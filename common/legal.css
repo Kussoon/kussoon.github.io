@@ -1,0 +1,44 @@
+:root {
+  color-scheme: light;
+  --ink: #17322b;
+  --muted: #5c6f69;
+  --green: #16745a;
+  --green-soft: #eaf6f1;
+  --line: #d7e3de;
+  --paper: #ffffff;
+  --bg: #f5f8f7;
+  --warn: #8a5a00;
+}
+
+* { box-sizing: border-box; }
+html { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif; }
+body { margin: 0; color: var(--ink); background: var(--bg); line-height: 1.75; }
+a { color: #0b6250; text-underline-offset: 0.18em; }
+.site-header { background: var(--paper); border-bottom: 1px solid var(--line); }
+.site-header__inner, main, .site-footer__inner { width: min(920px, calc(100% - 32px)); margin: 0 auto; }
+.site-header__inner { padding: 18px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { color: var(--green); font-weight: 800; text-decoration: none; letter-spacing: .02em; }
+.back-link { font-size: .92rem; }
+main { margin-top: 28px; margin-bottom: 48px; padding: 30px clamp(20px, 5vw, 48px); background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 8px 30px rgba(21, 72, 57, .06); }
+h1 { margin: 0 0 8px; font-size: clamp(1.65rem, 5vw, 2.35rem); line-height: 1.35; }
+h2 { margin-top: 2.2em; padding-bottom: .35em; border-bottom: 2px solid var(--green-soft); font-size: 1.25rem; }
+h3 { margin-top: 1.6em; font-size: 1.05rem; }
+p, li { font-size: 1rem; }
+.lead { color: var(--muted); margin-top: 0; }
+.updated { color: var(--muted); font-size: .9rem; }
+.notice { padding: 14px 16px; background: var(--green-soft); border-left: 4px solid var(--green); border-radius: 8px; }
+.warning { color: var(--warn); background: #fff8e7; border-left-color: #d18a00; }
+.source-list { padding-left: 1.25rem; }
+.source-list li { margin-bottom: 1rem; }
+.primary-link { display: inline-block; padding: 12px 18px; border-radius: 10px; background: var(--green); color: #fff; font-weight: 700; text-decoration: none; }
+.primary-link:hover { background: #0f6049; }
+.portal-links { display: grid; gap: 10px; padding-left: 1.25rem; }
+.site-footer { background: #16352d; color: #eff8f5; }
+.site-footer__inner { padding: 26px 0; }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; }
+.site-footer a { color: #fff; }
+.site-footer small { color: #c9ddd6; }
+@media (max-width: 560px) {
+  .site-header__inner { align-items: flex-start; flex-direction: column; gap: 6px; }
+  main { width: calc(100% - 20px); margin-top: 10px; padding: 22px 16px; border-radius: 12px; }
+}
