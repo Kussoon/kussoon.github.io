@@ -5,41 +5,47 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="canonical" href="https://kussoon.com/local/">
 <meta name="description" content="Kussoonの地域情報入口です。西宮市・芦屋市・尼崎市・宝塚市・伊丹市の町名や地域マップへ、地域ごとにアクセスできます。">
-<meta name="theme-color" content="#f4f8fb">
+<meta name="theme-color" content="#eaf8ef">
 <title>地域を調べる｜Kussoon</title>
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-body{background:linear-gradient(180deg,#f4f8fb 0%,#fff 45%,#f8fafc 100%);color:#243746}
-main{max-width:820px;margin:auto;padding:20px 14px 36px}
-.toplink{display:inline-block;margin-bottom:14px;color:#47677d;text-decoration:none;font-size:13px;font-weight:800}
-.hero{text-align:center;padding:8px 6px 22px}
-.hero h1{margin:0 0 8px;font-size:32px;color:#315f4b}
-.hero p{max-width:620px;margin:auto;color:#607481;font-size:14px;line-height:1.75}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{background:#fff;border:1px solid #dbe6df;border-radius:18px;padding:17px 16px;box-shadow:0 5px 15px #36584910}
-.card h2{margin:0 0 6px;font-size:21px;color:#356d52}
-.card p{margin:0 0 12px;color:#657a72;font-size:13px;line-height:1.65}
+.toplink{display:inline-block;margin-bottom:8px;color:#3b7153;text-decoration:none;font-size:12px;font-weight:850}
+body{background:linear-gradient(180deg,#eaf8ef,#fff);color:#244335}
+main{max-width:430px;margin:auto;min-height:100dvh;padding:14px 12px 28px}
+h1{margin:2px 0;text-align:center;font-size:34px;color:#28764a}
+.sub{text-align:center;font-weight:800;color:#527563;margin-bottom:12px}
+.hero{display:grid;grid-template-columns:38% 62%;align-items:center;background:#fff;border:1px solid #bfe2cc;border-radius:18px;overflow:hidden;box-shadow:0 5px 16px #286b4518;margin-bottom:12px}
+.hero img{width:100%;height:145px;object-fit:contain;background:#f5fbf7}
+.speech{padding:12px;color:#426653;font-size:13px;font-weight:750;line-height:1.6}
+.grid{display:grid;gap:10px}
+.card{background:#3f9b64;border-radius:16px;padding:16px 14px;box-shadow:0 4px 10px #0002;color:#fff}
+.card.featured{background:#b97842}
+.card h2{margin:0 0 5px;font-size:19px;color:#fff}
+.card p{margin:0 0 11px;color:#fff;font-size:12px;font-weight:650;line-height:1.6;opacity:.95}
 .links{display:flex;flex-wrap:wrap;gap:8px}
-.links a{display:inline-block;text-decoration:none;background:#f1f7f3;color:#35634f;border:1px solid #d7e7dc;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}
-.note{margin-top:18px;padding:13px 15px;border-radius:14px;background:#fff;border:1px solid #e0e8e3;color:#667b70;font-size:12px;line-height:1.7}
-.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:7px 13px;margin-top:18px;font-size:11px}
-.site-links a{color:#48687d}
-footer{text-align:center;margin-top:14px;color:#83939c;font-size:11px}
-@media(max-width:600px){main{max-width:440px}.grid{grid-template-columns:1fr}.hero h1{font-size:29px}}
+.links a{display:inline-block;text-decoration:none;background:#fff;color:#34704d;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:850;box-shadow:0 2px 5px #0001}
+.featured .links a{color:#8b552c}
+.note{margin-top:14px;padding:12px;border-radius:12px;background:#f3faf5;color:#536f60;font-size:11px;line-height:1.65}
+.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:5px 10px;margin-top:13px;font-size:11px;line-height:1.5}
+.site-links a{color:#3b7153}
+footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-height:1.7}
 </style>
 </head>
 <body>
 <main>
 <a class="toplink" href="/">← Kussoon トップへ戻る</a>
 
-<section class="hero">
-  <h1>🗺️ 地域を調べる</h1>
-  <p>町名、店、道路、交差点など、地域について調べて作ったページへの入口です。まずは地域を選んでください。</p>
+<h1>Kussoon</h1>
+<div class="sub">🗺️ 地域を調べる</div>
+
+<section class="hero" aria-label="地域コンテンツの案内">
+  <img src="/games/images/kisaragi-teacher.png" alt="案内役のイラスト">
+  <div class="speech">町名、店、道路、交差点など、地域について調べて作ったページへの入口です。</div>
 </section>
 
 <section class="grid">
-  <article class="card">
+  <article class="card featured">
     <h2>西宮・芦屋・尼崎をまとめて探す</h2>
     <p>3市のパン屋を、ひとつの地図で探せます。市や店名で絞り込めます。</p>
     <div class="links"><a href="/maps/unified-bread-map.html">3市統合パン屋マップ</a></div>
@@ -100,7 +106,7 @@ footer{text-align:center;margin-top:14px;color:#83939c;font-size:11px}
   <a href="/terms/">利用上の注意</a>
 </nav>
 
-<footer>© Kussoon</footer>
+<footer>Version 1.1.0<br>© 2026 Kussoon. All rights reserved.</footer>
 </main>
 </body>
 </html>
