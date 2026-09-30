@@ -1,33 +1,101 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="地名・地理・漢字などを、地図やクイズで楽しく学べる個人制作サイトです。">
-  <title>Kussoon｜地図とクイズの学習サイト</title>
-  <link rel="canonical" href="https://kussoon.com/">
-  <link rel="stylesheet" href="/common/legal.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="canonical" href="https://kussoon.com/">
+<meta name="description" content="ないものは、作ってみる。Kussoonは、学ぶ・遊ぶ、地域を調べる、便利なTips、運転・モビリティなど、自分で調べて作ったものを公開する個人サイトです。">
+<meta name="theme-color" content="#f4f8fb">
+<title>Kussoon｜ないものは、作ってみる。</title>
+<link rel="stylesheet" href="/common/legal.css">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+body{background:linear-gradient(180deg,#f4f8fb 0%,#fff 42%,#f8fafc 100%);color:#22364a}
+main{max-width:760px;margin:auto;padding:22px 14px 36px}
+.hero{text-align:center;padding:18px 10px 20px}
+.hero h1{margin:0;font-size:38px;letter-spacing:.02em;color:#194f7a}
+.catch{margin:8px 0 5px;font-size:21px;font-weight:900;color:#2c5674}
+.lead{max-width:560px;margin:0 auto;color:#5c7183;font-size:14px;line-height:1.75}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #d9e4eb;border-radius:18px;padding:18px 16px;box-shadow:0 5px 16px #29485f12;min-height:155px}
+.card h2{margin:0 0 6px;font-size:21px}
+.card p{margin:0;color:#627787;font-size:13px;line-height:1.65}
+.card .go{display:inline-block;margin-top:12px;font-size:12px;font-weight:800}
+.learn h2,.learn .go{color:#286f9f}
+.local h2,.local .go{color:#477f5f}
+.tips h2,.tips .go{color:#9a6c26}
+.driving h2,.driving .go{color:#6c5d8f}
+.quick{margin-top:18px;background:#fff;border:1px solid #dfe8ee;border-radius:16px;padding:14px}
+.quick h2{margin:0 0 8px;font-size:16px;color:#445f73}
+.quick-links{display:flex;flex-wrap:wrap;gap:8px}
+.quick-links a{display:inline-block;text-decoration:none;color:#365f7a;background:#f3f7fa;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:750}
+.note{margin:18px 2px 0;color:#697e8c;font-size:11px;line-height:1.7}
+.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 12px;margin-top:16px;font-size:11px}
+.site-links a{color:#3f6585}
+footer{text-align:center;margin-top:13px;color:#82929e;font-size:11px}
+@media(max-width:560px){
+  main{max-width:430px}
+  .grid{grid-template-columns:1fr}
+  .card{min-height:auto}
+  .hero h1{font-size:36px}
+}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-header__inner"><a class="brand" href="/">Kussoon</a></div>
-  </header>
-  <main>
-    <h1>Kussoon</h1>
-    <p class="lead">地名・地理・漢字などを、地図やクイズで楽しく学ぶための個人制作サイトです。</p>
+<main>
+<section class="hero">
+  <h1>Kussoon</h1>
+  <div class="catch">ないものは、作ってみる。</div>
+  <p class="lead">知る・試す・調べる。自分で「あったらいいな」と思ったものを、地図・クイズ・便利ツール・調査記事などの形で公開しています。</p>
+</section>
 
-    <h2>学習ゲーム</h2>
-    <p>都道府県、兵庫県の市町村、阪神間の町名、魚へんの漢字などを、スマートフォンでも気軽に学べます。</p>
-    <p><a class="primary-link" href="/games/">Kussoon Gamesを開く</a></p>
+<section class="grid" aria-label="Kussoonの主なコンテンツ">
+  <a class="card learn" href="/games/">
+    <h2>🧠 学ぶ・遊ぶ</h2>
+    <p>都道府県、市町村、町名、魚へんの漢字などを、地図やクイズで見て・探して・覚えます。</p>
+    <span class="go">学ぶ・遊ぶへ →</span>
+  </a>
 
-    <h2>サイト情報</h2>
-    <ul class="portal-links">
-      <li><a href="/about/">このサイトについて</a></li>
-      <li><a href="/privacy/">プライバシーポリシー</a></li>
-      <li><a href="/sources/">データ出典</a></li>
-      <li><a href="/terms/">利用上の注意</a></li>
-    </ul>
-  </main>
-  <script src="/common/site-footer.js" defer></script>
+  <a class="card local" href="/nishinomiya/">
+    <h2>🗺️ 地域を調べる</h2>
+    <p>町名、パン屋、和洋菓子店、交差点看板など、地域の情報を地図で分かりやすく整理します。</p>
+    <span class="go">地域コンテンツを見る →</span>
+  </a>
+
+  <a class="card tips" href="/games/clock-guide.html">
+    <h2>💡 ナイス・Tips</h2>
+    <p>実際に使って便利だった工夫や、自分で作ったツールなど、小さくても役立つものを紹介します。</p>
+    <span class="go">まずは時計・タイマーを見る →</span>
+  </a>
+
+  <a class="card driving" href="/nishinomiya/nishinomiya-intersections-map.html">
+    <h2>🚗 運転・モビリティ</h2>
+    <p>道路・交差点の見方や、運転で気づいたこと、自動運転・モビリティなどへ広げていきます。</p>
+    <span class="go">交差点看板マップを見る →</span>
+  </a>
+</section>
+
+<section class="quick">
+  <h2>いま公開しているものから</h2>
+  <div class="quick-links">
+    <a href="/games/todofuken.html">都道府県を地図で覚える</a>
+    <a href="/hyogo/">兵庫県の市町村を地図で覚える</a>
+    <a href="/nishinomiya/">西宮市の町名を地図で覚える</a>
+    <a href="/maps/unified-bread-map.html">西宮・芦屋・尼崎 パン屋マップ</a>
+  </div>
+</section>
+
+<p class="note">Kussoonは個人制作サイトです。掲載内容はできる限り確認していますが、店舗・施設・地域情報などは変更される場合があります。各ページの出典・注意事項もあわせてご覧ください。</p>
+
+<nav class="site-links" aria-label="サイト共通案内">
+  <a href="/about/">このサイトについて</a>
+  <a href="/privacy/">プライバシーポリシー</a>
+  <a href="/sources/">調査方法・データ出典</a>
+  <a href="/terms/">利用上の注意</a>
+</nav>
+<footer>© Kussoon</footer>
+</main>
+<script src="/common/site-footer.js" defer></script>
 </body>
 </html>
