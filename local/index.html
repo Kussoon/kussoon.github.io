@@ -30,6 +30,15 @@ h1{margin:2px 0;text-align:center;font-size:34px;color:#28764a}
 .site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:5px 10px;margin-top:13px;font-size:11px;line-height:1.5}
 .site-links a{color:#3b7153}
 footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-height:1.7}
+.quick-searches{display:grid;gap:10px;margin-bottom:10px}
+.search-card{background:#fff;border:1px solid #bfe2cc;border-radius:16px;padding:13px 12px;box-shadow:0 4px 12px #286b4512}
+.search-card h2{margin:0 0 4px;color:#28764a;font-size:18px}
+.search-card p{margin:0 0 9px;color:#607668;font-size:11px;font-weight:700;line-height:1.5}
+.search-row{display:grid;grid-template-columns:1fr auto;gap:7px}
+.search-row input{min-width:0;width:100%;border:1px solid #aed4bb;border-radius:11px;background:#fbfefc;color:#244335;padding:10px 11px;font:inherit;font-size:14px;outline:none}
+.search-row input:focus{border-color:#3f9b64;box-shadow:0 0 0 3px #3f9b6420}
+.search-row button{border:0;border-radius:11px;background:#3f9b64;color:#fff;padding:10px 13px;font-size:13px;font-weight:900;white-space:nowrap;cursor:pointer}
+.search-row button:active{transform:translateY(1px)}
 </style>
 </head>
 <body>
@@ -44,9 +53,29 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
   <div class="speech">町名、店、道路、交差点など、地域について調べて作ったページへの入口です。</div>
 </section>
 
+<section class="quick-searches" aria-label="町名検索">
+  <form class="search-card" action="/nishinomiya/town-search.html" method="get">
+    <h2>🔍 西宮市の町名を検索</h2>
+    <p>町名・読み仮名・郵便番号から探す</p>
+    <div class="search-row">
+      <input type="search" name="q" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="例：高、こま、662-0911" aria-label="西宮市の町名検索">
+      <button type="submit">検索する</button>
+    </div>
+  </form>
+
+  <form class="search-card" action="/takarazuka/town-search.html" method="get">
+    <h2>🔍 宝塚市の町名を検索</h2>
+    <p>町名・読み仮名・郵便番号から探す</p>
+    <div class="search-row">
+      <input type="search" name="q" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="例：川、めふ、665-0051" aria-label="宝塚市の町名検索">
+      <button type="submit">検索する</button>
+    </div>
+  </form>
+</section>
+
 <section class="grid">
   <article class="card featured">
-    <h2>西宮・芦屋・尼崎をまとめて探す</h2>
+    <h2>西宮・芦屋・尼崎のパン屋マップ</h2>
     <p>3市のパン屋を、ひとつの地図で探せます。市や店名で絞り込めます。</p>
     <div class="links"><a href="/maps/unified-bread-map.html">3市統合パン屋マップ</a></div>
   </article>
@@ -61,6 +90,12 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
       <a href="/nishinomiya/nishinomiya-intersections-map.html">交差点看板マップ</a>
       <a href="/nishinomiya/okome-map.html">おこめ券取扱店舗の記録</a>
     </div>
+  </article>
+
+  <article class="card">
+    <h2>宝塚市</h2>
+    <p>町名・町域や、地域ごとの位置関係を地図で見て覚えられます。</p>
+    <div class="links"><a href="/takarazuka/">宝塚市トップ</a></div>
   </article>
 
   <article class="card">
@@ -82,12 +117,6 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
   </article>
 
   <article class="card">
-    <h2>宝塚市</h2>
-    <p>町名・町域や、地域ごとの位置関係を地図で見て覚えられます。</p>
-    <div class="links"><a href="/takarazuka/">宝塚市トップ</a></div>
-  </article>
-
-  <article class="card">
     <h2>伊丹市</h2>
     <p>町名・町域を地図で見て、探して、覚えられます。</p>
     <div class="links"><a href="/itami/">伊丹市トップ</a></div>
@@ -104,9 +133,10 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
   <a href="/privacy/">プライバシーポリシー</a>
   <a href="/sources/">データ出典</a>
   <a href="/terms/">利用上の注意</a>
+      <a href="/sitemap/">サイトマップ</a>
 </nav>
 
-<footer>Version 1.1.0<br>© 2026 Kussoon. All rights reserved.</footer>
+<footer>Version 1.2.0<br>© 2026 Kussoon. All rights reserved.</footer>
 </main>
 </body>
 </html>
