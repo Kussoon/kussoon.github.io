@@ -34,6 +34,19 @@ h1{margin:4px 0 2px;text-align:center;font-size:36px;color:#17538e}
 .quick-links{display:grid;gap:7px}
 .quick-links a{display:block;text-decoration:none;color:#365f7a;background:#f3f8fb;border-radius:10px;padding:9px 10px;font-size:12px;font-weight:800}
 .note{margin:16px 4px 0;padding:12px;border-radius:12px;background:#f5f9fb;color:#536b79;font-size:11px;line-height:1.65}
+
+/* Kussoon article template v1.1: common footer + accessibility. No ads before approval. */
+.kussoon-common-footer{max-width:920px;margin:22px auto 0;padding:20px 14px 30px;text-align:center;color:#647169;font-size:12px;line-height:1.7;border-top:1px solid #d7e7dc}
+.kussoon-footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 17px;margin:0 auto 13px}
+.kussoon-footer-links a{color:#446453;text-decoration:underline;text-underline-offset:2px;font-size:13px}
+.kussoon-common-footer p{margin:0}
+a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
+@media(max-width:520px){.kussoon-footer-links{gap:8px 12px}}
+
+/* Site top retains its four category colors; footer follows article v1.1. */
+.kussoon-common-footer{border-top-color:#dce6ee;color:#536b79}
+.kussoon-footer-links a{color:#285978}
+
 </style>
 </head>
 <body>
@@ -89,6 +102,18 @@ h1{margin:4px 0 2px;text-align:center;font-size:36px;color:#17538e}
 <p class="note">Kussoonは個人制作サイトです。掲載内容はできる限り確認していますが、店舗・施設・地域情報などは変更される場合があります。各ページの出典・注意事項もあわせてご覧ください。</p>
 
 </main>
-<script src="/common/site-footer.js" defer></script>
+<footer class="kussoon-common-footer" aria-label="Kussoon共通フッター">
+<nav class="kussoon-footer-links" aria-label="サイト共通案内">
+<a href="/">Kussoonトップ</a>
+<a href="/ideas/">工夫・アイデア</a>
+<a href="/games/">学ぶ・遊ぶ</a>
+<a href="/local/">地域を調べる</a>
+<a href="/about/">このサイトについて</a>
+<a href="/privacy/">プライバシーポリシー</a>
+<a href="/sources/">データ出典</a>
+<a href="/terms/">利用上の注意</a>
+</nav>
+<p>© 2026 Kussoon. All rights reserved.</p>
+</footer>
 </body>
 </html>
