@@ -1,82 +1,111 @@
 <!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="canonical" href="https://kussoon.com/ideas/">
-<meta name="description" content="Kussoonの「工夫・アイデア」ページです。自分で試して便利だったこと、ちょっとした工夫、作ってみたツールなどを紹介します。">
-<meta name="theme-color" content="#f8f4ea">
-<title>工夫・アイデア｜Kussoon</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-body{background:linear-gradient(180deg,#fbf7ef 0%,#fff 45%,#faf9f6 100%);color:#3e3b34}
-main{max-width:820px;margin:auto;padding:20px 14px 36px}
-.toplink{display:inline-block;margin-bottom:14px;color:#6f6552;text-decoration:none;font-size:13px;font-weight:800}
-.hero{text-align:center;padding:8px 6px 22px}
-.hero h1{margin:0 0 8px;font-size:32px;color:#8a6a2b}
-.hero p{max-width:620px;margin:auto;color:#716b60;font-size:14px;line-height:1.75}
-.card{background:#fff;border:1px solid #eadfc7;border-radius:18px;padding:18px 16px;box-shadow:0 5px 15px #6c542012;margin-bottom:14px}
-.card h2{margin:0 0 7px;font-size:21px;color:#8a6a2b}
-.card p{margin:0 0 12px;color:#716b60;font-size:13px;line-height:1.7}
-.card a{display:inline-block;text-decoration:none;background:#fbf5e8;color:#7c5f26;border:1px solid #eadab4;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800}
-.future{background:#fff;border:1px solid #e8e2d7;border-radius:16px;padding:16px}
-.future h2{margin:0 0 8px;font-size:18px;color:#5d5548}
-.future p{margin:0;color:#766f64;font-size:13px;line-height:1.85}
-.note{margin-top:16px;color:#857c70;font-size:11px;line-height:1.7}
-.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:7px 13px;margin-top:18px;font-size:11px}
-.site-links a{color:#6e6658}
-footer{text-align:center;margin-top:14px;color:#92897d;font-size:11px}
-@media(max-width:600px){main{max-width:440px}.hero h1{font-size:29px}}
-</style>
-</head>
-<body>
-<main>
-<a class="toplink" href="/">← Kussoon トップへ戻る</a>
+<!-- Kussoon ideas article ID: 001 (internal management) -->
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="canonical" href="https://kussoon.com/ideas/001/"><meta name="description" content="iPhoneのホーム画面に追加して使える時計・バータイマーWebアプリの機能と使い方を紹介します。"><title>バータイマー付きデジタル時計｜工夫・アイデア｜Kussoon</title><style>
+:root{color-scheme:light;--bg:#fbf7ef;--ink:#3e3b34;--accent:#806126;--line:#eadfc7;--soft:#fbf5e8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fbf7ef 0%,#fff 45%,#faf9f6 100%);line-height:1.85}
+.container{max-width:900px;margin:auto;padding:18px 18px 55px}
+a{color:var(--accent)}.back{display:inline-block;padding:9px 16px;background:#fff;border:1px solid var(--line);border-radius:10px;text-decoration:none;font-weight:650;margin-bottom:18px}
+article{background:white;border:1px solid var(--line);border-radius:16px;padding:clamp(18px,4vw,42px);box-shadow:0 3px 16px #192f4a0b}
+.kicker{margin:0 0 5px;color:#58718e;font-size:.88rem;font-weight:700}h1{font-size:clamp(1.48rem,4.5vw,2.15rem);line-height:1.48;margin:0 0 15px;letter-spacing:.015em}h2{font-size:1.3rem;margin:40px 0 12px;padding:0 0 8px;border-bottom:2px solid #eadfc7}p{margin:13px 0;text-align:left}strong{font-weight:750}.lead{font-size:1.045rem}.figure{max-width:620px;margin:26px auto 12px;text-align:center}.figure img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid #d7dfe6}.figure figcaption{text-align:left;font-size:.88rem;color:#546779;margin:10px 0 0;line-height:1.6}
+.key{white-space:nowrap;font-family:inherit;border:1px solid #a8b3c2;border-bottom:3px solid #8795a5;border-radius:5px;padding:1px 7px;background:#f4f6f8;font-size:.94em;font-weight:700}.howto{background:var(--soft);border-radius:12px;padding:16px 20px;margin:20px 0}.howto ol{padding-left:1.35em;margin:0}.howto li{padding:4px 0}.note{font-size:.94rem;color:#46596e;background:#f8fafc;padding:13px 16px;border-left:4px solid #a3b6cb;border-radius:4px}.source{font-size:.95rem;overflow-wrap:anywhere}.footer{margin:26px auto 0;text-align:center;font-size:.89rem;color:#64748b}.footer a{margin:0 8px}.version{font-size:.8rem;color:#6d7d8c;text-align:right;margin-top:27px}.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:9px 16px;margin:24px auto 12px;font-size:.89rem}.site-links a{color:#806126}.article-body{text-align:left} @media(max-width:480px){.container{padding:12px 10px 35px}article{padding:20px 16px}.howto{padding:14px}.footer a{display:inline-block;margin:5px}}
 
-<section class="hero">
-  <h1>💡 工夫・アイデア</h1>
-  <p>自分で試して便利だったこと、ちょっとした工夫、作ってみたものを紹介します。</p>
+/* Article 001: preserve all clock help functionality while matching 002 editorial layout */
+.content-section{margin:0;padding:0;border:0;background:transparent;box-shadow:none}
+.content-section h2{color:var(--ink)}
+.content-section p,.content-section li{text-align:left}
+.app-label{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:6px 12px;font-weight:650;font-size:.94rem;margin:0 0 12px}
+.use-cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}
+.use-case{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fffdfa}
+.use-case.recommended{background:var(--soft)}
+.use-case h3{font-size:1.08rem;margin:0 0 8px}
+.use-case p{font-size:.94rem;margin:8px 0}
+.content-section h3{font-size:1.1rem;margin:22px 0 8px}
+.features,.steps{padding-left:1.6em;line-height:1.85}
+.features li,.steps li{padding:3px 0}
+.important-note{background:#fff6e8;border-left:4px solid #c6a15f;border-radius:6px;padding:14px 16px;margin:18px 0}
+.action{text-align:center;margin:20px 0 24px}
+.action a,.launch{display:inline-block;background:#86692f;color:white;text-decoration:none;font-weight:750;border-radius:10px;padding:12px 20px;min-width:min(100%,280px);text-align:center}
+.action a:hover,.launch:hover{background:#6b5224}
+details{border-bottom:1px solid var(--line);padding:14px 2px}
+summary{cursor:pointer;font-weight:700}
+.note{font-size:.93rem;color:#57626b;background:#f7f9fa;padding:12px 14px;border-radius:6px}
+.content-section .note{text-align:left}
+@media(max-width:580px){.use-cases{grid-template-columns:1fr}.use-case{padding:14px}}
+</style></head><body><div class="container"><a class="back" href="../">← 工夫・アイデアへ戻る</a><main><article class="article-body"><p class="kicker">Kussoon ／ 💡 工夫・アイデア</p>
+<h1>バータイマー付きデジタル時計</h1>
+<p class="app-label">iPhoneのホーム画面に追加して使える時計・タイマーWebアプリ</p>
+<p class="lead">大きく見やすい時計と、時間の経過を色とバーで確認できるタイマーです。スマートフォンを横向き・縦向きのどちらでも使えます。</p>
+<p class="action"><a class="launch" href="/ideas/001/clock.html?mode=clock">時計を表示する</a></p>
+<section class="content-section">
+<h2>この時計の使い方は2通りあります</h2>
+<p>表示される時計・タイマーの機能は同じですが、開き方と画面の見え方が異なります。</p>
+<div class="use-cases">
+<div class="use-case">
+<h3>① 説明書からそのまま開く</h3>
+<p>このページの「時計を表示する」「タイマーを表示する」を押すと、SafariのWebページとしてすぐに使えます。</p>
+<p>インストールせずに試したいときや、一時的に使うときに便利です。Safariのアドレスバーや操作部分が表示されることがあります。</p>
+</div>
+<div class="use-case recommended">
+<h3>② ホーム画面に追加して開く（おすすめ）</h3>
+<p>iPhoneのホーム画面にアイコンを追加すると、時計専用のアプリのように、ホーム画面から直接起動できます。</p>
+<p>通常はSafariのアドレスバーやタブが表示されないため、普段使いはこちらがおすすめです。</p>
+</div>
+</div>
+<h3>ホーム画面への追加方法</h3>
+<ol class="steps">
+<li>この説明書をSafariで開きます。</li>
+<li>Safariの共有ボタン（四角から上向き矢印が出ているボタン）を押します。</li>
+<li>「ホーム画面に追加」を選び、右上の「追加」を押します。</li>
+<li>ホーム画面にできたアイコンから時計を起動します。</li>
+</ol>
+<p class="important-note">この時計は、ホーム画面から起動し、時計・タイマー画面の「全画面」を選んだ状態に最適化しています。通常表示では、端末の向きと「横／縦」の組み合わせによって数字が重なる場合があります。全画面表示は右上の「×」で終了できます。</p>
 </section>
-
-<!-- Article management: ID 001 | folder 001 | original clock application remains at /ideas/clock/ -->
-<article class="card">
-  <h2>バータイマー付きデジタル時計</h2>
-  <p>バー表示で残り時間を視覚的に確認できるタイマーと、デジタル時計を組み合わせたWebアプリです。</p>
-  <a href="/ideas/001/">使い方を見る →</a>
-</article>
-
-
-<!-- Article management: ID 002 | folder 002 | URL /ideas/002/ -->
-<article class="card">
-  <h2>Ctrl＋Alt＋Deleteを右手一本で押す方法</h2>
-  <p>3つのキーを右手の親指・人差し指・中指だけで同時に押す、キーボードの小さな工夫をご紹介します。写真付きです。</p>
-  <a href="/ideas/002/">押し方を見る →</a>
-</article>
-
-<section class="future">
-  <h2>今後のラインナップ</h2>
-  <p>
-    ・G-SHOCKとスマートウォッチを一体化させる方法<br>
-    ・車の運転席にペン差しを作る方法<br>
-    ・麦茶を入れるポットの内側の白いプツプツを取る方法<br>
-    ・水筒の中の汚れを取る方法<br>
-    ・ネット環境のない実家にWi-Fi環境を作り、センサーで遠隔見守りする方法
-  </p>
+<section class="content-section">
+<h2>時計</h2>
+<p>時刻だけでなく、今日と一年の流れもひと目で分かる時計です。</p>
+<ul class="features">
+<li>大きな時・分・秒表示。横表示／縦表示／全画面表示に対応</li>
+<li>月日・曜日と現在の二十四節気を表示</li>
+<li>西暦・令和・平成・昭和の年数を同時表示</li>
+<li>今年の残り週数・日数と、366日分の「今日は何の日」を表示</li>
+<li>15分ごとのメッセージ、毎時50分からの「⚠️座りすぎ注意」、毎正時の鳩時計</li>
+</ul>
+<div class="action"><a href="/ideas/001/clock.html?mode=clock">時計を表示する</a></div>
 </section>
-
-<p class="note">今後のラインナップは予定です。内容や公開順は変更する場合があります。</p>
-
-<nav class="site-links" aria-label="サイト共通案内">
-  <a href="/games/">学ぶ・遊ぶ</a>
-  <a href="/local/">地域を調べる</a>
-  <a href="/about/">このサイトについて</a>
-  <a href="/privacy/">プライバシーポリシー</a>
-  <a href="/sources/">データ出典</a>
-  <a href="/terms/">利用上の注意</a>
-</nav>
-
-<footer>© Kussoon</footer>
-</main>
-</body>
-</html>
+<section class="content-section">
+<h2>タイマー</h2>
+<p>残り時間を数字だけでなく、60本のカラーバーでも直感的に確認できます。</p>
+<ul class="features">
+<li>テンキーで分・秒を直接入力</li>
+<li>オレンジ・黄緑・緑・青の60本バーで残り時間を表示</li>
+<li>刀の位置で、残り時間と経過時間の境界を確認</li>
+<li>横表示／縦表示／全画面表示に対応</li>
+<li>残り時間が5分刻みになるたび画面全体がフラッシュ。0になったときもフラッシュ</li>
+</ul>
+<div class="action"><a href="/ideas/001/clock.html?mode=timer">タイマーを表示する</a></div>
+</section>
+<section class="content-section help">
+<h2>画面を消さずに使いたいとき</h2>
+<details>
+<summary>iPhone / iPad</summary>
+<p>「設定 → アクセシビリティ → アクセスガイド」でアクセスガイドをオンにし、「画面の自動ロック」を「しない」にします。時計を表示してからサイドボタン（ホームボタン搭載機種ではホームボタン）を3回押して、アクセスガイドを開始します。</p>
+<p class="note">終了方法は端末の設定によって異なります。Face IDを使う場合は、アクセスガイドのパスコード設定でFace IDを有効にしておくと便利です。</p>
+</details>
+<details>
+<summary>Android</summary>
+<p>対応ブラウザでは、この時計が画面のスリープを防ぐ機能を利用します。まずはそのままお試しください。画面が消える場合は、端末の「画面消灯」「スリープ」「画面タイムアウト」などの設定を確認してください。</p>
+<p class="note">「アプリの固定（画面の固定）」がある端末では、他のアプリへ移動しにくくできます。ただし、これは画面の自動消灯を止める機能とは別です。名称や設定方法は機種によって異なります。</p>
+</details>
+</section>
+<section class="content-section privacy-note">
+<h2>設定内容とプライバシー</h2>
+<p>時計／タイマー、横／縦表示、画面の明るさなどの設定は、この端末のブラウザ内に保存されます。これらの設定が運営者へ送信されることはありません。</p>
+<p>対応ブラウザでは、時計の使用中に画面のスリープを一時的に防ぐ機能を利用します。詳しくは<a href="https://kussoon.com/privacy/">プライバシーポリシー</a>をご確認ください。</p>
+</section>
+<section class="content-section data-note">
+<h2>掲載情報について</h2>
+<p>時刻と日付は、ご利用の端末の時計をもとに表示します。二十四節気は太陽の見かけの黄経から概算しているため、暦資料の切替時刻と差が生じる場合があります。</p>
+<p>「今日は何の日」は、公開情報をもとに当サイトが代表的な記念日を1日1件選び、独自に整理したものです。記念日には複数の説や制定主体があるため、網羅的・公式な一覧ではありません。一般的な参考情報としてご利用ください。</p>
+<p>時計の使用中に外部のデータAPIへ問い合わせることはありません。サイト全体の方針は<a href="https://kussoon.com/sources/">データ出典</a>と<a href="https://kussoon.com/terms/">利用上の注意</a>をご確認ください。</p>
+</section>
+<div class="version">時計・タイマー Version 2.1.3</div></article></main><footer class="footer"><a href="../">← 工夫・アイデアへ戻る</a><a href="/">Kussoonトップ</a><nav class="site-links" aria-label="サイト共通案内"><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/about/">このサイトについて</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p></footer></div></body></html>
