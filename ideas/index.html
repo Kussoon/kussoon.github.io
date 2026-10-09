@@ -10,43 +10,48 @@
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-body{background:linear-gradient(180deg,#fff5df,#fff);color:#4a3a24}
-main{max-width:430px;margin:auto;min-height:100dvh;padding:14px 12px 28px}
-.toplink{display:inline-block;margin-bottom:8px;color:#8a6525;text-decoration:none;font-size:12px;font-weight:850}
-h1{margin:2px 0;text-align:center;font-size:34px;color:#a56c10}
-.sub{text-align:center;font-weight:800;color:#846d48;margin-bottom:12px}
-.hero{display:grid;grid-template-columns:38% 62%;align-items:center;background:#fff;border:1px solid #ead7a9;border-radius:18px;overflow:hidden;box-shadow:0 5px 16px #8f661818;margin-bottom:12px}
-.hero img{width:100%;height:145px;object-fit:contain;background:#fffbf2}
-.speech{padding:12px;color:#755e39;font-size:13px;font-weight:750;line-height:1.6}
-.card{background:#e49a2f;border-radius:16px;padding:17px 15px;box-shadow:0 4px 10px #0002;color:#fff;margin-bottom:10px}
-.card h2{margin:0 0 6px;font-size:20px;color:#fff}
-.card p{margin:0 0 11px;color:#fff;font-size:12px;font-weight:650;line-height:1.65;opacity:.95}
-.card a{display:inline-block;text-decoration:none;background:#fff;color:#956217;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:850;box-shadow:0 2px 5px #0001}
-.future{background:#fff;border:1px solid #ead7a9;border-radius:16px;padding:15px;box-shadow:0 3px 10px #8f661812}
-.future h2{margin:0 0 7px;font-size:18px;color:#8a6525}
-.future p{margin:0;color:#766446;font-size:12px;line-height:1.85}
-.note{margin:12px 3px 0;color:#887755;font-size:11px;line-height:1.65}
-.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:5px 10px;margin-top:13px;font-size:11px;line-height:1.5}
-.site-links a{color:#8a6525}
-footer{text-align:center;margin-top:12px;color:#96856a;font-size:12px;line-height:1.7}
+body{background:linear-gradient(180deg,#fbf7ef 0%,#fff 45%,#faf9f6 100%);color:#3e3b34}
+main{max-width:820px;margin:auto;padding:20px 14px 36px}
+.toplink{display:inline-block;margin-bottom:14px;color:#6f6552;text-decoration:none;font-size:13px;font-weight:800}
+.hero{text-align:center;padding:8px 6px 22px}
+.hero h1{margin:0 0 8px;font-size:32px;color:#8a6a2b}
+.hero p{max-width:620px;margin:auto;color:#716b60;font-size:14px;line-height:1.75}
+.card{background:#fff;border:1px solid #eadfc7;border-radius:18px;padding:18px 16px;box-shadow:0 5px 15px #6c542012;margin-bottom:14px}
+.card h2{margin:0 0 7px;font-size:21px;color:#8a6a2b}
+.card p{margin:0 0 12px;color:#716b60;font-size:13px;line-height:1.7}
+.card a{display:inline-block;text-decoration:none;background:#fbf5e8;color:#7c5f26;border:1px solid #eadab4;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800}
+.future{background:#fff;border:1px solid #e8e2d7;border-radius:16px;padding:16px}
+.future h2{margin:0 0 8px;font-size:18px;color:#5d5548}
+.future p{margin:0;color:#766f64;font-size:13px;line-height:1.85}
+.note{margin-top:16px;color:#857c70;font-size:11px;line-height:1.7}
+.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:7px 13px;margin-top:18px;font-size:11px}
+.site-links a{color:#6e6658}
+footer{text-align:center;margin-top:14px;color:#92897d;font-size:11px}
+@media(max-width:600px){main{max-width:440px}.hero h1{font-size:29px}}
 </style>
 </head>
 <body>
 <main>
 <a class="toplink" href="/">← Kussoon トップへ戻る</a>
 
-<h1>Kussoon</h1>
-<div class="sub">💡 工夫・アイデア</div>
-
-<section class="hero" aria-label="工夫・アイデアの案内">
-  <img src="/games/images/kisaragi-teacher.png" alt="案内役のイラスト">
-  <div class="speech">自分で試して便利だったこと、ちょっとした工夫、作ってみたものを紹介します。</div>
+<section class="hero">
+  <h1>💡 工夫・アイデア</h1>
+  <p>自分で試して便利だったこと、ちょっとした工夫、作ってみたものを紹介します。</p>
 </section>
 
+<!-- Article management: ID 001 | folder 001 | original clock application remains at /ideas/clock/ -->
 <article class="card">
   <h2>バータイマー付きデジタル時計</h2>
   <p>バー表示で残り時間を視覚的に確認できるタイマーと、デジタル時計を組み合わせたWebアプリです。</p>
-  <a href="/ideas/clock/clock-guide.html">使い方を見る →</a>
+  <a href="/ideas/001/">使い方を見る →</a>
+</article>
+
+
+<!-- Article management: ID 002 | folder 002 | URL /ideas/002/ -->
+<article class="card">
+  <h2>Ctrl＋Alt＋Deleteを右手一本で押す方法</h2>
+  <p>3つのキーを右手の親指・人差し指・中指だけで同時に押す、キーボードの小さな工夫をご紹介します。写真付きです。</p>
+  <a href="/ideas/002/">押し方を見る →</a>
 </article>
 
 <section class="future">
@@ -71,7 +76,7 @@ footer{text-align:center;margin-top:12px;color:#96856a;font-size:12px;line-heigh
   <a href="/terms/">利用上の注意</a>
 </nav>
 
-<footer>Version 1.1.0<br>© 2026 Kussoon. All rights reserved.</footer>
+<footer>© Kussoon</footer>
 </main>
 </body>
 </html>
