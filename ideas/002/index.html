@@ -13,9 +13,21 @@ a{color:var(--accent)}.back{display:inline-block;padding:9px 16px;background:#ff
 article{background:white;border:1px solid var(--line);border-radius:16px;padding:clamp(18px,4vw,42px);box-shadow:0 3px 16px #192f4a0b}
 .kicker{margin:0 0 5px;color:#58718e;font-size:.88rem;font-weight:700}h1{font-size:clamp(1.48rem,4.5vw,2.15rem);line-height:1.48;margin:0 0 15px;letter-spacing:.015em}h2{font-size:1.3rem;margin:40px 0 12px;padding:0 0 8px;border-bottom:2px solid #eadfc7}p{margin:13px 0;text-align:left}strong{font-weight:750}.lead{font-size:1.045rem}.figure{max-width:620px;margin:26px auto 12px;text-align:center}.figure img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid #d7dfe6}.figure figcaption{text-align:left;font-size:.88rem;color:#546779;margin:10px 0 0;line-height:1.6}
 .key{white-space:nowrap;font-family:inherit;border:1px solid #a8b3c2;border-bottom:3px solid #8795a5;border-radius:5px;padding:1px 7px;background:#f4f6f8;font-size:.94em;font-weight:700}.howto{background:var(--soft);border-radius:12px;padding:16px 20px;margin:20px 0}.howto ol{padding-left:1.35em;margin:0}.howto li{padding:4px 0}.note{font-size:.94rem;color:#46596e;background:#f8fafc;padding:13px 16px;border-left:4px solid #a3b6cb;border-radius:4px}.source{font-size:.95rem;overflow-wrap:anywhere}.footer{margin:26px auto 0;text-align:center;font-size:.89rem;color:#64748b}.footer a{margin:0 8px}.version{font-size:.8rem;color:#6d7d8c;text-align:right;margin-top:27px}.site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:9px 16px;margin:24px auto 12px;font-size:.89rem}.site-links a{color:#806126}.article-body{text-align:left} @media(max-width:480px){.container{padding:12px 10px 35px}article{padding:20px 16px}.howto{padding:14px}.footer a{display:inline-block;margin:5px}}
+
+/* Kussoon article template v1.1: common footer + accessibility. No ads before approval. */
+.kussoon-common-footer{max-width:920px;margin:22px auto 0;padding:20px 14px 30px;text-align:center;color:#647169;font-size:12px;line-height:1.7;border-top:1px solid #d7e7dc}
+.kussoon-footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 17px;margin:0 auto 13px}
+.kussoon-footer-links a{color:#446453;text-decoration:underline;text-underline-offset:2px;font-size:13px}
+.kussoon-common-footer p{margin:0}
+a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
+@media(max-width:520px){.kussoon-footer-links{gap:8px 12px}}
+
+/* v1.1 standard article accent and body layout retained */
+.kicker{color:#806126}
+
 </style>
 </head>
-<body><div class="container">
+<body id="top"><div class="container">
 <a class="back" href="../">← 工夫・アイデアへ戻る</a>
 <!-- Article management: ID 002 | folder 002 | no public sequence number -->
 <main><article>
@@ -42,12 +54,18 @@ article{background:white;border:1px solid var(--line);border-radius:16px;padding
 <p class="source">『Esquire』「<a href="https://www.esquire.com/jp/lifestyle/tech/a182510/lifestyle-tech-billgates17-0927/" target="_blank" rel="noopener noreferrer">ビル・ゲイツ、「Ctrl-Alt-Delete」の組み合わせは最大の痛恨事であった</a>」（2017年9月27日公開）</p>
 <div class="version">Version 1.0.0</div>
 </article></main>
-<footer class="footer"><a href="../">← 工夫・アイデアへ戻る</a><a href="/">Kussoonトップ</a><nav class="site-links" aria-label="サイト共通案内">
+<!-- 広告・アフィリエイト導入時は告知と専用リンクを追加してください。現時点では広告コードなし。 -->
+<footer class="kussoon-common-footer" aria-label="Kussoon共通フッター">
+<nav class="kussoon-footer-links" aria-label="サイト共通案内">
+<a href="/">Kussoonトップ</a>
+<a href="/ideas/">工夫・アイデア</a>
 <a href="/games/">学ぶ・遊ぶ</a>
 <a href="/local/">地域を調べる</a>
 <a href="/about/">このサイトについて</a>
 <a href="/privacy/">プライバシーポリシー</a>
 <a href="/sources/">データ出典</a>
 <a href="/terms/">利用上の注意</a>
-</nav><p>© 2026 Kussoon. All rights reserved.</p></footer>
+</nav>
+<p>© 2026 Kussoon. All rights reserved.</p>
+</footer>
 </div></body></html>
