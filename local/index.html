@@ -22,6 +22,9 @@ h1{margin:2px 0;text-align:center;font-size:34px;color:#28764a}
 .card{background:#3f9b64;border-radius:16px;padding:16px 14px;box-shadow:0 4px 10px #0002;color:#fff}
 .card.featured{background:#b97842}
 .card h2{margin:0 0 5px;font-size:19px;color:#fff}
+.card h2 a{color:inherit;text-decoration:none;display:inline-block;touch-action:manipulation}
+.card h2 a:hover,.card h2 a:focus-visible{text-decoration:underline;text-underline-offset:3px}
+.card h2 a:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:3px}
 .card p{margin:0 0 11px;color:#fff;font-size:12px;font-weight:650;line-height:1.6;opacity:.95}
 .links{display:flex;flex-wrap:wrap;gap:8px}
 .links a{display:inline-block;text-decoration:none;background:#fff;color:#34704d;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:850;box-shadow:0 2px 5px #0001}
@@ -89,13 +92,13 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
 
 <section class="grid">
   <article class="card featured">
-    <h2>西宮・芦屋・尼崎のパン屋マップ</h2>
+    <h2><a href="/maps/unified-bread-map.html" data-umami-event="local-bread-map-heading-click" aria-label="西宮・芦屋・尼崎のパン屋マップを開く">西宮・芦屋・尼崎のパン屋マップ</a></h2>
     <p>3市のパン屋を、ひとつの地図で探せます。市や店名で絞り込めます。</p>
     <div class="links"><a href="/maps/unified-bread-map.html" data-umami-event="local-bread-map-click">3市統合パン屋マップ</a></div>
   </article>
 
   <article class="card">
-    <h2>西宮市</h2>
+    <h2><a href="/nishinomiya/" data-umami-event="local-nishinomiya-heading-click" aria-label="西宮市を開く">西宮市</a></h2>
     <p>町名を中心に、パン屋、和菓子・洋菓子店、交差点看板など、現在もっとも多くの地域情報を公開しています。</p>
     <div class="links">
       <a href="/nishinomiya/" data-umami-event="local-nishinomiya-click">西宮市トップ</a>
@@ -108,13 +111,13 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
   </article>
 
   <article class="card">
-    <h2>宝塚市</h2>
+    <h2><a href="/takarazuka/" data-umami-event="local-takarazuka-heading-click" aria-label="宝塚市を開く">宝塚市</a></h2>
     <p>町名・町域や、地域ごとの位置関係を地図で見て覚えられます。</p>
     <div class="links"><a href="/takarazuka/" data-umami-event="local-takarazuka-click">宝塚市トップ</a></div>
   </article>
 
   <article class="card">
-    <h2>芦屋市</h2>
+    <h2><a href="/ashiya/" data-umami-event="local-ashiya-heading-click" aria-label="芦屋市を開く">芦屋市</a></h2>
     <p>町名を地図で見て覚えるページと、パン屋マップを公開しています。</p>
     <div class="links">
       <a href="/ashiya/" data-umami-event="local-ashiya-click">芦屋市トップ</a>
@@ -123,7 +126,7 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
   </article>
 
   <article class="card">
-    <h2>尼崎市</h2>
+    <h2><a href="/amagasaki/" data-umami-event="local-amagasaki-heading-click" aria-label="尼崎市を開く">尼崎市</a></h2>
     <p>町名を地図で見て覚えるページと、パン屋マップを公開しています。</p>
     <div class="links">
       <a href="/amagasaki/" data-umami-event="local-amagasaki-click">尼崎市トップ</a>
@@ -132,7 +135,7 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
   </article>
 
   <article class="card">
-    <h2>伊丹市</h2>
+    <h2><a href="/itami/" data-umami-event="local-itami-heading-click" aria-label="伊丹市を開く">伊丹市</a></h2>
     <p>町名・町域を地図で見て、探して、覚えられます。</p>
     <div class="links"><a href="/itami/" data-umami-event="local-itami-click">伊丹市トップ</a></div>
   </article>
@@ -151,7 +154,7 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
       <a href="/sitemap/">サイトマップ</a>
 </nav>
 
-<footer>Version 1.2.3<br>© 2026 Kussoon. All rights reserved.</footer>
+<footer>Version 1.2.4<br>© 2026 Kussoon. All rights reserved.</footer>
 </main>
 <script>
 // Choose the existing town-search page; retain the keyword across city changes.
