@@ -40,6 +40,22 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
 .search-row button{border:0;border-radius:11px;background:#3f9b64;color:#fff;padding:10px 13px;font-size:13px;font-weight:900;white-space:nowrap;cursor:pointer}
 .search-row button:active{transform:translateY(1px)}
 </style>
+<!-- Kussoon: Umami analytics (query values are not collected) -->
+<script>
+window.kussoonUmamiBeforeSend = function (type, payload) {
+  ['url', 'referrer'].forEach(function (key) {
+    if (typeof payload[key] === 'string') {
+      payload[key] = payload[key].split(/[?#]/)[0];
+    }
+  });
+  return payload;
+};
+</script>
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"
+        data-domains="kussoon.com,www.kussoon.com"
+        data-exclude-search="true" data-exclude-hash="true"
+        data-before-send="kussoonUmamiBeforeSend"></script>
 </head>
 <body>
 <main>
@@ -54,7 +70,7 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
 </section>
 
 <section class="quick-searches" aria-label="町名検索">
-  <form class="search-card" action="/nishinomiya/town-search.html" method="get">
+  <form class="search-card" action="/nishinomiya/town-search.html" method="get" data-kussoon-search-event="nishinomiya-town-search-submit">
     <h2>🔍 西宮市の町名を検索</h2>
     <p>町名・読み仮名・郵便番号から探す</p>
     <div class="search-row">
@@ -63,7 +79,7 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
     </div>
   </form>
 
-  <form class="search-card" action="/takarazuka/town-search.html" method="get">
+  <form class="search-card" action="/takarazuka/town-search.html" method="get" data-kussoon-search-event="takarazuka-town-search-submit">
     <h2>🔍 宝塚市の町名を検索</h2>
     <p>町名・読み仮名・郵便番号から探す</p>
     <div class="search-row">
@@ -77,14 +93,14 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
   <article class="card featured">
     <h2>西宮・芦屋・尼崎のパン屋マップ</h2>
     <p>3市のパン屋を、ひとつの地図で探せます。市や店名で絞り込めます。</p>
-    <div class="links"><a href="/maps/unified-bread-map.html">3市統合パン屋マップ</a></div>
+    <div class="links"><a href="/maps/unified-bread-map.html" data-umami-event="local-bread-map-click">3市統合パン屋マップ</a></div>
   </article>
 
   <article class="card">
     <h2>西宮市</h2>
     <p>町名を中心に、パン屋、和菓子・洋菓子店、交差点看板など、現在もっとも多くの地域情報を公開しています。</p>
     <div class="links">
-      <a href="/nishinomiya/">西宮市トップ</a>
+      <a href="/nishinomiya/" data-umami-event="local-nishinomiya-click">西宮市トップ</a>
       <a href="/nishinomiya/bakeries/nishinomiya-bread-map.html">パン屋マップ</a>
       <a href="/nishinomiya/jisha/">神社・寺院マップ</a>
       <a href="/nishinomiya/sweets/">和菓子・洋菓子店マップ</a>
@@ -96,14 +112,14 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
   <article class="card">
     <h2>宝塚市</h2>
     <p>町名・町域や、地域ごとの位置関係を地図で見て覚えられます。</p>
-    <div class="links"><a href="/takarazuka/">宝塚市トップ</a></div>
+    <div class="links"><a href="/takarazuka/" data-umami-event="local-takarazuka-click">宝塚市トップ</a></div>
   </article>
 
   <article class="card">
     <h2>芦屋市</h2>
     <p>町名を地図で見て覚えるページと、パン屋マップを公開しています。</p>
     <div class="links">
-      <a href="/ashiya/">芦屋市トップ</a>
+      <a href="/ashiya/" data-umami-event="local-ashiya-click">芦屋市トップ</a>
       <a href="/ashiya/ashiya-bread-map.html">パン屋マップ</a>
     </div>
   </article>
@@ -112,7 +128,7 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
     <h2>尼崎市</h2>
     <p>町名を地図で見て覚えるページと、パン屋マップを公開しています。</p>
     <div class="links">
-      <a href="/amagasaki/">尼崎市トップ</a>
+      <a href="/amagasaki/" data-umami-event="local-amagasaki-click">尼崎市トップ</a>
       <a href="/amagasaki/amagasaki-bread-map.html">パン屋マップ</a>
     </div>
   </article>
@@ -120,7 +136,7 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
   <article class="card">
     <h2>伊丹市</h2>
     <p>町名・町域を地図で見て、探して、覚えられます。</p>
-    <div class="links"><a href="/itami/">伊丹市トップ</a></div>
+    <div class="links"><a href="/itami/" data-umami-event="local-itami-click">伊丹市トップ</a></div>
   </article>
 </section>
 
@@ -137,7 +153,35 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
       <a href="/sitemap/">サイトマップ</a>
 </nav>
 
-<footer>Version 1.2.1<br>© 2026 Kussoon. All rights reserved.</footer>
+<footer>Version 1.2.2<br>© 2026 Kussoon. All rights reserved.</footer>
 </main>
+<script>
+// Count valid submissions, including Enter, without collecting the input.
+(function () {
+  document.querySelectorAll('form[data-kussoon-search-event]').forEach(function (form) {
+    var sending = false;
+    form.addEventListener('submit', function (event) {
+      if (event.defaultPrevented) return;
+      if (sending) { event.preventDefault(); return; }
+      if (!window.umami || typeof window.umami.track !== 'function') return;
+      event.preventDefault();
+      sending = true;
+      var finished = false;
+      function proceed() {
+        if (finished) return;
+        finished = true;
+        clearTimeout(timer);
+        sending = false;
+        HTMLFormElement.prototype.submit.call(form);
+      }
+      var timer = setTimeout(proceed, 300);
+      try {
+        Promise.resolve(window.umami.track(form.getAttribute('data-kussoon-search-event')))
+          .then(proceed, proceed);
+      } catch (error) { proceed(); }
+    });
+  });
+})();
+</script>
 </body>
 </html>
