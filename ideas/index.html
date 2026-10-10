@@ -29,6 +29,22 @@ main{max-width:820px;margin:auto;padding:20px 14px 36px}
 footer{text-align:center;margin-top:14px;color:#92897d;font-size:11px}
 @media(max-width:600px){main{max-width:440px}.hero h1{font-size:29px}}
 </style>
+<!-- Kussoon: Umami analytics (query values are not collected) -->
+<script>
+window.kussoonUmamiBeforeSend = function (type, payload) {
+  ['url', 'referrer'].forEach(function (key) {
+    if (typeof payload[key] === 'string') {
+      payload[key] = payload[key].split(/[?#]/)[0];
+    }
+  });
+  return payload;
+};
+</script>
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"
+        data-domains="kussoon.com,www.kussoon.com"
+        data-exclude-search="true" data-exclude-hash="true"
+        data-before-send="kussoonUmamiBeforeSend"></script>
 </head>
 <body>
 <main>
@@ -43,7 +59,7 @@ footer{text-align:center;margin-top:14px;color:#92897d;font-size:11px}
 <article class="card">
   <h2>バータイマー付きデジタル時計</h2>
   <p>バー表示で残り時間を視覚的に確認できるタイマーと、デジタル時計を組み合わせたWebアプリです。</p>
-  <a href="/ideas/001/">使い方を見る →</a>
+  <a href="/ideas/001/" data-umami-event="ideas-001-click">使い方を見る →</a>
 </article>
 
 
@@ -51,14 +67,14 @@ footer{text-align:center;margin-top:14px;color:#92897d;font-size:11px}
 <article class="card">
   <h2>Ctrl＋Alt＋Deleteを右手一本で押す方法</h2>
   <p>3つのキーを右手の親指・人差し指・中指だけで同時に押す、キーボードの小さな工夫をご紹介します。写真付きです。</p>
-  <a href="/ideas/002/">押し方を見る →</a>
+  <a href="/ideas/002/" data-umami-event="ideas-002-click">押し方を見る →</a>
 </article>
 
 <!-- Article management: ID 003 | folder 003 | URL /ideas/003/ -->
 <article class="card">
   <h2>車の運転席にボールペン差しを作ってみた</h2>
   <p>市販のホルダーから、ヨーグルトのフタを再利用した自作品まで。ボールペンのクリップを使った固定方法も、写真付きでご紹介します。</p>
-  <a href="/ideas/003/">作り方を見る →</a>
+  <a href="/ideas/003/" data-umami-event="ideas-003-click">作り方を見る →</a>
 </article>
 
 <section class="future">
