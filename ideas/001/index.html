@@ -31,11 +31,27 @@ summary{cursor:pointer;font-weight:700}
 .note{font-size:.93rem;color:#57626b;background:#f7f9fa;padding:12px 14px;border-radius:6px}
 .content-section .note{text-align:left}
 @media(max-width:580px){.use-cases{grid-template-columns:1fr}.use-case{padding:14px}}
-</style></head><body><div class="container"><a class="back" href="../">← 工夫・アイデアへ戻る</a><main><article class="article-body"><p class="kicker">Kussoon ／ 💡 工夫・アイデア</p>
+</style><!-- Kussoon: Umami analytics (query values are not collected) -->
+<script>
+window.kussoonUmamiBeforeSend = function (type, payload) {
+  ['url', 'referrer'].forEach(function (key) {
+    if (typeof payload[key] === 'string') {
+      payload[key] = payload[key].split(/[?#]/)[0];
+    }
+  });
+  return payload;
+};
+</script>
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"
+        data-domains="kussoon.com,www.kussoon.com"
+        data-exclude-search="true" data-exclude-hash="true"
+        data-before-send="kussoonUmamiBeforeSend"></script>
+</head><body><div class="container"><a class="back" href="../">← 工夫・アイデアへ戻る</a><main><article class="article-body"><p class="kicker">Kussoon ／ 💡 工夫・アイデア</p>
 <h1>バータイマー付きデジタル時計</h1>
 <p class="app-label">iPhoneのホーム画面に追加して使える時計・タイマーWebアプリ</p>
 <p class="lead">大きく見やすい時計と、時間の経過を色とバーで確認できるタイマーです。スマートフォンを横向き・縦向きのどちらでも使えます。</p>
-<p class="action"><a class="launch" href="/ideas/001/clock.html?mode=clock">時計を表示する</a></p>
+<p class="action"><a class="launch" href="/ideas/001/clock.html?mode=clock" data-umami-event="ideas-001-clock-open-click">時計を表示する</a></p>
 <section class="content-section">
 <h2>この時計の使い方は2通りあります</h2>
 <p>表示される時計・タイマーの機能は同じですが、開き方と画面の見え方が異なります。</p>
@@ -70,7 +86,7 @@ summary{cursor:pointer;font-weight:700}
 <li>今年の残り週数・日数と、366日分の「今日は何の日」を表示</li>
 <li>15分ごとのメッセージ、毎時50分からの「⚠️座りすぎ注意」、毎正時の鳩時計</li>
 </ul>
-<div class="action"><a href="/ideas/001/clock.html?mode=clock">時計を表示する</a></div>
+<div class="action"><a href="/ideas/001/clock.html?mode=clock" data-umami-event="ideas-001-clock-open-click">時計を表示する</a></div>
 </section>
 <section class="content-section">
 <h2>タイマー</h2>
@@ -82,7 +98,7 @@ summary{cursor:pointer;font-weight:700}
 <li>横表示／縦表示／全画面表示に対応</li>
 <li>残り時間が5分刻みになるたび画面全体がフラッシュ。0になったときもフラッシュ</li>
 </ul>
-<div class="action"><a href="/ideas/001/clock.html?mode=timer">タイマーを表示する</a></div>
+<div class="action"><a href="/ideas/001/clock.html?mode=timer" data-umami-event="ideas-001-timer-open-click">タイマーを表示する</a></div>
 </section>
 <section class="content-section help">
 <h2>画面を消さずに使いたいとき</h2>
@@ -108,4 +124,4 @@ summary{cursor:pointer;font-weight:700}
 <p>「今日は何の日」は、公開情報をもとに当サイトが代表的な記念日を1日1件選び、独自に整理したものです。記念日には複数の説や制定主体があるため、網羅的・公式な一覧ではありません。一般的な参考情報としてご利用ください。</p>
 <p>時計の使用中に外部のデータAPIへ問い合わせることはありません。サイト全体の方針は<a href="https://kussoon.com/sources/">データ出典</a>と<a href="https://kussoon.com/terms/">利用上の注意</a>をご確認ください。</p>
 </section>
-<div class="version">時計・タイマー Version 2.1.3</div></article></main><!-- 広告・アフィリエイト導入時は明示と規約準拠のリンクを追加します。審査前のため広告コードや空枠は設置しません。 --><footer class="footer" aria-label="Kussoon共通フッター"><a href="../">← 工夫・アイデアへ戻る</a><a href="/">Kussoonトップ</a><nav class="site-links" aria-label="サイト共通案内"><a href="/ideas/">工夫・アイデア</a><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/about/">このサイトについて</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p></footer></div></body></html>
+<div class="version">時計・タイマー Version 2.1.4</div></article></main><!-- 広告・アフィリエイト導入時は明示と規約準拠のリンクを追加します。審査前のため広告コードや空枠は設置しません。 --><footer class="footer" aria-label="Kussoon共通フッター"><a href="../">← 工夫・アイデアへ戻る</a><a href="/">Kussoonトップ</a><nav class="site-links" aria-label="サイト共通案内"><a href="/ideas/">工夫・アイデア</a><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/about/">このサイトについて</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p></footer></div></body></html>
