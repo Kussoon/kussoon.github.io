@@ -27,6 +27,22 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
 .kicker{color:#806126}
 
 </style>
+<!-- Kussoon: Umami analytics (query values are not collected) -->
+<script>
+window.kussoonUmamiBeforeSend = function (type, payload) {
+  ['url', 'referrer'].forEach(function (key) {
+    if (typeof payload[key] === 'string') {
+      payload[key] = payload[key].split(/[?#]/)[0];
+    }
+  });
+  return payload;
+};
+</script>
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"
+        data-domains="kussoon.com,www.kussoon.com"
+        data-exclude-search="true" data-exclude-hash="true"
+        data-before-send="kussoonUmamiBeforeSend"></script>
 </head>
 <body id="top"><div class="container">
 <a class="back" href="../">← 工夫・アイデアへ戻る</a>
@@ -66,7 +82,7 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
 <p>今回は、捨てるはずだったヨーグルトのフタが、ボールペン差しになりました。</p>
 <p>どちらにしても、必要なときにボールペンがすぐ見つかる。それだけのことなのですが、毎日の小さな不便が一つ減りました。</p>
 <p class="note"><strong>取り付けに関する注意：</strong>写真は試作・使用状況の紹介であり、写真の取り付け位置の安全性を保証するものではありません。特にAピラーや窓枠付近は、車種によってエアバッグの展開経路に当たります。取扱説明書などで確認し、エアバッグの展開範囲や視界、運転操作を妨げる場所には取り付けないでください。走行中に外れたり、窓の開閉やドアの操作に干渉したりする場合も使用しないでください。仕事で使用する車では、管理者の許可や車両の取り扱い条件も確認してください。</p>
-<div class="version">Version 1.0.1</div>
+<div class="version">Version 1.0.2</div>
 </article></main>
 <!-- 広告・アフィリエイト導入時は告知と専用リンクを追加してください。現時点では広告コードなし。 -->
 <footer class="kussoon-common-footer" aria-label="Kussoon共通フッター">
