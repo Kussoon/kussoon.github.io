@@ -47,23 +47,11 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
 .kussoon-common-footer{border-top-color:#dce6ee;color:#536b79}
 .kussoon-footer-links a{color:#285978}
 
+/* アフィリエイト参加について：控えめながら判読可能な表記 */
+.amazon-affiliate-statement{font-size:13px;line-height:1.7;color:#425a6c;max-width:650px;margin:12px auto 9px;text-align:center}
 </style>
-<!-- Kussoon: Umami analytics (query values are not collected) -->
-<script>
-window.kussoonUmamiBeforeSend = function (type, payload) {
-  ['url', 'referrer'].forEach(function (key) {
-    if (typeof payload[key] === 'string') {
-      payload[key] = payload[key].split(/[?#]/)[0];
-    }
-  });
-  return payload;
-};
-</script>
-<script defer src="https://cloud.umami.is/script.js"
-        data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"
-        data-domains="kussoon.com,www.kussoon.com"
-        data-exclude-search="true" data-exclude-hash="true"
-        data-before-send="kussoonUmamiBeforeSend"></script>
+<!-- Umami アクセス解析 -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true"></script>
 </head>
 <body>
 <main>
@@ -78,13 +66,13 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
 </section>
 
 <section class="grid" aria-label="Kussoonの主なコンテンツ">
-  <a class="card learn" href="/games/" data-umami-event="top-games-click">
+  <a class="card learn" href="/games/">
     <h2>🧠 学ぶ・遊ぶ</h2>
     <p>都道府県、市町村、町名、魚へんの漢字などを、地図やクイズで見て・探して・覚えます。</p>
     <span class="go">学ぶ・遊ぶへ →</span>
   </a>
 
-  <a class="card local" href="/local/" data-umami-event="top-local-click">
+  <a class="card local" href="/local/">
     <h2>🗺️ 地域を調べる</h2>
     <p>町名、パン屋、和洋菓子店、交差点看板など、地域の情報を地図で分かりやすく整理します。</p>
     <span class="go">地域を調べる →</span>
@@ -108,7 +96,7 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
   <div class="quick-links">
     <a href="/games/todofuken.html">都道府県を地図で覚える</a>
     <a href="/hyogo/">兵庫県の市町村を地図で覚える</a>
-    <a href="/nishinomiya/" data-umami-event="top-nishinomiya-click">西宮市の町名を地図で覚える</a>
+    <a href="/nishinomiya/">西宮市の町名を地図で覚える</a>
     <a href="/maps/unified-bread-map.html">西宮・芦屋・尼崎 パン屋マップ</a>
     <a href="/nishinomiya/sweets/">西宮お菓子マップ</a>
     <a href="/ideas/001/">バータイマー付きデジタル時計</a>
@@ -122,13 +110,15 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
 <nav class="kussoon-footer-links" aria-label="サイト共通案内">
 <a href="/">Kussoonトップ</a>
 <a href="/ideas/">工夫・アイデア</a>
-<a href="/games/" data-umami-event="top-games-click">学ぶ・遊ぶ</a>
-<a href="/local/" data-umami-event="top-local-click">地域を調べる</a>
+<a href="/games/">学ぶ・遊ぶ</a>
+<a href="/local/">地域を調べる</a>
 <a href="/about/">このサイトについて</a>
 <a href="/privacy/">プライバシーポリシー</a>
+<a href="/advertising/">広告・アフィリエイトについて</a>
 <a href="/sources/">データ出典</a>
 <a href="/terms/">利用上の注意</a>
 </nav>
+<p class="amazon-affiliate-statement">Amazonのアソシエイトとして、Kussoonは適格販売により収入を得ています。</p>
 <p>© 2026 Kussoon. All rights reserved.</p>
 </footer>
 </body>
