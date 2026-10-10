@@ -34,7 +34,10 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
 .search-card{background:#fff;border:1px solid #bfe2cc;border-radius:16px;padding:13px 12px;box-shadow:0 4px 12px #286b4512}
 .search-card h2{margin:0 0 4px;color:#28764a;font-size:18px}
 .search-card p{margin:0 0 9px;color:#607668;font-size:11px;font-weight:700;line-height:1.5}
-.search-row{display:grid;grid-template-columns:1fr auto;gap:7px}
+.search-row{display:grid;grid-template-columns:minmax(90px,110px) minmax(0,1fr) auto;gap:7px}
+.search-row select{min-width:0;width:100%;border:1px solid #aed4bb;border-radius:11px;background:#fbfefc;color:#244335;padding:10px 5px;font:inherit;font-size:13px;font-weight:750;outline:none}
+.search-row select:focus{border-color:#3f9b64;box-shadow:0 0 0 3px #3f9b6420}
+@media(max-width:370px){.search-row{grid-template-columns:95px minmax(0,1fr)}.search-row button{grid-column:1/-1}}
 .search-row input{min-width:0;width:100%;border:1px solid #aed4bb;border-radius:11px;background:#fbfefc;color:#244335;padding:10px 11px;font:inherit;font-size:14px;outline:none}
 .search-row input:focus{border-color:#3f9b64;box-shadow:0 0 0 3px #3f9b6420}
 .search-row button{border:0;border-radius:11px;background:#3f9b64;color:#fff;padding:10px 13px;font-size:13px;font-weight:900;white-space:nowrap;cursor:pointer}
@@ -70,20 +73,15 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
 </section>
 
 <section class="quick-searches" aria-label="町名検索">
-  <form class="search-card" action="/nishinomiya/town-search.html" method="get" data-kussoon-search-event="nishinomiya-town-search-submit">
-    <h2>🔍 西宮市の町名を検索</h2>
-    <p>町名・読み仮名・郵便番号から探す</p>
+  <form class="search-card" id="local-town-search" action="/nishinomiya/town-search.html" method="get" data-kussoon-search-event="nishinomiya-town-search-submit">
+    <h2>🔍 西宮市・宝塚市の町名検索</h2>
+    <p>市を選び、町名・読み仮名・郵便番号から探す</p>
     <div class="search-row">
-      <input type="search" name="q" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="例：高、こま、662-0911" aria-label="西宮市の町名検索">
-      <button type="submit">検索する</button>
-    </div>
-  </form>
-
-  <form class="search-card" action="/takarazuka/town-search.html" method="get" data-kussoon-search-event="takarazuka-town-search-submit">
-    <h2>🔍 宝塚市の町名を検索</h2>
-    <p>町名・読み仮名・郵便番号から探す</p>
-    <div class="search-row">
-      <input type="search" name="q" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="例：川、めふ、665-0051" aria-label="宝塚市の町名検索">
+      <select id="town-search-city" aria-label="検索する市を選択">
+        <option value="nishinomiya" selected>西宮市</option>
+        <option value="takarazuka">宝塚市</option>
+      </select>
+      <input type="search" name="q" required inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="町名・郵便番号" aria-label="町名・読み仮名・郵便番号">
       <button type="submit">検索する</button>
     </div>
   </form>
@@ -153,9 +151,22 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
       <a href="/sitemap/">サイトマップ</a>
 </nav>
 
-<footer>Version 1.2.2<br>© 2026 Kussoon. All rights reserved.</footer>
+<footer>Version 1.2.3<br>© 2026 Kussoon. All rights reserved.</footer>
 </main>
 <script>
+// Choose the existing town-search page; retain the keyword across city changes.
+(function () {
+  var form = document.getElementById('local-town-search');
+  var city = document.getElementById('town-search-city');
+  function updateCity() {
+    var selected = city.value === 'takarazuka' ? 'takarazuka' : 'nishinomiya';
+    form.action = '/' + selected + '/town-search.html';
+    form.setAttribute('data-kussoon-search-event', selected + '-town-search-submit');
+  }
+  city.addEventListener('change', updateCity);
+  form.addEventListener('submit', updateCity);
+  updateCity();
+})();
 // Count valid submissions, including Enter, without collecting the input.
 (function () {
   document.querySelectorAll('form[data-kussoon-search-event]').forEach(function (form) {
