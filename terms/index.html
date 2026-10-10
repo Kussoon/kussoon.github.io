@@ -7,6 +7,22 @@
   <title>利用上の注意｜Kussoon</title>
   <link rel="canonical" href="https://kussoon.com/terms/">
   <link rel="stylesheet" href="/common/legal.css">
+<!-- Kussoon: Umami analytics (query values are not collected) -->
+<script>
+window.kussoonUmamiBeforeSend = function (type, payload) {
+  ['url', 'referrer'].forEach(function (key) {
+    if (typeof payload[key] === 'string') {
+      payload[key] = payload[key].split(/[?#]/)[0];
+    }
+  });
+  return payload;
+};
+</script>
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"
+        data-domains="kussoon.com,www.kussoon.com"
+        data-exclude-search="true" data-exclude-hash="true"
+        data-before-send="kussoonUmamiBeforeSend"></script>
 </head>
 <body>
   <header class="site-header"><div class="site-header__inner"><a class="brand" href="/">Kussoon</a><a class="back-link" href="/">Kussoonトップへ戻る</a></div></header>
