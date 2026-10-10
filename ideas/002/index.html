@@ -26,6 +26,22 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
 .kicker{color:#806126}
 
 </style>
+<!-- Kussoon: Umami analytics (query values are not collected) -->
+<script>
+window.kussoonUmamiBeforeSend = function (type, payload) {
+  ['url', 'referrer'].forEach(function (key) {
+    if (typeof payload[key] === 'string') {
+      payload[key] = payload[key].split(/[?#]/)[0];
+    }
+  });
+  return payload;
+};
+</script>
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"
+        data-domains="kussoon.com,www.kussoon.com"
+        data-exclude-search="true" data-exclude-hash="true"
+        data-before-send="kussoonUmamiBeforeSend"></script>
 </head>
 <body id="top"><div class="container">
 <a class="back" href="../">← 工夫・アイデアへ戻る</a>
@@ -52,7 +68,7 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
 <p>以前から知られている方法かもしれませんが、自分で気づくと少しうれしいものですね。興味があれば、ぜひお手元のキーボードで試してみてください。</p>
 <h2>参考記事</h2>
 <p class="source">『Esquire』「<a href="https://www.esquire.com/jp/lifestyle/tech/a182510/lifestyle-tech-billgates17-0927/" target="_blank" rel="noopener noreferrer">ビル・ゲイツ、「Ctrl-Alt-Delete」の組み合わせは最大の痛恨事であった</a>」（2017年9月27日公開）</p>
-<div class="version">Version 1.0.0</div>
+<div class="version">Version 1.0.1</div>
 </article></main>
 <!-- 広告・アフィリエイト導入時は告知と専用リンクを追加してください。現時点では広告コードなし。 -->
 <footer class="kussoon-common-footer" aria-label="Kussoon共通フッター">
