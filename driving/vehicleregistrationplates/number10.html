@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f2f6f8"><title>ナンバー10｜ナンバープレートで10を作ろう</title><meta name="description" content="2～4桁の車のナンバーを使い、四則演算を左から右へ順番に計算して10を作ろう。4つの出題モードに対応。"><script>
+// 本番ドメインのみ計測し、URLとリファラーからクエリ・ハッシュを除外します。
+function kussoonUmamiBeforeSend(type,payload){
+  if(payload&&typeof payload==='object'){
+    for(const key of ['url','referrer']){
+      if(typeof payload[key]==='string'){
+        try{const u=new URL(payload[key],location.href);payload[key]=key==='url'?u.pathname:u.origin+u.pathname;}
+        catch(e){payload[key]=payload[key].split(/[?#]/)[0];}
+      }
+    }
+  }
+  return payload;
+}
+if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
+  const script=document.createElement('script');
+  script.defer=true;script.src='https://cloud.umami.is/script.js';
+  script.dataset.websiteId='8beb23a4-a36f-4aff-b082-bec86e01a2f7';
+  script.dataset.beforeSend='kussoonUmamiBeforeSend';
+  document.head.appendChild(script);
+}
+</script>
+<style>:root{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;color:#142b39;background:#f2f6f8;color-scheme:light}*{box-sizing:border-box}body{margin:0}main{max-width:700px;margin:auto;padding:22px 16px 48px}h1{font-size:1.65rem;margin:0 0 8px}.intro{line-height:1.75;color:#475a65;margin:0 0 18px}.settings{display:grid;grid-template-columns:1fr 1fr;gap:12px}.setting label{font-weight:700;display:block;margin-bottom:6px}.setting select{width:100%}.plate{background:#fff;border:5px solid #fff;border-radius:13px;box-shadow:0 4px 14px #203d5133;text-align:center;max-width:420px;margin:24px auto 14px;padding:12px 14px 20px;color:#234c32}.plate-top{font-weight:750;letter-spacing:.06em;font-size:1.2rem}.digits{font-weight:800;font-size:clamp(3.6rem,15vw,5.6rem);line-height:1.35;letter-spacing:.06em;font-variant-numeric:tabular-nums;color:#20282a}.panel{background:#fff;border:1px solid #d4e0e5;border-radius:16px;padding:18px;margin-top:16px;box-shadow:0 2px 9px #1737470d}.panel h2{font-size:1.05rem;margin:0 0 12px}.buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.btn{border:1px solid #a9c0ce;border-radius:10px;background:#f4f9fc;color:#183b52;min-height:45px;padding:9px 14px;font-size:1rem;font-weight:700;cursor:pointer}.btn:focus-visible{outline:3px solid #ee9c27;outline-offset:3px}.btn.primary{background:#10517a;color:#fff;border-color:#10517a}.btn.warn{background:#fff7df}.btn:disabled{opacity:.35;cursor:not-allowed}.display{min-height:54px;padding:12px;background:#edf4f8;border:1px solid #d0e1e9;border-radius:10px;font-size:1.35rem;word-break:break-all;text-align:center}.keypad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}.keypad .btn{font-size:1.15rem}.message{min-height:2.4em;margin-top:12px;line-height:1.65;font-weight:600}.success{color:#087038}.error{color:#bd3630}.quiet{color:#50626c;font-weight:400}.note{font-size:.91rem;line-height:1.8;color:#566a76}.stat{text-align:center;color:#4b5c64;font-variant-numeric:tabular-nums}footer{margin-top:25px;text-align:center;font-size:.8rem;color:#566c77}@media(max-width:430px){.settings{grid-template-columns:1fr}.panel{padding:14px}}.rules{line-height:1.75}.rules h3{font-size:1rem;margin:18px 0 6px}.rules p{margin:7px 0}.rules ul{padding-left:1.45em;margin:7px 0}.rules li{margin:5px 0}.example{background:#edf4f8;border-radius:12px;padding:14px 8px;text-align:center;font-size:.94rem;line-height:1.9}.example-formula{font-size:1.3rem;font-weight:700}.example strong{display:block;color:#087038}
+/* 「次のナンバーは？クイズ」と共通のタイトル用ナンバープレート */
+.number-hero{background:linear-gradient(125deg,#e5f6fd,#cbe8f6);padding:20px 12px 23px;border-radius:18px;text-align:center;margin-bottom:18px;color:#19445f}
+.number-hero .eyebrow{letter-spacing:.18em;font-size:.74rem;font-weight:800;color:#145071}
+.number-hero h1{font-size:clamp(1.6rem,5vw,2.3rem);color:#145071;margin:10px 0 0}
+.hero-plate{width:min(95%,430px);margin:17px auto 15px;border:4px solid #39966a;background:#22291e;color:#9cd9b0;border-radius:18px;padding:14px 9px 13px;box-shadow:none}
+.hero-plate .hero-top{display:flex;justify-content:center;align-items:baseline;gap:24px;font-weight:800;font-size:clamp(1.5rem,5.6vw,2rem);line-height:1.2}
+.hero-plate .hero-bottom{font-size:clamp(1.55rem,6vw,2.35rem);font-weight:850;line-height:1.6;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.025em}
+.site-footer{max-width:700px;margin:0 auto;padding:0 16px 36px;text-align:center;font-size:.8rem;color:#566c77}
+.site-footer .site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin:6px 0 12px}
+.site-footer a{color:#10517a;text-decoration:underline;text-underline-offset:2px}
+.site-footer p{margin:4px 0}
+@media(max-width:430px){.number-hero{padding:17px 8px}.hero-plate{padding:12px 5px}.hero-plate .hero-top{gap:16px}.hero-plate .hero-bottom{font-size:clamp(1.43rem,6.1vw,1.95rem)}}
+@media(prefers-color-scheme:dark){:root{background:#101923;color:#eff5fa;color-scheme:dark}body{background:#101923}.number-hero{background:linear-gradient(125deg,#164362,#25495d);color:#f3f8fb}.number-hero h1,.number-hero .eyebrow{color:#f3f8fb}.intro,.note,.stat,.quiet,.site-footer{color:#b5c6d5}.panel{background:#1b2b3a;border-color:#385064}.btn{background:#243e52;color:#eff5fa;border-color:#55758e}.btn.primary{background:#265f91;border-color:#6aa6d5}.btn.warn{background:#4a412c}.display,.example{background:#263e50;border-color:#385064}.site-footer a{color:#9bcdf0}.plate{background:#fff;color:#234c32}.digits{color:#20282a}}
+</style></head>
+<body><main><div class="number-hero"><div class="eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="hero-plate" role="img" aria-label="神戸 500、1+2+3+4=10 のナンバープレートを模したタイトル画像"><div class="hero-top"><span>神戸</span><span>500</span></div><div class="hero-bottom">1+2+3+4=10</div></div><h1>ナンバー10</h1></div><p class="intro">車のナンバープレートの数字を使って、答えが<strong>10</strong>になる式をつくりましょう！</p>
+<div class="panel"><h2>出題モード</h2><div class="settings"><div class="setting"><label for="guarantee">答えがあるか</label><select class="btn" id="guarantee"><option value="yes">必ず答えがある</option><option value="random">答えがないこともある</option></select></div><div class="setting"><label for="order">数字の順番</label><select class="btn" id="order"><option value="fixed">順番どおり</option><option value="free">入れ替え自由</option></select></div></div><p class="note" id="modeNote"></p><div class="buttons"><button class="btn primary" id="new" data-umami-event="number10-next">次のナンバー</button></div></div>
+<div class="plate" aria-label="ナンバープレート"><div class="plate-top">日本 ５００　か</div><div class="digits" id="plate"></div></div><p class="stat" id="stats">正解 0問 ／ 挑戦 0問</p>
+<section class="panel"><h2>式を作る</h2><div class="display" id="expression" aria-live="polite">数字と記号を押してください</div><div class="keypad" id="digitKeys"></div><div class="keypad"><button class="btn" data-token="+">＋</button><button class="btn" data-token="-">−</button><button class="btn" data-token="*">×</button><button class="btn" data-token="/">÷</button><button class="btn warn" id="back">1つ戻す</button><button class="btn warn" id="clear">消去</button></div><div class="buttons"><button class="btn primary" id="check" data-umami-event="number10-check">答え合わせ</button><button class="btn" id="hint" data-umami-event="number10-hint">ヒント</button><button class="btn" id="solution" data-umami-event="number10-answer">解答を見る</button></div><div class="message quiet" id="message" aria-live="polite"></div></section>
+<section class="panel rules"><h2>🚗 10をつくろう！</h2>
+<p>ナンバープレートの数字を使って、答えが10になる式をつくりましょう！</p>
+<h3>計算は、左から順番に！</h3>
+<p>このゲームでは、ふつうの算数とはちがって、たし算・ひき算・かけ算・わり算を、すべて左から順番に計算します。</p>
+<div class="example"><div class="example-formula">7 ＋ 4 − 9 × 5</div><div>7＋4＝11 → 11−9＝2 → 2×5＝10</div><strong>✓ 10になったら正解！</strong></div>
+<h3>数字の使い方</h3>
+<ul><li>出てきた数字は、全部1回ずつ使いましょう。</li><li>「順番どおり」では左から使います。「入れ替え自由」では好きな順番で使えます。</li><li>数字をくっつけたり、かっこを使ったりはできません。</li></ul>
+<h3>問題のえらび方</h3>
+<ul><li>「必ず答えがある」：10をつくれる問題だけが出ます。</li><li>「答えがないこともある」：10をつくれない問題も出ます。</li></ul>
+</section></main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/" data-umami-event="number10-footer-about">このサイトについて</a><a href="https://kussoon.com/privacy/" data-umami-event="number10-footer-privacy">プライバシー</a><a href="https://kussoon.com/sources/" data-umami-event="number10-footer-sources">データ出典</a><a href="https://kussoon.com/terms/" data-umami-event="number10-footer-terms">利用上の注意</a></nav><p>ナンバー10　Version 1.0.0</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
+<script>
+'use strict';const $=id=>document.getElementById(id),EPS=1e-8;let digits=[],tokens=[],used=[],answer=null,attempts=0,wins=0,finished=false;const fmt=s=>s.replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−');
+function calc(x,y,op){if(op==='+' )return x+y;if(op==='-')return x-y;if(op==='*')return x*y;if(Math.abs(y)<EPS)return null;return x/y;}
+// All modes use sequential left-to-right arithmetic, without operator precedence.
+function solveFixed(ns){
+ function walk(i,value,expr){
+  if(i===ns.length)return Math.abs(value-10)<EPS?expr:null;
+  for(const op of ['+','-','*','/']){
+   const v=calc(value,ns[i],op);
+   if(v!==null&&Number.isFinite(v)&&Math.abs(v)<1e7){const result=walk(i+1,v,expr+op+ns[i]);if(result)return result;}
+  }
+  return null;
+ }
+ return walk(1,ns[0],String(ns[0]));
+}
+function solveFree(ns){
+ function walk(remaining,value,expr){
+  if(!remaining.length)return Math.abs(value-10)<EPS?expr:null;
+  for(let i=0;i<remaining.length;i++){
+   const tail=remaining.filter((_,j)=>i!==j),digit=remaining[i];
+   if(value===null){const result=walk(tail,digit,String(digit));if(result)return result;}
+   else for(const op of ['+','-','*','/']){
+    const v=calc(value,digit,op);
+    if(v!==null&&Number.isFinite(v)&&Math.abs(v)<1e7){const result=walk(tail,v,expr+op+digit);if(result)return result;}
+   }
+  }
+  return null;
+ }
+ return walk(ns,null,'');
+}
+function solve(ns){return $('order').value==='fixed'?solveFixed(ns):solveFree(ns);}
+function nextDigits(){const count=2+Math.floor(Math.random()*3);return [1+Math.floor(Math.random()*9),...Array.from({length:count-1},()=>Math.floor(Math.random()*10))];}
+function newGame(){let d,sol;let tries=0;do{d=nextDigits();sol=solve(d);tries++;}while($('guarantee').value==='yes'&&!sol&&tries<10000);if($('guarantee').value==='yes'&&!sol){message('問題を用意できませんでした。もう一度お試しください。','error');return;}digits=d;used=d.map(()=>false);tokens=[];answer=sol;finished=false;const str=d.join('');$('plate').textContent=str.length===4?`${str.slice(0,2)}-${str.slice(2)}`:str.padStart(4,'・');$('modeNote').textContent=`${$('guarantee').value==='yes'?'必ず10を作れます':'10を作れない番号も出ます'}。${$('order').value==='fixed'?'数字も計算も左から右へ進めます。':'数字は入れ替え自由で、計算は左から右へ進めます。'}`;message('');render();}
+function render(){const key=$('digitKeys');key.replaceChildren();digits.forEach((digit,i)=>{const b=document.createElement('button');b.className='btn';b.textContent=digit;b.disabled=used[i]||($('order').value==='fixed'&&i!==used.findIndex(v=>!v));b.setAttribute('aria-label',`${i+1}番目の数字 ${digit}`);b.onclick=()=>{if(b.disabled)return;used[i]=true;tokens.push({type:'digit',value:String(digit),index:i});render();};key.append(b);});$('expression').textContent=tokens.length?fmt(tokens.map(t=>t.value).join('')):'数字と記号を押してください';$('stats').textContent=`正解 ${wins}問 ／ 挑戦 ${attempts}問`;}
+document.querySelectorAll('[data-token]').forEach(b=>b.onclick=()=>{tokens.push({type:'op',value:b.dataset.token});render();});$('back').onclick=()=>{const t=tokens.pop();if(t?.type==='digit')used[t.index]=false;render();};$('clear').onclick=()=>{tokens=[];used=used.map(()=>false);render();};
+function parse(t){
+ if(!t.length||!/^[0-9]$/.test(t[0]))throw Error('数字から式を始めてください');
+ let v=Number(t[0]);
+ for(let i=1;i<t.length;i+=2){
+  const op=t[i],n=t[i+1];
+  if(!['+','-','*','/'].includes(op)||!/^[0-9]$/.test(n||''))throw Error('数字と記号を交互に入力してください');
+  const next=calc(v,Number(n),op);
+  if(next===null)throw Error('0では割れません');
+  v=next;
+ }
+ return v;
+}
+function message(str,cls='quiet'){$('message').textContent=str;$('message').className=`message ${cls}`;}
+function record(solved){if(finished)return;attempts++;if(solved)wins++;finished=true;}
+$('check').onclick=()=>{if(tokens.filter(t=>t.type==='digit').length!==digits.length){message('表示された数字をすべて使ってください。','error');return;}try{const val=parse(tokens.map(t=>t.value));if(Math.abs(val-10)<EPS){record(true);message('🎉 正解！ 10になりました！','success');render();}else message(`左から順に計算すると ${Number(val.toPrecision(8))} です。10を目指そう！`,'error');}catch(e){message(e.message,'error');}};
+$('hint').onclick=()=>{if(!answer){message('このルールでは10を作る式はありません。');return;}const ops=[...answer.matchAll(/[+*\/-]/g)].map(m=>fmt(m[0]));message(`ヒント：${[...new Set(ops)].join('・')} を使い、左から順に計算する解き方があります。`);};$('solution').onclick=()=>{record(false);message(answer?`解答例：${fmt(answer)} = 10`:'このモードのルールでは10を作れません。');render();};$('new').onclick=newGame;$('guarantee').onchange=newGame;$('order').onchange=newGame;newGame();
+// Analytics: only named actions; no plate digits, coordinates, expressions or solutions are transmitted.
+</script></body></html>
