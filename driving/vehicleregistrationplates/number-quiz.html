@@ -40,6 +40,24 @@
 .intro-content .level-choice #course-actions label{white-space:nowrap;}
 .intro-content .level-choice .level-detail[hidden]{display:none;}
 @media(max-width:500px){.intro-content .level-choice #course-actions{flex-wrap:wrap;}}
+
+/* v0.13.2: インラインの分類番号進行表 */
+.sequence-details{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--card)}
+.sequence-details summary{cursor:pointer;font-weight:800;color:var(--navy);padding:5px 2px;list-style:none}
+.sequence-details summary::-webkit-details-marker{display:none}
+.sequence-details summary::before{content:"▶ ";font-size:.8em}
+.sequence-details[open] summary::before{content:"▼ "}
+.sequence-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:14px 0 12px}
+.sequence-tabs button{padding:8px 3px;font-size:.82rem;line-height:1.25;min-height:44px;border-color:var(--line)}
+.sequence-tabs button[aria-pressed="true"]{background:#266791;color:white;border-color:#73a4cd}
+.sequence-step{background:var(--tint);border:1px solid var(--line);border-radius:9px;padding:10px 7px;text-align:center;margin:0 0 5px}
+.sequence-step strong{font-size:clamp(1rem,3.7vw,1.19rem);letter-spacing:.02em}
+.sequence-step small{display:block;margin-bottom:4px;font-size:.75rem}
+.sequence-arrow{text-align:center;line-height:1.45;color:var(--muted);font-weight:800}
+.sequence-note{color:var(--muted);font-size:.78rem;line-height:1.55}
+.sequence-focus{border:2px solid #2783af;box-shadow:0 0 0 1px #2783af44}
+.sequence-current{color:var(--navy);font-weight:800}
+@media(prefers-color-scheme:dark){.sequence-tabs button[aria-pressed="true"]{background:#245f86;color:#fff}.sequence-focus{border-color:#85c9f3}}
 </style>
 <script>
 // 公開時のみUmamiを導入。クエリ・ハッシュを解析へ送らない。
@@ -75,12 +93,12 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
 <div id="course-actions" class="actions"><label for="count">問題数：</label><select id="count"><option value="5">5問</option><option value="10" selected>10問</option><option value="15">15問</option></select><button id="start" class="primary" data-umami-event="number-quiz-start">スタート</button></div>
 
 </div></section>
-<section id="game" class="hidden" aria-live="polite"><div class="meta"><span class="tag" id="kind">数字の進行</span><span id="progress">第1問 / 10問</span></div><div class="bar"><div id="progressbar" style="width:0"></div></div><div id="plateview" class="plate" role="img" aria-label="問題のナンバープレート"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span id="digits">12-34</span></div></div><div id="topicview" class="topic-display hidden" aria-label="問題の対象"></div><p id="stem">次に進む番号は？</p><p id="choicelabel" class="choice-label">正しい次の数字を選んでください。</p><div id="choices" class="choices"></div><div id="feedback" class="feedback hidden" role="status"></div><div class="actions" style="justify-content:flex-end;margin-top:14px"><button id="next" class="primary hidden" data-umami-event="number-quiz-next">次の問題へ</button></div></section>
+<section id="game" class="hidden" aria-live="polite"><div class="meta"><span class="tag" id="kind">数字の進行</span><span id="progress">第1問 / 10問</span></div><div class="bar"><div id="progressbar" style="width:0"></div></div><div id="plateview" class="plate" role="img" aria-label="問題のナンバープレート"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span id="digits">12-34</span></div></div><div id="topicview" class="topic-display hidden" aria-label="問題の対象"></div><p id="stem">次に進む番号は？</p><p id="choicelabel" class="choice-label">正しい次の数字を選んでください。</p><div id="choices" class="choices"></div><div id="feedback" class="feedback hidden" role="status"></div><details id="sequence-details" class="sequence-details hidden"><summary>3ナンバー分類番号の進行表を見る</summary><p class="sequence-note">2017年通知の基本系列です。現在の問題に対応する系列を表示しています。別の系列も切り替えて比較できます。</p><div class="sequence-tabs" role="group" aria-label="払出し区分"><button type="button" data-sequence="normal" aria-pressed="false">通常一連</button><button type="button" data-sequence="general" aria-pressed="false">一般希望</button><button type="button" data-sequence="lottery" aria-pressed="false">抽選希望</button></div><div id="sequence-steps" aria-live="polite"></div><p id="sequence-selected" class="sequence-note"></p><p class="sequence-note">「…」は途中の組合せを省略しています。希望番号の数字系列は歴史的な実際の払出し順序と異なる場合があります。地域特例・現在の交付状況は対象外です。</p></details><div class="actions" style="justify-content:flex-end;margin-top:14px"><button id="next" class="primary hidden" data-umami-event="number-quiz-next">次の問題へ</button></div></section>
 <section id="result" class="hidden results"><h2>結果</h2><p><strong id="score">0 / 10</strong></p><p id="resultnote"></p><div class="actions" style="justify-content:center"><button id="retry" class="primary" data-umami-event="number-quiz-top">トップページへ</button><button id="review" data-umami-event="number-quiz-review">間違えた問題を復習</button></div></section>
 <section class="help" aria-label="希望番号制度の説明"><details id="hope-number-guide"><summary>希望番号制度とは</summary><p>希望番号制度は、自動車のナンバープレートに表示される<strong>下段の4桁以下の数字</strong>を、申込みによって選べる制度です。地域名・分類番号・ひらがなは選べません。</p><p>通常の一般払出しでは使われない「42」「49」などの数字も、対象車両では希望番号として申し込めます。一部の人気番号は抽選となり、その対象となる番号は地域によって異なります。希望番号を利用できる車両や申込条件には制限があります。</p><p>詳しくは<a href="https://www.kibou-number.jp/html/info/kibou-number.html" target="_blank" rel="noopener noreferrer">希望番号申込サービスの案内</a>をご覧ください。</p></details></section>
-<section class="help" aria-label="ルールと出典"><details><summary>ルールと出典</summary><p>対象は、登録自動車について<strong>2017年通知に基づく基本的な払出し規則</strong>です。数字の昇順と一部の欠番規則、ひらがなの順序、通常一連番号・一般希望番号・抽選対象希望番号ごとに異なる分類番号の進行を扱います。下2桁が42・49となる数字を除きます。例えば「・420」「14-92」は、この理由では飛ばしません。</p><p>希望番号制度で取得可能な除外数字には、解説に「希望番号で取るなら可能だが、通常は発行されない。」を表示します。なお、希望番号にも申込み条件があります。</p><p><b>払出し順序の根拠（2017年）</b>：<a href="https://www.aiseishin.or.jp/public_html/protect/somu/20171013%20nanba-.pdf" target="_blank" rel="noopener noreferrer">「分類番号のローマ字導入に伴う自動車登録番号の定め方について」（公開PDF）</a>。<br><b>番号の形式に関する現行法令（2026年）</b>：<a href="https://laws.e-gov.go.jp/law/345M50000800007" target="_blank" rel="noopener noreferrer">e-Gov「自動車登録規則」第13条・別表</a>。<br><b>希望番号制度</b>：<a href="https://www.kibou-number.jp/html/info/kibou-number.html" target="_blank" rel="noopener noreferrer">希望番号申込サービスの案内</a>。</p><p><b>確認状況（2026年10月15日）</b>：2017年以降にこの詳細な払出し順序を全面的に置き換える公開通知は確認できませんでした。ただし、通知の現行性・追加変更がないことは未確定です。地域別抽選対象番号を含めた現実の完全な次番号は再現しません。分類番号問題は2017年通知の基本系列と7ページ目の別表に基づきます。歴史的な払出し実績と2026年現在の実際の交付順序を確定するものではありません。特例地域・字光式等を対象外にしています。</p></details></section>
+<section class="help" aria-label="ルールと出典"><details><summary>ルールと出典</summary><p>対象は、登録自動車について<strong>2017年通知に基づく基本的な払出し規則</strong>です。数字の昇順と一部の欠番規則、ひらがなの順序、通常一連番号・一般希望番号・抽選対象希望番号ごとに異なる分類番号の進行を扱います。下2桁が42・49となる数字を除きます。例えば「・420」「14-92」は、この理由では飛ばしません。</p><p>希望番号制度で取得可能な除外数字には、解説に「希望番号で取るなら可能だが、通常は発行されない。」を表示します。なお、希望番号にも申込み条件があります。</p><p><b>払出し順序の根拠（2017年）</b>：<a href="https://www.aiseishin.or.jp/public_html/protect/somu/20171013%20nanba-.pdf" target="_blank" rel="noopener noreferrer">「分類番号のローマ字導入に伴う自動車登録番号の定め方について」（公開PDF）</a>。<br><b>番号の形式に関する現行法令（2026年）</b>：<a href="https://laws.e-gov.go.jp/law/345M50000800007" target="_blank" rel="noopener noreferrer">e-Gov「自動車登録規則」第13条・別表</a>。<br><b>希望番号制度</b>：<a href="https://www.kibou-number.jp/html/info/kibou-number.html" target="_blank" rel="noopener noreferrer">希望番号申込サービスの案内</a>。</p><p><b>確認状況（2026年10月15日）</b>：2017年以降にこの詳細な払出し順序を全面的に置き換える公開通知は確認できませんでした。ただし、通知の現行性・追加変更がないことは未確定です。地域別抽選対象番号を含めた現実の完全な次番号は再現しません。分類番号問題は2017年通知の基本系列と7ページ目の別表に基づきます。分類番号の進行は「通常一連番号」「一般希望番号」「抽選対象希望番号」で異なります。歴史的な払出し実績と2026年現在の実際の交付順序を確定するものではありません。特例地域・字光式等を対象外にしています。</p></details></section>
 <section class="help" aria-label="注意事項"><details><summary>注意事項</summary><p>このクイズは公表された払出し規則を学ぶためのものです。実際に次に交付されるナンバープレートを予測するものではありません。</p><p>地域・車両の区分・希望番号の申込み・個別の特例などにより、実際の取扱いが異なる場合があります。</p></details></section>
-</main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/">このサイトについて</a><a href="https://kussoon.com/privacy/">プライバシー</a><a href="https://kussoon.com/sources/">データ出典</a><a href="https://kussoon.com/terms/">利用上の注意</a></nav><p>次のナンバーは？クイズ　Version 0.13.0</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
+</main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/">このサイトについて</a><a href="https://kussoon.com/privacy/">プライバシー</a><a href="https://kussoon.com/sources/">データ出典</a><a href="https://kussoon.com/terms/">利用上の注意</a></nav><p>次のナンバーは？クイズ　Version 0.13.2</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
 <script>
 'use strict';
 // 希望番号制の説明へ移動し、内容を開く。
@@ -197,8 +215,8 @@ const classCategoryLabels={normal:'通常一連番号（一般払出し）',lott
 function classificationQuestion(category,current,answer,id,sourcePages,fixed){
   const special=current==='数字系列全体';
   const prompt=special
-    ?'【2017年通知／地域特例なし】3ナンバー・一般希望番号で、使用できる「数字のみ」の分類番号の組合せがすべて払底した場合、次に使用するローマ字入り分類番号は？'
-    :`【2017年通知／地域特例なし】3ナンバー・${classCategoryLabels[category]}で、分類番号「${current}」に割り当てられた組合せが払底した場合、同じ区分で次に使用する分類番号は？`;
+    ?'一般希望番号で数字のみの分類番号をすべて使い切った場合、最初に使うローマ字入り分類番号は？'
+    :`2017年通知の基本系列で、「${current}」を使い切った場合、次の分類番号は？`;
   const all=[...new Set(Object.values(classSequences).flat())];
   const direct=classSequences[category]||[];
   const pos=direct.indexOf(current);
@@ -215,9 +233,9 @@ function classificationQuestion(category,current,answer,id,sourcePages,fixed){
   const pages=sourcePages||[4,5,7];
   const explanation=special
     ?'2017年通知の2.(2)②では、数字のみの分類番号の組合せが払底した場合、別表の「1A」から使用すると示されています。3ナンバーでは31Aです。個別の398の直後を問う問題ではありません。'
-    :`2017年通知の基本系列では、3ナンバーの${classCategoryLabels[category]}は「${current}」の次に「${answer}」を使用します。分類番号の全組合せが払底したときの規則上の移行であり、実際に次に交付されるプレートを予測するものではありません。`;
+    :`この区分の基本系列では「${current}」の次に「${answer}」を使います。${category==='normal'&&current==='30Y'?'通常一連番号では「31A」へ進まず、ローマ字＋数字の「3A0」に移ります。31Aは抽選対象希望番号側の系列です。':''}`;
   return {id,type:'class',level:'expert',from:special?'数字のみの分類番号が払底':`${classCategoryLabels[category]}：${current}`,answer,
-    options,stem:prompt,exp:explanation,source:`2017年通知 ${pages.map(p=>'p.'+p).join('・')}（分類番号の区分別払出し）`,fixed:!!fixed};
+    options,stem:prompt,exp:explanation,category,current,source:`2017年通知 ${pages.map(p=>'p.'+p).join('・')}`,fixed:!!fixed};
 }
 const baseClasses=classCases.map((q,i)=>({...q,id:'c-'+i,type:'class',level:'expert',source:'2017年払出し取扱資料 1.(1)・1.(2)',options:[q.answer,...q.wrong]}));
 const fixedClasses=classFixed.map(q=>classificationQuestion(q.category,q.current,q.answer,q.id,q.source_pages,true));
@@ -243,10 +261,48 @@ function explainDigits(q){const {from,to,kind}=q;
  return `${format(from)} の次は ${format(to)} です。数字を1増やし、桁数が変わる場合はナンバープレートの表示形式に合わせます。`;}
 function buildChoices(q){if(q.type!=='digits')return shuffle(q.options);
  const wrong=new Set();const candidates=[q.from+1,q.to+1,q.to-1,q.to+2,q.to-2,q.from+2,q.from-1];for(const n of candidates){if(n>0&&n<=9999&&n!==q.to)wrong.add(n)}while(wrong.size<3){const n=q.to+wrong.size+5;if(n<=9999)wrong.add(n);else break}return shuffle([q.answer,...shuffle([...wrong]).slice(0,3).map(format)]);}
+
+// 2017年通知の3系列を、既存の出題マスターから省略表示する。
+const sequenceStageLabels=['数字のみ','数字＋ローマ字','ローマ字＋数字','ローマ字＋ローマ字'];
+const sequenceCategoryOrder=['normal','general','lottery'];
+let sequenceActiveCategory='normal';
+let sequenceFocusCurrent='';
+function stageIndex(code){const tail=code.slice(1);if(/^\d{2}$/.test(tail))return 0;if(/^\d[A-Z]$/.test(tail))return 1;if(/^[A-Z]\d$/.test(tail))return 2;return 3;}
+function compactStage(list){
+  // 長い列は先頭・末尾を残し、重要な切替（325→327・328→330）だけ明示する。
+  if(list.length<=7)return list.join(' → ');
+  const first=list[0],last=list[list.length-1];
+  if(first==='310')return '310 → … → 325 → 327 → 328 → 330 → … → 398';
+  if(first==='300'&&last==='398')return '300 → … → 325 → 327 → 328 → 330 → … → 398';
+  return `${first} → ${list[1]} → … → ${list[list.length-2]} → ${last}`;
+}
+function renderSequence(category,focus){
+  sequenceActiveCategory=category;
+  const all=classSequences[category];
+  const steps=$('sequence-steps');steps.replaceChildren();
+  for(const [i,label] of sequenceStageLabels.entries()){
+    const list=all.filter(x=>stageIndex(x)===i);
+    if(!list.length)continue;
+    if(steps.children.length){const arrow=document.createElement('div');arrow.className='sequence-arrow';arrow.textContent='↓';steps.appendChild(arrow)}
+    const group=document.createElement('div');group.className='sequence-step';
+    if(focus&&list.includes(focus))group.classList.add('sequence-focus');
+    const lbl=document.createElement('small');lbl.textContent=label;
+    const val=document.createElement('strong');val.textContent=compactStage(list);
+    group.append(lbl,val);steps.appendChild(group);
+  }
+  for(const btn of document.querySelectorAll('[data-sequence]'))btn.setAttribute('aria-pressed',String(btn.dataset.sequence===category));
+  const idx=focus?all.indexOf(focus):-1;
+  const near=idx>=0&&idx+1<all.length?`この系列では「${focus}」の次は「${all[idx+1]}」です。`:idx===all.length-1&&idx>=0?`「${focus}」は、この表の最後の分類番号です。`:focus?`「${focus}」は、この系列の使用対象ではありません。`:'';
+  $('sequence-selected').textContent=`${classCategoryLabels[category]}。${near}`;
+}
+for(const btn of document.querySelectorAll('[data-sequence]')){
+ btn.addEventListener('click',()=>renderSequence(btn.dataset.sequence,sequenceFocusCurrent));
+}
+
 function openGame(items){questions=items;index=0;answers=[];$('intro').classList.add('hidden');$('result').classList.add('hidden');$('game').classList.remove('hidden');display();window.scrollTo({top:0,behavior:'smooth'});}
 function display(){locked=false;const q=questions[index];$('kind').textContent=({easy:'初級｜数字',middle:'中級｜欠番',hard:'上級｜ひらがな',expert:'超上級｜分類番号'})[q.level];$('progress').textContent=`第${index+1}問 / ${questions.length}問`;$('progressbar').style.width=(index/questions.length*100)+'%';const stemText=q.type==='digits'?'2017年の払出し規則では、この次に発行されるプレートの数字は？':q.stem;
-$('stem').replaceChildren();if(stemText.includes('【数字系列】')){const [before,after]=stemText.split('【数字系列】');$('stem').append(document.createTextNode(before));const emphasis=document.createElement('strong');emphasis.className='series-emphasis';emphasis.textContent='数字系列';$('stem').append(emphasis,document.createTextNode(after));}else{$('stem').textContent=stemText;}$('plateview').classList.toggle('hidden',q.type!=='digits');$('topicview').classList.toggle('hidden',q.type==='digits');if(q.type==='digits'){$('digits').textContent=format(q.from)}else{$('topicview').textContent=q.type==='kana'?(q.topic||`ひらがな「${q.from}」の次は？`):q.from;}$('choicelabel').textContent=q.type==='digits'?'次の数字を選んでください。':q.type==='kana'?'次に使用するひらがなを選んでください。':'正しいものを選んでください。';$('feedback').classList.add('hidden');$('next').classList.add('hidden');const box=$('choices');box.replaceChildren();for(const value of buildChoices(q)){const b=document.createElement('button');b.type='button';b.textContent=value;b.addEventListener('click',()=>respond(value,b));box.appendChild(b)}}
-function respond(value,chosen){if(locked)return;locked=true;const q=questions[index];const correct=value===q.answer;answers.push({item:q,correct});[...$('choices').children].forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add('correct');else if(b===chosen)b.classList.add('wrong')});const f=$('feedback');f.className='feedback'+(correct?'':' error');const h=document.createElement('b');h.textContent=correct?'正解です。':'不正解です。';const a=document.createElement('p');a.textContent=`正解：${q.answer}`;const exp=document.createElement('p');exp.textContent=q.type==='digits'?explainDigits(q):q.exp;f.replaceChildren(h,a,exp);const basis=document.createElement('p');basis.className='source-link';basis.textContent='根拠：'+q.source+'（2017年）。地域別の例外・現実の交付状況は対象外。';f.appendChild(basis);const link=document.createElement('a');link.href=POLICY_URL;link.target='_blank';link.rel='noopener noreferrer';link.textContent='根拠資料PDFを確認';link.className='source-link';f.appendChild(link);if(q.kind==='skip'){const note=document.createElement('div');note.className='notice';note.textContent='希望番号で取るなら可能だが、通常は発行されない。';f.appendChild(note)}$('next').textContent=index+1===questions.length?'結果を見る':'次の問題へ';$('next').classList.remove('hidden')}
+$('stem').replaceChildren();if(stemText.includes('【数字系列】')){const [before,after]=stemText.split('【数字系列】');$('stem').append(document.createTextNode(before));const emphasis=document.createElement('strong');emphasis.className='series-emphasis';emphasis.textContent='数字系列';$('stem').append(emphasis,document.createTextNode(after));}else{$('stem').textContent=stemText;}$('plateview').classList.toggle('hidden',q.type!=='digits');$('topicview').classList.toggle('hidden',q.type==='digits');if(q.type==='digits'){$('digits').textContent=format(q.from)}else{$('topicview').textContent=q.type==='kana'?(q.topic||`ひらがな「${q.from}」の次は？`):q.from;}$('choicelabel').textContent=q.type==='class'?'3ナンバー／2017年基本系列／地域特例なし':q.type==='digits'?'次の数字を選んでください。':q.type==='kana'?'次に使用するひらがなを選んでください。':'正しいものを選んでください。';$('feedback').classList.add('hidden');const sd=$('sequence-details');sd.open=false;sd.classList.add('hidden');$('next').classList.add('hidden');const box=$('choices');box.replaceChildren();for(const value of buildChoices(q)){const b=document.createElement('button');b.type='button';b.textContent=value;b.addEventListener('click',()=>respond(value,b));box.appendChild(b)}}
+function respond(value,chosen){if(locked)return;locked=true;const q=questions[index];const correct=value===q.answer;answers.push({item:q,correct});[...$('choices').children].forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add('correct');else if(b===chosen)b.classList.add('wrong')});const f=$('feedback');f.className='feedback'+(correct?'':' error');const h=document.createElement('b');h.textContent=correct?'正解です。':'不正解です。';const a=document.createElement('p');a.textContent=`正解：${q.answer}`;const exp=document.createElement('p');exp.textContent=q.type==='digits'?explainDigits(q):q.exp;f.replaceChildren(h,a,exp);if(q.type==='class'&&!correct&&q.category){const wrongSeqCategories=Object.entries(classSequences).filter(([cat,seq])=>cat!==q.category&&seq.indexOf(q.current)>=0&&seq[seq.indexOf(q.current)+1]===value).map(([cat])=>classCategoryLabels[cat]);if(wrongSeqCategories.length){const why=document.createElement('p');why.textContent=`選んだ「${value}」は、${wrongSeqCategories.join('・')}の系列での次番号です。問題の区分「${classCategoryLabels[q.category]}」とは使う範囲が異なります。`;f.appendChild(why)}else if(q.current==='30Y'&&value==='31A'){const why=document.createElement('p');why.textContent='「31A」は抽選対象希望番号の進行です。通常一連番号は30Yの後、3A0へ切り替わります。';f.appendChild(why)}}const basis=document.createElement('p');basis.className='source-link';basis.textContent='根拠：'+q.source+'（地域特例・実際の交付状況は対象外）';f.appendChild(basis);const link=document.createElement('a');link.href=POLICY_URL;link.target='_blank';link.rel='noopener noreferrer';link.textContent='根拠資料PDFを確認';link.className='source-link';f.appendChild(link);if(q.kind==='skip'){const note=document.createElement('div');note.className='notice';note.textContent='希望番号で取るなら可能だが、通常は発行されない。';f.appendChild(note)}if(q.type==='class'&&q.category){const sd=$('sequence-details');sd.classList.remove('hidden');sequenceFocusCurrent=q.current==='数字系列全体'?'':q.current;renderSequence(q.category,sequenceFocusCurrent)}$('next').textContent=index+1===questions.length?'結果を見る':'次の問題へ';$('next').classList.remove('hidden')}
 function finish(){lastWrong=answers.filter(a=>!a.correct).map(a=>a.item);$('game').classList.add('hidden');$('result').classList.remove('hidden');const hits=answers.filter(a=>a.correct).length;$('score').textContent=`${hits} / ${questions.length}`;$('resultnote').textContent=hits===questions.length?'全問正解です！':`正解率 ${Math.round(hits/questions.length*100)}%。解説を踏まえて再挑戦しましょう。`;$('review').disabled=lastWrong.length===0;$('progressbar').style.width='100%';window.scrollTo({top:0,behavior:'smooth'})}
 
 function startCourse(mode){
