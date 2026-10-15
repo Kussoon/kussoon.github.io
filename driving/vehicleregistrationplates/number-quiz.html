@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>次のナンバーは？クイズ｜Kussoon</title>
+<meta name="description" content="自動車ナンバープレートの数字、42・49の欠番、ひらがなと分類番号の切替を学ぶ試作クイズ。">
+<style>
+:root{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color-scheme:light;--bg:#f4f7f9;--card:#fff;--ink:#182d42;--muted:#53677b;--line:#dbe3e9;--navy:#154b78;--tint:#e8f1f8;--ok:#176944;--bad:#b72d3d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.6}header{background:#183b5b;color:white;padding:18px 16px}header .inner,main,footer{max-width:730px;margin:auto}header h1{font-size:1.45rem;margin:0}header p{margin:3px 0 0;font-size:.86rem;color:#deebf6}main{padding:18px 14px 30px}section,.panel{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:14px;box-shadow:0 2px 12px #193d5d0a}h2{margin:0 0 10px;font-size:1.06rem}p{margin:8px 0}small,.sub{color:var(--muted);font-size:.84rem}.tag{background:var(--tint);color:var(--navy);padding:4px 9px;border-radius:99px;font-size:.75rem;font-weight:700}button,select{font:inherit}button{border:1px solid var(--navy);background:white;color:var(--navy);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;min-height:44px}button.primary{background:var(--navy);color:white}button:disabled{opacity:.55;cursor:not-allowed}button:focus-visible,select:focus-visible{outline:3px solid #f5a623;outline-offset:2px}select{padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);min-height:44px}.actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.plate{border:3px solid #206b42;background:#f7f8ef;color:#226d45;border-radius:11px;max-width:430px;margin:20px auto;padding:14px 15px 10px;font-family:system-ui,"Hiragino Kaku Gothic ProN",sans-serif;box-shadow:inset 0 0 0 2px #f7f8ef,0 4px 15px #123c2430}.pl-top{display:flex;justify-content:center;align-items:baseline;gap:22px;font-weight:800;font-size:clamp(1.45rem,6vw,2rem);line-height:1.15}.pl-bottom{display:flex;justify-content:center;align-items:center;gap:19px;font-weight:800;font-size:clamp(2.1rem,10vw,3.45rem);line-height:1.3;white-space:nowrap}.plate .kana{font-size:.79em}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.choices button{padding:14px 6px;font-size:1.16rem;letter-spacing:.02em}.choices button.correct{background:#dcf2e4;color:#0c5c34;border:2px solid #218553}.choices button.wrong{background:#fbe5e6;color:#9b2630;border:2px solid #c34b51}.feedback{border-left:4px solid var(--ok);padding:12px 14px;background:#f0f9f3;border-radius:6px;margin-top:14px;color:#153b2a}.feedback.error{border-left-color:var(--bad);background:#fff2f3;color:#56252a}.feedback p{margin:5px 0}.notice{background:#fff7e9;border:1px solid #e9d1a5;border-radius:8px;padding:10px 12px;font-size:.88rem;margin-top:10px;color:#574121}.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}.bar{height:8px;border-radius:12px;background:#e4eaf0;overflow:hidden;margin:12px 0}.bar>div{height:100%;background:#2b779e;transition:width .25s}.help summary{cursor:pointer;font-weight:700}.hidden{display:none!important}footer{padding:0 15px 36px;color:var(--muted);font-size:.8rem}footer a{color:var(--navy)}.results{text-align:center}.results strong{font-size:2.1rem;color:var(--navy)}.choice-label{font-size:.9rem;color:var(--muted)}.level-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.level-option{display:block;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}.level-option:has(input:checked){border:2px solid #2572ad;background:var(--tint);padding:9px 11px}.level-option input{accent-color:#216a9a}.level-option strong{display:block}.level-option small{display:block}.topic-display{border:2px solid var(--line);border-radius:12px;background:var(--tint);text-align:center;padding:24px 10px;margin:18px 0;font-weight:800;font-size:clamp(1.6rem,6vw,2.3rem)}.source-link{font-size:.82rem;overflow-wrap:anywhere}.level-head{margin-top:18px}.intro-note{font-size:.88rem}@media(max-width:440px){section,.panel{padding:15px}.plate{padding:12px 7px}.pl-top{gap:15px}.pl-bottom{gap:12px}.choices{gap:7px}}@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#101923;--card:#1b2b3a;--ink:#eff5fa;--muted:#b5c6d5;--line:#385064;--navy:#80bce8;--tint:#28445a}header{background:#0b2c4a}button{background:var(--card)}button.primary{background:#265f91;color:#fff;border-color:#6aa6d5}.feedback{background:#193d32;color:#e5f8ec}.feedback.error{background:#512a32;color:#fff2f3}.notice{background:#453921;border-color:#836a3a;color:#ffebb9}.plate{color:#226d45}.bar{background:#324657}footer a{color:#9bcdf0}}
+.series-emphasis{font-weight:900;text-decoration:underline;text-decoration-thickness:.14em;text-underline-offset:.17em;background:#fff0b3;color:#423219;padding:0 .12em;border-radius:3px}.intro-title{text-align:center;padding:20px 10px 12px;background:linear-gradient(160deg,var(--tint),transparent);border-radius:12px;margin-bottom:18px}.intro-title h2{font-size:clamp(1.3rem,5vw,1.7rem);margin:8px 0}.intro-eyebrow{letter-spacing:.18em;font-size:.75rem;font-weight:800;color:var(--navy)}.level-options{grid-template-columns:1fr 1fr;gap:12px}.level-option{min-height:102px;display:flex;flex-direction:column;justify-content:center;position:relative;padding:13px 14px}.level-option:has(input:checked){padding:12px 13px}.level-option input{position:absolute;top:12px;right:12px}.level-option strong{padding-right:20px;font-size:1.02rem}.level-option small{line-height:1.5}.level-option:last-child{grid-column:1/-1;min-height:70px}.footer-links{display:flex;justify-content:center;gap:22px;padding:12px 0 16px;margin-bottom:12px;border-bottom:1px solid var(--line);font-size:.9rem}.footer-links a{font-weight:700}@media(max-width:500px){.level-options{grid-template-columns:1fr}.level-option:last-child{grid-column:auto}.level-option{min-height:78px}}@media(prefers-color-scheme:dark){.series-emphasis{background:#705b20;color:#fff4bf}}
+/* v0.6.0: 数え方クイズの入口構造を踏襲した縦並びのコース選択 */
+.intro-page{padding:0;overflow:hidden;border-radius:22px}.number-hero{text-align:center;background:linear-gradient(125deg,#e5f6fd,#cbe8f6);padding:28px 16px 25px;color:#19445f}.number-hero h2{font-size:clamp(1.7rem,5vw,2.4rem);margin:10px 0 2px;color:#145071}.number-hero p{margin:0}.number-icons{display:flex;justify-content:center;gap:12px;margin:12px 0}.number-icons span{width:55px;height:55px;display:grid;place-items:center;background:#fff;border-radius:50%;font-size:1.35rem;color:#166186;font-weight:800}.intro-content{padding:20px}.intro-lead{text-align:center;margin:0 0 22px}.course-stack{display:grid;gap:10px;margin:12px 0}.course-button{display:block;width:100%;text-align:left;background:#1c789c;color:white;border-color:#1c789c;border-radius:14px;padding:15px 18px}.course-button strong{display:block;font-size:1.12rem}.course-button small{display:block;color:#e0f5ff;font-size:.83rem;font-weight:400;margin-top:3px}.course-button:hover{filter:brightness(.95)}.course-settings{display:flex;gap:12px;align-items:center;justify-content:center;margin:24px 0}.site-footer{text-align:center;max-width:730px;margin:0 auto;font-size:.8rem}.site-footer .site-links{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-bottom:12px}.site-footer p{margin:3px 0}.site-footer a{font-weight:normal}.intro-page .level-head{margin-top:8px}@media(max-width:500px){.number-hero{padding:24px 10px}.number-icons span{width:49px;height:49px}.intro-content{padding:16px}}@media(prefers-color-scheme:dark){.number-hero{background:linear-gradient(125deg,#164362,#25495d);color:#f3f8fb}.number-hero h2{color:#f3f8fb}.number-icons span{background:#eaf7fd;color:#125476}.course-button{background:#286686;color:white;border-color:#6298b6}.course-button small{color:#e1f3fb}}
+
+/* v0.6.0: v0.4.0の難易度選択カードに戻し、開始操作を独立 */
+.intro-content .level-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.intro-content .level-option{background:var(--card);min-height:102px;display:flex;flex-direction:column;justify-content:center;cursor:pointer}
+.intro-content .level-option:last-child{grid-column:1/-1;min-height:70px}
+@media(max-width:500px){.intro-content .level-options{grid-template-columns:1fr}.intro-content .level-option:last-child{grid-column:auto}.intro-content .level-option{min-height:78px}}
+.site-footer>.site-links{margin-top:5px}
+.site-footer>p:first-child{margin-bottom:12px}
+
+/* トップのナンバープレートは文字を持つHTML表示。画面幅が変わっても鮮明に表示。 */
+.hero-plate{width:min(94%,430px);margin:18px auto 16px;border:4px solid #39966a;background:#22291e;color:#9cd9b0;border-radius:18px;padding:14px 13px 12px;box-shadow:none;}
+.hero-plate .pl-top{font-size:clamp(1.55rem,5.6vw,2rem);gap:24px;}
+.hero-plate .pl-bottom{font-size:clamp(2.5rem,9vw,3.55rem);gap:15px;}
+.hero-plate .kana{font-size:.8em}
+@media(max-width:440px){.hero-plate{padding:12px 6px 10px;margin:15px auto}.hero-plate .pl-top{gap:15px}.hero-plate .pl-bottom{gap:9px}}
+.intro-warnings{margin:10px 0 18px;color:var(--muted);font-size:.86rem;line-height:1.5}.intro-warnings p{margin:5px 0}
+.hope-guide-link{font-weight:800;text-decoration:underline;text-underline-offset:.2em;text-decoration-thickness:2px;color:inherit;cursor:pointer}.hope-guide-link:hover,.hope-guide-link:focus-visible{color:var(--navy)}#hope-number-guide{scroll-margin-top:20px}
+/* v0.12.2: カード単位の説明を選択カードの直下に配置 */
+.intro-content .level-choice{min-width:0}
+.intro-content .level-choice:last-child{grid-column:1/-1}
+.intro-content .level-choice .level-option{width:100%;min-height:102px;grid-column:auto}
+.intro-content .level-choice:last-child .level-option{min-height:70px}
+.intro-content .level-choice .level-detail{margin:7px 2px 4px;padding:10px 12px;border-left:3px solid #3685bc;background:var(--tint);border-radius:6px;line-height:1.55}
+@media(max-width:500px){.intro-content .level-choice:last-child{grid-column:auto}.intro-content .level-choice .level-option{min-height:78px}}
+/* v0.12.3: place the single action bar immediately below the selected course explanation. */
+.intro-content .level-choice #course-actions{justify-content:flex-start;margin:12px 2px 6px;gap:10px;}
+.intro-content .level-choice #course-actions label{white-space:nowrap;}
+.intro-content .level-choice .level-detail[hidden]{display:none;}
+@media(max-width:500px){.intro-content .level-choice #course-actions{flex-wrap:wrap;}}
+</style>
+<script>
+// 公開時のみUmamiを導入。クエリ・ハッシュを解析へ送らない。
+function kussoonUmamiBeforeSend(type,payload){
+  if(payload&&typeof payload==='object'){
+    for(const key of ['url','referrer']){
+      if(typeof payload[key]==='string'){
+        try{const u=new URL(payload[key],location.href);payload[key]=key==='url'?u.pathname:u.origin+u.pathname;}catch(e){payload[key]=payload[key].split(/[?#]/)[0];}
+      }
+    }
+  }
+  return payload;
+}
+if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
+  const s=document.createElement('script');s.defer=true;s.src='https://cloud.umami.is/script.js';s.dataset.websiteId='8beb23a4-a36f-4aff-b082-bec86e01a2f7';s.dataset.beforeSend='kussoonUmamiBeforeSend';document.head.appendChild(s);
+}
+</script>
+</head>
+<body>
+<main>
+<section id="intro" class="intro-page">
+<div class="number-hero"><div class="intro-eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="plate hero-plate" role="img" aria-label="神戸 500 さ 20-26 のナンバープレート"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span>20-26</span></div></div><h2>次のナンバーは？クイズ</h2><p>数字から、ひらがな、分類番号まで。</p></div>
+<div class="intro-content"><p class="intro-lead">車のナンバープレートは、どんな規則で数字が進んでいくのでしょうか。難易度を選んで挑戦しましょう。</p>
+<div class="intro-warnings"><p>※<a class="hope-guide-link" href="#hope-number-guide" id="hope-guide-jump" data-umami-event="number-quiz-hope-guide-jump">希望番号制度</a>でしか使われない数字の並びがあります。</p><p>※実在する自動車の登録番号を照会する機能ではありません。</p></div>
+<h2 class="level-head">難易度を選んでください</h2>
+<div class="level-options" role="radiogroup" aria-label="難易度">
+<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="easy"><strong>初級｜数字の進み方</strong><small>1ずつ増える・桁上がり</small></label><p class="level-detail sub" hidden>数字が1ずつ増える問題と桁上がりを出題します。</p></div>
+<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="middle"><strong>中級｜欠番の扱い</strong><small>42と49を含む数字</small></label><p class="level-detail sub" hidden>42と49を含む数字の問題です。</p></div>
+<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="hard"><strong>上級｜ひらがな</strong><small>文字の進み方と、使用されない文字</small></label><p class="level-detail sub" hidden>自家用登録車のひらがなの使用順と、使用されない「お・し・へ・よ・ん」などを扱います。</p></div>
+<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="expert"><strong>超上級｜分類番号</strong><small>分類番号と英字入り系列の切替</small></label><p class="level-detail sub" hidden>2017年通知に基づく基本的な払出し規則で、通常一連番号・一般希望番号・抽選対象希望番号の進行を扱います。実際の交付順序を予測するものではありません。</p></div>
+<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="mix" checked><strong>総合｜全難易度</strong><small>初級から超上級まで混合</small></label><p class="level-detail sub">全難易度から出題します。</p></div>
+</div>
+<div id="course-actions" class="actions"><label for="count">問題数：</label><select id="count"><option value="5">5問</option><option value="10" selected>10問</option><option value="15">15問</option></select><button id="start" class="primary" data-umami-event="number-quiz-start">スタート</button></div>
+
+</div></section>
+<section id="game" class="hidden" aria-live="polite"><div class="meta"><span class="tag" id="kind">数字の進行</span><span id="progress">第1問 / 10問</span></div><div class="bar"><div id="progressbar" style="width:0"></div></div><div id="plateview" class="plate" role="img" aria-label="問題のナンバープレート"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span id="digits">12-34</span></div></div><div id="topicview" class="topic-display hidden" aria-label="問題の対象"></div><p id="stem">次に進む番号は？</p><p id="choicelabel" class="choice-label">正しい次の数字を選んでください。</p><div id="choices" class="choices"></div><div id="feedback" class="feedback hidden" role="status"></div><div class="actions" style="justify-content:flex-end;margin-top:14px"><button id="next" class="primary hidden" data-umami-event="number-quiz-next">次の問題へ</button></div></section>
+<section id="result" class="hidden results"><h2>結果</h2><p><strong id="score">0 / 10</strong></p><p id="resultnote"></p><div class="actions" style="justify-content:center"><button id="retry" class="primary" data-umami-event="number-quiz-top">トップページへ</button><button id="review" data-umami-event="number-quiz-review">間違えた問題を復習</button></div></section>
+<section class="help" aria-label="希望番号制度の説明"><details id="hope-number-guide"><summary>希望番号制度とは</summary><p>希望番号制度は、自動車のナンバープレートに表示される<strong>下段の4桁以下の数字</strong>を、申込みによって選べる制度です。地域名・分類番号・ひらがなは選べません。</p><p>通常の一般払出しでは使われない「42」「49」などの数字も、対象車両では希望番号として申し込めます。一部の人気番号は抽選となり、その対象となる番号は地域によって異なります。希望番号を利用できる車両や申込条件には制限があります。</p><p>詳しくは<a href="https://www.kibou-number.jp/html/info/kibou-number.html" target="_blank" rel="noopener noreferrer">希望番号申込サービスの案内</a>をご覧ください。</p></details></section>
+<section class="help" aria-label="ルールと出典"><details><summary>ルールと出典</summary><p>対象は、登録自動車について<strong>2017年通知に基づく基本的な払出し規則</strong>です。数字の昇順と一部の欠番規則、ひらがなの順序、通常一連番号・一般希望番号・抽選対象希望番号ごとに異なる分類番号の進行を扱います。下2桁が42・49となる数字を除きます。例えば「・420」「14-92」は、この理由では飛ばしません。</p><p>希望番号制度で取得可能な除外数字には、解説に「希望番号で取るなら可能だが、通常は発行されない。」を表示します。なお、希望番号にも申込み条件があります。</p><p><b>払出し順序の根拠（2017年）</b>：<a href="https://www.aiseishin.or.jp/public_html/protect/somu/20171013%20nanba-.pdf" target="_blank" rel="noopener noreferrer">「分類番号のローマ字導入に伴う自動車登録番号の定め方について」（公開PDF）</a>。<br><b>番号の形式に関する現行法令（2026年）</b>：<a href="https://laws.e-gov.go.jp/law/345M50000800007" target="_blank" rel="noopener noreferrer">e-Gov「自動車登録規則」第13条・別表</a>。<br><b>希望番号制度</b>：<a href="https://www.kibou-number.jp/html/info/kibou-number.html" target="_blank" rel="noopener noreferrer">希望番号申込サービスの案内</a>。</p><p><b>確認状況（2026年10月15日）</b>：2017年以降にこの詳細な払出し順序を全面的に置き換える公開通知は確認できませんでした。ただし、通知の現行性・追加変更がないことは未確定です。地域別抽選対象番号を含めた現実の完全な次番号は再現しません。分類番号問題は2017年通知の基本系列と7ページ目の別表に基づきます。歴史的な払出し実績と2026年現在の実際の交付順序を確定するものではありません。特例地域・字光式等を対象外にしています。</p></details></section>
+<section class="help" aria-label="注意事項"><details><summary>注意事項</summary><p>このクイズは公表された払出し規則を学ぶためのものです。実際に次に交付されるナンバープレートを予測するものではありません。</p><p>地域・車両の区分・希望番号の申込み・個別の特例などにより、実際の取扱いが異なる場合があります。</p></details></section>
+</main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/">このサイトについて</a><a href="https://kussoon.com/privacy/">プライバシー</a><a href="https://kussoon.com/sources/">データ出典</a><a href="https://kussoon.com/terms/">利用上の注意</a></nav><p>次のナンバーは？クイズ　Version 0.13.0</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
+<script>
+'use strict';
+// 希望番号制の説明へ移動し、内容を開く。
+document.getElementById('hope-guide-jump')?.addEventListener('click',function(event){
+  event.preventDefault();
+  const target=document.getElementById('hope-number-guide');
+  if(!target)return;
+  target.open=true;
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+});
+// 問題は2017年資料の抜粋規則の学習用。現実の交付状況や地域別の抽選番号を表すものではない。
+const RAW=[
+[1234,1235,'normal'],[1239,1240,'normal'],[99,100,'normal'],[3999,4000,'normal'],[1099,1100,'normal'],[987,988,'normal'],[1208,1209,'normal'],
+[41,43,'skip'],[48,50,'skip'],[1141,1143,'skip'],[1148,1150,'skip'],[4241,4243,'skip'],[4948,4950,'skip'],[2041,2043,'skip'],[3048,3050,'skip'],
+[419,420,'inside'],[420,421,'inside'],[1419,1420,'inside'],[1491,1492,'inside'],[424,425,'inside'],[492,493,'inside'],[4219,4220,'inside'],[1490,1491,'inside'],[4924,4925,'inside']
+];
+const $=id=>document.getElementById(id);
+const format=n=>n<10?'・・・'+n:n<100?'・・'+n:n<1000?'・'+n:String(n).slice(0,-2)+'-'+String(n).slice(-2);
+const omit=n=>n%100===42||n%100===49;
+const POLICY_URL='https://www.aiseishin.or.jp/public_html/protect/somu/20171013%20nanba-.pdf';
+const numeric=RAW.map(([from,to,kind])=>({id:`n-${from}`,type:'digits',level:kind==='normal'?'easy':'middle',from,to,kind,answer:format(to),source:'2017年払出し取扱資料 1.(4)'}));
+// v1.0.0: 数字問題のみ、2017年資料の明示した抜粋規則から自動生成する。
+// 地域別抽選対象番号を網羅した「実際の交付順」の再現ではない。
+const isUsableInSubset=n=>n>=1&&n<=9999&&!omit(n);
+function generatedDigits(from,kind){
+ const to=kind==='skip'?from+2:from+1;
+ return {id:`auto-${kind}-${from}`,type:'digits',level:kind==='normal'?'easy':'middle',from,to,kind,
+ answer:format(to),source:'2017年払出し取扱資料 1.(4)'};
+}
+function buildGeneratedPool(){
+ const normal=[],skip42=[],skip49=[],inside42=[],inside49=[];
+ for(let from=1;from<9999;from++){
+   const to=from+1;
+   if(!isUsableInSubset(from))continue;
+   if(omit(to)){
+     const next=from+2;
+     if(next<=9999&&isUsableInSubset(next)){
+       (to%100===42?skip42:skip49).push(generatedDigits(from,'skip'));
+     }
+     continue;
+   }
+   const s=String(to);
+   const is42=s.indexOf('42')>=0&&s.indexOf('42')<s.length-2;
+   const is49=s.indexOf('49')>=0&&s.indexOf('49')<s.length-2;
+   if(is42)inside42.push(generatedDigits(from,'inside'));
+   if(is49)inside49.push(generatedDigits(from,'inside'));
+   if(!is42&&!is49)normal.push(generatedDigits(from,'normal'));
+ }
+ return {normal,skip42,skip49,inside42,inside49};
+}
+const generated=buildGeneratedPool();
+let previousQuestionIds=new Set();
+function pickDistinct(pools,total){
+ const selected=[],used=new Set();
+ // 前回の問題をなるべく避ける（このページを開いている間のみ）。
+ for(const avoidPrevious of [true,false]){
+   for(const pool of pools){
+     for(const q of shuffle(pool)){
+       if(selected.length>=total)break;
+       if(used.has(q.id)||(avoidPrevious&&previousQuestionIds.has(q.id)))continue;
+       selected.push(q);used.add(q.id);
+     }
+     if(selected.length>=total)break;
+   }
+   if(selected.length>=total)break;
+ }
+ return selected;
+}
+function generateForLevel(level,n){
+ if(level==='easy'){
+   const carry=generated.normal.filter(q=>q.to%10===0||String(q.to).length!==String(q.from).length);
+   const plain=generated.normal.filter(q=>q.to%10!==0&&String(q.to).length===String(q.from).length);
+   return shuffle(pickDistinct([shuffle(carry).slice(0,Math.ceil(n*.35)),shuffle(plain),generated.normal],n));
+ }
+ if(level==='middle'){
+   const buckets=[generated.skip42,generated.skip49,generated.inside42,generated.inside49];
+   const sample=[];let used=new Set();
+   // 42を飛ばす／49を飛ばす／数字の途中に42／49の4パターンを均等にする。
+   for(let i=0;i<n;i++){
+     const list=shuffle(buckets[i%4]);
+     const q=list.find(q=>!used.has(q.id)&&!previousQuestionIds.has(q.id))||list.find(q=>!used.has(q.id));
+     if(q){sample.push(q);used.add(q.id)}
+   }
+   return shuffle(sample);
+ }
+ return [];
+}
+// 文字だけの順序問題。実在するプレートの次の交付を問わない。
+const kanaSequence=['さ','す','せ','そ','た','ち','つ','て','と','な','に','ぬ','ね','の','は','ひ','ふ','ほ','ま','み','む','め','も','や','ゆ','ら','り','る','ろ'];
+const kanaPairs=kanaSequence.slice(0,-1).map((k,i)=>[k,kanaSequence[i+1]]);
+const kanaWrong=['さ','す','せ','そ','た','ち','つ','て','と','な','に','ぬ','ね','の','は','ひ','ふ','ほ','ま','み','む','め','も','や','ゆ','ら','り','る','ろ'];
+const kanaTraps={'さ':{skip:'し',detail:'「し」は自家用登録車の使用文字一覧に含まれないため、次は「す」です。'},'ふ':{skip:'へ',detail:'「へ」は自家用登録車の使用文字一覧に含まれないため、次は「ほ」です。'},'ゆ':{skip:'よ',detail:'「よ」は自家用登録車に割り当てられた使用文字一覧に含まれていないため、次は「ら」です。資料から確かめられるのは不使用という規定であり、不使用になった歴史的な理由まではこの資料では確認できません。'}};
+const kana=kanaPairs.map(([from,answer],i)=>{const trap=kanaTraps[from];const alternatives=kanaWrong.filter(k=>k!==answer&&k!==from&&(!trap||k!==trap.skip));return {id:`k-${i}`,type:'kana',level:'hard',from,answer,trap:!!trap,source:'2017年払出し取扱資料 1.(3)①・自動車登録規則別表第三',stem:'自家用登録車の通常の一般払出しで、あるひらがなの数字をすべて使い切ったとします。次に使用するひらがなは？',exp:`通常の自家用登録車では、法令別表の使用文字順に従い「${from}」の次は「${answer}」です。${trap?trap.detail:''} ひらがなは対応する数字を使い切ってから切り替えます。これは文字の順序を問う問題であり、次に実際に交付されるプレート全体を示していません。`,options:[answer,...(trap?[trap.skip,...alternatives.slice(0,2)]:[0,1,2].map(j=>alternatives[((i*3)+j)%alternatives.length]))]};});
+// 「お」「ん」は使用順の隣り合う2文字を問えないため、使用可否の独立問題にする。
+const kanaUnused=[
+ {id:'k-unused-o',type:'kana',level:'hard',from:'使用対象外の文字',topic:'自家用登録車で使用されないひらがなは？',answer:'お',trap:true,source:'自動車登録規則別表第三（自家用登録車の使用文字）',stem:'通常の自家用登録車のナンバープレートに割り当てられないひらがなは、次のうちどれ？',exp:'「お」は自家用登録車の使用文字一覧に含まれていません。したがって一般払出しで使用しません。この規定から不使用は確認できますが、その歴史的な理由まで確定するものではありません。',options:['お','さ','た','ら']},
+ {id:'k-unused-n',type:'kana',level:'hard',from:'使用対象外の文字',topic:'自家用登録車で使用されないひらがなは？',answer:'ん',trap:true,source:'自動車登録規則別表第三（自家用登録車の使用文字）',stem:'通常の自家用登録車のナンバープレートに割り当てられないひらがなは、次のうちどれ？',exp:'「ん」は自家用登録車の使用文字一覧に含まれていません。「ろ」の次に「ん」へ進むという規則はありません。不使用の歴史的な理由は、この資料だけでは断定できません。',options:['ん','す','な','ま']}
+];
+kana.push(...kanaUnused);
+function shuffleStable(a,ans,i){const tail=a.filter(x=>x!==ans).slice(0,3);return [ans,...tail]}
+// 分類番号の昇順は各「分類番号に割り当てられたひらがな・数字が払底」の条件付き。
+const classCases=[
+ {from:'300～309',answer:'30A',wrong:['310','3A0','700'],stem:'【2017年資料の一般払出し／地域特例なし】分類番号300～309の全組合せを使い切った後、次に開始する英字入り分類番号は？',exp:'2017年資料の1.(2)では、下2文字の「00～09」を昇順で使用し、払底後は英字を含む「0A」から使用するとしています。したがって3ナンバーでは30Aです。309という1枚のプレートの直後に30Aになるという意味ではありません。'},
+ {from:'500～509',answer:'50A',wrong:['510','5A0','700'],stem:'【2017年資料の一般払出し／地域特例なし】分類番号500～509の全組合せを使い切った後、次に開始する英字入り分類番号は？',exp:'一般払出しの分類番号の下2文字は、00～09を使い切った後に0Aへ進むという2017年資料の基本順序に従います。5ナンバーでは50Aです。希望番号の別系列とは混同しません。'},
+ {from:'400～409',answer:'40A',wrong:['410','4A0','600'],stem:'【2017年資料の一般払出し／地域特例なし】分類番号400～409の全組合せを使い切った後、次に開始する英字入り分類番号は？',exp:'2017年資料1.(2)の00～09から0Aへの基本順序を4ナンバーに当てはめると40Aです。すべてのひらがな・数字の組合せが払底した場合に限ります。'},
+ {from:'分類番号の英字',answer:'A・C・F・H・K・L・M・P・X・Y',wrong:['A～Zの26文字','A・B・C・D・E','母音のA・E・I・O・Uのみ'],stem:'【2017年資料・登録車】分類番号に使用するローマ字10種類の組合せはどれ？',exp:'2017年資料は、分類番号に用いるローマ字をA、C、F、H、K、L、M、P、X、Yの10種類と示しています。すべてのアルファベットが使えるわけではありません。'},
+ {from:'一般払出しの分類番号',answer:'00～09',wrong:['00～99','10～19','00～49'],stem:'【2017年資料の一般払出し／地域特例なし】分類番号の下2文字として、最初に使用する【数字系列】は？',exp:'2017年資料1.(2)では、分類番号の下2文字00～09を、00から昇順で使用すると定めています。希望番号の系列は別の規定です。'}
+];
+
+// 2017年通知・別表の3ナンバー分類番号系列を埋め込む。外部JSONの配置は不要。
+const classSequences = {"normal":["300","301","302","303","304","305","306","307","308","309","30A","30C","30F","30H","30K","30L","30M","30P","30X","30Y","3A0","3A1","3A2","3A3","3A4","3A5","3A6","3A7","3A8","3A9","3AA","3AC","3AF","3AH","3AK","3AL","3AM","3AP","3AX","3AY"],"lottery":["300","301","302","303","304","305","306","307","308","309","310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","327","328","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","30A","30C","30F","30H","30K","30L","30M","30P","30X","30Y","31A","31C","31F","31H","31K","31L","31M","31P","31X","31Y","32A","32C","32F","32H","32K","32L","32M","32P","32X","32Y","33A","33C","33F","33H","33K","33L","33M","33P","33X","33Y","34A","34C","34F","34H","34K","34L","34M","34P","34X","34Y","35A","35C","35F","35H","35K","35L","35M","35P","35X","35Y","36A","36C","36F","36H","36K","36L","36M","36P","36X","36Y","37A","37C","37F","37H","37K","37L","37M","37P","37X","37Y","38A","38C","38F","38H","38K","38L","38M","38P","38X","38Y","3A0","3A1","3A2","3A3","3A4","3A5","3A6","3A7","3A8","3A9","3C0","3C1","3C2","3C3","3C4","3C5","3C6","3C7","3C8","3C9","3F0","3F1","3F2","3F3","3F4","3F5","3F6","3F7","3F8","3F9","3H0","3H1","3H2","3H3","3H4","3H5","3H6","3H7","3H8","3H9","3K0","3K1","3K2","3K3","3K4","3K5","3K6","3K7","3K8","3K9","3L0","3L1","3L2","3L3","3L4","3L5","3L6","3L7","3L8","3L9","3M0","3M1","3M2","3M3","3M4","3M5","3M6","3M7","3M8","3M9","3P0","3P1","3P2","3P3","3P4","3P5","3P6","3P7","3P8","3P9","3X0","3X1","3X2","3X3","3X4","3X5","3X6","3X7","3X8","3X9","3Y0","3Y1","3Y2","3Y3","3Y4","3Y5","3Y6","3Y7","3Y8","3Y9","3AA","3AC","3AF","3AH","3AK","3AL","3AM","3AP","3AX","3AY","3CA","3CC","3CF","3CH","3CK","3CL","3CM","3CP","3CX","3CY","3FA","3FC","3FF","3FH","3FK","3FL","3FM","3FP","3FX","3FY","3HA","3HC","3HF","3HH","3HK","3HL","3HM","3HP","3HX","3HY","3KA","3KC","3KF","3KH","3KK","3KL","3KM","3KP","3KX","3KY","3LA","3LC","3LF","3LH","3LK","3LL","3LM","3LP","3LX","3LY","3MA","3MC","3MF","3MH","3MK","3ML","3MM","3MP","3MX","3MY","3PA","3PC","3PF","3PH","3PK","3PL","3PM","3PP","3PX","3PY","3XA","3XC","3XF","3XH","3XK","3XL","3XM","3XP","3XX","3XY","3YA","3YC","3YF","3YH","3YK","3YL","3YM","3YP","3YX","3YY"],"general":["310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","327","328","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","31A","31C","31F","31H","31K","31L","31M","31P","31X","31Y","32A","32C","32F","32H","32K","32L","32M","32P","32X","32Y","33A","33C","33F","33H","33K","33L","33M","33P","33X","33Y","34A","34C","34F","34H","34K","34L","34M","34P","34X","34Y","35A","35C","35F","35H","35K","35L","35M","35P","35X","35Y","36A","36C","36F","36H","36K","36L","36M","36P","36X","36Y","37A","37C","37F","37H","37K","37L","37M","37P","37X","37Y","38A","38C","38F","38H","38K","38L","38M","38P","38X","38Y","3C0","3C1","3C2","3C3","3C4","3C5","3C6","3C7","3C8","3C9","3F0","3F1","3F2","3F3","3F4","3F5","3F6","3F7","3F8","3F9","3H0","3H1","3H2","3H3","3H4","3H5","3H6","3H7","3H8","3H9","3K0","3K1","3K2","3K3","3K4","3K5","3K6","3K7","3K8","3K9","3L0","3L1","3L2","3L3","3L4","3L5","3L6","3L7","3L8","3L9","3M0","3M1","3M2","3M3","3M4","3M5","3M6","3M7","3M8","3M9","3P0","3P1","3P2","3P3","3P4","3P5","3P6","3P7","3P8","3P9","3X0","3X1","3X2","3X3","3X4","3X5","3X6","3X7","3X8","3X9","3Y0","3Y1","3Y2","3Y3","3Y4","3Y5","3Y6","3Y7","3Y8","3Y9","3CA","3CC","3CF","3CH","3CK","3CL","3CM","3CP","3CX","3CY","3FA","3FC","3FF","3FH","3FK","3FL","3FM","3FP","3FX","3FY","3HA","3HC","3HF","3HH","3HK","3HL","3HM","3HP","3HX","3HY","3KA","3KC","3KF","3KH","3KK","3KL","3KM","3KP","3KX","3KY","3LA","3LC","3LF","3LH","3LK","3LL","3LM","3LP","3LX","3LY","3MA","3MC","3MF","3MH","3MK","3ML","3MM","3MP","3MX","3MY","3PA","3PC","3PF","3PH","3PK","3PL","3PM","3PP","3PX","3PY","3XA","3XC","3XF","3XH","3XK","3XL","3XM","3XP","3XX","3XY","3YA","3YC","3YF","3YH","3YK","3YL","3YM","3YP","3YX","3YY"]};
+const classFixed = [{"id":"P01","category":"normal","current":"309","answer":"30A","source_pages":[2,7]},{"id":"P02","category":"normal","current":"30Y","answer":"3A0","source_pages":[2,7]},{"id":"P03","category":"normal","current":"3A9","answer":"3AA","source_pages":[2,7]},{"id":"P04","category":"lottery","current":"325","answer":"327","source_pages":[3,4,5,7]},{"id":"P05","category":"lottery","current":"328","answer":"330","source_pages":[3,4,5,7]},{"id":"P06","category":"lottery","current":"398","answer":"30A","source_pages":[3,4,5,7]},{"id":"P07","category":"lottery","current":"30Y","answer":"31A","source_pages":[3,4,5,7]},{"id":"P08","category":"lottery","current":"38Y","answer":"3A0","source_pages":[3,4,5,7]},{"id":"P09","category":"lottery","current":"3A9","answer":"3C0","source_pages":[3,4,5,7]},{"id":"P10","category":"lottery","current":"3Y9","answer":"3AA","source_pages":[3,4,5,7]},{"id":"P11","category":"lottery","current":"3AY","answer":"3CA","source_pages":[3,4,5,7]},{"id":"P12","category":"general","current":"325","answer":"327","source_pages":[3,4,5,7]},{"id":"P13","category":"general","current":"31Y","answer":"32A","source_pages":[3,4,5,7]},{"id":"P14","category":"general","current":"38Y","answer":"3C0","source_pages":[3,4,5,7]},{"id":"P15","category":"general","current":"3C9","answer":"3F0","source_pages":[3,4,5,7]},{"id":"P16","category":"general","current":"3CY","answer":"3FA","source_pages":[3,4,5,7]},{"id":"P17","category":"general","current":"数字系列全体","answer":"31A","source_pages":[3,4,5,7]}];
+const classCategoryLabels={normal:'通常一連番号（一般払出し）',lottery:'抽選対象希望番号',general:'一般希望番号'};
+function classificationQuestion(category,current,answer,id,sourcePages,fixed){
+  const special=current==='数字系列全体';
+  const prompt=special
+    ?'【2017年通知／地域特例なし】3ナンバー・一般希望番号で、使用できる「数字のみ」の分類番号の組合せがすべて払底した場合、次に使用するローマ字入り分類番号は？'
+    :`【2017年通知／地域特例なし】3ナンバー・${classCategoryLabels[category]}で、分類番号「${current}」に割り当てられた組合せが払底した場合、同じ区分で次に使用する分類番号は？`;
+  const all=[...new Set(Object.values(classSequences).flat())];
+  const direct=classSequences[category]||[];
+  const pos=direct.indexOf(current);
+  const pool=[];
+  // 他系列の進行を連想させる選択肢と、近傍の組合せを誤答候補にする。
+  for(const [key,arr] of Object.entries(classSequences)){
+    if(key!==category){const p=arr.indexOf(current);if(p>=0&&p+1<arr.length)pool.push(arr[p+1]);}
+  }
+  for(let delta of [-2,2,-1,3,4])if(pos+delta>=0&&pos+delta<direct.length)pool.push(direct[pos+delta]);
+  for(const value of [current,answer])if(value.length===3)pool.push(...all.filter(x=>x[0]===value[0]&&x!==answer).slice(0,8));
+  const others=[...new Set(pool.filter(x=>x!==answer&&x.length===3))];
+  for(const alt of all){if(others.length>=3)break;if(alt!==answer&&!others.includes(alt))others.push(alt);}
+  const options=[answer,...others.slice(0,3)];
+  const pages=sourcePages||[4,5,7];
+  const explanation=special
+    ?'2017年通知の2.(2)②では、数字のみの分類番号の組合せが払底した場合、別表の「1A」から使用すると示されています。3ナンバーでは31Aです。個別の398の直後を問う問題ではありません。'
+    :`2017年通知の基本系列では、3ナンバーの${classCategoryLabels[category]}は「${current}」の次に「${answer}」を使用します。分類番号の全組合せが払底したときの規則上の移行であり、実際に次に交付されるプレートを予測するものではありません。`;
+  return {id,type:'class',level:'expert',from:special?'数字のみの分類番号が払底':`${classCategoryLabels[category]}：${current}`,answer,
+    options,stem:prompt,exp:explanation,source:`2017年通知 ${pages.map(p=>'p.'+p).join('・')}（分類番号の区分別払出し）`,fixed:!!fixed};
+}
+const baseClasses=classCases.map((q,i)=>({...q,id:'c-'+i,type:'class',level:'expert',source:'2017年払出し取扱資料 1.(1)・1.(2)',options:[q.answer,...q.wrong]}));
+const fixedClasses=classFixed.map(q=>classificationQuestion(q.category,q.current,q.answer,q.id,q.source_pages,true));
+const fixedKeys=new Set(classFixed.map(q=>q.category+'|'+q.current));
+const autoClasses=[];
+for(const [category,series] of Object.entries(classSequences)){
+  for(let i=0;i<series.length-1;i++){
+    const current=series[i],answer=series[i+1];
+    // 2017年通知の理論上の並びと、歴史的な希望番号の使用履歴を混同させない。
+    if(category==='general'&&((current==='328'&&answer==='330')||(current==='398'&&answer==='31A')))continue;
+    if(fixedKeys.has(category+'|'+current))continue;
+    autoClasses.push(classificationQuestion(category,current,answer,`auto-${category}-${i}`,[4,5,7],false));
+  }
+}
+const classes=[...baseClasses,...fixedClasses,...autoClasses];
+
+const bank=[...numeric,...kana,...classes];
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+let questions=[],index=0,answers=[],locked=false,lastWrong=[];
+function explainDigits(q){const {from,to,kind}=q;
+ if(kind==='skip')return `${format(from)} の直後の ${format(from+1)} は下2桁が「${String((from+1)%100).padStart(2,'0')}」になるため、この一般払出し規則では飛ばします。次は ${format(to)} です。`;
+ if(kind==='inside')return `${format(to)} には途中に${String(to).includes('42')?'42':'49'}が見えますが、下2桁は「${String(to%100).padStart(2,'0')}」です。42・49の除外条件には該当しないため、${format(to)} に進みます。`;
+ return `${format(from)} の次は ${format(to)} です。数字を1増やし、桁数が変わる場合はナンバープレートの表示形式に合わせます。`;}
+function buildChoices(q){if(q.type!=='digits')return shuffle(q.options);
+ const wrong=new Set();const candidates=[q.from+1,q.to+1,q.to-1,q.to+2,q.to-2,q.from+2,q.from-1];for(const n of candidates){if(n>0&&n<=9999&&n!==q.to)wrong.add(n)}while(wrong.size<3){const n=q.to+wrong.size+5;if(n<=9999)wrong.add(n);else break}return shuffle([q.answer,...shuffle([...wrong]).slice(0,3).map(format)]);}
+function openGame(items){questions=items;index=0;answers=[];$('intro').classList.add('hidden');$('result').classList.add('hidden');$('game').classList.remove('hidden');display();window.scrollTo({top:0,behavior:'smooth'});}
+function display(){locked=false;const q=questions[index];$('kind').textContent=({easy:'初級｜数字',middle:'中級｜欠番',hard:'上級｜ひらがな',expert:'超上級｜分類番号'})[q.level];$('progress').textContent=`第${index+1}問 / ${questions.length}問`;$('progressbar').style.width=(index/questions.length*100)+'%';const stemText=q.type==='digits'?'2017年の払出し規則では、この次に発行されるプレートの数字は？':q.stem;
+$('stem').replaceChildren();if(stemText.includes('【数字系列】')){const [before,after]=stemText.split('【数字系列】');$('stem').append(document.createTextNode(before));const emphasis=document.createElement('strong');emphasis.className='series-emphasis';emphasis.textContent='数字系列';$('stem').append(emphasis,document.createTextNode(after));}else{$('stem').textContent=stemText;}$('plateview').classList.toggle('hidden',q.type!=='digits');$('topicview').classList.toggle('hidden',q.type==='digits');if(q.type==='digits'){$('digits').textContent=format(q.from)}else{$('topicview').textContent=q.type==='kana'?(q.topic||`ひらがな「${q.from}」の次は？`):q.from;}$('choicelabel').textContent=q.type==='digits'?'次の数字を選んでください。':q.type==='kana'?'次に使用するひらがなを選んでください。':'正しいものを選んでください。';$('feedback').classList.add('hidden');$('next').classList.add('hidden');const box=$('choices');box.replaceChildren();for(const value of buildChoices(q)){const b=document.createElement('button');b.type='button';b.textContent=value;b.addEventListener('click',()=>respond(value,b));box.appendChild(b)}}
+function respond(value,chosen){if(locked)return;locked=true;const q=questions[index];const correct=value===q.answer;answers.push({item:q,correct});[...$('choices').children].forEach(b=>{b.disabled=true;if(b.textContent===q.answer)b.classList.add('correct');else if(b===chosen)b.classList.add('wrong')});const f=$('feedback');f.className='feedback'+(correct?'':' error');const h=document.createElement('b');h.textContent=correct?'正解です。':'不正解です。';const a=document.createElement('p');a.textContent=`正解：${q.answer}`;const exp=document.createElement('p');exp.textContent=q.type==='digits'?explainDigits(q):q.exp;f.replaceChildren(h,a,exp);const basis=document.createElement('p');basis.className='source-link';basis.textContent='根拠：'+q.source+'（2017年）。地域別の例外・現実の交付状況は対象外。';f.appendChild(basis);const link=document.createElement('a');link.href=POLICY_URL;link.target='_blank';link.rel='noopener noreferrer';link.textContent='根拠資料PDFを確認';link.className='source-link';f.appendChild(link);if(q.kind==='skip'){const note=document.createElement('div');note.className='notice';note.textContent='希望番号で取るなら可能だが、通常は発行されない。';f.appendChild(note)}$('next').textContent=index+1===questions.length?'結果を見る':'次の問題へ';$('next').classList.remove('hidden')}
+function finish(){lastWrong=answers.filter(a=>!a.correct).map(a=>a.item);$('game').classList.add('hidden');$('result').classList.remove('hidden');const hits=answers.filter(a=>a.correct).length;$('score').textContent=`${hits} / ${questions.length}`;$('resultnote').textContent=hits===questions.length?'全問正解です！':`正解率 ${Math.round(hits/questions.length*100)}%。解説を踏まえて再挑戦しましょう。`;$('review').disabled=lastWrong.length===0;$('progressbar').style.width='100%';window.scrollTo({top:0,behavior:'smooth'})}
+
+function startCourse(mode){
+ const wanted=Number($('count').value);
+ let items=[];
+ if(mode==='easy'||mode==='middle'){
+   items=generateForLevel(mode,wanted);
+ }else if(mode==='hard'){
+   const pool=shuffle(kana);
+   const maxTrap=Math.min(5,Math.ceil(wanted*.5));
+   const minTrap=Math.min(maxTrap,Math.max(1,Math.floor(wanted*.3)));
+   const trapCount=minTrap+Math.floor(Math.random()*(maxTrap-minTrap+1));
+   const special=shuffle(pool.filter(q=>q.trap)).slice(0,trapCount);
+   const regular=shuffle(pool.filter(q=>!q.trap)).slice(0,wanted-special.length);
+   items=shuffle([...special,...regular]);
+ }else if(mode==='expert'){
+   // 少なくとも半分は境界を問う固定問題にし、残りは検証済み系列から類題を生成。
+   const nFixed=Math.min(fixedClasses.length,Math.ceil(wanted/2));
+   const selected=shuffle(fixedClasses).slice(0,nFixed);
+   const pool=shuffle([...autoClasses,...baseClasses]).filter(q=>!selected.some(s=>s.id===q.id));
+   items=shuffle([...selected,...pool.slice(0,wanted-selected.length)]);
+ }else{
+   // 総合は少なくとも各分野から出題し、残りを数字の自動生成で埋める。
+   const expert=Math.min(2,Math.max(1,Math.floor(wanted/5)));
+   const hard=Math.min(3,Math.max(1,Math.floor(wanted/5)));
+   const remain=wanted-expert-hard;
+   const mid=Math.max(1,Math.floor(remain/2));
+   items=shuffle([...shuffle([...fixedClasses,...baseClasses,...autoClasses]).slice(0,expert),...shuffle(kana).slice(0,hard),
+     ...generateForLevel('middle',mid),...generateForLevel('easy',remain-mid)]);
+ }
+ previousQuestionIds=new Set(items.map(q=>q.id));
+ openGame(items);
+}
+function syncLevelDetails(){
+  const active=document.querySelector('input[name="difficulty"]:checked');
+  document.querySelectorAll('.level-choice').forEach(choice=>{
+    const selected=choice.contains(active);
+    choice.querySelector('.level-detail').hidden=!selected;
+  });
+  if(!active)return;
+  // The same problem-count/start controls follow whichever explanation is expanded.
+  const selectedChoice=active.closest('.level-choice');
+  selectedChoice.appendChild($('course-actions'));
+  // 超上級も5・10・15問を選択できる。
+  for(const option of $('count').options)option.disabled=false;
+
+}
+document.querySelectorAll('input[name="difficulty"]').forEach(el=>el.addEventListener('change',syncLevelDetails));
+syncLevelDetails();
+$('start').addEventListener('click',()=>startCourse(document.querySelector('input[name="difficulty"]:checked').value));
+$('next').addEventListener('click',()=>{if(!locked)return;index++;if(index===questions.length)finish();else display()});
+$('retry').addEventListener('click',()=>{$('result').classList.add('hidden');$('intro').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})});
+$('review').addEventListener('click',()=>{if(lastWrong.length)openGame(shuffle(lastWrong))});
+</script>
+</body></html>
