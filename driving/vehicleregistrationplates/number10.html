@@ -34,11 +34,18 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
 .site-footer p{margin:4px 0}
 @media(max-width:430px){.number-hero{padding:17px 8px}.hero-plate{padding:12px 5px}.hero-plate .hero-top{gap:16px}.hero-plate .hero-bottom{font-size:clamp(1.43rem,6.1vw,1.95rem)}}
 @media(prefers-color-scheme:dark){:root{background:#101923;color:#eff5fa;color-scheme:dark}body{background:#101923}.number-hero{background:linear-gradient(125deg,#164362,#25495d);color:#f3f8fb}.number-hero h1,.number-hero .eyebrow{color:#f3f8fb}.intro,.note,.stat,.quiet,.site-footer{color:#b5c6d5}.panel{background:#1b2b3a;border-color:#385064}.btn{background:#243e52;color:#eff5fa;border-color:#55758e}.btn.primary{background:#265f91;border-color:#6aa6d5}.btn.warn{background:#4a412c}.display,.example{background:#263e50;border-color:#385064}.site-footer a{color:#9bcdf0}.plate{background:#fff;color:#234c32}.digits{color:#20282a}}
+
+/* 正解表示はライト・ダーク双方で高コントラストにする。 */
+.message.success{color:#075b36;background:#e4f8e9;border:2px solid #149257;border-radius:12px;padding:12px 14px;font-weight:800;font-size:1.12rem}
+.next-number-area{margin:20px 0 26px}
+.next-number-area .btn{min-width:190px}
+@media(prefers-color-scheme:dark){.message.success{color:#fff3a8;background:#244b3b;border-color:#67e4a3}}
 </style></head>
 <body><main><div class="number-hero"><div class="eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="hero-plate" role="img" aria-label="神戸 500、1+2+3+4=10 のナンバープレートを模したタイトル画像"><div class="hero-top"><span>神戸</span><span>500</span></div><div class="hero-bottom">1+2+3+4=10</div></div><h1>ナンバー10</h1></div><p class="intro">車のナンバープレートの数字を使って、答えが<strong>10</strong>になる式をつくりましょう！</p>
-<div class="panel"><h2>出題モード</h2><div class="settings"><div class="setting"><label for="guarantee">答えがあるか</label><select class="btn" id="guarantee"><option value="yes">必ず答えがある</option><option value="random">答えがないこともある</option></select></div><div class="setting"><label for="order">数字の順番</label><select class="btn" id="order"><option value="fixed">順番どおり</option><option value="free">入れ替え自由</option></select></div></div><p class="note" id="modeNote"></p><div class="buttons"><button class="btn primary" id="new" data-umami-event="number10-next">次のナンバー</button></div></div>
+<div class="panel"><h2>出題モード</h2><div class="settings"><div class="setting"><label for="guarantee">答えがあるか</label><select class="btn" id="guarantee"><option value="yes">必ず答えがある</option><option value="random">答えがないこともある</option></select></div><div class="setting"><label for="order">数字の順番</label><select class="btn" id="order"><option value="fixed">順番どおり</option><option value="free">入れ替え自由</option></select></div></div><p class="note" id="modeNote"></p></div>
 <div class="plate" aria-label="ナンバープレート"><div class="plate-top">日本 ５００　か</div><div class="digits" id="plate"></div></div><p class="stat" id="stats">正解 0問 ／ 挑戦 0問</p>
 <section class="panel"><h2>式を作る</h2><div class="display" id="expression" aria-live="polite">数字と記号を押してください</div><div class="keypad" id="digitKeys"></div><div class="keypad"><button class="btn" data-token="+">＋</button><button class="btn" data-token="-">−</button><button class="btn" data-token="*">×</button><button class="btn" data-token="/">÷</button><button class="btn warn" id="back">1つ戻す</button><button class="btn warn" id="clear">消去</button></div><div class="buttons"><button class="btn primary" id="check" data-umami-event="number10-check">答え合わせ</button><button class="btn" id="hint" data-umami-event="number10-hint">ヒント</button><button class="btn" id="solution" data-umami-event="number10-answer">解答を見る</button></div><div class="message quiet" id="message" aria-live="polite"></div></section>
+<div class="next-number-area"><div class="buttons"><button class="btn primary" id="new" data-umami-event="number10-next">次のナンバー</button></div></div>
 <section class="panel rules"><h2>🚗 10をつくろう！</h2>
 <p>ナンバープレートの数字を使って、答えが10になる式をつくりましょう！</p>
 <h3>計算は、左から順番に！</h3>
@@ -48,7 +55,7 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
 <ul><li>出てきた数字は、全部1回ずつ使いましょう。</li><li>「順番どおり」では左から使います。「入れ替え自由」では好きな順番で使えます。</li><li>数字をくっつけたり、かっこを使ったりはできません。</li></ul>
 <h3>問題のえらび方</h3>
 <ul><li>「必ず答えがある」：10をつくれる問題だけが出ます。</li><li>「答えがないこともある」：10をつくれない問題も出ます。</li></ul>
-</section></main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/" data-umami-event="number10-footer-about">このサイトについて</a><a href="https://kussoon.com/privacy/" data-umami-event="number10-footer-privacy">プライバシー</a><a href="https://kussoon.com/sources/" data-umami-event="number10-footer-sources">データ出典</a><a href="https://kussoon.com/terms/" data-umami-event="number10-footer-terms">利用上の注意</a></nav><p>ナンバー10　Version 1.0.0</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
+</section></main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/" data-umami-event="number10-footer-about">このサイトについて</a><a href="https://kussoon.com/privacy/" data-umami-event="number10-footer-privacy">プライバシー</a><a href="https://kussoon.com/sources/" data-umami-event="number10-footer-sources">データ出典</a><a href="https://kussoon.com/terms/" data-umami-event="number10-footer-terms">利用上の注意</a></nav><p>ナンバー10　Version 1.0.1</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
 <script>
 'use strict';const $=id=>document.getElementById(id),EPS=1e-8;let digits=[],tokens=[],used=[],answer=null,attempts=0,wins=0,finished=false;const fmt=s=>s.replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−');
 function calc(x,y,op){if(op==='+' )return x+y;if(op==='-')return x-y;if(op==='*')return x*y;if(Math.abs(y)<EPS)return null;return x/y;}
