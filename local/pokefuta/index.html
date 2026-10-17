@@ -5,13 +5,13 @@
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="no-referrer">
 <title>全国ポケふたマップ | Kussoon</title>
 <meta name="description" content="ポケふたを探して、訪問を記録。7府県35枚の設置場所・位置精度・駐車条件をご案内します。">
-<link rel="stylesheet" href="assets/vendor/leaflet.css"><link rel="stylesheet" href="assets/style.css?v=0.1.1">
+<link rel="stylesheet" href="assets/vendor/leaflet.css"><link rel="stylesheet" href="assets/style.css?v=0.1.2">
 <script>
 function pokefutaBeforeSend(type,payload){if(type!=='event'||payload.name)return false;const clean=v=>{try{const u=new URL(v,location.origin);return u.origin+u.pathname}catch{return ''}};const out={...payload,url:clean(payload.url),referrer:payload.referrer?clean(payload.referrer):'',title:'全国ポケふたマップ'};delete out.data;return out;}
 function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com'].includes(location.hostname))return;let ref='';try{const u=new URL(document.referrer);ref=u.origin+u.pathname}catch{}window.umami.track(p=>({...p,url:location.origin+location.pathname,referrer:ref,title:'全国ポケふたマップ'}));}
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
-<script defer src="assets/vendor/leaflet.js"></script><script defer src="data/pokefuta.js"></script><script defer src="assets/core.js"></script><script defer src="assets/app.js?v=0.1.1"></script>
+<script defer src="assets/vendor/leaflet.js"></script><script defer src="data/pokefuta.js"></script><script defer src="assets/core.js"></script><script defer src="assets/app.js?v=0.1.2"></script>
 </head>
 <body>
 <header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">7府県・35枚</span><h1>全国ポケふたマップ</h1><p>旅の途中に、ひとつずつ。</p></header>
@@ -24,11 +24,12 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <p class="map-note">P1・P2のピンは概略位置です。現物のGPS座標ではありません。<br>同じ施設のピンが重なる場合は、下の一覧から選べます。</p>
 </section>
 <section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケふた一覧</h2><span id="progress"></span></div><p id="empty" hidden>条件に合うポケふたがありません。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.1.1（第1次公開検証版）／情報確認日：2026/10/17。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山の35枚を掲載しています。全国データは順次追加予定です。</p><p>P4は自治体公表の現物位置、P3は資料から推定した現物位置、P2は設置エリア、P1は設置施設、P0は位置未確認の公開保留です。P1・P2では現地の目印も確認してください。現在のP4は白浜町の1枚のみです。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の読み込み時は表示範囲のタイルが国土地理院へリクエストされます。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap等に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a></p></details>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.1.2（第1次公開検証版）／情報確認日：2026/10/17。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山の35枚を掲載しています。全国データは順次追加予定です。</p><p>P4は自治体公表の現物位置、P3は資料から推定した現物位置、P2は設置エリア、P1は設置施設、P0は位置未確認の公開保留です。P1・P2では現地の目印も確認してください。現在のP4は白浜町の1枚のみです。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の読み込み時は表示範囲の淡色地図タイルが国土地理院へリクエストされます。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap等に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.1.1（第1次公開検証版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.1.2（第1次公開検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>記録はこのブラウザに保存されます。</p><div class="record-actions"><button id="export">JSONを書き出す</button><label class="file-button">JSONを取り込む<input id="import-file" type="file" accept="application/json,.json"></label><button id="share">共有URLを作る</button></div><div id="share-result" hidden><label for="share-url">訪問済みのIDを含む共有URL</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このURLを知る人は訪問状況を確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
+<button type="button" id="back-to-top" aria-label="ページの一番上へ戻る" hidden><span aria-hidden="true">↑</span> 一番上へ</button>
 <div id="toast" role="status" aria-live="polite" hidden></div>
 <noscript><p>地図・検索・訪問記録を利用するにはJavaScriptを有効にしてください。</p></noscript>
 </body></html>
