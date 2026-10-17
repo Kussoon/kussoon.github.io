@@ -2,3 +2,16 @@
 @media(max-width:680px){header{padding:18px 14px 14px}main{padding:0 10px}#filters{display:block;padding:10px 10px 0}.filter-row{margin-top:8px}.filter-row label:first-child{flex:1}.filter-row label{min-width:0}select{font-size:14px;padding:9px 7px}.map-top{padding:2px 10px}#map{height:53svh;min-height:300px}.workspace{border-radius:14px}.legend{gap:8px 12px;padding:10px 10px 0;font-size:11px}.map-note{margin:8px 10px 10px;font-size:11px}#list{grid-template-columns:1fr}.card{padding:14px}.list-head{margin:20px 4px 10px}.edition{font-size:11px}.leaflet-popup-content{margin:13px 15px;width:250px!important;max-width:calc(100vw - 100px)}footer{padding:0 14px 22px}}
 @media(prefers-color-scheme:dark){:root{--bg:#101c1c;--panel:#1b2b2b;--text:#e0efea;--muted:#b0c5be;--line:#3a504c;--brand:#83d9bb;--soft:#29433b;--warn:#ffe0a8;--warn-bg:#44321e;--shadow:none}.visited-btn[aria-pressed=true]{color:#102e24}.p4{background:#176451}.p1{background:#f0eaf8}.leaflet-container{background:#b7c6be}.leaflet-popup-close-button{color:var(--text)!important}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* v0.1.1: Compact map callout; details remain in the accessible list. */
+.leaflet-popup-content-wrapper{border-radius:12px}
+.leaflet-popup-content{width:210px!important;max-width:min(210px,calc(100vw - 90px))!important;max-height:none;overflow:visible;margin:12px 13px;font-size:13px;line-height:1.48}
+.popup-compact .eyebrow{font-size:11px;margin:7px 0 0}
+.popup-compact h3{font-size:16px;line-height:1.35;margin:5px 0}
+.popup-compact .popup-place{font-size:12px;line-height:1.4;margin:5px 0;overflow-wrap:anywhere}
+.popup-compact .popup-precision{font-size:11px;color:var(--muted);margin:5px 0}
+.popup-compact .popup-alert{font-size:11px;color:var(--warn);margin:5px 0}
+.popup-compact .popup-detail{width:100%;min-height:38px;padding:7px 5px;font-size:12px;margin-top:6px}
+/* Visible accessible focus ring in the Kussoon color palette. */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,.file-button:focus-within{outline:3px solid var(--brand);outline-offset:2px}
+@media(max-width:680px){.leaflet-popup-content{width:205px!important;max-width:min(205px,calc(100vw - 96px))!important;margin:11px 12px}.leaflet-popup-content-wrapper{max-width:240px}.leaflet-popup{margin-bottom:13px}}
