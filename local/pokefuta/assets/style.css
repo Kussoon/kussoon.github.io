@@ -15,3 +15,10 @@
 /* Visible accessible focus ring in the Kussoon color palette. */
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,.file-button:focus-within{outline:3px solid var(--brand);outline-offset:2px}
 @media(max-width:680px){.leaflet-popup-content{width:205px!important;max-width:min(205px,calc(100vw - 96px))!important;margin:11px 12px}.leaflet-popup-content-wrapper{max-width:240px}.leaflet-popup{margin-bottom:13px}}
+
+/* v0.1.2: Floating page-top shortcut, shown only after a long scroll. */
+#back-to-top{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:1600;border:1px solid var(--line);border-radius:999px;padding:10px 15px;min-height:48px;background:var(--panel);color:var(--text);box-shadow:0 3px 18px #0004;font-size:14px;font-weight:700;white-space:nowrap}
+#back-to-top span{font-size:20px;margin-right:5px;vertical-align:-1px}
+#back-to-top:hover{background:var(--soft)}
+#back-to-top[hidden]{display:none!important}
+@media(max-width:680px){#back-to-top{right:12px;bottom:calc(16px + env(safe-area-inset-bottom));padding:9px 13px}}
