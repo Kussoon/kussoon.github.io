@@ -171,6 +171,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .map-marker.visited span.lid-pin{opacity:1}
 .map-note{font-size:13px;line-height:1.65;padding:11px 15px;margin:0;color:var(--muted)}
 @media(max-width:680px){.map-note{font-size:13px;margin:0;padding:10px 12px}}
+/* v0.4.1: clear expand/collapse action labels instead of an ambiguous chevron. */
+.pokemon-group-hint{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.group-open-action{display:none}
+.pokemon-group[open] .group-open-action{display:inline}
+.pokemon-group[open] .group-closed-action{display:none}
+.pokemon-group-hint span{transform:none!important}
+@media(max-width:680px){.pokemon-group-hint{font-size:12px;gap:4px}}
 </style>
 <script>
 function pokefutaBeforeSend(type,payload){if(type!=='event'||payload.name)return false;const clean=v=>{try{const u=new URL(v,location.origin);return u.origin+u.pathname}catch{return ''}};const out={...payload,url:clean(payload.url),referrer:payload.referrer?clean(payload.referrer):'',title:'全国ポケふたマップ'};delete out.data;return out;}
@@ -178,7 +185,7 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.4.0-2026-10-18T21:30:19Z">
+<meta name="kussoon-build" content="pokefuta-v0.4.1-2026-10-19-reset-fold-fix">
 </head>
 <body>
 <header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">10府県・地図90枚＋位置保留1枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
@@ -4985,7 +4992,7 @@ function filtered(){
   return eligible.filter(d=>pokemonMatches(d,terms));
 }
 function groupKey(name){return 'pokemon-'+Array.from(name).map(ch=>ch.codePointAt(0).toString(16)).join('-');}
-function groupedList(rows){const groups=new Map();for(const d of rows){if(!groups.has(d.pokemon))groups.set(d.pokemon,[]);groups.get(d.pokemon).push(d);}return [...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0],'ja')).map(([name,items])=>{items.sort((a,b)=>a.prefecture.localeCompare(b.prefecture,'ja')||a.city.localeCompare(b.city,'ja')||a.id.localeCompare(b.id));const prefs=[...new Set(items.map(d=>d.prefecture))];const places=items.length>1?'（'+prefs.join('・')+(items.length>prefs.length?'・'+items.length+'枚':'')+'）':'';return `<details class="pokemon-group" id="${groupKey(name)}"><summary><span class="pokemon-group-name">${esc(name)}${places?`<span class="pokemon-group-area">${esc(places)}</span>`:''}</span><span class="pokemon-group-hint">${items.length}枚 <span aria-hidden="true">⌄</span></span></summary><div class="pokemon-group-items">${items.map(card).join('')}</div></details>`;}).join('');}
+function groupedList(rows){const groups=new Map();for(const d of rows){if(!groups.has(d.pokemon))groups.set(d.pokemon,[]);groups.get(d.pokemon).push(d);}return [...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0],'ja')).map(([name,items])=>{items.sort((a,b)=>a.prefecture.localeCompare(b.prefecture,'ja')||a.city.localeCompare(b.city,'ja')||a.id.localeCompare(b.id));const prefs=[...new Set(items.map(d=>d.prefecture))];const places=items.length>1?'（'+prefs.join('・')+(items.length>prefs.length?'・'+items.length+'枚':'')+'）':'';return `<details class="pokemon-group" id="${groupKey(name)}"><summary><span class="pokemon-group-name">${esc(name)}${places?`<span class="pokemon-group-area">${esc(places)}</span>`:''}</span><span class="pokemon-group-hint">${items.length}枚 <span class="group-open-action">閉じる <span aria-hidden="true">▲</span></span><span class="group-closed-action">詳細を見る <span aria-hidden="true">▼</span></span></span></summary><div class="pokemon-group-items">${items.map(card).join('')}</div></details>`;}).join('');}
 function fit(){if(!map)return;const points=filtered().map(C.coords).filter(Boolean);if(points.length)map.fitBounds(points,{padding:[35,35],maxZoom:14});}
 function renderQuickMatches(rows){
   const root=$('#quick-matches'),query=$('#search').value.trim(),pref=$('#pref').value,visit=$('#visit').value;
@@ -5022,7 +5029,17 @@ function checkHash(){try{const ids=C.fromHash(location.hash);if(ids!==null)openI
 load();for(const pref of [...new Set(D.lids.map(d=>d.prefecture))]){const o=document.createElement('option');o.value=o.textContent=pref;$('#pref').append(o);}
 try{if(!window.L)throw Error('Leaflet unavailable');map=L.map('map',{zoomControl:false,scrollWheelZoom:true}).setView([35.5,137],5);L.control.zoom({position:'topright'}).addTo(map);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'}).addTo(map);const Fit=L.Control.extend({options:{position:'topright'},onAdd(){const b=L.DomUtil.create('button','fit-control');b.type='button';b.textContent='全体';b.setAttribute('aria-label','絞り込み対象の全体を表示');L.DomEvent.disableClickPropagation(b);L.DomEvent.on(b,'click',fit);return b;}});new Fit().addTo(map);new ResizeObserver(()=>map.invalidateSize()).observe($('#map'));}catch{$('#map-unavailable').hidden=false;}
 $('#filters').addEventListener('submit',e=>e.preventDefault());$('#search').addEventListener('input',()=>render(true));$('#pref').addEventListener('change',()=>render(true));$('#visit').addEventListener('change',()=>render(true));$('#quick-matches-list').addEventListener('click',event=>{const button=event.target.closest('button[data-group]');if(button)jumpToPokemon(button.dataset.group);});
-$('#reset').onclick=()=>{$('#filters').reset();render(true);toast('検索・絞り込み条件をリセットしました。訪問記録は保持しています。');};list.addEventListener('click',handleAction);$('#map').addEventListener('click',handleAction);
+$('#reset').onclick=()=>{
+  // Explicitly clear all three filters; do not rely on Safari form.reset() behavior.
+  $('#search').value='';
+  $('#pref').value='';
+  $('#visit').value='all';
+  selected=null;
+  render(true);
+  // Make the reset result immediately visible even when activated far down the page.
+  $('#filters').scrollIntoView({block:'start',behavior:'auto'});
+  toast('検索条件をリセットしました。91件すべてを表示しています。訪問記録は保持しています。');
+};list.addEventListener('click',handleAction);$('#map').addEventListener('click',handleAction);
 $('#records').onclick=()=>{$('#record-status').textContent=storageOK?'':'ブラウザ保存が使えません。JSONで書き出して保管してください。';$('#record-dialog').showModal();};$('#close-records').onclick=()=>$('#record-dialog').close();
 $('#export').onclick=()=>{const blob=new Blob([JSON.stringify(C.pack(visited),null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='kussoon-pokefuta-visits.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);$('#record-status').textContent='訪問記録のファイルを保存しました。大切に保管してください。';};
 $('#import-file').onchange=async e=>{try{const f=e.target.files[0];if(!f)return;if(f.size>500000)throw Error('ファイルが大きすぎます。');openImport(C.validate(JSON.parse(await f.text())),'JSONファイル');}catch(e){$('#record-status').textContent='取り込みに失敗しました。'+e.message;}finally{$('#import-file').value='';}};
