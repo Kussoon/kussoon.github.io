@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="no-referrer">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。9府県86件（地図83枚・位置保留3枚）の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。9府県86件（地図85枚・位置保留1枚）の設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -178,23 +178,23 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.3.2-2026-10-18T11:58:09Z">
+<meta name="kussoon-build" content="pokefuta-v0.3.3-2026-10-18T12:58:58Z">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">9府県・地図83枚＋位置保留3枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">9府県・地図85枚＋位置保留1枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の86件（うち地図表示83枚）にはありません。全国すべてを収録したわけではありません。</p><div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の86件（うち地図表示85枚）にはありません。全国すべてを収録したわけではありません。</p><div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の86件（うち地図表示83枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.3.2（所在地・一番上ボタン改善版）／調査基準日：2026/10/18。既存55枚の情報は従来の確認日を維持し、三重県31枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重の86件を一覧に掲載。地図表示83枚、日野町・大台町・大紀町の3枚は表示座標を保留しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の86件（うち地図表示85枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.3.3（三重県2地点の位置保留解除版）／調査基準日：2026/10/18。既存55枚の情報は従来の確認日を維持し、三重県31枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重の86件を一覧に掲載。地図表示85枚、日野町の1枚は表示座標を保留しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.3.2（所在地・一番上ボタン改善版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.3.3（三重県2地点の位置保留解除版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの一番上へ戻る" hidden><span aria-hidden="true">↑</span> 一番上へ</button>
@@ -205,8 +205,8 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.3.2",
-  "source_version": "3.5",
+  "version": "0.3.3",
+  "source_version": "3.6",
   "checked_at": "2026-10-18",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
@@ -2909,23 +2909,23 @@ window.POKEFUTA_DATA={
       "facility_name": "奥伊勢フォレストピア",
       "address": "三重県大台町薗993",
       "source_position_grade": "C",
-      "source_public_stage": "P0",
-      "public_stage": "P0",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
       "lid_lat": null,
       "lid_lon": null,
       "lid_coord_type": "unknown",
-      "facility_lat": null,
-      "facility_lon": null,
-      "facility_coord_type": "unknown",
-      "facility_coord_label": "",
-      "facility_coord_source": "",
-      "coordinate_method": "",
-      "exact_landmark": "ホテル正面から右へ進み、コテージ宿泊棟の案内横の遊歩道から芝生広場の東屋手前へ。施設代表点も未確定のため地図ピンを保留しています。",
+      "facility_lat": 34.356856,
+      "facility_lon": 136.346962,
+      "facility_coord_type": "gsi_map_facility_representative",
+      "facility_coord_label": "奥伊勢フォレストピア・宮川山荘の建物群代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#17/34.356856/136.346962/&base=std&ls=std&disp=1",
+      "coordinate_method": "利用者提供の数値は探索範囲を絞る参考情報として使用。公式の設置施設説明・配置図または外観写真と、地理院標準地図の建物輪郭、道路・橋・河川の位置関係を照合。地理院地図上で施設建物群の代表画素を選び、タイル原点と画素から逆メルカトル変換。提供数値の転載ではなく、現物位置・駐車場入口の特定でもない。",
+      "exact_landmark": "奥伊勢フォレストピア。ホテル前駐車場近くの東屋手前。ホテル正面から右へ進み、「コテージ宿泊棟」の案内横の遊歩道を奥へ。分かれ道は左へ進み、芝生広場を東屋に向かうと手前にあります。ピンはホテル建物群の概略位置で、東屋前の現物位置ではありません。",
       "parking_id": "parking-info-295",
       "parking_eligibility": "unconfirmed",
       "parking_note": "駐車場入口座標は未確認。施設・住所代表点を駐車場入口として使っていません。",
       "viewing_condition": "県観光連盟はポケふたを随時・無料で観覧できると案内しています。施設内の有料サービス・店舗の営業時間とは別です。予約要否・臨時閉鎖や災害時の立入条件は未確認。閉鎖中の無断立入はしないでください。",
-      "unresolved": "表示座標を保留。地理院住所検索は町域代表点までしか返さず不採用。同名・同地域の採用可能な施設地物も特定できず、公式配置資料と地理資料の座標照合は未完了。現物GPS・駐車場入口GPSも未確認。",
+      "unresolved": "現物GPS・駐車場入口GPSは未確認。施設建物の代表点として表示。現地での現存・臨時規制は未確認。",
       "official_url": "https://local.pokemon.jp/manhole/desc/295/?is_modal=1&is_portal=1",
       "sources": [
         "https://local.pokemon.jp/manhole/desc/295/?is_modal=1&is_portal=1",
@@ -2946,29 +2946,30 @@ window.POKEFUTA_DATA={
       "facility_name": "山海の郷紀勢",
       "address": "三重県大紀町崎２１５４−１",
       "source_position_grade": "C",
-      "source_public_stage": "P0",
-      "public_stage": "P0",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
       "lid_lat": null,
       "lid_lon": null,
       "lid_coord_type": "unknown",
-      "facility_lat": null,
-      "facility_lon": null,
-      "facility_coord_type": "unknown",
-      "facility_coord_label": "",
-      "facility_coord_source": "",
-      "coordinate_method": "",
-      "exact_landmark": "山海の郷紀勢の正面入口（大紀町公式）。施設代表点が未確定のため地図ピンを保留しています。",
+      "facility_lat": 34.297315,
+      "facility_lon": 136.399491,
+      "facility_coord_type": "gsi_map_facility_representative",
+      "facility_coord_label": "山海の郷紀勢の建物代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#17/34.297315/136.399491/&base=std&ls=std&disp=1",
+      "coordinate_method": "利用者提供の数値は探索範囲を絞る参考情報として使用。公式の設置施設説明・配置図または外観写真と、地理院標準地図の建物輪郭、道路・橋・河川の位置関係を照合。地理院地図上で施設建物群の代表画素を選び、タイル原点と画素から逆メルカトル変換。提供数値の転載ではなく、現物位置・駐車場入口の特定でもない。",
+      "exact_landmark": "山海の郷紀勢（崎2154番地1）の正面入口。入口扉の手前、屋根のある舗装面に設置（町公式の設置案内と提供された公式発表の写真を照合）。ピンは施設建物の概略位置で、入口前の現物GPSではありません。",
       "parking_id": "parking-info-387",
       "parking_eligibility": "unconfirmed",
       "parking_note": "駐車場入口座標は未確認。施設・住所代表点を駐車場入口として使っていません。",
       "viewing_condition": "県観光連盟はポケふたを随時・無料で観覧できると案内しています。施設内の有料サービス・店舗の営業時間とは別です。予約要否・臨時閉鎖や災害時の立入条件は未確認。閉鎖中の無断立入はしないでください。 山海の郷紀勢の店舗は10:00から、火曜休（祝日は翌日）と町公式。観光協会は10:00～18:00と掲載。店舗休業と屋外ふたの観覧条件を区別しています。",
-      "unresolved": "表示座標を保留。地理院住所検索は町域代表点までしか返さず不採用。同名・同地域の採用可能な施設地物も特定できず、公式配置資料と地理資料の座標照合は未完了。現物GPS・駐車場入口GPSも未確認。 登場ポケモンの集合は公式と一致。表示順は既存台帳を維持。",
+      "unresolved": "現物GPS・駐車場入口GPSは未確認。施設建物の代表点として表示。現地での現存・臨時規制は未確認。",
       "official_url": "https://local.pokemon.jp/manhole/desc/387/?is_modal=1&is_portal=1",
       "sources": [
         "https://local.pokemon.jp/manhole/desc/387/?is_modal=1&is_portal=1",
         "https://www.kankomie.or.jp/spot/25049",
         "https://www.town.taiki.mie.jp/soshiki/shokokanko/gyomu/kanko/1376.html",
-        "https://www.town.taiki.mie.jp/soshiki/shokokanko/gyomu/kanko/osusume/290.html"
+        "https://www.town.taiki.mie.jp/soshiki/shokokanko/gyomu/kanko/osusume/290.html",
+        "https://www.town.taiki.mie.jp/material/files/group/11/sankai__doc_01.pdf"
       ],
       "source_date": "2026-10-18",
       "current_status": "公式個別ページ・公式県一覧の掲載を照合（現地の現存確認ではない）",
