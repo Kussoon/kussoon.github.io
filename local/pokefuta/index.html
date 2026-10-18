@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="no-referrer">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。7府県35枚の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。8府県55枚（地図54枚・位置保留1枚）の設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -178,22 +178,23 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<meta name="kussoon-build" content="pokefuta-v0.2.0-2026-10-18T03:31:33Z">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">7府県・35枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">8府県・地図54枚＋位置保留1枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の35枚にはありません。全国すべてを収録したわけではありません。</p><div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の55件（うち地図表示54枚）にはありません。全国すべてを収録したわけではありません。</p><div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の35枚にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.1.16（第1次公開検証版）／情報確認日：2026/10/17。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山の35枚を掲載しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap等に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の55件（うち地図表示54枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.2.0（鳥取県追加検証版）／情報確認日：既存35枚 2026/10/17・鳥取県 2026/10/18。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取の55件を一覧に掲載。地図表示54枚、日野町の1枚は表示座標を保留しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.1.16（第1次公開検証版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.2.0（鳥取県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの一番上へ戻る" hidden><span aria-hidden="true">↑</span> 一番上へ</button>
@@ -202,11 +203,11 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 
 <!-- Kussoon owned data and application source; only Leaflet and map tiles are requested externally. -->
 <script>
-window.POKEFUTA_DATA = {
+window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.1.0",
-  "source_version": "2.7",
-  "checked_at": "2026-10-17",
+  "version": "0.2.0",
+  "source_version": "3.3",
+  "checked_at": "2026-10-18",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
     {
@@ -1437,6 +1438,762 @@ window.POKEFUTA_DATA = {
       "current_status": "現地未確認（公式掲載・資料の照合）",
       "uncertainty_m": null,
       "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0074",
+      "official_number": 74,
+      "prefecture": "鳥取県",
+      "city": "鳥取市",
+      "pokemon": "サンド／アローラサンド／ミミロル",
+      "facility_name": "砂の美術館前",
+      "address": "鳥取県鳥取市福部町湯山2083-17地先",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.5396516,
+      "facility_lon": 134.2383442,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "砂の美術館の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/344182588",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "砂の美術館前の歩道。建物内の展示ではありません。",
+      "parking_id": "parking-info-74",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "美術館は9:00～18:00、最終入館17:30。展示入館は有料で会期・休館期間があります。屋外ポケふたの観覧料金・予約要否・時間外観覧可否は公式資料に明記がなく未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/74/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/74/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.sand-museum.jp/access/?page_id=2",
+        "https://www.sand-museum.jp/information/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0075",
+      "official_number": 75,
+      "prefecture": "鳥取県",
+      "city": "米子市",
+      "pokemon": "サンド／カモネギ／スワンナ",
+      "facility_name": "米子市観光センター",
+      "address": "鳥取県米子市皆生温泉3丁目1番1号",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.4562397,
+      "facility_lon": 133.3617005,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "米子市観光センターの地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/3945161654",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "観光センターの花風の足湯横。",
+      "parking_id": "parking-info-75",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "案内所は8:30～18:00。2026/6/1から案内所・売店は水曜を基本とする不定休（公式カレンダー確認）。屋外ポケふたの休館日・時間外観覧可否、料金・予約要否は未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/75/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/75/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.kaike-onsen.jp/post/【重要】米子市観光センター-案内所定休日新設のご案内",
+        "https://www.kaike-onsen.jp/",
+        "https://www.kaike-onsen.jp/room"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0076",
+      "official_number": 76,
+      "prefecture": "鳥取県",
+      "city": "倉吉市",
+      "pokemon": "サンド／アローラサンド",
+      "facility_name": "くらよし駅ヨコプラザ前",
+      "address": "鳥取県倉吉市上井195",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.4543814,
+      "facility_lon": 133.8498465,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "観光物産館 くらよし駅ヨコプラザの地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/4477501190",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "JR倉吉駅南口・くらよし駅ヨコプラザ前。",
+      "parking_id": "parking-info-76",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "店舗7:30～19:30、年中無休。ポケふたは店舗前。観覧料金・予約要否と営業時間外の可否は未確認。店舗所在地は上井195-12、ポケふた公式表記は上井195。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/76/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/76/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.choseido.jp/kurayoshiekiyokoplaza.html"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0077",
+      "official_number": 77,
+      "prefecture": "鳥取県",
+      "city": "境港市",
+      "pokemon": "サンド／アローラサンド／クラブ",
+      "facility_name": "境夢みなとターミナル",
+      "address": "鳥取県境港市竹内団地252-2",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.522112,
+      "facility_lon": 133.2586266,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "境夢みなとターミナルの地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1036399202",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "ターミナル駐車場入口の歩道。駐車場入口そのものの座標ではありません。",
+      "parking_id": "parking-info-77",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "館内9:00～18:00、水曜・年末年始休館（客船寄港時は除く）。屋外ポケふたの時間外・休館日観覧可否、料金・予約要否は未確認。寄港時は交通規制等を確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/77/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/77/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.sakai-tottori.jp/archives/654",
+        "https://www.sakai-tottori.jp/faci"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "客船寄港日は西側臨時駐車場を一般車で利用しないでください。南側の一般駐車場を確認。"
+    },
+    {
+      "id": "PF-0078",
+      "official_number": 78,
+      "prefecture": "鳥取県",
+      "city": "岩美町",
+      "pokemon": "サンド／ネイティオ",
+      "facility_name": "浦富海岸・荒砂神社前",
+      "address": "鳥取県岩美町浦富2475-17",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.5911375,
+      "facility_lon": 134.3212985,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "荒砂神社の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/11252078535",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "荒砂神社前、浦富海水浴場そば。ピンは神社の代表位置で、現物位置ではありません。",
+      "parking_id": "parking-info-78",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "屋外の海岸沿い。夜間・荒天時・海水浴シーズンの観覧条件、料金・予約要否は未確認。遊泳情報はポケふたの観覧時間を示すものではありません。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/78/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/78/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.iwamikanko.org/news/9712/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0079",
+      "official_number": 79,
+      "prefecture": "鳥取県",
+      "city": "若桜町",
+      "pokemon": "アローラサンド／ユキカブリ",
+      "facility_name": "道の駅 若桜 桜ん坊",
+      "address": "鳥取県若桜町若桜983-2",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.3440216,
+      "facility_lon": 134.4003304,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "道の駅若桜 桜ん坊の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/439116893",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "道の駅「若桜 桜ん坊」の入口前。",
+      "parking_id": "parking-info-79",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "販売所は3～11月9:00～18:00、12～2月9:00～17:00。月曜不定休（祝日は営業）・年末年始休館。屋外ポケふたの料金・予約要否・時間外観覧可否は未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/79/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/79/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://michinoeki-sakuranbou.com/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0080",
+      "official_number": 80,
+      "prefecture": "鳥取県",
+      "city": "三朝町",
+      "pokemon": "サンド／アローラサンド／ケロマツ",
+      "facility_name": "三朝温泉多目的駐車場",
+      "address": "鳥取県三朝町三朝783",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.408833,
+      "facility_lon": 133.89444,
+      "facility_coord_type": "gsi_address_representative",
+      "facility_coord_label": "鳥取県三朝町三朝７８３番地の住所代表点",
+      "facility_coord_source": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%B3%A5%E5%8F%96%E7%9C%8C%E4%B8%89%E6%9C%9D%E7%94%BA%E4%B8%89%E6%9C%9D783",
+      "coordinate_method": "ポケふた公式の所在地を地理院住所検索で照合。返却された番地単位の代表点を施設・設置エリアの概略位置として採用。枝番・歩道上の現物位置を確定するものではありません。",
+      "exact_landmark": "三朝温泉多目的駐車場の奥、案内看板の下。ピンは公式所在地の住所代表点です。",
+      "parking_id": "parking-info-80",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "駐車場は24時間営業。ポケふたの夜間観覧可否・観覧料金・予約要否は明記がなく未確認。車の動線を避けて観覧。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/80/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/80/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://tottori-iyashitabi.com/spot/area/misasa/9115/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0081",
+      "official_number": 81,
+      "prefecture": "鳥取県",
+      "city": "湯梨浜町",
+      "pokemon": "サンド／シェルダー",
+      "facility_name": "はわい温泉・東郷温泉観光案内所向かいの歩道",
+      "address": "鳥取県湯梨浜町はわい温泉3-13",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.476669,
+      "facility_lon": 133.881271,
+      "facility_coord_type": "gsi_address_representative",
+      "facility_coord_label": "鳥取県湯梨浜町はわい温泉３番地の住所代表点",
+      "facility_coord_source": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%B9%AF%E6%A2%A8%E6%B5%9C%E7%94%BA%E3%81%AF%E3%82%8F%E3%81%84%E6%B8%A9%E6%B3%893-13",
+      "coordinate_method": "ポケふた公式の所在地を地理院住所検索で照合。返却された番地単位の代表点を施設・設置エリアの概略位置として採用。枝番・歩道上の現物位置を確定するものではありません。",
+      "exact_landmark": "観光案内所の道路を挟んで向かい側の歩道。案内所建物やその駐車場とは別です。",
+      "parking_id": "parking-info-81",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "公式所在地ははわい温泉3-13。案内所所在地5-22と混同しないでください。観覧可能時間・料金・予約要否は未確認。横断は安全な場所から。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/81/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/81/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.yurihama-kankou.jp/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0082",
+      "official_number": 82,
+      "prefecture": "鳥取県",
+      "city": "琴浦町",
+      "pokemon": "サンド／アローラサンド",
+      "facility_name": "道の駅 ポート赤碕横",
+      "address": "鳥取県琴浦町別所270-4",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.5068019,
+      "facility_lon": 133.6633339,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "道の駅ポート赤碕の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/580919224",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "道の駅ポート赤碕横、ポート赤碕信号機近くの歩道。道の駅「琴の浦」ではありません。",
+      "parking_id": "parking-info-82",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "隣接する漁協直売センターは9:30～17:00、水曜・年始休み。臨時営業は公式を確認。歩道上ポケふたの観覧時間・料金・予約要否は未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/82/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/82/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://port-akasaki.net/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0083",
+      "official_number": 83,
+      "prefecture": "鳥取県",
+      "city": "大山町",
+      "pokemon": "アローラサンド／ヒトモシ",
+      "facility_name": "道の駅 大山恵みの里",
+      "address": "鳥取県大山町名和951-6",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.5043526,
+      "facility_lon": 133.5025648,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "名和PA;道の駅大山 恵みの里の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/434868476",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "道の駅内、身障者用駐車場の近く。目印としての説明で、一般車に専用区画を案内するものではありません。",
+      "parking_id": "parking-info-83",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "店舗9:00～18:00（12～2月は17:00まで）、12/31・1/1休業。屋外ポケふたの観覧時間・料金・予約要否は未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/83/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/83/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://daisen-meguminosato.jp/michinoeki/6/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0084",
+      "official_number": 84,
+      "prefecture": "鳥取県",
+      "city": "南部町",
+      "pokemon": "サンド／アローラサンド／ナックラー",
+      "facility_name": "とっとり花回廊",
+      "address": "鳥取県南部町鶴田110",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.3479682,
+      "facility_lon": 133.4248977,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "鳥取県立とっとり花回廊の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/406678528",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "入場ゲート前の広場。ピンは花回廊全体の代表点で、ゲート前の現物位置ではありません。",
+      "parking_id": "parking-info-84",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "園の開園時間・休園日・入園料金は季節・イベントで変わります。2026年10月は通常9:00～17:00。入場ゲート前ポケふたの観覧だけの料金・予約要否・休園日や時間外の立入可否は未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/84/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/84/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://tottorihanakairou.or.jp/park/parking/",
+        "https://tottorihanakairou.or.jp/business/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0085",
+      "official_number": 85,
+      "prefecture": "鳥取県",
+      "city": "伯耆町",
+      "pokemon": "サンド／アローラサンド／オニゴーリ",
+      "facility_name": "伯耆町スポーツ公園・岸本B&G海洋センター前",
+      "address": "鳥取県伯耆町大原997-12",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.382948,
+      "facility_lon": 133.4588815,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "伯耆町立岸本海洋センターの地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1265766328",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "伯耆町スポーツ公園内、伯耆町岸本B&G海洋センター前。センター代表点を表示しています。",
+      "parking_id": "parking-info-85",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "センター休館日は月曜および祝日の翌日。ポケふた観覧の時間・料金・予約要否と休館日・時間外の観覧可否は未確認。公園・センター利用と観覧の条件は別途確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/85/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/85/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.houki-town.jp/new1/18/sougous/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "vehicle_route_allowed": false
+    },
+    {
+      "id": "PF-0086",
+      "official_number": 86,
+      "prefecture": "鳥取県",
+      "city": "日南町",
+      "pokemon": "サンド／バルビート／イルミーゼ",
+      "facility_name": "道の駅 にちなん日野川の郷",
+      "address": "鳥取県日南町生山354番地2",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.170563,
+      "facility_lon": 133.31023,
+      "facility_coord_type": "gsi_map_area_representative",
+      "facility_coord_label": "地理院地図で読図した道の駅建物群の代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#16/35.170563/133.31023/&base=std&ls=std&disp=1",
+      "coordinate_method": "地理院地図標準地図の「道の駅」注記と施設建物群を目視照合し、建物群の代表点を読図。ズーム16のタイル原点と選択画素から逆メルカトル変換。現物位置・駐車場入口ではない。",
+      "exact_landmark": "多目的ルーム前。施設建物群の代表点を表示し、現物位置とは区別しています。",
+      "parking_id": "parking-info-86",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "直売所8:30～18:00・年中無休（運営者公式）。営業時間外のポケふた観覧可否・料金・予約要否は未確認。施設住所は生山386、ポケふた公式所在地は生山354番地2。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/86/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/86/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://nichinan-hinogawanosato.jp/",
+        "https://www.michi-no-eki.jp/stations/views/19855"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0087",
+      "official_number": 87,
+      "prefecture": "鳥取県",
+      "city": "日野町",
+      "pokemon": "サンド／アローラサンド／チルット",
+      "facility_name": "金持テラスひの",
+      "address": "鳥取県日野町根雨170番地1",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P0",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": null,
+      "facility_lon": null,
+      "facility_coord_type": "unknown",
+      "facility_coord_label": "",
+      "facility_coord_source": "",
+      "coordinate_method": "",
+      "exact_landmark": "金持テラスひのの入口前。併設の葬祭ホールの入口・駐車区画と取り違えないでください。",
+      "parking_id": "parking-info-87",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "施設は10:00～16:00（特産品売場は9:00から）、年末年始休業。ポケふたの観覧料金・予約要否・時間外観覧可否は未確認。",
+      "unresolved": "表示座標を保留：地理院住所検索は根雨の町域代表点までしか返さず不採用。同名OSM地物も未確認。現物GPS・駐車場入口GPSも未確認。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/87/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/87/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.japan47go.travel/ja/detail/d1ddd959-6d3e-405a-8ca7-f2e04d819b84"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0106",
+      "official_number": 106,
+      "prefecture": "鳥取県",
+      "city": "智頭町",
+      "pokemon": "サンド／サンドパン／ウソッキー",
+      "facility_name": "智頭町総合案内所・どうだん広場",
+      "address": "鳥取県智頭町大字智頭2067-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.2654883,
+      "facility_lon": 134.2262496,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "智頭町総合案内所の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/391784836",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "智頭町総合案内所の横、どうだん広場。",
+      "parking_id": "parking-info-106",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "案内所9:00～18:00、年末年始休み。屋外ポケふたの観覧時間・料金・予約要否は未確認。案内所2階の有料利用とは区別してください。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/106/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/106/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://chizukankou-kurashiya.jp/information_center/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0107",
+      "official_number": 107,
+      "prefecture": "鳥取県",
+      "city": "八頭町",
+      "pokemon": "アローラサンド／アローラサンドパン",
+      "facility_name": "道の駅 はっとう",
+      "address": "鳥取県八頭町徳丸625",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.366334,
+      "facility_lon": 134.3399794,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "道の駅はっとうの地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/462729555",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "道の駅はっとうの入口横。",
+      "parking_id": "parking-info-107",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "全国道の駅連絡会は営業時間9:00～17:15と掲載。現行の店舗休業日・ポケふた観覧の時間、料金、予約要否は未確認。古い案内には異なる閉店時間があるため出発前に確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/107/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/107/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.michi-no-eki.jp/stations/views/19520"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0108",
+      "official_number": 108,
+      "prefecture": "鳥取県",
+      "city": "北栄町",
+      "pokemon": "サンド／アローラサンド",
+      "facility_name": "北条オートキャンプ場（北エリア）・一菜ふく福前",
+      "address": "鳥取県北栄町田井488-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.4992788,
+      "facility_lon": 133.8182044,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "北条オートキャンプ場の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/14285437358",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "北条オートキャンプ場の一菜ふく福前。2022年の移設案内と現行トリパスで北エリアを照合。新しい道の駅ほうじょう南エリアではありません。",
+      "parking_id": "parking-info-108",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "キャンプ場・一菜ふく福側の観覧可能時間・休業日・観覧料金・予約要否は未確認。道の駅ほうじょう南エリアの営業時間を転用していません。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。 北栄町デザインは県の2020/10/5訂正後と現行個別公式を優先。移設前の南エリアとは区別。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/108/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/108/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.pref.tottori.lg.jp/sandoidetottori/campaign/2020/pokefuta2/",
+        "https://www.hokuei-kankou.jp/2022/10/24/ポケモンマンホール-ポケふた-移設について/",
+        "https://www.michinoeki-hojo.com/floormap.php"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "vehicle_route_allowed": false
+    },
+    {
+      "id": "PF-0109",
+      "official_number": 109,
+      "prefecture": "鳥取県",
+      "city": "日吉津村",
+      "pokemon": "サンド／メタモン",
+      "facility_name": "ヴィレステひえづ",
+      "address": "鳥取県日吉津村大字日吉津930番地",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.440323,
+      "facility_lon": 133.379135,
+      "facility_coord_type": "gsi_address_representative",
+      "facility_coord_label": "鳥取県日吉津村日吉津９３０番地の住所代表点",
+      "facility_coord_source": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%97%A5%E5%90%89%E6%B4%A5%E6%9D%91%E5%A4%A7%E5%AD%97%E6%97%A5%E5%90%89%E6%B4%A5930%E7%95%AA%E5%9C%B0",
+      "coordinate_method": "ポケふた公式の所在地を地理院住所検索で照合。返却された番地単位の代表点を施設・設置エリアの概略位置として採用。枝番・歩道上の現物位置を確定するものではありません。",
+      "exact_landmark": "ヴィレステひえづの入口横。ピンは日吉津930番地の住所代表点です。",
+      "parking_id": "parking-info-109",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "村公式利用ガイドでは開館8:30～22:00、年末年始と施設が認めた日は休館（部屋利用・窓口・図書館は別時間）。入口横ポケふたの観覧料金・予約要否、休館日や時間外の観覧可否は未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/109/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/109/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://www.hiezu.jp/wp-content/uploads/2026/03/newli-yong-gaido.pdf"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "社会福祉センター側の駐車場には駐車できません。",
+      "vehicle_route_allowed": false
+    },
+    {
+      "id": "PF-0110",
+      "official_number": 110,
+      "prefecture": "鳥取県",
+      "city": "江府町",
+      "pokemon": "サンド／アローラサンド",
+      "facility_name": "道の駅 奥大山",
+      "address": "鳥取県江府町佐川908-3",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.2960852,
+      "facility_lon": 133.4740223,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "道の駅奥大山の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/3846434697",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "道の駅奥大山の施設前通路。",
+      "parking_id": "parking-info-110",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "運営者公式は8:30～17:30・不定休。トイレ・バス停・情報コーナーは24時間。これをポケふたの24時間観覧可と読み替えません。観覧料金・予約要否と時間外可否は未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/110/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/110/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://okudaisen.org/access",
+        "https://okudaisen.org/news"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認"
+    },
+    {
+      "id": "PF-0300",
+      "official_number": 300,
+      "prefecture": "鳥取県",
+      "city": "鳥取市",
+      "pokemon": "サンド／アローラサンド／ホルビー",
+      "facility_name": "アイエム電子鳥取砂丘こどもの国",
+      "address": "鳥取県鳥取市浜坂1157-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.5324414,
+      "facility_lon": 134.2242284,
+      "facility_coord_type": "osm_representative",
+      "facility_coord_label": "鳥取砂丘こどもの国の地物代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/409569212",
+      "coordinate_method": "自治体・観光連盟の設置先・目印とOSMの同名同地域地物を照合。Nominatim返却の代表点を施設概略位置に採用。現物位置・駐車場入口ではありません。",
+      "exact_landmark": "鳥取砂丘こどもの国入口ゲート前。ピンは園全体の代表点です。",
+      "parking_id": "parking-info-300",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設・住所代表点を駐車場入口に使っていません。",
+      "viewing_condition": "営業時間外は観覧できません。9:00～17:00の開園時間内・休園日以外に観覧（施設2026/5/7告知）。休園は第2水曜（祝日は翌日、8月無休）・12/29～1/1。園の最終入園16:30。園内入園は別料金。ゲート前ポケふただけの観覧料金・予約要否は明記がなく未確認。",
+      "unresolved": "現物GPS・駐車場入口GPS未確認。現地確認は行っていません。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/300/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/300/?is_modal=1",
+        "https://www.tottori-guide.jp/toripass/",
+        "https://kodomonokuni.tottori.jp/news/20260507/5341/",
+        "https://kodomonokuni.tottori.jp/charge/"
+      ],
+      "source_date": "2026-10-18",
+      "current_status": "公式掲載・資料照合済み（現地の現存・規制は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "営業時間外は観覧できません。9:00～17:00・休園日以外に訪問してください。"
     }
   ],
   "parkings": [
@@ -1965,10 +2722,309 @@ window.POKEFUTA_DATA = {
       ],
       "source_date": "2026-10-17",
       "entrance_note": "駐車場入口座標は未確認。経路終点としての使用不可。"
+    },
+    {
+      "id": "parking-info-74",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "砂の美術館の無料駐車場あり。駐車場の利用時間と観覧のみの利用条件・入口は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "砂の美術館 駐車場"
+      ],
+      "sources": [
+        "https://www.sand-museum.jp/access/?page_id=2",
+        "https://www.sand-museum.jp/information/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-75",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "センター専用駐車場約30台。専用区画以外への駐車不可、周辺は路線バスの通路で路上駐車厳禁。観覧だけの利用可否・駐車料金・時間は要確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.kaike-onsen.jp/",
+        "https://www.kaike-onsen.jp/room"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-76",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "店舗専用駐車場なし。店舗公式は倉吉駅南口交番横の市営駐車場（30分無料）を案内。以後料金・上限・利用時間・入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "倉吉駅南口 交番横 市営駐車場"
+      ],
+      "sources": [
+        "https://www.choseido.jp/kurayoshiekiyokoplaza.html"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-77",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "南側の一般駐車場（夢みなとタワー共用）は無料。寄港日は西側臨時駐車場を一般車に案内しません。路上駐車・周辺私有地への無断立入禁止。駐車場利用時間・入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "境夢みなとターミナル 南側一般駐車場"
+      ],
+      "sources": [
+        "https://www.sakai-tottori.jp/archives/654",
+        "https://www.sakai-tottori.jp/faci"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-78",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "周辺駐車場の対象区画・料金・営業時間・入口は未確認。夏季の交通や駐車条件は観光協会の最新案内で確認し、無料・24時間とは案内しません。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.iwamikanko.org/news/9712/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-79",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "駐車場あり（普通車22台・大型4台・障がい者用2台）。一般車は一般区画へ。駐車料金・利用時間・入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://michinoeki-sakuranbou.com/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-80",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "普通車は1時間以内無料、その後30分ごと100円、入庫24時間まで最大1,000円。24時間超の扱いは公式を確認。バイクは利用不可（温泉公式案内）。入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "三朝温泉多目的駐車場"
+      ],
+      "sources": [
+        "https://tottori-iyashitabi.com/spot/area/misasa/9115/",
+        "https://misasaonsen.jp/access/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-81",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "観覧用駐車場の有無・利用対象・料金・時間・入口は未確認。周辺旅館・施設の専用駐車場を無断で利用しないでください。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.yurihama-kankou.jp/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-82",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "漁協公式は無料駐車場ありと案内。利用時間・一般観覧者の利用範囲・入口座標は未確認。歩道・交差点での停車は避けてください。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://port-akasaki.net/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-83",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "普通車60台・大型14台など。一般車は一般区画を使用し、身障者用区画は対象者のみ。料金・駐車時間・入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://daisen-meguminosato.jp/michinoeki/6/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-84",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "無料駐車場あり（乗用車2,000台）。一般車は一般区画へ。駐車場開閉時間とポケふた観覧だけの利用条件・入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "とっとり花回廊 駐車場"
+      ],
+      "sources": [
+        "https://tottorihanakairou.or.jp/park/parking/",
+        "https://tottorihanakairou.or.jp/business/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-85",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "町公式の公園案内図に駐車場あり。ポケふた観覧のみの利用可否・料金・開閉時間・入口座標は未確認。施設利用者用と断定した一般向け案内はしません。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.houki-town.jp/new1/18/sougous/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-86",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅駐車場あり（全国道の駅連絡会に掲載）。駐車料金・利用時間・観覧だけの利用条件・入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://nichinan-hinogawanosato.jp/",
+        "https://www.michi-no-eki.jp/stations/views/19855"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-87",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "駐車場の一般観覧用区画・利用対象・料金・時間・入口は未確認。併設の葬祭ホール等の専用区画を観光用に案内しません。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.japan47go.travel/ja/detail/d1ddd959-6d3e-405a-8ca7-f2e04d819b84"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-106",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "観覧用駐車場の利用対象・料金・時間・入口は未確認。駅前や周辺施設の区画を無断利用しないでください。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://chizukankou-kurashiya.jp/information_center/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-107",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "駐車場あり（全国道の駅連絡会に普通車150台・大型4台等の記載）。駐車料金・利用時間・観覧だけの条件・入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.michi-no-eki.jp/stations/views/19520"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-108",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "北エリアの一般観覧用駐車区画・料金・時間・入口は未確認。キャンプ利用者向け区画を一般観覧者に案内しません。2022年の南エリア工事情報を現行の通行制限として扱いません。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.michinoeki-hojo.com/floormap.php"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-109",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "施設専用駐車場は台数に限りがあります。村公式利用ガイドは社会福祉センター側への駐車を禁止。観覧だけの利用可否・駐車料金・時間・入口は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.hiezu.jp/wp-content/uploads/2026/03/newli-yong-gaido.pdf"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-110",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅駐車場あり。一般車の区画・料金・駐車可能時間・入口座標は未確認。隣接施設と区画を取り違えないよう現地表示を確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://okudaisen.org/access",
+        "https://okudaisen.org/news"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
+    },
+    {
+      "id": "parking-info-300",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "無料駐車場あり（500台）。営業時間外の観覧は不可。駐車場の開閉時刻と入口座標は未確認。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "鳥取砂丘こどもの国 駐車場"
+      ],
+      "sources": [
+        "https://kodomonokuni.tottori.jp/news/20260507/5341/",
+        "https://kodomonokuni.tottori.jp/charge/"
+      ],
+      "source_date": "2026-10-18",
+      "entrance_note": "駐車場入口座標未確認。施設代表点やGoogleマップの登録座標を入口座標へ転用していません。"
     }
   ]
 };
-
 </script>
 <script>
 (function(root){'use strict';
@@ -1997,20 +3053,21 @@ function toast(s){clearTimeout(lastToast);$('#toast').textContent=s;$('#toast').
 function load(){try{let s=localStorage.getItem(C.KEY);if(s)visited=new Set(C.validate(JSON.parse(s)));}catch{storageOK=false;toast('保存済み記録を読み込めません。JSONでバックアップしてください。');}}
 function save(next){try{localStorage.setItem(C.KEY,JSON.stringify(C.pack(next)));storageOK=true;}catch{storageOK=false;toast('ブラウザへ保存できません。この画面の記録をJSONで書き出してください。');}visited=new Set(next);}
 function badge(d){return '';}
-function warning(d){let texts=[];if(d.parking_eligibility==='no_vehicle')texts.push('自家用車・バイク・自転車・タクシーでの来館不可。公共交通機関を利用してください。');if(d.parking_eligibility==='eligible_only')texts.push('おもいやり駐車場は対象者限定です。一般来園者向けには推奨しません。');if(d.parking_eligibility==='facility_users_only')texts.push('施設利用者以外の駐車は不可。ポケふた観覧だけで利用できるか未確認です。');if(['PF-0209','PF-0210'].includes(d.id))texts.push('このポケふたに最適な駐車場は未確定です。2枚は別の場所にあります。');if(d.id==='PF-0152')texts.push('現況位置の屋内外は未確認です。屋外入口前にあるとは断定できません。');if(['PF-0195','PF-0196','PF-0197'].includes(d.id))texts.push('市営駅前駐車場は2026/09/28～2027/01/31（予定）工事閉鎖。訪問前に公式情報をご確認ください。');return texts.length?`<div class="warning"><strong>訪問前に確認</strong>${texts.map(esc).join('<br>')}</div>`:'';}
+function warning(d){let texts=[];if(d.access_warning)texts.push(d.access_warning);if(d.parking_eligibility==='no_vehicle')texts.push('自家用車・バイク・自転車・タクシーでの来館不可。公共交通機関を利用してください。');if(d.parking_eligibility==='eligible_only')texts.push('おもいやり駐車場は対象者限定です。一般来園者向けには推奨しません。');if(d.parking_eligibility==='facility_users_only')texts.push('施設利用者以外の駐車は不可。ポケふた観覧だけで利用できるか未確認です。');if(['PF-0209','PF-0210'].includes(d.id))texts.push('このポケふたに最適な駐車場は未確定です。2枚は別の場所にあります。');if(d.id==='PF-0152')texts.push('現況位置の屋内外は未確認です。屋外入口前にあるとは断定できません。');if(['PF-0195','PF-0196','PF-0197'].includes(d.id))texts.push('市営駅前駐車場は2026/09/28～2027/01/31（予定）工事閉鎖。訪問前に公式情報をご確認ください。');return texts.length?`<div class="warning"><strong>訪問前に確認</strong>${texts.map(esc).join('<br>')}</div>`:'';}
 function precision(d){return ['P1','P2'].includes(d.public_stage)?`<p class="fine">ピンは施設・設置エリアを代表する概略位置です。現物がその場所にあるとは限りません。詳しい場所は「目印」をご確認ください。</p>`:d.public_stage==='P3'?'<p class="fine">資料から推定した現物位置です。実測位置ではありません。</p>':d.public_stage==='P0'?'<p class="fine">表示座標未確認のため地図のピンは保留しています。</p>':'<p class="fine">白浜町が公表したポケふた現物の位置です（駐車場入口ではありません）。</p>';}
 function parkingRoutes(p){if(['no_vehicle','eligible_only','facility_users_only'].includes(p.eligibility)||!p.destinations?.length)return '';return '<p class="fine">以下は駐車場候補への車経路です。最適駐車場の保証はなく、入口座標も未確認です。到着前に営業状況・入口・利用条件を確認してください。</p><div class="links">'+p.destinations.map(name=>link('https://www.google.com/maps/dir/?api=1&travelmode=driving&destination='+encodeURIComponent(name),'車経路候補：'+name)).join('')+'</div>';}
 function details(d){const parking=D.parkings.find(p=>p.id===d.parking_id);return `<p><b>目印</b><br>${esc(d.exact_landmark)}</p>${d.address&&d.address!=='未確認'?`<p>所在地：${esc(d.address)}</p>`:''}<p><b>観覧条件</b><br>${esc(d.viewing_condition)}</p><p><b>駐車場・利用条件</b><br>${esc(parking.description)}<br>${esc(d.parking_note)}</p>${parkingRoutes(parking)}<p class="fine">駐車・観覧情報確認：${esc(d.source_date)}（資料照合／現地未確認）。料金・時間・利用条件は変更される場合があります。</p><div class="links">${parking.sources.map((u,i)=>link(u,i?'駐車情報の出典 '+(i+1):'駐車・アクセス公式情報')).join('')}${d.sources.map((u,i)=>link(u,i?'設置根拠 '+(i+1):'設置場所の根拠')).join('')}${link(d.facility_coord_source,'概略位置の地理資料')}</div><p class="fine">${esc(d.unresolved)}<br>現況：${esc(d.current_status)}</p>`;}
 function actions(d){return `<button class="visited-btn" data-visit="${d.id}" aria-pressed="${visited.has(d.id)}">${visited.has(d.id)?'✓ 訪問済み':'未訪問 → 訪問済みに'}</button>`;}
 function mapPlace(d){const exact=['P3','P4'].includes(d.public_stage)&&C.coords(d);const q=exact?C.coords(d).join(','):[d.prefecture,d.city,d.facility_name].filter(Boolean).join(' ');return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
 function driveRoute(d){const exact=['P3','P4'].includes(d.public_stage)&&C.coords(d);const q=exact?C.coords(d).join(','):[d.prefecture,d.city,d.facility_name].filter(Boolean).join(' ');return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(q)+'&travelmode=driving';}
-function routeLinks(d){return `${link(d.official_url,'ポケふた公式')}${link(mapPlace(d),'Googleマップで場所を見る')}${d.parking_eligibility==='no_vehicle'?'':link(driveRoute(d),'車の経路を検索')}`;}
+function routeLinks(d){return `${link(d.official_url,'ポケふた公式')}${link(mapPlace(d),'Googleマップで場所を見る')}${d.parking_eligibility==='no_vehicle'||d.vehicle_route_allowed===false?'':link(driveRoute(d),'車の経路を検索')}`;}
 function card(d){return `<article class="card${selected===d.id?' selected':''}" id="card-${d.id}" data-id="${d.id}"><div class="card-top"><p class="eyebrow">${esc(d.prefecture+' '+d.city)} · ${d.id}</p>${badge(d)}</div><h3>${esc(d.pokemon)}</h3><p class="location">${esc(d.facility_name)}</p>${precision(d)}${warning(d)}<div class="card-actions">${actions(d)}${C.coords(d)?`<button data-map="${d.id}">地図で見る</button>`:''}</div><div class="links">${routeLinks(d)}</div><details class="detail"><summary>目印・駐車場・観覧条件</summary>${details(d)}</details></article>`;}
 function popup(d){const caution=warning(d)?'<p class="popup-alert">⚠ 訪問条件に注意（下の一覧で確認）</p>':'';return `<div class="popup-compact">${badge(d)}<p class="eyebrow">${esc(d.city)} · ${d.id}</p><h3>${esc(d.pokemon)}</h3><p class="popup-place">${esc(d.facility_name)}</p><p class="popup-precision">${d.public_stage==='P4'?'自治体公表の現物位置':d.public_stage==='P3'?'資料からの推定位置':'ピンは設置場所の目安です'}</p>${caution}<button class="popup-detail" data-detail="${d.id}">一覧で詳細・駐車場を見る</button></div>`;}
 function pokemonMatches(d,terms){
   // Name tokens are separate: “ギアル／ギギアル” must not match “ルギ” across the separator.
   const names=String(d.pokemon||'').split(/[／/・]/).map(C.normalize).filter(Boolean);
-  return terms.every(term=>names.some(name=>name.includes(term)));
+  const distinctForms=new Set(['サンド','アローラサンド','サンドパン','アローラサンドパン'].map(C.normalize));
+  return terms.every(term=>names.some(name=>distinctForms.has(term)?name===term:name.includes(term)));
 }
 function filtered(){
   const q=$('#search').value.trim(),pref=$('#pref').value,visit=$('#visit').value;
@@ -2047,7 +3104,7 @@ function jumpToPokemon(id){
   target.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
 }
 
-function render(refit=false){const rows=filtered();$('#search-nohits').hidden=!!rows.length||!$('#search').value.trim();const expanded=new Set([...list.querySelectorAll('.pokemon-group[open]')].map(el=>el.id));list.innerHTML=groupedList(rows);renderQuickMatches(rows);list.querySelectorAll('.pokemon-group').forEach(el=>{if(expanded.has(el.id))el.open=true;});$('#empty').hidden=!!rows.length;$('#count').textContent=`表示 ${rows.length} / ${D.lids.length}枚${rows.some(d=>!C.coords(d))?'（位置保留あり）':''}`;$('#progress').textContent=`訪問済み ${D.lids.filter(d=>visited.has(d.id)).length} / ${D.lids.length}`;if(map){for(const m of markers.values())m.remove();markers.clear();for(const d of rows){const point=C.coords(d);if(!point)continue;const marker=L.marker(point,{icon:L.divIcon({className:'map-marker'+(visited.has(d.id)?' visited':''),html:`<span class="lid-pin"></span>`,iconSize:[28,28],iconAnchor:[14,14]}),title:d.pokemon+'／'+d.facility_name,keyboard:true}).addTo(map).bindPopup(popup(d),{maxWidth:230,minWidth:170,autoPan:true,autoPanPaddingTopLeft:[24,70],autoPanPaddingBottomRight:[85,28]});marker.on('click',()=>selectCard(d.id,false));markers.set(d.id,marker);}if(refit)fit();}}
+function render(refit=false){const rows=filtered();$('#search-nohits').hidden=!!rows.length||!$('#search').value.trim();const expanded=new Set([...list.querySelectorAll('.pokemon-group[open]')].map(el=>el.id));list.innerHTML=groupedList(rows);renderQuickMatches(rows);list.querySelectorAll('.pokemon-group').forEach(el=>{if(expanded.has(el.id))el.open=true;});$('#empty').hidden=!!rows.length;$('#count').textContent=`表示 ${rows.length} / ${D.lids.length}件（地図 ${rows.filter(d=>C.coords(d)).length}枚${rows.some(d=>!C.coords(d))?'・位置保留 '+rows.filter(d=>!C.coords(d)).length+'枚':''}）`;$('#progress').textContent=`訪問済み ${D.lids.filter(d=>visited.has(d.id)).length} / ${D.lids.length}`;if(map){for(const m of markers.values())m.remove();markers.clear();for(const d of rows){const point=C.coords(d);if(!point)continue;const marker=L.marker(point,{icon:L.divIcon({className:'map-marker'+(visited.has(d.id)?' visited':''),html:`<span class="lid-pin"></span>`,iconSize:[28,28],iconAnchor:[14,14]}),title:d.pokemon+'／'+d.facility_name,keyboard:true}).addTo(map).bindPopup(popup(d),{maxWidth:230,minWidth:170,autoPan:true,autoPanPaddingTopLeft:[24,70],autoPanPaddingBottomRight:[85,28]});marker.on('click',()=>selectCard(d.id,false));markers.set(d.id,marker);}if(refit)fit();}}
 function selectCard(id,scroll){selected=id;document.querySelectorAll('.card').forEach(c=>c.classList.toggle('selected',c.dataset.id===id));if(scroll){const c=$('#card-'+id);if(c){c.closest('.pokemon-group').open=true;c.querySelector('details').open=true;c.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}}}
 function showMap(id){const d=D.lids.find(x=>x.id===id),point=C.coords(d);selectCard(id,false);if(map&&point){map.setView(point,Math.max(map.getZoom(),16));markers.get(id)?.openPopup();$('#map').scrollIntoView({block:'start',behavior:'smooth'});}else toast('地図を利用できません。公式ページと目印をご確認ください。');}
 function handleAction(e){const b=e.target.closest('button');if(!b)return;if(b.dataset.visit){const id=b.dataset.visit;let next=new Set(visited);if(next.has(id))next.delete(id);else next.add(id);save(next);const open=map&&[...markers].find(([,m])=>m.isPopupOpen())?.[0];render();if(open&&markers.has(open))markers.get(open).openPopup();if(storageOK)toast(visited.has(id)?'訪問済みにしました。':'未訪問に戻しました。');}if(b.dataset.map)showMap(b.dataset.map);if(b.dataset.detail)selectCard(b.dataset.detail,true);}
