@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="origin">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。14府県118件（地図118枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。15府県135件（地図135枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -194,24 +194,24 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.8.1-2026-10-20-ui-colors">
+<meta name="kussoon-build" content="pokefuta-v0.9.0-20261019T212253Z">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">14府県・地図118枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">15府県・地図135枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の118件（うち地図表示118枚）にはありません。全国すべてを収録したわけではありません。</p>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の135件（うち地図表示135枚）にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の118件（うち地図表示118枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.8.1（表示調整版）／調査基準日：2026/10/19。既存100枚の情報・確認日を維持し、香川県18枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島・香川の118件を一覧に掲載。地図表示118枚、位置保留0枚。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の135件（うち地図表示135枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.9.0（福井県追加検証版）／調査基準日：2026/10/20。既存118枚の情報・確認日を維持し、福井県17枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島・香川・福井の135件を一覧に掲載。地図表示135枚、位置保留0枚。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.8.1（表示調整版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.9.0（福井県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの先頭へ" hidden><span aria-hidden="true">↑</span> ページの先頭へ</button>
@@ -222,9 +222,9 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.8.0",
-  "source_version": "4.2",
-  "checked_at": "2026-10-19",
+  "version": "0.9.0",
+  "source_version": "4.3",
+  "checked_at": "2026-10-20",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
     {
@@ -4959,6 +4959,906 @@ window.POKEFUTA_DATA={
       "vehicle_route_allowed": true,
       "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
       "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0417",
+      "official_number": 417,
+      "prefecture": "福井県",
+      "city": "福井市",
+      "pokemon": "カイリュー／ジャラランガ",
+      "facility_name": "JR福井駅東口通路",
+      "address": "福井県福井市手寄1丁目1　（JR福井駅東口）",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 36.06191,
+      "facility_lon": 136.22402,
+      "facility_coord_type": "gsi_map_installation_area_reference",
+      "facility_coord_label": "設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#18/36.06191/136.22402/&base=std",
+      "coordinate_method": "地理院標準地図の建物・道路・海岸線と公式の設置案内/写真を照合し、設置エリアを代表する点を読取。現物中心の実測GPSではない。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 18,
+          "x0": 230265,
+          "y0": 102883
+        },
+        "pixel": [
+          590,
+          375
+        ],
+        "map_key": "417-detail18",
+        "reference_scope": "JR福井駅東口通路"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "東口のトリケラトプス親子像付近。観光交流センター側の通路のタイル面。県観光記事の現物周辺写真と照合。駅改札内ではありません。",
+      "parking_id": "parking-info-417",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/417/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/417/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://www.pref.fukui.lg.jp/doc/hozen/higashiguchichusyajo.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後は歩道を通り、東口の親子恐竜像付近へ徒歩で移動。バス・タクシー動線を横断せず、通行者を妨げないでください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車後は歩道を通り、東口の親子恐竜像付近へ徒歩で移動。バス・タクシー動線を横断せず、通行者を妨げないでください。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0416",
+      "official_number": 416,
+      "prefecture": "福井県",
+      "city": "坂井市",
+      "pokemon": "カイリュー／マフィティフ",
+      "facility_name": "竹田水車メロディーパーク",
+      "address": "福井県坂井市丸岡町山口64-31",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 36.161963,
+      "facility_lon": 136.333581,
+      "facility_coord_type": "prefecture_open_data_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/list_6_d/fil/kankouti.csv",
+      "coordinate_method": "県オープンデータの施設代表点を原CSVから確認し、現在の公式住所・設置先と地理院地図で敷地を照合。古い施設データであり現物座標や現在の設置証明ではない。",
+      "coordinate_evidence": {
+        "dataset_name": "福井県 観光地一覧",
+        "dataset_update": "2014-10-28",
+        "facility_name": "竹田水車メロディーパーク",
+        "license": "CC BY 4.0（福井県）"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "園内の大きな2連水車の前。水車へ向かう通路付近の現物写真を県観光記事で確認。",
+      "parking_id": "parking-info-416",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "市公式は公園9:00～17:00、火曜休園、入園無料と案内。公園の利用可能時間内に見学してください。閉園後・休園日の現物観覧可否、ポケふたの予約要否は未確認。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。公式掲載住所64-31に対し、市は公園64-30・レストラン64-31と記載。公式掲載住所を保持し、公園の施設住所とは区別。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/416/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/416/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://www.city.fukui-sakai.lg.jp/kanko/kanko-bunka/kanko/annaijo/melody-park.html",
+        "https://www.manabi.pref.fukui.jp/manabi/shisetsu/25461.html",
+        "https://steam.fukui.jp/opendata/pref-fukui/datasets/kanko-gourmet-268a09a8/",
+        "https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "公園駐車場から水車へ徒歩。市は県道10号丸岡川西線に車両総重量14t以上の通行制限を案内しています。対象外の普通車も当日の道路規制を確認してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "公園駐車場から水車へ徒歩。市は県道10号丸岡川西線に車両総重量14t以上の通行制限を案内しています。対象外の普通車も当日の道路規制を確認してください。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0421",
+      "official_number": 421,
+      "prefecture": "福井県",
+      "city": "越前町",
+      "pokemon": "カイリュー／プクリン",
+      "facility_name": "越前陶芸村・福井県陶芸館前",
+      "address": "福井県越前町小曽原120-60",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.934869,
+      "facility_lon": 136.058286,
+      "facility_coord_type": "prefecture_open_data_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/list_6_d/fil/kankouti.csv",
+      "coordinate_method": "県オープンデータの施設代表点を原CSVから確認し、現在の公式住所・設置先と地理院地図で敷地を照合。古い施設データであり現物座標や現在の設置証明ではない。",
+      "coordinate_evidence": {
+        "dataset_name": "福井県 観光地一覧",
+        "dataset_update": "2014-10-28",
+        "facility_name": "福井県陶芸館",
+        "license": "CC BY 4.0（福井県）"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "陶芸館の資料館へ向かう通路の途中。県観光記事の茶色いタイル状舗装と建物方向を照合。文化交流会館前とは区別してください。",
+      "parking_id": "parking-info-421",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。県オープンデータの施設住所は小曽原7-8、公式ポケふたは120-60。施設代表座標の旧住所を現物所在地へ転記しない。陶芸館ページの駐車場なし表記と、管理者の総合駐車場250台案内の適用範囲・現行料金を要確認。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/421/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/421/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://www.tougeikan.jp/access/",
+        "https://www.fuku-e.com/spot/detail_1196.html",
+        "https://steam.fukui.jp/opendata/pref-fukui/datasets/kanko-gourmet-268a09a8/",
+        "https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "総合駐車場から陶芸館前の通路へ徒歩。資料館の営業時間・入館料は屋外のふたの観覧条件とは別です。",
+      "vehicle_route_allowed": true,
+      "transport_note": "総合駐車場から陶芸館前の通路へ徒歩。資料館の営業時間・入館料は屋外のふたの観覧条件とは別です。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0419",
+      "official_number": 419,
+      "prefecture": "福井県",
+      "city": "鯖江市",
+      "pokemon": "カイリュー／モルペコ／サッチムシ",
+      "facility_name": "西山公園・結びの広場",
+      "address": "福井県鯖江市桜町3丁目8-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.9499078,
+      "facility_lon": 136.181125,
+      "facility_coord_type": "osm_installation_area_reference",
+      "facility_coord_label": "設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/219369353",
+      "coordinate_method": "OpenStreetMapの結びの広場（recreation_ground）代表点。市の公園施設案内・おさんぽMAPの広場位置と県観光の現物写真を照合。公園全体や駅の代表点は不採用。",
+      "coordinate_evidence": {
+        "name": "結びの広場",
+        "osm_type": "way",
+        "osm_id": 219369353,
+        "type": "recreation_ground"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "坂を登った先の結びの広場、結びのチャイム付近のタイル面。県観光記事の現物周辺写真と、市の施設案内・おさんぽMAPの広場位置を照合。山頂の展望広場や公園全体の中心ではありません。",
+      "parking_id": "parking-info-419",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "公園入園は市公式で無料。屋外の結びの広場の夜間・催事時規制、ポケふた固有の予約要否は未確認。西山動物園の開園時間をポケふたの観覧時間へ転用していません。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/419/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/419/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://www.city.sabae.fukui.jp/kurashi_tetsuduki/doro_kasen_koen/koen/nishiyama/Nishiyama-Shisetsu.html",
+        "https://www.city.sabae.fukui.jp/kurashi_tetsuduki/doro_kasen_koen/koen/koen.html",
+        "https://www.city.sabae.fukui.jp/kurashi_tetsuduki/kokyokotsu/chushajo_churinjo/shieichushajo.html",
+        "https://www.city.sabae.fukui.jp/about_city/kekaku_torikumi/fukugo/tyuusyajyou.html",
+        "https://www.city.sabae.fukui.jp/about_city/kekaku_torikumi/fukugo/tyuusyajyou.files/ichizu03.pdf",
+        "https://www.city.sabae.fukui.jp/about_city/kekaku_torikumi/fukugo/tyuusyajyou.files/ichizu05.pdf",
+        "https://www.city.sabae.fukui.jp/kanko/information.files/ainiiku-sabae.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "公園南側から結びの広場へ上り坂・階段を含む動線があります。市公式は道の駅西山公園に公園アクセス用エレベーターがあると案内。ただし現物までの連続した段差なし経路・エレベーター稼働時間・徒歩所要時間は未確認。駐車場工事の通行区画を守ってください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "公園南側から結びの広場へ上り坂・階段を含む動線があります。市公式は道の駅西山公園に公園アクセス用エレベーターがあると案内。ただし現物までの連続した段差なし経路・エレベーター稼働時間・徒歩所要時間は未確認。駐車場工事の通行区画を守ってください。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0368",
+      "official_number": 368,
+      "prefecture": "福井県",
+      "city": "池田町",
+      "pokemon": "カイリュー／ハクリュー／ミニリュウ",
+      "facility_name": "WOOD LABO IKEDA（ウッドラボいけだ）",
+      "address": "福井県池田町池田9-6-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.8934864,
+      "facility_lon": 136.345358,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/6431927616",
+      "coordinate_method": "OpenStreetMapの「ウッドラボいけだ」（yes）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "ウッドラボいけだ",
+        "osm_type": "node",
+        "osm_id": 6431927616,
+        "type": "yes"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "正面玄関を見て左側のタイル面。県観光記事の玄関と黄色いベンチが写る写真を照合。",
+      "parking_id": "parking-info-368",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/368/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/368/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://ikeda-kibou100.jp/project/woodlabo/",
+        "https://fuku-iro.jp/spot/detail_10241.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車先を施設に確認した上で正面玄関左へ徒歩。館内9:00～17:00、水曜・年末年始休館ですが、屋外現物の観覧条件とは分けています。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先を施設に確認した上で正面玄関左へ徒歩。館内9:00～17:00、水曜・年末年始休館ですが、屋外現物の観覧条件とは分けています。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0366",
+      "official_number": 366,
+      "prefecture": "福井県",
+      "city": "南越前町",
+      "pokemon": "カイリュー／バタフリー",
+      "facility_name": "道の駅南えちぜん山海里・南条SA上りとの連絡通路",
+      "address": "福井県南越前町牧谷39-2-2",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.8315749,
+      "facility_lon": 136.201401,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1009901849",
+      "coordinate_method": "OpenStreetMapの「道の駅「南えちぜん山海里」」（retail）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "道の駅「南えちぜん山海里」",
+        "osm_type": "way",
+        "osm_id": 1009901849,
+        "type": "retail"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "道の駅と南条SAをつなぐ連絡通路の途中。県観光記事の建物沿いの舗装面を照合。隣接するSAは上り側です。ピンは道の駅の概略代表点で、現物の通路上の中心ではありません。",
+      "parking_id": "parking-info-366",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/366/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/366/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://kineno-nanjo.com/access/",
+        "https://www.kkr.mlit.go.jp/road/michi_no_eki/contents/fukui/minamiechizensankairi.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "一般道側の道の駅駐車場に駐車後、建物沿いのSA上りとの連絡通路へ徒歩。歩行通路の全区間の開放時間・工事規制は未確認。車経路は施設・通路へ直接生成せず、一般道側駐車場名の候補のみです。",
+      "vehicle_route_allowed": false,
+      "transport_note": "一般道側の道の駅駐車場に駐車後、建物沿いのSA上りとの連絡通路へ徒歩。歩行通路の全区間の開放時間・工事規制は未確認。車経路は施設・通路へ直接生成せず、一般道側駐車場名の候補のみです。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0364",
+      "official_number": 364,
+      "prefecture": "福井県",
+      "city": "大野市",
+      "pokemon": "カイリュー",
+      "facility_name": "大手門広場",
+      "address": "福井県大野市城町1-5（大手門広場内）",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.9846404,
+      "facility_lon": 136.4857801,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/13352617719",
+      "coordinate_method": "OpenStreetMapの「大手門広場」（park）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "大手門広場",
+        "osm_type": "node",
+        "osm_id": 13352617719,
+        "type": "park"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "大野の「野」のモニュメント付近の広場内。県観光記事の現物周辺写真と市の設置案内を照合。",
+      "parking_id": "parking-info-364",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/364/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/364/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://www.city.ono.fukui.jp/kanko/kanko-joho/2024pokehuta.html",
+        "https://www.city.ono.fukui.jp/kanko/kanko-joho/guide/kannko20240117.html",
+        "https://www.city.ono.fukui.jp/kanko/kanko-joho/guide/kannko20240117.files/0007_20260219.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "結ステーション駐車場から西側の大手門広場へ徒歩。広場やモニュメント前へ直接車で入らないでください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "結ステーション駐車場から西側の大手門広場へ徒歩。広場やモニュメント前へ直接車で入らないでください。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0339",
+      "official_number": 339,
+      "prefecture": "福井県",
+      "city": "永平寺町",
+      "pokemon": "カイリュー／ダクマ",
+      "facility_name": "道の駅禅の里",
+      "address": "福井県永平寺町清水2-21-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 36.0800996,
+      "facility_lon": 136.3987179,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/446611935",
+      "coordinate_method": "OpenStreetMapの「道の駅;禅の里」（public_bath）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "道の駅;禅の里",
+        "osm_type": "way",
+        "osm_id": 446611935,
+        "type": "public_bath"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "お手洗い前の通路。県観光記事では建物沿いの点字ブロック付近の現物写真を確認。",
+      "parking_id": "parking-info-339",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/339/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/339/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://michinoeki-zennosato.com/information.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後にトイレ前の通路へ徒歩。点字ブロックやトイレへの動線をふさがないでください。温泉・足湯・売店の時間とは別です。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車後にトイレ前の通路へ徒歩。点字ブロックやトイレへの動線をふさがないでください。温泉・足湯・売店の時間とは別です。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0338",
+      "official_number": 338,
+      "prefecture": "福井県",
+      "city": "越前市",
+      "pokemon": "カイリュー／エレズン／ヒトツキ",
+      "facility_name": "道の駅越前たけふ・越前たけふ駅との通路",
+      "address": "福井県越前市大屋町38-5-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.8952456,
+      "facility_lon": 136.1979214,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1155177092",
+      "coordinate_method": "OpenStreetMapの「道の駅「越前たけふ」」（services）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "道の駅「越前たけふ」",
+        "osm_type": "way",
+        "osm_id": 1155177092,
+        "type": "services"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "北陸新幹線越前たけふ駅と道の駅を結ぶ通路の途中。県観光記事の屋根付き通路・点字ブロック周辺写真を照合。",
+      "parking_id": "parking-info-338",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/338/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/338/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://echizen-takefu.jp/information/",
+        "https://www.city.echizen.lg.jp/office/060/050/mitinoekiseibi.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "道の駅の利用可能な区画へ駐車後、新幹線駅を結ぶ通路へ徒歩。駅改札や新幹線利用者用駐車場の中心へ案内していません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "道の駅の利用可能な区画へ駐車後、新幹線駅を結ぶ通路へ徒歩。駅改札や新幹線利用者用駐車場の中心へ案内していません。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0337",
+      "official_number": 337,
+      "prefecture": "福井県",
+      "city": "あわら市",
+      "pokemon": "カイリュー／トゲチック／ジグザグマ",
+      "facility_name": "芦原温泉駅西口・立体駐車場南側の歩行者通路",
+      "address": "福井県あわら市春宮1-13",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 36.21563,
+      "facility_lon": 136.23439,
+      "facility_coord_type": "gsi_map_installation_area_reference",
+      "facility_coord_label": "設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#18/36.21563/136.23439/&base=std",
+      "coordinate_method": "地理院標準地図の建物・道路・海岸線と公式の設置案内/写真を照合し、設置エリアを代表する点を読取。現物中心の実測GPSではない。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 18,
+          "x0": 230273,
+          "y0": 102744
+        },
+        "pixel": [
+          475,
+          475
+        ],
+        "map_key": "337-detail18",
+        "reference_scope": "芦原温泉駅西口・立体駐車場南側の歩行者通路"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "aキューブカフェ跡地と芦原温泉駅西口立体駐車場の間の通路。市公式位置図の赤丸と、県観光記事の現物写真で照合。駅改札・駐車場入口ではありません。",
+      "parking_id": "parking-info-337",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/337/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/337/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://www.city.awara.lg.jp/mokuteki/life/life05/life0502/p014004.html",
+        "https://www.city.awara.lg.jp/mokuteki/life/life0701/p002360.html",
+        "https://www.city.awara.lg.jp/mokuteki/life/life0701/p011819.html",
+        "https://www.city.awara.lg.jp/mokuteki/life/life05/life0502/p014004_d/fil/pokefuta.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "立体駐車場の正規入口から入り、駐車後は南側の歩行者通路へ徒歩。現物へ直接の車経路を出さず、駐車場名による候補のみ表示。",
+      "vehicle_route_allowed": false,
+      "transport_note": "立体駐車場の正規入口から入り、駐車後は南側の歩行者通路へ徒歩。現物へ直接の車経路を出さず、駐車場名による候補のみ表示。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0336",
+      "official_number": 336,
+      "prefecture": "福井県",
+      "city": "勝山市",
+      "pokemon": "カイリュー／アーケン／ガチゴラス",
+      "facility_name": "えちぜん鉄道勝山駅前",
+      "address": "福井県勝山市遅羽町比島34-2-7",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 36.0562881,
+      "facility_lon": 136.4921217,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/421595521",
+      "coordinate_method": "OpenStreetMapの「勝山駅」（train_station）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "勝山駅",
+        "osm_type": "way",
+        "osm_id": 421595521,
+        "type": "train_station"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "駅前1番バス乗り場付近のタイル面。県観光記事のバス停・時計・駅前通路の写真と照合。",
+      "parking_id": "parking-info-336",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/336/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/336/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.fuku-e.com/fukutabi/detail_867.html",
+        "https://www.echizen-tetudo.co.jp/guide/park-ride.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "鉄道利用時は駅前へ徒歩。バス専用レーン・停留所へ一般車を入れず、点字ブロックとバス乗降動線を妨げないでください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "鉄道利用時は駅前へ徒歩。バス専用レーン・停留所へ一般車を入れず、点字ブロックとバス乗降動線を妨げないでください。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0420",
+      "official_number": 420,
+      "prefecture": "福井県",
+      "city": "若狭町",
+      "pokemon": "カイリュー／コアルヒー／クワッス",
+      "facility_name": "パレア若狭",
+      "address": "福井県若狭町市場18-18",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.4608022,
+      "facility_lon": 135.8604608,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/relation/11636561",
+      "coordinate_method": "OpenStreetMapの「パレア若狭」（theatre）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "パレア若狭",
+        "osm_type": "relation",
+        "osm_id": 11636561,
+        "type": "theatre"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "町公式は正面敷地内歩道と明記。正面玄関を正面に見て、柵沿いに左へ進んだ歩道上。小浜市公式観光の現物写真で補助照合。",
+      "parking_id": "parking-info-420",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/420/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/420/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.town.fukui-wakasa.lg.jp/kurashi_tetsuzuki/jogesuido/3358.html",
+        "https://wakasa-obama.jp/special/wakasa-poke-huta/",
+        "https://parea-wakasa.jp/access/"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車先の利用条件を確認後、正面玄関の左側の歩道へ徒歩。毎週火曜の施設休館を、そのまま屋外現物の観覧不可とは断定していません。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、正面玄関の左側の歩道へ徒歩。毎週火曜の施設休館を、そのまま屋外現物の観覧不可とは断定していません。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0418",
+      "official_number": 418,
+      "prefecture": "福井県",
+      "city": "おおい町",
+      "pokemon": "カイリュー／ケーシィ／ニャオニクス",
+      "facility_name": "福井県こども家族館前の広場",
+      "address": "福井県おおい町成海1-1-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.481286,
+      "facility_lon": 135.628052,
+      "facility_coord_type": "prefecture_open_data_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/list_6_d/fil/kankouti.csv",
+      "coordinate_method": "県オープンデータの施設代表点を原CSVから確認し、現在の公式住所・設置先と地理院地図で敷地を照合。古い施設データであり現物座標や現在の設置証明ではない。",
+      "coordinate_evidence": {
+        "dataset_name": "福井県 観光地一覧",
+        "dataset_update": "2014-10-28",
+        "facility_name": "福井県こども家族館",
+        "license": "CC BY 4.0（福井県）"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "うみんぴあ大飯エリア内、こども家族館の円筒形の建物前にある広場。小浜市公式観光の写真は広場の中央付近を指示。道の駅うみんぴあ大飯の建物前ではありません。",
+      "parking_id": "parking-info-418",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。小浜市公式観光の記事見出しは道の駅うみんぴあ大飯ですが、本文写真と県観光記事・公式住所はこども家族館前。設置先を広場に統一。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/418/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/418/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://wakasa-obama.jp/special/wakasa-poke-huta/",
+        "https://www.fuku-e.com/fukutabi/detail_763.html",
+        "https://www.kodomokazokukan.jp/access/",
+        "https://www.kodomokazokukan.jp/",
+        "https://steam.fukui.jp/opendata/pref-fukui/datasets/kanko-gourmet-268a09a8/",
+        "https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "利用可能な駐車区画から家族館正面の広場へ徒歩。館内の有料ゾーンや開館時間を屋外現物の条件に転用していません。",
+      "vehicle_route_allowed": true,
+      "transport_note": "利用可能な駐車区画から家族館正面の広場へ徒歩。館内の有料ゾーンや開館時間を屋外現物の条件に転用していません。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0367",
+      "official_number": 367,
+      "prefecture": "福井県",
+      "city": "小浜市",
+      "pokemon": "カイリュー／ココガラ",
+      "facility_name": "小浜市まちの駅・旭座前",
+      "address": "福井県小浜市小浜白鬚111-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.4950861,
+      "facility_lon": 135.741524,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/753374122",
+      "coordinate_method": "OpenStreetMapの「旭座」（theatre）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "旭座",
+        "osm_type": "way",
+        "osm_id": 753374122,
+        "type": "theatre"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "まちの駅の時計台から左手へ進んだ旭座前の舗装面。小浜市公式観光の矢印写真で照合。",
+      "parking_id": "parking-info-367",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "管理者は屋外広場を9:00～20:00（冬季18:00まで）、火曜休業（祝日の場合翌日）、年末年始12/29～1/3休業と案内。広場の利用時間内に見学してください。休業日のふた観覧可否・現物固有の料金・予約要否、冬季の適用期間は未確認。駐車場24時間を現物観覧24時間とみなしません。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/367/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/367/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://wakasa-obama.jp/special/wakasa-poke-huta/",
+        "https://www.obama-machinoeki.net/access.php",
+        "https://www.obama-machinoeki.net/"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車先の利用条件を確認し、時計台を目印に旭座前へ徒歩。イベント時は規制を確認してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認し、時計台を目印に旭座前へ徒歩。イベント時は規制を確認してください。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0365",
+      "official_number": 365,
+      "prefecture": "福井県",
+      "city": "敦賀市",
+      "pokemon": "カイリュー／マッギョ",
+      "facility_name": "敦賀赤レンガ倉庫前",
+      "address": "福井県敦賀市金ケ崎町4-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.6616979,
+      "facility_lon": 136.0741746,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/11824861308",
+      "coordinate_method": "OpenStreetMapの「敦賀赤レンガ倉庫」（bicycle_rental）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "敦賀赤レンガ倉庫",
+        "osm_type": "node",
+        "osm_id": 11824861308,
+        "type": "bicycle_rental"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "赤レンガ倉庫の屋外看板前の舗装面。小浜市公式観光の現物・看板・倉庫が一緒に写る写真で確認。ジオラマ館内ではありません。",
+      "parking_id": "parking-info-365",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/365/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/365/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://wakasa-obama.jp/special/wakasa-poke-huta/",
+        "https://www.city.tsuruga.lg.jp/page/4229.html",
+        "https://www.manabi.pref.fukui.jp/manabi/shisetsu/25250.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後は歩道から屋外看板前へ徒歩。館内ジオラマの開館時間・料金は屋外現物とは別です。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車後は歩道から屋外看板前へ徒歩。館内ジオラマの開館時間・料金は屋外現物とは別です。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0341",
+      "official_number": 341,
+      "prefecture": "福井県",
+      "city": "美浜町",
+      "pokemon": "カイリュー／ヒドイデ／ウミディグダ",
+      "facility_name": "道の駅若狭美浜はまびより",
+      "address": "福井県美浜町松原35-15-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.6043035,
+      "facility_lon": 135.9363485,
+      "facility_coord_type": "osm_facility_reference",
+      "facility_coord_label": "施設の概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1156494723",
+      "coordinate_method": "OpenStreetMapの「道の駅 若狭美浜はまびより」（services）施設代表点。公式設置先・住所・現物目印と地理院地図で照合。施設建物/エリアの代表点で現物中心や駐車入口ではない。",
+      "coordinate_evidence": {
+        "name": "道の駅 若狭美浜はまびより",
+        "osm_type": "way",
+        "osm_id": 1156494723,
+        "type": "services"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "正面入口を見て右側へ進み、遊具エリア付近から左を向いた先の縞模様の舗装面。小浜市公式観光の連続写真で照合。入口や駐車場そのものではありません。",
+      "parking_id": "parking-info-341",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/341/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/341/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://wakasa-obama.jp/special/wakasa-poke-huta/",
+        "https://hamabiyori.com/guidance/"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "道の駅駐車場の利用可能な区画から正面入口右側の遊具付近へ徒歩。車路の横断に注意してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "道の駅駐車場の利用可能な区画から正面入口右側の遊具付近へ徒歩。車路の横断に注意してください。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0340",
+      "official_number": 340,
+      "prefecture": "福井県",
+      "city": "高浜町",
+      "pokemon": "カイリュー／シャリタツ",
+      "facility_name": "若宮海岸・UMIKARA近くの海岸沿い",
+      "address": "福井県高浜町塩土第1号200番地",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.49337,
+      "facility_lon": 135.54624,
+      "facility_coord_type": "gsi_map_installation_area_reference",
+      "facility_coord_label": "設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#18/35.49337/135.54624/&base=std",
+      "coordinate_method": "地理院標準地図の建物・道路・海岸線と公式の設置案内/写真を照合し、設置エリアを代表する点を読取。現物中心の実測GPSではない。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 18,
+          "x0": 229772,
+          "y0": 103393
+        },
+        "pixel": [
+          450,
+          450
+        ],
+        "map_key": "340-detail18",
+        "reference_scope": "若宮海岸・UMIKARA近くの海岸沿い"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "UMIKARAから海岸へ歩いた先、青葉山と海を望むタイル舗装面。町公式の設置案内と小浜市公式観光の矢印・現物周辺写真を照合。砂浜やUMIKARA建物中心の位置ではありません。",
+      "parking_id": "parking-info-340",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "屋外のポケふたです。現物固有の観覧時間・料金・予約要否、休館日・夜間・催事時の立入条件は未確認です。近隣施設の営業時間や入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。ポケふた公式住所は塩土第1号200番地、UMIKARA管理者住所は塩土5-1。建物住所を現物住所へ置換しない。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/340/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/340/?is_modal=1",
+        "https://local.pokemon.jp/manhole/fukui.html",
+        "https://fuku-iro.jp/blog/detail_258.html",
+        "https://www.town.takahama.fukui.jp/page/jyousuidou/p007835.html",
+        "https://wakasa-obama.jp/special/wakasa-poke-huta/",
+        "https://wakasa-takahama.jp/spot/wakamiya-beach/",
+        "https://umikara.co.jp/access"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・設置資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車先を確認後、海岸の歩行空間へ徒歩。砂浜や海岸歩道へ車で進入しないでください。荒天・高潮・高波時は無理に近づかず現地規制に従ってください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車先を確認後、海岸の歩行空間へ徒歩。砂浜や海岸歩道へ車で進入しないでください。荒天・高潮・高波時は無理に近づかず現地規制に従ってください。",
+      "port_information": "該当なし（本土）"
     }
   ],
   "parkings": [
@@ -6826,6 +7726,283 @@ window.POKEFUTA_DATA={
       ],
       "source_date": "2026-10-19",
       "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-417",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：福井駅東口駐車場（手寄1丁目、18台）。県の2025/4/11更新案内では24時間入出庫、20分以内無料、20分超40分以内100円、40分超60分以内300円、以後30分ごと100円。送迎停車帯は駐車場ではありません。 徒歩：駐車後は歩道を通り、東口の親子恐竜像付近へ徒歩で移動。バス・タクシー動線を横断せず、通行者を妨げないでください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "福井駅東口駐車場"
+      ],
+      "sources": [
+        "https://www.pref.fukui.lg.jp/doc/hozen/higashiguchichusyajo.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-416",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "公園駐車場。県の施設情報は無料・約40台、大型バス3台と案内。開閉時間、ポケふただけの利用条件、入口GPSは未確認。ホテルや飲食店専用区画へ無断駐車しないでください。 徒歩：公園駐車場から水車へ徒歩。市は県道10号丸岡川西線に車両総重量14t以上の通行制限を案内しています。対象外の普通車も当日の道路規制を確認してください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "竹田水車メロディーパーク 駐車場"
+      ],
+      "sources": [
+        "https://www.city.fukui-sakai.lg.jp/kanko/kanko-bunka/kanko/annaijo/melody-park.html",
+        "https://www.manabi.pref.fukui.jp/manabi/shisetsu/25461.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-421",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "越前陶芸村総合駐車場（250台）を管理者が案内。一方、県観光の陶芸館ページは「駐車場なし」と記載しており、施設単体と総合駐車場の区別を維持します。現行の駐車料金・開閉時間・入口GPS・催事時の区画変更は未確認。 徒歩：総合駐車場から陶芸館前の通路へ徒歩。資料館の営業時間・入館料は屋外のふたの観覧条件とは別です。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "越前陶芸村総合駐車場"
+      ],
+      "sources": [
+        "https://www.tougeikan.jp/access/",
+        "https://www.fuku-e.com/spot/detail_1196.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-419",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：嚮陽会館前駐車場。通常公表208台（車いす用4台含む）ですが、工事中は台数減・出入口変更あり。最初2時間無料、以降24時間以内300円、その後24時間ごと700円加算。市の2026/10/19更新規制図では10/25までと10/26以降で利用範囲が異なります。掲載本文のリンク見出しは「10/25～」ですが、図面内は10/26～2027/3/31です。最新図面・現地表示を優先してください。 徒歩：公園南側から結びの広場へ上り坂・階段を含む動線があります。市公式は道の駅西山公園に公園アクセス用エレベーターがあると案内。ただし現物までの連続した段差なし経路・エレベーター稼働時間・徒歩所要時間は未確認。駐車場工事の通行区画を守ってください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "嚮陽会館前駐車場 鯖江市"
+      ],
+      "sources": [
+        "https://www.city.sabae.fukui.jp/kurashi_tetsuduki/doro_kasen_koen/koen/nishiyama/Nishiyama-Shisetsu.html",
+        "https://www.city.sabae.fukui.jp/kurashi_tetsuduki/doro_kasen_koen/koen/koen.html",
+        "https://www.city.sabae.fukui.jp/kurashi_tetsuduki/kokyokotsu/chushajo_churinjo/shieichushajo.html",
+        "https://www.city.sabae.fukui.jp/about_city/kekaku_torikumi/fukugo/tyuusyajyou.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-368",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "施設駐車場20台という福井市観光公式案内あり。料金・開閉時間・現物観覧だけの利用可否は未確認。施設利用条件を確認し、専用区画以外へ無断駐車しないでください。 徒歩：駐車先を施設に確認した上で正面玄関左へ徒歩。館内9:00～17:00、水曜・年末年始休館ですが、屋外現物の観覧条件とは分けています。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://ikeda-kibou100.jp/project/woodlabo/",
+        "https://fuku-iro.jp/spot/detail_10241.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-366",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "一般道側の道の駅駐車場（国交省公表：小型127台・大型8台）。管理者は一般道利用とスマートICを経由した利用に対応すると案内。駐車場・トイレ・休憩コーナーは24時間利用可と案内されています。駐車料金・入口GPSは今回未確認。SA上りの高速道路側駐車場や下り側へ一般道から直接進入しないでください。 徒歩：一般道側の道の駅駐車場に駐車後、建物沿いのSA上りとの連絡通路へ徒歩。歩行通路の全区間の開放時間・工事規制は未確認。車経路は施設・通路へ直接生成せず、一般道側駐車場名の候補のみです。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅 南えちぜん山海里 一般道駐車場"
+      ],
+      "sources": [
+        "https://kineno-nanjo.com/access/",
+        "https://www.kkr.mlit.go.jp/road/michi_no_eki/contents/fukui/minamiechizensankairi.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-364",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：越前おおの結ステーション駐車場。2026/4/1から有料の本格運用。普通車30分以内無料、30分超2時間以内は平日100円・土日祝200円、2時間超は1時間ごと100円、24時間ごとの上限500円。市の試験運用結果PDF最終ページで確認。開閉時間・台数・入口GPSは未確認です。 徒歩：結ステーション駐車場から西側の大手門広場へ徒歩。広場やモニュメント前へ直接車で入らないでください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "越前おおの結ステーション駐車場"
+      ],
+      "sources": [
+        "https://www.city.ono.fukui.jp/kanko/kanko-joho/2024pokehuta.html",
+        "https://www.city.ono.fukui.jp/kanko/kanko-joho/guide/kannko20240117.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-339",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅駐車場。管理者案内は普通車25台・大型2台、別記で身障者用2台。集計に障がい者用が含まれるかは未確認のため合算しません。料金・開閉時間・入口GPSは未確認です。 徒歩：駐車後にトイレ前の通路へ徒歩。点字ブロックやトイレへの動線をふさがないでください。温泉・足湯・売店の時間とは別です。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅禅の里 駐車場"
+      ],
+      "sources": [
+        "https://michinoeki-zennosato.com/information.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-338",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅の普通車138台・大型28台。管理者は駐車場24時間利用可、市は無料駐車場と案内。道の駅利用者向け区画であり、新幹線利用者用駐車場とは用途を区別してください。入口GPS・催事時の規制は未確認。 徒歩：道の駅の利用可能な区画へ駐車後、新幹線駅を結ぶ通路へ徒歩。駅改札や新幹線利用者用駐車場の中心へ案内していません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅越前たけふ 駐車場"
+      ],
+      "sources": [
+        "https://echizen-takefu.jp/information/",
+        "https://www.city.echizen.lg.jp/office/060/050/mitinoekiseibi.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-337",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：芦原温泉駅西口立体駐車場（市公表300台）。1時間以内無料、1時間超9時間以内は1時間ごと100円、9時間超24時間以内800円。その後は24時間ごとに1時間100円で加算し800円との低い方。西口交通広場は別の10台区画で、30分以内無料・以後30分ごと100円、上限なし。乗降ロータリー・歩行通路を駐車場所として使わないでください。立体駐車場の現行開閉時間・入口GPSは今回未確認。 徒歩：立体駐車場の正規入口から入り、駐車後は南側の歩行者通路へ徒歩。現物へ直接の車経路を出さず、駐車場名による候補のみ表示。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "芦原温泉駅西口立体駐車場"
+      ],
+      "sources": [
+        "https://www.city.awara.lg.jp/mokuteki/life/life05/life0502/p014004.html",
+        "https://www.city.awara.lg.jp/mokuteki/life/life0701/p002360.html",
+        "https://www.city.awara.lg.jp/mokuteki/life/life0701/p011819.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-336",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "鉄道公式は勝山駅パーク＆ライド駐車場190台・無料と案内しますが、対象は「えちぜん鉄道をご利用いただいている方」です。ポケふた観覧だけの無料駐車場として案内しません。鉄道を利用しない場合の一般駐車先・料金・時間・入口GPSは未確認です。駅や観光窓口で確認してください。 徒歩：鉄道利用時は駅前へ徒歩。バス専用レーン・停留所へ一般車を入れず、点字ブロックとバス乗降動線を妨げないでください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.echizen-tetudo.co.jp/guide/park-ride.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-420",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "管理者アクセス案内は約200台・無料。開閉時間、催事時の区画、ポケふた観覧だけの利用可否、入口GPSは未確認。施設利用者の動線を守り、管理者に確認してください。 徒歩：駐車先の利用条件を確認後、正面玄関の左側の歩道へ徒歩。毎週火曜の施設休館を、そのまま屋外現物の観覧不可とは断定していません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.town.fukui-wakasa.lg.jp/kurashi_tetsuzuki/jogesuido/3358.html",
+        "https://parea-wakasa.jp/access/"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-418",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "こども家族館公式は普通車70台・障がい者用4台・大型バス10台、駐車料金無料と案内。うみんぴあ大飯内には他の駐車場もあります。開閉時間・現物だけの観覧時の利用範囲・入口GPSは未確認。隣接する各施設の専用区画を無断利用しないでください。 徒歩：利用可能な駐車区画から家族館正面の広場へ徒歩。館内の有料ゾーンや開館時間を屋外現物の条件に転用していません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.kodomokazokukan.jp/access/",
+        "https://www.kodomokazokukan.jp/"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-367",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "小浜市まちの駅の駐車場。管理者は駐車場・トイレは24時間と案内。料金・台数・一般普通車の現物だけの利用条件・入口GPSは未確認。屋外広場の利用時間とは別です。 徒歩：駐車先の利用条件を確認し、時計台を目印に旭座前へ徒歩。イベント時は規制を確認してください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.obama-machinoeki.net/access.php",
+        "https://www.obama-machinoeki.net/"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-365",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "赤レンガ倉庫駐車場。県の施設情報は無料、乗用車60台・大型バス3台・障がい者用3台と案内。バスと障がい者区画を普通車向けに合算しません。開閉時間・現物だけの観覧時の利用条件・入口GPSは未確認。 徒歩：駐車後は歩道から屋外看板前へ徒歩。館内ジオラマの開館時間・料金は屋外現物とは別です。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "敦賀赤レンガ倉庫 駐車場"
+      ],
+      "sources": [
+        "https://www.city.tsuruga.lg.jp/page/4229.html",
+        "https://www.manabi.pref.fukui.jp/manabi/shisetsu/25250.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-341",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅駐車場。管理者公式は普通車108台・大型10台・車いす専用3台、トイレ・駐車場等は休館日も利用可と案内。料金・開閉時間・入口GPS・催事時規制は今回未確認。休館日の利用可を24時間無料と読み替えていません。 徒歩：道の駅駐車場の利用可能な区画から正面入口右側の遊具付近へ徒歩。車路の横断に注意してください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅若狭美浜はまびより 駐車場"
+      ],
+      "sources": [
+        "https://hamabiyori.com/guidance/"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-340",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：若宮海水浴場周辺の有料駐車場。観光協会は周辺合計約60台、普通車1,000円～/台と案内。個別駐車場名、海水浴期と通常期の料金・営業期間・開閉時間、入口GPSは未確認です。通常期無料とは断定しません。UMIKARA駐車場をポケふただけの観覧用として無条件に推奨しません。 徒歩：駐車先を確認後、海岸の歩行空間へ徒歩。砂浜や海岸歩道へ車で進入しないでください。荒天・高潮・高波時は無理に近づかず現地規制に従ってください。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.town.takahama.fukui.jp/page/jyousuidou/p007835.html",
+        "https://wakasa-takahama.jp/spot/wakamiya-beach/",
+        "https://umikara.co.jp/access"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
     }
   ]
 };
