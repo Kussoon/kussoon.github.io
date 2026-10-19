@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="origin">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。13府県100件（地図100枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。14府県118件（地図118枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -194,24 +194,24 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.7.2-2026-10-19-scroll-fix">
+<meta name="kussoon-build" content="pokefuta-v0.8.0-2026-10-19T143240+0000">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">13府県・地図100枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">14府県・地図118枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の100件（うち地図表示100枚）にはありません。全国すべてを収録したわけではありません。</p>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の118件（うち地図表示118枚）にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の100件（うち地図表示100枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.7.2（Android詳細スクロール修正版）／調査基準日：2026/10/19。既存97枚の情報・確認日を維持し、徳島県3枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島の100件を一覧に掲載。地図表示100枚、位置保留0枚。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の118件（うち地図表示118枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.8.0（香川県追加検証版）／調査基準日：2026/10/19。既存100枚の情報・確認日を維持し、香川県18枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島・香川の118件を一覧に掲載。地図表示118枚、位置保留0枚。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.7.2（Android詳細スクロール修正版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.8.0（香川県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの一番上へ戻る" hidden><span aria-hidden="true">↑</span> 一番上へ</button>
@@ -222,8 +222,8 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.7.0",
-  "source_version": "4.1",
+  "version": "0.8.0",
+  "source_version": "4.2",
   "checked_at": "2026-10-19",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
@@ -4026,6 +4026,939 @@ window.POKEFUTA_DATA={
       "uncertainty_m": null,
       "infrastructure_type": "機能未確認",
       "access_warning": "第1駐車場の一般車区画は野球場改修で利用不可の案内があります。第4駐車場などの候補も当日の規制・満車状況を確認してください。"
+    },
+    {
+      "id": "PF-0028",
+      "official_number": 28,
+      "prefecture": "香川県",
+      "city": "高松市",
+      "pokemon": "ヤドン",
+      "facility_name": "高松南部3町ドーム",
+      "address": "香川県高松市南新町8-30地先",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.33891,
+      "facility_lon": 134.04895,
+      "facility_coord_type": "map_read_installation_area_reference",
+      "facility_coord_label": "設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#18/34.33891/134.04895/&base=std",
+      "coordinate_method": "地理院標準地図と公式配置図の道路・施設関係を目視照合。南新町・常磐町・田町の交差するドーム下周辺を代表。読取画像のズーム・タイル原点・画素位置は監査データに保存。現物GPSではなく設置エリアの代表点。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 18,
+          "x0": 228682,
+          "y0": 104418
+        },
+        "pixel": [
+          375,
+          510
+        ]
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "南新町・常磐町・田町の商店街が交わるドーム下。高松市の設置位置図の赤丸と地理院地図の交差部を照合。ドーム周辺の設置エリアを示す概略ピンです。",
+      "parking_id": "parking-info-28",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/28/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/28/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.city.takamatsu.kagawa.jp/smph/kurashi/kurashi/jogesuido/oshirase/manhole.html",
+        "https://www.ms-machi.com/info_dome.php",
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kurashi/shisetsu/shiei/index.html",
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kurashi/jogesuido/oshirase/manhole.files/ichi.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "商店街の歩行空間です。現物へ車で直接進入せず、有料駐車場から徒歩で訪問してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0029",
+      "official_number": 29,
+      "prefecture": "香川県",
+      "city": "丸亀市",
+      "pokemon": "ヤドン",
+      "facility_name": "JR丸亀駅南側・バスターミナル付近",
+      "address": "香川県丸亀市浜町109-4",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.2910129,
+      "facility_lon": 133.7929939,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/8498024054",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「丸亀駅」（bus_stop）。現物中心・駐車場入口として取得したものではない。駅前・バス停等の代表点で、改札・駅建物・ふたの中心とは区別する。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 8498024054,
+        "osm_name": "丸亀駅",
+        "osm_feature_type": "bus_stop"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "公式掲載住所の浜町109-4。駅南側のバスターミナル付近が設置先（現地取材記事で補助照合）。駅改札内ではなく駅前の歩行スペースを探してください。個別のバス乗り場番号は未確認。",
+      "parking_id": "parking-info-29",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/29/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/29/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.city.marugame.lg.jp/page/3198.html",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "バス・タクシー・送迎車の動線を妨げず、歩道から見学してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0030",
+      "official_number": 30,
+      "prefecture": "香川県",
+      "city": "坂出市",
+      "pokemon": "ヤドン",
+      "facility_name": "JR坂出駅南口",
+      "address": "香川県坂出市駒止町1丁目4",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.3148165,
+      "facility_lon": 133.8561428,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/8521668605",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「坂出駅」（bus_stop）。現物中心・駐車場入口として取得したものではない。駅前・バス停等の代表点で、改札・駅建物・ふたの中心とは区別する。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 8521668605,
+        "osm_name": "坂出駅",
+        "osm_feature_type": "bus_stop"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "JR坂出駅南口の駅前設置エリア。駅北口や駅構内と区別してください。駅南口という位置関係は現地取材記事で補助照合。ふたの中心・舗装上の細部は未確認です。",
+      "parking_id": "parking-info-30",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/30/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/30/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.city.sakaide.lg.jp/soshiki/tosiseibi/parking-siei.html",
+        "https://www.city.sakaide.lg.jp/soshiki/kouminrenkei/ekimae-area-saiseibi.html",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "坂出駅前は再整備の案内があります。南口への徒歩経路・当日の工事規制を確認してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0031",
+      "official_number": 31,
+      "prefecture": "香川県",
+      "city": "善通寺市",
+      "pokemon": "ヤドン／ヤドラン",
+      "facility_name": "南大門前にぎわい広場",
+      "address": "香川県善通寺市善通寺町二丁目2",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.22537,
+      "facility_lon": 133.7773,
+      "facility_coord_type": "map_read_installation_area_reference",
+      "facility_coord_label": "設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#18/34.22537/133.7773/&base=std",
+      "coordinate_method": "地理院標準地図と公式配置図の道路・施設関係を目視照合。南大門前の広場内を代表。読取画像のズーム・タイル原点・画素位置は監査データに保存。現物GPSではなく設置エリアの代表点。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 18,
+          "x0": 228484,
+          "y0": 104519
+        },
+        "pixel": [
+          425,
+          270
+        ]
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "総本山善通寺の南大門前にあるにぎわい広場。市観光協会が広場内のポケふたを案内。ピンは広場内の代表位置で、南大門・境内の中心を現物座標へ転用していません。",
+      "parking_id": "parking-info-31",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/31/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/31/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.kukainavi.com/spot/play/entry-561.html",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "広場内へ車で進入せず、催事や参拝者の通行を妨げないようにしてください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0032",
+      "official_number": 32,
+      "prefecture": "香川県",
+      "city": "観音寺市",
+      "pokemon": "ヤドン／ヤドキング",
+      "facility_name": "大正橋プラザ（観光案内所）前の歩道",
+      "address": "香川県観音寺市観音寺町甲1234-4",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.1253069,
+      "facility_lon": 133.6550509,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/626430013",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「大正橋プラザ」（office）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 626430013,
+        "osm_name": "大正橋プラザ",
+        "osm_feature_type": "office"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "市公式が案内する大正橋プラザ前の歩道内。JR観音寺駅から徒歩1分との市案内があります。観光案内所の建物内部ではありません。",
+      "parking_id": "parking-info-32",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "市は観光案内所前の屋外歩道と案内しています。案内所の9:00～17:00・年末年始休館を、屋外のふたの観覧時間へ転用していません。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の規制は未確認です。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/32/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/32/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.city.kanonji.kagawa.jp/soshiki/26/21150.html",
+        "https://www.city.kanonji.kagawa.jp/soshiki/21/355.html"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駅前の歩道です。通行・バスやタクシーの動線を妨げないでください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0033",
+      "official_number": 33,
+      "prefecture": "香川県",
+      "city": "さぬき市",
+      "pokemon": "ヤドン／ピッピ",
+      "facility_name": "JR志度駅南口",
+      "address": "香川県さぬき市志度670-10",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.3217035,
+      "facility_lon": 134.1731612,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/601281508",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「志度駅」（bus_stop）。現物中心・駐車場入口として取得したものではない。駅前・バス停等の代表点で、改札・駅建物・ふたの中心とは区別する。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 601281508,
+        "osm_name": "志度駅",
+        "osm_feature_type": "bus_stop"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "公式掲載住所の志度670-10、JR志度駅南口付近。琴電志度駅と混同しないでください。南口のバス停横とする現地記事を補助資料とし、現物中心・舗装上の細部は未確認です。",
+      "parking_id": "parking-info-33",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/33/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/33/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.pref.kagawa.lg.jp/kotsu/kotsu/sido.html"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駅のバス・送迎区画へ停車して見学しないでください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0034",
+      "official_number": 34,
+      "prefecture": "香川県",
+      "city": "東かがわ市",
+      "pokemon": "ヤドン",
+      "facility_name": "ひとの駅さんぼんまつ・健康広場",
+      "address": "香川県東かがわ市三本松1172-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.25135,
+      "facility_lon": 134.333817,
+      "facility_coord_type": "gsi_address_facility_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%A6%99%E5%B7%9D%E7%9C%8C%E6%9D%B1%E3%81%8B%E3%81%8C%E3%82%8F%E5%B8%82%E4%B8%89%E6%9C%AC%E6%9D%BE1172-1",
+      "coordinate_method": "地理院住所検索の「香川県東かがわ市三本松１１７２番地」代表点。市の健康広場配置図・地理院標準地図の建物と道路関係により施設敷地を照合。枝番・現物・駐車場入口の座標ではない。",
+      "coordinate_evidence": {
+        "geocoded_address": "香川県東かがわ市三本松１１７２番地"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "市公式の設置図では、施設北西側の健康広場。東かがわ市のカラーマンホールの横に設置されています。設置図の写真では、2枚が並ぶ地面と周囲の柵を確認できます。施設住所代表点のピンで、健康広場の現物GPSではありません。",
+      "parking_id": "parking-info-34",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/34/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/34/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.higashikagawa.jp/shiseijoho/kokyoshisetsu/2170.html",
+        "https://www.higashikagawa.jp/soshikikarasagasu/zaimuka/gyomuannai/2/726.html",
+        "https://www.higashikagawa.jp/material/files/group/17/manholecover.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "職員専用区画・おもいやり駐車場は一般向け区画ではありません。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0035",
+      "official_number": 35,
+      "prefecture": "香川県",
+      "city": "三豊市",
+      "pokemon": "ヤドン／シェルダー",
+      "facility_name": "ル・ポール粟島前",
+      "address": "香川県三豊市詫間町粟島1541地先",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.2689532,
+      "facility_lon": 133.6316336,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/531452275",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「ル・ポール粟島」（hotel）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 531452275,
+        "osm_name": "ル・ポール粟島",
+        "osm_feature_type": "hotel"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "三豊市公式は「ル・ポール粟島前」と案内。ピンはOpenStreetMapの宿泊施設代表点で、建物前の現物中心ではありません。粟島港から施設前へ徒歩で移動してください。港から現物までの正確な距離・時間は未確認。",
+      "parking_id": "parking-info-35",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "船で渡る必要があります。須田―粟島は約15分。市公開運賃表では旅客片道330円、小学生以下半額（10円未満四捨五入）、小学生未満は大人同伴1名につき1名無料。宮の下港からの便は志々島・上新田経由で、須田港と別航路・所要時間です。時刻表・欠航・小児区分は市公式で再確認してください。ポケふた固有の観覧時間・料金・予約要否は未確認。粟島海洋記念館は2021/12/24～2027/3/31改修で全面立入禁止の案内がありますが、ル・ポール前のふたが観覧禁止と確認されたものではありません。工事範囲との関係・当日の通路は要現地確認。 基本は須田港または宮の下港から船＋島内徒歩。市運賃表には須田⇔粟島のみ1便1台・要予約の制限付き自動車航送あり（車長4.5m未満、高さ1.95m以下、幅1.7m以下、重量2.2t未満）。通常の家族車が利用できるとは限りません。旅客予約の要否は未確認。車両は必ず粟島汽船へ確認。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。公式掲載住所は粟島1541地先、2026県パンフレットは粟島1390、施設の代表住所は1418-2と表記差があります。別住所を現物所在地へ置換していません。工事区域とふたの通行範囲は要現地確認。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/35/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/35/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.city.mitoyo.lg.jp/kakuka/shiminkankyou/eisei/6/2835.html",
+        "https://www.city.mitoyo.lg.jp/kakuka/seisaku/koutsuu/1_1/1_3/2670.html",
+        "https://www.mitoyo-kanko.com/facility/awashimamuseum/",
+        "https://www.mitoyo-kanko.com/facility/le-port/",
+        "https://www.honki-mode.co.jp/leport/kankou/kankou-index.html"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "船で訪問する離島です。粟島海洋記念館の工事区域へ入らないでください。ふたまでの通路は要現地確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "基本は須田港または宮の下港から船＋島内徒歩。市運賃表には須田⇔粟島のみ1便1台・要予約の制限付き自動車航送あり（車長4.5m未満、高さ1.95m以下、幅1.7m以下、重量2.2t未満）。通常の家族車が利用できるとは限りません。旅客予約の要否は未確認。車両は必ず粟島汽船へ確認。",
+      "port_information": "本土：須田港／宮の下港。島内：粟島港（ふたの座標と分離）。港代表座標・駐車場入口座標は未登録。",
+      "island_access": true
+    },
+    {
+      "id": "PF-0036",
+      "official_number": 36,
+      "prefecture": "香川県",
+      "city": "土庄町",
+      "pokemon": "ヤドン／メタモン",
+      "facility_name": "王子神社前付近（小豆島・土庄町）",
+      "address": "香川県土庄町甲222-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.48376,
+      "facility_lon": 134.18085,
+      "facility_coord_type": "map_read_installation_area_reference",
+      "facility_coord_label": "設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#16/34.48376/134.18085/&base=std",
+      "coordinate_method": "地理院標準地図と公式配置図の道路・施設関係を目視照合。観光協会のぐるりマップの西光寺・王子神社前の道路関係を標準地図へ照合し、参道周辺を代表。読取画像のズーム・タイル原点・画素位置は監査データに保存。現物GPSではなく設置エリアの代表点。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 16,
+          "x0": 57194,
+          "y0": 26072
+        },
+        "pixel": [
+          225,
+          265
+        ]
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "小豆島観光協会の土庄港・土庄東港ぐるりマップ（2025/12）は、西光寺・三重塔の近くの王子神社前に「ポケふた」を図示。地理院地図の寺院・道路との位置関係を照合した設置エリアの概略ピンです。建物内部・島の中心・土庄港ではありません。",
+      "parking_id": "parking-info-36",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "小豆島への訪問には船が必要です。車両航送のあるフェリーを利用すれば島内で車を利用できます。例として小豆島フェリーの高松―土庄航路は約60分。車両は事前WEB予約優先（一部予約対象外便あり）、旅客のみは予約不可・先着順。平日の危険物搭載車両指定便は一般旅客が乗れません。時刻・運賃・欠航は公式航路ページを確認してください。2026/10/19の案内では10/31まで代船運航予定（変更あり）。最寄り港・最適航路と当日の島内通行は確約していません。 王子神社前のポケふた固有の観覧時間・料金・予約・夜間立入条件は未確認です。 小豆島への訪問には船が必要です。車両航送のあるフェリーを利用すれば島内で車を利用できます。例として小豆島フェリーの高松―土庄航路は約60分。車両は事前WEB予約優先（一部予約対象外便あり）、旅客のみは予約不可・先着順。平日の危険物搭載車両指定便は一般旅客が乗れません。時刻・運賃・欠航は公式航路ページを確認してください。2026/10/19の案内では10/31まで代船運航予定（変更あり）。最寄り港・最適航路と当日の島内通行は確約していません。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/36/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/36/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.shikokuferry.com/route2/",
+        "https://www.shikokuferry.com/19103",
+        "https://shodoshima.or.jp/datas/booklet/pdf/020251208084826_D5gnK.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "小豆島内の細い通路付近です。港とは別地点。車両航送後も現物前へ直接進入せず、徒歩で訪問してください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "小豆島への訪問には船が必要です。車両航送のあるフェリーを利用すれば島内で車を利用できます。例として小豆島フェリーの高松―土庄航路は約60分。車両は事前WEB予約優先（一部予約対象外便あり）、旅客のみは予約不可・先着順。平日の危険物搭載車両指定便は一般旅客が乗れません。時刻・運賃・欠航は公式航路ページを確認してください。2026/10/19の案内では10/31まで代船運航予定（変更あり）。最寄り港・最適航路と当日の島内通行は確約していません。",
+      "port_information": "航路候補：高松港⇔土庄港（車両航送あり）。土庄港から設置場所までは別途島内移動。最寄り・最適航路は未確定。",
+      "island_access": true
+    },
+    {
+      "id": "PF-0037",
+      "official_number": 37,
+      "prefecture": "香川県",
+      "city": "小豆島町",
+      "pokemon": "ヤドン",
+      "facility_name": "道の駅小豆島ふるさと村",
+      "address": "香川県小豆島町室生2084-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.4710556,
+      "facility_lon": 134.2366026,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/11018087794",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「小豆島ふるさと村」（bus_stop）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 11018087794,
+        "osm_name": "小豆島ふるさと村",
+        "osm_feature_type": "bus_stop"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "道の駅小豆島ふるさと村の売店付近の屋外が設置先。公式観光協会の池田港ぐるりマップにポケふたを掲載。ピンは施設・道の駅の代表点で、現物中心ではありません。物産館・売店周辺の歩行空間で、現地表示を確認してください。",
+      "parking_id": "parking-info-37",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "小豆島への訪問には船が必要です。車両航送のあるフェリーを利用すれば島内で車を利用できます。例として小豆島フェリーの高松―土庄航路は約60分。車両は事前WEB予約優先（一部予約対象外便あり）、旅客のみは予約不可・先着順。平日の危険物搭載車両指定便は一般旅客が乗れません。時刻・運賃・欠航は公式航路ページを確認してください。2026/10/19の案内では10/31まで代船運航予定（変更あり）。最寄り港・最適航路と当日の島内通行は確約していません。 屋外ポケふたの観覧時間・料金・予約要否は未確認。駐車場の24時間利用や売店の営業時間を、そのまま現物観覧条件へ転用していません。 小豆島への訪問には船が必要です。車両航送のあるフェリーを利用すれば島内で車を利用できます。例として小豆島フェリーの高松―土庄航路は約60分。車両は事前WEB予約優先（一部予約対象外便あり）、旅客のみは予約不可・先着順。平日の危険物搭載車両指定便は一般旅客が乗れません。時刻・運賃・欠航は公式航路ページを確認してください。2026/10/19の案内では10/31まで代船運航予定（変更あり）。最寄り港・最適航路と当日の島内通行は確約していません。 高松⇔池田などの航路も施設が案内。施設の送迎は国民宿舎宿泊客限定であり一般観覧者へ推奨しません。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/37/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/37/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.shodoshima.jp/eat/",
+        "https://www.shodoshima.jp/faq/",
+        "https://www.shodoshima.jp/access/",
+        "https://www.shikokuferry.com/route2/",
+        "https://www.shikokuferry.com/19103",
+        "https://shodoshima.or.jp/datas/booklet/pdf/020250719172108_AbWiZ.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "小豆島には車両航送航路があります。島内移動と駐車場を確認し、売店・歩道の現物へ直接車を向けないでください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "小豆島への訪問には船が必要です。車両航送のあるフェリーを利用すれば島内で車を利用できます。例として小豆島フェリーの高松―土庄航路は約60分。車両は事前WEB予約優先（一部予約対象外便あり）、旅客のみは予約不可・先着順。平日の危険物搭載車両指定便は一般旅客が乗れません。時刻・運賃・欠航は公式航路ページを確認してください。2026/10/19の案内では10/31まで代船運航予定（変更あり）。最寄り港・最適航路と当日の島内通行は確約していません。 高松⇔池田などの航路も施設が案内。施設の送迎は国民宿舎宿泊客限定であり一般観覧者へ推奨しません。",
+      "port_information": "高松⇔土庄は運航会社公式で照合。高松⇔池田などは施設アクセス案内に掲載。最適航路は未確定。",
+      "island_access": true
+    },
+    {
+      "id": "PF-0038",
+      "official_number": 38,
+      "prefecture": "香川県",
+      "city": "三木町",
+      "pokemon": "ヤドン",
+      "facility_name": "三木町役場・正面玄関東の芝生",
+      "address": "香川県三木町大字氷上310",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.2685093,
+      "facility_lon": 134.1344471,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/761146192",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「三木町役場」（townhall）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 761146192,
+        "osm_name": "三木町役場",
+        "osm_feature_type": "townhall"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "町公式の2025/11/6案内によると、耐震工事に伴う移転後、足場撤去により「正面玄関東の芝生」の従来位置へ戻しています。防災センター等の旧仮設場所ではありません。ピンは役場建物の代表点です。",
+      "parking_id": "parking-info-38",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/38/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/38/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.town.miki.lg.jp/kanko/info/dtl.php?hdnKey=8311"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "工事中の旧仮設場所ではなく、役場正面玄関東の芝生を確認してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0039",
+      "official_number": 39,
+      "prefecture": "香川県",
+      "city": "直島町",
+      "pokemon": "ヤドン／コイキング",
+      "facility_name": "直島パヴィリオン前",
+      "address": "香川県直島町2249番地55",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.4558431,
+      "facility_lon": 133.9754375,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/4265985799",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「Sou Fujimoto \"Naoshima Pavilion\" 2015」（artwork）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 4265985799,
+        "osm_name": "Sou Fujimoto \"Naoshima Pavilion\" 2015",
+        "osm_feature_type": "artwork"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "宮浦港周辺の直島パヴィリオン前が設置エリア。公式掲載住所2249番地55と周遊資料を照合。ピンはOpenStreetMapのパヴィリオン代表点で、ふたの中心ではありません。港到着後、パヴィリオン前の歩行空間へ徒歩で向かってください。",
+      "parking_id": "parking-info-39",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "宇野港・高松港から四国汽船で宮浦港へ渡り、港から徒歩訪問を基本に案内します。宇野―宮浦のフェリーは約20分、旅客船は約15分、高松―宮浦のフェリーは約60分、高速船は約30分。自動車航送はフェリーで可能（旅客船・高速船は不可）。料金・予約・欠航は公式各航路ページを確認してください。船会社は乗船予約を受けず先着順と案内。ポケふた固有の観覧時間・料金・予約要否、夜間・工事の立入条件は未確認です。 四国汽船の宇野港⇔宮浦港、高松港⇔宮浦港。フェリーは車両航送可、旅客船・高速船は不可。固定時刻/運賃の大量転載はせず公式へ誘導。運航・乗船条件は出発前に再確認。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。公式掲載住所2249番地55に対し、県パンフレットは宮ノ浦3771-2。住所表記差を未解決として保持。船会社の宮浦駐車場料金の表記差も未解決。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/39/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/39/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://shikokukisen.com/uno-miyanoura/",
+        "https://shikokukisen.com/takamatsu-miyanoura/",
+        "https://naoshima.net/ja/access/access_area/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "船で渡り、宮浦港から徒歩で訪問する案内です。直島全域が自家用車禁止という意味ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "四国汽船の宇野港⇔宮浦港、高松港⇔宮浦港。フェリーは車両航送可、旅客船・高速船は不可。固定時刻/運賃の大量転載はせず公式へ誘導。運航・乗船条件は出発前に再確認。",
+      "port_information": "本土：宇野港／高松港。島内：宮浦港。パヴィリオン代表点を港・駐車場入口へ転用しない。",
+      "island_access": true
+    },
+    {
+      "id": "PF-0040",
+      "official_number": 40,
+      "prefecture": "香川県",
+      "city": "綾川町",
+      "pokemon": "ヤドン",
+      "facility_name": "道の駅滝宮",
+      "address": "香川県綾川町滝宮1589-2",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.2504761,
+      "facility_lon": 133.9167193,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/158687294",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「道の駅 滝宮」（services）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 158687294,
+        "osm_name": "道の駅 滝宮",
+        "osm_feature_type": "services"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "道の駅滝宮の屋外、トイレ付近という現地取材記事を補助資料として照合。ヤドン公園のPF-0298とは別地点・別デザインです。施設内のトイレ位置と現物中心の公式数値座標は未確認です。",
+      "parking_id": "parking-info-40",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。駐車台数の集計区分が管理者と道の駅連絡会で異なります。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/40/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/40/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://michinoeki-takinomiya.com/",
+        "https://www.sk-michinoeki.jp/michinoeki/361",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "綾川町の2枚は別施設です。ここは道の駅滝宮で、ヤドン公園ではありません。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0041",
+      "official_number": 41,
+      "prefecture": "香川県",
+      "city": "琴平町",
+      "pokemon": "ヤドン",
+      "facility_name": "一之橋公園",
+      "address": "香川県琴平町723-2",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.1877126,
+      "facility_lon": 133.8198937,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/546986773",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「一之橋公園」（park）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 546986773,
+        "osm_name": "一之橋公園",
+        "osm_feature_type": "park"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "金刀比羅宮の参道周辺にある一之橋公園。現地取材記事では園内のトイレ付近。神社の石段上ではありません。ピンは公園代表点で、現物中心ではありません。",
+      "parking_id": "parking-info-41",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/41/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/41/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.my-kagawa.jp/blog/blog-20030401/blog-20030401",
+        "https://www.town.kotohira.kagawa.jp/soshiki/8/11326.html",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "参道や公園へ車で直接進入せず、周辺駐車場から徒歩で訪問してください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0042",
+      "official_number": 42,
+      "prefecture": "香川県",
+      "city": "多度津町",
+      "pokemon": "ヤドン",
+      "facility_name": "JR多度津駅前広場・SL横",
+      "address": "香川県多度津町栄町3-3",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.271068,
+      "facility_lon": 133.7567492,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/545248987",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「多度津駅」（train_station）。現物中心・駐車場入口として取得したものではない。駅前・バス停等の代表点で、改札・駅建物・ふたの中心とは区別する。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 545248987,
+        "osm_name": "多度津駅",
+        "osm_feature_type": "train_station"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "町の2023/9/19案内は、2023/9/25から駅付近SL横の元の場所へ戻すと説明。2024/4開園の駅前広場の案内と現地取材記事を照合。地域交流センター1階の旧仮設展示ではありません。",
+      "parking_id": "parking-info-42",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/42/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/42/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.town.tadotsu.kagawa.jp/soshikikarasagasu/sangyoka/kanko/2994.html",
+        "https://www.town.tadotsu.kagawa.jp/soshikikarasagasu/seisakuka/toshikeikaku/toshikouen/3412.html",
+        "https://www.town.tadotsu.kagawa.jp/soshikikarasagasu/somuka/kokyoshisetsu/3996.html",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "公共交通利用者向けP&Rや施設専用駐車場を、観覧だけの一般駐車先として案内していません。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0043",
+      "official_number": 43,
+      "prefecture": "香川県",
+      "city": "まんのう町",
+      "pokemon": "ヤドン",
+      "facility_name": "かりんの丘公園",
+      "address": "香川県まんのう町吉野4314-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.1731889,
+      "facility_lon": 133.8699533,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/560050712",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「かりんの丘公園」（park）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 560050712,
+        "osm_name": "かりんの丘公園",
+        "osm_feature_type": "park"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "かりんの丘公園内。現地取材記事では野球場のフェンス付近、大型遊具と公衆トイレの間。ピンは公園の代表点です。国営讃岐まんのう公園と混同しないでください。",
+      "parking_id": "parking-info-43",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/43/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/43/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.town.manno.lg.jp/site/miryoku-hasshin/5662.html",
+        "https://www.my-kagawa.jp/point/338/",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "国営讃岐まんのう公園とは別施設です。球場・催事利用時の規制に従ってください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0097",
+      "official_number": 97,
+      "prefecture": "香川県",
+      "city": "宇多津町",
+      "pokemon": "ガラルヤドン／ヌオー",
+      "facility_name": "うたづ臨海公園",
+      "address": "香川県宇多津町浜一番丁4番地",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.3134855,
+      "facility_lon": 133.8078604,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/561468605",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「うたづ海ホタル」（museum）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 561468605,
+        "osm_name": "うたづ海ホタル",
+        "osm_feature_type": "museum"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "うたづ臨海公園の屋外設置エリア。県公式パンフレットの設置住所と公園管理者の所在地を照合。ピンはうたづ海ホタル建物の代表点で、園内の現物中心ではありません。具体的な園内の向き・ふたの舗装位置は未確認。",
+      "parking_id": "parking-info-97",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "屋外に設置。ポケふた固有の観覧時間・料金・予約要否、夜間・催事時の立入条件は公式資料で未確認です。近隣施設の営業時間を観覧時間に転用していません。現地の規制・通行案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/97/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/97/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://utazu-umihotaru.jp/about/",
+        "https://sanpomichi.town.utazu.lg.jp/spot/entry/new/007525/",
+        "https://www.my-kagawa.jp/point/318/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車場は道の駅利用者向けで一部夜間閉鎖があります。思いやり区画を一般向けに使わないでください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0298",
+      "official_number": 298,
+      "prefecture": "香川県",
+      "city": "綾川町",
+      "pokemon": "ヤドン／ガラルヤドン／シェルダー",
+      "facility_name": "ひだまり公園あやがわ（ヤドン公園）",
+      "address": "香川県綾川町萱原253-7",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.2470558,
+      "facility_lon": 133.9329116,
+      "facility_coord_type": "osm_facility_or_area_reference",
+      "facility_coord_label": "施設・エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1124076124",
+      "coordinate_method": "公式設置先・掲載住所と照合したOpenStreetMapの施設/エリア代表点。Nominatim検索結果の対象名「ひだまり公園 あやがわ (ヤドン公園)」（park）。現物中心・駐車場入口として取得したものではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 1124076124,
+        "osm_name": "ひだまり公園 あやがわ (ヤドン公園)",
+        "osm_feature_type": "park"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "ひだまり公園あやがわの入口付近が現地資料の目印。町公式の公園所在地と公式ポケふたページを照合。ピンは公園の代表点で、入口の現物中心ではありません。道の駅滝宮のPF-0040と区別してください。",
+      "parking_id": "parking-info-298",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口の座標は未確認です。施設・設置エリアの代表点を駐車場入口として使っていません。",
+      "viewing_condition": "町公式の開園時間は7:00～20:00。閉園時間に入らないよう町が明示しています。公園内のふたも開園時間内に見学してください。ポケふた固有の料金・予約要否、催事時の例外は未確認。公園内施設の独占利用や業としての撮影は別途許可が必要です。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・正確な誤差、駐車場入口GPS、当日の現存と通行状況は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/298/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/298/?is_modal=1",
+        "https://local.pokemon.jp/manhole/kagawa.html",
+        "https://yadon.my-kagawa.jp/stamp2026/pdf/leaflet2026.pdf",
+        "https://www.town.ayagawa.lg.jp/docs/2023032300021/",
+        "https://kids.rurubu.jp/article/218795/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式個別ページ・資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "開園7:00～20:00。閉園後の立入り、周辺私道への進入や無断駐車をしないでください。",
+      "vehicle_route_allowed": true,
+      "transport_note": "駐車先の利用条件を確認後、現物へは徒歩。経路・所要時間の未確認事項は駐車説明に記載。",
+      "port_information": "該当なし（本土）"
     }
   ],
   "parkings": [
@@ -5590,6 +6523,309 @@ window.POKEFUTA_DATA={
       ],
       "source_date": "2026-10-19",
       "entrance_note": "駐車場名で検索する候補です。正確な入口位置や利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-28",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：高松市立瓦町駅地下駐車場。市は2026/9/1から24時間営業と案内。料金・普通車台数・寸法制限・入口GPS・実測徒歩時間は今回未確認。商店街へは駐車後に徒歩で移動してください。南部駐車場は2026/12/20の22時から使用停止予定のため、長期に使える駐車先として推奨しません。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "高松市立瓦町駅地下駐車場"
+      ],
+      "sources": [
+        "https://www.city.takamatsu.kagawa.jp/smph/kurashi/kurashi/jogesuido/oshirase/manhole.html",
+        "https://www.ms-machi.com/info_dome.php",
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kurashi/shisetsu/shiei/index.html",
+        "https://www.city.takamatsu.kagawa.jp/kurashi/kurashi/jogesuido/oshirase/manhole.files/ichi.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-29",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：丸亀市営駅前地下駐車場。市の2026/8/26更新案内で24時間、100円/30分、入庫後1時間以内無料、入庫後24時間以内最大1,000円。追加無料認証は指定施設の利用条件があり、ポケふた観覧だけで認証を受けられるとは案内しません。台数・寸法制限・入口GPSは未確認。徒歩で地上へ出て駅南側のバスターミナルへ。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "丸亀市営駅前地下駐車場"
+      ],
+      "sources": [
+        "https://www.city.marugame.lg.jp/page/3198.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-30",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：坂出駅西駐車場（文京町一丁目）。市の2026/2/6更新案内で53台、24時間・年中無休、最初60分無料、以降60分ごと100円、24時間以内最大300円、1週間超の駐車不可。駅西側から南口へ徒歩で移動。当日の歩道・入口GPS・徒歩距離/時間は未確認です。北口地下駐車場は別施設（126台、4:30～翌1:30、最初30分無料、以降30分100円、24時間最大1,200円）。駅前再整備で北口地下の西側出入口廃止案内があるため、古い入口案内に注意。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "坂出駅西駐車場"
+      ],
+      "sources": [
+        "https://www.city.sakaide.lg.jp/soshiki/tosiseibi/parking-siei.html",
+        "https://www.city.sakaide.lg.jp/soshiki/kouminrenkei/ekimae-area-saiseibi.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-31",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "周辺の一般普通車用駐車場の管理者・料金・時間・台数・観覧のみでの利用条件を今回確定できていません。広場への駐車や寺院の参拝者用区画の無条件利用は案内しません。善通寺市観光協会等へ駐車先を確認し、徒歩で南大門前の広場へ。実測徒歩距離/時間と入口GPSは未確認。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.kukainavi.com/spot/play/entry-561.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-32",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "一般普通車が観覧のみで利用できる駐車場の名称・料金・台数・時間・入口GPSは今回未確認。大正橋プラザの施設住所を駐車場入口として使っていません。駅前のバス・タクシー区画や歩道に駐車せず、観光案内所等に周辺の一般駐車先を確認して徒歩で訪問してください。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.city.kanonji.kagawa.jp/soshiki/26/21150.html",
+        "https://www.city.kanonji.kagawa.jp/soshiki/21/355.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-33",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：さぬき市JR志度駅南駐車場。県のパーク＆ライド案内（2025年1月末時点）では市管理19台・800円/日。現在の時間貸し体系・開閉時間・寸法制限・入口GPSは未確認のため、最新料金は現地または市に確認してください。月極区画を一般時間貸しとして使わず、駅南口へ徒歩で移動。徒歩距離・時間は未確認。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "さぬき市JR志度駅南駐車場"
+      ],
+      "sources": [
+        "https://www.pref.kagawa.lg.jp/kotsu/kotsu/sido.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-34",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "ひとの駅さんぼんまつ駐車場。市公式（2026/7/22更新）では72台（うちおもいやり4台）、入庫後4時間無料、以降1時間ごと100円、1日最大500円（24時まで）。24時を越えると再度4時間無料という計算です。JR・商店利用者も利用可。職員専用・対象者限定区画と区別してください。独立した開閉時間表・入口GPS・寸法制限は未確認。駐車後は健康広場へ徒歩で移動し、隣り合う2枚を目印に探してください。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "ひとの駅さんぼんまつ 駐車場"
+      ],
+      "sources": [
+        "https://www.higashikagawa.jp/shiseijoho/kokyoshisetsu/2170.html",
+        "https://www.higashikagawa.jp/soshikikarasagasu/zaimuka/gyomuannai/2/726.html",
+        "https://www.higashikagawa.jp/material/files/group/17/manholecover.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-35",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "本土側の須田港・宮の下港は、市が案内する指定区画のみ無料。須田港は公式配置図の①～④、×印は施設専用等のため駐車不可。宮の下港も別の公式図を確認してください。一般普通車台数・開閉時間・入口GPSは未確認。ル・ポールの須田港専用駐車場8台は要予約の宿利用者向け案内なので、一般観覧者向けに流用しません。須田港から粟島汽船で粟島港へ約15分、上陸後は徒歩で施設前へ。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "須田港 粟島汽船 駐車場"
+      ],
+      "sources": [
+        "https://www.city.mitoyo.lg.jp/kakuka/shiminkankyou/eisei/6/2835.html",
+        "https://www.city.mitoyo.lg.jp/kakuka/seisaku/koutsuu/1_1/1_3/2670.html",
+        "https://www.mitoyo-kanko.com/facility/awashimamuseum/",
+        "https://www.mitoyo-kanko.com/facility/le-port/",
+        "https://www.honki-mode.co.jp/leport/kankou/kankou-index.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-36",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "公式ぐるりマップでは周辺の妖怪美術館パーキングやエンジェルロード周辺駐車場が示されていますが、観覧のみの一般利用条件・料金・時間・台数・最適駐車先は今回未確認。寺社や店舗の私有地へ無断駐車せず、管理者へ確認してください。港からは島内バス・タクシー・車等で土庄中心部へ移動し、最後は徒歩。狭い路地へ車で直接進入しないでください。徒歩距離/時間・入口GPSは未確認。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.shikokuferry.com/route2/",
+        "https://www.shikokuferry.com/19103",
+        "https://shodoshima.or.jp/datas/booklet/pdf/020251208084826_D5gnK.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-37",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅小豆島ふるさと村の駐車場。管理者公式では大型4台・普通45台・身障者用2台、駐車場・トイレ・電話は24時間利用可。FAQで無料駐車場を案内しています。対象者限定区画を避け、施設利用の普通車区画へ。売店付近の屋外へ徒歩で移動。入口GPS・現物までの実測距離/時間は未確認。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅小豆島ふるさと村 駐車場"
+      ],
+      "sources": [
+        "https://www.shodoshima.jp/eat/",
+        "https://www.shodoshima.jp/faq/",
+        "https://www.shodoshima.jp/access/",
+        "https://www.shikokuferry.com/route2/",
+        "https://www.shikokuferry.com/19103",
+        "https://shodoshima.or.jp/datas/booklet/pdf/020250719172108_AbWiZ.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-38",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "役場敷地の駐車区画について、観覧のみでの一般利用可否・料金・開閉時間・台数・入口GPSは今回公式確定できていません。来庁者用・職員用・対象者限定区画を無条件に案内せず、町へ確認してください。徒歩で正面玄関東の芝生へ向かいます。実測距離・時間は未確認。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.town.miki.lg.jp/kanko/info/dtl.php?hdnKey=8311"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-39",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "本土側は宇野港または高松港周辺の一般有料駐車場を候補とし、船会社の乗り場案内から最新情報を確認してください。駐車場名の最適選定・料金・時間・台数・入口GPSは未確認のため、自動車経路候補は生成していません。宮浦港周辺の駐車場は同じ船会社の航路ページ間で「有料」「無料」の表記差があり未解決。無料とは断定しません。島内へ車を航送する場合も、現物周辺への車両進入は保証しません。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://shikokukisen.com/uno-miyanoura/",
+        "https://shikokukisen.com/takamatsu-miyanoura/",
+        "https://naoshima.net/ja/access/access_area/"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-40",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅滝宮の駐車場。現管理者公式では第1側83台（普通73・軽1・大型4・身障5）、第2側68台（普通65・軽3）。道の駅連絡会は普通142台という集計で、区分定義の差は未解決のため合算して普通車台数としません。料金・独立した開閉時間・入口GPSは未確認。対象者専用区画を避け、駐車後はトイレ付近へ徒歩で移動してください。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅滝宮 駐車場"
+      ],
+      "sources": [
+        "https://michinoeki-takinomiya.com/",
+        "https://www.sk-michinoeki.jp/michinoeki/361"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-41",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：町営駅前西駐車場（琴平町榎井831番地3）。町の2026/2/20更新案内で24時間・年中無休（臨時休業あり）、普通車53台、長さ5.5m以下、1時間200円、24時間最大1,000円（繰り返し）。二輪不可。駅側から一之橋公園まで徒歩移動します。現物に最も近い駐車場との保証はなく、実測距離/時間・入口GPSは未確認。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "琴平町営駅前西駐車場"
+      ],
+      "sources": [
+        "https://www.my-kagawa.jp/blog/blog-20030401/blog-20030401",
+        "https://www.town.kotohira.kagawa.jp/soshiki/8/11326.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-42",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "駅東側の町パークアンドライド駐車場は、公共交通で通勤・通学等をする人が利用対象（町公式2026/3/25更新）。ポケふた観覧だけの利用条件を満たすと確認できないため推奨しません。役場・地域交流センター駐車場も施設利用者向けで、一般観覧へ流用しません。周辺の一般時間貸し駐車場の名称・料金・時間・台数・入口GPSは未確認。駐車先を確認し、徒歩で駅前広場のSL横へ。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.town.tadotsu.kagawa.jp/soshikikarasagasu/sangyoka/kanko/2994.html",
+        "https://www.town.tadotsu.kagawa.jp/soshikikarasagasu/seisakuka/toshikeikaku/toshikouen/3412.html",
+        "https://www.town.tadotsu.kagawa.jp/soshikikarasagasu/somuka/kokyoshisetsu/3996.html"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-43",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "かりんの丘公園駐車場は県観光公式で165台・無料。普通車だけの内訳、駐車場自体の開閉時間・入口GPSは未確認。有料公園施設の9:00～18:00、12/29～1/3休業を駐車場の開閉時間や屋外のふたの観覧時間と同一視していません。駐車後は園内通路で遊具・トイレ側へ移動。実測距離/時間と催事の臨時運用は未確認です。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "かりんの丘公園 駐車場"
+      ],
+      "sources": [
+        "https://www.town.manno.lg.jp/site/miryoku-hasshin/5662.html",
+        "https://www.my-kagawa.jp/point/338/"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-97",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅利用者向け駐車場は54台（管理者案内ではおもいやり3台）。金・土・日・休日・休前日は22:00～翌7:00に一部閉鎖。車中泊目的は不可。対象者限定区画を一般区画と扱わず、道の駅利用条件と当日の規制を確認してください。駐車料金、普通車一般区画だけの内訳・入口GPS・ふたまでの実測徒歩距離/時間は未確認。隣接水族館の駐車場・料金とは区別します。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "うたづ臨海公園 道の駅 駐車場"
+      ],
+      "sources": [
+        "https://utazu-umihotaru.jp/about/",
+        "https://sanpomichi.town.utazu.lg.jp/spot/entry/new/007525/",
+        "https://www.my-kagawa.jp/point/318/"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-298",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "町公式の2026/2/27案内は公園内18台、イオンモール綾川・綾川葬祭の駐車場も利用可としています。提携先の利用区画・開閉時間・催事時条件・料金・入口GPSは未確認のため、現地の提携表示に従ってください。町は公共交通を推奨（綾川駅から徒歩5分）。団地内の私道・私有地での転回、無断駐車、横断歩道以外の横断は禁止。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "ひだまり公園あやがわ 駐車場"
+      ],
+      "sources": [
+        "https://www.town.ayagawa.lg.jp/docs/2023032300021/"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "名前で検索する駐車場候補です。入口の精密位置・最適な駐車先・利用可能性を保証しません。"
     }
   ]
 };
