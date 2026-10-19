@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="no-referrer">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。12府県97件（地図97枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。13府県100件（地図100枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -194,24 +194,24 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.6.0-2026-10-19T07:26:28Z">
+<meta name="kussoon-build" content="pokefuta-v0.7.0-2026-10-19T08:07:05Z">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">12府県・地図97枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">13府県・地図100枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の97件（うち地図表示97枚）にはありません。全国すべてを収録したわけではありません。</p>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の100件（うち地図表示100枚）にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の97件（うち地図表示97枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.6.0（愛媛県追加検証版）／調査基準日：2026/10/19。既存95枚の情報・確認日を維持し、愛媛県2枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛の97件を一覧に掲載。地図表示97枚、位置保留0枚。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の100件（うち地図表示100枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.7.0（徳島県追加検証版）／調査基準日：2026/10/19。既存97枚の情報・確認日を維持し、徳島県3枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島の100件を一覧に掲載。地図表示100枚、位置保留0枚。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.6.0（愛媛県追加検証版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.7.0（徳島県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの一番上へ戻る" hidden><span aria-hidden="true">↑</span> 一番上へ</button>
@@ -222,8 +222,8 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.6.0",
-  "source_version": "4.0",
+  "version": "0.7.0",
+  "source_version": "4.1",
   "checked_at": "2026-10-19",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
@@ -3838,6 +3838,194 @@ window.POKEFUTA_DATA={
       "uncertainty_m": null,
       "infrastructure_type": "下水道（市の設置案内による）",
       "access_warning": "山頂の展望塔前まで徒歩で上ります。駐車場からの坂道と閉鎖時刻に注意してください。"
+    },
+    {
+      "id": "PF-0327",
+      "official_number": 327,
+      "prefecture": "徳島県",
+      "city": "鳴門市",
+      "pokemon": "スイクン",
+      "facility_name": "網干休憩所",
+      "address": "徳島県鳴門市鳴門町土佐泊浦字大毛82-100",
+      "source_position_grade": "B",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.2241111111,
+      "facility_lon": 134.6361944444,
+      "facility_coord_type": "municipal_published_installation_reference",
+      "facility_coord_label": "市ガイド公表の設置地点座標を設置エリアの目安として使用（GPS実測未確認）",
+      "facility_coord_source": "https://www.city.naruto.lg.jp/docs/2024072500013/file_contents/2024072500013__files_00577786_manhall_guide_r6_2.pdf",
+      "coordinate_method": "鳴門市マンホールガイドR6.7の各名称に対応する度分秒を原本PDFの本文・画像で再読取。度＋分/60＋秒/3600を厳密有理数で計算し、小数点以下10桁で保存。地理院標準地図と公式設置写真・施設図の位置関係に矛盾なし。市公表値は移動・補正していません。測定方法・測地系・精度はPDFに未記載のため、設置エリアの目安として使用し、GPS実測の現物座標とは登録していません。",
+      "municipal_installation_lat": 34.2241111111,
+      "municipal_installation_lon": 134.6361944444,
+      "municipal_lat_dms": "34°13′26.8″N",
+      "municipal_lon_dms": "134°38′10.3″E",
+      "municipal_dms_components": [
+        [
+          34,
+          13,
+          "26.8"
+        ],
+        [
+          134,
+          38,
+          "10.3"
+        ]
+      ],
+      "gps_measurement_verified": false,
+      "coordinate_datum": "未記載・未確認",
+      "exact_landmark": "網干休憩所の海岸沿いの歩行スペース。市ガイドと公式観光の写真では、タイル状の舗装に、ふたを囲む白っぽい円形の石材が見えます。休憩所建物・松の木の近くで、周囲に海岸と駐車スペースがあります。市公開座標を設置エリアの目安として採用しています。",
+      "parking_id": "parking-info-327",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。市公開の設置地点座標を駐車場入口へ転用していません。",
+      "viewing_condition": "屋外の休憩所周辺に設置。ポケふた固有の観覧時間・料金・予約要否、夜間や荒天時の立入条件は公式資料で未確認です。近隣ホテルの営業時間や利用条件を転用していません。海岸沿いのため、強風・高波・暗い時間帯は足元に注意し、閉鎖や避難の案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。市公表の設置地点座標を使用していますが、現物GPS実測・測地系・誤差・現在の現存は未確認です。駐車場入口GPSも未確認です。 駐車料金・時間・一般普通車の利用条件、夜間/催事時の観覧条件は未確認。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/327/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/327/?is_modal=1",
+        "https://www.city.naruto.lg.jp/docs/2024072500013/file_contents/2024072500013__files_00577786_manhall_guide_r6_2.pdf",
+        "https://www.city.naruto.lg.jp/docs/2024072500013/",
+        "https://www.city.naruto.lg.jp/map/info/155/",
+        "https://naruto-tourism.jp/jp/25352",
+        "https://www.naruto-kankou.jp/manhole/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式掲載・市資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "周辺駐車場の一般利用条件は未確認です。ホテル専用駐車場と区別し、海岸の風・波にも注意してください。"
+    },
+    {
+      "id": "PF-0328",
+      "official_number": 328,
+      "prefecture": "徳島県",
+      "city": "鳴門市",
+      "pokemon": "シードラ／キングドラ",
+      "facility_name": "うずしおふれあい公園（北西端）",
+      "address": "徳島県鳴門市撫養町斎田字北浜157",
+      "source_position_grade": "B",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.1819444444,
+      "facility_lon": 134.6017222222,
+      "facility_coord_type": "municipal_published_installation_reference",
+      "facility_coord_label": "市ガイド公表の設置地点座標を設置エリアの目安として使用（GPS実測未確認）",
+      "facility_coord_source": "https://www.city.naruto.lg.jp/docs/2024072500013/file_contents/2024072500013__files_00577786_manhall_guide_r6_2.pdf",
+      "coordinate_method": "鳴門市マンホールガイドR6.7の各名称に対応する度分秒を原本PDFの本文・画像で再読取。度＋分/60＋秒/3600を厳密有理数で計算し、小数点以下10桁で保存。地理院標準地図と公式設置写真・施設図の位置関係に矛盾なし。市公表値は移動・補正していません。測定方法・測地系・精度はPDFに未記載のため、設置エリアの目安として使用し、GPS実測の現物座標とは登録していません。",
+      "municipal_installation_lat": 34.1819444444,
+      "municipal_installation_lon": 134.6017222222,
+      "municipal_lat_dms": "34°10′55.0″N",
+      "municipal_lon_dms": "134°36′06.2″E",
+      "municipal_dms_components": [
+        [
+          34,
+          10,
+          "55.0"
+        ],
+        [
+          134,
+          36,
+          "06.2"
+        ]
+      ],
+      "gps_measurement_verified": false,
+      "coordinate_datum": "未記載・未確認",
+      "exact_landmark": "市ガイドが示す公園北西端。公式観光の設置写真では、植栽に囲まれた通路が交わる舗装面の四角い補修部分にあります。北側駐車場からは園内の北西側へ進みます。園内中央の広場や施設全体の中心ではありません。",
+      "parking_id": "parking-info-328",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。市公開の設置地点座標を駐車場入口へ転用していません。",
+      "viewing_condition": "屋外公園の北西端に設置。ポケふた固有の観覧時間・料金・予約要否、夜間や催事時の利用制限は公式資料で未確認です。公園や駐車場が常時開いているとは断定しません。園内の歩行者や子どもの通行を妨げず、利用規制や催事の案内に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。市公表の設置地点座標を使用していますが、現物GPS実測・測地系・誤差・現在の現存は未確認です。駐車場入口GPSも未確認です。 駐車料金・時間・一般普通車の利用条件、夜間/催事時の観覧条件は未確認。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/328/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/328/?is_modal=1",
+        "https://www.city.naruto.lg.jp/docs/2024072500013/file_contents/2024072500013__files_00577786_manhall_guide_r6_2.pdf",
+        "https://www.city.naruto.lg.jp/docs/2024072500013/",
+        "https://www.city.naruto.lg.jp/map/info/154/",
+        "https://naruto-tourism.jp/jp/25352",
+        "https://www.naruto-kankou.jp/manhole/",
+        "https://www.city.naruto.lg.jp/docs/2024042501729/"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式掲載・市資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車場は公園北側の候補です。料金・開閉時間・利用条件は現地または市に確認してください。"
+    },
+    {
+      "id": "PF-0329",
+      "official_number": 329,
+      "prefecture": "徳島県",
+      "city": "鳴門市",
+      "pokemon": "ニョロモ／ニョロゾ／ディグダ",
+      "facility_name": "鳴門・大塚スポーツパーク（正面時計南）",
+      "address": "徳島県鳴門市撫養町立岩字四枚61",
+      "source_position_grade": "B",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.1680833333,
+      "facility_lon": 134.6163611111,
+      "facility_coord_type": "municipal_published_installation_reference",
+      "facility_coord_label": "市ガイド公表の設置地点座標を設置エリアの目安として使用（GPS実測未確認）",
+      "facility_coord_source": "https://www.city.naruto.lg.jp/docs/2024072500013/file_contents/2024072500013__files_00577786_manhall_guide_r6_2.pdf",
+      "coordinate_method": "鳴門市マンホールガイドR6.7の各名称に対応する度分秒を原本PDFの本文・画像で再読取。度＋分/60＋秒/3600を厳密有理数で計算し、小数点以下10桁で保存。地理院標準地図と公式設置写真・施設図の位置関係に矛盾なし。市公表値は移動・補正していません。測定方法・測地系・精度はPDFに未記載のため、設置エリアの目安として使用し、GPS実測の現物座標とは登録していません。",
+      "municipal_installation_lat": 34.1680833333,
+      "municipal_installation_lon": 134.6163611111,
+      "municipal_lat_dms": "34°10′05.1″N",
+      "municipal_lon_dms": "134°36′58.9″E",
+      "municipal_dms_components": [
+        [
+          34,
+          10,
+          "05.1"
+        ],
+        [
+          134,
+          36,
+          "58.9"
+        ]
+      ],
+      "gps_measurement_verified": false,
+      "coordinate_datum": "未記載・未確認",
+      "exact_landmark": "市ガイドの「正面時計南」。公式観光写真では、シンボルタワーとポカリスエットスタジアム正面が見える、時計塔南側のタイル状の舗装面です。施設全体の中心や野球場内ではありません。",
+      "parking_id": "parking-info-329",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。市公開の設置地点座標を駐車場入口へ転用していません。",
+      "viewing_condition": "屋外の正面時計南側に設置。競技施設内部への入場や予約を必要とする場所とは区別していますが、ポケふた固有の観覧時間・料金・予約要否、施設休館時の屋外通行可否は未確認です。施設FAQの火曜・年末年始休館を、そのまま屋外観覧の休止日へ転用していません。大会・試合時は混雑・通行規制があり、係員の指示に従ってください。野球場工事の仮囲い内へは入らないでください。 こども広場は遊具更新工事により2026/10/13～2027年3月下旬頃（予定）、遊具が全面使用不可です。ポケふた自体の閉鎖を示す案内ではありませんが、仮囲いや当日の通行案内を確認してください。",
+      "unresolved": "ピンはおおまかな位置です。市公表の設置地点座標を使用していますが、現物GPS実測・測地系・誤差・現在の現存は未確認です。駐車場入口GPSも未確認です。 第1駐車場の再開・時計南側の当日の通行可否は未確認。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/329/?is_modal=1",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/329/?is_modal=1",
+        "https://www.city.naruto.lg.jp/docs/2024072500013/file_contents/2024072500013__files_00577786_manhall_guide_r6_2.pdf",
+        "https://www.city.naruto.lg.jp/docs/2024072500013/",
+        "https://www.city.naruto.lg.jp/map/info/153/",
+        "https://naruto-tourism.jp/jp/25352",
+        "https://www.naruto-kankou.jp/manhole/",
+        "https://www.awa-spo.net/naruto/access/",
+        "https://www.awa-spo.net/naruto/faq/",
+        "https://www.awa-spo.net/naruto/",
+        "https://www.pref.tokushima.lg.jp/ippannokata/kendozukuri/toshikeikaku/7244941/",
+        "https://www.awa-spo.net/naruto/news/20231106-27089/",
+        "https://www.awa-spo.net/naruto/news/20261009-41078/",
+        "https://www.vortis.jp/stadium/access/",
+        "https://www.awa-spo.net/naruto/download/map_all.pdf",
+        "https://www.pref.tokushima.lg.jp/file/attachment/947761.pdf",
+        "https://www.pref.tokushima.lg.jp/file/attachment/974248.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "current_status": "公式掲載・市資料照合済み（現地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "第1駐車場の一般車区画は野球場改修で利用不可の案内があります。第4駐車場などの候補も当日の規制・満車状況を確認してください。"
     }
   ],
   "parkings": [
@@ -5339,6 +5527,69 @@ window.POKEFUTA_DATA={
       ],
       "source_date": "2026-10-19",
       "entrance_note": "名称で検索する駐車場候補で、正確な入口の指定ではありません。"
+    },
+    {
+      "id": "parking-info-327",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "網干休憩所周辺の駐車スペースは公式観光の写真で確認できますが、管理主体・一般普通車の利用可否・台数・料金・開閉時間・入口GPSは公式資料で確定できていません。「無料」「24時間」とは断定しません。近隣ホテルの専用駐車場を公共駐車場として案内せず、観覧だけでホテル駐車場へ入らないでください。現地の利用表示を確認できない場合は、鳴門市観光振興課等に駐車先を確認してください。写真で確認できる休憩所建物・松の木付近の歩行空間を目印に、駐車区画・車道を避けて徒歩で探してください。駐車位置からの距離・時間は未確認です。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.city.naruto.lg.jp/map/info/155/",
+        "https://naruto-tourism.jp/jp/25352",
+        "https://www.naruto-kankou.jp/manhole/"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "駐車場名で検索する候補です。正確な入口位置や利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-328",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "うずしおふれあい公園の北側駐車場が候補。鳴門市の公園紹介は約60台と案内していますが、普通車専用台数かどうか、料金・開閉時間・対象者や車両の制限・入口GPSは未確認です。「無料」「24時間」とは断定しません。利用表示を確認して駐車し、北側から園内通路を北西端へ進み、植栽付近の舗装面を探してください。駐車位置により経路が異なり、徒歩距離・所要時間・段差のない経路は未確認。確認先は鳴門市公園緑地課088-683-6556です。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "うずしおふれあい公園 北側駐車場 鳴門市"
+      ],
+      "sources": [
+        "https://www.city.naruto.lg.jp/map/info/154/",
+        "https://naruto-tourism.jp/jp/25352",
+        "https://www.naruto-kankou.jp/manhole/",
+        "https://www.city.naruto.lg.jp/docs/2024042501729/"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "駐車場名で検索する候補です。正確な入口位置や利用可能性を保証しません。"
+    },
+    {
+      "id": "parking-info-329",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "公園利用者向け駐車場は無料（管理者公式）。通常時の普通車台数は第1：156台、第2：88台、第3：94台、第4：96台、第5：74台、合計508台です。この508台は現在利用できる台数ではありません。第1駐車場の一般車区画は、県公式の2024/10/31案内で2024/11/5から球場完成（2026年度予定）まで利用不可とされています（大型車区画を除く）。再開確認はできていないため普通車の候補にしません。管理者の園内図と工事図を照合し、野球場の工事区域を避けやすい第4駐車場を徒歩訪問の候補とします。駐車後はアミノバリューホール側の園内通路を南へ進み、正面のシンボルタワー（時計）へ向かい、その南側を確認してください。これは図面に基づく候補で、最短・当日の通行を保証するものではありません。開閉時間・入口GPS・実測徒歩距離/時間・車両寸法制限は未確認。試合・大会時は臨時運用があり、関係者/対象者専用区画へは駐車しないでください。 確認日：2026/10/19。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "鳴門・大塚スポーツパーク 第4駐車場"
+      ],
+      "sources": [
+        "https://www.city.naruto.lg.jp/map/info/153/",
+        "https://naruto-tourism.jp/jp/25352",
+        "https://www.naruto-kankou.jp/manhole/",
+        "https://www.awa-spo.net/naruto/access/",
+        "https://www.awa-spo.net/naruto/faq/",
+        "https://www.awa-spo.net/naruto/",
+        "https://www.pref.tokushima.lg.jp/ippannokata/kendozukuri/toshikeikaku/7244941/",
+        "https://www.awa-spo.net/naruto/news/20231106-27089/",
+        "https://www.awa-spo.net/naruto/news/20261009-41078/",
+        "https://www.vortis.jp/stadium/access/",
+        "https://www.awa-spo.net/naruto/download/map_all.pdf",
+        "https://www.pref.tokushima.lg.jp/file/attachment/947761.pdf",
+        "https://www.pref.tokushima.lg.jp/file/attachment/974248.pdf"
+      ],
+      "source_date": "2026-10-19",
+      "entrance_note": "駐車場名で検索する候補です。正確な入口位置や利用可能性を保証しません。"
     }
   ]
 };
