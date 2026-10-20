@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="origin">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。16府県153件（地図153枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。17府県161件（地図160枚・位置保留1枚）の設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -194,24 +194,24 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.10.1-20261020T022943Z">
+<meta name="kussoon-build" content="pokefuta-v0.11.0-20261020T042150Z">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">16府県・地図153枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">17府県・地図160枚・位置保留1枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の153件（うち地図表示153枚）にはありません。全国すべてを収録したわけではありません。</p>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の161件（うち地図表示160枚）にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の153件（うち地図表示153枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.10.1（高知県概略ピン3地点追加版）／調査基準日：2026/10/20。既存135枚の情報・確認日を維持し、高知県18枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島・香川・福井・高知の153件を一覧に掲載。地図表示153枚、位置保留0枚。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の161件（うち地図表示160枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.11.0（石川県追加検証版）／調査基準日：2026/10/20。既存153枚の情報・確認日を維持し、石川県8枚を追加。17府県161件を一覧に掲載。地図表示160枚、位置保留1枚（珠洲市PF-0470）。石川県の7ピンは施設・設置エリアの概略位置であり、現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.10.1（高知県概略ピン3地点追加版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.11.0（石川県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの先頭へ" hidden><span aria-hidden="true">↑</span> ページの先頭へ</button>
@@ -222,8 +222,8 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.10.1",
-  "source_version": "4.4",
+  "version": "0.11.0",
+  "source_version": "4.5",
   "checked_at": "2026-10-20",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
@@ -6141,7 +6141,7 @@ window.POKEFUTA_DATA={
       "transport_note": "山間部の積雪・凍結・冬季閉鎖に注意。県は県道383号の2025/12/5からの冬期閉鎖を2026/3/18に解除と公表。2026～27年冬の開始日は未確認。施設の道路案内は2026/10/8現在で県道36号地芳峠の時間帯通行止め等を記載しており、調査日当日の通行保証ではありません。細い県道へナビ任せで入らず、最新の道路管理者・施設案内を確認してください。",
       "port_information": "該当なし（本土または橋で接続した地域）"
     },
-{
+    {
       "id": "PF-0395",
       "official_number": 395,
       "prefecture": "高知県",
@@ -6192,7 +6192,7 @@ window.POKEFUTA_DATA={
       "transport_note": "柏島は橋で本土とつながる地域です。船でしか行けない離島ではありません。集落内の狭路・生活道路や橋の上に駐車せず、利用可能な指定駐車場を確認して徒歩で訪問してください。季節外の駐車先は町へ確認。",
       "port_information": "該当なし（本土または橋で接続した地域）"
     },
-{
+    {
       "id": "PF-0396",
       "official_number": 396,
       "prefecture": "高知県",
@@ -6668,7 +6668,7 @@ window.POKEFUTA_DATA={
       "transport_note": "利用可能な駐車区画から海洋館へ徒歩。道路を横断する場合は現地の歩行経路を確認。海沿いの高波・荒天時は現地規制に従ってください。",
       "port_information": "該当なし（本土または橋で接続した地域）"
     },
-{
+    {
       "id": "PF-0451",
       "official_number": 451,
       "prefecture": "高知県",
@@ -6838,6 +6838,550 @@ window.POKEFUTA_DATA={
       "access_warning": "店舗指定の駐車先から徒歩。狭い渓谷入口道路での路上駐車は避けてください。店の営業時間は2026年県リーフレット10:00～16:00・月曜休み（祝日は営業、冬季変更あり）と、2025年県観光の季節別9:00～17:00/16:00・不定休で差があり、最新の実運用は未確認です。",
       "vehicle_route_allowed": false,
       "transport_note": "店舗指定の駐車先から徒歩。狭い渓谷入口道路での路上駐車は避けてください。店の営業時間は2026年県リーフレット10:00～16:00・月曜休み（祝日は営業、冬季変更あり）と、2025年県観光の季節別9:00～17:00/16:00・不定休で差があり、最新の実運用は未確認です。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0301",
+      "official_number": 301,
+      "prefecture": "石川県",
+      "city": "金沢市",
+      "pokemon": "ミロカロス",
+      "facility_name": "国立工芸館前",
+      "address": "石川県金沢市出羽町3-2",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 36.559067,
+      "facility_lon": 136.661807,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/876150436",
+      "coordinate_method": "自治体・施設の設置先と住所を照合し、独立地理資料OpenStreetMapの施設・設置エリア代表点を採用。地理院地図の建物・道路・海岸線と周辺位置を目視照合。現物中心や駐車場入口の座標ではありません。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 876150436,
+        "osm_feature_name": "国立工芸館",
+        "osm_category": "tourism",
+        "osm_feature_type": "museum",
+        "boundingbox": [
+          "36.5587465",
+          "36.5593970",
+          "136.6614346",
+          "136.6621225"
+        ],
+        "official_match": "設置施設・エリアと公式住所を照合。詳細は個別監査表。",
+        "measurement": "GPS実測の根拠なし",
+        "geographic_check": "地理院地図std z17（2026-10-20閲覧）で施設・周辺道路の位置関係を目視照合。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "国立工芸館の建物前の屋外。県観光公式の現地写真では、中央エントランス前庭の芝地・土の面にふたがあり、周囲は丸く縁取られています。館内展示室の中ではありません。現物中心は未測量です。",
+      "parking_id": "parking-info-301",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "県観光公式の写真で屋外設置を確認。館内展覧会のチケットとは別です。館は通常9:30～17:30、月曜（祝休日は翌平日）・展示替・年末年始休館ですが、屋外の現物が同じ時間に制限されるか、夜間・休館日の立入可否や予約要否は未確認です。",
+      "unresolved": "ピンはおおまかな位置です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/301/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/301/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://www.hot-ishikawa.jp/blog/detail_485.html",
+        "https://www.momat.go.jp/craft-museum/access",
+        "https://www.momat.go.jp/craft-museum/faq",
+        "https://ishikawa-odekake.jp/parking/ishibiki.html"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車場から一般歩道を使い国立工芸館前庭へ徒歩。建物入口に車を横付けできないと館公式が案内しています。公道の横断・坂道に注意。本多の森駐車場からの現物までの実測徒歩時間と最適性は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車場から一般歩道を使い国立工芸館前庭へ徒歩。建物入口に車を横付けできないと館公式が案内しています。公道の横断・坂道に注意。本多の森駐車場からの現物までの実測徒歩時間と最適性は未確認。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0468",
+      "official_number": 468,
+      "prefecture": "石川県",
+      "city": "七尾市",
+      "pokemon": "ニョロトノ／ギャラドス／ニョロモ",
+      "facility_name": "湯っ足りパーク（わくらポケモン足湯そば）",
+      "address": "石川県七尾市和倉町ひばり1丁目1番地",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 37.0874259,
+      "facility_lon": 136.9240699,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/289203591",
+      "coordinate_method": "自治体・施設の設置先と住所を照合し、独立地理資料OpenStreetMapの施設・設置エリア代表点を採用。地理院地図の建物・道路・海岸線と周辺位置を目視照合。現物中心や駐車場入口の座標ではありません。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 289203591,
+        "osm_feature_name": "和倉温泉湯っ足りパーク",
+        "osm_category": "leisure",
+        "osm_feature_type": "park",
+        "boundingbox": [
+          "37.0870621",
+          "37.0879009",
+          "136.9233188",
+          "136.9247993"
+        ],
+        "official_match": "設置施設・エリアと公式住所を照合。詳細は個別監査表。",
+        "measurement": "GPS実測の根拠なし",
+        "geographic_check": "地理院地図std z17（2026-10-20閲覧）で施設・周辺道路の位置関係を目視照合。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "湯っ足りパーク内のわくらポケモン足湯のすぐそば。県観光公式の写真では足湯建物付近の灰色の舗装面です。足湯の中ではありません。建物からの正確な向き・現物中心は未確認。",
+      "parking_id": "parking-info-468",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "足湯は2026/5/12に再開。管理者案内は7:00～19:00・無料、七尾市に気象警報が出た日は終日臨時休業です。これは足湯の利用条件で、隣の屋外ポケふたの時間外観覧・料金・予約要否は未確認。警報・工事の規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/468/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/468/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/68/",
+        "https://www.hot-ishikawa.jp/spot/detail_18425.html",
+        "https://www.wakura.or.jp/brochure/brochure-4313/",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "正規の駐車区画から公園内へ徒歩。足湯施設の周辺で歩行者動線をふさがないでください。周辺の和倉和倉停車場線には9/1～11/30・9～17時の片側交互通行予定（規制190243、土日祝を除く）があります。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "正規の駐車区画から公園内へ徒歩。足湯施設の周辺で歩行者動線をふさがないでください。周辺の和倉和倉停車場線には9/1～11/30・9～17時の片側交互通行予定（規制190243、土日祝を除く）があります。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0469",
+      "official_number": 469,
+      "prefecture": "石川県",
+      "city": "輪島市",
+      "pokemon": "ダルマッカ／ゲッコウガ",
+      "facility_name": "道の駅輪島（ふらっと訪夢）",
+      "address": "石川県輪島市河井町20-1-131",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 37.3892345,
+      "facility_lon": 136.9063855,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1451629191",
+      "coordinate_method": "自治体・施設の設置先と住所を照合し、独立地理資料OpenStreetMapの施設・設置エリア代表点を採用。地理院地図の建物・道路・海岸線と周辺位置を目視照合。現物中心や駐車場入口の座標ではありません。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 1451629191,
+        "osm_feature_name": "道の駅輪島 ふらっと訪夢",
+        "osm_category": "highway",
+        "osm_feature_type": "services",
+        "boundingbox": [
+          "37.3887060",
+          "37.3897291",
+          "136.9058253",
+          "136.9069614"
+        ],
+        "official_match": "設置施設・エリアと公式住所を照合。詳細は個別監査表。",
+        "measurement": "GPS実測の根拠なし",
+        "geographic_check": "地理院地図std z17（2026-10-20閲覧）で施設・周辺道路の位置関係を目視照合。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "旧輪島駅跡の道の駅建物の屋外。県観光公式の現地写真では、建物前の灰色の大判タイル面に黄色く縁取られたふたが見えます。館内の「輪島塗蒔絵皿 ゲッコウガ」やスタンプ台とは別です。出入口からの向き・現物中心は未確認。",
+      "parking_id": "parking-info-469",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。施設の営業条件を現物の観覧条件へ転用していません。現地の掲示・規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/469/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/469/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/70/",
+        "https://www.hot-ishikawa.jp/spot/detail_1950.html",
+        "https://wajimanavi.jp/",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "道の駅の一般車用区画から建物前へ徒歩。駅前交通広場や復旧工事の規制範囲へ進入しないでください。周辺の七尾輪島線は2026/4/6～2027/3/31・8:30～17時の片側交互通行予定（189188、土日を除く）。近隣国道249号の通行止めもあり、現地規制を確認。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "道の駅の一般車用区画から建物前へ徒歩。駅前交通広場や復旧工事の規制範囲へ進入しないでください。周辺の七尾輪島線は2026/4/6～2027/3/31・8:30～17時の片側交互通行予定（189188、土日を除く）。近隣国道249号の通行止めもあり、現地規制を確認。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0470",
+      "official_number": 470,
+      "prefecture": "石川県",
+      "city": "珠洲市",
+      "pokemon": "ラブカス／ニンフィア",
+      "facility_name": "見付海水浴場そば（円形タイルの壇上）",
+      "address": "石川県珠洲市宝立町鵜島二47-1",
+      "source_position_grade": "E",
+      "source_public_stage": "P0",
+      "public_stage": "P0",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": null,
+      "facility_lon": null,
+      "facility_coord_type": "unconfirmed",
+      "facility_coord_label": "位置確認中",
+      "facility_coord_source": null,
+      "coordinate_method": "公式の円形タイル壇上写真と海水浴場側への設置は確認できましたが、独立した地理資料でその設置エリアを確実に対応付ける数値座標を確認できませんでした。見附公園の代表点は駐車先側であり現物位置には採用せず、地理院住所検索の鵜島地区代表点、検索で混入した氷見市の海水浴場、Google登録座標も採用していません。公式の拡大配置図または根拠ある設置エリア座標の確認待ちです。",
+      "coordinate_evidence": {
+        "rejected_sources": [
+          "地理院住所検索の集落代表点",
+          "Google登録座標の転載",
+          "島・町の中心点"
+        ],
+        "reason": "公式の円形タイル壇上写真と海水浴場側への設置は確認できましたが、独立した地理資料でその設置エリアを確実に対応付ける数値座標を確認できませんでした。見附公園の代表点は駐車先側であり現物位置には採用せず、地理院住所検索の鵜島地区代表点、検索で混入した氷見市の海水浴場、Google登録座標も採用していません。公式の拡大配置図または根拠ある設置エリア座標の確認待ちです。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "珠洲市公式の設置写真は、海を背にした円形の段状タイルの壇上を示しています。ラブカスベンチと同じ海水浴場側のエリアで、見附島前のニンフィアモニュメントとは別地点です。見付公園駐車場そのものや仮設住宅を現物位置としていません。",
+      "parking_id": "parking-info-470",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。施設の営業条件を現物の観覧条件へ転用していません。現地の掲示・規制に従ってください。",
+      "unresolved": "地図ピンは位置確認中のため表示していません。公式の円形タイル壇上写真と海水浴場側への設置は確認できましたが、独立した地理資料でその設置エリアを確実に対応付ける数値座標を確認できませんでした。見附公園の代表点は駐車先側であり現物位置には採用せず、地理院住所検索の鵜島地区代表点、検索で混入した氷見市の海水浴場、Google登録座標も採用していません。公式の拡大配置図または根拠ある設置エリア座標の確認待ちです。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/470/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/470/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/71/",
+        "https://www.city.suzu.lg.jp/site/kankou/24996.html",
+        "https://www.pokemon-foundation.or.jp/news/173/",
+        "https://www.hot-ishikawa.jp/spot/detail_6554.html",
+        "https://www.hot-ishikawa.jp/feature/detail_613.html",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "観光客用の見付公園駐車場から、現地案内に従い海水浴場側のラブカスベンチ・円形壇上へ徒歩。県観光は見附島前モニュメントと海水浴場側を徒歩約7～10分離れた場所として案内。駐車入口からの正確な経路・住宅境界・工事範囲は未確認です。住宅用地・工事区域に入らず、海岸の立入規制・高波に注意。宝立町鵜島～鵜飼の金峰寺橋は橋梁被災による通行止め（184612、2024/1/1～終了未定、迂回あり）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "観光客用の見付公園駐車場から、現地案内に従い海水浴場側のラブカスベンチ・円形壇上へ徒歩。県観光は見附島前モニュメントと海水浴場側を徒歩約7～10分離れた場所として案内。駐車入口からの正確な経路・住宅境界・工事範囲は未確認です。住宅用地・工事区域に入らず、海岸の立入規制・高波に注意。宝立町鵜島～鵜飼の金峰寺橋は橋梁被災による通行止め（184612、2024/1/1～終了未定、迂回あり）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0471",
+      "official_number": 471,
+      "prefecture": "石川県",
+      "city": "志賀町",
+      "pokemon": "カイデン／サクラビス",
+      "facility_name": "世界一長いベンチ付近",
+      "address": "石川県志賀町富来領家町",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 37.1395496,
+      "facility_lon": 136.7245548,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/8780199517",
+      "coordinate_method": "自治体・施設の設置先と住所を照合し、独立地理資料OpenStreetMapの施設・設置エリア代表点を採用。地理院地図の建物・道路・海岸線と周辺位置を目視照合。現物中心や駐車場入口の座標ではありません。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 8780199517,
+        "osm_feature_name": "世界一長いベンチ",
+        "osm_category": "tourism",
+        "osm_feature_type": "attraction",
+        "boundingbox": [
+          "37.1394996",
+          "37.1395996",
+          "136.7245048",
+          "136.7246048"
+        ],
+        "official_match": "設置施設・エリアと公式住所を照合。詳細は個別監査表。",
+        "measurement": "GPS実測の根拠なし",
+        "geographic_check": "地理院地図std z17（2026-10-20閲覧）で施設・周辺道路の位置関係を目視照合。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "県観光の現地案内は、道の駅とぎ海街道の建物裏手から海岸へ続く階段を上がり、看板を目印に進むとポケふた・デジタルフォトスポットがあると説明。写真は灰色の舗装面。長いベンチの中央が現物とは確認していません。",
+      "parking_id": "parking-info-471",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。施設の営業条件を現物の観覧条件へ転用していません。現地の掲示・規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/471/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/471/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/67/",
+        "https://www.hot-ishikawa.jp/spot/detail_5677.html",
+        "https://www.hot-ishikawa.jp/spot/detail_1951.html",
+        "https://togi-michinoeki.com/",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "道の駅裏手の階段から海岸沿いの看板を確認し徒歩で訪問。ベンチ・海岸遊歩道へ車を入れないでください。富来領家町の国道249号には2026/10/13～11/6の自転車・歩行者通行止め（190716、土日祝を除く、迂回あり）があるため、歩道の迂回指示にも従ってください。全車両通行止めとは区別します。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "道の駅裏手の階段から海岸沿いの看板を確認し徒歩で訪問。ベンチ・海岸遊歩道へ車を入れないでください。富来領家町の国道249号には2026/10/13～11/6の自転車・歩行者通行止め（190716、土日祝を除く、迂回あり）があるため、歩道の迂回指示にも従ってください。全車両通行止めとは区別します。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0472",
+      "official_number": 472,
+      "prefecture": "石川県",
+      "city": "穴水町",
+      "pokemon": "カビゴン／プラスル／マイナン",
+      "facility_name": "穴水駅前（駅舎向かい側）",
+      "address": "石川県穴水町字大町ト33",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 37.228041,
+      "facility_lon": 136.9048206,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/543604138",
+      "coordinate_method": "自治体・施設の設置先と住所を照合し、独立地理資料OpenStreetMapの施設・設置エリア代表点を採用。地理院地図の建物・道路・海岸線と周辺位置を目視照合。現物中心や駐車場入口の座標ではありません。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 543604138,
+        "osm_feature_name": "穴水駅",
+        "osm_category": "building",
+        "osm_feature_type": "train_station",
+        "boundingbox": [
+          "37.2279391",
+          "37.2281583",
+          "136.9046796",
+          "136.9049438"
+        ],
+        "official_match": "設置施設・エリアと公式住所を照合。詳細は個別監査表。",
+        "measurement": "GPS実測の根拠なし",
+        "geographic_check": "地理院地図std z17（2026-10-20閲覧）で施設・周辺道路の位置関係を目視照合。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "県観光公式は駅舎の向かい側にあると明記。現地写真では駅入口を正面に見るレンガ色の歩行空間にあります。改札内ホームの車両展示や顔出しパネルとは別です。ピンは駅建物代表点で、向かい側のふた中心ではありません。",
+      "parking_id": "parking-info-472",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。施設の営業条件を現物の観覧条件へ転用していません。現地の掲示・規制に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/472/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/472/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/56/",
+        "https://www.hot-ishikawa.jp/spot/detail_19907.html",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html",
+        "https://nototetsu.jp/pokemon/",
+        "https://nototetsu.jp/",
+        "https://nototetsu.jp/news/%e3%81%ae%e3%81%a8%e9%89%84%e9%81%93%e3%83%a9%e3%83%83%e3%83%94%e3%83%b3%e3%82%b0%e8%bb%8a%e4%b8%a1%e3%81%ae%e4%b8%80%e6%99%82%e9%81%8b%e8%a1%8c%e5%81%9c%e6%ad%a2%e5%8f%8a%e3%81%b3%e5%88%97%e8%bb%8a/",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/news/420/",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "一般駐車区画から駅前の横断箇所を安全確認し、駅舎向かい側の歩行空間へ徒歩。ポケモン列車は鉄道公式2026/9/18発表で安全確認のため当面運行休止、10月以降の展示は要最新確認。駅全体の休業とは断定しません。周辺七尾輪島線は2026/9/28～12/27・9～17時片側交互通行（190614、土日を除く）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "一般駐車区画から駅前の横断箇所を安全確認し、駅舎向かい側の歩行空間へ徒歩。ポケモン列車は鉄道公式2026/9/18発表で安全確認のため当面運行休止、10月以降の展示は要最新確認。駅全体の休業とは断定しません。周辺七尾輪島線は2026/9/28～12/27・9～17時片側交互通行（190614、土日を除く）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0473",
+      "official_number": 473,
+      "prefecture": "石川県",
+      "city": "能登町",
+      "pokemon": "ロゼリア／メテノ／ハスボー",
+      "facility_name": "柳田植物公園（やなぎだ植物公園）",
+      "address": "石川県能登町字上町ロ部1-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 37.3355279,
+      "facility_lon": 137.1375953,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/node/5748104204",
+      "coordinate_method": "自治体・施設の設置先と住所を照合し、独立地理資料OpenStreetMapの施設・設置エリア代表点を採用。地理院地図の建物・道路・海岸線と周辺位置を目視照合。現物中心や駐車場入口の座標ではありません。",
+      "coordinate_evidence": {
+        "osm_type": "node",
+        "osm_id": 5748104204,
+        "osm_feature_name": "柳田植物公園",
+        "osm_category": "leisure",
+        "osm_feature_type": "park",
+        "boundingbox": [
+          "37.3354779",
+          "37.3355779",
+          "137.1375453",
+          "137.1376453"
+        ],
+        "official_match": "設置施設・エリアと公式住所を照合。詳細は個別監査表。",
+        "measurement": "GPS実測の根拠なし",
+        "geographic_check": "地理院地図std z17（2026-10-20閲覧）で施設・周辺道路の位置関係を目視照合。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "県・町の公式資料は柳田植物公園内への設置を案内。県観光の写真は灰色の舗装面です。園内の花壇・通路・ふれあいハウスとの具体的な方向関係は未確認。ピンは公園代表点で、屋内遊具や現物中心の位置ではありません。",
+      "parking_id": "parking-info-473",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "県観光は入園無料、入園9:00～17:30、木曜休みと掲載。レストラン・有料体験・屋内遊具「ポケモンなかよしハウス」の料金や予約・対象年齢は別です。屋外ポケふたの木曜・閉園後の立入可否、現物固有の予約要否は未確認。公園の最新案内を確認してください。",
+      "unresolved": "ピンはおおまかな位置です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/473/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/473/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/66/",
+        "https://www.hot-ishikawa.jp/spot/detail_6642.html",
+        "https://www.town.noto.lg.jp/kakuka/1009/gyomu/5/5446.html",
+        "https://yanagida-flower.jp/",
+        "https://yanagida-flower.jp/about/",
+        "https://yanagida-flower.jp/access/",
+        "https://yanagida-flower.jp/facilities/",
+        "https://www.pokemon-foundation.or.jp/news/175/",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "公園の指定駐車場から園内案内を確認して徒歩。正確な現物までの経路・所要時間は未確認。宇出津町野線の能登町上町区間に2026/10/1～12/25の終日片側交互通行予定（190564、土日祝を除く）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "公園の指定駐車場から園内案内を確認して徒歩。正確な現物までの経路・所要時間は未確認。宇出津町野線の能登町上町区間に2026/10/1～12/25の終日片側交互通行予定（190564、土日祝を除く）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0475",
+      "official_number": 475,
+      "prefecture": "石川県",
+      "city": "輪島市",
+      "pokemon": "タツベイ／ボーマンダ",
+      "facility_name": "のと里山ポケモン・ウィズ・ユー空港（ターミナル前屋外）",
+      "address": "石川県輪島市・のと里山空港敷地内（輪島市三井町洲衛10-11-1）",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 37.2952791,
+      "facility_lon": 136.9573619,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/290214966",
+      "coordinate_method": "自治体・施設の設置先と住所を照合し、独立地理資料OpenStreetMapの施設・設置エリア代表点を採用。地理院地図の建物・道路・海岸線と周辺位置を目視照合。現物中心や駐車場入口の座標ではありません。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 290214966,
+        "osm_feature_name": "能登空港ターミナルビル",
+        "osm_category": "aeroway",
+        "osm_feature_type": "terminal",
+        "boundingbox": [
+          "37.2949744",
+          "37.2955901",
+          "136.9568706",
+          "136.9578508"
+        ],
+        "official_match": "設置施設・エリアと公式住所を照合。詳細は個別監査表。",
+        "measurement": "GPS実測の根拠なし",
+        "geographic_check": "地理院地図std z17（2026-10-20閲覧）。空港はターミナルビルの代表点であり滑走路・空港全体の中心ではない。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "県公式「空港の楽しみ方」の1階配置図では、屋外の空港前広場側に12番「ポケふた」を表示。ターミナルの建物外、出入口から少し歩く場所と県観光も案内しています。2階保安検査場前のタツベイ像や保安区域内の装飾とは別です。",
+      "parking_id": "parking-info-475",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "県の一般来訪者向け案内と屋外配置図で、ターミナル前の一般区域を観光スポットとして紹介。搭乗券を要する保安区域内ではありません。現物の観覧可能時間・料金・予約要否、夜間・閉館後の出入りは未確認です。館内施設の営業時間や保安検査場の利用条件を転用していません。",
+      "unresolved": "ピンはおおまかな位置です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・現地での当日運用や臨時変更は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/475/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/475/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/72/",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/airport/enjoy/",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/airport/",
+        "https://www.pref.ishikawa.lg.jp/chiji/kisya/r8_6_25/1.html",
+        "https://www.pokemon.jp/info/event/detail/20398.html",
+        "https://www.noto-airport.jp/access/parking.html",
+        "https://www.noto-airport.jp/info/info_1083.html",
+        "https://www.noto-airport.jp/facilities/",
+        "https://www.noto-airport.jp/faq/",
+        "https://www.noto-airport.jp/info/info_1121.html",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車場の指定歩行動線からターミナル前の一般区域へ徒歩。現物は屋外の広場側であり、保安検査場や滑走路へ入る必要はありません。工事区画・バス乗降場・タクシー動線を避けてください。柏木穴水線の三井町洲衛に2026/10/13～12/21の全車両通行止め（190755、土日を除く、迂回あり）。空港全体へのアクセス不能を意味しません。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車場の指定歩行動線からターミナル前の一般区域へ徒歩。現物は屋外の広場側であり、保安検査場や滑走路へ入る必要はありません。工事区画・バス乗降場・タクシー動線を避けてください。柏木穴水線の三井町洲衛に2026/10/13～12/21の全車両通行止め（190755、土日を除く、迂回あり）。空港全体へのアクセス不能を意味しません。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
       "port_information": "該当なし（本土または橋で接続した地域）"
     }
   ],
@@ -9286,6 +9830,171 @@ window.POKEFUTA_DATA={
         "https://doppuri.kochi-tabi.jp/pokemon/information/dtl.html?id=30",
         "https://kochi-tabi.jp/search_spot_food.html?id=16313",
         "https://www.niyodogawa.tv/movie/movie-3573/"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-301",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "一般有料駐車場の候補：本多の森駐車場（旧石引駐車場、金沢市石引4丁目380番）。管理者案内は普通車400台・24時間年中無休・車高2.2m以下。最初の1時間は30分100円、以降1時間100円。7～10時入庫かつ18時まで出庫は最大900円。催事の混雑・料金変更は公式を再確認。文化施設共用駐車場は国立工芸館公式で第3・45台/徒歩1分、第2・60台/約3分、第1・128台/約4分、無料と案内されていますが、駐車券を国立工芸館受付へ渡す手続きがあります。ポケふた観覧だけでの共用駐車場の利用資格・開閉時間は未確認。優先駐車場3台を一般用に案内していません。 徒歩：駐車場から一般歩道を使い国立工芸館前庭へ徒歩。建物入口に車を横付けできないと館公式が案内しています。公道の横断・坂道に注意。本多の森駐車場からの現物までの実測徒歩時間と最適性は未確認。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "本多の森駐車場 金沢市石引4丁目380番"
+      ],
+      "sources": [
+        "https://www.hot-ishikawa.jp/blog/detail_485.html",
+        "https://www.momat.go.jp/craft-museum/access",
+        "https://www.momat.go.jp/craft-museum/faq",
+        "https://ishikawa-odekake.jp/parking/ishibiki.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-468",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "公園の駐車場ありと県観光が案内。普通車の台数、料金、開閉時間、観覧だけの利用条件、復旧工事による使用区画は未確認です。近隣旅館の専用駐車場や路上を代わりに案内していません。利用可能な区画を公園管理者へ確認してください。 徒歩：正規の駐車区画から公園内へ徒歩。足湯施設の周辺で歩行者動線をふさがないでください。周辺の和倉和倉停車場線には9/1～11/30・9～17時の片側交互通行予定（規制190243、土日祝を除く）があります。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/68/",
+        "https://www.hot-ishikawa.jp/spot/detail_18425.html",
+        "https://www.wakura.or.jp/brochure/brochure-4313/",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-469",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅の無料駐車場ありと2026/10/1県観光記事で案内。一般車が現在使える区画・開閉時間・工事で減った台数は未確認。過去の収容台数を現在の空き台数として掲載しません。バス・タクシーの乗降区画には駐車しないでください。 徒歩：道の駅の一般車用区画から建物前へ徒歩。駅前交通広場や復旧工事の規制範囲へ進入しないでください。周辺の七尾輪島線は2026/4/6～2027/3/31・8:30～17時の片側交互通行予定（189188、土日を除く）。近隣国道249号の通行止めもあり、現地規制を確認。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅輪島 ふらっと訪夢 駐車場"
+      ],
+      "sources": [
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/70/",
+        "https://www.hot-ishikawa.jp/spot/detail_1950.html",
+        "https://wajimanavi.jp/",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-470",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "観光客は見付公園駐車場を利用するよう財団公式が指定。仮設住宅入居者の専用駐車場は利用しないでください。県観光は「見附公園駐車場」200台・無料と案内しますが、当日使用できる台数・開閉時間・入口GPSは未確認です。トイレは仮設集会所ではなく、見附茶屋隣のトイレを利用してください。 徒歩：観光客用の見付公園駐車場から、現地案内に従い海水浴場側のラブカスベンチ・円形壇上へ徒歩。県観光は見附島前モニュメントと海水浴場側を徒歩約7～10分離れた場所として案内。駐車入口からの正確な経路・住宅境界・工事範囲は未確認です。住宅用地・工事区域に入らず、海岸の立入規制・高波に注意。宝立町鵜島～鵜飼の金峰寺橋は橋梁被災による通行止め（184612、2024/1/1～終了未定、迂回あり）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "見付公園 駐車場 珠洲市"
+      ],
+      "sources": [
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/71/",
+        "https://www.city.suzu.lg.jp/site/kankou/24996.html",
+        "https://www.pokemon-foundation.or.jp/news/173/",
+        "https://www.hot-ishikawa.jp/spot/detail_6554.html",
+        "https://www.hot-ishikawa.jp/feature/detail_613.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-471",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：道の駅とぎ海街道の一般車用駐車場。県観光は普通40台・大型2台・身障者1台、2026/10/1記事は無料と案内。実際の使用可能台数・駐車場開閉時間・入口GPSは未確認。店舗の3～11月9～17時／12～2月9～16時・木曜休みは駐車場の時間とは別です。 徒歩：道の駅裏手の階段から海岸沿いの看板を確認し徒歩で訪問。ベンチ・海岸遊歩道へ車を入れないでください。富来領家町の国道249号には2026/10/13～11/6の自転車・歩行者通行止め（190716、土日祝を除く、迂回あり）があるため、歩道の迂回指示にも従ってください。全車両通行止めとは区別します。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅とぎ海街道 駐車場"
+      ],
+      "sources": [
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/67/",
+        "https://www.hot-ishikawa.jp/spot/detail_5677.html",
+        "https://www.hot-ishikawa.jp/spot/detail_1951.html",
+        "https://togi-michinoeki.com/",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-472",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "候補：隣接する道の駅あなみずの一般車用駐車場。県観光は36台、2026/10/1記事は無料と案内。開閉時間、当日使える区画、入口GPSは未確認。駅ロータリー・バス・タクシー用区画を駐車先としていません。 徒歩：一般駐車区画から駅前の横断箇所を安全確認し、駅舎向かい側の歩行空間へ徒歩。ポケモン列車は鉄道公式2026/9/18発表で安全確認のため当面運行休止、10月以降の展示は要最新確認。駅全体の休業とは断定しません。周辺七尾輪島線は2026/9/28～12/27・9～17時片側交互通行（190614、土日を除く）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅あなみず 駐車場"
+      ],
+      "sources": [
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/56/",
+        "https://www.hot-ishikawa.jp/spot/detail_19907.html",
+        "https://www.hot-ishikawa.jp/feature/detail_592.html",
+        "https://nototetsu.jp/pokemon/",
+        "https://nototetsu.jp/",
+        "https://nototetsu.jp/news/%e3%81%ae%e3%81%a8%e9%89%84%e9%81%93%e3%83%a9%e3%83%83%e3%83%94%e3%83%b3%e3%82%b0%e8%bb%8a%e4%b8%a1%e3%81%ae%e4%b8%80%e6%99%82%e9%81%8b%e8%a1%8c%e5%81%9c%e6%ad%a2%e5%8f%8a%e3%81%b3%e5%88%97%e8%bb%8a/",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/news/420/"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-473",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "公園駐車場あり、無料と2026/10/1県観光記事が案内。一般普通車の台数・開閉時間・入口GPSは未確認。イベント・復旧工事による区画変更は管理者へ確認してください。 徒歩：公園の指定駐車場から園内案内を確認して徒歩。正確な現物までの経路・所要時間は未確認。宇出津町野線の能登町上町区間に2026/10/1～12/25の終日片側交互通行予定（190564、土日祝を除く）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "柳田植物公園 駐車場"
+      ],
+      "sources": [
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/66/",
+        "https://www.hot-ishikawa.jp/spot/detail_6642.html",
+        "https://www.town.noto.lg.jp/kakuka/1009/gyomu/5/5446.html",
+        "https://yanagida-flower.jp/",
+        "https://yanagida-flower.jp/about/",
+        "https://yanagida-flower.jp/access/",
+        "https://yanagida-flower.jp/facilities/",
+        "https://www.pokemon-foundation.or.jp/news/175/"
+      ],
+      "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-475",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "空港公式は駐車場無料・900台、県ポケモンサイトは約800台と案内し、集計範囲は未確認です。空港見学者向けにも無料駐車場の案内がありますが、航空旅客の利用を妨げず、管理者の指定区画を使ってください。2026/2/16から第一駐車場の一部で舗装災害復旧工事による駐車規制。満車時は第二駐車場へ。規制終了日・現在使える台数・開閉時間・入口GPSは未確認。 徒歩：駐車場の指定歩行動線からターミナル前の一般区域へ徒歩。現物は屋外の広場側であり、保安検査場や滑走路へ入る必要はありません。工事区画・バス乗降場・タクシー動線を避けてください。柏木穴水線の三井町洲衛に2026/10/13～12/21の全車両通行止め（190755、土日を除く、迂回あり）。空港全体へのアクセス不能を意味しません。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。 確認日：2026/10/20。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "のと里山空港 第二駐車場"
+      ],
+      "sources": [
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/72/",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/airport/enjoy/",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/airport/",
+        "https://www.pref.ishikawa.lg.jp/chiji/kisya/r8_6_25/1.html",
+        "https://www.pokemon.jp/info/event/detail/20398.html",
+        "https://www.noto-airport.jp/access/parking.html",
+        "https://www.noto-airport.jp/info/info_1083.html",
+        "https://www.noto-airport.jp/facilities/",
+        "https://www.noto-airport.jp/faq/",
+        "https://www.noto-airport.jp/info/info_1121.html"
       ],
       "source_date": "2026-10-20",
       "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
