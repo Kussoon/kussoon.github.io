@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="origin">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。16府県153件（地図150枚・位置保留3枚）の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。16府県153件（地図153枚・位置保留0枚）の設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -194,24 +194,24 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.10.0-20261020T022943Z">
+<meta name="kussoon-build" content="pokefuta-v0.10.1-20261020T022943Z">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">16府県・地図150枚・位置保留3枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">16府県・地図153枚・位置保留0枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の153件（うち地図表示150枚）にはありません。全国すべてを収録したわけではありません。</p>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の153件（うち地図表示153枚）にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の153件（うち地図表示150枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.10.0（高知県追加検証版）／調査基準日：2026/10/20。既存135枚の情報・確認日を維持し、高知県18枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島・香川・福井・高知の153件を一覧に掲載。地図表示150枚、位置保留3枚（高知県の大月町・三原村・安田町）。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の153件（うち地図表示153枚）にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.10.1（高知県概略ピン3地点追加版）／調査基準日：2026/10/20。既存135枚の情報・確認日を維持し、高知県18枚を追加。兵庫・大阪・京都・滋賀・和歌山・奈良・岡山・鳥取・三重・島根・山口・愛媛・徳島・香川・福井・高知の153件を一覧に掲載。地図表示153枚、位置保留0枚。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.10.0（高知県追加検証版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.10.1（高知県概略ピン3地点追加版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの先頭へ" hidden><span aria-hidden="true">↑</span> ページの先頭へ</button>
@@ -222,7 +222,7 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "source_version": "4.4",
   "checked_at": "2026-10-20",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
@@ -6141,7 +6141,7 @@ window.POKEFUTA_DATA={
       "transport_note": "山間部の積雪・凍結・冬季閉鎖に注意。県は県道383号の2025/12/5からの冬期閉鎖を2026/3/18に解除と公表。2026～27年冬の開始日は未確認。施設の道路案内は2026/10/8現在で県道36号地芳峠の時間帯通行止め等を記載しており、調査日当日の通行保証ではありません。細い県道へナビ任せで入らず、最新の道路管理者・施設案内を確認してください。",
       "port_information": "該当なし（本土または橋で接続した地域）"
     },
-    {
+{
       "id": "PF-0395",
       "official_number": 395,
       "prefecture": "高知県",
@@ -6149,33 +6149,30 @@ window.POKEFUTA_DATA={
       "pokemon": "ヌオー／フィオネ／ケイコウオ",
       "facility_name": "柏島観光情報発信センター",
       "address": "高知県大月町柏島600番地",
-      "source_position_grade": "E",
-      "source_public_stage": "P0",
-      "public_stage": "P0",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
       "lid_lat": null,
       "lid_lon": null,
       "lid_coord_type": "unknown",
-      "facility_lat": null,
-      "facility_lon": null,
-      "facility_coord_type": "unconfirmed",
-      "facility_coord_label": "位置確認中",
-      "facility_coord_source": null,
-      "coordinate_method": "柏島600の施設は確定していますが、今回取得した独立地理資料だけではセンター敷地を確実に対応付けられませんでした。Google登録点・島の中心・橋の端点は採用していません。公式の拡大配置図または根拠のある施設座標が必要です。",
+      "facility_lat": 32.7676787,
+      "facility_lon": 132.6272612,
+      "facility_coord_type": "user_supplied_approximate",
+      "facility_coord_label": "利用者提供の設置エリア概略点（現物GPSではありません）",
+      "facility_coord_source": "利用者提供（2026-10-20）",
+      "coordinate_method": "写真とGoogleストリートビュー（2024年3月）の建物・案内板の対応を利用者が確認。利用者提供の位置は現物中心の実測座標ではなく、おおまかな位置です。",
       "coordinate_evidence": {
-        "rejected_sources": [
-          "地理院住所検索の集落代表点",
-          "Google登録座標の転載",
-          "島・町の中心点"
-        ],
-        "reason": "柏島600の施設は確定していますが、今回取得した独立地理資料だけではセンター敷地を確実に対応付けられませんでした。Google登録点・島の中心・橋の端点は採用していません。公式の拡大配置図または根拠のある施設座標が必要です。"
+        "source": "利用者が座標を提示（2026-10-20）。PF-0395については建物・案内板・ふた位置を示すユーザー提供の写真とストリートビュー画面あり。",
+        "position_accuracy": "概略位置であり、現物中心・施設入口・駐車場入口のGPSではない",
+        "independent_map_verification": "未実施。地図表示後の実機確認を要する"
       },
       "gps_measurement_verified": false,
-      "exact_landmark": "県の設置発表・リーフレットは柏島観光情報発信センター（柏島600）を指定。島の中心ではなく、センターの敷地を概略表示します。敷地内の現物中心は未確認。",
+      "exact_landmark": "柏島観光情報発信センターの建物前、柏島MAP案内板の足元付近",
       "parking_id": "parking-info-395",
       "parking_eligibility": "unconfirmed",
       "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
       "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。近隣施設の営業時間・入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
-      "unresolved": "地図ピンは位置確認中のため表示していません。柏島600の施設は確定していますが、今回取得した独立地理資料だけではセンター敷地を確実に対応付けられませんでした。Google登録点・島の中心・橋の端点は採用していません。公式の拡大配置図または根拠のある施設座標が必要です。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "unresolved": "現物GPS・誤差・駐車場入口GPS・利用者提供概略座標と現物の正確な差・当日の規制は未確認です。地図上のピンはおおまかな位置です。",
       "official_url": "https://local.pokemon.jp/manhole/desc/395/",
       "sources": [
         "https://local.pokemon.jp/manhole/desc/395/?is_modal=1",
@@ -6195,7 +6192,7 @@ window.POKEFUTA_DATA={
       "transport_note": "柏島は橋で本土とつながる地域です。船でしか行けない離島ではありません。集落内の狭路・生活道路や橋の上に駐車せず、利用可能な指定駐車場を確認して徒歩で訪問してください。季節外の駐車先は町へ確認。",
       "port_information": "該当なし（本土または橋で接続した地域）"
     },
-    {
+{
       "id": "PF-0396",
       "official_number": 396,
       "prefecture": "高知県",
@@ -6203,33 +6200,30 @@ window.POKEFUTA_DATA={
       "pokemon": "ヌオー／ドオー",
       "facility_name": "星ヶ丘公園（ヒメノボタンの里）",
       "address": "高知県三原村宮ノ川",
-      "source_position_grade": "E",
-      "source_public_stage": "P0",
-      "public_stage": "P0",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
       "lid_lat": null,
       "lid_lon": null,
       "lid_coord_type": "unknown",
-      "facility_lat": null,
-      "facility_lon": null,
-      "facility_coord_type": "unconfirmed",
-      "facility_coord_label": "位置確認中",
-      "facility_coord_source": null,
-      "coordinate_method": "星ヶ丘公園の設置と現地記事の日時計前を確認しましたが、独立地理資料上で日時計・公園敷地を確実に対応付けられませんでした。宮ノ川の集落代表点は採用せず、位置図または施設座標の確認待ちです。",
+      "facility_lat": 32.9225507,
+      "facility_lon": 132.8398692,
+      "facility_coord_type": "user_supplied_approximate",
+      "facility_coord_label": "利用者提供の設置エリア概略点（現物GPSではありません）",
+      "facility_coord_source": "利用者提供（2026-10-20）",
+      "coordinate_method": "利用者提供の概略座標です。現物の日時計前と数値座標が正確に一致するかは未確認です。",
       "coordinate_evidence": {
-        "rejected_sources": [
-          "地理院住所検索の集落代表点",
-          "Google登録座標の転載",
-          "島・町の中心点"
-        ],
-        "reason": "星ヶ丘公園の設置と現地記事の日時計前を確認しましたが、独立地理資料上で日時計・公園敷地を確実に対応付けられませんでした。宮ノ川の集落代表点は採用せず、位置図または施設座標の確認待ちです。"
+        "source": "利用者が座標を提示（2026-10-20）。PF-0395については建物・案内板・ふた位置を示すユーザー提供の写真とストリートビュー画面あり。",
+        "position_accuracy": "概略位置であり、現物中心・施設入口・駐車場入口のGPSではない",
+        "independent_map_verification": "未実施。地図表示後の実機確認を要する"
       },
       "gps_measurement_verified": false,
-      "exact_landmark": "県の設置発表・リーフレットで星ヶ丘公園を確認。独立した2025/12現地記事の写真では日時計の前のタイル状舗装面にあります。日時計前という細部は自治体資料では未確認です。",
+      "exact_landmark": "星ヶ丘公園、日時計のようなモニュメント前のタイル状舗装付近",
       "parking_id": "parking-info-396",
       "parking_eligibility": "unconfirmed",
       "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
       "viewing_condition": "県観光は公園無料・無休と案内。ポケふた固有の予約要否、夜間・臨時規制の条件は未確認です。暗い時間や荒天時の無理な訪問は避けてください。",
-      "unresolved": "地図ピンは位置確認中のため表示していません。星ヶ丘公園の設置と現地記事の日時計前を確認しましたが、独立地理資料上で日時計・公園敷地を確実に対応付けられませんでした。宮ノ川の集落代表点は採用せず、位置図または施設座標の確認待ちです。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。",
+      "unresolved": "現物GPS・誤差・駐車場入口GPS・利用者提供概略座標と現物の正確な差・当日の規制は未確認です。地図上のピンはおおまかな位置です。",
       "official_url": "https://local.pokemon.jp/manhole/desc/396/",
       "sources": [
         "https://local.pokemon.jp/manhole/desc/396/?is_modal=1",
@@ -6674,7 +6668,7 @@ window.POKEFUTA_DATA={
       "transport_note": "利用可能な駐車区画から海洋館へ徒歩。道路を横断する場合は現地の歩行経路を確認。海沿いの高波・荒天時は現地規制に従ってください。",
       "port_information": "該当なし（本土または橋で接続した地域）"
     },
-    {
+{
       "id": "PF-0451",
       "official_number": 451,
       "prefecture": "高知県",
@@ -6682,33 +6676,30 @@ window.POKEFUTA_DATA={
       "pokemon": "ヌオー／メタモン",
       "facility_name": "味工房じねん",
       "address": "高知県安田町大字正弘566番地",
-      "source_position_grade": "E",
-      "source_public_stage": "P0",
-      "public_stage": "P0",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
       "lid_lat": null,
       "lid_lon": null,
       "lid_coord_type": "unknown",
-      "facility_lat": null,
-      "facility_lon": null,
-      "facility_coord_type": "unconfirmed",
-      "facility_coord_label": "位置確認中",
-      "facility_coord_source": null,
-      "coordinate_method": "味工房じねんへの設置は町広報で確認しましたが、地理院住所検索は正弘地区の代表点までで、店舗を特定する数値座標を裏付けられませんでした。地区中心やGoogle登録座標は採用せず、配置図等の確認待ちです。",
+      "facility_lat": 33.4798391,
+      "facility_lon": 133.9998368,
+      "facility_coord_type": "user_supplied_approximate",
+      "facility_coord_label": "利用者提供の設置エリア概略点（現物GPSではありません）",
+      "facility_coord_source": "利用者提供（2026-10-20）",
+      "coordinate_method": "利用者提供の概略座標です。店舗の現物中心や駐車場入口を実測した座標ではありません。",
       "coordinate_evidence": {
-        "rejected_sources": [
-          "地理院住所検索の集落代表点",
-          "Google登録座標の転載",
-          "島・町の中心点"
-        ],
-        "reason": "味工房じねんへの設置は町広報で確認しましたが、地理院住所検索は正弘地区の代表点までで、店舗を特定する数値座標を裏付けられませんでした。地区中心やGoogle登録座標は採用せず、配置図等の確認待ちです。"
+        "source": "利用者が座標を提示（2026-10-20）。PF-0395については建物・案内板・ふた位置を示すユーザー提供の写真とストリートビュー画面あり。",
+        "position_accuracy": "概略位置であり、現物中心・施設入口・駐車場入口のGPSではない",
+        "independent_map_verification": "未実施。地図表示後の実機確認を要する"
       },
       "gps_measurement_verified": false,
-      "exact_landmark": "町広報やすだ2026年5月号p14は味工房じねん内への設置済みを明記。掲載写真は灰色の舗装面。受付内外・入口からの具体的方向は未確認です。",
+      "exact_landmark": "味工房じねんの敷地内（詳しい現物位置は未確認）",
       "parking_id": "parking-info-451",
       "parking_eligibility": "unconfirmed",
       "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
       "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。近隣施設の営業時間・入館料を、そのままポケふたの条件として扱っていません。現地の規制に従ってください。",
-      "unresolved": "地図ピンは位置確認中のため表示していません。味工房じねんへの設置は町広報で確認しましたが、地理院住所検索は正弘地区の代表点までで、店舗を特定する数値座標を裏付けられませんでした。地区中心やGoogle登録座標は採用せず、配置図等の確認待ちです。 現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の規制は未確認です。県2026年ラリー紙面の住所「正広566」は、ポケふた公式・町観光・県観光の「正弘566」と異なります。正式掲載住所は公式個別ページを採用。店舗営業時間7:00～15:00/17:00に差があります。",
+      "unresolved": "現物GPS・誤差・駐車場入口GPS・利用者提供概略座標と現物の正確な差・当日の規制は未確認です。地図上のピンはおおまかな位置です。",
       "official_url": "https://local.pokemon.jp/manhole/desc/451/",
       "sources": [
         "https://local.pokemon.jp/manhole/desc/451/?is_modal=1",
