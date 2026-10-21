@@ -188,7 +188,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .pokemon-group[open] .pokemon-group-hint .group-open-action{display:inline!important}
 .pokemon-group[open] .pokemon-group-hint .group-closed-action{display:none!important}
 
-/* v0.12.2 — full-width search, three-column prefecture chooser, horizontal control rows */
+/* v0.12.3 — full-width search, three-column prefecture chooser, horizontal control rows */
 #filters{display:flex!important;flex-direction:column;gap:10px;padding:13px 16px 12px}
 #filters .search-row,#filters .pref-row,#filters .visit-row{display:flex;align-items:center;gap:9px;width:100%;min-width:0}
 #filters .search-row .search{flex:1;display:block;min-width:0}
@@ -211,7 +211,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 @media(max-width:680px){#filters{padding:10px 10px 12px;gap:9px}#clear-search{min-width:61px;padding:8px 10px}#filters #reset{max-width:48%;font-size:13px;padding:7px 6px}#pref-toggle{font-size:14px;padding:7px 9px}#filters .visit-row{gap:6px}#filters .visit-row .visit-check-label{font-size:12px}#filters .visit-row #visit{font-size:12px;padding:6px 2px}#filters .visit-row .record-in-filter{font-size:12px;padding:6px 7px}#filters .visit-row .record-in-filter span{font-size:16px}.pref-panel{width:min(460px,calc(100vw - 35px));gap:4px;padding:7px}.pref-panel button{font-size:12px;padding:6px 2px;min-height:39px}}
 
 
-/* v0.12.2: reuse geographic SVG outlines from Kussoon number-plate selector */
+/* v0.12.3: reuse geographic SVG outlines from Kussoon number-plate selector */
 #filters .pref-picker{position:static}
 #filters .pref-row{position:relative}
 #filters .pk-map-panel{display:block;width:min(730px,calc(100vw - 36px));max-height:min(78svh,720px);overflow-y:auto;overflow-x:hidden;grid-template-columns:none;padding:12px;left:0;top:calc(100% + 7px);overscroll-behavior:contain}
@@ -249,7 +249,7 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.12.2-20261020T233643Z">
+<meta name="kussoon-build" content="pokefuta-v0.12.3-20261020T233643Z">
 </head>
 <body>
 <header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">18府県・ポケふた170枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
@@ -275,9 +275,9 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
 <section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の170件にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.12.2（愛知県追加検証版）／調査基準日：2026/10/21。既存161枚の情報・確認日を維持し、愛知県9枚を追加。18府県170件を一覧に掲載。地図ピン170地点、位置保留0枚。愛知県9枚のピンは施設・設置エリアの概略位置であり、現物GPSではありません。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.12.3（愛知県追加検証版）／調査基準日：2026/10/21。既存161枚の情報・確認日を維持し、愛知県9枚を追加。18府県170件を一覧に掲載。地図ピン170地点、位置保留0枚。愛知県9枚のピンは施設・設置エリアの概略位置であり、現物GPSではありません。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.12.2（愛知県追加検証版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.12.3（愛知県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの先頭へ" hidden><span aria-hidden="true">↑</span> ページの先頭へ</button>
@@ -10934,6 +10934,7 @@ for(const g of pkMap.querySelectorAll('[data-pname]')){
 for(const o of $('#pref').options){if(!o.value)continue;const b=document.createElement('button');b.type='button';b.dataset.pref=o.value;b.textContent=o.value;pkNames.append(b);}
 const pkRegions={all:[0,0,840,880],hokkaido:[440,20,365,435],kanto:[395,390,270,270],chubu:[285,420,345,290],kinki:[225,530,275,245],chugoku:[60,530,395,260],kyushu:[20,630,255,245]};
 let pkView=[...pkRegions.all],pkDrag=null,pkMoved=false;
+const pkPointers=new Map();let pkGesture=null,pkSuppressClick=false;
 function pkSetView(v){let [x,y,w,h]=v;w=Math.min(840,Math.max(95,w));h=Math.min(880,Math.max(100,h));x=Math.max(0,Math.min(840-w,x));y=Math.max(0,Math.min(880-h,y));pkView=[x,y,w,h];pkMap.setAttribute('viewBox',pkView.join(' '));pkDrawLabels();}
 function pkDrawLabels(){pkLabels.replaceChildren();const [vx,vy,vw,vh]=pkView;for(const p of pkInfo){if(!pkEnabled.has(p.name)||p.x<vx||p.x>vx+vw||p.y<vy||p.y>vy+vh)continue;
  // Show labels only once magnified enough that names are legible.
@@ -10942,7 +10943,7 @@ function pkDrawLabels(){pkLabels.replaceChildren();const [vx,vy,vw,vh]=pkView;fo
 }}
 function pkZoom(factor){const [x,y,w,h]=pkView;pkSetView([x+w*(1-factor)/2,y+h*(1-factor)/2,w*factor,h*factor]);}
 function pkChoose(name){if(!pkEnabled.has(name))return;$('#pref').value=name;$('#pref').dispatchEvent(new Event('change',{bubbles:true}));syncPrefPicker();setPrefPanel(false);prefToggle.focus();}
-pkMap.addEventListener('click',e=>{if(pkMoved){pkMoved=false;return;}const g=e.target.closest('[data-pname]');if(g)pkChoose(g.dataset.pname);});
+pkMap.addEventListener('click',e=>{if(pkMoved||pkSuppressClick){pkMoved=false;pkSuppressClick=false;return;}const g=e.target.closest('[data-pname]');if(g)pkChoose(g.dataset.pname);});
 pkMap.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset.pname){e.preventDefault();pkChoose(e.target.dataset.pname);}});
 pkNames.addEventListener('click',e=>{const b=e.target.closest('button[data-pref]');if(b)pkChoose(b.dataset.pref);});
 $('#pk-close').addEventListener('click',()=>{setPrefPanel(false);prefToggle.focus();});
@@ -10950,9 +10951,54 @@ $('#pk-all').addEventListener('click',()=>{$('#pref').value='';$('#pref').dispat
 $('#pk-region').addEventListener('change',e=>pkSetView(pkRegions[e.target.value]||pkRegions.all));
 $('#pk-zoom-in').addEventListener('click',()=>pkZoom(.72));$('#pk-zoom-out').addEventListener('click',()=>pkZoom(1/.72));
 $('#pk-zoom-reset').addEventListener('click',()=>{$('#pk-region').value='all';pkSetView(pkRegions.all);});
-pkMap.addEventListener('pointerdown',e=>{if(e.button!==0)return;pkDrag={x:e.clientX,y:e.clientY,view:[...pkView]};pkMoved=false;pkMap.setPointerCapture(e.pointerId);});
-pkMap.addEventListener('pointermove',e=>{if(!pkDrag)return;const r=pkMap.getBoundingClientRect(),dx=(e.clientX-pkDrag.x)*pkDrag.view[2]/r.width,dy=(e.clientY-pkDrag.y)*pkDrag.view[3]/r.height;if(Math.abs(e.clientX-pkDrag.x)+Math.abs(e.clientY-pkDrag.y)>8)pkMoved=true;if(pkMoved)pkSetView([pkDrag.view[0]-dx,pkDrag.view[1]-dy,pkDrag.view[2],pkDrag.view[3]]);});
-pkMap.addEventListener('pointerup',()=>{pkDrag=null;});pkMap.addEventListener('pointercancel',()=>{pkDrag=null;});
+// Pointer Events: one finger pans; two fingers zoom around their midpoint and pan together.
+// Keep separate pointer IDs so a second touch never overwrites the first finger's drag state.
+function pkStartGesture(){
+ const points=[...pkPointers.values()];
+ if(points.length<2){pkGesture=null;return;}
+ const [a,b]=points;
+ pkGesture={startView:[...pkView],distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),midX:(a.x+b.x)/2,midY:(a.y+b.y)/2};
+ pkDrag=null;pkMoved=true;pkSuppressClick=true;
+}
+function pkEndPointer(e){
+ pkPointers.delete(e.pointerId);
+ if(pkMap.hasPointerCapture(e.pointerId))pkMap.releasePointerCapture(e.pointerId);
+ if(pkPointers.size>=2){pkStartGesture();}
+ else if(pkPointers.size===1){
+   const p=[...pkPointers.values()][0];pkDrag={x:p.x,y:p.y,view:[...pkView]};pkGesture=null;
+ }else{pkDrag=null;pkGesture=null;}
+}
+pkMap.addEventListener('pointerdown',e=>{
+ if(e.pointerType==='mouse'&&e.button!==0)return;
+ pkPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+ pkMap.setPointerCapture(e.pointerId);
+ if(pkPointers.size>=2)pkStartGesture();
+ else{pkDrag={x:e.clientX,y:e.clientY,view:[...pkView]};pkMoved=false;pkSuppressClick=false;}
+});
+pkMap.addEventListener('pointermove',e=>{
+ if(!pkPointers.has(e.pointerId))return;
+ pkPointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+ if(pkPointers.size>=2&&pkGesture){
+   const [a,b]=[...pkPointers.values()],distance=Math.max(1,Math.hypot(a.x-b.x,a.y-b.y));
+   const midX=(a.x+b.x)/2,midY=(a.y+b.y)/2,r=pkMap.getBoundingClientRect();
+   const [vx,vy,vw,vh]=pkGesture.startView;
+   const factor=pkGesture.distance/distance;
+   // Anchor the initial midpoint while letting both fingers move the map.
+   const w=vw*factor,h=vh*factor;
+   const px=(pkGesture.midX-r.left)/r.width,py=(pkGesture.midY-r.top)/r.height;
+   const qx=(midX-r.left)/r.width,qy=(midY-r.top)/r.height;
+   pkSetView([vx+px*vw-qx*w,vy+py*vh-qy*h,w,h]);
+   pkMoved=true;pkSuppressClick=true;
+   return;
+ }
+ if(!pkDrag)return;
+ const r=pkMap.getBoundingClientRect(),dx=(e.clientX-pkDrag.x)*pkDrag.view[2]/r.width,dy=(e.clientY-pkDrag.y)*pkDrag.view[3]/r.height;
+ if(Math.abs(e.clientX-pkDrag.x)+Math.abs(e.clientY-pkDrag.y)>8){pkMoved=true;pkSuppressClick=true;}
+ if(pkMoved)pkSetView([pkDrag.view[0]-dx,pkDrag.view[1]-dy,pkDrag.view[2],pkDrag.view[3]]);
+});
+pkMap.addEventListener('pointerup',pkEndPointer);
+pkMap.addEventListener('pointercancel',pkEndPointer);
+pkMap.addEventListener('lostpointercapture',e=>{if(pkPointers.has(e.pointerId))pkEndPointer(e);});
 pkMap.addEventListener('wheel',e=>{e.preventDefault();pkZoom(e.deltaY<0?.85:1.18);},{passive:false});
 pkMsg.textContent=`選択できる県：${pkEnabled.size}府県`;
 pkSetView(pkRegions.all);
