@@ -187,6 +187,28 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .pokemon-group:not([open]) .pokemon-group-hint .group-closed-action{display:inline!important}
 .pokemon-group[open] .pokemon-group-hint .group-open-action{display:inline!important}
 .pokemon-group[open] .pokemon-group-hint .group-closed-action{display:none!important}
+
+/* v0.12.1 — full-width search, three-column prefecture chooser, horizontal control rows */
+#filters{display:flex!important;flex-direction:column;gap:10px;padding:13px 16px 12px}
+#filters .search-row,#filters .pref-row,#filters .visit-row{display:flex;align-items:center;gap:9px;width:100%;min-width:0}
+#filters .search-row .search{flex:1;display:block;min-width:0}
+#filters #search{width:100%;min-width:0;min-height:48px;font-size:16px}
+#clear-search{white-space:nowrap;min-width:68px;min-height:48px}
+#filters .pref-row{position:relative}
+.pref-picker{flex:1;min-width:0;position:relative}
+#pref-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;min-width:0;min-height:48px;text-align:left;font-size:16px;font-weight:600;gap:7px}
+#pref-toggle span{flex-shrink:0}
+#filters #reset{flex:0 0 auto!important;width:auto!important;min-height:48px!important;max-width:46%;padding:8px 12px;font-size:15px;white-space:normal}
+.pref-panel{position:absolute;top:calc(100% + 6px);left:0;z-index:1700;width:min(570px,calc(100vw - 35px));max-height:min(53svh,430px);overflow:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:0 9px 25px #0004}
+.pref-panel[hidden]{display:none!important}
+.pref-panel button{padding:7px 3px;min-height:40px;font-size:14px;font-weight:600;overflow-wrap:anywhere;text-align:center}
+.pref-panel button[aria-pressed="true"]{background:var(--brand);color:var(--panel);border-color:var(--brand)}
+#filters .visit-row{align-items:center}
+#filters .visit-row .visit-check-label{flex:none;margin:0;font-size:15px;font-weight:700;white-space:nowrap}
+#filters .visit-row #visit{flex:1;width:auto;min-width:0;max-width:none;min-height:46px;font-size:15px;background:var(--bg)}
+#filters .visit-row .record-in-filter{flex:none;width:auto;min-height:46px;margin:0;white-space:nowrap;font-size:15px;padding:7px 13px}
+#filters #reset-status{position:absolute;z-index:1500;top:calc(100% + 5px);left:auto;right:0;width:min(340px,100%);margin:0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#213c38;box-shadow:0 5px 18px #0004;font-size:13px;line-height:1.5;pointer-events:none}
+@media(max-width:680px){#filters{padding:10px 10px 12px;gap:9px}#clear-search{min-width:61px;padding:8px 10px}#filters #reset{max-width:48%;font-size:13px;padding:7px 6px}#pref-toggle{font-size:14px;padding:7px 9px}#filters .visit-row{gap:6px}#filters .visit-row .visit-check-label{font-size:12px}#filters .visit-row #visit{font-size:12px;padding:6px 2px}#filters .visit-row .record-in-filter{font-size:12px;padding:6px 7px}#filters .visit-row .record-in-filter span{font-size:16px}.pref-panel{width:min(460px,calc(100vw - 35px));gap:4px;padding:7px}.pref-panel button{font-size:12px;padding:6px 2px;min-height:39px}}
 </style>
 <script>
 function pokefutaBeforeSend(type,payload){if(type!=='event'||payload.name)return false;const clean=v=>{try{const u=new URL(v,location.origin);return u.origin+u.pathname}catch{return ''}};const out={...payload,url:clean(payload.url),referrer:payload.referrer?clean(payload.referrer):'',title:'全国ポケふたマップ'};delete out.data;return out;}
@@ -194,13 +216,17 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.12.0-20261020T233643Z">
+<meta name="kussoon-build" content="pokefuta-v0.12.1-20261020T233643Z">
 </head>
 <body>
 <header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">18府県・ポケふた170枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
-<form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
+<form id="filters" role="search" autocomplete="off">
+<div class="search-row"><label class="search" for="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><button type="button" id="clear-search" aria-label="ポケモン名の検索をクリア">クリア</button></div>
+<div class="pref-row"><div class="pref-picker"><select id="pref" aria-label="都道府県名を選択" class="sr"><option value="">都道府県名を選択</option></select><button type="button" id="pref-toggle" aria-expanded="false" aria-controls="pref-panel" aria-haspopup="true">都道府県名を選択 <span aria-hidden="true">▾</span></button><div id="pref-panel" class="pref-panel" hidden role="group" aria-label="都道府県を3列から選択"></div></div><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div>
+<div class="visit-row"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div>
+</form>
 <p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の170件にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
@@ -209,9 +235,9 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
 <section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の170件にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.12.0（愛知県追加検証版）／調査基準日：2026/10/21。既存161枚の情報・確認日を維持し、愛知県9枚を追加。18府県170件を一覧に掲載。地図ピン170地点、位置保留0枚。愛知県9枚のピンは施設・設置エリアの概略位置であり、現物GPSではありません。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.12.1（愛知県追加検証版）／調査基準日：2026/10/21。既存161枚の情報・確認日を維持し、愛知県9枚を追加。18府県170件を一覧に掲載。地図ピン170地点、位置保留0枚。愛知県9枚のピンは施設・設置エリアの概略位置であり、現物GPSではありません。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.12.0（愛知県追加検証版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.12.1（愛知県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの先頭へ" hidden><span aria-hidden="true">↑</span> ページの先頭へ</button>
@@ -10855,6 +10881,17 @@ function openImport(ids,source){pending=ids;const unknown=ids.filter(id=>!known.
 function finishImport(mode){if(pending===null)return;save(C.merge([...visited],pending,mode));pending=null;$('#import-dialog').close();render();if(location.hash.startsWith('#visits='))history.replaceState(null,'',location.pathname+location.search);if(storageOK)toast('訪問記録を取り込みました。');}
 function checkHash(){try{const ids=C.fromHash(location.hash);if(ids!==null)openImport(ids,'共有URL');}catch(e){toast('共有URLの読み込みに失敗しました。'+e.message);}}
 load();for(const pref of [...new Set(D.lids.map(d=>d.prefecture))]){const o=document.createElement('option');o.value=o.textContent=pref;$('#pref').append(o);}
+const prefPicker=$('.pref-picker'),prefToggle=$('#pref-toggle'),prefPanel=$('#pref-panel');
+function setPrefPanel(open){prefPanel.hidden=!open;prefToggle.setAttribute('aria-expanded',String(open));}
+function syncPrefPicker(){const value=$('#pref').value;prefToggle.firstChild.textContent=(value||'都道府県名を選択')+' ';prefPanel.querySelectorAll('button[data-pref]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pref===value)));}
+for(const option of $('#pref').options){const b=document.createElement('button');b.type='button';b.dataset.pref=option.value;b.textContent=option.value||'すべて';b.setAttribute('aria-pressed','false');prefPanel.append(b);}
+syncPrefPicker();
+prefToggle.addEventListener('click',()=>setPrefPanel(prefPanel.hidden));
+prefPanel.addEventListener('click',e=>{const b=e.target.closest('button[data-pref]');if(!b)return;$('#pref').value=b.dataset.pref;$('#pref').dispatchEvent(new Event('change',{bubbles:true}));syncPrefPicker();setPrefPanel(false);prefToggle.focus();});
+document.addEventListener('click',e=>{if(!prefPicker.contains(e.target))setPrefPanel(false);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!prefPanel.hidden){setPrefPanel(false);prefToggle.focus();}});
+$('#clear-search').addEventListener('click',()=>{$('#search').value='';hideResetNotice();render(true);$('#search').focus();});
+
 try{if(!window.L)throw Error('Leaflet unavailable');map=L.map('map',{zoomControl:false,scrollWheelZoom:true}).setView([35.5,137],5);L.control.zoom({position:'topright'}).addTo(map);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,referrerPolicy:'origin',attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'}).addTo(map);const Fit=L.Control.extend({options:{position:'topright'},onAdd(){const b=L.DomUtil.create('button','fit-control');b.type='button';b.textContent='全体';b.setAttribute('aria-label','絞り込み対象の全体を表示');L.DomEvent.disableClickPropagation(b);L.DomEvent.on(b,'click',fit);return b;}});new Fit().addTo(map);new ResizeObserver(()=>map.invalidateSize()).observe($('#map'));}catch{$('#map-unavailable').hidden=false;}
 let resetNoticeTimer;function hideResetNotice(){clearTimeout(resetNoticeTimer);$('#reset-status').hidden=true;}
 $('#filters').addEventListener('submit',e=>e.preventDefault());$('#search').addEventListener('input',()=>{hideResetNotice();render(true)});$('#pref').addEventListener('change',()=>{hideResetNotice();render(true)});$('#visit').addEventListener('change',()=>{hideResetNotice();render(true)});$('#quick-matches-list').addEventListener('click',event=>{const button=event.target.closest('button[data-group]');if(button)jumpToPokemon(button.dataset.group);});
@@ -10862,6 +10899,7 @@ $('#reset').onclick=()=>{
   // Explicitly clear all three filters; do not rely on Safari form.reset() behavior.
   $('#search').value='';
   $('#pref').value='';
+  syncPrefPicker();setPrefPanel(false);
   $('#visit').value='all';
   selected=null;
   render(true);
