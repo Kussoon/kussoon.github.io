@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark"><meta name="referrer" content="origin">
 <title>全国ポケふたマップ | Kussoon</title>
-<meta name="description" content="ポケふたを探して、訪問を記録。17府県161件の設置場所・位置精度・駐車条件をご案内します。">
+<meta name="description" content="ポケふたを探して、訪問を記録。19府県175枚のポケふた設置場所・位置精度・駐車条件をご案内します。">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6ef;--panel:#fff;--text:#213c38;--muted:#50635f;--line:#d6e0d8;--brand:#176451;--soft:#e6f1e9;--warn:#743b0a;--warn-bg:#fff2d9;--shadow:0 4px 22px #1a342414}*{box-sizing:border-box}body{margin:0;font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text)}a{color:var(--brand);text-underline-offset:3px}button,input,select,textarea{font:inherit}button,.file-button{cursor:pointer;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);padding:9px 13px;min-height:44px;font-weight:650}button:hover,.file-button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #d18a2b;outline-offset:3px}header,main,footer{max-width:1120px;margin:auto}header{padding:24px 24px 17px;position:relative}.brand{font-weight:800;letter-spacing:.08em;text-decoration:none;font-size:17px}.edition{float:right;border:1px solid var(--line);border-radius:20px;padding:3px 11px;font-size:12px}h1{font-size:clamp(23px,4.5vw,34px);letter-spacing:.03em;margin:10px 0 2px;line-height:1.5}header p{margin:0;color:var(--muted)}main{padding:0 24px}h2{font-size:19px;margin:0}.workspace{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}#filters{display:flex;gap:10px;padding:14px 16px 0}.search{flex:1;min-width:0}input[type=search],select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--text);min-height:44px;padding:9px 11px;width:100%}input[type=search]{font-size:16px}.filter-row{display:flex;gap:8px}.filter-row label{min-width:100px}.map-top{display:flex;justify-content:space-between;align-items:center;padding:3px 16px}#count{margin:6px 0;font-size:13px;font-weight:650}.text-button{border:none;font-size:13px;color:var(--brand);padding:5px 10px;background:none}.map-shell{position:relative}#map{height:57svh;min-height:320px;max-height:660px;background:#d8e4dd;z-index:0}.legend{display:flex;gap:9px 17px;flex-wrap:wrap;padding:13px 16px 0;font-size:12px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:7px}.shape{display:inline-block;background:#186754;border:2px solid white;box-shadow:0 0 0 1px #214b40;width:13px;height:13px;flex-shrink:0}.p4{border-radius:50%;background:#176451}.p3{transform:rotate(45deg);background:#286aa0}.p2{background:#b85a18;clip-path:polygon(50% 0,100% 100%,0 100%);width:16px;height:16px;border:0;box-shadow:none}.p1{background:#fff;border:3px solid #7951a0}.map-note{font-size:12px;color:var(--muted);margin:8px 16px 14px}.list-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.list-head span{font-size:13px;color:var(--muted)}#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;scroll-margin-top:16px}.card.selected{outline:3px solid var(--brand);outline-offset:2px}.card-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.eyebrow{font-size:12px;color:var(--muted);margin:0}.card h3{font-size:18px;margin:8px 0 4px;line-height:1.6}.location{font-size:13px;margin:0 0 10px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}.card-actions,.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.card-actions button{font-size:13px}.visited-btn[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}.detail{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.detail summary{cursor:pointer;font-size:13px;font-weight:700;padding:4px 0}.detail p{font-size:13px;margin:9px 0}.warning{background:var(--warn-bg);color:var(--warn);border-left:3px solid #bd7229;padding:9px 11px;border-radius:5px;font-size:13px}.warning strong{display:block}.fine{font-size:12px!important;color:var(--muted)}.links a{border:1px solid var(--line);border-radius:8px;padding:8px 10px;text-decoration:none;font-size:13px}.about{margin:28px 0;background:var(--panel);border:1px solid var(--line);padding:15px;border-radius:12px;font-size:13px}.about summary{cursor:pointer;font-weight:650}footer{padding:0 24px 26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}dialog{max-width:520px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:22px;max-height:90svh;overflow:auto}dialog::backdrop{background:#102b29aa}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-actions{display:flex;gap:10px;flex-wrap:wrap}.file-button input{position:absolute;width:1px;height:1px;opacity:0}.file-button:focus-within{outline:3px solid #d18a2b}#share-result{margin-top:18px}textarea{resize:vertical}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--panel);padding:10px 18px;border-radius:12px;max-width:90%;z-index:2000;box-shadow:var(--shadow)}.map-marker{background:none;border:none}.map-marker span{display:block;box-shadow:0 1px 5px #0008;width:24px;height:24px;border:3px solid white}.map-marker .p1{border:5px solid #7951a0;outline:2px solid white}.map-marker .p2{width:28px;height:28px;border:0;filter:drop-shadow(0 1px 2px #000a)}.map-marker.visited span{opacity:.65}.map-marker.visited::after{content:'✓';position:absolute;right:-4px;top:-5px;background:#176451;color:#fff;border:2px solid white;border-radius:50%;font-weight:900;font-size:11px;line-height:17px;width:17px;text-align:center}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--panel);color:var(--text)}.leaflet-popup-content{font:13px/1.6 system-ui;max-height:48svh;overflow:auto}.leaflet-popup-content h3{font-size:16px;margin:5px 0}.leaflet-popup-content p{margin:8px 0}.leaflet-popup-content a{color:var(--brand)}.leaflet-control-zoom a,.fit-control{background:var(--panel)!important;color:var(--text)!important}.fit-control{border:2px solid #0003;border-radius:5px;padding:4px 7px;min-width:34px;min-height:34px;font-size:12px}.leaflet-control-attribution{font-size:10px!important;background:#ffffffdf!important;color:#333!important}.leaflet-control-attribution a{color:#175e70!important}#map-unavailable{position:absolute;inset:0;display:grid;place-items:center;padding:25px;color:#213c38;background:#e4ebe7}#map-unavailable[hidden],[hidden]{display:none!important}
@@ -249,10 +249,10 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.12.5-20261020T233643Z">
+<meta name="kussoon-build" content="pokefuta-v0.13.1-20261021-sekigahara">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">18府県・ポケふた170枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">19府県・ポケふた175枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off">
@@ -267,17 +267,17 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </div></div><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div>
 <div class="visit-row"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div>
 </form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の170件にはありません。全国すべてを収録したわけではありません。</p>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の175件にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の170件にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.12.5（愛知県追加検証版）／調査基準日：2026/10/21。既存161枚の情報・確認日を維持し、愛知県9枚を追加。18府県170件を一覧に掲載。地図ピン170地点、位置保留0枚。愛知県9枚のピンは施設・設置エリアの概略位置であり、現物GPSではありません。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の175件にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.13.1（岐阜県追加検証版）／調査基準日：2026/10/21。既存170枚の情報・確認日を維持し、岐阜県5枚を追加。19府県175件を一覧に掲載。地図ピン174地点、位置保留1枚（関ケ原町）。岐阜県の4ピンは施設・設置エリアの概略位置であり、現物GPSではありません。岐阜県は公式個別ページ本文の再照合が一部未完了の検証版です。愛知県9枚のピンは施設・設置エリアの概略位置であり、現物GPSではありません。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.12.5（愛知県追加検証版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.13.1（岐阜県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの先頭へ" hidden><span aria-hidden="true">↑</span> ページの先頭へ</button>
@@ -288,8 +288,8 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.12.0",
-  "source_version": "4.6",
+  "version": "0.13.1",
+  "source_version": "4.7",
   "checked_at": "2026-10-21",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
@@ -8036,6 +8036,381 @@ window.POKEFUTA_DATA={
       "vehicle_route_allowed": false,
       "transport_note": "駐車後、工事中の市道・囲いを避け、公園の歩行者園路で二之丸天守台下の芝生へ。駐車場からの正確な歩行距離・時間は未確認。駐車場が利用可能でも、どの道路からも自由に進入できるとは案内しません。",
       "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0361",
+      "official_number": 361,
+      "prefecture": "岐阜県",
+      "city": "関市",
+      "pokemon": "ウッウ",
+      "facility_name": "関シティターミナル前",
+      "address": "岐阜県関市東桜町8-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.4908437,
+      "facility_lon": 136.912477,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/1356105630",
+      "coordinate_method": "自治体の設置施設名・県博物館の位置図と照合し、OSMの施設・通路代表点を採用。現物中心や駐車入口の位置ではない。",
+      "coordinate_evidence": {
+        "query": "関シティターミナル",
+        "result": {
+          "place_id": 265765687,
+          "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+          "osm_type": "way",
+          "osm_id": 1356105630,
+          "lat": "35.4908437",
+          "lon": "136.9124770",
+          "category": "highway",
+          "type": "footway",
+          "place_rank": 27,
+          "importance": 0.04005583504997329,
+          "addresstype": "road",
+          "name": "関シティターミナル",
+          "display_name": "関シティターミナル, 桜本町二丁目, 東桜町, 富士塚, 関市, 岐阜県, 501-3253, 日本",
+          "boundingbox": [
+            "35.4903153",
+            "35.4910228",
+            "136.9120628",
+            "136.9125245"
+          ]
+        },
+        "gsi_visual_map": "361-gsi-map.png",
+        "official_map": "岐阜県博物館ポケふたマップ（2024年7月、1ページ）"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "長良川鉄道・関駅西口の関シティターミナル前。市公式はターミナル前と案内。バス乗降場の車路ではなく、歩行者エリアから探してください。舗装上の厳密な位置は未確認です。",
+      "parking_id": "parking-info-361",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "屋外に設置。ポケふた個別の観覧時間・料金・予約要否、夜間や催事時の立入条件は未確認。2024年の岐阜県博物館での期間限定展示は終了した過去の案内です。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別本文の再取得は503/転送により未完了。ID・名称順・公式掲載住所は検索索引と一次資料による照合で、正式公開前の再確認が必要です。 ポケふた所在地の東桜町8-1と駐車場住所18-1は別。地図ピンはターミナルの歩行者通路代表点。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/361/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/361/",
+        "https://local.pokemon.jp/manhole/gifu.html",
+        "https://www.gifu-kenpaku.jp/pokefuta/",
+        "https://www.gifu-kenpaku.jp/wp-content/uploads/2024/07/岐阜県ポケふたマップーweb-ss.pdf",
+        "https://www.city.seki.lg.jp/0000021019.html",
+        "https://www.city.seki.lg.jp/0000006152.html",
+        "https://www.openstreetmap.org/way/1356105630"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "自治体資料・公式検索索引照合（個別本文再照合未完了／実地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "関駅西口から歩行者広場へ。バス・タクシーの乗降車路へ一般車で進入しないでください。駐車場から現物までの正確な徒歩距離・時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "関駅西口から歩行者広場へ。バス・タクシーの乗降車路へ一般車で進入しないでください。駐車場から現物までの正確な徒歩距離・時間は未確認。",
+      "port_information": "該当なし（本土）",
+      "official_page_body_verified": false,
+      "official_id_verification": "公式ドメインの検索索引で個別自治体との対応を確認。連番推定ではない。",
+      "pokemon_order_verification": "公式個別検索索引に基づく暫定順（本文再取得未完了）",
+      "address_kind": "official_search_index_address",
+      "address_verification": "公式個別検索索引の住所。本文再取得未完了。"
+    },
+    {
+      "id": "PF-0359",
+      "official_number": 359,
+      "prefecture": "岐阜県",
+      "city": "各務原市",
+      "pokemon": "ナマズン／ドジョッチ",
+      "facility_name": "オアシスパーク南側入口",
+      "address": "岐阜県各務原市川島笠田町1564-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.3707797,
+      "facility_lon": 136.8078588,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/162076676",
+      "coordinate_method": "自治体の設置施設名・県博物館の位置図と照合し、OSMの施設・通路代表点を採用。現物中心や駐車入口の位置ではない。",
+      "coordinate_evidence": {
+        "query": "オアシスパーク",
+        "result": {
+          "place_id": 267314471,
+          "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+          "osm_type": "way",
+          "osm_id": 162076676,
+          "lat": "35.3707797",
+          "lon": "136.8078588",
+          "category": "building",
+          "type": "yes",
+          "place_rank": 30,
+          "importance": 0.3140788844789178,
+          "addresstype": "building",
+          "name": "オアシスパーク",
+          "display_name": "オアシスパーク, 東海北陸自動車道, 米野, 各務原市, 羽島郡, 岐阜県, 501-6181, 日本",
+          "boundingbox": [
+            "35.3706024",
+            "35.3709299",
+            "136.8073620",
+            "136.8080007"
+          ]
+        },
+        "gsi_visual_map": "359-gsi-map.png",
+        "official_map": "岐阜県博物館ポケふたマップ（2024年7月、1ページ）"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "市公式・県博物館マップが示すオアシスパーク南側入口。公園全体の中心、中央駐車場、高速道路PAとは別です。入口のどの舗装面かを確定できる詳細な現物位置は未確認。",
+      "parking_id": "parking-info-359",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "入園無料。2026/4/25～10/31は9:30～22:30、原則9:30～22:00、2026/12/31～2027/3/19は9:30～18:00という施設案内があります。全園休園日・国営休園日で運用が異なります。2026/11/9は国営公園休園日に伴いオアシスパーク18:00閉園の告知。南側入口の閉園後のポケふた観覧可否・予約要否は未確認。水族館等の入場料は別です。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別本文の再取得は503/転送により未完了。ID・名称順・公式掲載住所は検索索引と一次資料による照合で、正式公開前の再確認が必要です。 事前候補のオタマロ等は下呂市。施設住所1564-1を使用。公式個別の検索索引ではナマズン／ドジョッチ順を確認したが本文は503で再確認できず、正式住所と全列挙順の再照合を要する。OSM建物代表点で南側入口の現物GPSではない。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/359/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/359/",
+        "https://local.pokemon.jp/manhole/gifu.html",
+        "https://www.gifu-kenpaku.jp/pokefuta/",
+        "https://www.gifu-kenpaku.jp/wp-content/uploads/2024/07/岐阜県ポケふたマップーweb-ss.pdf",
+        "https://www.city.kakamigahara.lg.jp/kankobunka/kankou/1022433.html",
+        "https://www.oasispark.co.jp/access/",
+        "https://www.oasispark.co.jp/guide/",
+        "https://www.oasispark.co.jp/news/info/p11036/",
+        "https://www.oasispark.co.jp/news/info/p16437/",
+        "https://www.openstreetmap.org/way/162076676"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "自治体資料・公式検索索引照合（個別本文再照合未完了／実地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "一般道側中央駐車場で降車し、公式案内図の歩行者通路から南側入口へ。PAへの一般道進入や園内への直接車経路は案内しません。高速側は進行方向のPAに駐車し徒歩で入園。入口GPS・現物までの最短距離と時間は未確認。川島大橋について施設アクセス頁に通行止め告知がありますが、道路管理者による最新の復旧状況は未確認です。訪問前に公式交通情報を確認してください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "一般道側中央駐車場で降車し、公式案内図の歩行者通路から南側入口へ。PAへの一般道進入や園内への直接車経路は案内しません。高速側は進行方向のPAに駐車し徒歩で入園。入口GPS・現物までの最短距離と時間は未確認。川島大橋について施設アクセス頁に通行止め告知がありますが、道路管理者による最新の復旧状況は未確認です。訪問前に公式交通情報を確認してください。",
+      "port_information": "該当なし（本土）",
+      "official_page_body_verified": false,
+      "official_id_verification": "公式ドメインの検索索引で個別自治体との対応を確認。連番推定ではない。",
+      "pokemon_order_verification": "公式個別検索索引に基づく暫定順（本文再取得未完了）",
+      "address_kind": "facility_address",
+      "address_verification": "県博物館・施設公式の所在地。公式個別住所は未確認。"
+    },
+    {
+      "id": "PF-0362",
+      "official_number": 362,
+      "prefecture": "岐阜県",
+      "city": "関ケ原町",
+      "pokemon": "ドドゲザン／コマタナ",
+      "facility_name": "駅北ポケットパーク",
+      "address": "岐阜県関ケ原町大字関ケ原894-95",
+      "source_position_grade": "D",
+      "source_public_stage": "P0",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.3640278,
+      "facility_lon": 136.4684167,
+      "facility_coord_type": "user_supplied_approx",
+      "facility_coord_label": "駅北ポケットパークの市松模様舗装付近（ユーザー提供概略位置）",
+      "facility_coord_source": "ユーザー提供の地図画面・現物写真（2026-10-21）",
+      "coordinate_method": "利用者提示の地図画面に記載された35°21′50.5″N, 136°28′06.3″Eを十進度に変換。現物写真の灰白色市松模様の広場と駅北側の位置関係を照合した概略点。現地GPS測量ではない。",
+      "coordinate_evidence": {
+        "rejected_result": {
+          "geometry": {
+            "coordinates": [
+              136.465561,
+              35.367092
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "岐阜県関ケ原町関ケ原８９４番地"
+          }
+        },
+        "reason": "町役場・記念館周辺の番地代表点と公園を混同しないため",
+        "gsi_visual_map": [
+          "362-gsi-map.png",
+          "362-south-gsi-map.png"
+        ],
+        "official_map": "岐阜県博物館ポケふたマップ1ページ"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "JR関ケ原駅北側・駅北ポケットパークの灰色と白色の市松模様舗装。道路と横断歩道に近い歩行者広場。ユーザー提供写真で現物の見た目を確認。正確な中心座標は未確認。",
+      "parking_id": "parking-info-362",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "町観光公式では無料、JR関ケ原駅北口から徒歩約5分。観覧可能時間・予約要否・夜間や催事時の立入条件は未確認。",
+      "unresolved": "利用者提供の概略座標です。現物GPS・測量誤差・駐車場入口座標は未確認。 ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別本文の再取得は503/転送により未完了。ID・名称順・公式掲載住所は検索索引と一次資料による照合で、正式公開前の再確認が必要です。 町全体・駅や古戦場記念館の代表点は使用しない。住所検索の894番地代表点は公園の位置を示すとは限らず、位置図と地理院地図から設置エリアを別途照合。公式個別の列挙順は検索索引による照合で本文再取得未完了。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/362/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/362/",
+        "https://local.pokemon.jp/manhole/gifu.html",
+        "https://www.gifu-kenpaku.jp/pokefuta/",
+        "https://www.gifu-kenpaku.jp/wp-content/uploads/2024/07/岐阜県ポケふたマップーweb-ss.pdf",
+        "https://www.town.sekigahara.gifu.jp/5656.htm",
+        "https://www.sekigahara1600.com/spot/pokefuta.html",
+        "https://www.sekigahara1600.com/faq/",
+        "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%96%A2%E3%82%B1%E5%8E%9F%E7%94%BA%E9%96%A2%E3%82%B1%E5%8E%9F894-95",
+        "ユーザー提供：関ケ原駅北の現物写真・地図画面（2026-10-21）"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "自治体資料・公式検索索引照合（個別本文再照合未完了／実地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駅北口から駅北ポケットパークへ徒歩。公園・歩行者広場への直接車経路は生成しません。駐車場からの徒歩距離・時間、一方通行・当日のイベント規制は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駅北口から駅北ポケットパークへ徒歩。公園・歩行者広場への直接車経路は生成しません。駐車場からの徒歩距離・時間、一方通行・当日のイベント規制は未確認。",
+      "port_information": "該当なし（本土）",
+      "official_page_body_verified": false,
+      "official_id_verification": "公式ドメインの検索索引で個別自治体との対応を確認。連番推定ではない。",
+      "pokemon_order_verification": "公式個別検索索引に基づく暫定順（本文再取得未完了）",
+      "address_kind": "official_search_index_address",
+      "address_verification": "公式個別検索索引の住所。本文再取得未完了。"
+    },
+    {
+      "id": "PF-0360",
+      "official_number": 360,
+      "prefecture": "岐阜県",
+      "city": "下呂市",
+      "pokemon": "ガマゲロゲ／ガマガル／オタマロ",
+      "facility_name": "下呂市観光交流センター「湯めぐり館」前",
+      "address": "岐阜県下呂市森1075-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.807465,
+      "facility_lon": 137.243057,
+      "facility_coord_type": "gsi_address_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E4%B8%8B%E5%91%82%E5%B8%82%E6%A3%AE1075-3",
+      "coordinate_method": "市・県博物館資料の施設所在地を地理院住所検索し、地理院標準地図上で施設所在街区・道路・河川との整合を目視確認。枝番まで現物中心を表す値ではない。",
+      "coordinate_evidence": {
+        "query": "下呂市森1075-3",
+        "result": {
+          "geometry": {
+            "coordinates": [
+              137.243057,
+              35.807465
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "岐阜県下呂市森１０７５番地"
+          }
+        },
+        "gsi_visual_map": "360-gsi-map.png",
+        "official_map": "岐阜県博物館ポケふたマップ1ページ"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "湯めぐり館前。県博物館の公式設置マップでは森1075-3。施設入口前の具体的な舗装位置・現物中心は未確認。温泉街の歩行者の通行を妨げないでください。",
+      "parking_id": "parking-info-360",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "2026/4/1から市直営。市公式2026/4/21更新では施設営業時間9:00～17:00。旧観光協会サイトの9:00～17:30は現行の施設時間として採用しません。屋外ポケふたの時間外観覧・料金・予約要否・休館時の立入条件は未確認です。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別本文の再取得は503/転送により未完了。ID・名称順・公式掲載住所は検索索引と一次資料による照合で、正式公開前の再確認が必要です。 事前候補のドジョッチ等は各務原市。公式個別検索索引の住所森1075-1と市・県博物館の施設住所1075-3に差。公式掲載住所候補を保持し施設代表座標と区別。個別本文再取得・列挙順の最終照合は未完了。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/360/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/360/",
+        "https://local.pokemon.jp/manhole/gifu.html",
+        "https://www.gifu-kenpaku.jp/pokefuta/",
+        "https://www.gifu-kenpaku.jp/wp-content/uploads/2024/07/岐阜県ポケふたマップーweb-ss.pdf",
+        "https://www.city.gero.lg.jp/site/kanko/37996.html",
+        "https://www.gero-spa.com/yumegurikan/",
+        "https://www.city.gero.lg.jp/site/kanko/1526.html",
+        "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E4%B8%8B%E5%91%82%E5%B8%82%E6%A3%AE1075-3"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "自治体資料・公式検索索引照合（個別本文再照合未完了／実地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後は温泉街の歩道・通行可能な道路から湯めぐり館前へ。狭路・歩行者・一方通行や現地規制に従ってください。駐車場からの正確な徒歩距離・時間、入口GPSは未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車後は温泉街の歩道・通行可能な道路から湯めぐり館前へ。狭路・歩行者・一方通行や現地規制に従ってください。駐車場からの正確な徒歩距離・時間、入口GPSは未確認。",
+      "port_information": "該当なし（本土）",
+      "official_page_body_verified": false,
+      "official_id_verification": "公式ドメインの検索索引で個別自治体との対応を確認。連番推定ではない。",
+      "pokemon_order_verification": "公式個別検索索引に基づく暫定順（本文再取得未完了）",
+      "address_kind": "official_search_index_address",
+      "address_verification": "公式個別検索索引の住所。本文再取得未完了。"
+    },
+    {
+      "id": "PF-0363",
+      "official_number": 363,
+      "prefecture": "岐阜県",
+      "city": "高山市",
+      "pokemon": "ヤナップ／バオップ／ヒヤップ",
+      "facility_name": "飛騨高山にぎわい交流館「大政」南側歩道",
+      "address": "岐阜県高山市本町４－１",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 36.145596,
+      "facility_lon": 137.25737,
+      "facility_coord_type": "gsi_address_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%AB%98%E5%B1%B1%E5%B8%82%E6%9C%AC%E7%94%BA4-1",
+      "coordinate_method": "市・県博物館資料の施設所在地を地理院住所検索し、地理院標準地図上で施設所在街区・道路・河川との整合を目視確認。枝番まで現物中心を表す値ではない。",
+      "coordinate_evidence": {
+        "query": "高山市本町4-1",
+        "result": {
+          "geometry": {
+            "coordinates": [
+              137.25737,
+              36.145596
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "岐阜県高山市本町四丁目１番地"
+          }
+        },
+        "gsi_visual_map": "363-gsi-map.png",
+        "official_map": "岐阜県博物館ポケふたマップ1ページ"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "高山市の公式発表は大政の南側歩道上（本町4-1）。建物内、宮川の河川敷、駐車場ではありません。行神橋に近い交流館を目印に、歩道から探してください。",
+      "parking_id": "parking-info-363",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "屋外の南側歩道。大政の開館9:00～21:30・年末年始休館と、トイレ24時間利用は屋外ポケふたの観覧時間を示すものではありません。個別の時間外観覧・料金・予約要否・催事規制は未確認。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別本文の再取得は503/転送により未完了。ID・名称順・公式掲載住所は検索索引と一次資料による照合で、正式公開前の再確認が必要です。 県博物館PDFの並びバオップ／ヒヤップ／ヤナップと個別公式検索索引・市発表のヤナップ／バオップ／ヒヤップは順が違うため後者を採用。住所代表点であり南側歩道の現物GPSではない。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/363/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/363/",
+        "https://local.pokemon.jp/manhole/gifu.html",
+        "https://www.gifu-kenpaku.jp/pokefuta/",
+        "https://www.gifu-kenpaku.jp/wp-content/uploads/2024/07/岐阜県ポケふたマップーweb-ss.pdf",
+        "https://prtimes.jp/main/html/rd/p/000000134.000124925.html",
+        "https://www.city.takayama.lg.jp/shisei/1000067/1002872/1016646.html",
+        "https://www.hidatakayama.or.jp/spot/detail_5141.html",
+        "https://www.city.takayama.lg.jp/shisetsu/1004139/1000035/1001564.html",
+        "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E9%AB%98%E5%B1%B1%E5%B8%82%E6%9C%AC%E7%94%BA4-1"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "自治体資料・公式検索索引照合（個別本文再照合未完了／実地未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "市公式の施設アクセスでは弥生橋駐車場から大政まで徒歩3分、高山駅から徒歩13分。ポケふた現物や駐車場入口からの実測所要時間ではありません。南側の歩道を歩き、歩行者優先・催事の規制に従ってください。積雪・凍結時は現地の路面と規制を確認してください。",
+      "vehicle_route_allowed": false,
+      "transport_note": "市公式の施設アクセスでは弥生橋駐車場から大政まで徒歩3分、高山駅から徒歩13分。ポケふた現物や駐車場入口からの実測所要時間ではありません。南側の歩道を歩き、歩行者優先・催事の規制に従ってください。積雪・凍結時は現地の路面と規制を確認してください。",
+      "port_information": "該当なし（本土）",
+      "official_page_body_verified": false,
+      "official_id_verification": "公式ドメインの検索索引で個別自治体との対応を確認。連番推定ではない。",
+      "pokemon_order_verification": "公式個別検索索引に基づく暫定順（本文再取得未完了）",
+      "address_kind": "official_search_index_address",
+      "address_verification": "公式個別検索索引の住所。本文再取得未完了。"
     }
   ],
   "parkings": [
@@ -10819,6 +11194,92 @@ window.POKEFUTA_DATA={
         "https://aichinow.pref.aichi.jp/spots/detail/213/",
         "https://nishio-museum.jp/guide/",
         "https://www.city.nishio.aichi.jp/_res/projects/default_project/_page_/001/002/603/trafic.pdf"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-361",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "関シティターミナル駐車場（東桜町18-1）の市案内は171台（うち障がい者用4台）。最初の3時間無料、3時間超24時間まで200円、以後24時間ごと200円。鉄道・バス利用のパークアンドライドを主目的とする施設で、ポケふた観覧だけの一般利用条件・開閉時間は未確認です。利用前に管理者へ確認してください。 徒歩：関駅西口から歩行者広場へ。バス・タクシーの乗降車路へ一般車で進入しないでください。駐車場から現物までの正確な徒歩距離・時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.city.seki.lg.jp/0000021019.html",
+        "https://www.city.seki.lg.jp/0000006152.html"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-359",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "一般道からは中央駐車場（無料、普通457台、身障者用10台、大型27台）を優先。駐車場は8:30開門、中央はオアシスパーク閉園時に閉門。東口・西口は9～2月17:00、3～5月18:00、6～8月19:00閉門。高速利用者は川島PA上り・下りから入園できますが、一般道の中央駐車場とPAは車で行き来できません。スマートICはなく、PA内でUターンできません。PA駐車場の24時間利用と、公園・ハイウェイオアシスの入口開放時間は別です。混雑時は公式の誘導に従ってください。 徒歩：一般道側中央駐車場で降車し、公式案内図の歩行者通路から南側入口へ。PAへの一般道進入や園内への直接車経路は案内しません。高速側は進行方向のPAに駐車し徒歩で入園。入口GPS・現物までの最短距離と時間は未確認。川島大橋について施設アクセス頁に通行止め告知がありますが、道路管理者による最新の復旧状況は未確認です。訪問前に公式交通情報を確認してください。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.city.kakamigahara.lg.jp/kankobunka/kankou/1022433.html",
+        "https://www.oasispark.co.jp/access/",
+        "https://www.oasispark.co.jp/guide/",
+        "https://www.oasispark.co.jp/news/info/p11036/",
+        "https://www.oasispark.co.jp/news/info/p16437/"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-362",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "ポケふた観覧だけに一般普通車が利用できる最寄り駐車場の名称・料金・時間・台数・入口は未確認です。駅前ロータリーを駐車場所として案内しません。周辺施設の利用者専用区画を無条件に利用できるとは案内しません。 徒歩：駅北口から駅北ポケットパークへ徒歩。公園・歩行者広場への直接車経路は生成しません。駐車場からの徒歩距離・時間、一方通行・当日のイベント規制は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.town.sekigahara.gifu.jp/5656.htm",
+        "https://www.sekigahara1600.com/spot/pokefuta.html",
+        "https://www.sekigahara1600.com/faq/"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-360",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "市営下呂温泉第2駐車場（森1148番地1）が周辺一般駐車場の候補。市公式は24時間、39台、20分100円・1日最大1,500円と案内（掲載更新2019/11/13）。最新改定の有無・最大料金の繰返し条件は未確認。施設専用の駐車場とは別です。 徒歩：駐車後は温泉街の歩道・通行可能な道路から湯めぐり館前へ。狭路・歩行者・一方通行や現地規制に従ってください。駐車場からの正確な徒歩距離・時間、入口GPSは未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "市営下呂温泉第2駐車場 岐阜県下呂市森1148-1"
+      ],
+      "sources": [
+        "https://www.city.gero.lg.jp/site/kanko/37996.html",
+        "https://www.gero-spa.com/yumegurikan/",
+        "https://www.city.gero.lg.jp/site/kanko/1526.html"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-363",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "専用駐車場なし。市営弥生橋駐車場（大新町1-2）が候補。普通車21台、終日利用可。8:00～20:00は30分までごと150円、20:00～翌8:00は1時間までごと50円（市2026/2/27更新）。定期利用者向け月額料金は観光客向け通常料金と区別します。 徒歩：市公式の施設アクセスでは弥生橋駐車場から大政まで徒歩3分、高山駅から徒歩13分。ポケふた現物や駐車場入口からの実測所要時間ではありません。南側の歩道を歩き、歩行者優先・催事の規制に従ってください。積雪・凍結時は現地の路面と規制を確認してください。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "弥生橋駐車場 岐阜県高山市大新町1-2"
+      ],
+      "sources": [
+        "https://prtimes.jp/main/html/rd/p/000000134.000124925.html",
+        "https://www.city.takayama.lg.jp/shisei/1000067/1002872/1016646.html",
+        "https://www.hidatakayama.or.jp/spot/detail_5141.html",
+        "https://www.city.takayama.lg.jp/shisetsu/1004139/1000035/1001564.html"
       ],
       "source_date": "2026-10-21",
       "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
