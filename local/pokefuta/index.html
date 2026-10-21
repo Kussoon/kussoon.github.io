@@ -194,24 +194,24 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 </script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-auto-track="false" data-exclude-search="true" data-exclude-hash="true" data-before-send="pokefutaBeforeSend" data-do-not-track="true" onload="pokefutaPageview()"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<meta name="kussoon-build" content="pokefuta-v0.11.2-20261021-labels">
+<meta name="kussoon-build" content="pokefuta-v0.12.0-20261020T233643Z">
 </head>
 <body>
-<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">17府県・ポケふた161枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
+<header><a class="brand" href="https://kussoon.com/">Kussoon</a><span class="edition">18府県・ポケふた170枚</span><h1><a class="title-reload" href="./index.html" aria-label="全国ポケふたマップを再読み込み">全国ポケふたマップ</a></h1><p>旅の途中に、ひとつずつ。</p></header>
 <main>
 <section class="workspace" aria-label="ポケふたを探す">
 <form id="filters" role="search" autocomplete="off"><div class="filter-row"><div class="filter-left"><label class="search"><span class="sr">ポケモン名で検索</span><input id="search" type="search" placeholder="ポケモン名で検索" maxlength="100"></label><label><span class="sr">都道府県</span><select id="pref"><option value="">すべての都道府県</option></select></label><button type="button" id="reset" title="ポケモン名・都道府県・訪問状況の検索条件をリセットします。訪問記録は消しません。">検索条件をリセット</button><p id="reset-status" role="status" aria-live="polite" hidden>検索条件をリセットしました。</p></div><div class="visit-filter"><label class="visit-check-label" for="visit">訪問チェック</label><select id="visit" name="visit" aria-label="訪問チェック"><option value="all" selected>すべてのポケふた</option><option value="visited">訪問済のみ表示</option><option value="unvisited">未訪問のみ表示</option></select><button type="button" id="records" class="record-in-filter" aria-haspopup="dialog" aria-controls="record-dialog">記録・共有 <span aria-hidden="true">›</span></button></div></div></form>
-<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の161件にはありません。全国すべてを収録したわけではありません。</p>
+<p id="search-nohits" class="search-nohits" hidden role="status">該当するポケふたは現在掲載中の170件にはありません。全国すべてを収録したわけではありません。</p>
 <div class="map-top"><p id="count" role="status" aria-live="polite">読み込み中…</p></div>
 <div class="map-shell"><div id="map" aria-label="全国ポケふた地図"></div><div id="map-unavailable" hidden>地図を読み込めませんでした。下の一覧から詳細・経路を確認できます。</div></div>
 
 <p class="map-note">地図上のピンは設置場所の目安です。現物位置を確認できた地点を除き、ピンは施設・設置エリアを代表する位置であり、その場所に必ずポケふたがあることを示すものではありません。詳しい場所は各地点の説明をご確認ください。同じ位置にピンが重なる場合は下の一覧から選べます。</p>
 <div id="quick-matches" class="quick-matches" aria-label="検索結果のポケモン" hidden><div class="quick-matches-head">ヒットしたポケモン <span id="quick-matches-count"></span></div><div id="quick-matches-list" class="quick-matches-list"></div><p class="quick-matches-note">名前をタップすると、地図の下の該当する一覧へ移動します。府県を選ぶと住所も表示します。</p></div>
 </section>
-<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の161件にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
-<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.11.2（表示文言調整版）／調査基準日：2026/10/20。既存153枚の情報・確認日を維持し、石川県8枚を追加。17府県161件を一覧に掲載。地図ピン161地点、位置保留0枚。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
+<section id="results" aria-labelledby="list-heading"><div class="list-head"><h2 id="list-heading">ポケモンから探す</h2><span id="progress"></span></div><p id="empty" hidden>該当するポケふたは、現在掲載中の170件にはありません。未収録の地域に存在する可能性があります。</p><p class="list-helper">ポケモン名をタップすると、設置場所と詳細が開きます。五十音順です。</p><div id="list"></div></section>
+<details class="about"><summary>この地図について・位置精度とプライバシー</summary><p>v0.12.0（愛知県追加検証版）／調査基準日：2026/10/21。既存161枚の情報・確認日を維持し、愛知県9枚を追加。18府県170件を一覧に掲載。地図ピン170地点、位置保留0枚。愛知県9枚のピンは施設・設置エリアの概略位置であり、現物GPSではありません。石川県の8ピンは施設・設置エリアの概略位置であり、珠洲市PF-0470は利用者提供の概略座標です。現物GPSではありません。高知県の大月町・三原村・安田町は利用者提供の概略座標を採用し、現物GPSは未確認です。日野町は従来どおり利用者提供の入口付近の概略座標で表示しています。全国データは順次追加予定です。</p><p>ピンは原則として施設・設置エリアの概略位置です。現物位置が公式に確認できたのは現時点で白浜町の1枚のみです。詳しい設置場所は各地点の目印をご確認ください。公式掲載は現地での現存確認を意味しません。</p><p>訪問記録はこのブラウザ内に保存します。別の端末・ブラウザへの移行にはJSONまたは共有URLを使ってください。履歴削除やプライベートブラウズ等で失われる場合があります。共有URLを知る人は、含まれる訪問済みIDを読めます。訪問日時・GPSは収集しません。</p><p>Kussoonのアクセス解析はページ閲覧のみです。検索語・訪問記録・JSON・URLのクエリとフラグメントは送信しません。地図の表示にはLeafletのCDNおよびOpenStreetMapの地図タイルへのアクセスが必要です。外部の地図・公式サイトを開くと、そのサービスに移動します。</p><p>個人制作の非公式地図です。ポケモンの画像・ポケふた写真は使用していません。設置情報はポケふた公式・自治体・施設資料、概略位置はOpenStreetMap・国土地理院の地理資料に基づきます。駐車条件・料金・営業時間は変更されるため訪問前に公式情報をご確認ください。</p><p><a href="https://local.pokemon.jp/manhole/" target="_blank" rel="noopener noreferrer">ポケふた公式サイト</a> ／ <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">位置データ © OpenStreetMap contributors / ODbL</a> ／ <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院（地理院地図・住所検索を加工）</a> ／ <a href="https://www.pref.fukui.lg.jp/doc/dx-suishin/opendata/index.html" target="_blank" rel="noopener noreferrer">福井県「観光地一覧」（CC BY 4.0・施設代表点）</a></p></details>
 </main>
-<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.11.2（表示文言調整版）</span></footer>
+<footer><a href="https://kussoon.com/">Kussoon トップ</a><span>v0.12.0（愛知県追加検証版）</span></footer>
 <dialog id="record-dialog" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">訪問記録と共有</h2><button id="close-records" aria-label="閉じる">閉じる</button></div><p>訪問済みにしたポケふたは、この端末のブラウザに保存されます。機種変更や別の端末でも使いたいときは、記録を保存・復元できます。</p><p class="record-explain">「JSON」は訪問記録を保存するためのファイル形式です。中身を編集する必要はありません。</p><div class="record-actions"><div class="record-action"><button id="export">訪問記録を保存（JSON）</button><p>訪問済みの記録をファイルとして保存します。バックアップにおすすめです。</p></div><div class="record-action"><label class="file-button">保存した記録を読み込む<input id="import-file" type="file" accept="application/json,.json"></label><p>以前保存したJSONファイルから訪問記録を復元します。取り込み前に確認できます。</p></div><div class="record-action"><button id="share">共有URLを作る</button><p>訪問済みの状態を含むリンクを作り、別の端末などで開けます。リンクを知る人にも記録が伝わります。</p></div></div><div id="share-result" hidden><label for="share-url">訪問記録を含む共有リンク</label><textarea id="share-url" readonly rows="4"></textarea><button id="copy">URLをコピー</button><p>このリンクを知る人は、どのポケふたを訪問済みにしたか確認できます。</p></div><p id="record-status" role="status" aria-live="polite"></p></dialog>
 <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">訪問記録を取り込む</h2><p id="import-summary"></p><p>「追加」は今の訪問済み記録とまとめます。「置換」は今の記録を取り込み内容に入れ替えます。</p><div class="record-actions"><button id="merge">追加する</button><button id="replace">置換する</button><button id="cancel-import">取り込まない</button></div></dialog>
 <button type="button" id="back-to-top" aria-label="ページの先頭へ" hidden><span aria-hidden="true">↑</span> ページの先頭へ</button>
@@ -222,9 +222,9 @@ function pokefutaPageview(){if(!window.umami||!['kussoon.com','www.kussoon.com']
 <script>
 window.POKEFUTA_DATA={
   "schema": "kussoon-pokefuta-data",
-  "version": "0.11.1",
-  "source_version": "4.5.1",
-  "checked_at": "2026-10-20",
+  "version": "0.12.0",
+  "source_version": "4.6",
+  "checked_at": "2026-10-21",
   "coordinate_policy": "現物・施設概略・駐車場入口を分離。Google由来数値なし。元資料のP2でも地図の座標が施設代表点の場合、表示P1に抑える。",
   "lids": [
     {
@@ -7038,67 +7038,67 @@ window.POKEFUTA_DATA={
       "port_information": "該当なし（本土または橋で接続した地域）"
     },
     {
-          "id": "PF-0470",
-          "official_number": 470,
-          "prefecture": "石川県",
-          "city": "珠洲市",
-          "pokemon": "ラブカス／ニンフィア",
-          "facility_name": "見付海水浴場そば（円形タイルの壇上）",
-          "address": "石川県珠洲市宝立町鵜島二47-1",
-          "source_position_grade": "C",
-          "source_public_stage": "P1",
-          "public_stage": "P1",
-          "lid_lat": null,
-          "lid_lon": null,
-          "lid_coord_type": "unknown",
-          "facility_lat": 37.3945399,
-          "facility_lon": 137.2403684,
-          "facility_coord_type": "user_provided_approximate",
-          "facility_coord_label": "見付海水浴場側・円形タイル壇上付近（利用者提供の概略位置。現物GPSではない）",
-          "facility_coord_source": "利用者提供（YouTube映像を参考に選定した概略座標、2026-10-20）",
-          "coordinate_method": "利用者がYouTube映像を参考に示した現物付近の概略座標を、見付海水浴場側の円形タイル壇上付近の表示用として採用。現物の正確なGPS・実測値ではなく、独立した現地測量も未実施。見付公園駐車場入口・仮設住宅・見附島前モニュメントを示す座標ではない。",
-          "coordinate_evidence": {
-                "type": "user_provided_approximate",
-                "user_coordinates": [
-                      37.3945399,
-                      137.2403684
-                ],
-                "method": "YouTube映像を参考に利用者が提供。現物ジャストではない概略位置。独立測量なし。",
-                "verified_lid_gps": false,
-                "provided_on": "2026-10-20"
-          },
-          "gps_measurement_verified": false,
-          "exact_landmark": "珠洲市公式の設置写真は、海を背にした円形の段状タイルの壇上を示しています。ラブカスベンチと同じ海水浴場側のエリアで、見附島前のニンフィアモニュメントとは別地点です。見付公園駐車場そのものや仮設住宅を現物位置としていません。 表示ピンは利用者がYouTube映像を参考に提供した概略位置であり、現物と一致する保証はありません。",
-          "parking_id": "parking-info-470",
-          "parking_eligibility": "unconfirmed",
-          "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
-          "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。施設の営業条件を現物の観覧条件へ転用していません。現地の掲示・規制に従ってください。",
-          "unresolved": "利用者提供の概略ピンを表示。現物の正確なGPS、利用者提示点と現物の距離、駐車場入口GPS、実地現存、最新の道路・観覧規制は未確認。詳細は現地案内と公式道路情報を確認してください。",
-          "official_url": "https://local.pokemon.jp/manhole/desc/470/",
-          "sources": [
-                "https://local.pokemon.jp/manhole/desc/470/?is_modal=1",
-                "https://local.pokemon.jp/manhole/ishikawa.html",
-                "https://noto-pokemon.pref.ishikawa.lg.jp/spot/71/",
-                "https://www.city.suzu.lg.jp/site/kankou/24996.html",
-                "https://www.pokemon-foundation.or.jp/news/173/",
-                "https://www.hot-ishikawa.jp/spot/detail_6554.html",
-                "https://www.hot-ishikawa.jp/feature/detail_613.html",
-                "https://www.pokemon-foundation.or.jp/news/161/",
-                "https://douro.pref.ishikawa.lg.jp/",
-                "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
-                "https://www.hrr.mlit.go.jp/kanazawa/",
-                "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
-                "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
-                "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
-          ],
-          "source_date": "2026-10-20",
-          "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
-          "uncertainty_m": null,
-          "infrastructure_type": "機能未確認",
-          "access_warning": "観光客用の見付公園駐車場から、現地案内に従い海水浴場側のラブカスベンチ・円形壇上へ徒歩。県観光は見附島前モニュメントと海水浴場側を徒歩約7～10分離れた場所として案内。駐車場入口からの正確な経路・住宅境界・工事範囲は未確認です。住宅用地・工事区域に入らず、海岸の立入規制・高波に注意。宝立町鵜島～鵜飼の金峰寺橋は橋梁被災による通行止め（184612、2024/1/1～終了未定、迂回あり）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
-          "vehicle_route_allowed": false,
-          "transport_note": "観光客用の見付公園駐車場から、現地案内に従い海水浴場側のラブカスベンチ・円形壇上へ徒歩。県観光は見附島前モニュメントと海水浴場側を徒歩約7～10分離れた場所として案内。駐車場入口からの正確な経路・住宅境界・工事範囲は未確認です。住宅用地・工事区域に入らず、海岸の立入規制・高波に注意。宝立町鵜島～鵜飼の金峰寺橋は橋梁被災による通行止め（184612、2024/1/1～終了未定、迂回あり）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
-          "port_information": "該当なし（本土または橋で接続した地域）"
+      "id": "PF-0470",
+      "official_number": 470,
+      "prefecture": "石川県",
+      "city": "珠洲市",
+      "pokemon": "ラブカス／ニンフィア",
+      "facility_name": "見付海水浴場そば（円形タイルの壇上）",
+      "address": "石川県珠洲市宝立町鵜島二47-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 37.3945399,
+      "facility_lon": 137.2403684,
+      "facility_coord_type": "user_provided_approximate",
+      "facility_coord_label": "見付海水浴場側・円形タイル壇上付近（利用者提供の概略位置。現物GPSではない）",
+      "facility_coord_source": "利用者提供（YouTube映像を参考に選定した概略座標、2026-10-20）",
+      "coordinate_method": "利用者がYouTube映像を参考に示した現物付近の概略座標を、見付海水浴場側の円形タイル壇上付近の表示用として採用。現物の正確なGPS・実測値ではなく、独立した現地測量も未実施。見付公園駐車場入口・仮設住宅・見附島前モニュメントを示す座標ではない。",
+      "coordinate_evidence": {
+        "type": "user_provided_approximate",
+        "user_coordinates": [
+          37.3945399,
+          137.2403684
+        ],
+        "method": "YouTube映像を参考に利用者が提供。現物ジャストではない概略位置。独立測量なし。",
+        "verified_lid_gps": false,
+        "provided_on": "2026-10-20"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "珠洲市公式の設置写真は、海を背にした円形の段状タイルの壇上を示しています。ラブカスベンチと同じ海水浴場側のエリアで、見附島前のニンフィアモニュメントとは別地点です。見付公園駐車場そのものや仮設住宅を現物位置としていません。 表示ピンは利用者がYouTube映像を参考に提供した概略位置であり、現物と一致する保証はありません。",
+      "parking_id": "parking-info-470",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設の代表点を駐車入口として使用していません。",
+      "viewing_condition": "現物固有の観覧時間・料金・予約要否、夜間・休館日・催事時の立入条件は未確認です。施設の営業条件を現物の観覧条件へ転用していません。現地の掲示・規制に従ってください。",
+      "unresolved": "利用者提供の概略ピンを表示。現物の正確なGPS、利用者提示点と現物の距離、駐車場入口GPS、実地現存、最新の道路・観覧規制は未確認。詳細は現地案内と公式道路情報を確認してください。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/470/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/470/?is_modal=1",
+        "https://local.pokemon.jp/manhole/ishikawa.html",
+        "https://noto-pokemon.pref.ishikawa.lg.jp/spot/71/",
+        "https://www.city.suzu.lg.jp/site/kankou/24996.html",
+        "https://www.pokemon-foundation.or.jp/news/173/",
+        "https://www.hot-ishikawa.jp/spot/detail_6554.html",
+        "https://www.hot-ishikawa.jp/feature/detail_613.html",
+        "https://www.pokemon-foundation.or.jp/news/161/",
+        "https://douro.pref.ishikawa.lg.jp/",
+        "https://www.pref.ishikawa.lg.jp/saigai/202401jishin-douro.html",
+        "https://www.hrr.mlit.go.jp/kanazawa/",
+        "https://douro.pref.ishikawa.lg.jp/api/getRegulation",
+        "https://www.hrr.mlit.go.jp/kanazawa/mb5_kouhou/press/saigai/p261020_2.pdf",
+        "https://www.hrr.mlit.go.jp/kanazawa/douro_kengendaikou/information/assets/r81009.pdf"
+      ],
+      "source_date": "2026-10-20",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "観光客用の見付公園駐車場から、現地案内に従い海水浴場側のラブカスベンチ・円形壇上へ徒歩。県観光は見附島前モニュメントと海水浴場側を徒歩約7～10分離れた場所として案内。駐車場入口からの正確な経路・住宅境界・工事範囲は未確認です。住宅用地・工事区域に入らず、海岸の立入規制・高波に注意。宝立町鵜島～鵜飼の金峰寺橋は橋梁被災による通行止め（184612、2024/1/1～終了未定、迂回あり）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "観光客用の見付公園駐車場から、現地案内に従い海水浴場側のラブカスベンチ・円形壇上へ徒歩。県観光は見附島前モニュメントと海水浴場側を徒歩約7～10分離れた場所として案内。駐車場入口からの正確な経路・住宅境界・工事範囲は未確認です。住宅用地・工事区域に入らず、海岸の立入規制・高波に注意。宝立町鵜島～鵜飼の金峰寺橋は橋梁被災による通行止め（184612、2024/1/1～終了未定、迂回あり）。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
+      "port_information": "該当なし（本土または橋で接続した地域）"
     },
     {
       "id": "PF-0471",
@@ -7385,6 +7385,591 @@ window.POKEFUTA_DATA={
       "vehicle_route_allowed": false,
       "transport_note": "駐車場の指定歩行動線からターミナル前の一般区域へ徒歩。現物は屋外の広場側であり、保安検査場や滑走路へ入る必要はありません。工事区画・バス乗降場・タクシー動線を避けてください。柏木穴水線の三井町洲衛に2026/10/13～12/21の全車両通行止め（190755、土日を除く、迂回あり）。空港全体へのアクセス不能を意味しません。道路確認：2026/10/20。国交省は同日7:30に能越道・穴水IC～徳田大津ICの大雨通行止めを発表。解除時刻は未確認です。訪問直前に石川みち情報ネットと道路管理者の最新情報を確認してください。経路検索の結果は通行可能の保証ではありません。",
       "port_information": "該当なし（本土または橋で接続した地域）"
+    },
+    {
+      "id": "PF-0271",
+      "official_number": 271,
+      "prefecture": "愛知県",
+      "city": "豊橋市",
+      "pokemon": "バクフーン",
+      "facility_name": "豊橋公園",
+      "address": "愛知県豊橋市今橋町3",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.769786,
+      "facility_lon": 137.3960286,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/493385691",
+      "coordinate_method": "自治体・管理者が示す設置施設とOSMの同名施設範囲を照合し、OSM施設代表点を採用。地理院標準地図で周辺・敷地を目視確認。現物中心・駐車入口ではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 493385691,
+        "category": "leisure",
+        "type": "park",
+        "name": "豊橋公園",
+        "boundingbox": [
+          "34.7679352",
+          "34.7715557",
+          "137.3924151",
+          "137.3997295"
+        ],
+        "source_api": "https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=jp&limit=5&q=%E8%B1%8A%E6%A9%8B%E5%85%AC%E5%9C%92&bounded=1&viewbox=136.5%2C35.5%2C137.8%2C34.4",
+        "license": "© OpenStreetMap contributors / ODbL",
+        "gsi_visual": "271-gsi-map.png"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "豊橋市公式めぐりマップでは美術博物館の西側、エールガーデン付近。公園全体の概略ピンです。",
+      "parking_id": "parking-info-271",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "公園は無料の公式案内があります。ポケふた個別の夜間・工事時の立入条件や予約要否は未確認です。吉田城・美術博物館の開館時間を屋外観覧時間には転用していません。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/271/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/271/",
+        "https://local.pokemon.jp/manhole/desc/271/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://www.city.toyohashi.lg.jp/63731.htm",
+        "https://hagumin-net.pref.aichi.jp/facility/playground_search_detail/265",
+        "https://www.city.toyohashi.lg.jp/secure/108447/HP用マップ.pdf",
+        "https://www.openstreetmap.org/way/493385691"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "公園内の許可された駐車区画から美術博物館西側のエールガーデン付近へ徒歩。工事囲い内には入らず、市・現地管理者の最新動線を確認してください。徒歩距離・時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "公園内の許可された駐車区画から美術博物館西側のエールガーデン付近へ徒歩。工事囲い内には入らず、市・現地管理者の最新動線を確認してください。徒歩距離・時間は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0272",
+      "official_number": 272,
+      "prefecture": "愛知県",
+      "city": "豊橋市",
+      "pokemon": "アゴジムシ／アブリボン",
+      "facility_name": "豊橋駅南口駅前広場",
+      "address": "愛知県豊橋市駅前大通1-134",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.762047,
+      "facility_lon": 137.383163,
+      "facility_coord_type": "gsi_address_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E8%B1%8A%E6%A9%8B%E5%B8%82%E9%A7%85%E5%89%8D%E5%A4%A7%E9%80%9A1%E4%B8%81%E7%9B%AE134",
+      "coordinate_method": "市公式の広場所在地・ポケふた個別住所と一致する「豊橋市駅前大通一丁目134番地」の地理院住所検索代表点。市めぐりマップと地理院標準地図で南口広場付近であることを照合。現物GPSとはしない。",
+      "coordinate_evidence": {
+        "query": "豊橋市駅前大通1丁目134",
+        "feature": {
+          "geometry": {
+            "coordinates": [
+              137.383163,
+              34.762047
+            ],
+            "type": "Point"
+          },
+          "type": "Feature",
+          "properties": {
+            "addressCode": "",
+            "title": "愛知県豊橋市駅前大通一丁目１３４番地"
+          }
+        },
+        "gsi_visual": "272-gsi-map.png",
+        "rejected": "OSM豊橋駅検索の駅裏通架道橋・病院・市役所は対象外"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "市公式めぐりマップの拡大図では豊橋駅南口の広場内、樹木のある区画の南西寄り。駅前ロータリーやバス・タクシー乗降場とは別の歩行者広場です。",
+      "parking_id": "parking-info-272",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "屋外ポケふたの観覧可能時間・休業日の立入可否・料金・予約要否は公式資料で個別に確認できていません。近隣施設の営業時間や入場料を、そのまま観覧条件として扱っていません。現地の閉鎖・催事・管理者の案内を優先してください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/272/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/272/",
+        "https://local.pokemon.jp/manhole/desc/272/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://www.city.toyohashi.lg.jp/48116.htm",
+        "https://park500.co.jp/toyohashiparking/ekichika.html",
+        "https://www.city.toyohashi.lg.jp/secure/108447/HP用マップ.pdf",
+        "https://msearch.gsi.go.jp/address-search/AddressSearch?q=%E8%B1%8A%E6%A9%8B%E5%B8%82%E9%A7%85%E5%89%8D%E5%A4%A7%E9%80%9A1%E4%B8%81%E7%9B%AE134"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車場から案内された歩行者出入口で地上へ出て、豊橋駅南口駅前広場へ。ロータリー・バス・タクシー専用区画への進入や広場内駐車を案内しません。実際の出入口からの距離・時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車場から案内された歩行者出入口で地上へ出て、豊橋駅南口駅前広場へ。ロータリー・バス・タクシー専用区画への進入や広場内駐車を案内しません。実際の出入口からの距離・時間は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0273",
+      "official_number": 273,
+      "prefecture": "愛知県",
+      "city": "豊橋市",
+      "pokemon": "スターミー／デンヂムシ",
+      "facility_name": "道の駅とよはし",
+      "address": "愛知県豊橋市東七根町一の沢113-2",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.6959452,
+      "facility_lon": 137.4143248,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/relation/9570659",
+      "coordinate_method": "自治体・管理者が示す設置施設とOSMの同名施設範囲を照合し、OSM施設代表点を採用。地理院標準地図で周辺・敷地を目視確認。現物中心・駐車入口ではない。",
+      "coordinate_evidence": {
+        "osm_type": "relation",
+        "osm_id": 9570659,
+        "category": "landuse",
+        "type": "retail",
+        "name": "道の駅とよはし",
+        "boundingbox": [
+          "34.6948626",
+          "34.6965185",
+          "137.4135080",
+          "137.4192989"
+        ],
+        "source_api": "https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=jp&limit=5&q=%E9%81%93%E3%81%AE%E9%A7%85%E3%81%A8%E3%82%88%E3%81%AF%E3%81%97&bounded=1&viewbox=136.5%2C35.5%2C137.8%2C34.4",
+        "license": "© OpenStreetMap contributors / ODbL",
+        "gsi_visual": "273-gsi-map.png"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "市公式めぐりマップの拡大図では、あぐりパーク食彩村と道の駅とよはし（Tomate）の間の通路側。駐車区画の中央ではありません。",
+      "parking_id": "parking-info-273",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "屋外の通路側に設置。施設の店舗営業時間と屋外観覧は区別しています。駐車場・トイレ等の24時間利用案内はありますが、ポケふた個別の臨時閉鎖・催事時・休業日の立入条件、予約要否は未確認です。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/273/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/273/",
+        "https://local.pokemon.jp/manhole/desc/273/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://michinoeki-toyohashi.jp/access",
+        "https://www.aichinow.pref.aichi.jp/spots/detail/2988/",
+        "https://www.cbr.mlit.go.jp/michinoeki/aichi/aichi17.html",
+        "https://www.city.toyohashi.lg.jp/secure/108447/HP用マップ.pdf",
+        "https://www.cbr.mlit.go.jp/kisya/2020/06/0625.pdf",
+        "https://www.openstreetmap.org/relation/9570659"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後、歩行者通路を使い、あぐりパーク食彩村とTomateの間へ。敷地の施設代表点をポケふた中心や駐車場入口としては使用していません。距離・時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車後、歩行者通路を使い、あぐりパーク食彩村とTomateの間へ。敷地の施設代表点をポケふた中心や駐車場入口としては使用していません。距離・時間は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0274",
+      "official_number": 274,
+      "prefecture": "愛知県",
+      "city": "豊橋市",
+      "pokemon": "カブト／クワガノン",
+      "facility_name": "豊橋総合動植物公園（のんほいパーク）中央門前",
+      "address": "愛知県豊橋市大岩町大穴1-238",
+      "source_position_grade": "C",
+      "source_public_stage": "P2",
+      "public_stage": "P2",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.72025,
+      "facility_lon": 137.42937,
+      "facility_coord_type": "gsi_map_area_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#17/34.72025/137.42937/&base=std&ls=std&disp=1",
+      "coordinate_method": "公式資料の施設配置と地理院標準地図の道路・建物・園路を照合し、中央門前エリアの概略代表点を地図から読取。タイル原点と画素をWebメルカトル逆変換し小数5桁に丸めた。現物中心・GPS実測・駐車入口ではない。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 17,
+          "x0": 115572,
+          "y0": 52040
+        },
+        "pixel": [
+          130,
+          375
+        ],
+        "scope": "中央門前エリア",
+        "gsi_visual": "274-gsi-map.png",
+        "independent_of_google_coordinates": true
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "市公式は中央門、めぐりマップは入園ゲート前のショップ・売店と駐車場に接する位置を示します。東門・西門と取り違えないでください。",
+      "parking_id": "parking-info-274",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "市の配置図は中央門の入園ゲート外側の設置を示します。園内入場券の購入を観覧条件としては案内しません。休園日・夜間にゲート前まで立ち入れるか、個別の無料観覧条件や予約要否は未確認です。園内の開園9:00～16:30・入園16:00までや入園料を、屋外ポケふたの観覧時間・料金へ転用していません。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/274/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/274/",
+        "https://local.pokemon.jp/manhole/desc/274/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://www.nonhoi.jp/information/",
+        "https://www.nonhoi.jp/event/p17973/",
+        "https://www.city.toyohashi.lg.jp/secure/108447/HP用マップ.pdf",
+        "https://maps.gsi.go.jp/#17/34.72025/137.42937/&base=std&ls=std&disp=1"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "中央門側の利用可能な一般駐車区画から、中央門前のショップ・売店付近へ徒歩。東門の駐車場を最寄りとして断定せず、中央門までの現地歩行者案内に従ってください。距離・時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "中央門側の利用可能な一般駐車区画から、中央門前のショップ・売店付近へ徒歩。東門の駐車場を最寄りとして断定せず、中央門までの現地歩行者案内に従ってください。距離・時間は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0404",
+      "official_number": 404,
+      "prefecture": "愛知県",
+      "city": "名古屋市",
+      "pokemon": "コイキング／ネッコアラ",
+      "facility_name": "金シャチ横丁 宗春ゾーン（東門エリア）",
+      "address": "愛知県名古屋市中区二の丸１番2・3号",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.1832,
+      "facility_lon": 136.90466,
+      "facility_coord_type": "gsi_map_area_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#17/35.1832/136.90466/&base=std&ls=std&disp=1",
+      "coordinate_method": "公式資料の施設配置と地理院標準地図の道路・建物・園路を照合し、宗春ゾーンの建物列付近の概略代表点を地図から読取。タイル原点と画素をWebメルカトル逆変換し小数5桁に丸めた。現物中心・GPS実測・駐車入口ではない。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 17,
+          "x0": 115380,
+          "y0": 51834
+        },
+        "pixel": [
+          375,
+          465
+        ],
+        "scope": "宗春ゾーンの建物列付近",
+        "gsi_visual": "404-gsi-map.png",
+        "independent_of_google_coordinates": true,
+        "rejected": "同名のOSM宗春ゾーンはシェアサイクル拠点で施設中心ではないため、その数値は直接採用せず地理院地図上の施設範囲を読取。義直ゾーンと大分県の地名検索結果も不採用。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "名古屋城東門側の宗春ゾーン内。義直ゾーン（正門エリア）ではありません。運営者の設置式写真ではタイル面と芝生の境の舗装部分に設置されています。ゾーン内の店舗との厳密な位置関係は未確認です。",
+      "parking_id": "parking-info-404",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "宗春ゾーンは城の東門外側に位置することを公式配置図で確認。城内有料区域の入場料をポケふた観覧料として案内していません。ポケふた個別の観覧料金・予約要否・夜間や店舗閉店後の立入条件は未確認です。店舗営業時間をそのまま観覧時間にしません。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別住所「中区二の丸１番2・3号」を保持。宗春ゾーンの地理院地図上の代表点で、城中心・義直ゾーン・近傍のシェアサイクル拠点を現物座標として採用しない。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/404/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/404/",
+        "https://local.pokemon.jp/manhole/desc/404/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.nagoya.jp/kankou/kankouinfo/1013741/1035282.html",
+        "https://kinshachi-yokocho.com/news-topics/pokefuta/",
+        "https://kinshachi-yokocho.com/access/",
+        "https://kinshachi-yokocho.com/faq/",
+        "https://www.nagoyajo.city.nagoya.jp/access/",
+        "https://maps.gsi.go.jp/#17/35.1832/136.90466/&base=std&ls=std&disp=1"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "二の丸東駐車場から東門外側の歩行者動線を通って宗春ゾーンへ。城内の有料区域を横断する経路や、ポケふたの歩行者空間への車両進入は案内しません。徒歩距離・所要時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "二の丸東駐車場から東門外側の歩行者動線を通って宗春ゾーンへ。城内の有料区域を横断する経路や、ポケふたの歩行者空間への車両進入は案内しません。徒歩距離・所要時間は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0405",
+      "official_number": 405,
+      "prefecture": "愛知県",
+      "city": "瀬戸市",
+      "pokemon": "ニャヒート／ブーバー",
+      "facility_name": "瀬戸蔵 正面玄関北側",
+      "address": "愛知県瀬戸市蔵所町1-1",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.225319,
+      "facility_lon": 137.1006441,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/relation/8541984",
+      "coordinate_method": "自治体・管理者が示す設置施設とOSMの同名施設範囲を照合し、OSM施設代表点を採用。地理院標準地図で周辺・敷地を目視確認。現物中心・駐車入口ではない。",
+      "coordinate_evidence": {
+        "osm_type": "relation",
+        "osm_id": 8541984,
+        "category": "building",
+        "type": "yes",
+        "name": "瀬戸蔵",
+        "boundingbox": [
+          "35.2248305",
+          "35.2256807",
+          "137.1000466",
+          "137.1012278"
+        ],
+        "source_api": "https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=jp&limit=5&q=%E7%80%AC%E6%88%B8%E8%94%B5&bounded=1&viewbox=136.5%2C35.5%2C137.8%2C34.4",
+        "license": "© OpenStreetMap contributors / ODbL",
+        "gsi_visual": "405-gsi-map.png"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "市公式指定は瀬戸蔵の正面玄関北側。施設運営者も正面北玄関と案内。玄関前の通行を妨げないでください。",
+      "parking_id": "parking-info-405",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "正面玄関北側の屋外設置。ミュージアム入場料金を屋外観覧料金へ転用していません。観覧可能時間・休館日や夜間の屋外立入、ポケふた観覧のみの料金・予約要否は未確認。施設の休館と駐車場の利用制限は別です。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/405/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/405/",
+        "https://local.pokemon.jp/manhole/desc/405/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.seto.aichi.jp/docs/2025/06/13/00505309499/00505309499.html",
+        "https://www.setogura-museum.jp/info/3797/",
+        "https://www.city.seto.aichi.jp/docs/2011/03/15/00115/",
+        "https://www.setogura-museum.jp/access/",
+        "https://www.setogura-museum.jp/info/4746/",
+        "https://ceramicplaza.aitohko.com/access",
+        "https://www.openstreetmap.org/relation/8541984"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後、建物の正面玄関北側へ徒歩。立体駐車場入口と屋外玄関前の現物位置は別です。実際の歩行者出入口からの距離・時間、最適経路は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車後、建物の正面玄関北側へ徒歩。立体駐車場入口と屋外玄関前の現物位置は別です。実際の歩行者出入口からの距離・時間、最適経路は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0406",
+      "official_number": 406,
+      "prefecture": "愛知県",
+      "city": "常滑市",
+      "pokemon": "ピジョット／アローラニャース",
+      "facility_name": "常滑りんくうビーチ",
+      "address": "愛知県常滑市りんくう町２丁目　りんくうビーチ",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.88532,
+      "facility_lon": 136.82296,
+      "facility_coord_type": "gsi_map_area_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://maps.gsi.go.jp/#17/34.88532/136.82296/&base=std&ls=std&disp=1",
+      "coordinate_method": "公式資料の施設配置と地理院標準地図の道路・建物・園路を照合し、りんくうビーチの海沿い遊歩道エリアの概略代表点を地図から読取。タイル原点と画素をWebメルカトル逆変換し小数5桁に丸めた。現物中心・GPS実測・駐車入口ではない。",
+      "coordinate_evidence": {
+        "grid": {
+          "z": 17,
+          "x0": 115350,
+          "y0": 51967
+        },
+        "pixel": [
+          440,
+          325
+        ],
+        "scope": "りんくうビーチの海沿い遊歩道エリア",
+        "gsi_visual": "406-beach-gsi-map.png",
+        "independent_of_google_coordinates": true,
+        "rejected": "常滑市中心・りんくう町二丁目の地名代表点は海岸でないため不採用。海岸エリアのみ対応付け、現物の石段位置を精密に断定しない。"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "公式はりんくうビーチと案内。補助の現地写真・訪問記録ではビーチ入口から石段を上がった舗装エリアとされています。砂浜の中心ではありません。園路上の厳密な位置の一次資料は未確認です。",
+      "parking_id": "parking-info-406",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "屋外ビーチ。海水浴期間・有料BBQの営業時間をポケふた観覧条件に転用しません。ポケふた個別の夜間・催事時の立入条件、観覧料金・予約要否は未確認。荒天・高潮・高波、イベントの立入制限に従い、閉鎖区画には入らないでください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/406/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/406/",
+        "https://local.pokemon.jp/manhole/desc/406/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://tokoname-kankou.net/news/detail/138/",
+        "https://rinku-beach.jp/access",
+        "https://rinku-beach.jp/about",
+        "https://blog.affectec.jp/aichi-pokefuta-tokoname/",
+        "https://maps.gsi.go.jp/#17/34.88532/136.82296/&base=std&ls=std&disp=1"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後、ビーチ入口から海沿いの歩行者通路へ。石段や周囲の歩行者、海側の安全に注意し、砂浜や歩行者空間へ車で進入しないでください。駐車区画からの具体的な徒歩距離・時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車後、ビーチ入口から海沿いの歩行者通路へ。石段や周囲の歩行者、海側の安全に注意し、砂浜や歩行者空間へ車で進入しないでください。駐車区画からの具体的な徒歩距離・時間は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0407",
+      "official_number": 407,
+      "prefecture": "愛知県",
+      "city": "刈谷市",
+      "pokemon": "タツベイ／ジュカイン／キバゴ",
+      "facility_name": "刈谷ハイウェイオアシス オアシス館刈谷 INFOBOX前",
+      "address": "愛知県刈谷市東境町吉野55",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 35.0411061,
+      "facility_lon": 137.0482177,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/way/494075017",
+      "coordinate_method": "自治体・管理者が示す設置施設とOSMの同名施設範囲を照合し、OSM施設代表点を採用。地理院標準地図で周辺・敷地を目視確認。現物中心・駐車入口ではない。",
+      "coordinate_evidence": {
+        "osm_type": "way",
+        "osm_id": 494075017,
+        "category": "tourism",
+        "type": "information",
+        "name": "オアシス館刈谷INFOBOX",
+        "boundingbox": [
+          "35.0409425",
+          "35.0412697",
+          "137.0480211",
+          "137.0484142"
+        ],
+        "source_api": "https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=jp&limit=5&q=%E3%82%AA%E3%82%A2%E3%82%B7%E3%82%B9%E9%A4%A8%E5%88%88%E8%B0%B7&bounded=1&viewbox=136.5%2C35.5%2C137.8%2C34.4",
+        "license": "© OpenStreetMap contributors / ODbL",
+        "gsi_visual": "407-gsi-map.png"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "刈谷市公式指定は「オアシス館刈谷 INFOBOX」正面玄関前。観覧車と一緒に撮影できる場所。PA全体や公園の中心とは区別してください。",
+      "parking_id": "parking-info-407",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "屋外のINFOBOX正面玄関前に設置。オアシス館の営業8:00～22:00を屋外ポケふたの観覧時間へ転用しません。個別の夜間・休業時の立入、観覧料金・予約要否は未確認。施設の現地案内・混雑時の誘導に従ってください。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別と管理者の所在地は東境町吉野55、市設置記事の施設所在地は25-1と差がある。公開住所は公式個別55を保持し、市の目印とOSMのINFOBOX建物で設置エリアを照合。地番差は未解決。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/407/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/407/",
+        "https://local.pokemon.jp/manhole/desc/407/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.kariya.lg.jp/kurashi/road_park/park/1017263/1017293/pokemon.html",
+        "https://kariya-oasis.com/info/",
+        "https://kariya-oasis.com/access/",
+        "https://kariya-guide.com/sightseeing/000024.html",
+        "https://www.openstreetmap.org/way/494075017"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "一般道側駐車場で降車し、敷地内の案内図・歩行者通路に従ってオアシス館刈谷INFOBOX正面玄関前へ。駐車場の進入方向・右折制限は公式アクセス図を参照。一般道から高速PAへの車経路、INFOBOX前への直接車経路は生成していません。各駐車場からの最短距離・時間は未確認。",
+      "vehicle_route_allowed": false,
+      "transport_note": "一般道側駐車場で降車し、敷地内の案内図・歩行者通路に従ってオアシス館刈谷INFOBOX正面玄関前へ。駐車場の進入方向・右折制限は公式アクセス図を参照。一般道から高速PAへの車経路、INFOBOX前への直接車経路は生成していません。各駐車場からの最短距離・時間は未確認。",
+      "port_information": "該当なし（本土）"
+    },
+    {
+      "id": "PF-0408",
+      "official_number": 408,
+      "prefecture": "愛知県",
+      "city": "西尾市",
+      "pokemon": "マホイップ／ゴクリン",
+      "facility_name": "西尾市歴史公園",
+      "address": "愛知県西尾市錦城町233",
+      "source_position_grade": "C",
+      "source_public_stage": "P1",
+      "public_stage": "P1",
+      "lid_lat": null,
+      "lid_lon": null,
+      "lid_coord_type": "unknown",
+      "facility_lat": 34.8667449,
+      "facility_lon": 137.0480927,
+      "facility_coord_type": "osm_facility_representative",
+      "facility_coord_label": "施設・設置エリアの概略代表点",
+      "facility_coord_source": "https://www.openstreetmap.org/relation/17545326",
+      "coordinate_method": "自治体・管理者が示す設置施設とOSMの同名施設範囲を照合し、OSM施設代表点を採用。地理院標準地図で周辺・敷地を目視確認。現物中心・駐車入口ではない。",
+      "coordinate_evidence": {
+        "osm_type": "relation",
+        "osm_id": 17545326,
+        "category": "leisure",
+        "type": "park",
+        "name": "西尾市歴史公園",
+        "boundingbox": [
+          "34.8657531",
+          "34.8677632",
+          "137.0467606",
+          "137.0492473"
+        ],
+        "source_api": "https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=jp&limit=5&q=%E8%A5%BF%E5%B0%BE%E5%B8%82%E6%AD%B4%E5%8F%B2%E5%85%AC%E5%9C%92&bounded=1&viewbox=136.5%2C35.5%2C137.8%2C34.4",
+        "license": "© OpenStreetMap contributors / ODbL",
+        "gsi_visual": "408-gsi-map.png"
+      },
+      "gps_measurement_verified": false,
+      "exact_landmark": "西尾市公式指定は公園内の二之丸天守台の下の芝生。公式写真では園路沿いの芝生内の四角い基礎面に設置され、本丸丑寅櫓を背景に撮影できます。",
+      "parking_id": "parking-info-408",
+      "parking_eligibility": "unconfirmed",
+      "parking_note": "駐車場入口座標は未確認です。施設代表点を駐車場入口として使用していません。",
+      "viewing_condition": "県観光公式は無料、園内散策はいつでも自由と案内。旧近衛邸等の9:00～18:00（10～3月17:00まで）・月曜等休館を屋外ポケふたの観覧時間には転用しません。臨時閉鎖・工事規制と現地案内を優先。ポケふた個別の予約要否は未確認。",
+      "unresolved": "ピンはおおまかな位置です。現物GPS・測量方法・誤差、駐車場入口GPS、実地の現存・当日の臨時運用は未確認です。 公式個別住所は錦城町233、市設置記事・施設住所は231番地1。現物は二之丸天守台下であり、施設所在地の地番で公式掲載住所を上書きしない。地番差の理由は未確認。",
+      "official_url": "https://local.pokemon.jp/manhole/desc/408/",
+      "sources": [
+        "https://local.pokemon.jp/manhole/desc/408/",
+        "https://local.pokemon.jp/manhole/desc/408/?is_modal=1",
+        "https://local.pokemon.jp/manhole/aichi.html",
+        "https://www.pref.aichi.jp/soshiki/kanko/iphuta2025.html",
+        "https://www.city.nishio.aichi.jp/sportskanko/kanko/1001472/1011041.html",
+        "https://www.city.nishio.aichi.jp/shisetsu/1005437/1002603.html",
+        "https://aichinow.pref.aichi.jp/spots/detail/213/",
+        "https://nishio-museum.jp/guide/",
+        "https://www.city.nishio.aichi.jp/_res/projects/default_project/_page_/001/002/603/trafic.pdf",
+        "https://www.openstreetmap.org/relation/17545326"
+      ],
+      "source_date": "2026-10-21",
+      "current_status": "公式個別ページ・自治体等資料照合済み（実地現存は未確認）",
+      "uncertainty_m": null,
+      "infrastructure_type": "機能未確認",
+      "access_warning": "駐車後、工事中の市道・囲いを避け、公園の歩行者園路で二之丸天守台下の芝生へ。駐車場からの正確な歩行距離・時間は未確認。駐車場が利用可能でも、どの道路からも自由に進入できるとは案内しません。",
+      "vehicle_route_allowed": false,
+      "transport_note": "駐車後、工事中の市道・囲いを避け、公園の歩行者園路で二之丸天守台下の芝生へ。駐車場からの正確な歩行距離・時間は未確認。駐車場が利用可能でも、どの道路からも自由に進入できるとは案内しません。",
+      "port_information": "該当なし（本土）"
     }
   ],
   "parkings": [
@@ -9999,6 +10584,177 @@ window.POKEFUTA_DATA={
         "https://www.noto-airport.jp/info/info_1121.html"
       ],
       "source_date": "2026-10-20",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-271",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "豊橋公園の公園利用者向け駐車場が候補。県案内は250台ですが工事進捗で変わる旨の注記があります。市公式は工事による駐車台数減少を案内。掲載仮設図の適用期間は2025/10/27～2026/9/30で終了しており、10/21の動線・利用台数は未確定です。普通車料金・開閉時間は未確認。市役所の来庁者用駐車場を観光用として案内していません。 徒歩：公園内の許可された駐車区画から美術博物館西側のエールガーデン付近へ徒歩。工事囲い内には入らず、市・現地管理者の最新動線を確認してください。徒歩距離・時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://www.city.toyohashi.lg.jp/63731.htm",
+        "https://hagumin-net.pref.aichi.jp/facility/playground_search_detail/265"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-272",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "一般普通車の候補は豊橋えきちか駐車場（駅前公共第二、駅前大通1丁目地内の地下）。130台、5:00～24:00、時間外は入出庫不可。入庫後15分まで無料、基本30分150円・昼間打切りなし。夜間17:00～翌9:00の最大900円は17:00～23:59入庫等の条件付き。施設利用に伴う割引をポケふた観覧だけに適用していません。大雨時は公式基準により入庫口または全出入口を閉鎖し、安全確認まで出庫も不可になる場合があります。 徒歩：駐車場から案内された歩行者出入口で地上へ出て、豊橋駅南口駅前広場へ。ロータリー・バス・タクシー専用区画への進入や広場内駐車を案内しません。実際の出入口からの距離・時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "豊橋えきちか駐車場 愛知県豊橋市駅前大通1丁目"
+      ],
+      "sources": [
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://www.city.toyohashi.lg.jp/48116.htm",
+        "https://park500.co.jp/toyohashiparking/ekichika.html"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-273",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "道の駅とよはしの来訪者向け駐車場。無料、258台（西側132台・東側126台）は運営者・県観光公式で一致。国土交通省資料では24時間利用可能。イベント・災害等で制限される場合は現地案内を優先。東側と西側を横切る際は敷地内の車両に注意してください。 徒歩：駐車後、歩行者通路を使い、あぐりパーク食彩村とTomateの間へ。敷地の施設代表点をポケふた中心や駐車場入口としては使用していません。距離・時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "道の駅とよはし 駐車場 愛知県豊橋市東七根町"
+      ],
+      "sources": [
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://michinoeki-toyohashi.jp/access",
+        "https://www.aichinow.pref.aichi.jp/spots/detail/2988/",
+        "https://www.cbr.mlit.go.jp/michinoeki/aichi/aichi17.html"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-274",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "中央門側の中央第1・第2・第3駐車場が候補。普通車200円。2026/10/17の公式告知で中央第2駐車場・西第1駐車場は精算機不具合により当面現金のみ。中央第3も通常から現金のみ。混雑表示の「空・閉」は取得時点の状態であり恒常的な閉鎖ではありません。各区画の台数・開閉時間・休園日の利用条件は未確認。 徒歩：中央門側の利用可能な一般駐車区画から、中央門前のショップ・売店付近へ徒歩。東門の駐車場を最寄りとして断定せず、中央門までの現地歩行者案内に従ってください。距離・時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "のんほいパーク 中央第1駐車場 豊橋市"
+      ],
+      "sources": [
+        "https://www.city.toyohashi.lg.jp/53062.htm",
+        "https://www.city.toyohashi.lg.jp/57957.htm",
+        "https://www.nonhoi.jp/information/",
+        "https://www.nonhoi.jp/event/p17973/"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-404",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "金シャチ横丁専用駐車場はありません。東門側の名城公園二の丸東駐車場が一般普通車の候補。名古屋城公式は普通車123台、8:30～22:30、1/2～12/28、30分以内ごと250円。正門前は普通車308台、8:45～21:30、同250円ですが宗春ゾーンとは距離があります。横丁公式に残る180円表記と異なるため、駐車場案内を管轄する城公式の250円を採用し、改定施行日は未確認。バス用区画へ普通車を案内していません。催事時の閉鎖・台数規制は訪問前に確認してください。 徒歩：二の丸東駐車場から東門外側の歩行者動線を通って宗春ゾーンへ。城内の有料区域を横断する経路や、ポケふたの歩行者空間への車両進入は案内しません。徒歩距離・所要時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "名城公園二の丸東駐車場 名古屋市"
+      ],
+      "sources": [
+        "https://www.city.nagoya.jp/kankou/kankouinfo/1013741/1035282.html",
+        "https://kinshachi-yokocho.com/news-topics/pokefuta/",
+        "https://kinshachi-yokocho.com/access/",
+        "https://kinshachi-yokocho.com/faq/",
+        "https://www.nagoyajo.city.nagoya.jp/access/"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-405",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "瀬戸蔵立体駐車場が候補。一般乗用車189台（うち身体障害者用5台との運営者案内）、高さ2.1m以上不可。60分まで無料、以後60分ごと100円、24時間最大800円を繰り返し適用。最大料金はせともの祭当日と前後日を除外。支払は現金のみ（市公式）。店舗案内に24時間使用可能とありますが、2026/10/26は停電により10:30～12:30利用不可の公式告知があります。館利用者向けの2時間無料サービスを、ポケふた観覧だけの通常料金に転用しません。 徒歩：駐車後、建物の正面玄関北側へ徒歩。立体駐車場入口と屋外玄関前の現物位置は別です。実際の歩行者出入口からの距離・時間、最適経路は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "瀬戸蔵駐車場 瀬戸市蔵所町1-1"
+      ],
+      "sources": [
+        "https://www.city.seto.aichi.jp/docs/2025/06/13/00505309499/00505309499.html",
+        "https://www.setogura-museum.jp/info/3797/",
+        "https://www.city.seto.aichi.jp/docs/2011/03/15/00115/",
+        "https://www.setogura-museum.jp/access/",
+        "https://www.setogura-museum.jp/info/4746/",
+        "https://ceramicplaza.aitohko.com/access"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-406",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "りんくうビーチ駐車場が公式指定の候補。普通車207台、5:00～22:00（時間外は入出庫不可）。入庫30分まで無料、4～10月は1日1回1,000円、11～3月は同500円。同日再入場も規定料金。約500台という夏季案内は臨時駐車場込みで、常設207台と区別します。休日・7～8月・GWの大型・中型・大型特殊車の制限を、普通車の一律禁止と誤案内していません。 徒歩：駐車後、ビーチ入口から海沿いの歩行者通路へ。石段や周囲の歩行者、海側の安全に注意し、砂浜や歩行者空間へ車で進入しないでください。駐車区画からの具体的な徒歩距離・時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "りんくうビーチ駐車場 愛知県常滑市りんくう町2丁目"
+      ],
+      "sources": [
+        "https://tokoname-kankou.net/news/detail/138/",
+        "https://rinku-beach.jp/access",
+        "https://rinku-beach.jp/about"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-407",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "一般道からは一般道路側駐車場を優先。無料、一般車約1,300台は観光協会案内の合計目安（身障者用30台は別記）です。第1・第2・第3は5:00～24:00、第4は8:00～22:00、第5は5:00～20:00。時間外施錠、一般道側に24時間利用可能な駐車場はありません。高速側上りPA・下りPAは高速道路利用者用で24時間、一般道から直接車で進入する駐車場ではありません。スマートICはETC専用で上下線別入口、スマートIC入口から入ると刈谷PAは利用できない旨の公式案内があります。PA内Uターン不可、上下線の行き来は徒歩。車を置いて別の旅行等へ出かける利用は不可。 徒歩：一般道側駐車場で降車し、敷地内の案内図・歩行者通路に従ってオアシス館刈谷INFOBOX正面玄関前へ。駐車場の進入方向・右折制限は公式アクセス図を参照。一般道から高速PAへの車経路、INFOBOX前への直接車経路は生成していません。各駐車場からの最短距離・時間は未確認。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [],
+      "sources": [
+        "https://www.city.kariya.lg.jp/kurashi/road_park/park/1017263/1017293/pokemon.html",
+        "https://kariya-oasis.com/info/",
+        "https://kariya-oasis.com/access/",
+        "https://kariya-guide.com/sightseeing/000024.html"
+      ],
+      "source_date": "2026-10-21",
+      "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
+    },
+    {
+      "id": "parking-info-408",
+      "parking_lat": null,
+      "parking_lon": null,
+      "coord_type": "unknown",
+      "description": "西尾市歴史公園駐車場が来訪者向け候補。無料・普通車50台は県観光公式と資料館管理者で一致。駐車場の開閉時間・入口GPSは未確認。生涯学習センター建設工事による市道山下錦城線の車両規制が2025/8/18頃～2027/1/15頃に予定され、平日9:00～17:00は車両通行止め、夜間開放、土日祝は規制なし・一部一方通行解除と市の工事図に記載。工事図では歴史公園駐車場は利用可能と案内されています。 徒歩：駐車後、工事中の市道・囲いを避け、公園の歩行者園路で二之丸天守台下の芝生へ。駐車場からの正確な歩行距離・時間は未確認。駐車場が利用可能でも、どの道路からも自由に進入できるとは案内しません。 確認日：2026/10/21。料金・時間・利用条件は変更される場合があります。",
+      "eligibility": "unconfirmed",
+      "destinations": [
+        "西尾市歴史公園駐車場 西尾市"
+      ],
+      "sources": [
+        "https://www.city.nishio.aichi.jp/sportskanko/kanko/1001472/1011041.html",
+        "https://www.city.nishio.aichi.jp/shisetsu/1005437/1002603.html",
+        "https://aichinow.pref.aichi.jp/spots/detail/213/",
+        "https://nishio-museum.jp/guide/",
+        "https://www.city.nishio.aichi.jp/_res/projects/default_project/_page_/001/002/603/trafic.pdf"
+      ],
+      "source_date": "2026-10-21",
       "entrance_note": "駐車先は候補。入口位置・最適性・当日の利用を保証しません。"
     }
   ]
