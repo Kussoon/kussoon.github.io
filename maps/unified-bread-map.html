@@ -921,19 +921,19 @@ header,.container,main,.controls,.searchbar,.options,.lower,#side{min-width:0;ma
 .breads-map-size-control button:focus-visible{outline:3px solid #1d9a85;outline-offset:2px}
 @media(max-width:700px){.mapbox.map-expanded #map{height:540px}.breads-map-size-control button{font-size:.72rem;padding:9px 10px}}
 
-.bread-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:end;gap:12px}.bread-field{display:grid;gap:5px;min-width:0}.bread-field label{display:block;white-space:nowrap;word-break:keep-all;font-weight:600}.bread-field select{width:100%;min-width:0;max-width:100%}.bread-fields #reset{min-height:44px}.pin.ref{background:transparent;border:0;border-radius:0;box-shadow:none;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-bottom:27px solid #823da0;filter:drop-shadow(0 1px 2px #3338)}.tag.reference{color:#823da0} @media(prefers-color-scheme:dark){.tag.reference{color:#d4a5ed}}
-@media(max-width:700px){.bread-fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.bread-fields #reset{grid-column:1/-1;justify-self:start}#map{height:60svh;min-height:340px;max-height:650px}.mapbox.map-expanded #map{height:80svh;max-height:850px}}
+.bread-fields{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:12px}.bread-field{display:grid;gap:5px;min-width:0}.bread-field label{display:block;white-space:nowrap;word-break:keep-all;font-weight:600}.bread-field select{width:100%;min-width:0;max-width:100%}.bread-fields #reset{min-height:44px}.pin.ref{background:transparent;border:0;border-radius:0;box-shadow:none;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-bottom:27px solid #823da0;filter:drop-shadow(0 1px 2px #3338)}.tag.reference{color:#823da0} @media(prefers-color-scheme:dark){.tag.reference{color:#d4a5ed}}
+@media(max-width:700px){.bread-fields{grid-template-columns:minmax(0,1fr) auto;gap:10px}.bread-fields #reset{grid-column:auto;justify-self:end}#map{height:60svh;min-height:340px;max-height:650px}.mapbox.map-expanded #map{height:80svh;max-height:850px}}
 </style></head><body>
-<header id="page-top"><h1>西宮・芦屋・尼崎・宝塚・伊丹 パン屋マップ</h1><p class="muted">Ver.1.3.0</p><p class="subtitle">5市のパン屋をまとめて探せます。参考候補は紫三角で表示し、通常掲載店舗数には含めません。</p></header>
+<header id="page-top"><h1>西宮・芦屋・尼崎・宝塚・伊丹 パン屋マップ</h1><p class="muted">Ver.1.3.1</p><p class="subtitle">5市のパン屋をまとめて探せます。</p></header>
 <main class="container stack">
 <section class="panel controls" aria-label="店舗の絞り込み">
  <div class="searchbar"><input id="search" type="search" placeholder="店名・地名・施設名を検索" aria-label="店舗検索" autocomplete="off"><button type="button" class="smallbtn" id="clear">クリア</button></div>
  <div><strong>市を選択（複数可）</strong><div class="cityset" id="cities"></div></div>
- <div class="bread-fields"><div class="bread-field"><label for="kind">店舗種別</label><select id="kind"><option value="all">すべて</option><option>パン専門店</option><option>施設内ベーカリー</option><option>店内ベーカリー</option><option>その他のパン販売</option></select></div><div class="bread-field"><label for="candidate">参考候補</label><select id="candidate"><option value="show">表示する</option><option value="hide">表示しない</option><option value="only">参考候補のみ</option></select></div><button type="button" id="reset" class="smallbtn">条件をリセット</button></div>
+ <div class="bread-fields"><div class="bread-field"><label for="kind">店舗種別</label><select id="kind"><option value="all">すべて</option><option>パン専門店</option><option>施設内ベーカリー</option><option>店内ベーカリー</option><option>その他のパン販売</option></select></div><button type="button" id="reset" class="smallbtn">条件をリセット</button></div>
 </section>
 <div class="stats" aria-live="polite"><strong id="count"></strong><small id="city-counts"></small></div>
 <div class="lower">
-<section class="panel mapbox" aria-label="店舗地図"><div class="mapbar"><h2>店舗地図</h2></div><div id="map" role="application" aria-label="5市パン屋地図"></div><div id="breadPinPanel" class="bread-pin-panel" hidden aria-label="選択した店舗の吹き出し"></div><div id="facilityPanel" class="facilityPanel" hidden aria-live="polite"></div><div class="mapnote">紫三角：営業状況・販売場所等の確認が十分でない参考候補。青い角丸数字：同一施設・地点の店舗。橙の丸数字：近接地点のまとまり。伊丹市のBakery Smile・パン・オ・ノワのピンは指定住所付近の概略位置です。</div></section>
+<section class="panel mapbox" aria-label="店舗地図"><div class="mapbar"><h2>店舗地図</h2></div><div id="map" role="application" aria-label="5市パン屋地図"></div><div id="breadPinPanel" class="bread-pin-panel" hidden aria-label="選択した店舗の吹き出し"></div><div id="facilityPanel" class="facilityPanel" hidden aria-live="polite"></div><div class="mapnote">青い角丸数字：同一施設・地点の店舗。橙の丸数字：近接地点のまとまり。伊丹市のBakery Smile・パン・オ・ノワのピンは指定住所付近の概略位置です。</div></section>
 <section class="stack" id="side"><section class="panel results"><h2>店舗一覧 <span class="muted" id="listcount"></span> <span class="list-order">（読み・店名順）</span></h2><div id="list" class="resultgrid" aria-live="polite"></div><nav class="pager" aria-label="一覧ページ切替"><button id="prev" type="button">前へ</button><span id="pageinfo"></span><button id="next" type="button">次へ</button></nav></section><section id="detail" class="panel detail" hidden aria-live="polite"></section></section>
 </div>
 </main>
@@ -963,7 +963,7 @@ function mapSearchQuery(s){if(s.source_no==='ITM-BREAD-R008')return '兵庫県�
 
 function norm(s){return String(s||'').normalize('NFKC').toLowerCase().replace(/[\u3041-\u3096]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60)).replace(/[\s\u3000‐‑‒–—ー・･.]/g,'')}
 function categoryOf(s){return s.type_group}
-function matches(s){const term=norm($('search').value);if(!selectedCities.has(s.city)||!publicEligible(s))return false;const cat=categoryValue(),ref=$('candidate').value;if(cat!=='all'&&categoryOf(s)!==cat)return false;if(ref==='hide'&&s.status==='参考候補'||ref==='only'&&s.status!=='参考候補')return false;return !term||[s.store_name,s.brand_name,s.store_kana,s.address,s.facility_name,s.city].map(norm).join(' ').includes(term)}
+function matches(s){const term=norm($('search').value);if(!selectedCities.has(s.city)||!publicEligible(s))return false;const cat=categoryValue();if(cat!=='all'&&categoryOf(s)!==cat)return false;return !term||[s.store_name,s.brand_name,s.store_kana,s.address,s.facility_name,s.city].map(norm).join(' ').includes(term)}
 
 function event(name){if(typeof window.umami==='object'&&typeof window.umami.track==='function')window.umami.track(name)}
 const citywrap=$('cities');cityNames.forEach(city=>{const l=document.createElement('label'),cb=document.createElement('input');cb.type='checkbox';cb.checked=true;cb.value=city;cb.addEventListener('change',()=>{if(cb.checked)selectedCities.add(city);else selectedCities.delete(city);event('breads-city-filter');update(true)});l.append(cb,document.createTextNode(city));citywrap.append(l)});
@@ -1012,7 +1012,7 @@ function showDetail(s,fromBreadPreview=false){
  for(const [label,url] of pairs){if(!url||!/^https?:\/\//i.test(url))continue;const a=safeText('a',label);a.href=url;a.target='_blank';a.rel='noopener noreferrer';links.append(a)}e.append(links);renderList();if(window.innerWidth<1000)requestAnimationFrame(()=>e.scrollIntoView({behavior:'smooth',block:'start'}));event('bread-detail-open')}
 
 function safeText(tag,txt,cls){const e=document.createElement(tag);e.textContent=txt;if(cls)e.className=cls;return e}
-function renderList(){const list=$('list');list.replaceChildren();const total=shown.length;$('listcount').textContent='（'+total+'件）';const pages=Math.max(1,Math.ceil(total/perPage));page=Math.min(page,pages-1);let segment=shown.slice(page*perPage,(page+1)*perPage);if(!segment.length)list.append(safeText('p','条件に合う店舗がありません。','empty'));for(const s of segment){let b=document.createElement('button');b.type='button';b.className='item'+(s.store_id===selectedId?' selected':'');b.append(safeText('b',s.store_name),safeText('span',s.city+' · '+categoryOf(s)+(s.facility_name&&s.facility_name!=='路面店'?' · '+s.facility_name:'')+' · '+shortAddress(s),'meta'),makeTag(s));if(!hasCoordinates(s))b.append(safeText('span','位置未確定・地図ピンなし','meta'));b.addEventListener('click',()=>goToStore(s));list.append(b)}$('pageinfo').textContent=(page+1)+' / '+pages;$('prev').disabled=page<=0;$('next').disabled=page>=pages-1}
+function renderList(){const list=$('list');list.replaceChildren();const total=shown.length;$('listcount').textContent='（'+total+'件）';const pages=Math.max(1,Math.ceil(total/perPage));page=Math.min(page,pages-1);let segment=shown.slice(page*perPage,(page+1)*perPage);if(!segment.length)list.append(safeText('p','条件に合う店舗がありません。','empty'));for(const s of segment){let b=document.createElement('button');b.type='button';b.className='item'+(s.store_id===selectedId?' selected':'');b.append(safeText('b',s.store_name),safeText('span',s.city+' · '+categoryOf(s)+(s.facility_name&&s.facility_name!=='路面店'?' · '+s.facility_name:'')+' · '+shortAddress(s),'meta'));if(!hasCoordinates(s))b.append(safeText('span','位置未確定・地図ピンなし','meta'));b.addEventListener('click',()=>goToStore(s));list.append(b)}$('pageinfo').textContent=(page+1)+' / '+pages;$('prev').disabled=page<=0;$('next').disabled=page>=pages-1}
 function groupKey(s){return [s.city,s.latitude,s.longitude].join('|')}
 function groupName(arr){if(arr.length===1)return arr[0].store_name;const f=arr[0].facility_name;return f&&arr.every(s=>s.facility_name===f)?f:arr[0].city+'の同一施設・地点'}
 function openFacility(arr){const el=$('facilityPanel');el.replaceChildren();const head=document.createElement('div');head.className='head';const heading=document.createElement('div');heading.className='facility-heading';heading.append(safeText('strong','🏬 '+groupName(arr)),safeText('small','この施設・地点にある '+arr.length+' 店舗'));head.append(heading);let closer=document.createElement('button');closer.type='button';closer.className='close-facility';closer.textContent='閉じる';closer.onclick=()=>{el.hidden=true};const collapse=document.createElement('button');collapse.type='button';collapse.className='collapse-facility';collapse.textContent='一覧をたたむ';collapse.setAttribute('aria-expanded','true');head.append(collapse);head.append(closer);el.append(head);const items=document.createElement('div');items.className='facility-items';collapse.onclick=()=>{items.hidden=!items.hidden;collapse.textContent=items.hidden?'一覧を開く':'一覧をたたむ';collapse.setAttribute('aria-expanded',String(!items.hidden))};for(const s of arr){const b=document.createElement('button');b.type='button';b.textContent=s.store_name;b.onclick=()=>{showDetail(s);event('breads-facility-shop-open')};items.append(b)}el.append(items);el.hidden=false;event('breads-facility-open');if(!isInMapView(arr[0]))centerStore(arr[0]);}
@@ -1045,7 +1045,7 @@ function openBreadPreview(arr,marker){
  const scroll=document.createElement('div');scroll.className='bread-pin-scroll';
  for(const s of arr){const row=document.createElement('div');row.className='bread-pin-shop';
  if(arr.length>1){const nm=document.createElement('strong');nm.textContent=s.store_name;row.append(nm)}
- const addr=document.createElement('span');addr.textContent=shortAddress(s);row.append(addr);if(s.status==='参考候補')row.append(safeText('span','参考候補の理由：'+(s['備考']||s['掲載段階'])));if(/施設代表点/.test(s['位置状態']))row.append(safeText('span','施設代表点（店舗入口ではありません）'));
+ const addr=document.createElement('span');addr.textContent=shortAddress(s);row.append(addr);if(/施設代表点/.test(s['位置状態']))row.append(safeText('span','施設代表点（店舗入口ではありません）'));
  const actions=document.createElement('div');actions.className='bread-pin-shop-actions';
  const detail=document.createElement('button');detail.type='button';detail.className='bread-pin-detail';detail.textContent='詳細';
  detail.onclick=()=>{
@@ -1081,17 +1081,17 @@ function renderMap(){
   }
   return points;
 }
-function fitVisible(points){map.invalidateSize({pan:false});if(points.length===1){map.setView(points[0],16,{animate:false})}else if(points.length){map.fitBounds(L.latLngBounds(points),{padding:[45,45],maxZoom:16,animate:false})}else{map.setView([34.756,135.37],11,{animate:false})}}
+function fitVisible(points){map.invalidateSize({pan:false});if(points.length===1){map.setView(points[0],16,{animate:false})}else if(points.length){const bounds=L.latLngBounds(points);const mobile=window.innerWidth<700;map.fitBounds(bounds,{paddingTopLeft:mobile?[10,10]:[12,12],paddingBottomRight:mobile?[14,10]:[18,12],maxZoom:16,animate:false})}else{map.setView([34.756,135.37],11,{animate:false})}}
 function goToStore(s){page=Math.max(0,Math.floor(shown.findIndex(x=>x.store_id===s.store_id)/perPage));renderList();if(hasCoordinates(s))centerStore(s);const arr=groups.get(groupKey(s));if(arr&&arr.length>1)openFacility(arr);showDetail(s)}
-function update(refit){shown=data.filter(matches).sort((a,b)=>norm(a.store_kana||a.store_name).localeCompare(norm(b.store_kana||b.store_name),'ja'));page=0;selectedId=null;$('detail').hidden=true;$('facilityPanel').hidden=true;closeBreadPreview();updateTopButton();const normals=shown.filter(s=>s.map_display==='normal').length;const refs=shown.length-normals;$('count').textContent='掲載店舗 '+normals+'店　参考候補 '+refs+'件'+(shown.some(s=>!hasCoordinates(s))?'（位置未確定 '+shown.filter(s=>!hasCoordinates(s)).length+'件・ピン非表示）':'');$('city-counts').textContent=cityNames.map(c=>c.replace('市','')+' '+shown.filter(s=>s.city===c&&s.status==='通常掲載').length+'店').join('｜');renderList();if(map){const points=renderMap();if(refit)fitVisible(points)}}
-$('search').addEventListener('input',()=>update(true));$('clear').onclick=()=>{$('search').value='';update(true);$('search').focus()};['kind','candidate'].forEach(id=>$(id).addEventListener('change',()=>update(true)));$('reset').onclick=()=>{selectedCities.clear();cityNames.forEach(c=>selectedCities.add(c));citywrap.querySelectorAll('input').forEach(x=>x.checked=true);$('search').value='';$('kind').value='all';$('candidate').value='show';update(true)};function turnPage(delta){page+=delta;renderList();requestAnimationFrame(()=>{const listHead=document.querySelector('#side .results h2');const top=listHead.getBoundingClientRect().top+window.scrollY-105;window.scrollTo({top:Math.max(0,top),behavior:'instant'})});event('breads-list-page')}$('prev').onclick=()=>turnPage(-1);$('next').onclick=()=>turnPage(1);
+function update(refit){shown=data.filter(matches).sort((a,b)=>norm(a.store_kana||a.store_name).localeCompare(norm(b.store_kana||b.store_name),"ja"));page=0;selectedId=null;$("detail").hidden=true;$("facilityPanel").hidden=true;closeBreadPreview();updateTopButton();const normals=shown.filter(s=>s.map_display==="normal").length;$("count").textContent="掲載店舗 "+normals+"店"+(shown.some(s=>!hasCoordinates(s))?"（位置未確定 "+shown.filter(s=>!hasCoordinates(s)).length+"件・ピン非表示）":"");$("city-counts").textContent=cityNames.map(c=>c.replace("市","")+" "+shown.filter(s=>s.city===c&&s.status==="通常掲載").length+"店").join("｜");renderList();if(map){const points=renderMap();if(refit)fitVisible(points)}}
+$("search").addEventListener("input",()=>update(true));$("clear").onclick=()=>{$("search").value="";update(true);$("search").focus()};["kind"].forEach(id=>$(id).addEventListener("change",()=>update(true)));$("reset").onclick=()=>{selectedCities.clear();cityNames.forEach(c=>selectedCities.add(c));citywrap.querySelectorAll("input").forEach(x=>x.checked=true);$("search").value="";$("kind").value="all";update(true)};function turnPage(delta){page+=delta;renderList();requestAnimationFrame(()=>{const listHead=document.querySelector("#side .results h2");const top=listHead.getBoundingClientRect().top+window.scrollY-105;window.scrollTo({top:Math.max(0,top),behavior:"instant"})});event("breads-list-page")}$("prev").onclick=()=>turnPage(-1);$("next").onclick=()=>turnPage(1);
 const topButton=$('backToTop');
 function updateTopButton(){const footer=document.querySelector('.sitefooter');const footerVisible=footer.getBoundingClientRect().top<window.innerHeight-30;const scrolled=(window.scrollY||document.documentElement.scrollTop)>=420;topButton.hidden=!scrolled||footerVisible}
 window.addEventListener('scroll',updateTopButton,{passive:true});
 topButton.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});event('breads-back-to-top')});$('footerBackTop').addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});event('breads-footer-back-to-top')});window.addEventListener('resize',updateTopButton,{passive:true});
 updateTopButton();
 if(typeof L==='undefined'){document.getElementById('map').replaceChildren(safeText('p','地図ライブラリを読み込めません。ネット接続をご確認ください。','empty'));update(false);return;}
-map=L.map('map',{scrollWheelZoom:false,zoomControl:false}).setView([34.756,135.37],11);
+map=L.map('map',{scrollWheelZoom:false,zoomControl:false,zoomSnap:0.25,zoomDelta:0.5}).setView([34.756,135.37],11);
 // Height toggle is a Leaflet control, anchored to the map's upper-left corner.
 // Resize only the map viewport, never change its center or zoom level.
 const BreadsSizeControl=L.Control.extend({
@@ -1126,13 +1126,13 @@ facilityPins=L.layerGroup();
 map.addLayer(clusters);map.addLayer(facilityPins);
 map.on('movestart zoomstart',closeBreadPreview);
 map.on('click',closeBreadPreview);
-// Both controls live at upper right. 「全体」 restores the initial map extent.
+// Both controls live at upper right. 「全体」 fits the currently visible pins.
 L.control.zoom({position:'topright',zoomInTitle:'拡大',zoomOutTitle:'縮小'}).addTo(map);
 const allControl=L.Control.extend({options:{position:'topright'},onAdd:function(){
   const box=L.DomUtil.create('div','leaflet-bar leaflet-control leaflet-control-all');
-  const a=L.DomUtil.create('a','',box);a.href='#';a.textContent='全体';a.title='5市全体を表示';a.setAttribute('aria-label','5市全体を表示');
+  const a=L.DomUtil.create('a','',box);a.href='#';a.textContent='全体';a.title='表示中のピン全体が収まるように表示';a.setAttribute('aria-label','表示中のピン全体が収まるように表示');
   L.DomEvent.disableClickPropagation(box);L.DomEvent.disableScrollPropagation(box);
-  L.DomEvent.on(a,'click',L.DomEvent.stop).on(a,'click',()=>{fitVisible(data.filter(s=>publicEligible(s)&&hasCoordinates(s)).map(s=>[s.latitude,s.longitude]));a.textContent='✓';a.setAttribute('aria-label','5市全体を表示しました');window.setTimeout(()=>{a.textContent='全体';a.setAttribute('aria-label','5市全体を表示')},900);event('breads-map-reset-initial')});
+  L.DomEvent.on(a,'click',L.DomEvent.stop).on(a,'click',()=>{fitVisible(shown.filter(hasCoordinates).map(s=>[s.latitude,s.longitude]));a.textContent='✓';a.setAttribute('aria-label','表示中のピン全体が収まるように表示しました');window.setTimeout(()=>{a.textContent='全体';a.setAttribute('aria-label','表示中のピン全体が収まるように表示')},900);event('breads-map-reset-initial')});
   return box;
 }});new allControl().addTo(map);
 window.__breadCheck=()=>({records:sourceData.length,shown:shown.map(s=>s.store_id),groups:[...groups.values()].map(a=>a.map(s=>s.store_id)),page,normal:shown.filter(s=>s.status==='通常掲載').length,reference:shown.filter(s=>s.status==='参考候補').length,coordinateRecords:shown.filter(hasCoordinates).length,unlocated:shown.filter(s=>!hasCoordinates(s)).map(s=>s.store_id)});
@@ -1140,7 +1140,7 @@ update(true);
 // Five-city bounds: no extra zoom after fitBounds.
 // iOS Safari may settle CSS/viewport dimensions after Leaflet initialization.
 requestAnimationFrame(()=>requestAnimationFrame(()=>map.invalidateSize({pan:false})));
-window.addEventListener('load',()=>{map.invalidateSize({pan:false});});
+window.addEventListener('load',()=>{map.invalidateSize({pan:false});fitVisible(shown.filter(hasCoordinates).map(s=>[s.latitude,s.longitude]));});
 window.addEventListener('resize',()=>map.invalidateSize({pan:false}));
 if(typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>map.invalidateSize({pan:false})).observe($('map'))} 
 })();
