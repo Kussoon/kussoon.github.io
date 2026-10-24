@@ -45,6 +45,12 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
 .search-row input:focus{border-color:#3f9b64;box-shadow:0 0 0 3px #3f9b6420}
 .search-row button{border:0;border-radius:11px;background:#3f9b64;color:#fff;padding:10px 13px;font-size:13px;font-weight:900;white-space:nowrap;cursor:pointer}
 .search-row button:active{transform:translateY(1px)}
+
+.featured-title-row{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 5px}
+.featured-title-row h2{margin:0;text-align:center;flex:0 1 auto}
+.featured-bread{font-size:30px;line-height:1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.12));user-select:none;pointer-events:none}
+@media(max-width:370px){.featured-title-row{gap:10px}.featured-bread{font-size:26px}}
+
 </style>
 <!-- Kussoon: Umami analytics (query values are not collected) -->
 <script>
@@ -92,7 +98,11 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
 
 <section class="grid">
   <article class="card featured">
-    <h2>阪神間 お菓子・パン屋マップ</h2>
+    <div class="featured-title-row">
+      <span class="featured-bread" aria-hidden="true">🍞</span>
+      <h2>阪神間 お菓子・パン屋マップ</h2>
+      <span class="featured-bread" aria-hidden="true">🍞</span>
+    </div>
     <p>西宮・芦屋・尼崎・宝塚・伊丹のパン屋とお菓子のお店を、それぞれの地図から探せます。</p>
     <div class="links">
       <a href="/maps/unified-sweets-map.html" data-umami-event="local-hanshinkan-sweets-map-click">阪神間 お菓子マップ</a>
@@ -105,6 +115,7 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
     <p>町名を中心に、パン屋、和菓子・洋菓子店、交差点看板など、現在もっとも多くの地域情報を公開しています。</p>
     <div class="links">
       <a href="/nishinomiya/" data-umami-event="local-nishinomiya-click">西宮市トップ</a>
+      <a href="/nishinomiya/nishinomiya-early-night-map.html" data-umami-event="local-nishinomiya-early-night-map-click">早朝パン屋・夜カフェマップ</a>
       <a href="/nishinomiya/jisha/">神社・寺院マップ</a>
       <a href="/nishinomiya/nishinomiya-intersections-map.html">交差点看板マップ</a>
       <a href="/nishinomiya/okome-map.html">おこめ券取扱店舗の記録</a>
@@ -153,7 +164,7 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
       <a href="/sitemap/">サイトマップ</a>
 </nav>
 
-<footer>Version 1.2.7<br>© 2026 Kussoon. All rights reserved.</footer>
+<footer>Version 1.2.9<br>© 2026 Kussoon. All rights reserved.</footer>
 </main>
 <script>
 // Choose the existing town-search page; retain the keyword across city changes.
