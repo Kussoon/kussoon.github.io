@@ -33,37 +33,45 @@ footer{text-align:center;margin-top:14px;color:#9498a3;font-size:11px}
 .hero p{color:#495469;font-weight:600;text-shadow:0 1px 4px rgba(255,255,255,.85)}
 @media(max-width:600px){.hero{padding:45px 15px 28px;background-position:57% center}}
 </style>
-<script data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" defer="True" src="https://cloud.umami.is/script.js"></script></head>
+<style>
+/* v2.0: 学ぶ・遊ぶのタイル型デザインに統一。カード全体がリンク。 */
+main{max-width:820px}
+a.card.tile{display:block;text-decoration:none;color:#fff;border:0;border-radius:18px;padding:23px 22px;margin-bottom:14px;box-shadow:0 5px 13px #0000001c;transition:filter .15s,transform .15s}
+a.card.tile:hover{filter:brightness(1.08);transform:translateY(-1px)}
+a.card.tile:focus-visible{outline:4px solid #e99a18;outline-offset:4px}
+a.card.tile h2{color:#fff;font-size:clamp(21px,4.7vw,27px);line-height:1.35;margin:0 0 8px;font-weight:900}
+a.card.tile p{color:#fff;font-size:clamp(13px,3.3vw,16px);font-weight:650;line-height:1.65;margin:0;opacity:.98}
+a.card.tile .expanding{color:#fff;font-size:12px;margin-top:9px;opacity:.87}
+@media(max-width:600px){a.card.tile{padding:19px 17px;margin-bottom:12px}}
+a.card.tile-1{background:#526bb2}
+a.card.tile-2{background:#6b5aa8}
+a.card.tile-3{background:#247d91}
+a.card.tile-4{background:#537aa0}
+</style><script>window.kussoonUmamiBeforeSend=function(type,payload){if(payload&&typeof payload==='object'){for(const key of ['url','referrer']){if(typeof payload[key]==='string')payload[key]=payload[key].split(/[?#]/)[0];}}return payload;};</script><script data-before-send="kussoonUmamiBeforeSend" data-domains="kussoon.com,www.kussoon.com" data-exclude-hash="true" data-exclude-search="true" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" defer="" src="https://cloud.umami.is/script.js"></script></head>
 <body>
 <main>
 <a class="toplink" href="/">← Kussoon トップへ戻る</a>
 <section class="hero">
 <h1>運転・モビリティ</h1>
 <p>道路や交差点、運転の仕事、交通ルールなど、実際の運転で気づいたことや調べたことをまとめていきます。</p>
-</section><article class="card">
+</section><a class="card tile tile-1" data-umami-event="driving-1-click" href="/driving/news/">
 <h2>自動運転・AIニュース（週刊）</h2>
 <p>自動運転・モビリティとAI・テクノロジーの注目ニュースを、毎週まとめてお届けします。</p>
-<a href="/driving/news/">週刊ニュースを読む →</a>
-</article><article class="card">
+
+</a><a class="card tile tile-2" data-umami-event="driving-2-click" href="/driving/vehicleregistrationplates/region/index.html">
 <h2>全国ナンバープレートマップ</h2>
 <p>この市区町村で新規登録すると何ナンバー？ 全国47都道府県の地図と市区町村検索で確認できます。</p>
-<a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップを見る →</a>
-</article><article class="card">
+
+</a><a class="card tile tile-3" data-umami-event="driving-number10-click" href="https://kussoon.com/driving/vehicleregistrationplates/number10.html">
 <h2>ナンバー10</h2>
 <p>ナンバープレートの2～4桁の数字を使って、10をつくる計算ゲームです。数字の順番など、4つのモードで遊べます。</p>
-<a data-umami-event="driving-number10-click" href="https://kussoon.com/driving/vehicleregistrationplates/number10.html">ナンバー10で遊ぶ →</a>
-</article><article class="card">
+
+</a><a class="card tile tile-4" data-umami-event="driving-4-click" href="/nishinomiya/nishinomiya-intersections-map.html">
 <h2>西宮市の交差点看板マップ</h2>
 <p>道路に掲げられている交差点名標識を地図上で確認できるマップです。</p>
-<a href="/nishinomiya/nishinomiya-intersections-map.html">交差点看板マップを見る →</a>
+
 <div class="expanding">範囲拡大中。順次更新します。</div>
-</article>
-
-
-
-
-
-
+</a>
 <nav aria-label="サイト共通案内" class="site-links">
 <a href="/games/">学ぶ・遊ぶ</a>
 <a href="/local/">地域を調べる</a>
