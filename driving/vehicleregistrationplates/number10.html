@@ -43,44 +43,49 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
 #back{grid-column:3}#clear{grid-column:4}.game-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.game-actions .btn{min-width:0;padding:10px 5px;font-size:clamp(.85rem,3.6vw,1rem)}
 .grade-result{margin-top:16px;padding:16px;border:2px solid #2a739b;border-radius:13px;background:#eaf5fb;text-align:center}.grade-result[hidden]{display:none}.grade-result h3{margin:0 0 8px;font-size:1.1rem}.grade-result p{margin:5px 0 12px}.grade-result #gradeSummary{font-size:1.17rem;font-weight:800}.grade-result .btn{margin-top:7px}
 @media(prefers-color-scheme:dark){.grade-result{background:#243e52;border-color:#7ab9dd}.grade-result #gradeDetail{color:#d3e4f1}}
-</style><style>
+</style>
+<style>
 
-/* Kussoon 運転・モビリティ：共通フッター（既存本文・アプリには影響しない） */
-footer.ks-driving-footer {
-  box-sizing:border-box; width:100%; max-width:none; min-width:0;
-  margin:38px 0 0; padding:34px max(16px, env(safe-area-inset-left)) calc(26px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
-  border:0; border-top:4px solid #60b4d7; border-radius:0;
-  background:#122b3d; color:#e9f3f8; text-align:left;
-  font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
-  font-size:14px; line-height:1.7; font-weight:400;
+/* Kussoon 読み物・雑学ベースの共通フッター v2: footer内だけに適用 */
+footer.ks-unified-footer {
+  box-sizing:border-box; display:block; clear:both; width:100%; max-width:none;
+  margin:32px 0 0; padding:28px 16px calc(30px + env(safe-area-inset-bottom));
+  background:#f8fafc; border-top:1px solid #dce5eb;
+  color:#40566a; color-scheme:light; font-family:inherit; font-size:14px;
+  line-height:1.75; text-align:left; box-shadow:none;
 }
-footer.ks-driving-footer, footer.ks-driving-footer * { box-sizing:border-box; }
-footer.ks-driving-footer .ks-footer-inner { max-width:1100px; margin:0 auto; }
-footer.ks-driving-footer .ks-footer-heading { margin:0; color:#fff; font-size:clamp(1.17rem,2.8vw,1.4rem); font-weight:750; line-height:1.4; }
-footer.ks-driving-footer .ks-footer-lead { margin:7px 0 24px; color:#c3d7e2; font-size:.9rem; }
-footer.ks-driving-footer .ks-footer-grid { display:grid; grid-template-columns:minmax(0,2fr) minmax(210px,1fr); gap:22px 42px; padding:22px 0; border-top:1px solid #365163; border-bottom:1px solid #365163; }
-footer.ks-driving-footer .ks-footer-label { margin:0 0 12px; font-size:.9rem; color:#a6d7eb; font-weight:750; }
-footer.ks-driving-footer .ks-footer-content-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 12px; }
-footer.ks-driving-footer .ks-footer-info-links { display:grid; grid-template-columns:1fr; gap:8px; }
-footer.ks-driving-footer a, footer.ks-driving-footer .ks-footer-current { display:flex; align-items:center; min-width:0; min-height:42px; padding:9px 12px; border:1px solid #476377; border-radius:9px; background:#1a394f; color:#f4f9fc; text-decoration:none; font-size:.86rem; line-height:1.45; overflow-wrap:anywhere; }
-footer.ks-driving-footer a:hover { background:#2c5670; border-color:#8bcbe5; text-decoration:underline; text-underline-offset:3px; }
-footer.ks-driving-footer a:focus-visible { outline:3px solid #ffcb69; outline-offset:3px; }
-footer.ks-driving-footer .ks-footer-current { background:#284657; border-color:#638299; color:#d3e1e9; }
-footer.ks-driving-footer .ks-footer-current::before { content:"現在："; flex:none; font-size:.72rem; color:#a6d7eb; margin-right:4px; }
-footer.ks-driving-footer .ks-footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px 20px; padding-top:20px; }
-footer.ks-driving-footer .ks-footer-bottom-links { display:flex; flex-wrap:wrap; gap:10px; }
-footer.ks-driving-footer .ks-footer-bottom-links a { min-height:40px; background:transparent; padding:7px 11px; }
-footer.ks-driving-footer .ks-footer-top { font-weight:700; }
-footer.ks-driving-footer .ks-footer-meta { margin:15px 0 0; font-size:.77rem; color:#b3c7d4; }
-footer.ks-driving-footer .ks-footer-meta p { margin:3px 0; }
-@media(max-width:680px) {
-  footer.ks-driving-footer { margin-top:28px; padding-top:27px; }
-  footer.ks-driving-footer .ks-footer-grid { grid-template-columns:1fr; gap:22px; }
-  footer.ks-driving-footer .ks-footer-content-links { grid-template-columns:1fr 1fr; gap:7px; }
-  footer.ks-driving-footer a, footer.ks-driving-footer .ks-footer-current { padding:9px 10px; font-size:.8rem; }
+footer.ks-unified-footer *, footer.ks-unified-footer *::before, footer.ks-unified-footer *::after { box-sizing:border-box; }
+footer.ks-unified-footer .ksu-inner { max-width:1050px; margin:0 auto; }
+footer.ks-unified-footer .ksu-brand { margin:0 0 3px; font-size:1.06rem; font-weight:750; color:#1c3e56; }
+footer.ks-unified-footer .ksu-lead { margin:0 0 22px; color:#627789; font-size:.87rem; }
+footer.ks-unified-footer .ksu-section { margin:0 0 21px; }
+footer.ks-unified-footer .ksu-label { margin:0 0 8px; color:#354e60; font-size:.87rem; font-weight:700; }
+footer.ks-unified-footer .ksu-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:20px; row-gap:5px; }
+footer.ks-unified-footer .ksu-links a, footer.ks-unified-footer .ksu-links .ksu-current {
+  display:flex; align-items:center; min-width:0; min-height:36px; padding:4px 0;
+  font-size:.88rem; line-height:1.5; overflow-wrap:anywhere;
 }
-@media(max-width:360px) { footer.ks-driving-footer .ks-footer-content-links { grid-template-columns:1fr; } }
-@media(prefers-reduced-motion:reduce) { footer.ks-driving-footer * { scroll-behavior:auto; } }
+footer.ks-unified-footer a { color:#225f89; text-decoration:underline; text-underline-offset:3px; }
+footer.ks-unified-footer a:hover { color:#103c60; text-decoration-thickness:2px; }
+footer.ks-unified-footer a:focus-visible { outline:3px solid #e8a747; outline-offset:3px; border-radius:3px; }
+footer.ks-unified-footer .ksu-current { color:#62717d; font-weight:700; text-decoration:none; }
+footer.ks-unified-footer .ksu-current::before { content:'現在：'; font-size:.75rem; font-weight:400; margin-right:3px; }
+footer.ks-unified-footer .ksu-other { padding-top:17px; border-top:1px solid #e0e7ed; }
+footer.ks-unified-footer .ksu-bottom { border-top:1px solid #e0e7ed; padding-top:17px; margin-top:5px; }
+footer.ks-unified-footer .ksu-home { display:flex; flex-wrap:wrap; gap:4px 22px; margin-bottom:13px; }
+footer.ks-unified-footer .ksu-home a { display:inline-flex; align-items:center; min-height:36px; }
+footer.ks-unified-footer .ksu-top { display:inline-flex; align-items:center; min-height:40px; padding:6px 13px; border:1px solid #c5d4df; border-radius:8px; background:#fff; text-decoration:none; font-weight:700; }
+footer.ks-unified-footer .ksu-info { display:flex; flex-wrap:wrap; gap:0 19px; margin:14px 0 8px; }
+footer.ks-unified-footer .ksu-info a { display:inline-flex; align-items:center; min-height:34px; font-size:.82rem; }
+footer.ks-unified-footer .ksu-copy { margin:8px 0 0; font-size:.77rem; color:#70808b; }
+footer.ks-unified-footer .ksu-version { margin:7px 0 0; font-size:.76rem; color:#70808b; }
+@media(max-width:520px) {
+  footer.ks-unified-footer { padding:24px 16px calc(26px + env(safe-area-inset-bottom)); }
+  footer.ks-unified-footer .ksu-links { grid-template-columns:1fr; row-gap:2px; }
+  footer.ks-unified-footer .ksu-lead { margin-bottom:18px; }
+  footer.ks-unified-footer .ksu-section { margin-bottom:17px; }
+  footer.ks-unified-footer .ksu-info { gap:0 14px; }
+}
 
 </style>
 </head>
@@ -99,37 +104,38 @@ footer.ks-driving-footer .ks-footer-meta p { margin:3px 0; }
 <ul><li>出てきた数字は、全部1回ずつ使いましょう。</li><li>「順番どおり」では左から使います。「入れ替え自由」では好きな順番で使えます。</li><li>数字をくっつけたり、かっこを使ったりはできません。</li></ul>
 <h3>問題のえらび方</h3>
 <ul><li>「必ず答えがある」：10をつくれる問題だけが出ます。</li><li>「答えがないこともある」：10をつくれない問題も出ます。</li></ul>
-</section></main><footer class="ks-driving-footer" aria-label="Kussoon 運転・モビリティ共通フッター">
-  <div class="ks-footer-inner">
-    <p class="ks-footer-heading">Kussoon｜運転・モビリティ</p>
-    <p class="ks-footer-lead">車のナンバーで10をつくる、計算ゲーム。</p>
-    <div class="ks-footer-grid">
-      <nav aria-label="運転・モビリティのコンテンツ">
-        <p class="ks-footer-label">運転・モビリティのコンテンツ</p>
-        <div class="ks-footer-content-links"><a href="/driving/news/">自動運転・AIニュース</a>
+</section></main><footer class="ks-unified-footer" aria-label="Kussoon共通フッター">
+<div class="ksu-inner">
+<p class="ksu-brand">Kussoon｜運転・モビリティ</p>
+<p class="ksu-lead">車のナンバーで10をつくる、計算ゲーム。</p>
+<nav class="ksu-section" aria-label="運転・モビリティの関連ページ">
+<p class="ksu-label">運転・モビリティの関連ページ</p>
+<div class="ksu-links"><a href="/driving/news/">自動運転・AIニュース</a>
 <a href="/driving/news/guide/">自動運転入門</a>
 <a href="/driving/news/japan-timeline/">日本の自動運転・年表</a>
 <a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップ</a>
-<span class="ks-footer-current" aria-current="page">ナンバー10</span>
+<span class="ksu-current" aria-current="page">ナンバー10</span>
 <a href="/nishinomiya/nishinomiya-intersections-map.html">西宮市 交差点マップ</a></div>
-      </nav>
-      <nav aria-label="サイト情報">
-        <p class="ks-footer-label">サイト情報</p>
-        <div class="ks-footer-info-links"><a href="/about/">このサイトについて</a>
+</nav>
+
+<nav class="ksu-section ksu-other" aria-label="Kussoonのほかのコンテンツ">
+<p class="ksu-label">Kussoonのほかのコンテンツ</p>
+<div class="ksu-links"><a href="/games/">学ぶ・遊ぶ</a>
+<a href="/local/">地域を調べる</a>
+<a href="/ideas/">工夫・アイデア</a>
+<a href="/reading/">読み物・雑学</a></div>
+</nav>
+<div class="ksu-bottom">
+<nav class="ksu-home" aria-label="サイト上位ページ"><a href="/">Kussoonトップ</a><a href="/driving/">運転・モビリティ トップ</a></nav>
+<a class="ksu-top" href="#">↑ ページ先頭へ戻る</a>
+<nav class="ksu-info" aria-label="サイト情報"><a href="/about/">このサイトについて</a>
 <a href="/privacy/">プライバシー</a>
 <a href="/sources/">データ出典</a>
-<a href="/terms/">利用上の注意</a></div>
-      </nav>
-    </div>
-    <div class="ks-footer-bottom">
-      <nav class="ks-footer-bottom-links" aria-label="上位ページへの移動">
-        <a href="/">⌂ Kussoonトップ</a>
-        <a href="/driving/">運転・モビリティ トップ</a>
-      </nav>
-      <a class="ks-footer-top" href="#ks-page-top">↑ ページ先頭へ戻る</a>
-    </div>
-    <div class="ks-footer-meta"><p>ナンバー10 Version 1.1.0</p><p>© 2026 Kussoon. All rights reserved.</p></div>
-  </div>
+<a href="/terms/">利用上の注意</a></nav>
+<p class="ksu-copy">© 2026 Kussoon. All rights reserved.</p>
+<p class="ksu-version">ナンバー10 Version 1.1.0</p>
+</div>
+</div>
 </footer>
 <script>
 'use strict';const $=id=>document.getElementById(id),EPS=1e-8;let digits=[],tokens=[],used=[],answer=null,attempts=0,wins=0,shown=0,finished=false;const fmt=s=>s.replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−');
