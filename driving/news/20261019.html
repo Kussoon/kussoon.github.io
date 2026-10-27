@@ -10,6 +10,50 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.9}
 a{color:var(--blue)}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;padding:.5rem}.sitehead{background:#fff;border-bottom:1px solid var(--line)}.sitehead-inner{max-width:990px;margin:auto;padding:15px 20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}.brand{font-weight:750;text-decoration:none;color:#1c3850}.back{font-size:.88rem;text-decoration:none}.container{max-width:900px;margin:auto;padding:26px 18px 50px}.paper{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:clamp(20px,5vw,46px);box-shadow:0 7px 22px #142d4c0b}.issue{display:inline-block;background:#e6f1fa;border-radius:100px;padding:3px 13px;font-size:.82rem;font-weight:700;color:#225e87}h1{font-size:clamp(1.55rem,4vw,2.3rem);line-height:1.48;margin:18px 0 12px;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5;margin:55px 0 20px;padding:0 0 10px;border-bottom:3px solid #cce1ee}h3{font-size:1.18rem;line-height:1.55;margin:30px 0 10px}h4{font-size:1.03rem;margin:22px 0 7px}.meta,.small{color:var(--muted);font-size:.89rem}.intro{font-size:1.045rem;padding:10px 0}.toc{background:#f2f7fb;border:1px solid var(--line);padding:17px 22px;border-radius:12px;margin:22px 0}.toc strong{display:block;margin-bottom:4px}.toc ol{margin:5px 0 0;padding-left:1.4em}.toc a{text-decoration:none}.toc li{padding:3px 0}p{margin:13px 0}.point{border-left:4px solid #80b6d7;padding:9px 15px;background:#f5f9fc;margin:18px 0}.source{font-size:.87rem;margin:14px 0 23px;color:var(--muted)}.news{padding-bottom:15px;border-bottom:1px solid var(--line)}.others h3{font-size:1.04rem;margin:27px 0 6px}.others ul{padding-left:1.3em;margin:6px 0}.others li{margin:5px 0}.note{font-size:.86rem;color:var(--muted);padding-top:20px;border-top:1px solid var(--line);margin-top:45px}footer{padding:22px 0;text-align:center;font-size:.9rem;color:var(--muted)}footer a{text-decoration:none}.top{position:fixed;right:16px;bottom:20px;background:#2375a8;color:#fff;box-shadow:0 2px 12px #253e5550;width:43px;height:43px;display:grid;place-items:center;border-radius:50%;text-decoration:none;font-size:1.3rem}@media(max-width:600px){.container{padding:14px 10px 38px}.paper{border-radius:10px}h2{margin-top:39px}}
 </style>
+<style>
+
+/* Kussoon 読み物・雑学ベースの共通フッター v2: footer内だけに適用 */
+footer.ks-unified-footer {
+  box-sizing:border-box; display:block; clear:both; width:100%; max-width:none;
+  margin:32px 0 0; padding:28px 16px calc(30px + env(safe-area-inset-bottom));
+  background:#f8fafc; border-top:1px solid #dce5eb;
+  color:#40566a; color-scheme:light; font-family:inherit; font-size:14px;
+  line-height:1.75; text-align:left; box-shadow:none;
+}
+footer.ks-unified-footer *, footer.ks-unified-footer *::before, footer.ks-unified-footer *::after { box-sizing:border-box; }
+footer.ks-unified-footer .ksu-inner { max-width:1050px; margin:0 auto; }
+footer.ks-unified-footer .ksu-brand { margin:0 0 3px; font-size:1.06rem; font-weight:750; color:#1c3e56; }
+footer.ks-unified-footer .ksu-lead { margin:0 0 22px; color:#627789; font-size:.87rem; }
+footer.ks-unified-footer .ksu-section { margin:0 0 21px; }
+footer.ks-unified-footer .ksu-label { margin:0 0 8px; color:#354e60; font-size:.87rem; font-weight:700; }
+footer.ks-unified-footer .ksu-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:20px; row-gap:5px; }
+footer.ks-unified-footer .ksu-links a, footer.ks-unified-footer .ksu-links .ksu-current {
+  display:flex; align-items:center; min-width:0; min-height:36px; padding:4px 0;
+  font-size:.88rem; line-height:1.5; overflow-wrap:anywhere;
+}
+footer.ks-unified-footer a { color:#225f89; text-decoration:underline; text-underline-offset:3px; }
+footer.ks-unified-footer a:hover { color:#103c60; text-decoration-thickness:2px; }
+footer.ks-unified-footer a:focus-visible { outline:3px solid #e8a747; outline-offset:3px; border-radius:3px; }
+footer.ks-unified-footer .ksu-current { color:#62717d; font-weight:700; text-decoration:none; }
+footer.ks-unified-footer .ksu-current::before { content:'現在：'; font-size:.75rem; font-weight:400; margin-right:3px; }
+footer.ks-unified-footer .ksu-other { padding-top:17px; border-top:1px solid #e0e7ed; }
+footer.ks-unified-footer .ksu-bottom { border-top:1px solid #e0e7ed; padding-top:17px; margin-top:5px; }
+footer.ks-unified-footer .ksu-home { display:flex; flex-wrap:wrap; gap:4px 22px; margin-bottom:13px; }
+footer.ks-unified-footer .ksu-home a { display:inline-flex; align-items:center; min-height:36px; }
+footer.ks-unified-footer .ksu-top { display:inline-flex; align-items:center; min-height:40px; padding:6px 13px; border:1px solid #c5d4df; border-radius:8px; background:#fff; text-decoration:none; font-weight:700; }
+footer.ks-unified-footer .ksu-info { display:flex; flex-wrap:wrap; gap:0 19px; margin:14px 0 8px; }
+footer.ks-unified-footer .ksu-info a { display:inline-flex; align-items:center; min-height:34px; font-size:.82rem; }
+footer.ks-unified-footer .ksu-copy { margin:8px 0 0; font-size:.77rem; color:#70808b; }
+footer.ks-unified-footer .ksu-version { margin:7px 0 0; font-size:.76rem; color:#70808b; }
+@media(max-width:520px) {
+  footer.ks-unified-footer { padding:24px 16px calc(26px + env(safe-area-inset-bottom)); }
+  footer.ks-unified-footer .ksu-links { grid-template-columns:1fr; row-gap:2px; }
+  footer.ks-unified-footer .ksu-lead { margin-bottom:18px; }
+  footer.ks-unified-footer .ksu-section { margin-bottom:17px; }
+  footer.ks-unified-footer .ksu-info { gap:0 14px; }
+}
+
+</style>
 </head>
 <body id="top"><a class="skip" href="#main">本文へ移動</a>
 <header class="sitehead"><div class="sitehead-inner"><a class="brand" href="/driving/news/">Kussoon 自動運転・AIニュース</a><a class="back" href="/">← Kussoonトップへ</a></div></header>
@@ -49,5 +93,39 @@ a{color:var(--blue)}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;t
 <h3>10月23日（金）</h3><ul><li>【ロボタクシー】Tesla、Cybercabを2026年末までに一般販売へ</li><li>【運転支援】GM、ピックアップトラックにも「前方監視不要」の自動運転を導入へ</li><li>【AI安全】OpenAIの安全監視システム、外部監査で複数の問題が判明</li><li>【AIエージェント】米大手銀行、AIによる顧客口座へのアクセスを遮断</li><li>【AIインフラ】AIデータセンター建設、今度は電力ケーブルが不足</li></ul></section>
 <section id="review"><h2>今週を振り返って</h2><p>今週の自動運転関連ニュースでは、走行技術を実際の交通・物流サービスに組み込むための動きが目立った。T2の拠点発着、Waymoの海外展開、NVIDIAを中心とした欧州の企業連携は、いずれも車両運行を支える仕組みの整備と結び付いている。</p><p>一方、車両の調達を巡る貿易規制や、新しい地域での検証、安全性を確認するための仕組みなど、事業化に伴う課題も表面化している。</p></section>
 <p class="note">本記事は2026年10月19日〜23日のデイリーブリーフィングを基に編集しています。各社の計画・目標は、実施済みの事実と区別して記載しています。AIを編集補助として活用しています。ニュース本文は公式発表や報道資料を基に編集し、「その他のニュース」はデイリーブリーフィングの見出しを収録しています。全25件の見出しについて個別の一次情報照合は完了していません。</p>
-</article><footer><a href="/driving/news/">← 週刊ニュース一覧へ</a><p>© Kussoon ｜ <a href="/">トップ</a> ｜ <a href="/driving/news/">ニュース一覧</a></p></footer></main><a class="top" href="#top" aria-label="ページの先頭へ">↑</a>
+</article></main><footer class="ks-unified-footer" aria-label="Kussoon共通フッター">
+<div class="ksu-inner">
+<p class="ksu-brand">Kussoon｜運転・モビリティ</p>
+<p class="ksu-lead">自動運転・AIニュース 週刊第2号（2026年10月19日〜23日）。</p>
+<nav class="ksu-section" aria-label="運転・モビリティの関連ページ">
+<p class="ksu-label">運転・モビリティの関連ページ</p>
+<div class="ksu-links"><a href="/driving/news/">自動運転・AIニュース</a>
+<a href="/driving/news/guide/">自動運転入門</a>
+<a href="/driving/news/japan-timeline/">日本の自動運転・年表</a>
+<a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップ</a>
+<a href="/driving/vehicleregistrationplates/number10.html">ナンバー10</a>
+<a href="/nishinomiya/nishinomiya-intersections-map.html">西宮市 交差点マップ</a></div>
+</nav>
+<nav class="ksu-section" aria-label="週刊ニュースの記事"><p class="ksu-label">週刊ニュースの記事</p><div class="ksu-links"><a href="/driving/news/">週刊ニュース一覧</a>
+<a href="/driving/news/20261012.html">第1号（10月12日〜18日）</a>
+<span class="ksu-current" aria-current="page">第2号（10月19日〜23日）</span></div></nav>
+<nav class="ksu-section ksu-other" aria-label="Kussoonのほかのコンテンツ">
+<p class="ksu-label">Kussoonのほかのコンテンツ</p>
+<div class="ksu-links"><a href="/games/">学ぶ・遊ぶ</a>
+<a href="/local/">地域を調べる</a>
+<a href="/ideas/">工夫・アイデア</a>
+<a href="/reading/">読み物・雑学</a></div>
+</nav>
+<div class="ksu-bottom">
+<nav class="ksu-home" aria-label="サイト上位ページ"><a href="/">Kussoonトップ</a><a href="/driving/">運転・モビリティ トップ</a></nav>
+<a class="ksu-top" href="#">↑ ページ先頭へ戻る</a>
+<nav class="ksu-info" aria-label="サイト情報"><a href="/about/">このサイトについて</a>
+<a href="/privacy/">プライバシー</a>
+<a href="/sources/">データ出典</a>
+<a href="/terms/">利用上の注意</a></nav>
+<p class="ksu-copy">© 2026 Kussoon. All rights reserved.</p>
+
+</div>
+</div>
+</footer><a class="top" href="#top" aria-label="ページの先頭へ">↑</a>
 </body></html>
