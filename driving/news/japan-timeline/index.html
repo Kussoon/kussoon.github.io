@@ -6,7 +6,7 @@
 /* 横幅の狭い画面で、表が左右に動かせることを案内 */
 .table-scroll-area{position:relative;min-width:0}
 .table-scroll-area .scroll-hint{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:30;display:block;height:auto;pointer-events:none}
-.table-scroll-area .scroll-hint .hint-finger{display:block;margin:0;color:#fff;font-size:4.4rem;font-weight:700;line-height:1;white-space:nowrap;-webkit-text-stroke:2.8px #17606b;text-shadow:0 8px 18px rgba(22,60,76,.28);animation:floatingFinger 1.7s ease-in-out infinite}
+.table-scroll-area .scroll-hint .hint-finger{display:block;margin:0;color:#fff;font-size:4.8rem;font-weight:700;line-height:1;white-space:nowrap;-webkit-text-stroke:1.1px #17606b;text-shadow:0 6px 12px rgba(22,60,76,.22);animation:floatingFinger 1.7s ease-in-out infinite}
 .table-scroll-area .scroll-hint[hidden]{display:none!important}
 .tablewrap{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 @keyframes floatingFinger{0%,100%{transform:translateY(-3px)}50%{transform:translateY(5px)}}
@@ -35,13 +35,28 @@ const pickActiveTableArea=()=>{
 };
 const syncTableHints=()=>{
   const activeArea=pickActiveTableArea();
+  const viewportMid=window.innerHeight/2;
   tableHintAreas.forEach(area=>{
     const viewport=area.querySelector('.tablewrap');
     const hint=area.querySelector('.scroll-hint');
     if(!viewport||!hint)return;
     const overflow=viewport.scrollWidth-viewport.clientWidth>12;
     const remaining=viewport.scrollWidth-viewport.clientWidth-viewport.scrollLeft;
-    hint.hidden=!(area===activeArea&&overflow&&remaining>8);
+    if(!(area===activeArea&&overflow&&remaining>8)){
+      hint.hidden=true;
+      return;
+    }
+    const rect=area.getBoundingClientRect();
+    const edgeGap=46;
+    const minTop=Math.max(rect.top+edgeGap, edgeGap);
+    const maxTop=Math.min(rect.bottom-edgeGap, window.innerHeight-edgeGap);
+    if(maxTop<=minTop){
+      hint.hidden=true;
+      return;
+    }
+    const clampedTop=Math.min(Math.max(viewportMid, minTop), maxTop);
+    hint.style.top=clampedTop+'px';
+    hint.hidden=false;
   });
 };
 document.querySelectorAll('.table-scroll-area .tablewrap').forEach(el=>el.addEventListener('scroll',syncTableHints,{passive:true}));
