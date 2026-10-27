@@ -43,8 +43,48 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
 #back{grid-column:3}#clear{grid-column:4}.game-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.game-actions .btn{min-width:0;padding:10px 5px;font-size:clamp(.85rem,3.6vw,1rem)}
 .grade-result{margin-top:16px;padding:16px;border:2px solid #2a739b;border-radius:13px;background:#eaf5fb;text-align:center}.grade-result[hidden]{display:none}.grade-result h3{margin:0 0 8px;font-size:1.1rem}.grade-result p{margin:5px 0 12px}.grade-result #gradeSummary{font-size:1.17rem;font-weight:800}.grade-result .btn{margin-top:7px}
 @media(prefers-color-scheme:dark){.grade-result{background:#243e52;border-color:#7ab9dd}.grade-result #gradeDetail{color:#d3e4f1}}
-</style></head>
-<body><main><div class="number-hero"><div class="eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="hero-plate" role="img" aria-label="神戸 500、1+2+3+4=10 のナンバープレートを模したタイトル画像"><div class="hero-top"><span>神戸</span><span>500</span></div><div class="hero-bottom">1+2+3+4=10</div></div><h1>ナンバー10</h1></div><p class="intro">車のナンバープレートの数字を使って、答えが<strong>10</strong>になる式をつくりましょう！</p>
+</style><style>
+
+/* Kussoon 運転・モビリティ：共通フッター（既存本文・アプリには影響しない） */
+footer.ks-driving-footer {
+  box-sizing:border-box; width:100%; max-width:none; min-width:0;
+  margin:38px 0 0; padding:34px max(16px, env(safe-area-inset-left)) calc(26px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+  border:0; border-top:4px solid #60b4d7; border-radius:0;
+  background:#122b3d; color:#e9f3f8; text-align:left;
+  font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  font-size:14px; line-height:1.7; font-weight:400;
+}
+footer.ks-driving-footer, footer.ks-driving-footer * { box-sizing:border-box; }
+footer.ks-driving-footer .ks-footer-inner { max-width:1100px; margin:0 auto; }
+footer.ks-driving-footer .ks-footer-heading { margin:0; color:#fff; font-size:clamp(1.17rem,2.8vw,1.4rem); font-weight:750; line-height:1.4; }
+footer.ks-driving-footer .ks-footer-lead { margin:7px 0 24px; color:#c3d7e2; font-size:.9rem; }
+footer.ks-driving-footer .ks-footer-grid { display:grid; grid-template-columns:minmax(0,2fr) minmax(210px,1fr); gap:22px 42px; padding:22px 0; border-top:1px solid #365163; border-bottom:1px solid #365163; }
+footer.ks-driving-footer .ks-footer-label { margin:0 0 12px; font-size:.9rem; color:#a6d7eb; font-weight:750; }
+footer.ks-driving-footer .ks-footer-content-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 12px; }
+footer.ks-driving-footer .ks-footer-info-links { display:grid; grid-template-columns:1fr; gap:8px; }
+footer.ks-driving-footer a, footer.ks-driving-footer .ks-footer-current { display:flex; align-items:center; min-width:0; min-height:42px; padding:9px 12px; border:1px solid #476377; border-radius:9px; background:#1a394f; color:#f4f9fc; text-decoration:none; font-size:.86rem; line-height:1.45; overflow-wrap:anywhere; }
+footer.ks-driving-footer a:hover { background:#2c5670; border-color:#8bcbe5; text-decoration:underline; text-underline-offset:3px; }
+footer.ks-driving-footer a:focus-visible { outline:3px solid #ffcb69; outline-offset:3px; }
+footer.ks-driving-footer .ks-footer-current { background:#284657; border-color:#638299; color:#d3e1e9; }
+footer.ks-driving-footer .ks-footer-current::before { content:"現在："; flex:none; font-size:.72rem; color:#a6d7eb; margin-right:4px; }
+footer.ks-driving-footer .ks-footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px 20px; padding-top:20px; }
+footer.ks-driving-footer .ks-footer-bottom-links { display:flex; flex-wrap:wrap; gap:10px; }
+footer.ks-driving-footer .ks-footer-bottom-links a { min-height:40px; background:transparent; padding:7px 11px; }
+footer.ks-driving-footer .ks-footer-top { font-weight:700; }
+footer.ks-driving-footer .ks-footer-meta { margin:15px 0 0; font-size:.77rem; color:#b3c7d4; }
+footer.ks-driving-footer .ks-footer-meta p { margin:3px 0; }
+@media(max-width:680px) {
+  footer.ks-driving-footer { margin-top:28px; padding-top:27px; }
+  footer.ks-driving-footer .ks-footer-grid { grid-template-columns:1fr; gap:22px; }
+  footer.ks-driving-footer .ks-footer-content-links { grid-template-columns:1fr 1fr; gap:7px; }
+  footer.ks-driving-footer a, footer.ks-driving-footer .ks-footer-current { padding:9px 10px; font-size:.8rem; }
+}
+@media(max-width:360px) { footer.ks-driving-footer .ks-footer-content-links { grid-template-columns:1fr; } }
+@media(prefers-reduced-motion:reduce) { footer.ks-driving-footer * { scroll-behavior:auto; } }
+
+</style>
+</head>
+<body id="ks-page-top"><main><div class="number-hero"><div class="eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="hero-plate" role="img" aria-label="神戸 500、1+2+3+4=10 のナンバープレートを模したタイトル画像"><div class="hero-top"><span>神戸</span><span>500</span></div><div class="hero-bottom">1+2+3+4=10</div></div><h1>ナンバー10</h1></div><p class="intro">車のナンバープレートの数字を使って、答えが<strong>10</strong>になる式をつくりましょう！</p>
 <div class="panel"><h2>出題モード</h2><div class="settings"><div class="setting"><label for="guarantee">答えがあるか</label><select class="btn" id="guarantee"><option value="yes">必ず答えがある</option><option value="random">答えがないこともある</option></select></div><div class="setting"><label for="order">数字の順番</label><select class="btn" id="order"><option value="fixed">順番どおり</option><option value="free">入れ替え自由</option></select></div></div><p class="note" id="modeNote"></p></div>
 <div class="plate" aria-label="ナンバープレート"><div class="plate-top">神戸 ５００　か</div><div class="digits" id="plate"></div></div><p class="stat" id="stats">正解 0問 ／ 挑戦 0問</p>
 <section class="panel"><h2>式を作る</h2><div class="display" id="expression" aria-live="polite">数字と記号を押してください</div><div class="keypad" id="digitKeys"></div><div class="keypad"><button class="btn" data-token="+">＋</button><button class="btn" data-token="-">−</button><button class="btn" data-token="*">×</button><button class="btn" data-token="/">÷</button><button class="btn warn" id="back">1つ戻す</button><button class="btn warn" id="clear">消去</button></div><div class="buttons"><button class="btn primary" id="check" data-umami-event="number10-check">答え合わせ</button><button class="btn" id="hint" data-umami-event="number10-hint">ヒント</button><button class="btn" id="solution" data-umami-event="number10-answer">解答を見る</button></div><div class="message quiet" id="message" aria-live="polite"></div>
@@ -59,7 +99,38 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
 <ul><li>出てきた数字は、全部1回ずつ使いましょう。</li><li>「順番どおり」では左から使います。「入れ替え自由」では好きな順番で使えます。</li><li>数字をくっつけたり、かっこを使ったりはできません。</li></ul>
 <h3>問題のえらび方</h3>
 <ul><li>「必ず答えがある」：10をつくれる問題だけが出ます。</li><li>「答えがないこともある」：10をつくれない問題も出ます。</li></ul>
-</section></main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/" data-umami-event="number10-footer-about">このサイトについて</a><a href="https://kussoon.com/privacy/" data-umami-event="number10-footer-privacy">プライバシー</a><a href="https://kussoon.com/sources/" data-umami-event="number10-footer-sources">データ出典</a><a href="https://kussoon.com/terms/" data-umami-event="number10-footer-terms">利用上の注意</a></nav><p>ナンバー10　Version 1.1.0</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
+</section></main><footer class="ks-driving-footer" aria-label="Kussoon 運転・モビリティ共通フッター">
+  <div class="ks-footer-inner">
+    <p class="ks-footer-heading">Kussoon｜運転・モビリティ</p>
+    <p class="ks-footer-lead">車のナンバーで10をつくる、計算ゲーム。</p>
+    <div class="ks-footer-grid">
+      <nav aria-label="運転・モビリティのコンテンツ">
+        <p class="ks-footer-label">運転・モビリティのコンテンツ</p>
+        <div class="ks-footer-content-links"><a href="/driving/news/">自動運転・AIニュース</a>
+<a href="/driving/news/guide/">自動運転入門</a>
+<a href="/driving/news/japan-timeline/">日本の自動運転・年表</a>
+<a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップ</a>
+<span class="ks-footer-current" aria-current="page">ナンバー10</span>
+<a href="/nishinomiya/nishinomiya-intersections-map.html">西宮市 交差点マップ</a></div>
+      </nav>
+      <nav aria-label="サイト情報">
+        <p class="ks-footer-label">サイト情報</p>
+        <div class="ks-footer-info-links"><a href="/about/">このサイトについて</a>
+<a href="/privacy/">プライバシー</a>
+<a href="/sources/">データ出典</a>
+<a href="/terms/">利用上の注意</a></div>
+      </nav>
+    </div>
+    <div class="ks-footer-bottom">
+      <nav class="ks-footer-bottom-links" aria-label="上位ページへの移動">
+        <a href="/">⌂ Kussoonトップ</a>
+        <a href="/driving/">運転・モビリティ トップ</a>
+      </nav>
+      <a class="ks-footer-top" href="#ks-page-top">↑ ページ先頭へ戻る</a>
+    </div>
+    <div class="ks-footer-meta"><p>ナンバー10 Version 1.1.0</p><p>© 2026 Kussoon. All rights reserved.</p></div>
+  </div>
+</footer>
 <script>
 'use strict';const $=id=>document.getElementById(id),EPS=1e-8;let digits=[],tokens=[],used=[],answer=null,attempts=0,wins=0,shown=0,finished=false;const fmt=s=>s.replace(/\*/g,'×').replace(/\//g,'÷').replace(/-/g,'−');
 function calc(x,y,op){if(op==='+' )return x+y;if(op==='-')return x-y;if(op==='*')return x*y;if(Math.abs(y)<EPS)return null;return x/y;}
