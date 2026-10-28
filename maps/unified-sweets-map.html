@@ -272,6 +272,7 @@ header h1,header .subtitle{position:relative}
 <footer class="sitefooter kussoon-unified-footer" id="page-footer"><div class="container">
 <nav class="footer-actions" aria-label="ページ下部の移動"><div class="footer-links"><a class="footer-link" href="https://kussoon.com/">⌂ Kussoonトップ</a><a class="footer-link" href="#page-top">このマップの先頭へ</a></div><div class="footer-return"><button id="footerBackTop" type="button" class="footer-top">↑ 先頭に戻る</button></div></nav>
 <p class="sweets-version">Version 1.0.1</p>
+<nav aria-label="サイト共通案内" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;margin:12px 0;width:100%"><a href="/privacy/">プライバシーポリシー</a></nav>
 <nav class="sweets-footer-info" aria-label="サイト情報">
 <details><summary>このサイトについて</summary><div class="sweets-footer-explanation">Kussoonが個人で制作する、阪神間5市のお菓子店を地図で探せる地域ガイドです。</div></details>
 <details><summary>プライバシー</summary><div class="sweets-footer-explanation">閲覧状況の把握にはUmamiを使用しています。検索語や入力内容、位置情報はアクセス解析イベントへ送信しない設計です。</div></details>
@@ -482,4 +483,5 @@ window.addEventListener('load',()=>{map.invalidateSize({pan:false});});
 window.addEventListener('resize',()=>map.invalidateSize({pan:false}));
 if(typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>map.invalidateSize({pan:false})).observe($('map'))} 
 })();
-</script></body></html>
+</script><script defer src="/common/footer-links.js"></script>
+</body></html>
