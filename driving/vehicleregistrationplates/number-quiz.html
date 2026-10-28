@@ -96,6 +96,50 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
   const s=document.createElement('script');s.defer=true;s.src='https://cloud.umami.is/script.js';s.dataset.websiteId='8beb23a4-a36f-4aff-b082-bec86e01a2f7';s.dataset.beforeSend='kussoonUmamiBeforeSend';document.head.appendChild(s);
 }
 </script>
+<style>
+
+/* Kussoon 読み物・雑学ベースの共通フッター v2: footer内だけに適用 */
+footer.ks-unified-footer {
+  box-sizing:border-box; display:block; clear:both; width:100%; max-width:none;
+  margin:32px 0 0; padding:28px 16px calc(30px + env(safe-area-inset-bottom));
+  background:#f8fafc; border-top:1px solid #dce5eb;
+  color:#40566a; color-scheme:light; font-family:inherit; font-size:14px;
+  line-height:1.75; text-align:left; box-shadow:none;
+}
+footer.ks-unified-footer *, footer.ks-unified-footer *::before, footer.ks-unified-footer *::after { box-sizing:border-box; }
+footer.ks-unified-footer .ksu-inner { max-width:1050px; margin:0 auto; }
+footer.ks-unified-footer .ksu-brand { margin:0 0 3px; font-size:1.06rem; font-weight:750; color:#1c3e56; }
+footer.ks-unified-footer .ksu-lead { margin:0 0 22px; color:#627789; font-size:.87rem; }
+footer.ks-unified-footer .ksu-section { margin:0 0 21px; }
+footer.ks-unified-footer .ksu-label { margin:0 0 8px; color:#354e60; font-size:.87rem; font-weight:700; }
+footer.ks-unified-footer .ksu-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:20px; row-gap:5px; }
+footer.ks-unified-footer .ksu-links a, footer.ks-unified-footer .ksu-links .ksu-current {
+  display:flex; align-items:center; min-width:0; min-height:36px; padding:4px 0;
+  font-size:.88rem; line-height:1.5; overflow-wrap:anywhere;
+}
+footer.ks-unified-footer a { color:#225f89; text-decoration:underline; text-underline-offset:3px; }
+footer.ks-unified-footer a:hover { color:#103c60; text-decoration-thickness:2px; }
+footer.ks-unified-footer a:focus-visible { outline:3px solid #e8a747; outline-offset:3px; border-radius:3px; }
+footer.ks-unified-footer .ksu-current { color:#62717d; font-weight:700; text-decoration:none; }
+footer.ks-unified-footer .ksu-current::before { content:'現在：'; font-size:.75rem; font-weight:400; margin-right:3px; }
+footer.ks-unified-footer .ksu-other { padding-top:17px; border-top:1px solid #e0e7ed; }
+footer.ks-unified-footer .ksu-bottom { border-top:1px solid #e0e7ed; padding-top:17px; margin-top:5px; }
+footer.ks-unified-footer .ksu-home { display:flex; flex-wrap:wrap; gap:4px 22px; margin-bottom:13px; }
+footer.ks-unified-footer .ksu-home a { display:inline-flex; align-items:center; min-height:36px; }
+footer.ks-unified-footer .ksu-top { display:inline-flex; align-items:center; min-height:40px; padding:6px 13px; border:1px solid #c5d4df; border-radius:8px; background:#fff; text-decoration:none; font-weight:700; }
+footer.ks-unified-footer .ksu-info { display:flex; flex-wrap:wrap; gap:0 19px; margin:14px 0 8px; }
+footer.ks-unified-footer .ksu-info a { display:inline-flex; align-items:center; min-height:34px; font-size:.82rem; }
+footer.ks-unified-footer .ksu-copy { margin:8px 0 0; font-size:.77rem; color:#70808b; }
+footer.ks-unified-footer .ksu-version { margin:7px 0 0; font-size:.76rem; color:#70808b; }
+@media(max-width:520px) {
+  footer.ks-unified-footer { padding:24px 16px calc(26px + env(safe-area-inset-bottom)); }
+  footer.ks-unified-footer .ksu-links { grid-template-columns:1fr; row-gap:2px; }
+  footer.ks-unified-footer .ksu-lead { margin-bottom:18px; }
+  footer.ks-unified-footer .ksu-section { margin-bottom:17px; }
+  footer.ks-unified-footer .ksu-info { gap:0 14px; }
+}
+
+</style>
 </head>
 <body>
 <main>
@@ -120,7 +164,39 @@ if(['kussoon.com','www.kussoon.com'].includes(location.hostname)){
 <section class="help" aria-label="希望番号制度の説明"><details id="hope-number-guide"><summary>希望番号制度とは</summary><p>希望番号制度は、自動車のナンバープレートに表示される<strong>下段の4桁以下の数字</strong>を、申込みによって選べる制度です。地域名・分類番号・ひらがなは選べません。</p><p>通常の一般払出しでは使われない「42」「49」などの数字も、対象車両では希望番号として申し込めます。一部の人気番号は抽選となり、その対象となる番号は地域によって異なります。希望番号を利用できる車両や申込条件には制限があります。</p><div class="issuance-guide"><h3>分類番号の進み方は3種類あります</h3><p>番号の取得方法によって、分類番号の使用範囲と順序が異なります。</p><dl><dt>通常一連番号（一般払出し）</dt><dd>希望番号を申し込まず、順番に割り当てられる番号です。</dd><dt>一般希望番号</dt><dd>好きな4桁以下の数字を希望し、抽選なしで取得する番号です。</dd><dt>抽選対象希望番号</dt><dd>人気番号など、抽選対象の数字を希望し、当選して取得する番号です。</dd></dl><p class="issuance-tip"><strong>ポイント：</strong>希望して選べるのは原則として下段の4桁以下の数字です。地域名・分類番号・ひらがなを指定する制度ではありません。同じ「30Y」でも、通常一連番号の次は「3A0」、抽選対象希望番号の次は「31A」となります（2017年通知の基本系列）。</p></div><p>詳しくは<a href="https://www.kibou-number.jp/html/info/kibou-number.html" target="_blank" rel="noopener noreferrer">希望番号申込サービスの案内</a>をご覧ください。</p></details></section>
 <section class="help" aria-label="ルールと出典"><details><summary>ルールと出典</summary><p>対象は、登録自動車について<strong>2017年通知に基づく基本的な払出し規則</strong>です。数字の昇順と一部の欠番規則、ひらがなの順序、通常一連番号・一般希望番号・抽選対象希望番号ごとに異なる分類番号の進行を扱います。下2桁が42・49となる数字を除きます。例えば「・420」「14-92」は、この理由では飛ばしません。</p><p>希望番号制度で取得可能な除外数字には、解説に「希望番号で取るなら可能だが、通常は発行されない。」を表示します。なお、希望番号にも申込み条件があります。</p><p><b>払出し順序の根拠（2017年）</b>：<a href="https://www.aiseishin.or.jp/public_html/protect/somu/20171013%20nanba-.pdf" target="_blank" rel="noopener noreferrer">「分類番号のローマ字導入に伴う自動車登録番号の定め方について」（公開PDF）</a>。<br><b>番号の形式に関する現行法令（2026年）</b>：<a href="https://laws.e-gov.go.jp/law/345M50000800007" target="_blank" rel="noopener noreferrer">e-Gov「自動車登録規則」第13条・別表</a>。<br><b>希望番号制度</b>：<a href="https://www.kibou-number.jp/html/info/kibou-number.html" target="_blank" rel="noopener noreferrer">希望番号申込サービスの案内</a>。</p><p><b>確認状況（2026年10月15日）</b>：2017年以降にこの詳細な払出し順序を全面的に置き換える公開通知は確認できませんでした。ただし、通知の現行性・追加変更がないことは未確定です。地域別抽選対象番号を含めた現実の完全な次番号は再現しません。分類番号問題は2017年通知の基本系列と7ページ目の別表に基づきます。分類番号の進行は「通常一連番号」「一般希望番号」「抽選対象希望番号」で異なります。歴史的な払出し実績と2026年現在の実際の交付順序を確定するものではありません。特例地域・字光式等を対象外にしています。</p></details></section>
 <section class="help" aria-label="注意事項"><details><summary>注意事項</summary><p>このクイズは公表された払出し規則を学ぶためのものです。実際に次に交付されるナンバープレートを予測するものではありません。</p><p>地域・車両の区分・希望番号の申込み・個別の特例などにより、実際の取扱いが異なる場合があります。</p></details></section>
-</main><footer class="site-footer"><nav class="site-links" aria-label="サイト案内"><a href="https://kussoon.com/about/">このサイトについて</a><a href="https://kussoon.com/privacy/">プライバシー</a><a href="https://kussoon.com/sources/">データ出典</a><a href="https://kussoon.com/terms/">利用上の注意</a></nav><p>ナンバーの次は？　Version 0.13.7</p><p>© 2026 Kussoon. All rights reserved.</p></footer>
+</main><footer class="ks-unified-footer" aria-label="Kussoon共通フッター">
+<div class="ksu-inner">
+<p class="ksu-brand">Kussoon｜運転・モビリティ</p>
+<p class="ksu-lead">車のナンバープレートの数字・ひらがな・分類番号を、クイズで学ぶ。</p>
+<nav class="ksu-section" aria-label="運転・モビリティの関連ページ">
+<p class="ksu-label">運転・モビリティの関連ページ</p>
+<div class="ksu-links"><a href="/driving/news/">自動運転・AIニュース</a>
+<a href="/driving/news/guide/">自動運転入門</a>
+<a href="/driving/news/japan-timeline/">日本の自動運転・年表</a>
+<a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップ</a>
+<a href="/driving/vehicleregistrationplates/number10.html">ナンバー10</a>
+<span class="ksu-current" aria-current="page">次のナンバーは？クイズ</span>
+<a href="/nishinomiya/nishinomiya-intersections-map.html">西宮市 交差点マップ</a></div>
+</nav>
+<nav class="ksu-section ksu-other" aria-label="Kussoonのほかのコンテンツ">
+<p class="ksu-label">Kussoonのほかのコンテンツ</p>
+<div class="ksu-links"><a href="/games/">学ぶ・遊ぶ</a>
+<a href="/local/">地域を調べる</a>
+<a href="/ideas/">工夫・アイデア</a>
+<a href="/reading/">読み物・雑学</a></div>
+</nav>
+<div class="ksu-bottom">
+<nav class="ksu-home" aria-label="サイト上位ページ"><a href="/">Kussoonトップ</a><a href="/driving/">運転・モビリティ トップ</a></nav>
+<a class="ksu-top" href="#">↑ ページ先頭へ戻る</a>
+<nav class="ksu-info" aria-label="サイト情報"><a href="/about/">このサイトについて</a>
+<a href="/privacy/">プライバシー</a>
+<a href="/sources/">データ出典</a>
+<a href="/terms/">利用上の注意</a></nav>
+<p class="ksu-copy">© 2026 Kussoon. All rights reserved.</p>
+<p class="ksu-version">ナンバーの次は？　Version 0.13.7</p>
+</div>
+</div>
+</footer>
 <script>
 'use strict';
 // 希望番号制の説明へ移動し、内容を開く。
