@@ -47,7 +47,14 @@ a.card.tile-1{background:#526bb2}
 a.card.tile-2{background:#6b5aa8}
 a.card.tile-3{background:#247d91}
 a.card.tile-4{background:#537aa0}
-</style><script>window.kussoonUmamiBeforeSend=function(type,payload){if(payload&&typeof payload==='object'){for(const key of ['url','referrer']){if(typeof payload[key]==='string')payload[key]=payload[key].split(/[?#]/)[0];}}return payload;};</script><script data-before-send="kussoonUmamiBeforeSend" data-domains="kussoon.com,www.kussoon.com" data-exclude-hash="true" data-exclude-search="true" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" defer="" src="https://cloud.umami.is/script.js"></script></head>
+</style><script>window.kussoonUmamiBeforeSend=function(type,payload){if(payload&&typeof payload==='object'){for(const key of ['url','referrer']){if(typeof payload[key]==='string')payload[key]=payload[key].split(/[?#]/)[0];}}return payload;};</script><script data-before-send="kussoonUmamiBeforeSend" data-domains="kussoon.com,www.kussoon.com" data-exclude-hash="true" data-exclude-search="true" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" defer="" src="https://cloud.umami.is/script.js"></script><style>
+.driving-footer{margin-top:34px;padding:22px 18px;border-radius:16px;background:#203b50;color:#f4f7fb;text-align:left}
+.driving-footer .df-section{padding:12px 0 16px;border-bottom:1px solid #ffffff35}
+.driving-footer h2{margin:0 0 9px;font-size:15px;color:#fff}
+.driving-footer .df-links{display:flex;flex-wrap:wrap;gap:8px 17px}
+.driving-footer .df-links a{color:#f0f7ff;text-underline-offset:3px;font-size:13px;line-height:1.8}
+.driving-footer .df-copy{text-align:center;font-size:12px;margin:17px 0 0;color:#d8e5ee}
+</style></head>
 <body>
 <main>
 <a class="toplink" href="/">← Kussoon トップへ戻る</a>
@@ -72,16 +79,28 @@ a.card.tile-4{background:#537aa0}
 
 <div class="expanding">範囲拡大中。順次更新します。</div>
 </a>
-<nav aria-label="サイト共通案内" class="site-links">
-<a href="/games/">学ぶ・遊ぶ</a>
-<a href="/local/">地域を調べる</a>
-<a href="/ideas/">工夫・アイデア</a>
-<a href="/about/">このサイトについて</a>
-<a href="/privacy/">プライバシーポリシー</a>
-<a href="/sources/">データ出典</a>
-<a href="/terms/">利用上の注意</a>
-</nav>
-<footer>© Kussoon</footer>
+<footer class="driving-footer" aria-label="運転・モビリティのフッター">
+  <nav class="df-section" aria-label="運転・モビリティの関連ページ">
+    <h2>運転・モビリティの関連ページ</h2>
+    <div class="df-links">
+      <a href="/driving/news/">自動運転・AIニュース</a>
+      <a href="/driving/news/guide/">自動運転入門</a>
+      <a href="/driving/news/japan-timeline/">日本の自動運転・年表</a>
+      <a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップ</a>
+      <a href="/driving/vehicleregistrationplates/number10.html">ナンバー10</a>
+      <a href="/nishinomiya/nishinomiya-intersections-map.html">西宮市 交差点マップ</a>
+    </div>
+  </nav>
+  <nav class="df-section" aria-label="Kussoonのほかのコンテンツ">
+    <h2>Kussoonのほかのコンテンツ</h2>
+    <div class="df-links"><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/ideas/">工夫・アイデア</a><a href="/reading/">読み物・雑学</a></div>
+  </nav>
+  <nav class="df-section" aria-label="サイト共通案内">
+    <h2>サイト共通案内</h2>
+    <div class="df-links"><a href="/">Kussoonトップ</a><a href="/sitemap/">サイトマップ</a><a href="/about/">このサイトについて</a><a href="/contact/">お問い合わせ</a><a href="/privacy/">プライバシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></div>
+  </nav>
+  <p class="df-copy">© 2026 Kussoon. All rights reserved.</p>
+</footer>
 </main>
 </body>
 </html>
