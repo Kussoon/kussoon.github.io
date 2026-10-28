@@ -16,6 +16,7 @@
   footer.innerHTML = `
     <nav aria-label="サイト情報">
       <a href="/about/">このサイトについて</a>
+      <a href="/contact/">お問い合わせ</a>
       <a href="/privacy/">プライバシーポリシー</a>
       <a href="/sources/">データ出典</a>
       <a href="/terms/">利用上の注意</a>
