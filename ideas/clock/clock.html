@@ -1564,6 +1564,14 @@
     }
 
 </style>
+  <style id="site-links-menu-style">
+    #menu {
+      max-height: calc(100dvh - max(164px, calc(150px + var(--safe-top))) - max(12px, var(--safe-bottom)));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+  </style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true"></script>
 </head>
 
 <body class="level-0">
@@ -1708,7 +1716,7 @@
       <button type="button" data-level="1">暗い</button>
       <button type="button" data-level="2">超暗い</button>
     </div>
-    <nav class="menu-info" aria-label="この時計について">
+    <nav class="menu-info site-links" aria-label="この時計について">
       <a href="clock-guide.html">使い方・掲載情報について</a>
       <a href="https://kussoon.com/privacy/">プライバシー</a>
       <a href="https://kussoon.com/terms/">利用上の注意</a>
@@ -2966,5 +2974,6 @@
       requestWakeLock();
     })();
   </script>
+  <script defer src="/common/footer-links.js"></script>
 </body>
 </html>
