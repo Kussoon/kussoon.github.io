@@ -50,6 +50,34 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
 .kussoon-common-footer{border-top-color:#dce6ee;color:#536b79}
 .kussoon-footer-links a{color:#285978}
 
+/* Desktop layout: keep the original mobile presentation intact. */
+@media (min-width: 768px) {
+  main{max-width:1080px;padding:28px 28px 42px}
+  h1{font-size:44px}
+  .catch{font-size:20px;margin-bottom:22px}
+  .branding{margin-bottom:10px}
+  .branding-stamp{right:24px;width:110px}
+  .hero{grid-template-columns:220px minmax(0,1fr);max-width:850px;margin:0 auto 24px}
+  .hero img{height:195px}
+  .hero-text{padding:24px 30px}
+  .hero-text p{font-size:16px;line-height:1.8}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .card{padding:24px;transition:transform .15s ease,box-shadow .15s ease}
+  .card h2{font-size:23px}
+  .card p{font-size:14px}
+  .card .go{font-size:13px}
+  .card:hover{transform:translateY(-2px);box-shadow:0 7px 17px #0002}
+  .quick{margin-top:20px;padding:20px}
+  .quick h2{font-size:17px}
+  .quick-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .quick-links a{font-size:14px;padding:12px 14px}
+  .quick-links a:hover{background:#e6f2fa}
+  .note{font-size:12px;margin-top:20px}
+}
+@media (min-width: 1100px) {
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
 </style>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"></script>
 </head>
