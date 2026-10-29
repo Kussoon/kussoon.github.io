@@ -51,6 +51,14 @@ footer{text-align:center;margin-top:12px;color:#728b7d;font-size:12px;line-heigh
 .featured-bread{font-size:30px;line-height:1;filter:drop-shadow(0 2px 2px rgba(0,0,0,.12));user-select:none;pointer-events:none}
 @media(max-width:370px){.featured-title-row{gap:10px}.featured-bread{font-size:26px}}
 
+@media (min-width:700px){
+  main{max-width:960px;padding:20px 20px 32px}
+  .hero,.quick-searches{max-width:680px;margin-left:auto;margin-right:auto}
+  .hero{grid-template-columns:180px minmax(0,1fr)}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card.featured{grid-column:1/-1}
+  .note{max-width:760px;margin-left:auto;margin-right:auto}
+}
 </style>
 <!-- Kussoon: Umami analytics (query values are not collected) -->
 <script>
