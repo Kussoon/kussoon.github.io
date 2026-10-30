@@ -94,7 +94,7 @@ test('kanji-only administrative labels need no synthetic kana readings',()=>{
 
 test('all 49 labels are drawn from the full map at mobile and PC widths',()=>{
   for(const width of [320,390,700])for(const font of [12,14,18]){
-    for(const anchor of ['raw','safe','universal']){
+    for(const anchor of ['raw','safe','universal','balanced']){
       for(const shift of ['none','adjacent']){
         const placed=labels(width,font,anchor,shift);
         assert.equal(placed.length,49);
@@ -155,4 +155,92 @@ test('the plate-region trial reuses 21 Himeji codes from the existing Hyogo map'
   assert.ok(codes.includes('28201'),'姫路市');
   assert.ok(!codes.includes('28204'),'西宮市');
   assert.ok(!codes.includes('28106'),'神戸市長田区');
+});
+
+function horizontalSegmentAt(model,[x,y]){
+  const crossings=[];
+  for(const ring of model.rings)for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const a=ring[j],b=ring[i];
+    if((a[1]>y)!==(b[1]>y))
+      crossings.push(a[0]+(b[0]-a[0])*(y-a[1])/(b[1]-a[1]));
+  }
+  crossings.sort((a,b)=>a-b);
+  for(let i=0;i+1<crossings.length;i+=2){
+    if(x>crossings[i]&&x<crossings[i+1])return [crossings[i],crossings[i+1]];
+  }
+  throw new Error('No interior horizontal segment for '+model.name);
+}
+
+test('Sumoto, Tatsuno and Aioi automatically balance the LEFT and RIGHT margins at their existing height',()=>{
+  const baseline=labels(390,14,'safe','none');
+  const adjusted=labels(390,14,'balanced','none');
+  const names=['洲本市','たつの市','相生市'];
+  const expectedDirection={'洲本市':1,'たつの市':1,'相生市':-1};
+  for(const name of names){
+    const i=models.findIndex(m=>m.name===name),model=models[i];
+    const old=baseline[i],now=adjusted[i];
+    assert.equal(old.y,now.y,name+' height changed unexpectedly');
+    const [left,right]=horizontalSegmentAt(model,[now.x,now.y]);
+    const beforeDifference=Math.abs((old.x-left)-(right-old.x));
+    const afterDifference=Math.abs((now.x-left)-(right-now.x));
+    assert.ok(afterDifference<.0001,name+' not horizontally centered');
+    assert.ok(beforeDifference>5,name+' original imbalance missing');
+    assert.ok((now.x-old.x)*expectedDirection[name]>4,name+' did not move toward vacant side');
+    assert.ok(E.signedDist(now.x,now.y,model.rings)>0,name+' outside region');
+  }
+});
+
+test('Nishinomiya moves to the substantial southern lobe instead of the northern polylabel area',()=>{
+  const m=models.find(x=>x.code==='28204');
+  const old=R.safeInteriorCenter(m,E),now=R.locallyBalancedCenter(m,E);
+  assert.ok(now[1]-old[1]>18,'label did not leave the upper lobe');
+  assert.ok(now[1]<m.box.maxY-20,'label is too close to the southern edge');
+  assert.ok(E.signedDist(...now,m.rings)>=E.signedDist(...m.polylabel,m.rings)*.6,
+    'new lobe is too narrow for a stable anchor');
+  assert.ok(E.isInside(now[0],now[1],m.rings));
+  assert.ok(Math.abs(now[0]-old[0])<m.box.w*.25);
+});
+
+test('balanced mode preserves valid centers and leaves unrelated 41 administrative centers untouched',()=>{
+  const baseline=labels(390,14,'safe','none'),balanced=labels(390,14,'balanced','none');
+  assert.equal(balanced.length,49);
+  const changed=models.flatMap((m,i)=>{
+    const a=baseline[i],b=balanced[i];
+    assert.ok(E.isInside(b.x,b.y,m.rings),m.name+' outside');
+    return Math.hypot(a.x-b.x,a.y-b.y)>1e-5?[m.name]:[];
+  });
+  assert.equal(changed.length,8);
+  for(const name of ['西宮市','洲本市','相生市','たつの市'])
+    assert.ok(changed.includes(name),name+' not moved');
+  assert.equal(models.length-changed.length,41);
+});
+
+test('balanced mode is insensitive to zoom, font size and plate-map color classes',()=>{
+  const fixed=labels(390,14,'balanced','none');
+  for(const width of [320,390,700])for(const font of [12,14,18]){
+    const actual=labels(width,font,'balanced','none');
+    for(let i=0;i<49;i++){
+      assert.equal(actual[i].x,fixed[i].x,models[i].name+' moved x on zoom');
+      assert.equal(actual[i].y,fixed[i].y,models[i].name+' moved y on zoom');
+    }
+  }
+  // Both uses render the same labels. The plate switch only colors region paths.
+  const app=fs.readFileSync(path.join(root,'hyogo/labels-app.js'),'utf8');
+  assert.ok(app.includes("anchor:$('anchor').value"));
+  assert.ok(app.includes("plateMode=$('use-case').value==='plate'"));
+});
+
+test('adjacent-label staggering cannot pull Nishinomiya back into its northern narrow area',()=>{
+  const index=models.findIndex(m=>m.name==='西宮市');
+  const anchor=R.locallyBalancedCenter(models[index],E);
+  for(const width of [320,390,700])for(const zoom of [1,2,4]){
+    const size=E.screenPixelsToSvgUnits(14,900/zoom,width);
+    const positioned=R.planCenterFirstLabels(models,null,'kanji',size,measure,E,
+      {anchor:'balanced',shift:'adjacent'});
+    const p=positioned[index];
+    assert.ok(p.y>=anchor[1]-4,'Nishinomiya was moved north into its narrow neck');
+    assert.ok(E.signedDist(p.x,p.y,models[index].rings)>=
+      E.signedDist(...anchor,models[index].rings)*.75,'shallow-neck placement');
+    assert.equal(positioned.length,49);
+  }
 });
