@@ -71,15 +71,14 @@
   for(const [lon,lat] of positions){const x=lon*lonFactor,y=-lat;x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);}
   const scale=maxSpan/Math.max(x1-x0,y1-y0);
   const width=(x1-x0)*scale+pad*2,height=(y1-y0)*scale+pad*2;
+  const projectPoint=([lon,lat])=>[pad+(lon*lonFactor-x0)*scale,pad+(-lat-y0)*scale];
   const models=records.map(r=>{
-   const rings=r.geoPolygons.flatMap(polygon=>polygon.map(ring=>ring.map(([lon,lat])=>[
-    pad+(lon*lonFactor-x0)*scale,pad+(-lat-y0)*scale
-   ])));
+   const rings=r.geoPolygons.flatMap(polygon=>polygon.map(ring=>ring.map(projectPoint)));
    const {geoPolygons,...props}=r;
    return {...props,rings,box:engine.bbox(rings),centroid:engine.centroid(rings),
     polylabel:engine.polylabel(rings)};
   });
-  return {models,bounds:{x:0,y:0,w:width,h:height}};
+  return {models,bounds:{x:0,y:0,w:width,h:height},projectPoint};
  }
  function plateMembers(models,plate){
   const needed=new Set(plate.municipalityCodes);
