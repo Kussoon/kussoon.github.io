@@ -37,13 +37,20 @@
     if(!reading)throw new Error('読み仮名がありません: '+name);
     const rubySize=size*.58, strokePad=size*.24;
     const primary=style==='kana'?reading:name;
-    const width=style==='both'
-      ?Math.max(measure(name,size),measure(reading,rubySize))
-      :measure(primary,size);
-    // Reserve outline/halo, and the full ruby line in the collision bounds.
-    const height=style==='both'?size*1.17+rubySize*1.34:size*1.26;
+    // The placement and automatic vertical stagger ALWAYS use the primary
+    // kanji row for 'both'. Furigana is added below as auxiliary information;
+    // it must not push the kanji itself above the town center or move the
+    // kanji relative to the 'kanji' mode.
+    const width=measure(primary,size)+strokePad;
+    const height=size*1.26+strokePad;
+    // Preserve separate full visual bounds for optional diagnostics. These
+    // are NOT used to decide the geographical anchor or automatic staggering.
+    const visualWidth=style==='both'
+      ?Math.max(measure(name,size),measure(reading,rubySize))+strokePad:width;
+    const visualHeight=style==='both'
+      ?size*1.17+rubySize*1.34+strokePad:height;
     return {name,reading,style,primary,size,rubySize,
-      width:width+strokePad,height:height+strokePad};
+      width,height,visualWidth,visualHeight};
   }
   function planVerticalNudges(models,seeds,readings,style,size,measure,engine,options={}) {
     validateReadings(models,readings);
@@ -101,7 +108,12 @@
     const right=Math.min(...intersections.filter(v=>v>x+1e-7));
     if(!Number.isFinite(left)||!Number.isFinite(right))return point;
     const leftRoom=x-left,rightRoom=right-x;
-    if(Math.min(leftRoom,rightRoom)/Math.max(leftRoom,rightRoom)>=.35)return point;
+    // Tall, narrow towns can look one-sided even at a moderate imbalance.
+    // Keep the historical threshold for wider/irregular towns so their
+    // already accepted label anchors remain completely unchanged.
+    const tallAndNarrow=model.box?.h > model.box?.w*1.2;
+    const minBalance=tallAndNarrow?.50:.35;
+    if(Math.min(leftRoom,rightRoom)/Math.max(leftRoom,rightRoom)>=minBalance)return point;
     const candidateX=(left+right)/2;
     // Small, conservative correction; do not drag the label to another arm
     // of an irregular region, and never move its center outside the region.
