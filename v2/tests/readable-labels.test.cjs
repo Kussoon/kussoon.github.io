@@ -55,7 +55,10 @@ test('all three label styles preserve town identity and show ruby on its own lin
   assert.equal(a.primary,'業平町');
   assert.equal(b.primary,'業平町');
   assert.equal(c.primary,'なりひらちょう');
-  assert.equal(b.height>a.height,true);
+  assert.equal(b.height,a.height,'furigana must not affect kanji placement height');
+  assert.equal(b.width,a.width,'furigana must not affect kanji placement width');
+  assert.ok(b.visualHeight>a.height,'full two-line drawing is still taller');
+  assert.ok(b.visualWidth>=a.width);
   assert.equal(b.rubySize,font*.58);
   assert.ok(c.width>a.width);
   assert.throws(()=>R.labelSpec('業平町','', 'kanji',font,measure));
@@ -252,7 +255,7 @@ test('one-sided East Ashiya anchor is balanced inside its region without manuall
   assert.ok(Math.hypot(point[0]-town.centroid[0],point[1]-town.centroid[1])<town.box.w*.25);
 });
 
-test('only East Ashiya moves compared with the former safe-center calculation',()=>{
+test('only East Ashiya and the narrow Wakaba district move compared with the former safe-center calculation',()=>{
   const formerSafe=m=>{
     const c=m.centroid,p=m.polylabel,rings=m.rings;
     const cd=E.signedDist(c[0],c[1],rings),pd=E.signedDist(p[0],p[1],rings);
@@ -272,7 +275,7 @@ test('only East Ashiya moves compared with the former safe-center calculation',(
     const prev=formerSafe(m),current=R.safeInteriorCenter(m,E);
     if(Math.hypot(prev[0]-current[0],prev[1]-current[1])>1e-7)changed.push(m.name);
   }
-  assert.deepEqual(changed,['東芦屋町']);
+  assert.deepEqual(changed,['東芦屋町','若葉町']);
 });
 
 test('readable East Ashiya label gains space at high zoom without hiding or moving other labels',()=>{
@@ -291,4 +294,57 @@ test('readable East Ashiya label gains space at high zoom without hiding or movi
       assert.ok(eastLabel.x>base[east].x,'corrected label center should be to the right');
     }
   }
+});
+
+test('kanji and kanji-plus-furigana use identical centers and vertical staggers',()=>{
+  for(const screenWidth of [320,390,700])for(const zoom of [1,2,5,8]){
+    const font=E.screenPixelsToSvgUnits(18,1000/zoom,screenWidth);
+    for(const anchor of ['safe','universal','raw'])for(const shift of ['none','adjacent']){
+      const kanji=R.planCenterFirstLabels(models,readings,'kanji',font,measure,E,{anchor,shift});
+      const ruby=R.planCenterFirstLabels(models,readings,'both',font,measure,E,{anchor,shift});
+      assert.equal(ruby.length,59);
+      for(let i=0;i<59;i++){
+        assert.equal(kanji[i].x,ruby[i].x,models[i].name+' x');
+        assert.equal(kanji[i].y,ruby[i].y,models[i].name+' y');
+        assert.equal(kanji[i].width,ruby[i].width,models[i].name+' layout width');
+        assert.equal(kanji[i].height,ruby[i].height,models[i].name+' layout height');
+        assert.ok(ruby[i].visualHeight>ruby[i].height);
+      }
+    }
+  }
+});
+
+test('Wakaba balances left/right internal corridor without being pushed by Takahama',()=>{
+  const target=models.find(m=>m.name==='若葉町');
+  function margins(x,y){
+    const crossings=[];
+    for(const ring of target.rings)for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+      const a=ring[j],b=ring[i];
+      if((a[1]>y)!==(b[1]>y))
+        crossings.push(a[0]+(b[0]-a[0])*(y-a[1])/(b[1]-a[1]));
+    }
+    const L=Math.max(...crossings.filter(v=>v<x-1e-7));
+    const RR=Math.min(...crossings.filter(v=>v>x+1e-7));
+    return [x-L,RR-x];
+  }
+  const before=margins(...target.centroid);
+  const point=R.safeInteriorCenter(target,E),after=margins(...point);
+  assert.ok(before[0]<before[1]*.5);
+  assert.ok(point[0]>target.centroid[0]+5,'shift toward available space on the right');
+  assert.ok(Math.abs(point[1]-target.centroid[1])<1e-7);
+  assert.ok(Math.abs(after[0]-after[1])<1e-7,'balanced horizontal margins');
+  assert.ok(E.isInside(point[0],point[1],target.rings));
+  assert.ok(E.signedDist(...point,target.rings)>E.signedDist(...target.centroid,target.rings)*1.2);
+  const all=models.map(()=>true);
+  const fixed=R.planCenterFirstLabels(models,readings,'both',16,measure,E,
+    {anchor:'safe',shift:'none'});
+  const ix=models.findIndex(m=>m.name==='若葉町');
+  assert.equal(fixed[ix].x,point[0],'not moved horizontally by neighboring labels');
+  assert.equal(R.evaluateVisible(models,fixed,all,E,bounds).shown,59);
+});
+
+test('map displays the kanji at its anchor and furigana below that row',()=>{
+  const app=fs.readFileSync(path.join(base,'ashiya/readings-app.js'),'utf8');
+  assert.ok(app.includes("node.main.setAttribute('y',l.y.toFixed(2))"));
+  assert.ok(app.includes("node.ruby.setAttribute('y',(l.y+l.size*.90).toFixed(2))"));
 });
