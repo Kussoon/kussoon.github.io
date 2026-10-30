@@ -47,6 +47,13 @@ button.active{background:var(--blue);border-color:var(--blue);color:#fff}
 .search{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
 .search label{flex:1 1 220px}
 .search button{flex:0 0 auto}
+.search-field{position:relative;flex:1 1 220px;min-width:0}
+.search-field label{display:flex}
+.suggestions{position:absolute;z-index:20;top:100%;left:0;right:0;max-height:290px;overflow:auto;background:white;border:1px solid #9db9ca;border-radius:0 0 10px 10px;box-shadow:0 7px 18px #193c5729}
+.suggestions[hidden]{display:none}
+.suggestion{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #dbe6ed;border-radius:0;padding:9px 12px;min-height:42px;background:#fff}
+.suggestion:hover,.suggestion:focus-visible{background:#eaf6ff}
+.suggestion small{display:block;color:#526d80;font-size:12px}
 #status{font-size:13px;color:#375c75}
 @media(min-width:820px){.body-layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:12px}.metric-panel{margin-top:0}}
 </style>
@@ -58,7 +65,7 @@ window.kussoonUmamiBeforeSend=function(type,payload){for(const k of ['url','refe
 <script defer src="../common/js/label-engine.js"></script>
 <script defer src="../common/js/readable-labels.js"></script>
 <script defer src="../common/js/topo-region-adapter.js"></script>
-<script defer src="labels-app.js?v=20261030-search-full"></script>
+<script defer src="labels-app.js?v=20261030-kana-suggest"></script>
 </head>
 <body><main>
 <a href="/v2/">← V2試験トップへ</a>
@@ -106,10 +113,11 @@ window.kussoonUmamiBeforeSend=function(type,payload){for(const k of ['url','refe
 </section>
 <section class="panel">
  <form class="search" id="find-form" autocomplete="off">
-  <label>市町・区を探す
-   <input type="search" id="find" placeholder="例：西宮市、長田区、佐用町" list="towns" required>
-   <datalist id="towns"></datalist>
-  </label>
+  <div class="search-field">
+   <label for="find">市町・区を探す</label>
+   <input type="search" id="find" placeholder="例：西宮、にしのみや、こうべ" autocomplete="off" aria-controls="suggestions" aria-expanded="false" required>
+   <div id="suggestions" class="suggestions" hidden></div>
+  </div>
   <button type="submit">地図へ移動</button>
  </form>
  <div class="buttons">
