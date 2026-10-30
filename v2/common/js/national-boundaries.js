@@ -30,15 +30,17 @@
     const prefecture=String(p.N03_001||'');
     if(!CODE.test(code)||code.slice(0,2)!==prefCode||!municipality)
      throw Error('Invalid municipality code/name '+prefCode+': '+code);
+    // N03_003 is also used for county names (e.g. 南都留郡).
+    // Only entries explicitly registered as designated cities are grouped.
     const designatedId=parentCity?designated.get(prefCode+'|'+parentCity):null;
-    if(parentCity&&!designatedId)throw Error('Missing designated-city group: '+prefCode+' '+parentCity);
+    const cityName=designatedId?parentCity:null;
     const targetCode=mode==='municipality'&&designatedId?designatedId:code;
-    const targetName=mode==='municipality'&&designatedId?parentCity:municipality;
+    const targetName=mode==='municipality'&&designatedId?cityName:municipality;
     const key=prefCode+':'+targetCode;
     if(!grouped.has(key))grouped.set(key,{
       id:key,code:targetCode,name:targetName,
-      fullName:parentCity&&mode==='ward'?parentCity+municipality:targetName,
-      prefecture,prefectureCode:prefCode,major:parentCity&&mode==='ward'?parentCity:null,
+      fullName:cityName&&mode==='ward'?cityName+municipality:targetName,
+      prefecture,prefectureCode:prefCode,major:cityName&&mode==='ward'?cityName:null,
       municipalityCodes:[],geometries:[]
     });
     const group=grouped.get(key);
