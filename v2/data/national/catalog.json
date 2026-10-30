@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "system": "Kussoon V2 nationwide municipality and cross-prefecture plate-region foundation",
+  "experimental": true,
+  "geometry": {
+    "dataset": "N03-21_XX_210101",
+    "asOf": "2021-01-01",
+    "simplified": "1%",
+    "use": "V2 geometry and layout experiments only; verify against latest MLIT N03 before formal publication",
+    "source": "https://github.com/smartnews-smri/japan-topography/tree/main/data/municipality/topojson/s0010",
+    "original": "https://nlftp.mlit.go.jp/ksj/",
+    "licenseNotice": "Contains processed National Land Numerical Information (administrative boundaries); attribution and survey/redistribution terms must be verified for production"
+  },
+  "prefectures": [
+    {
+      "code": "19",
+      "name": "山梨県",
+      "scope": [
+        "fuji"
+      ]
+    },
+    {
+      "code": "22",
+      "name": "静岡県",
+      "scope": [
+        "fuji"
+      ]
+    },
+    {
+      "code": "25",
+      "name": "滋賀県",
+      "scope": [
+        "kansai"
+      ]
+    },
+    {
+      "code": "26",
+      "name": "京都府",
+      "scope": [
+        "kansai"
+      ]
+    },
+    {
+      "code": "27",
+      "name": "大阪府",
+      "scope": [
+        "kansai"
+      ]
+    },
+    {
+      "code": "28",
+      "name": "兵庫県",
+      "scope": [
+        "kansai"
+      ]
+    },
+    {
+      "code": "29",
+      "name": "奈良県",
+      "scope": [
+        "kansai"
+      ]
+    },
+    {
+      "code": "30",
+      "name": "和歌山県",
+      "scope": [
+        "kansai"
+      ]
+    }
+  ],
+  "designatedCities": [
+    {
+      "municipalityCode": "26100",
+      "name": "京都市",
+      "prefectureCode": "26"
+    },
+    {
+      "municipalityCode": "27100",
+      "name": "大阪市",
+      "prefectureCode": "27"
+    },
+    {
+      "municipalityCode": "27140",
+      "name": "堺市",
+      "prefectureCode": "27"
+    },
+    {
+      "municipalityCode": "28100",
+      "name": "神戸市",
+      "prefectureCode": "28"
+    }
+  ],
+  "plates": [
+    {
+      "id": "fuji",
+      "name": "富士山",
+      "prefectureCodes": [
+        "19",
+        "22"
+      ],
+      "municipalityCodes": [
+        "19202",
+        "19422",
+        "19423",
+        "19424",
+        "19425",
+        "19429",
+        "19430",
+        "22207",
+        "22210",
+        "22215",
+        "22220",
+        "22344"
+      ],
+      "effectiveNote": "Current 12 municipalities: 7 Yamanashi + 5 Shizuoka; former Shizuoka Shibakawa town was absorbed into Fujinomiya in 2010.",
+      "sources": [
+        "https://www.mlit.go.jp/report/press/jidosha08_hh_000001.html",
+        "https://www.city.fuji.shizuoka.jp/1005050000/p005077.html",
+        "https://www.pref.shizuoka.jp/kurashikankyo/zei/kenzeigaiyou/1002344/1011818.html"
+      ]
+    }
+  ]
+}
