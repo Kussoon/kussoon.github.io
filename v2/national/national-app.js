@@ -171,16 +171,22 @@ function renderLabels(){
  // At national overview scale many tiny municipalities cannot contain 15px
  // names; defer this heavier search until the user magnifies the map.
  // Keep the existing Fuji plate-region rendering exactly as previously tested.
+ // Stage 1: keep the existing 5x5-contained-area refinement unchanged,
+ // including the familiar 4x–6x overview behavior.
  const containment=state.mode!=='plate'&&zoom>=4
   ?F.refine(layoutModels,collisionResult.labels,size,E,{
-    view,passes:1,pinned,
-    // An exact perimeter-margin check is useful only when the map is
-    // magnified enough for names to have meaningful free space.
-    // Preserve the older 5x5-only behavior at 4x–under 6x overview zoom.
-    perimeter:zoom>=6
+    view,passes:1,pinned,perimeter:false
    })
   :null;
- const resultLabels=containment?containment.labels:collisionResult.labels;
+ // Stage 2: at sufficient zoom, improve the text-edge safety margin without
+ // sacrificing any containment that the first stage already achieved.
+ const clearance=containment&&zoom>=6
+  ?F.refine(layoutModels,containment.labels,size,E,{
+    view,passes:1,pinned,perimeter:true
+   })
+  :null;
+ const resultLabels=clearance?clearance.labels:
+  containment?containment.labels:collisionResult.labels;
  resultLabels.forEach((position,i)=>{
   const target=labelNodes[i]?.node;
   if(!target)return;
@@ -199,9 +205,9 @@ function renderLabels(){
   '件／文字の重なり（概算）'+before.collisions+'→'+after.collisions+'組／追加移動'+
   moved+'件／区域境界またぎ（9点判定）'+after.outside+'件'+
   (containment?'／文字箱の区域外相当量 '+containment.beforeOutside.toFixed(1)+
-    '→'+containment.afterOutside.toFixed(1):'')+
-  (containment&&zoom>=6?'／境界近接ラベル '+containment.edgeRiskBefore+
-    '→'+containment.edgeRiskAfter:'')+'。';
+    '→'+(clearance?clearance.afterOutside:containment.afterOutside).toFixed(1):'')+
+  (clearance?'／境界近接ラベル '+clearance.edgeRiskBefore+
+    '→'+clearance.edgeRiskAfter:'')+'。';
  setStatus('拡大 '+zoom.toFixed(2)+'倍・文字 '+screenPx.toFixed(1)+'px・配置 '+
   (performance.now()-start).toFixed(0)+'ms');
 }
