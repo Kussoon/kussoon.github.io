@@ -15,6 +15,7 @@ const E=context.window.KussoonLabelEngine;
 const R=context.window.KussoonReadableLabels;
 const A=context.window.KussoonTopoRegionAdapter;
 const data=JSON.parse(fs.readFileSync(path.join(root,'data/hyogo/hyogo-city.topojson'),'utf8'));
+const plateData=JSON.parse(fs.readFileSync(path.join(root,'data/hyogo/plate-assignment.json'),'utf8'));
 const source=A.decodeTopology(data,'city');
 const projected=A.projectRegions(source,E,{width:900,padding:30,referenceLatitude:35});
 const models=projected.models;
@@ -134,4 +135,22 @@ test('safe and universal mode do not mutate geometry or another model on repeate
     assert.equal(models[i].centroid[0],originals[i][0]);
     assert.equal(models[i].centroid[1],originals[i][1]);
   }
+});
+
+test('the plate-region trial reuses 21 Himeji codes from the existing Hyogo map',()=>{
+  const codes=plateData.otherPlateMunicipalityCodes;
+  assert.equal(plateData.defaultPlate,'神戸');
+  assert.equal(plateData.otherPlate,'姫路');
+  assert.equal(codes.length,21);
+  assert.equal(new Set(codes).size,21);
+  for(const code of codes){
+    const m=models.find(x=>x.code===code);
+    assert.ok(m,'plate code missing from 49 regions: '+code);
+    assert.notEqual(m.major,'神戸市');
+  }
+  assert.equal(models.filter(m=>codes.includes(m.code)).length,21);
+  assert.equal(models.filter(m=>!codes.includes(m.code)).length,28);
+  assert.ok(codes.includes('28201'),'姫路市');
+  assert.ok(!codes.includes('28204'),'西宮市');
+  assert.ok(!codes.includes('28106'),'神戸市長田区');
 });
