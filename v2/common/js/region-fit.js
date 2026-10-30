@@ -34,6 +34,24 @@ function fractionInside(box,rings,engine){
  }
  return inside/25;
 }
+// Inspect the actual rectangular label perimeter (including its stroke).
+// A 5x5 interior grid can miss a narrow border crossing at a glyph edge.
+// Each side gets five samples, including corners and midpoints. Signed
+// distance is positive inside the *correct* owner polygon, negative outside.
+function edgeClearance(box,rings,engine){
+ let margin=Infinity;
+ const w=box.x2-box.x1,h=box.y2-box.y1;
+ for(let k=0;k<=4;k++){
+  const t=k/4;
+  const x=box.x1+w*t,y=box.y1+h*t;
+  margin=Math.min(margin,
+   engine.signedDist(x,box.y1,rings),
+   engine.signedDist(x,box.y2,rings),
+   engine.signedDist(box.x1,y,rings),
+   engine.signedDist(box.x2,y,rings));
+ }
+ return margin;
+}
 function candidates(seed,model,size,engine){
  const points=[],seen=new Set();
  function add(x,y){
@@ -70,10 +88,12 @@ function refine(models,labels,size,engine,options={}){
   throw Error('区域とラベルのデータが不正です');
  const view=options.view||null,selected=Number.isInteger(options.pinned)?options.pinned:-1;
  const result=labels.map(l=>({...l,box:{...l.box}}));
- const margin=size*2;
+ const viewMargin=size*2;
  // Labels whose centers are off-screen should not force shifts on this view.
- const active=result.map((label,i)=>overlapsView(label.box,view,margin)?i:-1).filter(i=>i>=0);
- const minGain=typeof options.minGain==='number'?options.minGain:.075;
+ const active=result.map((label,i)=>overlapsView(label.box,view,viewMargin)?i:-1).filter(i=>i>=0);
+ const usePerimeter=options.perimeter!==false;
+ const minGain=typeof options.minGain==='number'?options.minGain:(usePerimeter?.03:.075);
+ const safeMargin=size*.18; // also leaves room for the white text stroke
  const maxPasses=Math.max(1,Math.min(2,options.passes||1));
  function scoreAt(i,box){
   let pairs=0,area=0;
@@ -84,7 +104,24 @@ function refine(models,labels,size,engine,options={}){
   }
   return {pairs,area};
  }
+ // The visible diagnostic counts names by center position. A label may enter
+ // the viewport during refinement, so static active-pair checks alone are not
+ // enough to prevent a *new visible collision* at a pan/zoom boundary.
+ function visibleCollisions(){
+  const shown=active.filter(i=>!view||
+   (result[i].x>=view.x&&result[i].x<=view.x+view.w&&
+    result[i].y>=view.y&&result[i].y<=view.y+view.h));
+  let pairs=0;
+  for(let a=0;a<shown.length;a++)
+   for(let b=0;b<a;b++)
+    if(areaOverlap(result[shown[a]].box,result[shown[b]].box)>.01)pairs++;
+  return pairs;
+ }
+ const baselineVisibleCollisions=visibleCollisions();
+ const history=[];
  const originalInside=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
+ const originalMargins=usePerimeter?
+  active.map(i=>edgeClearance(result[i].box,models[i].rings,engine)):[];
  let improved=0;
  for(let pass=0;pass<maxPasses;pass++){
   // Work on the worst-contained labels first, not just labels colliding
@@ -96,30 +133,42 @@ function refine(models,labels,size,engine,options={}){
   for(const i of order){
    const current=result[i],model=models[i],origin=labels[i];
    const fit=fractionInside(current.box,model.rings,engine);
-   if(fit>=.96)continue; // Already within the region; do not drift.
+   const margin=usePerimeter?edgeClearance(current.box,model.rings,engine):Infinity;
+   // A label is safe only when BOTH its interior and its physical perimeter
+   // fit. This catches a sliver of a glyph crossing into the next town.
+   if(fit>=.96&&margin>=safeMargin)continue;
    const startOverlap=scoreAt(i,current.box);
+   const marginPenalty=distance=>usePerimeter?
+    Math.max(0,(safeMargin-distance)/size)*18:0;
    let best=null;
    const baseScore=(1-fit)*100+startOverlap.pairs*28+
      startOverlap.area/(size*size)*5+
-     Math.hypot(current.x-origin.x,current.y-origin.y)/size*.8;
+     Math.hypot(current.x-origin.x,current.y-origin.y)/size*.8+
+     marginPenalty(margin);
    let bestScore=baseScore,bestFit=fit;
    for(const [x,y] of candidates(origin,model,size,engine)){
     const candidateBox=makeBox(x,y,current.width,current.height);
-    if(!overlapsView(candidateBox,view,margin))continue;
+    if(!overlapsView(candidateBox,view,viewMargin))continue;
     const overlap=scoreAt(i,candidateBox);
     // Never trade an additional name collision for geometric containment.
     if(overlap.pairs>startOverlap.pairs)continue;
     const coverage=fractionInside(candidateBox,model.rings,engine);
-    if(coverage<fit+minGain-1e-9)continue;
+    // Do not decrease the estimated contained area to improve an edge.
+    if(coverage<fit-1e-9)continue;
+    const clearance=usePerimeter?edgeClearance(candidateBox,model.rings,engine):Infinity;
+    if(usePerimeter){
+     if(coverage<fit+minGain-1e-9&&clearance<margin+size*.10-1e-9)continue;
+    }else if(coverage<fit+minGain-1e-9)continue;
     const drift=Math.hypot(x-origin.x,y-origin.y)/size;
     const score=(1-coverage)*100+overlap.pairs*28+
-      overlap.area/(size*size)*5+drift*.8;
+      overlap.area/(size*size)*5+drift*.8+marginPenalty(clearance);
     if(score<bestScore-1e-7){
      best={x,y,box:candidateBox};
      bestScore=score;bestFit=coverage;
     }
    }
    if(best){
+    history.push({i,previous:{...current,box:{...current.box}}});
     current.x=best.x;current.y=best.y;current.box=best.box;
     current.fit=undefined; // An old 9-point score is no longer valid.
     current.step=(current.y-origin.y)/size;
@@ -130,18 +179,30 @@ function refine(models,labels,size,engine,options={}){
   }
   if(!changed)break;
  }
+ // Revert only as many final moves as necessary if a viewport-edge
+ // membership change made the user's visible label collisions worse.
+ for(let h=history.length-1;usePerimeter&&h>=0&&
+     visibleCollisions()>baselineVisibleCollisions;h--){
+  const {i,previous}=history[h];
+  result[i]=previous;
+ }
  const after=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
+ const afterMargins=usePerimeter?
+  active.map(i=>edgeClearance(result[i].box,models[i].rings,engine)):[];
  const sum=values=>values.reduce((acc,n)=>acc+n,0);
  return {
   labels:result,
   moved:result.reduce((acc,l,i)=>acc+
    (Math.hypot(l.x-labels[i].x,l.y-labels[i].y)>1e-6?1:0),0),
-  improved,
+  improved:result.reduce((n,l,i)=>n+
+   (Math.hypot(l.x-labels[i].x,l.y-labels[i].y)>1e-6?1:0),0),
   beforeOutside:active.length-sum(originalInside),
   afterOutside:active.length-sum(after),
   poorlyContainedBefore:originalInside.filter(v=>v<.76).length,
-  poorlyContainedAfter:after.filter(v=>v<.76).length
+  poorlyContainedAfter:after.filter(v=>v<.76).length,
+  edgeRiskBefore:originalMargins.filter(v=>v<safeMargin).length,
+  edgeRiskAfter:afterMargins.filter(v=>v<safeMargin).length
  };
 }
-global.KussoonRegionFit={refine,fractionInside,candidates};
+global.KussoonRegionFit={refine,fractionInside,edgeClearance,candidates};
 })(window);
