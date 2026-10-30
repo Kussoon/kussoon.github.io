@@ -351,6 +351,12 @@
           for(const step of steps){
             const y=anchor[1]+step*size;
             if(!engine.isInside(anchor[0],y,m.rings))continue;
+            // With the balanced geometry-first mode, do not undo a selected
+            // broad lobe by shifting its label into a very narrow neck.
+            // Mild staggering remains possible inside the same safe lobe.
+            if(anchorMode==='balanced' &&
+              engine.signedDist(anchor[0],y,m.rings)<
+              engine.signedDist(anchor[0],anchor[1],m.rings)*.75)continue;
             const scores=scoresAt(y);
             if(scores.pairs>baseline.pairs)continue;
             const quality=scores.pairs*10+scores.area/(size*size)+Math.abs(step)*.75;
