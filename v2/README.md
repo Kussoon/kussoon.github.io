@@ -29,6 +29,8 @@
 - [初期設計](docs/design.md)
 - [試験トップ](index.html)
 - [芦屋市のラベル比較実験](ashiya/labels.html)
+- [芦屋市の読み仮名・ひらがな／1行ラベル比較](ashiya/readings.html)
+- [読み仮名・上下微調整の実験記録](docs/ashiya-reading-trial.md)
 - [芦屋市ラベル実験の記録](docs/ashiya-label-test.md)
 - 旧共通仕様案：[nishinomiya/common-learning-spec-draft.md](https://github.com/Kussoon/nishinomiya/blob/main/common-learning-spec-draft.md)
 - 旧画面見本：[common-design-preview.html](https://kussoon.com/nishinomiya/common-design-preview.html)
@@ -68,3 +70,11 @@ node --test v2/tests/label-engine.test.cjs
 ```
 
 正式な表示確認後、ラベルの表示密度・拡大縮小時の可読性を次工程で改善する。既存の `/ashiya/` は変更していない。
+
+## 芦屋市：読み仮名と1行の上下微調整（追加試作）
+
+既存の芦屋市町名検索から全59件の読みを再利用し、漢字のみ／漢字＋小さな読み／ひらがなのみを切り替える独立した試験画面を作成。ラベルは原則1行で、重なりが出る場合だけ上下に半文字～1.5文字移動する候補を比較する。既存の2行表示実験のコードは変更せず、PRは別に管理する。
+
+```sh
+node --test v2/tests/readable-labels.test.cjs
+```
