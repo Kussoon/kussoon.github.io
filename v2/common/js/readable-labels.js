@@ -131,6 +131,77 @@
     return balanceOneSidedAnchor(best,model,engine);
   }
 
+  // V2 geometry-only anchor for crescent, horseshoe, multi-arm and
+  // multi-part regions. Keep the old safe rule available as a baseline.
+  // Cache by polygon model so zoom, furigana mode and drag never alter this
+  // anchor or repeat the bounded search.
+  const universalAnchorCache=new WeakMap();
+  function largestOuterRing(rings) {
+    let largest=null,largestArea=-1;
+    for(const ring of rings){
+      let twice=0;
+      for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+        twice+=ring[j][0]*ring[i][1]-ring[i][0]*ring[j][1];
+      }
+      if(Math.abs(twice)>largestArea){
+        largestArea=Math.abs(twice);largest=ring;
+      }
+    }
+    return largest;
+  }
+  function universalInteriorAnchor(model,engine){
+    if(universalAnchorCache.has(model))return [...universalAnchorCache.get(model)];
+    const rings=model.rings,centroid=model.centroid,polylabel=model.polylabel;
+    const base=safeInteriorCenter(model,engine);
+    const cd=engine.signedDist(centroid[0],centroid[1],rings);
+    const pd=engine.signedDist(polylabel[0],polylabel[1],rings);
+    // Fast path: the already tested centroid/safe rule remains untouched
+    // when the centroid has reasonable clearance.
+    if(cd>0 && (pd<=0 || cd>=pd*.26)){
+      universalAnchorCache.set(model,base);return [...base];
+    }
+    if(!(pd>0)){
+      universalAnchorCache.set(model,base);return [...base];
+    }
+    // For archipelagos or a town name combining several chome, choose an
+    // anchor in the largest connected outer polygon. Do not place the single
+    // label in a tiny outlying fragment simply because it is near the center.
+    const main=largestOuterRing(rings);
+    const b=engine.bbox([main]);
+    const minClear=pd*.35;
+    const allowed=(x,y)=>engine.isInside(x,y,[main]) &&
+      engine.signedDist(x,y,rings)>=minClear;
+    let best=allowed(base[0],base[1])?[...base]:[...polylabel];
+    let distance=(best[0]-centroid[0])**2+(best[1]-centroid[1])**2;
+    function tryPoint(x,y){
+      if(!allowed(x,y))return;
+      const d=(x-centroid[0])**2+(y-centroid[1])**2;
+      if(d<distance-1e-8){
+        best=[x,y];distance=d;
+      }
+    }
+    // Bounded grid then local refinement: unlike the old straight-line
+    // interpolation, this can find a safe point even when the path from the
+    // centroid to Polylabel crosses a concavity or hole.
+    const cells=24;
+    for(let i=0;i<=cells;i++){
+      const x=b.minX+b.w*i/cells;
+      for(let j=0;j<=cells;j++)tryPoint(x,b.minY+b.h*j/cells);
+    }
+    let stepX=b.w/cells,stepY=b.h/cells;
+    for(let k=0;k<4;k++){
+      const [bx,by]=best;
+      for(const dx of [-1,0,1])for(const dy of [-1,0,1]){
+        tryPoint(bx+dx*stepX,by+dy*stepY);
+      }
+      stepX*=.5;stepY*=.5;
+    }
+    // Keep the tested horizontal-margin correction, where appropriate.
+    best=balanceOneSidedAnchor(best,model,engine);
+    universalAnchorCache.set(model,best);
+    return [...best];
+  }
+
   // Prefer stable, region-centered names to a collision-free map. All labels
   // remain visible even if they overlap or cross regional borders.
   // anchor:'safe' fixes concave-neck/outside centroids; 'raw' is the baseline.
@@ -139,10 +210,11 @@
     const shift=options.shift || 'none';
     if(!['none','vertical','adjacent'].includes(shift))throw new Error('上下調整の方式が不正です');
     const anchorMode=options.anchor || 'raw';
-    if(!['raw','safe'].includes(anchorMode))throw new Error('配置方式が不正です');
+    if(!['raw','safe','universal'].includes(anchorMode))throw new Error('配置方式が不正です');
     const specs=models.map(m=>labelSpec(m.name,readings[m.name],style,size,measure));
     const anchors=models.map(m=>
-      anchorMode==='safe'?safeInteriorCenter(m,engine):
+      anchorMode==='universal'?universalInteriorAnchor(m,engine):
+        anchorMode==='safe'?safeInteriorCenter(m,engine):
         (engine.isInside(m.centroid[0],m.centroid[1],m.rings) ? [...m.centroid] : [...m.polylabel]));
     // Start with every label anchored at its center. Unlike the former
     // greedy placement, compare each shift against *all* neighbors, not only
@@ -226,5 +298,5 @@
       total:models.length};
   }
   global.KussoonReadableLabels={normalizeReading,validateReadings,labelSpec,
-    planVerticalNudges,safeInteriorCenter,planCenterFirstLabels,evaluateVisible};
+    planVerticalNudges,safeInteriorCenter,universalInteriorAnchor,planCenterFirstLabels,evaluateVisible};
 })(window);
