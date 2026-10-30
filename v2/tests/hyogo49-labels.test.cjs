@@ -229,3 +229,18 @@ test('balanced mode is insensitive to zoom, font size and plate-map color classe
   assert.ok(app.includes("anchor:$('anchor').value"));
   assert.ok(app.includes("plateMode=$('use-case').value==='plate'"));
 });
+
+test('adjacent-label staggering cannot pull Nishinomiya back into its northern narrow area',()=>{
+  const index=models.findIndex(m=>m.name==='西宮市');
+  const anchor=R.locallyBalancedCenter(models[index],E);
+  for(const width of [320,390,700])for(const zoom of [1,2,4]){
+    const size=E.screenPixelsToSvgUnits(14,900/zoom,width);
+    const positioned=R.planCenterFirstLabels(models,null,'kanji',size,measure,E,
+      {anchor:'balanced',shift:'adjacent'});
+    const p=positioned[index];
+    assert.ok(p.y>=anchor[1]-4,'Nishinomiya was moved north into its narrow neck');
+    assert.ok(E.signedDist(p.x,p.y,models[index].rings)>=
+      E.signedDist(...anchor,models[index].rings)*.75,'shallow-neck placement');
+    assert.equal(positioned.length,49);
+  }
+});
