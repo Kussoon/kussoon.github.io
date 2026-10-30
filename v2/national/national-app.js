@@ -1,5 +1,5 @@
 /* National municipality V2 - eight-prefecture foundation experiment.
- * Shared geometry, a 5-digit municipal-code registry and跨-prefecture overlays.
+ * Shared geometry, a 5-digit municipal-code registry and cross-prefecture overlays.
  */
 (()=>{
 'use strict';
@@ -58,11 +58,14 @@ function showSelection(){
  }else $('selection').textContent='市区町村をタップすると選択できます。';
 }
 function highlight(){
- const selectedPlate=selection?.type==='plate'&&plate?new Set(plate.municipalityCodes):null;
+ // In plate mode the whole cross-prefecture plate region stays colored,
+ // even if the user taps an individual municipality for details.
+ const selectedPlate=state.mode==='plate'&&plate?new Set(plate.municipalityCodes):null;
  drawing.forEach(({node,model})=>{
-  const show=selection?.type==='model'?model.id===selection.id:
-   selectedPlate?model.municipalityCodes.some(code=>selectedPlate.has(code)):false;
+  const focused=selection?.type==='model'&&model.id===selection.id;
+  const show=selectedPlate?model.municipalityCodes.some(code=>selectedPlate.has(code)):focused;
   node.classList.toggle('selected',show);
+  node.classList.toggle('focused',Boolean(focused));
  });
  labelNodes.forEach(({node,model})=>{
   node.classList.toggle('selected',selection?.type==='model'&&model?.id===selection.id);
