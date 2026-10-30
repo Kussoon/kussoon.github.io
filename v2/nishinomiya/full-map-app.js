@@ -98,7 +98,10 @@ function renderLabels(){
  // Grow rendered glyphs gently with zoom, never shrinking below 16px.
  const base=Math.max(16,Number($('font').value));
  const screenPx=Math.min(42,base*Math.pow(zoom,.25));
- const size=E.screenPixelsToSvgUnits(screenPx,view.w,screen.width||390);
+ // This city's viewBox is taller than the square SVG. preserveAspectRatio
+ // uses the *smaller* of X/Y scales; width-only conversion undersized text.
+ const svgPixelsPerUnit=Math.min((screen.width||390)/view.w,(screen.height||390)/view.h);
+ const size=screenPx/svgPixelsPerUnit;
  const initial=R.planCenterFirstLabels(models,null,'kanji',size,textWidth,E,{
   anchor:$('anchor').value,shift:$('shift').value
  });
