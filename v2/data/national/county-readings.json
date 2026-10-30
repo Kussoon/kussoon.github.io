@@ -1,9 +1,10 @@
 {
   "meta": {
-    "scope": "Thirteen-prefecture pilot: Kansai, Yamanashi/Shizuoka and Chugoku",
-    "count": 74,
+    "scope": "Seventeen-prefecture pilot: Kansai, Yamanashi/Shizuoka, Chugoku, Shikoku",
+    "count": 99,
     "source": "County names from MLIT N03_003; readings cross-checked against e-Stat district listings and general place-name dictionaries. Source data remains a V2 prototype.",
-    "status": "Working reference; compare against current administrative datasets before production"
+    "status": "Working reference; compare against current administrative datasets before production",
+    "shikokuReadingReference": "https://idokichi.mydns.jp/current_allgun.htm (cross-check before production)"
   },
   "readings": {
     "三島郡": "みしまぐん",
@@ -79,6 +80,31 @@
     "飯石郡": "いいしぐん",
     "駿東郡": "すんとうぐん",
     "高市郡": "たかいちぐん",
-    "鹿足郡": "かのあしぐん"
+    "鹿足郡": "かのあしぐん",
+    "勝浦郡": "かつうらぐん",
+    "名東郡": "みょうどうぐん",
+    "名西郡": "みょうざいぐん",
+    "那賀郡": "なかぐん",
+    "海部郡": "かいふぐん",
+    "板野郡": "いたのぐん",
+    "美馬郡": "みまぐん",
+    "三好郡": "みよしぐん",
+    "小豆郡": "しょうずぐん",
+    "木田郡": "きたぐん",
+    "香川郡": "かがわぐん",
+    "綾歌郡": "あやうたぐん",
+    "仲多度郡": "なかたどぐん",
+    "越智郡": "おちぐん",
+    "上浮穴郡": "かみうけなぐん",
+    "伊予郡": "いよぐん",
+    "喜多郡": "きたぐん",
+    "西宇和郡": "にしうわぐん",
+    "北宇和郡": "きたうわぐん",
+    "南宇和郡": "みなみうわぐん",
+    "幡多郡": "はたぐん",
+    "長岡郡": "ながおかぐん",
+    "土佐郡": "とさぐん",
+    "吾川郡": "あがわぐん",
+    "高岡郡": "たかおかぐん"
   }
 }
