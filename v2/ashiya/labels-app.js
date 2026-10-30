@@ -10,7 +10,7 @@
   let models = [], selected = null, activeWheelMap = null;
   let ringsBuildMs = 0, renderCount = 0;
   let layouts = null;
-  let reflowFrame = null;
+  let reflowFrame = null, adaptiveTimer = null;
   const mapObjects = new Map();
   const activePointers = new Map();
   let dragged = false, suppressClickUntil = 0;
@@ -138,14 +138,16 @@
     context.font='900 '+size+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
     return models.map(m=>context.measureText(m.name).width);
   }
-  function printMetrics(id,score,visible,eligible,hiddenByCollision) {
+  function printMetrics(id,score,visible,eligible,hiddenByCollision,wrapped=0,shrunk=0) {
     const fields=[
       ['対象町名',models.length],
       ['表示範囲の候補',eligible+'件'],
       ['範囲内のラベル中心',visible.count+'件'],
       ['衝突のため省略',hiddenByCollision+'件'],
       ['表示中の重なり',score.collisions+'組'],
-      ['範囲内で文字が区域外',visible.wholeOutside+'件']
+      ['範囲内で文字が区域外',visible.wholeOutside+'件'],
+      ['表示中の2行ラベル',wrapped+'件'],
+      ['表示中の縮小ラベル',shrunk+'件']
     ];
     $(id).innerHTML=fields.map(([label,v])=>'<div><dt>'+label+'</dt><dd>'+v+'</dd></div>').join('');
   }
@@ -154,35 +156,62 @@
     for(const side of ['manual','auto']) {
       const l=layouts[side];
       const indices=l.shown.flatMap((v,i)=>v?[i]:[]);
-      const score=E.subsetMetrics(models,l.positions,l.widths,l.size,indices);
       const inView=indices.filter(i=>{
         const [x,y]=l.positions[i];
         return x>=view.x&&x<=view.x+view.w&&y>=view.y&&y<=view.y+view.h;
       });
-      const visible=E.subsetMetrics(models,l.positions,l.widths,l.size,inView);
-      printMetrics(side+'-stats',score,visible,l.eligible.filter(Boolean).length,l.hiddenByCollision);
+      const score=l.labelLayouts
+        ?E.evaluateLabelLayouts(models,l.labelLayouts,indices)
+        :E.subsetMetrics(models,l.positions,l.widths,l.size,indices);
+      const visible=l.labelLayouts
+        ?E.evaluateLabelLayouts(models,l.labelLayouts,inView)
+        :E.subsetMetrics(models,l.positions,l.widths,l.size,inView);
+      const wrapped=l.labelLayouts?indices.filter(i=>l.labelLayouts[i].wrapped).length:0;
+      const shrunk=l.labelLayouts?indices.filter(i=>l.labelLayouts[i].scale<1).length:0;
+      printMetrics(side+'-stats',score,visible,l.eligible.filter(Boolean).length,l.hiddenByCollision,wrapped,shrunk);
     }
   }
   function scheduleReflow() {
+    // Adaptive candidates are relatively expensive on mobile. Keep the map
+    // continuously draggable but compute new multiline layouts after motion.
+    if($('layout-mode').value!=='single'){
+      if(adaptiveTimer!==null)clearTimeout(adaptiveTimer);
+      adaptiveTimer=setTimeout(()=>{adaptiveTimer=null;relayout();},170);
+      return;
+    }
     if(reflowFrame!==null)return;
     reflowFrame=requestAnimationFrame(()=>{
-      reflowFrame=null;
-      relayout();
+      reflowFrame=null;relayout();
     });
   }
   function renderedMapWidth() {
     const visible=maps.find(svg=>svg.getBoundingClientRect().width>0);
     return visible?visible.getBoundingClientRect().width:360;
   }
-  function drawLabels(svg,positions,problems,size,showProblems,shown) {
+  function drawLabels(svg,positions,problems,size,showProblems,shown,labelLayouts=null) {
     const obj=mapObjects.get(svg);
     if(!obj)return;
     const set=new Set(problems);
     obj.texts.forEach((t,i)=>{
-      t.setAttribute('x',positions[i][0].toFixed(2));
-      t.setAttribute('y',positions[i][1].toFixed(2));
-      t.setAttribute('font-size',String(size));
-      t.setAttribute('stroke-width',String(size*.17));
+      const l=labelLayouts?labelLayouts[i]:null;
+      const font=l?l.fontSize:size;
+      const x=positions[i][0], y=positions[i][1];
+      t.setAttribute('x',x.toFixed(2));
+      t.setAttribute('font-size',String(font));
+      t.setAttribute('stroke-width',String(font*.17));
+      if(l && l.lines.length===2){
+        const lh=font*1.16;
+        t.setAttribute('y',(y-lh/2).toFixed(2));
+        const first=element('tspan',{x:x.toFixed(2)});
+        first.textContent=l.lines[0];
+        const second=element('tspan',{x:x.toFixed(2),dy:lh.toFixed(2)});
+        second.textContent=l.lines[1];
+        t.replaceChildren(first,second);
+      } else {
+        t.setAttribute('y',y.toFixed(2));
+        if(t.children.length || t.textContent!==models[i].name)
+          t.textContent=models[i].name;
+      }
       t.style.display=shown[i]?'':'none';
       t.classList.toggle('problem',showProblems&&set.has(i));
       t.classList.toggle('selected',i===selected);
@@ -197,30 +226,57 @@
     const widths=measureWidths(size);
     const t0=performance.now();
     const manual=E.choosePositions(models,widths,size,'manual');
-    const auto=E.choosePositions(models,widths,size,mode);
+    const seed=E.choosePositions(models,widths,size,mode);
+    const lineMode=$('layout-mode').value;
+    const measuring=document.createElement('canvas').getContext('2d');
+    const measureCache=new Map();
+    function measureLine(str,lineSize){
+      const key=str+'|'+lineSize;
+      if(measureCache.has(key))return measureCache.get(key);
+      let value=str.length*lineSize;
+      if(measuring){
+        measuring.font='900 '+lineSize+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
+        value=measuring.measureText(str).width;
+      }
+      measureCache.set(key,value);
+      return value;
+    }
+    const autoLayouts=lineMode==='single'?null:
+      E.planAdaptiveLabels(models,seed,size,measureLine,{
+        wrap:true,shrink:lineMode==='wrap-shrink'
+      });
+    const auto=autoLayouts?autoLayouts.map(l=>[l.x,l.y]):seed;
+    const autoWidths=autoLayouts?autoLayouts.map(l=>l.width):widths;
     const manualShown=models.map(()=>true);
     const priority=$('priority-mode').value;
     const eligibleManual=E.selectPriorityLabels(models,manual,widths,size,view,{strategy:'area'}).eligible;
     const previous=layouts&&layouts.auto.strategy===priority ? layouts.auto.shown : null;
-    const priorityResult=E.selectPriorityLabels(models,auto,widths,size,view,{
-      strategy:priority,pinned:selected,previous
+    const priorityResult=E.selectPriorityLabels(models,auto,autoWidths,size,view,{
+      strategy:priority,pinned:selected,previous,
+      boxes:autoLayouts?autoLayouts.map(l=>l.box):undefined
     });
     const autoShown=$('declutter').checked ? priorityResult.shown : models.map(()=>true);
+    const activeAuto=autoShown.flatMap((shown,i)=>shown?[i]:[]);
     const allManual=manualShown.map((v,i)=>v?i:-1).filter(i=>i!==-1);
-    const activeAuto=autoShown.map((v,i)=>v?i:-1).filter(i=>i!==-1);
     const manualScore=E.subsetMetrics(models,manual,widths,size,allManual);
-    const autoScore=E.subsetMetrics(models,auto,widths,size,activeAuto);
+    const autoScore=autoLayouts
+      ?E.evaluateLabelLayouts(models,autoLayouts,activeAuto)
+      :E.subsetMetrics(models,auto,autoWidths,size,activeAuto);
     const elapsed=performance.now()-t0;
     layouts={
       manual:{positions:manual,widths,size,shown:manualShown,eligible:eligibleManual,hiddenByCollision:0},
       auto:{
-        positions:auto,widths,size,shown:autoShown,eligible:priorityResult.eligible,
+        positions:auto,widths:autoWidths,size,shown:autoShown,eligible:priorityResult.eligible,
         hiddenByCollision:$('declutter').checked?priorityResult.hiddenByCollision:0,
-        strategy:priority
+        strategy:priority,labelLayouts:autoLayouts
       }
     };
     drawLabels(maps[0],manual,manualScore.problemIndices,size,showProblems,manualShown);
-    drawLabels(maps[1],auto,autoScore.problemIndices.map(i=>activeAuto[i]),size,showProblems,autoShown);
+    // subsetMetrics uses indices local to activeAuto; adaptive metrics use
+    // original model indices. Convert before coloring the corresponding labels.
+    const autoProblems=autoLayouts ? autoScore.problemIndices :
+      autoScore.problemIndices.map(i=>activeAuto[i]);
+    drawLabels(maps[1],auto,autoProblems,size,showProblems,autoShown,autoLayouts);
     updateVisibleStats();
     renderCount++;
     const inView=activeAuto.filter(i=>{
@@ -260,6 +316,7 @@
   $('show-problems').addEventListener('change',relayout);
   $('declutter').addEventListener('change',relayout);
   $('priority-mode').addEventListener('change',()=>{layouts=null;relayout();});
+  $('layout-mode').addEventListener('change',()=>{layouts=null;relayout();});
   $('zoom-in').addEventListener('click',()=>zoomAt(1.4));
   $('zoom-out').addEventListener('click',()=>zoomAt(1/1.4));
   $('reset-zoom').addEventListener('click',()=>{view={...full};paintMaps();scheduleReflow();});

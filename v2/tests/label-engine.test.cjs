@@ -186,3 +186,68 @@ test('out-of-view labels do not count as labels hidden by collisions',()=>{
   assert.equal(layout.hiddenByCollision,layout.eligible.filter((e,i)=>e&&!layout.shown[i]).length);
   assert.ok(layout.eligible.filter(Boolean).length<59);
 });
+
+test('adaptive two-line variants retain every original character',()=>{
+  for(const name of ['東芦屋町','打出小槌町','六麓荘町']){
+    const variants=E.lineVariants(name,true);
+    assert.equal(variants[0].join(''),name);
+    assert.ok(variants.length>=2);
+    for(const v of variants){
+      assert.ok(v.length<=2);
+      assert.equal(v.join(''),name);
+    }
+  }
+  assert.ok(!E.lineVariants('東芦屋町',true).some(v=>v.join('/')==='東芦/屋町'));
+  assert.ok(E.lineVariants('打出小槌町',true).some(v=>v.join('/')==='打出/小槌町'));
+  assert.ok(E.lineVariants('六麓荘町',true).some(v=>v.join('/')==='六麓荘/町'));
+});
+
+test('adaptive layouts improve fit where possible without altering town shapes',()=>{
+  const {models}=E.buildModels(raw.features);
+  const size=E.screenPixelsToSvgUnits(16,1000,700);
+  const measure=(name,font)=>Array.from(name).length*font;
+  const widths=models.map(m=>measure(m.name,size));
+  const seed=E.choosePositions(models,widths,size,'avoid');
+  const base=E.planAdaptiveLabels(models,seed,size,measure,{wrap:false,shrink:false});
+  const adapt=E.planAdaptiveLabels(models,seed,size,measure,{wrap:true,shrink:true});
+  assert.equal(adapt.length,59);
+  assert.ok(adapt.some(l=>l.wrapped));
+  for(let i=0;i<59;i++){
+    assert.equal(adapt[i].lines.join(''),models[i].name);
+    assert.ok(adapt[i].lines.length<=2);
+    assert.ok(adapt[i].fontSize>=size*.875-1e-8);
+    assert.ok(adapt[i].fontSize<=size+1e-8);
+    assert.ok(E.isInside(adapt[i].x,adapt[i].y,models[i].rings));
+    assert.ok(adapt[i].insidePoints>=base[i].insidePoints,
+      'adaptive fit cannot worsen measured 9-point shape fit: '+models[i].name);
+  }
+  for(const name of ['東芦屋町','六麓荘町']){
+    const i=models.findIndex(m=>m.name===name);
+    assert.ok(adapt[i].insidePoints>base[i].insidePoints,name+' should benefit');
+  }
+});
+
+test('adaptive variable-height collision boxes preserve selection and collision freedom',()=>{
+  const {models}=E.buildModels(raw.features);
+  const measure=(name,size)=>Array.from(name).length*size;
+  for(const width of [320,390,700]){
+    const size=E.screenPixelsToSvgUnits(16,1000,width);
+    const seed=E.choosePositions(models,models.map(m=>measure(m.name,size)),size,'avoid');
+    const layouts=E.planAdaptiveLabels(models,seed,size,measure,{wrap:true,shrink:true});
+    const positions=layouts.map(l=>[l.x,l.y]),sizes=layouts.map(l=>l.width);
+    for(const strategy of ['area','balanced','density']){
+      const out=E.selectPriorityLabels(models,positions,sizes,size,{x:0,y:0,w:1000,h:1581},
+        {strategy,boxes:layouts.map(l=>l.box)});
+      const indices=out.shown.flatMap((shown,i)=>shown?[i]:[]);
+      assert.equal(E.evaluateLabelLayouts(models,layouts,indices).collisions,0);
+      const hidden=out.shown.findIndex(s=>!s);
+      if(hidden>=0){
+        const forced=E.selectPriorityLabels(models,positions,sizes,size,{x:0,y:0,w:1000,h:1581},
+          {strategy,boxes:layouts.map(l=>l.box),pinned:hidden});
+        assert.ok(forced.shown[hidden]);
+        const shown=forced.shown.flatMap((s,i)=>s?[i]:[]);
+        assert.equal(E.evaluateLabelLayouts(models,layouts,shown).collisions,0);
+      }
+    }
+  }
+});

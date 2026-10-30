@@ -252,15 +252,24 @@
   function selectPriorityLabels(models,positions,widths,fontSize,view,options={}) {
     const strategy=['balanced','density','area'].includes(options.strategy) ? options.strategy : 'balanced';
     const pinned=Number.isInteger(options.pinned)&&options.pinned>=0&&options.pinned<models.length ? options.pinned : null;
-    const boxes=positions.map(([x,y],i)=>rect(x,y,widths[i],fontSize*1.15));
+    const boxes=Array.isArray(options.boxes) ? options.boxes :
+      positions.map(([x,y],i)=>rect(x,y,widths[i],fontSize*1.15));
     const eligible=models.map((m,i)=>{
       const r=boxes[i];
       return i===pinned || (r.x2>=view.x&&r.x1<=view.x+view.w&&r.y2>=view.y&&r.y1<=view.y+view.h);
     });
     const shown=new Array(models.length).fill(false);
     if(strategy==='area'){
-      const baseline=selectVisibleLabels(models,positions,widths,fontSize,view,pinned);
-      return {shown:baseline,eligible,hiddenByCollision:eligible.filter((yes,i)=>yes&&!baseline[i]).length,strategy};
+      // Use the actual multiline/shrunk boxes when they are supplied.
+      const order=models.map((m,i)=>({i,area:m.box.w*m.box.h}))
+        .filter(x=>eligible[x.i]).sort((a,b)=>
+          (b.i===pinned)-(a.i===pinned)||b.area-a.area||a.i-b.i);
+      const accepted=[];
+      for(const {i} of order){
+        if(accepted.some(j=>overlapArea(boxes[i],boxes[j])>0.01))continue;
+        shown[i]=true;accepted.push(i);
+      }
+      return {shown,eligible,hiddenByCollision:eligible.filter((yes,i)=>yes&&!shown[i]).length,strategy};
     }
     const candidates=models.map((m,i)=>i).filter(i=>eligible[i]);
     const conflicts=Array.from({length:models.length},()=>[]);
@@ -324,5 +333,95 @@
     }
     return {shown,eligible,hiddenByCollision:eligible.filter((yes,i)=>yes&&!shown[i]).length,strategy};
   }
-  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize,screenPixelsToSvgUnits,subsetMetrics,selectVisibleLabels,selectPriorityLabels};
+
+  // Return possible semantic-neutral splits. The full name is always retained.
+  // The candidate ranking penalizes lonely one-character lines; suffix '町'
+  // can be split when the shape makes that markedly better than one line.
+  function lineVariants(name,allowWrap=true) {
+    const chars=Array.from(name);
+    const variants=[[name]];
+    if(allowWrap && chars.length>=4){
+      const last=chars.length-1;
+      for(let cut=1;cut<chars.length;cut++){
+        // Avoid unnatural mid-word splits like 東芦／屋町. On four-character
+        // names, prefer directional-prefix or explicit suffix boundaries.
+        if(chars.length===4 && cut===2)continue;
+        if(cut===1 && !/^[東西南北上下新旧]/u.test(chars[0]))continue;
+        if(cut===last && chars[last]!=='町' && chars[last]!=='村')continue;
+        const left=chars.slice(0,cut).join(''),right=chars.slice(cut).join('');
+        variants.push([left,right]);
+      }
+    }
+    return variants;
+  }
+  // The boxes contain screen-font dimensions expressed in the same SVG units
+  // as viewBox. Preserve every source town; only label layout changes.
+  function makeLabelBox(x,y,w,h){return rect(x,y,w,h);}
+  function planAdaptiveLabels(models,seedPositions,fontSize,measure,options={}) {
+    const useWrap=options.wrap!==false, useShrink=options.shrink===true;
+    const scales=useShrink?[1,0.875]:[1];
+    const result=[];
+    const offsets=[[0,0],[-.55,0],[.55,0],[0,-.55],[0,.55],
+      [-1.1,0],[1.1,0],[0,-1.1],[0,1.1]];
+    for(let i=0;i<models.length;i++){
+      const m=models[i],seed=seedPositions[i];
+      let best=null;
+      const lines=lineVariants(m.name,useWrap);
+      for(const scale of scales){
+        const size=fontSize*scale, lineHeight=size*1.16;
+        for(const variant of lines){
+          const width=Math.max(...variant.map(x=>measure(x,size)));
+          const height=lineHeight*variant.length;
+          const orphan=(variant.length>1 && Math.min(...variant.map(x=>Array.from(x).length))===1)?1:0;
+          const shapeChoices=[seed,m.polylabel,m.centroid];
+          for(const center of shapeChoices){
+            for(const [dx,dy] of offsets){
+              const x=center[0]+dx*Math.max(width*.45,size*.5);
+              const y=center[1]+dy*Math.max(height*.45,size*.5);
+              if(!isInside(x,y,m.rings))continue;
+              const box=makeLabelBox(x,y,width,height);
+              const n=insideSamples(box,m.rings);
+              const drift=Math.hypot(x-seed[0],y-seed[1])/Math.max(fontSize,1);
+              // "Fully within" means the nine sample points are inside,
+              // not that every glyph pixel is inside the polygon.
+              const score=(9-n)*18 + drift*.10 +
+                (variant.length===2?1.2:0) + orphan*2.8 +
+                (1-scale)*30;
+              if(!best || score<best.score){
+                best={x,y,lines:variant,fontSize:size,width,height,box,insidePoints:n,
+                  score,scale,wrapped:variant.length>1};
+              }
+            }
+          }
+        }
+      }
+      if(!best){
+        const x=seed[0],y=seed[1],size=fontSize;
+        const width=measure(m.name,size),height=size*1.16;
+        const box=makeLabelBox(x,y,width,height);
+        best={x,y,lines:[m.name],fontSize:size,width,height,box,
+          insidePoints:insideSamples(box,m.rings),score:Infinity,scale:1,wrapped:false};
+      }
+      result.push(best);
+    }
+    return result;
+  }
+  function evaluateLabelLayouts(models,layouts,indices=null) {
+    const ids=indices || layouts.map((_,i)=>i);
+    let collisions=0,centerOutside=0,wholeOutside=0;
+    const problemIndices=new Set();
+    for(let p=0;p<ids.length;p++){
+      const i=ids[p],l=layouts[i];
+      if(!isInside(l.x,l.y,models[i].rings)){centerOutside++;problemIndices.add(i);}
+      if(insideSamples(l.box,models[i].rings)<9){wholeOutside++;problemIndices.add(i);}
+      for(let q=0;q<p;q++){
+        const j=ids[q];
+        if(overlapArea(l.box,layouts[j].box)>0.01){
+          collisions++;problemIndices.add(i);problemIndices.add(j);
+        }
+      }
+    }
+    return {count:ids.length,collisions,centerOutside,wholeOutside,problemIndices:[...problemIndices]};
+  }
+  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize,screenPixelsToSvgUnits,subsetMetrics,selectVisibleLabels,selectPriorityLabels,lineVariants,planAdaptiveLabels,evaluateLabelLayouts};
 })(window);
