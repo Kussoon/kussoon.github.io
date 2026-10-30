@@ -2,10 +2,13 @@
   "meta": {
     "source": "https://github.com/code4fukui/localgovjp/blob/master/localgovjp.json",
     "license": "CC0",
-    "dataScope": "2021 geometry pilot: Kansai, Yamanashi/Shizuoka and Chugoku 5 prefectures (13 prefectures total)",
+    "dataScope": "2021 geometry pilot: Kansai, Yamanashi/Shizuoka, Chugoku, Shikoku (17 prefectures total)",
     "sourceChecked": "2026-10-31",
     "format": "5-digit municipality code mapped to name and hiragana reading; designated city wards may include a space between city and ward readings",
-    "count": 440
+    "count": 535,
+    "nameVariantNotes": {
+      "39405": "2021 N03 梼原町, localgovjp 檮原町: verified variant for same administrative code; geometry spelling preserved; Kochi prefectural handbook / historical municipalities database."
+    }
   },
   "items": {
     "19201": {
@@ -1767,6 +1770,386 @@
     "35502": {
       "name": "阿武町",
       "reading": "あぶちょう"
+    },
+    "36201": {
+      "name": "徳島市",
+      "reading": "とくしまし"
+    },
+    "36202": {
+      "name": "鳴門市",
+      "reading": "なるとし"
+    },
+    "36203": {
+      "name": "小松島市",
+      "reading": "こまつしまし"
+    },
+    "36204": {
+      "name": "阿南市",
+      "reading": "あなんし"
+    },
+    "36205": {
+      "name": "吉野川市",
+      "reading": "よしのがわし"
+    },
+    "36206": {
+      "name": "阿波市",
+      "reading": "あわし"
+    },
+    "36207": {
+      "name": "美馬市",
+      "reading": "みまし"
+    },
+    "36208": {
+      "name": "三好市",
+      "reading": "みよしし"
+    },
+    "36301": {
+      "name": "勝浦町",
+      "reading": "かつうらちょう"
+    },
+    "36302": {
+      "name": "上勝町",
+      "reading": "かみかつちょう"
+    },
+    "36321": {
+      "name": "佐那河内村",
+      "reading": "さなごうちそん"
+    },
+    "36341": {
+      "name": "石井町",
+      "reading": "いしいちょう"
+    },
+    "36342": {
+      "name": "神山町",
+      "reading": "かみやまちょう"
+    },
+    "36368": {
+      "name": "那賀町",
+      "reading": "なかちょう"
+    },
+    "36383": {
+      "name": "牟岐町",
+      "reading": "むぎちょう"
+    },
+    "36387": {
+      "name": "美波町",
+      "reading": "みなみちょう"
+    },
+    "36388": {
+      "name": "海陽町",
+      "reading": "かいようちょう"
+    },
+    "36401": {
+      "name": "松茂町",
+      "reading": "まつしげちょう"
+    },
+    "36402": {
+      "name": "北島町",
+      "reading": "きたじまちょう"
+    },
+    "36403": {
+      "name": "藍住町",
+      "reading": "あいずみちょう"
+    },
+    "36404": {
+      "name": "板野町",
+      "reading": "いたのちょう"
+    },
+    "36405": {
+      "name": "上板町",
+      "reading": "かみいたちょう"
+    },
+    "36468": {
+      "name": "つるぎ町",
+      "reading": "つるぎちょう"
+    },
+    "36489": {
+      "name": "東みよし町",
+      "reading": "ひがしみよしちょう"
+    },
+    "37201": {
+      "name": "高松市",
+      "reading": "たかまつし"
+    },
+    "37202": {
+      "name": "丸亀市",
+      "reading": "まるがめし"
+    },
+    "37203": {
+      "name": "坂出市",
+      "reading": "さかいでし"
+    },
+    "37204": {
+      "name": "善通寺市",
+      "reading": "ぜんつうじし"
+    },
+    "37205": {
+      "name": "観音寺市",
+      "reading": "かんおんじし"
+    },
+    "37206": {
+      "name": "さぬき市",
+      "reading": "さぬきし"
+    },
+    "37207": {
+      "name": "東かがわ市",
+      "reading": "ひがしかがわし"
+    },
+    "37208": {
+      "name": "三豊市",
+      "reading": "みとよし"
+    },
+    "37322": {
+      "name": "土庄町",
+      "reading": "とのしょうちょう"
+    },
+    "37324": {
+      "name": "小豆島町",
+      "reading": "しょうどしまちょう"
+    },
+    "37341": {
+      "name": "三木町",
+      "reading": "みきちょう"
+    },
+    "37364": {
+      "name": "直島町",
+      "reading": "なおしまちょう"
+    },
+    "37386": {
+      "name": "宇多津町",
+      "reading": "うたづちょう"
+    },
+    "37387": {
+      "name": "綾川町",
+      "reading": "あやがわちょう"
+    },
+    "37403": {
+      "name": "琴平町",
+      "reading": "ことひらちょう"
+    },
+    "37404": {
+      "name": "多度津町",
+      "reading": "たどつちょう"
+    },
+    "37406": {
+      "name": "まんのう町",
+      "reading": "まんのうちょう"
+    },
+    "38201": {
+      "name": "松山市",
+      "reading": "まつやまし"
+    },
+    "38202": {
+      "name": "今治市",
+      "reading": "いまばりし"
+    },
+    "38203": {
+      "name": "宇和島市",
+      "reading": "うわじまし"
+    },
+    "38204": {
+      "name": "八幡浜市",
+      "reading": "やわたはまし"
+    },
+    "38205": {
+      "name": "新居浜市",
+      "reading": "にいはまし"
+    },
+    "38206": {
+      "name": "西条市",
+      "reading": "さいじょうし"
+    },
+    "38207": {
+      "name": "大洲市",
+      "reading": "おおずし"
+    },
+    "38210": {
+      "name": "伊予市",
+      "reading": "いよし"
+    },
+    "38213": {
+      "name": "四国中央市",
+      "reading": "しこくちゅうおうし"
+    },
+    "38214": {
+      "name": "西予市",
+      "reading": "せいよし"
+    },
+    "38215": {
+      "name": "東温市",
+      "reading": "とうおんし"
+    },
+    "38356": {
+      "name": "上島町",
+      "reading": "かみじまちょう"
+    },
+    "38386": {
+      "name": "久万高原町",
+      "reading": "くまこうげんちょう"
+    },
+    "38401": {
+      "name": "松前町",
+      "reading": "まさきちょう"
+    },
+    "38402": {
+      "name": "砥部町",
+      "reading": "とべちょう"
+    },
+    "38422": {
+      "name": "内子町",
+      "reading": "うちこちょう"
+    },
+    "38442": {
+      "name": "伊方町",
+      "reading": "いかたちょう"
+    },
+    "38484": {
+      "name": "松野町",
+      "reading": "まつのちょう"
+    },
+    "38488": {
+      "name": "鬼北町",
+      "reading": "きほくちょう"
+    },
+    "38506": {
+      "name": "愛南町",
+      "reading": "あいなんちょう"
+    },
+    "39201": {
+      "name": "高知市",
+      "reading": "こうちし"
+    },
+    "39202": {
+      "name": "室戸市",
+      "reading": "むろとし"
+    },
+    "39203": {
+      "name": "安芸市",
+      "reading": "あきし"
+    },
+    "39204": {
+      "name": "南国市",
+      "reading": "なんこくし"
+    },
+    "39205": {
+      "name": "土佐市",
+      "reading": "とさし"
+    },
+    "39206": {
+      "name": "須崎市",
+      "reading": "すさきし"
+    },
+    "39208": {
+      "name": "宿毛市",
+      "reading": "すくもし"
+    },
+    "39209": {
+      "name": "土佐清水市",
+      "reading": "とさしみずし"
+    },
+    "39210": {
+      "name": "四万十市",
+      "reading": "しまんとし"
+    },
+    "39211": {
+      "name": "香南市",
+      "reading": "こうなんし"
+    },
+    "39212": {
+      "name": "香美市",
+      "reading": "かみし"
+    },
+    "39301": {
+      "name": "東洋町",
+      "reading": "とうようちょう"
+    },
+    "39302": {
+      "name": "奈半利町",
+      "reading": "なはりちょう"
+    },
+    "39303": {
+      "name": "田野町",
+      "reading": "たのちょう"
+    },
+    "39304": {
+      "name": "安田町",
+      "reading": "やすだちょう"
+    },
+    "39305": {
+      "name": "北川村",
+      "reading": "きたがわむら"
+    },
+    "39306": {
+      "name": "馬路村",
+      "reading": "うまじむら"
+    },
+    "39307": {
+      "name": "芸西村",
+      "reading": "げいせいむら"
+    },
+    "39341": {
+      "name": "本山町",
+      "reading": "もとやまちょう"
+    },
+    "39344": {
+      "name": "大豊町",
+      "reading": "おおとよちょう"
+    },
+    "39363": {
+      "name": "土佐町",
+      "reading": "とさちょう"
+    },
+    "39364": {
+      "name": "大川村",
+      "reading": "おおかわむら"
+    },
+    "39386": {
+      "name": "いの町",
+      "reading": "いのちょう"
+    },
+    "39387": {
+      "name": "仁淀川町",
+      "reading": "によどがわちょう"
+    },
+    "39401": {
+      "name": "中土佐町",
+      "reading": "なかとさちょう"
+    },
+    "39402": {
+      "name": "佐川町",
+      "reading": "さかわちょう"
+    },
+    "39403": {
+      "name": "越知町",
+      "reading": "おちちょう"
+    },
+    "39405": {
+      "name": "梼原町",
+      "reading": "ゆすはらちょう"
+    },
+    "39410": {
+      "name": "日高村",
+      "reading": "ひだかむら"
+    },
+    "39411": {
+      "name": "津野町",
+      "reading": "つのちょう"
+    },
+    "39412": {
+      "name": "四万十町",
+      "reading": "しまんとちょう"
+    },
+    "39424": {
+      "name": "大月町",
+      "reading": "おおつきちょう"
+    },
+    "39427": {
+      "name": "三原村",
+      "reading": "みはらむら"
+    },
+    "39428": {
+      "name": "黒潮町",
+      "reading": "くろしおちょう"
     }
   }
 }
