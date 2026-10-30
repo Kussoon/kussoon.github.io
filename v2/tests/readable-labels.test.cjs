@@ -112,3 +112,51 @@ test('text-box pixel conversion is independent of map zoom',()=>{
     assert.ok(Math.abs(size*width/(1000/zoom)-16)<1e-9);
   }
 });
+
+test('center-first full-display labels stay on the geographic centroid',()=>{
+  const size=E.screenPixelsToSvgUnits(18,1000,390);
+  const layouts=R.planCenterFirstLabels(models,readings,'both',size,measure,E,{shift:'none'});
+  assert.equal(layouts.length,59);
+  for(let i=0;i<models.length;i++){
+    assert.equal(layouts[i].x,models[i].centroid[0],models[i].name+' center X');
+    assert.equal(layouts[i].y,models[i].centroid[1],models[i].name+' center Y');
+    assert.ok(E.isInside(layouts[i].x,layouts[i].y,models[i].rings),models[i].name+' inside');
+    assert.equal(layouts[i].step,0);
+  }
+  const allVisible=models.map(()=>true);
+  const metrics=R.evaluateVisible(models,layouts,allVisible,E,bounds);
+  assert.equal(metrics.shown,59,'all town labels must be rendered');
+  assert.equal(metrics.inView,59,'all label anchors must be on whole-city map');
+  assert.equal(metrics.moved,0);
+});
+
+test('overlaps and border crossings never hide a label by default',()=>{
+  for(const width of [320,390,700]){
+    const size=E.screenPixelsToSvgUnits(18,1000,width);
+    for(const style of ['kanji','both','kana']){
+      const layouts=R.planCenterFirstLabels(models,readings,style,size,measure,E,{shift:'none'});
+      const all=models.map(()=>true);
+      const metrics=R.evaluateVisible(models,layouts,all,E,bounds);
+      assert.equal(metrics.shown,59);
+      assert.equal(metrics.inView,59);
+      assert.equal(metrics.total,59);
+      assert.equal(layouts.length,59);
+      assert.ok(metrics.collisions>=0);
+      assert.ok(metrics.outside>=0);
+    }
+  }
+});
+
+test('center-first optional vertical nudge preserves every name and anchor inside area',()=>{
+  for(const width of [320,390,700]){
+    const size=E.screenPixelsToSvgUnits(18,1000,width);
+    const base=R.planCenterFirstLabels(models,readings,'both',size,measure,E,{shift:'none'});
+    const nudge=R.planCenterFirstLabels(models,readings,'both',size,measure,E,{shift:'vertical'});
+    for(let i=0;i<models.length;i++){
+      assert.equal(nudge[i].x,base[i].x);
+      assert.ok(Math.abs(nudge[i].y-base[i].y)<=1.5*size+1e-7);
+      assert.ok(E.isInside(nudge[i].x,nudge[i].y,models[i].rings));
+      assert.equal(nudge[i].name,models[i].name);
+    }
+  }
+});
