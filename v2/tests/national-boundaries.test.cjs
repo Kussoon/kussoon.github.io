@@ -98,6 +98,28 @@ test('Kansai groups correctly to 198 municipalities or 245 wards',()=>{
  assertModels(N.project(municipal,E));
  assertModels(N.project(ward,E));
 });
+test('Chugoku region and connected 11-prefecture western map use the same city-grouping rules',()=>{
+ const chugoku=Object.fromEntries(['31','32','33','34','35'].map(code=>[code,topologies[code]]));
+ const west=Object.fromEntries(['25','26','27','28','29','30','31','32','33','34','35'].map(code=>[code,topologies[code]]));
+ const municipal=N.registry(chugoku,catalog,'municipality');
+ const ward=N.registry(chugoku,catalog,'ward');
+ assert.equal(municipal.length,107);
+ assert.equal(ward.length,117);
+ const okayama=municipal.find(x=>x.code==='33100');
+ const hiroshima=municipal.find(x=>x.code==='34100');
+ assert.equal(okayama.name,'岡山市');
+ assert.equal(okayama.municipalityCodes.length,4);
+ assert.equal(hiroshima.name,'広島市');
+ assert.equal(hiroshima.municipalityCodes.length,8);
+ assert.equal(ward.find(x=>x.code==='33101').fullName,'岡山市北区');
+ assert.equal(ward.find(x=>x.code==='34101').fullName,'広島市中区');
+ assert.equal(municipal.find(x=>x.name==='邑南町').fullName,'邑智郡邑南町');
+ assert.equal(municipal.find(x=>x.name==='隠岐の島町').fullName,'隠岐郡隠岐の島町');
+ assert.equal(N.registry(west,catalog,'municipality').length,305);
+ assert.equal(N.registry(west,catalog,'ward').length,362);
+ assertModels(N.project(municipal,E));
+ assertModels(N.project(ward,E));
+});
 test('Fuji plate area crosses the Yamanashi/Shizuoka prefectural boundary',()=>{
  const municipalities=N.registry(fuji,catalog,'municipality');
  assert.equal(municipalities.length,62);
