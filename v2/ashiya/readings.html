@@ -76,13 +76,14 @@ window.kussoonUmamiBeforeSend=function(type,payload){
  <p class="lead"><a href="/v2/ashiya/labels.html">従来の1行・2行配置比較へ</a> ／ <a href="/ashiya/">芦屋市の現行版へ</a></p>
 </header>
 <section class="panel controls" aria-label="地図の設定">
- <label>町名の表示
-  <select id="name-mode">
-   <option value="kanji">漢字のみ</option>
-   <option value="both" selected>漢字＋小さな読み仮名</option>
-   <option value="kana">ひらがなのみ</option>
-  </select>
- </label>
+ <div class="wide">
+  <label>町名の表示（ワンタップで切り替え）</label>
+  <div class="buttons" role="group" aria-label="町名の表示切り替え" id="name-mode-buttons">
+   <button type="button" data-label-style="kanji" aria-pressed="false">漢字のみ</button>
+   <button type="button" data-label-style="both" class="active" aria-pressed="true">漢字＋読み</button>
+   <button type="button" data-label-style="kana" aria-pressed="false">ひらがなのみ</button>
+  </div>
+ </div>
  <label>1行の上下微調整
   <select id="shift-mode">
    <option value="none">上下移動なし（基準）</option>
