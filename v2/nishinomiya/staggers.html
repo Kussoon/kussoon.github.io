@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="西宮市の鞍掛町・久保町と上ケ原七〜十番町で、V2町名ラベルの上下微調整を実データで比較する試験ページ。">
+<title>西宮市・隣接する縦長町のラベル比較｜Kussoon V2</title>
+<style>
+:root{color-scheme:light;--ink:#1d3e5b;--line:#c0d5e3}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(#edf6fb,#fff 65%);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:var(--ink);line-height:1.6}
+main{max-width:1040px;margin:auto;padding:16px 12px 38px}
+h1{font-size:clamp(22px,5vw,30px);line-height:1.35;margin:10px 0}
+h2{font-size:18px;margin:0 0 8px}
+p{margin:7px 0 12px} a{color:#14608a}
+.caption{color:#526d80;font-size:13px}
+.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:14px;margin:14px 0}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:11px}
+label{display:flex;flex-direction:column;font-weight:800;font-size:13px;gap:4px}
+select{width:100%;min-height:44px;border:1px solid #9fbdd2;border-radius:9px;padding:8px;background:#fff;font:inherit;font-size:16px;color:var(--ink)}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.map-box{min-width:0}
+.map-box h2{font-size:16px;text-align:center;margin:0 0 8px}
+.map-svg{width:100%;display:block;aspect-ratio:1;background:#eaf4f8;border:1px solid #b6d0df;border-radius:12px}
+.shape{fill:#a5cfe4;stroke:#fff;stroke-width:1.5;vector-effect:non-scaling-stroke;fill-rule:evenodd;stroke-linejoin:round}
+.shape.focus{fill:#73b8d9}
+.primary{fill:#1c3953;stroke:#fff;paint-order:stroke;stroke-linejoin:round;font-weight:900;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+.primary.focus{fill:#a4432c}
+.ruby{fill:#23455e;stroke:#fff;paint-order:stroke;stroke-linejoin:round;font-weight:800;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+.ruby.focus{fill:#a4432c}
+.metrics{font-size:13px;background:#eef5fa;padding:9px;border-radius:9px;margin-top:9px;min-height:46px}
+.status{font-size:14px;color:#395b70}
+:focus-visible{outline:3px solid #2479bf;outline-offset:2px}
+@media(max-width:700px){.compare{grid-template-columns:1fr}.map-box h2{margin-top:8px}}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload}</script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
+<script defer src="/common/site-footer.js"></script>
+<script defer src="../common/js/label-engine.js"></script>
+<script defer src="../common/js/readable-labels.js"></script>
+<script defer src="stagger-app.js"></script>
+</head>
+<body><main>
+<a href="/v2/">← V2の試験トップへ</a>
+<h1>西宮市・縦長の隣接町でのラベル比較</h1>
+<p>鞍掛町と久保町、上ケ原七〜十番町を、実際の町域データと周辺の町名で検証しています。<strong>重なっても町名は隠さず、必要な場合だけ上下へずらす</strong>方式です。</p>
+<section class="panel">
+ <div class="controls">
+  <label>比較地域<select id="group">
+   <option value="kurakake-kubo" selected>鞍掛町・久保町</option>
+   <option value="uegahara">上ケ原七〜十番町</option>
+  </select></label>
+  <label>文字表示<select id="style">
+   <option value="kanji" selected>漢字のみ</option>
+   <option value="both">漢字＋読み仮名</option>
+   <option value="kana">ひらがなのみ</option>
+  </select></label>
+  <label>文字サイズ<select id="font-size">
+   <option value="14">14px</option>
+   <option value="16">16px</option>
+   <option value="18" selected>18px</option>
+   <option value="22">22px</option>
+  </select></label>
+  <label>拡大相当の文字・町域比率<select id="zoom">
+   <option value="1" selected>1倍（広域）</option>
+   <option value="1.5">1.5倍相当</option>
+   <option value="2">2倍相当</option>
+   <option value="3">3倍相当</option>
+  </select></label>
+ </div>
+ <label style="display:flex;flex-direction:row;align-items:center;gap:9px;margin-top:12px">
+  <input type="checkbox" id="neighbors" style="width:19px;height:19px">
+  周辺の町名ラベルも表示（上下調整の計算には常に含みます）
+ </label>
+ <p class="caption">比較しやすいよう、両地図の町域を同じ大きさに固定し、拡大時に相当する文字と町域の比率を再現します。地図そのものをズームする操作とは異なります。</p>
+</section>
+<section class="compare">
+ <article class="panel map-box"><h2>上下微調整なし</h2>
+  <svg id="map-before" class="map-svg" viewBox="0 0 900 900" role="img" aria-label="上下調整前の町名地図"></svg>
+  <div id="stats-before" class="metrics" aria-live="polite"></div>
+ </article>
+ <article class="panel map-box"><h2>縦長の隣接町を自動微調整</h2>
+  <svg id="map-after" class="map-svg" viewBox="0 0 900 900" role="img" aria-label="上下調整後の町名地図"></svg>
+  <div id="stats-after" class="metrics" aria-live="polite"></div>
+ </article>
+</section>
+<section class="panel">
+ <h2>比較方法・出典</h2>
+ <p>対象の6町名は<strong>赤茶色</strong>、周辺の町名は濃紺で表示します。上下調整は、縦長の隣接町で文字が大きく重なる場合に最大1文字分だけ試します。文字が町域境界をまたいでも構いません。</p>
+ <p>漢字＋読み仮名表示でも、漢字1行の中心を町域の配置位置に合わせます。左右方向に押し出して重なりを避ける処理はありません。</p>
+ <p class="caption">町域の形状：CODH令和2年国勢調査町丁・字等別境界データセット（CC BY 4.0）を加工した <a href="https://github.com/Kussoon/nishinomiya/blob/main/data/nishinomiya-towns.topojson">西宮市の既存地理データ</a>。読みは既存の西宮市町名検索のデータを参照。これは学習・配置試験用で、正式な境界証明ではありません。今回の試験では本番ページを編集しません。</p>
+ <p><a href="/v2/irregular/">三日月・飛地などの比較へ</a> ・ <a href="/v2/ashiya/readings.html">芦屋市の59町名の試験へ</a></p>
+</section>
+<p id="status" class="status" role="status">町域データを読み込んでいます。</p>
+</main></body></html>

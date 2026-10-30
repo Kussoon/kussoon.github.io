@@ -1,7 +1,7 @@
 # Kussoon 地域学習システム V2
 
 開始日：2026-10-30  
-状態：第2弾・芦屋市ラベル自動配置の試験実装（実ブラウザ評価前）
+状態：芦屋市の自動配置と西宮市の特殊形状・隣接町名でV2比較試験中
 
 ## 目的
 
@@ -31,6 +31,8 @@
 - [芦屋市のラベル比較実験](ashiya/labels.html)
 - [芦屋市の読み仮名・ひらがな／1行ラベル比較](ashiya/readings.html)
 - [三日月・飛地・仁川町／一ケ谷町の特殊形状比較](irregular/index.html)
+- [西宮市・隣接する6町名の上下調整比較](nishinomiya/staggers.html)
+- [西宮市6町名の恒久的な配置回帰テスト記録](docs/nishinomiya-adjacent-labels.md)
 - [複雑な町域の汎用配置ルールと検証](docs/irregular-labels.md)
 - [読み仮名・上下微調整の実験記録](docs/ashiya-reading-trial.md)
 - [芦屋市ラベル実験の記録](docs/ashiya-label-test.md)
