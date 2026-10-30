@@ -93,6 +93,69 @@ function refine(models,initial,size,engine,options={}){
   }
   if(!changed)break;
  }
+
+ // One-label greedy refinement may reach a local minimum: two neighboring
+ // names sometimes have to move together before their collision disappears.
+ // Apply joint moves only in magnified, bounded viewports.
+ if(options.pairwise&&active.length<=105){
+  const overlaps=[];
+  for(let a=0;a<active.length;a++)for(let b=0;b<a;b++){
+   const i=active[a],j=active[b],area=overlap(laid[i].box,laid[j].box);
+   if(area>.01)overlaps.push({i,j,area});
+  }
+  overlaps.sort((a,b)=>b.area-a.area||a.i-b.i||a.j-b.j);
+  function candidates(i){
+   const current=laid[i],seed=initial[i],m=models[i];
+   const baseline={x:current.x,y:current.y,box:current.box};
+   if(i===pinned)return [baseline];
+   const depth=engine.signedDist(seed.x,seed.y,m.rings);
+   const minDepth=depth>0?Math.min(size*.14,depth*.25):0;
+   const found=[baseline];
+   for(const [dx,dy] of OFFSETS){
+    const x=seed.x+dx*size,y=seed.y+dy*size;
+    if(!engine.isInside(x,y,m.rings))continue;
+    if(minDepth>0&&engine.signedDist(x,y,m.rings)<minDepth)continue;
+    found.push({x,y,box:box(x,y,current.width,current.height)});
+   }
+   return found;
+  }
+  function quality(i,j,first,second){
+   const pairArea=overlap(first.box,second.box);
+   let pairs=pairArea>.01?1:0,area=pairArea;
+   for(const k of active){
+    if(k===i||k===j)continue;
+    const b=laid[k].box,firstOverlap=overlap(first.box,b),secondOverlap=overlap(second.box,b);
+    if(firstOverlap>.01){pairs++;area+=firstOverlap;}
+    if(secondOverlap>.01){pairs++;area+=secondOverlap;}
+   }
+   const si=initial[i],sj=initial[j];
+   const drift=(Math.hypot(first.x-si.x,first.y-si.y)+
+     Math.hypot(second.x-sj.x,second.y-sj.y))/size;
+   return {pairs,pairArea,cost:pairs*100+pairArea/(size*size)*20+area/(size*size)*5+drift*.4};
+  }
+  for(const {i,j} of overlaps.slice(0,25)){
+   if(overlap(laid[i].box,laid[j].box)<=.01)continue;
+   const beforeI={x:laid[i].x,y:laid[i].y,box:laid[i].box};
+   const beforeJ={x:laid[j].x,y:laid[j].y,box:laid[j].box};
+   const old=quality(i,j,beforeI,beforeJ);
+   let bestI=beforeI,bestJ=beforeJ,best=old;
+   for(const first of candidates(i))for(const second of candidates(j)){
+    const next=quality(i,j,first,second);
+    if(next.pairs>old.pairs||next.pairArea>old.pairArea+.01)continue;
+    if(next.cost<best.cost-1e-7){
+     best=next;bestI=first;bestJ=second;
+    }
+   }
+   if(bestI!==beforeI||bestJ!==beforeJ){
+    for(const [k,p] of [[i,bestI],[j,bestJ]]){
+     const l=laid[k],seed=initial[k];
+     l.x=p.x;l.y=p.y;l.box=p.box;
+     l.step=(l.y-seed.y)/size;
+     l.horizontalStep=(l.x-seed.x)/size;
+    }
+   }
+  }
+ }
  const after=totals();
  const moved=laid.reduce((n,l,i)=>n+(Math.hypot(l.x-initial[i].x,l.y-initial[i].y)>1e-5?1:0),0);
  return {labels:laid,before,after,moved};
