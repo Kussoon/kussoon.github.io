@@ -34,6 +34,24 @@ function fractionInside(box,rings,engine){
  }
  return inside/25;
 }
+// Inspect the actual rectangular label perimeter (including its stroke).
+// A 5x5 interior grid can miss a narrow border crossing at a glyph edge.
+// Each side gets five samples, including corners and midpoints. Signed
+// distance is positive inside the *correct* owner polygon, negative outside.
+function edgeClearance(box,rings,engine){
+ let margin=Infinity;
+ const w=box.x2-box.x1,h=box.y2-box.y1;
+ for(let k=0;k<=4;k++){
+  const t=k/4;
+  const x=box.x1+w*t,y=box.y1+h*t;
+  margin=Math.min(margin,
+   engine.signedDist(x,box.y1,rings),
+   engine.signedDist(x,box.y2,rings),
+   engine.signedDist(box.x1,y,rings),
+   engine.signedDist(box.x2,y,rings));
+ }
+ return margin;
+}
 function candidates(seed,model,size,engine){
  const points=[],seen=new Set();
  function add(x,y){
@@ -73,7 +91,8 @@ function refine(models,labels,size,engine,options={}){
  const margin=size*2;
  // Labels whose centers are off-screen should not force shifts on this view.
  const active=result.map((label,i)=>overlapsView(label.box,view,margin)?i:-1).filter(i=>i>=0);
- const minGain=typeof options.minGain==='number'?options.minGain:.075;
+ const minGain=typeof options.minGain==='number'?options.minGain:.03;
+ const safeMargin=size*.18; // also leaves room for the white text stroke
  const maxPasses=Math.max(1,Math.min(2,options.passes||1));
  function scoreAt(i,box){
   let pairs=0,area=0;
@@ -85,6 +104,7 @@ function refine(models,labels,size,engine,options={}){
   return {pairs,area};
  }
  const originalInside=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
+ const originalMargins=active.map(i=>edgeClearance(result[i].box,models[i].rings,engine));
  let improved=0;
  for(let pass=0;pass<maxPasses;pass++){
   // Work on the worst-contained labels first, not just labels colliding
@@ -96,12 +116,17 @@ function refine(models,labels,size,engine,options={}){
   for(const i of order){
    const current=result[i],model=models[i],origin=labels[i];
    const fit=fractionInside(current.box,model.rings,engine);
-   if(fit>=.96)continue; // Already within the region; do not drift.
+   const margin=edgeClearance(current.box,model.rings,engine);
+   // A label is safe only when BOTH its interior and its physical perimeter
+   // fit. This catches a sliver of a glyph crossing into the next town.
+   if(fit>=.96&&margin>=safeMargin)continue;
    const startOverlap=scoreAt(i,current.box);
+   const marginPenalty=distance=>Math.max(0,(safeMargin-distance)/size)*18;
    let best=null;
    const baseScore=(1-fit)*100+startOverlap.pairs*28+
      startOverlap.area/(size*size)*5+
-     Math.hypot(current.x-origin.x,current.y-origin.y)/size*.8;
+     Math.hypot(current.x-origin.x,current.y-origin.y)/size*.8+
+     marginPenalty(margin);
    let bestScore=baseScore,bestFit=fit;
    for(const [x,y] of candidates(origin,model,size,engine)){
     const candidateBox=makeBox(x,y,current.width,current.height);
@@ -110,10 +135,14 @@ function refine(models,labels,size,engine,options={}){
     // Never trade an additional name collision for geometric containment.
     if(overlap.pairs>startOverlap.pairs)continue;
     const coverage=fractionInside(candidateBox,model.rings,engine);
-    if(coverage<fit+minGain-1e-9)continue;
+    // Do not decrease the estimated contained area to improve an edge.
+    if(coverage<fit-1e-9)continue;
+    const clearance=edgeClearance(candidateBox,model.rings,engine);
+    if(coverage<fit+minGain-1e-9&&clearance<margin+size*.10-1e-9)
+     continue;
     const drift=Math.hypot(x-origin.x,y-origin.y)/size;
     const score=(1-coverage)*100+overlap.pairs*28+
-      overlap.area/(size*size)*5+drift*.8;
+      overlap.area/(size*size)*5+drift*.8+marginPenalty(clearance);
     if(score<bestScore-1e-7){
      best={x,y,box:candidateBox};
      bestScore=score;bestFit=coverage;
@@ -131,6 +160,7 @@ function refine(models,labels,size,engine,options={}){
   if(!changed)break;
  }
  const after=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
+ const afterMargins=active.map(i=>edgeClearance(result[i].box,models[i].rings,engine));
  const sum=values=>values.reduce((acc,n)=>acc+n,0);
  return {
   labels:result,
@@ -140,8 +170,10 @@ function refine(models,labels,size,engine,options={}){
   beforeOutside:active.length-sum(originalInside),
   afterOutside:active.length-sum(after),
   poorlyContainedBefore:originalInside.filter(v=>v<.76).length,
-  poorlyContainedAfter:after.filter(v=>v<.76).length
+  poorlyContainedAfter:after.filter(v=>v<.76).length,
+  edgeRiskBefore:originalMargins.filter(v=>v<safeMargin).length,
+  edgeRiskAfter:afterMargins.filter(v=>v<safeMargin).length
  };
 }
-global.KussoonRegionFit={refine,fractionInside,candidates};
+global.KussoonRegionFit={refine,fractionInside,edgeClearance,candidates};
 })(window);
