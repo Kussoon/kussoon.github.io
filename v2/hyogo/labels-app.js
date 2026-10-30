@@ -180,6 +180,32 @@ function textMeasure(){
   memo.set(key,width);return width;
  };
 }
+// Measure the actually rendered SVG text, including Kobe's two-line tspans.
+function visualLabelStats(labels,shown){
+ const boxes=items.map((item,i)=>{
+  if(!shown[i])return null;
+  const t=item.text;
+  try{
+   const b=t.getBBox(),padding=Number(t.getAttribute('stroke-width')||0)/2;
+   if(!Number.isFinite(b.width)||!Number.isFinite(b.height)||b.width<=0||b.height<=0)return null;
+   return {x1:b.x-padding,y1:b.y-padding,x2:b.x+b.width+padding,y2:b.y+b.height+padding};
+  }catch(_){return null;}
+ });
+ const visible=boxes.map((b,i)=>b&&b.x2>=view.x&&b.x1<=view.x+view.w&&
+  b.y2>=view.y&&b.y1<=view.y+view.h?i:-1).filter(i=>i>=0);
+ let collisions=0,outside=0;
+ for(let a=0;a<visible.length;a++){
+  const i=visible[a],b=boxes[i],m=models[i];
+  const xs=[b.x1,(b.x1+b.x2)/2,b.x2],ys=[b.y1,(b.y1+b.y2)/2,b.y2];
+  if(xs.some(x=>ys.some(y=>!E.isInside(x,y,m.rings))))outside++;
+  for(let c=0;c<a;c++){
+   const other=boxes[visible[c]];
+   if(Math.min(b.x2,other.x2)-Math.max(b.x1,other.x1)>.01&&
+      Math.min(b.y2,other.y2)-Math.max(b.y1,other.y1)>.01)collisions++;
+  }
+ }
+ return {visible:visible.length,collisions,outside};
+}
 function relayout(){
  if(models.length===0)return;
  const start=performance.now(),rect=svg.getBoundingClientRect();
@@ -213,12 +239,13 @@ function relayout(){
   t.style.fill=flag&&l.fit<9?'#b13c34':'';
  });
  const stats=R.evaluateVisible(models,labels,show,E,view);
+ const visual=visualLabelStats(labels,show);
  const vals=[
   ['県内の対象区域',models.length+'件'],
   ['表示対象ラベル',stats.shown+'件'],
-  ['表示範囲内のラベル',stats.inView+'件'],
-  ['ラベル同士の重なり（許容）',stats.collisions+'組'],
-  ['境界またぎ（概算・許容）',stats.outside+'件'],
+  ['表示範囲内のラベル',visual.visible+'件'],
+  ['表示文字の重なり（2段含む・概算）',visual.collisions+'組'],
+  ['表示文字の境界またぎ（概算）',visual.outside+'件'],
   ['上下位置を微調整',stats.moved+'件']
  ];
  const cells=vals.map(([title,value])=>{
