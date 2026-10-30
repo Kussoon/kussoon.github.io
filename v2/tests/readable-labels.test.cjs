@@ -194,8 +194,8 @@ test('automatic vertical stagger only adjusts neighboring tall districts and nev
     box:{w,h},
     rings:[[[x-w/2,5],[x+w/2,5],[x+w/2,5+h],[x-w/2,5+h]]]
   });
-  const a=model('甲町',40,55,300),b=model('乙町',98,55,300);
-  const data={甲町:'とてもながいまちなまえ',乙町:'となりのながいまちなまえ'};
+  const a=model('東側の縦長町',40,55,300),b=model('西側の縦長町',98,55,300);
+  const data={'東側の縦長町':'とてもながいまちなまえ','西側の縦長町':'となりのながいまちなまえ'};
   const initial=R.planCenterFirstLabels([a,b],data,'both',22,measure,E,{anchor:'safe',shift:'none'});
   const stagger=R.planCenterFirstLabels([a,b],data,'both',22,measure,E,{anchor:'safe',shift:'adjacent'});
   assert.equal(initial[0].y,initial[1].y);
@@ -203,7 +203,7 @@ test('automatic vertical stagger only adjusts neighboring tall districts and nev
   assert.equal(stagger[1].x,b.centroid[0]);
   assert.ok(Math.abs(stagger[1].y-b.centroid[1])<=22);
   assert.ok(E.isInside(stagger[1].x,stagger[1].y,b.rings));
-  const wide=[model('甲町',40,300,100),model('乙町',98,300,100)];
+  const wide=[model('東側の縦長町',40,300,100),model('西側の縦長町',98,300,100)];
   assert.ok(R.planCenterFirstLabels(wide,data,'both',22,measure,E,{anchor:'safe',shift:'adjacent'})
     .every(l=>Math.abs(l.step)<.01),'wide neighboring regions must not move');
 });
@@ -344,7 +344,7 @@ test('Wakaba balances left/right internal corridor without being pushed by Takah
 });
 
 test('map displays the kanji at its anchor and furigana below that row',()=>{
-  const app=fs.readFileSync(path.join(base,'ashiya/readings-app.js'),'utf8');
+  const app=fs.readFileSync(path.join(root,'ashiya/readings-app.js'),'utf8');
   assert.ok(app.includes("node.main.setAttribute('y',l.y.toFixed(2))"));
   assert.ok(app.includes("node.ruby.setAttribute('y',(l.y+l.size*.90).toFixed(2))"));
 });
