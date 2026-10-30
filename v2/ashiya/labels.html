@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,follow">
-  <meta name="description" content="Kussoon V2実験：芦屋市59町名の手動ラベル配置と重心・Polylabel・簡易衝突回避を比較する試験ページです。">
+  <meta name="description" content="Kussoon V2実験：芦屋市59町名の固定ピクセル文字表示・自動ラベル密度調整を比較する試験ページです。">
   <title>芦屋市 ラベル配置比較実験｜Kussoon V2</title>
   <style>
     :root{color-scheme:light;--ink:#203a57;--border:#c6dbe8;--accent:#245b82;--blue:#78b8db}
@@ -25,6 +25,12 @@
     button{font:inherit;cursor:pointer;min-height:42px;padding:7px 13px;border-radius:10px;border:1px solid #96bad0;background:#fff;color:var(--ink);font-weight:700}
     button[aria-pressed="true"]{background:#245b82;color:#fff;border-color:#245b82}
     .checkline{display:flex;flex-direction:row;align-items:center;gap:8px;padding:10px 0;font-size:13px}
+    .searchbox{display:flex;flex-wrap:wrap;gap:8px;align-items:end;margin-top:12px;padding:12px;background:#fff;border:1px solid var(--border);border-radius:14px}
+    .searchbox label{flex:1 1 220px}
+    .searchbox input{width:100%;min-height:44px;border:1px solid #9ebccf;border-radius:10px;padding:8px 12px;font-size:16px}
+    .searchbox button{background:#245b82;color:#fff}
+    .search-feedback{margin:6px 0 0;font-size:13px;color:#365c79;flex-basis:100%}
+    text.town-label.selected{fill:#b24121}
     .checkline input{width:18px;height:18px}
     .zoom-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
     .mobile-toggle{display:none;gap:6px;margin-top:12px}
@@ -92,16 +98,16 @@
         <option value="avoid" selected>Polylabel＋簡易衝突回避</option>
       </select>
     </label>
-    <label>文字サイズ（SVG座標系）
+    <label>文字サイズ（画面上・CSSピクセル）
       <select id="font-size">
-        <option value="7">7（現行SVG相当・小）</option>
-        <option value="10">10（小）</option>
-        <option value="14" selected>14（中・おすすめ）</option>
-        <option value="24">24（大きめ）</option>
-        <option value="36">36（全域での混雑も確認）</option>
+        <option value="12">小 12px</option>
+        <option value="14">やや小 14px</option>
+        <option value="16" selected>標準 16px</option>
+        <option value="18">大 18px</option>
+        <option value="22">特大 22px</option>
       </select>
     </label>
-    <label class="checkline"><input type="checkbox" id="zoom-aware" checked>自動側だけ文字サイズをズーム連動</label>
+    <label class="checkline"><input type="checkbox" id="declutter" checked>自動配置では重なるラベルを省略</label>
     <label class="checkline"><input type="checkbox" id="show-problems" checked>問題のあるラベルを赤で表示</label>
     <div class="zoom-row" role="group" aria-label="地図の拡大縮小">
       <button type="button" id="zoom-in" aria-label="地図を拡大">＋</button>
@@ -109,13 +115,21 @@
       <button type="button" id="reset-zoom">全体表示</button>
     </div>
   </section>
+  <form id="town-search-form" class="searchbox" role="search" autocomplete="off">
+    <label for="town-search-input">町名を探す（省略された名前も選択できます）
+      <input id="town-search-input" type="search" placeholder="例：三条南町" list="town-options" enterkeyhint="search" required>
+    </label>
+    <datalist id="town-options"></datalist>
+    <button type="submit">地図で表示</button>
+    <p class="search-feedback" id="town-search-result" role="status">地名を入力すると、その町に移動してラベルを表示します。</p>
+  </form>
   <div class="mobile-toggle" role="group" aria-label="スマートフォンの比較対象">
     <button type="button" id="view-manual" aria-pressed="false">現行の手動配置</button>
     <button type="button" id="view-auto" aria-pressed="true">自動配置</button>
   </div>
   <div class="message" aria-live="polite">
     <strong id="status">地図データを読み込み中…</strong>
-    <div class="note">地図はドラッグ・ピンチで移動／拡大できます。PCでは地図をクリックしてからホイールで拡大、地図外をクリックするとページスクロールに戻ります。ズーム連動がオンの場合、地図を2倍に拡大しても自動側の文字は約1.32倍に抑え、操作が落ち着いたときに位置を再計算します。現行の手動配置は比較用に固定します。</div>
+    <div class="note">地図はドラッグ・ピンチで移動／拡大できます。PCでは地図をクリックしてからホイールで拡大、外をクリックするとページスクロールに戻ります。地図を大きくしても、文字は指定したピクセルサイズで表示します。自動配置では重なる町名を一時的に省略でき、拡大すると再表示されます。</div>
   </div>
   <div class="maps">
     <section class="panel" data-side="manual" aria-labelledby="manual-title">
@@ -126,15 +140,15 @@
     </section>
     <section class="panel" data-side="auto" aria-labelledby="auto-title">
       <div class="panel-head"><h2 id="auto-title">V2：自動配置</h2><span class="eyebrow">試作</span></div>
-      <p class="sub">拡大率に応じて文字を緩やかに拡大し、ラベル位置を再計算します（ズーム連動オン時）</p>
+      <p class="sub">文字サイズを画面上で一定に保ち、重ならない町名を優先表示します</p>
       <div class="map-wrap"><svg id="map-auto" class="map" viewBox="0 0 1000 1581" aria-label="芦屋市の自動ラベル配置" role="group"></svg></div>
       <dl class="stats" id="auto-stats"></dl>
     </section>
   </div>
   <section class="message">
     <h2>検証について</h2>
-    <p>「全域」は59町名の全ラベルを対象とした評価です。「表示範囲」は地図上で見えている範囲に<strong>ラベル中心がある町名</strong>だけの評価です。重複はラベル矩形の重なりペア数、区域外は文字の四隅・辺の中点・中心の計9点による概算で、<strong>文字全体が収まる厳密判定ではありません。</strong> 赤は重なりまたは区域外の可能性があるラベルを示します。</p>
-    <p>全域・表示範囲の数値は拡大によって変わり得ます。ただし小さい区域でもラベルをすべて表示するため、区域外表示が残る場合があります。表示密度の自動制御や一部ラベルの拡大時表示は、次段階で検討します。自動配置の完成・合格を意味するものではありません。</p>
+    <p>59町名のうち、見えている範囲では重ならない名前を優先表示します。地図を拡大すると細かい町名も徐々に表示されます。<strong>隠れている町名も、地図のタップや検索で選択できます。</strong> ラベルの重複と区域外は9点による概算で、厳密判定ではありません。</p>
+    <p>表示を省略した町名は削除していません。採点・学習用には今後、すべての町名を必ず確認できる別の一覧・出題機能も用意します。現在は文字サイズ・ラベル密度の比較試験であり、正式な表示方式の決定ではありません。</p>
   </section>
   <section class="credit">
     <h2>地理データ・出典</h2>
