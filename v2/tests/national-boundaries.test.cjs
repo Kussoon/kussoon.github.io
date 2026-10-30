@@ -34,10 +34,11 @@ const ctx={window:{topojson:{
  merge:(topo,geometries)=>({type:'MultiPolygon',
   coordinates:geometries.flatMap(g=>decodeGeometry(topo,g))})
 }},performance:{now:()=>0}};
-for(const script of ['label-engine.js','national-boundaries.js']){
+for(const script of ['label-engine.js','national-boundaries.js','administrative-labels.js']){
  vm.runInNewContext(file('common/js/'+script),ctx,{filename:script});
 }
 const E=ctx.window.KussoonLabelEngine,N=ctx.window.KussoonNationalBoundaries;
+const L=ctx.window.KussoonAdministrativeLabels;
 const kansai=Object.fromEntries(['25','26','27','28','29','30'].map(code=>[code,topologies[code]]));
 const fuji=Object.fromEntries(['19','22'].map(code=>[code,topologies[code]]));
 function assertModels(valid){
@@ -131,4 +132,23 @@ test('catalog cannot silently collapse two prefectures into one municipality ID'
  assert.equal(new Set(all.map(r=>r.id)).size,315);
  assert.ok(all.some(r=>r.prefectureCode==='19'));
  assert.ok(all.some(r=>r.prefectureCode==='30'));
+});
+
+test('2021 nationwide data uses two lines for all county towns and city wards',()=>{
+ const municipal=N.registry(kansai,catalog,'municipality');
+ const ward=N.registry(kansai,catalog,'ward');
+ const countyPlaces=municipal.filter(m=>m.county);
+ assert.equal(countyPlaces.length,87);
+ for(const m of countyPlaces){
+  assert.equal(L.rows(m)[0],m.county);
+  assert.equal(L.rows(m)[1],m.name);
+  assert.equal(m.fullName,L.rows(m).join(''));
+ }
+ const inagawa=municipal.find(m=>m.name==='猪名川町');
+ assert.deepEqual([...L.rows(inagawa)],['川辺郡','猪名川町']);
+ const cityWard=ward.find(m=>m.code==='28101');
+ assert.deepEqual([...L.rows(cityWard)],['神戸市','東灘区']);
+ const fujiCounty=N.registry(fuji,catalog,'municipality').find(m=>m.name==='富士河口湖町');
+ assert.deepEqual([...L.rows(fujiCounty)],['南都留郡','富士河口湖町']);
+ assert.equal(L.rows(municipal.find(m=>m.name==='西宮市')),null);
 });
