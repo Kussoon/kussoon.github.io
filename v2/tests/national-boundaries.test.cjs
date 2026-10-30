@@ -9,7 +9,7 @@ const vm=require('node:vm');
 const base=path.resolve(__dirname,'..');
 const file=p=>fs.readFileSync(path.join(base,p),'utf8');
 const catalog=JSON.parse(file('data/national/catalog.json'));
-const codes=['19','22','25','26','27','28','29','30','31','32','33','34','35'];
+const codes=['19','22','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39'];
 const topologies=Object.fromEntries(codes.map(code=>[code,
  JSON.parse(file('data/national/2021/'+code+'.topojson'))]));
 // A narrow test geometry adapter decodes topological arcs without dissolving
@@ -55,7 +55,7 @@ function assertModels(valid){
 }
 test('source years and loaded prefectures remain explicit and non-production',()=>{
  assert.equal(catalog.geometry.asOf,'2021-01-01');
- assert.equal(catalog.prefectures.length,13);
+ assert.equal(catalog.prefectures.length,17);
  assert.equal(catalog.experimental,true);
  for(const code of codes){
   const topo=topologies[code];
@@ -152,8 +152,8 @@ test('plate classification refuses missing or repeated municipality codes',()=>{
 });
 test('catalog cannot silently collapse two prefectures into one municipality ID',()=>{
  const all=N.registry(topologies,catalog,'ward');
- assert.equal(all.length,432);
- assert.equal(new Set(all.map(r=>r.id)).size,432);
+ assert.equal(all.length,527);
+ assert.equal(new Set(all.map(r=>r.id)).size,527);
  assert.ok(all.some(r=>r.prefectureCode==='19'));
  assert.ok(all.some(r=>r.prefectureCode==='30'));
 });
@@ -207,4 +207,21 @@ test('Chugoku county names, islands and small villages are preserved',()=>{
  assert.ok(ama.geoPolygons.length>0);
  const oochi=municipal.find(m=>m.code==='32449');
  assert.equal(oochi.fullName,'邑智郡邑南町');
+});
+
+test('Shikoku and connected western maps preserve 2021 pilot geometry counts',()=>{
+ const four=Object.fromEntries(['36','37','38','39'].map(code=>[code,topologies[code]]));
+ const nine=Object.fromEntries(['31','32','33','34','35','36','37','38','39'].map(code=>[code,topologies[code]]));
+ const fifteen=Object.fromEntries(['25','26','27','28','29','30','31','32','33','34','35','36','37','38','39'].map(code=>[code,topologies[code]]));
+ assert.equal(N.registry(four,catalog,'municipality').length,95);
+ assert.equal(N.registry(four,catalog,'ward').length,95);
+ assert.equal(N.registry(nine,catalog,'municipality').length,202);
+ assert.equal(N.registry(nine,catalog,'ward').length,212);
+ assert.equal(N.registry(fifteen,catalog,'municipality').length,400);
+ assert.equal(N.registry(fifteen,catalog,'ward').length,457);
+ assertModels(N.project(N.registry(four,catalog,'municipality'),E));
+ assertModels(N.project(N.registry(nine,catalog,'ward'),E));
+ assertModels(N.project(N.registry(fifteen,catalog,'municipality'),E));
+ const kochi=N.registry(four,catalog,'municipality').find(x=>x.code==='39405');
+ assert.equal(kochi.name,'梼原町');
 });
