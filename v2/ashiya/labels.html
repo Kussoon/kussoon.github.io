@@ -107,6 +107,13 @@
         <option value="22">特大 22px</option>
       </select>
     </label>
+    <label>自動表示の優先基準
+      <select id="priority-mode">
+        <option value="balanced" selected>バランス（文字の収まり・密度）</option>
+        <option value="density">表示数重視（できるだけ多く）</option>
+        <option value="area">面積優先（前の方式）</option>
+      </select>
+    </label>
     <label class="checkline"><input type="checkbox" id="declutter" checked>自動配置では重なるラベルを省略</label>
     <label class="checkline"><input type="checkbox" id="show-problems" checked>問題のあるラベルを赤で表示</label>
     <div class="zoom-row" role="group" aria-label="地図の拡大縮小">
@@ -140,15 +147,15 @@
     </section>
     <section class="panel" data-side="auto" aria-labelledby="auto-title">
       <div class="panel-head"><h2 id="auto-title">V2：自動配置</h2><span class="eyebrow">試作</span></div>
-      <p class="sub">文字サイズを画面上で一定に保ち、重ならない町名を優先表示します</p>
+      <p class="sub">文字サイズを一定に保ちながら、区域内の収まり・表示数・従来の面積優先を比較できます</p>
       <div class="map-wrap"><svg id="map-auto" class="map" viewBox="0 0 1000 1581" aria-label="芦屋市の自動ラベル配置" role="group"></svg></div>
       <dl class="stats" id="auto-stats"></dl>
     </section>
   </div>
   <section class="message">
     <h2>検証について</h2>
-    <p>59町名のうち、見えている範囲では重ならない名前を優先表示します。地図を拡大すると細かい町名も徐々に表示されます。<strong>隠れている町名も、地図のタップや検索で選択できます。</strong> ラベルの重複と区域外は9点による概算で、厳密判定ではありません。</p>
-    <p>表示を省略した町名は削除していません。採点・学習用には今後、すべての町名を必ず確認できる別の一覧・出題機能も用意します。現在は文字サイズ・ラベル密度の比較試験であり、正式な表示方式の決定ではありません。</p>
+    <p>59町名の表示優先順位を「バランス」「表示数重視」「面積優先」から選べます。全域表示では文字の重複を避け、拡大すると細かい町名も表示しやすくなります。表示数重視では、一つのラベルを二つのラベルに入れ替えることもあります。<strong>隠れている町名も、地図のタップや検索で選択できます。</strong> ラベルの重複と区域外は9点による概算で、厳密判定ではありません。</p>
+    <p>表示を省略した町名は削除していません。採点・学習用には今後、すべての町名を必ず確認できる別の一覧・出題機能も用意します。地名の配置候補は従来の方式を使用しています。今回は重なる名前の優先順位だけを比較し、見た目と表示数のどちらも評価します。正式な表示方式の決定ではありません。</p>
   </section>
   <section class="credit">
     <h2>地理データ・出典</h2>

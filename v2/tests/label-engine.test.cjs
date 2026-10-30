@@ -122,3 +122,67 @@ test('searched or tapped town remains visible even under label collisions',()=>{
   const active=pinned.flatMap((x,i)=>x?[i]:[]);
   assert.equal(E.subsetMetrics(models,positions,widths,size,active).collisions,0);
 });
+
+test('priority strategies keep a collision-free set at representative device widths',()=>{
+  const {models}=E.buildModels(raw.features);
+  for(const screenWidth of [320,390,700]){
+    const fontSize=E.screenPixelsToSvgUnits(16,1000,screenWidth);
+    const widths=models.map(m=>m.name.length*fontSize);
+    const positions=E.choosePositions(models,widths,fontSize,'avoid');
+    const view={x:0,y:0,w:1000,h:1581};
+    const scores={};
+    for(const strategy of ['area','balanced','density']){
+      const result=E.selectPriorityLabels(models,positions,widths,fontSize,view,{strategy});
+      assert.equal(result.shown.length,59);
+      assert.equal(result.eligible.length,59);
+      const visible=result.shown.flatMap((shown,i)=>shown?[i]:[]);
+      const metrics=E.subsetMetrics(models,positions,widths,fontSize,visible);
+      assert.equal(metrics.collisions,0,screenWidth+'px / '+strategy);
+      assert.equal(result.hiddenByCollision,result.eligible.filter((e,i)=>e&&!result.shown[i]).length);
+      scores[strategy]=visible.length;
+    }
+    assert.ok(scores.density>=scores.area,'density should be no worse than area baseline at '+screenWidth+'px');
+  }
+});
+
+test('priority layout keeps selected hidden town visible and collision free',()=>{
+  const {models}=E.buildModels(raw.features);
+  const size=E.screenPixelsToSvgUnits(16,1000,390);
+  const widths=models.map(m=>m.name.length*size);
+  const positions=E.choosePositions(models,widths,size,'avoid');
+  const view={x:0,y:0,w:1000,h:1581};
+  for(const strategy of ['balanced','density','area']){
+    const baseline=E.selectPriorityLabels(models,positions,widths,size,view,{strategy});
+    const hidden=baseline.shown.findIndex(x=>!x);
+    assert.ok(hidden>=0);
+    const selected=E.selectPriorityLabels(models,positions,widths,size,view,{strategy,pinned:hidden});
+    assert.ok(selected.shown[hidden],strategy+' must pin the selected town');
+    const indices=selected.shown.flatMap((s,i)=>s?[i]:[]);
+    assert.equal(E.subsetMetrics(models,positions,widths,size,indices).collisions,0);
+  }
+});
+
+test('previously visible labels favour stable results without creating overlap',()=>{
+  const {models}=E.buildModels(raw.features);
+  const size=E.screenPixelsToSvgUnits(16,1000,390);
+  const widths=models.map(m=>m.name.length*size);
+  const positions=E.choosePositions(models,widths,size,'avoid');
+  const view={x:0,y:0,w:1000,h:1581};
+  const first=E.selectPriorityLabels(models,positions,widths,size,view,{strategy:'balanced'});
+  const next=E.selectPriorityLabels(models,positions,widths,size,view,{strategy:'balanced',previous:first.shown});
+  const again=E.selectPriorityLabels(models,positions,widths,size,view,{strategy:'balanced',previous:first.shown});
+  assert.equal(JSON.stringify(next.shown),JSON.stringify(again.shown));
+  const ids=next.shown.flatMap((s,i)=>s?[i]:[]);
+  assert.equal(E.subsetMetrics(models,positions,widths,size,ids).collisions,0);
+});
+
+test('out-of-view labels do not count as labels hidden by collisions',()=>{
+  const {models}=E.buildModels(raw.features);
+  const size=E.screenPixelsToSvgUnits(16,1000,360);
+  const widths=models.map(m=>m.name.length*size);
+  const positions=E.choosePositions(models,widths,size,'avoid');
+  const view={x:0,y:0,w:120,h:180};
+  const layout=E.selectPriorityLabels(models,positions,widths,size,view,{strategy:'balanced'});
+  assert.equal(layout.hiddenByCollision,layout.eligible.filter((e,i)=>e&&!layout.shown[i]).length);
+  assert.ok(layout.eligible.filter(Boolean).length<59);
+});

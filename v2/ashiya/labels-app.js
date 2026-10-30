@@ -138,14 +138,14 @@
     context.font='900 '+size+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
     return models.map(m=>context.measureText(m.name).width);
   }
-  function printMetrics(id,score,visible,shown) {
+  function printMetrics(id,score,visible,eligible,hiddenByCollision) {
     const fields=[
       ['対象町名',models.length],
-      ['表示範囲のラベル',visible.count],
-      ['省略中のラベル',models.length-shown],
-      ['表示中ラベルの重なり',score.collisions+'組'],
-      ['表示範囲の重なり',visible.collisions+'組'],
-      ['表示範囲で文字が区域外',visible.wholeOutside+'件']
+      ['表示範囲の候補',eligible+'件'],
+      ['範囲内のラベル中心',visible.count+'件'],
+      ['衝突のため省略',hiddenByCollision+'件'],
+      ['表示中の重なり',score.collisions+'組'],
+      ['範囲内で文字が区域外',visible.wholeOutside+'件']
     ];
     $(id).innerHTML=fields.map(([label,v])=>'<div><dt>'+label+'</dt><dd>'+v+'</dd></div>').join('');
   }
@@ -160,7 +160,7 @@
         return x>=view.x&&x<=view.x+view.w&&y>=view.y&&y<=view.y+view.h;
       });
       const visible=E.subsetMetrics(models,l.positions,l.widths,l.size,inView);
-      printMetrics(side+'-stats',score,visible,indices.length);
+      printMetrics(side+'-stats',score,visible,l.eligible.filter(Boolean).length,l.hiddenByCollision);
     }
   }
   function scheduleReflow() {
@@ -199,23 +199,35 @@
     const manual=E.choosePositions(models,widths,size,'manual');
     const auto=E.choosePositions(models,widths,size,mode);
     const manualShown=models.map(()=>true);
-    const autoShown=$('declutter').checked
-      ?E.selectVisibleLabels(models,auto,widths,size,view,selected)
-      :models.map(()=>true);
+    const priority=$('priority-mode').value;
+    const eligibleManual=E.selectPriorityLabels(models,manual,widths,size,view,{strategy:'area'}).eligible;
+    const previous=layouts&&layouts.auto.strategy===priority ? layouts.auto.shown : null;
+    const priorityResult=E.selectPriorityLabels(models,auto,widths,size,view,{
+      strategy:priority,pinned:selected,previous
+    });
+    const autoShown=$('declutter').checked ? priorityResult.shown : models.map(()=>true);
     const allManual=manualShown.map((v,i)=>v?i:-1).filter(i=>i!==-1);
     const activeAuto=autoShown.map((v,i)=>v?i:-1).filter(i=>i!==-1);
     const manualScore=E.subsetMetrics(models,manual,widths,size,allManual);
     const autoScore=E.subsetMetrics(models,auto,widths,size,activeAuto);
     const elapsed=performance.now()-t0;
     layouts={
-      manual:{positions:manual,widths,size,shown:manualShown},
-      auto:{positions:auto,widths,size,shown:autoShown}
+      manual:{positions:manual,widths,size,shown:manualShown,eligible:eligibleManual,hiddenByCollision:0},
+      auto:{
+        positions:auto,widths,size,shown:autoShown,eligible:priorityResult.eligible,
+        hiddenByCollision:$('declutter').checked?priorityResult.hiddenByCollision:0,
+        strategy:priority
+      }
     };
     drawLabels(maps[0],manual,manualScore.problemIndices,size,showProblems,manualShown);
     drawLabels(maps[1],auto,autoScore.problemIndices.map(i=>activeAuto[i]),size,showProblems,autoShown);
     updateVisibleStats();
     renderCount++;
-    $('status').textContent='59町名・60地図面／地図 '+(full.w/view.w).toFixed(2)+'倍。画面上の文字 '+px+'px（固定）／自動側は'+activeAuto.length+'件表示。再配置・計測 '+elapsed.toFixed(1)+'ms（端末参考値）。';
+    const inView=activeAuto.filter(i=>{
+      const [x,y]=auto[i];
+      return x>=view.x&&x<=view.x+view.w&&y>=view.y&&y<=view.y+view.h;
+    }).length;
+    $('status').textContent='59町名・60地図面／地図 '+(full.w/view.w).toFixed(2)+'倍。文字 '+px+'px（固定）／自動配置・範囲内'+inView+'件、衝突で省略'+layouts.auto.hiddenByCollision+'件。再配置・計測 '+elapsed.toFixed(1)+'ms（端末参考値）。';
     highlightSelection();
   }
   function setMobileView(mode){
@@ -247,6 +259,7 @@
   $('font-size').addEventListener('change',relayout);
   $('show-problems').addEventListener('change',relayout);
   $('declutter').addEventListener('change',relayout);
+  $('priority-mode').addEventListener('change',()=>{layouts=null;relayout();});
   $('zoom-in').addEventListener('click',()=>zoomAt(1.4));
   $('zoom-out').addEventListener('click',()=>zoomAt(1/1.4));
   $('reset-zoom').addEventListener('click',()=>{view={...full};paintMaps();scheduleReflow();});
