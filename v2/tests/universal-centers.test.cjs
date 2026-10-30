@@ -133,3 +133,25 @@ test('new anchors do not depend on display mode or current zoom',()=>{
     assert.ok(near([label.x,label.y],a));
   }
 });
+
+test('universal mode keeps every Ashiya label across zooms and display styles',()=>{
+  const features=JSON.parse(fs.readFileSync(path.join(base,'data/ashiya/labels-source.json'),'utf8')).features;
+  const readings=JSON.parse(fs.readFileSync(path.join(base,'data/ashiya/readings.json'),'utf8')).readings;
+  const {models}=E.buildModels(features);
+  const measure=(s,font)=>Array.from(s).length*font;
+  const anchorPoints=models.map(m=>R.universalInteriorAnchor(m,E));
+  for(const screenWidth of [320,390,700])for(const zoom of [1,2,5,10]){
+    const font=E.screenPixelsToSvgUnits(18,1000/zoom,screenWidth);
+    for(const style of ['kanji','both','kana']){
+      const labels=R.planCenterFirstLabels(models,readings,style,font,measure,E,
+        {anchor:'universal',shift:'none'});
+      assert.equal(labels.length,59);
+      for(let i=0;i<59;i++){
+        assert.ok(E.isInside(labels[i].x,labels[i].y,models[i].rings));
+        assert.ok(near([labels[i].x,labels[i].y],anchorPoints[i]),models[i].name+' anchor moved with zoom');
+      }
+      assert.equal(R.evaluateVisible(models,labels,models.map(()=>true),E,
+        {x:0,y:0,w:1000,h:1581}).shown,59);
+    }
+  }
+});
