@@ -56,3 +56,27 @@ test('automatic placement is deterministic for identical data and settings',()=>
   const b=E.choosePositions(models,widths,10,'avoid');
   assert.deepEqual(JSON.stringify(a),JSON.stringify(b));
 });
+
+test('zoom-responsive labels grow more slowly than the map geometry',()=>{
+  const base=14;
+  const two=E.zoomFontSize(base,2,0.4);
+  const four=E.zoomFontSize(base,4,0.4);
+  assert.ok(two<base && four<two);
+  assert.ok(Math.abs((two*2/base)-Math.pow(2,0.4))<1e-10);
+  assert.ok(Math.abs((four*4/base)-Math.pow(4,0.4))<1e-10);
+});
+
+test('viewport metrics change when panning, whole-map metrics do not',()=>{
+  const {models}=E.buildModels(raw.features);
+  const base=14, widths=models.map(m=>m.name.length*base);
+  const positions=E.choosePositions(models,widths,base,'avoid');
+  const whole=E.evaluate(models,positions,widths,base);
+  const full=E.evaluateView(models,positions,widths,base,{x:0,y:0,w:1000,h:1581});
+  const south=E.evaluateView(models,positions,widths,base,{x:400,y:950,w:400,h:400});
+  assert.equal(whole.count,59);
+  assert.equal(full.count,59);
+  assert.ok(south.count>0 && south.count<59);
+  assert.equal(south.total,59);
+  assert.ok(south.collisions<=whole.collisions);
+  assert.ok(south.wholeOutside<=whole.wholeOutside);
+});
