@@ -1,4 +1,4 @@
-/* National municipality V2 - eight-prefecture foundation experiment.
+/* National municipality V2 - cross-prefecture foundation experiment.
  * Shared geometry, a 5-digit municipal-code registry and cross-prefecture overlays.
  */
 (()=>{
@@ -10,7 +10,7 @@ const C=window.KussoonCollisionRefinement,F=window.KussoonRegionFit,N=window.Kus
 const L=window.KussoonAdministrativeLabels,NR=window.KussoonNationalReadings;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
-const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
+const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
 let catalog=null,readingData=null,countyData=null,models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
@@ -379,9 +379,9 @@ window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
-   fetch('../data/national/catalog.json?v=20261031-chugoku'),
-   fetch('../data/national/municipality-readings.json?v=20261031-chugoku'),
-   fetch('../data/national/county-readings.json?v=20261031-chugoku')
+   fetch('../data/national/catalog.json?v=20261031-shikoku'),
+   fetch('../data/national/municipality-readings.json?v=20261031-shikoku'),
+   fetch('../data/national/county-readings.json?v=20261031-shikoku')
   ]);
   if(!catalogResponse.ok||!municipalitiesResponse.ok||!countiesResponse.ok)
    throw Error('全国区域・読み仮名データ定義が読み込めません');
