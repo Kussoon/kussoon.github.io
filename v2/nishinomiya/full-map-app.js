@@ -97,7 +97,7 @@ function renderLabels(){
  // The old rule kept screen text at 11px even at maximum zoom.
  // Grow rendered glyphs gently with zoom, never shrinking below 16px.
  const base=Math.max(16,Number($('font').value));
- const screenPx=Math.min(42,base*Math.pow(zoom,.25));
+ const screenPx=Math.min(38,base*Math.pow(zoom,.18));
  // This city's viewBox is taller than the square SVG. preserveAspectRatio
  // uses the *smaller* of X/Y scales; width-only conversion undersized text.
  const svgPixelsPerUnit=Math.min((screen.width||390)/view.w,(screen.height||390)/view.h);
