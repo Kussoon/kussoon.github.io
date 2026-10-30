@@ -47,14 +47,22 @@ function scheduleLabels(){
 function showSelection(){
  if(!models.length)return;
  const chosen=selection?.type==='model'?models.find(m=>m.id===selection.id):null;
+ if(state.mode==='plate'&&plate){
+  const included=new Set(plate.municipalityCodes);
+  if(chosen){
+   const matches=chosen.municipalityCodes.every(code=>included.has(code));
+   $('selection').textContent=nameOf(chosen)+'：'+(matches?
+    plate.name+'ナンバー':'富士山ナンバー対象外（他のナンバー地名はこの試験版では未収録）');
+  }else{
+   const members=N.plateMembers(models,plate),grouped={};
+   for(const m of members)(grouped[m.prefecture]??=[]).push(m.name);
+   const summary=Object.entries(grouped).map(([pref,values])=>pref+' '+values.length+'市町村').join('＋');
+   $('selection').textContent='紫色の範囲：'+plate.name+'ナンバー（'+summary+'、合計'+members.length+'市町村）。青色は今回ナンバー地域を未収録の区域です。';
+  }
+  return;
+ }
  if(chosen){
   $('selection').textContent=nameOf(chosen)+'（'+chosen.prefecture+'・行政区域コード '+chosen.code+'）';
- }else if(selection?.type==='plate'&&plate){
-  const members=N.plateMembers(models,plate);
-  const grouped={};
-  for(const m of members)(grouped[m.prefecture]??=[]).push(m.name);
-  const summary=Object.entries(grouped).map(([pref,values])=>pref+' '+values.length+'市町村').join('＋');
-  $('selection').textContent='富士山ナンバー：'+summary+'。合計'+members.length+'市町村を県境を越えて一つの地域として表示しています。';
  }else $('selection').textContent='市区町村をタップすると選択できます。';
 }
 function highlight(){
@@ -91,37 +99,40 @@ function buildPrefOutlines(topologies,projectPoint){
 function drawMap(topologies,projectPoint){
  const shapeLayer=tag('g'),labelLayer=tag('g',{'aria-hidden':'true'}),outlines=buildPrefOutlines(topologies,projectPoint);
  drawing=[];labelNodes=[];outlineNodes=[];
+ const isPlate=state.mode==='plate'&&Boolean(plate);
+ map.classList.toggle('plate-mode',isPlate);
  for(const model of models){
-  const p=tag('path',{d:pathData(model.rings),class:'land',tabindex:0,role:'button',
-   'aria-label':nameOf(model),'data-id':model.id});
+  const attributes={d:pathData(model.rings),class:'land','aria-label':nameOf(model)};
+  if(!isPlate)Object.assign(attributes,{tabindex:0,role:'button','data-id':model.id});
+  const p=tag('path',attributes);
   const title=tag('title');title.textContent=nameOf(model);p.append(title);
   shapeLayer.append(p);drawing.push({node:p,model});
  }
- if(state.mode==='plate'&&plate){
+ // In either mode keep the municipality names as geographic reference.
+ // The plate mode adds one dedicated region label, not a detail popup per town.
+ for(const model of models){
   const t=tag('text',{class:'place-label'});
+  if(model.major){
+   const city=tag('tspan',{'data-row':'city',dy:'-0.48em'});
+   city.textContent=model.major;
+   const ward=tag('tspan',{'data-row':'ward',dy:'1.12em'});
+   ward.textContent=model.name;
+   t.append(city,ward);
+  }else t.textContent=nameOf(model);
+  labelLayer.append(t);
+  labelNodes.push({node:t,model});
+ }
+ if(isPlate){
+  const t=tag('text',{class:'place-label plate-label'});
   t.textContent=plate.name;labelLayer.append(t);
-  labelNodes.push({node:t,model:null});
- }else{
-  for(const model of models){
-   const t=tag('text',{class:'place-label'});
-   if(model.major){
-    // Avoid ambiguous ward-only names (e.g. multiple 北区 in different cities).
-    // City and ward form two visible rows with the same geographic anchor.
-    const city=tag('tspan',{'data-row':'city',dy:'-0.48em'});
-    city.textContent=model.major;
-    const ward=tag('tspan',{'data-row':'ward',dy:'1.12em'});
-    ward.textContent=model.name;
-    t.append(city,ward);
-   }else t.textContent=model.name;
-   labelLayer.append(t);
-   labelNodes.push({node:t,model});
-  }
+  labelNodes.push({node:t,model:plateShape});
  }
  map.replaceChildren(shapeLayer,outlines,labelLayer);
  highlight();
 }
 function labelSize(zoom){
- return Math.min(24,16+Math.min(2,Math.max(0,zoom-1)*.18));
+ // National overview starts one pixel below the Nishinomiya town-map trial.
+ return 15+Math.min(2,Math.max(0,zoom-1)*.18);
 }
 const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
 function measure(value,size){
@@ -136,23 +147,33 @@ function renderLabels(){
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
  if(!(ratio>0))return;
  const size=screenPx/ratio;
- let workModels=state.mode==='plate'&&plateShape?[plateShape]:models;
- // Plate labels and administrative labels use the same centroid-first engine.
- const planned=R.planCenterFirstLabels(workModels,null,'kanji',size,measure,E,{
+ const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
+ // Measure county-prefixed names (川辺郡猪名川町), not just their short form.
+ // Municipality names remain visible beneath the plate-region overlay.
+ const layoutModels=workModels.map(m=>m.major||m.name===nameOf(m)?m:{...m,name:nameOf(m)});
+ const planned=R.planCenterFirstLabels(layoutModels,null,'kanji',size,measure,E,{
   anchor:'balanced',shift:'adjacent'
  });
  // A designated-city ward has two displayed rows. Collision refinement and
  // diagnostics must measure *both*, rather than just the short ward name.
  const original=planned.map((l,i)=>{
   const m=workModels[i];
+  if(m.id==='plate'){
+   const width=measure(m.name,size*1.2)+size*.3;
+   const height=size*1.5;
+   return {...l,width,height,box:{x1:l.x-width/2,y1:l.y-height/2,
+    x2:l.x+width/2,y2:l.y+height/2}};
+  }
   if(!m.major)return l;
   const width=Math.max(measure(m.major,size),measure(m.name,size))+size*.24;
   const height=size*2.24+size*.24;
   return {...l,width,height,box:{x1:l.x-width/2,y1:l.y-height/2,
    x2:l.x+width/2,y2:l.y+height/2}};
  });
- const result=C.refine(workModels,original,size,E,{view,passes:3,
-  pinned:selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1
+ const result=C.refine(layoutModels,original,size,E,{view,passes:3,
+  // Keep the plate-region name anchored; move adjacent municipality labels.
+  pinned:state.mode==='plate'?layoutModels.length-1:
+   selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1
  });
  result.labels.forEach((position,i)=>{
   const target=labelNodes[i]?.node;
@@ -161,11 +182,12 @@ function renderLabels(){
   target.setAttribute('y',position.y.toFixed(2));
   const rows=target.querySelectorAll('tspan');
   for(const row of rows)row.setAttribute('x',position.x.toFixed(2));
-  target.setAttribute('font-size',size.toFixed(2));
-  target.setAttribute('stroke-width',(size*.18).toFixed(2));
+  const displayedSize=target.classList.contains('plate-label')?size*1.2:size;
+  target.setAttribute('font-size',displayedSize.toFixed(2));
+  target.setAttribute('stroke-width',(displayedSize*.18).toFixed(2));
  });
- const before=R.evaluateVisible(workModels,original,workModels.map(()=>true),E,view);
- const after=R.evaluateVisible(workModels,result.labels,workModels.map(()=>true),E,view);
+ const before=R.evaluateVisible(layoutModels,original,layoutModels.map(()=>true),E,view);
+ const after=R.evaluateVisible(layoutModels,result.labels,layoutModels.map(()=>true),E,view);
  $('metrics').textContent='表示単位 '+models.length+'区域／画面内ラベル '+after.inView+
   '件／文字の重なり（概算）'+before.collisions+'→'+after.collisions+'組／追加移動'+
   result.moved+'件／区域外 '+after.outside+'件。';
@@ -228,6 +250,12 @@ async function load(area,mode){
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
  selection=mode==='plate'&&plate?{type:'plate'}:null;
+ $('clear').hidden=mode==='plate';
+ $('interaction-guide').textContent=mode==='plate'
+  ?'紫色が富士山ナンバーの区域です。市町村名は位置確認用に表示し、地図のタップによる詳細表示はありません。検索では対象市町村のナンバー名を調べられます。'
+  :'ドラッグで移動、ピンチで拡大縮小できます。検索結果を選ぶと全域図で該当区域を紫色にします。';
+ $('legend-blue').textContent=mode==='plate'?'その他（地名未登録）':'市区町村';
+ $('legend-selected').textContent=mode==='plate'?'富士山ナンバー':'選択区域';
  fit();drawMap(topologies,projected.projectPoint);renderLabels();
  $('search').value='';$('suggestions').hidden=true;
 }
@@ -258,12 +286,12 @@ $('search').addEventListener('keydown',e=>{
 });
 document.addEventListener('pointerdown',e=>{if(!e.target.closest('.searchbox'))$('suggestions').hidden=true;});
 map.addEventListener('click',e=>{
- if(performance.now()<skipClickUntil)return;
+ if(state.mode==='plate'||performance.now()<skipClickUntil)return;
  const p=e.target.closest('path[data-id]');
  if(p)select({type:'model',id:p.getAttribute('data-id')});
 });
 map.addEventListener('keydown',e=>{
- if(!['Enter',' '].includes(e.key))return;
+ if(state.mode==='plate'||!['Enter',' '].includes(e.key))return;
  const p=e.target.closest('path[data-id]');
  if(p){e.preventDefault();select({type:'model',id:p.getAttribute('data-id')});}
 });
@@ -300,7 +328,8 @@ for(const type of ['pointerup','pointercancel','lostpointercapture']){
  map.addEventListener(type,e=>{
   const p=pointers.get(e.pointerId);if(!p)return;
   pointers.delete(e.pointerId);
-  if(type==='pointerup'&&!p.moved&&p.targetId)select({type:'model',id:p.targetId});
+  if(state.mode!=='plate'&&type==='pointerup'&&!p.moved&&p.targetId)
+   select({type:'model',id:p.targetId});
   // A synthesized click must not select twice after pointer capture.
   skipClickUntil=performance.now()+280;
  });
