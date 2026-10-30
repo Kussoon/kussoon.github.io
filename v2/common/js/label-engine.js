@@ -341,7 +341,13 @@
     const chars=Array.from(name);
     const variants=[[name]];
     if(allowWrap && chars.length>=4){
+      const last=chars.length-1;
       for(let cut=1;cut<chars.length;cut++){
+        // Avoid unnatural mid-word splits like 東芦／屋町. On four-character
+        // names, prefer directional-prefix or explicit suffix boundaries.
+        if(chars.length===4 && cut===2)continue;
+        if(cut===1 && !/^[東西南北上下新旧]/u.test(chars[0]))continue;
+        if(cut===last && chars[last]!=='町' && chars[last]!=='村')continue;
         const left=chars.slice(0,cut).join(''),right=chars.slice(cut).join('');
         variants.push([left,right]);
       }
