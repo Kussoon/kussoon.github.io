@@ -84,3 +84,29 @@ test('keeps all names; preserves identifying metadata and box dimensions',()=>{
  assert.equal(r.labels[0].primary,old.primary);
  assert.equal(m.id,'28:28446');
 });
+
+test('a narrow notch crossing a label edge triggers DOWNWARD movement even when interior sampling reports perfect fit',()=>{
+ const rings=[[[0,0],[40,0],[40,23],[66,23],[66,0],[120,0],[120,70],[0,70]]];
+ const m=model(rings),start=label(55,33,36,24);
+ assert.equal(F.fractionInside(start.box,m.rings,E),1);
+ assert.ok(F.edgeClearance(start.box,m.rings,E)<0);
+ const r=F.refine([m],[start],15,E);
+ assert.equal(r.moved,1);
+ assert.ok(r.labels[0].y>start.y,'The useful free space is below the notch');
+ assert.ok(F.edgeClearance(r.labels[0].box,m.rings,E)>
+  F.edgeClearance(start.box,m.rings,E));
+ assert.ok(r.edgeRiskAfter<=r.edgeRiskBefore);
+ const legacy=F.refine([m],[start],15,E,{perimeter:false});
+ assert.equal(legacy.moved,0,'Pre-existing overview positioning remains unchanged');
+});
+test('a left-side notch triggers RIGHTWARD movement without a municipality-specific offset',()=>{
+ const rings=[[[0,0],[130,0],[130,75],[0,75],[0,50],[23,50],[23,22],[0,22]]];
+ const m=model(rings),start=label(34,36,24,24);
+ assert.equal(F.fractionInside(start.box,m.rings,E),1);
+ assert.ok(F.edgeClearance(start.box,m.rings,E)<0);
+ const r=F.refine([m],[start],15,E);
+ assert.equal(r.moved,1);
+ assert.ok(r.labels[0].x>start.x,'The available land is to the right');
+ assert.ok(F.edgeClearance(r.labels[0].box,m.rings,E)>
+  F.edgeClearance(start.box,m.rings,E));
+});
