@@ -80,7 +80,16 @@ test('Kansai groups correctly to 198 municipalities or 245 wards',()=>{
  assert.ok(ward.find(x=>x.code==='28107').fullName==='神戸市須磨区');
  // N03_003 also holds county names. County towns must never be merged.
  assert.ok(municipal.some(x=>x.name==='富士河口湖町')===false);
- assert.ok(municipal.find(x=>x.name==='猪名川町'));
+ const inagawa=municipal.find(x=>x.name==='猪名川町');
+ assert.ok(inagawa);
+ assert.equal(inagawa.county,'川辺郡');
+ assert.equal(inagawa.fullName,'川辺郡猪名川町');
+ assert.equal(ward.find(x=>x.code==='28301').fullName,'川辺郡猪名川町');
+ assert.equal(municipal.find(x=>x.name==='京都市').fullName,'京都市');
+ assert.equal(ward.find(x=>x.code==='28101').fullName,'神戸市東灘区');
+ const countyTowns=municipal.filter(x=>x.county);
+ assert.ok(countyTowns.length>=20,'Missing county suffixes from municipality names');
+ assert.ok(countyTowns.every(x=>x.fullName===x.county+x.name));
  assert.equal(new Set(municipal.map(x=>x.id)).size,198);
  assert.equal(new Set(ward.map(x=>x.id)).size,245);
  assertModels(N.project(municipal,E));
@@ -103,6 +112,7 @@ test('Fuji plate area crosses the Yamanashi/Shizuoka prefectural boundary',()=>{
  assert.equal(members.filter(m=>m.prefectureCode==='22').length,5);
  assert.ok(members.some(m=>m.name==='富士吉田市'));
  assert.ok(members.some(m=>m.name==='富士宮市'));
+ assert.equal(members.find(m=>m.name==='富士河口湖町').fullName,'南都留郡富士河口湖町');
  const target=N.joinPlateShape(members,E);
  assert.ok(target.rings.length>1);
  assert.ok(target.polylabel.every(Number.isFinite));
