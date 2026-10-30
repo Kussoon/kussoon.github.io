@@ -379,9 +379,9 @@ window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
-   fetch('../data/national/catalog.json?v=20261031-fuji-ruby'),
-   fetch('../data/national/municipality-readings.json'),
-   fetch('../data/national/county-readings.json')
+   fetch('../data/national/catalog.json?v=20261031-chugoku'),
+   fetch('../data/national/municipality-readings.json?v=20261031-chugoku'),
+   fetch('../data/national/county-readings.json?v=20261031-chugoku')
   ]);
   if(!catalogResponse.ok||!municipalitiesResponse.ok||!countiesResponse.ok)
    throw Error('全国区域・読み仮名データ定義が読み込めません');
