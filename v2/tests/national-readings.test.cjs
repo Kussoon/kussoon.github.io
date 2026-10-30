@@ -96,3 +96,16 @@ test('reject swapped municipality readings rather than guessing',()=>{
  assert.throws(()=>one('28110','北区',{major:'神戸市'}),/一致しません/);
  assert.throws(()=>NR.attach([{code:'00000',name:'架空町'}],dataset,counties),/未収録/);
 });
+
+test('Fuji plate label itself has hiragana and fits as one two-line label',()=>{
+ const catalog=JSON.parse(read('data/national/catalog.json'));
+ const plate=catalog.plates.find(p=>p.id==='fuji');
+ assert.equal(plate.reading,'ふじさん');
+ const model={name:plate.name,readingParts:[{name:plate.name,reading:plate.reading}]};
+ assert.deepEqual(NR.lines(model).map(row=>row.text),['富士山','ふじさん']);
+ const label={x:100,y:80,width:50,height:18,box:{x1:75,y1:71,x2:125,y2:89}};
+ const measured=NR.boxFor(model,label,18,measure);
+ assert.ok(measured.height>18);
+ assert.ok(measured.width>0);
+ assert.equal(measured.box.y1,80-measured.height/2);
+});
