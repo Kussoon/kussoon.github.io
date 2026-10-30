@@ -86,7 +86,8 @@ window.kussoonUmamiBeforeSend=function(type,payload){
  </div>
  <label>ラベルの位置
   <select id="anchor-mode">
-   <option value="smart" selected>中心優先＋くびれ・飛地の安全補正</option>
+   <option value="smart" selected>中心優先＋くびれ・飛地の安全補正（現行）</option>
+   <option value="universal">三日月・多枝・飛地の汎用中心（新・試験中）</option>
    <option value="center">単純な重心（前回方式）</option>
    <option value="legacy">従来のはみ出し・重複回避方式</option>
   </select>
@@ -137,6 +138,7 @@ window.kussoonUmamiBeforeSend=function(type,payload){
  <p><strong>標準では59町名をすべて表示</strong>し、幾何学的中心を基本に、重心が区域外・細いくびれにある場合だけ安全な内部の点へ補正します。縦長の町が横に隣接し文字が大きく重なる場合は、中心から最大1文字分だけ上下にずらします。境界またぎや重なりは許容し、読みにくい場合は拡大して確認できます。</p>
  <p>読み仮名を加えると重なりは増えますが、標準では名前を隠しません。「ひらがなのみ」の文字列も漢字より長いため、縮尺別に拡大して見比べてください。</p>
  <p>区域外の判定はラベル矩形の9点による概算で、<strong>失敗や非表示の条件にはしません。</strong>ラベル中心が町域内であること、必要な地名が最初から見つかることを優先します。</p>
+ <p>新しい「三日月・多枝・飛地の汎用中心」は、複雑な形の試験モードです。<strong>初期値は実機で好評だった現行方式のまま</strong>です。新モードでは一部の町名位置が変わるため、比較してお確かめください。</p>
 </section>
 <section class="panel">
  <h2>データの出典</h2>
