@@ -82,9 +82,9 @@ function initMap(){
   const path=element('path',{d:asPath(m.rings),
     class:m.major==='神戸市'?'shape ward':'shape',
     'data-index':i,tabindex:0,role:'button',
-    'aria-label':m.name+(m.major?'（'+m.major+'）':'')});
+    'aria-label':m.major==='神戸市'?'神戸市'+m.name:m.name});
   const title=element('title');
-  title.textContent=m.name;path.append(title);shapes.append(path);
+  title.textContent=m.major==='神戸市'?'神戸市'+m.name:m.name;path.append(title);shapes.append(path);
   const text=element('text',{class:'name'});
   text.textContent=m.name;labels.append(text);
   return {path,text};
