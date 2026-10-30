@@ -248,7 +248,12 @@ map.addEventListener('keydown',e=>{
 });
 map.addEventListener('pointerdown',e=>{
  if(e.pointerType==='mouse'&&e.button!==0)return;
- pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,moved:false});
+ const target=e.target.closest('path[data-id]');
+ // Pointer capture can retarget the final click to the SVG itself on iOS.
+ // Remember the original polygon so a stationary tap still selects it.
+ for(const other of pointers.values())other.moved=true;
+ pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,moved:pointers.size>0,
+  targetId:target?.getAttribute('data-id')||null});
  try{map.setPointerCapture(e.pointerId);}catch(_){}
 });
 map.addEventListener('pointermove',e=>{
@@ -268,13 +273,15 @@ map.addEventListener('pointermove',e=>{
    pan(dx/2,dy/2);
   }
  }
- pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,moved:p.moved});e.preventDefault();
+ pointers.set(e.pointerId,{x:e.clientX,y:e.clientY,moved:p.moved,targetId:p.targetId});e.preventDefault();
 });
 for(const type of ['pointerup','pointercancel','lostpointercapture']){
  map.addEventListener(type,e=>{
   const p=pointers.get(e.pointerId);if(!p)return;
   pointers.delete(e.pointerId);
-  if(p.moved)skipClickUntil=performance.now()+280;
+  if(type==='pointerup'&&!p.moved&&p.targetId)select({type:'model',id:p.targetId});
+  // A synthesized click must not select twice after pointer capture.
+  skipClickUntil=performance.now()+280;
  });
 }
 map.addEventListener('wheel',e=>{
