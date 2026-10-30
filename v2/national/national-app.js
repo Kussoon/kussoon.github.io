@@ -7,11 +7,11 @@ const $=id=>document.getElementById(id);
 const NS='http://www.w3.org/2000/svg';
 const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels;
 const C=window.KussoonCollisionRefinement,F=window.KussoonRegionFit,N=window.KussoonNationalBoundaries;
-const L=window.KussoonAdministrativeLabels;
+const L=window.KussoonAdministrativeLabels,NR=window.KussoonNationalReadings;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
 const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
-let catalog=null,models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
+let catalog=null,readingData=null,countyData=null,models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
@@ -113,9 +113,10 @@ function drawMap(topologies,projectPoint){
  // The plate mode adds one dedicated region label, not a detail popup per town.
  for(const model of models){
   const t=tag('text',{class:'place-label'});
-  // Identical two-row formatting for city/ward and county/town or village.
-  // Full search names remain in the model, unaffected by line breaks.
-  L.paint(t,model,0,15);
+  // Names are always stored independently of their display lines.
+  if(state.mode!=='plate'&&$('reading').value==='on')
+   NR.paint(t,model,0,0,15,measure);
+  else L.paint(t,model,0,15);
   labelLayer.append(t);
   labelNodes.push({node:t,model});
  }
@@ -144,6 +145,7 @@ function renderLabels(){
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
  if(!(ratio>0))return;
  const size=screenPx/ratio;
+ const readingEnabled=state.mode!=='plate'&&$('reading').value==='on';
  const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
  // Measure whichever row is wider, not the concatenated county + town string.
  // Search and selection continue to use the complete administrative name.
@@ -161,7 +163,7 @@ function renderLabels(){
    return {...l,width,height,box:{x1:l.x-width/2,y1:l.y-height/2,
     x2:l.x+width/2,y2:l.y+height/2}};
   }
-  return L.boxFor(m,l,size,measure);
+  return readingEnabled?NR.boxFor(m,l,size,measure):L.boxFor(m,l,size,measure);
  });
  const pinned=state.mode==='plate'?layoutModels.length-1:
    selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1;
@@ -192,7 +194,9 @@ function renderLabels(){
   if(!target)return;
   target.setAttribute('x',position.x.toFixed(2));
   target.setAttribute('y',position.y.toFixed(2));
-  L.paint(target,workModels[i],position.x,size);
+  if(readingEnabled&&i<models.length)
+   NR.paint(target,workModels[i],position.x,position.y,size,measure);
+  else L.paint(target,workModels[i],position.x,size);
   const displayedSize=target.classList.contains('plate-label')?size*1.2:size;
   target.setAttribute('font-size',displayedSize.toFixed(2));
   target.setAttribute('stroke-width',(displayedSize*.18).toFixed(2));
@@ -212,13 +216,16 @@ function renderLabels(){
   (performance.now()-start).toFixed(0)+'ms');
 }
 function suggest(){
- const q=$('search').value.trim(),container=$('suggestions');container.replaceChildren();
+ const q=$('search').value.trim(),kanaQuery=NR.kana(q),
+  container=$('suggestions');container.replaceChildren();
  if(!q){container.hidden=true;return;}
  const options=[];
  if(plate&&plate.name.includes(q))options.push({text:plate.name,sub:'山梨県・静岡県を横断するナンバー地域',sel:{type:'plate'}});
  for(const m of models){
-  if(nameOf(m).includes(q)||m.name.includes(q)||m.code===q)
-   options.push({text:nameOf(m),sub:m.prefecture,sel:{type:'model',id:m.id}});
+  if(nameOf(m).includes(q)||m.name.includes(q)||m.code===q||
+    m.reading?.includes(kanaQuery))
+   options.push({text:nameOf(m),sub:m.prefecture+'・'+m.reading,
+    sel:{type:'model',id:m.id}});
   if(options.length>=40)break;
  }
  for(const option of options){
@@ -252,7 +259,8 @@ async function load(area,mode){
  const grouped=N.registry(topologies,catalog,mode==='ward'?'ward':'municipality');
  const projected=N.project(grouped,E);
  if(token!==runId)return;
- models=projected.models;bounds=projected.bounds;
+ models=NR.attach(projected.models,readingData,countyData);
+ bounds=projected.bounds;
  const count=SCOPES[area].expected[mode==='ward'?'ward':'municipality'];
  if(models.length!==count)throw Error('区域件数が一致しません：'+models.length+'（期待 '+count+'）');
  plate=area==='fuji'?catalog.plates.find(p=>p.id==='fuji'):null;
@@ -267,6 +275,7 @@ async function load(area,mode){
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
  selection=mode==='plate'&&plate?{type:'plate'}:null;
+ $('reading').disabled=mode==='plate';
  $('clear').hidden=mode==='plate';
  $('interaction-guide').textContent=mode==='plate'
   ?'紫色が富士山ナンバーの区域です。市町村名は位置確認用に表示し、地図のタップによる詳細表示はありません。検索では対象市町村のナンバー名を調べられます。'
@@ -289,6 +298,7 @@ $('area').addEventListener('change',()=>{
  $('mode').value=$('area').value==='fuji'?'plate':'municipality';refresh();
 });
 $('mode').addEventListener('change',refresh);
+$('reading').addEventListener('change',renderLabels);
 $('zoom-in').addEventListener('click',()=>zoomBy(1.5));
 $('zoom-out').addEventListener('click',()=>zoomBy(1/1.5));
 $('reset').addEventListener('click',()=>{fit();renderLabels();});
@@ -360,9 +370,16 @@ map.addEventListener('wheel',e=>{
 window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
-  const response=await fetch('../data/national/catalog.json');
-  if(!response.ok)throw Error('全国区域データ定義がありません');
-  catalog=await response.json();
+  const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
+   fetch('../data/national/catalog.json'),
+   fetch('../data/national/municipality-readings.json'),
+   fetch('../data/national/county-readings.json')
+  ]);
+  if(!catalogResponse.ok||!municipalitiesResponse.ok||!countiesResponse.ok)
+   throw Error('全国区域・読み仮名データ定義が読み込めません');
+  [catalog,readingData,countyData]=await Promise.all([
+   catalogResponse.json(),municipalitiesResponse.json(),countiesResponse.json()
+  ]);
   const params=new URLSearchParams(location.search);
   if(params.get('area')==='fuji'){$('area').value='fuji';$('mode').value='plate';}
   setModeOptions($('area').value);await refresh();
