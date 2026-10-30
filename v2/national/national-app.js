@@ -9,7 +9,7 @@ const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels;
 const C=window.KussoonCollisionRefinement,N=window.KussoonNationalBoundaries;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
-const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},fuji:{title:'山梨県・静岡県',expected:{municipality:70,ward:70}}};
+const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
 let catalog=null,models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
