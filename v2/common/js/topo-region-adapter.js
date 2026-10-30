@@ -58,7 +58,7 @@ function projectRegions(regions,engine,options={}){
     minY=Math.min(minY,y);maxY=Math.max(maxY,y);
   }
   const scale=(width-pad*2)/Math.max(maxX-minX,maxY-minY);
-  if(!(scale>0)&&!Number.isFinite(scale))throw new Error('投影範囲が不正です');
+  if(!(scale>0)||!Number.isFinite(scale))throw new Error('投影範囲が不正です');
   const height=(maxY-minY)*scale+pad*2;
   const models=regions.map(g=>{
     const props=g.properties;
