@@ -94,10 +94,11 @@ function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),screen=svg.getBoundingClientRect();
  const zoom=full.w/view.w;
- // The old rule kept screen text at 11px even at maximum zoom.
- // Grow rendered glyphs gently with zoom, never shrinking below 16px.
+ // Keep the initial label at least 16px, but bound its growth as geometry zooms.
+ // The former 16 -> ~33px growth at 18x overwhelmed small town polygons,
+ // leaving little room for the nearby labels to escape collisions.
  const base=Math.max(16,Number($('font').value));
- const screenPx=Math.min(38,base*Math.pow(zoom,.18));
+ const screenPx=Math.min(24,base+Math.min(2,Math.max(0,zoom-1)*.18));
  // This city's viewBox is taller than the square SVG. preserveAspectRatio
  // uses the *smaller* of X/Y scales; width-only conversion undersized text.
  const svgPixelsPerUnit=Math.min((screen.width||390)/view.w,(screen.height||390)/view.h);
@@ -108,7 +109,7 @@ function renderLabels(){
  // Only the default "adjacent" mode opts into the new 2D refinement;
  // comparison modes retain the historical vertical-only or no-shift rules.
  const resolved=$('shift').value==='adjacent'
-  ?C.refine(models,initial,size,E,{view,pinned:selected,passes:2})
+  ?C.refine(models,initial,size,E,{view,pinned:selected,passes:3})
   :{labels:initial,moved:0};
  const labels=resolved.labels;
  for(let i=0;i<texts.length;i++){
