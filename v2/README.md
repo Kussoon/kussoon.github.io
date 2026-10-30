@@ -30,6 +30,8 @@
 - [試験トップ](index.html)
 - [芦屋市のラベル比較実験](ashiya/labels.html)
 - [芦屋市の読み仮名・ひらがな／1行ラベル比較](ashiya/readings.html)
+- [三日月・飛地・仁川町／一ケ谷町の特殊形状比較](irregular/index.html)
+- [複雑な町域の汎用配置ルールと検証](docs/irregular-labels.md)
 - [読み仮名・上下微調整の実験記録](docs/ashiya-reading-trial.md)
 - [芦屋市ラベル実験の記録](docs/ashiya-label-test.md)
 - 旧共通仕様案：[nishinomiya/common-learning-spec-draft.md](https://github.com/Kussoon/nishinomiya/blob/main/common-learning-spec-draft.md)
