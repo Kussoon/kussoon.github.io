@@ -34,12 +34,17 @@
     // Only entries explicitly registered as designated cities are grouped.
     const designatedId=parentCity?designated.get(prefCode+'|'+parentCity):null;
     const cityName=designatedId?parentCity:null;
+    // N03_003 has a county name for towns/villages and a parent city name
+    // for designated-city wards. County is part of the full administrative name.
+    const county=!designatedId&&parentCity?.endsWith('郡')?parentCity:null;
     const targetCode=mode==='municipality'&&designatedId?designatedId:code;
     const targetName=mode==='municipality'&&designatedId?cityName:municipality;
     const key=prefCode+':'+targetCode;
     if(!grouped.has(key))grouped.set(key,{
       id:key,code:targetCode,name:targetName,
-      fullName:cityName&&mode==='ward'?cityName+municipality:targetName,
+      fullName:cityName&&mode==='ward'?cityName+municipality:
+       county?county+municipality:targetName,
+      county,
       prefecture,prefectureCode:prefCode,major:cityName&&mode==='ward'?cityName:null,
       municipalityCodes:[],geometries:[]
     });

@@ -64,7 +64,11 @@ function showSuggestions(){
  }
  box.hidden=hits.length===0;$('find').setAttribute('aria-expanded',String(hits.length>0));
 }
-function displayName(m){return m.major==='神戸市'?'神戸市'+m.name:m.name;}
+function displayName(m){
+ if(m.major==='神戸市')return '神戸市'+m.name;
+ if(m.major?.endsWith('郡'))return m.major+m.name;
+ return m.name;
+}
 function setSelected(i,focus){
  if(!Number.isInteger(i)||i<0||i>=models.length)return;
  selected=i;
@@ -87,11 +91,16 @@ function setSelected(i,focus){
 function applyMapTheme(){
  const plateMode=$('use-case').value==='plate';
  $('legend').hidden=!plateMode;
+ svg.classList.toggle('plate-mode',plateMode);
  for(let i=0;i<models.length;i++){
   const path=items[i].path,code=models[i].code;
   path.classList.toggle('plate-kobe',plateMode&&!plateCodes.has(code));
   path.classList.toggle('plate-himeji',plateMode&&plateCodes.has(code));
+  if(plateMode){path.removeAttribute('tabindex');path.removeAttribute('role');}
+  else{path.setAttribute('tabindex','0');path.setAttribute('role','button');}
  }
+ if(plateMode&&selected===null)
+  $('selection').textContent='市町村名と凡例の色分けから、神戸・姫路のナンバー地域を直接確認できます。地図のタップ操作は不要です。';
 }
 function initMap(){
  svg.replaceChildren();
@@ -111,12 +120,12 @@ function initMap(){
  applyMapTheme();
  svg.addEventListener('click',event=>{
   zoomWheelArmed=true;
-  if(performance.now()<suppressTapUntil)return;
+  if($('use-case').value==='plate'||performance.now()<suppressTapUntil)return;
   const target=event.target.closest('.shape');
   if(target)setSelected(Number(target.dataset.index),false);
  });
  svg.addEventListener('keydown',event=>{
-  if(event.key!=='Enter'&&event.key!==' ')return;
+  if($('use-case').value==='plate'||(event.key!=='Enter'&&event.key!==' '))return;
   const target=event.target.closest('.shape');
   if(!target)return;
   event.preventDefault();setSelected(Number(target.dataset.index),false);
@@ -212,7 +221,10 @@ function relayout(){
  const px=Number($('font').value);
  const fontSize=E.screenPixelsToSvgUnits(px,view.w,rect.width||390);
  const measure=textMeasure();
- const labels=R.planCenterFirstLabels(models,null,'kanji',fontSize,measure,E,{
+ // Measure the complete county-and-town label (e.g. 川辺郡猪名川町);
+ // keep the original short name and administrative codes in the data model.
+ const measuredModels=models.map(m=>m.major?.endsWith('郡')?{...m,name:displayName(m)}:m);
+ const labels=R.planCenterFirstLabels(measuredModels,null,'kanji',fontSize,measure,E,{
   anchor:$('anchor').value,shift:$('shift').value
  });
  const mode=$('names').value,show=models.map(m=>mode==='all'||
@@ -264,10 +276,16 @@ function wire(){
  for(const id of ['anchor','shift','font','names','boundaries'])$(id).addEventListener('change',relayout);
  $('use-case').addEventListener('change',()=>{
   applyMapTheme();
-  if(selected!==null)setSelected(selected,false);
-  else $('selection').textContent=$('use-case').value==='plate'
-    ?'市町・区をタップすると、対応するナンバー地域名を表示します。'
-    :'市町・区の形をタップすると名前が分かります。';
+  if($('use-case').value==='plate'){
+    // No municipality tap-to-reveal UI in plate mode; colors are self-explanatory.
+    selected=null;
+    items.forEach(item=>{
+      item.path.classList.remove('selected');
+      item.text.classList.remove('selected');
+    });
+    $('selection').textContent='市町村名と凡例の色分けから、神戸・姫路のナンバー地域を直接確認できます。地図のタップ操作は不要です。';
+  }else if(selected!==null)setSelected(selected,false);
+  else $('selection').textContent='市町・区の形をタップすると名前が分かります。';
   relayout();
  });
  $('zoom-in').addEventListener('click',()=>zoom(1.4));
