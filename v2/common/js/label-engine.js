@@ -344,7 +344,7 @@
   function lineVariants(name,allowWrap=true,knownStems=new Set()) {
     const chars=Array.from(name);
     const variants=[[name]];
-    if(!allowWrap || chars.length<5)return variants;
+    if(!allowWrap || chars.length<4)return variants;
     const stems=knownStems instanceof Set?knownStems:new Set(knownStems);
     for(let cut=2;cut<=chars.length-2;cut++){
       const left=chars.slice(0,cut).join(''),right=chars.slice(cut).join('');
