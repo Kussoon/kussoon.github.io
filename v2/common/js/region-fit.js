@@ -104,6 +104,21 @@ function refine(models,labels,size,engine,options={}){
   }
   return {pairs,area};
  }
+ // The visible diagnostic counts names by center position. A label may enter
+ // the viewport during refinement, so static active-pair checks alone are not
+ // enough to prevent a *new visible collision* at a pan/zoom boundary.
+ function visibleCollisions(){
+  const shown=active.filter(i=>!view||
+   (result[i].x>=view.x&&result[i].x<=view.x+view.w&&
+    result[i].y>=view.y&&result[i].y<=view.y+view.h));
+  let pairs=0;
+  for(let a=0;a<shown.length;a++)
+   for(let b=0;b<a;b++)
+    if(areaOverlap(result[shown[a]].box,result[shown[b]].box)>.01)pairs++;
+  return pairs;
+ }
+ const baselineVisibleCollisions=visibleCollisions();
+ const history=[];
  const originalInside=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
  const originalMargins=usePerimeter?
   active.map(i=>edgeClearance(result[i].box,models[i].rings,engine)):[];
@@ -153,6 +168,7 @@ function refine(models,labels,size,engine,options={}){
     }
    }
    if(best){
+    history.push({i,previous:{...current,box:{...current.box}}});
     current.x=best.x;current.y=best.y;current.box=best.box;
     current.fit=undefined; // An old 9-point score is no longer valid.
     current.step=(current.y-origin.y)/size;
@@ -163,6 +179,13 @@ function refine(models,labels,size,engine,options={}){
   }
   if(!changed)break;
  }
+ // Revert only as many final moves as necessary if a viewport-edge
+ // membership change made the user's visible label collisions worse.
+ for(let h=history.length-1;h>=0&&
+     visibleCollisions()>baselineVisibleCollisions;h--){
+  const {i,previous}=history[h];
+  result[i]=previous;
+ }
  const after=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
  const afterMargins=usePerimeter?
   active.map(i=>edgeClearance(result[i].box,models[i].rings,engine)):[];
@@ -171,7 +194,8 @@ function refine(models,labels,size,engine,options={}){
   labels:result,
   moved:result.reduce((acc,l,i)=>acc+
    (Math.hypot(l.x-labels[i].x,l.y-labels[i].y)>1e-6?1:0),0),
-  improved,
+  improved:result.reduce((n,l,i)=>n+
+   (Math.hypot(l.x-labels[i].x,l.y-labels[i].y)>1e-6?1:0),0),
   beforeOutside:active.length-sum(originalInside),
   afterOutside:active.length-sum(after),
   poorlyContainedBefore:originalInside.filter(v=>v<.76).length,
