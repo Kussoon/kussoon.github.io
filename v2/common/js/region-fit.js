@@ -88,9 +88,9 @@ function refine(models,labels,size,engine,options={}){
   throw Error('区域とラベルのデータが不正です');
  const view=options.view||null,selected=Number.isInteger(options.pinned)?options.pinned:-1;
  const result=labels.map(l=>({...l,box:{...l.box}}));
- const margin=size*2;
+ const viewMargin=size*2;
  // Labels whose centers are off-screen should not force shifts on this view.
- const active=result.map((label,i)=>overlapsView(label.box,view,margin)?i:-1).filter(i=>i>=0);
+ const active=result.map((label,i)=>overlapsView(label.box,view,viewMargin)?i:-1).filter(i=>i>=0);
  const usePerimeter=options.perimeter!==false;
  const minGain=typeof options.minGain==='number'?options.minGain:(usePerimeter?.03:.075);
  const safeMargin=size*.18; // also leaves room for the white text stroke
@@ -148,7 +148,7 @@ function refine(models,labels,size,engine,options={}){
    let bestScore=baseScore,bestFit=fit;
    for(const [x,y] of candidates(origin,model,size,engine)){
     const candidateBox=makeBox(x,y,current.width,current.height);
-    if(!overlapsView(candidateBox,view,margin))continue;
+    if(!overlapsView(candidateBox,view,viewMargin))continue;
     const overlap=scoreAt(i,candidateBox);
     // Never trade an additional name collision for geometric containment.
     if(overlap.pairs>startOverlap.pairs)continue;
