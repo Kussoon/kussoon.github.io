@@ -68,7 +68,7 @@ test('all six readings use the original Nishinomiya town search data',()=>{
     '上ケ原十番町':'うえがはらじゅうばんちょう'
   };
   for(const g of data.groups)for(const name of g.focus){
-    assert.equal(g.readings[name],expected[name]);
+    assert.equal(groups[g.id].readings[name],expected[name]);
   }
 });
 test('all regional centers remain inside their own CODH-derived polygons',()=>{
