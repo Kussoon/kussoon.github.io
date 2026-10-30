@@ -174,7 +174,9 @@
       node.group.style.display=visible[i]?'':'none';
       node.main.textContent=l.primary;
       node.main.setAttribute('x',l.x.toFixed(2));
-      node.main.setAttribute('y',(l.y-(isRuby?l.rubySize*.62:0)).toFixed(2));
+      // The kanji (primary line) itself is centered on the town anchor.
+      // Furigana is only supplementary text beneath that same anchor.
+      node.main.setAttribute('y',l.y.toFixed(2));
       node.main.setAttribute('font-size',String(l.size));
       node.main.setAttribute('stroke-width',String(l.size*.17));
       node.main.classList.toggle('flag',flagged&&l.fit<9);
@@ -182,7 +184,7 @@
       if(isRuby){
         node.ruby.textContent=l.reading;
         node.ruby.setAttribute('x',l.x.toFixed(2));
-        node.ruby.setAttribute('y',(l.y+l.size*.60).toFixed(2));
+        node.ruby.setAttribute('y',(l.y+l.size*.90).toFixed(2));
         node.ruby.setAttribute('font-size',String(l.rubySize));
         node.ruby.setAttribute('stroke-width',String(l.rubySize*.16));
         node.ruby.classList.toggle('flag',flagged&&l.fit<9);
@@ -195,8 +197,8 @@
       ['対象町名',metrics.total+'件'],
       ['画面内のラベル',metrics.inView+'件'],
       ['非表示にしたラベル（比較用）',priority.hiddenByCollision+'件'],
-      ['ラベルの重なり（許容）',metrics.collisions+'組'],
-      ['境界またぎ（許容・概算）',metrics.outside+'件'],
+      ['主文字の重なり（許容）',metrics.collisions+'組'],
+      ['主文字の境界またぎ（概算）',metrics.outside+'件'],
       ['上下微調整した名前',metrics.moved+'件']
     ];
     $('stats').replaceChildren(...fields.map(([name,value])=>{
