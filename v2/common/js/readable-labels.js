@@ -77,46 +77,105 @@
     }
     return laid;
   }
-  // V2 learning-mode placement: show names where their *regions* are, not
-  // wherever the complete text happens to fit. Region outlines and overlaps
-  // are allowed to pass underneath labels. In particular, no clipping or
-  // collision suppression occurs here.
+  // Return the polygon center when it is visually safe. If the centroid
+  // falls in a hole, outside, or inside a very narrow concave neck, find the
+  // nearest point toward Polylabel with reasonable interior clearance.
+  // Geometry-only: the anchor never changes just because the user zooms.
+  function safeInteriorCenter(model,engine) {
+    const c=model.centroid,p=model.polylabel,rings=model.rings;
+    const cDepth=engine.signedDist(c[0],c[1],rings);
+    const pDepth=engine.signedDist(p[0],p[1],rings);
+    if(cDepth>0 && cDepth>=pDepth*.26)return [...c];
+    if(!(pDepth>0))return [...p];
+    const minDepth=pDepth*.35;
+    let best=[...p],bestDistance=Math.hypot(p[0]-c[0],p[1]-c[1]);
+    // The segment to an interior point is not necessarily inside a concave
+    // polygon. Check the *actual* rings for every candidate.
+    for(let k=0;k<=40;k++) {
+      const t=k/40,x=c[0]+(p[0]-c[0])*t,y=c[1]+(p[1]-c[1])*t;
+      if(engine.signedDist(x,y,rings)<minDepth)continue;
+      const distance=Math.hypot(x-c[0],y-c[1]);
+      if(distance<bestDistance-1e-9){best=[x,y];bestDistance=distance;}
+    }
+    return best;
+  }
+
+  // Prefer stable, region-centered names to a collision-free map. All labels
+  // remain visible even if they overlap or cross regional borders.
+  // anchor:'safe' fixes concave-neck/outside centroids; 'raw' is the baseline.
   function planCenterFirstLabels(models,readings,style,size,measure,engine,options={}) {
     validateReadings(models,readings);
     const shift=options.shift || 'none';
-    if(!['none','vertical'].includes(shift))throw new Error('上下調整の方式が不正です');
+    if(!['none','vertical','adjacent'].includes(shift))throw new Error('上下調整の方式が不正です');
+    const anchorMode=options.anchor || 'raw';
+    if(!['raw','safe'].includes(anchorMode))throw new Error('配置方式が不正です');
     const specs=models.map(m=>labelSpec(m.name,readings[m.name],style,size,measure));
-    const anchors=models.map(m=>{
-      const c=m.centroid;
-      return engine.isInside(c[0],c[1],m.rings) ? c : m.polylabel;
+    const anchors=models.map(m=>
+      anchorMode==='safe'?safeInteriorCenter(m,engine):
+        (engine.isInside(m.centroid[0],m.centroid[1],m.rings) ? [...m.centroid] : [...m.polylabel]));
+    // Start with every label anchored at its center. Unlike the former
+    // greedy placement, compare each shift against *all* neighbors, not only
+    // the ones drawn earlier.
+    const layout=models.map((m,i)=>{
+      const [x,y]=anchors[i],spec=specs[i],box=rect(x,y,spec.width,spec.height);
+      return {...spec,x,y,box,fit:sampleFit(box,m.rings,engine),step:0,overlap:0};
     });
-    const layout=new Array(models.length);
-    // Consistent, source-independent order. Vertical adjustments are a
-    // small opt-in improvement, never the reason a label disappears.
-    const order=models.map((_,i)=>i);
-    const accepted=[];
-    for(const i of order){
-      const m=models[i],spec=specs[i],anchor=anchors[i];
-      const overlapsAt=y=>{
-        const box=rect(anchor[0],y,spec.width,spec.height);
-        return accepted.reduce((sum,j)=>sum+overlapArea(box,layout[j].box),0);
-      };
-      const baseOverlap=overlapsAt(anchor[1]);
-      let bestY=anchor[1],bestCost=baseOverlap/(size*size);
-      if(shift==='vertical' && baseOverlap>size*size*.6){
-        for(const step of [-.5,.5,-1,1,-1.5,1.5]){
-          const y=anchor[1]+step*size;
-          if(!engine.isInside(anchor[0],y,m.rings))continue;
-          const cost=overlapsAt(y)/(size*size)+Math.abs(step)*.75;
-          if(cost<bestCost-1e-7){bestY=y;bestCost=cost;}
+    if(shift!=='none') {
+      // Two deterministic sweeps are enough for this small training map.
+      // Never accept a move that increases the number of overlapping pairs.
+      for(let pass=0;pass<2;pass++){
+        let changed=false;
+        for(let i=0;i<models.length;i++){
+          const m=models[i],spec=specs[i],anchor=anchors[i];
+          const neighbors=layout.map((l,j)=>j).filter(j=>j!==i);
+          const scoresAt=y=>{
+            const box=rect(anchor[0],y,spec.width,spec.height);
+            let pairs=0,area=0;
+            for(const j of neighbors){
+              const overlap=overlapArea(box,layout[j].box);
+              if(overlap>.01){pairs++;area+=overlap;}
+            }
+            return {pairs,area};
+          };
+          const baseline=scoresAt(layout[i].y);
+          if(baseline.area<=size*size*.45)continue;
+          if(shift==='adjacent'){
+            const nearParallel=neighbors.some(j=>{
+              const other=models[j],a=anchors[j],otherSpec=specs[j];
+              return m.box.h>m.box.w*1.35 && other.box.h>other.box.w*1.35 &&
+                Math.abs(anchor[0]-a[0])<(spec.width+otherSpec.width)*.52 &&
+                Math.abs(anchor[1]-a[1])<(spec.height+otherSpec.height)*.9 &&
+                overlapArea(layout[i].box,layout[j].box)>.01;
+            });
+            if(!nearParallel)continue;
+          }
+          let bestY=layout[i].y,bestScore=baseline;
+          const steps=shift==='adjacent'?[-.5,.5,-1,1]:[-.5,.5,-1,1,-1.5,1.5];
+          for(const step of steps){
+            const y=anchor[1]+step*size;
+            if(!engine.isInside(anchor[0],y,m.rings))continue;
+            const scores=scoresAt(y);
+            if(scores.pairs>baseline.pairs)continue;
+            const quality=scores.pairs*10+scores.area/(size*size)+Math.abs(step)*.75;
+            const previous=bestScore.pairs*10+bestScore.area/(size*size)+Math.abs((bestY-anchor[1])/size)*.75;
+            if(quality<previous-1e-7){
+              bestY=y;bestScore=scores;
+            }
+          }
+          if(Math.abs(bestY-layout[i].y)>1e-7){
+            layout[i].y=bestY;
+            layout[i].box=rect(anchor[0],bestY,spec.width,spec.height);
+            layout[i].fit=sampleFit(layout[i].box,m.rings,engine);
+            layout[i].step=(bestY-anchor[1])/size;
+            changed=true;
+          }
         }
+        if(!changed)break;
       }
-      const box=rect(anchor[0],bestY,spec.width,spec.height);
-      layout[i]={...spec,x:anchor[0],y:bestY,box,
-        fit:sampleFit(box,m.rings,engine),
-        step:(bestY-anchor[1])/size,
-        overlap:overlapsAt(bestY)};
-      accepted.push(i);
+    }
+    for(let i=0;i<layout.length;i++){
+      layout[i].overlap=layout.reduce((sum,l,j)=>
+        sum+(i===j?0:overlapArea(layout[i].box,l.box)),0);
     }
     return layout;
   }
@@ -136,5 +195,5 @@
       total:models.length};
   }
   global.KussoonReadableLabels={normalizeReading,validateReadings,labelSpec,
-    planVerticalNudges,planCenterFirstLabels,evaluateVisible};
+    planVerticalNudges,safeInteriorCenter,planCenterFirstLabels,evaluateVisible};
 })(window);

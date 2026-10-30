@@ -160,3 +160,70 @@ test('center-first optional vertical nudge preserves every name and anchor insid
     }
   }
 });
+
+test('safe interior anchors correct the narrow-neck town without shifting ordinary centers',()=>{
+  const oh=models.find(m=>m.name==='奥山');
+  const east=models.find(m=>m.name==='東芦屋町');
+  const oki=models.find(m=>m.name==='奥池町');
+  for(const m of [oh,east]){
+    const p=R.safeInteriorCenter(m,E);
+    assert.ok(E.isInside(p[0],p[1],m.rings),m.name);
+    assert.ok(E.signedDist(p[0],p[1],m.rings)>
+      E.signedDist(m.centroid[0],m.centroid[1],m.rings),m.name+' should have more breathing room');
+  }
+  assert.deepEqual([...R.safeInteriorCenter(oki,E)],[...oki.centroid]);
+});
+
+test('outside centroid in a concave L-shaped region automatically returns an interior label point',()=>{
+  const rings=E.parsePath('M0 0 L30 0 L30 170 L190 170 L190 200 L0 200 Z');
+  const shape={rings,centroid:E.centroid(rings),polylabel:E.polylabel(rings)};
+  assert.equal(E.isInside(shape.centroid[0],shape.centroid[1],rings),false);
+  const pt=R.safeInteriorCenter(shape,E);
+  assert.ok(E.isInside(pt[0],pt[1],rings));
+  assert.ok(E.signedDist(pt[0],pt[1],rings)>0);
+});
+
+test('automatic vertical stagger only adjusts neighboring tall districts and never hides them',()=>{
+  const model=(name,x,w,h)=>({
+    name,
+    centroid:[x,155],
+    polylabel:[x,155],
+    box:{w,h},
+    rings:[[[x-w/2,5],[x+w/2,5],[x+w/2,5+h],[x-w/2,5+h]]]
+  });
+  const a=model('甲町',40,55,300),b=model('乙町',98,55,300);
+  const data={甲町:'とてもながいまちなまえ',乙町:'となりのながいまちなまえ'};
+  const initial=R.planCenterFirstLabels([a,b],data,'both',22,measure,E,{anchor:'safe',shift:'none'});
+  const stagger=R.planCenterFirstLabels([a,b],data,'both',22,measure,E,{anchor:'safe',shift:'adjacent'});
+  assert.equal(initial[0].y,initial[1].y);
+  assert.ok(Math.abs(stagger[1].step)>.01,'second tall neighbor should stagger');
+  assert.equal(stagger[1].x,b.centroid[0]);
+  assert.ok(Math.abs(stagger[1].y-b.centroid[1])<=22);
+  assert.ok(E.isInside(stagger[1].x,stagger[1].y,b.rings));
+  const wide=[model('甲町',40,300,100),model('乙町',98,300,100)];
+  assert.ok(R.planCenterFirstLabels(wide,data,'both',22,measure,E,{anchor:'safe',shift:'adjacent'})
+    .every(l=>Math.abs(l.step)<.01),'wide neighboring regions must not move');
+});
+
+test('all 59 reading labels remain visible in auto-corrected and staggered mode at varying screen widths',()=>{
+  for(const width of [320,390,700])for(const font of [14,18,22]){
+    const size=E.screenPixelsToSvgUnits(font,1000,width);
+    for(const style of ['kanji','both','kana']){
+      const straight=R.planCenterFirstLabels(models,readings,style,size,measure,E,
+        {anchor:'safe',shift:'none'});
+      const staggered=R.planCenterFirstLabels(models,readings,style,size,measure,E,
+        {anchor:'safe',shift:'adjacent'});
+      assert.equal(staggered.length,59);
+      for(let i=0;i<59;i++){
+        assert.ok(E.isInside(staggered[i].x,staggered[i].y,models[i].rings));
+        assert.equal(staggered[i].x,straight[i].x);
+        assert.ok(Math.abs(staggered[i].step)<=1.001);
+      }
+      const all=models.map(()=>true);
+      const m=R.evaluateVisible(models,staggered,all,E,bounds);
+      assert.equal(m.shown,59);
+      assert.equal(m.inView,59);
+      assert.ok(m.collisions<=R.evaluateVisible(models,straight,all,E,bounds).collisions);
+    }
+  }
+});

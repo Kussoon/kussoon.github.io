@@ -218,12 +218,16 @@
       const reading=readings[m.name];
       return R.labelSpec(m.name,reading,mode,size,measure).width;
     });
-    const centerFirst=$('anchor-mode').value==='center';
-    const laid=centerFirst
-      ?R.planCenterFirstLabels(models,readings,mode,size,measure,E,{shift})
+    const anchorMode=$('anchor-mode').value;
+    const laid=anchorMode!=='legacy'
+      ?R.planCenterFirstLabels(models,readings,mode,size,measure,E,{
+        anchor:anchorMode==='smart'?'safe':'raw',shift
+      })
       :R.planVerticalNudges(models,
           E.choosePositions(models,baseWidths,size,'avoid'),
-          readings,mode,size,measure,E,{shift,pinned:selected});
+          readings,mode,size,measure,E,{
+            shift:shift==='none'?'none':'vertical',pinned:selected
+          });
     // Learning default: all names appear immediately, irrespective of
     // collisions or glyphs crossing a polygon border.
     const hide=$('declutter').checked;
