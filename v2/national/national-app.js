@@ -379,7 +379,7 @@ window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
-   fetch('../data/national/catalog.json'),
+   fetch('../data/national/catalog.json?v=20261031-fuji-ruby'),
    fetch('../data/national/municipality-readings.json'),
    fetch('../data/national/county-readings.json')
   ]);
