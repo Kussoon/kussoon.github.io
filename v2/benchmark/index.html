@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="芦屋市・西宮市・兵庫県の実区域を同じ尺度で検証するKussoon V2ラベル配置ベンチマーク。">
+<title>V2ラベル配置 共通ルール検証｜Kussoon</title>
+<style>
+:root{color-scheme:light;--ink:#203d56;--line:#c5dae8}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(#edf6fb,#fff 60%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.65}
+main{max-width:1060px;margin:auto;padding:16px 13px 38px}h1{font-size:clamp(23px,4.5vw,32px);line-height:1.4;margin:13px 0}h2{font-size:19px;margin:0 0 9px}a{color:#1a6186}
+section{border:1px solid var(--line);background:white;border-radius:14px;padding:15px;margin:13px 0}
+p{margin:7px 0 12px}label{font-weight:800;font-size:14px}
+.controls{display:flex;flex-wrap:wrap;align-items:end;gap:10px}select,button{font:inherit;min-height:44px;padding:8px 12px;border:1px solid #9ebacc;border-radius:10px;color:var(--ink);background:white}select{min-width:200px}button{font-weight:800;cursor:pointer;background:#226389;color:white;border-color:#226389}button:disabled{opacity:.55;cursor:wait}
+:focus-visible{outline:3px solid #3486c0;outline-offset:2px}
+.small{font-size:13px;color:#526c7f}.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:710px;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 8px;text-align:left;border-bottom:1px solid #dce7ef;white-space:nowrap}thead th{background:#ecf5fa;position:sticky;top:0}td.num,th.num{text-align:right}
+tbody tr:nth-child(even){background:#f7fafc}
+.over{font-weight:800;color:#a04728}
+.good{font-weight:800;color:#267353}
+#status{font-weight:700}#results:empty::before{content:"まだ計測していません。"}
+details{margin-top:10px}.rules{padding-left:20px}.rules li{margin:5px 0}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const key of ['url','referrer'])if(typeof payload[key]==='string')payload[key]=payload[key].split(/[?#]/)[0];return payload};</script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
+<script defer src="/common/site-footer.js"></script>
+<script defer src="../common/js/label-engine.js"></script>
+<script defer src="../common/js/readable-labels.js"></script>
+<script defer src="../common/js/collision-refinement.js"></script>
+<script defer src="../common/js/topo-region-adapter.js"></script>
+<script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<script defer src="benchmark-app.js?v=20261030-1"></script>
+</head><body><main>
+<a href="/v2/">← V2試験トップへ</a>
+<h1>ラベル自動配置・共通ルール検証</h1>
+<p>芦屋市59町名・西宮市322町名・兵庫県49区域を、同じ条件で繰り返し測定します。<strong>地図の修正ではなく、規則の良し悪しを検査する試験です。</strong></p>
+<section><h2>計測するデータ</h2>
+<div class="controls"><label for="region">対象地域
+<select id="region"><option value="all" selected>3地域まとめて検証</option><option value="ashiya">芦屋市（59町名）</option><option value="nishinomiya">西宮市（322町名）</option><option value="hyogo">兵庫県（49区域）</option></select></label>
+<button id="run" type="button">同じ条件で計測する</button></div>
+<p class="small">全域、6倍、最大拡大（芦屋12倍／兵庫県16倍／西宮18倍）を比較します。全域以外は各地域の注目地点を中心とした画面範囲です。文字は初期16px、最大18pxの共通ルールで換算します。</p>
+<p id="status" role="status" aria-live="polite">計測を開始すると、結果を下の表に順次表示します。</p></section>
+<section><h2>計測結果</h2><div class="scroll"><table>
+<thead><tr><th>地域</th><th>表示範囲</th><th class="num">拡大</th><th class="num">表示文字</th><th class="num">対象件数</th><th class="num">重なり調整前</th><th class="num">調整後</th><th class="num">境界外中心</th><th class="num">移動ラベル</th><th class="num">処理時間</th></tr></thead>
+<tbody id="results"></tbody></table></div>
+<p id="totals" class="small"></p>
+<details><summary>どのような基準で判定していますか？</summary>
+<ul class="rules">
+<li>「重なり」は文字の推定矩形の交差を組数で数えます。実際の漢字の輪郭・縁取りを完全再現した値ではありません。</li>
+<li>区域の外にラベル中心が出た件数も調べます。文字全体が行政区域内に収まることは必須にしていません。</li>
+<li>全域で密集するラベルと、十分な拡大率でも残る重なりを区別します。ラベルを非表示にして数値だけ改善することは認めません。</li>
+<li>3地域に同じ「中心優先＋縦長補正＋上下左右の衝突回避」を適用し、特定の町名専用座標は使いません。</li>
+<li>芦屋市は保存済みSVGの加工座標、兵庫県は行政区域TopoJSON、西宮市は丁目を結合した国勢調査町域TopoJSONです。形状やデータの由来は異なります。</li>
+<li>これはブラウザで動く概算検査であり、実機の可読性の評価や全国での「衝突ゼロ」の保証ではありません。</li>
+</ul></details></section>
+<section><h2>検証で大切にする規則</h2>
+<p>町名をすべて表示し、区域内の自然な中心を基本にします。全国での再利用を目指し、個別の町名や行政区域コードに依存した位置補正は避けます。既存ページの見栄えを犠牲にする変更を見落とさないため、まず比較結果を残してから配置規則を更新します。</p>
+<p class="small">このページはV2だけの検証用です。正式版は変更していません。データ出典：CODH／国勢調査の既存公開サイト掲載加工データ、兵庫県V2試験用TopoJSON。</p></section>
+</main></body></html>
