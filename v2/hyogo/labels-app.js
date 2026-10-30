@@ -2,6 +2,7 @@
 (()=>{
 'use strict';
 const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels,A=window.KussoonTopoRegionAdapter;
+const L=window.KussoonAdministrativeLabels;
 const NS='http://www.w3.org/2000/svg',$=id=>document.getElementById(id);
 const svg=$('map'),pointers=new Map();
 let models=[],items=[],selected=null,plateCodes=new Set(),allView={x:0,y:0,w:900,h:900},view={...allView};
@@ -109,9 +110,9 @@ function initMap(){
   const path=element('path',{d:asPath(m.rings),
     class:m.major==='神戸市'?'shape ward':'shape',
     'data-index':i,tabindex:0,role:'button',
-    'aria-label':m.major==='神戸市'?'神戸市'+m.name:m.name});
+    'aria-label':displayName(m)});
   const title=element('title');
-  title.textContent=m.major==='神戸市'?'神戸市'+m.name:m.name;path.append(title);shapes.append(path);
+  title.textContent=displayName(m);path.append(title);shapes.append(path);
   const text=element('text',{class:'name'});
   text.textContent=m.name;labels.append(text);
   return {path,text};
@@ -221,29 +222,21 @@ function relayout(){
  const px=Number($('font').value);
  const fontSize=E.screenPixelsToSvgUnits(px,view.w,rect.width||390);
  const measure=textMeasure();
- // Measure the complete county-and-town label (e.g. 川辺郡猪名川町);
- // keep the original short name and administrative codes in the data model.
- const measuredModels=models.map(m=>m.major?.endsWith('郡')?{...m,name:displayName(m)}:m);
- const labels=R.planCenterFirstLabels(measuredModels,null,'kanji',fontSize,measure,E,{
+ // County/town and city/ward rows use the same automatic placement widths.
+ // Keep the original names and administrative codes for search/selection.
+ const measuredModels=models.map(m=>L.widestRowModel(m,fontSize,measure));
+ const planned=R.planCenterFirstLabels(measuredModels,null,'kanji',fontSize,measure,E,{
   anchor:$('anchor').value,shift:$('shift').value
  });
+ const labels=planned.map((l,i)=>L.boxFor(models[i],l,fontSize,measure));
  const mode=$('names').value,show=models.map(m=>mode==='all'||
   (mode==='wards'?m.major==='神戸市':m.major!=='神戸市'));
  const flag=$('boundaries').checked;
  labels.forEach((l,i)=>{
   const t=items[i].text;
   t.style.display=show[i]?'':'none';
-  const kobeWard=models[i].major==='神戸市';
-  if(kobeWard){
-   // Keep the geographic anchor at the midpoint of both rows.
-   const top=element('tspan',{x:l.x.toFixed(2),dy:(-l.size*.58).toFixed(2)});
-   top.textContent='神戸市';
-   const bottom=element('tspan',{x:l.x.toFixed(2),dy:(l.size*1.16).toFixed(2)});
-   bottom.textContent=models[i].name;
-   t.replaceChildren(top,bottom);
-  }else{
-   t.textContent=l.primary;
-  }
+  // County / municipality and city / ward always share the same 2-line rule.
+  L.paint(t,models[i],l.x,l.size);
   t.setAttribute('x',l.x.toFixed(2));
   t.setAttribute('y',l.y.toFixed(2));
   t.setAttribute('font-size',l.size.toFixed(2));
