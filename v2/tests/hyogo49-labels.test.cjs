@@ -37,6 +37,9 @@ test('source 49 region set: 40 municipalities plus 9 Kobe wards',()=>{
   assert.equal(models.find(m=>m.code==='28204').name,'西宮市');
   assert.equal(models.find(m=>m.code==='28106').name,'長田区');
   assert.equal(models.find(m=>m.code==='28301').name,'猪名川町');
+  assert.equal(models.find(m=>m.code==='28301').major,'川辺郡');
+  assert.equal(models.find(m=>m.name==='神河町').major,'神崎郡');
+  assert.equal(models.find(m=>m.name==='播磨町').major,'加古郡');
   assert.ok(models.some(m=>m.name==='丹波篠山市'));
 });
 
