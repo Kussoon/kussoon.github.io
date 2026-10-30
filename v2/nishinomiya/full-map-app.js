@@ -108,7 +108,7 @@ function renderLabels(){
  // Only the default "adjacent" mode opts into the new 2D refinement;
  // comparison modes retain the historical vertical-only or no-shift rules.
  const resolved=$('shift').value==='adjacent'
-  ?C.refine(models,initial,size,E,{view,pinned:selected,passes:2})
+  ?C.refine(models,initial,size,E,{view,pinned:selected,passes:2,pairwise:zoom>=7})
   :{labels:initial,moved:0};
  const labels=resolved.labels;
  for(let i=0;i<texts.length;i++){
