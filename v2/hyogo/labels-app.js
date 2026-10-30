@@ -64,7 +64,11 @@ function showSuggestions(){
  }
  box.hidden=hits.length===0;$('find').setAttribute('aria-expanded',String(hits.length>0));
 }
-function displayName(m){return m.major==='神戸市'?'神戸市'+m.name:m.name;}
+function displayName(m){
+ if(m.major==='神戸市')return '神戸市'+m.name;
+ if(m.major?.endsWith('郡'))return m.major+m.name;
+ return m.name;
+}
 function setSelected(i,focus){
  if(!Number.isInteger(i)||i<0||i>=models.length)return;
  selected=i;
@@ -212,7 +216,10 @@ function relayout(){
  const px=Number($('font').value);
  const fontSize=E.screenPixelsToSvgUnits(px,view.w,rect.width||390);
  const measure=textMeasure();
- const labels=R.planCenterFirstLabels(models,null,'kanji',fontSize,measure,E,{
+ // Measure the complete county-and-town label (e.g. 川辺郡猪名川町);
+ // keep the original short name and administrative codes in the data model.
+ const measuredModels=models.map(m=>m.major?.endsWith('郡')?{...m,name:displayName(m)}:m);
+ const labels=R.planCenterFirstLabels(measuredModels,null,'kanji',fontSize,measure,E,{
   anchor:$('anchor').value,shift:$('shift').value
  });
  const mode=$('names').value,show=models.map(m=>mode==='all'||
