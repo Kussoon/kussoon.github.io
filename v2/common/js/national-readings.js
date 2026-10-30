@@ -30,5 +30,59 @@
    return {...model,readingParts:parts,reading:parts.map(p=>p.reading).join('')};
   });
  }
- global.KussoonNationalReadings={attach,kana};
+
+ // Name/reading pairs are one unit for collision and territory fit.
+ const SMALL=.62;
+ function lines(model){
+  return (model.readingParts||[]).flatMap(p=>[
+   {text:p.name,scale:1,kind:'name'},
+   {text:p.reading,scale:SMALL,kind:'reading'}
+  ]);
+ }
+ function geometry(model,size,measure){
+  const rows=lines(model),parts=model.readingParts||[];
+  if(!parts.length)throw Error('Reading lines missing: '+model.name);
+  const widths=rows.map(r=>measure(r.text,size*r.scale));
+  const width=Math.max(...widths)+size*.28;
+  const rowSizes=rows.map(r=>size*r.scale);
+  const gaps=rows.slice(0,-1).map((r,i)=>i%2===0?size*.10:size*.24);
+  const total=rowSizes.reduce((a,b)=>a+b,0)+gaps.reduce((a,b)=>a+b,0);
+  const height=total+size*.20;
+  let pos=-total/2;
+  const positions=rowSizes.map((h,i)=>{
+   const y=pos+h/2;pos+=h+(gaps[i]||0);return y;
+  });
+  return {width,height,rows,positions,rowSizes};
+ }
+ function boxFor(model,label,size,measure){
+  const g=geometry(model,size,measure);
+  const {x,y}=label;
+  return {...label,width:g.width,height:g.height,
+   box:{x1:x-g.width/2,x2:x+g.width/2,y1:y-g.height/2,y2:y+g.height/2}};
+ }
+ function paint(textElement,model,x,y,size,measure){
+  const g=geometry(model,size,measure);
+  const existing=[...textElement.querySelectorAll('tspan')];
+  if(existing.length!==g.rows.length||existing.some((node,i)=>node.textContent!==g.rows[i].text)){
+   const nodes=g.rows.map(row=>{
+    const el=textElement.ownerDocument.createElementNS('http://www.w3.org/2000/svg','tspan');
+    el.textContent=row.text;return el;
+   });
+   textElement.replaceChildren(...nodes);
+  }
+  const spans=[...textElement.querySelectorAll('tspan')];
+  spans.forEach((span,i)=>{
+   const row=g.rows[i],font=size*row.scale;
+   span.setAttribute('x',Number(x).toFixed(2));
+   span.setAttribute('y',(y+g.positions[i]).toFixed(2));
+   span.setAttribute('font-size',font.toFixed(2));
+   span.setAttribute('font-weight',row.kind==='reading'?'700':'850');
+   span.setAttribute('stroke-width',(font*.18).toFixed(2));
+   span.setAttribute('dominant-baseline','central');
+   span.setAttribute('data-kind',row.kind);
+  });
+  return g;
+ }
+ global.KussoonNationalReadings={attach,kana,lines,geometry,boxFor,paint};
+
 })(window);
