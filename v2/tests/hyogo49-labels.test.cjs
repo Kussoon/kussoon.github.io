@@ -40,19 +40,21 @@ test('source 49 region set: 40 municipalities plus 9 Kobe wards',()=>{
   assert.ok(models.some(m=>m.name==='丹波篠山市'));
 });
 
-test('TopoJSON reverse/delta arc decoder reconstructs a closed polygon',()=>{
+test('TopoJSON reverse and delta decoding reconstruct a rectangle exactly',()=>{
   const demo={type:'Topology',transform:{scale:[1,1],translate:[0,0]},
     objects:{city:{type:'GeometryCollection',geometries:[
       {type:'Polygon',properties:{N03_007:'28204',N03_004:'西宮市'},
-       arcs:[[0,1,2,3]]}
+       arcs:[[0,~1,2,3]]}
     ]}},arcs:[
-      [[0,0],[10,0]],
-      [[10,10],[-0,10]], // test adds delta; not contiguous intentionally
-      [[20,20],[-10,0]],
-      [[0,20],[0,-20]]
+      [[0,0],[10,0]],    // eastbound
+      [[10,10],[0,-10]], // southbound, must be reversed with ~1
+      [[10,10],[-10,0]], // westbound
+      [[0,10],[0,-10]]   // northbound
     ]};
-  // Full real-source topology and code-based tests below are authoritative.
-  assert.equal(A.decodeTopology(demo,'city').length,1);
+  const result=A.decodeTopology(demo,'city');
+  assert.equal(result.length,1);
+  assert.deepEqual(Array.from(result[0].rings[0],p=>Array.from(p)),
+    [[0,0],[10,0],[10,10],[0,10]]);
   assert.throws(()=>A.decodeTopology({},'city'));
 });
 
