@@ -4,7 +4,7 @@
 const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels,A=window.KussoonTopoRegionAdapter;
 const NS='http://www.w3.org/2000/svg',$=id=>document.getElementById(id);
 const svg=$('map'),pointers=new Map();
-let models=[],items=[],selected=null,allView={x:0,y:0,w:900,h:900},view={...allView};
+let models=[],items=[],selected=null,plateCodes=new Set(),allView={x:0,y:0,w:900,h:900},view={...allView};
 let layoutTimer=null,zoomWheelArmed=false,dragged=false,suppressTapUntil=0;
 function element(tag,attr={}){
  const el=document.createElementNS(NS,tag);
@@ -57,8 +57,19 @@ function setSelected(i,focus){
  });
  const m=models[i];
  $('selection').textContent=m.name+
-   (m.major ? '（'+m.major+'）' : '')+'／行政区域コード '+m.code;
+   (m.major ? '（'+m.major+'）' : '')+
+   ($('use-case').value==='plate'?'／ナンバー地域名：'+(plateCodes.has(m.code)?'姫路':'神戸'):'')+
+   '／行政区域コード '+m.code;
  schedule();
+}
+function applyMapTheme(){
+ const plateMode=$('use-case').value==='plate';
+ $('legend').hidden=!plateMode;
+ for(let i=0;i<models.length;i++){
+  const path=items[i].path,code=models[i].code;
+  path.classList.toggle('plate-kobe',plateMode&&!plateCodes.has(code));
+  path.classList.toggle('plate-himeji',plateMode&&plateCodes.has(code));
+ }
 }
 function initMap(){
  svg.replaceChildren();
@@ -75,6 +86,7 @@ function initMap(){
   return {path,text};
  });
  svg.append(shapes,labels);
+ applyMapTheme();
  svg.addEventListener('click',event=>{
   zoomWheelArmed=true;
   if(performance.now()<suppressTapUntil)return;
@@ -188,6 +200,14 @@ function relayout(){
 }
 function wire(){
  for(const id of ['anchor','shift','font','names','boundaries'])$(id).addEventListener('change',relayout);
+ $('use-case').addEventListener('change',()=>{
+  applyMapTheme();
+  if(selected!==null)setSelected(selected,false);
+  else $('selection').textContent=$('use-case').value==='plate'
+    ?'市町・区をタップすると、対応するナンバー地域名を表示します。'
+    :'市町・区の形をタップすると名前が分かります。';
+  relayout();
+ });
  $('zoom-in').addEventListener('click',()=>zoom(1.4));
  $('zoom-out').addEventListener('click',()=>zoom(1/1.4));
  $('reset').addEventListener('click',()=>{view={...allView};repaintView();relayout()});
@@ -203,22 +223,33 @@ function wire(){
  window.addEventListener('resize',schedule);
 }
 wire();
-fetch('../data/hyogo/hyogo-city.topojson')
- .then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()})
- .then(topo=>{
-  const regions=A.decodeTopology(topo,'city');
-  const projected=A.projectRegions(regions,E,{width:900,padding:30,referenceLatitude:35});
-  models=projected.models;
-  if(models.length!==49||models.filter(m=>m.major==='神戸市').length!==9)
-   throw Error('49区域または神戸市9区のデータが一致しません');
-  allView=projected.bounds;view={...allView};repaintView();
-  $('towns').replaceChildren(...models.map(m=>{
-   const el=document.createElement('option');el.value=m.name;el.label=m.code;return el;
-  }));
-  initMap();relayout();
+Promise.all([
+ fetch('../data/hyogo/hyogo-city.topojson').then(r=>{
+  if(!r.ok)throw Error('境界 HTTP '+r.status);return r.json();
+ }),
+ fetch('../data/hyogo/plate-assignment.json').then(r=>{
+  if(!r.ok)throw Error('ナンバー地域名 HTTP '+r.status);return r.json();
  })
- .catch(e=>{
-  console.error('Hyogo 49 V2 label trial',e);
-  $('status').textContent='地図の読込みに失敗しました：'+e.message;
- });
+]).then(([topo,plate])=>{
+ const regions=A.decodeTopology(topo,'city');
+ const projected=A.projectRegions(regions,E,{width:900,padding:30,referenceLatitude:35});
+ models=projected.models;
+ if(models.length!==49||models.filter(m=>m.major==='神戸市').length!==9)
+  throw Error('49区域または神戸市9区のデータが一致しません');
+ if(plate.defaultPlate!=='神戸'||plate.otherPlate!=='姫路'||
+    !Array.isArray(plate.otherPlateMunicipalityCodes))
+  throw Error('ナンバー地域名のデータ構造が不正です');
+ plateCodes=new Set(plate.otherPlateMunicipalityCodes);
+ if(plateCodes.size!==plate.otherPlateMunicipalityCodes.length ||
+    [...plateCodes].some(code=>!models.some(m=>m.code===code)))
+  throw Error('ナンバー地域名コードと市町・区が一致しません');
+ allView=projected.bounds;view={...allView};repaintView();
+ $('towns').replaceChildren(...models.map(m=>{
+  const el=document.createElement('option');el.value=m.name;el.label=m.code;return el;
+ }));
+ initMap();relayout();
+}).catch(e=>{
+ console.error('Hyogo 49 V2 label trial',e);
+ $('status').textContent='地図の読込みに失敗しました：'+e.message;
+});
 })();
