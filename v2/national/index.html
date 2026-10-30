@@ -27,6 +27,9 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .land.selected{fill:var(--selected);stroke:#65399a;stroke-width:2.0}.land.focused{stroke:#4d267f;stroke-width:3.3}
 /* Touch browsers may keep :hover on an SVG polygon after a finger brushes it. */
 @media (hover:hover) and (pointer:fine){.land:not(.selected):hover{stroke:#356a8b;stroke-width:1.7}}
+/* Touch focus is not an intended selection. Keep explicit keyboard focus visible. */
+.land:focus:not(:focus-visible){outline:none}
+.land:focus-visible{outline:2px solid #286b98;outline-offset:2px}
 .outline{fill:none;stroke:#376383;stroke-width:2.1;vector-effect:non-scaling-stroke;pointer-events:none}
 .place-label{font-weight:850;text-anchor:middle;dominant-baseline:central;fill:#193e58;stroke:#fff;stroke-linejoin:round;paint-order:stroke;pointer-events:none}
 .place-label.selected{fill:#693b95}.plate-label{fill:#532c86;stroke:#fff;stroke-width:2.4;paint-order:stroke;letter-spacing:.025em;font-weight:900}
