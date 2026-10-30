@@ -194,9 +194,9 @@
     const fields=[
       ['対象町名',metrics.total+'件'],
       ['画面内のラベル',metrics.inView+'件'],
-      ['衝突で省略',priority.hiddenByCollision+'件'],
-      ['表示中の重なり',metrics.collisions+'組'],
-      ['区域外の可能性（概算）',metrics.outside+'件'],
+      ['非表示にしたラベル（比較用）',priority.hiddenByCollision+'件'],
+      ['ラベルの重なり（許容）',metrics.collisions+'組'],
+      ['境界またぎ（許容・概算）',metrics.outside+'件'],
       ['上下微調整した名前',metrics.moved+'件']
     ];
     $('stats').replaceChildren(...fields.map(([name,value])=>{
