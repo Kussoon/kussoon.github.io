@@ -34,7 +34,7 @@
   }
   function labelSpec(name,reading,style,size,measure) {
     if(!['kanji','both','kana'].includes(style))throw new Error('表示方式が不正です');
-    if(!reading)throw new Error('読み仮名がありません: '+name);
+    if(!reading && style!=='kanji')throw new Error('読み仮名がありません: '+name);
     const rubySize=size*.58, strokePad=size*.24;
     const primary=style==='kana'?reading:name;
     // The placement and automatic vertical stagger ALWAYS use the primary
@@ -229,12 +229,14 @@
   // remain visible even if they overlap or cross regional borders.
   // anchor:'safe' fixes concave-neck/outside centroids; 'raw' is the baseline.
   function planCenterFirstLabels(models,readings,style,size,measure,engine,options={}) {
-    validateReadings(models,readings);
+    // Kanji-only maps (prefectures/municipalities/license-plate areas)
+    // need no synthetic readings; kana/both modes still require full validation.
+    if(style!=='kanji' || readings!=null)validateReadings(models,readings);
     const shift=options.shift || 'none';
     if(!['none','vertical','adjacent'].includes(shift))throw new Error('上下調整の方式が不正です');
     const anchorMode=options.anchor || 'raw';
     if(!['raw','safe','universal'].includes(anchorMode))throw new Error('配置方式が不正です');
-    const specs=models.map(m=>labelSpec(m.name,readings[m.name],style,size,measure));
+    const specs=models.map(m=>labelSpec(m.name,readings?.[m.name],style,size,measure));
     const anchors=models.map(m=>
       anchorMode==='universal'?universalInteriorAnchor(m,engine):
         anchorMode==='safe'?safeInteriorCenter(m,engine):
