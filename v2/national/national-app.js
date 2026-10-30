@@ -104,7 +104,16 @@ function drawMap(topologies,projectPoint){
  }else{
   for(const model of models){
    const t=tag('text',{class:'place-label'});
-   t.textContent=model.name;labelLayer.append(t);
+   if(model.major){
+    // Avoid ambiguous ward-only names (e.g. multiple 北区 in different cities).
+    // City and ward form two visible rows with the same geographic anchor.
+    const city=tag('tspan',{'data-row':'city',dy:'-0.48em'});
+    city.textContent=model.major;
+    const ward=tag('tspan',{'data-row':'ward',dy:'1.12em'});
+    ward.textContent=model.name;
+    t.append(city,ward);
+   }else t.textContent=model.name;
+   labelLayer.append(t);
    labelNodes.push({node:t,model});
   }
  }
@@ -129,8 +138,18 @@ function renderLabels(){
  const size=screenPx/ratio;
  let workModels=state.mode==='plate'&&plateShape?[plateShape]:models;
  // Plate labels and administrative labels use the same centroid-first engine.
- const original=R.planCenterFirstLabels(workModels,null,'kanji',size,measure,E,{
+ const planned=R.planCenterFirstLabels(workModels,null,'kanji',size,measure,E,{
   anchor:'balanced',shift:'adjacent'
+ });
+ // A designated-city ward has two displayed rows. Collision refinement and
+ // diagnostics must measure *both*, rather than just the short ward name.
+ const original=planned.map((l,i)=>{
+  const m=workModels[i];
+  if(!m.major)return l;
+  const width=Math.max(measure(m.major,size),measure(m.name,size))+size*.24;
+  const height=size*2.24+size*.24;
+  return {...l,width,height,box:{x1:l.x-width/2,y1:l.y-height/2,
+   x2:l.x+width/2,y2:l.y+height/2}};
  });
  const result=C.refine(workModels,original,size,E,{view,passes:3,
   pinned:selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1
@@ -140,6 +159,8 @@ function renderLabels(){
   if(!target)return;
   target.setAttribute('x',position.x.toFixed(2));
   target.setAttribute('y',position.y.toFixed(2));
+  const rows=target.querySelectorAll('tspan');
+  for(const row of rows)row.setAttribute('x',position.x.toFixed(2));
   target.setAttribute('font-size',size.toFixed(2));
   target.setAttribute('stroke-width',(size*.18).toFixed(2));
  });
