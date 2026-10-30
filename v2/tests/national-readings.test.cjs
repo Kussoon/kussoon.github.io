@@ -67,8 +67,8 @@ test('SVG paint uses explicit per-line centers and reading font smaller than nam
  assert.equal(el.childNodes[0],before[0],'Zoom should reuse existing tspans');
  assert.equal(el.childNodes[0].attrs.x,'122.00');
 });
-test('2021 pilot geometry names match 321 code-verified readings, with 45 district readings',()=>{
- const prefs=['19','22','25','26','27','28','29','30'];
+test('2021 pilot geometry names match 440 code-verified readings, with 74 district readings',()=>{
+ const prefs=['19','22','25','26','27','28','29','30','31','32','33','34','35'];
  const models=[],countySet=new Set(),codes=new Set();
  for(const pref of prefs){
   const t=JSON.parse(read('data/national/2021/'+pref+'.topojson'));
@@ -83,14 +83,26 @@ test('2021 pilot geometry names match 321 code-verified readings, with 45 distri
   }
  }
  const attached=NR.attach(models,dataset,counties);
- assert.equal(attached.length,315);
- assert.equal(Object.keys(dataset.items).length,321);
- assert.equal(countySet.size,45);
- assert.equal(Object.keys(counties.readings).length,45);
+ assert.equal(attached.length,432);
+ assert.equal(Object.keys(dataset.items).length,440);
+ assert.equal(countySet.size,74);
+ assert.equal(Object.keys(counties.readings).length,74);
  assert.ok(attached.every(m=>m.readingParts.length===1||m.readingParts.length===2));
- for(const city of [['26100','京都市'],['27100','大阪市'],['27140','堺市'],['28100','神戸市'],['22100','静岡市'],['22130','浜松市']]){
+ for(const city of [['26100','京都市'],['27100','大阪市'],['27140','堺市'],['28100','神戸市'],['22100','静岡市'],['22130','浜松市'],['33100','岡山市'],['34100','広島市']]){
   assert.ok(one(...city).reading);
  }
+});
+test('Chugoku city/ward and county readings preserve four-line interleaved order',()=>{
+ const hiroshima=one('34101','中区',{major:'広島市'});
+ assert.deepEqual(NR.lines(hiroshima).map(x=>x.text),['広島市','ひろしまし','中区','なかく']);
+ const okayama=one('33101','北区',{major:'岡山市'});
+ assert.deepEqual(NR.lines(okayama).map(x=>x.text),['岡山市','おかやまし','北区','きたく']);
+ const okunoshima=one('32528','隠岐の島町',{county:'隠岐郡'});
+ assert.deepEqual(NR.lines(okunoshima).map(x=>x.text),[
+  '隠岐郡','おきぐん','隠岐の島町','おきのしまちょう'
+ ]);
+ const ohchi=one('32449','邑南町',{county:'邑智郡'});
+ assert.deepEqual(NR.lines(ohchi).map(x=>x.text).slice(0,2),['邑智郡','おおちぐん']);
 });
 test('reject swapped municipality readings rather than guessing',()=>{
  assert.throws(()=>one('28110','北区',{major:'神戸市'}),/一致しません/);

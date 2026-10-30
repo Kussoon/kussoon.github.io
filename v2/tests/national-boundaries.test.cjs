@@ -9,7 +9,7 @@ const vm=require('node:vm');
 const base=path.resolve(__dirname,'..');
 const file=p=>fs.readFileSync(path.join(base,p),'utf8');
 const catalog=JSON.parse(file('data/national/catalog.json'));
-const codes=['19','22','25','26','27','28','29','30'];
+const codes=['19','22','25','26','27','28','29','30','31','32','33','34','35'];
 const topologies=Object.fromEntries(codes.map(code=>[code,
  JSON.parse(file('data/national/2021/'+code+'.topojson'))]));
 // A narrow test geometry adapter decodes topological arcs without dissolving
@@ -41,6 +41,8 @@ const E=ctx.window.KussoonLabelEngine,N=ctx.window.KussoonNationalBoundaries;
 const L=ctx.window.KussoonAdministrativeLabels;
 const kansai=Object.fromEntries(['25','26','27','28','29','30'].map(code=>[code,topologies[code]]));
 const fuji=Object.fromEntries(['19','22'].map(code=>[code,topologies[code]]));
+const chugoku=Object.fromEntries(['31','32','33','34','35'].map(code=>[code,topologies[code]]));
+const west=Object.fromEntries(['25','26','27','28','29','30','31','32','33','34','35'].map(code=>[code,topologies[code]]));
 function assertModels(valid){
  assert.ok(valid.bounds.w>0&&valid.bounds.h>0);
  for(const model of valid.models){
@@ -53,7 +55,7 @@ function assertModels(valid){
 }
 test('source years and loaded prefectures remain explicit and non-production',()=>{
  assert.equal(catalog.geometry.asOf,'2021-01-01');
- assert.equal(catalog.prefectures.length,8);
+ assert.equal(catalog.prefectures.length,13);
  assert.equal(catalog.experimental,true);
  for(const code of codes){
   const topo=topologies[code];
@@ -96,6 +98,28 @@ test('Kansai groups correctly to 198 municipalities or 245 wards',()=>{
  assertModels(N.project(municipal,E));
  assertModels(N.project(ward,E));
 });
+test('Chugoku region and connected 11-prefecture western map use the same city-grouping rules',()=>{
+ const chugoku=Object.fromEntries(['31','32','33','34','35'].map(code=>[code,topologies[code]]));
+ const west=Object.fromEntries(['25','26','27','28','29','30','31','32','33','34','35'].map(code=>[code,topologies[code]]));
+ const municipal=N.registry(chugoku,catalog,'municipality');
+ const ward=N.registry(chugoku,catalog,'ward');
+ assert.equal(municipal.length,107);
+ assert.equal(ward.length,117);
+ const okayama=municipal.find(x=>x.code==='33100');
+ const hiroshima=municipal.find(x=>x.code==='34100');
+ assert.equal(okayama.name,'岡山市');
+ assert.equal(okayama.municipalityCodes.length,4);
+ assert.equal(hiroshima.name,'広島市');
+ assert.equal(hiroshima.municipalityCodes.length,8);
+ assert.equal(ward.find(x=>x.code==='33101').fullName,'岡山市北区');
+ assert.equal(ward.find(x=>x.code==='34101').fullName,'広島市中区');
+ assert.equal(municipal.find(x=>x.name==='邑南町').fullName,'邑智郡邑南町');
+ assert.equal(municipal.find(x=>x.name==='隠岐の島町').fullName,'隠岐郡隠岐の島町');
+ assert.equal(N.registry(west,catalog,'municipality').length,305);
+ assert.equal(N.registry(west,catalog,'ward').length,362);
+ assertModels(N.project(municipal,E));
+ assertModels(N.project(ward,E));
+});
 test('Fuji plate area crosses the Yamanashi/Shizuoka prefectural boundary',()=>{
  const municipalities=N.registry(fuji,catalog,'municipality');
  assert.equal(municipalities.length,62);
@@ -128,8 +152,8 @@ test('plate classification refuses missing or repeated municipality codes',()=>{
 });
 test('catalog cannot silently collapse two prefectures into one municipality ID',()=>{
  const all=N.registry(topologies,catalog,'ward');
- assert.equal(all.length,315);
- assert.equal(new Set(all.map(r=>r.id)).size,315);
+ assert.equal(all.length,432);
+ assert.equal(new Set(all.map(r=>r.id)).size,432);
  assert.ok(all.some(r=>r.prefectureCode==='19'));
  assert.ok(all.some(r=>r.prefectureCode==='30'));
 });
@@ -151,4 +175,36 @@ test('2021 nationwide data uses two lines for all county towns and city wards',(
  const fujiCounty=N.registry(fuji,catalog,'municipality').find(m=>m.name==='富士河口湖町');
  assert.deepEqual([...L.rows(fujiCounty)],['南都留郡','富士河口湖町']);
  assert.equal(L.rows(municipal.find(m=>m.name==='西宮市')),null);
+});
+
+test('Chugoku five prefectures and contiguous Western Japan use the same engine',()=>{
+ const municipal=N.registry(chugoku,catalog,'municipality');
+ const ward=N.registry(chugoku,catalog,'ward');
+ assert.equal(municipal.length,107);
+ assert.equal(ward.length,117);
+ const okayama=municipal.find(m=>m.code==='33100');
+ const hiroshima=municipal.find(m=>m.code==='34100');
+ assert.equal(okayama.name,'岡山市');
+ assert.equal(okayama.municipalityCodes.length,4);
+ assert.equal(hiroshima.name,'広島市');
+ assert.equal(hiroshima.municipalityCodes.length,8);
+ assert.equal(ward.find(m=>m.code==='33101').fullName,'岡山市北区');
+ assert.equal(ward.find(m=>m.code==='34105').fullName,'広島市安佐南区');
+ const western=N.registry(west,catalog,'municipality');
+ assert.equal(western.length,305);
+ assert.equal(N.registry(west,catalog,'ward').length,362);
+ assert.equal(new Set(western.map(m=>m.id)).size,305);
+ assertModels(N.project(municipal,E));
+ assertModels(N.project(ward,E));
+ assertModels(N.project(western,E));
+});
+test('Chugoku county names, islands and small villages are preserved',()=>{
+ const municipal=N.registry(chugoku,catalog,'municipality');
+ const hiezuson=municipal.find(m=>m.code==='31384');
+ assert.equal(hiezuson.fullName,'西伯郡日吉津村');
+ const ama=municipal.find(m=>m.code==='32525');
+ assert.equal(ama.fullName,'隠岐郡海士町');
+ assert.ok(ama.geoPolygons.length>0);
+ const oochi=municipal.find(m=>m.code==='32449');
+ assert.equal(oochi.fullName,'邑智郡邑南町');
 });

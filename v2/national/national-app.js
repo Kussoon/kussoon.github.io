@@ -10,7 +10,7 @@ const C=window.KussoonCollisionRefinement,F=window.KussoonRegionFit,N=window.Kus
 const L=window.KussoonAdministrativeLabels,NR=window.KussoonNationalReadings;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
-const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
+const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
 let catalog=null,readingData=null,countyData=null,models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
@@ -379,9 +379,9 @@ window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
-   fetch('../data/national/catalog.json?v=20261031-fuji-ruby'),
-   fetch('../data/national/municipality-readings.json'),
-   fetch('../data/national/county-readings.json')
+   fetch('../data/national/catalog.json?v=20261031-chugoku'),
+   fetch('../data/national/municipality-readings.json?v=20261031-chugoku'),
+   fetch('../data/national/county-readings.json?v=20261031-chugoku')
   ]);
   if(!catalogResponse.ok||!municipalitiesResponse.ok||!countiesResponse.ok)
    throw Error('全国区域・読み仮名データ定義が読み込めません');
@@ -389,7 +389,11 @@ window.addEventListener('resize',scheduleLabels);
    catalogResponse.json(),municipalitiesResponse.json(),countiesResponse.json()
   ]);
   const params=new URLSearchParams(location.search);
-  if(params.get('area')==='fuji'){$('area').value='fuji';$('mode').value='plate';}
+  const requested=params.get('area');
+  if(requested&&SCOPES[requested]){
+   $('area').value=requested;
+   if(requested==='fuji')$('mode').value='plate';
+  }
   setModeOptions($('area').value);await refresh();
  }catch(e){console.error('National V2 setup',e);setStatus('読み込みエラー：'+e.message);}
 })();
