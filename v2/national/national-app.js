@@ -7,6 +7,7 @@ const $=id=>document.getElementById(id);
 const NS='http://www.w3.org/2000/svg';
 const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels;
 const C=window.KussoonCollisionRefinement,N=window.KussoonNationalBoundaries;
+const L=window.KussoonAdministrativeLabels;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
 const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
@@ -112,13 +113,9 @@ function drawMap(topologies,projectPoint){
  // The plate mode adds one dedicated region label, not a detail popup per town.
  for(const model of models){
   const t=tag('text',{class:'place-label'});
-  if(model.major){
-   const city=tag('tspan',{'data-row':'city',dy:'-0.48em'});
-   city.textContent=model.major;
-   const ward=tag('tspan',{'data-row':'ward',dy:'1.12em'});
-   ward.textContent=model.name;
-   t.append(city,ward);
-  }else t.textContent=nameOf(model);
+  // Identical two-row formatting for city/ward and county/town or village.
+  // Full search names remain in the model, unaffected by line breaks.
+  L.paint(t,model,0,15);
   labelLayer.append(t);
   labelNodes.push({node:t,model});
  }
@@ -148,14 +145,14 @@ function renderLabels(){
  if(!(ratio>0))return;
  const size=screenPx/ratio;
  const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
- // Measure county-prefixed names (川辺郡猪名川町), not just their short form.
- // Municipality names remain visible beneath the plate-region overlay.
- const layoutModels=workModels.map(m=>m.major||m.name===nameOf(m)?m:{...m,name:nameOf(m)});
+ // Measure whichever row is wider, not the concatenated county + town string.
+ // Search and selection continue to use the complete administrative name.
+ const layoutModels=workModels.map(m=>L.widestRowModel(m,size,measure));
  const planned=R.planCenterFirstLabels(layoutModels,null,'kanji',size,measure,E,{
   anchor:'balanced',shift:'adjacent'
  });
- // A designated-city ward has two displayed rows. Collision refinement and
- // diagnostics must measure *both*, rather than just the short ward name.
+ // Collision checks must include both rendered rows of every county town
+ // and designated-city ward, including in Fuji plate overview mode.
  const original=planned.map((l,i)=>{
   const m=workModels[i];
   if(m.id==='plate'){
@@ -164,11 +161,7 @@ function renderLabels(){
    return {...l,width,height,box:{x1:l.x-width/2,y1:l.y-height/2,
     x2:l.x+width/2,y2:l.y+height/2}};
   }
-  if(!m.major)return l;
-  const width=Math.max(measure(m.major,size),measure(m.name,size))+size*.24;
-  const height=size*2.24+size*.24;
-  return {...l,width,height,box:{x1:l.x-width/2,y1:l.y-height/2,
-   x2:l.x+width/2,y2:l.y+height/2}};
+  return L.boxFor(m,l,size,measure);
  });
  const result=C.refine(layoutModels,original,size,E,{view,passes:3,
   // Keep the plate-region name anchored; move adjacent municipality labels.
@@ -180,8 +173,7 @@ function renderLabels(){
   if(!target)return;
   target.setAttribute('x',position.x.toFixed(2));
   target.setAttribute('y',position.y.toFixed(2));
-  const rows=target.querySelectorAll('tspan');
-  for(const row of rows)row.setAttribute('x',position.x.toFixed(2));
+  L.paint(target,workModels[i],position.x,size);
   const displayedSize=target.classList.contains('plate-label')?size*1.2:size;
   target.setAttribute('font-size',displayedSize.toFixed(2));
   target.setAttribute('stroke-width',(displayedSize*.18).toFixed(2));

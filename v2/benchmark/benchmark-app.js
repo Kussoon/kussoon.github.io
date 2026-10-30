@@ -6,6 +6,7 @@
 const $=id=>document.getElementById(id);
 const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels;
 const A=window.KussoonTopoRegionAdapter,C=window.KussoonCollisionRefinement;
+const L=window.KussoonAdministrativeLabels;
 const REGIONS={
  ashiya:{label:'芦屋市',expected:59,max:12,spots:['大原町','宮塚町','三条町']},
  nishinomiya:{label:'西宮市',expected:322,max:18,spots:['寿町','今在家町','甲子園砂田町']},
@@ -76,14 +77,8 @@ async function loadRegion(id){
 }
 function textStyle(id,models,laid,size){
  if(id!=='hyogo')return laid;
- // Kobe's nine wards are actually rendered with two text rows on the map.
- return laid.map((l,i)=>{
-  if(models[i].major!=='神戸市')return l;
-  const width=Math.max(measure('神戸市',size),measure(models[i].name,size))+size*.24;
-  const height=size*2.25;
-  const b={x1:l.x-width/2,x2:l.x+width/2,y1:l.y-height/2,y2:l.y+height/2};
-  return {...l,width,height,box:b};
- });
+ // Match the shared two-line geometry for Kobe wards AND county towns.
+ return laid.map((l,i)=>L.boxFor(models[i],l,size,measure));
 }
 function boxesOverlap(a,b){
  return Math.max(0,Math.min(a.x2,b.x2)-Math.max(a.x1,b.x1))*
@@ -169,7 +164,8 @@ async function start(){
     $('status').textContent=config.label+' '+z+'倍の共通配置を計算中…';await nextPaint();
     const b=loaded.bounds,screenPx=screenSize(z);
     const size=screenPx/Math.min(390/(b.w/z),390/(b.h/z));
-    const initial=R.planCenterFirstLabels(loaded.models,null,'kanji',size,measure,E,
+    const plannedModels=loaded.models.map(m=>L.widestRowModel(m,size,measure));
+    const initial=R.planCenterFirstLabels(plannedModels,null,'kanji',size,measure,E,
      {anchor:'balanced',shift:'adjacent'});
     baseline.set(z,textStyle(id,loaded.models,initial,size));
    }

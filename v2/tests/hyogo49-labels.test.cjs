@@ -8,12 +8,13 @@ const path=require('node:path');
 const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const context={window:{},performance:{now:()=>0}};
-for(const file of ['label-engine.js','readable-labels.js','topo-region-adapter.js']){
+for(const file of ['label-engine.js','readable-labels.js','topo-region-adapter.js','administrative-labels.js']){
   vm.runInNewContext(fs.readFileSync(path.join(root,'common/js',file),'utf8'),context,{filename:file});
 }
 const E=context.window.KussoonLabelEngine;
 const R=context.window.KussoonReadableLabels;
 const A=context.window.KussoonTopoRegionAdapter;
+const L=context.window.KussoonAdministrativeLabels;
 const data=JSON.parse(fs.readFileSync(path.join(root,'data/hyogo/hyogo-city.topojson'),'utf8'));
 const plateData=JSON.parse(fs.readFileSync(path.join(root,'data/hyogo/plate-assignment.json'),'utf8'));
 const source=A.decodeTopology(data,'city');
@@ -246,4 +247,24 @@ test('adjacent-label staggering cannot pull Nishinomiya back into its northern n
       E.signedDist(...anchor,models[index].rings)*.75,'shallow-neck placement');
     assert.equal(positioned.length,49);
   }
+});
+
+test('Hyogo county/town and Kobe city/ward labels use the same 2-row rule',()=>{
+ const examples=[
+  ['猪名川町','川辺郡'],['神河町','神崎郡'],['播磨町','加古郡'],
+  ['太子町','揖保郡']
+ ];
+ for(const [name,county] of examples){
+  const model=models.find(m=>m.name===name);
+  assert.ok(model);
+  assert.deepEqual([...L.rows(model)],[county,name]);
+  const measured=L.widestRowModel(model,14,measure);
+  const layout=R.planCenterFirstLabels([measured],null,'kanji',14,measure,E,
+    {anchor:'balanced',shift:'none'})[0];
+  const expanded=L.boxFor(model,layout,14,measure);
+  assert.ok(expanded.box.y2-expanded.box.y1>layout.box.y2-layout.box.y1);
+ }
+ const kobe=models.find(m=>m.name==='東灘区');
+ assert.deepEqual([...L.rows(kobe)],['神戸市','東灘区']);
+ assert.equal(L.rows(models.find(m=>m.name==='西宮市')),null);
 });
