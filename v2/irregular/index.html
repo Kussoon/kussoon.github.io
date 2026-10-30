@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="Kussoon V2 特殊な形の町域の自動ラベル配置実験。三日月形、U字形、飛地、西宮市仁川町と一ケ谷町を比較。">
+<title>特殊形状の町域ラベル配置実験｜Kussoon V2</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f7fa;color:#193d58;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;line-height:1.6}
+main{max-width:880px;padding:18px 12px 32px;margin:auto}
+h1{font-size:clamp(23px,5vw,31px);margin:8px 0}
+a{color:#0d618c}
+.panel{background:white;border:1px solid #bfd5e2;border-radius:16px;padding:14px;margin:14px 0}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+label{font-weight:700;font-size:14px;display:block}
+select{width:100%;min-height:44px;border:1px solid #9bbfd4;border-radius:9px;background:#fff;color:#183c55;font:inherit;font-size:16px;padding:8px;margin-top:4px}
+.svg-wrap{background:#edf6fa;border:1px solid #c5d7e4;border-radius:12px;overflow:hidden}
+svg{display:block;width:100%;height:auto}
+.region{fill:#80bedc;stroke:#fff;stroke-width:3;fill-rule:evenodd;stroke-linejoin:round}
+.marker-old{fill:#d96448;stroke:white;stroke-width:2}
+.marker-new{fill:#115f91;stroke:white;stroke-width:2}
+.guide{stroke:#426e86;stroke-width:1.8;stroke-dasharray:5 5;opacity:.75}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-weight:700;font-size:13px}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}
+.caption{color:#526f7f;font-size:13px}
+.info{background:#eef5fa;padding:12px;border-radius:10px;font-size:14px}
+:focus-visible{outline:3px solid #2784d6;outline-offset:2px}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){['url','referrer'].forEach(function(k){if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0]});return payload}</script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
+<script defer src="/common/site-footer.js"></script>
+<script defer src="../common/js/label-engine.js"></script>
+<script defer src="../common/js/readable-labels.js"></script>
+<script defer src="demo.js"></script>
+</head>
+<body><main>
+<a href="/v2/">← V2の試験トップへ</a>
+<h1>複雑な形の町域・自動ラベル配置実験</h1>
+<p>町域の形だけから、手動座標なしで地名を置く実験です。三日月形・U字形・穴あき・離れた区域、および西宮市の仁川町・一ケ谷町のデータを比較します。</p>
+<section class="panel">
+ <div class="controls">
+  <label>町域の形
+   <select id="shape">
+    <option value="仁川町" selected>西宮市・仁川町（6丁目分を統合）</option>
+    <option value="仁川町六丁目">西宮市・仁川町六丁目</option>
+    <option value="一ケ谷町">西宮市・一ケ谷町</option>
+    <option value="三日月形">三日月形（架空）</option>
+    <option value="U字形">U字形（架空）</option>
+    <option value="鉤形">鉤形（架空）</option>
+    <option value="鹿児島県風">鹿児島県風・多枝と飛地（架空）</option>
+    <option value="穴あき">穴あき（架空）</option>
+    <option value="本体と小島">細長い本体と小島（架空）</option>
+   </select>
+  </label>
+  <label>表示位置の比較
+   <select id="comparison">
+    <option value="both" selected>従来の安全中心と新汎用中心</option>
+    <option value="old">従来方式のみ</option>
+    <option value="new">新汎用方式のみ</option>
+   </select>
+  </label>
+ </div>
+ <div class="legend" style="margin:12px 0"><span><i class="dot" style="background:#d96448"></i>従来の安全中心</span><span><i class="dot" style="background:#115f91"></i>新しい汎用中心</span></div>
+ <div class="svg-wrap"><svg id="map" viewBox="0 0 900 900" aria-label="選択した町域とラベル候補の比較" role="img"></svg></div>
+ <div class="info" id="metrics" aria-live="polite">形状を読み込んでいます。</div>
+</section>
+<section class="panel">
+ <h2>新しいルール</h2>
+ <p>従来の安全中心をまず計算し、十分自然ならそのまま使用します。重心が区域外・細いくびれにある場合だけ、<strong>一番大きな区域</strong>の内部を細かく調べて、境界から一定の余裕を持ちながら重心に近い場所を選びます。</p>
+ <p>途中に穴があったり、湾曲した三日月形だったりしても、重心から一方向にしか探索しない方式とは異なり、2次元で候補を探します。文字が境界をまたぐこと、町名同士が重なることは引き続き許容し、表示は省略しません。</p>
+ <p class="caption">これは配置アルゴリズムの比較用試作です。西宮市の元データは国勢調査町丁・字等別境界データセット（CODH／令和2年国勢調査加工、CC BY 4.0）に由来し、試験用SVG座標に変換しています。正式な行政境界や住所証明には使えません。架空の形は実際の自治体の境界ではありません。<a href="https://github.com/Kussoon/nishinomiya/blob/main/data/nishinomiya-towns.topojson">元の形状データ</a></p>
+ <p><a href="/v2/ashiya/readings.html">芦屋市59町名での比較へ</a>（表示位置から「三日月・多枝・飛地の汎用中心」を選択）</p>
+</section>
+</main></body></html>
