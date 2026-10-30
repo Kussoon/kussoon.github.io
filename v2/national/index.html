@@ -42,7 +42,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/collision-refinement.js"></script>
 <script defer src="../common/js/national-boundaries.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
-<script defer src="national-app.js?v=1"></script>
+<script defer src="national-app.js?v=20261030-municipality2"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>全国市区町村マップ V2</h1>
@@ -73,5 +73,5 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 </div>
 <section class="panel"><h2>全国展開に向けた考え方</h2>
 <p><strong>行政区域は「都道府県コード＋5桁の市区町村コード」で管理</strong>し、ナンバープレート地域はそれらのコードの集合として定義します。「富士山」は山梨県7市町村と静岡県5市町を一つの地域に結びつけます。県ごとに複製した図形や座標は持たせません。</p>
-<p class="meta">境界試験データ：<a href="https://github.com/smartnews-smri/japan-topography">SmartNews SMRI「japan-topography」</a>（国土交通省・国土数値情報 N03 2021年版を簡素化）。<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html">国土交通省の2026年版行政区域データ</a>と照合した正式版の整備は今後の工程です。富士山ナンバー対象区域は国土交通省・静岡県等の公表情報に基づきます。</p></section>
+<p class="meta">境界試験データ：「国土数値情報（行政区域データ）」（国土交通省）を加工して作成した<a href="https://github.com/smartnews-smri/japan-topography">SmartNews SMRI「japan-topography」</a>（2021年基準・簡素化1％）を利用。<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html">国土交通省の2026年版行政区域データ</a>と照合した正式版の整備は今後の工程です。富士山ナンバー対象区域は国土交通省・静岡県等の公表情報に基づきます。</p></section>
 </main></body></html>
