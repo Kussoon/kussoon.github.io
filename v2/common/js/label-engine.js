@@ -388,11 +388,11 @@
               const drift=Math.hypot(x-seed[0],y-seed[1])/Math.max(fontSize,1);
               // "Fully within" means the nine sample points are inside,
               // not that every glyph pixel is inside the polygon.
-              // One-line is the default. Require roughly three extra
-              // in-polygon samples before accepting a two-line candidate.
-              // This discourages switching lines for tiny visual gains.
+              // Prefer one line unless a verified place-name boundary
+              // yields a real fit improvement. The conservative stem check
+              // already blocks orphan suffixes and awkward splits.
               const score=(9-n)*18 + drift*.10 +
-                (variant.length===2?40:0) + orphan*40 +
+                (variant.length===2?12:0) + orphan*40 +
                 (1-scale)*30;
               if(!best || score<best.score){
                 best={x,y,lines:variant,fontSize:size,width,height,box,insidePoints:n,
