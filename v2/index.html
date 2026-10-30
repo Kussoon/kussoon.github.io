@@ -52,7 +52,7 @@
       <a class="back" href="/">← Kussoonトップへ</a>
       <p class="eyebrow">開発・比較用（正式版ではありません）</p>
       <h1>Kussoon 地域学習システム V2</h1>
-      <p class="lead">町名・市町村名・都道府県名・国名を、同じ仕組みで学べる地域学習システムを検証しています。</p>
+      <p class="lead">町名・市町村名・都道府県名・ナンバープレート地域名を、全国共通の行政区域データとラベル配置規則で扱う地域学習システムを検証しています。</p>
     </header>
     <section class="notice" aria-label="試験ページについて">
       <strong>芦屋市・兵庫県・西宮市全域の実データを使って共通規則を検証中です。</strong>
@@ -61,6 +61,10 @@
     <section aria-labelledby="tests" style="margin-top:28px">
       <h2 id="tests">試験対象</h2>
       <div class="grid">
+        <article class="card"><h2>全国市区町村マップ V2</h2><span class="status">全国対応の共通構造を検証中</span>
+        <p>まず関西198市町村（区表示では245区域）と、山梨・静岡にまたがる富士山ナンバー12市町村を一つの仕組みで試験します。境界は2021年基準の軽量データです。</p>
+        <div class="links"><a href="/v2/national/?area=kansai">関西2府4県・市町村マップ</a>
+        <a href="/v2/national/?area=fuji">富士山ナンバーの県境横断表示</a></div></article>
         <article class="card"><h2>芦屋市</h2><span class="status">ラベル配置実験中</span><p>59町名・60地図面を使い、ラベルの自動配置に加えて漢字・読み仮名・ひらがな表示も検証します。</p><div class="links"><a href="/v2/ashiya/readings.html">読み仮名・1行表示の実験</a><a href="/v2/ashiya/labels.html">従来の配置比較</a><a href="/ashiya/">現行版を見る</a></div></article>
         <article class="card"><h2>兵庫県</h2><span class="status">49区域ラベル試験中</span><p>40市町＋神戸市9区の地図に、中心優先・全件表示を適用。ナンバープレートの地域名表示にも同じ規則を試します。</p><div class="links"><a href="/v2/hyogo/labels.html">兵庫県49区域の配置比較</a><a href="/v2/hyogo/labels.html?mode=plate">ナンバープレート地域名・兵庫県V2試験</a><a href="/hyogo/">現行版を見る</a></div></article>
         <article class="card"><h2>西宮市</h2><span class="status">実際の町域で配置試験中</span><p>仁川町・一ケ谷町の特殊形状に加え、鞍掛町・久保町、上ケ原七〜十番町の重なりを自動調整して比較します。</p><div class="links"><a href="/v2/nishinomiya/full-map.html">西宮市全域322町名の配置試験</a><a href="/v2/nishinomiya/staggers.html">隣接する6町名の自動配置比較</a><a href="/v2/irregular/">特殊形状のラベル配置比較</a><a href="/nishinomiya/">現行版を見る</a></div></article>
