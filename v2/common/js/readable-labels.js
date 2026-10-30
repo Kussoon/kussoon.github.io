@@ -81,11 +81,41 @@
   // falls in a hole, outside, or inside a very narrow concave neck, find the
   // nearest point toward Polylabel with reasonable interior clearance.
   // Geometry-only: the anchor never changes just because the user zooms.
+  // If a region anchor is unusually close to one side of its horizontal
+  // interior corridor, balance the two available margins. This is not the
+  // former "fit every glyph inside" constraint: it only corrects extreme
+  // one-sided anchors, independent of font size, viewport and zoom.
+  function balanceOneSidedAnchor(point,model,engine) {
+    const [x,y]=point,intersections=[];
+    for(const ring of model.rings){
+      for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+        const a=ring[j],b=ring[i];
+        if((a[1]>y)!==(b[1]>y)){
+          intersections.push(a[0]+(b[0]-a[0])*(y-a[1])/(b[1]-a[1]));
+        }
+      }
+    }
+    // The adjacent intersections bound the *contiguous* inside segment,
+    // even for concave outlines or regions with holes.
+    const left=Math.max(...intersections.filter(v=>v<x-1e-7));
+    const right=Math.min(...intersections.filter(v=>v>x+1e-7));
+    if(!Number.isFinite(left)||!Number.isFinite(right))return point;
+    const leftRoom=x-left,rightRoom=right-x;
+    if(Math.min(leftRoom,rightRoom)/Math.max(leftRoom,rightRoom)>=.35)return point;
+    const candidateX=(left+right)/2;
+    // Small, conservative correction; do not drag the label to another arm
+    // of an irregular region, and never move its center outside the region.
+    if(Math.abs(candidateX-x)>model.box.w*.15)return point;
+    if(!engine.isInside(candidateX,y,model.rings))return point;
+    if(engine.signedDist(candidateX,y,model.rings)<=
+       engine.signedDist(x,y,model.rings)*1.2)return point;
+    return [candidateX,y];
+  }
   function safeInteriorCenter(model,engine) {
     const c=model.centroid,p=model.polylabel,rings=model.rings;
     const cDepth=engine.signedDist(c[0],c[1],rings);
     const pDepth=engine.signedDist(p[0],p[1],rings);
-    if(cDepth>0 && cDepth>=pDepth*.26)return [...c];
+    if(cDepth>0 && cDepth>=pDepth*.26)return balanceOneSidedAnchor([...c],model,engine);
     if(!(pDepth>0))return [...p];
     const minDepth=pDepth*.35;
     let best=[...p],bestDistance=Math.hypot(p[0]-c[0],p[1]-c[1]);
@@ -97,7 +127,7 @@
       const distance=Math.hypot(x-c[0],y-c[1]);
       if(distance<bestDistance-1e-9){best=[x,y];bestDistance=distance;}
     }
-    return best;
+    return balanceOneSidedAnchor(best,model,engine);
   }
 
   // Prefer stable, region-centered names to a collision-free map. All labels
