@@ -45,7 +45,11 @@ function setSelected(i,focus){
  if(!Number.isInteger(i)||i<0||i>=models.length)return;
  selected=i;
  if(focus){
-  const m=models[i],p=R.safeInteriorCenter(m,E);
+  const m=models[i],mode=$('anchor').value;
+  const p=mode==='balanced'?R.locallyBalancedCenter(m,E):
+    mode==='universal'?R.universalInteriorAnchor(m,E):
+    mode==='safe'?R.safeInteriorCenter(m,E):
+    E.isInside(...m.centroid,m.rings)?[...m.centroid]:[...m.polylabel];
   const width=Math.min(view.w,allView.w/5);
   view={x:p[0]-width/2,y:p[1]-width*allView.h/allView.w/2,
     w:width,h:width*allView.h/allView.w};
