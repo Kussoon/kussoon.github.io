@@ -23,7 +23,9 @@ function refine(models,initial,size,engine,options={}){
  if(models.length!==initial.length||!(size>0))throw Error('配置データが不正です');
  const laid=initial.map(l=>({...l,box:{...l.box}}));
  const view=options.view||null;
- const margin=size*10;
+ // Only labels near the visible viewport should compete for screen space.
+ // Offscreen towns must not displace an otherwise readable on-screen label.
+ const margin=size*2;
  const active=laid.map((l,i)=>{
   if(!view)return i;
   const b=l.box;
