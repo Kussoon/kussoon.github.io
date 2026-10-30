@@ -88,11 +88,15 @@ test('Kansai groups correctly to 198 municipalities or 245 wards',()=>{
 });
 test('Fuji plate area crosses the Yamanashi/Shizuoka prefectural boundary',()=>{
  const municipalities=N.registry(fuji,catalog,'municipality');
- assert.equal(municipalities.length,70);
+ assert.equal(municipalities.length,62);
  const projected=N.project(municipalities,E);
  assertModels(projected);
  const plate=catalog.plates.find(p=>p.id==='fuji');
  assert.ok(plate);
+ const ward=N.registry(fuji,catalog,'ward');
+ assert.equal(ward.length,70);
+ assert.equal(municipalities.find(x=>x.code==='22100').municipalityCodes.length,3);
+ assert.equal(municipalities.find(x=>x.code==='22130').municipalityCodes.length,7);
  const members=N.plateMembers(projected.models,plate);
  assert.equal(members.length,12);
  assert.equal(members.filter(m=>m.prefectureCode==='19').length,7);
