@@ -221,7 +221,7 @@
     const anchorMode=$('anchor-mode').value;
     const laid=anchorMode!=='legacy'
       ?R.planCenterFirstLabels(models,readings,mode,size,measure,E,{
-        anchor:anchorMode==='smart'?'safe':'raw',shift
+        anchor:anchorMode==='universal'?'universal':anchorMode==='smart'?'safe':'raw',shift
       })
       :R.planVerticalNudges(models,
           E.choosePositions(models,baseWidths,size,'avoid'),
