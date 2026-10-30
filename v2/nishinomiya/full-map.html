@@ -12,7 +12,7 @@
 <script defer src="../common/js/readable-labels.js"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="../common/js/collision-refinement.js?v=1"></script>
-<script defer src="full-map-app.js?v=3-dense-font"></script>
+<script defer src="full-map-app.js?v=4-readable-zoom"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a><h1>西宮市全域・町名ラベル自動配置</h1>
 <p>既存の町域境界449図形を、同じ町の丁目境界を結合した<strong>322町名グループ</strong>として試験します。全町名を表示しながら、縦長でない町も含めた小幅な重なり調整と拡大時の文字の読みやすさを検証します。従来の公開ページは変更しません。</p>
@@ -22,7 +22,7 @@
 <label>初期文字サイズ<select id="font"><option value="16" selected>16px（標準）</option><option value="18">18px</option><option value="20">20px</option><option value="22">22px</option><option value="24">24px</option></select></label>
 <div class="finder"><label for="find" style="display:block;font-weight:800;font-size:13px">町名を検索（漢字の一部）</label><input id="find" type="search" placeholder="例：鞍掛、上ケ原、甲陽園" autocomplete="off" aria-controls="suggestions"><div id="suggestions" class="suggestions" hidden></div></div>
 </section>
-<section class="panel"><div class="buttons"><button id="zoom-in">＋ 拡大</button><button id="zoom-out">− 縮小</button><button id="reset">全域</button><button id="clear">選択解除</button></div><p id="selection" class="summary" aria-live="polite">町名をタップすると選択できます。</p><p class="small">ドラッグで移動・2本指で拡大縮小。拡大に応じて文字も大きくなります。町名は省略せず表示しますが、小さな町域では一部重なる場合があります。</p></section>
+<section class="panel"><div class="buttons"><button id="zoom-in">＋ 拡大</button><button id="zoom-out">− 縮小</button><button id="reset">全域</button><button id="clear">選択解除</button></div><p id="selection" class="summary" aria-live="polite">町名をタップすると選択できます。</p><p class="small">ドラッグで移動・2本指で拡大縮小。拡大しても標準文字サイズは約18pxを上限に抑え、周囲のラベルとの重なりを自動調整します。町名は省略しませんが、密集区域では重なりが残る場合があります。</p></section>
 <div class="layout"><section class="panel"><h2>西宮市322町名・全域</h2><svg id="map" class="map" viewBox="0 0 900 900" aria-label="西宮市全域の町名地図"></svg></section><section class="panel"><h2>ラベル配置診断</h2><p id="status" role="status">地図を読み込み中…</p><div id="metrics" class="small"></div></section></div>
 <section class="panel small"><strong>データと試験範囲：</strong>西宮市の現行地図と同じ「令和2年国勢調査町丁・字等別境界データ」を利用。既存の<a href="/nishinomiya/data/nishinomiya-towns.topojson">TopoJSON</a>から丁目を町名に統合して表示します。同じ町名に属する丁目の図形はTopoJSONの共有境界を結合し、町内の丁目境界を表示しません。別の町との境界は維持します。ひらがな検索・郵便番号・町丁目の正規化は今後の工程で検証します。</section>
 </main></body></html>
