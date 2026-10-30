@@ -32,6 +32,9 @@
 - [芦屋市の読み仮名・ひらがな／1行ラベル比較](ashiya/readings.html)
 - [三日月・飛地・仁川町／一ケ谷町の特殊形状比較](irregular/index.html)
 - [西宮市・隣接する6町名の上下調整比較](nishinomiya/staggers.html)
+- [兵庫県49市町・区名のV2配置比較／ナンバー地域名表示](hyogo/labels.html)
+- [兵庫県49区域ラベル試験記録](docs/hyogo49-label-trial.md)
+- [全国ナンバープレートマップのV2段階導入計画](docs/nationwide-plate-label-plan.md)
 - [西宮市6町名の恒久的な配置回帰テスト記録](docs/nishinomiya-adjacent-labels.md)
 - [複雑な町域の汎用配置ルールと検証](docs/irregular-labels.md)
 - [読み仮名・上下微調整の実験記録](docs/ashiya-reading-trial.md)
@@ -81,4 +84,12 @@ node --test v2/tests/label-engine.test.cjs
 
 ```sh
 node --test v2/tests/readable-labels.test.cjs
+```
+
+## 兵庫県49区域／全国ナンバープレートマップの次段階
+
+兵庫県の既存TopoJSON（40市町＋神戸市9区）をV2の共通中心計算へ接続し、学習地図とナンバープレート地域名マップの両方で同じラベル配置を試す。正式版は未変更。読み仮名の正本がない場合は架空の読みを補完しない。全国47ページは合計約103.5MiBのHTMLなので兵庫県から段階的に進め、旧URLや管轄情報を維持する。
+
+```sh
+node --test v2/tests/hyogo49-labels.test.cjs
 ```
