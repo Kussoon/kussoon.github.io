@@ -334,23 +334,25 @@
     return {shown,eligible,hiddenByCollision:eligible.filter((yes,i)=>yes&&!shown[i]).length,strategy};
   }
 
-  // Return possible semantic-neutral splits. The full name is always retained.
-  // The candidate ranking penalizes lonely one-character lines; suffix '町'
-  // can be split when the shape makes that markedly better than one line.
-  function lineVariants(name,allowWrap=true) {
+  // Infer conservative place-name stems from *other* entities in this dataset.
+  // For example 打出町 gives the stem 打出, which licenses 打出／小槌町.
+  // No arbitrary char-count break or isolated 町 is ever generated.
+  function deriveNameStems(models) {
+    return new Set(models.map(m=>String(m.name).replace(/[町村市区]$/u,''))
+      .filter(s=>Array.from(s).length>=2));
+  }
+  function lineVariants(name,allowWrap=true,knownStems=new Set()) {
     const chars=Array.from(name);
     const variants=[[name]];
-    if(allowWrap && chars.length>=4){
-      const last=chars.length-1;
-      for(let cut=1;cut<chars.length;cut++){
-        // Avoid unnatural mid-word splits like 東芦／屋町. On four-character
-        // names, prefer directional-prefix or explicit suffix boundaries.
-        if(chars.length===4 && cut===2)continue;
-        if(cut===1 && !/^[東西南北上下新旧]/u.test(chars[0]))continue;
-        if(cut===last && chars[last]!=='町' && chars[last]!=='村')continue;
-        const left=chars.slice(0,cut).join(''),right=chars.slice(cut).join('');
-        variants.push([left,right]);
-      }
+    if(!allowWrap || chars.length<5)return variants;
+    const stems=knownStems instanceof Set?knownStems:new Set(knownStems);
+    for(let cut=2;cut<=chars.length-2;cut++){
+      const left=chars.slice(0,cut).join(''),right=chars.slice(cut).join('');
+      // Reject breaks immediately adjacent to a small kana, separator,
+      // or an unsupported semantic boundary (e.g. 朝日／ヶ丘町).
+      if(/[ヶケがノの・･]$/u.test(left)||/^[ヶケがノの・･]/u.test(right))continue;
+      if(!stems.has(left))continue;
+      variants.push([left,right]);
     }
     return variants;
   }
@@ -359,23 +361,25 @@
   function makeLabelBox(x,y,w,h){return rect(x,y,w,h);}
   function planAdaptiveLabels(models,seedPositions,fontSize,measure,options={}) {
     const useWrap=options.wrap!==false, useShrink=options.shrink===true;
+    const fixedPosition=options.fixedPosition===true;
     const scales=useShrink?[1,0.875]:[1];
+    const stems=options.knownStems || deriveNameStems(models);
     const result=[];
     const offsets=[[0,0],[-.55,0],[.55,0],[0,-.55],[0,.55],
       [-1.1,0],[1.1,0],[0,-1.1],[0,1.1]];
     for(let i=0;i<models.length;i++){
       const m=models[i],seed=seedPositions[i];
       let best=null;
-      const lines=lineVariants(m.name,useWrap);
+      const lines=lineVariants(m.name,useWrap,stems);
       for(const scale of scales){
         const size=fontSize*scale, lineHeight=size*1.16;
         for(const variant of lines){
           const width=Math.max(...variant.map(x=>measure(x,size)));
           const height=lineHeight*variant.length;
           const orphan=(variant.length>1 && Math.min(...variant.map(x=>Array.from(x).length))===1)?1:0;
-          const shapeChoices=[seed,m.polylabel,m.centroid];
+          const shapeChoices=fixedPosition?[seed]:[seed,m.polylabel,m.centroid];
           for(const center of shapeChoices){
-            for(const [dx,dy] of offsets){
+            for(const [dx,dy] of (fixedPosition?[[0,0]]:offsets)){
               const x=center[0]+dx*Math.max(width*.45,size*.5);
               const y=center[1]+dy*Math.max(height*.45,size*.5);
               if(!isInside(x,y,m.rings))continue;
@@ -384,8 +388,11 @@
               const drift=Math.hypot(x-seed[0],y-seed[1])/Math.max(fontSize,1);
               // "Fully within" means the nine sample points are inside,
               // not that every glyph pixel is inside the polygon.
+              // One-line is the default. Require roughly three extra
+              // in-polygon samples before accepting a two-line candidate.
+              // This discourages switching lines for tiny visual gains.
               const score=(9-n)*18 + drift*.10 +
-                (variant.length===2?1.2:0) + orphan*2.8 +
+                (variant.length===2?40:0) + orphan*40 +
                 (1-scale)*30;
               if(!best || score<best.score){
                 best={x,y,lines:variant,fontSize:size,width,height,box,insidePoints:n,
@@ -423,5 +430,5 @@
     }
     return {count:ids.length,collisions,centerOutside,wholeOutside,problemIndices:[...problemIndices]};
   }
-  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize,screenPixelsToSvgUnits,subsetMetrics,selectVisibleLabels,selectPriorityLabels,lineVariants,planAdaptiveLabels,evaluateLabelLayouts};
+  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize,screenPixelsToSvgUnits,subsetMetrics,selectVisibleLabels,selectPriorityLabels,deriveNameStems,lineVariants,planAdaptiveLabels,evaluateLabelLayouts};
 })(window);
