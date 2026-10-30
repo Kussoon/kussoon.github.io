@@ -113,40 +113,69 @@
     const anchors=models.map(m=>
       anchorMode==='safe'?safeInteriorCenter(m,engine):
         (engine.isInside(m.centroid[0],m.centroid[1],m.rings) ? [...m.centroid] : [...m.polylabel]));
-    const layout=new Array(models.length);
-    const accepted=[];
-    for(let i=0;i<models.length;i++){
-      const m=models[i],spec=specs[i],anchor=anchors[i];
-      const overlapsAt=y=>{
-        const box=rect(anchor[0],y,spec.width,spec.height);
-        return accepted.reduce((sum,j)=>sum+overlapArea(box,layout[j].box),0);
-      };
-      const baseOverlap=overlapsAt(anchor[1]);
-      let bestY=anchor[1],bestCost=baseOverlap/(size*size);
-      // Only stagger a narrow north-south neighbor, not every overlapping
-      // label. The original center has priority unless adjustment helps.
-      const nearbyParallel=accepted.some(j=>{
-        const other=models[j],a=anchors[j],otherSpec=specs[j];
-        return m.box.h>m.box.w*1.35 && other.box.h>other.box.w*1.35 &&
-          Math.abs(anchor[0]-a[0])<(spec.width+otherSpec.width)*.52 &&
-          Math.abs(anchor[1]-a[1])<(spec.height+otherSpec.height)*.9;
-      });
-      const canStagger=shift==='vertical'||(shift==='adjacent'&&nearbyParallel);
-      if(canStagger && baseOverlap>size*size*.45){
-        const steps=shift==='adjacent'?[-.5,.5,-1,1]:[-.5,.5,-1,1,-1.5,1.5];
-        for(const step of steps) {
-          const y=anchor[1]+step*size;
-          if(!engine.isInside(anchor[0],y,m.rings))continue;
-          const cost=overlapsAt(y)/(size*size)+Math.abs(step)*.75;
-          if(cost<bestCost-1e-7){bestY=y;bestCost=cost;}
+    // Start with every label anchored at its center. Unlike the former
+    // greedy placement, compare each shift against *all* neighbors, not only
+    // the ones drawn earlier.
+    const layout=models.map((m,i)=>{
+      const [x,y]=anchors[i],spec=specs[i],box=rect(x,y,spec.width,spec.height);
+      return {...spec,x,y,box,fit:sampleFit(box,m.rings,engine),step:0,overlap:0};
+    });
+    if(shift!=='none') {
+      // Two deterministic sweeps are enough for this small training map.
+      // Never accept a move that increases the number of overlapping pairs.
+      for(let pass=0;pass<2;pass++){
+        let changed=false;
+        for(let i=0;i<models.length;i++){
+          const m=models[i],spec=specs[i],anchor=anchors[i];
+          const neighbors=layout.map((l,j)=>j).filter(j=>j!==i);
+          const scoresAt=y=>{
+            const box=rect(anchor[0],y,spec.width,spec.height);
+            let pairs=0,area=0;
+            for(const j of neighbors){
+              const overlap=overlapArea(box,layout[j].box);
+              if(overlap>.01){pairs++;area+=overlap;}
+            }
+            return {pairs,area};
+          };
+          const baseline=scoresAt(layout[i].y);
+          if(baseline.area<=size*size*.45)continue;
+          if(shift==='adjacent'){
+            const nearParallel=neighbors.some(j=>{
+              const other=models[j],a=anchors[j],otherSpec=specs[j];
+              return m.box.h>m.box.w*1.35 && other.box.h>other.box.w*1.35 &&
+                Math.abs(anchor[0]-a[0])<(spec.width+otherSpec.width)*.52 &&
+                Math.abs(anchor[1]-a[1])<(spec.height+otherSpec.height)*.9 &&
+                overlapArea(layout[i].box,layout[j].box)>.01;
+            });
+            if(!nearParallel)continue;
+          }
+          let bestY=layout[i].y,bestScore=baseline;
+          const steps=shift==='adjacent'?[-.5,.5,-1,1]:[-.5,.5,-1,1,-1.5,1.5];
+          for(const step of steps){
+            const y=anchor[1]+step*size;
+            if(!engine.isInside(anchor[0],y,m.rings))continue;
+            const scores=scoresAt(y);
+            if(scores.pairs>baseline.pairs)continue;
+            const quality=scores.pairs*10+scores.area/(size*size)+Math.abs(step)*.75;
+            const previous=bestScore.pairs*10+bestScore.area/(size*size)+Math.abs((bestY-anchor[1])/size)*.75;
+            if(quality<previous-1e-7){
+              bestY=y;bestScore=scores;
+            }
+          }
+          if(Math.abs(bestY-layout[i].y)>1e-7){
+            layout[i].y=bestY;
+            layout[i].box=rect(anchor[0],bestY,spec.width,spec.height);
+            layout[i].fit=sampleFit(layout[i].box,m.rings,engine);
+            layout[i].step=(bestY-anchor[1])/size;
+            changed=true;
+          }
         }
+        if(!changed)break;
       }
-      const box=rect(anchor[0],bestY,spec.width,spec.height);
-      layout[i]={...spec,x:anchor[0],y:bestY,box,
-        fit:sampleFit(box,m.rings,engine),
-        step:(bestY-anchor[1])/size,
-        overlap:overlapsAt(bestY)};
-      accepted.push(i);
+    }
+    for(let i=0;i<layout.length;i++){
+      layout[i].overlap=layout.reduce((sum,l,j)=>
+        sum+(i===j?0:overlapArea(layout[i].box,l.box)),0);
     }
     return layout;
   }
