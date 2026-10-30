@@ -199,5 +199,24 @@
     }
     return {count:models.length,centerOutside,wholeOutside,collisions,problemIndices:[...problemIndices],boxes};
   }
-  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate};
+  // A view-local metric covers labels whose *centres* are within the current SVG
+  // viewport. This is intentionally distinct from the whole-map metric.
+  function evaluateView(models,positions,widths,fontSize,view) {
+    const selected=[];
+    for(let i=0;i<models.length;i++) {
+      const [x,y]=positions[i];
+      if(x>=view.x && x<=view.x+view.w && y>=view.y && y<=view.y+view.h)selected.push(i);
+    }
+    return {
+      ...evaluate(selected.map(i=>models[i]),selected.map(i=>positions[i]),selected.map(i=>widths[i]),fontSize),
+      total:models.length
+    };
+  }
+  // On a zoomed SVG viewBox, the geometry grows by z. To grow labels by
+  // z^exponent instead, scale their unprojected font size by z^(exponent-1).
+  function zoomFontSize(baseFont,zoom,exponent=0.4) {
+    if(!(baseFont>0) || !(zoom>0))throw new Error('Invalid label font size or zoom');
+    return baseFont*Math.pow(zoom,exponent-1);
+  }
+  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize};
 })(window);
