@@ -96,11 +96,12 @@
       <select id="font-size">
         <option value="7">7（現行SVG相当・小）</option>
         <option value="10">10（小）</option>
-        <option value="14">14（中）</option>
-        <option value="24" selected>24（比較しやすい大きさ）</option>
+        <option value="14" selected>14（中・おすすめ）</option>
+        <option value="24">24（大きめ）</option>
         <option value="36">36（全域での混雑も確認）</option>
       </select>
     </label>
+    <label class="checkline"><input type="checkbox" id="zoom-aware" checked>自動側だけ文字サイズをズーム連動</label>
     <label class="checkline"><input type="checkbox" id="show-problems" checked>問題のあるラベルを赤で表示</label>
     <div class="zoom-row" role="group" aria-label="地図の拡大縮小">
       <button type="button" id="zoom-in" aria-label="地図を拡大">＋</button>
@@ -114,7 +115,7 @@
   </div>
   <div class="message" aria-live="polite">
     <strong id="status">地図データを読み込み中…</strong>
-    <div class="note">地図はドラッグ・ピンチで移動／拡大できます。PCでは地図をクリックしてからホイールで拡大、地図外をクリックすると通常のページスクロールに戻ります。全域図では文字が小さい／重なることがあります。拡大してラベルを確認してください。文字サイズは比較用のSVG座標値で、画面上のピクセル数ではありません。</div>
+    <div class="note">地図はドラッグ・ピンチで移動／拡大できます。PCでは地図をクリックしてからホイールで拡大、地図外をクリックするとページスクロールに戻ります。ズーム連動がオンの場合、地図を2倍に拡大しても自動側の文字は約1.32倍に抑え、操作が落ち着いたときに位置を再計算します。現行の手動配置は比較用に固定します。</div>
   </div>
   <div class="maps">
     <section class="panel" data-side="manual" aria-labelledby="manual-title">
@@ -125,15 +126,15 @@
     </section>
     <section class="panel" data-side="auto" aria-labelledby="auto-title">
       <div class="panel-head"><h2 id="auto-title">V2：自動配置</h2><span class="eyebrow">試作</span></div>
-      <p class="sub">境界から候補座標を計算し、選択方式で配置</p>
+      <p class="sub">拡大率に応じて文字を緩やかに拡大し、ラベル位置を再計算します（ズーム連動オン時）</p>
       <div class="map-wrap"><svg id="map-auto" class="map" viewBox="0 0 1000 1581" aria-label="芦屋市の自動ラベル配置" role="group"></svg></div>
       <dl class="stats" id="auto-stats"></dl>
     </section>
   </div>
   <section class="message">
     <h2>検証について</h2>
-    <p>重複はラベル矩形の重なりペア数、区域外は文字の四隅・辺の中点・中心の計9点による概算です。<strong>文字全体が収まる厳密判定ではありません。</strong> 赤は「ラベル同士の重なり」または「区域外へのはみ出し」がある箇所です。</p>
-    <p>現段階では小さい区域でもラベルを強制表示するため、区域外表示が残る場合があります。次段階で拡大率に応じた表示制御・自動非表示・候補点の改良を検討します。自動配置の採用・合格はまだ判断していません。</p>
+    <p>「全域」は59町名の全ラベルを対象とした評価です。「表示範囲」は地図上で見えている範囲に<strong>ラベル中心がある町名</strong>だけの評価です。重複はラベル矩形の重なりペア数、区域外は文字の四隅・辺の中点・中心の計9点による概算で、<strong>文字全体が収まる厳密判定ではありません。</strong> 赤は重なりまたは区域外の可能性があるラベルを示します。</p>
+    <p>全域・表示範囲の数値は拡大によって変わり得ます。ただし小さい区域でもラベルをすべて表示するため、区域外表示が残る場合があります。表示密度の自動制御や一部ラベルの拡大時表示は、次段階で検討します。自動配置の完成・合格を意味するものではありません。</p>
   </section>
   <section class="credit">
     <h2>地理データ・出典</h2>
