@@ -95,7 +95,7 @@ function renderLabels(){
  const start=performance.now(),screen=svg.getBoundingClientRect();
  const zoom=full.w/view.w;
  // Keep the initial label at least 16px, but bound its growth as geometry zooms.
- // The former 16 -> ~33px growth at 18x overwhelmed small town polygons,
+ // The former 16 -> ~27px growth at 18x overwhelmed small town polygons,
  // leaving little room for the nearby labels to escape collisions.
  const base=Math.max(16,Number($('font').value));
  const screenPx=Math.min(24,base+Math.min(2,Math.max(0,zoom-1)*.18));
