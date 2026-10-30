@@ -46,9 +46,9 @@ const readings={
 '姫路市':'ひめじし','尼崎市':'あまがさきし','明石市':'あかしし','西宮市':'にしのみやし','洲本市':'すもとし','芦屋市':'あしやし','伊丹市':'いたみし','相生市':'あいおいし','豊岡市':'とよおかし','加古川市':'かこがわし','赤穂市':'あこうし','西脇市':'にしわきし','宝塚市':'たからづかし','三木市':'みきし','高砂市':'たかさごし','川西市':'かわにしし','小野市':'おのし','三田市':'さんだし','加西市':'かさいし','丹波篠山市':'たんばささやまし','養父市':'やぶし','丹波市':'たんばし','南あわじ市':'みなみあわじし','朝来市':'あさごし','淡路市':'あわじし','宍粟市':'しそうし','加東市':'かとうし','たつの市':'たつのし',
 '猪名川町':'いながわちょう','多可町':'たかちょう','稲美町':'いなみちょう','播磨町':'はりまちょう','市川町':'いちかわちょう','福崎町':'ふくさきちょう','神河町':'かみかわちょう','太子町':'たいしちょう','上郡町':'かみごおりちょう','佐用町':'さようちょう','香美町':'かみちょう','新温泉町':'しんおんせんちょう'
 };
-function hiragana(value){return value.normalize('NFKC').replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/\\s+/g,'').toLowerCase();}
+function hiragana(value){return value.normalize('NFKC').replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)).replace(/\s+/g,'').toLowerCase();}
 function reading(m){return m.major==='神戸市'?'こうべし'+(readings[m.name]||''):readings[m.name]||'';}
-function matches(m,q){return displayName(m).includes(q)||hiragana(reading(m)).includes(hiragana(q))||m.code===q;}
+function matches(m,q){if(!q)return false;return displayName(m).includes(q)||hiragana(reading(m)).includes(hiragana(q))||m.code===q;}
 function closeSuggestions(){const box=$('suggestions');box.hidden=true;box.replaceChildren();$('find').setAttribute('aria-expanded','false');}
 function showSuggestions(){
  const q=$('find').value.trim(),box=$('suggestions');
