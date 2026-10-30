@@ -50,7 +50,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/administrative-labels.js?v=1"></script>
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
-<script defer src="national-app.js?v=20261031-kana-lines1"></script>
+<script defer src="national-app.js?v=20261031-fuji-ruby2"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>全国市区町村マップ V2</h1>
@@ -78,7 +78,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <section class="panel"><h2>表示・配置状況</h2>
 <p id="status" role="status">地図を読み込み中…</p>
 <div id="metrics" class="meta"></div>
-<p class="meta">漢字は初期15px、拡大時最大17px、読み仮名は漢字の約62％です。市名・郡名・区名・町村名それぞれの直下に小さい読みを置きます（例：神戸市／こうべし／中央区／ちゅうおうく）。漢字だけへの切替も可能です。V2共通ラベル配置規則を使用します。拡大時は文字全体の収まりと、文字の四辺から境界線までの余白を評価し、重なりを増やさずに位置を改善します。密集地域で完全に重ならないことは保証しません。</p></section>
+<p class="meta">漢字は初期15px、拡大時最大17px、読み仮名は漢字の約62％です。市名・郡名・区名・町村名それぞれの直下に小さい読みを置きます（例：神戸市／こうべし／中央区／ちゅうおうく）。ナンバープレート表示でも読み仮名を使用できます。漢字だけへの切替も可能です。V2共通ラベル配置規則を使用します。拡大時は文字全体の収まりと、文字の四辺から境界線までの余白を評価し、重なりを増やさずに位置を改善します。密集地域で完全に重ならないことは保証しません。</p></section>
 </div>
 <section class="panel"><h2>全国展開に向けた考え方</h2>
 <p><strong>行政区域は「都道府県コード＋5桁の市区町村コード」で管理</strong>し、ナンバープレート地域はそれらのコードの集合として定義します。「富士山」は山梨県7市町村と静岡県5市町を一つの地域に結びつけます。県ごとに複製した図形や座標は持たせません。</p>

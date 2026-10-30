@@ -114,7 +114,7 @@ function drawMap(topologies,projectPoint){
  for(const model of models){
   const t=tag('text',{class:'place-label'});
   // Names are always stored independently of their display lines.
-  if(state.mode!=='plate'&&$('reading').value==='on')
+  if($('reading').value==='on')
    NR.paint(t,model,0,0,15,measure);
   else L.paint(t,model,0,15);
   labelLayer.append(t);
@@ -122,7 +122,9 @@ function drawMap(topologies,projectPoint){
  }
  if(isPlate){
   const t=tag('text',{class:'place-label plate-label'});
-  t.textContent=plate.name;labelLayer.append(t);
+  if($('reading').value==='on')NR.paint(t,plateShape,0,0,18,measure);
+  else t.textContent=plate.name;
+  labelLayer.append(t);
   labelNodes.push({node:t,model:plateShape});
  }
  map.replaceChildren(shapeLayer,outlines,labelLayer);
@@ -145,7 +147,7 @@ function renderLabels(){
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
  if(!(ratio>0))return;
  const size=screenPx/ratio;
- const readingEnabled=state.mode!=='plate'&&$('reading').value==='on';
+ const readingEnabled=$('reading').value==='on';
  const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
  // Measure whichever row is wider, not the concatenated county + town string.
  // Search and selection continue to use the complete administrative name.
@@ -157,6 +159,8 @@ function renderLabels(){
  // and designated-city ward, including in Fuji plate overview mode.
  const original=planned.map((l,i)=>{
   const m=workModels[i];
+  if(m.id==='plate'&&readingEnabled)
+   return NR.boxFor(m,l,size*1.2,measure);
   if(m.id==='plate'){
    const width=measure(m.name,size*1.2)+size*.3;
    const height=size*1.5;
@@ -194,8 +198,9 @@ function renderLabels(){
   if(!target)return;
   target.setAttribute('x',position.x.toFixed(2));
   target.setAttribute('y',position.y.toFixed(2));
-  if(readingEnabled&&i<models.length)
-   NR.paint(target,workModels[i],position.x,position.y,size,measure);
+  if(readingEnabled)
+   NR.paint(target,workModels[i],position.x,position.y,
+    target.classList.contains('plate-label')?size*1.2:size,measure);
   else L.paint(target,workModels[i],position.x,size);
   const displayedSize=target.classList.contains('plate-label')?size*1.2:size;
   target.setAttribute('font-size',displayedSize.toFixed(2));
@@ -220,7 +225,7 @@ function suggest(){
   container=$('suggestions');container.replaceChildren();
  if(!q){container.hidden=true;return;}
  const options=[];
- if(plate&&plate.name.includes(q))options.push({text:plate.name,sub:'山梨県・静岡県を横断するナンバー地域',sel:{type:'plate'}});
+ if(plate&&(plate.name.includes(q)||plate.reading?.includes(kanaQuery)))options.push({text:plate.name,sub:'山梨県・静岡県を横断するナンバー地域',sel:{type:'plate'}});
  for(const m of models){
   if(nameOf(m).includes(q)||m.name.includes(q)||m.code===q||
     m.reading?.includes(kanaQuery))
@@ -269,13 +274,16 @@ async function load(area,mode){
   const members=N.plateMembers(models,plate);
   plateShape=N.joinPlateShape(members,E);
   plateShape.name=plate.name;
+  if(!/^[ぁ-ゖー]+$/.test(plate.reading||''))
+   throw Error('ナンバー地域名の読みが未登録です：'+plate.name);
+  plateShape.readingParts=[{name:plate.name,reading:plate.reading}];
  }
  state={area,mode};
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
  selection=mode==='plate'&&plate?{type:'plate'}:null;
- $('reading').disabled=mode==='plate';
+ $('reading').disabled=false;
  $('clear').hidden=mode==='plate';
  $('interaction-guide').textContent=mode==='plate'
   ?'紫色が富士山ナンバーの区域です。市町村名は位置確認用に表示し、地図のタップによる詳細表示はありません。検索では対象市町村のナンバー名を調べられます。'
@@ -371,7 +379,7 @@ window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
-   fetch('../data/national/catalog.json'),
+   fetch('../data/national/catalog.json?v=20261031-fuji-ruby'),
    fetch('../data/national/municipality-readings.json'),
    fetch('../data/national/county-readings.json')
   ]);
