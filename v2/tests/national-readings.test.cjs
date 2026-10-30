@@ -68,7 +68,7 @@ test('SVG paint uses explicit per-line centers and reading font smaller than nam
  assert.equal(el.childNodes[0].attrs.x,'122.00');
 });
 test('2021 pilot geometry names match 440 code-verified readings, with 74 district readings',()=>{
- const prefs=['19','22','25','26','27','28','29','30','31','32','33','34','35'];
+ const prefs=['19','22','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39'];
  const models=[],countySet=new Set(),codes=new Set();
  for(const pref of prefs){
   const t=JSON.parse(read('data/national/2021/'+pref+'.topojson'));
@@ -83,10 +83,10 @@ test('2021 pilot geometry names match 440 code-verified readings, with 74 distri
   }
  }
  const attached=NR.attach(models,dataset,counties);
- assert.equal(attached.length,432);
- assert.equal(Object.keys(dataset.items).length,440);
- assert.equal(countySet.size,74);
- assert.equal(Object.keys(counties.readings).length,74);
+ assert.equal(attached.length,527);
+ assert.equal(Object.keys(dataset.items).length,535);
+ assert.equal(countySet.size,99);
+ assert.equal(Object.keys(counties.readings).length,99);
  assert.ok(attached.every(m=>m.readingParts.length===1||m.readingParts.length===2));
  for(const city of [['26100','京都市'],['27100','大阪市'],['27140','堺市'],['28100','神戸市'],['22100','静岡市'],['22130','浜松市'],['33100','岡山市'],['34100','広島市']]){
   assert.ok(one(...city).reading);
@@ -120,4 +120,12 @@ test('Fuji plate label itself has hiragana and fits as one two-line label',()=>{
  assert.ok(measured.height>18);
  assert.ok(measured.width>0);
  assert.equal(measured.box.y1,80-measured.height/2);
+});
+
+test('Shikoku readings and the documented variant are valid',()=>{
+ assert.deepEqual(NR.lines(one('39405','梼原町',{county:'高岡郡'})).map(x=>x.text),
+  ['高岡郡','たかおかぐん','梼原町','ゆすはらちょう']);
+ assert.deepEqual(NR.lines(one('37322','土庄町',{county:'小豆郡'})).map(x=>x.text),
+  ['小豆郡','しょうずぐん','土庄町','とのしょうちょう']);
+ assert.throws(()=>one('39405','檮原町'),/一致しません/);
 });
