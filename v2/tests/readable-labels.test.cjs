@@ -61,7 +61,9 @@ test('all three label styles preserve town identity and show ruby on its own lin
   assert.ok(b.visualWidth>=a.width);
   assert.equal(b.rubySize,font*.58);
   assert.ok(c.width>a.width);
-  assert.throws(()=>R.labelSpec('業平町','', 'kanji',font,measure));
+  assert.equal(R.labelSpec('業平町','', 'kanji',font,measure).primary,'業平町');
+  assert.throws(()=>R.labelSpec('業平町','', 'both',font,measure));
+  assert.throws(()=>R.labelSpec('業平町','', 'kana',font,measure));
 });
 
 test('vertical nudges keep the names on one line and do not shift horizontally',()=>{
