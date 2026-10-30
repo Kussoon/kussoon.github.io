@@ -168,18 +168,28 @@
     // label in a tiny outlying fragment simply because it is near the center.
     const main=largestOuterRing(rings);
     const b=engine.bbox([main]);
-    const minClear=pd*.35;
+    const mainPeak=rings.length>1?engine.polylabel([main]):polylabel;
+    const mainDepth=engine.signedDist(mainPeak[0],mainPeak[1],rings);
+    // A small, round island may have more clearance than a much larger
+    // narrow mainland. Derive the threshold from the *main component*, so
+    // the name never jumps to that unrelated island.
+    const minClear=(mainDepth>0?Math.min(pd,mainDepth):pd)*.35;
     const allowed=(x,y)=>engine.isInside(x,y,[main]) &&
       engine.signedDist(x,y,rings)>=minClear;
-    let best=allowed(base[0],base[1])?[...base]:[...polylabel];
-    let distance=(best[0]-centroid[0])**2+(best[1]-centroid[1])**2;
+    let best=null,distance=Infinity,backup=null,backupDepth=-Infinity;
     function tryPoint(x,y){
-      if(!allowed(x,y))return;
+      if(!engine.isInside(x,y,[main])||!engine.isInside(x,y,rings))return;
+      const depth=engine.signedDist(x,y,rings);
+      if(depth>backupDepth){backup=[x,y];backupDepth=depth;}
+      if(depth<minClear)return;
       const d=(x-centroid[0])**2+(y-centroid[1])**2;
       if(d<distance-1e-8){
         best=[x,y];distance=d;
       }
     }
+    tryPoint(base[0],base[1]);
+    tryPoint(mainPeak[0],mainPeak[1]);
+    tryPoint(polylabel[0],polylabel[1]);
     // Bounded grid then local refinement: unlike the old straight-line
     // interpolation, this can find a safe point even when the path from the
     // centroid to Polylabel crosses a concavity or hole.
@@ -188,6 +198,7 @@
       const x=b.minX+b.w*i/cells;
       for(let j=0;j<=cells;j++)tryPoint(x,b.minY+b.h*j/cells);
     }
+    if(!best)best=backup || [...mainPeak];
     let stepX=b.w/cells,stepY=b.h/cells;
     for(let k=0;k<4;k++){
       const [bx,by]=best;
