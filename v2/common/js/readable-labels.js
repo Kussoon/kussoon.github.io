@@ -105,7 +105,8 @@
     const candidateX=(left+right)/2;
     // Small, conservative correction; do not drag the label to another arm
     // of an irregular region, and never move its center outside the region.
-    if(Math.abs(candidateX-x)>model.box.w*.15)return point;
+    const regionWidth=Number.isFinite(model.box?.w)?model.box.w:engine.bbox(model.rings).w;
+    if(Math.abs(candidateX-x)>regionWidth*.15)return point;
     if(!engine.isInside(candidateX,y,model.rings))return point;
     if(engine.signedDist(candidateX,y,model.rings)<=
        engine.signedDist(x,y,model.rings)*1.2)return point;
