@@ -31,7 +31,11 @@ function clamp(){
 }
 function zoomBy(factor,fx=.5,fy=.5){
  if(!models.length)return;
- const newWidth=Math.max(bounds.w/18,Math.min(bounds.w,view.w/factor));
+ // Wide-area maps need more than the legacy 18x cap to inspect a town.
+ // Keep the already-tested limits for single-region and Fuji modes.
+ const maxZoom=state.area==='west-shikoku'?96:
+  state.area==='chugoku-shikoku'?72:state.area==='west'?72:18;
+ const newWidth=Math.max(bounds.w/maxZoom,Math.min(bounds.w,view.w/factor));
  const newHeight=newWidth*bounds.h/bounds.w;
  view.x+=(view.w-newWidth)*fx;view.y+=(view.h-newHeight)*fy;
  view.w=newWidth;view.h=newHeight;clamp();syncView();scheduleLabels();
