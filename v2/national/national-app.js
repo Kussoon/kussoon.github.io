@@ -6,7 +6,7 @@
 const $=id=>document.getElementById(id);
 const NS='http://www.w3.org/2000/svg';
 const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels;
-const C=window.KussoonCollisionRefinement,N=window.KussoonNationalBoundaries;
+const C=window.KussoonCollisionRefinement,F=window.KussoonRegionFit,N=window.KussoonNationalBoundaries;
 const L=window.KussoonAdministrativeLabels;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
@@ -163,12 +163,19 @@ function renderLabels(){
   }
   return L.boxFor(m,l,size,measure);
  });
- const result=C.refine(layoutModels,original,size,E,{view,passes:3,
-  // Keep the plate-region name anchored; move adjacent municipality labels.
-  pinned:state.mode==='plate'?layoutModels.length-1:
-   selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1
- });
- result.labels.forEach((position,i)=>{
+ const pinned=state.mode==='plate'?layoutModels.length-1:
+   selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1;
+ const collisionResult=C.refine(layoutModels,original,size,E,{view,passes:3,pinned});
+ // Independent, geometry-only refinement: move labels that protrude from
+ // their own territory, even where they don't overlap another label.
+ // At national overview scale many tiny municipalities cannot contain 15px
+ // names; defer this heavier search until the user magnifies the map.
+ // Keep the existing Fuji plate-region rendering exactly as previously tested.
+ const containment=state.mode!=='plate'&&zoom>=4
+  ?F.refine(layoutModels,collisionResult.labels,size,E,{view,passes:1,pinned})
+  :null;
+ const resultLabels=containment?containment.labels:collisionResult.labels;
+ resultLabels.forEach((position,i)=>{
   const target=labelNodes[i]?.node;
   if(!target)return;
   target.setAttribute('x',position.x.toFixed(2));
@@ -179,10 +186,14 @@ function renderLabels(){
   target.setAttribute('stroke-width',(displayedSize*.18).toFixed(2));
  });
  const before=R.evaluateVisible(layoutModels,original,layoutModels.map(()=>true),E,view);
- const after=R.evaluateVisible(layoutModels,result.labels,layoutModels.map(()=>true),E,view);
+ const after=R.evaluateVisible(layoutModels,resultLabels,layoutModels.map(()=>true),E,view);
+ const moved=resultLabels.reduce((count,p,i)=>count+
+   (Math.hypot(p.x-original[i].x,p.y-original[i].y)>1e-5?1:0),0);
  $('metrics').textContent='表示単位 '+models.length+'区域／画面内ラベル '+after.inView+
   '件／文字の重なり（概算）'+before.collisions+'→'+after.collisions+'組／追加移動'+
-  result.moved+'件／区域外 '+after.outside+'件。';
+  moved+'件／区域境界またぎ（9点判定）'+after.outside+'件'+
+  (containment?'／文字箱の区域外相当量 '+containment.beforeOutside.toFixed(1)+
+    '→'+containment.afterOutside.toFixed(1):'')+'。';
  setStatus('拡大 '+zoom.toFixed(2)+'倍・文字 '+screenPx.toFixed(1)+'px・配置 '+
   (performance.now()-start).toFixed(0)+'ms');
 }
