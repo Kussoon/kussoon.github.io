@@ -177,7 +177,17 @@ function relayout(){
  labels.forEach((l,i)=>{
   const t=items[i].text;
   t.style.display=show[i]?'':'none';
-  t.textContent=l.primary;
+  const kobeWard=models[i].major==='神戸市';
+  if(kobeWard){
+   // Keep the geographic anchor at the midpoint of both rows.
+   const top=element('tspan',{x:l.x.toFixed(2),dy:(-l.size*.58).toFixed(2)});
+   top.textContent='神戸市';
+   const bottom=element('tspan',{x:l.x.toFixed(2),dy:(l.size*1.16).toFixed(2)});
+   bottom.textContent=models[i].name;
+   t.replaceChildren(top,bottom);
+  }else{
+   t.textContent=l.primary;
+  }
   t.setAttribute('x',l.x.toFixed(2));
   t.setAttribute('y',l.y.toFixed(2));
   t.setAttribute('font-size',l.size.toFixed(2));
