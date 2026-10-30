@@ -61,13 +61,21 @@ test('every irregular example gets a reproducible interior anchor',()=>{
 });
 
 test('crescent, U-shape and hooked districts anchor close to their visual center',()=>{
-  for(const m of [synthetic[0],U,hook,donut]){
+  for(const m of [synthetic[0],U,hook]){
     assert.equal(E.isInside(...m.centroid,m.rings),false,m.name+' must be genuinely concave');
     const old=R.safeInteriorCenter(m,E),selected=R.universalInteriorAnchor(m,E);
     const distance=p=>Math.hypot(p[0]-m.centroid[0],p[1]-m.centroid[1]);
     assert.ok(distance(selected)<=distance(old)+1e-7,m.name+' closer to centroid');
     assert.ok(E.signedDist(...selected,m.rings)>0);
   }
+});
+
+test('a polygon with a central hole avoids the hole and stays in the principal region',()=>{
+  assert.equal(E.isInside(...donut.centroid,donut.rings),false);
+  const anchor=R.universalInteriorAnchor(donut,E);
+  assert.ok(E.isInside(...anchor,donut.rings));
+  assert.ok(!E.isInside(...anchor,[donut.rings[1]]));
+  assert.ok(E.signedDist(...anchor,donut.rings)>0);
 });
 
 test('Kagoshima-like multipart outline anchors on main body, never a small offshore island',()=>{
