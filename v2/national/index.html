@@ -2,8 +2,8 @@
 <html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,follow"><meta name="theme-color" content="#edf7fc">
-<title>全国市区町村マップ V2｜関西・富士山地域試験｜Kussoon</title>
-<meta name="description" content="全国市町村マップの共通エンジンを、関西・中国11府県と山梨・静岡の富士山ナンバーで検証する試験ページ。">
+<title>全国市区町村マップ V2｜関西・中国・四国・富士山地域試験｜Kussoon</title>
+<meta name="description" content="全国市町村マップの共通エンジンを、関西・中国・四国15府県と山梨・静岡の富士山ナンバーで検証する試験ページ。">
 <style>
 :root{color-scheme:light;--ink:#1a3e59;--line:#b8d1e0;--blue:#a8d5eb;--selected:#b89aee}
 *{box-sizing:border-box}
@@ -50,14 +50,14 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/administrative-labels.js?v=1"></script>
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
-<script defer src="national-app.js?v=20261031-chugoku1"></script>
+<script defer src="national-app.js?v=20261031-shikoku1"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>全国市区町村マップ V2</h1>
-<p>全国共通の市区町村コードを基準に、<strong>県境を越えた地域も一つの地図で扱う</strong>ための試験版です。現在は関西・中国の11府県と山梨・静岡の計13都府県の軽量データで検証しています。</p>
+<p>全国共通の市区町村コードを基準に、<strong>県境を越えた地域も一つの地図で扱う</strong>ための試験版です。現在は関西・中国・四国の15府県と山梨・静岡の計17都府県の軽量データで検証しています。</p>
 <section class="panel">
 <div class="controls">
-<label>表示エリア<select id="area"><option value="kansai">関西2府4県</option><option value="chugoku">中国地方5県</option><option value="west">関西＋中国11府県</option><option value="fuji">山梨・静岡（富士山ナンバー）</option></select></label>
+<label>表示エリア<select id="area"><option value="kansai">関西2府4県</option><option value="chugoku">中国地方5県</option><option value="west">関西＋中国11府県</option><option value="shikoku">四国4県</option><option value="chugoku-shikoku">中国＋四国9県</option><option value="west-shikoku">関西＋中国＋四国15府県</option><option value="fuji">山梨・静岡（富士山ナンバー）</option></select></label>
 <label>表示単位<select id="mode"><option value="municipality">市町村名（政令市を統合）</option><option value="ward">市区町村名（政令市の区も表示）</option><option value="plate">富士山ナンバー（県境横断）</option></select></label>
 <label>読み仮名表示<select id="reading"><option value="on">漢字＋よみがな</option><option value="off">漢字のみ</option></select></label>
 <div class="searchbox"><label for="search" style="display:block;font-size:13px;font-weight:800">市区町村・地域名を検索</label><input id="search" type="search" autocomplete="off" placeholder="例：西宮、大阪市、富士山" aria-controls="suggestions"><div id="suggestions" class="suggest" hidden></div></div>
