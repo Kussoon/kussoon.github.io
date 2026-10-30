@@ -218,19 +218,26 @@
       const reading=readings[m.name];
       return R.labelSpec(m.name,reading,mode,size,measure).width;
     });
-    const seeds=E.choosePositions(models,baseWidths,size,'avoid');
-    const laid=R.planVerticalNudges(models,seeds,readings,mode,size,measure,E,
-      {shift,pinned:selected});
-    const result=E.selectPriorityLabels(models,laid.map(l=>[l.x,l.y]),
+    const centerFirst=$('anchor-mode').value==='center';
+    const laid=centerFirst
+      ?R.planCenterFirstLabels(models,readings,mode,size,measure,E,{shift})
+      :R.planVerticalNudges(models,
+          E.choosePositions(models,baseWidths,size,'avoid'),
+          readings,mode,size,measure,E,{shift,pinned:selected});
+    // Learning default: all names appear immediately, irrespective of
+    // collisions or glyphs crossing a polygon border.
+    const hide=$('declutter').checked;
+    const result=hide ?E.selectPriorityLabels(models,laid.map(l=>[l.x,l.y]),
       laid.map(l=>l.width),size,view,{
         strategy:'balanced',pinned:selected,boxes:laid.map(l=>l.box)
-      });
-    const visible=$('declutter').checked?result.shown:models.map(()=>true);
+      }):null;
+    const visible=hide?result.shown:models.map(()=>true);
     const metrics=R.evaluateVisible(models,laid,visible,E,view);
     renderLabels(laid,visible);
-    printStats(metrics,{hiddenByCollision:$('declutter').checked?result.hiddenByCollision:0});
+    printStats(metrics,{hiddenByCollision:hide?result.hiddenByCollision:0});
     $('status').textContent='文字 '+$('font-size').value+'px（画面上で固定）、拡大 '+(1000/view.w).toFixed(2)+
-      '倍。配置計算 '+(performance.now()-start).toFixed(1)+'ms（端末参考値）。';
+      '倍。全59町名'+(hide?'から衝突に応じて一部省略':'を表示（重なり・境界またぎ許容）')+
+      '。配置計算 '+(performance.now()-start).toFixed(1)+'ms（端末参考値）。';
   }
   function chooseByQuery(text) {
     const query=R.normalizeReading(text);
@@ -271,7 +278,7 @@
       relayout();
     });
   }
-  for(const id of ['shift-mode','font-size','declutter','show-problems'])
+  for(const id of ['anchor-mode','shift-mode','font-size','declutter','show-problems'])
     $(id).addEventListener('change',relayout);
   $('zoom-in').addEventListener('click',()=>zoom(1.4));
   $('zoom-out').addEventListener('click',()=>zoom(1/1.4));
