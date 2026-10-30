@@ -225,6 +225,74 @@
     return [...best];
   }
 
+  // Center-first option for wider administrative regions. For thin waists
+  // connecting two broad lobes, the safe baseline can retreat to the northern
+  // maximum-clearance lobe even though another substantial lobe is nearer the
+  // region's overall bounding-box center. Do not bake municipality names or
+  // manual coordinates into the choice; use a bounded, geometry-only search.
+  const balancedAnchorCache=new WeakMap();
+  function localHorizontalCenter(point,model,engine){
+    const [x,y]=point,intersections=[];
+    for(const ring of model.rings)for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+      const a=ring[j],b=ring[i];
+      if((a[1]>y)!==(b[1]>y))
+        intersections.push(a[0]+(b[0]-a[0])*(y-a[1])/(b[1]-a[1]));
+    }
+    intersections.sort((a,b)=>a-b);
+    // Even/odd rings give exact contiguous horizontal inside intervals,
+    // including concave boundaries and disjoint pieces at this latitude.
+    let segment=null;
+    for(let i=0;i+1<intersections.length;i+=2){
+      if(x>intersections[i]+1e-7&&x<intersections[i+1]-1e-7){
+        segment=[intersections[i],intersections[i+1]];break;
+      }
+    }
+    if(!segment)return point;
+    const left=x-segment[0],right=segment[1]-x;
+    if(!(left>0&&right>0))return point;
+    if(Math.min(left,right)/Math.max(left,right)>=.65)return point;
+    const midpoint=(segment[0]+segment[1])/2;
+    if(Math.abs(midpoint-x)>model.box.w*.15)return point;
+    const oldDepth=engine.signedDist(x,y,model.rings);
+    const newDepth=engine.signedDist(midpoint,y,model.rings);
+    // Only balance horizontal margins when geometry stays safe: this is
+    // independent of label width and never squeezes text inside the region.
+    return oldDepth>0&&newDepth>=oldDepth*.98?[midpoint,y]:point;
+  }
+  function locallyBalancedCenter(model,engine){
+    if(balancedAnchorCache.has(model))return [...balancedAnchorCache.get(model)];
+    const rings=model.rings,box=model.box,centroid=model.centroid;
+    const cDepth=engine.signedDist(centroid[0],centroid[1],rings);
+    const polyDepth=engine.signedDist(...model.polylabel,rings);
+    let point=safeInteriorCenter(model,engine);
+    // A very shallow centroid in a tall, constricted region suggests that
+    // its two broad parts are joined by a narrow neck. Choose a substantial
+    // inner lobe near the geometric center of the whole bounding box, rather
+    // than always pulling back toward the single deepest (possibly upper)
+    // lobe. Require 60% of the maximum interior clearance.
+    if(cDepth>0&&polyDepth>0&&cDepth/polyDepth<.18&&box.h>box.w*1.2){
+      const main=largestOuterRing(rings);
+      const mid=[box.minX+box.w/2,box.minY+box.h/2];
+      const threshold=polyDepth*.60;
+      let best=null,bestDistance=Infinity;
+      const count=80;
+      for(let iy=0;iy<=count;iy++){
+        const y=box.minY+box.h*iy/count;
+        for(let ix=0;ix<=count;ix++){
+          const x=box.minX+box.w*ix/count;
+          if(!engine.isInside(x,y,[main]))continue;
+          if(engine.signedDist(x,y,rings)<threshold)continue;
+          const d=(x-mid[0])**2+(y-mid[1])**2;
+          if(d<bestDistance){best=[x,y];bestDistance=d;}
+        }
+      }
+      if(best)point=best;
+    }
+    point=localHorizontalCenter(point,model,engine);
+    balancedAnchorCache.set(model,point);
+    return [...point];
+  }
+
   // Prefer stable, region-centered names to a collision-free map. All labels
   // remain visible even if they overlap or cross regional borders.
   // anchor:'safe' fixes concave-neck/outside centroids; 'raw' is the baseline.
@@ -235,9 +303,10 @@
     const shift=options.shift || 'none';
     if(!['none','vertical','adjacent'].includes(shift))throw new Error('上下調整の方式が不正です');
     const anchorMode=options.anchor || 'raw';
-    if(!['raw','safe','universal'].includes(anchorMode))throw new Error('配置方式が不正です');
+    if(!['raw','safe','universal','balanced'].includes(anchorMode))throw new Error('配置方式が不正です');
     const specs=models.map(m=>labelSpec(m.name,readings?.[m.name],style,size,measure));
     const anchors=models.map(m=>
+      anchorMode==='balanced'?locallyBalancedCenter(m,engine):
       anchorMode==='universal'?universalInteriorAnchor(m,engine):
         anchorMode==='safe'?safeInteriorCenter(m,engine):
         (engine.isInside(m.centroid[0],m.centroid[1],m.rings) ? [...m.centroid] : [...m.polylabel]));
@@ -323,5 +392,6 @@
       total:models.length};
   }
   global.KussoonReadableLabels={normalizeReading,validateReadings,labelSpec,
-    planVerticalNudges,safeInteriorCenter,universalInteriorAnchor,planCenterFirstLabels,evaluateVisible};
+    planVerticalNudges,safeInteriorCenter,universalInteriorAnchor,locallyBalancedCenter,
+    planCenterFirstLabels,evaluateVisible};
 })(window);
