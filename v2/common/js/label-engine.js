@@ -246,5 +246,83 @@
     }
     return shown;
   }
-  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize,screenPixelsToSvgUnits,subsetMetrics,selectVisibleLabels};
+  // Compare competing collision-free label sets without editing source geometry.
+  // In addition to the previous area-first baseline this supports a visual-fit
+  // mode and a name-count mode. A selected name always wins a collision.
+  function selectPriorityLabels(models,positions,widths,fontSize,view,options={}) {
+    const strategy=['balanced','density','area'].includes(options.strategy) ? options.strategy : 'balanced';
+    const pinned=Number.isInteger(options.pinned)&&options.pinned>=0&&options.pinned<models.length ? options.pinned : null;
+    const boxes=positions.map(([x,y],i)=>rect(x,y,widths[i],fontSize*1.15));
+    const eligible=models.map((m,i)=>{
+      const r=boxes[i];
+      return i===pinned || (r.x2>=view.x&&r.x1<=view.x+view.w&&r.y2>=view.y&&r.y1<=view.y+view.h);
+    });
+    const shown=new Array(models.length).fill(false);
+    if(strategy==='area'){
+      const baseline=selectVisibleLabels(models,positions,widths,fontSize,view,pinned);
+      return {shown:baseline,eligible,hiddenByCollision:eligible.filter((yes,i)=>yes&&!baseline[i]).length,strategy};
+    }
+    const candidates=models.map((m,i)=>i).filter(i=>eligible[i]);
+    const conflicts=Array.from({length:models.length},()=>[]);
+    for(let a=0;a<candidates.length;a++) for(let b=0;b<a;b++){
+      const i=candidates[a],j=candidates[b];
+      if(overlapArea(boxes[i],boxes[j])>0.01){
+        conflicts[i].push(j);
+        conflicts[j].push(i);
+      }
+    }
+    const wasVisible=Array.isArray(options.previous) ? options.previous : [];
+    function priority(i){
+      const m=models[i];
+      // The rectangle-in-polygon sample score is a *relative* visual-fit
+      // estimate, not a guarantee that the full glyph outline is inside.
+      const fit=insideSamples(boxes[i],m.rings)/9;
+      const area=Math.log1p(Math.max(0,m.box.w*m.box.h));
+      const isolation=1/(1+conflicts[i].length);
+      const stable=wasVisible[i] ? 1:0;
+      return strategy==='density'
+        ? 10*isolation + .9*fit + .10*area + .25*stable
+        : 4*fit + 3*isolation + .30*area + .8*stable;
+    }
+    const order=candidates.sort((a,b)=>{
+      if(a===pinned)return -1;
+      if(b===pinned)return 1;
+      return priority(b)-priority(a)||a-b;
+    });
+    for(const i of order){
+      if(conflicts[i].some(j=>shown[j]))continue;
+      shown[i]=true;
+    }
+    // Density mode can swap one accepted label for two non-overlapping names,
+    // improving coverage without introducing overlaps. The pinned label is protected.
+    if(strategy==='density'){
+      for(let pass=0;pass<4;pass++){
+        let changed=false;
+        for(const i of order){
+          if(!shown[i] || i===pinned)continue;
+          const alternatives=order.filter(j=>!shown[j] &&
+            conflicts[j].filter(k=>shown[k]).length===1 &&
+            conflicts[j].includes(i));
+          let pair=null;
+          for(let a=0;a<alternatives.length&&!pair;a++){
+            for(let b=a+1;b<alternatives.length;b++){
+              if(!conflicts[alternatives[a]].includes(alternatives[b])){
+                pair=[alternatives[a],alternatives[b]];
+                break;
+              }
+            }
+          }
+          if(pair){
+            shown[i]=false;
+            shown[pair[0]]=true;
+            shown[pair[1]]=true;
+            changed=true;
+          }
+        }
+        if(!changed)break;
+      }
+    }
+    return {shown,eligible,hiddenByCollision:eligible.filter((yes,i)=>yes&&!shown[i]).length,strategy};
+  }
+  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize,screenPixelsToSvgUnits,subsetMetrics,selectVisibleLabels,selectPriorityLabels};
 })(window);
