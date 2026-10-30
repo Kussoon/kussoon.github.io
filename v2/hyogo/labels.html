@@ -65,7 +65,7 @@ window.kussoonUmamiBeforeSend=function(type,payload){for(const k of ['url','refe
 <script defer src="../common/js/label-engine.js"></script>
 <script defer src="../common/js/readable-labels.js"></script>
 <script defer src="../common/js/topo-region-adapter.js"></script>
-<script defer src="labels-app.js?v=20261030-visual-metrics"></script>
+<script defer src="labels-app.js?v=20261030-county-names"></script>
 </head>
 <body><main>
 <a href="/v2/">← V2試験トップへ</a>
@@ -144,7 +144,7 @@ window.kussoonUmamiBeforeSend=function(type,payload){for(const k of ['url','refe
 <section class="panel">
  <h2>この実験の位置づけ</h2>
  <p>現在の兵庫県学習地図では、数か所のラベル位置を手動で補正しています。V2では、区域の形から中心を求め、同じ高さの左右の余白が偏っていれば局所的に中央へ移します。西宮市のように細い部分が上下の広い区域をつなぐ場合は、広い部分の中心を探索します。<strong>重複ゼロや境界内への完全な収まりは目標にせず、49区域すべてが最初から見えることを優先</strong>します。</p>
- <p class="small">データ：既存の <a href="/hyogo/hyogo-city.topojson">兵庫県市町・区境界TopoJSON</a> に由来。CODH『歴史的行政区域データセットβ版』／国土数値情報「行政区域データ」を加工（CC BY 4.0）。V2試験用に同じデータを保存し、平面に投影して使用しています。正式な住所・行政界の証明には使えません。神戸市そのものの文字は追加せず、対象49区域＝神戸市の9区＋40市町としています。</p>
+ <p class="small">データ：既存の <a href="/hyogo/hyogo-city.topojson">兵庫県市町・区境界TopoJSON</a> に由来。CODH『歴史的行政区域データセットβ版』／国土数値情報「行政区域データ」を加工（CC BY 4.0）。V2試験用に同じデータを保存し、平面に投影して使用しています。正式な住所・行政界の証明には使えません。郡に属する町村は郡名を付けて表示します（例：川辺郡猪名川町）。神戸市そのものの区域は追加せず、対象49区域＝神戸市の9区＋40市町としています。</p>
  <p class="small">ナンバープレート地域名の色分けは、<a href="/driving/vehicleregistrationplates/hyogo-number-map.html">既存の兵庫県地域名マップ</a>（2026年10月15日判定）のコード別対応を試験用に再利用。今回はラベル配置の比較であり、制度変更や登録管轄の最新状況を再判定したものではありません。</p>
 </section>
 </main></body></html>
