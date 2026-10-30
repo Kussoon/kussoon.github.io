@@ -47,7 +47,7 @@ function assertModels(valid){
   assert.ok(model.rings.length>0,model.name);
   assert.ok(model.centroid.every(Number.isFinite),model.name);
   assert.ok(model.polylabel.every(Number.isFinite),model.name);
-  assert.ok(/^\\d{5}$/.test(model.code),model.name);
+  assert.ok(/^\d{5}$/.test(model.code),model.name);
  }
 }
 test('source years and loaded prefectures remain explicit and non-production',()=>{
