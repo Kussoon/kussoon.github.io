@@ -9,6 +9,8 @@
   let view = {...full};
   let models = [], selected = null, activeWheelMap = null;
   let ringsBuildMs = 0, renderCount = 0;
+  let layouts = null;
+  let reflowTimer = null;
   const mapObjects = new Map();
   const activePointers = new Map();
   let dragged = false, suppressClickUntil = 0;
@@ -39,6 +41,7 @@
     view.y+=(view.h-view.h*ratio)*ry;
     view.w=nextW;view.h*=ratio;
     clampView();paintMaps();
+    scheduleReflow();
   }
   function moveView(dx,dy,svg) {
     const r=svg.getBoundingClientRect();
@@ -87,6 +90,7 @@
       if(!activePointers.has(e.pointerId))return;
       activePointers.delete(e.pointerId);
       if(dragged)suppressClickUntil=performance.now()+200;
+      if(activePointers.size===0)updateVisibleStats();
     }
     svg.addEventListener('pointerup',endPointer);
     svg.addEventListener('pointercancel',endPointer);
@@ -133,14 +137,32 @@
     context.font='900 '+size+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
     return models.map(m=>context.measureText(m.name).width);
   }
-  function printMetrics(id,metrics) {
+  function printMetrics(id,metrics,visible) {
     const fields=[
-      ['対象町名',metrics.count],
-      ['ラベルの重なり',metrics.collisions+'組'],
-      ['中心が区域外',metrics.centerOutside+'件'],
-      ['文字が区域外（概算）',metrics.wholeOutside+'件']
+      ['全域：対象町名',metrics.count],
+      ['表示範囲：町名',visible.count],
+      ['全域：ラベルの重なり',metrics.collisions+'組'],
+      ['表示範囲：重なり',visible.collisions+'組'],
+      ['全域：文字が区域外（概算）',metrics.wholeOutside+'件'],
+      ['表示範囲：文字が区域外',visible.wholeOutside+'件']
     ];
     $(id).innerHTML=fields.map(([label,v])=>'<div><dt>'+label+'</dt><dd>'+v+'</dd></div>').join('');
+  }
+  function updateVisibleStats() {
+    if(!layouts)return;
+    for(const side of ['manual','auto']) {
+      const l=layouts[side];
+      const visible=E.evaluateView(models,l.positions,l.widths,l.size,view);
+      printMetrics(side+'-stats',l.score,visible);
+    }
+  }
+  function scheduleReflow() {
+    if(reflowTimer!==null)clearTimeout(reflowTimer);
+    // Recompute when zooming pauses; panning needs only a viewport metric refresh.
+    reflowTimer=setTimeout(()=>{
+      reflowTimer=null;
+      relayout();
+    },130);
   }
   function drawLabels(svg,positions,problems,size,showProblems) {
     const obj=mapObjects.get(svg);
@@ -150,26 +172,33 @@
       t.setAttribute('x',positions[i][0].toFixed(2));
       t.setAttribute('y',positions[i][1].toFixed(2));
       t.setAttribute('font-size',String(size));
+      t.setAttribute('stroke-width',String(size*2.2/14));
       t.classList.toggle('problem',showProblems&&set.has(i));
     });
   }
   function relayout() {
     if(!models.length)return;
-    const size=Number($('font-size').value),mode=$('method').value;
+    const base=Number($('font-size').value),mode=$('method').value;
     const showProblems=$('show-problems').checked;
-    const widths=measureWidths(size);
+    const zoom=full.w/view.w;
+    const aware=$('zoom-aware').checked;
+    const autoSize=aware?E.zoomFontSize(base,zoom,0.4):base;
+    const manualWidths=measureWidths(base),autoWidths=measureWidths(autoSize);
     const t0=performance.now();
-    const manual=E.choosePositions(models,widths,size,'manual');
-    const manualScore=E.evaluate(models,manual,widths,size);
-    const auto=E.choosePositions(models,widths,size,mode);
-    const autoScore=E.evaluate(models,auto,widths,size);
+    const manual=E.choosePositions(models,manualWidths,base,'manual');
+    const manualScore=E.evaluate(models,manual,manualWidths,base);
+    const auto=E.choosePositions(models,autoWidths,autoSize,mode);
+    const autoScore=E.evaluate(models,auto,autoWidths,autoSize);
     const elapsed=performance.now()-t0;
-    drawLabels(maps[0],manual,manualScore.problemIndices,size,showProblems);
-    drawLabels(maps[1],auto,autoScore.problemIndices,size,showProblems);
-    printMetrics('manual-stats',manualScore);
-    printMetrics('auto-stats',autoScore);
+    layouts={
+      manual:{positions:manual,widths:manualWidths,size:base,score:manualScore},
+      auto:{positions:auto,widths:autoWidths,size:autoSize,score:autoScore}
+    };
+    drawLabels(maps[0],manual,manualScore.problemIndices,base,showProblems);
+    drawLabels(maps[1],auto,autoScore.problemIndices,autoSize,showProblems);
+    updateVisibleStats();
     renderCount++;
-    $('status').textContent='59町名・60地図面。候補点計算 '+ringsBuildMs.toFixed(1)+'ms、今回の配置＋計測 '+elapsed.toFixed(1)+'ms（この端末での参考値）。';
+    $('status').textContent='59町名・60地図面／地図 '+zoom.toFixed(2)+'倍。自動側の文字 '+(aware?Math.pow(zoom,0.4).toFixed(2)+'倍（緩やかに追従）':'同倍率')+'。候補点計算 '+ringsBuildMs.toFixed(1)+'ms、再配置・計測 '+elapsed.toFixed(1)+'ms（端末参考値）。';
     highlightSelection();
   }
   function setMobileView(mode){
@@ -180,9 +209,10 @@
   $('method').addEventListener('change',relayout);
   $('font-size').addEventListener('change',relayout);
   $('show-problems').addEventListener('change',relayout);
+  $('zoom-aware').addEventListener('change',relayout);
   $('zoom-in').addEventListener('click',()=>zoomAt(1.4));
   $('zoom-out').addEventListener('click',()=>zoomAt(1/1.4));
-  $('reset-zoom').addEventListener('click',()=>{view={...full};paintMaps();});
+  $('reset-zoom').addEventListener('click',()=>{view={...full};paintMaps();scheduleReflow();});
   $('view-manual').addEventListener('click',()=>setMobileView('manual'));
   $('view-auto').addEventListener('click',()=>setMobileView('auto'));
 
