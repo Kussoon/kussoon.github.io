@@ -41,6 +41,7 @@ function pan(dx,dy){
  view.x-=dx*view.w/rect.width;view.y-=dy*view.h/rect.height;
  clamp();repaintView();schedule();
 }
+function displayName(m){return m.major==='神戸市'?'神戸市'+m.name:m.name;}
 function setSelected(i,focus){
  if(!Number.isInteger(i)||i<0||i>=models.length)return;
  selected=i;
@@ -60,8 +61,7 @@ function setSelected(i,focus){
   item.text.classList.toggle('selected',j===selected);
  });
  const m=models[i];
- $('selection').textContent=m.name+
-   (m.major ? '（'+m.major+'）' : '')+
+ $('selection').textContent=displayName(m)+
    ($('use-case').value==='plate'?'／ナンバー地域名：'+(plateCodes.has(m.code)?'姫路':'神戸'):'')+
    '／行政区域コード '+m.code;
  schedule();
@@ -228,11 +228,11 @@ function wire(){
  $('find-form').addEventListener('submit',event=>{
   event.preventDefault();
   const query=$('find').value.trim();
-  const exact=models.findIndex(m=>m.name===query||m.code===query);
+  const exact=models.findIndex(m=>displayName(m)===query||m.name===query||m.code===query);
   if(exact!==-1){setSelected(exact,true);return}
-  const hits=models.flatMap((m,i)=>m.name.includes(query)?[i]:[]);
+  const hits=models.flatMap((m,i)=>displayName(m).includes(query)?[i]:[]);
   if(hits.length===1){setSelected(hits[0],true)}
-  else $('selection').textContent=hits.length?'候補：'+hits.map(i=>models[i].name).join('、'):'該当する区域がありません。';
+  else $('selection').textContent=hits.length?'候補：'+hits.map(i=>displayName(models[i])).join('、'):'該当する区域がありません。';
  });
  window.addEventListener('resize',schedule);
 }
@@ -263,7 +263,7 @@ Promise.all([
   throw Error('ナンバー地域名コードと市町・区が一致しません');
  allView=projected.bounds;view={...allView};repaintView();
  $('towns').replaceChildren(...models.map(m=>{
-  const el=document.createElement('option');el.value=m.name;el.label=m.code;return el;
+  const el=document.createElement('option');el.value=displayName(m);el.label=m.code;return el;
  }));
  initMap();relayout();
 }).catch(e=>{
