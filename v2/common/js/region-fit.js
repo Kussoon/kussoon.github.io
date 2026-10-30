@@ -181,7 +181,7 @@ function refine(models,labels,size,engine,options={}){
  }
  // Revert only as many final moves as necessary if a viewport-edge
  // membership change made the user's visible label collisions worse.
- for(let h=history.length-1;h>=0&&
+ for(let h=history.length-1;usePerimeter&&h>=0&&
      visibleCollisions()>baselineVisibleCollisions;h--){
   const {i,previous}=history[h];
   result[i]=previous;
