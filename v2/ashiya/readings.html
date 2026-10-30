@@ -72,7 +72,7 @@ window.kussoonUmamiBeforeSend=function(type,payload){
  <a href="/v2/">← V2試験トップへ</a>
  <div class="eyebrow">V2 ラベル検証／読み仮名と1行配置（試験版）</div>
  <h1>芦屋市 町名と読み仮名の表示実験</h1>
- <p class="lead">59町名を使い、Yahoo!マップの住所表示を参考に「漢字＋読み仮名」「ひらがなのみ」と、1行固定の上下微調整を比較します。</p>
+ <p class="lead">59町名を最初から表示し、Yahoo!マップの住所表示を参考に「漢字＋読み仮名」「ひらがなのみ」、町域中心への配置を比較します。</p>
  <p class="lead"><a href="/v2/ashiya/labels.html">従来の1行・2行配置比較へ</a> ／ <a href="/ashiya/">芦屋市の現行版へ</a></p>
 </header>
 <section class="panel controls" aria-label="地図の設定">
@@ -84,23 +84,29 @@ window.kussoonUmamiBeforeSend=function(type,payload){
    <button type="button" data-label-style="kana" aria-pressed="false">ひらがなのみ</button>
   </div>
  </div>
+ <label>ラベルの位置
+  <select id="anchor-mode">
+   <option value="center" selected>町域の中心（おすすめ）</option>
+   <option value="legacy">従来のはみ出し・重複回避方式</option>
+  </select>
+ </label>
  <label>1行の上下微調整
   <select id="shift-mode">
-   <option value="none">上下移動なし（基準）</option>
-   <option value="vertical" selected>重なる場合は上下に半〜1.5文字分</option>
+   <option value="none" selected>調整なし・中心に固定（おすすめ）</option>
+   <option value="vertical">必要な場合だけ上下へ微調整</option>
   </select>
  </label>
  <label>漢字・ひらがなの文字サイズ
   <select id="font-size">
    <option value="12">12px（小）</option>
    <option value="14">14px</option>
-   <option value="16" selected>16px（標準）</option>
-   <option value="18">18px（大）</option>
+   <option value="16">16px（標準）</option>
+   <option value="18" selected>18px（初期値）</option>
    <option value="22">22px（特大）</option>
   </select>
  </label>
- <label class="checkbox-row"><input id="declutter" type="checkbox" checked>重なるラベルを一時的に省略</label>
- <label class="checkbox-row"><input id="show-problems" type="checkbox">区域外の可能性がある文字を赤で表示</label>
+ <label class="checkbox-row"><input id="declutter" type="checkbox">重なるラベルを非表示にする（比較用・標準は全件表示）</label>
+ <label class="checkbox-row"><input id="show-problems" type="checkbox">境界またぎの可能性を赤で表示（診断用）</label>
  <div class="buttons" role="group" aria-label="ズーム">
   <button id="zoom-in" type="button">＋ 拡大</button>
   <button id="zoom-out" type="button">− 縮小</button>
@@ -126,9 +132,9 @@ window.kussoonUmamiBeforeSend=function(type,payload){
 <section class="panel">
  <h2>この実験で確かめること</h2>
  <p>漢字は原則1行です。「漢字＋小さな読み仮名」では読みを別の小さな行に表示します。地名そのものを分割する2行表示とは異なります。</p>
- <p>上下調整では、重なる場合だけ元の位置から約半文字・1文字・1.5文字分の移動を試します。移動が不適切なら重なる町名を一時的に省略し、検索・タップで選べる状態を残します。</p>
- <p>読み仮名を加えると地図に表示できる名前の数が減る場合があります。「ひらがなのみ」の文字列も漢字より長いため、縮尺別の見やすさを比較してください。</p>
- <p>区域外の判定はラベル矩形の9点による概算です。実際に読めるラベルが区域から少しはみ出しても、それだけでは失敗としません。</p>
+ <p><strong>標準では59町名をすべて表示</strong>し、各ラベルの中心を町域の幾何学的中心付近に置きます。境界またぎやラベル同士の重なりは許容し、読みにくい場合は拡大して確認できます。表示の自動省略や上下微調整は比較用にのみ選択できます。</p>
+ <p>読み仮名を加えると重なりは増えますが、標準では名前を隠しません。「ひらがなのみ」の文字列も漢字より長いため、縮尺別に拡大して見比べてください。</p>
+ <p>区域外の判定はラベル矩形の9点による概算で、<strong>失敗や非表示の条件にはしません。</strong>ラベル中心が町域内であること、必要な地名が最初から見つかることを優先します。</p>
 </section>
 <section class="panel">
  <h2>データの出典</h2>
