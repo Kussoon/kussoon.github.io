@@ -91,7 +91,8 @@ function refine(models,labels,size,engine,options={}){
  const margin=size*2;
  // Labels whose centers are off-screen should not force shifts on this view.
  const active=result.map((label,i)=>overlapsView(label.box,view,margin)?i:-1).filter(i=>i>=0);
- const minGain=typeof options.minGain==='number'?options.minGain:.03;
+ const usePerimeter=options.perimeter!==false;
+ const minGain=typeof options.minGain==='number'?options.minGain:(usePerimeter?.03:.075);
  const safeMargin=size*.18; // also leaves room for the white text stroke
  const maxPasses=Math.max(1,Math.min(2,options.passes||1));
  function scoreAt(i,box){
@@ -104,7 +105,8 @@ function refine(models,labels,size,engine,options={}){
   return {pairs,area};
  }
  const originalInside=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
- const originalMargins=active.map(i=>edgeClearance(result[i].box,models[i].rings,engine));
+ const originalMargins=usePerimeter?
+  active.map(i=>edgeClearance(result[i].box,models[i].rings,engine)):[];
  let improved=0;
  for(let pass=0;pass<maxPasses;pass++){
   // Work on the worst-contained labels first, not just labels colliding
@@ -116,12 +118,13 @@ function refine(models,labels,size,engine,options={}){
   for(const i of order){
    const current=result[i],model=models[i],origin=labels[i];
    const fit=fractionInside(current.box,model.rings,engine);
-   const margin=edgeClearance(current.box,model.rings,engine);
+   const margin=usePerimeter?edgeClearance(current.box,model.rings,engine):Infinity;
    // A label is safe only when BOTH its interior and its physical perimeter
    // fit. This catches a sliver of a glyph crossing into the next town.
    if(fit>=.96&&margin>=safeMargin)continue;
    const startOverlap=scoreAt(i,current.box);
-   const marginPenalty=distance=>Math.max(0,(safeMargin-distance)/size)*18;
+   const marginPenalty=distance=>usePerimeter?
+    Math.max(0,(safeMargin-distance)/size)*18:0;
    let best=null;
    const baseScore=(1-fit)*100+startOverlap.pairs*28+
      startOverlap.area/(size*size)*5+
@@ -137,9 +140,10 @@ function refine(models,labels,size,engine,options={}){
     const coverage=fractionInside(candidateBox,model.rings,engine);
     // Do not decrease the estimated contained area to improve an edge.
     if(coverage<fit-1e-9)continue;
-    const clearance=edgeClearance(candidateBox,model.rings,engine);
-    if(coverage<fit+minGain-1e-9&&clearance<margin+size*.10-1e-9)
-     continue;
+    const clearance=usePerimeter?edgeClearance(candidateBox,model.rings,engine):Infinity;
+    if(usePerimeter){
+     if(coverage<fit+minGain-1e-9&&clearance<margin+size*.10-1e-9)continue;
+    }else if(coverage<fit+minGain-1e-9)continue;
     const drift=Math.hypot(x-origin.x,y-origin.y)/size;
     const score=(1-coverage)*100+overlap.pairs*28+
       overlap.area/(size*size)*5+drift*.8+marginPenalty(clearance);
@@ -160,7 +164,8 @@ function refine(models,labels,size,engine,options={}){
   if(!changed)break;
  }
  const after=active.map(i=>fractionInside(result[i].box,models[i].rings,engine));
- const afterMargins=active.map(i=>edgeClearance(result[i].box,models[i].rings,engine));
+ const afterMargins=usePerimeter?
+  active.map(i=>edgeClearance(result[i].box,models[i].rings,engine)):[];
  const sum=values=>values.reduce((acc,n)=>acc+n,0);
  return {
   labels:result,
