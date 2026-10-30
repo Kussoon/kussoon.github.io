@@ -227,3 +227,68 @@ test('all 59 reading labels remain visible in auto-corrected and staggered mode 
     }
   }
 });
+
+test('one-sided East Ashiya anchor is balanced inside its region without manually setting coordinates',()=>{
+  const town=models.find(m=>m.name==='東芦屋町');
+  const point=R.safeInteriorCenter(town,E);
+  function corridor(x,y){
+    const crossings=[];
+    for(const ring of town.rings)for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+      const a=ring[j],b=ring[i];
+      if((a[1]>y)!==(b[1]>y))
+        crossings.push(a[0]+(b[0]-a[0])*(y-a[1])/(b[1]-a[1]));
+    }
+    const l=Math.max(...crossings.filter(v=>v<x-1e-7));
+    const r=Math.min(...crossings.filter(v=>v>x+1e-7));
+    return [x-l,r-x];
+  }
+  const oldCenter=[628.9,824.2]; // rounded diagnostic from the previous V2 revision
+  const before=corridor(oldCenter[0],oldCenter[1]);
+  const after=corridor(point[0],point[1]);
+  assert.ok(before[0]<before[1]*.35,'former anchor crowded the left edge');
+  assert.ok(after[0]>before[0]+10,'new anchor has more room on the left');
+  assert.ok(Math.abs(after[0]-after[1])<.01,'horizontal margins are balanced');
+  assert.ok(E.isInside(point[0],point[1],town.rings));
+  assert.ok(Math.hypot(point[0]-town.centroid[0],point[1]-town.centroid[1])<town.box.w*.25);
+});
+
+test('only East Ashiya moves compared with the former safe-center calculation',()=>{
+  const formerSafe=m=>{
+    const c=m.centroid,p=m.polylabel,rings=m.rings;
+    const cd=E.signedDist(c[0],c[1],rings),pd=E.signedDist(p[0],p[1],rings);
+    if(cd>0&&cd>=pd*.26)return [...c];
+    if(!(pd>0))return [...p];
+    let best=[...p],bestDist=Math.hypot(p[0]-c[0],p[1]-c[1]);
+    for(let k=0;k<=40;k++){
+      const t=k/40,x=c[0]+(p[0]-c[0])*t,y=c[1]+(p[1]-c[1])*t;
+      if(E.signedDist(x,y,rings)<pd*.35)continue;
+      const d=Math.hypot(x-c[0],y-c[1]);
+      if(d<bestDist-1e-9){best=[x,y];bestDist=d;}
+    }
+    return best;
+  };
+  const changed=[];
+  for(const m of models){
+    const prev=formerSafe(m),current=R.safeInteriorCenter(m,E);
+    if(Math.hypot(prev[0]-current[0],prev[1]-current[1])>1e-7)changed.push(m.name);
+  }
+  assert.deepEqual(changed,['東芦屋町']);
+});
+
+test('readable East Ashiya label gains space at high zoom without hiding or moving other labels',()=>{
+  const east=models.findIndex(m=>m.name==='東芦屋町');
+  for(const viewWidth of [1000,500,250,125]){
+    const font=E.screenPixelsToSvgUnits(18,viewWidth,390);
+    for(const style of ['kanji','both','kana']){
+      const base=R.planCenterFirstLabels(models,readings,style,font,measure,E,
+        {anchor:'raw',shift:'none'});
+      const fixed=R.planCenterFirstLabels(models,readings,style,font,measure,E,
+        {anchor:'safe',shift:'none'});
+      assert.equal(fixed.length,59);
+      assert.equal(R.evaluateVisible(models,fixed,models.map(()=>true),E,bounds).shown,59);
+      const eastLabel=fixed[east];
+      assert.ok(E.isInside(eastLabel.x,eastLabel.y,models[east].rings));
+      assert.ok(eastLabel.x>base[east].x,'corrected label center should be to the right');
+    }
+  }
+});
