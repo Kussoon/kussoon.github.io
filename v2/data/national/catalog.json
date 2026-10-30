@@ -31,7 +31,8 @@
       "name": "滋賀県",
       "scope": [
         "kansai",
-        "west"
+        "west",
+        "west-shikoku"
       ]
     },
     {
@@ -39,7 +40,8 @@
       "name": "京都府",
       "scope": [
         "kansai",
-        "west"
+        "west",
+        "west-shikoku"
       ]
     },
     {
@@ -47,7 +49,8 @@
       "name": "大阪府",
       "scope": [
         "kansai",
-        "west"
+        "west",
+        "west-shikoku"
       ]
     },
     {
@@ -55,7 +58,8 @@
       "name": "兵庫県",
       "scope": [
         "kansai",
-        "west"
+        "west",
+        "west-shikoku"
       ]
     },
     {
@@ -63,7 +67,8 @@
       "name": "奈良県",
       "scope": [
         "kansai",
-        "west"
+        "west",
+        "west-shikoku"
       ]
     },
     {
@@ -71,7 +76,8 @@
       "name": "和歌山県",
       "scope": [
         "kansai",
-        "west"
+        "west",
+        "west-shikoku"
       ]
     },
     {
@@ -79,7 +85,9 @@
       "name": "鳥取県",
       "scope": [
         "chugoku",
-        "west"
+        "west",
+        "west-shikoku",
+        "chugoku-shikoku"
       ]
     },
     {
@@ -87,7 +95,9 @@
       "name": "島根県",
       "scope": [
         "chugoku",
-        "west"
+        "west",
+        "west-shikoku",
+        "chugoku-shikoku"
       ]
     },
     {
@@ -95,7 +105,9 @@
       "name": "岡山県",
       "scope": [
         "chugoku",
-        "west"
+        "west",
+        "west-shikoku",
+        "chugoku-shikoku"
       ]
     },
     {
@@ -103,7 +115,9 @@
       "name": "広島県",
       "scope": [
         "chugoku",
-        "west"
+        "west",
+        "west-shikoku",
+        "chugoku-shikoku"
       ]
     },
     {
@@ -111,7 +125,45 @@
       "name": "山口県",
       "scope": [
         "chugoku",
-        "west"
+        "west",
+        "west-shikoku",
+        "chugoku-shikoku"
+      ]
+    },
+    {
+      "code": "36",
+      "name": "徳島県",
+      "scope": [
+        "shikoku",
+        "chugoku-shikoku",
+        "west-shikoku"
+      ]
+    },
+    {
+      "code": "37",
+      "name": "香川県",
+      "scope": [
+        "shikoku",
+        "chugoku-shikoku",
+        "west-shikoku"
+      ]
+    },
+    {
+      "code": "38",
+      "name": "愛媛県",
+      "scope": [
+        "shikoku",
+        "chugoku-shikoku",
+        "west-shikoku"
+      ]
+    },
+    {
+      "code": "39",
+      "name": "高知県",
+      "scope": [
+        "shikoku",
+        "chugoku-shikoku",
+        "west-shikoku"
       ]
     }
   ],
