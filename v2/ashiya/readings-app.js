@@ -6,6 +6,7 @@
   const $=id=>document.getElementById(id);
   const svg=$('map'),full={x:0,y:0,w:1000,h:1581};
   let view={...full},models=[],readings={},selected=null;
+  let nameMode='both';
   let nodes=[],activeWheel=false,layoutTimer=null;
   const pointers=new Map();
   let suppressClickUntil=0,wasDragged=false,viewVersion=0;
@@ -211,7 +212,7 @@
     const start=performance.now();
     const screenWidth=svg.getBoundingClientRect().width||360;
     const size=E.screenPixelsToSvgUnits(Number($('font-size').value),view.w,screenWidth);
-    const mode=$('name-mode').value,shift=$('shift-mode').value;
+    const mode=nameMode,shift=$('shift-mode').value;
     const measure=measurements();
     const baseWidths=models.map(m=>{
       const reading=readings[m.name];
@@ -259,7 +260,18 @@
         '。町名を詳しく入力してください。';
     }
   });
-  for(const id of ['name-mode','shift-mode','font-size','declutter','show-problems'])
+  for(const btn of document.querySelectorAll('[data-label-style]')){
+    btn.addEventListener('click',()=>{
+      nameMode=btn.dataset.labelStyle;
+      for(const other of document.querySelectorAll('[data-label-style]')){
+        const active=other===btn;
+        other.classList.toggle('active',active);
+        other.setAttribute('aria-pressed',String(active));
+      }
+      relayout();
+    });
+  }
+  for(const id of ['shift-mode','font-size','declutter','show-problems'])
     $(id).addEventListener('change',relayout);
   $('zoom-in').addEventListener('click',()=>zoom(1.4));
   $('zoom-out').addEventListener('click',()=>zoom(1/1.4));
