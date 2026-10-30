@@ -7,21 +7,29 @@ let models=[],shapes=[],texts=[],selected=-1,full={x:0,y:0,w:900,h:900},view={..
 const node=(tag,attrs={})=>{const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,String(v));return e;};
 const groupedName=name=>String(name||'').replace(/[一二三四五六七八九十百]+丁目$/,'');
 function arcsToRegions(topo){
- if(topo.type!=='Topology'||topo.transform||!topo.objects?.town||!Array.isArray(topo.arcs))throw Error('想定外の町域TopoJSON');
- const arcs=topo.arcs;
- const cached=new Map();
- const getArc=id=>{const k=id<0?~id:id;if(!cached.has(k))cached.set(k,arcs[k]);const points=cached.get(k);if(!points)throw Error('Arc参照エラー');return id<0?[...points].reverse():points;};
- const ring=ids=>ids.flatMap((id,j)=>getArc(id).slice(j?1:0));
+ if(topo?.type!=='Topology'||!Array.isArray(topo.objects?.town?.geometries)||
+    !Array.isArray(topo.arcs))throw Error('想定外の町域TopoJSON');
+ if(typeof window.topojson?.merge!=='function')throw Error('町域結合ライブラリを読み込めません');
  const groups=new Map();
  for(const g of topo.objects.town.geometries){
   const name=groupedName(g.properties?.S_NAME);
   if(!name)throw Error('町名がありません');
-  const polys=g.type==='Polygon'?[g.arcs]:g.type==='MultiPolygon'?g.arcs:null;
-  if(!polys)throw Error('未対応形状');
+  if(g.type!=='Polygon'&&g.type!=='MultiPolygon')throw Error('未対応形状：'+g.type);
   if(!groups.has(name))groups.set(name,[]);
-  for(const poly of polys)for(const ids of poly){const pts=ring(ids);if(pts.length>=3)groups.get(name).push(pts);}
+  groups.get(name).push(g);
  }
- return groups;
+ const dissolved=new Map();
+ for(const [name,geometries] of groups){
+  // Same process as the published Nishinomiya all-area-labeled.html:
+  // topojson.merge removes arcs shared by neighboring chome of the same town.
+  // Nonadjacent pieces remain separate polygons of one town.
+  const merged=window.topojson.merge(topo,geometries);
+  if(merged.type!=='MultiPolygon'||!Array.isArray(merged.coordinates))throw Error('町域結合の形式が不正：'+name);
+  const rings=merged.coordinates.flatMap(polygon=>polygon.filter(ring=>ring.length>=4));
+  if(!rings.length)throw Error('町域結合で空になった区域：'+name);
+  dissolved.set(name,rings);
+ }
+ return dissolved;
 }
 function project(groups){
  const all=[...groups.values()].flat(2);
