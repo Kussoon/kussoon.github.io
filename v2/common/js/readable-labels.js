@@ -112,7 +112,7 @@
     // Keep the historical threshold for wider/irregular towns so their
     // already accepted label anchors remain completely unchanged.
     const tallAndNarrow=model.box?.h > model.box?.w*1.2;
-    const minBalance=tallAndNarrow?.50:.35;
+    const minBalance=tallAndNarrow ? 0.50 : 0.35;
     if(Math.min(leftRoom,rightRoom)/Math.max(leftRoom,rightRoom)>=minBalance)return point;
     const candidateX=(left+right)/2;
     // Small, conservative correction; do not drag the label to another arm
