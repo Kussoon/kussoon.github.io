@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,follow">
+<title>西宮市全域322町名・ラベル自動配置試験｜Kussoon V2</title>
+<meta name="description" content="西宮市の全域322町名グループでV2ラベル配置を試験します。正式版は変更しません。">
+<style>
+:root{--ink:#1b405b;--line:#bdd4e3}*{box-sizing:border-box}body{margin:0;background:linear-gradient(#edf6fb,#fff);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;color:var(--ink);line-height:1.55}main{max-width:1060px;margin:auto;padding:14px 12px 34px}h1{font-size:clamp(23px,4vw,30px)}a{color:#176089}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:13px;margin:13px 0}.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end}.controls label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:800;flex:1 1 150px}select,input,button{font:inherit;min-height:44px;color:var(--ink);background:white;border:1px solid #9ebaca;border-radius:8px;padding:8px}input,select{width:100%}button{font-weight:800;cursor:pointer}.buttons{display:flex;gap:7px;flex-wrap:wrap}.map{display:block;width:100%;aspect-ratio:1;touch-action:none;border:1px solid #abcad9;background:#eaf4f8;border-radius:12px;user-select:none}.town{fill:#a8d4e8;stroke:#fff;stroke-width:1;stroke-linejoin:round;vector-effect:non-scaling-stroke;cursor:pointer;fill-rule:evenodd}.town.selected{fill:#ba9bee;stroke:#5a358b;stroke-width:2.6}.name{font-weight:850;text-anchor:middle;dominant-baseline:middle;fill:#173c58;stroke:white;paint-order:stroke;stroke-linejoin:round;pointer-events:none}.name.selected{fill:#71379e}.summary{font-size:14px;padding:9px;background:#eff6fa;border-radius:9px}.small{font-size:13px;color:#537082}.finder{position:relative;flex:2 1 230px}.suggestions{position:absolute;top:100%;z-index:10;left:0;right:0;max-height:240px;overflow:auto;background:white;border:1px solid #9ebaca;box-shadow:0 8px 18px #163b5326}.suggestions[hidden]{display:none}.suggestions button{display:block;width:100%;border:0;border-bottom:1px solid #dbe5eb;border-radius:0;text-align:left}.suggestions button:hover{background:#eef7ff}@media(min-width:850px){.layout{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:12px}}:focus-visible{outline:3px solid #2975b9;outline-offset:2px}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
+<script defer src="/common/site-footer.js"></script>
+<script defer src="../common/js/label-engine.js"></script>
+<script defer src="../common/js/readable-labels.js"></script>
+<script defer src="full-map-app.js?v=1"></script>
+</head><body><main>
+<a href="/v2/">← V2試験トップへ</a><h1>西宮市全域・町名ラベル自動配置</h1>
+<p>既存の町域境界449図形を、丁目単位をまとめた<strong>322町名グループ</strong>として試験します。まずは全域配置と拡大時の読みやすさを検証し、従来の公開ページは変更しません。</p>
+<section class="panel controls">
+<label>配置方法<select id="anchor"><option value="balanced" selected>左右の局所中央（V2標準）</option><option value="safe">安全中心</option><option value="universal">特殊形状対応</option><option value="raw">重心</option></select></label>
+<label>上下の調整<select id="shift"><option value="adjacent" selected>縦長隣接区域のみ</option><option value="none">なし</option><option value="vertical">全体を調整</option></select></label>
+<label>文字サイズ<select id="font"><option value="9">9px</option><option value="11" selected>11px</option><option value="13">13px</option><option value="16">16px</option></select></label>
+<div class="finder"><label for="find" style="display:block;font-weight:800;font-size:13px">町名を検索（漢字の一部）</label><input id="find" type="search" placeholder="例：鞍掛、上ケ原、甲陽園" autocomplete="off" aria-controls="suggestions"><div id="suggestions" class="suggestions" hidden></div></div>
+</section>
+<section class="panel"><div class="buttons"><button id="zoom-in">＋ 拡大</button><button id="zoom-out">− 縮小</button><button id="reset">全域</button><button id="clear">選択解除</button></div><p id="selection" class="summary" aria-live="polite">町名をタップすると選択できます。</p><p class="small">ドラッグで移動・2本指で拡大縮小。ラベルは原則すべて表示し、拡大すると読みやすくなります。</p></section>
+<div class="layout"><section class="panel"><h2>西宮市322町名・全域</h2><svg id="map" class="map" viewBox="0 0 900 900" aria-label="西宮市全域の町名地図"></svg></section><section class="panel"><h2>ラベル配置診断</h2><p id="status" role="status">地図を読み込み中…</p><div id="metrics" class="small"></div></section></div>
+<section class="panel small"><strong>データと試験範囲：</strong>西宮市の現行地図と同じ「令和2年国勢調査町丁・字等別境界データ」を利用。既存の<a href="/nishinomiya/data/nishinomiya-towns.topojson">TopoJSON</a>から丁目を町名に統合して表示します。町域の分割図形を結合せず同名領域として扱うため、境界線は試験表示です。ひらがな検索・郵便番号・町丁目の正規化は今後の工程で検証します。</section>
+</main></body></html>
