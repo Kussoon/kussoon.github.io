@@ -10,7 +10,7 @@
   let models = [], selected = null, activeWheelMap = null;
   let ringsBuildMs = 0, renderCount = 0;
   let layouts = null;
-  let reflowTimer = null;
+  let reflowFrame = null;
   const mapObjects = new Map();
   const activePointers = new Map();
   let dragged = false, suppressClickUntil = 0;
@@ -49,6 +49,7 @@
     view.x-=dx/r.width*view.w;
     view.y-=dy/r.height*view.h;
     clampView();paintMaps();
+    scheduleReflow();
   }
   function wireMap(svg) {
     svg.addEventListener('wheel', e => {
@@ -101,8 +102,8 @@
       const path=e.target.closest('.town');
       if(path&&path.dataset.index!=null) {
         selected=Number(path.dataset.index);
-        highlightSelection();
-        $('status').textContent=models[selected].name+'を選択しました。';
+        relayout();
+        $('town-search-result').textContent=models[selected].name+'を地図から選択しました。';
       }
     });
   }
@@ -137,14 +138,14 @@
     context.font='900 '+size+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
     return models.map(m=>context.measureText(m.name).width);
   }
-  function printMetrics(id,metrics,visible) {
+  function printMetrics(id,score,visible,shown) {
     const fields=[
-      ['全域：対象町名',metrics.count],
-      ['表示範囲：町名',visible.count],
-      ['全域：ラベルの重なり',metrics.collisions+'組'],
-      ['表示範囲：重なり',visible.collisions+'組'],
-      ['全域：文字が区域外（概算）',metrics.wholeOutside+'件'],
-      ['表示範囲：文字が区域外',visible.wholeOutside+'件']
+      ['対象町名',models.length],
+      ['表示範囲のラベル',visible.count],
+      ['省略中のラベル',models.length-shown],
+      ['表示中ラベルの重なり',score.collisions+'組'],
+      ['表示範囲の重なり',visible.collisions+'組'],
+      ['表示範囲で文字が区域外',visible.wholeOutside+'件']
     ];
     $(id).innerHTML=fields.map(([label,v])=>'<div><dt>'+label+'</dt><dd>'+v+'</dd></div>').join('');
   }
@@ -152,19 +153,28 @@
     if(!layouts)return;
     for(const side of ['manual','auto']) {
       const l=layouts[side];
-      const visible=E.evaluateView(models,l.positions,l.widths,l.size,view);
-      printMetrics(side+'-stats',l.score,visible);
+      const indices=l.shown.flatMap((v,i)=>v?[i]:[]);
+      const score=E.subsetMetrics(models,l.positions,l.widths,l.size,indices);
+      const inView=indices.filter(i=>{
+        const [x,y]=l.positions[i];
+        return x>=view.x&&x<=view.x+view.w&&y>=view.y&&y<=view.y+view.h;
+      });
+      const visible=E.subsetMetrics(models,l.positions,l.widths,l.size,inView);
+      printMetrics(side+'-stats',score,visible,indices.length);
     }
   }
   function scheduleReflow() {
-    if(reflowTimer!==null)clearTimeout(reflowTimer);
-    // Recompute when zooming pauses; panning needs only a viewport metric refresh.
-    reflowTimer=setTimeout(()=>{
-      reflowTimer=null;
+    if(reflowFrame!==null)return;
+    reflowFrame=requestAnimationFrame(()=>{
+      reflowFrame=null;
       relayout();
-    },130);
+    });
   }
-  function drawLabels(svg,positions,problems,size,showProblems) {
+  function renderedMapWidth() {
+    const visible=maps.find(svg=>svg.getBoundingClientRect().width>0);
+    return visible?visible.getBoundingClientRect().width:360;
+  }
+  function drawLabels(svg,positions,problems,size,showProblems,shown) {
     const obj=mapObjects.get(svg);
     if(!obj)return;
     const set=new Set(problems);
@@ -172,49 +182,81 @@
       t.setAttribute('x',positions[i][0].toFixed(2));
       t.setAttribute('y',positions[i][1].toFixed(2));
       t.setAttribute('font-size',String(size));
-      t.setAttribute('stroke-width',String(size*2.2/14));
+      t.setAttribute('stroke-width',String(size*.17));
+      t.style.display=shown[i]?'':'none';
       t.classList.toggle('problem',showProblems&&set.has(i));
+      t.classList.toggle('selected',i===selected);
     });
   }
   function relayout() {
     if(!models.length)return;
-    const base=Number($('font-size').value),mode=$('method').value;
+    const px=Number($('font-size').value),mode=$('method').value;
     const showProblems=$('show-problems').checked;
-    const zoom=full.w/view.w;
-    const aware=$('zoom-aware').checked;
-    const autoSize=aware?E.zoomFontSize(base,zoom,0.4):base;
-    const manualWidths=measureWidths(base),autoWidths=measureWidths(autoSize);
+    const width=renderedMapWidth();
+    const size=E.screenPixelsToSvgUnits(px,view.w,width);
+    const widths=measureWidths(size);
     const t0=performance.now();
-    const manual=E.choosePositions(models,manualWidths,base,'manual');
-    const manualScore=E.evaluate(models,manual,manualWidths,base);
-    const auto=E.choosePositions(models,autoWidths,autoSize,mode);
-    const autoScore=E.evaluate(models,auto,autoWidths,autoSize);
+    const manual=E.choosePositions(models,widths,size,'manual');
+    const auto=E.choosePositions(models,widths,size,mode);
+    const manualShown=models.map(()=>true);
+    const autoShown=$('declutter').checked
+      ?E.selectVisibleLabels(models,auto,widths,size,view,selected)
+      :models.map(()=>true);
+    const allManual=manualShown.map((v,i)=>v?i:-1).filter(i=>i!==-1);
+    const activeAuto=autoShown.map((v,i)=>v?i:-1).filter(i=>i!==-1);
+    const manualScore=E.subsetMetrics(models,manual,widths,size,allManual);
+    const autoScore=E.subsetMetrics(models,auto,widths,size,activeAuto);
     const elapsed=performance.now()-t0;
     layouts={
-      manual:{positions:manual,widths:manualWidths,size:base,score:manualScore},
-      auto:{positions:auto,widths:autoWidths,size:autoSize,score:autoScore}
+      manual:{positions:manual,widths,size,shown:manualShown},
+      auto:{positions:auto,widths,size,shown:autoShown}
     };
-    drawLabels(maps[0],manual,manualScore.problemIndices,base,showProblems);
-    drawLabels(maps[1],auto,autoScore.problemIndices,autoSize,showProblems);
+    drawLabels(maps[0],manual,manualScore.problemIndices,size,showProblems,manualShown);
+    drawLabels(maps[1],auto,autoScore.problemIndices.map(i=>activeAuto[i]),size,showProblems,autoShown);
     updateVisibleStats();
     renderCount++;
-    $('status').textContent='59町名・60地図面／地図 '+zoom.toFixed(2)+'倍。自動側の文字 '+(aware?Math.pow(zoom,0.4).toFixed(2)+'倍（緩やかに追従）':'同倍率')+'。候補点計算 '+ringsBuildMs.toFixed(1)+'ms、再配置・計測 '+elapsed.toFixed(1)+'ms（端末参考値）。';
+    $('status').textContent='59町名・60地図面／地図 '+(full.w/view.w).toFixed(2)+'倍。画面上の文字 '+px+'px（固定）／自動側は'+activeAuto.length+'件表示。再配置・計測 '+elapsed.toFixed(1)+'ms（端末参考値）。';
     highlightSelection();
   }
   function setMobileView(mode){
     document.body.dataset.mobileView=mode;
     $('view-manual').setAttribute('aria-pressed',String(mode==='manual'));
     $('view-auto').setAttribute('aria-pressed',String(mode==='auto'));
+    scheduleReflow();
+  }
+  function goToTown(name) {
+    const key=name.replace(/[\s　]+/g,'').trim();
+    let idx=models.findIndex(m=>m.name===key);
+    if(idx<0){
+      const candidates=models.map((m,i)=>({m,i})).filter(x=>x.m.name.includes(key));
+      if(key && candidates.length===1)idx=candidates[0].i;
+    }
+    if(idx<0){
+      $('town-search-result').textContent='町名が見つからないか、候補が複数あります。候補一覧から正式な町名を選んでください。';
+      return;
+    }
+    selected=idx;
+    const [x,y]=models[idx].polylabel;
+    const w=Math.min(view.w,210);
+    view={x:x-w/2,y:y-w*full.h/full.w/2,w,h:w*full.h/full.w};
+    clampView();paintMaps();relayout();
+    $('town-search-result').textContent=models[idx].name+'へ移動しました。地図の町域とラベルを確認できます。';
+    document.querySelector('.maps').scrollIntoView({behavior:'smooth',block:'start'});
   }
   $('method').addEventListener('change',relayout);
   $('font-size').addEventListener('change',relayout);
   $('show-problems').addEventListener('change',relayout);
-  $('zoom-aware').addEventListener('change',relayout);
+  $('declutter').addEventListener('change',relayout);
   $('zoom-in').addEventListener('click',()=>zoomAt(1.4));
   $('zoom-out').addEventListener('click',()=>zoomAt(1/1.4));
   $('reset-zoom').addEventListener('click',()=>{view={...full};paintMaps();scheduleReflow();});
   $('view-manual').addEventListener('click',()=>setMobileView('manual'));
   $('view-auto').addEventListener('click',()=>setMobileView('auto'));
+  $('town-search-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    if(models.length)goToTown($('town-search-input').value);
+  });
+  window.addEventListener('resize',scheduleReflow);
 
   fetch('../data/ashiya/labels-source.json')
     .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
@@ -225,6 +267,11 @@
       models=built.models;
       ringsBuildMs=built.elapsedMs;
       maps.forEach(makeMap);
+      const choices=$('town-options');
+      choices.replaceChildren(...models.map(m=>{
+        const option=document.createElement('option');
+        option.value=m.name;return option;
+      }));
       relayout();
       paintMaps();
     })

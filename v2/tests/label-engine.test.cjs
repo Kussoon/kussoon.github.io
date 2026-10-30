@@ -80,3 +80,45 @@ test('viewport metrics change when panning, whole-map metrics do not',()=>{
   assert.ok(south.collisions<=whole.collisions);
   assert.ok(south.wholeOutside<=whole.wholeOutside);
 });
+
+test('pixel-based font stays the same apparent size across zoom levels and devices',()=>{
+  for(const width of [320,390,780]){
+    for(const z of [1,2,5,10]){
+      const units=E.screenPixelsToSvgUnits(16,1000/z,width);
+      assert.ok(Math.abs(units/(1000/z)*width-16)<1e-10);
+    }
+  }
+  assert.throws(()=>E.screenPixelsToSvgUnits(16,1000,0));
+});
+
+test('collision-aware visibility is deterministic and all regions remain in source',()=>{
+  const {models}=E.buildModels(raw.features);
+  const size=E.screenPixelsToSvgUnits(16,1000,360);
+  const widths=models.map(m=>m.name.length*size);
+  const positions=E.choosePositions(models,widths,size,'avoid');
+  const view={x:0,y:0,w:1000,h:1581};
+  const selected=E.selectVisibleLabels(models,positions,widths,size,view);
+  const again=E.selectVisibleLabels(models,positions,widths,size,view);
+  assert.equal(selected.length,59);
+  assert.equal(JSON.stringify(selected),JSON.stringify(again));
+  const indices=selected.flatMap((x,i)=>x?[i]:[]);
+  assert.ok(indices.length>0&&indices.length<59);
+  const score=E.subsetMetrics(models,positions,widths,size,indices);
+  assert.equal(score.collisions,0);
+  assert.equal(score.count,indices.length);
+});
+
+test('searched or tapped town remains visible even under label collisions',()=>{
+  const {models}=E.buildModels(raw.features);
+  const w=1000,px=16,size=E.screenPixelsToSvgUnits(px,w,360);
+  const widths=models.map(m=>m.name.length*size);
+  const positions=E.choosePositions(models,widths,size,'avoid');
+  const view={x:0,y:0,w:1000,h:1581};
+  const baseline=E.selectVisibleLabels(models,positions,widths,size,view);
+  const hidden=baseline.findIndex(show=>!show);
+  assert.ok(hidden>=0);
+  const pinned=E.selectVisibleLabels(models,positions,widths,size,view,hidden);
+  assert.ok(pinned[hidden]);
+  const active=pinned.flatMap((x,i)=>x?[i]:[]);
+  assert.equal(E.subsetMetrics(models,positions,widths,size,active).collisions,0);
+});

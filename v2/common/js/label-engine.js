@@ -218,5 +218,33 @@
     if(!(baseFont>0) || !(zoom>0))throw new Error('Invalid label font size or zoom');
     return baseFont*Math.pow(zoom,exponent-1);
   }
-  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize};
+  // Convert a readable screen size in CSS pixels to SVG units. With a viewBox,
+  // geometry changes scale but labels must retain their screen size.
+  function screenPixelsToSvgUnits(px, viewWidth, renderedWidth) {
+    if(!(px>0)||!(viewWidth>0)||!(renderedWidth>0))throw new Error('Invalid viewport dimensions');
+    return px*viewWidth/renderedWidth;
+  }
+  function subsetMetrics(models,positions,widths,fontSize,indices) {
+    return evaluate(
+      indices.map(i=>models[i]),
+      indices.map(i=>positions[i]),
+      indices.map(i=>widths[i]),fontSize
+    );
+  }
+  // A chosen label remains visible even if it collides. Other labels are
+  // deterministic, larger regions first. Hidden labels stay searchable.
+  function selectVisibleLabels(models,positions,widths,fontSize,view,pinned=null) {
+    const boxes=positions.map(([x,y],i)=>rect(x,y,widths[i],fontSize*1.15));
+    const ordered=models.map((m,i)=>({i,area:m.box.w*m.box.h}))
+      .sort((a,b)=>(b.i===pinned)-(a.i===pinned) || b.area-a.area || a.i-b.i);
+    const shown=new Array(models.length).fill(false),accepted=[];
+    for(const {i} of ordered) {
+      const r=boxes[i];
+      if(i!==pinned && (r.x2<view.x||r.x1>view.x+view.w||r.y2<view.y||r.y1>view.y+view.h))continue;
+      if(i!==pinned && accepted.some(j=>overlapArea(r,boxes[j])>0.01))continue;
+      shown[i]=true;accepted.push(i);
+    }
+    return shown;
+  }
+  global.KussoonLabelEngine={parsePath,bbox,isInside,signedDist,centroid,polylabel,buildModels,choosePositions,evaluate,evaluateView,zoomFontSize,screenPixelsToSvgUnits,subsetMetrics,selectVisibleLabels};
 })(window);
