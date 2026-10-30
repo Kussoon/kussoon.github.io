@@ -95,12 +95,22 @@ function intersects(b,v){
 function evaluate(models,layout,view){
  const active=layout.map((l,i)=>intersects(l.box,view)?i:-1).filter(i=>i>=0);
  let collisions=0,centerOutside=0;
+ const conflicts=[];
  for(let a=0;a<active.length;a++){
   const i=active[a],l=layout[i];
   if(!E.isInside(l.x,l.y,models[i].rings))centerOutside++;
-  for(let b=0;b<a;b++)if(boxesOverlap(l.box,layout[active[b]].box))collisions++;
+  for(let b=0;b<a;b++){
+   const j=active[b],other=layout[j];
+   if(!boxesOverlap(l.box,other.box))continue;
+   collisions++;
+   const width=Math.max(0,Math.min(l.box.x2,other.box.x2)-Math.max(l.box.x1,other.box.x1));
+   const height=Math.max(0,Math.min(l.box.y2,other.box.y2)-Math.max(l.box.y1,other.box.y1));
+   conflicts.push({a:models[i].name,b:models[j].name,area:width*height});
+  }
  }
- return {active:active.length,collisions,centerOutside};
+ conflicts.sort((a,b)=>b.area-a.area);
+ return {active:active.length,collisions,centerOutside,examples:conflicts.slice(0,3)
+   .map(c=>c.a+'・'+c.b)};
 }
 function screenSize(z){return Math.min(24,16+Math.min(2,Math.max(0,z-1)*.18));}
 function caseAt(id,region,baseline,z,spot){
@@ -125,7 +135,7 @@ function caseAt(id,region,baseline,z,spot){
  const scalePx=screenSize(z);
  return {region:REGIONS[id].label,spot:spot||'全域',zoom:z,
   screenPx:scalePx,targets:after.active,before:before.collisions,
-  after:after.collisions,centerOutside:after.centerOutside,moved:adjusted.moved,ms:elapsed};
+  after:after.collisions,centerOutside:after.centerOutside,moved:adjusted.moved,ms:elapsed,examples:after.examples};
 }
 function createTd(textValue,className){
  const td=document.createElement('td');td.textContent=String(textValue);
@@ -134,7 +144,7 @@ function createTd(textValue,className){
 function showResult(r){
  const tr=document.createElement('tr');
  const values=[r.region,r.spot,r.zoom.toFixed(1)+'倍',r.screenPx.toFixed(1)+'px',
-  r.targets,r.before,r.after,r.centerOutside,r.moved,r.ms.toFixed(0)+'ms'];
+  r.targets,r.before,r.after,r.centerOutside,r.moved,r.ms.toFixed(0)+'ms',r.examples.join('／')||'—'];
  for(let i=0;i<values.length;i++)tr.append(createTd(values[i],
   i===6&&r.after>0?'num over':i===6?'num good':i>=2?'num':''));
  $('results').append(tr);
@@ -181,9 +191,9 @@ async function start(){
    (failures.length?' 読込失敗：'+failures.join('／'):'');
   $('status').textContent=failures.length?'一部の地域を計測できませんでした。':'計測完了。結果は同じ条件で再現できます。';
   lastOutput='Kussoon V2 ラベル配置検証\n'+
-   ['地域','地点','拡大倍率','画面文字px','対象件数','重なり前','重なり後','区域外中心','移動数','時間ms'].join('\t')+'\n'+
+   ['地域','地点','拡大倍率','画面文字px','対象件数','重なり前','重なり後','区域外中心','移動数','時間ms','残存する重なり例'].join('\t')+'\n'+
    output.map(r=>[r.region,r.spot,r.zoom,r.screenPx.toFixed(1),r.targets,r.before,r.after,
-     r.centerOutside,r.moved,r.ms.toFixed(0)].join('\t')).join('\n')+'\n'+
+     r.centerOutside,r.moved,r.ms.toFixed(0),r.examples.join('／')].join('\t')).join('\n')+'\n'+
    $('totals').textContent;
   $('copy').disabled=!output.length;
  }catch(err){
@@ -199,6 +209,8 @@ $('copy').addEventListener('click',()=>{
   navigator.clipboard.writeText(lastOutput).then(()=>
    $('status').textContent='結果をコピーしました。').catch(()=>
    $('status').textContent='このブラウザではコピーできませんでした。');
+ }else if(lastOutput){
+  $('status').textContent='このブラウザではコピー機能が利用できません。表の内容を選択してください。';
  }
 });
 })();
