@@ -1,7 +1,7 @@
 # Kussoon 地域学習システム V2
 
 開始日：2026-10-30  
-状態：第1弾・開発基盤／設計資料（試験機能未実装）
+状態：第2弾・芦屋市ラベル自動配置の試験実装（実ブラウザ評価前）
 
 ## 目的
 
@@ -28,6 +28,8 @@
 - [現行機能・データの棚卸し](docs/inventory.md)
 - [初期設計](docs/design.md)
 - [試験トップ](index.html)
+- [芦屋市のラベル比較実験](ashiya/labels.html)
+- [芦屋市ラベル実験の記録](docs/ashiya-label-test.md)
 - 旧共通仕様案：[nishinomiya/common-learning-spec-draft.md](https://github.com/Kussoon/nishinomiya/blob/main/common-learning-spec-draft.md)
 - 旧画面見本：[common-design-preview.html](https://kussoon.com/nishinomiya/common-design-preview.html)
 
@@ -54,3 +56,15 @@
 ## 今後の進め方
 
 最初の技術検証は芦屋市59町名。自動配置位置、区域外へのはみ出し、ラベル衝突、手動補正件数を数値比較する。次に兵庫県49区域で「町名以外でも同じエンジンが使えるか」を検証する。正式ページの置換は最後に個別判断する。
+
+## 第2弾：芦屋市ラベル比較（試験中）
+
+59の町名と60の地図面を、既存の手動座標と紐づけて抽出した。 `/v2/ashiya/labels.html` で重心・Polylabel・簡易衝突回避の結果を比較できる。計測値はプロトタイプの概算であり、現時点で正確性や表示品質を保証しない。
+
+ローカルで自動テストを走らせる場合：
+
+```sh
+node --test v2/tests/label-engine.test.cjs
+```
+
+正式な表示確認後、ラベルの表示密度・拡大縮小時の可読性を次工程で改善する。既存の `/ashiya/` は変更していない。
