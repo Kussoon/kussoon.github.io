@@ -226,6 +226,10 @@ function wire(){
  });
  window.addEventListener('resize',schedule);
 }
+// Open the existing shared test directly in plate mode when requested.
+if(new URLSearchParams(window.location.search).get('mode')==='plate'){
+ $('use-case').value='plate';
+}
 wire();
 Promise.all([
  fetch('../data/hyogo/hyogo-city.topojson').then(r=>{
