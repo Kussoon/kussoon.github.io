@@ -77,25 +77,45 @@
     }
     return laid;
   }
-  // V2 learning-mode placement: show names where their *regions* are, not
-  // wherever the complete text happens to fit. Region outlines and overlaps
-  // are allowed to pass underneath labels. In particular, no clipping or
-  // collision suppression occurs here.
+  // Return the polygon center when it is visually safe. If the centroid
+  // falls in a hole, outside, or inside a very narrow concave neck, find the
+  // nearest point toward Polylabel with reasonable interior clearance.
+  // Geometry-only: the anchor never changes just because the user zooms.
+  function safeInteriorCenter(model,engine) {
+    const c=model.centroid,p=model.polylabel,rings=model.rings;
+    const cDepth=engine.signedDist(c[0],c[1],rings);
+    const pDepth=engine.signedDist(p[0],p[1],rings);
+    if(cDepth>0 && cDepth>=pDepth*.26)return [...c];
+    if(!(pDepth>0))return [...p];
+    const minDepth=pDepth*.35;
+    let best=[...p],bestDistance=Math.hypot(p[0]-c[0],p[1]-c[1]);
+    // The segment to an interior point is not necessarily inside a concave
+    // polygon. Check the *actual* rings for every candidate.
+    for(let k=0;k<=40;k++) {
+      const t=k/40,x=c[0]+(p[0]-c[0])*t,y=c[1]+(p[1]-c[1])*t;
+      if(engine.signedDist(x,y,rings)<minDepth)continue;
+      const distance=Math.hypot(x-c[0],y-c[1]);
+      if(distance<bestDistance-1e-9){best=[x,y];bestDistance=distance;}
+    }
+    return best;
+  }
+
+  // Prefer stable, region-centered names to a collision-free map. All labels
+  // remain visible even if they overlap or cross regional borders.
+  // anchor:'safe' fixes concave-neck/outside centroids; 'raw' is the baseline.
   function planCenterFirstLabels(models,readings,style,size,measure,engine,options={}) {
     validateReadings(models,readings);
     const shift=options.shift || 'none';
-    if(!['none','vertical'].includes(shift))throw new Error('上下調整の方式が不正です');
+    if(!['none','vertical','adjacent'].includes(shift))throw new Error('上下調整の方式が不正です');
+    const anchorMode=options.anchor || 'raw';
+    if(!['raw','safe'].includes(anchorMode))throw new Error('配置方式が不正です');
     const specs=models.map(m=>labelSpec(m.name,readings[m.name],style,size,measure));
-    const anchors=models.map(m=>{
-      const c=m.centroid;
-      return engine.isInside(c[0],c[1],m.rings) ? c : m.polylabel;
-    });
+    const anchors=models.map(m=>
+      anchorMode==='safe'?safeInteriorCenter(m,engine):
+        (engine.isInside(m.centroid[0],m.centroid[1],m.rings) ? [...m.centroid] : [...m.polylabel]));
     const layout=new Array(models.length);
-    // Consistent, source-independent order. Vertical adjustments are a
-    // small opt-in improvement, never the reason a label disappears.
-    const order=models.map((_,i)=>i);
     const accepted=[];
-    for(const i of order){
+    for(let i=0;i<models.length;i++){
       const m=models[i],spec=specs[i],anchor=anchors[i];
       const overlapsAt=y=>{
         const box=rect(anchor[0],y,spec.width,spec.height);
@@ -103,8 +123,18 @@
       };
       const baseOverlap=overlapsAt(anchor[1]);
       let bestY=anchor[1],bestCost=baseOverlap/(size*size);
-      if(shift==='vertical' && baseOverlap>size*size*.6){
-        for(const step of [-.5,.5,-1,1,-1.5,1.5]){
+      // Only stagger a narrow north-south neighbor, not every overlapping
+      // label. The original center has priority unless adjustment helps.
+      const nearbyParallel=accepted.some(j=>{
+        const other=models[j],a=anchors[j],otherSpec=specs[j];
+        return m.box.h>m.box.w*1.35 && other.box.h>other.box.w*1.35 &&
+          Math.abs(anchor[0]-a[0])<(spec.width+otherSpec.width)*.52 &&
+          Math.abs(anchor[1]-a[1])<(spec.height+otherSpec.height)*.9;
+      });
+      const canStagger=shift==='vertical'||(shift==='adjacent'&&nearbyParallel);
+      if(canStagger && baseOverlap>size*size*.45){
+        const steps=shift==='adjacent'?[-.5,.5,-1,1]:[-.5,.5,-1,1,-1.5,1.5];
+        for(const step of steps) {
           const y=anchor[1]+step*size;
           if(!engine.isInside(anchor[0],y,m.rings))continue;
           const cost=overlapsAt(y)/(size*size)+Math.abs(step)*.75;
@@ -136,5 +166,5 @@
       total:models.length};
   }
   global.KussoonReadableLabels={normalizeReading,validateReadings,labelSpec,
-    planVerticalNudges,planCenterFirstLabels,evaluateVisible};
+    planVerticalNudges,safeInteriorCenter,planCenterFirstLabels,evaluateVisible};
 })(window);
