@@ -272,7 +272,11 @@
       }
     };
     drawLabels(maps[0],manual,manualScore.problemIndices,size,showProblems,manualShown);
-    drawLabels(maps[1],auto,autoScore.problemIndices,size,showProblems,autoShown,autoLayouts);
+    // subsetMetrics uses indices local to activeAuto; adaptive metrics use
+    // original model indices. Convert before coloring the corresponding labels.
+    const autoProblems=autoLayouts ? autoScore.problemIndices :
+      autoScore.problemIndices.map(i=>activeAuto[i]);
+    drawLabels(maps[1],auto,autoProblems,size,showProblems,autoShown,autoLayouts);
     updateVisibleStats();
     renderCount++;
     const inView=activeAuto.filter(i=>{
