@@ -1,7 +1,7 @@
 /* Nishinomiya 322 town-name groups, V2-only full-area label trial. */
 (()=>{
 'use strict';
-const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels,$=id=>document.getElementById(id);
+const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels,C=window.KussoonCollisionRefinement,$=id=>document.getElementById(id);
 const NS='http://www.w3.org/2000/svg',svg=$('map'),pointers=new Map();
 let models=[],shapes=[],texts=[],selected=-1,full={x:0,y:0,w:900,h:900},view={...full},timer=0,ignoreTap=0;
 const node=(tag,attrs={})=>{const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,String(v));return e;};
@@ -84,19 +84,49 @@ function build(){
  for(const kind of ['pointerup','pointercancel','lostpointercapture'])svg.addEventListener(kind,e=>{if(!pointers.has(e.pointerId))return;pointers.delete(e.pointerId);if(moved)ignoreTap=performance.now()+250;});
  svg.addEventListener('wheel',e=>{if(!e.ctrlKey&&!e.metaKey)return;e.preventDefault();const r=svg.getBoundingClientRect();zoomBy(e.deltaY<0?1.2:1/1.2,(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height);},{passive:false});
 }
+const measureContext=document.createElement('canvas').getContext('2d');
+function textWidth(value,size){
+ if(!measureContext)return [...value].length*size;
+ measureContext.font='850 '+size+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
+ return measureContext.measureText(value).width;
+}
 function renderLabels(){
  if(!models.length)return;
- const start=performance.now(),screen=svg.getBoundingClientRect(),size=E.screenPixelsToSvgUnits(Number($('font').value),view.w,screen.width||390);
- const measure=(value,font)=>[...value].length*font;
- const labels=R.planCenterFirstLabels(models,null,'kanji',size,measure,E,{anchor:$('anchor').value,shift:$('shift').value});
+ const start=performance.now(),screen=svg.getBoundingClientRect();
+ const zoom=full.w/view.w;
+ // The old rule kept screen text at 11px even at maximum zoom.
+ // Grow rendered glyphs gently with zoom, never shrinking below 16px.
+ const base=Math.max(16,Number($('font').value));
+ const screenPx=Math.min(38,base*Math.pow(zoom,.18));
+ // This city's viewBox is taller than the square SVG. preserveAspectRatio
+ // uses the *smaller* of X/Y scales; width-only conversion undersized text.
+ const svgPixelsPerUnit=Math.min((screen.width||390)/view.w,(screen.height||390)/view.h);
+ const size=screenPx/svgPixelsPerUnit;
+ const initial=R.planCenterFirstLabels(models,null,'kanji',size,textWidth,E,{
+  anchor:$('anchor').value,shift:$('shift').value
+ });
+ // Only the default "adjacent" mode opts into the new 2D refinement;
+ // comparison modes retain the historical vertical-only or no-shift rules.
+ const resolved=$('shift').value==='adjacent'
+  ?C.refine(models,initial,size,E,{view,pinned:selected,passes:2})
+  :{labels:initial,moved:0};
+ const labels=resolved.labels;
  for(let i=0;i<texts.length;i++){
   const label=labels[i],t=texts[i];
-  t.setAttribute('x',label.x.toFixed(2));t.setAttribute('y',label.y.toFixed(2));t.setAttribute('font-size',label.size.toFixed(2));t.setAttribute('stroke-width',(label.size*.18).toFixed(2));
+  t.setAttribute('x',label.x.toFixed(2));t.setAttribute('y',label.y.toFixed(2));
+  t.setAttribute('font-size',label.size.toFixed(2));
+  t.setAttribute('stroke-width',(label.size*.18).toFixed(2));
  }
- const inView=labels.map((l,i)=>l.x>=view.x&&l.x<=view.x+view.w&&l.y>=view.y&&l.y<=view.y+view.h?i:-1).filter(i=>i>=0);
- const stats=R.evaluateVisible(models,labels,models.map(()=>true),E,view);
- $('metrics').textContent='全町名：'+models.length+'件／画面内中心：'+inView.length+'件／ラベルの重なり（概算）：'+stats.collisions+'組／区域境界またぎ（概算）：'+stats.outside+'件。';
- $('status').textContent='拡大'+(full.w/view.w).toFixed(2)+'倍・配置'+(performance.now()-start).toFixed(0)+'ms。322町名を省略せず表示。';
+ const shown=models.map(()=>true);
+ const before=R.evaluateVisible(models,initial,shown,E,view);
+ const stats=R.evaluateVisible(models,labels,shown,E,view);
+ $('metrics').textContent='全町名：'+models.length+'件／画面内：'+stats.inView+
+  '件／表示範囲内の重なり（概算）：'+before.collisions+'組 → '+stats.collisions+
+  '組／区域境界またぎ（概算）：'+stats.outside+
+  '件／上下左右の追加調整：'+resolved.moved+'件。';
+ $('status').textContent='文字'+screenPx.toFixed(1)+'px（画面上）・拡大'+
+  zoom.toFixed(2)+'倍・配置'+(performance.now()-start).toFixed(0)+
+  'ms。322町名を省略せず表示。';
 }
 function suggestions(){
  const q=$('find').value.trim(),box=$('suggestions');box.replaceChildren();
