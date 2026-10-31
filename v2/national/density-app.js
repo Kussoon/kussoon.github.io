@@ -69,8 +69,8 @@ function renderOfficePopup(model){
  const result=window.KussoonOfficeDirectory.resolve(officeDirectory,model.code);
  window.KussoonOfficeDirectory.render(document,$('popup-actions'),result,nameOf(model));
  $('popup-note').textContent=result.offices.length&&result.offices.every(o=>o.status==='verified')?
-  '公式ウェブで確認した庁舎情報。リンクは別タブで開きます。':
-  '未確認の所在地・リンクは利用できません。';
+  '役所・役場の住所は地域の参考情報です。リンクは選択した地域を調べるためのものです。':
+  '確認できた住所のみ表示します。リンクは選択した地域の情報を開きます。';
  popup.hidden=false;
 }
 function showSelection(){
