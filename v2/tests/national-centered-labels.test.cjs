@@ -388,7 +388,7 @@ test('office overlay has separate selection, safe links, and unverified fallback
  for(const id of ['municipal-popup','popup-name','popup-close',
   'popup-office','popup-address','popup-actions','popup-note'])
   assert.ok(html.includes('id="'+id+'"'));
- assert.ok(html.includes('density-app.js?v=20261101-bottomkana1'));
+ assert.ok(html.includes('density-app.js?v=20261101-zipcode-b2'));
  for(const title of ['公式サイト','Wikipedia','ここへ行く'])
   assert.ok(app.includes(title));
  for(const code of ['renderOfficePopup(model)','renderOfficePopup(chosen)',
@@ -437,7 +437,7 @@ test('popup comparison pages share geography and test two distinct responsive la
  const b=fs.readFileSync(path.resolve(__dirname,'../national/density-popup-b.html'),'utf8');
  const current=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  for(const page of [a,b]){
-  assert.ok(page.includes('density-app.js?v=20261101-bottomkana1'));
+  assert.ok(page.includes('density-app.js?v=20261101-zipcode-b2'));
   assert.ok(page.includes('centered-labels.js?v=20261101-proposal5a'));
   assert.ok(page.includes('value="proposal5" selected'));
   assert.ok(page.includes('id="municipal-popup"'));
@@ -452,4 +452,27 @@ test('popup comparison pages share geography and test two distinct responsive la
  assert.ok(b.includes('right:120px;bottom:8px;width:calc(100% - 128px)'));
  assert.ok(b.includes('.map-toolbar{right:8px;bottom:8px;width:104px}'));
  assert.ok(!current.includes('吹き出しの配置を比較'));
+});
+
+test('B popup becomes the default layout; zip codes render above addresses',()=>{
+ const current=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const a=fs.readFileSync(path.resolve(__dirname,'../national/density-popup-a.html'),'utf8');
+ const b=fs.readFileSync(path.resolve(__dirname,'../national/density-popup-b.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ const records=JSON.parse(fs.readFileSync(path.resolve(__dirname,
+  '../data/national/municipality-offices-pilot.json'),'utf8')).offices;
+ for(const [code,post] of Object.entries({'28204':'662-8567',
+  '28214':'665-8665','28215':'673-0492','28446':'679-3116'})){
+  assert.equal(records[code].postalCode,post);
+  assert.ok(records[code].source.startsWith('https://'));
+ }
+ for(const page of [current,a,b]){
+  assert.ok(page.includes('density-app.js?v=20261101-zipcode-b2'));
+  assert.ok(page.includes('white-space:pre-line'));
+ }
+ assert.ok(current.includes('right:120px;bottom:8px;width:calc(100% - 128px)'));
+ assert.ok(current.includes('.map-toolbar{width:112px}'));
+ assert.ok(current.includes('grid-template-columns:repeat(3,minmax(0,1fr))'));
+ assert.ok(app.includes("data.postalCode?'〒'+data.postalCode"));
+ assert.ok(app.includes("+'\\n':'')+data.address"));
 });
