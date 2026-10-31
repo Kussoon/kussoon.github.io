@@ -63,5 +63,49 @@ test('comparison page loads the centred module before density app',()=>{
  const s=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(s.indexOf('centered-labels.js')>0);
  assert.ok(s.indexOf('centered-labels.js')<s.indexOf('density-app.js'));
- assert.match(s,/<option value="center" selected>/);
+ assert.match(s,/<option value="multi" selected>/);
+ assert.match(s,/<option value="center">/);
+});
+
+test('multi-section anchor is inside an irregular administrative polygon',()=>{
+ const m={...rectangle('irregular','変形市',0,0,140,200),
+  rings:[[[0,0],[140,0],[140,55],[90,55],[90,200],
+   [55,200],[55,55],[0,55]]],polylabel:[65,30]};
+ const p=M.pointMulti(m);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...p,m.rings),true);
+ assert.ok(p[1]>60&&p[1]<140,'prefer a central height over the wide northern lobe');
+});
+test('multi-section cross-section X follows the FINAL Y after correction',()=>{
+ const m={...rectangle('stair','階段市',0,0,150,150),
+  rings:[[[0,0],[60,0],[60,45],[150,45],
+   [150,150],[55,150],[55,85],[0,85]]]};
+ const y=110;
+ const p=M.centerAtHeight(m,y,90);
+ assert.ok(p);
+ assert.equal(p[1],y);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...p,m.rings),true);
+ const runs=M.horizontalRuns(m.rings,y);
+ assert.ok(runs.some(([a,b])=>Math.abs(p[0]-(a+b)/2)<.00001));
+});
+test('multi-section build does not depend on zoom, viewport, or selection',()=>{
+ const ms=[rectangle('one','第一市',0,0,60,180),
+  rectangle('two','第二市',60,0,120,180)];
+ const a=M.build(ms,{strategy:'multi',fontSize:12});
+ const b=M.build(ms,{strategy:'multi',fontSize:12});
+ assert.deepEqual(a.anchors,b.anchors);
+ a.anchors.forEach((p,i)=>assert.ok(
+  context.window.KussoonLabelEngine.isInside(...p,ms[i].rings)));
+ const source=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.match(source,/multiCenters=new Map\(models\.map/);
+ assert.match(source,/strategy:'multi'/);
+});
+test('four-city comparison controls and script versions exist',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const js=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ for(const city of ['宝塚市','西宮市','神戸市','京都市']){
+  assert.ok(html.includes('data-city="'+city+'"'));
+ }
+ assert.match(html,/centered-labels\.js\?v=20261031-multislice1/);
+ assert.match(html,/density-app\.js\?v=20261031-multislice1/);
+ assert.match(js,/city-shortcuts'\)\.addEventListener/);
 });
