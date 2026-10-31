@@ -82,7 +82,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
 <script defer src="centered-labels.js?v=20261101-proposal5a"></script>
-<script defer src="density-app.js?v=20261101-officepilot1"></script>
+<script defer src="density-app.js?v=20261101-popupclose2"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>新案5：南北中央の最長水平区間に地名を配置</h1>
@@ -168,7 +168,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <button type="button" id="reading-toggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな</button>
 </div>
 </div>
-<p class="meta">地名をタップすると詳しい表示になります。もう一度同じ場所をタップするか、地図の空白部分をタップすると選択が解除されます。</p>
+<p class="meta">市町村をタップすると区域が紫色になり、庁舎情報の吹き出しが開きます。×印は吹き出しだけを閉じ、選択色は残します。同じ市町村を再度タップすると選択色が解除され、その次のタップで再び色と吹き出しが表示されます。</p>
 <button id="clear-below" type="button">選択色を元に戻す</button>
 <p class="legend"><span><i style="background:var(--blue)"></i><span id="legend-blue">市区町村</span></span><span><i style="background:var(--selected)"></i><span id="legend-selected">選択区域</span></span></p></section>
 <section class="panel"><h2>表示・配置状況</h2>
