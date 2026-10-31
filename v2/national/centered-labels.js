@@ -83,23 +83,37 @@
   const b=model.box;
   if(!b||!(b.w>0&&b.h>0)||!model.rings?.length)return point(model);
   const midY=(b.minY+b.maxY)/2;
-  const midX=(b.minX+b.maxX)/2;
-  // The tiny fallbacks address a scanline hitting a vertex or a hole,
-  // rather than searching for a broader part of the municipality.
+  // The complete horizontal extent at the exact north/south midpoint.
+  // If the polygon intersects the line in several pieces, calculate the
+  // midpoint from the leftmost and rightmost intersections, NOT the
+  // midpoint of one arbitrarily chosen piece.
   const offsets=[0,-1e-7,1e-7,-1e-5,1e-5,-.001,.001,-.01,.01,
    -.03,.03,-.08,.08,-.16,.16,-.3,.3,-.45,.45];
   for(const fraction of offsets){
    const y=midY+b.h*fraction;
    const segments=horizontalRuns(model.rings,y)
-    .map(([left,right])=>({x:(left+right)/2,y,width:right-left}))
-    .filter(p=>p.width>1e-8&&E.isInside(p.x,p.y,model.rings));
+    .filter(([left,right])=>right-left>1e-8&&
+     E.isInside((left+right)/2,y,model.rings));
    if(!segments.length)continue;
-   // For disconnected territories, prefer the segment nearest the
-   // municipality's overall east/west midpoint; do not prefer width.
-   segments.sort((a,c)=>Math.abs(a.x-midX)-Math.abs(c.x-midX)||
-    Math.abs(a.x-(model.polylabel?.[0]??midX))-
-    Math.abs(c.x-(model.polylabel?.[0]??midX))||a.x-c.x);
-   return [round(segments[0].x),round(y)];
+   const left=Math.min(...segments.map(([a])=>a));
+   const right=Math.max(...segments.map(([,b])=>b));
+   const desiredX=(left+right)/2;
+   if(E.isInside(desiredX,y,model.rings))return [round(desiredX),round(y)];
+   // Rare case: the full-extents midpoint falls in a gap or hole.
+   // Retain the EXACT midpoint height and move only X by the shortest
+   // possible distance to a valid interior point (do not pick a wide
+   // interval, a Polylabel point, or a different latitude).
+   let best=null;
+   for(const [a,b] of segments){
+    const epsilon=Math.min((b-a)/4,Math.max((b-a)*1e-5,1e-7));
+    const x=Math.max(a+epsilon,Math.min(b-epsilon,desiredX));
+    if(!E.isInside(x,y,model.rings))continue;
+    const distance=Math.abs(x-desiredX);
+    if(!best||distance<best.distance-1e-10||
+      (Math.abs(distance-best.distance)<=1e-10&&x<best.x))
+     best={x,distance};
+   }
+   if(best)return [round(best.x),round(y)];
   }
   return point(model);
  }
