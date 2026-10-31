@@ -110,7 +110,7 @@ test('four-city comparison controls and script versions exist',()=>{
   assert.ok(html.includes('data-city="'+city+'"'));
  }
  assert.match(html,/centered-labels\.js\?v=20261101-proposal5a/);
- assert.match(html,/density-app\.js\?v=20261101-proposal5a/);
+ assert.match(html,/density-app\.js\?v=20261101-zipcode-b2/);
  assert.match(js,/city-shortcuts'\)\.addEventListener/);
 });
 
