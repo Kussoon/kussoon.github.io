@@ -173,13 +173,23 @@ function renderLabels(){
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
  if(!(ratio>0))return;
  const size=screenPx/ratio;
+ const compareMode=['fixed','light'].includes($('density-mode').value);
  const readingEnabled=$('reading').value==='on' &&
-  ($('density-mode').value==='all'||zoom>=6);
+  (compareMode||$('density-mode').value==='all'||zoom>=6);
  const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
  // Measure whichever row is wider, not the concatenated county + town string.
  // Search and selection continue to use the complete administrative name.
  const layoutModels=workModels.map(m=>L.widestRowModel(m,size,measure));
- const planned=R.planCenterFirstLabels(layoutModels,null,'kanji',size,measure,E,{
+ // A/B both start from a stable point belonging to the municipality.
+ // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
+ const planned=compareMode?layoutModels.map(m=>{
+  const [x,y]=Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)
+   ?m.polylabel : m.centroid;
+  const width=measure(m.name,size)+size*.24,height=size*1.2;
+  return {x,y,width,height,box:{
+   x1:x-width/2,x2:x+width/2,y1:y-height/2,y2:y+height/2
+  }};
+ }):R.planCenterFirstLabels(layoutModels,null,'kanji',size,measure,E,{
   anchor:'balanced',shift:'adjacent'
  });
  // Collision checks must include both rendered rows of every county town
@@ -198,28 +208,30 @@ function renderLabels(){
  });
  const pinned=state.mode==='plate'?layoutModels.length-1:
    selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1;
- const collisionResult=C.refine(layoutModels,original,size,E,{view,passes:3,pinned});
- // Independent, geometry-only refinement: move labels that protrude from
- // their own territory, even where they don't overlap another label.
- // At national overview scale many tiny municipalities cannot contain 15px
- // names; defer this heavier search until the user magnifies the map.
- // Keep the existing Fuji plate-region rendering exactly as previously tested.
- // Stage 1: keep the existing 5x5-contained-area refinement unchanged,
- // including the familiar 4x–6x overview behavior.
- const containment=state.mode!=='plate'&&zoom>=4
-  ?F.refine(layoutModels,collisionResult.labels,size,E,{
-    view,passes:1,pinned,perimeter:false
-   })
-  :null;
- // Stage 2: at sufficient zoom, improve the text-edge safety margin without
- // sacrificing any containment that the first stage already achieved.
- const clearance=containment&&zoom>=6
-  ?F.refine(layoutModels,containment.labels,size,E,{
-    view,passes:1,pinned,perimeter:true
-   })
-  :null;
- const resultLabels=clearance?clearance.labels:
-  containment?containment.labels:collisionResult.labels;
+ // A: native, centered label anchors with no collision-driven movement.
+ // B: same anchors, then at most 8px of movement to reduce collisions.
+ // Both versions render all labels (no hiding).
+ let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
+ if(compareMode){
+  resultLabels=D.fullCompare(workModels,original,{
+   mode:$('density-mode').value,view,
+   screenWidth:rect.width||390,screenHeight:rect.height||390,
+   selectedId:selection?.type==='model'?selection.id:null
+  }).labels;
+ }else{
+  const collision=C.refine(layoutModels,original,size,E,{view,passes:3,pinned});
+  collisionResult=collision;
+  containment=state.mode!=='plate'&&zoom>=4
+   ?F.refine(layoutModels,collision.labels,size,E,{
+     view,passes:1,pinned,perimeter:false
+    }):null;
+  clearance=containment&&zoom>=6
+   ?F.refine(layoutModels,containment.labels,size,E,{
+     view,passes:1,pinned,perimeter:true
+    }):null;
+  resultLabels=clearance?clearance.labels:
+   containment?containment.labels:collision.labels;
+ }
  resultLabels.forEach((position,i)=>{
   const target=labelNodes[i]?.node;
   if(!target)return;
@@ -233,14 +245,15 @@ function renderLabels(){
   target.setAttribute('font-size',displayedSize.toFixed(2));
   target.setAttribute('stroke-width',(displayedSize*.18).toFixed(2));
  });
- const arrangement=D.arrange(workModels,resultLabels,{
-  view,zoom,mode:$('density-mode').value,density:$('density-level').value,
-  selectedId:selection?.type==='model'?selection.id:null,
-  screenWidth:rect.width||390,screenHeight:rect.height||390
- });
+ const arrangement=compareMode?
+  {visible:workModels.map(()=>true),labels:resultLabels}:
+  D.arrange(workModels,resultLabels,{
+   view,zoom,mode:$('density-mode').value,density:$('density-level').value,
+   selectedId:selection?.type==='model'?selection.id:null,
+   screenWidth:rect.width||390,screenHeight:rect.height||390
+  });
  const visible=arrangement.visible;
- // Some previously hidden names can now use a polygon-interior anchor.
- // Repaint only labels moved by the visibility experiment.
+ // The legacy declutter trial may choose an alternative label anchor.
  arrangement.labels.forEach((position,i)=>{
   if(!visible[i]||position===resultLabels[i])return;
   const target=labelNodes[i]?.node,m=workModels[i];
@@ -255,12 +268,15 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='all'?'全件':'自然な表示：'+$('density-level').selectedOptions[0].text)+
+  ($('density-mode').value==='fixed'?'A：全件・中心優先':
+   $('density-mode').value==='light'?'B：全件・軽い調整':
+   $('density-mode').value==='all'?'旧・全件表示':
+   '旧・自然な表示：'+$('density-level').selectedOptions[0].text)+
   '）。'+(readingEnabled?'読み仮名あり':'読み仮名なし')+
   '。非表示の市町村も検索・タップできます。';
  const before=R.evaluateVisible(layoutModels,original,layoutModels.map(()=>true),E,view);
- const after=R.evaluateVisible(layoutModels,resultLabels,layoutModels.map(()=>true),E,view);
- const moved=resultLabels.reduce((count,p,i)=>count+
+ const after=R.evaluateVisible(layoutModels,arrangement.labels,visible,E,view);
+ const moved=arrangement.labels.reduce((count,p,i)=>count+
    (Math.hypot(p.x-original[i].x,p.y-original[i].y)>1e-5?1:0),0);
  $('metrics').textContent='表示単位 '+models.length+'区域／画面内ラベル '+after.inView+
   '件／文字の重なり（概算）'+before.collisions+'→'+after.collisions+'組／追加移動'+
@@ -360,8 +376,10 @@ $('area').addEventListener('change',()=>{
 $('mode').addEventListener('change',refresh);
 $('reading').addEventListener('change',renderLabels);
 $('density-mode').addEventListener('change',()=>{
- $('density-level').disabled=$('density-mode').value==='all';renderLabels();
+ $('density-level').disabled=$('density-mode').value!=='adaptive';
+ renderLabels();
 });
+$('density-level').disabled=$('density-mode').value!=='adaptive';
 $('density-level').addEventListener('change',renderLabels);
 $('zoom-in').addEventListener('click',()=>zoomBy(1.5));
 $('zoom-out').addEventListener('click',()=>zoomBy(1/1.5));

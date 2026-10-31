@@ -111,3 +111,31 @@ test('dense mode has no early global label cap when many non-overlapping names f
  });
  assert.equal(result.visible.filter(Boolean).length,24);
 });
+
+test('A mode keeps all municipality labels at their supplied central anchors',()=>{
+ const rect=[{x:50,y:50,width:30,height:20,box:{x1:35,x2:65,y1:40,y2:60}},
+  {x:65,y:50,width:30,height:20,box:{x1:50,x2:80,y1:40,y2:60}}];
+ const ms=rect.map((_,i)=>({id:'m'+i,rings:[[[0,0],[140,0],[140,120],[0,120]]],box:{w:140,h:120}}));
+ const res=D.fullCompare(ms,rect,{mode:'fixed',view:{x:0,y:0,w:140,h:120},
+  screenWidth:280,screenHeight:240});
+ assert.equal(res.visible.filter(Boolean).length,2);
+ assert.equal(res.labels[0],rect[0]);
+ assert.equal(res.labels[1],rect[1]);
+ assert.equal(res.moved,0);
+});
+test('B mode retains every label, moves only colliding ones within eight screen pixels',()=>{
+ ctx.window.KussoonLabelEngine={isInside:(x,y)=>x>=0&&x<=140&&y>=0&&y<=120};
+ const rect=[{x:50,y:50,width:30,height:20,box:{x1:35,x2:65,y1:40,y2:60}},
+  {x:65,y:50,width:30,height:20,box:{x1:50,x2:80,y1:40,y2:60}},
+  {x:115,y:50,width:30,height:20,box:{x1:100,x2:130,y1:40,y2:60}}];
+ const ms=rect.map((_,i)=>({id:'m'+i,rings:[[[0,0],[140,0],[140,120],[0,120]]],box:{w:140,h:120}}));
+ const res=D.fullCompare(ms,rect,{mode:'light',view:{x:0,y:0,w:140,h:120},
+  screenWidth:280,screenHeight:240,selectedId:'m0'});
+ assert.equal(res.visible.filter(Boolean).length,3);
+ assert.equal(res.labels[0],rect[0]);
+ assert.ok(res.moved>=1);
+ res.labels.forEach((label,i)=>{
+  assert.ok(Math.hypot(label.x-rect[i].x,label.y-rect[i].y)<=4*Math.SQRT2+1e-6);
+ });
+ assert.equal(res.labels[2],rect[2]);
+});
