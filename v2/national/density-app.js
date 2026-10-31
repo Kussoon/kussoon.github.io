@@ -17,6 +17,7 @@ let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShap
 let fixedCenters=new Map(),fixedCorrections=0;
 let multiCenters=new Map(),multiCorrections=0;
 let horizontalCenters=new Map(),verticalCenters=new Map();
+let conditionalCenters=new Map(),conditionalResults=new Map();
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
  const el=document.createElementNS(NS,name);
@@ -175,7 +176,7 @@ function measure(value,size){
 function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
- const compareMode=['horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
+ const compareMode=['conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
  const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
@@ -190,7 +191,9 @@ function renderLabels(){
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
  const planned=compareMode?layoutModels.map(m=>{
-  const [x,y]=$('density-mode').value==='horizontal'?
+  const [x,y]=$('density-mode').value==='conditional'?
+   (conditionalCenters.get(m.id)||horizontalCenters.get(m.id)||m.polylabel||m.centroid):
+   $('density-mode').value==='horizontal'?
    (horizontalCenters.get(m.id)||m.polylabel||m.centroid):
    $('density-mode').value==='vertical'?
    (verticalCenters.get(m.id)||m.polylabel||m.centroid):
@@ -229,7 +232,7 @@ function renderLabels(){
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
  if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
-   mode:['horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
+   mode:['conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    selectedId:selection?.type==='model'?selection.id:null
   }).labels;
@@ -283,7 +286,8 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='horizontal'?'水平中央・固定':
+  ($('density-mode').value==='conditional'?'新案3：条件付き縦補正':
+   $('density-mode').value==='horizontal'?'水平中央・固定':
    $('density-mode').value==='vertical'?'水平＋縦断面中央・固定':
    $('density-mode').value==='multi'?'複数断面・固定配置':
    $('density-mode').value==='center'?'中央断面・固定配置':
@@ -384,6 +388,24 @@ async function load(area,mode){
  // collision-based corrections. The anchor is computed exactly once on load.
  horizontalCenters=new Map(models.map(m=>[m.id,M.pointHorizontal(m)]));
  verticalCenters=new Map(models.map(m=>[m.id,M.pointHorizontalVertical(m)]));
+ const conditional=models.map(m=>[m.id,M.conditionalVertical(m,{
+  fontSize:referenceFont,measure,rows:item=>L.rows(item)
+ })]);
+ conditionalResults=new Map(conditional);
+ conditionalCenters=new Map(conditional.map(([id,r])=>[id,r.point]));
+ const affected=conditional.filter(([,r])=>r.adjusted).length;
+ const priorities=['神河町','西宮市','宝塚市','三木市'];
+ const notes=priorities.map(name=>{
+  const model=models.find(m=>m.name===name);
+  if(!model)return null;
+  const result=conditionalResults.get(model.id);
+  const direction=result.point[1]>result.from[1]?'南':'北';
+  const pct=(result.delta/model.box.h*100).toFixed(1);
+  return name+'：'+(result.adjusted?'補正あり（'+direction+'へ市域高の'+pct+'％）':'補正なし');
+ }).filter(Boolean);
+ $('conditional-report').textContent='新案3の判定：全'+models.length+
+  '区域中'+affected+'区域を補正（基準文字サイズで縦方向のはみ出し20％以上、改善12ポイント以上、移動は市域高の18％以下）。'+
+  notes.join(' ／ ')+'。';
 
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
