@@ -26,16 +26,43 @@
   if(!(ratio>0))return {visible:models.map(()=>false),labels};
   const result=models.map(()=>false),placed=labels.slice();
   const factors={sparse:9500,normal:5900,dense:3100};
-  const marginPx={sparse:8,normal:4,dense:0};
+  const marginPx={sparse:9,normal:3,dense:0};
   const tilePx={sparse:150,normal:115,dense:90};
-  const limit=Math.max(3,Math.ceil(width*height/(factors[density]||5900)));
+  // Dense and standard modes show every non-overlapping eligible label.
+  // A global count ceiling used to leave obvious blank municipal areas.
+  const limit=density==='sparse'?Math.max(3,Math.ceil(width*height/factors.sparse)):
+   Infinity;
   const gap=(marginPx[density]??4)/ratio;
   const tile=tilePx[density]||115;
   const countX=Math.max(1,Math.ceil(width/tile));
   const countY=Math.max(1,Math.ceil(height/tile));
-  const taken=new Set(),active=[];
+  const active=[];
   const inView=b=>b.x2>=view.x&&b.x1<=view.x+view.w&&
    b.y2>=view.y&&b.y1<=view.y+view.h;
+  // In a zoomed/panned viewport the map's original anchor may be offscreen
+  // even though a substantial part of the municipality is visible.
+  // Test real polygon-interior anchors within the visible intersection.
+  const E=global.KussoonLabelEngine;
+  function viewportAnchors(m,p){
+   const box=m.box;
+   if(!box?.w||!box?.h||!Array.isArray(m.rings)||!E?.isInside)return [];
+   const left=Math.max(view.x,box.minX),right=Math.min(view.x+view.w,box.maxX);
+   const top=Math.max(view.y,box.minY),bottom=Math.min(view.y+view.h,box.maxY);
+   if(!(right>left&&bottom>top))return [];
+   const steps=5,candidates=[];
+   for(let iy=0;iy<steps;iy++)for(let ix=0;ix<steps;ix++){
+    const x=left+(right-left)*(ix+.5)/steps;
+    const y=top+(bottom-top)*(iy+.5)/steps;
+    if(!E.isInside(x,y,m.rings))continue;
+    // Prefer interior points near the visible region's centre, without
+    // forcing the label outside its own municipality.
+    const score=Math.hypot((x-(left+right)/2)/(right-left),
+     (y-(top+bottom)/2)/(bottom-top));
+    candidates.push({x,y,score});
+   }
+   candidates.sort((a,b)=>a.score-b.score);
+   return candidates.slice(0,12).map(({x,y})=>shift(p,x,y));
+  }
   const candidates=models.map((m,i)=>{
    const p=labels[i];if(!p?.box)return null;
    const code=m.code||'',pref=m.prefectureCode||code.slice(0,2);
@@ -45,6 +72,11 @@
    if(Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)){
     const alt=shift(p,m.polylabel[0],m.polylabel[1]);
     if(Math.hypot(p.x-alt.x,p.y-alt.y)>p.height*.3)anchors.push(alt);
+   }
+   // Try locally visible parts of long, clipped or irregular regions, too.
+   for(const alt of viewportAnchors(m,p)){
+    if(anchors.every(a=>Math.hypot(a.x-alt.x,a.y-alt.y)>p.height*.4))
+     anchors.push(alt);
    }
    return {i,priority,pref,code,selected:m.id===selectedId,anchors};
   }).filter(Boolean);
@@ -58,7 +90,7 @@
    if(!allowCollision&&active.some(a=>overlaps(a.box,p.box,gap)))return false;
    result[c.i]=true;placed[c.i]=p;
    active.push({box:p.box,cell:cellOf(p)});
-   taken.add(cellOf(p));return true;
+   return true;
   }
   // A selected municipality must survive decluttering even if it overlaps.
   for(const c of candidates)if(c.selected)claim(c,c.anchors.find(p=>inView(p.box))||c.anchors[0],true);
@@ -78,7 +110,8 @@
     if(claim(c,p))break;
    }
   }
-  // Second pass: fill remaining gaps without allowing overlaps.
+  // Second pass: fill ALL remaining non-overlapping areas, without the
+  // previous global cap that delayed place names until excessive zoom.
   const rest=candidates.filter(c=>!result[c.i])
    .sort((a,b)=>b.priority-a.priority||a.code.localeCompare(b.code));
   for(const c of rest){
