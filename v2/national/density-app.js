@@ -66,7 +66,9 @@ function renderOfficePopup(model){
  const data=officeDirectory[String(model.code)]||null;
  $('popup-name').textContent=nameOf(model);
  $('popup-office').textContent=data?.office||'市役所・役場の所在地';
- $('popup-address').textContent=data?.address||'所在地は調査中です';
+ $('popup-address').textContent=data?.address?
+  (data.postalCode?'〒'+data.postalCode+'\n':'')+data.address:
+  '所在地は調査中です';
  const actions=$('popup-actions');actions.replaceChildren();
  const destination=data?.address?
   'https://www.google.com/maps/dir/?api=1&destination='+
