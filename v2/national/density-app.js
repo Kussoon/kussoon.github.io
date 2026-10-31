@@ -15,6 +15,7 @@ const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245
 let catalog=null,readingData=null,countyData=null,models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
 let fixedCenters=new Map(),fixedCorrections=0;
+let multiCenters=new Map(),multiCorrections=0;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
  const el=document.createElementNS(NS,name);
@@ -173,7 +174,7 @@ function measure(value,size){
 function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
- const compareMode=['center','fixed','light'].includes($('density-mode').value);
+ const compareMode=['multi','center','fixed','light'].includes($('density-mode').value);
  const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
@@ -188,7 +189,9 @@ function renderLabels(){
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
  const planned=compareMode?layoutModels.map(m=>{
-  const [x,y]=$('density-mode').value==='center'?
+  const [x,y]=$('density-mode').value==='multi'?
+   (multiCenters.get(m.id)||fixedCenters.get(m.id)||m.polylabel||m.centroid):
+   $('density-mode').value==='center'?
    (fixedCenters.get(m.id)||m.polylabel||m.centroid):
    (Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)
     ?m.polylabel : m.centroid);
@@ -221,7 +224,7 @@ function renderLabels(){
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
  if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
-   mode:$('density-mode').value==='center'?'fixed':$('density-mode').value,view,
+   mode:['center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    selectedId:selection?.type==='model'?selection.id:null
   }).labels;
@@ -275,7 +278,8 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='center'?'新A：中央基準・初期補正のみ':
+  ($('density-mode').value==='multi'?'複数断面・固定配置':
+   $('density-mode').value==='center'?'中央断面・固定配置':
    $('density-mode').value==='fixed'?'旧A：Polylabel固定':
    $('density-mode').value==='light'?'B：全件・軽い調整':
    $('density-mode').value==='all'?'旧・全件表示':
@@ -364,6 +368,11 @@ async function load(area,mode){
  });
  fixedCenters=new Map(models.map((m,i)=>[m.id,built.anchors[i]]));
  fixedCorrections=built.adjusted;
+ const multi=M.build(models,{
+  fontSize:referenceFont,measure,rows:m=>L.rows(m),strategy:'multi'
+ });
+ multiCenters=new Map(models.map((m,i)=>[m.id,multi.anchors[i]]));
+ multiCorrections=multi.adjusted;
 
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
