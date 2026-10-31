@@ -365,3 +365,35 @@ test('proposal5 uses cached anchors and displays selected longest interval',()=>
   app.indexOf('function suggest',app.indexOf('function renderLabels()')));
  assert.doesNotMatch(render,/M\.proposal5\(/);
 });
+
+test('office pilot records use verified five digit codes and explicit source links',()=>{
+ const json=JSON.parse(fs.readFileSync(path.resolve(__dirname,
+  '../data/national/municipality-offices-pilot.json'),'utf8'));
+ const records=json.offices;
+ assert.equal(Object.keys(records).length,4);
+ for(const code of ['28204','28214','28215','28446']){
+  assert.equal(code.length,5);
+  const entry=records[code];
+  assert.ok(entry.name&&entry.office&&entry.address);
+  assert.ok(entry.official.startsWith('https://'));
+  assert.ok(entry.wikipedia.startsWith('https://'));
+  assert.ok(entry.source.startsWith('https://'));
+ }
+ assert.ok(records['28204'].address.includes('六湛寺町10-3'));
+ assert.ok(records['28446'].address.includes('寺前64番地'));
+});
+test('office overlay has separate selection, safe links, and unverified fallback',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ for(const id of ['municipal-popup','popup-name','popup-close',
+  'popup-office','popup-address','popup-actions','popup-note'])
+  assert.ok(html.includes('id="'+id+'"'));
+ assert.ok(html.includes('density-app.js?v=20261101-officepilot1'));
+ for(const title of ['公式サイト','Wikipedia','ここへ行く'])
+  assert.ok(app.includes(title));
+ for(const code of ['renderOfficePopup(model)','renderOfficePopup(chosen)',
+  "popup-close').addEventListener", 'municipality-offices-pilot.json',
+  'aria-disabled', 'encodeURIComponent(data.office', 'toggleMunicipality(id)'])
+  assert.ok(app.includes(code),code);
+ assert.ok(html.includes('.municipal-popup[hidden]'));
+});

@@ -49,6 +49,18 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .label-diagnostic .diag-fourth-path{stroke:#854cb5;stroke-width:2.5;stroke-dasharray:4 4}
 .label-diagnostic .diag-longest{stroke:#e63f59;stroke-width:4.5;stroke-linecap:round}
 .label-diagnostic .diag-fifth{fill:#e63f59;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.municipal-popup{position:absolute;z-index:6;bottom:14px;left:14px;width:min(350px,calc(100% - 28px));max-height:min(50vh,330px);overflow:auto;background:#fff;border:2px solid #7a9eb5;border-radius:13px;box-shadow:0 9px 25px #183f5970;padding:12px 12px 14px;color:#193e58}
+.municipal-popup[hidden]{display:none}
+.popup-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.popup-head strong{font-size:19px}
+.popup-close{border:0;background:#edf4f9;min-height:36px;min-width:36px;padding:4px 8px;font-size:21px}
+.popup-office{font-weight:750;margin:8px 0 0}
+.popup-address{font-size:14px;margin:4px 0 12px;overflow-wrap:anywhere}
+.popup-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.popup-actions a,.popup-actions span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:42px;padding:5px 2px;border-radius:8px;border:1px solid #8ab3cf;font-size:12px;font-weight:800;color:#17496d;text-decoration:none;background:#eff7fc;overflow-wrap:anywhere}
+.popup-actions span{color:#7a8790;background:#f1f3f5;border-color:#ccd3d9}
+.popup-note{font-size:12px;color:#5b6e7c;margin:8px 0 0}
+@media(max-width:500px){.municipal-popup{bottom:8px;left:8px;width:calc(100% - 16px);max-height:48%}}
 .place-label{font-weight:850;text-anchor:middle;dominant-baseline:central;fill:#193e58;stroke:#fff;stroke-linejoin:round;paint-order:stroke;pointer-events:none}
 .place-label.selected{fill:#693b95}.plate-label{fill:#532c86;stroke:#fff;stroke-width:2.4;paint-order:stroke;letter-spacing:.025em;font-weight:900}
 .info{background:#eef6fb;border:1px solid #d7e7f0;border-radius:9px;padding:10px;font-size:14px}
@@ -70,7 +82,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
 <script defer src="centered-labels.js?v=20261101-proposal5a"></script>
-<script defer src="density-app.js?v=20261101-proposal5a"></script>
+<script defer src="density-app.js?v=20261101-officepilot1"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>新案5：南北中央の最長水平区間に地名を配置</h1>
@@ -142,6 +154,13 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <section class="panel"><h2 id="map-title">地図を読み込み中</h2>
 <div class="map-shell">
 <svg id="map" viewBox="0 0 900 900" aria-label="市区町村の試験地図"></svg>
+<aside id="municipal-popup" class="municipal-popup" role="region" aria-label="選択した自治体の情報" hidden>
+<div class="popup-head"><strong id="popup-name"></strong><button id="popup-close" class="popup-close" type="button" aria-label="吹き出しを閉じて選択解除">×</button></div>
+<p id="popup-office" class="popup-office"></p>
+<p id="popup-address" class="popup-address"></p>
+<div class="popup-actions" id="popup-actions"></div>
+<p id="popup-note" class="popup-note"></p>
+</aside>
 <div class="map-toolbar" role="group" aria-label="地図の操作">
 <button type="button" id="zoom-in" aria-label="地図を拡大">＋ 拡大</button>
 <button type="button" id="zoom-out" aria-label="地図を縮小">－ 縮小</button>
