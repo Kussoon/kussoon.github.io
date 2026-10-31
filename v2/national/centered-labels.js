@@ -211,6 +211,30 @@
   return {point:fallback,raw:fallback,reason:'no-horizontal-intersection',
    vertical:null};
  }
+ // Proposal 5: at the north/south midpoint, choose the LONGEST
+ // contiguous portion of the polygon's horizontal scanline. Unlike
+ // proposal 4, separate intervals are never joined across a gap.
+ function proposal5(model){
+  const b=model.box;
+  const fallback=pointHorizontal(model);
+  if(!b||!(b.w>0&&b.h>0)||!model.rings?.length)
+   return {point:fallback,segment:null,segments:[],reason:'no-geometry'};
+  const mid=(b.minY+b.maxY)/2;
+  const offsets=[0,-1e-7,1e-7,-1e-5,1e-5,-.001,.001,-.01,.01,
+   -.03,.03,-.08,.08,-.16,.16,-.3,.3,-.45,.45];
+  for(const fraction of offsets){
+   const y=mid+b.h*fraction;
+   const segments=horizontalRuns(model.rings,y)
+    .filter(([a,z])=>z-a>1e-8&&E.isInside((a+z)/2,y,model.rings))
+    .sort((a,z)=>(z[1]-z[0])-(a[1]-a[0])||a[0]-z[0]);
+   if(!segments.length)continue;
+   const [left,right]=segments[0],x=(left+right)/2;
+   return {point:safePoint(x,y,model.rings),segment:[left,right],
+    segments,reason:fraction===0?'longest-segment':'nearby-height'};
+  }
+  return {point:fallback,segment:null,segments:[],
+   reason:'no-horizontal-intersection'};
+ }
  // Candidate C: start at the exact horizontal centre. Only try the
  // vertical interval's centre if the FIXED reference-size text box
  // protrudes substantially beyond the territory in the vertical direction.
@@ -310,5 +334,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,proposal4,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,proposal4,proposal5,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
