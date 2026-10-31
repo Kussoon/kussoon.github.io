@@ -88,7 +88,9 @@ function highlight(){
 }
 function select(sel,scroll=false){
  selection=sel;highlight();
+ // Re-run visibility so a tapped municipality becomes the pinned label.
  if(scroll){fit();renderLabels();map.scrollIntoView({behavior:'smooth',block:'center'});}
+ else renderLabels();
 }
 function buildPrefOutlines(topologies,projectPoint){
  const layer=tag('g',{'aria-hidden':'true'});
