@@ -151,27 +151,39 @@
   }
   return outside/total;
  }
+ function verticalTextOverflow(model,x,y,height){
+  if(!(height>0))return 0;
+  const span=verticalRuns(model.rings,x).find(([lo,hi])=>
+   lo<=y+1e-6&&hi>=y-1e-6&&E.isInside(x,(lo+hi)/2,model.rings));
+  if(!span)return 1;
+  const from=y-height/2,to=y+height/2;
+  return Math.max(0,1-Math.max(0,Math.min(to,span[1])-Math.max(from,span[0]))/height);
+ }
  function conditionalVertical(model,options={}){
   const {fontSize=13,measure=(str,size)=>[...str].length*size,
-   rows=()=>null,threshold=.20,minImprovement=.08,maxShiftFraction=.18}=options;
+   rows=()=>null,threshold=.20,minImprovement=.12,
+   maxShiftFraction=.18,maxWorsening=.04}=options;
   const h=pointHorizontal(model),v=pointHorizontalVertical(model);
   const parts=rows(model)||[model.name];
   const width=Math.max(...parts.map(t=>measure(t,fontSize)))+fontSize*.2;
   const height=fontSize*1.2*parts.length;
   const before=boxOverflow(model,...h,width,height);
   const after=boxOverflow(model,...v,width,height);
+  const beforeVertical=verticalTextOverflow(model,...h,height);
+  const afterVertical=verticalTextOverflow(model,...v,height);
   const delta=Math.abs(v[1]-h[1]),maxShift=model.box?.h*maxShiftFraction||0;
-  // Ignore sideways overflow: only a vertical recenter that *improves*
-  // containment by >=8 percentage points may replace the original.
-  const eligible=before>=threshold&&before-after>=minImprovement&&
-   delta>1e-6&&delta<=maxShift;
-  const chosen=eligible?v:h;
+  // A truly vertical protrusion is required: wide text hanging over a
+  // narrow region horizontally must NOT cause the municipality to jump.
+  const eligible=beforeVertical>=threshold&&
+   beforeVertical-afterVertical>=minImprovement&&
+   after<=before+maxWorsening&&delta>1e-6&&delta<=maxShift;
   return {
-   point:chosen,adjusted:eligible,from:h,to:v,
-   before,after,delta,
+   point:eligible?v:h,adjusted:eligible,from:h,to:v,
+   before,after,beforeVertical,afterVertical,delta,
    reason:eligible?'vertical-improvement':
-    before<threshold?'acceptable-overflow':
-    before-after<minImprovement?'no-meaningful-improvement':
+    beforeVertical<threshold?'acceptable-vertical-overflow':
+    beforeVertical-afterVertical<minImprovement?'no-vertical-improvement':
+    after>before+maxWorsening?'worse-overall-overflow':
     delta>maxShift?'excessive-movement':'unchanged'
   };
  }
@@ -223,5 +235,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,conditionalVertical,boxOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
