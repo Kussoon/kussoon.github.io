@@ -32,7 +32,7 @@ test('verified facilities have complete official evidence, postal codes, address
  for(const [id,o] of Object.entries(directory.offices)){
   assert.ok(['verified','needsReview','missing'].includes(o.status));
   for(const key of ['officialPage','sourceUrl','sourcePostalUrl'])if(o[key])assert.ok(api.safeUrl(o[key]),id+key);
-  if(o.status!=='verified'){assert.equal(o.address,null);assert.equal(o.postalCode,null);assert.equal(api.destination(o),null);continue;}
+  if(o.status!=='verified'){assert.equal(o.address,null);assert.equal(o.postalCode,null);continue;continue;}
   assert.match(o.postalCode,/^\d{3}-\d{4}$/);assert.match(o.address,/^兵庫県.+\d/);
   assert.ok(o.name&&o.officialPage&&o.sourceUrl&&o.sourcePostalUrl);
   assert.match(o.verifiedAt,/^\d{4}-\d{2}-\d{2}$/);assert.ok(o.verifiedAt<=directory.asOf);
@@ -43,7 +43,7 @@ test('verified facilities have complete official evidence, postal codes, address
   }else assert.equal(source.officialPageHttpStatus,200);
   assert.ok(sources[id.slice(0,5)].evidence.some(e=>e.excerpt.includes(o.postalCode)));
   const key=o.name+'|'+o.address;assert.ok(!unique.has(key),'duplicate '+id);unique.add(key);
-  const url=new URL(api.destination(o));assert.equal(url.searchParams.get('destination'),o.name+' '+o.address);
+  assert.ok(o.postalCode&&o.address);
  }
  assert.equal(Object.values(directory.offices).filter(o=>o.kind==='cityHall'&&o.name.startsWith('神戸市役所')).length,1);
  assert.equal(directory.offices['28109-ward'].postalCode,'651-1195');
@@ -58,7 +58,7 @@ test('initial six regions retain pilot records and use distinct ward/city destin
  assert.equal(api.resolve(directory,'28100').offices.length,1);
  const pair=api.resolve(directory,'28110').offices;
  assert.deepEqual(pair.map(o=>o.postalCode),['651-8570','650-8570']);
- assert.notEqual(api.destination(pair[0]),api.destination(pair[1]));
+ assert.notEqual(pair[0].address,pair[1].address);
 });
 test('regional links match confirmed Wikipedia articles and official top pages',()=>{
  for(const [code,r] of Object.entries(directory.regions)){
@@ -71,10 +71,10 @@ test('regional links match confirmed Wikipedia articles and official top pages',
 });
 test('unknown regions and partial wards never invent destinations',()=>{
  assert.deepEqual(api.resolve(directory,'99999'),{region:null,offices:[]});
- assert.equal(api.destination({name:'未確認',address:null,status:'missing'}),null);
+ assert.equal(api.resolve(directory,'99999').offices.length,0);
  const partial=structuredClone(directory);partial.offices['28110-ward']={name:'中央区役所',status:'missing'};
  const pair=api.resolve(partial,'28110').offices;
- assert.equal(api.destination(pair[0]),null);assert.ok(api.destination(pair[1]));
+ assert.equal(pair[0].address,undefined);assert.ok(pair[1].address);
  for(const u of [undefined,null,'javascript:alert(1)','http://example.com','https://user:secret@example.com'])assert.equal(api.safeUrl(u),null);
 });
 
@@ -89,10 +89,23 @@ test('all 50 facilities are verified, including the official Taka confirmation',
  const url='https://www.town.taka.lg.jp/about_taka/chousha/';
  for(const key of ['officialPage','sourceUrl','sourcePostalUrl'])assert.equal(office[key],url);
  assert.equal(office.reviewNote,undefined);
- assert.equal(new URL(api.destination(office)).searchParams.get('destination'),office.name+' '+office.address);
+ assert.ok(office.address.includes('多可町'));
  assert.equal(sources['28365'].officialPage,url);
  assert.equal(sources['28365'].checkedAt,office.verifiedAt);
  assert.equal(sources['28365'].officialPageHttpStatus,503);
  assert.equal(sources['28365'].verificationMethod,'userProvidedOfficialConfirmation');
  assert.ok(sources['28365'].evidence.some(e=>e.excerpt.includes(office.address)&&e.excerpt.includes(office.postalCode)));
+});
+
+test('office addresses are reference text and only regional links are displayed',()=>{
+ const source=fs.readFileSync(path.join(__dirname,'../common/js/office-directory.js'),'utf8');
+ assert.ok(source.includes("action('公式サイト',result.region?.official,label)"));
+ assert.ok(source.includes("action('Wikipedia',result.region?.wikipedia,label)"));
+ assert.ok(!source.includes("action('ここへ行く'"));
+ assert.ok(!source.includes("action('庁舎案内'"));
+ assert.ok(!source.includes('google.com/maps/dir'));
+ assert.equal(directory.regions['28365'].official,'https://www.town.taka.lg.jp/');
+ const ward=api.resolve(directory,'28110');
+ assert.equal(ward.offices.length,2);
+ assert.equal(ward.region.wikipedia,directory.regions['28110'].wikipedia);
 });
