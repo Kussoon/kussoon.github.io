@@ -63,7 +63,7 @@ test('comparison page loads the centred module before density app',()=>{
  const s=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(s.indexOf('centered-labels.js')>0);
  assert.ok(s.indexOf('centered-labels.js')<s.indexOf('density-app.js'));
- assert.match(s,/<option value="proposal4" selected>/);
+ assert.match(s,/<option value="proposal5" selected>/);
  assert.match(s,/<option value="horizontal">/);
  assert.match(s,/<option value="conditional">/);
  assert.match(s,/<option value="vertical">/);
@@ -109,8 +109,8 @@ test('four-city comparison controls and script versions exist',()=>{
  for(const city of ['宝塚市','西宮市','神戸市','京都市']){
   assert.ok(html.includes('data-city="'+city+'"'));
  }
- assert.match(html,/centered-labels\.js\?v=20261101-proposal4a/);
- assert.match(html,/density-app\.js\?v=20261101-proposal4a/);
+ assert.match(html,/centered-labels\.js\?v=20261101-proposal5a/);
+ assert.match(html,/density-app\.js\?v=20261101-proposal5a/);
  assert.match(js,/city-shortcuts'\)\.addEventListener/);
 });
 
@@ -203,7 +203,7 @@ test('new proposal 3 is cached at load and not recomputed on zoom',()=>{
  assert.match(app,/conditionalCenters=new Map\(conditional\.map/);
  const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(html.includes('id="conditional-report"'));
- assert.ok(html.includes('value="proposal4" selected'));
+ assert.ok(html.includes('value="proposal5" selected'));
 });
 
 test('diagnostic overlay shows both exact cross-sections without moving anchors',()=>{
@@ -213,7 +213,7 @@ test('diagnostic overlay shows both exact cross-sections without moving anchors'
  assert.match(html,/id="diagnostic-overlay"/);
  assert.match(html,/id="diagnostic-output"/);
  assert.match(html,/id="diagnostic-ranking"/);
- assert.match(html,/density-app\.js\?v=20261101-proposal4a/);
+ assert.match(html,/density-app\.js\?v=20261101-proposal5a/);
  assert.match(app,/function renderDiagnostic\(\)/);
  assert.match(app,/M\.horizontalRuns\(model\.rings,h\[1\]\)/);
  assert.match(app,/M\.verticalRuns\(model\.rings,h\[0\]\)/);
@@ -310,7 +310,7 @@ test('proposal 4 picks a valid vertical interval when its full midpoint is a gap
 test('proposal 4 remains a precomputed map and horizontal marker shows full width',()=>{
  const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
- assert.match(html,/value="proposal4" selected/);
+ assert.match(html,/value="proposal5" selected/);
  assert.match(html,/id="proposal4-report"/);
  assert.match(app,/proposal4Centers=new Map/);
  assert.match(app,/proposal4Results=new Map/);
@@ -319,4 +319,49 @@ test('proposal 4 remains a precomputed map and horizontal marker shows full widt
  const diagnostic=app.slice(app.indexOf('function renderDiagnostic(){'),
    app.indexOf('function renderLabels(){'));
  assert.doesNotMatch(diagnostic,/M\.proposal4\(/);
+});
+
+test('proposal5 selects the longest interval instead of joined outer extent',()=>{
+ const m={...rectangle('two','二区域',0,0,100,100),
+  rings:[[[0,0],[20,0],[20,100],[0,100]],
+   [[30,0],[100,0],[100,100],[30,100]]]};
+ const r=M.proposal5(m);
+ assert.equal(r.reason,'longest-segment');
+ assert.equal(r.segments.length,2);
+ assert.deepEqual(Array.from(r.point),[65,50]);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...r.point,m.rings),true);
+});
+test('proposal5 uses the sole segment midpoint and stays at middle height',()=>{
+ const m=rectangle('plain','普通市',0,0,100,100);
+ const r=M.proposal5(m);
+ assert.deepEqual(Array.from(r.point),[50,50]);
+ assert.equal(r.segments.length,1);
+});
+test('proposal5 is deterministic with equal length segments',()=>{
+ const m={...rectangle('equal','等幅市',0,0,100,100),
+  rings:[[[0,0],[20,0],[20,100],[0,100]],
+   [[80,0],[100,0],[100,100],[80,100]]]};
+ const a=M.proposal5(m),b=M.proposal5(m);
+ assert.deepEqual(a,b);
+ assert.deepEqual(Array.from(a.point),[10,50]);
+});
+test('proposal5 can use nearby height only when middle has no intersection',()=>{
+ const m={...rectangle('gaps','離島市',0,0,100,100),
+  rings:[[[0,0],[100,0],[100,20],[0,20]],
+   [[0,80],[100,80],[100,100],[0,100]]]};
+ const r=M.proposal5(m);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...r.point,m.rings),true);
+ assert.notEqual(r.point[1],50);
+});
+test('proposal5 uses cached anchors and displays selected longest interval',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.ok(html.includes('value="proposal5" selected'));
+ assert.ok(html.includes('data-city="朝来市"'));
+ assert.ok(html.includes('id="proposal5-report"'));
+ assert.match(app,/proposal5Centers=new Map/);
+ assert.match(app,/class:'diag-longest'/);
+ const render=app.slice(app.indexOf('function renderLabels()'),
+  app.indexOf('function suggest',app.indexOf('function renderLabels()')));
+ assert.doesNotMatch(render,/M\.proposal5\(/);
 });
