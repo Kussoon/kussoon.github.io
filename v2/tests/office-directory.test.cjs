@@ -32,7 +32,7 @@ test('verified facilities have complete official evidence, postal codes, address
  for(const [id,o] of Object.entries(directory.offices)){
   assert.ok(['verified','needsReview','missing'].includes(o.status));
   for(const key of ['officialPage','sourceUrl','sourcePostalUrl'])if(o[key])assert.ok(api.safeUrl(o[key]),id+key);
-  if(o.status!=='verified'){assert.equal(o.address,null);assert.equal(o.postalCode,null);continue;continue;}
+  if(o.status!=='verified'){assert.equal(o.address,null);assert.equal(o.postalCode,null);continue;}
   assert.match(o.postalCode,/^\d{3}-\d{4}$/);assert.match(o.address,/^兵庫県.+\d/);
   assert.ok(o.name&&o.officialPage&&o.sourceUrl&&o.sourcePostalUrl);
   assert.match(o.verifiedAt,/^\d{4}-\d{2}-\d{2}$/);assert.ok(o.verifiedAt<=directory.asOf);
