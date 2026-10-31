@@ -187,6 +187,8 @@ function renderDiagnostic(){
  const line=M.verticalRuns(model.rings,h[0])
   .filter(([a,b])=>a<=h[1]+1e-6&&b>=h[1]-1e-6&&
    E.isInside(h[0],(a+b)/2,model.rings))[0];
+ const horizontal=M.horizontalRuns(model.rings,h[1]).find(([a,b])=>
+  a<=h[0]+1e-6&&b>=h[0]-1e-6);
  const delta=v[1]-h[1],move=Math.abs(delta);
  const percent=100*move/model.box.h;
  const direction=delta>1e-5?'南':delta< -1e-5?'北':'移動なし';
@@ -205,7 +207,7 @@ function renderDiagnostic(){
  // Show both actual territory boundaries at the selected X and the
  // displacement between the two precomputed candidate positions.
  if(line)makeLine(h[0],line[0],h[0],line[1],'diag-vertical');
- makeLine(model.box.minX,h[1],model.box.maxX,h[1],'diag-horizontal');
+ if(horizontal)makeLine(horizontal[0],h[1],horizontal[1],h[1],'diag-horizontal');
  if(move>1e-6)makeLine(h[0],h[1],v[0],v[1],'diag-movement');
  for(const [p,klass] of [[h,'diag-origin'],[v,'diag-destination']]){
   diagnosticLayer.append(tag('circle',{
