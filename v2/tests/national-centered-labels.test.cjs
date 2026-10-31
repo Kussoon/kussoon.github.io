@@ -388,7 +388,7 @@ test('office overlay has separate selection, safe links, and unverified fallback
  for(const id of ['municipal-popup','popup-name','popup-close',
   'popup-office','popup-address','popup-actions','popup-note'])
   assert.ok(html.includes('id="'+id+'"'));
- assert.ok(html.includes('density-app.js?v=20261101-zipcode-b2'));
+ assert.ok(html.includes('density-app.js?v=20261101-compactward1'));
  for(const title of ['公式サイト','Wikipedia','ここへ行く'])
   assert.ok(app.includes(title));
  for(const code of ['renderOfficePopup(model)','renderOfficePopup(chosen)',
@@ -467,12 +467,29 @@ test('B popup becomes the default layout; zip codes render above addresses',()=>
   assert.ok(records[code].source.startsWith('https://'));
  }
  for(const page of [current,a,b]){
-  assert.ok(page.includes('density-app.js?v=20261101-zipcode-b2'));
+  assert.ok(page.includes('density-app.js?v=20261101-'+(page===current?'compactward1':'zipcode-b2')));
   assert.ok(page.includes('white-space:pre-line'));
  }
- assert.ok(current.includes('right:120px;bottom:8px;width:calc(100% - 128px)'));
- assert.ok(current.includes('.map-toolbar{width:112px}'));
+ assert.ok(current.includes('right:104px;bottom:8px;width:calc(100% - 112px)'));
+ assert.ok(current.includes('.map-toolbar{width:96px}'));
  assert.ok(current.includes('grid-template-columns:repeat(3,minmax(0,1fr))'));
  assert.ok(app.includes("data.postalCode?'〒'+data.postalCode"));
  assert.ok(app.includes("+'\\n':'')+data.address"));
+});
+
+test('default ward display, narrow right control, and non-purple selection',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.ok(html.includes('<option value="ward" selected>市区町村名（政令市の区も表示）</option>'));
+ assert.ok(html.includes('<option value="on" selected>漢字＋よみがな</option>'));
+ assert.ok(html.includes('--selected:#ffc36e'));
+ assert.ok(html.includes('.map-toolbar{width:96px}'));
+ assert.ok(html.includes('.map-toolbar{right:8px;bottom:8px;width:88px}'));
+ assert.ok(html.includes('right:104px;bottom:8px;width:calc(100% - 112px)'));
+ assert.ok(app.includes("let state={area:'kansai',mode:'ward'}"));
+ assert.ok(app.includes("'plate':'ward';refresh()"));
+ assert.ok(app.includes("if(area!=='fuji'&&$('mode').value==='plate')$('mode').value='ward'"));
+ assert.ok(app.includes("m.name===name||m.major===name"));
+ assert.ok(app.includes("const b={minX:Math.min(...parts.map(m=>m.box.minX))"));
+ assert.ok(html.includes('density-app.js?v=20261101-compactward1'));
 });
