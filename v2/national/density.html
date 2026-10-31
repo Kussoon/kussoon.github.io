@@ -50,7 +50,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/administrative-labels.js?v=1"></script>
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
-<script defer src="density-labels.js?v=20261031-density2"></script>
+<script defer src="density-labels.js?v=20261031-density3"></script>
 <script defer src="density-app.js?v=20261031-density2"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
@@ -63,7 +63,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <label>自然な表示の密度<select id="density-level"><option value="sparse">少なめ</option><option value="normal" selected>標準</option><option value="dense">多め</option></select></label>
 </div>
 <p id="density-output" class="info" aria-live="polite">表示数を計算中です。</p>
-<p class="meta">自然な表示では、主要都市を優先し、地名の矩形が重なると一部を一時的に隠します。拡大すると表示候補が増え、読み仮名は6倍以上で追加します（「漢字のみ」選択時は表示しません）。検索・タップで選択した地名は必ず残します。全件表示に戻すと従来のラベルをそのまま確認できます。</p>
+<p class="meta">自然な表示では、地図内で見えている町域にも候補点を探し、ラベル同士が重ならない範囲で早めに表示します。拡大すると表示候補が増え、読み仮名は6倍以上で追加します（「漢字のみ」選択時は表示しません）。検索・タップで選択した地名は必ず残します。全件表示に戻すと従来のラベルをそのまま確認できます。</p>
 </section>
 <section class="panel">
 <div class="controls">
