@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "experimental": true,
+  "asOf": "2026-11-01",
+  "note": "庁舎情報は公式自治体資料に基づく試験収録。未収録自治体には所在地・リンクを推測して表示しない。政令市の区役所は別途整備。",
+  "offices": {
+    "28204": {
+      "name": "西宮市",
+      "office": "西宮市役所 本庁舎",
+      "address": "兵庫県西宮市六湛寺町10-3",
+      "official": "https://www.city.nishinomiya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/西宮市",
+      "source": "https://www.city.nishinomiya.lg.jp/access/sonotashisetsu/honchosha/shuhenannai.html"
+    },
+    "28214": {
+      "name": "宝塚市",
+      "office": "宝塚市役所 本庁舎",
+      "address": "兵庫県宝塚市東洋町1番1号",
+      "official": "https://www.city.takarazuka.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/宝塚市",
+      "source": "https://www.city.takarazuka.hyogo.jp/1060687/1060720/1061628/1001190.html"
+    },
+    "28215": {
+      "name": "三木市",
+      "office": "三木市役所",
+      "address": "兵庫県三木市上の丸町10番30号",
+      "official": "https://www.city.miki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/三木市",
+      "source": "https://www.city.miki.lg.jp/map/10000.html"
+    },
+    "28446": {
+      "name": "神河町",
+      "office": "神河町役場 本庁舎",
+      "address": "兵庫県神崎郡神河町寺前64番地",
+      "official": "https://www.town.kamikawa.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/神河町",
+      "source": "https://www.town.kamikawa.hyogo.jp/"
+    }
+  }
+}
