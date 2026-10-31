@@ -68,8 +68,24 @@ function showSelection(){
   return;
  }
  if(chosen){
-  $('selection').textContent=nameOf(chosen)+'（'+chosen.prefecture+'・行政区域コード '+chosen.code+'）';
- }else $('selection').textContent='市区町村をタップすると選択できます。';
+  const readings=(chosen.readingParts||[]).map(x=>x.reading).filter(Boolean);
+  const name=nameOf(chosen),reading=readings.join('／')||chosen.reading||'';
+  $('selection').replaceChildren();
+  const strong=document.createElement('strong');strong.textContent=name;
+  $('selection').append(strong);
+  if(reading){
+   const kana=document.createElement('div');kana.textContent='読み：'+reading;
+   $('selection').append(kana);
+  }
+  const details=document.createElement('div');
+  details.className='meta';
+  details.textContent='所在地：'+chosen.prefecture+
+   '　／　行政区域コード：'+chosen.code;
+  $('selection').append(details);
+  const note=document.createElement('div');
+  note.className='meta';note.textContent='同じ区域をもう一度タップすると選択解除できます。';
+  $('selection').append(note);
+ }else $('selection').textContent='市町村をタップすると名前と読みを確認できます。';
 }
 function highlight(){
  // In plate mode the whole cross-prefecture plate region stays colored,
@@ -91,6 +107,9 @@ function select(sel,scroll=false){
  // Re-run visibility so a tapped municipality becomes the pinned label.
  if(scroll){fit();renderLabels();map.scrollIntoView({behavior:'smooth',block:'center'});}
  else renderLabels();
+}
+function toggleMunicipality(id){
+ select(selection?.type==='model'&&selection.id===id?null:{type:'model',id});
 }
 function buildPrefOutlines(topologies,projectPoint){
  const layer=tag('g',{'aria-hidden':'true'});
@@ -214,10 +233,23 @@ function renderLabels(){
   target.setAttribute('font-size',displayedSize.toFixed(2));
   target.setAttribute('stroke-width',(displayedSize*.18).toFixed(2));
  });
- const visible=D.select(workModels,resultLabels,{
+ const arrangement=D.arrange(workModels,resultLabels,{
   view,zoom,mode:$('density-mode').value,density:$('density-level').value,
   selectedId:selection?.type==='model'?selection.id:null,
   screenWidth:rect.width||390,screenHeight:rect.height||390
+ });
+ const visible=arrangement.visible;
+ // Some previously hidden names can now use a polygon-interior anchor.
+ // Repaint only labels moved by the visibility experiment.
+ arrangement.labels.forEach((position,i)=>{
+  if(!visible[i]||position===resultLabels[i])return;
+  const target=labelNodes[i]?.node,m=workModels[i];
+  if(!target)return;
+  if(readingEnabled)NR.paint(target,m,position.x,position.y,
+   target.classList.contains('plate-label')?size*1.2:size,measure);
+  else L.paint(target,m,position.x,size);
+  target.setAttribute('x',position.x.toFixed(2));
+  target.setAttribute('y',position.y.toFixed(2));
  });
  labelNodes.forEach(({node},i)=>{node.style.display=visible[i]?'':'none';});
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
@@ -307,7 +339,7 @@ async function load(area,mode){
  $('clear').hidden=mode==='plate';
  $('interaction-guide').textContent=mode==='plate'
   ?'紫色が富士山ナンバーの区域です。市町村名は位置確認用に表示し、地図のタップによる詳細表示はありません。検索では対象市町村のナンバー名を調べられます。'
-  :'ドラッグで移動、ピンチで拡大縮小できます。検索結果を選ぶと全域図で該当区域を紫色にします。';
+  :'ドラッグ・ピンチで地図を操作できます。区域をタップすると地名と読みを表示します。同じ区域の再タップ、地図の空白タップ、または「選択解除」で色を戻せます。';
  $('legend-blue').textContent=mode==='plate'?'その他（地名未登録）':'市区町村';
  $('legend-selected').textContent=mode==='plate'?'富士山ナンバー':'選択区域';
  fit();drawMap(topologies,projected.projectPoint);renderLabels();
@@ -347,12 +379,13 @@ document.addEventListener('pointerdown',e=>{if(!e.target.closest('.searchbox'))$
 map.addEventListener('click',e=>{
  if(state.mode==='plate'||performance.now()<skipClickUntil)return;
  const p=e.target.closest('path[data-id]');
- if(p)select({type:'model',id:p.getAttribute('data-id')});
+ if(p)toggleMunicipality(p.getAttribute('data-id'));
+ else select(null);
 });
 map.addEventListener('keydown',e=>{
  if(state.mode==='plate'||!['Enter',' '].includes(e.key))return;
  const p=e.target.closest('path[data-id]');
- if(p){e.preventDefault();select({type:'model',id:p.getAttribute('data-id')});}
+ if(p){e.preventDefault();toggleMunicipality(p.getAttribute('data-id'));}
 });
 map.addEventListener('pointerdown',e=>{
  if(e.pointerType==='mouse'&&e.button!==0)return;
@@ -387,8 +420,10 @@ for(const type of ['pointerup','pointercancel','lostpointercapture']){
  map.addEventListener(type,e=>{
   const p=pointers.get(e.pointerId);if(!p)return;
   pointers.delete(e.pointerId);
-  if(state.mode!=='plate'&&type==='pointerup'&&!p.moved&&p.targetId)
-   select({type:'model',id:p.targetId});
+  if(state.mode!=='plate'&&type==='pointerup'&&!p.moved){
+   if(p.targetId)toggleMunicipality(p.targetId);
+   else select(null);
+  }
   // A synthesized click must not select twice after pointer capture.
   skipClickUntil=performance.now()+280;
  });
