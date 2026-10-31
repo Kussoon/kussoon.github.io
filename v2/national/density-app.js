@@ -8,12 +8,13 @@ const NS='http://www.w3.org/2000/svg';
 const E=window.KussoonLabelEngine,R=window.KussoonReadableLabels;
 const C=window.KussoonCollisionRefinement,F=window.KussoonRegionFit,N=window.KussoonNationalBoundaries;
 const L=window.KussoonAdministrativeLabels,NR=window.KussoonNationalReadings;
-const D=window.KussoonDensityLabels;
+const D=window.KussoonDensityLabels,M=window.KussoonCenteredLabels;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
 const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
 let catalog=null,readingData=null,countyData=null,models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
+let fixedCenters=new Map(),fixedCorrections=0;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
  const el=document.createElementNS(NS,name);
@@ -172,7 +173,7 @@ function measure(value,size){
 function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
- const compareMode=['fixed','light'].includes($('density-mode').value);
+ const compareMode=['center','fixed','light'].includes($('density-mode').value);
  const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
@@ -187,8 +188,10 @@ function renderLabels(){
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
  const planned=compareMode?layoutModels.map(m=>{
-  const [x,y]=Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)
-   ?m.polylabel : m.centroid;
+  const [x,y]=$('density-mode').value==='center'?
+   (fixedCenters.get(m.id)||m.polylabel||m.centroid):
+   (Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)
+    ?m.polylabel : m.centroid);
   const width=measure(m.name,size)+size*.24,height=size*1.2;
   return {x,y,width,height,box:{
    x1:x-width/2,x2:x+width/2,y1:y-height/2,y2:y+height/2
@@ -218,7 +221,7 @@ function renderLabels(){
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
  if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
-   mode:$('density-mode').value,view,
+   mode:$('density-mode').value==='center'?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    selectedId:selection?.type==='model'?selection.id:null
   }).labels;
@@ -272,7 +275,8 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='fixed'?'A：全件・中心優先':
+  ($('density-mode').value==='center'?'新A：中央基準・初期補正のみ':
+   $('density-mode').value==='fixed'?'旧A：Polylabel固定':
    $('density-mode').value==='light'?'B：全件・軽い調整':
    $('density-mode').value==='all'?'旧・全件表示':
    '旧・自然な表示：'+$('density-level').selectedOptions[0].text)+
@@ -351,6 +355,16 @@ async function load(area,mode){
   plateShape.readingParts=[{name:plate.name,reading:plate.reading}];
  }
  state={area,mode};
+ // Compute only when geometry or municipality/ward mode changes.
+ // Never move labels in response to zoom, pan, reading toggle, or selection.
+ const referenceFont=7*bounds.w/390;
+ const built=M.build(models,{
+  fontSize:referenceFont,measure,
+  rows:m=>L.rows(m)
+ });
+ fixedCenters=new Map(models.map((m,i)=>[m.id,built.anchors[i]]));
+ fixedCorrections=built.adjusted;
+
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
