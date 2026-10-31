@@ -122,6 +122,59 @@
   }
   return {visible:result,labels:placed};
  }
- global.KussoonDensityLabels={arrange,select:(models,labels,options)=>
+ // A / B experiment: every administrative unit retains its label.
+ // B may move a label only a few screen pixels, only to reduce overlaps,
+ // and only if its anchor remains inside its *own* polygon.
+ function fullCompare(models,labels,options){
+  const {mode,view,screenWidth,screenHeight,selectedId}=options;
+  const visible=models.map(()=>true);
+  if(mode!=='light')return {visible,labels:labels.slice(),moved:0};
+  const ratio=Math.min((screenWidth||390)/view.w,(screenHeight||390)/view.h);
+  if(!(ratio>0))return {visible,labels:labels.slice(),moved:0};
+  const engine=global.KussoonLabelEngine;
+  if(typeof engine?.isInside!=='function')return {visible,labels:labels.slice(),moved:0};
+  const movedLabels=labels.slice();
+  const maxShift=8/ratio;
+  const offsets=[[0,0],[-1,0],[1,0],[0,-1],[0,1],
+   [-1,-1],[1,-1],[-1,1],[1,1]];
+  // The current displayed viewport is all that can have visible collisions.
+  const candidates=labels.map((p,i)=>({i,p,m:models[i]})).filter(({p})=>
+   p?.box&&p.box.x2>=view.x&&p.box.x1<=view.x+view.w&&
+   p.box.y2>=view.y&&p.box.y1<=view.y+view.h);
+  function collisionCost(box,index){
+   let sum=0;
+   for(const {i} of candidates){
+    if(i===index)continue;
+    const other=movedLabels[i]?.box;if(!other)continue;
+    sum+=Math.max(0,Math.min(box.x2,other.x2)-Math.max(box.x1,other.x1))*
+     Math.max(0,Math.min(box.y2,other.y2)-Math.max(box.y1,other.y1));
+   }
+   return sum;
+  }
+  let moved=0;
+  // Smaller polygons get their first opportunity, without hiding large ones.
+  candidates.sort((a,b)=>(a.m.box?.w||0)*(a.m.box?.h||0)-
+   (b.m.box?.w||0)*(b.m.box?.h||0)||a.i-b.i);
+  for(const {i,m,p} of candidates){
+   if(m.id===selectedId||!Array.isArray(m.rings))continue;
+   let best=p,bestOverlap=collisionCost(p.box,i);
+   if(bestOverlap<=.01)continue;
+   for(const radius of [0.5,1]){
+    for(const [dx,dy] of offsets.slice(1)){
+     const x=p.x+dx*maxShift*radius,y=p.y+dy*maxShift*radius;
+     if(!engine.isInside(x,y,m.rings))continue;
+     const test=shift(p,x,y);
+     const overlap=collisionCost(test.box,i);
+     if(overlap+.01<bestOverlap){
+      best=test;bestOverlap=overlap;
+     }
+    }
+   }
+   if(best!==p){movedLabels[i]=best;moved++;}
+  }
+  return {visible,labels:movedLabels,moved};
+ }
+
+ global.KussoonDensityLabels={arrange,fullCompare,select:(models,labels,options)=>
   arrange(models,labels,options).visible};
 })(window);
