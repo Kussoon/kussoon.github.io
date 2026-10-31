@@ -86,6 +86,10 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
  .popup-actions a,.popup-actions span{font-size:10px;min-height:43px;padding:3px 1px}
  .popup-note{font-size:10px}
 }
+#popup-actions{display:block}
+#popup-actions>.popup-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+.popup-facility{margin:8px 0;padding-bottom:8px;border-bottom:1px solid #ccd3d9}
+.popup-facility .popup-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
 </style>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
@@ -100,7 +104,8 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
 <script defer src="centered-labels.js?v=20261101-proposal5a"></script>
-<script defer src="density-app.js?v=20261101-zipcode-b2"></script>
+<script defer src="../common/js/office-directory.js?v=2"></script>
+<script defer src="density-app.js?v=20261101-offices2"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>B案：操作ボタン左側・横長（比較試験）</h1>

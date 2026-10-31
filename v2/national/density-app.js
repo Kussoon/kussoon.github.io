@@ -63,37 +63,14 @@ function renderOfficePopup(model){
  if(!model||state.mode==='plate'||popupDismissed){
   popup.hidden=true;return;
  }
- const data=officeDirectory[String(model.code)]||null;
  $('popup-name').textContent=nameOf(model);
- $('popup-office').textContent=data?.office||'市役所・役場の所在地';
- $('popup-address').textContent=data?.address?
-  (data.postalCode?'〒'+data.postalCode+'\n':'')+data.address:
-  '所在地は調査中です';
- const actions=$('popup-actions');actions.replaceChildren();
- const destination=data?.address?
-  'https://www.google.com/maps/dir/?api=1&destination='+
-   encodeURIComponent(data.office+' '+data.address):null;
- const entries=[
-  ['公式サイト',data?.official],
-  ['Wikipedia',data?.wikipedia],
-  ['ここへ行く',destination]
- ];
- for(const [title,url] of entries){
-  if(typeof url==='string'&&url.startsWith('https://')){
-   const a=document.createElement('a');
-   a.textContent=title;a.href=url;a.target='_blank';a.rel='noopener noreferrer';
-   a.setAttribute('aria-label',nameOf(model)+'：'+title);
-   actions.append(a);
-  }else{
-   const item=document.createElement('span');
-   item.textContent=title;item.setAttribute('aria-disabled','true');
-   item.title='所在地・リンクの確認後に利用できます';
-   actions.append(item);
-  }
- }
- $('popup-note').textContent=data?
-  '本庁舎の所在地を表示しています。リンクは別タブで開きます。':
-  'この自治体は所在地・リンクの確認待ちです。推測した住所やURLは表示しません。';
+ $('popup-office').textContent='';
+ $('popup-address').textContent='';
+ const result=window.KussoonOfficeDirectory.resolve(officeDirectory,model.code);
+ window.KussoonOfficeDirectory.render(document,$('popup-actions'),result,nameOf(model));
+ $('popup-note').textContent=result.offices.length&&result.offices.every(o=>o.status==='verified')?
+  '公式ウェブで確認した庁舎情報。リンクは別タブで開きます。':
+  '未確認の所在地・リンクは利用できません。';
  popup.hidden=false;
 }
 function showSelection(){
@@ -472,12 +449,30 @@ async function getTopology(code){
  if(!response.ok)throw Error('地図データ '+code+' HTTP '+response.status);
  const value=await response.json();sourceCache.set(code,value);return value;
 }
+let officesLoading=null;
+async function loadOffices(){
+ if(officeDirectory.schemaVersion===2)return;
+ if(!officesLoading)officesLoading=(async()=>{
+  try{
+   const response=await fetch('../data/offices/28.json?v=2');
+   if(!response.ok)throw Error('庁舎データを取得できません');
+   const directory=await response.json();
+   if(directory.schemaVersion!==2||!directory.regions||!directory.offices)throw Error('庁舎データ形式が不正です');
+   officeDirectory=directory;
+  }catch(error){console.warn('Office directory',error);}
+  finally{officesLoading=null;}
+ })();
+ await officesLoading;
+}
 async function load(area,mode){
  const token=++runId;clearTimeout(renderTimer);
  const needed=catalog.prefectures.filter(p=>p.scope.includes(area));
  if(!needed.length)throw Error('表示地域のデータ定義がありません');
  setStatus(needed.length+'府県の地図データを読み込んでいます…');
- const pairs=await Promise.all(needed.map(async p=>[p.code,await getTopology(p.code)]));
+ const [pairs]=await Promise.all([
+  Promise.all(needed.map(async p=>[p.code,await getTopology(p.code)])),
+  needed.some(p=>String(p.code)==='28')?loadOffices():Promise.resolve()
+ ]);
  if(token!==runId)return;
  const topologies=Object.fromEntries(pairs);
  const grouped=N.registry(topologies,catalog,mode==='ward'?'ward':'municipality');
@@ -720,19 +715,16 @@ map.addEventListener('wheel',e=>{
 window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
-  const [catalogResponse,municipalitiesResponse,countiesResponse,officesResponse]=await Promise.all([
+  const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
    fetch('../data/national/catalog.json?v=20261031-density'),
    fetch('../data/national/municipality-readings.json?v=20261031-shikoku'),
-   fetch('../data/national/county-readings.json?v=20261031-shikoku'),
-   fetch('../data/national/municipality-offices-pilot.json?v=20261101-pilot1')
+   fetch('../data/national/county-readings.json?v=20261031-shikoku')
   ]);
-  if(!catalogResponse.ok||!municipalitiesResponse.ok||!countiesResponse.ok||!officesResponse.ok)
+  if(!catalogResponse.ok||!municipalitiesResponse.ok||!countiesResponse.ok)
    throw Error('全国区域・読み仮名データ定義が読み込めません');
   [catalog,readingData,countyData]=await Promise.all([
    catalogResponse.json(),municipalitiesResponse.json(),countiesResponse.json()
   ]);
-  const offices=await officesResponse.json();
-  officeDirectory=offices.offices||{};
   const params=new URLSearchParams(location.search);
   const requested=params.get('area');
   if(requested&&SCOPES[requested]){
