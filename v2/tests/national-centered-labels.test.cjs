@@ -63,7 +63,9 @@ test('comparison page loads the centred module before density app',()=>{
  const s=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(s.indexOf('centered-labels.js')>0);
  assert.ok(s.indexOf('centered-labels.js')<s.indexOf('density-app.js'));
- assert.match(s,/<option value="multi" selected>/);
+ assert.match(s,/<option value="horizontal" selected>/);
+ assert.match(s,/<option value="vertical">/);
+ assert.match(s,/<option value="multi">/);
  assert.match(s,/<option value="center">/);
 });
 
@@ -105,7 +107,50 @@ test('four-city comparison controls and script versions exist',()=>{
  for(const city of ['宝塚市','西宮市','神戸市','京都市']){
   assert.ok(html.includes('data-city="'+city+'"'));
  }
- assert.match(html,/centered-labels\.js\?v=20261031-multislice1/);
- assert.match(html,/density-app\.js\?v=20261031-multislice1/);
+ assert.match(html,/centered-labels\.js\?v=20261031-horizontalvertical1/);
+ assert.match(html,/density-app\.js\?v=20261031-horizontalvertical1/);
  assert.match(js,/city-shortcuts'\)\.addEventListener/);
+});
+
+test('horizontal centre keeps the midpoint even when the municipal neck is narrow',()=>{
+ const m={...rectangle('neck','くびれ市',0,0,120,200),
+  rings:[[[0,0],[120,0],[120,65],[68,65],[68,180],[60,180],
+   [60,65],[0,65]]],polylabel:[45,32]};
+ const p=M.pointHorizontal(m);
+ assert.equal(p[1],100);
+ assert.equal(p[0],64);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...p,m.rings),true);
+});
+test('vertical pass uses the segment at the chosen X, without shifting X',()=>{
+ const m={...rectangle('lobe','変形市',0,0,130,200),
+  rings:[[[0,0],[100,0],[100,60],[55,60],[55,170],[20,170],
+   [20,60],[0,60]]],polylabel:[60,30]};
+ const h=M.pointHorizontal(m);
+ const v=M.pointHorizontalVertical(m);
+ assert.equal(h[1],100);
+ assert.equal(h[0],37.5);
+ assert.equal(v[0],h[0]);
+ assert.ok(v[1]!==h[1]);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...v,m.rings),true);
+});
+test('vertical intervals respect holes and include the original point',()=>{
+ const m={...rectangle('hole','穴町',0,0,100,100),
+  rings:[[[0,0],[100,0],[100,100],[0,100]],
+   [[35,40],[65,40],[65,60],[35,60]]]};
+ const h=M.pointHorizontal(m),v=M.pointHorizontalVertical(m);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...h,m.rings),true);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...v,m.rings),true);
+ const runs=M.verticalRuns(m.rings,h[0]);
+ assert.ok(runs.some(([a,b])=>a<=h[1]&&b>=h[1]));
+});
+test('new horizontal and vertical anchors are computed only at geometry load',()=>{
+ const s=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ const render=s.slice(s.indexOf('function renderLabels()'),s.indexOf('function suggest',s.indexOf('function renderLabels()')));
+ assert.doesNotMatch(render,/M\.pointHorizontal\(/);
+ assert.doesNotMatch(render,/M\.pointHorizontalVertical\(/);
+ assert.match(s,/horizontalCenters=new Map\(models\.map/);
+ assert.match(s,/verticalCenters=new Map\(models\.map/);
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ for(const city of ['神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市'])
+  assert.ok(html.includes('data-city="'+city+'"'));
 });

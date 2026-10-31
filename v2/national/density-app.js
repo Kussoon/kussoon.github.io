@@ -16,6 +16,7 @@ let catalog=null,readingData=null,countyData=null,models=[],bounds={x:0,y:0,w:90
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
 let fixedCenters=new Map(),fixedCorrections=0;
 let multiCenters=new Map(),multiCorrections=0;
+let horizontalCenters=new Map(),verticalCenters=new Map();
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
  const el=document.createElementNS(NS,name);
@@ -174,7 +175,7 @@ function measure(value,size){
 function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
- const compareMode=['multi','center','fixed','light'].includes($('density-mode').value);
+ const compareMode=['horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
  const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
@@ -189,7 +190,11 @@ function renderLabels(){
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
  const planned=compareMode?layoutModels.map(m=>{
-  const [x,y]=$('density-mode').value==='multi'?
+  const [x,y]=$('density-mode').value==='horizontal'?
+   (horizontalCenters.get(m.id)||m.polylabel||m.centroid):
+   $('density-mode').value==='vertical'?
+   (verticalCenters.get(m.id)||m.polylabel||m.centroid):
+   $('density-mode').value==='multi'?
    (multiCenters.get(m.id)||fixedCenters.get(m.id)||m.polylabel||m.centroid):
    $('density-mode').value==='center'?
    (fixedCenters.get(m.id)||m.polylabel||m.centroid):
@@ -224,7 +229,7 @@ function renderLabels(){
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
  if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
-   mode:['center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
+   mode:['horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    selectedId:selection?.type==='model'?selection.id:null
   }).labels;
@@ -278,7 +283,9 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='multi'?'複数断面・固定配置':
+  ($('density-mode').value==='horizontal'?'水平中央・固定':
+   $('density-mode').value==='vertical'?'水平＋縦断面中央・固定':
+   $('density-mode').value==='multi'?'複数断面・固定配置':
    $('density-mode').value==='center'?'中央断面・固定配置':
    $('density-mode').value==='fixed'?'旧A：Polylabel固定':
    $('density-mode').value==='light'?'B：全件・軽い調整':
@@ -373,6 +380,10 @@ async function load(area,mode){
  });
  multiCenters=new Map(models.map((m,i)=>[m.id,multi.anchors[i]]));
  multiCorrections=multi.adjusted;
+ // Unlike the earlier strategies, these two pilots deliberately have NO
+ // collision-based corrections. The anchor is computed exactly once on load.
+ horizontalCenters=new Map(models.map(m=>[m.id,M.pointHorizontal(m)]));
+ verticalCenters=new Map(models.map(m=>[m.id,M.pointHorizontalVertical(m)]));
 
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
@@ -405,7 +416,7 @@ $('city-shortcuts').addEventListener('click',async e=>{
  const button=e.target.closest('button[data-city]');
  if(!button)return;
  const name=button.dataset.city;
- if(!['宝塚市','西宮市','神戸市','京都市'].includes(name))return;
+ if(!['宝塚市','西宮市','神戸市','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市'].includes(name))return;
  if($('area').value!=='west-shikoku'||$('mode').value!=='municipality'){
   $('area').value='west-shikoku';$('mode').value='municipality';
   await refresh();
