@@ -63,7 +63,8 @@ test('comparison page loads the centred module before density app',()=>{
  const s=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(s.indexOf('centered-labels.js')>0);
  assert.ok(s.indexOf('centered-labels.js')<s.indexOf('density-app.js'));
- assert.match(s,/<option value="horizontal" selected>/);
+ assert.match(s,/<option value="conditional" selected>/);
+ assert.match(s,/<option value="horizontal">/);
  assert.match(s,/<option value="vertical">/);
  assert.match(s,/<option value="multi">/);
  assert.match(s,/<option value="center">/);
@@ -107,8 +108,8 @@ test('four-city comparison controls and script versions exist',()=>{
  for(const city of ['宝塚市','西宮市','神戸市','京都市']){
   assert.ok(html.includes('data-city="'+city+'"'));
  }
- assert.match(html,/centered-labels\.js\?v=20261031-horizontalvertical1/);
- assert.match(html,/density-app\.js\?v=20261031-horizontalvertical1/);
+ assert.match(html,/centered-labels\.js\?v=20261101-conditional1/);
+ assert.match(html,/density-app\.js\?v=20261101-conditional1/);
  assert.match(js,/city-shortcuts'\)\.addEventListener/);
 });
 
@@ -153,4 +154,53 @@ test('new horizontal and vertical anchors are computed only at geometry load',()
  const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  for(const city of ['神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市'])
   assert.ok(html.includes('data-city="'+city+'"'));
+});
+
+test('new proposal 3 never moves a label for a narrow midpoint alone',()=>{
+ const m={...rectangle('neck','縦長市',0,0,120,200),
+  rings:[[[0,0],[120,0],[120,65],[68,65],[68,180],[60,180],
+   [60,65],[0,65]]],polylabel:[45,32]};
+ const result=M.conditionalVertical(m,{fontSize:10,measure:(x,z)=>x.length*z});
+ assert.equal(result.adjusted,false);
+ assert.deepEqual(Array.from(result.point),Array.from(M.pointHorizontal(m)));
+});
+test('new proposal 3 does not shift because of sideways overflow alone',()=>{
+ const m=rectangle('stripe','細長市',0,0,12,200);
+ const result=M.conditionalVertical(m,{fontSize:20,measure:(x,z)=>x.length*z});
+ assert.equal(result.adjusted,false);
+ assert.equal(result.reason,'acceptable-vertical-overflow');
+});
+test('new proposal 3 makes vertical correction only when it improves fit',()=>{
+ const m={...rectangle('lobe','南北変形市',0,0,130,200),
+  rings:[[[0,0],[100,0],[100,60],[55,60],[55,170],[20,170],
+   [20,60],[0,60]]],polylabel:[60,30]};
+ const first=M.conditionalVertical(m,{fontSize:44,measure:()=>25,threshold:.1,
+  minImprovement:.03,maxShiftFraction:.25,maxWorsening:1});
+ assert.equal(first.point[0],M.pointHorizontal(m)[0]);
+ if(first.adjusted){
+  assert.ok(first.beforeVertical-first.afterVertical>=.03);
+  assert.ok(first.delta<=m.box.h*.25);
+ }else{
+  assert.deepEqual(Array.from(first.point),Array.from(M.pointHorizontal(m)));
+ }
+});
+test('new proposal 3 is deterministic and keeps its point inside territory',()=>{
+ const ms=[rectangle('x','甲市',0,0,65,180),
+  rectangle('y','乙市',65,0,130,180)];
+ for(const m of ms){
+  const a=M.conditionalVertical(m,{fontSize:12});
+  const b=M.conditionalVertical(m,{fontSize:12});
+  assert.deepEqual(a,b);
+  assert.equal(context.window.KussoonLabelEngine.isInside(...a.point,m.rings),true);
+ }
+});
+test('new proposal 3 is cached at load and not recomputed on zoom',()=>{
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ const render=app.slice(app.indexOf('function renderLabels()'),
+  app.indexOf('function suggest',app.indexOf('function renderLabels()')));
+ assert.doesNotMatch(render,/M\.conditionalVertical\(/);
+ assert.match(app,/conditionalCenters=new Map\(conditional\.map/);
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ assert.ok(html.includes('id="conditional-report"'));
+ assert.ok(html.includes('value="conditional" selected'));
 });
