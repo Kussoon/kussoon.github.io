@@ -180,7 +180,16 @@ function renderLabels(){
  // Measure whichever row is wider, not the concatenated county + town string.
  // Search and selection continue to use the complete administrative name.
  const layoutModels=workModels.map(m=>L.widestRowModel(m,size,measure));
- const planned=R.planCenterFirstLabels(layoutModels,null,'kanji',size,measure,E,{
+ // A/B both start from a stable point belonging to the municipality.
+ // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
+ const planned=compareMode?layoutModels.map(m=>{
+  const [x,y]=Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)
+   ?m.polylabel : m.centroid;
+  const width=measure(m.name,size)+size*.24,height=size*1.2;
+  return {x,y,width,height,box:{
+   x1:x-width/2,x2:x+width/2,y1:y-height/2,y2:y+height/2
+  }};
+ }):R.planCenterFirstLabels(layoutModels,null,'kanji',size,measure,E,{
   anchor:'balanced',shift:'adjacent'
  });
  // Collision checks must include both rendered rows of every county town
