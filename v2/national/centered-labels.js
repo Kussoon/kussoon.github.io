@@ -107,6 +107,11 @@
      // FINAL height after a vertical collision correction.
      const newCenter=strategy==='multi'&&dy!==0?
       centerAtHeight(m,y,anchor[0]):null;
+     if(strategy==='multi'&&dy!==0&&!newCenter)continue;
+     // Re-centering at the new latitude must not jump to a distant
+     // disconnected interval; keep the initial correction local.
+     if(newCenter&&Math.abs(newCenter[0]-anchor[0])>
+       Math.min(m.box.w*.15,fontSize*1.5))continue;
      const x=newCenter?newCenter[0]:anchor[0]+dx*limit;
      if(!E.isInside(x,y,m.rings))continue;
      const box=rect(x,y,labelWidth,labelHeight);
