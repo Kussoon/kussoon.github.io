@@ -22,7 +22,7 @@ let conditionalCenters=new Map(),conditionalResults=new Map();
 let proposal4Centers=new Map(),proposal4Results=new Map();
 let proposal5Centers=new Map(),proposal5Results=new Map();
 let diagnosticLayer=null;
-let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
+let state={area:'kansai',mode:'ward'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
  const el=document.createElementNS(NS,name);
  for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));
@@ -110,7 +110,7 @@ function showSelection(){
    const members=N.plateMembers(models,plate),grouped={};
    for(const m of members)(grouped[m.prefecture]??=[]).push(m.name);
    const summary=Object.entries(grouped).map(([pref,values])=>pref+' '+values.length+'市町村').join('＋');
-   $('selection').textContent='紫色の範囲：'+plate.name+'ナンバー（'+summary+'、合計'+members.length+'市町村）。青色は今回ナンバー地域を未収録の区域です。';
+   $('selection').textContent='琥珀色の範囲：'+plate.name+'ナンバー（'+summary+'、合計'+members.length+'市町村）。青色は今回ナンバー地域を未収録の区域です。';
   }
   return;
  }
@@ -464,7 +464,7 @@ function suggest(){
 function setModeOptions(area){
  const option=$('mode').querySelector('option[value="plate"]');
  option.disabled=area!=='fuji';
- if(area!=='fuji'&&$('mode').value==='plate')$('mode').value='municipality';
+ if(area!=='fuji'&&$('mode').value==='plate')$('mode').value='ward';
 }
 async function getTopology(code){
  if(sourceCache.has(code))return sourceCache.get(code);
@@ -568,7 +568,7 @@ async function load(area,mode){
  $('reading').disabled=false;
  $('clear').hidden=mode==='plate';
  $('interaction-guide').textContent=mode==='plate'
-  ?'紫色が富士山ナンバーの区域です。市町村名は位置確認用に表示し、地図のタップによる詳細表示はありません。検索では対象市町村のナンバー名を調べられます。'
+  ?'琥珀色が富士山ナンバーの区域です。市町村名は位置確認用に表示し、地図のタップによる詳細表示はありません。検索では対象市町村のナンバー名を調べられます。'
   :'ドラッグ・ピンチで地図を操作できます。区域をタップすると地名と読みを表示します。同じ区域の再タップ、地図の空白タップ、または「選択解除」で色を戻せます。';
  $('legend-blue').textContent=mode==='plate'?'その他（地名未登録）':'市区町村';
  $('legend-selected').textContent=mode==='plate'?'富士山ナンバー':'選択区域';
@@ -585,7 +585,7 @@ async function refresh(){
  finally{$('area').disabled=$('mode').disabled=false;}
 }
 $('area').addEventListener('change',()=>{
- $('mode').value=$('area').value==='fuji'?'plate':'municipality';refresh();
+ $('mode').value=$('area').value==='fuji'?'plate':'ward';refresh();
 });
 $('mode').addEventListener('change',refresh);
 $('city-shortcuts').addEventListener('click',async e=>{
@@ -596,14 +596,18 @@ $('city-shortcuts').addEventListener('click',async e=>{
   $('diagnostic-city').value=name;
  }
  if(!['宝塚市','西宮市','神戸市','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
- if($('area').value!=='west-shikoku'||$('mode').value!=='municipality'){
-  $('area').value='west-shikoku';$('mode').value='municipality';
+ if($('area').value!=='west-shikoku'||$('mode').value!=='ward'){
+  $('area').value='west-shikoku';$('mode').value='ward';
   await refresh();
  }
- const city=models.find(m=>m.name===name);
- if(!city){setStatus(name+'の地図データが見つかりません');return;}
- // The camera changes only here, not when switching label algorithms.
- const b=city.box;
+ const parts=models.filter(m=>m.name===name||m.major===name);
+ if(!parts.length){setStatus(name+'の地図データが見つかりません');return;}
+ // In ward mode Kobe/Kyoto comprise several ward polygons: fit their union.
+ const b={minX:Math.min(...parts.map(m=>m.box.minX)),
+  maxX:Math.max(...parts.map(m=>m.box.maxX)),
+  minY:Math.min(...parts.map(m=>m.box.minY)),
+  maxY:Math.max(...parts.map(m=>m.box.maxY))};
+ b.w=b.maxX-b.minX;b.h=b.maxY-b.minY;
  const width=Math.min(bounds.w,Math.max(
   b.w*2.5,b.h*2.5*bounds.w/bounds.h,bounds.w/28
  ));
