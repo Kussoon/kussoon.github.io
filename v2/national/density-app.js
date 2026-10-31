@@ -14,6 +14,7 @@ const sourceCache=new Map(),pointers=new Map();
 const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
 let catalog=null,readingData=null,countyData=null,officeDirectory={},models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
+let popupDismissed=false;
 let fixedCenters=new Map(),fixedCorrections=0;
 let multiCenters=new Map(),multiCorrections=0;
 let horizontalCenters=new Map(),verticalCenters=new Map();
@@ -59,7 +60,7 @@ function scheduleLabels(){
 }
 function renderOfficePopup(model){
  const popup=$('municipal-popup');
- if(!model||state.mode==='plate'){
+ if(!model||state.mode==='plate'||popupDismissed){
   popup.hidden=true;return;
  }
  const data=officeDirectory[String(model.code)]||null;
@@ -147,6 +148,9 @@ function highlight(){
  showSelection();
 }
 function select(sel,scroll=false){
+ // A new municipality selection reopens the popup. Closing only the popup
+ // must never clear the currently highlighted administrative area.
+ popupDismissed=false;
  selection=sel;highlight();
  // Re-run visibility so a tapped municipality becomes the pinned label.
  if(scroll){fit();renderLabels();map.scrollIntoView({behavior:'smooth',block:'center'});}
@@ -557,6 +561,7 @@ async function load(area,mode){
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
+ popupDismissed=false;
  selection=mode==='plate'&&plate?{type:'plate'}:null;
  $('reading').disabled=false;
  $('clear').hidden=mode==='plate';
@@ -635,7 +640,10 @@ $('zoom-out').addEventListener('click',()=>zoomBy(1/1.5));
 $('reset').addEventListener('click',()=>{fit();renderLabels();});
 $('clear').addEventListener('click',()=>select(state.mode==='plate'&&plate?{type:'plate'}:null));
 $('clear-below').addEventListener('click',()=>select(null));
-$('popup-close').addEventListener('click',()=>select(null));
+$('popup-close').addEventListener('click',()=>{
+ popupDismissed=true;
+ $('municipal-popup').hidden=true;
+});
 $('search').addEventListener('input',suggest);
 $('search').addEventListener('keydown',e=>{
  if(e.key==='Escape')$('suggestions').hidden=true;
