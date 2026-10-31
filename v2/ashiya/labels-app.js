@@ -241,9 +241,14 @@
       measureCache.set(key,value);
       return value;
     }
+    // Shrink-only keeps precisely the baseline candidate anchor. This
+    // isolates the effect of font size from changes in label placement.
+    // Wrap modes can also search for a better interior anchor.
     const autoLayouts=lineMode==='single'?null:
       E.planAdaptiveLabels(models,seed,size,measureLine,{
-        wrap:true,shrink:lineMode==='wrap-shrink'
+        wrap:lineMode==='wrap'||lineMode==='wrap-shrink',
+        shrink:lineMode==='shrink'||lineMode==='wrap-shrink',
+        fixedPosition:lineMode==='shrink'
       });
     const auto=autoLayouts?autoLayouts.map(l=>[l.x,l.y]):seed;
     const autoWidths=autoLayouts?autoLayouts.map(l=>l.width):widths;
