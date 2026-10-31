@@ -41,3 +41,37 @@ test('density setting is monotonic for isolated candidates',()=>{
  const d=D.select(models,separate,{...ss,density:'dense'}).filter(Boolean).length;
  assert.ok(s<=m&&m<=d);
 });
+
+test('unused open cells can receive labels via polygon-internal candidate anchors',()=>{
+ const clustered=models.slice(0,4).map((m,i)=>({
+  ...m,
+  polylabel:[40+i*90,110]
+ }));
+ const starting=clustered.map((m,i)=>({
+  x:40+i*3,y:110,height:20,
+  box:{x1:10+i*3,y1:100,x2:70+i*3,y2:120}
+ }));
+ const arranged=D.arrange(clustered,starting,{
+  view:{x:0,y:0,w:440,h:220},
+  screenWidth:440,screenHeight:220,
+  mode:'adaptive',density:'dense',selectedId:null
+ });
+ assert.ok(arranged.visible.filter(Boolean).length>=3,
+  'additional noncolliding polygon centers should be considered');
+ assert.ok(arranged.labels.some((p,i)=>p.x!==starting[i].x));
+});
+test('selected model stays highlighted while alternative placements are considered',()=>{
+ const crowded=models.slice(0,2).map((m,i)=>({
+  ...m,polylabel:[50+i*110,50]
+ }));
+ const labels=crowded.map(m=>({
+  x:50,y:50,height:20,box:{x1:30,y1:40,x2:70,y2:60}
+ }));
+ const result=D.arrange(crowded,labels,{
+  view:{x:0,y:0,w:200,h:120},
+  screenWidth:390,screenHeight:240,
+  mode:'adaptive',density:'normal',selectedId:crowded[0].id
+ });
+ assert.equal(result.visible[0],true);
+ assert.equal(result.labels[0].x,50);
+});
