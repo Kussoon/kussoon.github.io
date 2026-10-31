@@ -551,7 +551,7 @@ $('city-shortcuts').addEventListener('click',async e=>{
  if([...$('diagnostic-city').options].some(o=>o.value===name)){
   $('diagnostic-city').value=name;
  }
- if(!['宝塚市','西宮市','神戸市','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市'].includes(name))return;
+ if(!['宝塚市','西宮市','神戸市','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
  if($('area').value!=='west-shikoku'||$('mode').value!=='municipality'){
   $('area').value='west-shikoku';$('mode').value='municipality';
   await refresh();
