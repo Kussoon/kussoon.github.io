@@ -79,6 +79,11 @@
  // Pilot 1: choose the exact north/south bbox midpoint and the centre
  // of a horizontal interval that belongs to the actual municipality.
  // Thin intervals remain valid: width never affects the selected latitude.
+ function safePoint(x,y,rings){
+  const rounded=[round(x),round(y)];
+  // Small islands can become exterior if rounded to 4 decimals.
+  return E.isInside(...rounded,rings)?rounded:[x,y];
+ }
  function pointHorizontal(model){
   const b=model.box;
   if(!b||!(b.w>0&&b.h>0)||!model.rings?.length)return point(model);
@@ -98,7 +103,7 @@
    const left=Math.min(...segments.map(([a])=>a));
    const right=Math.max(...segments.map(([,b])=>b));
    const desiredX=(left+right)/2;
-   if(E.isInside(desiredX,y,model.rings))return [round(desiredX),round(y)];
+   if(E.isInside(desiredX,y,model.rings))return safePoint(desiredX,y,model.rings);
    // Rare case: the full-extents midpoint falls in a gap or hole.
    // Retain the EXACT midpoint height and move only X by the shortest
    // possible distance to a valid interior point (do not pick a wide
@@ -113,7 +118,7 @@
       (Math.abs(distance-best.distance)<=1e-10&&x<best.x))
      best={x,distance};
    }
-   if(best)return [round(best.x),round(y)];
+   if(best)return safePoint(best.x,y,model.rings);
   }
   return point(model);
  }
