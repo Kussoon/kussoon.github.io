@@ -388,7 +388,7 @@ test('office overlay has separate selection, safe links, and unverified fallback
  for(const id of ['municipal-popup','popup-name','popup-close',
   'popup-office','popup-address','popup-actions','popup-note'])
   assert.ok(html.includes('id="'+id+'"'));
- assert.ok(html.includes('density-app.js?v=20261101-popupclose2'));
+ assert.ok(html.includes('density-app.js?v=20261101-bottomkana1'));
  for(const title of ['公式サイト','Wikipedia','ここへ行く'])
   assert.ok(app.includes(title));
  for(const code of ['renderOfficePopup(model)','renderOfficePopup(chosen)',
@@ -416,4 +416,18 @@ test('popup close preserves selection and repeated tap toggles selection',()=>{
  assert.ok(app.includes("selection.id===id?null:{type:'model',id}"));
  assert.ok(app.includes("state.mode==='plate'||popupDismissed"));
  assert.ok(html.includes('×印は吹き出しだけを閉じ、選択色は残します'));
+});
+
+test('map toolbar sits at the lower-right and ruby starts enabled',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.ok(html.includes('.map-toolbar{position:absolute;right:12px;bottom:12px;'));
+ assert.ok(html.includes('.map-toolbar{right:8px;bottom:8px}'));
+ assert.ok(!html.includes('.map-toolbar{position:absolute;right:12px;top:12px;'));
+ assert.ok(html.includes('<option value="on" selected>漢字＋よみがな</option>'));
+ assert.ok(html.includes('id="reading-toggle" aria-label="読み仮名の表示を切り替え" aria-pressed="true">よみがな ON'));
+ assert.ok(html.includes('max-height:calc(100% - 207px)'));
+ assert.ok(app.includes("'reading-toggle').addEventListener('click'"));
+ assert.ok(app.includes("reading').value==='on'?'off':'on'"));
+ assert.ok(app.includes("syncReadingButton();renderLabels()"));
 });
