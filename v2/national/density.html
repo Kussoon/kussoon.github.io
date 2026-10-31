@@ -44,6 +44,9 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .label-diagnostic .diag-horizontal{stroke:#d77b21;stroke-width:1.7;stroke-dasharray:4 4}
 .label-diagnostic .diag-origin{fill:#e88625;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
 .label-diagnostic .diag-destination{fill:#188b60;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-fourth{fill:#854cb5;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-raw{fill:#fff;stroke:#854cb5;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-fourth-path{stroke:#854cb5;stroke-width:2.5;stroke-dasharray:4 4}
 .place-label{font-weight:850;text-anchor:middle;dominant-baseline:central;fill:#193e58;stroke:#fff;stroke-linejoin:round;paint-order:stroke;pointer-events:none}
 .place-label.selected{fill:#693b95}.plate-label{fill:#532c86;stroke:#fff;stroke-width:2.4;paint-order:stroke;letter-spacing:.025em;font-weight:900}
 .info{background:#eef6fb;border:1px solid #d7e7f0;border-radius:9px;padding:10px;font-size:14px}
@@ -64,12 +67,12 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
-<script defer src="centered-labels.js?v=20261101-scanmid1"></script>
-<script defer src="density-app.js?v=20261101-scanmid1"></script>
+<script defer src="centered-labels.js?v=20261101-proposal4a"></script>
+<script defer src="density-app.js?v=20261101-proposal4a"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
-<h1>ラベル中心の位置と移動量を検証</h1>
-<p><strong>すべての市町村名を小さく全件表示</strong>し、拡大に合わせて文字だけ大きくします。新案1は<strong>南北中央の高さで水平に切った市域の最西端と最東端の中点</strong>を使います。複数区間でも全体の両端で計算し、中点が市域外の隙間なら最も近い市域内にだけ動かします。細い地形でも高さは変更しません。</p>
+<h1>新案4：市域外の場合だけ縦断面で補正</h1>
+<p><strong>すべての市町村名を小さく全件表示</strong>し、拡大に合わせて文字だけ大きくします。新案4は<strong>市域の南北中央の水平線で最西端と最東端の中点</strong>を求めます。中点が区域内なら固定し、区域外の場合に限って同じX座標の縦断面で南北中央を求めます。縦断面の中央も区域外なら、その縦線上の最も近い区域内へ補正します。縦線が区域を横切らない例外だけ横方向へ最小補正します。</p>
 <section class="panel" aria-label="4都市への移動">
 <h2>位置を比較する市町村</h2>
 <div class="buttons" id="city-shortcuts">
@@ -102,14 +105,15 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <option value="off">非表示</option>
 </select></label>
 </div>
-<p class="meta">橙の点＝新案1（南北中央の水平断面）、緑の点＝新案2（同じX座標で縦断面の南北中央）。緑の縦線は、そのXで市域が続いている区間です。補助線は位置確認用で、ラベルを動かしません。</p>
+<p class="meta">橙の点＝新案1、緑の点＝新案2、紫の点＝新案4。紫の白抜き点は水平全幅の中点（補正前）、紫の破線は新案4の補正経路です。橙の横線は市域と交わる全区間の最西端から最東端まで描きます。補助線は位置確認用で、ラベルを動かしません。</p>
+<p id="proposal4-report" class="info" aria-live="polite">新案4の補正件数を集計中です。</p>
 <p id="diagnostic-output" class="info" aria-live="polite">中心点の位置を計算中です。</p>
 <p id="diagnostic-ranking" class="meta">移動率の大きい市町村を計算中です。</p>
 </section>
 <section class="panel" aria-label="ラベル表示の比較設定">
 <h2>配置方式を比較</h2>
 <div class="controls">
-<label>配置方式<select id="density-mode"><option value="horizontal" selected>新案1：水平断面の東西全幅の中央（修正版）</option><option value="conditional">新案3：必要な場合のみ縦補正</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
+<label>配置方式<select id="density-mode"><option value="proposal4" selected>新案4：市域外の場合だけ縦断面で補正</option><option value="horizontal">新案1：水平断面の東西全幅の中央</option><option value="conditional">新案3：必要な場合のみ縦補正</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
 <label>旧実験用・表示密度<select id="density-level" disabled><option value="sparse">少なめ</option><option value="normal" selected>標準</option><option value="dense">多め</option></select></label>
 </div>
 <p id="density-output" class="info" aria-live="polite">表示数を計算中です。</p>

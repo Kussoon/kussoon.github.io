@@ -63,7 +63,8 @@ test('comparison page loads the centred module before density app',()=>{
  const s=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(s.indexOf('centered-labels.js')>0);
  assert.ok(s.indexOf('centered-labels.js')<s.indexOf('density-app.js'));
- assert.match(s,/<option value="horizontal" selected>/);
+ assert.match(s,/<option value="proposal4" selected>/);
+ assert.match(s,/<option value="horizontal">/);
  assert.match(s,/<option value="conditional">/);
  assert.match(s,/<option value="vertical">/);
  assert.match(s,/<option value="multi">/);
@@ -108,8 +109,8 @@ test('four-city comparison controls and script versions exist',()=>{
  for(const city of ['宝塚市','西宮市','神戸市','京都市']){
   assert.ok(html.includes('data-city="'+city+'"'));
  }
- assert.match(html,/centered-labels\.js\?v=20261101-scanmid1/);
- assert.match(html,/density-app\.js\?v=20261101-scanmid1/);
+ assert.match(html,/centered-labels\.js\?v=20261101-proposal4a/);
+ assert.match(html,/density-app\.js\?v=20261101-proposal4a/);
  assert.match(js,/city-shortcuts'\)\.addEventListener/);
 });
 
@@ -202,7 +203,7 @@ test('new proposal 3 is cached at load and not recomputed on zoom',()=>{
  assert.match(app,/conditionalCenters=new Map\(conditional\.map/);
  const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(html.includes('id="conditional-report"'));
- assert.ok(html.includes('value="horizontal" selected'));
+ assert.ok(html.includes('value="proposal4" selected'));
 });
 
 test('diagnostic overlay shows both exact cross-sections without moving anchors',()=>{
@@ -212,7 +213,7 @@ test('diagnostic overlay shows both exact cross-sections without moving anchors'
  assert.match(html,/id="diagnostic-overlay"/);
  assert.match(html,/id="diagnostic-output"/);
  assert.match(html,/id="diagnostic-ranking"/);
- assert.match(html,/density-app\.js\?v=20261101-scanmid1/);
+ assert.match(html,/density-app\.js\?v=20261101-proposal4a/);
  assert.match(app,/function renderDiagnostic\(\)/);
  assert.match(app,/M\.horizontalRuns\(model\.rings,h\[1\]\)/);
  assert.match(app,/M\.verticalRuns\(model\.rings,h\[0\]\)/);
@@ -265,4 +266,57 @@ test('keep the same full horizontal midpoint in proposal 2 and 3',()=>{
  assert.equal(h[0],45);
  assert.equal(v[0],h[0]);
  assert.equal(c[0],h[0]);
+});
+
+test('proposal 4 does not move inside horizontal midpoint, even in a thin neck',()=>{
+ const m={...rectangle('neck','細首市',0,0,100,100),
+  rings:[[[0,0],[100,0],[100,25],[51,25],[51,100],[49,100],[49,25],[0,25]]]};
+ const r=M.proposal4(m);
+ assert.equal(r.reason,'horizontal-inside');
+ assert.equal(r.point[1],50);
+ assert.equal(r.point[0],50);
+});
+test('proposal 4 lifts the gap midpoint vertically in a U-shaped area',()=>{
+ const m={...rectangle('u','U字町',0,0,100,100),
+  rings:[[[0,0],[100,0],[100,100],[70,100],[70,30],
+   [30,30],[30,100],[0,100]]]};
+ const r=M.proposal4(m);
+ assert.equal(r.raw[0],50);
+ assert.equal(r.raw[1],50);
+ assert.equal(r.point[0],50);
+ assert.equal(r.reason,'vertical-midpoint');
+ assert.equal(r.point[1],15);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...r.point,m.rings),true);
+});
+test('proposal 4 handles disjoint islands with no vertical intersection',()=>{
+ const m={...rectangle('islands','離島町',0,0,100,100),
+  rings:[[[0,0],[20,0],[20,100],[0,100]],
+   [[80,0],[100,0],[100,100],[80,100]]]};
+ const r=M.proposal4(m);
+ assert.equal(r.reason,'no-vertical-intersection');
+ assert.equal(r.raw[0],50);
+ assert.equal(r.point[1],50);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...r.point,m.rings),true);
+});
+test('proposal 4 picks a valid vertical interval when its full midpoint is a gap',()=>{
+ const m={...rectangle('vertical gap','上下分離町',0,0,100,100),
+  rings:[[[0,0],[100,0],[100,20],[0,20]],
+   [[0,80],[100,80],[100,100],[0,100]]]};
+ // The midpoint horizontal scanline does not cross either polygon,
+ // so the nearest available height may be chosen as a rare exception.
+ const r=M.proposal4(m);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...r.point,m.rings),true);
+});
+test('proposal 4 remains a precomputed map and horizontal marker shows full width',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.match(html,/value="proposal4" selected/);
+ assert.match(html,/id="proposal4-report"/);
+ assert.match(app,/proposal4Centers=new Map/);
+ assert.match(app,/proposal4Results=new Map/);
+ assert.match(app,/Math\.min\(\.\.\.allHorizontal\.map/);
+ assert.match(app,/Math\.max\(\.\.\.allHorizontal\.map/);
+ const diagnostic=app.slice(app.indexOf('function renderDiagnostic(){'),
+   app.indexOf('function renderLabels(){'));
+ assert.doesNotMatch(diagnostic,/M\.proposal4\(/);
 });

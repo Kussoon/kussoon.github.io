@@ -155,6 +155,62 @@
   const newY=(top+bottom)/2;
   return E.isInside(x,newY,model.rings)?[round(x),round(newY)]:initial;
  }
+ // Proposal 4: preserve the midpoint of the FULL horizontal extent, even
+ // if it falls into a U-shaped gap. Only then use the corresponding
+ // vertical scanline. All geometry is evaluated once at data load.
+ function proposal4(model){
+  const b=model.box;
+  const fallback=pointHorizontal(model);
+  if(!b||!(b.w>0&&b.h>0)||!model.rings?.length)return {
+   point:fallback,raw:fallback,reason:'no-geometry',vertical:null};
+  const midY=(b.minY+b.maxY)/2;
+  const offsets=[0,-1e-7,1e-7,-1e-5,1e-5,-.001,.001,-.01,.01,
+   -.03,.03,-.08,.08,-.16,.16,-.3,.3,-.45,.45];
+  for(const fraction of offsets){
+   const y=midY+b.h*fraction;
+   const intervals=horizontalRuns(model.rings,y).filter(([lo,hi])=>
+    hi-lo>1e-8&&E.isInside((lo+hi)/2,y,model.rings));
+   if(!intervals.length)continue;
+   const left=Math.min(...intervals.map(r=>r[0]));
+   const right=Math.max(...intervals.map(r=>r[1]));
+   const x=(left+right)/2, raw=[x,y];
+   if(E.isInside(x,y,model.rings))return {
+    point:safePoint(x,y,model.rings),raw,reason:'horizontal-inside',
+    vertical:null};
+   // Intersections of the VERTICAL scanline at the original X.
+   const spans=verticalRuns(model.rings,x).filter(([lo,hi])=>
+    hi-lo>1e-8&&E.isInside(x,(lo+hi)/2,model.rings));
+   if(spans.length){
+    const low=Math.min(...spans.map(r=>r[0]));
+    const high=Math.max(...spans.map(r=>r[1]));
+    const targetY=(low+high)/2;
+    if(E.isInside(x,targetY,model.rings))return {
+     point:safePoint(x,targetY,model.rings),raw,
+     reason:'vertical-midpoint',vertical:[low,high]};
+    // A vertical U-gap may itself have an exterior midpoint. Move Y
+    // minimally inside an intersected segment; do not move X.
+    let candidate=null;
+    for(const [lo,hi] of spans){
+     const pad=Math.min((hi-lo)/4,Math.max((hi-lo)*1e-5,1e-7));
+     const value=Math.max(lo+pad,Math.min(hi-pad,targetY));
+     if(!E.isInside(x,value,model.rings))continue;
+     if(!candidate||Math.abs(value-targetY)<candidate.distance){
+      candidate={y:value,distance:Math.abs(value-targetY)};
+     }
+    }
+    if(candidate)return {
+     point:safePoint(x,candidate.y,model.rings),raw,
+     reason:'vertical-gap-nearest',vertical:[low,high]};
+   }
+   // If the vertical line never crosses the territory (e.g. separated
+   // islands with no north/south bridge), use the previous safe X-only
+   // correction at this SAME latitude.
+   return {point:fallback,raw,reason:'no-vertical-intersection',
+    vertical:null};
+  }
+  return {point:fallback,raw:fallback,reason:'no-horizontal-intersection',
+   vertical:null};
+ }
  // Candidate C: start at the exact horizontal centre. Only try the
  // vertical interval's centre if the FIXED reference-size text box
  // protrudes substantially beyond the territory in the vertical direction.
@@ -254,5 +310,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,proposal4,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
