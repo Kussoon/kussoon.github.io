@@ -18,6 +18,7 @@ let fixedCenters=new Map(),fixedCorrections=0;
 let multiCenters=new Map(),multiCorrections=0;
 let horizontalCenters=new Map(),verticalCenters=new Map();
 let conditionalCenters=new Map(),conditionalResults=new Map();
+let diagnosticLayer=null;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
  const el=document.createElementNS(NS,name);
@@ -129,6 +130,7 @@ function buildPrefOutlines(topologies,projectPoint){
 }
 function drawMap(topologies,projectPoint){
  const shapeLayer=tag('g'),labelLayer=tag('g',{'aria-hidden':'true'}),outlines=buildPrefOutlines(topologies,projectPoint);
+ diagnosticLayer=tag('g',{class:'label-diagnostic','aria-hidden':'true'});
  drawing=[];labelNodes=[];outlineNodes=[];
  const isPlate=state.mode==='plate'&&Boolean(plate);
  map.classList.toggle('plate-mode',isPlate);
@@ -157,7 +159,7 @@ function drawMap(topologies,projectPoint){
   labelLayer.append(t);
   labelNodes.push({node:t,model:plateShape});
  }
- map.replaceChildren(shapeLayer,outlines,labelLayer);
+ map.replaceChildren(shapeLayer,outlines,diagnosticLayer,labelLayer);
  highlight();
 }
 function labelSize(zoom,compact){
@@ -172,6 +174,46 @@ function measure(value,size){
  if(!ctx)return [...value].length*size;
  ctx.font='850 '+size+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
  return ctx.measureText(value).width;
+}
+function renderDiagnostic(){
+ if(!diagnosticLayer||!models.length)return;
+ diagnosticLayer.replaceChildren();
+ const cityName=$('diagnostic-city').value;
+ const model=models.find(m=>m.name===cityName);
+ if(!model){$('diagnostic-output').textContent=cityName+'の区域データがありません。';return;}
+ const h=horizontalCenters.get(model.id),v=verticalCenters.get(model.id);
+ const decision=conditionalResults.get(model.id);
+ if(!h||!v)return;
+ const line=M.verticalRuns(model.rings,h[0])
+  .filter(([a,b])=>a<=h[1]+1e-6&&b>=h[1]-1e-6&&
+   E.isInside(h[0],(a+b)/2,model.rings))[0];
+ const horizontal=M.horizontalRuns(model.rings,h[1]).find(([a,b])=>
+  a<=h[0]+1e-6&&b>=h[0]-1e-6);
+ const delta=v[1]-h[1],move=Math.abs(delta);
+ const percent=100*move/model.box.h;
+ const direction=delta>1e-5?'南':delta< -1e-5?'北':'移動なし';
+ const verticalText=line?'縦断面内の南北幅 '+(line[1]-line[0]).toFixed(2):'縦断面が取得できません';
+ $('diagnostic-output').textContent=
+  cityName+'：新案1の中心('+h.map(x=>x.toFixed(2)).join('、')+
+  ') → 新案2('+v.map(x=>x.toFixed(2)).join('、')+')。'+
+  '移動量 '+move.toFixed(2)+'地図単位（市域南北高の'+percent.toFixed(1)+
+  '％）、方向 '+direction+'。'+verticalText+'。'+
+  '新案3の判定：'+(decision?.adjusted?'補正を採用':'新案1の位置を維持')+'。';
+ if($('diagnostic-overlay').value!=='on')return;
+ const rect=map.getBoundingClientRect();
+ const unitsPerPx=Math.max(view.w/(rect.width||390),view.h/(rect.height||390));
+ const makeLine=(x1,y1,x2,y2,klass)=>diagnosticLayer.append(
+  tag('line',{x1,y1,x2,y2,class:klass}));
+ // Show both actual territory boundaries at the selected X and the
+ // displacement between the two precomputed candidate positions.
+ if(line)makeLine(h[0],line[0],h[0],line[1],'diag-vertical');
+ if(horizontal)makeLine(horizontal[0],h[1],horizontal[1],h[1],'diag-horizontal');
+ if(move>1e-6)makeLine(h[0],h[1],v[0],v[1],'diag-movement');
+ for(const [p,klass] of [[h,'diag-origin'],[v,'diag-destination']]){
+  diagnosticLayer.append(tag('circle',{
+   cx:p[0],cy:p[1],r:5*unitsPerPx,class:klass
+  }));
+ }
 }
 function renderLabels(){
  if(!models.length)return;
@@ -283,6 +325,7 @@ function renderLabels(){
   target.setAttribute('y',position.y.toFixed(2));
  });
  labelNodes.forEach(({node},i)=>{node.style.display=visible[i]?'':'none';});
+ renderDiagnostic();
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
@@ -388,6 +431,16 @@ async function load(area,mode){
  // collision-based corrections. The anchor is computed exactly once on load.
  horizontalCenters=new Map(models.map(m=>[m.id,M.pointHorizontal(m)]));
  verticalCenters=new Map(models.map(m=>[m.id,M.pointHorizontalVertical(m)]));
+ // Geometry-based displacement ranking, independent of zoom and font size.
+ const ranked=models.map(m=>{
+  const first=horizontalCenters.get(m.id),second=verticalCenters.get(m.id);
+  const delta=second[1]-first[1];
+  return {name:m.name,delta,pct:Math.abs(delta)/m.box.h*100};
+ }).sort((a,b)=>b.pct-a.pct||a.name.localeCompare(b.name,'ja'));
+ $('diagnostic-ranking').textContent='全'+models.length+'区域で新案1→新案2の移動を比較。市域南北高に対する移動率・上位10件：'+
+  ranked.slice(0,10).map((r,i)=>(i+1)+'位 '+r.name+' '+
+   (r.delta>0?'南':r.delta<0?'北':'移動なし')+' '+
+   r.pct.toFixed(1)+'％').join(' ／ ')+'。';
  const conditional=models.map(m=>[m.id,M.conditionalVertical(m,{
   fontSize:referenceFont,measure,rows:item=>L.rows(item)
  })]);
@@ -407,6 +460,7 @@ async function load(area,mode){
   '区域中'+affected+'区域を補正（基準文字サイズで縦方向のはみ出し20％以上、改善12ポイント以上、移動は市域高の18％以下）。'+
   notes.join(' ／ ')+'。';
 
+ $('diagnostic-output').textContent='市町村を選ぶと新案1と新案2の位置・距離を表示します。';
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
@@ -438,6 +492,9 @@ $('city-shortcuts').addEventListener('click',async e=>{
  const button=e.target.closest('button[data-city]');
  if(!button)return;
  const name=button.dataset.city;
+ if([...$('diagnostic-city').options].some(o=>o.value===name)){
+  $('diagnostic-city').value=name;
+ }
  if(!['宝塚市','西宮市','神戸市','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市'].includes(name))return;
  if($('area').value!=='west-shikoku'||$('mode').value!=='municipality'){
   $('area').value='west-shikoku';$('mode').value='municipality';
@@ -474,6 +531,12 @@ $('density-mode').addEventListener('change',()=>{
 });
 $('density-level').disabled=$('density-mode').value!=='adaptive';
 $('density-level').addEventListener('change',renderLabels);
+$('diagnostic-overlay').addEventListener('change',renderDiagnostic);
+$('diagnostic-city').addEventListener('change',()=>{
+ const target=$('city-shortcuts').querySelector('button[data-city="'+$('diagnostic-city').value+'"]');
+ if(target)target.click();
+ else renderDiagnostic();
+});
 $('zoom-in').addEventListener('click',()=>zoomBy(1.5));
 $('zoom-out').addEventListener('click',()=>zoomBy(1/1.5));
 $('reset').addEventListener('click',()=>{fit();renderLabels();});

@@ -2,7 +2,7 @@
 <html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,follow"><meta name="theme-color" content="#edf7fc">
-<title>条件付き縦補正の比較｜Kussoon V2</title>
+<title>水平・縦断面の固定位置を可視化｜Kussoon V2</title>
 <meta name="description" content="市町村名の全件表示A/B配置、位置固定と軽い調整を比較するKussoon V2試験ページ。">
 <style>
 :root{color-scheme:light;--ink:#1a3e59;--line:#b8d1e0;--blue:#a8d5eb;--selected:#b89aee}
@@ -37,6 +37,13 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .land:focus:not(:focus-visible){outline:none}
 .land:focus-visible{outline:2px solid #286b98;outline-offset:2px}
 .outline{fill:none;stroke:#376383;stroke-width:2.1;vector-effect:non-scaling-stroke;pointer-events:none}
+.label-diagnostic{pointer-events:none}
+.label-diagnostic line{vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-vertical{stroke:#168055;stroke-width:2.5;stroke-dasharray:5 5}
+.label-diagnostic .diag-movement{stroke:#1d5688;stroke-width:3}
+.label-diagnostic .diag-horizontal{stroke:#d77b21;stroke-width:1.7;stroke-dasharray:4 4}
+.label-diagnostic .diag-origin{fill:#e88625;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-destination{fill:#188b60;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
 .place-label{font-weight:850;text-anchor:middle;dominant-baseline:central;fill:#193e58;stroke:#fff;stroke-linejoin:round;paint-order:stroke;pointer-events:none}
 .place-label.selected{fill:#693b95}.plate-label{fill:#532c86;stroke:#fff;stroke-width:2.4;paint-order:stroke;letter-spacing:.025em;font-weight:900}
 .info{background:#eef6fb;border:1px solid #d7e7f0;border-radius:9px;padding:10px;font-size:14px}
@@ -58,10 +65,10 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
 <script defer src="centered-labels.js?v=20261101-conditional1"></script>
-<script defer src="density-app.js?v=20261101-conditional1"></script>
+<script defer src="density-app.js?v=20261101-diagnostic1"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
-<h1>新案3：必要な場合だけ縦方向に補正</h1>
+<h1>ラベル中心の位置と移動量を検証</h1>
 <p><strong>すべての市町村名を小さく全件表示</strong>し、拡大に合わせて文字だけ大きくします。新案は<strong>南北中央の高さを第一に固定</strong>し、細い町域でも横幅を理由に場所を変えません。水平中央固定（新案1）を基本とし、縦方向への大きな文字のはみ出しが改善する場合だけ補正する新案3を比較します。</p>
 <section class="panel" aria-label="4都市への移動">
 <h2>位置を比較する市町村</h2>
@@ -79,7 +86,25 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <button type="button" data-city="三木市">三木市へ</button>
 <button type="button" data-city="加古川市">加古川市へ</button>
 </div>
-<p class="meta">移動先で新案1・2・3を切り替えてください。位置・倍率は変わりません。補正の有無は下の判定欄で確認できます。</p>
+<p class="meta">市町村への移動ボタンを押すと、水平中央（橙）と縦断面中央（緑）の位置、および縦断面の範囲を地図上に重ねます。表示方式を切り替えても位置と倍率は変わりません。</p>
+</section>
+<section class="panel" aria-label="位置の計算結果">
+<h2>中心点と移動距離の可視化</h2>
+<div class="controls">
+<label>確認する市町村<select id="diagnostic-city">
+<option value="神河町">神河町</option>
+<option value="宝塚市">宝塚市</option>
+<option value="西宮市">西宮市</option>
+<option value="三木市" selected>三木市</option>
+</select></label>
+<label>地図上の補助線<select id="diagnostic-overlay">
+<option value="on" selected>表示する</option>
+<option value="off">非表示</option>
+</select></label>
+</div>
+<p class="meta">橙の点＝新案1（南北中央の水平断面）、緑の点＝新案2（同じX座標で縦断面の南北中央）。緑の縦線は、そのXで市域が続いている区間です。補助線は位置確認用で、ラベルを動かしません。</p>
+<p id="diagnostic-output" class="info" aria-live="polite">中心点の位置を計算中です。</p>
+<p id="diagnostic-ranking" class="meta">移動率の大きい市町村を計算中です。</p>
 </section>
 <section class="panel" aria-label="ラベル表示の比較設定">
 <h2>配置方式を比較</h2>
