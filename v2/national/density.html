@@ -2,7 +2,7 @@
 <html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,follow"><meta name="theme-color" content="#edf7fc">
-<title>全件表示・小さな地名を拡大して読む｜Kussoon V2</title>
+<title>条件付き縦補正の比較｜Kussoon V2</title>
 <meta name="description" content="市町村名の全件表示A/B配置、位置固定と軽い調整を比較するKussoon V2試験ページ。">
 <style>
 :root{color-scheme:light;--ink:#1a3e59;--line:#b8d1e0;--blue:#a8d5eb;--selected:#b89aee}
@@ -57,12 +57,12 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
-<script defer src="centered-labels.js?v=20261031-horizontalvertical1"></script>
-<script defer src="density-app.js?v=20261031-horizontalvertical1"></script>
+<script defer src="centered-labels.js?v=20261101-conditional1"></script>
+<script defer src="density-app.js?v=20261101-conditional1"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
-<h1>水平中央と縦断面中央を比較</h1>
-<p><strong>すべての市町村名を小さく全件表示</strong>し、拡大に合わせて文字だけ大きくします。新案は<strong>南北中央の高さを第一に固定</strong>し、細い町域でも横幅を理由に場所を変えません。水平断面でXを決める方式と、同じXの縦断面でYを一度だけ調整する方式を比較します。</p>
+<h1>新案3：必要な場合だけ縦方向に補正</h1>
+<p><strong>すべての市町村名を小さく全件表示</strong>し、拡大に合わせて文字だけ大きくします。新案は<strong>南北中央の高さを第一に固定</strong>し、細い町域でも横幅を理由に場所を変えません。水平中央固定（新案1）を基本とし、縦方向への大きな文字のはみ出しが改善する場合だけ補正する新案3を比較します。</p>
 <section class="panel" aria-label="4都市への移動">
 <h2>位置を比較する市町村</h2>
 <div class="buttons" id="city-shortcuts">
@@ -79,16 +79,17 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <button type="button" data-city="三木市">三木市へ</button>
 <button type="button" data-city="加古川市">加古川市へ</button>
 </div>
-<p class="meta">移動先で「水平中央」「水平＋縦断面中央」を切り替えてください。地図位置・倍率は変わりません。</p>
+<p class="meta">移動先で新案1・2・3を切り替えてください。位置・倍率は変わりません。補正の有無は下の判定欄で確認できます。</p>
 </section>
 <section class="panel" aria-label="ラベル表示の比較設定">
 <h2>配置方式を比較</h2>
 <div class="controls">
-<label>配置方式<select id="density-mode"><option value="horizontal" selected>新案1：南北中央の水平断面で固定</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
+<label>配置方式<select id="density-mode"><option value="conditional" selected>新案3：大きな上下はみ出しだけ補正</option><option value="horizontal">新案1：水平中央で固定</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
 <label>旧実験用・表示密度<select id="density-level" disabled><option value="sparse">少なめ</option><option value="normal" selected>標準</option><option value="dense">多め</option></select></label>
 </div>
 <p id="density-output" class="info" aria-live="polite">表示数を計算中です。</p>
-<p class="meta">新案1は南北中央の高さで、実際の市域を横切る区間の東西中央に固定します。細くても移動しません。新案2は同じX位置で縦断面を取り、最初の点を含む市域内区間の南北中央に一度だけ移動します。両案ともラベルの重なりを理由に動かさず、ズームで再配置しません。極端な形状や中央線が区域に交わらない場合だけ、区域内の近傍点へ補完します。</p>
+<p id="conditional-report" class="info" aria-live="polite">補正の判定を計算中です。</p>
+<p class="meta">新案3は新案1の位置を優先し、基準文字サイズで縦断面上の文字のはみ出しが20％以上あり、補正候補で12ポイント以上改善し、かつ文字全体の収まりを大きく悪化させず、移動が市域の高さの18％以内の場合だけ新案2のY座標に変更します。左右方向のはみ出しや隣接ラベルの重なりだけでは補正しません。ラベルの位置はデータ読み込み時に一度だけ確定します。</p>
 </section>
 <section class="panel">
 <div class="controls">

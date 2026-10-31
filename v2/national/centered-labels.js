@@ -136,6 +136,57 @@
   const newY=(top+bottom)/2;
   return E.isInside(x,newY,model.rings)?[round(x),round(newY)]:initial;
  }
+ // Candidate C: start at the exact horizontal centre. Only try the
+ // vertical interval's centre if the FIXED reference-size text box
+ // protrudes substantially beyond the territory in the vertical direction.
+ // The final anchor is computed once at geometry load, never per zoom.
+ function boxOverflow(model,x,y,w,h){
+  if(!(w>0&&h>0)||!model.rings?.length)return 0;
+  let outside=0,total=0;
+  // Equal-area sample grid; includes near-edge samples but avoids boundary
+  // ambiguity at exactly x +/- w/2 and y +/- h/2.
+  for(let j=0;j<9;j++)for(let i=0;i<11;i++){
+   const px=x+(i-5)*w/11,py=y+(j-4)*h/9;
+   total++;if(!E.isInside(px,py,model.rings))outside++;
+  }
+  return outside/total;
+ }
+ function verticalTextOverflow(model,x,y,height){
+  if(!(height>0))return 0;
+  const span=verticalRuns(model.rings,x).find(([lo,hi])=>
+   lo<=y+1e-6&&hi>=y-1e-6&&E.isInside(x,(lo+hi)/2,model.rings));
+  if(!span)return 1;
+  const from=y-height/2,to=y+height/2;
+  return Math.max(0,1-Math.max(0,Math.min(to,span[1])-Math.max(from,span[0]))/height);
+ }
+ function conditionalVertical(model,options={}){
+  const {fontSize=13,measure=(str,size)=>[...str].length*size,
+   rows=()=>null,threshold=.20,minImprovement=.12,
+   maxShiftFraction=.18,maxWorsening=.04}=options;
+  const h=pointHorizontal(model),v=pointHorizontalVertical(model);
+  const parts=rows(model)||[model.name];
+  const width=Math.max(...parts.map(t=>measure(t,fontSize)))+fontSize*.2;
+  const height=fontSize*1.2*parts.length;
+  const before=boxOverflow(model,...h,width,height);
+  const after=boxOverflow(model,...v,width,height);
+  const beforeVertical=verticalTextOverflow(model,...h,height);
+  const afterVertical=verticalTextOverflow(model,...v,height);
+  const delta=Math.abs(v[1]-h[1]),maxShift=model.box?.h*maxShiftFraction||0;
+  // A truly vertical protrusion is required: wide text hanging over a
+  // narrow region horizontally must NOT cause the municipality to jump.
+  const eligible=beforeVertical>=threshold&&
+   beforeVertical-afterVertical>=minImprovement&&
+   after<=before+maxWorsening&&delta>1e-6&&delta<=maxShift;
+  return {
+   point:eligible?v:h,adjusted:eligible,from:h,to:v,
+   before,after,beforeVertical,afterVertical,delta,
+   reason:eligible?'vertical-improvement':
+    beforeVertical<threshold?'acceptable-vertical-overflow':
+    beforeVertical-afterVertical<minImprovement?'no-vertical-improvement':
+    after>before+maxWorsening?'worse-overall-overflow':
+    delta>maxShift?'excessive-movement':'unchanged'
+  };
+ }
  function build(models,options={}){
   const {fontSize=13,measure=(s,sz)=>[...s].length*sz,rows=()=>null,strategy='center'}=options;
   const anchors=models.map(m=>strategy==='multi'?pointMulti(m):point(m));
@@ -184,5 +235,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,horizontalRuns,verticalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
