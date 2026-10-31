@@ -5,7 +5,7 @@
 <title>水平・縦断面の固定位置を可視化｜Kussoon V2</title>
 <meta name="description" content="市町村名の全件表示A/B配置、位置固定と軽い調整を比較するKussoon V2試験ページ。">
 <style>
-:root{color-scheme:light;--ink:#1a3e59;--line:#b8d1e0;--blue:#a8d5eb;--selected:#b89aee}
+:root{color-scheme:light;--ink:#1a3e59;--line:#b8d1e0;--blue:#a8d5eb;--selected:#ffc36e}
 *{box-sizing:border-box}
 body{margin:0;background:linear-gradient(#edf7fc,#fff);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);line-height:1.55}
 main{max-width:1100px;margin:auto;padding:13px 12px 38px}
@@ -30,7 +30,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .notice{font-size:13px;color:#6c4d2f;background:#fff8e8;border:1px solid #efdbb3;border-radius:9px;padding:10px}
 #map{display:block;width:100%;height:min(72vh,700px);min-height:400px;border:1px solid #a6c6d9;border-radius:12px;background:#eff7fb;touch-action:none;user-select:none}
 .land{fill:var(--blue);stroke:white;stroke-width:1.1;vector-effect:non-scaling-stroke;stroke-linejoin:round;fill-rule:evenodd;cursor:pointer}.plate-mode .land{cursor:default}
-.land.selected{fill:var(--selected);stroke:#65399a;stroke-width:2.0}.land.focused{stroke:#4d267f;stroke-width:3.3}
+.land.selected{fill:var(--selected);stroke:#a65e19;stroke-width:2.0}.land.focused{stroke:#88420f;stroke-width:3.3}
 /* Touch browsers may keep :hover on an SVG polygon after a finger brushes it. */
 @media (hover:hover) and (pointer:fine){.land:not(.selected):hover{stroke:#356a8b;stroke-width:1.7}}
 /* Touch focus is not an intended selection. Keep explicit keyboard focus visible. */
@@ -62,7 +62,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .popup-note{font-size:12px;color:#5b6e7c;margin:8px 0 0}
 @media(max-width:500px){.municipal-popup{bottom:194px;left:8px;width:calc(100% - 16px);max-height:calc(100% - 207px)}}
 .place-label{font-weight:850;text-anchor:middle;dominant-baseline:central;fill:#193e58;stroke:#fff;stroke-linejoin:round;paint-order:stroke;pointer-events:none}
-.place-label.selected{fill:#693b95}.plate-label{fill:#532c86;stroke:#fff;stroke-width:2.4;paint-order:stroke;letter-spacing:.025em;font-weight:900}
+.place-label.selected{fill:#8b460c}.plate-label{fill:#532c86;stroke:#fff;stroke-width:2.4;paint-order:stroke;letter-spacing:.025em;font-weight:900}
 .info{background:#eef6fb;border:1px solid #d7e7f0;border-radius:9px;padding:10px;font-size:14px}
 .meta{font-size:13px;color:#57738a}.legend{display:flex;align-items:center;gap:15px;flex-wrap:wrap;font-size:13px}
 .legend i{display:inline-block;width:17px;height:14px;margin-right:4px;border:1px solid #91b2c6;border-radius:3px;vertical-align:middle}
@@ -70,12 +70,12 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 @media(max-width:500px){main{padding:8px}#map{min-height:380px;height:62vh}.panel{padding:11px}}
 
 /* Adopt B: short popup to the left of four lower-right map controls. */
-.map-toolbar{width:112px}
+.map-toolbar{width:96px}
 .map-toolbar button{width:100%;padding-left:3px;padding-right:3px}
-.municipal-popup{left:auto;right:136px;bottom:12px;width:min(510px,calc(100% - 150px));max-height:calc(100% - 24px);padding:12px;z-index:6}
+.municipal-popup{left:auto;right:120px;bottom:12px;width:min(510px,calc(100% - 134px));max-height:calc(100% - 24px);padding:12px;z-index:6}
 .popup-actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
 .popup-actions a,.popup-actions span{min-height:43px;font-size:11px;padding:5px 2px}
-@media(max-width:500px){.map-toolbar{right:8px;bottom:8px;width:104px}.map-toolbar button{min-width:0;font-size:11px}.municipal-popup{left:auto;right:120px;bottom:8px;width:calc(100% - 128px);max-height:calc(100% - 16px);padding:9px}.popup-head strong{font-size:16px}.popup-close{min-width:31px;min-height:32px;font-size:18px}.popup-office{margin-top:5px;font-size:13px}.popup-address{font-size:12px;margin:3px 0 9px}.popup-actions{gap:4px}.popup-actions a,.popup-actions span{font-size:10px;min-height:43px;padding:3px 1px}.popup-note{font-size:10px}}
+@media(max-width:500px){.map-toolbar{right:8px;bottom:8px;width:88px}.map-toolbar button{min-width:0;font-size:10px}.municipal-popup{left:auto;right:104px;bottom:8px;width:calc(100% - 112px);max-height:calc(100% - 16px);padding:9px}.popup-head strong{font-size:16px}.popup-close{min-width:31px;min-height:32px;font-size:18px}.popup-office{margin-top:5px;font-size:13px}.popup-address{font-size:12px;margin:3px 0 9px}.popup-actions{gap:4px}.popup-actions a,.popup-actions span{font-size:10px;min-height:43px;padding:3px 1px}.popup-note{font-size:10px}}
 </style>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
@@ -90,7 +90,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
 <script defer src="centered-labels.js?v=20261101-proposal5a"></script>
-<script defer src="density-app.js?v=20261101-zipcode-b2"></script>
+<script defer src="density-app.js?v=20261101-compactward1"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>新案5：南北中央の最長水平区間に地名を配置</h1>
@@ -148,7 +148,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <section class="panel">
 <div class="controls">
 <label>表示エリア<select id="area"><option value="kansai">関西2府4県</option><option value="chugoku">中国地方5県</option><option value="west">関西＋中国11府県</option><option value="shikoku">四国4県</option><option value="chugoku-shikoku">中国＋四国9県</option><option value="west-shikoku" selected>関西＋中国＋四国15府県</option><option value="fuji">山梨・静岡（富士山ナンバー）</option></select></label>
-<label>表示単位<select id="mode"><option value="municipality">市町村名（政令市を統合）</option><option value="ward">市区町村名（政令市の区も表示）</option><option value="plate">富士山ナンバー（県境横断）</option></select></label>
+<label>表示単位<select id="mode"><option value="municipality">市町村名（政令市を統合）</option><option value="ward" selected>市区町村名（政令市の区も表示）</option><option value="plate">富士山ナンバー（県境横断）</option></select></label>
 <label>読み仮名表示<select id="reading"><option value="on" selected>漢字＋よみがな</option><option value="off">漢字のみ</option></select></label>
 <div class="searchbox"><label for="search" style="display:block;font-size:13px;font-weight:800">市区町村・地域名を検索</label><input id="search" type="search" autocomplete="off" placeholder="例：西宮、大阪市、富士山" aria-controls="suggestions"><div id="suggestions" class="suggest" hidden></div></div>
 </div>
