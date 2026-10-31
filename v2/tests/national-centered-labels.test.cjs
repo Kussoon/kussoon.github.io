@@ -211,6 +211,7 @@ test('diagnostic overlay shows both exact cross-sections without moving anchors'
  assert.match(html,/id="diagnostic-city"/);
  assert.match(html,/id="diagnostic-overlay"/);
  assert.match(html,/id="diagnostic-output"/);
+ assert.match(html,/id="diagnostic-ranking"/);
  assert.match(html,/density-app\.js\?v=20261101-diagnostic1/);
  assert.match(app,/function renderDiagnostic\(\)/);
  assert.match(app,/M\.horizontalRuns\(model\.rings,h\[1\]\)/);
