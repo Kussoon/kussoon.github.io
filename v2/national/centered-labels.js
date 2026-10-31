@@ -43,9 +43,42 @@
   }
   return fallback;
  }
+ function pointMulti(model){
+  const b=model.box;
+  if(!b||!(b.w>0&&b.h>0)||!model.rings?.length)return point(model);
+  const mid=(b.minY+b.maxY)/2;
+  const candidates=[];
+  // The same 61 height slices used in the Nishinomiya four-town trial.
+  for(let step=-30;step<=30;step++){
+   const y=mid+b.h*step/100;
+   for(const [left,right] of horizontalRuns(model.rings,y)){
+    const x=(left+right)/2,width=right-left;
+    if(!(width>0)||!E.isInside(x,y,model.rings))continue;
+    // Center-biased score: the usable width is tested at THIS y,
+    // not against the overall longitude span of a municipality.
+    const score=Math.abs(y-mid)/b.h*2+
+     12/(width+8)+3/(width/2+5);
+    candidates.push({x,y,width,score});
+   }
+  }
+  candidates.sort((a,b)=>a.score-b.score||
+   Math.abs(a.y-mid)-Math.abs(b.y-mid)||
+   b.width-a.width||a.x-b.x);
+  return candidates.length?[round(candidates[0].x),round(candidates[0].y)]:point(model);
+ }
+ function centerAtHeight(model,y,nearX){
+  const runs=horizontalRuns(model.rings,y).filter(([a,b])=>
+   E.isInside((a+b)/2,y,model.rings));
+  if(!runs.length)return null;
+  runs.sort((a,b)=>
+   Math.abs((a[0]+a[1])/2-nearX)-
+   Math.abs((b[0]+b[1])/2-nearX)||
+   (b[1]-b[0])-(a[1]-a[0]));
+  return [(runs[0][0]+runs[0][1])/2,y];
+ }
  function build(models,options={}){
-  const {fontSize=13,measure=(s,sz)=>[...s].length*sz,rows=()=>null}=options;
-  const anchors=models.map(m=>point(m));
+  const {fontSize=13,measure=(s,sz)=>[...s].length*sz,rows=()=>null,strategy='center'}=options;
+  const anchors=models.map(m=>strategy==='multi'?pointMulti(m):point(m));
   // Initial-only, conservative correction for adjacent municipality labels.
   // Never move farther than a small fraction of each municipality's height.
   const placed=[];
@@ -69,7 +102,12 @@
     const moves=[[0,-.5],[0,.5],[0,-1],[0,1],[-.5,0],[.5,0],
      [-.5,-.5],[.5,-.5],[-.5,.5],[.5,.5]];
     for(const [dx,dy] of moves){
-     const x=anchor[0]+dx*limit,y=anchor[1]+dy*limit;
+     const y=anchor[1]+dy*limit;
+     // For multi-section labels, recompute the east-west centre at the
+     // FINAL height after a vertical collision correction.
+     const newCenter=strategy==='multi'&&dy!==0?
+      centerAtHeight(m,y,anchor[0]):null;
+     const x=newCenter?newCenter[0]:anchor[0]+dx*limit;
      if(!E.isInside(x,y,m.rings))continue;
      const box=rect(x,y,labelWidth,labelHeight);
      const cost=placed.reduce((sum,b)=>sum+overlap(box,b),0);
@@ -81,5 +119,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,horizontalRuns,build};
+ global.KussoonCenteredLabels={point,pointMulti,horizontalRuns,centerAtHeight,build};
 })(window);
