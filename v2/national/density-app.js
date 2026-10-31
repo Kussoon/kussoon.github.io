@@ -367,6 +367,7 @@ $('zoom-in').addEventListener('click',()=>zoomBy(1.5));
 $('zoom-out').addEventListener('click',()=>zoomBy(1/1.5));
 $('reset').addEventListener('click',()=>{fit();renderLabels();});
 $('clear').addEventListener('click',()=>select(state.mode==='plate'&&plate?{type:'plate'}:null));
+$('clear-below').addEventListener('click',()=>select(null));
 $('search').addEventListener('input',suggest);
 $('search').addEventListener('keydown',e=>{
  if(e.key==='Escape')$('suggestions').hidden=true;
