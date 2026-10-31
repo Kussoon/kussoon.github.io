@@ -55,7 +55,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .popup-head strong{font-size:19px}
 .popup-close{border:0;background:#edf4f9;min-height:36px;min-width:36px;padding:4px 8px;font-size:21px}
 .popup-office{font-weight:750;margin:8px 0 0}
-.popup-address{font-size:14px;margin:4px 0 12px;overflow-wrap:anywhere}
+.popup-address{font-size:14px;margin:4px 0 12px;white-space:pre-line;overflow-wrap:anywhere}
 .popup-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .popup-actions a,.popup-actions span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:42px;padding:5px 2px;border-radius:8px;border:1px solid #8ab3cf;font-size:12px;font-weight:800;color:#17496d;text-decoration:none;background:#eff7fc;overflow-wrap:anywhere}
 .popup-actions span{color:#7a8790;background:#f1f3f5;border-color:#ccd3d9}
@@ -68,6 +68,14 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .legend i{display:inline-block;width:17px;height:14px;margin-right:4px;border:1px solid #91b2c6;border-radius:3px;vertical-align:middle}
 @media(min-width:920px){.workarea{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:12px;align-items:start}.workarea .panel{margin-top:0}}
 @media(max-width:500px){main{padding:8px}#map{min-height:380px;height:62vh}.panel{padding:11px}}
+
+/* Adopt B: short popup to the left of four lower-right map controls. */
+.map-toolbar{width:112px}
+.map-toolbar button{width:100%;padding-left:3px;padding-right:3px}
+.municipal-popup{left:auto;right:136px;bottom:12px;width:min(510px,calc(100% - 150px));max-height:calc(100% - 24px);padding:12px;z-index:6}
+.popup-actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.popup-actions a,.popup-actions span{min-height:43px;font-size:11px;padding:5px 2px}
+@media(max-width:500px){.map-toolbar{right:8px;bottom:8px;width:104px}.map-toolbar button{min-width:0;font-size:11px}.municipal-popup{left:auto;right:120px;bottom:8px;width:calc(100% - 128px);max-height:calc(100% - 16px);padding:9px}.popup-head strong{font-size:16px}.popup-close{min-width:31px;min-height:32px;font-size:18px}.popup-office{margin-top:5px;font-size:13px}.popup-address{font-size:12px;margin:3px 0 9px}.popup-actions{gap:4px}.popup-actions a,.popup-actions span{font-size:10px;min-height:43px;padding:3px 1px}.popup-note{font-size:10px}}
 </style>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
@@ -82,7 +90,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
 <script defer src="centered-labels.js?v=20261101-proposal5a"></script>
-<script defer src="density-app.js?v=20261101-bottomkana1"></script>
+<script defer src="density-app.js?v=20261101-zipcode-b2"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>新案5：南北中央の最長水平区間に地名を配置</h1>
@@ -155,7 +163,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <div class="map-shell">
 <svg id="map" viewBox="0 0 900 900" aria-label="市区町村の試験地図"></svg>
 <aside id="municipal-popup" class="municipal-popup" role="region" aria-label="選択した自治体の情報" hidden>
-<div class="popup-head"><strong id="popup-name"></strong><button id="popup-close" class="popup-close" type="button" aria-label="吹き出しを閉じて選択解除">×</button></div>
+<div class="popup-head"><strong id="popup-name"></strong><button id="popup-close" class="popup-close" type="button" aria-label="吹き出しだけを閉じる">×</button></div>
 <p id="popup-office" class="popup-office"></p>
 <p id="popup-address" class="popup-address"></p>
 <div class="popup-actions" id="popup-actions"></div>
