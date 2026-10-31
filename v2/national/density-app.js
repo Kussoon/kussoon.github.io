@@ -431,6 +431,16 @@ async function load(area,mode){
  // collision-based corrections. The anchor is computed exactly once on load.
  horizontalCenters=new Map(models.map(m=>[m.id,M.pointHorizontal(m)]));
  verticalCenters=new Map(models.map(m=>[m.id,M.pointHorizontalVertical(m)]));
+ // Geometry-based displacement ranking, independent of zoom and font size.
+ const ranked=models.map(m=>{
+  const first=horizontalCenters.get(m.id),second=verticalCenters.get(m.id);
+  const delta=second[1]-first[1];
+  return {name:m.name,delta,pct:Math.abs(delta)/m.box.h*100};
+ }).sort((a,b)=>b.pct-a.pct||a.name.localeCompare(b.name,'ja'));
+ $('diagnostic-ranking').textContent='全'+models.length+'区域で新案1→新案2の移動を比較。市域南北高に対する移動率・上位10件：'+
+  ranked.slice(0,10).map((r,i)=>(i+1)+'位 '+r.name+' '+
+   (r.delta>0?'南':r.delta<0?'北':'移動なし')+' '+
+   r.pct.toFixed(1)+'％').join(' ／ ')+'。';
  const conditional=models.map(m=>[m.id,M.conditionalVertical(m,{
   fontSize:referenceFont,measure,rows:item=>L.rows(item)
  })]);
