@@ -63,8 +63,8 @@ test('comparison page loads the centred module before density app',()=>{
  const s=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(s.indexOf('centered-labels.js')>0);
  assert.ok(s.indexOf('centered-labels.js')<s.indexOf('density-app.js'));
- assert.match(s,/<option value="conditional" selected>/);
- assert.match(s,/<option value="horizontal">/);
+ assert.match(s,/<option value="horizontal" selected>/);
+ assert.match(s,/<option value="conditional">/);
  assert.match(s,/<option value="vertical">/);
  assert.match(s,/<option value="multi">/);
  assert.match(s,/<option value="center">/);
@@ -108,8 +108,8 @@ test('four-city comparison controls and script versions exist',()=>{
  for(const city of ['宝塚市','西宮市','神戸市','京都市']){
   assert.ok(html.includes('data-city="'+city+'"'));
  }
- assert.match(html,/centered-labels\.js\?v=20261101-conditional1/);
- assert.match(html,/density-app\.js\?v=20261101-conditional1/);
+ assert.match(html,/centered-labels\.js\?v=20261101-scanmid1/);
+ assert.match(html,/density-app\.js\?v=20261101-scanmid1/);
  assert.match(js,/city-shortcuts'\)\.addEventListener/);
 });
 
@@ -202,7 +202,7 @@ test('new proposal 3 is cached at load and not recomputed on zoom',()=>{
  assert.match(app,/conditionalCenters=new Map\(conditional\.map/);
  const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  assert.ok(html.includes('id="conditional-report"'));
- assert.ok(html.includes('value="conditional" selected'));
+ assert.ok(html.includes('value="horizontal" selected'));
 });
 
 test('diagnostic overlay shows both exact cross-sections without moving anchors',()=>{
@@ -212,7 +212,7 @@ test('diagnostic overlay shows both exact cross-sections without moving anchors'
  assert.match(html,/id="diagnostic-overlay"/);
  assert.match(html,/id="diagnostic-output"/);
  assert.match(html,/id="diagnostic-ranking"/);
- assert.match(html,/density-app\.js\?v=20261101-diagnostic1/);
+ assert.match(html,/density-app\.js\?v=20261101-scanmid1/);
  assert.match(app,/function renderDiagnostic\(\)/);
  assert.match(app,/M\.horizontalRuns\(model\.rings,h\[1\]\)/);
  assert.match(app,/M\.verticalRuns\(model\.rings,h\[0\]\)/);
@@ -237,4 +237,32 @@ test('anchor displacement compares only two points on one fixed X',()=>{
   a<=first[1]&&b>=first[1]);
  assert.ok(vertical);
  assert.ok(second[1]>=vertical[0]&&second[1]<=vertical[1]);
+});
+
+test('multiple horizontal intervals: take WESTMOST and EASTMOST edges, not a selected segment',()=>{
+ const m={...rectangle('disconnected','複合市',0,0,100,100),
+  rings:[[[0,0],[8,0],[8,100],[0,100]],
+   [[9,0],[90,0],[90,100],[9,100]]]};
+ const p=M.pointHorizontal(m);
+ assert.deepEqual(Array.from(p),[45,50]);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...p,m.rings),true);
+});
+test('if full-extent midpoint is in a gap, keep Y and use closest interior X',()=>{
+ const m={...rectangle('islands','飛地市',0,0,100,100),
+  rings:[[[0,0],[20,0],[20,100],[0,100]],
+   [[80,0],[100,0],[100,100],[80,100]]]};
+ const p=M.pointHorizontal(m);
+ assert.equal(p[1],50);
+ assert.equal(context.window.KussoonLabelEngine.isInside(...p,m.rings),true);
+ assert.ok(Math.abs(p[0]-20)<.01||Math.abs(p[0]-80)<.01);
+});
+test('keep the same full horizontal midpoint in proposal 2 and 3',()=>{
+ const m={...rectangle('two','二区域',0,0,100,100),
+  rings:[[[0,0],[8,0],[8,100],[0,100]],
+   [[9,0],[90,0],[90,100],[9,100]]]};
+ const h=M.pointHorizontal(m),v=M.pointHorizontalVertical(m),
+  c=M.conditionalVertical(m,{fontSize:10}).point;
+ assert.equal(h[0],45);
+ assert.equal(v[0],h[0]);
+ assert.equal(c[0],h[0]);
 });
