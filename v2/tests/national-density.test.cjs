@@ -139,3 +139,27 @@ test('B mode retains every label, moves only colliding ones within eight screen 
  });
  assert.equal(res.labels[2],rect[2]);
 });
+
+test('full-label trial begins with tiny type and enlarges smoothly',()=>{
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ const declaration=app.match(/function labelSize\(zoom,compact\)\{[\s\S]*?\n\}/)?.[0];
+ assert.ok(declaration,'labelSize function must exist');
+ const font=vm.runInNewContext(declaration+';labelSize');
+ const sizes=[1,2,4,8,16,32,96].map(z=>font(z,true));
+ assert.equal(sizes[0],7);
+ assert.ok(sizes.every((x,i)=>i===0||x>=sizes[i-1]));
+ assert.equal(sizes.at(-1),18);
+ assert.equal(font(1,false),15,'legacy trial keeps its previous base font');
+});
+test('all four floating map controls exist and keep the native IDs',()=>{
+ const page=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const shell=page.match(/<div class="map-shell">[\s\S]*?<\/div>\s*<\/div>/)?.[0];
+ assert.ok(shell,'map shell and toolbar required');
+ for(const id of ['zoom-in','zoom-out','reset','reading-toggle']){
+  assert.ok(shell.includes('id="'+id+'"'),id+' must be inside the map shell');
+  assert.equal((page.match(new RegExp('id="'+id+'"','g'))||[]).length,1);
+ }
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.match(app,/reading-toggle'\)\.addEventListener\('click'/);
+ assert.match(app,/syncReadingButton\(\);renderLabels\(\)/);
+});

@@ -156,8 +156,11 @@ function drawMap(topologies,projectPoint){
  map.replaceChildren(shapeLayer,outlines,labelLayer);
  highlight();
 }
-function labelSize(zoom){
- // National overview starts one pixel below the Nishinomiya town-map trial.
+function labelSize(zoom,compact){
+ // Full-label experiment: all labels are present from the beginning.
+ // Small at overview and progressively legible when zooming in.
+ // Font dimensions are screen pixels; the SVG units are recomputed per view.
+ if(compact)return Math.min(18,7+2.6*Math.log2(Math.max(1,zoom)));
  return 15+Math.min(2,Math.max(0,zoom-1)*.18);
 }
 const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
@@ -168,12 +171,13 @@ function measure(value,size){
 }
 function renderLabels(){
  if(!models.length)return;
- const start=performance.now(),zoom=bounds.w/view.w,screenPx=labelSize(zoom);
+ const start=performance.now(),zoom=bounds.w/view.w;
+ const compareMode=['fixed','light'].includes($('density-mode').value);
+ const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
  if(!(ratio>0))return;
  const size=screenPx/ratio;
- const compareMode=['fixed','light'].includes($('density-mode').value);
  const readingEnabled=$('reading').value==='on' &&
   (compareMode||$('density-mode').value==='all'||zoom>=6);
  const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
@@ -374,7 +378,17 @@ $('area').addEventListener('change',()=>{
  $('mode').value=$('area').value==='fuji'?'plate':'municipality';refresh();
 });
 $('mode').addEventListener('change',refresh);
-$('reading').addEventListener('change',renderLabels);
+function syncReadingButton(){
+ const pressed=$('reading').value==='on';
+ $('reading-toggle').setAttribute('aria-pressed',String(pressed));
+ $('reading-toggle').textContent=pressed?'よみがな ON':'よみがな';
+}
+$('reading-toggle').addEventListener('click',()=>{
+ $('reading').value=$('reading').value==='on'?'off':'on';
+ syncReadingButton();renderLabels();
+});
+$('reading').addEventListener('change',()=>{syncReadingButton();renderLabels();});
+syncReadingButton();
 $('density-mode').addEventListener('change',()=>{
  $('density-level').disabled=$('density-mode').value!=='adaptive';
  renderLabels();
