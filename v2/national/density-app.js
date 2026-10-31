@@ -18,6 +18,7 @@ let fixedCenters=new Map(),fixedCorrections=0;
 let multiCenters=new Map(),multiCorrections=0;
 let horizontalCenters=new Map(),verticalCenters=new Map();
 let conditionalCenters=new Map(),conditionalResults=new Map();
+let proposal4Centers=new Map(),proposal4Results=new Map();
 let diagnosticLayer=null;
 let state={area:'kansai',mode:'municipality'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
@@ -183,12 +184,15 @@ function renderDiagnostic(){
  if(!model){$('diagnostic-output').textContent=cityName+'の区域データがありません。';return;}
  const h=horizontalCenters.get(model.id),v=verticalCenters.get(model.id);
  const decision=conditionalResults.get(model.id);
+ const fourth=proposal4Results.get(model.id);
  if(!h||!v)return;
  const line=M.verticalRuns(model.rings,h[0])
   .filter(([a,b])=>a<=h[1]+1e-6&&b>=h[1]-1e-6&&
    E.isInside(h[0],(a+b)/2,model.rings))[0];
- const horizontal=M.horizontalRuns(model.rings,h[1]).find(([a,b])=>
-  a<=h[0]+1e-6&&b>=h[0]-1e-6);
+ const allHorizontal=M.horizontalRuns(model.rings,h[1]);
+ const extent=allHorizontal.length?[
+  Math.min(...allHorizontal.map(a=>a[0])),
+  Math.max(...allHorizontal.map(a=>a[1]))]:null;
  const delta=v[1]-h[1],move=Math.abs(delta);
  const percent=100*move/model.box.h;
  const direction=delta>1e-5?'南':delta< -1e-5?'北':'移動なし';
@@ -198,7 +202,14 @@ function renderDiagnostic(){
   ') → 新案2('+v.map(x=>x.toFixed(2)).join('、')+')。'+
   '移動量 '+move.toFixed(2)+'地図単位（市域南北高の'+percent.toFixed(1)+
   '％）、方向 '+direction+'。'+verticalText+'。'+
-  '新案3の判定：'+(decision?.adjusted?'補正を採用':'新案1の位置を維持')+'。';
+  '新案3の判定：'+(decision?.adjusted?'補正を採用':'新案1の位置を維持')+'。'+
+  ' 新案4：'+(fourth?{
+   'horizontal-inside':'水平中央を維持',
+   'vertical-midpoint':'縦断面の南北中央へ移動',
+   'vertical-gap-nearest':'縦方向の市域内へ最小補正',
+   'no-vertical-intersection':'縦線と交点なし・横方向に最小補正',
+   'no-horizontal-intersection':'中央水平線の交点なし'
+  }[fourth.reason]:'未計算')+'。';
  if($('diagnostic-overlay').value!=='on')return;
  const rect=map.getBoundingClientRect();
  const unitsPerPx=Math.max(view.w/(rect.width||390),view.h/(rect.height||390));
@@ -207,18 +218,32 @@ function renderDiagnostic(){
  // Show both actual territory boundaries at the selected X and the
  // displacement between the two precomputed candidate positions.
  if(line)makeLine(h[0],line[0],h[0],line[1],'diag-vertical');
- if(horizontal)makeLine(horizontal[0],h[1],horizontal[1],h[1],'diag-horizontal');
+ // Draw the whole east-west extent, not just the one interval containing h.
+ if(extent)makeLine(extent[0],h[1],extent[1],h[1],'diag-horizontal');
  if(move>1e-6)makeLine(h[0],h[1],v[0],v[1],'diag-movement');
  for(const [p,klass] of [[h,'diag-origin'],[v,'diag-destination']]){
   diagnosticLayer.append(tag('circle',{
    cx:p[0],cy:p[1],r:5*unitsPerPx,class:klass
   }));
  }
+ if(fourth){
+  const p=fourth.point;
+  diagnosticLayer.append(tag('circle',{
+   cx:p[0],cy:p[1],r:5*unitsPerPx,class:'diag-fourth'
+  }));
+  if(fourth.reason!=='horizontal-inside'){
+   const raw=fourth.raw;
+   makeLine(raw[0],raw[1],p[0],p[1],'diag-fourth-path');
+   diagnosticLayer.append(tag('circle',{
+    cx:raw[0],cy:raw[1],r:3.5*unitsPerPx,class:'diag-raw'
+   }));
+  }
+ }
 }
 function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
- const compareMode=['conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
+ const compareMode=['proposal4','conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
  const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
@@ -233,7 +258,9 @@ function renderLabels(){
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
  const planned=compareMode?layoutModels.map(m=>{
-  const [x,y]=$('density-mode').value==='conditional'?
+  const [x,y]=$('density-mode').value==='proposal4'?
+   (proposal4Centers.get(m.id)||horizontalCenters.get(m.id)||m.polylabel||m.centroid):
+   $('density-mode').value==='conditional'?
    (conditionalCenters.get(m.id)||horizontalCenters.get(m.id)||m.polylabel||m.centroid):
    $('density-mode').value==='horizontal'?
    (horizontalCenters.get(m.id)||m.polylabel||m.centroid):
@@ -274,7 +301,7 @@ function renderLabels(){
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
  if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
-   mode:['conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
+   mode:['proposal4','conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    selectedId:selection?.type==='model'?selection.id:null
   }).labels;
@@ -329,7 +356,8 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='conditional'?'新案3：条件付き縦補正':
+  ($('density-mode').value==='proposal4'?'新案4：市域外のみ縦補正':
+   $('density-mode').value==='conditional'?'新案3：条件付き縦補正':
    $('density-mode').value==='horizontal'?'水平中央・固定':
    $('density-mode').value==='vertical'?'水平＋縦断面中央・固定':
    $('density-mode').value==='multi'?'複数断面・固定配置':
@@ -430,6 +458,14 @@ async function load(area,mode){
  // Unlike the earlier strategies, these two pilots deliberately have NO
  // collision-based corrections. The anchor is computed exactly once on load.
  horizontalCenters=new Map(models.map(m=>[m.id,M.pointHorizontal(m)]));
+ const v4=models.map(m=>[m.id,M.proposal4(m)]);
+ proposal4Results=new Map(v4);
+ proposal4Centers=new Map(v4.map(([id,result])=>[id,result.point]));
+ const counts=v4.reduce((acc,[,r])=>(acc[r.reason]=(acc[r.reason]||0)+1,acc),{});
+ $('proposal4-report').textContent='新案4：水平中央を採用 '+(counts['horizontal-inside']||0)+
+  '件／縦断面で補正 '+((counts['vertical-midpoint']||0)+(counts['vertical-gap-nearest']||0))+
+  '件／縦線が市域と交わらず横方向の補正 '+(counts['no-vertical-intersection']||0)+
+  '件。';
  verticalCenters=new Map(models.map(m=>[m.id,M.pointHorizontalVertical(m)]));
  // Geometry-based displacement ranking, independent of zoom and font size.
  const ranked=models.map(m=>{
