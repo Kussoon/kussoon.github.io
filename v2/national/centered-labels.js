@@ -136,6 +136,45 @@
   const newY=(top+bottom)/2;
   return E.isInside(x,newY,model.rings)?[round(x),round(newY)]:initial;
  }
+ // Candidate C: start at the exact horizontal centre. Only try the
+ // vertical interval's centre if the FIXED reference-size text box
+ // protrudes substantially beyond the territory in the vertical direction.
+ // The final anchor is computed once at geometry load, never per zoom.
+ function boxOverflow(model,x,y,w,h){
+  if(!(w>0&&h>0)||!model.rings?.length)return 0;
+  let outside=0,total=0;
+  // Equal-area sample grid; includes near-edge samples but avoids boundary
+  // ambiguity at exactly x +/- w/2 and y +/- h/2.
+  for(let j=0;j<9;j++)for(let i=0;i<11;i++){
+   const px=x+(i-5)*w/11,py=y+(j-4)*h/9;
+   total++;if(!E.isInside(px,py,model.rings))outside++;
+  }
+  return outside/total;
+ }
+ function conditionalVertical(model,options={}){
+  const {fontSize=13,measure=(str,size)=>[...str].length*size,
+   rows=()=>null,threshold=.20,minImprovement=.08,maxShiftFraction=.18}=options;
+  const h=pointHorizontal(model),v=pointHorizontalVertical(model);
+  const parts=rows(model)||[model.name];
+  const width=Math.max(...parts.map(t=>measure(t,fontSize)))+fontSize*.2;
+  const height=fontSize*1.2*parts.length;
+  const before=boxOverflow(model,...h,width,height);
+  const after=boxOverflow(model,...v,width,height);
+  const delta=Math.abs(v[1]-h[1]),maxShift=model.box?.h*maxShiftFraction||0;
+  // Ignore sideways overflow: only a vertical recenter that *improves*
+  // containment by >=8 percentage points may replace the original.
+  const eligible=before>=threshold&&before-after>=minImprovement&&
+   delta>1e-6&&delta<=maxShift;
+  const chosen=eligible?v:h;
+  return {
+   point:chosen,adjusted:eligible,from:h,to:v,
+   before,after,delta,
+   reason:eligible?'vertical-improvement':
+    before<threshold?'acceptable-overflow':
+    before-after<minImprovement?'no-meaningful-improvement':
+    delta>maxShift?'excessive-movement':'unchanged'
+  };
+ }
  function build(models,options={}){
   const {fontSize=13,measure=(s,sz)=>[...s].length*sz,rows=()=>null,strategy='center'}=options;
   const anchors=models.map(m=>strategy==='multi'?pointMulti(m):point(m));
@@ -184,5 +223,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,horizontalRuns,verticalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,conditionalVertical,boxOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
