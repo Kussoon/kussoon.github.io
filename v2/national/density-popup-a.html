@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow"><meta name="theme-color" content="#edf7fc">
+<title>A案：縦長・3ボタン縦並び｜Kussoon V2比較</title>
+<meta name="description" content="市町村名の全件表示A/B配置、位置固定と軽い調整を比較するKussoon V2試験ページ。">
+<style>
+:root{color-scheme:light;--ink:#1a3e59;--line:#b8d1e0;--blue:#a8d5eb;--selected:#b89aee}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(#edf7fc,#fff);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);line-height:1.55}
+main{max-width:1100px;margin:auto;padding:13px 12px 38px}
+a{color:#195e84}h1{font-size:clamp(23px,4.5vw,32px);line-height:1.35;margin:14px 0 6px}
+h2{font-size:19px;margin:2px 0 9px}p{margin:7px 0 12px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:13px 0}
+.controls{display:flex;flex-wrap:wrap;align-items:end;gap:11px}
+.controls label{display:flex;flex-direction:column;gap:5px;flex:1 1 180px;font-weight:800;font-size:13px}
+select,input,button{font:inherit;min-height:44px;padding:8px;border:1px solid #9ebacd;border-radius:9px;background:#fff;color:var(--ink)}
+select,input{width:100%}button{font-weight:800;cursor:pointer}
+button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #247ec1;outline-offset:2px}
+.searchbox{position:relative;flex:2 1 200px}
+.suggest{position:absolute;top:100%;left:0;right:0;z-index:20;background:#fff;box-shadow:0 10px 20px #1c41502e;border:1px solid #aac4d5;border-radius:0 0 9px 9px;max-height:245px;overflow:auto}
+.suggest[hidden]{display:none}.suggest button{display:block;width:100%;text-align:left;border:0;border-radius:0;border-bottom:1px solid #dfebf0}.suggest small{display:block;font-size:12px;color:#58758c}
+.buttons{display:flex;gap:7px;flex-wrap:wrap}.buttons button{min-width:60px}
+.map-shell{position:relative}
+.map-toolbar{position:absolute;right:12px;bottom:12px;z-index:7;display:flex;flex-direction:column;gap:5px;align-items:stretch;max-width:calc(100% - 24px)}
+.map-toolbar button{min-width:50px;min-height:42px;padding:6px 9px;white-space:nowrap;background:rgba(255,255,255,.96);border:1px solid #96b3c7;border-radius:9px;box-shadow:0 2px 7px #183c5533;font-size:13px;font-weight:800;touch-action:manipulation}
+.map-toolbar button[aria-pressed="true"]{color:#fff;background:#245879;border-color:#245879}
+.map-toolbar button:focus-visible{outline:3px solid #edb844;outline-offset:1px}
+@media(max-width:500px){.map-toolbar{right:8px;bottom:8px}.map-toolbar button{min-width:45px;min-height:40px;padding:5px 8px;font-size:12px}}
+.notice{font-size:13px;color:#6c4d2f;background:#fff8e8;border:1px solid #efdbb3;border-radius:9px;padding:10px}
+#map{display:block;width:100%;height:min(72vh,700px);min-height:400px;border:1px solid #a6c6d9;border-radius:12px;background:#eff7fb;touch-action:none;user-select:none}
+.land{fill:var(--blue);stroke:white;stroke-width:1.1;vector-effect:non-scaling-stroke;stroke-linejoin:round;fill-rule:evenodd;cursor:pointer}.plate-mode .land{cursor:default}
+.land.selected{fill:var(--selected);stroke:#65399a;stroke-width:2.0}.land.focused{stroke:#4d267f;stroke-width:3.3}
+/* Touch browsers may keep :hover on an SVG polygon after a finger brushes it. */
+@media (hover:hover) and (pointer:fine){.land:not(.selected):hover{stroke:#356a8b;stroke-width:1.7}}
+/* Touch focus is not an intended selection. Keep explicit keyboard focus visible. */
+.land:focus:not(:focus-visible){outline:none}
+.land:focus-visible{outline:2px solid #286b98;outline-offset:2px}
+.outline{fill:none;stroke:#376383;stroke-width:2.1;vector-effect:non-scaling-stroke;pointer-events:none}
+.label-diagnostic{pointer-events:none}
+.label-diagnostic line{vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-vertical{stroke:#168055;stroke-width:2.5;stroke-dasharray:5 5}
+.label-diagnostic .diag-movement{stroke:#1d5688;stroke-width:3}
+.label-diagnostic .diag-horizontal{stroke:#d77b21;stroke-width:1.7;stroke-dasharray:4 4}
+.label-diagnostic .diag-origin{fill:#e88625;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-destination{fill:#188b60;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-fourth{fill:#854cb5;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-raw{fill:#fff;stroke:#854cb5;stroke-width:2;vector-effect:non-scaling-stroke}
+.label-diagnostic .diag-fourth-path{stroke:#854cb5;stroke-width:2.5;stroke-dasharray:4 4}
+.label-diagnostic .diag-longest{stroke:#e63f59;stroke-width:4.5;stroke-linecap:round}
+.label-diagnostic .diag-fifth{fill:#e63f59;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}
+.municipal-popup{position:absolute;z-index:6;bottom:14px;left:14px;width:min(350px,calc(100% - 28px));max-height:min(50vh,330px);overflow:auto;background:#fff;border:2px solid #7a9eb5;border-radius:13px;box-shadow:0 9px 25px #183f5970;padding:12px 12px 14px;color:#193e58}
+.municipal-popup[hidden]{display:none}
+.popup-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.popup-head strong{font-size:19px}
+.popup-close{border:0;background:#edf4f9;min-height:36px;min-width:36px;padding:4px 8px;font-size:21px}
+.popup-office{font-weight:750;margin:8px 0 0}
+.popup-address{font-size:14px;margin:4px 0 12px;overflow-wrap:anywhere}
+.popup-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.popup-actions a,.popup-actions span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:42px;padding:5px 2px;border-radius:8px;border:1px solid #8ab3cf;font-size:12px;font-weight:800;color:#17496d;text-decoration:none;background:#eff7fc;overflow-wrap:anywhere}
+.popup-actions span{color:#7a8790;background:#f1f3f5;border-color:#ccd3d9}
+.popup-note{font-size:12px;color:#5b6e7c;margin:8px 0 0}
+@media(max-width:500px){.municipal-popup{bottom:194px;left:8px;width:calc(100% - 16px);max-height:calc(100% - 207px)}}
+.place-label{font-weight:850;text-anchor:middle;dominant-baseline:central;fill:#193e58;stroke:#fff;stroke-linejoin:round;paint-order:stroke;pointer-events:none}
+.place-label.selected{fill:#693b95}.plate-label{fill:#532c86;stroke:#fff;stroke-width:2.4;paint-order:stroke;letter-spacing:.025em;font-weight:900}
+.info{background:#eef6fb;border:1px solid #d7e7f0;border-radius:9px;padding:10px;font-size:14px}
+.meta{font-size:13px;color:#57738a}.legend{display:flex;align-items:center;gap:15px;flex-wrap:wrap;font-size:13px}
+.legend i{display:inline-block;width:17px;height:14px;margin-right:4px;border:1px solid #91b2c6;border-radius:3px;vertical-align:middle}
+@media(min-width:920px){.workarea{display:grid;grid-template-columns:minmax(0,1fr) 245px;gap:12px;align-items:start}.workarea .panel{margin-top:0}}
+@media(max-width:500px){main{padding:8px}#map{min-height:380px;height:62vh}.panel{padding:11px}}
+/* A: tall, narrow popup with three vertically stacked actions. */
+.map-shell{--popup-side-gap:12px}
+.municipal-popup{left:12px;right:auto;bottom:12px;width:min(268px,calc(100% - 150px));max-height:calc(100% - 24px);padding:13px 11px;z-index:6}
+.popup-actions{display:flex;flex-direction:column;gap:8px}
+.popup-actions a,.popup-actions span{width:100%;min-height:45px;padding:8px 5px;font-size:13px}
+@media(max-width:500px){
+ .municipal-popup{left:8px;bottom:8px;right:auto;width:min(252px,calc(100% - 128px));max-height:calc(100% - 16px);padding:10px 9px}
+ .popup-head strong{font-size:17px}
+ .popup-office{margin-top:6px}
+ .popup-address{font-size:12px;margin-bottom:8px}
+ .popup-actions{gap:6px}
+ .popup-actions a,.popup-actions span{min-height:41px;font-size:12px}
+ .popup-note{font-size:11px}
+}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
+<script defer src="/common/site-footer.js"></script>
+<script defer src="../common/js/label-engine.js"></script>
+<script defer src="../common/js/readable-labels.js"></script>
+<script defer src="../common/js/collision-refinement.js"></script>
+<script defer src="../common/js/region-fit.js?v=2-border-clearance"></script>
+<script defer src="../common/js/national-boundaries.js?v=20261030-county"></script>
+<script defer src="../common/js/administrative-labels.js?v=1"></script>
+<script defer src="../common/js/national-readings.js?v=1"></script>
+<script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<script defer src="density-labels.js?v=20261031-compareab1"></script>
+<script defer src="centered-labels.js?v=20261101-proposal5a"></script>
+<script defer src="density-app.js?v=20261101-bottomkana1"></script>
+</head><body><main>
+<a href="/v2/">← V2試験トップへ</a>
+<h1>A案：縦長・3ボタン縦並び（比較試験）</h1>
+<nav class="panel" aria-label="吹き出し配置の比較"><strong>吹き出しの配置を比較：</strong> <a href="density-popup-a.html">A案・縦長</a>　／　<a href="density-popup-b.html">B案・右下操作ボタンの左</a>　／　<a href="density.html">現行版</a><p class="meta">市町村をタップすると吹き出しを確認できます。地名の表示方式と操作は3ページ共通です。</p></nav>
+<h2>新案5：南北中央の最長水平区間に地名を配置</h2>
+<p><strong>すべての市町村名を小さく全件表示</strong>し、拡大に合わせて文字だけ大きくします。新案5では<strong>市域の南北中央の高さで水平線を引き、市域内の各区間を比較して最も長い区間の中央</strong>にラベルを固定します。隙間をまたいで東西の両端を結んで中央に置くことはしません。中央の高さに交差区間がない場合だけ、近い高さで補完します。新案1〜4も比較できます。</p>
+<section class="panel" aria-label="4都市への移動">
+<h2>位置を比較する市町村</h2>
+<div class="buttons" id="city-shortcuts">
+<button type="button" data-city="宝塚市">宝塚市へ</button>
+<button type="button" data-city="西宮市">西宮市へ</button>
+<button type="button" data-city="神戸市">神戸市へ</button>
+<button type="button" data-city="京都市">京都市へ</button>
+<button type="button" data-city="神河町">神河町へ</button>
+<button type="button" data-city="西脇市">西脇市へ</button>
+<button type="button" data-city="三田市">三田市へ</button>
+<button type="button" data-city="加西市">加西市へ</button>
+<button type="button" data-city="加東市">加東市へ</button>
+<button type="button" data-city="小野市">小野市へ</button>
+<button type="button" data-city="三木市">三木市へ</button>
+<button type="button" data-city="朝来市">朝来市へ</button>
+<button type="button" data-city="加古川市">加古川市へ</button>
+</div>
+<p class="meta">市町村への移動ボタンを押すと、水平中央（橙）と縦断面中央（緑）の位置、および縦断面の範囲を地図上に重ねます。表示方式を切り替えても位置と倍率は変わりません。</p>
+</section>
+<section class="panel" aria-label="位置の計算結果">
+<h2>中心点と移動距離の可視化</h2>
+<div class="controls">
+<label>確認する市町村<select id="diagnostic-city">
+<option value="神河町">神河町</option>
+<option value="宝塚市">宝塚市</option>
+<option value="西宮市">西宮市</option>
+<option value="三木市" selected>三木市</option>
+<option value="朝来市">朝来市</option>
+</select></label>
+<label>地図上の補助線<select id="diagnostic-overlay">
+<option value="on" selected>表示する</option>
+<option value="off">非表示</option>
+</select></label>
+</div>
+<p class="meta">赤い太線と赤い点＝新案5で選んだ最長区間とその中央。橙の点＝新案1、緑の点＝新案2、紫の点＝新案4。紫の白抜き点は水平全幅の中点（補正前）、紫の破線は新案4の補正経路です。橙の横線は市域と交わる全区間の最西端から最東端まで描きます。補助線は位置確認用で、ラベルを動かしません。</p>
+<p id="proposal5-report" class="info" aria-live="polite">新案5の計算を確認中です。</p>
+<p id="proposal4-report" class="info" aria-live="polite">新案4の補正件数を集計中です。</p>
+<p id="diagnostic-output" class="info" aria-live="polite">中心点の位置を計算中です。</p>
+<p id="diagnostic-ranking" class="meta">移動率の大きい市町村を計算中です。</p>
+</section>
+<section class="panel" aria-label="ラベル表示の比較設定">
+<h2>配置方式を比較</h2>
+<div class="controls">
+<label>配置方式<select id="density-mode"><option value="proposal5" selected>新案5：水平線上の最長区間の中央</option><option value="proposal4">新案4：市域外の場合だけ縦断面で補正</option><option value="horizontal">新案1：水平断面の東西全幅の中央</option><option value="conditional">新案3：必要な場合のみ縦補正</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
+<label>旧実験用・表示密度<select id="density-level" disabled><option value="sparse">少なめ</option><option value="normal" selected>標準</option><option value="dense">多め</option></select></label>
+</div>
+<p id="density-output" class="info" aria-live="polite">表示数を計算中です。</p>
+<p id="conditional-report" class="info" aria-live="polite">補正の判定を計算中です。</p>
+<p class="meta">修正版の新案1では南北中央の水平断面にある全区間を対象に、最西端と最東端の中間へラベル中心を置きます。中間点が穴や飛地間の隙間なら、その高さで最も近い市域内部へXだけ補正します。新案2・3もこの同じ新案1を起点とします。全案とも拡大中にラベルの座標を変更しません。</p>
+</section>
+<section class="panel">
+<div class="controls">
+<label>表示エリア<select id="area"><option value="kansai">関西2府4県</option><option value="chugoku">中国地方5県</option><option value="west">関西＋中国11府県</option><option value="shikoku">四国4県</option><option value="chugoku-shikoku">中国＋四国9県</option><option value="west-shikoku" selected>関西＋中国＋四国15府県</option><option value="fuji">山梨・静岡（富士山ナンバー）</option></select></label>
+<label>表示単位<select id="mode"><option value="municipality">市町村名（政令市を統合）</option><option value="ward">市区町村名（政令市の区も表示）</option><option value="plate">富士山ナンバー（県境横断）</option></select></label>
+<label>読み仮名表示<select id="reading"><option value="on" selected>漢字＋よみがな</option><option value="off">漢字のみ</option></select></label>
+<div class="searchbox"><label for="search" style="display:block;font-size:13px;font-weight:800">市区町村・地域名を検索</label><input id="search" type="search" autocomplete="off" placeholder="例：西宮、大阪市、富士山" aria-controls="suggestions"><div id="suggestions" class="suggest" hidden></div></div>
+</div>
+</section>
+<div class="notice"><strong>実験データについて：</strong>境界線は2021年1月時点の簡素化された試験データです。最新の行政界・市区町村変更を確認したものではなく、正式版には使用しません。ナンバープレートの地域分けは別データで管理します。</div>
+<section class="panel"><div class="buttons">
+<button type="button" id="clear">選択解除</button>
+</div><p class="meta" id="interaction-guide">ドラッグで移動、ピンチで拡大縮小できます。検索結果を選ぶと全域図で該当区域を紫色にします。</p>
+<div id="selection" class="info" aria-live="polite">地図を読み込み中…</div></section>
+<div class="workarea">
+<section class="panel"><h2 id="map-title">地図を読み込み中</h2>
+<div class="map-shell">
+<svg id="map" viewBox="0 0 900 900" aria-label="市区町村の試験地図"></svg>
+<aside id="municipal-popup" class="municipal-popup" role="region" aria-label="選択した自治体の情報" hidden>
+<div class="popup-head"><strong id="popup-name"></strong><button id="popup-close" class="popup-close" type="button" aria-label="吹き出しだけを閉じる">×</button></div>
+<p id="popup-office" class="popup-office"></p>
+<p id="popup-address" class="popup-address"></p>
+<div class="popup-actions" id="popup-actions"></div>
+<p id="popup-note" class="popup-note"></p>
+</aside>
+<div class="map-toolbar" role="group" aria-label="地図の操作">
+<button type="button" id="zoom-in" aria-label="地図を拡大">＋ 拡大</button>
+<button type="button" id="zoom-out" aria-label="地図を縮小">－ 縮小</button>
+<button type="button" id="reset" aria-label="地図を全域表示">全体表示</button>
+<button type="button" id="reading-toggle" aria-label="読み仮名の表示を切り替え" aria-pressed="true">よみがな ON</button>
+</div>
+</div>
+<p class="meta">市町村をタップすると区域が紫色になり、庁舎情報の吹き出しが開きます。×印は吹き出しだけを閉じ、選択色は残します。同じ市町村を再度タップすると選択色が解除され、その次のタップで再び色と吹き出しが表示されます。</p>
+<button id="clear-below" type="button">選択色を元に戻す</button>
+<p class="legend"><span><i style="background:var(--blue)"></i><span id="legend-blue">市区町村</span></span><span><i style="background:var(--selected)"></i><span id="legend-selected">選択区域</span></span></p></section>
+<section class="panel"><h2>表示・配置状況</h2>
+<p id="status" role="status">地図を読み込み中…</p>
+<div id="metrics" class="meta"></div>
+<p class="meta">A/B案の漢字は全域で約7pxから始まり、拡大に合わせて最大18pxまで徐々に大きくなります。読み仮名は漢字の約62％です。自然表示では拡大率に応じて読みを追加します。市名・郡名・区名・町村名それぞれの直下に小さい読みを置きます（例：神戸市／こうべし／中央区／ちゅうおうく）。ナンバープレート表示でも読み仮名を使用できます。漢字だけへの切替も可能です。V2共通ラベル配置規則を使用します。拡大時は文字全体の収まりと、文字の四辺から境界線までの余白を評価し、重なりを増やさずに位置を改善します。密集地域で完全に重ならないことは保証しません。</p></section>
+</div>
+<section class="panel"><h2>全国展開に向けた考え方</h2>
+<p><strong>行政区域は「都道府県コード＋5桁の市区町村コード」で管理</strong>し、ナンバープレート地域はそれらのコードの集合として定義します。「富士山」は山梨県7市町村と静岡県5市町を一つの地域に結びつけます。県ごとに複製した図形や座標は持たせません。</p>
+<p class="meta">自治体の読みは<a href="https://github.com/code4fukui/localgovjp">code4fukui/localgovjp</a>のCC0データを5桁コードで照合しています（関西・中国・山梨・静岡440件）。郡名の読みは別データで管理します。</p><p class="meta">境界試験データ：「国土数値情報（行政区域データ）」（国土交通省）を加工して作成した<a href="https://github.com/smartnews-smri/japan-topography">SmartNews SMRI「japan-topography」</a>（2021年基準・簡素化1％）を利用。<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html">国土交通省の2026年版行政区域データ</a>と照合した正式版の整備は今後の工程です。富士山ナンバー対象区域は国土交通省・静岡県等の公表情報に基づきます。</p></section>
+</main></body></html>
