@@ -50,8 +50,8 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/administrative-labels.js?v=1"></script>
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
-<script defer src="density-labels.js?v=20261031-density1"></script>
-<script defer src="density-app.js?v=20261031-density1"></script>
+<script defer src="density-labels.js?v=20261031-density2"></script>
+<script defer src="density-app.js?v=20261031-density2"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>地名ラベルの表示密度・比較実験</h1>
@@ -84,6 +84,8 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <div class="workarea">
 <section class="panel"><h2 id="map-title">地図を読み込み中</h2>
 <svg id="map" viewBox="0 0 900 900" aria-label="市区町村の試験地図"></svg>
+<p class="meta">地名をタップすると詳しい表示になります。もう一度同じ場所をタップするか、地図の空白部分をタップすると選択が解除されます。</p>
+<button id="clear-below" type="button">選択色を元に戻す</button>
 <p class="legend"><span><i style="background:var(--blue)"></i><span id="legend-blue">市区町村</span></span><span><i style="background:var(--selected)"></i><span id="legend-selected">選択区域</span></span></p></section>
 <section class="panel"><h2>表示・配置状況</h2>
 <p id="status" role="status">地図を読み込み中…</p>
