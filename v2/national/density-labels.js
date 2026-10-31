@@ -1,4 +1,6 @@
-/* V2 national label visibility experiment. No changes to administrative geometry. */
+/* Experimental national label visibility: balanced screen coverage.
+ * Geometry and administrative records stay untouched.
+ */
 (function(global){
  'use strict';
  const capitals={
@@ -7,48 +9,86 @@
   '33':'33100','34':'34100','35':'35201','36':'36201','37':'37201',
   '38':'38201','39':'39201'
  };
- function overlaps(a,b,gap){
-  return a.x1-gap<b.x2 && a.x2+gap>b.x1 &&
-   a.y1-gap<b.y2 && a.y2+gap>b.y1;
+ const overlaps=(a,b,g)=>
+  a.x1-g<b.x2&&a.x2+g>b.x1&&a.y1-g<b.y2&&a.y2+g>b.y1;
+ function shift(label,x,y){
+  const dx=x-label.x,dy=y-label.y;
+  const b=label.box;
+  return {...label,x,y,box:{
+   x1:b.x1+dx,x2:b.x2+dx,y1:b.y1+dy,y2:b.y2+dy
+  }};
  }
- function select(models,labels,options){
-  const {view,zoom,mode,density,selectedId,screenWidth,screenHeight}=options;
-  if(mode==='all')return models.map(()=>true);
-  const result=models.map(()=>false);
-  const ratio=Math.min((screenWidth||390)/view.w,(screenHeight||390)/view.h);
-  const factors={sparse:10500,normal:6500,dense:3600};
-  const marginPx={sparse:8,normal:5,dense:2};
-  const budget=Math.max(3,Math.round((screenWidth||390)*(screenHeight||390)/
-    (factors[density]||factors.normal)));
-  const gap=(marginPx[density]||5)/ratio;
-  const active=[];
+ function arrange(models,labels,options){
+  const {view,mode,density,selectedId,screenWidth,screenHeight}=options;
+  if(mode==='all')return {visible:models.map(()=>true),labels};
+  const width=screenWidth||390,height=screenHeight||390;
+  const ratio=Math.min(width/view.w,height/view.h);
+  if(!(ratio>0))return {visible:models.map(()=>false),labels};
+  const result=models.map(()=>false),placed=labels.slice();
+  const factors={sparse:9500,normal:5900,dense:3100};
+  const marginPx={sparse:8,normal:4,dense:0};
+  const tilePx={sparse:150,normal:115,dense:90};
+  const limit=Math.max(3,Math.ceil(width*height/(factors[density]||5900)));
+  const gap=(marginPx[density]??4)/ratio;
+  const tile=tilePx[density]||115;
+  const countX=Math.max(1,Math.ceil(width/tile));
+  const countY=Math.max(1,Math.ceil(height/tile));
+  const taken=new Set(),active=[];
+  const inView=b=>b.x2>=view.x&&b.x1<=view.x+view.w&&
+   b.y2>=view.y&&b.y1<=view.y+view.h;
   const candidates=models.map((m,i)=>{
-   const p=labels[i],b=p?.box;
-   if(!b)return null;
+   const p=labels[i];if(!p?.box)return null;
    const code=m.code||'',pref=m.prefectureCode||code.slice(0,2);
-   const main=capitals[pref];
-   const priority=(m.id===selectedId?1000000:0)+
-    (code===main||m.major&&m.major===m.name?300000:0)+
-    (Math.max(0,(m.box?.w||0)*(m.box?.h||0))**.35);
-   return {i,code,pref,priority,box:b,selected:m.id===selectedId};
-  }).filter(Boolean).sort((a,b)=>b.priority-a.priority||
-    a.pref.localeCompare(b.pref)||a.code.localeCompare(b.code));
-  // The chosen municipality never disappears from the map when selected.
-  for(const c of candidates){
-   if(!c.selected)continue;
-   result[c.i]=true;active.push(c.box);
+   const priority=(code===capitals[pref]?100000:0)+
+    Math.pow(Math.max(0,(m.box?.w||0)*(m.box?.h||0)),.3);
+   const anchors=[p];
+   if(Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)){
+    const alt=shift(p,m.polylabel[0],m.polylabel[1]);
+    if(Math.hypot(p.x-alt.x,p.y-alt.y)>p.height*.3)anchors.push(alt);
+   }
+   return {i,priority,pref,code,selected:m.id===selectedId,anchors};
+  }).filter(Boolean);
+  function cellOf(p){
+   const cx=Math.max(0,Math.min(countX-1,Math.floor((p.x-view.x)*ratio/tile)));
+   const cy=Math.max(0,Math.min(countY-1,Math.floor((p.y-view.y)*ratio/tile)));
+   return cy*countX+cx;
   }
-  let count=0;
+  function claim(c,p,allowCollision=false){
+   if(!inView(p.box))return false;
+   if(!allowCollision&&active.some(a=>overlaps(a.box,p.box,gap)))return false;
+   result[c.i]=true;placed[c.i]=p;
+   active.push({box:p.box,cell:cellOf(p)});
+   taken.add(cellOf(p));return true;
+  }
+  // A selected municipality must survive decluttering even if it overlaps.
+  for(const c of candidates)if(c.selected)claim(c,c.anchors.find(p=>inView(p.box))||c.anchors[0],true);
+  // Choose candidates from under-represented screen cells first.
+  const byCell=Array.from({length:countX*countY},()=>[]);
   for(const c of candidates){
    if(c.selected)continue;
-   const b=c.box;
-   if(b.x2<view.x||b.x1>view.x+view.w||
-      b.y2<view.y||b.y1>view.y+view.h)continue;
-   if(count>=budget)break;
-   if(active.some(other=>overlaps(b,other,gap)))continue;
-   result[c.i]=true;active.push(b);count++;
+   for(const p of c.anchors)if(inView(p.box))byCell[cellOf(p)].push({c,p});
   }
-  return result;
+  for(const cell of byCell){
+   cell.sort((a,b)=>b.c.priority-a.c.priority||a.c.code.localeCompare(b.c.code));
+  }
+  // First pass: distribute a label to each available cell before clustering.
+  for(let cellId=0;cellId<byCell.length&&active.length<limit;cellId++){
+   for(const {c,p} of byCell[cellId]){
+    if(result[c.i])continue;
+    if(claim(c,p))break;
+   }
+  }
+  // Second pass: fill remaining gaps without allowing overlaps.
+  const rest=candidates.filter(c=>!result[c.i])
+   .sort((a,b)=>b.priority-a.priority||a.code.localeCompare(b.code));
+  for(const c of rest){
+   if(active.length>=limit)break;
+   for(const p of c.anchors){
+    if(claim(c,p))break;
+   }
+  }
+  return {visible:result,labels:placed};
  }
- global.KussoonDensityLabels={select};
+ global.KussoonDensityLabels={arrange,select:(models,labels,options)=>
+  arrange(models,labels,options).visible};
 })(window);
