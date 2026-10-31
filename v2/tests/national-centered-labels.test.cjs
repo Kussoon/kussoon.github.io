@@ -204,3 +204,36 @@ test('new proposal 3 is cached at load and not recomputed on zoom',()=>{
  assert.ok(html.includes('id="conditional-report"'));
  assert.ok(html.includes('value="conditional" selected'));
 });
+
+test('diagnostic overlay shows both exact cross-sections without moving anchors',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.match(html,/id="diagnostic-city"/);
+ assert.match(html,/id="diagnostic-overlay"/);
+ assert.match(html,/id="diagnostic-output"/);
+ assert.match(html,/density-app\.js\?v=20261101-diagnostic1/);
+ assert.match(app,/function renderDiagnostic\(\)/);
+ assert.match(app,/M\.horizontalRuns\(model\.rings,h\[1\]\)/);
+ assert.match(app,/M\.verticalRuns\(model\.rings,h\[0\]\)/);
+ assert.match(app,/tag\('circle'/);
+ assert.match(app,/class:'label-diagnostic'/);
+ // Visualization must read stable anchors; it must not compute a new one.
+ const diagnostics=app.slice(app.indexOf('function renderDiagnostic(){'),
+  app.indexOf('function renderLabels(){'));
+ assert.doesNotMatch(diagnostics,/M\.pointHorizontal(?:Vertical)?\(/);
+ assert.doesNotMatch(diagnostics,/M\.conditionalVertical\(/);
+ assert.match(diagnostics,/horizontalCenters\.get\(model\.id\)/);
+ assert.match(diagnostics,/verticalCenters\.get\(model\.id\)/);
+});
+test('anchor displacement compares only two points on one fixed X',()=>{
+ const m={...rectangle('stair','段差市',0,0,130,200),
+  rings:[[[0,0],[110,0],[110,65],[70,65],[70,200],
+   [40,200],[40,65],[0,65]]]};
+ const first=M.pointHorizontal(m),second=M.pointHorizontalVertical(m);
+ assert.equal(first[0],second[0]);
+ assert.ok(first.every(Number.isFinite)&&second.every(Number.isFinite));
+ const vertical=M.verticalRuns(m.rings,first[0]).find(([a,b])=>
+  a<=first[1]&&b>=first[1]);
+ assert.ok(vertical);
+ assert.ok(second[1]>=vertical[0]&&second[1]<=vertical[1]);
+});
