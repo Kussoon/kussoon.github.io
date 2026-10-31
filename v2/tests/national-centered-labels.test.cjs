@@ -431,3 +431,25 @@ test('map toolbar sits at the lower-right and ruby starts enabled',()=>{
  assert.ok(app.includes("reading').value==='on'?'off':'on'"));
  assert.ok(app.includes("syncReadingButton();renderLabels()"));
 });
+
+test('popup comparison pages share geography and test two distinct responsive layouts',()=>{
+ const a=fs.readFileSync(path.resolve(__dirname,'../national/density-popup-a.html'),'utf8');
+ const b=fs.readFileSync(path.resolve(__dirname,'../national/density-popup-b.html'),'utf8');
+ const current=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ for(const page of [a,b]){
+  assert.ok(page.includes('density-app.js?v=20261101-bottomkana1'));
+  assert.ok(page.includes('centered-labels.js?v=20261101-proposal5a'));
+  assert.ok(page.includes('value="proposal5" selected'));
+  assert.ok(page.includes('id="municipal-popup"'));
+  assert.ok(page.includes('id="map"'));
+  assert.ok(page.includes('density-popup-a.html'));
+  assert.ok(page.includes('density-popup-b.html'));
+  assert.ok(page.includes('aria-label="吹き出しだけを閉じる"'));
+ }
+ assert.ok(a.includes('.popup-actions{display:flex;flex-direction:column'));
+ assert.ok(a.includes('left:8px;bottom:8px;right:auto'));
+ assert.ok(b.includes('.popup-actions{display:grid;grid-template-columns:repeat(3'));
+ assert.ok(b.includes('right:120px;bottom:8px;width:calc(100% - 128px)'));
+ assert.ok(b.includes('.map-toolbar{right:8px;bottom:8px;width:104px}'));
+ assert.ok(!current.includes('吹き出しの配置を比較'));
+});
