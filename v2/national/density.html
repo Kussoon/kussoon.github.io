@@ -57,19 +57,20 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
-<script defer src="density-app.js?v=20261031-smalltype1"></script>
+<script defer src="centered-labels.js?v=20261031-central1"></script>
+<script defer src="density-app.js?v=20261031-central1"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
-<h1>全市町村名を小さく表示・拡大比較</h1>
-<p>西宮市の全域町名地図に近い試みです。<strong>全市町村の地名を最初から小さく表示</strong>し、拡大すると少しずつ大きく読めるようにします。A/Bでラベル位置も比較できます。</p>
+<h1>全件表示・地名ラベルの中央固定試験</h1>
+<p>西宮市の全域町名地図と同じく<strong>全件を小さく表示</strong>し、拡大に合わせて文字だけを大きくします。新A案では区域の南北中央・その高さの東西中央を基準に、最初に必要な軽微補正を済ませ、操作中は動かしません。</p>
 <section class="panel" aria-label="ラベル表示の比較設定">
 <h2>配置方式を比較</h2>
 <div class="controls">
-<label>配置方式<select id="density-mode"><option value="fixed" selected>A：全件表示・中心固定</option><option value="light">B：全件表示・軽い位置調整</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
+<label>配置方式<select id="density-mode"><option value="center" selected>A：南北中央＋東西中央・初期だけ補正</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
 <label>旧実験用・表示密度<select id="density-level" disabled><option value="sparse">少なめ</option><option value="normal" selected>標準</option><option value="dense">多め</option></select></label>
 </div>
 <p id="density-output" class="info" aria-live="polite">表示数を計算中です。</p>
-<p class="meta">初期状態は小さな漢字ラベルを全件表示します。地図右上の「よみがな」で読みを追加できます。A案は各市町村のポリゴン内の代表点にラベルを固定します。B案はA案を起点として、ラベルが重なる場合に限って最大8画面ピクセルだけ動かします。どちらも全件表示し、読み仮名の設定を尊重します。「旧実験」はこれまでの間引き方式を残した比較用です。</p>
+<p class="meta">初期状態は小さな漢字ラベルを全件表示。新Aは南北中央の高さで区域内の東西中央を求め、最初に隣接ラベルと重なるものだけ軽く補正して固定します。ズーム・移動・読み仮名切替時に座標の再計算はしません。旧A/Bと間引き方式は比較用に残しています。</p>
 </section>
 <section class="panel">
 <div class="controls">
