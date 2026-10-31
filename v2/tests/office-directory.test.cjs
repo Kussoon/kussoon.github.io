@@ -36,7 +36,11 @@ test('verified facilities have complete official evidence, postal codes, address
   assert.match(o.postalCode,/^\d{3}-\d{4}$/);assert.match(o.address,/^兵庫県.+\d/);
   assert.ok(o.name&&o.officialPage&&o.sourceUrl&&o.sourcePostalUrl);
   assert.match(o.verifiedAt,/^\d{4}-\d{2}-\d{2}$/);assert.ok(o.verifiedAt<=directory.asOf);
-  assert.equal(sources[id.slice(0,5)].officialPageHttpStatus,200);
+  const source=sources[id.slice(0,5)];
+  if(source.verificationMethod==='userProvidedOfficialConfirmation'){
+   assert.equal(id,'28365-town');
+   assert.ok(source.evidence.some(e=>e.method==='userProvidedOfficialConfirmation'&&e.url===o.sourceUrl));
+  }else assert.equal(source.officialPageHttpStatus,200);
   assert.ok(sources[id.slice(0,5)].evidence.some(e=>e.excerpt.includes(o.postalCode)));
   const key=o.name+'|'+o.address;assert.ok(!unique.has(key),'duplicate '+id);unique.add(key);
   const url=new URL(api.destination(o));assert.equal(url.searchParams.get('destination'),o.name+' '+o.address);
@@ -72,4 +76,23 @@ test('unknown regions and partial wards never invent destinations',()=>{
  const pair=api.resolve(partial,'28110').offices;
  assert.equal(api.destination(pair[0]),null);assert.ok(api.destination(pair[1]));
  for(const u of [undefined,null,'javascript:alert(1)','http://example.com','https://user:secret@example.com'])assert.equal(api.safeUrl(u),null);
+});
+
+test('all 50 facilities are verified, including the official Taka confirmation',()=>{
+ assert.equal(Object.values(directory.offices).filter(o=>o.status==='verified').length,50);
+ assert.equal(Object.values(directory.offices).filter(o=>o.status!=='verified').length,0);
+ const {region,offices:[office]}=api.resolve(directory,'28365');
+ assert.equal(region.name,'多可町');assert.deepEqual(region.officeIds,['28365-town']);
+ assert.equal(office.name,'多可町役場 本庁舎');
+ assert.equal(office.postalCode,'679-1192');
+ assert.equal(office.address,'兵庫県多可郡多可町中区中村町123番地');
+ const url='https://www.town.taka.lg.jp/about_taka/chousha/';
+ for(const key of ['officialPage','sourceUrl','sourcePostalUrl'])assert.equal(office[key],url);
+ assert.equal(office.reviewNote,undefined);
+ assert.equal(new URL(api.destination(office)).searchParams.get('destination'),office.name+' '+office.address);
+ assert.equal(sources['28365'].officialPage,url);
+ assert.equal(sources['28365'].checkedAt,office.verifiedAt);
+ assert.equal(sources['28365'].officialPageHttpStatus,503);
+ assert.equal(sources['28365'].verificationMethod,'userProvidedOfficialConfirmation');
+ assert.ok(sources['28365'].evidence.some(e=>e.excerpt.includes(office.address)&&e.excerpt.includes(office.postalCode)));
 });

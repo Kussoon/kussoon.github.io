@@ -19,11 +19,16 @@ const data=require('../data/offices/28.json');
    assert.equal(await page.locator('#reading').inputValue(),'on');
    assert.equal(await page.locator('#density-mode').inputValue(),'proposal5');
    const select=async code=>page.locator('#map path[data-id="28:'+code+'"]').dispatchEvent('keydown',{key:'Enter'});
-   for(const code of ['28110','28204','28214','28215','28446']){
+   for(const code of ['28110','28204','28214','28215','28446','28365']){
     await select(code);
     const popup=page.locator('#municipal-popup');assert.ok(await popup.isVisible());
     assert.equal(await popup.locator('.popup-facility').count(),code==='28110'?2:1);
     assert.equal(await popup.getByRole('link',{name:/ここへ行く/}).count(),code==='28110'?2:1);
+    if(code==='28365'){
+     assert.match(await popup.innerText(),/679-1192/);
+     assert.match(await popup.innerText(),/兵庫県多可郡多可町中区中村町123番地/);
+     assert.equal(await popup.getByRole('link',{name:/庁舎案内/}).getAttribute('href'),data.offices['28365-town'].officialPage);
+    }
     if(code==='28110'){
      assert.ok((await popup.innerText()).includes('651-8570'));assert.ok((await popup.innerText()).includes('650-8570'));
      const links=await popup.getByRole('link',{name:/ここへ行く/}).evaluateAll(nodes=>nodes.map(n=>n.href));assert.notEqual(links[0],links[1]);
@@ -40,13 +45,13 @@ const data=require('../data/offices/28.json');
   // Partial directory: an unconfirmed ward still leaves the shared city hall usable.
   const partial=structuredClone(data);partial.offices['28110-ward']={name:'神戸市中央区役所',status:'missing'};
   await page.route('**/data/offices/28.json*',r=>r.fulfill({json:partial}));
-  await page.reload();await page.waitForFunction(()=>!document.getElementById('area').disabled);
+  await page.reload();await page.waitForSelector('#map path[data-id]');await page.waitForFunction(()=>!document.getElementById('area').disabled);
   await page.locator('#map path[aria-label="神戸市中央区"]').dispatchEvent('keydown',{key:'Enter'});
   assert.equal(await page.locator('#municipal-popup').getByRole('link',{name:/ここへ行く/}).count(),1);
   assert.match(await page.locator('#municipal-popup').innerText(),/未確認/);
   await page.unroute('**/data/offices/28.json*');
   await page.route('**/data/offices/28.json*',r=>r.fulfill({status:503,body:'unavailable'}));
-  await page.reload();await page.waitForFunction(()=>!document.getElementById('area').disabled);
+  await page.reload();await page.waitForSelector('#map path[data-id]');await page.waitForFunction(()=>!document.getElementById('area').disabled);
   assert.ok(await page.locator('#map path[data-id]').count()>0);
   await page.locator('#map path[data-id="28:28110"]').dispatchEvent('keydown',{key:'Enter'});
   assert.equal(await page.locator('#municipal-popup').getByRole('link',{name:/ここへ行く/}).count(),0);
@@ -54,8 +59,9 @@ const data=require('../data/offices/28.json');
   let officeRequests=0;
   await page.route('**/data/offices/28.json*',r=>{officeRequests++;return r.continue();});
   await page.goto(base+'/v2/national/density.html?area=shikoku');
+  await page.waitForSelector('#map path[data-id]');
   await page.waitForFunction(()=>!document.getElementById('area').disabled);
   assert.equal(officeRequests,0);
-  assert.deepEqual(errors,[]);console.log('PASS: 3 viewport sizes, initial 6 regions, distinct routes, close/reselect, partial ward');
+  assert.deepEqual(errors,[]);console.log('PASS: 3 viewport sizes, initial 6 regions + Taka, distinct routes, close/reselect, partial ward, load failure, lazy loading');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

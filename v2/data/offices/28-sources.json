@@ -838,15 +838,23 @@
     }
   },
   "28365": {
-    "officialPage": null,
+    "officialPage": "https://www.town.taka.lg.jp/about_taka/chousha/",
     "checkedAt": "2026-10-31",
     "officialPageHttpStatus": 503,
-    "evidence": [],
+    "evidence": [
+      {
+        "url": "https://www.town.taka.lg.jp/about_taka/chousha/",
+        "method": "userProvidedOfficialConfirmation",
+        "excerpt": "多可町役場 本庁舎 〒679-1192 兵庫県多可郡多可町中区中村町123番地"
+      }
+    ],
     "wikipedia": {
       "url": "https://ja.wikipedia.org/wiki/多可町",
       "checkedAt": "2026-10-31",
       "method": "web reader: article title and existence checked (direct HTTP client returned 403)"
-    }
+    },
+    "verificationMethod": "userProvidedOfficialConfirmation",
+    "verificationNote": "ユーザーが公式庁舎案内で庁舎名・郵便番号・住所を確認し提示。実行環境の再取得結果はHTTP 503のため、取得成功として記録しない。"
   },
   "28381": {
     "officialPage": "https://www.town.hyogo-inami.lg.jp/0000000335.html",
