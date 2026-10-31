@@ -9,10 +9,6 @@ function resolve(directory,code){
  if(!region)return {region:null,offices:[]};
  return {region,offices:region.officeIds.map(id=>({id,...directory.offices[id]}))};
 }
-function destination(office){
- return office?.status==='verified'&&office.address?
-  'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(office.name+' '+office.address):null;
-}
 function render(document,container,result,label){
  container.replaceChildren();
  const element=(tag,className,text)=>{
@@ -37,7 +33,7 @@ function render(document,container,result,label){
  common.append(action('公式サイト',result.region?.official,label),action('Wikipedia',result.region?.wikipedia,label));
  container.append(common);
 }
-const api={safeUrl,resolve,destination,render};
+const api={safeUrl,resolve,render};
 if(typeof module==='object'&&module.exports)module.exports=api;
 else root.KussoonOfficeDirectory=api;
 })(typeof window==='object'?window:globalThis);
