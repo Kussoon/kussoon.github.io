@@ -35,10 +35,10 @@
    const y=mid+b.h*fraction, runs=horizontalRuns(model.rings,y);
    const feasible=runs.filter(([left,right])=>E.isInside((left+right)/2,y,model.rings));
    if(!feasible.length)continue;
-   const [left,right]=feasible.sort((a,b)=>
-    (b[1]-b[0])-(a[1]-a[0])||
-    Math.abs((a[0]+a[1])/2-(b.minX+b.maxX)/2)-
-    Math.abs((b[0]+b[1])/2-(b.minX+b.maxX)/2))[0];
+   const [left,right]=feasible.sort((runA,runB)=>
+    (runB[1]-runB[0])-(runA[1]-runA[0])||
+    Math.abs((runA[0]+runA[1])/2-(b.minX+b.maxX)/2)-
+    Math.abs((runB[0]+runB[1])/2-(b.minX+b.maxX)/2))[0];
    return [round((left+right)/2),round(y)];
   }
   return fallback;
