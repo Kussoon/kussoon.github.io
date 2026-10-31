@@ -401,6 +401,29 @@ $('area').addEventListener('change',()=>{
  $('mode').value=$('area').value==='fuji'?'plate':'municipality';refresh();
 });
 $('mode').addEventListener('change',refresh);
+$('city-shortcuts').addEventListener('click',async e=>{
+ const button=e.target.closest('button[data-city]');
+ if(!button)return;
+ const name=button.dataset.city;
+ if(!['宝塚市','西宮市','神戸市','京都市'].includes(name))return;
+ if($('area').value!=='west-shikoku'||$('mode').value!=='municipality'){
+  $('area').value='west-shikoku';$('mode').value='municipality';
+  await refresh();
+ }
+ const city=models.find(m=>m.name===name);
+ if(!city){setStatus(name+'の地図データが見つかりません');return;}
+ // The camera changes only here, not when switching label algorithms.
+ const b=city.box;
+ const width=Math.min(bounds.w,Math.max(
+  b.w*2.5,b.h*2.5*bounds.w/bounds.h,bounds.w/28
+ ));
+ view.w=width;view.h=width*bounds.h/bounds.w;
+ view.x=(b.minX+b.maxX-view.w)/2;
+ view.y=(b.minY+b.maxY-view.h)/2;
+ clamp();syncView();renderLabels();
+ map.scrollIntoView({behavior:'smooth',block:'center'});
+});
+
 function syncReadingButton(){
  const pressed=$('reading').value==='on';
  $('reading-toggle').setAttribute('aria-pressed',String(pressed));
