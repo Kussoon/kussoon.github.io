@@ -388,7 +388,7 @@ test('office overlay has separate selection, safe links, and unverified fallback
  for(const id of ['municipal-popup','popup-name','popup-close',
   'popup-office','popup-address','popup-actions','popup-note'])
   assert.ok(html.includes('id="'+id+'"'));
- assert.ok(html.includes('density-app.js?v=20261101-officepilot1'));
+ assert.ok(html.includes('density-app.js?v=20261101-popupclose2'));
  for(const title of ['公式サイト','Wikipedia','ここへ行く'])
   assert.ok(app.includes(title));
  for(const code of ['renderOfficePopup(model)','renderOfficePopup(chosen)',
@@ -396,4 +396,24 @@ test('office overlay has separate selection, safe links, and unverified fallback
   'aria-disabled', 'encodeURIComponent(data.office', 'toggleMunicipality(id)'])
   assert.ok(app.includes(code),code);
  assert.ok(html.includes('.municipal-popup[hidden]'));
+});
+
+test('popup close preserves selection and repeated tap toggles selection',()=>{
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const closeStart=app.indexOf("popup-close').addEventListener");
+ const closeEnd=app.indexOf("search').addEventListener",closeStart);
+ const close=app.slice(closeStart,closeEnd);
+ assert.ok(close.includes('popupDismissed=true'));
+ assert.ok(close.includes('municipal-popup'));
+ assert.ok(close.includes('hidden=true'));
+ assert.ok(!close.includes('select(null)'));
+ const begin=app.indexOf('function select(sel,scroll=false){');
+ const end=app.indexOf('function toggleMunicipality(id){');
+ const selection=app.slice(begin,end);
+ assert.ok(selection.includes('popupDismissed=false'));
+ assert.ok(selection.includes('selection=sel;highlight()'));
+ assert.ok(app.includes("selection.id===id?null:{type:'model',id}"));
+ assert.ok(app.includes("state.mode==='plate'||popupDismissed"));
+ assert.ok(html.includes('×印は吹き出しだけを閉じ、選択色は残します'));
 });
