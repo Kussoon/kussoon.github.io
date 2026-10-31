@@ -1,0 +1,1027 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "28",
+  "asOf": "2026-10-31",
+  "regions": {
+    "28100": {
+      "name": "神戸市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/神戸市"
+    },
+    "28101": {
+      "name": "神戸市東灘区",
+      "kind": "ward",
+      "officeIds": [
+        "28101-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/higashinadaku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/東灘区"
+    },
+    "28102": {
+      "name": "神戸市灘区",
+      "kind": "ward",
+      "officeIds": [
+        "28102-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/nadaku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/灘区"
+    },
+    "28105": {
+      "name": "神戸市兵庫区",
+      "kind": "ward",
+      "officeIds": [
+        "28105-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/hyogoku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/兵庫区"
+    },
+    "28106": {
+      "name": "神戸市長田区",
+      "kind": "ward",
+      "officeIds": [
+        "28106-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/nagataku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/長田区"
+    },
+    "28107": {
+      "name": "神戸市須磨区",
+      "kind": "ward",
+      "officeIds": [
+        "28107-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/sumaku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/須磨区"
+    },
+    "28108": {
+      "name": "神戸市垂水区",
+      "kind": "ward",
+      "officeIds": [
+        "28108-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/tarumiku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/垂水区"
+    },
+    "28109": {
+      "name": "神戸市北区",
+      "kind": "ward",
+      "officeIds": [
+        "28109-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/kitaku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/北区_(神戸市)"
+    },
+    "28110": {
+      "name": "神戸市中央区",
+      "kind": "ward",
+      "officeIds": [
+        "28110-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/chuoku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/中央区_(神戸市)"
+    },
+    "28111": {
+      "name": "神戸市西区",
+      "kind": "ward",
+      "officeIds": [
+        "28111-ward",
+        "28100-city"
+      ],
+      "official": "https://www.city.kobe.lg.jp/kuyakusho/nishiku/index.html",
+      "parentCode": "28100",
+      "wikipedia": "https://ja.wikipedia.org/wiki/西区_(神戸市)"
+    },
+    "28201": {
+      "name": "姫路市",
+      "kind": "city",
+      "officeIds": [
+        "28201-city"
+      ],
+      "official": "https://www.city.himeji.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/姫路市"
+    },
+    "28202": {
+      "name": "尼崎市",
+      "kind": "city",
+      "officeIds": [
+        "28202-city"
+      ],
+      "official": "https://www.city.amagasaki.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/尼崎市"
+    },
+    "28203": {
+      "name": "明石市",
+      "kind": "city",
+      "officeIds": [
+        "28203-city"
+      ],
+      "official": "https://www.city.akashi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/明石市"
+    },
+    "28204": {
+      "name": "西宮市",
+      "kind": "city",
+      "officeIds": [
+        "28204-city"
+      ],
+      "official": "https://www.nishi.or.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/西宮市"
+    },
+    "28205": {
+      "name": "洲本市",
+      "kind": "city",
+      "officeIds": [
+        "28205-city"
+      ],
+      "official": "https://www.city.sumoto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/洲本市"
+    },
+    "28206": {
+      "name": "芦屋市",
+      "kind": "city",
+      "officeIds": [
+        "28206-city"
+      ],
+      "official": "https://www.city.ashiya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/芦屋市"
+    },
+    "28207": {
+      "name": "伊丹市",
+      "kind": "city",
+      "officeIds": [
+        "28207-city"
+      ],
+      "official": "https://www.city.itami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/伊丹市"
+    },
+    "28208": {
+      "name": "相生市",
+      "kind": "city",
+      "officeIds": [
+        "28208-city"
+      ],
+      "official": "https://www.city.aioi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/相生市"
+    },
+    "28209": {
+      "name": "豊岡市",
+      "kind": "city",
+      "officeIds": [
+        "28209-city"
+      ],
+      "official": "https://www.city.toyooka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/豊岡市"
+    },
+    "28210": {
+      "name": "加古川市",
+      "kind": "city",
+      "officeIds": [
+        "28210-city"
+      ],
+      "official": "https://www.city.kakogawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/加古川市"
+    },
+    "28212": {
+      "name": "赤穂市",
+      "kind": "city",
+      "officeIds": [
+        "28212-city"
+      ],
+      "official": "https://www.city.ako.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/赤穂市"
+    },
+    "28213": {
+      "name": "西脇市",
+      "kind": "city",
+      "officeIds": [
+        "28213-city"
+      ],
+      "official": "https://www.city.nishiwaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/西脇市"
+    },
+    "28214": {
+      "name": "宝塚市",
+      "kind": "city",
+      "officeIds": [
+        "28214-city"
+      ],
+      "official": "https://www.city.takarazuka.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/宝塚市"
+    },
+    "28215": {
+      "name": "三木市",
+      "kind": "city",
+      "officeIds": [
+        "28215-city"
+      ],
+      "official": "https://www.city.miki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/三木市"
+    },
+    "28216": {
+      "name": "高砂市",
+      "kind": "city",
+      "officeIds": [
+        "28216-city"
+      ],
+      "official": "https://www.city.takasago.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/高砂市"
+    },
+    "28217": {
+      "name": "川西市",
+      "kind": "city",
+      "officeIds": [
+        "28217-city"
+      ],
+      "official": "https://www.city.kawanishi.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/川西市"
+    },
+    "28218": {
+      "name": "小野市",
+      "kind": "city",
+      "officeIds": [
+        "28218-city"
+      ],
+      "official": "https://www.city.ono.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/小野市"
+    },
+    "28219": {
+      "name": "三田市",
+      "kind": "city",
+      "officeIds": [
+        "28219-city"
+      ],
+      "official": "https://www.city.sanda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/三田市"
+    },
+    "28220": {
+      "name": "加西市",
+      "kind": "city",
+      "officeIds": [
+        "28220-city"
+      ],
+      "official": "https://www.city.kasai.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/加西市"
+    },
+    "28221": {
+      "name": "丹波篠山市",
+      "kind": "city",
+      "officeIds": [
+        "28221-city"
+      ],
+      "official": "https://www.city.tambasasayama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/丹波篠山市"
+    },
+    "28222": {
+      "name": "養父市",
+      "kind": "city",
+      "officeIds": [
+        "28222-city"
+      ],
+      "official": "https://www.city.yabu.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/養父市"
+    },
+    "28223": {
+      "name": "丹波市",
+      "kind": "city",
+      "officeIds": [
+        "28223-city"
+      ],
+      "official": "https://www.city.tamba.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/丹波市"
+    },
+    "28224": {
+      "name": "南あわじ市",
+      "kind": "city",
+      "officeIds": [
+        "28224-city"
+      ],
+      "official": "https://www.city.minamiawaji.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/南あわじ市"
+    },
+    "28225": {
+      "name": "朝来市",
+      "kind": "city",
+      "officeIds": [
+        "28225-city"
+      ],
+      "official": "https://www.city.asago.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/朝来市"
+    },
+    "28226": {
+      "name": "淡路市",
+      "kind": "city",
+      "officeIds": [
+        "28226-city"
+      ],
+      "official": "https://www.city.awaji.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/淡路市"
+    },
+    "28227": {
+      "name": "宍粟市",
+      "kind": "city",
+      "officeIds": [
+        "28227-city"
+      ],
+      "official": "https://www.city.shiso.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/宍粟市"
+    },
+    "28228": {
+      "name": "加東市",
+      "kind": "city",
+      "officeIds": [
+        "28228-city"
+      ],
+      "official": "https://www.city.kato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/加東市"
+    },
+    "28229": {
+      "name": "たつの市",
+      "kind": "city",
+      "officeIds": [
+        "28229-city"
+      ],
+      "official": "https://www.city.tatsuno.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/たつの市"
+    },
+    "28301": {
+      "name": "猪名川町",
+      "kind": "town",
+      "officeIds": [
+        "28301-town"
+      ],
+      "official": "https://www.town.inagawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/猪名川町"
+    },
+    "28365": {
+      "name": "多可町",
+      "kind": "town",
+      "officeIds": [
+        "28365-town"
+      ],
+      "wikipedia": "https://ja.wikipedia.org/wiki/多可町"
+    },
+    "28381": {
+      "name": "稲美町",
+      "kind": "town",
+      "officeIds": [
+        "28381-town"
+      ],
+      "official": "https://www.town.hyogo-inami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/稲美町"
+    },
+    "28382": {
+      "name": "播磨町",
+      "kind": "town",
+      "officeIds": [
+        "28382-town"
+      ],
+      "official": "https://www.town.harima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/播磨町"
+    },
+    "28442": {
+      "name": "市川町",
+      "kind": "town",
+      "officeIds": [
+        "28442-town"
+      ],
+      "official": "https://www.town.ichikawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/市川町"
+    },
+    "28443": {
+      "name": "福崎町",
+      "kind": "town",
+      "officeIds": [
+        "28443-town"
+      ],
+      "official": "https://www.town.fukusaki.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/福崎町"
+    },
+    "28446": {
+      "name": "神河町",
+      "kind": "town",
+      "officeIds": [
+        "28446-town"
+      ],
+      "official": "https://www.town.kamikawa.hyogo.jp/index.html",
+      "wikipedia": "https://ja.wikipedia.org/wiki/神河町"
+    },
+    "28464": {
+      "name": "太子町",
+      "kind": "town",
+      "officeIds": [
+        "28464-town"
+      ],
+      "official": "https://www.town.hyogo-taishi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/太子町_(兵庫県)"
+    },
+    "28481": {
+      "name": "上郡町",
+      "kind": "town",
+      "officeIds": [
+        "28481-town"
+      ],
+      "official": "https://www.town.kamigori.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/上郡町"
+    },
+    "28501": {
+      "name": "佐用町",
+      "kind": "town",
+      "officeIds": [
+        "28501-town"
+      ],
+      "official": "https://www.town.sayo.lg.jp/cms-sypher/www/normal_top.jsp",
+      "wikipedia": "https://ja.wikipedia.org/wiki/佐用町"
+    },
+    "28585": {
+      "name": "香美町",
+      "kind": "town",
+      "officeIds": [
+        "28585-town"
+      ],
+      "official": "https://www.town.mikata-kami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/香美町"
+    },
+    "28586": {
+      "name": "新温泉町",
+      "kind": "town",
+      "officeIds": [
+        "28586-town"
+      ],
+      "official": "https://www.town.shinonsen.hyogo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/新温泉町"
+    }
+  },
+  "offices": {
+    "28100-city": {
+      "name": "神戸市役所（1号館）",
+      "kind": "cityHall",
+      "postalCode": "650-8570",
+      "address": "兵庫県神戸市中央区加納町6-5-1",
+      "officialPage": "https://www.city.kobe.lg.jp/a28956/shise/about/building/index.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/"
+    },
+    "28101-ward": {
+      "name": "神戸市東灘区役所",
+      "kind": "wardOffice",
+      "postalCode": "658-8570",
+      "address": "兵庫県神戸市東灘区住吉東町5丁目2番1号",
+      "officialPage": "https://www.city.kobe.lg.jp/b63860/kuyakusho/higashinadaku/annai/access.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/higashinadaku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/higashinadaku/index.html"
+    },
+    "28102-ward": {
+      "name": "神戸市灘区役所",
+      "kind": "wardOffice",
+      "postalCode": "657-8570",
+      "address": "兵庫県神戸市灘区桜口町4丁目2番1号",
+      "officialPage": "https://www.city.kobe.lg.jp/c63604/kuyakusho/nadaku/madoguchi/access.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/nadaku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/nadaku/index.html"
+    },
+    "28105-ward": {
+      "name": "神戸市兵庫区役所",
+      "kind": "wardOffice",
+      "postalCode": "652-8570",
+      "address": "兵庫県神戸市兵庫区荒田町1丁目21-1",
+      "officialPage": "https://www.city.kobe.lg.jp/e90232/kuyakusho/hyogoku/madoguchi/access.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/hyogoku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/hyogoku/index.html"
+    },
+    "28106-ward": {
+      "name": "神戸市長田区役所",
+      "kind": "wardOffice",
+      "postalCode": "653-8570",
+      "address": "兵庫県神戸市長田区北町3丁目4番地の3",
+      "officialPage": "https://www.city.kobe.lg.jp/h53961/kuyakusho/nagataku/madoguchi/access.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/nagataku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/nagataku/index.html"
+    },
+    "28107-ward": {
+      "name": "神戸市須磨区役所",
+      "kind": "wardOffice",
+      "postalCode": "654-8570",
+      "address": "兵庫県神戸市須磨区大黒町4丁目1-1",
+      "officialPage": "https://www.city.kobe.lg.jp/i73375/kuyakusho/sumaku/acces/index.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/sumaku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/sumaku/index.html"
+    },
+    "28108-ward": {
+      "name": "神戸市垂水区役所",
+      "kind": "wardOffice",
+      "postalCode": "655-8570",
+      "address": "兵庫県神戸市垂水区日向1-5-1",
+      "officialPage": "https://www.city.kobe.lg.jp/j58252/kuyakusho/tarumiku/annai/annai.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/tarumiku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/tarumiku/index.html"
+    },
+    "28109-ward": {
+      "name": "神戸市北区役所",
+      "kind": "wardOffice",
+      "postalCode": "651-1195",
+      "address": "兵庫県神戸市北区鈴蘭台北町1丁目9-1",
+      "officialPage": "https://www.city.kobe.lg.jp/f96104/kuyakusho/kitaku/madoguchi/2-1.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/kitaku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/kitaku/index.html",
+      "reviewNote": "J-LIS一覧は651-1114。自治体公式トップで確認した庁舎固有の651-1195を採用。北神区役所は対象外。"
+    },
+    "28110-ward": {
+      "name": "神戸市中央区役所",
+      "kind": "wardOffice",
+      "postalCode": "651-8570",
+      "address": "兵庫県神戸市中央区東町115番地",
+      "officialPage": "https://www.city.kobe.lg.jp/d62766/kuyakusho/chuoku/madoguchi/access.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/chuoku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/chuoku/index.html"
+    },
+    "28111-ward": {
+      "name": "神戸市西区役所",
+      "kind": "wardOffice",
+      "postalCode": "651-2295",
+      "address": "兵庫県神戸市西区糀台5-4-1",
+      "officialPage": "https://www.city.kobe.lg.jp/k25836/kuyakusho/nishiku/annai/access.html",
+      "sourceUrl": "https://www.city.kobe.lg.jp/kuyakusho/nishiku/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kobe.lg.jp/kuyakusho/nishiku/index.html"
+    },
+    "28201-city": {
+      "name": "姫路市役所",
+      "kind": "cityHall",
+      "postalCode": "670-8501",
+      "address": "兵庫県姫路市安田四丁目1番地",
+      "officialPage": "https://www.city.himeji.lg.jp/shisei/category/5-6-1-0-0-0-0-0-0-0.html",
+      "sourceUrl": "https://www.city.himeji.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.himeji.lg.jp/"
+    },
+    "28202-city": {
+      "name": "尼崎市役所",
+      "kind": "cityHall",
+      "postalCode": "660-8501",
+      "address": "兵庫県尼崎市東七松町1丁目23番1号",
+      "officialPage": "https://www.city.amagasaki.hyogo.jp/map/1000375/1000385/1000425.html",
+      "sourceUrl": "https://www.city.amagasaki.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.amagasaki.hyogo.jp/"
+    },
+    "28203-city": {
+      "name": "明石市役所",
+      "kind": "cityHall",
+      "postalCode": "673-8686",
+      "address": "兵庫県明石市中崎1丁目5-1",
+      "officialPage": "https://www.city.akashi.lg.jp/seisaku/kouhou_ka/shisetsu/siyakusyo.html",
+      "sourceUrl": "https://www.city.akashi.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.akashi.lg.jp/"
+    },
+    "28204-city": {
+      "name": "西宮市役所 本庁舎",
+      "kind": "cityHall",
+      "postalCode": "662-8567",
+      "address": "兵庫県西宮市六湛寺町10-3",
+      "officialPage": "https://www.nishi.or.jp/access/sonotashisetsu/honchosha/chosha0001.html",
+      "sourceUrl": "https://www.nishi.or.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.nishi.or.jp/"
+    },
+    "28205-city": {
+      "name": "洲本市役所",
+      "kind": "cityHall",
+      "postalCode": "656-8686",
+      "address": "兵庫県洲本市本町三丁目4番10号",
+      "officialPage": "https://www.city.sumoto.lg.jp/soshiki/8/4888.html",
+      "sourceUrl": "https://www.city.sumoto.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.sumoto.lg.jp/"
+    },
+    "28206-city": {
+      "name": "芦屋市役所",
+      "kind": "cityHall",
+      "postalCode": "659-8501",
+      "address": "兵庫県芦屋市精道町7番6号",
+      "officialPage": "https://www.city.ashiya.lg.jp/kouhou/shiyakusho.html",
+      "sourceUrl": "https://www.city.ashiya.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.ashiya.lg.jp/"
+    },
+    "28207-city": {
+      "name": "伊丹市役所",
+      "kind": "cityHall",
+      "postalCode": "664-8503",
+      "address": "兵庫県伊丹市千僧1-1",
+      "officialPage": "https://www.city.itami.lg.jp/shiseijoho/shiyakusho/index.html",
+      "sourceUrl": "https://www.city.itami.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.itami.lg.jp/"
+    },
+    "28208-city": {
+      "name": "相生市役所",
+      "kind": "cityHall",
+      "postalCode": "678-8585",
+      "address": "兵庫県相生市旭1丁目1番3号",
+      "officialPage": "https://www.city.aioi.lg.jp/soshiki/kikakukoho/annai.html",
+      "sourceUrl": "https://www.city.aioi.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.aioi.lg.jp/"
+    },
+    "28209-city": {
+      "name": "豊岡市役所",
+      "kind": "cityHall",
+      "postalCode": "668-8666",
+      "address": "兵庫県豊岡市中央町2番4号",
+      "officialPage": "https://www.city.toyooka.lg.jp/shisei/soshiki/shiyakusho/index.html",
+      "sourceUrl": "https://www.city.toyooka.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.toyooka.lg.jp/"
+    },
+    "28210-city": {
+      "name": "加古川市役所",
+      "kind": "cityHall",
+      "postalCode": "675-8501",
+      "address": "兵庫県加古川市加古川町北在家2000",
+      "officialPage": "https://www.city.kakogawa.lg.jp/shiseijoho/gaiyou/1412735654401.html",
+      "sourceUrl": "https://www.city.kakogawa.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kakogawa.lg.jp/"
+    },
+    "28212-city": {
+      "name": "赤穂市役所",
+      "kind": "cityHall",
+      "postalCode": "678-0292",
+      "address": "兵庫県赤穂市加里屋81番地",
+      "officialPage": "https://www.city.ako.lg.jp/shise/chosha/index.html",
+      "sourceUrl": "https://www.city.ako.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.ako.lg.jp/"
+    },
+    "28213-city": {
+      "name": "西脇市役所",
+      "kind": "cityHall",
+      "postalCode": "677-8511",
+      "address": "兵庫県西脇市下戸田128番地の1",
+      "officialPage": "https://www.city.nishiwaki.lg.jp/access/index.html",
+      "sourceUrl": "https://www.city.nishiwaki.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.nishiwaki.lg.jp/"
+    },
+    "28214-city": {
+      "name": "宝塚市役所 本庁舎",
+      "kind": "cityHall",
+      "postalCode": "665-8665",
+      "address": "兵庫県宝塚市東洋町1番1号",
+      "officialPage": "https://www.city.takarazuka.hyogo.jp/1060687/1060720/1061628/1001190.html",
+      "sourceUrl": "https://www.city.takarazuka.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.takarazuka.hyogo.jp/"
+    },
+    "28215-city": {
+      "name": "三木市役所",
+      "kind": "cityHall",
+      "postalCode": "673-0492",
+      "address": "兵庫県三木市上の丸町10番30号",
+      "officialPage": "https://www.city.miki.lg.jp/map/10000.html",
+      "sourceUrl": "https://www.city.miki.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.miki.lg.jp/"
+    },
+    "28216-city": {
+      "name": "高砂市役所",
+      "kind": "cityHall",
+      "postalCode": "676-8501",
+      "address": "兵庫県高砂市荒井町千鳥1丁目1番1号",
+      "officialPage": "https://www.city.takasago.lg.jp/soshikikarasagasu/somuka/yakusho_madoguchiannai/6627.html",
+      "sourceUrl": "https://www.city.takasago.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.takasago.lg.jp/"
+    },
+    "28217-city": {
+      "name": "川西市役所",
+      "kind": "cityHall",
+      "postalCode": "666-8501",
+      "address": "兵庫県川西市中央町12番1号",
+      "officialPage": "https://www.city.kawanishi.hyogo.jp/shiseijoho/shokai/1003037.html",
+      "sourceUrl": "https://www.city.kawanishi.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kawanishi.hyogo.jp/"
+    },
+    "28218-city": {
+      "name": "小野市役所",
+      "kind": "cityHall",
+      "postalCode": "675-1380",
+      "address": "兵庫県小野市中島町531",
+      "officialPage": "https://www.city.ono.hyogo.jp/access.html",
+      "sourceUrl": "https://www.city.ono.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.ono.hyogo.jp/"
+    },
+    "28219-city": {
+      "name": "三田市役所",
+      "kind": "cityHall",
+      "postalCode": "669-1595",
+      "address": "兵庫県三田市三輪2丁目1番1号",
+      "officialPage": "https://www.city.sanda.lg.jp/shisei_joho/yakusho_madoguchi/annai.html",
+      "sourceUrl": "https://www.city.sanda.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.sanda.lg.jp/"
+    },
+    "28220-city": {
+      "name": "加西市役所",
+      "kind": "cityHall",
+      "postalCode": "675-2395",
+      "address": "兵庫県加西市北条町横尾1000番地",
+      "officialPage": "https://www.city.kasai.hyogo.jp/soshiki/3/10649.html",
+      "sourceUrl": "https://www.city.kasai.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kasai.hyogo.jp/"
+    },
+    "28221-city": {
+      "name": "丹波篠山市役所",
+      "kind": "cityHall",
+      "postalCode": "669-2397",
+      "address": "兵庫県丹波篠山市北新町41",
+      "officialPage": "https://www.city.tambasasayama.lg.jp/soshikikarasagasu/somuka/gyoseijoho/4/6056.html",
+      "sourceUrl": "https://www.city.tambasasayama.lg.jp/soshikikarasagasu/somuka/gyoseijoho/4/6056.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.tambasasayama.lg.jp/soshikikarasagasu/somuka/gyoseijoho/4/6056.html"
+    },
+    "28222-city": {
+      "name": "養父市役所",
+      "kind": "cityHall",
+      "postalCode": "667-8651",
+      "address": "兵庫県養父市八鹿町八鹿1675",
+      "officialPage": "https://www.city.yabu.hyogo.jp/kurashi_tetsuzuki/shisetsu/index.html",
+      "sourceUrl": "https://www.city.yabu.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.yabu.hyogo.jp/"
+    },
+    "28223-city": {
+      "name": "丹波市役所",
+      "kind": "cityHall",
+      "postalCode": "669-3692",
+      "address": "兵庫県丹波市氷上町成松字甲賀1番地",
+      "officialPage": "https://www.city.tamba.lg.jp/soshiki/hyojoshisho/gyomuannai/2/3/1469.html",
+      "sourceUrl": "https://www.city.tamba.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.tamba.lg.jp/"
+    },
+    "28224-city": {
+      "name": "南あわじ市役所",
+      "kind": "cityHall",
+      "postalCode": "656-0492",
+      "address": "兵庫県南あわじ市市善光寺22番地1",
+      "officialPage": "https://www.city.minamiawaji.hyogo.jp/soshiki/soumu/soshikizu.html",
+      "sourceUrl": "https://www.city.minamiawaji.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.minamiawaji.hyogo.jp/"
+    },
+    "28225-city": {
+      "name": "朝来市役所",
+      "kind": "cityHall",
+      "postalCode": "669-5292",
+      "address": "兵庫県朝来市和田山町東谷213番地1",
+      "officialPage": "https://www.city.asago.hyogo.jp/map/100067.html",
+      "sourceUrl": "https://www.city.asago.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.asago.hyogo.jp/"
+    },
+    "28226-city": {
+      "name": "淡路市役所",
+      "kind": "cityHall",
+      "postalCode": "656-2292",
+      "address": "兵庫県淡路市生穂新島8番地",
+      "officialPage": "https://www.city.awaji.lg.jp/soshiki/soumu/shiyakusho.html",
+      "sourceUrl": "https://www.city.awaji.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.awaji.lg.jp/"
+    },
+    "28227-city": {
+      "name": "宍粟市役所",
+      "kind": "cityHall",
+      "postalCode": "671-2593",
+      "address": "兵庫県宍粟市山崎町中広瀬133番地6",
+      "officialPage": "https://www.city.shiso.lg.jp/shiseijoho/shisoshishokai/sisoshinitsuite/access.html",
+      "sourceUrl": "https://www.city.shiso.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.shiso.lg.jp/"
+    },
+    "28228-city": {
+      "name": "加東市役所",
+      "kind": "cityHall",
+      "postalCode": "673-1493",
+      "address": "兵庫県加東市社50番地",
+      "officialPage": "https://www.city.kato.lg.jp/kakukanogoannai/hisyo/hisho/kohokochokakari/homepage/1454057434998.html",
+      "sourceUrl": "https://www.city.kato.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.kato.lg.jp/"
+    },
+    "28229-city": {
+      "name": "たつの市役所",
+      "kind": "cityHall",
+      "postalCode": "679-4192",
+      "address": "兵庫県たつの市龍野町富永1005-1",
+      "officialPage": "https://www.city.tatsuno.lg.jp/gyosei/yakusho-madoguchiannai/5947.html",
+      "sourceUrl": "https://www.city.tatsuno.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.city.tatsuno.lg.jp/"
+    },
+    "28301-town": {
+      "name": "猪名川町役場",
+      "kind": "townHall",
+      "postalCode": "666-0292",
+      "address": "兵庫県川辺郡猪名川町上野字北畑11-1",
+      "officialPage": "https://www.town.inagawa.lg.jp/soshiki/1004/gyomu/11/1320.html",
+      "sourceUrl": "https://www.town.inagawa.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.inagawa.lg.jp/"
+    },
+    "28365-town": {
+      "name": "多可町役場",
+      "kind": "townHall",
+      "postalCode": null,
+      "address": null,
+      "officialPage": null,
+      "sourceUrl": null,
+      "verifiedAt": null,
+      "status": "needsReview",
+      "reviewNote": "公式庁舎案内の検索結果には所在地・郵便番号があるが、本文取得が503（TLSエラー）。再確認まで未登録。"
+    },
+    "28381-town": {
+      "name": "稲美町役場",
+      "kind": "townHall",
+      "postalCode": "675-1115",
+      "address": "兵庫県加古郡稲美町国岡1-1",
+      "officialPage": "https://www.town.hyogo-inami.lg.jp/0000000335.html",
+      "sourceUrl": "https://www.town.hyogo-inami.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.hyogo-inami.lg.jp/"
+    },
+    "28382-town": {
+      "name": "播磨町役場",
+      "kind": "townHall",
+      "postalCode": "675-0182",
+      "address": "兵庫県加古郡播磨町東本荘1丁目5番30号",
+      "officialPage": "https://www.town.harima.lg.jp/kikaku/chosejoho/machiyakuba/access.html",
+      "sourceUrl": "https://www.town.harima.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.harima.lg.jp/"
+    },
+    "28442-town": {
+      "name": "市川町役場",
+      "kind": "townHall",
+      "postalCode": "679-2392",
+      "address": "兵庫県神崎郡市川町西川辺165-3",
+      "officialPage": "https://www.town.ichikawa.lg.jp/info/135",
+      "sourceUrl": "https://www.town.ichikawa.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.ichikawa.lg.jp/"
+    },
+    "28443-town": {
+      "name": "福崎町役場",
+      "kind": "townHall",
+      "postalCode": "679-2280",
+      "address": "兵庫県神崎郡福崎町南田原3116-1",
+      "officialPage": "https://www.town.fukusaki.hyogo.jp/0000000002.html",
+      "sourceUrl": "https://www.town.fukusaki.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.fukusaki.hyogo.jp/"
+    },
+    "28446-town": {
+      "name": "神河町役場 本庁舎",
+      "kind": "townHall",
+      "postalCode": "679-3116",
+      "address": "兵庫県神崎郡神河町寺前64番地",
+      "officialPage": "https://www.town.kamikawa.hyogo.jp/0000000107.html",
+      "sourceUrl": "https://www.town.kamikawa.hyogo.jp/index.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.kamikawa.hyogo.jp/index.html"
+    },
+    "28464-town": {
+      "name": "太子町役場",
+      "kind": "townHall",
+      "postalCode": "671-1592",
+      "address": "兵庫県揖保郡太子町鵤280番地1",
+      "officialPage": "https://www.town.hyogo-taishi.lg.jp/soshikikarasagasu/soumu/yakubaannnai/index.html",
+      "sourceUrl": "https://www.town.hyogo-taishi.lg.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.hyogo-taishi.lg.jp/"
+    },
+    "28481-town": {
+      "name": "上郡町役場",
+      "kind": "townHall",
+      "postalCode": "678-1292",
+      "address": "兵庫県赤穂郡上郡町大持278番地",
+      "officialPage": "https://www.town.kamigori.hyogo.jp/",
+      "sourceUrl": "https://www.town.kamigori.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.kamigori.hyogo.jp/"
+    },
+    "28501-town": {
+      "name": "佐用町役場",
+      "kind": "townHall",
+      "postalCode": "679-5380",
+      "address": "兵庫県佐用郡佐用町佐用2611-1",
+      "officialPage": "https://www.town.sayo.lg.jp/cms-sypher/www/info/detail.jsp?id=9182",
+      "sourceUrl": "https://www.town.sayo.lg.jp/cms-sypher/www/normal_top.jsp",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.sayo.lg.jp/cms-sypher/www/normal_top.jsp"
+    },
+    "28585-town": {
+      "name": "香美町役場",
+      "kind": "townHall",
+      "postalCode": "669-6592",
+      "address": "兵庫県美方郡香美町香住区香住870-1",
+      "officialPage": "https://www.town.mikata-kami.lg.jp/soshiki/kikaku/30/971.html",
+      "sourceUrl": "https://www.town.mikata-kami.lg.jp/soshiki/kikaku/30/971.html",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.mikata-kami.lg.jp/soshiki/kikaku/30/971.html"
+    },
+    "28586-town": {
+      "name": "新温泉町役場",
+      "kind": "townHall",
+      "postalCode": "669-6792",
+      "address": "兵庫県美方郡新温泉町浜坂2673-1",
+      "officialPage": "https://www.town.shinonsen.hyogo.jp/page/index.php?mode=page_list&cate_id=C2203",
+      "sourceUrl": "https://www.town.shinonsen.hyogo.jp/",
+      "verifiedAt": "2026-10-31",
+      "status": "verified",
+      "sourcePostalUrl": "https://www.town.shinonsen.hyogo.jp/"
+    }
+  }
+}
