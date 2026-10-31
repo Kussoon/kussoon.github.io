@@ -76,6 +76,66 @@
    (b[1]-b[0])-(a[1]-a[0]));
   return [(runs[0][0]+runs[0][1])/2,y];
  }
+ // Pilot 1: choose the exact north/south bbox midpoint and the centre
+ // of a horizontal interval that belongs to the actual municipality.
+ // Thin intervals remain valid: width never affects the selected latitude.
+ function pointHorizontal(model){
+  const b=model.box;
+  if(!b||!(b.w>0&&b.h>0)||!model.rings?.length)return point(model);
+  const midY=(b.minY+b.maxY)/2;
+  const midX=(b.minX+b.maxX)/2;
+  // The tiny fallbacks address a scanline hitting a vertex or a hole,
+  // rather than searching for a broader part of the municipality.
+  const offsets=[0,-1e-7,1e-7,-1e-5,1e-5,-.001,.001,-.01,.01,
+   -.03,.03,-.08,.08,-.16,.16,-.3,.3,-.45,.45];
+  for(const fraction of offsets){
+   const y=midY+b.h*fraction;
+   const segments=horizontalRuns(model.rings,y)
+    .map(([left,right])=>({x:(left+right)/2,y,width:right-left}))
+    .filter(p=>p.width>1e-8&&E.isInside(p.x,p.y,model.rings));
+   if(!segments.length)continue;
+   // For disconnected territories, prefer the segment nearest the
+   // municipality's overall east/west midpoint; do not prefer width.
+   segments.sort((a,c)=>Math.abs(a.x-midX)-Math.abs(c.x-midX)||
+    Math.abs(a.x-(model.polylabel?.[0]??midX))-
+    Math.abs(c.x-(model.polylabel?.[0]??midX))||a.x-c.x);
+   return [round(segments[0].x),round(y)];
+  }
+  return point(model);
+ }
+ function verticalRuns(rings,x){
+  const ys=[];
+  for(const ring of rings||[]){
+   for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const a=ring[j],b=ring[i];
+    if((a[0]<=x&&b[0]>x)||(b[0]<=x&&a[0]>x)){
+     ys.push(a[1]+(x-a[0])*(b[1]-a[1])/(b[0]-a[0]));
+    }
+   }
+  }
+  ys.sort((a,b)=>a-b);
+  const runs=[];
+  for(let i=0;i+1<ys.length;i+=2){
+   if(ys[i+1]-ys[i]>1e-8)runs.push([ys[i],ys[i+1]]);
+  }
+  return runs;
+ }
+ // Pilot 2: first compute horizontal X once, then use the Y midpoint
+ // of the VERTICAL interval containing that point. No iteration.
+ function pointHorizontalVertical(model){
+  const initial=pointHorizontal(model);
+  const [x,y]=initial;
+  if(!model.rings?.length)return initial;
+  const runs=verticalRuns(model.rings,x).filter(([a,b])=>
+   a<=y+1e-6&&b>=y-1e-6&&E.isInside(x,(a+b)/2,model.rings));
+  if(!runs.length)return initial;
+  // The segment that contains our starting point is the only eligible
+  // one, so disconnected lobes cannot pull the label elsewhere.
+  const [top,bottom]=runs.sort((a,b)=>Math.abs((a[0]+a[1])/2-y)-
+   Math.abs((b[0]+b[1])/2-y))[0];
+  const newY=(top+bottom)/2;
+  return E.isInside(x,newY,model.rings)?[round(x),round(newY)]:initial;
+ }
  function build(models,options={}){
   const {fontSize=13,measure=(s,sz)=>[...s].length*sz,rows=()=>null,strategy='center'}=options;
   const anchors=models.map(m=>strategy==='multi'?pointMulti(m):point(m));
@@ -124,5 +184,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,horizontalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
