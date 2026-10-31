@@ -1,4 +1,4 @@
-/* Normalized office data and popup rendering; no map geometry or selection state. */
+/* Regional information popup: office addresses are reference text, links explain the selected region. */
 (function(root){
 'use strict';
 const safeUrl=value=>{
@@ -30,13 +30,10 @@ function render(document,container,result,label){
   section.append(element('h3','popup-office',office.name));
   section.append(element('p','popup-address',
    (office.postalCode?'〒'+office.postalCode+'\n':'郵便番号：未確認\n')+(office.address||'所在地：未確認')));
-  const actions=element('div','popup-actions','');
-  actions.append(action('庁舎案内',office.officialPage,office.name),action('ここへ行く',destination(office),office.name));
-  section.append(actions);
   if(office.status!=='verified')section.append(element('p','popup-note','この施設の情報は確認待ちです。'));
   container.append(section);
  }
- const common=element('div','popup-actions','');
+ const common=element('div','popup-actions region-links','');
  common.append(action('公式サイト',result.region?.official,label),action('Wikipedia',result.region?.wikipedia,label));
  container.append(common);
 }
