@@ -1,0 +1,1362 @@
+{
+  "source": "https://github.com/code4fukui/localgovjp/blob/ca805dfb60fa9481cb76013cbbad89a5d3211e43/localgovjp.json",
+  "sourceCount": 1916,
+  "target": "official 2026 V2 municipality geometry",
+  "total": 1905,
+  "matched": 1721,
+  "missing": 16,
+  "mismatched": 168,
+  "coveragePct": 90.3,
+  "byPrefecture": [
+    {
+      "pref": "01",
+      "total": 194,
+      "mismatched": 10,
+      "matched": 178,
+      "missing": 6
+    },
+    {
+      "pref": "02",
+      "total": 40,
+      "matched": 40
+    },
+    {
+      "pref": "03",
+      "total": 33,
+      "matched": 33
+    },
+    {
+      "pref": "04",
+      "total": 39,
+      "mismatched": 5,
+      "matched": 34
+    },
+    {
+      "pref": "05",
+      "total": 25,
+      "matched": 25
+    },
+    {
+      "pref": "06",
+      "total": 35,
+      "matched": 35
+    },
+    {
+      "pref": "07",
+      "total": 59,
+      "matched": 59
+    },
+    {
+      "pref": "08",
+      "total": 44,
+      "matched": 44
+    },
+    {
+      "pref": "09",
+      "total": 25,
+      "matched": 25
+    },
+    {
+      "pref": "10",
+      "total": 35,
+      "matched": 35
+    },
+    {
+      "pref": "11",
+      "total": 72,
+      "mismatched": 10,
+      "matched": 62
+    },
+    {
+      "pref": "12",
+      "total": 60,
+      "missing": 1,
+      "mismatched": 6,
+      "matched": 53
+    },
+    {
+      "pref": "13",
+      "total": 63,
+      "missing": 1,
+      "matched": 62
+    },
+    {
+      "pref": "14",
+      "total": 58,
+      "mismatched": 28,
+      "matched": 30
+    },
+    {
+      "pref": "15",
+      "total": 37,
+      "mismatched": 8,
+      "matched": 29
+    },
+    {
+      "pref": "16",
+      "total": 15,
+      "matched": 15
+    },
+    {
+      "pref": "17",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "18",
+      "total": 17,
+      "matched": 17
+    },
+    {
+      "pref": "19",
+      "total": 27,
+      "matched": 27
+    },
+    {
+      "pref": "20",
+      "total": 77,
+      "matched": 77
+    },
+    {
+      "pref": "21",
+      "total": 42,
+      "matched": 42
+    },
+    {
+      "pref": "22",
+      "total": 39,
+      "mismatched": 3,
+      "missing": 3,
+      "matched": 33
+    },
+    {
+      "pref": "23",
+      "total": 70,
+      "missing": 1,
+      "mismatched": 16,
+      "matched": 53
+    },
+    {
+      "pref": "24",
+      "total": 29,
+      "matched": 29
+    },
+    {
+      "pref": "25",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "26",
+      "total": 36,
+      "mismatched": 11,
+      "matched": 25
+    },
+    {
+      "pref": "27",
+      "total": 72,
+      "mismatched": 31,
+      "matched": 41
+    },
+    {
+      "pref": "28",
+      "total": 49,
+      "mismatched": 9,
+      "matched": 40
+    },
+    {
+      "pref": "29",
+      "total": 39,
+      "matched": 39
+    },
+    {
+      "pref": "30",
+      "total": 31,
+      "missing": 1,
+      "matched": 30
+    },
+    {
+      "pref": "31",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "32",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "33",
+      "total": 30,
+      "mismatched": 4,
+      "matched": 26
+    },
+    {
+      "pref": "34",
+      "total": 30,
+      "mismatched": 8,
+      "matched": 22
+    },
+    {
+      "pref": "35",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "36",
+      "total": 24,
+      "matched": 24
+    },
+    {
+      "pref": "37",
+      "total": 17,
+      "matched": 17
+    },
+    {
+      "pref": "38",
+      "total": 20,
+      "matched": 20
+    },
+    {
+      "pref": "39",
+      "total": 34,
+      "matched": 34
+    },
+    {
+      "pref": "40",
+      "total": 73,
+      "missing": 1,
+      "mismatched": 14,
+      "matched": 58
+    },
+    {
+      "pref": "41",
+      "total": 20,
+      "matched": 20
+    },
+    {
+      "pref": "42",
+      "total": 21,
+      "matched": 21
+    },
+    {
+      "pref": "43",
+      "total": 49,
+      "mismatched": 5,
+      "matched": 44
+    },
+    {
+      "pref": "44",
+      "total": 18,
+      "matched": 18
+    },
+    {
+      "pref": "45",
+      "total": 26,
+      "matched": 26
+    },
+    {
+      "pref": "46",
+      "total": 44,
+      "missing": 1,
+      "matched": 43
+    },
+    {
+      "pref": "47",
+      "total": 42,
+      "missing": 1,
+      "matched": 41
+    }
+  ],
+  "issues": [
+    {
+      "code": "01101",
+      "officialName": "札幌市",
+      "sourceName": "札幌市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01102",
+      "officialName": "札幌市",
+      "sourceName": "札幌市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01103",
+      "officialName": "札幌市",
+      "sourceName": "札幌市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01104",
+      "officialName": "札幌市",
+      "sourceName": "札幌市白石区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01105",
+      "officialName": "札幌市",
+      "sourceName": "札幌市豊平区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01106",
+      "officialName": "札幌市",
+      "sourceName": "札幌市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01107",
+      "officialName": "札幌市",
+      "sourceName": "札幌市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01108",
+      "officialName": "札幌市",
+      "sourceName": "札幌市厚別区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01109",
+      "officialName": "札幌市",
+      "sourceName": "札幌市手稲区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01110",
+      "officialName": "札幌市",
+      "sourceName": "札幌市清田区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "01695",
+      "officialName": "色丹村",
+      "kind": "missing"
+    },
+    {
+      "code": "01696",
+      "officialName": "泊村",
+      "kind": "missing"
+    },
+    {
+      "code": "01697",
+      "officialName": "留夜別村",
+      "kind": "missing"
+    },
+    {
+      "code": "01698",
+      "officialName": "留別村",
+      "kind": "missing"
+    },
+    {
+      "code": "01699",
+      "officialName": "紗那村",
+      "kind": "missing"
+    },
+    {
+      "code": "01700",
+      "officialName": "蘂取村",
+      "kind": "missing"
+    },
+    {
+      "code": "04101",
+      "officialName": "仙台市",
+      "sourceName": "仙台市青葉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "04102",
+      "officialName": "仙台市",
+      "sourceName": "仙台市宮城野区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "04103",
+      "officialName": "仙台市",
+      "sourceName": "仙台市若林区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "04104",
+      "officialName": "仙台市",
+      "sourceName": "仙台市太白区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "04105",
+      "officialName": "仙台市",
+      "sourceName": "仙台市泉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11101",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11102",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11103",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市大宮区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11104",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市見沼区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11105",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11106",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市桜区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11107",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市浦和区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11108",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11109",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市緑区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "11110",
+      "officialName": "さいたま市",
+      "sourceName": "さいたま市岩槻区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "12000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "12101",
+      "officialName": "千葉市",
+      "sourceName": "千葉市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "12102",
+      "officialName": "千葉市",
+      "sourceName": "千葉市花見川区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "12103",
+      "officialName": "千葉市",
+      "sourceName": "千葉市稲毛区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "12104",
+      "officialName": "千葉市",
+      "sourceName": "千葉市若葉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "12105",
+      "officialName": "千葉市",
+      "sourceName": "千葉市緑区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "12106",
+      "officialName": "千葉市",
+      "sourceName": "千葉市美浜区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "13000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "14101",
+      "officialName": "横浜市",
+      "sourceName": "横浜市鶴見区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14102",
+      "officialName": "横浜市",
+      "sourceName": "横浜市神奈川区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14103",
+      "officialName": "横浜市",
+      "sourceName": "横浜市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14104",
+      "officialName": "横浜市",
+      "sourceName": "横浜市中区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14105",
+      "officialName": "横浜市",
+      "sourceName": "横浜市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14106",
+      "officialName": "横浜市",
+      "sourceName": "横浜市保土ケ谷区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14107",
+      "officialName": "横浜市",
+      "sourceName": "横浜市磯子区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14108",
+      "officialName": "横浜市",
+      "sourceName": "横浜市金沢区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14109",
+      "officialName": "横浜市",
+      "sourceName": "横浜市港北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14110",
+      "officialName": "横浜市",
+      "sourceName": "横浜市戸塚区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14111",
+      "officialName": "横浜市",
+      "sourceName": "横浜市港南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14112",
+      "officialName": "横浜市",
+      "sourceName": "横浜市旭区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14113",
+      "officialName": "横浜市",
+      "sourceName": "横浜市緑区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14114",
+      "officialName": "横浜市",
+      "sourceName": "横浜市瀬谷区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14115",
+      "officialName": "横浜市",
+      "sourceName": "横浜市栄区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14116",
+      "officialName": "横浜市",
+      "sourceName": "横浜市泉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14117",
+      "officialName": "横浜市",
+      "sourceName": "横浜市青葉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14118",
+      "officialName": "横浜市",
+      "sourceName": "横浜市都筑区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14131",
+      "officialName": "川崎市",
+      "sourceName": "川崎市川崎区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14132",
+      "officialName": "川崎市",
+      "sourceName": "川崎市幸区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14133",
+      "officialName": "川崎市",
+      "sourceName": "川崎市中原区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14134",
+      "officialName": "川崎市",
+      "sourceName": "川崎市高津区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14135",
+      "officialName": "川崎市",
+      "sourceName": "川崎市多摩区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14136",
+      "officialName": "川崎市",
+      "sourceName": "川崎市宮前区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14137",
+      "officialName": "川崎市",
+      "sourceName": "川崎市麻生区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14151",
+      "officialName": "相模原市",
+      "sourceName": "相模原市緑区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14152",
+      "officialName": "相模原市",
+      "sourceName": "相模原市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "14153",
+      "officialName": "相模原市",
+      "sourceName": "相模原市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15101",
+      "officialName": "新潟市",
+      "sourceName": "新潟市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15102",
+      "officialName": "新潟市",
+      "sourceName": "新潟市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15103",
+      "officialName": "新潟市",
+      "sourceName": "新潟市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15104",
+      "officialName": "新潟市",
+      "sourceName": "新潟市江南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15105",
+      "officialName": "新潟市",
+      "sourceName": "新潟市秋葉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15106",
+      "officialName": "新潟市",
+      "sourceName": "新潟市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15107",
+      "officialName": "新潟市",
+      "sourceName": "新潟市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "15108",
+      "officialName": "新潟市",
+      "sourceName": "新潟市西蒲区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "22101",
+      "officialName": "静岡市",
+      "sourceName": "静岡市葵区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "22102",
+      "officialName": "静岡市",
+      "sourceName": "静岡市駿河区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "22103",
+      "officialName": "静岡市",
+      "sourceName": "静岡市清水区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "22138",
+      "officialName": "浜松市",
+      "kind": "missing"
+    },
+    {
+      "code": "22139",
+      "officialName": "浜松市",
+      "kind": "missing"
+    },
+    {
+      "code": "22140",
+      "officialName": "浜松市",
+      "kind": "missing"
+    },
+    {
+      "code": "23000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "23101",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市千種区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23102",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23103",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23104",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23105",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市中村区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23106",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市中区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23107",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市昭和区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23108",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市瑞穂区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23109",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市熱田区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23110",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市中川区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23111",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市港区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23112",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23113",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市守山区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23114",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市緑区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23115",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市名東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "23116",
+      "officialName": "名古屋市",
+      "sourceName": "名古屋市天白区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26101",
+      "officialName": "京都市",
+      "sourceName": "京都市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26102",
+      "officialName": "京都市",
+      "sourceName": "京都市上京区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26103",
+      "officialName": "京都市",
+      "sourceName": "京都市左京区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26104",
+      "officialName": "京都市",
+      "sourceName": "京都市中京区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26105",
+      "officialName": "京都市",
+      "sourceName": "京都市東山区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26106",
+      "officialName": "京都市",
+      "sourceName": "京都市下京区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26107",
+      "officialName": "京都市",
+      "sourceName": "京都市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26108",
+      "officialName": "京都市",
+      "sourceName": "京都市右京区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26109",
+      "officialName": "京都市",
+      "sourceName": "京都市伏見区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26110",
+      "officialName": "京都市",
+      "sourceName": "京都市山科区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "26111",
+      "officialName": "京都市",
+      "sourceName": "京都市西京区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27102",
+      "officialName": "大阪市",
+      "sourceName": "大阪市都島区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27103",
+      "officialName": "大阪市",
+      "sourceName": "大阪市福島区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27104",
+      "officialName": "大阪市",
+      "sourceName": "大阪市此花区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27106",
+      "officialName": "大阪市",
+      "sourceName": "大阪市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27107",
+      "officialName": "大阪市",
+      "sourceName": "大阪市港区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27108",
+      "officialName": "大阪市",
+      "sourceName": "大阪市大正区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27109",
+      "officialName": "大阪市",
+      "sourceName": "大阪市天王寺区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27111",
+      "officialName": "大阪市",
+      "sourceName": "大阪市浪速区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27113",
+      "officialName": "大阪市",
+      "sourceName": "大阪市西淀川区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27114",
+      "officialName": "大阪市",
+      "sourceName": "大阪市東淀川区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27115",
+      "officialName": "大阪市",
+      "sourceName": "大阪市東成区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27116",
+      "officialName": "大阪市",
+      "sourceName": "大阪市生野区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27117",
+      "officialName": "大阪市",
+      "sourceName": "大阪市旭区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27118",
+      "officialName": "大阪市",
+      "sourceName": "大阪市城東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27119",
+      "officialName": "大阪市",
+      "sourceName": "大阪市阿倍野区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27120",
+      "officialName": "大阪市",
+      "sourceName": "大阪市住吉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27121",
+      "officialName": "大阪市",
+      "sourceName": "大阪市東住吉区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27122",
+      "officialName": "大阪市",
+      "sourceName": "大阪市西成区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27123",
+      "officialName": "大阪市",
+      "sourceName": "大阪市淀川区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27124",
+      "officialName": "大阪市",
+      "sourceName": "大阪市鶴見区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27125",
+      "officialName": "大阪市",
+      "sourceName": "大阪市住之江区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27126",
+      "officialName": "大阪市",
+      "sourceName": "大阪市平野区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27127",
+      "officialName": "大阪市",
+      "sourceName": "大阪市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27128",
+      "officialName": "大阪市",
+      "sourceName": "大阪市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27141",
+      "officialName": "堺市",
+      "sourceName": "堺市堺区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27142",
+      "officialName": "堺市",
+      "sourceName": "堺市中区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27143",
+      "officialName": "堺市",
+      "sourceName": "堺市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27144",
+      "officialName": "堺市",
+      "sourceName": "堺市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27145",
+      "officialName": "堺市",
+      "sourceName": "堺市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27146",
+      "officialName": "堺市",
+      "sourceName": "堺市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "27147",
+      "officialName": "堺市",
+      "sourceName": "堺市美原区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28101",
+      "officialName": "神戸市",
+      "sourceName": "神戸市東灘区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28102",
+      "officialName": "神戸市",
+      "sourceName": "神戸市灘区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28105",
+      "officialName": "神戸市",
+      "sourceName": "神戸市兵庫区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28106",
+      "officialName": "神戸市",
+      "sourceName": "神戸市長田区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28107",
+      "officialName": "神戸市",
+      "sourceName": "神戸市須磨区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28108",
+      "officialName": "神戸市",
+      "sourceName": "神戸市垂水区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28109",
+      "officialName": "神戸市",
+      "sourceName": "神戸市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28110",
+      "officialName": "神戸市",
+      "sourceName": "神戸市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "28111",
+      "officialName": "神戸市",
+      "sourceName": "神戸市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "30000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "33101",
+      "officialName": "岡山市",
+      "sourceName": "岡山市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "33102",
+      "officialName": "岡山市",
+      "sourceName": "岡山市中区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "33103",
+      "officialName": "岡山市",
+      "sourceName": "岡山市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "33104",
+      "officialName": "岡山市",
+      "sourceName": "岡山市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34101",
+      "officialName": "広島市",
+      "sourceName": "広島市中区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34102",
+      "officialName": "広島市",
+      "sourceName": "広島市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34103",
+      "officialName": "広島市",
+      "sourceName": "広島市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34104",
+      "officialName": "広島市",
+      "sourceName": "広島市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34105",
+      "officialName": "広島市",
+      "sourceName": "広島市安佐南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34106",
+      "officialName": "広島市",
+      "sourceName": "広島市安佐北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34107",
+      "officialName": "広島市",
+      "sourceName": "広島市安芸区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "34108",
+      "officialName": "広島市",
+      "sourceName": "広島市佐伯区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "40101",
+      "officialName": "北九州市",
+      "sourceName": "北九州市門司区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40103",
+      "officialName": "北九州市",
+      "sourceName": "北九州市若松区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40105",
+      "officialName": "北九州市",
+      "sourceName": "北九州市戸畑区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40106",
+      "officialName": "北九州市",
+      "sourceName": "北九州市小倉北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40107",
+      "officialName": "北九州市",
+      "sourceName": "北九州市小倉南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40108",
+      "officialName": "北九州市",
+      "sourceName": "北九州市八幡東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40109",
+      "officialName": "北九州市",
+      "sourceName": "北九州市八幡西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40131",
+      "officialName": "福岡市",
+      "sourceName": "福岡市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40132",
+      "officialName": "福岡市",
+      "sourceName": "福岡市博多区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40133",
+      "officialName": "福岡市",
+      "sourceName": "福岡市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40134",
+      "officialName": "福岡市",
+      "sourceName": "福岡市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40135",
+      "officialName": "福岡市",
+      "sourceName": "福岡市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40136",
+      "officialName": "福岡市",
+      "sourceName": "福岡市城南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "40137",
+      "officialName": "福岡市",
+      "sourceName": "福岡市早良区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "43101",
+      "officialName": "熊本市",
+      "sourceName": "熊本市中央区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "43102",
+      "officialName": "熊本市",
+      "sourceName": "熊本市東区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "43103",
+      "officialName": "熊本市",
+      "sourceName": "熊本市西区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "43104",
+      "officialName": "熊本市",
+      "sourceName": "熊本市南区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "43105",
+      "officialName": "熊本市",
+      "sourceName": "熊本市北区",
+      "kind": "name_mismatch"
+    },
+    {
+      "code": "46000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "47000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    }
+  ],
+  "policy": "Match five-digit municipality code and 2026 displayed name, or full designated-city+ward name. Never infer unmatched readings."
+}
