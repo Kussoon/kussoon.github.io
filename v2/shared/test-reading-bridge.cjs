@@ -22,7 +22,7 @@ const sapporo=bridge.attach([{code:'01101',name:'札幌市'}],national);
 assert.equal(sapporo.stats.matched,1,'2026 city-only ward geometry should use code-keyed source');
 assert.equal(sapporo.regions[0].name,'中央区','restore original source-listed ward label');
 assert.equal(sapporo.regions[0].reading,'さっぽろしちゅうおうく');
-assert.deepEqual(sapporo.regions[0].readingParts.map(x=>x.name),['札幌市','中央区']);
+assert.deepEqual(Array.from(sapporo.regions[0].readingParts,x=>x.name),['札幌市','中央区']);
 const changedWard=bridge.attach([{code:'01101',name:'別の市'}],national);
 assert.equal(changedWard.stats.mismatched,1,'never attach a reading to an unexpected parent city');
 console.log('PASS existing CC0 reading catalog, strict matching and no guessed readings');
