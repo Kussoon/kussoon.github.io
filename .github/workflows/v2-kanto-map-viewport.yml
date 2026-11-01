@@ -1,0 +1,24 @@
+name: V2 Kanto SVG map zoom pan regression
+on:
+  pull_request:
+    paths:
+      - 'v2/shared/map-viewport.js'
+      - 'v2/shared/test-map-viewport.cjs'
+      - 'v2/national/official-2026-kanto-seven-20m-trial.html'
+      - '.github/workflows/v2-kanto-map-viewport.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check reusable map gesture control and Kanto integration
+        run: |
+          node --check v2/shared/map-viewport.js
+          node --check v2/shared/test-map-viewport.cjs
+          node v2/shared/test-map-viewport.cjs
+          node v2/shared/test-municipality-renderer.cjs
