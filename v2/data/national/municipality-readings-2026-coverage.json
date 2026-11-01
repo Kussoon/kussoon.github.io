@@ -1,0 +1,324 @@
+{
+  "source": "https://github.com/code4fukui/localgovjp/blob/ca805dfb60fa9481cb76013cbbad89a5d3211e43/localgovjp.json",
+  "sourceCount": 1916,
+  "municipalOfficialOverrides": 3,
+  "target": "official 2026 V2 municipality geometry",
+  "total": 1905,
+  "matched": 1892,
+  "missing": 13,
+  "mismatched": 0,
+  "coveragePct": 99.3,
+  "byPrefecture": [
+    {
+      "pref": "01",
+      "total": 194,
+      "matched": 188,
+      "missing": 6
+    },
+    {
+      "pref": "02",
+      "total": 40,
+      "matched": 40
+    },
+    {
+      "pref": "03",
+      "total": 33,
+      "matched": 33
+    },
+    {
+      "pref": "04",
+      "total": 39,
+      "matched": 39
+    },
+    {
+      "pref": "05",
+      "total": 25,
+      "matched": 25
+    },
+    {
+      "pref": "06",
+      "total": 35,
+      "matched": 35
+    },
+    {
+      "pref": "07",
+      "total": 59,
+      "matched": 59
+    },
+    {
+      "pref": "08",
+      "total": 44,
+      "matched": 44
+    },
+    {
+      "pref": "09",
+      "total": 25,
+      "matched": 25
+    },
+    {
+      "pref": "10",
+      "total": 35,
+      "matched": 35
+    },
+    {
+      "pref": "11",
+      "total": 72,
+      "matched": 72
+    },
+    {
+      "pref": "12",
+      "total": 60,
+      "missing": 1,
+      "matched": 59
+    },
+    {
+      "pref": "13",
+      "total": 63,
+      "missing": 1,
+      "matched": 62
+    },
+    {
+      "pref": "14",
+      "total": 58,
+      "matched": 58
+    },
+    {
+      "pref": "15",
+      "total": 37,
+      "matched": 37
+    },
+    {
+      "pref": "16",
+      "total": 15,
+      "matched": 15
+    },
+    {
+      "pref": "17",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "18",
+      "total": 17,
+      "matched": 17
+    },
+    {
+      "pref": "19",
+      "total": 27,
+      "matched": 27
+    },
+    {
+      "pref": "20",
+      "total": 77,
+      "matched": 77
+    },
+    {
+      "pref": "21",
+      "total": 42,
+      "matched": 42
+    },
+    {
+      "pref": "22",
+      "total": 39,
+      "matched": 39
+    },
+    {
+      "pref": "23",
+      "total": 70,
+      "missing": 1,
+      "matched": 69
+    },
+    {
+      "pref": "24",
+      "total": 29,
+      "matched": 29
+    },
+    {
+      "pref": "25",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "26",
+      "total": 36,
+      "matched": 36
+    },
+    {
+      "pref": "27",
+      "total": 72,
+      "matched": 72
+    },
+    {
+      "pref": "28",
+      "total": 49,
+      "matched": 49
+    },
+    {
+      "pref": "29",
+      "total": 39,
+      "matched": 39
+    },
+    {
+      "pref": "30",
+      "total": 31,
+      "missing": 1,
+      "matched": 30
+    },
+    {
+      "pref": "31",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "32",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "33",
+      "total": 30,
+      "matched": 30
+    },
+    {
+      "pref": "34",
+      "total": 30,
+      "matched": 30
+    },
+    {
+      "pref": "35",
+      "total": 19,
+      "matched": 19
+    },
+    {
+      "pref": "36",
+      "total": 24,
+      "matched": 24
+    },
+    {
+      "pref": "37",
+      "total": 17,
+      "matched": 17
+    },
+    {
+      "pref": "38",
+      "total": 20,
+      "matched": 20
+    },
+    {
+      "pref": "39",
+      "total": 34,
+      "matched": 34
+    },
+    {
+      "pref": "40",
+      "total": 73,
+      "missing": 1,
+      "matched": 72
+    },
+    {
+      "pref": "41",
+      "total": 20,
+      "matched": 20
+    },
+    {
+      "pref": "42",
+      "total": 21,
+      "matched": 21
+    },
+    {
+      "pref": "43",
+      "total": 49,
+      "matched": 49
+    },
+    {
+      "pref": "44",
+      "total": 18,
+      "matched": 18
+    },
+    {
+      "pref": "45",
+      "total": 26,
+      "matched": 26
+    },
+    {
+      "pref": "46",
+      "total": 44,
+      "missing": 1,
+      "matched": 43
+    },
+    {
+      "pref": "47",
+      "total": 42,
+      "missing": 1,
+      "matched": 41
+    }
+  ],
+  "issues": [
+    {
+      "code": "01695",
+      "officialName": "色丹村",
+      "kind": "missing"
+    },
+    {
+      "code": "01696",
+      "officialName": "泊村",
+      "kind": "missing"
+    },
+    {
+      "code": "01697",
+      "officialName": "留夜別村",
+      "kind": "missing"
+    },
+    {
+      "code": "01698",
+      "officialName": "留別村",
+      "kind": "missing"
+    },
+    {
+      "code": "01699",
+      "officialName": "紗那村",
+      "kind": "missing"
+    },
+    {
+      "code": "01700",
+      "officialName": "蘂取村",
+      "kind": "missing"
+    },
+    {
+      "code": "12000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "13000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "23000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "30000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "40000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "46000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    },
+    {
+      "code": "47000",
+      "officialName": "所属未定地",
+      "kind": "missing"
+    }
+  ],
+  "policy": "Match code and exact 2026 name; in city-only ward geometry, explicitly recover ward name/reading from the code-keyed CC0 full city-ward name. Never guess missing records."
+}

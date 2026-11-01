@@ -16,4 +16,22 @@ assert.equal(attached.stats.matched,2);
 assert.equal(attached.stats.missing,1);
 assert.equal(attached.stats.mismatched,1);
 assert.equal(attached.regions[2].reading,'');
+const national=JSON.parse(fs.readFileSync('v2/data/national/municipality-readings-all-source.json','utf8'));
+assert.equal(national.meta.count,1916,'nationwide snapshot completeness');
+const sapporo=bridge.attach([{code:'01101',name:'札幌市'}],national);
+assert.equal(sapporo.stats.matched,1,'2026 city-only ward geometry should use code-keyed source');
+assert.equal(sapporo.regions[0].name,'中央区','restore original source-listed ward label');
+assert.equal(sapporo.regions[0].reading,'さっぽろしちゅうおうく');
+assert.deepEqual(Array.from(sapporo.regions[0].readingParts,x=>x.name),['札幌市','中央区']);
+const changedWard=bridge.attach([{code:'01101',name:'別の市'}],national);
+assert.equal(changedWard.stats.mismatched,1,'never attach a reading to an unexpected parent city');
+for(const [code,ward,reading] of [
+ ['22138','中央区','はままつしちゅうおうく'],
+ ['22139','浜名区','はままつしはまなく'],
+ ['22140','天竜区','はままつしてんりゅうく']]){
+ const value=bridge.attach([{code,name:'浜松市'}],national);
+ assert.equal(value.stats.matched,1,'officially verified 2024 Hamamatsu ward should match');
+ assert.equal(value.regions[0].name,ward);
+ assert.equal(value.regions[0].reading,reading);
+}
 console.log('PASS existing CC0 reading catalog, strict matching and no guessed readings');
