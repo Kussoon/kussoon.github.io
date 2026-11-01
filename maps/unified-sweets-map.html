@@ -271,7 +271,7 @@ header h1,header .subtitle{position:relative}
 <button id="backToTop" type="button" aria-label="ページの先頭に戻る" title="先頭に戻る" hidden>↑ <span>先頭に戻る</span></button>
 <footer class="sitefooter kussoon-unified-footer" id="page-footer"><div class="container">
 <nav class="footer-actions" aria-label="ページ下部の移動"><div class="footer-links"><a class="footer-link" href="#page-top">このマップの先頭へ</a></div><div class="footer-return"><button id="footerBackTop" type="button" class="footer-top">↑ 先頭に戻る</button></div></nav>
-<p class="sweets-version">Version 1.0.3</p>
+<p class="sweets-version">Version 1.0.4</p>
 <p class="sweets-version">最終更新日：2026年11月2日</p>
 <nav aria-label="サイト共通案内" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;margin:12px 0;width:100%"><a href="/privacy/">プライバシーポリシー</a></nav>
 <nav class="sweets-footer-info" aria-label="サイト情報">
@@ -360,7 +360,7 @@ function isInMapView(s){return map.getBounds().pad(-0.12).contains([s.latitude,s
 function centerStore(s){map.invalidateSize({pan:false});map.setView([s.latitude,s.longitude],Math.max(14,Math.min(16,map.getZoom())),{animate:false})}
 // v0.1.22: detached HTML panel; Leaflet never decides its direction.
 function popupEscape(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function shortAddress(s){const a=String(s.address||'').trim();if(!a)return s.city||'住所未登録';let v=a.replace(/^兵庫県\s*/, '');if(s.store_id==='KSS-28204-9')return v;const facility=s.facility_name&&s.facility_name!=='路面店'?s.facility_name:'';if(facility){const street=v.split(/(?:\s|　)(?=[^\s]*?(?:館|階|F|店|ビル))/)[0];return street.length>48?street.slice(0,47)+'…':street;}return v.length>48?v.slice(0,47)+'…':v}
+function shortAddress(s){const a=String(s.address||'').trim();return a||s.city||'住所未登録'}
 let activeSweetMarker=null;
 function closeSweetPreview(){dismissSweetMapReturn();const el=$('sweetPinPanel');el.hidden=true;el.replaceChildren();activeSweetMarker=null}
 function placeSweetPreview(){
