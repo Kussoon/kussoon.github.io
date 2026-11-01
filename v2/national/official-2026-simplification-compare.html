@@ -23,7 +23,7 @@ const BOX={sango:[135.595,34.535,135.765,34.681],taishi:[135.585,34.47,135.765,3
 const versions=new Map();let active=0;
 function decode(t){const tr=t.transform;return t.arcs.map(arc=>{let x=0,y=0;return arc.map(pt=>{if(tr){x+=pt[0];y+=pt[1];return [x*tr.scale[0]+tr.translate[0],y*tr.scale[1]+tr.translate[1]];}return pt.slice(0,2);});});}
 function dist2(p,a,b,lat){const cx=111320*Math.cos(lat*Math.PI/180),cy=111195,dx=(b[0]-a[0])*cx,dy=(b[1]-a[1])*cy,px=(p[0]-a[0])*cx,py=(p[1]-a[1])*cy,den=dx*dx+dy*dy;const t=den?Math.max(0,Math.min(1,(px*dx+py*dy)/den)):0;return (px-t*dx)**2+(py-t*dy)**2;}
-function dp(points,m){if(m===0||points.length<=2)return points;const keep=new Uint8Array(points.length);keep[0]=keep[points.length-1]=1;const stack=[[0,points.length-1]],lat=(points[0][1]+points[points.length-1][1])/2;
+function dp(points,m){if(m===0||points.length<=2)return points;if(points[0][0]===points[points.length-1][0]&&points[0][1]===points[points.length-1][1])return points;const keep=new Uint8Array(points.length);keep[0]=keep[points.length-1]=1;const stack=[[0,points.length-1]],lat=(points[0][1]+points[points.length-1][1])/2;
 while(stack.length){const [a,b]=stack.pop();let best=-1,index=-1;for(let i=a+1;i<b;i++){const d=dist2(points[i],points[a],points[b],lat);if(d>best){best=d;index=i;}}if(best>m*m){keep[index]=1;stack.push([a,index],[index,b]);}}
 const result=points.filter((_,i)=>keep[i]);return result.length>=2?result:points;}
 function build(source,arcs,m){if(m===0)return source;const obj={type:'Topology',objects:source.objects,arcs:arcs.map(a=>dp(a,m))};if(source.bbox)obj.bbox=source.bbox;return obj;}
