@@ -1,0 +1,52 @@
+name: V2 2026 nationwide municipality readings coverage
+on:
+  pull_request:
+    paths:
+      - 'v2/data/national/municipality-readings-all-source.json'
+      - 'v2/tools/shared-topology/audit-national-readings-2026.py'
+      - 'v2/national/official-2026-nationwide-pilot.html'
+      - '.github/workflows/v2-2026-readings-coverage.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify nationwide sources, official names, readings and 2026 coverage
+        run: |
+          python3 v2/tools/shared-topology/audit-national-readings-2026.py
+          node v2/shared/test-reading-bridge.cjs
+          node v2/shared/test-place-labels.cjs
+          python3 - <<'PY'
+          from pathlib import Path
+          page=Path('v2/national/official-2026-nationwide-pilot.html').read_text()
+          assert '../data/national/municipality-readings-all-source.json' in page
+          assert 'KussoonV2ReadingBridge.attach' in page
+          assert 'id="readingMode"' in page
+          Path('/tmp/v2-national-reading-ui.js').write_text(page.split('<script>')[-1].split('</script>')[0])
+          PY
+          node --check /tmp/v2-national-reading-ui.js
+      - name: Commit coverage report (not administrative data)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/municipality-readings-2026-coverage.json
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): audit verified municipal readings for all 47 prefectures"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: national-municipality-2026-readings-coverage
+          path: v2/data/national/municipality-readings-2026-coverage.json
+          retention-days: 30
