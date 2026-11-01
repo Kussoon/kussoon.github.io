@@ -1,0 +1,85 @@
+name: V2 2026 nationwide 47-prefecture pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/build-national-2026-pilot.mjs'
+      - 'v2/tools/shared-topology/test-national-navigation.mjs'
+      - 'v2/national/official-2026-nationwide-pilot.html'
+      - '.github/workflows/v2-2026-nationwide-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install shared topology tools
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Build nationwide overview and missing 15 prefecture slices
+        working-directory: v2/tools/shared-topology
+        run: node build-national-2026-pilot.mjs
+      - name: Validate 47-prefecture data and navigation page
+        run: |
+          node --check v2/tools/shared-topology/build-national-2026-pilot.mjs
+          python3 - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('v2/data/national/2026-common/national-2026-pilot')
+          manifest=json.loads((root/'manifest.json').read_text())
+          overview=json.loads((root/'prefectures-overview.geojson').read_text())
+          assert manifest['prefectureCount']==47 and len(manifest['entries'])==47
+          assert len(overview['features'])==47
+          assert set(x['pref'] for x in manifest['entries'])=={f'{i:02d}' for i in range(1,48)}
+          assert set(f['properties']['code'] for f in overview['features'])=={f'{i:02d}' for i in range(1,48)}
+          assert all(f['geometry']['coordinates'] for f in overview['features'])
+          assert manifest['municipalityCount']>1500
+          count=0
+          for item in manifest['entries']:
+              if item['pref'] in [f'{i:02d}' for i in range(25,40)]:
+                  data=json.loads((root/(item['pref']+'.topojson')).read_text())
+                  geoms=data['objects']['municipalities']['geometries']
+                  assert len(geoms)==item['regions']
+                  assert all(str(g['properties']['N03_007']).startswith(item['pref']) for g in geoms)
+                  assert len(data['arcs'])>0
+                  count+=1
+              else:
+                  assert (root.parent/item['source']).exists(),item['source']
+          assert count==15
+          page=pathlib.Path('v2/national/official-2026-nationwide-pilot.html').read_text()
+          assert 'KussoonV2MunicipalRenderer.render' in page
+          assert 'KussoonV2MapViewport.init' in page
+          assert 'nationBtn' in page and 'prefBtn' in page
+          assert 'national-2026-pilot/manifest.json' in page
+          pathlib.Path('/tmp/nation-ui.js').write_text(page.split('<script>')[-1].split('</script>')[0])
+          print('PASS 47 prefectures, all detail routes, 15 topology slices and navigation')
+          print('PASS national overview:',(root/'prefectures-overview.geojson').stat().st_size,'bytes, municipality total:',manifest['municipalityCount'])
+          PY
+          node --check /tmp/nation-ui.js
+          node v2/shared/test-municipality-renderer.cjs
+          node v2/shared/test-map-viewport.cjs
+          node v2/tools/shared-topology/test-national-navigation.mjs
+      - name: Publish generated pilot assets to PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/national-2026-pilot/
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): generate 47-prefecture nationwide 2026 pilot assets"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v2-national-2026-47-pilot
+          path: |
+            v2/data/national/2026-common/national-2026-pilot/manifest.json
+            v2/data/national/2026-common/national-2026-pilot/prefectures-overview.geojson
+          retention-days: 14
