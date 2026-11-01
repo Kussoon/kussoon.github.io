@@ -44,15 +44,21 @@ const fakeFetch=async url=>{
 const script=page.split('<script>').at(-1).split('</script>')[0];
 const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
 vm.runInNewContext(script,context);
-async function flush(){for(let i=0;i<20;i++)await new Promise(resolve=>setImmediate(resolve));}
-await flush();
+async function until(predicate,label){
+ for(let i=0;i<200;i++){
+  if(predicate())return;
+  await new Promise(resolve=>setTimeout(resolve,25));
+ }
+ throw Error('Timed out: '+label+'; status='+node('status').textContent);
+}
+await until(()=>node('status').textContent.includes('全国47都道府県'),'national overview');
 assert(node('status').textContent.includes('全国47都道府県'),'national overview did not load');
 assert.equal(node('pref').children.length,47,'missing prefecture selector options');
 assert(node('map').children.length>0,'national map not drawn');
 async function selectPref(code,count){
  node('pref').value=code;
  callbacks.get('pref:change')();
- await flush();
+ await until(()=>!node('status').textContent.includes('読み込み中です'),'prefecture '+code);
  assert(node('status').textContent.includes('表示中です'),code+' failed to load: '+node('status').textContent);
  assert.equal(lastRender?.count,count,code+' incorrect municipality count');
  assert(node('region').children.length===count+1,code+' failed region choices');
