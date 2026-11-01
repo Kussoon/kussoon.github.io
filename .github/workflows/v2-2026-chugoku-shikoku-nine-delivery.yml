@@ -47,7 +47,7 @@ jobs:
           assert original['objects']==light['objects']
           assert len(original['arcs'])==len(light['arcs'])
           geometries=light['objects']['municipalities']['geometries']
-          assert len(geometries)>180
+          assert len(geometries)==212
           codes=[str(g['properties']['N03_007']) for g in geometries]
           assert all(c.startswith(('31','32','33','34','35','36','37','38','39')) for c in codes)
           assert len(set(codes))==len(codes)
@@ -61,7 +61,7 @@ jobs:
           from pathlib import Path
           page=Path('v2/national/official-2026-chugoku-shikoku-nine-20m-trial.html').read_text()
           assert 'chugoku-shikoku-nine-20m.topojson' in page
-          assert 'length<180' in page
+          assert 'length!==212' in page
           print('PASS nine-prefecture interactive trial')
           PY
           mkdir -p v2/data/national/2026-common
