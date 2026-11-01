@@ -1,0 +1,93 @@
+name: V2 official 2026 Hokkaido prefecture-sliced 20m delivery
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/prepare-2026-hokkaido.py'
+      - '.github/workflows/v2-2026-hokkaido-one-slice.yml'
+      - 'v2/national/official-2026-hokkaido-20m-trial.html'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install GIS tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+      - name: Install topology tools
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Download official Hokkaido data
+        run: python3 v2/tools/shared-topology/prepare-2026-hokkaido.py "$RUNNER_TEMP/n03-input"
+      - name: Build one shared topology
+        working-directory: v2/tools/shared-topology
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03-input/hokkaido-2026.geojson" --output "$RUNNER_TEMP/v2-2026-hokkaido" --quantization 1000000 --keep 0.02 --expect-prefectures 1 --emit-combined hokkaido.topojson
+      - name: Validate prefecture topology
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-2026-hokkaido"
+      - name: Generate each prefecture 20m slice and verify shared borders
+        run: |
+          mkdir -p "$RUNNER_TEMP/hokkaido-prefecture-20m"
+          for pref in 01; do
+            python scripts/v2/simplify_topojson.py "$RUNNER_TEMP/v2-2026-hokkaido/$pref.topojson" "$RUNNER_TEMP/hokkaido-prefecture-20m/$pref.topojson" --meters 20
+          done
+          python - <<'PY'
+          import json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'hokkaido-prefecture-20m'
+          raw=pathlib.Path(os.environ['RUNNER_TEMP'])/'v2-2026-hokkaido'
+          seen=set(); shared={}
+          for pref in ['01']:
+              t=json.loads((root/(pref+'.topojson')).read_text())
+              before=json.loads((raw/(pref+'.topojson')).read_text())
+              assert before['objects']==t['objects']
+              assert len(before['arcs'])==len(t['arcs'])
+              assert 'transform' not in t
+              geoms=t['objects']['municipalities']['geometries']
+              codes=[str(g['properties']['N03_007']) for g in geoms]
+              assert all(code.startswith(pref) for code in codes)
+              assert not seen.intersection(codes)
+              seen.update(codes)
+              shared[pref]=set(json.dumps(arc,separators=(',',':')) for arc in t['arcs'])
+              print('PASS prefecture',pref,len(codes),'regions', (root/(pref+'.topojson')).stat().st_size,'bytes')
+          assert len(seen)>170
+          assert len({code[:2] for code in seen})==1
+          print('PASS unique regions in Hokkaido')
+          PY
+      - name: Verify independent page and commit prefecture slices
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          page=Path('v2/national/official-2026-hokkaido-20m-trial.html').read_text()
+          assert "pref+'.topojson'" in page
+          assert '県別に読み込み' in page
+          assert 'KussoonV2MunicipalRenderer.render' in page
+          print('PASS prefecture-on-demand trial page')
+          PY
+          mkdir -p v2/data/national/2026-common/hokkaido-prefecture-20m
+          cp "$RUNNER_TEMP/hokkaido-prefecture-20m/"*.topojson v2/data/national/2026-common/hokkaido-prefecture-20m/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/hokkaido-prefecture-20m/
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): add 2026 Hokkaido per-prefecture shared-arc 20m topology"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hokkaido-2026-prefecture-slices
+          path: |
+            ${{ runner.temp }}/hokkaido-prefecture-20m/*.topojson
+            ${{ runner.temp }}/v2-2026-hokkaido/manifest.json
+          retention-days: 14
