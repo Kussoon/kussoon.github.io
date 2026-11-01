@@ -390,10 +390,9 @@ test('office overlay has separate selection, safe links, and unverified fallback
   assert.ok(html.includes('id="'+id+'"'));
  assert.ok(html.includes('density-app.js?v=20261101-offices2'));
  const officeModule=fs.readFileSync(path.resolve(__dirname,'../common/js/office-directory.js'),'utf8');
- for(const title of ['公式サイト','Wikipedia'])
+ for(const title of ['公式サイト','Wikipedia','ここへ行く'])
   assert.ok(officeModule.includes(title));
- for(const title of ['庁舎案内','ここへ行く'])
-  assert.ok(!officeModule.includes(title));
+ assert.ok(!officeModule.includes('庁舎案内'));
  for(const code of ['renderOfficePopup(model)','renderOfficePopup(chosen)',
   "popup-close').addEventListener", '../data/offices/28.json',
   'KussoonOfficeDirectory.render', 'toggleMunicipality(id)'])

@@ -9,6 +9,10 @@ function resolve(directory,code){
  if(!region)return {region:null,offices:[]};
  return {region,offices:region.officeIds.map(id=>({id,...directory.offices[id]}))};
 }
+function destination(office){
+ if(office?.status!=='verified'||!office.address||!office.name)return null;
+ return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(office.name+' '+office.address);
+}
 function render(document,container,result,label){
  container.replaceChildren();
  const element=(tag,className,text)=>{
@@ -30,10 +34,10 @@ function render(document,container,result,label){
   container.append(section);
  }
  const common=element('div','popup-actions region-links','');
- common.append(action('公式サイト',result.region?.official,label),action('Wikipedia',result.region?.wikipedia,label));
+ common.append(action('公式サイト',result.region?.official,label),action('Wikipedia',result.region?.wikipedia,label),action('ここへ行く',destination(result.offices[0]),label));
  container.append(common);
 }
-const api={safeUrl,resolve,render};
+const api={safeUrl,resolve,destination,render};
 if(typeof module==='object'&&module.exports)module.exports=api;
 else root.KussoonOfficeDirectory=api;
 })(typeof window==='object'?window:globalThis);
