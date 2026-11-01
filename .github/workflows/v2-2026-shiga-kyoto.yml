@@ -6,13 +6,16 @@ on:
       - '.github/workflows/v2-2026-shiga-kyoto.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -49,6 +52,18 @@ jobs:
           assert len(set(codes))==len(codes)
           print('PASS',len(codes),'regions, original', (root/'shiga-kyoto.topojson').stat().st_size,'bytes, light',(root/'shiga-kyoto-20m.topojson').stat().st_size,'bytes')
           PY
+      - name: Commit lightweight test data to PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          mkdir -p v2/data/national/2026-common
+          cp "$RUNNER_TEMP/v2-2026-shiga-kyoto/shiga-kyoto-20m.topojson" v2/data/national/2026-common/shiga-kyoto-20m.topojson
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/shiga-kyoto-20m.topojson
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): add 2026 Shiga Kyoto 20m lightweight topology"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: shiga-kyoto-2026-20m-pilot
