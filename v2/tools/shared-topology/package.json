@@ -1,0 +1,14 @@
+{
+  "name": "kussoon-v2-common-topology-builder",
+  "private": true,
+  "type": "module",
+  "description": "Offline one-source nationwide topology generator for Kussoon V2",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "topojson-server": "3.0.1",
+    "topojson-simplify": "3.0.3"
+  }
+}
