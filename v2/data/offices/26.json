@@ -1,0 +1,771 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "26",
+  "asOf": "2026-11-01",
+  "regions": {
+    "26100": {
+      "name": "京都市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/京都市"
+    },
+    "26101": {
+      "name": "京都市北区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26101-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/kita/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/北区_(京都市)"
+    },
+    "26102": {
+      "name": "京都市上京区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26102-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/kamigyo/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/上京区"
+    },
+    "26103": {
+      "name": "京都市左京区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26103-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/sakyo/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/左京区"
+    },
+    "26104": {
+      "name": "京都市中京区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26104-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/nakagyo/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/中京区"
+    },
+    "26105": {
+      "name": "京都市東山区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26105-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/higasiyama/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/東山区"
+    },
+    "26106": {
+      "name": "京都市下京区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26106-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/shimogyo/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/下京区"
+    },
+    "26107": {
+      "name": "京都市南区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26107-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/minami/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/南区_(京都市)"
+    },
+    "26108": {
+      "name": "京都市右京区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26108-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/ukyo/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/右京区"
+    },
+    "26109": {
+      "name": "京都市伏見区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26109-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/fushimi/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/伏見区"
+    },
+    "26110": {
+      "name": "京都市山科区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26110-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/yamasina/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/山科区"
+    },
+    "26111": {
+      "name": "京都市西京区",
+      "kind": "ward",
+      "parentCode": "26100",
+      "officeIds": [
+        "26111-ward",
+        "26100-city"
+      ],
+      "official": "https://www.city.kyoto.lg.jp/nisikyo/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/西京区"
+    },
+    "26201": {
+      "name": "福知山市",
+      "kind": "city",
+      "officeIds": [
+        "26201-city"
+      ],
+      "official": "https://www.city.fukuchiyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/福知山市"
+    },
+    "26202": {
+      "name": "舞鶴市",
+      "kind": "city",
+      "officeIds": [
+        "26202-city"
+      ],
+      "official": "https://www.city.maizuru.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/舞鶴市"
+    },
+    "26203": {
+      "name": "綾部市",
+      "kind": "city",
+      "officeIds": [
+        "26203-city"
+      ],
+      "official": "https://www.city.ayabe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/綾部市"
+    },
+    "26204": {
+      "name": "宇治市",
+      "kind": "city",
+      "officeIds": [
+        "26204-city"
+      ],
+      "official": "https://www.city.uji.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/宇治市"
+    },
+    "26205": {
+      "name": "宮津市",
+      "kind": "city",
+      "officeIds": [
+        "26205-city"
+      ],
+      "official": "https://www.city.miyazu.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/宮津市"
+    },
+    "26206": {
+      "name": "亀岡市",
+      "kind": "city",
+      "officeIds": [
+        "26206-city"
+      ],
+      "official": "https://www.city.kameoka.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/亀岡市"
+    },
+    "26207": {
+      "name": "城陽市",
+      "kind": "city",
+      "officeIds": [
+        "26207-city"
+      ],
+      "official": "https://www.city.joyo.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/城陽市"
+    },
+    "26208": {
+      "name": "向日市",
+      "kind": "city",
+      "officeIds": [
+        "26208-city"
+      ],
+      "official": "https://www.city.muko.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/向日市"
+    },
+    "26209": {
+      "name": "長岡京市",
+      "kind": "city",
+      "officeIds": [
+        "26209-city"
+      ],
+      "official": "https://www.city.nagaokakyo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/長岡京市"
+    },
+    "26210": {
+      "name": "八幡市",
+      "kind": "city",
+      "officeIds": [
+        "26210-city"
+      ],
+      "official": "https://www.city.yawata.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/八幡市"
+    },
+    "26211": {
+      "name": "京田辺市",
+      "kind": "city",
+      "officeIds": [
+        "26211-city"
+      ],
+      "official": "https://www.city.kyotanabe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/京田辺市"
+    },
+    "26212": {
+      "name": "京丹後市",
+      "kind": "city",
+      "officeIds": [
+        "26212-city"
+      ],
+      "official": "https://www.city.kyotango.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/京丹後市"
+    },
+    "26213": {
+      "name": "南丹市",
+      "kind": "city",
+      "officeIds": [
+        "26213-city"
+      ],
+      "official": "https://www.city.nantan.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/南丹市"
+    },
+    "26214": {
+      "name": "木津川市",
+      "kind": "city",
+      "officeIds": [
+        "26214-city"
+      ],
+      "official": "https://www.city.kizugawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/木津川市"
+    },
+    "26303": {
+      "name": "大山崎町",
+      "kind": "town",
+      "officeIds": [
+        "26303-town"
+      ],
+      "official": "https://www.town.oyamazaki.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/大山崎町"
+    },
+    "26322": {
+      "name": "久御山町",
+      "kind": "town",
+      "officeIds": [
+        "26322-town"
+      ],
+      "official": "https://www.town.kumiyama.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/久御山町"
+    },
+    "26343": {
+      "name": "井手町",
+      "kind": "town",
+      "officeIds": [
+        "26343-town"
+      ],
+      "official": "https://www.town.ide.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/井手町"
+    },
+    "26344": {
+      "name": "宇治田原町",
+      "kind": "town",
+      "officeIds": [
+        "26344-town"
+      ],
+      "official": "https://www.town.ujitawara.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/宇治田原町"
+    },
+    "26364": {
+      "name": "笠置町",
+      "kind": "town",
+      "officeIds": [
+        "26364-town"
+      ],
+      "official": "https://www.town.kasagi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/笠置町"
+    },
+    "26365": {
+      "name": "和束町",
+      "kind": "town",
+      "officeIds": [
+        "26365-town"
+      ],
+      "official": "https://www.town.wazuka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/和束町"
+    },
+    "26366": {
+      "name": "精華町",
+      "kind": "town",
+      "officeIds": [
+        "26366-town"
+      ],
+      "official": "https://www.town.seika.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/精華町"
+    },
+    "26367": {
+      "name": "南山城村",
+      "kind": "village",
+      "officeIds": [
+        "26367-village"
+      ],
+      "official": "https://www.vill.minamiyamashiro.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/南山城村"
+    },
+    "26407": {
+      "name": "京丹波町",
+      "kind": "town",
+      "officeIds": [
+        "26407-town"
+      ],
+      "official": "https://www.town.kyotamba.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/京丹波町"
+    },
+    "26463": {
+      "name": "伊根町",
+      "kind": "town",
+      "officeIds": [
+        "26463-town"
+      ],
+      "official": "https://www.town.ine.kyoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/伊根町"
+    },
+    "26465": {
+      "name": "与謝野町",
+      "kind": "town",
+      "officeIds": [
+        "26465-town"
+      ],
+      "official": "https://www.town.yosano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/与謝野町"
+    }
+  },
+  "offices": {
+    "26100-city": {
+      "name": "京都市役所",
+      "kind": "cityHall",
+      "postalCode": "604-8571",
+      "address": "京都府京都市中京区寺町通御池上る上本能寺前町488",
+      "officialPage": "https://www.city.kyoto.lg.jp/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/gyozai/page/0000003417.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26101-ward": {
+      "name": "京都市北区役所",
+      "kind": "wardOffice",
+      "postalCode": "603-8511",
+      "address": "京都府京都市北区紫野東御所田町33-1",
+      "officialPage": "https://www.city.kyoto.lg.jp/kita/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26102-ward": {
+      "name": "京都市上京区役所",
+      "kind": "wardOffice",
+      "postalCode": "602-8511",
+      "address": "京都府京都市上京区今出川通室町西入堀出シ町285",
+      "officialPage": "https://www.city.kyoto.lg.jp/kamigyo/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26103-ward": {
+      "name": "京都市左京区役所",
+      "kind": "wardOffice",
+      "postalCode": "606-8511",
+      "address": "京都府京都市左京区松ケ崎堂ノ上町7-2",
+      "officialPage": "https://www.city.kyoto.lg.jp/sakyo/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26104-ward": {
+      "name": "京都市中京区役所",
+      "kind": "wardOffice",
+      "postalCode": "604-8588",
+      "address": "京都府京都市中京区西堀川通御池下る西三坊堀川町521",
+      "officialPage": "https://www.city.kyoto.lg.jp/nakagyo/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26105-ward": {
+      "name": "京都市東山区役所",
+      "kind": "wardOffice",
+      "postalCode": "605-8511",
+      "address": "京都府京都市東山区清水五丁目130-6",
+      "officialPage": "https://www.city.kyoto.lg.jp/higasiyama/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26106-ward": {
+      "name": "京都市下京区役所",
+      "kind": "wardOffice",
+      "postalCode": "600-8588",
+      "address": "京都府京都市下京区西洞院通塩小路上る東塩小路町608-8",
+      "officialPage": "https://www.city.kyoto.lg.jp/shimogyo/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26107-ward": {
+      "name": "京都市南区役所",
+      "kind": "wardOffice",
+      "postalCode": "601-8511",
+      "address": "京都府京都市南区西九条南田町1-3",
+      "officialPage": "https://www.city.kyoto.lg.jp/minami/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26108-ward": {
+      "name": "京都市右京区役所",
+      "kind": "wardOffice",
+      "postalCode": "616-8511",
+      "address": "京都府京都市右京区太秦下刑部町12",
+      "officialPage": "https://www.city.kyoto.lg.jp/ukyo/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26109-ward": {
+      "name": "京都市伏見区役所",
+      "kind": "wardOffice",
+      "postalCode": "612-8511",
+      "address": "京都府京都市伏見区鷹匠町39-2",
+      "officialPage": "https://www.city.kyoto.lg.jp/fushimi/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26110-ward": {
+      "name": "京都市山科区役所",
+      "kind": "wardOffice",
+      "postalCode": "607-8511",
+      "address": "京都府京都市山科区椥辻池尻町14-2",
+      "officialPage": "https://www.city.kyoto.lg.jp/yamasina/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26111-ward": {
+      "name": "京都市西京区役所",
+      "kind": "wardOffice",
+      "postalCode": "615-8522",
+      "address": "京都府京都市西京区上桂森下町25-1",
+      "officialPage": "https://www.city.kyoto.lg.jp/nisikyo/",
+      "sourceUrl": "https://www.city.kyoto.lg.jp/bunshi/page/0000003123.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26201-city": {
+      "name": "福知山市役所",
+      "kind": "cityHall",
+      "postalCode": "620-8501",
+      "address": "京都府福知山市字内記13-1",
+      "officialPage": "https://www.city.fukuchiyama.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26202-city": {
+      "name": "舞鶴市役所",
+      "kind": "cityHall",
+      "postalCode": "625-8555",
+      "address": "京都府舞鶴市字北吸1044",
+      "officialPage": "https://www.city.maizuru.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26203-city": {
+      "name": "綾部市役所",
+      "kind": "cityHall",
+      "postalCode": "623-8501",
+      "address": "京都府綾部市若竹町8-1",
+      "officialPage": "https://www.city.ayabe.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26204-city": {
+      "name": "宇治市役所",
+      "kind": "cityHall",
+      "postalCode": "611-8501",
+      "address": "京都府宇治市宇治琵琶33",
+      "officialPage": "https://www.city.uji.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26205-city": {
+      "name": "宮津市役所",
+      "kind": "cityHall",
+      "postalCode": "626-8501",
+      "address": "京都府宮津市字柳縄手345-1",
+      "officialPage": "https://www.city.miyazu.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26206-city": {
+      "name": "亀岡市役所",
+      "kind": "cityHall",
+      "postalCode": "621-8501",
+      "address": "京都府亀岡市安町野々神8",
+      "officialPage": "https://www.city.kameoka.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26207-city": {
+      "name": "城陽市役所",
+      "kind": "cityHall",
+      "postalCode": "610-0195",
+      "address": "京都府城陽市寺田東ノ口16・17",
+      "officialPage": "https://www.city.joyo.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26208-city": {
+      "name": "向日市役所",
+      "kind": "cityHall",
+      "postalCode": "617-8665",
+      "address": "京都府向日市寺戸町中野20",
+      "officialPage": "https://www.city.muko.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26209-city": {
+      "name": "長岡京市役所",
+      "kind": "cityHall",
+      "postalCode": "617-8501",
+      "address": "京都府長岡京市開田1-1-1",
+      "officialPage": "https://www.city.nagaokakyo.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26210-city": {
+      "name": "八幡市役所",
+      "kind": "cityHall",
+      "postalCode": "614-8501",
+      "address": "京都府八幡市八幡園内75",
+      "officialPage": "https://www.city.yawata.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26211-city": {
+      "name": "京田辺市役所",
+      "kind": "cityHall",
+      "postalCode": "610-0393",
+      "address": "京都府京田辺市田辺80",
+      "officialPage": "https://www.city.kyotanabe.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26212-city": {
+      "name": "京丹後市役所",
+      "kind": "cityHall",
+      "postalCode": "627-8567",
+      "address": "京都府京丹後市峰山町杉谷889",
+      "officialPage": "https://www.city.kyotango.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26213-city": {
+      "name": "南丹市役所",
+      "kind": "cityHall",
+      "postalCode": "622-8651",
+      "address": "京都府南丹市園部町小桜町47",
+      "officialPage": "https://www.city.nantan.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26214-city": {
+      "name": "木津川市役所",
+      "kind": "cityHall",
+      "postalCode": "619-0286",
+      "address": "京都府木津川市木津南垣外110-9",
+      "officialPage": "https://www.city.kizugawa.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26303-town": {
+      "name": "大山崎町役場",
+      "kind": "townHall",
+      "postalCode": "618-8501",
+      "address": "京都府乙訓郡大山崎町字円明寺小字夏目3",
+      "officialPage": "https://www.town.oyamazaki.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26322-town": {
+      "name": "久御山町役場",
+      "kind": "townHall",
+      "postalCode": "613-8585",
+      "address": "京都府久世郡久御山町島田ミスノ38",
+      "officialPage": "https://www.town.kumiyama.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26343-town": {
+      "name": "井手町役場",
+      "kind": "townHall",
+      "postalCode": "610-0302",
+      "address": "京都府綴喜郡井手町大字井手小字東高月8",
+      "officialPage": "https://www.town.ide.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26344-town": {
+      "name": "宇治田原町役場",
+      "kind": "townHall",
+      "postalCode": "610-0289",
+      "address": "京都府綴喜郡宇治田原町大字立川小字坂口18-1",
+      "officialPage": "https://www.town.ujitawara.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26364-town": {
+      "name": "笠置町役場",
+      "kind": "townHall",
+      "postalCode": "619-1303",
+      "address": "京都府相楽郡笠置町大字笠置小字西通90-1",
+      "officialPage": "https://www.town.kasagi.lg.jp/",
+      "sourceUrl": "https://www.zck.or.jp/soshiki/2/4011.html",
+      "sourcePostalUrl": "https://www.zck.or.jp/soshiki/2/4011.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26365-town": {
+      "name": "和束町役場",
+      "kind": "townHall",
+      "postalCode": "619-1295",
+      "address": "京都府相楽郡和束町大字釜塚小字生水14-2",
+      "officialPage": "https://www.town.wazuka.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26366-town": {
+      "name": "精華町役場",
+      "kind": "townHall",
+      "postalCode": "619-0285",
+      "address": "京都府相楽郡精華町南稲八妻北尻70",
+      "officialPage": "https://www.town.seika.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26367-village": {
+      "name": "南山城村役場",
+      "kind": "villageHall",
+      "postalCode": "619-1411",
+      "address": "京都府相楽郡南山城村北大河原小字久保14-1",
+      "officialPage": "https://www.vill.minamiyamashiro.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26407-town": {
+      "name": "京丹波町役場",
+      "kind": "townHall",
+      "postalCode": "622-0292",
+      "address": "京都府船井郡京丹波町蒲生蒲生野487-1",
+      "officialPage": "https://www.town.kyotamba.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26463-town": {
+      "name": "伊根町役場",
+      "kind": "townHall",
+      "postalCode": "626-0493",
+      "address": "京都府与謝郡伊根町字日出651",
+      "officialPage": "https://www.town.ine.kyoto.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "26465-town": {
+      "name": "与謝野町役場",
+      "kind": "townHall",
+      "postalCode": "629-2292",
+      "address": "京都府与謝郡与謝野町字岩滝1798-1",
+      "officialPage": "https://www.town.yosano.lg.jp/",
+      "sourceUrl": "https://www.pref.kyoto.jp/kourei-engo/13900025.html",
+      "sourcePostalUrl": "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14714183.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    }
+  }
+}
