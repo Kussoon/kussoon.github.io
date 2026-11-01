@@ -276,6 +276,92 @@
       "official": "https://www.city.osaka.lg.jp/chuo/",
       "wikipedia": "https://ja.wikipedia.org/wiki/中央区"
     },
+    "27140": {
+      "name": "堺市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/堺市"
+    },
+    "27141": {
+      "name": "堺市堺区",
+      "kind": "ward",
+      "parentCode": "27140",
+      "officeIds": [
+        "27141-ward",
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/sakai/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/堺区"
+    },
+    "27142": {
+      "name": "堺市中区",
+      "kind": "ward",
+      "parentCode": "27140",
+      "officeIds": [
+        "27142-ward",
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/naka/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/中区_(堺市)"
+    },
+    "27143": {
+      "name": "堺市東区",
+      "kind": "ward",
+      "parentCode": "27140",
+      "officeIds": [
+        "27143-ward",
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/higashi/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/東区_(堺市)"
+    },
+    "27144": {
+      "name": "堺市西区",
+      "kind": "ward",
+      "parentCode": "27140",
+      "officeIds": [
+        "27144-ward",
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/nishi/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/西区_(堺市)"
+    },
+    "27145": {
+      "name": "堺市南区",
+      "kind": "ward",
+      "parentCode": "27140",
+      "officeIds": [
+        "27145-ward",
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/minami/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/南区_(堺市)"
+    },
+    "27146": {
+      "name": "堺市北区",
+      "kind": "ward",
+      "parentCode": "27140",
+      "officeIds": [
+        "27146-ward",
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/kita/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/北区_(堺市)"
+    },
+    "27147": {
+      "name": "堺市美原区",
+      "kind": "ward",
+      "parentCode": "27140",
+      "officeIds": [
+        "27147-ward",
+        "27140-city"
+      ],
+      "official": "https://www.city.sakai.lg.jp/mihara/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/美原区"
+    },
     "27203": {
       "name": "豊中市",
       "kind": "city",
@@ -577,6 +663,94 @@
       "officialPage": "https://www.city.osaka.lg.jp/chuo/category/4037-0-0-0-0-0-0-0-0-0.html",
       "sourceUrl": "https://www.city.osaka.lg.jp/fukushi/page/0000371237.html",
       "sourcePostalUrl": "https://www.city.osaka.lg.jp/fukushi/page/0000371237.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27140-city": {
+      "name": "堺市役所",
+      "kind": "cityHall",
+      "postalCode": "590-0078",
+      "address": "大阪府堺市堺区南瓦町3番1号",
+      "officialPage": "https://www.city.sakai.lg.jp/shisei/gaiyo/annai/access.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27141-ward": {
+      "name": "堺市堺区役所",
+      "kind": "wardOffice",
+      "postalCode": "590-0078",
+      "address": "大阪府堺市堺区南瓦町3-1",
+      "officialPage": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27142-ward": {
+      "name": "堺市中区役所",
+      "kind": "wardOffice",
+      "postalCode": "599-8236",
+      "address": "大阪府堺市中区深井沢町2470-7",
+      "officialPage": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27143-ward": {
+      "name": "堺市東区役所",
+      "kind": "wardOffice",
+      "postalCode": "599-8112",
+      "address": "大阪府堺市東区日置荘原寺町195-1",
+      "officialPage": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27144-ward": {
+      "name": "堺市西区役所",
+      "kind": "wardOffice",
+      "postalCode": "593-8324",
+      "address": "大阪府堺市西区鳳東町6-600",
+      "officialPage": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27145-ward": {
+      "name": "堺市南区役所",
+      "kind": "wardOffice",
+      "postalCode": "590-0141",
+      "address": "大阪府堺市南区桃山台1-1-1",
+      "officialPage": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27146-ward": {
+      "name": "堺市北区役所",
+      "kind": "wardOffice",
+      "postalCode": "591-8021",
+      "address": "大阪府堺市北区新金岡町5-1-4",
+      "officialPage": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27147-ward": {
+      "name": "堺市美原区役所",
+      "kind": "wardOffice",
+      "postalCode": "587-8585",
+      "address": "大阪府堺市美原区黒山167-1",
+      "officialPage": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourceUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
+      "sourcePostalUrl": "https://www.city.sakai.lg.jp/yoyakuanai/bunrui/gyoseikikan/shiyakushokuyakusho.html",
       "verifiedAt": "2026-11-01",
       "status": "verified"
     },
