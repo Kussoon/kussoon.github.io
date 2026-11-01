@@ -41,7 +41,7 @@ function render(document,container,result,label){
   const section=element('section','popup-facility','');
   section.append(element('h3','popup-office',displayOfficeName(office.name)));
   section.append(element('p','popup-address',
-   (office.postalCode?'〒'+office.postalCode+'\\n':'郵便番号：未確認\\n')+(office.address||'所在地：未確認')));
+   (office.postalCode?'〒'+office.postalCode+'\n':'郵便番号：未確認\n')+(office.address||'所在地：未確認')));
   if(office.status!=='verified')section.append(element('p','popup-note','この施設の情報は確認待ちです。'));
   if(multi){
    const region=index===0?result.region:result.parentRegion;
