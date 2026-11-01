@@ -31,7 +31,8 @@ jobs:
               if name.startswith('kyushu'):
                   assert '.land{fill:#add9ef;stroke:none' in text, name
                   assert '.land.chosen{fill:#ffc476}' in text, name
-                  assert "outline(current.arcs,proj)" in script, name
+                  assert 'KussoonV2MunicipalRenderer.render(' in script, name
+                  assert '<script src="../shared/municipality-renderer.js"></script>' in text, name
                   assert 'item={regions,arcs,box:b,' in script, name
               else:
                   assert '.land{fill:#a8d5eb;stroke:none' in text, name
