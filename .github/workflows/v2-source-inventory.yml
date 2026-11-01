@@ -1,0 +1,31 @@
+name: Inventory V2 topology sources
+on:
+  pull_request:
+    paths:
+      - 'scripts/v2/inventory_topojson.py'
+      - '.github/workflows/v2-source-inventory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inventory source data
+        run: python scripts/v2/inventory_topojson.py > v2-topojson-inventory.json
+      - name: Preview inventory
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('v2-topojson-inventory.json'))
+          print('TopoJSON files:',data['count'])
+          for row in data['files']:
+            print(row['path'],row['bytes'],'bytes',row.get('objects',{}),row.get('error',''))
+          assert data['count'] > 0
+          assert all('error' not in row for row in data['files'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v2-topojson-inventory
+          path: v2-topojson-inventory.json
