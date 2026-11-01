@@ -235,6 +235,33 @@
   return {point:fallback,segment:null,segments:[],
    reason:'no-horizontal-intersection'};
  }
+ // Experimental proposal 5B: ignore disconnected components except the largest by
+ // projected polygon area. Holes are subtracted; no name-specific overrides.
+ function polygonArea(ring){
+  let twice=0;
+  for(let i=0,j=ring.length-1;i<ring.length;j=i++)
+   twice+=ring[j][0]*ring[i][1]-ring[i][0]*ring[j][1];
+  return Math.abs(twice)/2;
+ }
+ function largestComponent5(model){
+  const components=model.components;
+  if(!Array.isArray(components)||components.length<2)
+   return {...proposal5(model),componentCount:components?.length||0,
+    selectedComponent:0,reasonDetail:'single-component'};
+  let index=0,best=-Infinity;
+  components.forEach((polygon,i)=>{
+   if(!polygon?.length)return;
+   const area=Math.max(0,polygonArea(polygon[0])-
+    polygon.slice(1).reduce((sum,hole)=>sum+polygonArea(hole),0));
+   if(area>best){best=area;index=i;}
+  });
+  if(!(best>0))return {...proposal5(model),componentCount:components.length,
+   selectedComponent:null,reasonDetail:'invalid-area-fallback'};
+  const rings=components[index];
+  const result=proposal5({...model,rings,box:E.bbox(rings)});
+  return {...result,componentCount:components.length,selectedComponent:index,
+   reasonDetail:'largest-component'};
+ }
  // Candidate C: start at the exact horizontal centre. Only try the
  // vertical interval's centre if the FIXED reference-size text box
  // protrudes substantially beyond the territory in the vertical direction.
@@ -334,5 +361,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,proposal4,proposal5,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,proposal4,proposal5,largestComponent5,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
