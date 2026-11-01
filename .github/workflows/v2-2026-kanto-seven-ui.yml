@@ -31,6 +31,10 @@ jobs:
           assert 'regionCodes.some' in script
           assert 'kanto-prefecture-20m/' in script
           assert 'selected-outline' not in script
+          assert 'id="tokyoArea"' in html
+          assert 'TOKYO_BOX[sub]' in script
+          assert "$('tokyoArea').addEventListener('change',render)" in script
+          assert "$('tokyoArea').disabled=pref!=='13'" in script
           print('PASS seven Kanto prefectures, unique region code validation and common renderer')
           PY
           node --check /tmp/v2-kanto-ui.js
