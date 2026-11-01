@@ -78,9 +78,12 @@
   const width=(x1-x0)*scale+pad*2,height=(y1-y0)*scale+pad*2;
   const projectPoint=([lon,lat])=>[pad+(lon*lonFactor-x0)*scale,pad+(-lat-y0)*scale];
   const models=records.map(r=>{
-   const rings=r.geoPolygons.flatMap(polygon=>polygon.map(ring=>ring.map(projectPoint)));
+   const components=r.geoPolygons.map(polygon=>polygon.map(ring=>ring.map(projectPoint)));
+   const rings=components.flat();
    const {geoPolygons,...props}=r;
-   return {...props,rings,box:engine.bbox(rings),centroid:engine.centroid(rings),
+   // Preserve disconnected polygon components for the optional mainland-first label pilot.
+   // The complete rings still drive rendering, hit testing, and the original proposal 5.
+   return {...props,rings,components,box:engine.bbox(rings),centroid:engine.centroid(rings),
     polylabel:engine.polylabel(rings)};
   });
   return {models,bounds:{x:0,y:0,w:width,h:height},projectPoint};
