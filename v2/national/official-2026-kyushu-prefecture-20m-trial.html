@@ -36,6 +36,7 @@ small{color:#526b7b}.note{background:#fff6e7;border-radius:8px;padding:10px}tabl
 <tr><th>読み込み・解析</th><td id="loading">—</td></tr>
 <tr><th>描画時間</th><td id="drawing">—</td></tr>
 </tbody></table><p class="note">容量は非圧縮のJSONです。実際の通信量は圧縮やキャッシュによって変わります。広域表示や島しょ部を省略するものではありません。</p></section></main>
+<script src="../shared/municipality-renderer.js"></script>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=700;
@@ -47,13 +48,11 @@ function ring(ids,arcs){const pts=[];for(const id of ids){const a=arcs[id<0?~id:
 function geom(g,arcs){return g.type==='Polygon'?[g.arcs.map(r=>ring(r,arcs))]:g.type==='MultiPolygon'?g.arcs.map(poly=>poly.map(r=>ring(r,arcs))):[];}
 function bbox(polygons){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const p of polygons)for(const r of p)for(const [x,y] of r){a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x);d=Math.max(d,y);}return [a,b,c,d];}
 function project(b){const cosine=Math.cos(((b[1]+b[3])/2)*Math.PI/180),width=Math.max((b[2]-b[0])*cosine,.05),height=Math.max(b[3]-b[1],.05),scale=Math.min((W-48)/width,(H-44)/height),lon=(b[0]+b[2])/2,lat=(b[1]+b[3])/2;return p=>[W/2+(p[0]-lon)*cosine*scale,H/2-(p[1]-lat)*scale];}
-function outline(arcs,proj){let s='';for(const arc of arcs){if(arc.length<2)continue;for(let i=0;i<arc.length;i++){const p=proj(arc[i]);s+=(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2);}}return s;}
-function shape(polys,proj){let s='';for(const poly of polys)for(const ring of poly){for(let i=0;i<ring.length;i++){const p=proj(ring[i]);s+=(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2);}s+='Z';}return s;}
 function render(){
- if(!current)return;const start=performance.now(),map=$('map');map.replaceChildren();
+ if(!current)return;
+ const start=performance.now(),map=$('map');
  const regions=current.regions,selected=$('region').value,box=current.box,proj=project(box);
- for(const r of regions){const el=document.createElementNS(NS,'path');el.setAttribute('d',shape(r.polys,proj));el.setAttribute('class','land'+(r.code===selected?' chosen':''));el.dataset.code=r.code;const title=document.createElementNS(NS,'title');title.textContent=r.name;el.append(title);map.append(el);}
- const borders=document.createElementNS(NS,'path');borders.setAttribute('class','borders');borders.setAttribute('d',outline(current.arcs,proj));map.append(borders);
+ KussoonV2MunicipalRenderer.render({map,regions,arcs:current.arcs,project:proj,selected});
  $('drawing').textContent=(performance.now()-start).toFixed(1)+' ms';
 }
 async function load(pref){
