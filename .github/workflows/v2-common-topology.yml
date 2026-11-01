@@ -1,0 +1,23 @@
+name: V2 shared topology builder
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/**'
+      - '.github/workflows/v2-common-topology.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-fixture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned generator dependencies
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Validate shared arcs, detached islands and missing code behavior
+        working-directory: v2/tools/shared-topology
+        run: npm test
