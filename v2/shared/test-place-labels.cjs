@@ -36,4 +36,15 @@ const donut=[[[[0,0],[8,0],[8,8],[0,8],[0,0]],[[2,2],[6,2],[6,6],[2,6],[2,2]]]];
 const dpt=Array.from(labels.anchor(donut));
 assert(labels.insidePolygon(dpt,donut[0]),'label must avoid internal holes');
 assert.equal(labels.anchor(donut),labels.anchor(donut),'stable cached anchor');
+const named={...region,reading:'にしのみやし',readingParts:[{name:'西宮市',reading:'にしのみやし'}]};
+let readingSvg=element('svg');
+assert.equal(labels.show({svg:readingSvg,regions:[named],project:x=>x,selected:'28204',readings:true}),1);
+const kanji=readingSvg.children[0].children[0].children;
+assert.equal(kanji[0].attrs.y,'5','kanji baseline must not move when reading is toggled');
+assert.equal(kanji[1].textContent,'にしのみやし');
+const ward={...region,code:'28110',name:'中央区',reading:'こうべしちゅうおうく',
+ readingParts:[{name:'神戸市',reading:'こうべし'},{name:'中央区',reading:'ちゅうおうく'}]};
+const wardSvg=element('svg');
+assert.equal(labels.show({svg:wardSvg,regions:[ward],project:x=>x,selected:'28110',readings:true}),1);
+assert.deepEqual(wardSvg.children[0].children[0].children.map(x=>x.textContent),['神戸市','こうべし','中央区','ちゅうおうく']);
 console.log('PASS Japanese name search and land-centered labels for concave boundaries, islands and holes');
