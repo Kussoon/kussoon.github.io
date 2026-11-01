@@ -1,12 +1,13 @@
 {
   "source": "https://github.com/code4fukui/localgovjp/blob/ca805dfb60fa9481cb76013cbbad89a5d3211e43/localgovjp.json",
   "sourceCount": 1916,
+  "municipalOfficialOverrides": 3,
   "target": "official 2026 V2 municipality geometry",
   "total": 1905,
-  "matched": 1889,
-  "missing": 16,
+  "matched": 1892,
+  "missing": 13,
   "mismatched": 0,
-  "coveragePct": 99.2,
+  "coveragePct": 99.3,
   "byPrefecture": [
     {
       "pref": "01",
@@ -119,8 +120,7 @@
     {
       "pref": "22",
       "total": 39,
-      "matched": 36,
-      "missing": 3
+      "matched": 39
     },
     {
       "pref": "23",
@@ -292,21 +292,6 @@
     {
       "code": "13000",
       "officialName": "所属未定地",
-      "kind": "missing"
-    },
-    {
-      "code": "22138",
-      "officialName": "浜松市",
-      "kind": "missing"
-    },
-    {
-      "code": "22139",
-      "officialName": "浜松市",
-      "kind": "missing"
-    },
-    {
-      "code": "22140",
-      "officialName": "浜松市",
       "kind": "missing"
     },
     {
