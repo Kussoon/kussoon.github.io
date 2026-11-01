@@ -48,7 +48,8 @@ jobs:
           assert len(original['arcs'])==len(light['arcs'])
           geoms=light['objects']['municipalities']['geometries']
           codes=[str(g['properties']['N03_007']) for g in geoms]
-          assert len(codes)>=40 and len(set(codes))==len(codes) and all(c.startswith('47') for c in codes)
+          assert len(codes)==42 and len(set(codes))==len(codes) and all(c.startswith('47') for c in codes)
+          print('Okinawa codes and names:',[(str(g['properties']['N03_007']),g['properties']['N03_004']) for g in geoms])
           page=pathlib.Path('v2/national/official-2026-kyushu-okinawa-eight-20m-trial.html').read_text()
           assert "47" in page and "kyushu-prefecture-20m" in page
           print('PASS Okinawa',len(codes),'unique regions, original',(root/'47.topojson').stat().st_size,'bytes, 20m',(root/'47-20m.topojson').stat().st_size,'bytes')
