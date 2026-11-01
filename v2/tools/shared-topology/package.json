@@ -5,7 +5,8 @@
   "description": "Offline one-source nationwide topology generator for Kussoon V2",
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "build": "node build.mjs"
+    "build": "node build.mjs",
+    "validate": "node validate.mjs --dir ./generated"
   },
   "dependencies": {
     "topojson-server": "3.0.1",
