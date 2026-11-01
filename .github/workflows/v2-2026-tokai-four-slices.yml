@@ -3,8 +3,8 @@ on:
   pull_request:
     paths:
       - 'v2/tools/shared-topology/prepare-2026-tokai-four.py'
-      - '.github/workflows/v2-2026-kyushu-prefecture-slices.yml'
-      - 'v2/national/official-2026-tokai-prefecture-20m-trial.html'
+      - '.github/workflows/v2-2026-tokai-four-slices.yml'
+      - 'v2/national/official-2026-tokai-four-20m-trial.html'
   workflow_dispatch:
 permissions:
   contents: write
@@ -68,7 +68,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          page=Path('v2/national/official-2026-tokai-prefecture-20m-trial.html').read_text()
+          page=Path('v2/national/official-2026-tokai-four-20m-trial.html').read_text()
           assert "pref+'.topojson'" in page
           assert '県別に読み込み' in page
           print('PASS prefecture-on-demand trial page')
