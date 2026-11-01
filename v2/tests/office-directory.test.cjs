@@ -113,3 +113,19 @@ test('office addresses remain reference text and regional direction link uses th
  assert.equal(api.destination({name:'未確認',address:null,status:'missing'}),null);
  assert.equal(ward.region.wikipedia,directory.regions['28110'].wikipedia);
 });
+
+test('display removes building suffixes without modifying stored names or route destinations',()=>{
+ const pairs=[
+  ['西宮市役所 本庁舎','西宮市役所'],
+  ['神戸市役所（1号館）','神戸市役所'],
+  ['多可町役場 本庁舎','多可町役場'],
+  ['神戸市中央区役所','神戸市中央区役所']
+ ];
+ for(const [raw,expected] of pairs)assert.equal(api.displayOfficeName(raw),expected);
+ assert.equal(directory.offices['28204-city'].name,'西宮市役所 本庁舎');
+ const office=api.resolve(directory,'28204').offices[0];
+ assert.equal(new URL(api.destination(office)).searchParams.get('destination'),office.name+' '+office.address);
+ const central=api.resolve(directory,'28110').offices;
+ assert.equal(central.length,2);
+ assert.deepEqual(central.map(o=>api.displayOfficeName(o.name)),['神戸市中央区役所','神戸市役所']);
+});
