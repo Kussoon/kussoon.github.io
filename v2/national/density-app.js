@@ -67,10 +67,11 @@ function renderOfficePopup(model){
  $('popup-office').textContent='';
  $('popup-address').textContent='';
  const result=window.KussoonOfficeDirectory.resolve(officeDirectory,model.code);
+ popup.classList.toggle('multi-office',result.offices.length>1);
  window.KussoonOfficeDirectory.render(document,$('popup-actions'),result,nameOf(model));
  $('popup-note').textContent=result.offices.length&&result.offices.every(o=>o.status==='verified')?
-  '役所・役場の住所は地域の参考情報です。リンクは選択した地域を調べるためのものです。':
-  '確認できた住所のみ表示します。リンクは選択した地域の情報を開きます。';
+  '住所は地域の参考情報です。リンクは別タブで開きます。':
+  '未確認の住所があります。リンクは別タブで開きます。';
  popup.hidden=false;
 }
 function showSelection(){
