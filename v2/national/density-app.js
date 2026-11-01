@@ -633,7 +633,7 @@ $('city-shortcuts').addEventListener('click',async e=>{
  view.w=width;view.h=width*bounds.h/bounds.w;
  view.x=(b.minX+b.maxX-view.w)/2;
  view.y=(b.minY+b.maxY-view.h)/2;
- clamp();syncView();renderLabels();
+ clamp();syncView();renderLabels();renderDiagnostic();
  map.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
