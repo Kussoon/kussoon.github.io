@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "25",
+  "asOf": "2026-11-01",
+  "regions": {
+    "25201": {
+      "name": "大津市",
+      "kind": "city",
+      "officeIds": [
+        "25201-city"
+      ],
+      "official": "https://www.city.otsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/大津市"
+    },
+    "25202": {
+      "name": "彦根市",
+      "kind": "city",
+      "officeIds": [
+        "25202-city"
+      ],
+      "official": "https://www.city.hikone.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/彦根市"
+    },
+    "25203": {
+      "name": "長浜市",
+      "kind": "city",
+      "officeIds": [
+        "25203-city"
+      ],
+      "official": "https://www.city.nagahama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/長浜市"
+    },
+    "25204": {
+      "name": "近江八幡市",
+      "kind": "city",
+      "officeIds": [
+        "25204-city"
+      ],
+      "official": "https://www.city.omihachiman.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/近江八幡市"
+    },
+    "25206": {
+      "name": "草津市",
+      "kind": "city",
+      "officeIds": [
+        "25206-city"
+      ],
+      "official": "https://www.city.kusatsu.shiga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/草津市"
+    },
+    "25207": {
+      "name": "守山市",
+      "kind": "city",
+      "officeIds": [
+        "25207-city"
+      ],
+      "official": "https://www.city.moriyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/守山市"
+    },
+    "25208": {
+      "name": "栗東市",
+      "kind": "city",
+      "officeIds": [
+        "25208-city"
+      ],
+      "official": "https://www.city.ritto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/栗東市"
+    },
+    "25209": {
+      "name": "甲賀市",
+      "kind": "city",
+      "officeIds": [
+        "25209-city"
+      ],
+      "official": "https://www.city.koka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/甲賀市"
+    },
+    "25210": {
+      "name": "野洲市",
+      "kind": "city",
+      "officeIds": [
+        "25210-city"
+      ],
+      "official": "https://www.city.yasu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/野洲市"
+    },
+    "25211": {
+      "name": "湖南市",
+      "kind": "city",
+      "officeIds": [
+        "25211-city"
+      ],
+      "official": "https://www.city.shiga-konan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/湖南市"
+    },
+    "25212": {
+      "name": "高島市",
+      "kind": "city",
+      "officeIds": [
+        "25212-city"
+      ],
+      "official": "https://www.city.takashima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/高島市"
+    },
+    "25213": {
+      "name": "東近江市",
+      "kind": "city",
+      "officeIds": [
+        "25213-city"
+      ],
+      "official": "https://www.city.higashiomi.shiga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/東近江市"
+    },
+    "25214": {
+      "name": "米原市",
+      "kind": "city",
+      "officeIds": [
+        "25214-city"
+      ],
+      "official": "https://www.city.maibara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/米原市"
+    },
+    "25383": {
+      "name": "日野町",
+      "kind": "town",
+      "officeIds": [
+        "25383-town"
+      ],
+      "official": "https://www.town.shiga-hino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/日野町_(滋賀県)"
+    },
+    "25384": {
+      "name": "竜王町",
+      "kind": "town",
+      "officeIds": [
+        "25384-town"
+      ],
+      "official": "https://www.town.ryuoh.shiga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/竜王町"
+    },
+    "25425": {
+      "name": "愛荘町",
+      "kind": "town",
+      "officeIds": [
+        "25425-town"
+      ],
+      "official": "https://www.town.aisho.shiga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/愛荘町"
+    },
+    "25441": {
+      "name": "豊郷町",
+      "kind": "town",
+      "officeIds": [
+        "25441-town"
+      ],
+      "official": "https://www.town.toyosato.shiga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/豊郷町"
+    },
+    "25442": {
+      "name": "甲良町",
+      "kind": "town",
+      "officeIds": [
+        "25442-town"
+      ],
+      "official": "https://www.kouratown.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/甲良町"
+    },
+    "25443": {
+      "name": "多賀町",
+      "kind": "town",
+      "officeIds": [
+        "25443-town"
+      ],
+      "official": "https://www.town.taga.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/多賀町"
+    }
+  },
+  "offices": {
+    "25201-city": {
+      "name": "大津市役所",
+      "kind": "cityHall",
+      "postalCode": "520-8575",
+      "address": "滋賀県大津市御陵町3-1",
+      "officialPage": "https://www.city.otsu.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25202-city": {
+      "name": "彦根市役所",
+      "kind": "cityHall",
+      "postalCode": "522-8501",
+      "address": "滋賀県彦根市元町4-2",
+      "officialPage": "https://www.city.hikone.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25203-city": {
+      "name": "長浜市役所",
+      "kind": "cityHall",
+      "postalCode": "526-8501",
+      "address": "滋賀県長浜市八幡東町632",
+      "officialPage": "https://www.city.nagahama.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25204-city": {
+      "name": "近江八幡市役所",
+      "kind": "cityHall",
+      "postalCode": "523-8501",
+      "address": "滋賀県近江八幡市桜宮町236",
+      "officialPage": "https://www.city.omihachiman.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25206-city": {
+      "name": "草津市役所",
+      "kind": "cityHall",
+      "postalCode": "525-8588",
+      "address": "滋賀県草津市草津三丁目13-30",
+      "officialPage": "https://www.city.kusatsu.shiga.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25207-city": {
+      "name": "守山市役所",
+      "kind": "cityHall",
+      "postalCode": "524-8585",
+      "address": "滋賀県守山市吉身二丁目5-22",
+      "officialPage": "https://www.city.moriyama.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25208-city": {
+      "name": "栗東市役所",
+      "kind": "cityHall",
+      "postalCode": "520-3088",
+      "address": "滋賀県栗東市安養寺一丁目13-33",
+      "officialPage": "https://www.city.ritto.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25209-city": {
+      "name": "甲賀市役所",
+      "kind": "cityHall",
+      "postalCode": "528-8502",
+      "address": "滋賀県甲賀市水口町水口6053",
+      "officialPage": "https://www.city.koka.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25210-city": {
+      "name": "野洲市役所",
+      "kind": "cityHall",
+      "postalCode": "520-2395",
+      "address": "滋賀県野洲市小篠原2100-1",
+      "officialPage": "https://www.city.yasu.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25211-city": {
+      "name": "湖南市役所",
+      "kind": "cityHall",
+      "postalCode": "520-3288",
+      "address": "滋賀県湖南市中央一丁目1番地",
+      "officialPage": "https://www.city.shiga-konan.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25212-city": {
+      "name": "高島市役所",
+      "kind": "cityHall",
+      "postalCode": "520-1592",
+      "address": "滋賀県高島市新旭町北畑565",
+      "officialPage": "https://www.city.takashima.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25213-city": {
+      "name": "東近江市役所",
+      "kind": "cityHall",
+      "postalCode": "527-8527",
+      "address": "滋賀県東近江市八日市緑町10-5",
+      "officialPage": "https://www.city.higashiomi.shiga.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25214-city": {
+      "name": "米原市役所",
+      "kind": "cityHall",
+      "postalCode": "521-8501",
+      "address": "滋賀県米原市米原1016",
+      "officialPage": "https://www.city.maibara.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25383-town": {
+      "name": "日野町役場",
+      "kind": "townHall",
+      "postalCode": "529-1698",
+      "address": "滋賀県蒲生郡日野町河原一丁目1番地",
+      "officialPage": "https://www.town.shiga-hino.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25384-town": {
+      "name": "竜王町役場",
+      "kind": "townHall",
+      "postalCode": "520-2592",
+      "address": "滋賀県蒲生郡竜王町小口3",
+      "officialPage": "https://www.town.ryuoh.shiga.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25425-town": {
+      "name": "愛荘町役場",
+      "kind": "townHall",
+      "postalCode": "529-1380",
+      "address": "滋賀県愛知郡愛荘町愛知川72",
+      "officialPage": "https://www.town.aisho.shiga.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25441-town": {
+      "name": "豊郷町役場",
+      "kind": "townHall",
+      "postalCode": "529-1169",
+      "address": "滋賀県犬上郡豊郷町石畑375",
+      "officialPage": "https://www.town.toyosato.shiga.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25442-town": {
+      "name": "甲良町役場",
+      "kind": "townHall",
+      "postalCode": "522-0244",
+      "address": "滋賀県犬上郡甲良町在士353-1",
+      "officialPage": "https://www.kouratown.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "25443-town": {
+      "name": "多賀町役場",
+      "kind": "townHall",
+      "postalCode": "522-0341",
+      "address": "滋賀県犬上郡多賀町多賀324",
+      "officialPage": "https://www.town.taga.lg.jp/",
+      "sourceUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "sourcePostalUrl": "https://www.nionet.jp/shisetsulink/item_city.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    }
+  }
+}

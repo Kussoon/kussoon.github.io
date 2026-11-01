@@ -517,7 +517,7 @@ async function load(area,mode){
  setStatus(needed.length+'府県の地図データを読み込んでいます…');
  const [pairs,,officeReferencePoints]=await Promise.all([
   Promise.all(needed.map(async p=>[p.code,await getTopology(p.code)])),
-  Promise.all(needed.filter(p=>['26','27','28'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code))),
+  Promise.all(needed.filter(p=>['25','26','27','28'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code))),
   loadOfficeReferencePoints()
  ]);
  if(token!==runId)return;
