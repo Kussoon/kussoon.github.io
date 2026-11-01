@@ -46,7 +46,7 @@ const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=
 const cache=new Map();let current=null,requestId=0;
 const OKINAWA_BOX={main:[127.1,25.8,129.2,27.2],miyako:[124.8,24.3,126.2,25.35],yaeyama:[122.6,23.85,125.1,25.2],daito:[130.7,25.3,132.0,26.9]};
 const labels={'40':'福岡県','41':'佐賀県','42':'長崎県','43':'熊本県','44':'大分県','45':'宮崎県','46':'鹿児島県','47':'沖縄県'};
-const counts={'40':73,'41':20,'42':21,'43':49,'44':18,'45':26,'46':44,'47':41};
+const counts={'40':73,'41':20,'42':21,'43':49,'44':18,'45':26,'46':44,'47':42};
 function arcDecode(t){return t.arcs.map(a=>{let x=0,y=0;return a.map(p=>{if(t.transform){x+=p[0];y+=p[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];}return p;});});}
 function ring(ids,arcs){const pts=[];for(const id of ids){const a=arcs[id<0?~id:id],line=id<0?a.slice().reverse():a;pts.push(...(pts.length?line.slice(1):line));}return pts;}
 function geom(g,arcs){return g.type==='Polygon'?[g.arcs.map(r=>ring(r,arcs))]:g.type==='MultiPolygon'?g.arcs.map(poly=>poly.map(r=>ring(r,arcs))):[];}
