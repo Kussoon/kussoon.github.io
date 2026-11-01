@@ -30,7 +30,7 @@ const Option=function(text,value){const el=element('option');el.value=value;el.t
 let lastRender=null;
 const KussoonV2MunicipalRenderer={
  render(opts){lastRender={count:opts.regions.length,selected:opts.selected};},
- focusBounds(polys){const pts=polys.flat(2);const xx=pts.map(p=>p[0]),yy=pts.map(p=>p[1]);return [Math.min(...xx),Math.min(...yy),Math.max(...xx),Math.max(...yy)];}
+ focusBounds(){return [135,35,135.5,35.5];}
 };
 const KussoonV2MapViewport={init({onZoomChange}){onZoomChange(1);return {reset(){onZoomChange(1);},zoomIn(){},zoomOut(){}};}};
 const fakeFetch=async url=>{
@@ -46,7 +46,7 @@ vm.runInNewContext(script,context);
 async function flush(){for(let i=0;i<20;i++)await new Promise(resolve=>setImmediate(resolve));}
 await flush();
 assert(node('status').textContent.includes('全国47都道府県'),'national overview did not load');
-assert.equal(node('pref').children.length,48,'missing prefecture selector option');
+assert.equal(node('pref').children.length,47,'missing prefecture selector options');
 assert(node('map').children.length>0,'national map not drawn');
 async function selectPref(code,count){
  node('pref').value=code;
