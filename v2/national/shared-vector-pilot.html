@@ -29,17 +29,15 @@ footer{font-size:13px;color:#53738a;margin-top:18px}
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/polygon-clipping@0.15.7/dist/polygon-clipping.umd.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
-<script defer src="shared-vector-pilot.js?v=20261101-a"></script>
+<script defer src="shared-vector-pilot.js?v=20261101-b-worker"></script>
 </head><body><main>
 <a href="./density.html">← 全国市区町村マップへ</a>
 <h1>大阪・奈良の共通ベクター境界を比較</h1>
-<p>従来の府県ごとにずれた境界と、<strong>共通の線に合わせた市区町村ポリゴン</strong>を切り替えられる試作です。前回の画素方式とは異なり、SVGのベクター図形で描きます。</p>
+<p>従来の府県ごとにずれた境界と、<strong>共通の線に合わせた市区町村ポリゴン</strong>を切り替えられる試作です。まず従来地図を表示し、共通ベクター境界の計算は「試作」ボタンを押したときに別スレッドで行います。前回の画素方式とは異なり、SVGのベクター図形で描きます。</p>
 <section class="panel">
  <div class="controls" role="group" aria-label="境界方式">
-  <button id="original" type="button" aria-pressed="false">従来：府県別の境界</button>
-  <button id="shared" type="button" aria-pressed="true">試作：共通ベクター境界</button>
+  <button id="original" type="button" aria-pressed="true">従来：府県別の境界</button>
+  <button id="shared" type="button" aria-pressed="false">試作：共通ベクター境界</button>
  </div>
  <div class="controls" style="margin-top:12px">
   <label>確認する地域
@@ -63,7 +61,7 @@ footer{font-size:13px;color:#53738a;margin-top:18px}
 <section class="panel">
  <svg id="map" viewBox="0 0 850 720" role="img" aria-label="大阪府と奈良県の共通ベクター境界の比較地図"></svg>
  <p id="status" class="info" role="status">地図を読み込み中です。</p>
- <p class="meta">地図上をタップして区域を選ぶこともできます。切替時に地図の中心・倍率は変わりません。</p>
+ <p class="meta">地図上をタップして区域を選ぶこともできます。切替時に地図の中心・倍率は変わりません。計算が利用できない場合でも、従来の地図は表示されます。</p>
 </section>
 <section class="panel">
 <h2>今回の処理</h2>
