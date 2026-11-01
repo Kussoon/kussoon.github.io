@@ -21,7 +21,7 @@ function verify(region,entry){
  // only when the FIVE-DIGIT ward code agrees and its full source name begins
  // with precisely the geographic parent city. Never synthesize a ward name.
  if(display.endsWith('市')&&full.startsWith(display)){
-  const ward=full.slice(display.length),p=raw.split(/\\s+/);
+  const ward=full.slice(display.length),p=raw.split(/\s+/);
   if(!ward.endsWith('区')||!ward||p.length!==2)return null;
   const cityReading=kana(p[0]),wardReading=kana(p[1]);
   if(!validReading(cityReading)||!validReading(wardReading))return null;
