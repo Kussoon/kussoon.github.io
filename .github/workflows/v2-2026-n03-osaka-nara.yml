@@ -1,0 +1,60 @@
+name: V2 official 2026 Osaka-Nara common topology
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/**'
+      - '.github/workflows/v2-2026-n03-osaka-nara.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official-two-prefectures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install GIS conversion tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+      - name: Install pinned TopoJSON toolchain
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Convert actual MLIT 2026 Osaka and Nara N03 geometries
+        run: |
+          python3 v2/tools/shared-topology/prepare-2026-osaka-nara.py "$RUNNER_TEMP/n03-input"
+      - name: Build common topology from official 2026 shapes
+        working-directory: v2/tools/shared-topology
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03-input/osaka-nara-2026.geojson" \
+            --output "$RUNNER_TEMP/v2-common-2026" \
+            --quantization 1000000 --keep 0.02 --expect-prefectures 2
+      - name: Audit the common prefecture border and municipal code consistency
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-common-2026"
+      - name: Show pilot audit summary
+        run: |
+          python3 - <<'PY'
+          import json,os,pathlib
+          d=pathlib.Path(os.environ['RUNNER_TEMP'])/'v2-common-2026'
+          x=json.loads((d/'manifest.json').read_text())
+          print('Prefectures:',x['prefectureCount'])
+          print('Municipal codes:',x['regionCount'])
+          print('Shared Osaka-Nara topology arcs:',x['sharedPrefectureArcCounts'].get('27-29',0))
+          for name in ('27.topojson','29.topojson'):
+              print(name, (d/name).stat().st_size, 'bytes')
+          assert x['sharedPrefectureArcCounts'].get('27-29',0)>0
+          PY
+      - name: Upload reproducible pilot output (not website data)
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-official-2026-osaka-nara-common-topology
+          path: |
+            ${{ runner.temp }}/v2-common-2026/manifest.json
+            ${{ runner.temp }}/v2-common-2026/27.topojson
+            ${{ runner.temp }}/v2-common-2026/29.topojson
+          retention-days: 14
+          if-no-files-found: error
