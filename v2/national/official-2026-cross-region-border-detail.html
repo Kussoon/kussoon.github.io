@@ -79,8 +79,8 @@ function getBounds(){
  const points=[];for(const f of data.features){
   if(f.properties.type==='sample')continue;
   const walk=g=>{
-   if(g.type==='LineString')points.push(...g.coordinates);
-   else if(g.type==='MultiLineString')g.coordinates.forEach(line=>points.push(...line));
+   if(g.type==='LineString')for(const p of g.coordinates)points.push(p);
+   else if(g.type==='MultiLineString')g.coordinates.forEach(line=>{for(const p of line)points.push(p);});
    else if(g.type==='GeometryCollection')g.geometries.forEach(walk);
   };walk(f.geometry);
  }
