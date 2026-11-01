@@ -13,7 +13,7 @@ const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
 const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
 let catalog=null,readingData=null,countyData=null,officeDirectory={},models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
-let drawing=[],labelNodes=[],outlineNodes=[],selection=null,plate=null,plateShape=null;
+let drawing=[],labelNodes=[],outlineNodes=[],selectionOutline=null,selection=null,plate=null,plateShape=null;
 let popupDismissed=false;
 let fixedCenters=new Map(),fixedCorrections=0;
 let multiCenters=new Map(),multiCorrections=0;
@@ -127,6 +127,14 @@ function highlight(){
  labelNodes.forEach(({node,model})=>{
   node.classList.toggle('selected',selection?.type==='model'&&model?.id===selection.id);
  });
+ // Trace the selected administrative area once, above all base boundary layers.
+ // The plate display continues to use its existing multi-area highlighting.
+ if(selectionOutline){
+  const active=state.mode==='plate'?null:
+   models.find(model=>selection?.type==='model'&&model.id===selection.id);
+  if(active)selectionOutline.setAttribute('d',pathData(active.rings));
+  else selectionOutline.removeAttribute('d');
+ }
  showSelection();
 }
 function select(sel,scroll=false){
@@ -155,6 +163,9 @@ function buildPrefOutlines(topologies,projectPoint){
 }
 function drawMap(topologies,projectPoint){
  const shapeLayer=tag('g'),labelLayer=tag('g',{'aria-hidden':'true'}),outlines=buildPrefOutlines(topologies,projectPoint);
+ const selectionLayer=tag('g',{'aria-hidden':'true'});
+ selectionOutline=tag('path',{class:'selection-outline'});
+ selectionLayer.append(selectionOutline);
  diagnosticLayer=tag('g',{class:'label-diagnostic','aria-hidden':'true'});
  drawing=[];labelNodes=[];outlineNodes=[];
  const isPlate=state.mode==='plate'&&Boolean(plate);
@@ -184,7 +195,7 @@ function drawMap(topologies,projectPoint){
   labelLayer.append(t);
   labelNodes.push({node:t,model:plateShape});
  }
- map.replaceChildren(shapeLayer,outlines,diagnosticLayer,labelLayer);
+ map.replaceChildren(shapeLayer,outlines,selectionLayer,diagnosticLayer,labelLayer);
  highlight();
 }
 function labelSize(zoom,compact){
