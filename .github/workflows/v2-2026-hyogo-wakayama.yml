@@ -1,0 +1,74 @@
+name: V2 official 2026 Hyogo Wakayama 20m pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/prepare-2026-hyogo-wakayama.py'
+      - '.github/workflows/v2-2026-hyogo-wakayama.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install GIS tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+      - name: Install topology tools
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Download official Hyogo and Wakayama data
+        run: python3 v2/tools/shared-topology/prepare-2026-hyogo-wakayama.py "$RUNNER_TEMP/n03-input"
+      - name: Build one shared topology
+        working-directory: v2/tools/shared-topology
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03-input/hyogo-wakayama-2026.geojson" --output "$RUNNER_TEMP/v2-2026-hyogo-wakayama" --quantization 1000000 --keep 0.02 --expect-prefectures 2 --emit-combined hyogo-wakayama.topojson
+      - name: Validate prefecture topology
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-2026-hyogo-wakayama"
+      - name: Generate 20m version and verify region identifiers
+        run: |
+          python scripts/v2/simplify_topojson.py "$RUNNER_TEMP/v2-2026-hyogo-wakayama/hyogo-wakayama.topojson" "$RUNNER_TEMP/v2-2026-hyogo-wakayama/hyogo-wakayama-20m.topojson" --meters 20
+          python - <<'PY'
+          import json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'v2-2026-hyogo-wakayama'
+          original=json.loads((root/'hyogo-wakayama.topojson').read_text())
+          light=json.loads((root/'hyogo-wakayama-20m.topojson').read_text())
+          assert original['objects']==light['objects']
+          assert len(original['arcs'])==len(light['arcs'])
+          geometries=light['objects']['municipalities']['geometries']
+          assert len(geometries)>50
+          codes=[str(g['properties']['N03_007']) for g in geometries]
+          assert all(c.startswith(('28','30')) for c in codes)
+          assert len(set(codes))==len(codes)
+          print('PASS',len(codes),'regions, original', (root/'hyogo-wakayama.topojson').stat().st_size,'bytes, light',(root/'hyogo-wakayama-20m.topojson').stat().st_size,'bytes')
+          PY
+      - name: Commit lightweight test data to PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          mkdir -p v2/data/national/2026-common
+          cp "$RUNNER_TEMP/v2-2026-hyogo-wakayama/hyogo-wakayama-20m.topojson" v2/data/national/2026-common/hyogo-wakayama-20m.topojson
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/hyogo-wakayama-20m.topojson
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): add 2026 Hyogo Wakayama 20m lightweight topology"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hyogo-wakayama-2026-20m-pilot
+          path: |
+            ${{ runner.temp }}/v2-2026-hyogo-wakayama/hyogo-wakayama.topojson
+            ${{ runner.temp }}/v2-2026-hyogo-wakayama/hyogo-wakayama-20m.topojson
+            ${{ runner.temp }}/v2-2026-hyogo-wakayama/manifest.json
+          retention-days: 14
