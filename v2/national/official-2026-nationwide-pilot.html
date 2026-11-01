@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow"><title>全国47都道府県・市区町村地図 V2 統合試作 | Kussoon</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;background:#f0f7fc;color:#183951}
+*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:auto;padding:16px 12px 54px}
+h1{font-size:clamp(22px,4vw,30px)}p{line-height:1.7}.panel{background:white;border:1px solid #bfd5e5;border-radius:12px;padding:14px;margin:12px 0}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+label{display:grid;gap:6px;font-weight:700}select{font:inherit;min-height:44px;padding:9px;border:1px solid #9fbdd0;border-radius:8px;background:#fff;color:inherit;max-width:100%}
+.map-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}.map-tools button,.nav button{font:inherit;font-weight:700;color:inherit;background:#fff;border:1px solid #9fbdd0;border-radius:8px;padding:9px 12px;min-height:44px;cursor:pointer}.map-tools output{min-width:54px;text-align:center;font-weight:700}
+svg{display:block;width:100%;height:auto;background:#edf6fb;border:1px solid #b7ccdb;border-radius:10px;touch-action:none;user-select:none;overflow:hidden}
+.land{fill:#add9ef;stroke:none;fill-rule:evenodd;cursor:pointer}.land.chosen{fill:#ffc476}.borders{fill:none;stroke:white;stroke-width:.9;stroke-linejoin:round;pointer-events:none}
+.prefecture{fill:#add9ef;stroke:#fff;stroke-width:.75;fill-rule:evenodd;cursor:pointer}
+.prefecture:focus{outline:none;stroke:#174b71;stroke-width:2}.prefecture:hover{fill:#7bc5e7}
+.nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}.nav span{font-weight:700}
+.status{background:#e6f2fa;padding:10px;border-radius:8px;font-weight:700;line-height:1.6}
+small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border-radius:8px;font-size:14px;line-height:1.6}
+.map-locator{margin-top:10px;display:none}.map-locator.show{display:block}
+.map-locator svg{max-width:260px;touch-action:auto}
+.locator-pref{fill:#b8d9ea;stroke:#fff;stroke-width:1}.locator-pref.active{fill:#f5a73a}
+@media(max-width:600px){main{padding:10px 8px 36px}.panel{padding:11px}}
+</style></head><body><main>
+<a href="../">← V2 試作一覧</a>
+<h1>全国47都道府県・市区町村地図</h1>
+<p>2026年版行政区域データを使った全国統合試作です。全国から都道府県を選び、市区町村へ進めます。必要な県のデータだけを読み込む方式です。</p>
+<section class="panel">
+<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button><span id="breadcrumb">日本全国</span></div>
+<div class="controls">
+<label>都道府県<select id="pref"><option value="">全国47都道府県</option></select></label>
+<label>市区町村<select id="region" disabled><option value="">都道府県を選択してください</option></select></label>
+<label>全国地図の表示範囲<select id="nationExtent"><option value="main">全国主要域（北海道〜沖縄）</option><option value="all">遠隔離島を含む全域</option></select></label>
+</div>
+<div class="map-tools" role="group" aria-label="地図の操作">
+<button type="button" id="zoomIn">＋ 拡大</button>
+<button type="button" id="zoomOut">− 縮小</button>
+<button type="button" id="zoomReset">表示範囲を戻す</button>
+<output id="zoomLevel">1.0倍</output>
+</div>
+<svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
+<p id="status" class="status" role="status">全国地図を読み込みます。</p>
+<small>全国地図上で都道府県をタップするか、上のメニューから選択してください。都道府県内では市区町村を選択・タップできます。地図はピンチ・ドラッグ・＋／−で操作できます。縮小しきってからの位置関係は「都道府県全体へ」「日本全国へ」で確認できます。</small>
+<div class="map-locator" id="locatorPanel">
+<small>全国の中での位置（オレンジ色が選択中の都道府県）</small>
+<svg id="locator" viewBox="0 0 850 700" role="img" aria-label="都道府県の全国位置"></svg>
+</div>
+</section>
+<section class="panel">
+<h2>読み込み計測</h2><p id="metrics">全国の軽量な輪郭だけを先に読み込みます。</p>
+<div class="note">全国地図はナビゲーション用に簡略化した輪郭です。都道府県を選択すると詳細な20m版に切り替わります。別々に構築した地方間の県境が厳密に一致するかは、全国共通トポロジーの検証を別途行う必要があります。ここでは全国の操作・配信方式を検証します。</div>
+</section>
+</main>
+<script src="../shared/municipality-renderer.js"></script>
+<script src="../shared/map-viewport.js"></script>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=700;
+const base='../data/national/2026-common/',cache=new Map();
+const names=['','北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+const nationBoxes={main:[122.7,24.0,146.2,46.1],all:[122.7,24.0,154.2,46.1]};
+let manifest=null,overview=null,current=null,requestId=0,mode='national';
+for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
+const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>$('zoomLevel').textContent=z.toFixed(1)+'倍'});
+const number=(n)=>n.toLocaleString('ja-JP');
+function project(b){
+ const cos=Math.cos(((b[1]+b[3])/2)*Math.PI/180),bw=Math.max((b[2]-b[0])*cos,.04),bh=Math.max(b[3]-b[1],.04);
+ const s=Math.min((W-44)/bw,(H-38)/bh),lon=(b[0]+b[2])/2,lat=(b[1]+b[3])/2;
+ return p=>[W/2+(p[0]-lon)*cos*s,H/2-(p[1]-lat)*s];
+}
+function polygons(g){return g.type==='Polygon'?[g.coordinates]:g.coordinates;}
+function path(polys,p){
+ let d='';for(const poly of polys)for(const ring of poly){
+  for(let i=0;i<ring.length;i++){const q=p(ring[i]);d+=(i?'L':'M')+q[0].toFixed(2)+','+q[1].toFixed(2);}d+='Z';
+ }return d;
+}
+function drawOverview(svg,selected='',locator=false){
+ const p=project(nationBoxes[$('nationExtent').value]);svg.replaceChildren();
+ const fragment=document.createDocumentFragment();
+ for(const feat of overview.features){
+  const code=feat.properties.code,el=document.createElementNS(NS,'path');
+  el.setAttribute('d',path(polygons(feat.geometry),p));
+  el.setAttribute('class',locator?'locator-pref'+(code===selected?' active':''):'prefecture');
+  el.dataset.pref=code;
+  if(!locator){el.setAttribute('tabindex','0');el.setAttribute('role','button');el.setAttribute('aria-label',names[Number(code)]);}
+  const title=document.createElementNS(NS,'title');title.textContent=names[Number(code)];el.append(title);
+  fragment.append(el);
+ }
+ svg.append(fragment);
+}
+function arcDecode(t){return t.arcs.map(a=>{let x=0,y=0;return a.map(q=>{if(t.transform){x+=q[0];y+=q[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];}return q;});});}
+function ring(ids,arcs){const out=[];for(const id of ids){const arc=arcs[id<0?~id:id],points=id<0?arc.slice().reverse():arc;out.push(...(out.length?points.slice(1):points));}return out;}
+function geo(g,arcs){return g.type==='Polygon'?[g.arcs.map(r=>ring(r,arcs))]:g.type==='MultiPolygon'?g.arcs.map(p=>p.map(r=>ring(r,arcs))):[];}
+function bbox(polys){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const p of polys)for(const r of p)for(const pt of r){a=Math.min(a,pt[0]);b=Math.min(b,pt[1]);c=Math.max(c,pt[0]);d=Math.max(d,pt[1]);}return [a,b,c,d];}
+function paint(){
+ if(!overview)return;
+ if(!current){
+  drawOverview($('map'));$('locatorPanel').classList.remove('show');mode='national';
+  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('都道府県を選択してください',''));
+  $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
+ }else{
+  const selected=$('region').value,chosen=current.regions.find(r=>r.code===selected);
+  const box=chosen?KussoonV2MunicipalRenderer.focusBounds(chosen.polys):current.box;
+  KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.arcs,project:project(box),selected});
+  $('prefBtn').disabled=false;$('region').disabled=false;
+  const pref=$('pref').value,region=chosen?' ＞ '+chosen.name:'';
+  $('breadcrumb').textContent='日本全国 ＞ '+names[Number(pref)]+region;
+  $('metrics').textContent=names[Number(pref)]+'：'+number(current.regions.length)+'区域、'+(current.bytes/1048576).toFixed(2)+'MB、初回読み込み・解析 '+current.ms.toFixed(0)+'ms';
+  drawOverview($('locator'),pref,true);$('locatorPanel').classList.add('show');
+  mode=chosen?'region':'prefecture';
+ }
+ viewport.reset();
+}
+function returnNation(){
+ ++requestId;current=null;$('pref').value='';$('region').value='';
+ paint();$('status').textContent='全国47都道府県を表示中です。';
+}
+async function goPref(code){
+ if(!code){returnNation();return;}
+ const id=++requestId;
+ $('pref').value=code;$('status').textContent=names[Number(code)]+'の20m地図を読み込み中です…';
+ try{
+  let entry=cache.get(code);
+  if(!entry){
+   const meta=manifest.entries.find(x=>x.pref===code);
+   if(!meta)throw Error('県別データの登録がありません');
+   const start=performance.now(),res=await fetch(base+meta.source);
+   if(!res.ok)throw Error('HTTP '+res.status);
+   const raw=await res.text(),t=JSON.parse(raw),items=t.objects?.municipalities?.geometries||[];
+   const codes=items.map(g=>String(g.properties?.N03_007));
+   if(items.length!==meta.regions||codes.some(c=>c.length!==5||!c.startsWith(code))||new Set(codes).size!==items.length)throw Error('区域数か行政区域コードが不一致です');
+   const arcs=arcDecode(t);
+   const regions=items.map(g=>({code:String(g.properties.N03_007),name:String(g.properties.N03_004),polys:geo(g,arcs)}));
+   let b=[Infinity,Infinity,-Infinity,-Infinity];for(const r of regions){const q=bbox(r.polys);b=[Math.min(b[0],q[0]),Math.min(b[1],q[1]),Math.max(b[2],q[2]),Math.max(b[3],q[3])];}
+   entry={regions,arcs,box:b,ms:performance.now()-start,bytes:new TextEncoder().encode(raw).length};cache.set(code,entry);
+   // Avoid holding the whole country in memory on iPhone.
+   if(cache.size>3){for(const key of cache.keys()){if(key!==code){cache.delete(key);break;}}}
+  }
+  if(id!==requestId)return;
+  current=entry;
+  const region=$('region');region.replaceChildren(new Option('選択なし',''));
+  for(const r of entry.regions)region.append(new Option(r.name+'（'+r.code+'）',r.code));
+  paint();$('status').textContent=names[Number(code)]+'を表示中です。市区町村を選べます。';
+ }catch(e){if(id!==requestId)return;current=null;paint();$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
+}
+$('pref').addEventListener('change',()=>goPref($('pref').value));
+$('region').addEventListener('change',()=>{paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
+$('nationExtent').addEventListener('change',()=>{if(overview){if(current)drawOverview($('locator'),$('pref').value,true);else paint();}});
+$('nationBtn').addEventListener('click',returnNation);
+$('prefBtn').addEventListener('click',()=>{if(!current)return;$('region').value='';paint();$('status').textContent='都道府県全体を表示しています。';});
+$('zoomIn').addEventListener('click',()=>viewport.zoomIn());
+$('zoomOut').addEventListener('click',()=>viewport.zoomOut());
+$('zoomReset').addEventListener('click',()=>viewport.reset());
+$('map').addEventListener('click',e=>{
+ const target=e.target.closest('[data-pref],[data-code]');if(!target)return;
+ if(target.dataset.pref){void goPref(target.dataset.pref);return;}
+ if(!current||!target.dataset.code)return;
+ if($('region').value===target.dataset.code)return;
+ $('region').value=target.dataset.code;paint();
+});
+$('map').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset.pref){e.preventDefault();void goPref(e.target.dataset.pref);}});
+(async()=>{
+ try{
+  const start=performance.now();
+  const [m,o]=await Promise.all([fetch(base+'national-2026-pilot/manifest.json'),fetch(base+'national-2026-pilot/prefectures-overview.geojson')]);
+  if(!m.ok||!o.ok)throw Error('全国データがまだ公開されていません');
+  manifest=await m.json();overview=await o.json();
+  if(manifest.prefectureCount!==47||manifest.entries.length!==47||overview.features.length!==47)throw Error('47都道府県のデータが揃っていません');
+  paint();$('status').textContent='全国47都道府県の表示準備ができました（'+(performance.now()-start).toFixed(0)+'ms）。';
+ }catch(e){$('status').textContent='初期読み込みエラー：'+e.message;console.error(e);}
+})();
+})();
+</script></body></html>
