@@ -27,7 +27,6 @@ PAIRS=[
  ('10','20'), # Gunma / Nagano
  ('11','20'), # Saitama / Nagano
  ('14','22'), # Kanagawa / Shizuoka
- ('15','17'), # Niigata / Ishikawa? separated by Toyama: excluded below
  ('16','21'), # Toyama / Gifu
  ('17','21'), # Ishikawa / Gifu
  ('18','21'), # Fukui / Gifu
@@ -43,7 +42,6 @@ PAIRS=[
  ('28','31'), # Hyogo / Tottori
  ('28','33'), # Hyogo / Okayama
 ]
-PAIRS=[p for p in PAIRS if p!=('15','17')]
 def decode(t):
  tr=t.get('transform')
  result=[]
