@@ -450,20 +450,29 @@ async function getTopology(code){
  if(!response.ok)throw Error('地図データ '+code+' HTTP '+response.status);
  const value=await response.json();sourceCache.set(code,value);return value;
 }
-let officesLoading=null;
-async function loadOffices(){
- if(officeDirectory.schemaVersion===2)return;
- if(!officesLoading)officesLoading=(async()=>{
+// Load only the prefectural directories needed by the current map.
+const loadedOfficePrefectures=new Set();
+const officeLoads=new Map();
+async function loadOfficePrefecture(code){
+ code=String(code).padStart(2,'0');
+ if(loadedOfficePrefectures.has(code))return;
+ if(!officeLoads.has(code))officeLoads.set(code,(async()=>{
   try{
-   const response=await fetch('../data/offices/28.json?v=2');
-   if(!response.ok)throw Error('庁舎データを取得できません');
+   const response=await fetch('../data/offices/'+code+'.json?v=2');
+   if(!response.ok)throw Error('庁舎データ '+code+' HTTP '+response.status);
    const directory=await response.json();
-   if(directory.schemaVersion!==2||!directory.regions||!directory.offices)throw Error('庁舎データ形式が不正です');
-   officeDirectory=directory;
+   if(directory.schemaVersion!==2||directory.prefecture!==code||!directory.regions||!directory.offices)
+    throw Error('庁舎データ形式が不正です：'+code);
+   officeDirectory={
+    schemaVersion:2,
+    regions:{...(officeDirectory.regions||{}),...directory.regions},
+    offices:{...(officeDirectory.offices||{}),...directory.offices}
+   };
+   loadedOfficePrefectures.add(code);
   }catch(error){console.warn('Office directory',error);}
-  finally{officesLoading=null;}
- })();
- await officesLoading;
+  finally{officeLoads.delete(code);}
+ })());
+ await officeLoads.get(code);
 }
 async function load(area,mode){
  const token=++runId;clearTimeout(renderTimer);
@@ -472,7 +481,7 @@ async function load(area,mode){
  setStatus(needed.length+'府県の地図データを読み込んでいます…');
  const [pairs]=await Promise.all([
   Promise.all(needed.map(async p=>[p.code,await getTopology(p.code)])),
-  needed.some(p=>String(p.code)==='28')?loadOffices():Promise.resolve()
+  Promise.all(needed.filter(p=>['27','28'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code)))
  ]);
  if(token!==runId)return;
  const topologies=Object.fromEntries(pairs);
