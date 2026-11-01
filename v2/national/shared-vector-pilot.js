@@ -1,14 +1,12 @@
-/* V2 Osaka/Nara vector-topology comparison. Trial only.
- * The original 2021 simplified data and the live map are never modified.
- * polygon-clipping 0.15.7: boolean polygon operations.
- * turf 7.2.0: geographically calibrated 350-meter buffer.
+/* V2 Osaka-Nara shared vector border comparison.
+ * First render is always original lightweight SVG.
+ * Optional vector recalculation runs in a separate Worker.
  */
 (()=>{
 'use strict';
-const NS='http://www.w3.org/2000/svg';
-const $=id=>document.getElementById(id);
-const map=$('map'),status=$('status'),areaSelect=$('area'),selectionSelect=$('selection');
-const originalButton=$('original'),sharedButton=$('shared');
+const NS='http://www.w3.org/2000/svg',W=850,H=720;
+const $=id=>document.getElementById(id),map=$('map'),status=$('status');
+const area=$('area'),selection=$('selection'),original=$('original'),shared=$('shared');
 const BOX={
  sango:[135.595,34.535,135.765,34.681],
  taishi:[135.585,34.47,135.765,34.600]
@@ -20,42 +18,19 @@ const LABELS=[
  ['太子町',135.647,34.517],['斑鳩町',135.733,34.616],
  ['上牧町',135.733,34.551],['大阪狭山市',135.55,34.5]
 ];
-const W=850,H=720,BUFFER_KM=.35;
-const pc=window.polygonClipping,topo=window.topojson,turf=window.turf;
-let originals=null,modified=new Map(),mode='shared',working=false,sequence=0;
-function pointProject(box){
- const cos=Math.cos(((box[1]+box[3])/2)*Math.PI/180);
- const dx=(box[2]-box[0])*cos,dy=box[3]-box[1],scale=Math.min((W-30)/dx,(H-34)/dy);
+let source=null,mode='original',running=null,worker=null;
+const originalCache=new Map(),sharedCache=new Map(),errors=new Map();
+function projectFor(box){
+ const cos=Math.cos((box[1]+box[3])/2*Math.PI/360);
+ const dx=(box[2]-box[0])*cos,dy=box[3]-box[1],s=Math.min((W-30)/dx,(H-34)/dy);
  const mx=(box[0]+box[2])/2,my=(box[1]+box[3])/2;
- return ([lon,lat])=>[W/2+(lon-mx)*cos*scale,H/2-(lat-my)*scale];
+ return ([lon,lat])=>[W/2+(lon-mx)*cos*s,H/2-(lat-my)*s];
 }
-function pointInsideBox(g,box){
- let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
- const visit=c=>{
-  if(typeof c[0]==='number'){minX=Math.min(minX,c[0]);maxX=Math.max(maxX,c[0]);minY=Math.min(minY,c[1]);maxY=Math.max(maxY,c[1]);}
-  else c.forEach(visit);
- };
- visit(g.coordinates);
- return !(minX>box[2]||maxX<box[0]||minY>box[3]||maxY<box[1]);
-}
-function multi(g){return g.type==='Polygon'?[g.coordinates]:g.type==='MultiPolygon'?g.coordinates:[];}
-function nonempty(g){return Array.isArray(g)&&g.length>0;}
-function union(geoms){
- const valid=geoms.filter(nonempty);
- if(!valid.length)return [];
- if(valid.length===1)return valid[0];
- return pc.union(...valid);
-}
-function clip(g,windowRect){return pc.intersection(g,[[
- [windowRect[0],windowRect[1]],[windowRect[2],windowRect[1]],
- [windowRect[2],windowRect[3]],[windowRect[0],windowRect[3]],
- [windowRect[0],windowRect[1]]
- ]]);}
-function buffer(g){if(!nonempty(g))return [];const result=turf.buffer({type:'Feature',properties:{},geometry:{type:'MultiPolygon',coordinates:g}},BUFFER_KM,{units:'kilometers',steps:5});return result?multi(result.geometry):[];}
-function linePaths(multiPoly,project){
+function mp(geometry){return geometry.type==='Polygon'?[geometry.coordinates]:geometry.type==='MultiPolygon'?geometry.coordinates:[];}
+function pathData(multipolygon,project){
  let d='';
- for(const poly of multiPoly)for(const ring of poly){
-  if(ring.length<3)continue;
+ for(const polygon of multipolygon||[])for(const ring of polygon){
+  if(!ring||ring.length<3)continue;
   for(let i=0;i<ring.length;i++){
    const [x,y]=project(ring[i]);d+=(i?'L':'M')+x.toFixed(2)+','+y.toFixed(2);
   }
@@ -63,166 +38,153 @@ function linePaths(multiPoly,project){
  }
  return d;
 }
-function inRing(point,ring){
- const [x,y]=point;let odd=false;
- for(let i=0,j=ring.length-1;i<ring.length;j=i++){
-  const a=ring[i],b=ring[j];
-  if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])odd=!odd;
+function segmentData(segments,project){
+ let d='';
+ for(const [a,b] of segments){
+  const p=project(a),q=project(b);
+  d+='M'+p[0].toFixed(2)+','+p[1].toFixed(2)+'L'+q[0].toFixed(2)+','+q[1].toFixed(2);
  }
- return odd;
+ return d;
 }
-function inMulti(point,geometry){
- for(const polygon of geometry){
-  if(!inRing(point,polygon[0]))continue;
-  if(!polygon.slice(1).some(hole=>inRing(point,hole)))return true;
- }
- return false;
-}
-function sharedOutline(osakaUnion,naraBuffer,project){
- // This single line is copied from Osaka's trial reference geometry.
- // No separately simplified Nara prefecture outline is drawn.
- let d='',count=0;
- for(const polygon of osakaUnion)for(const ring of polygon){
-  for(let i=0;i<ring.length-1;i++){
-   const a=ring[i],b=ring[i+1],m=[(a[0]+b[0])/2,(a[1]+b[1])/2];
-   if(!inMulti(m,naraBuffer))continue;
-   const p=project(a),q=project(b);
-   d+='M'+p[0].toFixed(2)+','+p[1].toFixed(2)+'L'+q[0].toFixed(2)+','+q[1].toFixed(2);
-   count++;
-  }
- }
- return {d,count};
-}
-function node(tag,attributes={},parent=map){
+function element(tag,attrs={},parent=map){
  const e=document.createElementNS(NS,tag);
- for(const [k,v] of Object.entries(attributes))e.setAttribute(k,String(v));
+ for(const [key,val] of Object.entries(attrs))e.setAttribute(key,String(val));
  parent.append(e);return e;
 }
+function bboxIntersects(geometry,box){
+ let xmin=Infinity,ymin=Infinity,xmax=-Infinity,ymax=-Infinity;
+ function walk(coords){
+  if(typeof coords[0]==='number'){
+   xmin=Math.min(xmin,coords[0]);xmax=Math.max(xmax,coords[0]);
+   ymin=Math.min(ymin,coords[1]);ymax=Math.max(ymax,coords[1]);
+  }else coords.forEach(walk);
+ }
+ walk(geometry.coordinates);
+ return xmin<=box[2]&&xmax>=box[0]&&ymin<=box[3]&&ymax>=box[1];
+}
+function originalFor(key){
+ if(originalCache.has(key))return originalCache.get(key);
+ const box=BOX[key],pad=[box[0]-.01,box[1]-.01,box[2]+.01,box[3]+.01];
+ const shapes=[],outlines=[];
+ for(const pref of ['27','29']){
+  const {topology,features,outline}=source[pref];
+  for(const f of features)if(bboxIntersects(f.geometry,pad))
+   shapes.push({id:f.properties.N03_007,name:f.properties.N03_004,pref,geometry:mp(f.geometry)});
+  outlines.push(outline);
+ }
+ const value={shapes,outlines,project:projectFor(box)};
+ originalCache.set(key,value);return value;
+}
+function render(message){
+ if(!source)return;
+ const key=area.value,base=originalFor(key),candidate=sharedCache.get(key);
+ const useShared=mode==='shared'&&Boolean(candidate),chosen=selection.value;
+ map.replaceChildren();
+ const polygons=useShared?candidate.adjusted:base.shapes;
+ const group=element('g'),outlineGroup=element('g');
+ for(const f of polygons){
+  const selected=f.id===chosen;
+  const p=element('path',{
+   class:'region'+(selected?' selected':''),d:pathData(f.geometry,base.project),
+   'data-id':f.id,'aria-label':f.name
+  },group);
+  element('title',{},p).textContent=f.name;
+ }
+ if(useShared){
+  element('path',{d:segmentData(candidate.lines,base.project),class:'pref-border'},outlineGroup);
+ }else for(const polygon of base.outlines){
+  element('path',{d:pathData(polygon,base.project),class:'pref-border'},outlineGroup);
+ }
+ const selected=polygons.find(f=>f.id===chosen);
+ if(selected)element('path',{d:pathData(selected.geometry,base.project),class:'selection-border'},outlineGroup);
+ for(const [name,lon,lat] of LABELS){
+  const [x,y]=base.project([lon,lat]);if(x<35||x>W-35||y<30||y>H-30)continue;
+  element('text',{x:x.toFixed(2),y:y.toFixed(2),class:'map-label'}).textContent=name;
+ }
+ original.setAttribute('aria-pressed',String(mode==='original'));
+ shared.setAttribute('aria-pressed',String(mode==='shared'));
+ status.textContent=message||(
+  useShared?'共通ベクター境界：計算済みの同一形状からSVGで表示中。':
+  '従来の境界を表示しています。共通ベクター方式は右の切替ボタンから確認できます。');
+}
+function stopWorker(){
+ if(worker){worker.terminate();worker=null;}
+ running=null;
+}
+function calculateShared(key){
+ if(sharedCache.has(key)){render();return;}
+ if(errors.has(key)){render('共通境界の計算を開始できませんでした：'+errors.get(key)+'。従来地図は利用できます。');return;}
+ if(!window.Worker){
+  render('この環境では別スレッドの計算ができないため、従来地図を表示しています。');
+  return;
+ }
+ if(worker)stopWorker();
+ render('共通ベクター境界を計算しています。地図表示は利用できます。');
+ const token={key};running=token;
+ try{
+  worker=new Worker('shared-vector-worker.js?v=20261101-b');
+  worker.onmessage=event=>{
+   if(running!==token)return;
+   const data=event.data;stopWorker();
+   if(data.ok){
+    sharedCache.set(key,{adjusted:data.adjusted,lines:data.lines,extraCells:data.extraCells});
+    if(area.value===key&&mode==='shared')render('共通ベクター境界を表示中。補正対象の奈良県区域：'+data.extraCells+'件。');
+   }else{
+    errors.set(key,data.error||'計算に失敗しました');
+    if(area.value===key&&mode==='shared')render('共通境界の計算に失敗しました：'+errors.get(key)+'。従来地図を表示しています。');
+   }
+  };
+  worker.onerror=event=>{
+   if(running!==token)return;
+   const reason=event.message||'ワーカーの読み込みに失敗しました';
+   stopWorker();errors.set(key,reason);
+   if(area.value===key)render('共通境界の計算を開始できませんでした：'+reason+'。従来地図を表示しています。');
+  };
+  worker.postMessage({area:key,box:BOX[key]});
+ }catch(error){
+  stopWorker();
+  errors.set(key,String(error.message||error));
+  render('共通境界の計算を開始できませんでした。従来地図は利用できます。');
+ }
+}
+original.addEventListener('click',()=>{
+ mode='original';
+ if(worker)stopWorker();
+ render();
+});
+shared.addEventListener('click',()=>{mode='shared';if(source)calculateShared(area.value);});
+area.addEventListener('change',()=>{
+ if(worker)stopWorker();
+ render();
+ if(mode==='shared')calculateShared(area.value);
+});
+selection.addEventListener('change',()=>render());
+map.addEventListener('click',event=>{
+ const p=event.target.closest('path[data-id]');
+ if(!p)return;
+ const id=p.getAttribute('data-id');
+ if(![...selection.options].some(o=>o.value===id)){
+  const option=document.createElement('option');option.value=id;
+  option.textContent=p.getAttribute('aria-label');selection.append(option);
+ }
+ selection.value=id;render();
+});
 async function load(){
- const files=await Promise.all(['27','29'].map(async pref=>{
-  const r=await fetch('../data/national/2021/'+pref+'.topojson');
-  if(!r.ok)throw Error('行政区域データHTTP '+r.status+'（'+pref+'）');
-  return [pref,await r.json()];
- }));
- originals={};
- for(const [pref,t] of files){
-  const obj=t.objects[Object.keys(t.objects)[0]];
-  const items=topo.feature(t,obj).features;
-  originals[pref]={
-   features:items.map(item=>({id:item.properties.N03_007,name:item.properties.N03_004,
-    pref,geometry:multi(item.geometry)})),
-   outline:multi(topo.merge(t,obj.geometries))
+ if(!window.topojson)throw Error('地図データの読み込みライブラリが利用できません');
+ const result={};
+ for(const pref of ['27','29']){
+  const response=await fetch('../data/national/2021/'+pref+'.topojson');
+  if(!response.ok)throw Error(pref+'の地図データを取得できません（HTTP '+response.status+'）');
+  const topology=await response.json(),obj=topology.objects[Object.keys(topology.objects)[0]];
+  result[pref]={
+   topology,
+   features:topojson.feature(topology,obj).features,
+   outline:mp(topojson.merge(topology,obj.geometries))
   };
  }
- if(originals['27'].features.length!==72||originals['29'].features.length!==39)
-  throw Error('大阪・奈良の元データ件数が想定外です');
+ if(result['27'].features.length!==72||result['29'].features.length!==39)
+  throw Error('行政区域数が想定と異なります');
+ source=result;render();
 }
-function prepare(area){
- const box=BOX[area],pad=[box[0]-.01,box[1]-.01,box[2]+.01,box[3]+.01];
- const project=pointProject(box);
- const features=[];
- for(const pref of ['27','29'])for(const f of originals[pref].features){
-  if(!pointInsideBox({coordinates:f.geometry},pad))continue;
-  const geometry=clip(f.geometry,pad);
-  if(nonempty(geometry))features.push({...f,geometry});
- }
- const outlines=['27','29'].map(pref=>clip(originals[pref].outline,pad));
- const osaka=features.filter(f=>f.pref==='27'),nara=features.filter(f=>f.pref==='29');
- const osakaUnion=union(osaka.map(f=>f.geometry));
- const naraUnion=union(nara.map(f=>f.geometry));
- if(!nonempty(osakaUnion)||!nonempty(naraUnion))throw Error('境界の比較領域に両府県が含まれていません');
- // Geometric partition: overlap belongs to the Osaka reference geometry.
- // Near-border gaps are filled only if they are close to both prefectures.
- const osakaNear=buffer(osakaUnion),naraNear=buffer(naraUnion);
- const fringe=pc.difference(osakaNear,osakaUnion);
- const gaps=nonempty(fringe)?pc.intersection(fringe,naraNear):[];
- const adjusted=osaka.map(f=>({...f,geometry:f.geometry}));
- let claimed=[];
- let extraCells=0;
- for(const f of nara){
-  const cut=pc.difference(f.geometry,osakaUnion);
-  const additions=nonempty(gaps)?pc.intersection(gaps,buffer(f.geometry)):[];
-  let candidate=union([cut,additions]);
-  if(nonempty(claimed)&&nonempty(candidate))candidate=pc.difference(candidate,claimed);
-  if(!nonempty(candidate))continue;
-  claimed=union([claimed,candidate]);
-  adjusted.push({...f,geometry:candidate});
-  if(nonempty(additions))extraCells++;
- }
- return {project,original:features,originalOutlines:outlines,adjusted,
-  commonLine:sharedOutline(osakaUnion,naraNear,project),
-  originalCount:features.length,extraCells};
-}
-function labels(project){
- for(const [name,lon,lat] of LABELS){
-  const [x,y]=project([lon,lat]);if(x<35||x>W-35||y<30||y>H-30)continue;
-  node('text',{x:x.toFixed(2),y:y.toFixed(2),class:'map-label'}).textContent=name;
- }
-}
-function draw(){
- if(!originals)return;
- const area=areaSelect.value,chosen=selectionSelect.value,selected=chosen==='none'?null:chosen;
- const p=modified.get(area);
- if(!p)return;
- map.replaceChildren();
- const items=mode==='shared'?p.adjusted:p.original;
- const wrap=node('g');
- const foreground=node('g');
- // The same corrected SVG geometry drives fill, selection, and hit testing.
- for(const f of items){
-  const isChosen=f.id===selected;
-  const el=node('path',{d:linePaths(f.geometry,p.project),class:'region'+(isChosen?' selected':''),
-   'data-id':f.id,'aria-label':f.name},wrap);
-  const title=node('title',{},el);title.textContent=f.name;
- }
- if(mode==='shared'){
-  node('path',{d:p.commonLine.d,class:'pref-border'},foreground);
- }else for(const g of p.originalOutlines)
-  node('path',{d:linePaths(g,p.project),class:'pref-border'},foreground);
- const focus=items.find(f=>f.id===selected);
- if(focus)node('path',{d:linePaths(focus.geometry,p.project),class:'selection-border'},foreground);
- labels(p.project);
- originalButton.setAttribute('aria-pressed',String(mode==='original'));
- sharedButton.setAttribute('aria-pressed',String(mode==='shared'));
- status.textContent=(mode==='shared'?
-  '共通ベクター試作：大阪府側を基準にポリゴン演算で重複・短い隙間を整理。府県境は1本。':
-  '従来表示：両府県の外郭線を別々に描画。')+
-  ' 表示する市区町村'+items.length+'件／共通線の構成区間'+p.commonLine.count+
-  '本／隙間補完に使った奈良県の区域'+p.extraCells+'件。';
-}
-async function render(){
- if(!originals)return;
- const area=areaSelect.value,token=++sequence;
- if(!modified.has(area)){
-  status.textContent='共通ベクター境界を計算しています…';
-  await new Promise(resolve=>setTimeout(resolve,20));
-  try{
-   const result=prepare(area);
-   if(token!==sequence)return;
-   modified.set(area,result);
-  }catch(error){
-   status.textContent='境界計算に失敗しました：'+error.message;
-   console.error(error);return;
-  }
- }
- draw();
-}
-originalButton.addEventListener('click',()=>{mode='original';render()});
-sharedButton.addEventListener('click',()=>{mode='shared';render()});
-areaSelect.addEventListener('change',render);
-selectionSelect.addEventListener('change',render);
-map.addEventListener('click',event=>{
- const path=event.target.closest('path[data-id]');if(!path)return;
- const id=path.getAttribute('data-id');
- if(![...selectionSelect.options].some(o=>o.value===id)){
-  const option=document.createElement('option');option.value=id;
-  option.textContent=path.getAttribute('aria-label');selectionSelect.append(option);
- }
- selectionSelect.value=id;render();
-});
-if(!pc||!topo||!turf){status.textContent='必要な地理演算ライブラリを読み込めませんでした。';return;}
-load().then(render).catch(error=>{
- status.textContent='境界データの読み込みに失敗しました：'+error.message;
- console.error(error);
-});
+load().catch(error=>{status.textContent='地図の読み込みに失敗しました：'+error.message;console.error(error);});
 })();
