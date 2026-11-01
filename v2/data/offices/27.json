@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "27",
+  "asOf": "2026-11-01",
+  "regions": {
+    "27100": {
+      "name": "大阪市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "27100-city"
+      ],
+      "official": "https://www.city.osaka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/大阪市"
+    },
+    "27127": {
+      "name": "大阪市北区",
+      "kind": "ward",
+      "parentCode": "27100",
+      "officeIds": [
+        "27127-ward",
+        "27100-city"
+      ],
+      "official": "https://www.city.osaka.lg.jp/kita/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/北区_(大阪市)"
+    },
+    "27203": {
+      "name": "豊中市",
+      "kind": "city",
+      "officeIds": [
+        "27203-city"
+      ],
+      "official": "https://www.city.toyonaka.osaka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/豊中市"
+    },
+    "27322": {
+      "name": "能勢町",
+      "kind": "town",
+      "officeIds": [
+        "27322-town"
+      ],
+      "official": "https://www.town.nose.osaka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/能勢町"
+    },
+    "27383": {
+      "name": "千早赤阪村",
+      "kind": "village",
+      "officeIds": [
+        "27383-village"
+      ],
+      "official": "https://www.vill.chihayaakasaka.osaka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/千早赤阪村"
+    }
+  },
+  "offices": {
+    "27100-city": {
+      "name": "大阪市役所",
+      "kind": "cityHall",
+      "postalCode": "530-8201",
+      "address": "大阪府大阪市北区中之島1丁目3番20号",
+      "officialPage": "https://www.city.osaka.lg.jp/",
+      "sourceUrl": "https://www.city.osaka.lg.jp/",
+      "sourcePostalUrl": "https://www.city.osaka.lg.jp/",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27127-ward": {
+      "name": "大阪市北区役所",
+      "kind": "wardOffice",
+      "postalCode": "530-8401",
+      "address": "大阪府大阪市北区扇町2丁目1番27号",
+      "officialPage": "https://www.city.osaka.lg.jp/kita/page/0000215984.html",
+      "sourceUrl": "https://www.city.osaka.lg.jp/kita/page/0000215984.html",
+      "sourcePostalUrl": "https://www.city.osaka.lg.jp/kita/page/0000215984.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27203-city": {
+      "name": "豊中市役所 本庁舎",
+      "kind": "cityHall",
+      "postalCode": "561-8501",
+      "address": "大阪府豊中市中桜塚3丁目1番1号",
+      "officialPage": "https://www.city.toyonaka.osaka.jp/shisetsu/shi/map.html",
+      "sourceUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/shi/map.html",
+      "sourcePostalUrl": "https://www.city.toyonaka.osaka.jp/shisetsu/shi/map.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27322-town": {
+      "name": "能勢町役場",
+      "kind": "townHall",
+      "postalCode": "563-0392",
+      "address": "大阪府豊能郡能勢町宿野28番地",
+      "officialPage": "https://www.town.nose.osaka.jp/",
+      "sourceUrl": "https://www.town.nose.osaka.jp/soshiki/midorikankyou/midorisinko/katudoousienkyuuhuhojyo/10578.html",
+      "sourcePostalUrl": "https://www.town.nose.osaka.jp/soshiki/jyuuminka/jumin/jumin/yusou/847.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "27383-village": {
+      "name": "千早赤阪村役場",
+      "kind": "villageHall",
+      "postalCode": "585-8501",
+      "address": "大阪府南河内郡千早赤阪村大字水分180番地",
+      "officialPage": "https://www.vill.chihayaakasaka.osaka.jp/sonsei/muranitsuite/index.html",
+      "sourceUrl": "https://www.vill.chihayaakasaka.osaka.jp/sonsei/muranitsuite/index.html",
+      "sourcePostalUrl": "https://www.vill.chihayaakasaka.osaka.jp/sonsei/muranitsuite/index.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    }
+  }
+}
