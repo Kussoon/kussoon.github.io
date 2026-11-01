@@ -1,0 +1,90 @@
+name: V2 official 2026 Shiga Kyoto 20m pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/prepare-2026-shiga-kyoto.py'
+      - '.github/workflows/v2-2026-shiga-kyoto.yml'
+      - 'v2/national/official-2026-shiga-kyoto-20m-trial.html'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install GIS tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+      - name: Install topology tools
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Download official Shiga and Kyoto data
+        run: python3 v2/tools/shared-topology/prepare-2026-shiga-kyoto.py "$RUNNER_TEMP/n03-input"
+      - name: Build one shared topology
+        working-directory: v2/tools/shared-topology
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03-input/shiga-kyoto-2026.geojson" --output "$RUNNER_TEMP/v2-2026-shiga-kyoto" --quantization 1000000 --keep 0.02 --expect-prefectures 2 --emit-combined shiga-kyoto.topojson
+      - name: Validate prefecture topology
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-2026-shiga-kyoto"
+      - name: Generate 20m version and verify region identifiers
+        run: |
+          python scripts/v2/simplify_topojson.py "$RUNNER_TEMP/v2-2026-shiga-kyoto/shiga-kyoto.topojson" "$RUNNER_TEMP/v2-2026-shiga-kyoto/shiga-kyoto-20m.topojson" --meters 20
+          python - <<'PY'
+          import json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'v2-2026-shiga-kyoto'
+          original=json.loads((root/'shiga-kyoto.topojson').read_text())
+          light=json.loads((root/'shiga-kyoto-20m.topojson').read_text())
+          assert original['objects']==light['objects']
+          assert len(original['arcs'])==len(light['arcs'])
+          geometries=light['objects']['municipalities']['geometries']
+          assert len(geometries)>30
+          codes=[str(g['properties']['N03_007']) for g in geometries]
+          assert all(c.startswith(('25','26')) for c in codes)
+          assert len(set(codes))==len(codes)
+          print('PASS',len(codes),'regions, original', (root/'shiga-kyoto.topojson').stat().st_size,'bytes, light',(root/'shiga-kyoto-20m.topojson').stat().st_size,'bytes')
+          PY
+      - name: Validate independent trial page and published 20m input
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          page=Path('v2/national/official-2026-shiga-kyoto-20m-trial.html').read_text()
+          path=Path('v2/data/national/2026-common/shiga-kyoto-20m.topojson')
+          assert path.exists(), 'Lightweight file not committed yet'
+          data=json.loads(path.read_text())
+          assert len(data['objects']['municipalities']['geometries'])==55
+          assert 'shiga-kyoto-20m.topojson' in page
+          assert '!==55' in page
+          assert '25201' in page
+          print('PASS trial HTML references 55-region 20m file')
+          PY
+      - name: Commit lightweight test data to PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          mkdir -p v2/data/national/2026-common
+          cp "$RUNNER_TEMP/v2-2026-shiga-kyoto/shiga-kyoto-20m.topojson" v2/data/national/2026-common/shiga-kyoto-20m.topojson
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/shiga-kyoto-20m.topojson
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): add 2026 Shiga Kyoto 20m lightweight topology"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shiga-kyoto-2026-20m-pilot
+          path: |
+            ${{ runner.temp }}/v2-2026-shiga-kyoto/shiga-kyoto.topojson
+            ${{ runner.temp }}/v2-2026-shiga-kyoto/shiga-kyoto-20m.topojson
+            ${{ runner.temp }}/v2-2026-shiga-kyoto/manifest.json
+          retention-days: 14
