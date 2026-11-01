@@ -1,4 +1,4 @@
-name: V2 Tokai selected boundary unique-arc regression
+name: V2 Tokai uniform municipality border regression
 on:
   pull_request:
     paths:
@@ -11,30 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate selected boundary uses topology arcs only once
+      - name: Validate no special outline stroke on selected region
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p=Path('v2/national/official-2026-tokai-four-20m-trial.html').read_text()
           script=p.split('<script>')[-1].split('</script>')[0]
           Path('/tmp/tokai-selected-border.js').write_text(script)
-          assert 'chosenArcs.map(i=>current.arcs[i])' in script
-          assert 'boundaryArcs:boundaryArcIds(g)' in script
           assert "borders.setAttribute('d',outline(current.arcs,proj))" in script
-          assert "focus.setAttribute('d',outline(chosenArcs.map(i=>current.arcs[i]),proj))" in script
-          assert 'if(r.code===selected)chosen=d' not in script
+          assert "map.append(borders)" in script
+          assert "const regions=current.regions,selected=" in script
+          assert "el.setAttribute('class','land'+(r.code===selected?' chosen':''))" in script
           assert '.land{fill:#add9ef;stroke:none' in p
-          print('PASS selected boundary uses deduplicated TopoJSON arcs')
+          assert '.land.chosen{fill:#ffc476}' in p
+          assert '.borders{fill:none;stroke:white;stroke-width:.9' in p
+          assert '.selected-outline' not in p
+          assert 'chosenArcs' not in script
+          assert 'boundaryArcIds' not in script
+          print('PASS selected region changes fill only; shared topology arcs are stroked once')
           PY
           node --check /tmp/tokai-selected-border.js
-          node - <<'JS'
-          const fs=require('fs'),vm=require('vm'),src=fs.readFileSync('/tmp/tokai-selected-border.js','utf8');
-          const first=src.indexOf('function boundaryArcIds(g)');
-          const last=src.indexOf('function bbox(polygons)',first);
-          if(first<0||last<first)throw Error('boundaryArcIds function not found');
-          const fn=vm.runInNewContext('('+src.slice(first,last).trim()+')');
-          const unique=fn({type:'MultiPolygon',arcs:[[[0,1,2]],[[~1,3,4]],[[5,~5,6]]]});
-          const result=[...unique].sort((a,b)=>a-b);
-          if(JSON.stringify(result)!==JSON.stringify([0,2,3,4,6]))throw Error('Unexpected unique boundary arcs '+result);
-          console.log('PASS multipart, shared, reversed and duplicated arc regression');
-          JS
