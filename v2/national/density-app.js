@@ -21,6 +21,7 @@ let horizontalCenters=new Map(),verticalCenters=new Map();
 let conditionalCenters=new Map(),conditionalResults=new Map();
 let proposal4Centers=new Map(),proposal4Results=new Map();
 let proposal5Centers=new Map(),proposal5Results=new Map();
+let mainland5Centers=new Map(),mainland5Results=new Map();
 let diagnosticLayer=null;
 let state={area:'kansai',mode:'ward'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
@@ -202,12 +203,13 @@ function renderDiagnostic(){
  if(!diagnosticLayer||!models.length)return;
  diagnosticLayer.replaceChildren();
  const cityName=$('diagnostic-city').value;
- const model=models.find(m=>m.name===cityName);
+ const model=models.find(m=>m.name===cityName||m.fullName===cityName);
  if(!model){$('diagnostic-output').textContent=cityName+'の区域データがありません。';return;}
  const h=horizontalCenters.get(model.id),v=verticalCenters.get(model.id);
  const decision=conditionalResults.get(model.id);
  const fourth=proposal4Results.get(model.id);
  const fifth=proposal5Results.get(model.id);
+ const mainland=mainland5Results.get(model.id);
  if(!h||!v)return;
  const line=M.verticalRuns(model.rings,h[0])
   .filter(([a,b])=>a<=h[1]+1e-6&&b>=h[1]-1e-6&&
@@ -236,6 +238,12 @@ function renderDiagnostic(){
   (fifth?.segment?' 新案5：'+fifth.segments.length+'区間のうち最長区間の長さ '+
    (fifth.segment[1]-fifth.segment[0]).toFixed(2)+'、中心X='+
    fifth.point[0].toFixed(2)+'。':' 新案5：交差区間なし。');
+ $('mainland-report').textContent=mainland&&fifth?
+  cityName+'：新案5 '+fifth.point.map(n=>n.toFixed(2)).join(' / ')+
+  ' → 試作5B '+mainland.point.map(n=>n.toFixed(2)).join(' / ')+
+  '。離れた区域 '+mainland.componentCount+'個、採用区域 '+
+  (mainland.selectedComponent===null?'計算不可':mainland.selectedComponent+1)+'番目。':
+  'この区域の比較データはありません。';
  if($('diagnostic-overlay').value!=='on')return;
  const rect=map.getBoundingClientRect();
  const unitsPerPx=Math.max(view.w/(rect.width||390),view.h/(rect.height||390));
@@ -275,7 +283,7 @@ function renderDiagnostic(){
 function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
- const compareMode=['proposal5','proposal4','conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
+ const compareMode=['proposal5','mainland5','proposal4','conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
  const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
@@ -290,7 +298,9 @@ function renderLabels(){
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
  const planned=compareMode?layoutModels.map(m=>{
-  const [x,y]=$('density-mode').value==='proposal5'?
+  const [x,y]=$('density-mode').value==='mainland5'?
+   (mainland5Centers.get(m.id)||proposal5Centers.get(m.id)||m.polylabel||m.centroid):
+   $('density-mode').value==='proposal5'?
    (proposal5Centers.get(m.id)||proposal4Centers.get(m.id)||m.polylabel||m.centroid):
    $('density-mode').value==='proposal4'?
    (proposal4Centers.get(m.id)||horizontalCenters.get(m.id)||m.polylabel||m.centroid):
@@ -335,7 +345,7 @@ function renderLabels(){
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
  if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
-   mode:['proposal5','proposal4','conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
+   mode:['proposal5','mainland5','proposal4','conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    selectedId:selection?.type==='model'?selection.id:null
   }).labels;
@@ -390,7 +400,8 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='proposal5'?'新案5：最長区間の中央':
+  ($('density-mode').value==='mainland5'?'試作5B：最大連続区域の中央':
+   $('density-mode').value==='proposal5'?'新案5：最長区間の中央':
    $('density-mode').value==='proposal4'?'新案4：市域外のみ縦補正':
    $('density-mode').value==='conditional'?'新案3：条件付き縦補正':
    $('density-mode').value==='horizontal'?'水平中央・固定':
@@ -523,6 +534,9 @@ async function load(area,mode){
  const v5=models.map(m=>[m.id,M.proposal5(m)]);
  proposal5Results=new Map(v5);
  proposal5Centers=new Map(v5.map(([id,r])=>[id,r.point]));
+ const mainland=models.map(m=>[m.id,M.largestComponent5(m)]);
+ mainland5Results=new Map(mainland);
+ mainland5Centers=new Map(mainland.map(([id,r])=>[id,r.point]));
  const v5Count=v5.filter(([,r])=>r.reason==='longest-segment').length;
  $('proposal5-report').textContent='新案5：南北中央の水平線上で最長区間を採用 '+v5Count+
   '件／中央線に交差区間がなく近傍へ補完 '+(models.length-v5Count)+'件。';
@@ -600,12 +614,12 @@ $('city-shortcuts').addEventListener('click',async e=>{
  if([...$('diagnostic-city').options].some(o=>o.value===name)){
   $('diagnostic-city').value=name;
  }
- if(!['宝塚市','西宮市','神戸市','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
+ if(!['宝塚市','西宮市','神戸市','神戸市中央区','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
  if($('area').value!=='west-shikoku'||$('mode').value!=='ward'){
   $('area').value='west-shikoku';$('mode').value='ward';
   await refresh();
  }
- const parts=models.filter(m=>m.name===name||m.major===name);
+ const parts=models.filter(m=>m.name===name||m.major===name||m.fullName===name);
  if(!parts.length){setStatus(name+'の地図データが見つかりません');return;}
  // In ward mode Kobe/Kyoto comprise several ward polygons: fit their union.
  const b={minX:Math.min(...parts.map(m=>m.box.minX)),
@@ -619,7 +633,7 @@ $('city-shortcuts').addEventListener('click',async e=>{
  view.w=width;view.h=width*bounds.h/bounds.w;
  view.x=(b.minX+b.maxX-view.w)/2;
  view.y=(b.minY+b.maxY-view.h)/2;
- clamp();syncView();renderLabels();
+ clamp();syncView();renderLabels();renderDiagnostic();
  map.scrollIntoView({behavior:'smooth',block:'center'});
 });
 
