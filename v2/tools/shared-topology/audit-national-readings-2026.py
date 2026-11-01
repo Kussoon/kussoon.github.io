@@ -12,6 +12,10 @@ def valid_entry(code,name,entry):
  full=entry['name']
  text=entry['reading']
  if full==name:return bool(text)
+ # N03_004 in 2026 V2 city wards often stores only the parent city name.
+ # A different code-keyed CC0 entry explicitly names the ward and its kana.
+ if name.endswith('市') and full.startswith(name) and full[len(name):].endswith('区'):
+  return len(text.split())==2
  if name.endswith('区') and full.endswith(name) and full[:-len(name)].endswith('市'):
   return len(text.split())==2
  return False
@@ -46,7 +50,7 @@ out={'source':source['meta']['source'],'sourceCount':source['meta']['count'],
      'target':'official 2026 V2 municipality geometry','total':total,'matched':matched,
      'missing':missing,'mismatched':mismatched,'coveragePct':round(100*matched/total,1),
      'byPrefecture':details,'issues':issues,
-     'policy':'Match five-digit municipality code and 2026 displayed name, or full designated-city+ward name. Never infer unmatched readings.'}
+     'policy':'Match code and exact 2026 name; in city-only ward geometry, explicitly recover ward name/reading from the code-keyed CC0 full city-ward name. Never guess missing records.'}
 dest=ROOT/'municipality-readings-2026-coverage.json'
 dest.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
 print('PASS national coverage:',matched,'/',total,'(',out['coveragePct'],'%), unmatched:',len(issues),flush=True)
