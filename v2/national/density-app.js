@@ -238,6 +238,12 @@ function renderDiagnostic(){
   (fifth?.segment?' 新案5：'+fifth.segments.length+'区間のうち最長区間の長さ '+
    (fifth.segment[1]-fifth.segment[0]).toFixed(2)+'、中心X='+
    fifth.point[0].toFixed(2)+'。':' 新案5：交差区間なし。');
+ $('mainland-report').textContent=mainland&&fifth?
+  cityName+'：新案5 '+fifth.point.map(n=>n.toFixed(2)).join(' / ')+
+  ' → 試作5B '+mainland.point.map(n=>n.toFixed(2)).join(' / ')+
+  '。離れた区域 '+mainland.componentCount+'個、採用区域 '+
+  (mainland.selectedComponent===null?'計算不可':mainland.selectedComponent+1)+'番目。':
+  'この区域の比較データはありません。';
  if($('diagnostic-overlay').value!=='on')return;
  const rect=map.getBoundingClientRect();
  const unitsPerPx=Math.max(view.w/(rect.width||390),view.h/(rect.height||390));
