@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow"><title>東海4県・県別20m軽量配信試作 | Kussoon V2</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#183951;background:#f0f7fc}*{box-sizing:border-box}
+body{margin:0}main{max-width:960px;margin:auto;padding:16px 12px 50px}h1{font-size:clamp(21px,4vw,29px)}
+.panel{background:white;border:1px solid #bdd3e2;border-radius:12px;margin:12px 0;padding:14px}
+.controls{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 12px}label{flex:1 1 200px;display:grid;gap:5px;font-weight:bold}
+select{font:inherit;color:inherit;border:1px solid #a6c2d5;border-radius:8px;padding:9px;min-height:44px;background:white}
+svg{width:100%;height:auto;background:#edf6fb;border:1px solid #b5cad8;border-radius:10px;display:block}
+.land{fill:#add9ef;stroke:#fff;stroke-width:.9;stroke-linejoin:round;fill-rule:evenodd;cursor:pointer}
+.land.chosen{fill:#ffc476;stroke:#90470d;stroke-width:1.4}
+.status{background:#e6f2fa;padding:10px;border-radius:8px;font-weight:700}
+small{color:#526b7b}.note{background:#fff6e7;border-radius:8px;padding:10px}table{border-collapse:collapse;width:100%}th,td{padding:7px;border-bottom:1px solid #d2e0e9;text-align:left}
+</style></head>
+<body><main>
+<a href="./official-2026-kyushu-okinawa-eight-20m-trial.html">← 九州・沖縄8県版へ</a>
+<h1>東海4県・県別20m軽量配信試作</h1>
+<p>4県を一度に読み込む代わりに、<strong>選択した県だけを読み込む方式</strong>です。2026年版の公式データから4県の共通境界を一括生成し、県別20mデータを読み込みます。</p>
+<section class="panel">
+<div class="controls">
+<label>表示する県<select id="pref">
+<option value="21">岐阜県</option><option value="22">静岡県</option><option value="23">愛知県</option><option value="24">三重県</option>
+</select></label>
+<label>市区町村を選択<select id="region"><option value="">選択なし</option></select></label>
+</div>
+<svg id="map" viewBox="0 0 850 700" role="img" aria-label="九州・県別行政区域地図"></svg>
+<p id="status" class="status" role="status">県別に読み込みます。</p>
+<small>地図をタップして区域を選択できます。県を切り替えたときだけ新しい県のデータを読み込みます。</small>
+</section>
+<section class="panel"><h2>通信と描画の計測</h2><table><tbody>
+<tr><th>現在の県</th><td id="vname">—</td></tr>
+<tr><th>区域数</th><td id="count">—</td></tr>
+<tr><th>JSON容量</th><td id="size">—</td></tr>
+<tr><th>読み込み・解析</th><td id="loading">—</td></tr>
+<tr><th>描画時間</th><td id="drawing">—</td></tr>
+</tbody></table><p class="note">容量は非圧縮のJSONです。実際の通信量は圧縮やキャッシュによって変わります。広域表示や島しょ部を省略するものではありません。</p></section></main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=700;
+const cache=new Map();let current=null,requestId=0;
+const labels={'21':'岐阜県','22':'静岡県','23':'愛知県','24':'三重県'};
+const counts={};
+function arcDecode(t){return t.arcs.map(a=>{let x=0,y=0;return a.map(p=>{if(t.transform){x+=p[0];y+=p[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];}return p;});});}
+function ring(ids,arcs){const pts=[];for(const id of ids){const a=arcs[id<0?~id:id],line=id<0?a.slice().reverse():a;pts.push(...(pts.length?line.slice(1):line));}return pts;}
+function geom(g,arcs){return g.type==='Polygon'?[g.arcs.map(r=>ring(r,arcs))]:g.type==='MultiPolygon'?g.arcs.map(poly=>poly.map(r=>ring(r,arcs))):[];}
+function bbox(polygons){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const p of polygons)for(const r of p)for(const [x,y] of r){a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x);d=Math.max(d,y);}return [a,b,c,d];}
+function project(b){const cosine=Math.cos(((b[1]+b[3])/2)*Math.PI/180),width=Math.max((b[2]-b[0])*cosine,.05),height=Math.max(b[3]-b[1],.05),scale=Math.min((W-48)/width,(H-44)/height),lon=(b[0]+b[2])/2,lat=(b[1]+b[3])/2;return p=>[W/2+(p[0]-lon)*cosine*scale,H/2-(p[1]-lat)*scale];}
+function shape(polys,proj){let s='';for(const poly of polys)for(const ring of poly){for(let i=0;i<ring.length;i++){const p=proj(ring[i]);s+=(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2);}s+='Z';}return s;}
+function render(){
+ if(!current)return;const start=performance.now(),map=$('map');map.replaceChildren();
+ const regions=current.regions,selected=$('region').value,box=current.box,proj=project(box);
+ for(const r of regions){const el=document.createElementNS(NS,'path');el.setAttribute('d',shape(r.polys,proj));el.setAttribute('class','land'+(r.code===selected?' chosen':''));el.dataset.code=r.code;const title=document.createElementNS(NS,'title');title.textContent=r.name;el.append(title);map.append(el);}
+ $('drawing').textContent=(performance.now()-start).toFixed(1)+' ms';
+}
+async function load(pref){
+ const id=++requestId;current=null;$('status').textContent=labels[pref]+'を読み込み中です…';
+ try{
+  let item=cache.get(pref);if(!item){
+   const start=performance.now();
+   const response=await fetch('../data/national/2026-common/tokai-prefecture-20m/'+pref+'.topojson');
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const raw=await response.text(),t=JSON.parse(raw);
+   const items=t.objects?.municipalities?.geometries||[];
+   if(items.length<20||items.some(g=>!String(g.properties.N03_007).startsWith(pref)))throw Error('区域コードが不正です');
+   const arcs=arcDecode(t),regions=items.map(g=>({code:String(g.properties.N03_007),name:g.properties.N03_004,polys:geom(g,arcs)}));
+   let b=[Infinity,Infinity,-Infinity,-Infinity];for(const r of regions){const q=bbox(r.polys);b=[Math.min(b[0],q[0]),Math.min(b[1],q[1]),Math.max(b[2],q[2]),Math.max(b[3],q[3])];}
+   item={regions,box:b,bytes:new TextEncoder().encode(raw).length,ms:performance.now()-start};cache.set(pref,item);
+  }
+  if(id!==requestId)return;current=item;
+  const region=$('region');region.replaceChildren();const none=document.createElement('option');none.value='';none.textContent='選択なし';region.append(none);
+  for(const r of item.regions){const opt=document.createElement('option');opt.value=r.code;opt.textContent=r.name+'（'+r.code+'）';region.append(opt);}
+  $('vname').textContent=labels[pref];$('count').textContent=item.regions.length+'区域';$('size').textContent=(item.bytes/1048576).toFixed(2)+' MB';$('loading').textContent=item.ms.toFixed(1)+' ms'+(cache.has(pref)?'（初回の計測）':'');
+  render();$('status').textContent=labels[pref]+'・'+item.regions.length+'区域を表示中です。';
+ }catch(e){if(id!==requestId)return;$('status').textContent='読み込みに失敗しました：'+e.message;console.error(e);}
+}
+$('pref').addEventListener('change',()=>load($('pref').value));
+$('region').addEventListener('change',render);
+$('map').addEventListener('click',e=>{const el=e.target.closest('[data-code]');if(!el)return;$('region').value=el.dataset.code;render();});
+load($('pref').value);
+})();
+</script></body></html>
