@@ -49,6 +49,9 @@ jobs:
           geoms=light['objects']['municipalities']['geometries']
           codes=[str(g['properties']['N03_007']) for g in geoms]
           assert len(codes)==42 and len(set(codes))==len(codes) and all(c.startswith('47') for c in codes)
+          special=[g for g in geoms if str(g['properties']['N03_007'])=='47000']
+          assert len(special)==1 and special[0]['properties']['N03_004']=='所属未定地'
+          assert len([code for code in codes if code!='47000'])==41
           print('Okinawa codes and names:',[(str(g['properties']['N03_007']),g['properties']['N03_004']) for g in geoms])
           page=pathlib.Path('v2/national/official-2026-kyushu-okinawa-eight-20m-trial.html').read_text()
           assert "47" in page and "kyushu-prefecture-20m" in page
