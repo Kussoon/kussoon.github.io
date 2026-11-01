@@ -22,6 +22,7 @@ let conditionalCenters=new Map(),conditionalResults=new Map();
 let proposal4Centers=new Map(),proposal4Results=new Map();
 let proposal5Centers=new Map(),proposal5Results=new Map();
 let mainland5Centers=new Map(),mainland5Results=new Map();
+let office5Centers=new Map(),office5Results=new Map();
 let diagnosticLayer=null;
 let state={area:'kansai',mode:'ward'},renderTimer=0,runId=0,skipClickUntil=0;
 const tag=(name,attrs={})=>{
@@ -210,6 +211,7 @@ function renderDiagnostic(){
  const fourth=proposal4Results.get(model.id);
  const fifth=proposal5Results.get(model.id);
  const mainland=mainland5Results.get(model.id);
+ const office=office5Results.get(model.id);
  if(!h||!v)return;
  const line=M.verticalRuns(model.rings,h[0])
   .filter(([a,b])=>a<=h[1]+1e-6&&b>=h[1]-1e-6&&
@@ -244,6 +246,12 @@ function renderDiagnostic(){
   '。離れた区域 '+mainland.componentCount+'個、採用区域 '+
   (mainland.selectedComponent===null?'計算不可':mainland.selectedComponent+1)+'番目。':
   'この区域の比較データはありません。';
+ $('office5-report').textContent=office&&fifth?
+  cityName+'：試作5C '+office.point.map(n=>n.toFixed(2)).join(' / ')+
+  '。採用区域 '+(office.selectedComponent===null?'未確定':office.selectedComponent+1)+'番目'+
+  '／判定 '+(office.officeReason==='verified-office-point'?'役場の所在地を含む区域':
+   '所在地の位置情報が未登録・不一致のため5Bを使用')+'。':
+  'この区域の5C比較データはありません。';
  if($('diagnostic-overlay').value!=='on')return;
  const rect=map.getBoundingClientRect();
  const unitsPerPx=Math.max(view.w/(rect.width||390),view.h/(rect.height||390));
@@ -283,7 +291,7 @@ function renderDiagnostic(){
 function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
- const compareMode=['proposal5','mainland5','proposal4','conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
+ const compareMode=['proposal5','mainland5','office5','proposal4','conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
  const screenPx=labelSize(zoom,compareMode);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
@@ -298,7 +306,9 @@ function renderLabels(){
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
  const planned=compareMode?layoutModels.map(m=>{
-  const [x,y]=$('density-mode').value==='mainland5'?
+  const [x,y]=$('density-mode').value==='office5'?
+   (office5Centers.get(m.id)||mainland5Centers.get(m.id)||proposal5Centers.get(m.id)||m.polylabel||m.centroid):
+   $('density-mode').value==='mainland5'?
    (mainland5Centers.get(m.id)||proposal5Centers.get(m.id)||m.polylabel||m.centroid):
    $('density-mode').value==='proposal5'?
    (proposal5Centers.get(m.id)||proposal4Centers.get(m.id)||m.polylabel||m.centroid):
@@ -345,7 +355,7 @@ function renderLabels(){
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
  if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
-   mode:['proposal5','mainland5','proposal4','conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
+   mode:['proposal5','mainland5','office5','proposal4','conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    selectedId:selection?.type==='model'?selection.id:null
   }).labels;
@@ -400,7 +410,8 @@ function renderLabels(){
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
   '件表示（倍率 '+zoom.toFixed(1)+'倍・'+
-  ($('density-mode').value==='mainland5'?'試作5B：最大連続区域の中央':
+  ($('density-mode').value==='office5'?'試作5C：庁舎のある連続区域を優先':
+   $('density-mode').value==='mainland5'?'試作5B：最大連続区域の中央':
    $('density-mode').value==='proposal5'?'新案5：最長区間の中央':
    $('density-mode').value==='proposal4'?'新案4：市域外のみ縦補正':
    $('density-mode').value==='conditional'?'新案3：条件付き縦補正':
@@ -485,21 +496,42 @@ async function loadOfficePrefecture(code){
  })());
  await officeLoads.get(code);
 }
+let officeReferencePromise=null;
+async function loadOfficeReferencePoints(){
+ if(!officeReferencePromise)officeReferencePromise=fetch('../data/national/office-reference-points.json?v=1')
+  .then(response=>{if(!response.ok)throw Error('office reference points HTTP '+response.status);return response.json();})
+  .then(data=>{
+   if(data.schemaVersion!==1||!data.points||typeof data.points!=='object')
+    throw Error('invalid office reference points format');
+   return data.points;
+  }).catch(error=>{
+   console.warn('Office reference points',error);
+   return {};
+  });
+ return officeReferencePromise;
+}
 async function load(area,mode){
  const token=++runId;clearTimeout(renderTimer);
  const needed=catalog.prefectures.filter(p=>p.scope.includes(area));
  if(!needed.length)throw Error('表示地域のデータ定義がありません');
  setStatus(needed.length+'府県の地図データを読み込んでいます…');
- const [pairs]=await Promise.all([
+ const [pairs,,officeReferencePoints]=await Promise.all([
   Promise.all(needed.map(async p=>[p.code,await getTopology(p.code)])),
-  Promise.all(needed.filter(p=>['27','28'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code)))
+  Promise.all(needed.filter(p=>['27','28'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code))),
+  loadOfficeReferencePoints()
  ]);
  if(token!==runId)return;
  const topologies=Object.fromEntries(pairs);
  const grouped=N.registry(topologies,catalog,mode==='ward'?'ward':'municipality');
  const projected=N.project(grouped,E);
  if(token!==runId)return;
- models=NR.attach(projected.models,readingData,countyData);
+ models=NR.attach(projected.models,readingData,countyData).map(m=>{
+  const site=officeReferencePoints[m.code];
+  const ok=site&&Number.isFinite(site.longitude)&&Number.isFinite(site.latitude)&&
+   site.longitude>=-180&&site.longitude<=180&&site.latitude>=-90&&site.latitude<=90;
+  return {...m,officeReferencePoint:ok?
+   projected.projectPoint([site.longitude,site.latitude]):null};
+ });
  bounds=projected.bounds;
  const count=SCOPES[area].expected[mode==='ward'?'ward':'municipality'];
  if(models.length!==count)throw Error('区域件数が一致しません：'+models.length+'（期待 '+count+'）');
@@ -537,6 +569,9 @@ async function load(area,mode){
  const mainland=models.map(m=>[m.id,M.largestComponent5(m)]);
  mainland5Results=new Map(mainland);
  mainland5Centers=new Map(mainland.map(([id,r])=>[id,r.point]));
+ const office=models.map(m=>[m.id,M.officeComponent5(m)]);
+ office5Results=new Map(office);
+ office5Centers=new Map(office.map(([id,r])=>[id,r.point]));
  const v5Count=v5.filter(([,r])=>r.reason==='longest-segment').length;
  $('proposal5-report').textContent='新案5：南北中央の水平線上で最長区間を採用 '+v5Count+
   '件／中央線に交差区間がなく近傍へ補完 '+(models.length-v5Count)+'件。';
@@ -614,7 +649,7 @@ $('city-shortcuts').addEventListener('click',async e=>{
  if([...$('diagnostic-city').options].some(o=>o.value===name)){
   $('diagnostic-city').value=name;
  }
- if(!['宝塚市','西宮市','神戸市','神戸市中央区','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
+ if(!['宝塚市','西宮市','神戸市','神戸市中央区','田尻町','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
  if($('area').value!=='west-shikoku'||$('mode').value!=='ward'){
   $('area').value='west-shikoku';$('mode').value='ward';
   await refresh();
