@@ -4,6 +4,7 @@ on:
     paths:
       - 'v2/tools/shared-topology/prepare-2026-shiga-kyoto.py'
       - '.github/workflows/v2-2026-shiga-kyoto.yml'
+      - 'v2/national/official-2026-shiga-kyoto-20m-trial.html'
   workflow_dispatch:
 permissions:
   contents: write
@@ -51,6 +52,21 @@ jobs:
           assert all(c.startswith(('25','26')) for c in codes)
           assert len(set(codes))==len(codes)
           print('PASS',len(codes),'regions, original', (root/'shiga-kyoto.topojson').stat().st_size,'bytes, light',(root/'shiga-kyoto-20m.topojson').stat().st_size,'bytes')
+          PY
+      - name: Validate independent trial page and published 20m input
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          page=Path('v2/national/official-2026-shiga-kyoto-20m-trial.html').read_text()
+          path=Path('v2/data/national/2026-common/shiga-kyoto-20m.topojson')
+          assert path.exists(), 'Lightweight file not committed yet'
+          data=json.loads(path.read_text())
+          assert len(data['objects']['municipalities']['geometries'])==55
+          assert 'shiga-kyoto-20m.topojson' in page
+          assert '!==55' in page
+          assert '25201' in page
+          print('PASS trial HTML references 55-region 20m file')
           PY
       - name: Commit lightweight test data to PR branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
