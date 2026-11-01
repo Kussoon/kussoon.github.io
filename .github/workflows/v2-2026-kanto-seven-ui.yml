@@ -33,7 +33,9 @@ jobs:
           assert 'selected-outline' not in script
           assert 'id="tokyoArea"' in html
           assert 'TOKYO_BOX[sub]' in script
-          assert "$('tokyoArea').addEventListener('change',render)" in script
+          assert "$('tokyoArea').addEventListener('change',()=>{$('region').value='';render();})" in script
+          assert 'KussoonV2MunicipalRenderer.focusBounds(chosen.polys)' in script
+          assert 'const chosen=selected?regions.find(r=>r.code===selected):null' in script
           assert "$('tokyoArea').disabled=pref!=='13'" in script
           print('PASS seven Kanto prefectures, unique region code validation and common renderer')
           PY
