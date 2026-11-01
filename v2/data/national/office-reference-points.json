@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-01",
+  "note": "Label placement trial only. Each location is a verified office coordinate; never substitute this for the full administrative boundary.",
+  "points": {
+    "27362": {
+      "name": "田尻町役場",
+      "officeType": "townHall",
+      "latitude": 34.391666666666666,
+      "longitude": 135.28944444444446,
+      "coordinateSource": "https://www.town.tajiri.osaka.jp/material/files/group/2/hogokeikaku.pdf",
+      "addressSource": "https://www.town.tajiri.osaka.jp/gyoseijoho/shisetsu/tajirityoyakuba/index.html",
+      "address": "大阪府泉南郡田尻町嘉祥寺375番地1",
+      "verificationNote": "Town's disaster planning document explicitly lists the town hall at 34°23′30″N, 135°17′22″E."
+    },
+    "28110": {
+      "name": "神戸市中央区役所",
+      "officeType": "wardOffice",
+      "latitude": 34.6897038,
+      "longitude": 135.194925,
+      "coordinateSource": "https://mapfan.com/spots/SC35C%2CJ%2CD5",
+      "addressSource": "https://www.city.kobe.lg.jp/d62766/kuyakusho/chuoku/madoguchi/access.html",
+      "address": "兵庫県神戸市中央区東町115番地",
+      "verificationNote": "MapFan coordinate for the current Chuo Ward Office, cross-checked with Kobe City's current office address. Do not use the former Kumoi-dori office."
+    }
+  }
+}

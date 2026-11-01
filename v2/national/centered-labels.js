@@ -262,6 +262,27 @@
   return {...result,componentCount:components.length,selectedComponent:index,
    reasonDetail:'largest-component'};
  }
+ // Experimental proposal 5C: use the component containing a sourced office position.
+ // No coordinates or a position outside the municipality -> fall back to proposal 5B.
+ function officeComponent5(model){
+  const components=model.components||[];
+  const site=model.officeReferencePoint;
+  if(!Array.isArray(site)||site.length!==2||!site.every(Number.isFinite))
+   return {...largestComponent5(model),officeReason:'no-office-point-fallback-5B'};
+  const matches=[];
+  components.forEach((polygon,index)=>{
+   if(polygon?.length&&E.isInside(site[0],site[1],polygon))
+    matches.push(index);
+  });
+  // Never pick an office component if the supplied point cannot be verified in
+  // exactly one component. This also guards simplified/outdated boundaries.
+  if(matches.length!==1)return {...largestComponent5(model),
+   officeReason:matches.length?'ambiguous-office-point-fallback-5B':'outside-boundary-fallback-5B'};
+  const index=matches[0],rings=components[index];
+  const result=proposal5({...model,rings,box:E.bbox(rings)});
+  return {...result,componentCount:components.length,selectedComponent:index,
+   reasonDetail:'office-containing-component',officeReason:'verified-office-point'};
+ }
  // Candidate C: start at the exact horizontal centre. Only try the
  // vertical interval's centre if the FIXED reference-size text box
  // protrudes substantially beyond the territory in the vertical direction.
@@ -361,5 +382,5 @@
   }
   return {anchors:result,adjusted,original:anchors};
  }
- global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,proposal4,proposal5,largestComponent5,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
+ global.KussoonCenteredLabels={point,pointMulti,pointHorizontal,pointHorizontalVertical,proposal4,proposal5,largestComponent5,officeComponent5,conditionalVertical,boxOverflow,verticalTextOverflow,horizontalRuns,verticalRuns,centerAtHeight,build};
 })(window);
