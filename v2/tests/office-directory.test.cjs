@@ -97,15 +97,19 @@ test('all 50 facilities are verified, including the official Taka confirmation',
  assert.ok(sources['28365'].evidence.some(e=>e.excerpt.includes(office.address)&&e.excerpt.includes(office.postalCode)));
 });
 
-test('office addresses are reference text and only regional links are displayed',()=>{
+test('office addresses remain reference text and regional direction link uses the first office',()=>{
  const source=fs.readFileSync(path.join(__dirname,'../common/js/office-directory.js'),'utf8');
  assert.ok(source.includes("action('公式サイト',result.region?.official,label)"));
  assert.ok(source.includes("action('Wikipedia',result.region?.wikipedia,label)"));
- assert.ok(!source.includes("action('ここへ行く'"));
+ assert.ok(source.includes("action('ここへ行く',destination(result.offices[0]),label)"));
  assert.ok(!source.includes("action('庁舎案内'"));
- assert.ok(!source.includes('google.com/maps/dir'));
+ assert.ok(source.includes('google.com/maps/dir'));
  assert.equal(directory.regions['28365'].official,'https://www.town.taka.lg.jp/');
  const ward=api.resolve(directory,'28110');
  assert.equal(ward.offices.length,2);
+ const route=new URL(api.destination(ward.offices[0]));
+ assert.equal(route.searchParams.get('destination'),ward.offices[0].name+' '+ward.offices[0].address);
+ assert.notEqual(api.destination(ward.offices[0]),api.destination(ward.offices[1]));
+ assert.equal(api.destination({name:'未確認',address:null,status:'missing'}),null);
  assert.equal(ward.region.wikipedia,directory.regions['28110'].wikipedia);
 });
