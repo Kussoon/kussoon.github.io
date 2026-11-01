@@ -2,8 +2,8 @@
 <html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,follow"><meta name="theme-color" content="#edf7fc">
-<title>水平・縦断面の固定位置を可視化｜Kussoon V2</title>
-<meta name="description" content="市町村名の全件表示A/B配置、位置固定と軽い調整を比較するKussoon V2試験ページ。">
+<title>全国市区町村マップ｜Kussoon V2</title>
+<meta name="description" content="全国の市区町村の位置と読み方を地図で覚える。自治体の住所・郵便番号・公式サイトも調べられます。">
 <style>
 :root{color-scheme:light;--ink:#1a3e59;--line:#b8d1e0;--blue:#a8d5eb;--selected:#ffc36e}
 *{box-sizing:border-box}
@@ -97,6 +97,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 .municipal-popup.multi-office .popup-office{font-size:14px;line-height:1.45}
 .municipal-popup.multi-office .popup-address{font-size:13px;line-height:1.5}
 .municipal-popup.multi-office .popup-note{font-size:10px;line-height:1.4}
+details.advanced-panel{margin:12px 0;border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px}details.advanced-panel>summary{cursor:pointer;font-weight:800}details.advanced-panel[open]>summary{margin-bottom:10px}
 </style>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
@@ -115,8 +116,9 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="density-app.js?v=20261101-kyoto-office"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
-<h1>新案5：南北中央の最長水平区間に地名を配置</h1>
-<p><strong>すべての市町村名を小さく全件表示</strong>し、拡大に合わせて文字だけ大きくします。新案5では<strong>市域の南北中央の高さで水平線を引き、市域内の各区間を比較して最も長い区間の中央</strong>にラベルを固定します。隙間をまたいで東西の両端を結んで中央に置くことはしません。中央の高さに交差区間がない場合だけ、近い高さで補完します。新案1〜4も比較できます。</p>
+<h1>全国市区町村マップ</h1>
+<p>市区町村の名前と読み方を地図で確認できます。区域をタップすると、役所・役場の住所・郵便番号、公式サイト、Wikipedia、経路案内が表示されます。<strong>初期設定は「市区町村名」「よみがなON」「試作5C」</strong>です。</p><p class="meta">試作5Cは、庁舎位置が確認できた地域では庁舎がある連続区域を優先し、未登録の地域では主区域優先の試作5Bを使います。比較用の従来方式も残しています。<a href="#map-title">地図を見る</a></p>
+<details class="advanced-panel"><summary>配置方式の比較・診断（開く）</summary>
 <section class="panel" aria-label="4都市への移動">
 <h2>位置を比較する市町村</h2>
 <div class="buttons" id="city-shortcuts">
@@ -151,8 +153,8 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <option value="田尻町">田尻町</option>
 </select></label>
 <label>地図上の補助線<select id="diagnostic-overlay">
-<option value="on" selected>表示する</option>
-<option value="off">非表示</option>
+<option value="on">表示する</option>
+<option value="off" selected>非表示</option>
 </select></label>
 </div>
 <p class="meta">赤い太線と赤い点＝新案5で選んだ最長区間とその中央。橙の点＝新案1、緑の点＝新案2、紫の点＝新案4。紫の白抜き点は水平全幅の中点（補正前）、紫の破線は新案4の補正経路です。橙の横線は市域と交わる全区間の最西端から最東端まで描きます。補助線は位置確認用で、ラベルを動かしません。</p>
@@ -168,14 +170,16 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <p class="meta"><strong>試作5C：</strong>施設座標の出典が確認できる地域だけ、役場・区役所が存在する連続区域を選び、その区域内で新案5を計算します。未登録・境界外の地点は5Bに戻します。今回は田尻町と神戸市中央区を試験対象とし、全国の役場の座標を推測で補いません。新案5と5Bは残します。</p>
 <p class="meta"><strong>試作5B：</strong>離れた区域が複数ある市区町村では、面積が最大の連続区域のみを使って新案5のラベル位置を求めます。従来の新案5を初期設定として維持し、選択欄で切り替えられます。地図の境界や選択範囲は変更しません。</p>
 <div class="controls">
-<label>配置方式<select id="density-mode"><option value="proposal5" selected>新案5：水平線上の最長区間の中央</option><option value="mainland5">試作5B：最大連続区域だけで新案5</option><option value="office5">試作5C：役場・区役所のある連続区域を優先</option><option value="proposal4">新案4：市域外の場合だけ縦断面で補正</option><option value="horizontal">新案1：水平断面の東西全幅の中央</option><option value="conditional">新案3：必要な場合のみ縦補正</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
+<label>配置方式<select id="density-mode"><option value="proposal5">新案5：水平線上の最長区間の中央</option><option value="mainland5">試作5B：最大連続区域だけで新案5</option><option value="office5" selected>試作5C：役場・区役所のある連続区域を優先</option><option value="proposal4">新案4：市域外の場合だけ縦断面で補正</option><option value="horizontal">新案1：水平断面の東西全幅の中央</option><option value="conditional">新案3：必要な場合のみ縦補正</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
 <label>旧実験用・表示密度<select id="density-level" disabled><option value="sparse">少なめ</option><option value="normal" selected>標準</option><option value="dense">多め</option></select></label>
 </div>
 <p id="density-output" class="info" aria-live="polite">表示数を計算中です。</p>
 <p id="conditional-report" class="info" aria-live="polite">補正の判定を計算中です。</p>
 <p class="meta">修正版の新案1では南北中央の水平断面にある全区間を対象に、最西端と最東端の中間へラベル中心を置きます。中間点が穴や飛地間の隙間なら、その高さで最も近い市域内部へXだけ補正します。新案2・3もこの同じ新案1を起点とします。全案とも拡大中にラベルの座標を変更しません。</p>
 </section>
-<section class="panel">
+</details>
+<section class="panel" aria-label="地図の表示設定">
+<h2>地図の表示設定</h2>
 <div class="controls">
 <label>表示エリア<select id="area"><option value="kansai">関西2府4県</option><option value="chugoku">中国地方5県</option><option value="west">関西＋中国11府県</option><option value="shikoku">四国4県</option><option value="chugoku-shikoku">中国＋四国9県</option><option value="west-shikoku" selected>関西＋中国＋四国15府県</option><option value="fuji">山梨・静岡（富士山ナンバー）</option></select></label>
 <label>表示単位<select id="mode"><option value="municipality">市町村名（政令市を統合）</option><option value="ward" selected>市区町村名（政令市の区も表示）</option><option value="plate">富士山ナンバー（県境横断）</option></select></label>
@@ -183,10 +187,10 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <div class="searchbox"><label for="search" style="display:block;font-size:13px;font-weight:800">市区町村・地域名を検索</label><input id="search" type="search" autocomplete="off" placeholder="例：西宮、大阪市、富士山" aria-controls="suggestions"><div id="suggestions" class="suggest" hidden></div></div>
 </div>
 </section>
-<div class="notice"><strong>実験データについて：</strong>境界線は2021年1月時点の簡素化された試験データです。最新の行政界・市区町村変更を確認したものではなく、正式版には使用しません。ナンバープレートの地域分けは別データで管理します。</div>
+<div class="notice"><strong>地図データについて：</strong>境界線は2021年1月時点の簡素化された試験データです。最新の行政界を反映していない可能性があります。ナンバープレートの地域分けは別データで管理します。</div>
 <section class="panel"><div class="buttons">
 <button type="button" id="clear">選択解除</button>
-</div><p class="meta" id="interaction-guide">ドラッグで移動、ピンチで拡大縮小できます。検索結果を選ぶと全域図で該当区域を紫色にします。</p>
+</div><p class="meta" id="interaction-guide">ドラッグで移動、ピンチで拡大縮小できます。検索結果を選ぶと該当区域を琥珀色で強調します。</p>
 <div id="selection" class="info" aria-live="polite">地図を読み込み中…</div></section>
 <div class="workarea">
 <section class="panel"><h2 id="map-title">地図を読み込み中</h2>
@@ -206,15 +210,15 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <button type="button" id="reading-toggle" aria-label="読み仮名の表示を切り替え" aria-pressed="true">よみがな ON</button>
 </div>
 </div>
-<p class="meta">市町村をタップすると区域が紫色になり、庁舎情報の吹き出しが開きます。×印は吹き出しだけを閉じ、選択色は残します。同じ市町村を再度タップすると選択色が解除され、その次のタップで再び色と吹き出しが表示されます。</p>
+<p class="meta">市区町村をタップすると区域が琥珀色になり、庁舎情報の吹き出しが開きます。×印は吹き出しだけを閉じ、選択色は残します。同じ市区町村を再度タップすると選択色が解除され、その次のタップで再び色と吹き出しが表示されます。</p>
 <button id="clear-below" type="button">選択色を元に戻す</button>
 <p class="legend"><span><i style="background:var(--blue)"></i><span id="legend-blue">市区町村</span></span><span><i style="background:var(--selected)"></i><span id="legend-selected">選択区域</span></span></p></section>
-<section class="panel"><h2>表示・配置状況</h2>
+<details class="advanced-panel"><summary>表示・配置状況（詳細）</summary><section class="panel"><h2>表示・配置状況</h2>
 <p id="status" role="status">地図を読み込み中…</p>
 <div id="metrics" class="meta"></div>
-<p class="meta">A/B案の漢字は全域で約7pxから始まり、拡大に合わせて最大18pxまで徐々に大きくなります。読み仮名は漢字の約62％です。自然表示では拡大率に応じて読みを追加します。市名・郡名・区名・町村名それぞれの直下に小さい読みを置きます（例：神戸市／こうべし／中央区／ちゅうおうく）。ナンバープレート表示でも読み仮名を使用できます。漢字だけへの切替も可能です。V2共通ラベル配置規則を使用します。拡大時は文字全体の収まりと、文字の四辺から境界線までの余白を評価し、重なりを増やさずに位置を改善します。密集地域で完全に重ならないことは保証しません。</p></section>
+<p class="meta">A/B案の漢字は全域で約7pxから始まり、拡大に合わせて最大18pxまで徐々に大きくなります。読み仮名は漢字の約62％です。自然表示では拡大率に応じて読みを追加します。市名・郡名・区名・町村名それぞれの直下に小さい読みを置きます（例：神戸市／こうべし／中央区／ちゅうおうく）。ナンバープレート表示でも読み仮名を使用できます。漢字だけへの切替も可能です。V2共通ラベル配置規則を使用します。拡大時は文字全体の収まりと、文字の四辺から境界線までの余白を評価し、重なりを増やさずに位置を改善します。密集地域で完全に重ならないことは保証しません。</p></section></details>
 </div>
-<section class="panel"><h2>全国展開に向けた考え方</h2>
+<details class="advanced-panel"><summary>データと全国展開について</summary><section class="panel"><h2>全国展開に向けた考え方</h2>
 <p><strong>行政区域は「都道府県コード＋5桁の市区町村コード」で管理</strong>し、ナンバープレート地域はそれらのコードの集合として定義します。「富士山」は山梨県7市町村と静岡県5市町を一つの地域に結びつけます。県ごとに複製した図形や座標は持たせません。</p>
-<p class="meta">自治体の読みは<a href="https://github.com/code4fukui/localgovjp">code4fukui/localgovjp</a>のCC0データを5桁コードで照合しています（関西・中国・山梨・静岡440件）。郡名の読みは別データで管理します。</p><p class="meta">境界試験データ：「国土数値情報（行政区域データ）」（国土交通省）を加工して作成した<a href="https://github.com/smartnews-smri/japan-topography">SmartNews SMRI「japan-topography」</a>（2021年基準・簡素化1％）を利用。<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html">国土交通省の2026年版行政区域データ</a>と照合した正式版の整備は今後の工程です。富士山ナンバー対象区域は国土交通省・静岡県等の公表情報に基づきます。</p></section>
+<p class="meta">自治体の読みは<a href="https://github.com/code4fukui/localgovjp">code4fukui/localgovjp</a>のCC0データを5桁コードで照合しています（関西・中国・山梨・静岡440件）。郡名の読みは別データで管理します。</p><p class="meta">境界試験データ：「国土数値情報（行政区域データ）」（国土交通省）を加工して作成した<a href="https://github.com/smartnews-smri/japan-topography">SmartNews SMRI「japan-topography」</a>（2021年基準・簡素化1％）を利用。<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html">国土交通省の2026年版行政区域データ</a>と照合した正式版の整備は今後の工程です。富士山ナンバー対象区域は国土交通省・静岡県等の公表情報に基づきます。</p></section></details>
 </main></body></html>
