@@ -29,7 +29,7 @@ small{color:#526b7b}.note{background:#fff6e7;border-radius:8px;padding:10px}tabl
 </div>
 <svg id="map" viewBox="0 0 850 700" role="img" aria-label="関東7都県・県別行政区域地図"></svg>
 <p id="status" class="status" role="status">県別に読み込みます。</p>
-<small>地図をタップして区域を選択できます。県を切り替えたときだけ新しい都県のデータを読み込みます。東京都では本土・伊豆諸島・小笠原諸島などに表示範囲を切り替えられます。</small>
+<small>地図をタップして区域を選択できます。県を切り替えたときだけ新しい都県のデータを読み込みます。市区町村を選ぶとその区域を中央に拡大表示します。東京都では本土・伊豆諸島・小笠原諸島などに表示範囲を切り替えられます。広範囲に離島が分布する村は主要な島付近に寄せます。</small>
 </section>
 <section class="panel"><h2>通信と描画の計測</h2><table><tbody>
 <tr><th>現在の県</th><td id="vname">—</td></tr>
@@ -54,7 +54,10 @@ function project(b){const cosine=Math.cos(((b[1]+b[3])/2)*Math.PI/180),width=Mat
 function render(){
  if(!current)return;
  const start=performance.now(),map=$('map');
- const regions=current.regions,selected=$('region').value,sub=$('tokyoArea').value,box=$('pref').value==='13'&&sub!=='all'?TOKYO_BOX[sub]:current.box,proj=project(box);
+ const regions=current.regions,selected=$('region').value,sub=$('tokyoArea').value;
+ const chosen=selected?regions.find(r=>r.code===selected):null;
+ const box=chosen?KussoonV2MunicipalRenderer.focusBounds(chosen.polys):($('pref').value==='13'&&sub!=='all'?TOKYO_BOX[sub]:current.box);
+ const proj=project(box);
  KussoonV2MunicipalRenderer.render({map,regions,arcs:current.arcs,project:proj,selected});
  $('drawing').textContent=(performance.now()-start).toFixed(1)+' ms';
 }
@@ -82,7 +85,7 @@ async function load(pref){
 }
 $('pref').addEventListener('change',()=>load($('pref').value));
 $('region').addEventListener('change',render);
-$('tokyoArea').addEventListener('change',render);
+$('tokyoArea').addEventListener('change',()=>{$('region').value='';render();});
 $('map').addEventListener('click',e=>{const el=e.target.closest('[data-code]');if(!el)return;$('region').value=el.dataset.code;render();});
 load($('pref').value);
 })();
