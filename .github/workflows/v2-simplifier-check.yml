@@ -1,0 +1,31 @@
+name: Verify V2 common simplifier
+on:
+  push:
+    branches: [v2/reusable-20m-generator]
+    paths:
+      - 'scripts/v2/simplify_topojson.py'
+      - '.github/workflows/v2-simplifier-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate 20m Osaka-Nara file
+        run: python scripts/v2/simplify_topojson.py v2/data/national/2026-common/osaka-nara.topojson /tmp/osaka-nara-20m.topojson --meters 20
+      - name: Compare existing trial data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('/tmp/osaka-nara-20m.topojson').read_text())
+          b=json.loads(Path('v2/data/national/2026-common/osaka-nara-20m.topojson').read_text())
+          assert a==b, 'Common generator differs from the previously published 20m dataset'
+          assert len(a['objects']['municipalities']['geometries'])==111
+          print('PASS: byte-independent JSON equality, 111 municipalities')
+          PY
