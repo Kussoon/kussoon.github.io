@@ -210,15 +210,14 @@ details.advanced-panel{margin:12px 0;border:1px solid var(--line);border-radius:
 <button type="button" id="reading-toggle" aria-label="読み仮名の表示を切り替え" aria-pressed="true">よみがな ON</button>
 </div>
 </div>
-<p class="meta">市町村をタップすると区域が紫色になり、庁舎情報の吹き出しが開きます。×印は吹き出しだけを閉じ、選択色は残します。同じ市町村を再度タップすると選択色が解除され、その次のタップで再び色と吹き出しが表示されます。</p>
+<p class="meta">市区町村をタップすると区域が琥珀色になり、庁舎情報の吹き出しが開きます。×印は吹き出しだけを閉じ、選択色は残します。同じ市区町村を再度タップすると選択色が解除され、その次のタップで再び色と吹き出しが表示されます。</p>
 <button id="clear-below" type="button">選択色を元に戻す</button>
 <p class="legend"><span><i style="background:var(--blue)"></i><span id="legend-blue">市区町村</span></span><span><i style="background:var(--selected)"></i><span id="legend-selected">選択区域</span></span></p></section>
 <details class="advanced-panel"><summary>表示・配置状況（詳細）</summary><section class="panel"><h2>表示・配置状況</h2>
 <p id="status" role="status">地図を読み込み中…</p>
 <div id="metrics" class="meta"></div>
-<p class="meta">A/B案の漢字は全域で約7pxから始まり、拡大に合わせて最大18pxまで徐々に大きくなります。読み仮名は漢字の約62％です。自然表示では拡大率に応じて読みを追加します。市名・郡名・区名・町村名それぞれの直下に小さい読みを置きます（例：神戸市／こうべし／中央区／ちゅうおうく）。ナンバープレート表示でも読み仮名を使用できます。漢字だけへの切替も可能です。V2共通ラベル配置規則を使用します。拡大時は文字全体の収まりと、文字の四辺から境界線までの余白を評価し、重なりを増やさずに位置を改善します。密集地域で完全に重ならないことは保証しません。</p></section>
+<p class="meta">A/B案の漢字は全域で約7pxから始まり、拡大に合わせて最大18pxまで徐々に大きくなります。読み仮名は漢字の約62％です。自然表示では拡大率に応じて読みを追加します。市名・郡名・区名・町村名それぞれの直下に小さい読みを置きます（例：神戸市／こうべし／中央区／ちゅうおうく）。ナンバープレート表示でも読み仮名を使用できます。漢字だけへの切替も可能です。V2共通ラベル配置規則を使用します。拡大時は文字全体の収まりと、文字の四辺から境界線までの余白を評価し、重なりを増やさずに位置を改善します。密集地域で完全に重ならないことは保証しません。</p></section></details>
 </div>
-</details>
 <details class="advanced-panel"><summary>データと全国展開について</summary><section class="panel"><h2>全国展開に向けた考え方</h2>
 <p><strong>行政区域は「都道府県コード＋5桁の市区町村コード」で管理</strong>し、ナンバープレート地域はそれらのコードの集合として定義します。「富士山」は山梨県7市町村と静岡県5市町を一つの地域に結びつけます。県ごとに複製した図形や座標は持たせません。</p>
 <p class="meta">自治体の読みは<a href="https://github.com/code4fukui/localgovjp">code4fukui/localgovjp</a>のCC0データを5桁コードで照合しています（関西・中国・山梨・静岡440件）。郡名の読みは別データで管理します。</p><p class="meta">境界試験データ：「国土数値情報（行政区域データ）」（国土交通省）を加工して作成した<a href="https://github.com/smartnews-smri/japan-topography">SmartNews SMRI「japan-topography」</a>（2021年基準・簡素化1％）を利用。<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html">国土交通省の2026年版行政区域データ</a>と照合した正式版の整備は今後の工程です。富士山ナンバー対象区域は国土交通省・静岡県等の公表情報に基づきます。</p></section></details>
