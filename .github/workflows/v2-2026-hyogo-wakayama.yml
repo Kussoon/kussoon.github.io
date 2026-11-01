@@ -4,6 +4,7 @@ on:
     paths:
       - 'v2/tools/shared-topology/prepare-2026-hyogo-wakayama.py'
       - '.github/workflows/v2-2026-hyogo-wakayama.yml'
+      - 'v2/national/official-2026-hyogo-wakayama-20m-trial.html'
   workflow_dispatch:
 permissions:
   contents: write
@@ -51,6 +52,17 @@ jobs:
           assert all(c.startswith(('28','30')) for c in codes)
           assert len(set(codes))==len(codes)
           print('PASS',len(codes),'regions, original', (root/'hyogo-wakayama.topojson').stat().st_size,'bytes, light',(root/'hyogo-wakayama-20m.topojson').stat().st_size,'bytes')
+          PY
+      - name: Validate independent 20m trial
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          page=Path('v2/national/official-2026-hyogo-wakayama-20m-trial.html').read_text()
+          assert 'hyogo-wakayama-20m.topojson' in page
+          assert '!==80' in page
+          for code in ('28204','28110','28202','30201','30202'):
+              assert code in page
+          print('PASS 80-region trial page references official 20m dataset')
           PY
       - name: Commit lightweight test data to PR branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
