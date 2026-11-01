@@ -23,6 +23,17 @@ const data=require('../data/offices/28.json');
     await select(code);
     const popup=page.locator('#municipal-popup');assert.ok(await popup.isVisible());
     assert.equal(await popup.locator('.popup-facility').count(),code==='28110'?2:1);
+    assert.equal(await popup.evaluate(el=>el.classList.contains('multi-office')),code==='28110');
+    const row=popup.locator('.popup-actions.region-links');
+    assert.equal(await row.evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
+    if(code==='28110'){
+     assert.equal(await popup.locator('.popup-office').first().evaluate(el=>getComputedStyle(el).fontSize),'14px');
+     assert.equal(await popup.locator('.popup-address').first().evaluate(el=>getComputedStyle(el).fontSize),'13px');
+    }
+    if(code==='28204'){
+     assert.equal(await popup.locator('.popup-office').first().innerText(),'西宮市役所');
+     assert.equal(await popup.locator('.popup-office').first().evaluate(el=>getComputedStyle(el).fontSize),'12px');
+    }
     assert.equal(await popup.getByRole('link',{name:/公式サイト/}).count(),1);
     assert.equal(await popup.getByRole('link',{name:/Wikipedia/}).count(),1);
     assert.equal(await popup.getByRole('link',{name:/ここへ行く/}).count(),1);

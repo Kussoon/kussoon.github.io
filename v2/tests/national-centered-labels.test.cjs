@@ -388,7 +388,7 @@ test('office overlay has separate selection, safe links, and unverified fallback
  for(const id of ['municipal-popup','popup-name','popup-close',
   'popup-office','popup-address','popup-actions','popup-note'])
   assert.ok(html.includes('id="'+id+'"'));
- assert.ok(html.includes('density-app.js?v=20261101-offices2'));
+ assert.ok(html.includes('density-app.js?v=20261101-compact-all'));
  const officeModule=fs.readFileSync(path.resolve(__dirname,'../common/js/office-directory.js'),'utf8');
  for(const title of ['公式サイト','Wikipedia','ここへ行く'])
   assert.ok(officeModule.includes(title));
@@ -439,7 +439,7 @@ test('popup comparison pages share geography and test two distinct responsive la
  const b=fs.readFileSync(path.resolve(__dirname,'../national/density-popup-b.html'),'utf8');
  const current=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
  for(const page of [a,b]){
-  assert.ok(page.includes('density-app.js?v=20261101-offices2'));
+  assert.ok(page.includes('density-app.js?v=20261101-compact-all'));
   assert.ok(page.includes('centered-labels.js?v=20261101-proposal5a'));
   assert.ok(page.includes('value="proposal5" selected'));
   assert.ok(page.includes('id="municipal-popup"'));
@@ -469,7 +469,7 @@ test('B popup becomes the default layout; zip codes render above addresses',()=>
   assert.ok(records[code].source.startsWith('https://'));
  }
  for(const page of [current,a,b]){
-  assert.ok(page.includes('density-app.js?v=20261101-offices2'));
+  assert.ok(page.includes('density-app.js?v=20261101-compact-all'));
   assert.ok(page.includes('white-space:pre-line'));
  }
  assert.ok(current.includes('right:104px;bottom:8px;width:calc(100% - 112px)'));
@@ -494,5 +494,16 @@ test('default ward display, narrow right control, and non-purple selection',()=>
  assert.ok(app.includes("if(area!=='fuji'&&$('mode').value==='plate')$('mode').value='ward'"));
  assert.ok(app.includes("m.name===name||m.major===name"));
  assert.ok(app.includes("const b={minX:Math.min(...parts.map(m=>m.box.minX))"));
- assert.ok(html.includes('density-app.js?v=20261101-offices2'));
+ assert.ok(html.includes('density-app.js?v=20261101-compact-all'));
+});
+
+test('all-region compact popup keeps three actions and larger text for dual offices',()=>{
+ const html=fs.readFileSync(path.resolve(__dirname,'../national/density.html'),'utf8');
+ const app=fs.readFileSync(path.resolve(__dirname,'../national/density-app.js'),'utf8');
+ assert.ok(html.includes('office-directory.js?v=5-compact-all'));
+ assert.ok(html.includes('.municipal-popup.multi-office .popup-address{font-size:13px;line-height:1.5}'));
+ assert.ok(html.includes('.municipal-popup #popup-actions>.popup-actions.region-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}'));
+ assert.ok(html.includes('.municipal-popup #popup-office:empty'));
+ assert.ok(app.includes("popup.classList.toggle('multi-office',result.offices.length>1)"));
+ assert.ok(app.includes('住所は地域の参考情報です。リンクは別タブで開きます。'));
 });
