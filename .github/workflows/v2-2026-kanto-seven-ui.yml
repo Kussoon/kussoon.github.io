@@ -1,0 +1,37 @@
+name: V2 2026 Kanto seven-prefecture UI and region validation
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-kanto-seven-20m-trial.html'
+      - '.github/workflows/v2-2026-kanto-seven-ui.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate seven prefectures, shared renderer, and JS syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html=Path('v2/national/official-2026-kanto-seven-20m-trial.html').read_text()
+          script=html.split('<script>')[-1].split('</script>')[0]
+          Path('/tmp/v2-kanto-ui.js').write_text(script)
+          codes=re.findall(r'<option value="(\d\d)">',html)
+          assert codes==['08','09','10','11','12','13','14'],codes
+          assert 'KussoonV2MunicipalRenderer.render' in script
+          assert '<script src="../shared/municipality-renderer.js"></script>' in html
+          assert 'items.length<20' not in script
+          assert 'new Set(regionCodes).size!==items.length' in script
+          assert 'regionCodes.some' in script
+          assert 'kanto-prefecture-20m/' in script
+          assert 'selected-outline' not in script
+          print('PASS seven Kanto prefectures, unique region code validation and common renderer')
+          PY
+          node --check /tmp/v2-kanto-ui.js
+          node v2/shared/test-municipality-renderer.cjs
