@@ -6,8 +6,9 @@ const safeUrl=value=>{
 };
 function resolve(directory,code){
  const region=directory?.regions?.[String(code)];
- if(!region)return {region:null,offices:[]};
- return {region,offices:region.officeIds.map(id=>({id,...directory.offices[id]}))};
+ if(!region)return {region:null,parentRegion:null,offices:[]};
+ return {region,parentRegion:region.parentCode?directory.regions[region.parentCode]||null:null,
+  offices:region.officeIds.map(id=>({id,...(directory.offices[id]||{status:'missing'})}))};
 }
 function destination(office){
  if(office?.status!=='verified'||!office.address||!office.name)return null;
@@ -28,17 +29,27 @@ function render(document,container,result,label){
   node.setAttribute('aria-label',context+'：'+title);return node;
  };
  const offices=result.offices.length?result.offices:[{name:'市役所・役場／区役所',status:'missing'}];
- for(const office of offices){
+ const multi=result.region?.kind==='ward'&&offices.length>1;
+ const links=(region,office,context)=>{
+  const row=element('div','popup-actions region-links','');
+  row.append(action('公式サイト',region?.official,context),
+   action('Wikipedia',region?.wikipedia,context),
+   action('ここへ行く',destination(office),context));
+  return row;
+ };
+ offices.forEach((office,index)=>{
   const section=element('section','popup-facility','');
   section.append(element('h3','popup-office',displayOfficeName(office.name)));
   section.append(element('p','popup-address',
    (office.postalCode?'〒'+office.postalCode+'\n':'郵便番号：未確認\n')+(office.address||'所在地：未確認')));
   if(office.status!=='verified')section.append(element('p','popup-note','この施設の情報は確認待ちです。'));
+  if(multi){
+   const region=index===0?result.region:result.parentRegion;
+   section.append(links(region,office,region?.name||displayOfficeName(office.name)));
+  }
   container.append(section);
- }
- const common=element('div','popup-actions region-links','');
- common.append(action('公式サイト',result.region?.official,label),action('Wikipedia',result.region?.wikipedia,label),action('ここへ行く',destination(result.offices[0]),label));
- container.append(common);
+ });
+ if(!multi)container.append(links(result.region,offices[0],label));
 }
 const api={safeUrl,resolve,destination,displayOfficeName,render};
 if(typeof module==='object'&&module.exports)module.exports=api;
