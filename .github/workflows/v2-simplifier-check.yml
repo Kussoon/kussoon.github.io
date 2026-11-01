@@ -5,6 +5,10 @@ on:
     paths:
       - 'scripts/v2/simplify_topojson.py'
       - '.github/workflows/v2-simplifier-check.yml'
+  pull_request:
+    paths:
+      - 'scripts/v2/simplify_topojson.py'
+      - '.github/workflows/v2-simplifier-check.yml'
   workflow_dispatch:
 permissions:
   contents: read
