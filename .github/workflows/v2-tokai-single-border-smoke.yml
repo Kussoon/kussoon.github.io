@@ -18,10 +18,11 @@ jobs:
           page=Path('v2/national/official-2026-tokai-four-20m-trial.html').read_text()
           assert '.land{fill:#add9ef;stroke:none' in page
           assert "borders.setAttribute('d',outline(current.arcs,proj))" in page
-          assert "focus.setAttribute('class','selected-outline')" in page
-          assert page.index("map.append(borders)")<page.index("map.append(focus)")
+          assert 'selected-outline' not in page
+          assert "map.append(borders)" in page
+          assert "el.setAttribute('class','land'+(r.code===selected?' chosen':''))" in page
           assert 'item={regions,arcs,box:b,' in page
           Path('/tmp/v2-tokai-trial.js').write_text(page.split('<script>')[-1].split('</script>')[0])
-          print('PASS shared borders drawn once, selection above borders')
+          print('PASS all municipality borders drawn once, selected region fill only')
           PY
           node --check /tmp/v2-tokai-trial.js

@@ -11,7 +11,7 @@ svg{width:100%;height:auto;background:#edf6fb;border:1px solid #b5cad8;border-ra
 .land{fill:#add9ef;stroke:none;fill-rule:evenodd;cursor:pointer}
 .land.chosen{fill:#ffc476}
 .borders{fill:none;stroke:white;stroke-width:.9;stroke-linejoin:round;pointer-events:none}
-.selected-outline{fill:none;stroke:#90470d;stroke-width:1.2;stroke-linejoin:round;pointer-events:none}
+
 .status{background:#e6f2fa;padding:10px;border-radius:8px;font-weight:700}
 small{color:#526b7b}.note{background:#fff6e7;border-radius:8px;padding:10px}table{border-collapse:collapse;width:100%}th,td{padding:7px;border-bottom:1px solid #d2e0e9;text-align:left}
 </style></head>
@@ -64,14 +64,13 @@ function shape(polys,proj){let s='';for(const poly of polys)for(const ring of po
 function render(){
  if(!current)return;const start=performance.now(),map=$('map');map.replaceChildren();
  const regions=current.regions,selected=$('region').value,box=current.box,proj=project(box);
- const ns=NS;let chosen=null;
+ const ns=NS;
  for(const r of regions){
   const d=shape(r.polys,proj),el=document.createElementNS(ns,'path');
   el.setAttribute('d',d);el.setAttribute('class','land'+(r.code===selected?' chosen':''));
   el.dataset.code=r.code;
   const title=document.createElementNS(ns,'title');title.textContent=r.name;el.append(title);
   map.append(el);
-  if(r.code===selected)chosen=d;
  }
  // A region-by-region stroke double-paints shared borders and changes their
  // darkness depending on DOM order. Draw the underlying common arcs once.
@@ -79,12 +78,6 @@ function render(){
  borders.setAttribute('class','borders');
  borders.setAttribute('d',outline(current.arcs,proj));
  map.append(borders);
- // Keep the selected outline above all municipality fills and the border layer.
- if(chosen){
-  const focus=document.createElementNS(ns,'path');
-  focus.setAttribute('class','selected-outline');focus.setAttribute('d',chosen);
-  map.append(focus);
- }
  $('drawing').textContent=(performance.now()-start).toFixed(1)+' ms';
 }
 async function load(pref){

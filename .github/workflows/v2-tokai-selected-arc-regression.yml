@@ -1,0 +1,33 @@
+name: V2 Tokai uniform municipality border regression
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-tokai-four-20m-trial.html'
+      - '.github/workflows/v2-tokai-selected-arc-regression.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate no special outline stroke on selected region
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('v2/national/official-2026-tokai-four-20m-trial.html').read_text()
+          script=p.split('<script>')[-1].split('</script>')[0]
+          Path('/tmp/tokai-selected-border.js').write_text(script)
+          assert "borders.setAttribute('d',outline(current.arcs,proj))" in script
+          assert "map.append(borders)" in script
+          assert "const regions=current.regions,selected=" in script
+          assert "el.setAttribute('class','land'+(r.code===selected?' chosen':''))" in script
+          assert '.land{fill:#add9ef;stroke:none' in p
+          assert '.land.chosen{fill:#ffc476}' in p
+          assert '.borders{fill:none;stroke:white;stroke-width:.9' in p
+          assert '.selected-outline' not in p
+          assert 'chosenArcs' not in script
+          assert 'boundaryArcIds' not in script
+          print('PASS selected region changes fill only; shared topology arcs are stroked once')
+          PY
+          node --check /tmp/tokai-selected-border.js
