@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'v2/tools/shared-topology/prepare-2026-hokkaido.py'
-      - '.github/workflows/v2-2026-hokkaido-slices.yml'
+      - '.github/workflows/v2-2026-hokkaido-one-slice.yml'
       - 'v2/national/official-2026-hokkaido-20m-trial.html'
   workflow_dispatch:
 permissions:
