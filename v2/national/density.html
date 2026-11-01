@@ -80,6 +80,23 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 #popup-actions>.popup-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
 .popup-facility{margin:8px 0;padding-bottom:8px;border-bottom:1px solid #ccd3d9}
 .popup-actions.region-links{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* All municipalities: approved Nishinomiya compact layout. */
+.municipal-popup{padding:8px 9px;line-height:1.3}
+.municipal-popup .popup-head strong{font-size:16px}
+.municipal-popup .popup-close{min-width:32px;min-height:32px;padding:3px 6px}
+.municipal-popup #popup-office:empty,.municipal-popup #popup-address:empty{display:none}
+.municipal-popup .popup-facility{margin:4px 0 5px;padding-bottom:5px}
+.municipal-popup .popup-office{margin:0 0 3px;font-size:12px;line-height:1.3}
+.municipal-popup .popup-address{margin:0;font-size:11.5px;line-height:1.36}
+.municipal-popup #popup-actions>.popup-actions.region-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+.municipal-popup .popup-actions.region-links a,.municipal-popup .popup-actions.region-links span{min-height:37px;padding:3px 1px;font-size:10px;white-space:nowrap}
+.municipal-popup .popup-note{margin:4px 0 0;font-size:9px;line-height:1.35}
+/* Two facilities: retain the space-saving frame, but not the smaller text. */
+.municipal-popup.multi-office .popup-facility{margin:7px 0 8px;padding-bottom:8px}
+.municipal-popup.multi-office .popup-office{font-size:14px;line-height:1.45}
+.municipal-popup.multi-office .popup-address{font-size:13px;line-height:1.5}
+.municipal-popup.multi-office .popup-note{font-size:10px;line-height:1.4}
 </style>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
@@ -94,8 +111,8 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
 <script defer src="centered-labels.js?v=20261101-proposal5a"></script>
-<script defer src="../common/js/office-directory.js?v=4-region-route"></script>
-<script defer src="density-app.js?v=20261101-offices2"></script>
+<script defer src="../common/js/office-directory.js?v=5-compact-all"></script>
+<script defer src="density-app.js?v=20261101-compact-all"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>新案5：南北中央の最長水平区間に地名を配置</h1>
