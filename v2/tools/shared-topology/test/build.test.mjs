@@ -34,6 +34,9 @@ test('one national topology produces identical arcs on both prefecture sides',as
   const city=a.objects.municipalities.geometries.find(g=>g.properties.N03_007==='27221');
   assert.equal(city.type,'MultiPolygon');
   assert.equal(city.arcs.length,2,'detached component must survive');
+  const audit=spawnSync(process.execPath,[resolve(here,'../validate.mjs'),'--dir',result.dir],{encoding:'utf8'});
+  assert.equal(audit.status,0,audit.stderr);
+  assert.match(audit.stdout,/all arcs identical/);
  }finally{await rm(result.dir,{force:true,recursive:true});}
 });
 
