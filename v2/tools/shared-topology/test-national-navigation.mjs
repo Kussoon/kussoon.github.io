@@ -19,6 +19,7 @@ function element(tag='div',id=''){
  };
 }
 function node(id){if(!nodes.has(id))nodes.set(id,element('div',id));return nodes.get(id);}
+node('nationExtent').value='main';
 const document={
  getElementById:node,
  createElement:tag=>element(tag),
