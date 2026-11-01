@@ -46,6 +46,19 @@ const counts={};
 function arcDecode(t){return t.arcs.map(a=>{let x=0,y=0;return a.map(p=>{if(t.transform){x+=p[0];y+=p[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];}return p;});});}
 function ring(ids,arcs){const pts=[];for(const id of ids){const a=arcs[id<0?~id:id],line=id<0?a.slice().reverse():a;pts.push(...(pts.length?line.slice(1):line));}return pts;}
 function geom(g,arcs){return g.type==='Polygon'?[g.arcs.map(r=>ring(r,arcs))]:g.type==='MultiPolygon'?g.arcs.map(poly=>poly.map(r=>ring(r,arcs))):[];}
+// Identify original shared-topology edges of a municipality.
+ // Polygon SVG paths may trace the same edge more than once (multipart regions
+ // or holes). Painting that complete path as a stroke makes only those edges
+ // dark or thick. Count each original arc reference, then draw unique outer edges.
+function boundaryArcIds(g){
+ const counts=new Map();
+ const polygons=g.type==='Polygon'?[g.arcs]:g.type==='MultiPolygon'?g.arcs:[];
+ for(const polygon of polygons)for(const ring of polygon)for(const id of ring){
+  const idx=id<0?~id:id;
+  counts.set(idx,(counts.get(idx)||0)+1);
+ }
+ return [...counts].filter(([,count])=>count%2===1).map(([idx])=>idx);
+}
 function bbox(polygons){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const p of polygons)for(const r of p)for(const [x,y] of r){a=Math.min(a,x);b=Math.min(b,y);c=Math.max(c,x);d=Math.max(d,y);}return [a,b,c,d];}
 function project(b){const cosine=Math.cos(((b[1]+b[3])/2)*Math.PI/180),width=Math.max((b[2]-b[0])*cosine,.05),height=Math.max(b[3]-b[1],.05),scale=Math.min((W-48)/width,(H-44)/height),lon=(b[0]+b[2])/2,lat=(b[1]+b[3])/2;return p=>[W/2+(p[0]-lon)*cosine*scale,H/2-(p[1]-lat)*scale];}
 function outline(arcs,proj){
@@ -64,14 +77,14 @@ function shape(polys,proj){let s='';for(const poly of polys)for(const ring of po
 function render(){
  if(!current)return;const start=performance.now(),map=$('map');map.replaceChildren();
  const regions=current.regions,selected=$('region').value,box=current.box,proj=project(box);
- const ns=NS;let chosen=null;
+ const ns=NS;let chosenArcs=null;
  for(const r of regions){
   const d=shape(r.polys,proj),el=document.createElementNS(ns,'path');
   el.setAttribute('d',d);el.setAttribute('class','land'+(r.code===selected?' chosen':''));
   el.dataset.code=r.code;
   const title=document.createElementNS(ns,'title');title.textContent=r.name;el.append(title);
   map.append(el);
-  if(r.code===selected)chosen=d;
+  if(r.code===selected)chosenArcs=r.boundaryArcs;
  }
  // A region-by-region stroke double-paints shared borders and changes their
  // darkness depending on DOM order. Draw the underlying common arcs once.
@@ -79,10 +92,12 @@ function render(){
  borders.setAttribute('class','borders');
  borders.setAttribute('d',outline(current.arcs,proj));
  map.append(borders);
- // Keep the selected outline above all municipality fills and the border layer.
- if(chosen){
+ // Select only outer edges from original TopoJSON, not the filled polygon path.
+ // Each boundary segment is stroked at most once, including multipart cities.
+ if(chosenArcs&&chosenArcs.length){
   const focus=document.createElementNS(ns,'path');
-  focus.setAttribute('class','selected-outline');focus.setAttribute('d',chosen);
+  focus.setAttribute('class','selected-outline');
+  focus.setAttribute('d',outline(chosenArcs.map(i=>current.arcs[i]),proj));
   map.append(focus);
  }
  $('drawing').textContent=(performance.now()-start).toFixed(1)+' ms';
@@ -97,7 +112,7 @@ async function load(pref){
    const raw=await response.text(),t=JSON.parse(raw);
    const items=t.objects?.municipalities?.geometries||[];
    if(items.length<20||items.some(g=>!String(g.properties.N03_007).startsWith(pref)))throw Error('区域コードが不正です');
-   const arcs=arcDecode(t),regions=items.map(g=>({code:String(g.properties.N03_007),name:g.properties.N03_004,polys:geom(g,arcs)}));
+   const arcs=arcDecode(t),regions=items.map(g=>({code:String(g.properties.N03_007),name:g.properties.N03_004,polys:geom(g,arcs),boundaryArcs:boundaryArcIds(g)}));
    let b=[Infinity,Infinity,-Infinity,-Infinity];for(const r of regions){const q=bbox(r.polys);b=[Math.min(b[0],q[0]),Math.min(b[1],q[1]),Math.max(b[2],q[2]),Math.max(b[3],q[3])];}
    item={regions,arcs,box:b,bytes:new TextEncoder().encode(raw).length,ms:performance.now()-start};cache.set(pref,item);
   }
