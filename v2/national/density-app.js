@@ -203,12 +203,13 @@ function renderDiagnostic(){
  if(!diagnosticLayer||!models.length)return;
  diagnosticLayer.replaceChildren();
  const cityName=$('diagnostic-city').value;
- const model=models.find(m=>m.name===cityName);
+ const model=models.find(m=>m.name===cityName||m.fullName===cityName);
  if(!model){$('diagnostic-output').textContent=cityName+'の区域データがありません。';return;}
  const h=horizontalCenters.get(model.id),v=verticalCenters.get(model.id);
  const decision=conditionalResults.get(model.id);
  const fourth=proposal4Results.get(model.id);
  const fifth=proposal5Results.get(model.id);
+ const mainland=mainland5Results.get(model.id);
  if(!h||!v)return;
  const line=M.verticalRuns(model.rings,h[0])
   .filter(([a,b])=>a<=h[1]+1e-6&&b>=h[1]-1e-6&&
@@ -607,12 +608,12 @@ $('city-shortcuts').addEventListener('click',async e=>{
  if([...$('diagnostic-city').options].some(o=>o.value===name)){
   $('diagnostic-city').value=name;
  }
- if(!['宝塚市','西宮市','神戸市','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
+ if(!['宝塚市','西宮市','神戸市','神戸市中央区','京都市','神河町','西脇市','三田市','加西市','加東市','小野市','三木市','加古川市','朝来市'].includes(name))return;
  if($('area').value!=='west-shikoku'||$('mode').value!=='ward'){
   $('area').value='west-shikoku';$('mode').value='ward';
   await refresh();
  }
- const parts=models.filter(m=>m.name===name||m.major===name);
+ const parts=models.filter(m=>m.name===name||m.major===name||m.fullName===name);
  if(!parts.length){setStatus(name+'の地図データが見つかりません');return;}
  // In ward mode Kobe/Kyoto comprise several ward polygons: fit their union.
  const b={minX:Math.min(...parts.map(m=>m.box.minX)),
