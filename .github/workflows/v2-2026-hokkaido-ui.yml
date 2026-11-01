@@ -1,0 +1,37 @@
+name: V2 Hokkaido 2026 municipality interactive map UI regression
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-hokkaido-20m-trial.html'
+      - '.github/workflows/v2-2026-hokkaido-ui.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate official Hokkaido municipal code, gestures, and JS
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html=Path('v2/national/official-2026-hokkaido-20m-trial.html').read_text()
+          script=html.split('<script>')[-1].split('</script>')[0]
+          assert '<option value="01">北海道</option>' in html
+          assert "hokkaido-prefecture-20m/" in script
+          assert "new Set(regionCodes).size!==items.length" in script
+          assert "KussoonV2MunicipalRenderer.render" in script
+          assert "KussoonV2MunicipalRenderer.focusBounds(chosen.polys)" in script
+          assert "KussoonV2MapViewport.init" in script
+          assert "viewport.zoomIn()" in script and "viewport.zoomOut()" in script
+          assert 'id="zoomReset"' in html
+          assert 'items.length<20' not in script
+          Path('/tmp/v2-hokkaido-map.js').write_text(script)
+          print('PASS Hokkaido code, shared boundary renderer, selection focus and gesture controls')
+          PY
+          node --check /tmp/v2-hokkaido-map.js
+          node v2/shared/test-map-viewport.cjs
+          node v2/shared/test-municipality-renderer.cjs
