@@ -24,6 +24,8 @@ const output=resolve(arg('--output','./generated'));
 const quantization=Number(arg('--quantization','1000000'));
 const keep=Number(arg('--keep','0.02'));
 const expected=Number(arg('--expect-prefectures','0'));
+const combinedName=arg('--emit-combined',null);
+if(combinedName && !/^[a-zA-Z0-9-]+\.topojson$/.test(combinedName))throw Error('Invalid --emit-combined filename');
 if(!input||!Number.isInteger(quantization)||quantization<1e5
  ||!Number.isFinite(keep)||keep<=0||keep>1
  ||!Number.isInteger(expected)||expected<0){
@@ -126,6 +128,7 @@ if(hasOsaka&&hasNara&&!cross['27-29']){
  throw Error('No shared arc between Osaka and Nara. This input does not have a unified prefecture border. Stop rather than publish an inconsistent map.');
 }
 await mkdir(output,{recursive:true});
+if(combinedName)await writeFile(join(output,combinedName),JSON.stringify(topo)+'\n','utf8');
 const manifest={
  schemaVersion:1,
  source:'Single nationwide N03 GeoJSON provided by operator; see README and record provenance separately',
@@ -140,3 +143,4 @@ for(const pref of prefs){
 await writeFile(join(output,'manifest.json'),JSON.stringify(manifest,null,2)+'\n','utf8');
 console.log('Wrote',prefs.length,'prefecture slices to',output);
 console.log('Common Osaka/Nara arcs:',cross['27-29']||0);
+if(combinedName)console.log('Combined topology:',combinedName);
