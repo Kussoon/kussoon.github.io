@@ -7,6 +7,16 @@ ROOT=pathlib.Path(sys.argv[1] if len(sys.argv)>1 else 'v2/data/national')
 manifest=json.loads((ROOT/'2026-common/national-2026-pilot/manifest.json').read_text())
 source=json.loads((ROOT/'municipality-readings-all-source.json').read_text())
 items=source['items']
+# Officially verified Hamamatsu 2024 ward reorganization.
+# https://www.city.hamamatsu.shizuoka.jp/ksh/imf/tkdk.html
+# https://www.city.hamamatsu.shizuoka.jp/ksh/faq/2.html
+official_reorganized_wards={
+ '22138':{'name':'浜松市中央区','reading':'はままつし ちゅうおうく'},
+ '22139':{'name':'浜松市浜名区','reading':'はままつし はまなく'},
+ '22140':{'name':'浜松市天竜区','reading':'はままつし てんりゅうく'}
+}
+assert not set(official_reorganized_wards).intersection(items)
+items={**items,**official_reorganized_wards}
 def valid_entry(code,name,entry):
  if not entry:return False
  full=entry['name']
@@ -46,7 +56,7 @@ if total!=manifest['municipalityCount']:raise RuntimeError('Nationwide count inc
 if total!=matched+missing+mismatched:raise RuntimeError('Coverage count inconsistent')
 # Guard against accidentally losing most of the existing, verified nationwide catalog.
 if matched<1700:raise RuntimeError(f'Unexpectedly poor coverage: {matched}/{total}')
-out={'source':source['meta']['source'],'sourceCount':source['meta']['count'],
+out={'source':source['meta']['source'],'sourceCount':source['meta']['count'],'municipalOfficialOverrides':len(official_reorganized_wards),
      'target':'official 2026 V2 municipality geometry','total':total,'matched':matched,
      'missing':missing,'mismatched':mismatched,'coveragePct':round(100*matched/total,1),
      'byPrefecture':details,'issues':issues,
