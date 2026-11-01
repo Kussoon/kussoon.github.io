@@ -74,6 +74,30 @@ def convert(code):
         raise RuntimeError(f"Not a FeatureCollection: {code}")
     if not data.get("features"):
         raise RuntimeError(f"No features found: {code}")
+    def collect_polygons(geometry):
+        if not geometry:
+            return []
+        kind = geometry.get("type")
+        if kind == "Polygon":
+            return [geometry["coordinates"]]
+        if kind == "MultiPolygon":
+            return geometry["coordinates"]
+        if kind == "GeometryCollection":
+            result = []
+            for child in geometry.get("geometries", []):
+                result.extend(collect_polygons(child))
+            return result
+        raise RuntimeError(f"Unsupported source geometry {kind} in prefecture {code}")
+
+    normalized = 0
+    for feature in data["features"]:
+        if (feature.get("geometry") or {}).get("type") == "GeometryCollection":
+            polygons = collect_polygons(feature["geometry"])
+            if not polygons:
+                raise RuntimeError(f"Empty GeometryCollection in prefecture {code}")
+            feature["geometry"] = {"type": "MultiPolygon", "coordinates": polygons}
+            normalized += 1
+    print(f"Prefecture {code}: normalized {normalized} GeometryCollection features", flush=True)
     return data["features"]
 
 
