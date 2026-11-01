@@ -105,14 +105,14 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <script defer src="../common/js/readable-labels.js"></script>
 <script defer src="../common/js/collision-refinement.js"></script>
 <script defer src="../common/js/region-fit.js?v=2-border-clearance"></script>
-<script defer src="../common/js/national-boundaries.js?v=20261030-county"></script>
+<script defer src="../common/js/national-boundaries.js?v=20261101-mainland5"></script>
 <script defer src="../common/js/administrative-labels.js?v=1"></script>
 <script defer src="../common/js/national-readings.js?v=1"></script>
 <script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
 <script defer src="density-labels.js?v=20261031-compareab1"></script>
-<script defer src="centered-labels.js?v=20261101-proposal5a"></script>
+<script defer src="centered-labels.js?v=20261101-mainland5"></script>
 <script defer src="../common/js/office-directory.js?v=6-ward-city-links"></script>
-<script defer src="density-app.js?v=20261101-osaka-pilot"></script>
+<script defer src="density-app.js?v=20261101-mainland5"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>新案5：南北中央の最長水平区間に地名を配置</h1>
@@ -123,6 +123,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <button type="button" data-city="宝塚市">宝塚市へ</button>
 <button type="button" data-city="西宮市">西宮市へ</button>
 <button type="button" data-city="神戸市">神戸市へ</button>
+<button type="button" data-city="神戸市中央区">中央区へ（試作5B）</button>
 <button type="button" data-city="京都市">京都市へ</button>
 <button type="button" data-city="神河町">神河町へ</button>
 <button type="button" data-city="西脇市">西脇市へ</button>
@@ -145,6 +146,7 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 <option value="西宮市">西宮市</option>
 <option value="三木市" selected>三木市</option>
 <option value="朝来市">朝来市</option>
+<option value="神戸市中央区">神戸市中央区</option>
 </select></label>
 <label>地図上の補助線<select id="diagnostic-overlay">
 <option value="on" selected>表示する</option>
@@ -153,14 +155,16 @@ button:disabled{opacity:.6}button:focus-visible,input:focus-visible,select:focus
 </div>
 <p class="meta">赤い太線と赤い点＝新案5で選んだ最長区間とその中央。橙の点＝新案1、緑の点＝新案2、紫の点＝新案4。紫の白抜き点は水平全幅の中点（補正前）、紫の破線は新案4の補正経路です。橙の横線は市域と交わる全区間の最西端から最東端まで描きます。補助線は位置確認用で、ラベルを動かしません。</p>
 <p id="proposal5-report" class="info" aria-live="polite">新案5の計算を確認中です。</p>
+<p id="mainland-report" class="info" aria-live="polite">試作5Bの比較位置を計算中です。</p>
 <p id="proposal4-report" class="info" aria-live="polite">新案4の補正件数を集計中です。</p>
 <p id="diagnostic-output" class="info" aria-live="polite">中心点の位置を計算中です。</p>
 <p id="diagnostic-ranking" class="meta">移動率の大きい市町村を計算中です。</p>
 </section>
 <section class="panel" aria-label="ラベル表示の比較設定">
 <h2>配置方式を比較</h2>
+<p class="meta"><strong>試作5B：</strong>離れた区域が複数ある市区町村では、面積が最大の連続区域のみを使って新案5のラベル位置を求めます。従来の新案5を初期設定として維持し、選択欄で切り替えられます。地図の境界や選択範囲は変更しません。</p>
 <div class="controls">
-<label>配置方式<select id="density-mode"><option value="proposal5" selected>新案5：水平線上の最長区間の中央</option><option value="proposal4">新案4：市域外の場合だけ縦断面で補正</option><option value="horizontal">新案1：水平断面の東西全幅の中央</option><option value="conditional">新案3：必要な場合のみ縦補正</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
+<label>配置方式<select id="density-mode"><option value="proposal5" selected>新案5：水平線上の最長区間の中央</option><option value="mainland5">試作5B：最大連続区域だけで新案5</option><option value="proposal4">新案4：市域外の場合だけ縦断面で補正</option><option value="horizontal">新案1：水平断面の東西全幅の中央</option><option value="conditional">新案3：必要な場合のみ縦補正</option><option value="vertical">新案2：水平中央→縦断面中央で固定</option><option value="multi">旧案：複数水平断面・固定</option><option value="center">旧案：南北中央の断面・固定</option><option value="fixed">旧A：Polylabel固定（比較用）</option><option value="light">旧B：軽い位置調整（比較用）</option><option value="adaptive">旧実験：自然な表示</option><option value="all">旧実験：全件表示</option></select></label>
 <label>旧実験用・表示密度<select id="density-level" disabled><option value="sparse">少なめ</option><option value="normal" selected>標準</option><option value="dense">多め</option></select></label>
 </div>
 <p id="density-output" class="info" aria-live="polite">表示数を計算中です。</p>
