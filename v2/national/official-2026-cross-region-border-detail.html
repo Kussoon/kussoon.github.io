@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow"><title>地方間の県境 詳細比較 | Kussoon V2</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#153a55;background:#f0f7fc}
+*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:0 auto;padding:14px 12px 45px}
+h1{font-size:clamp(22px,4vw,30px)}.panel{background:white;padding:14px;border:1px solid #c1d5e3;border-radius:12px;margin:12px 0}
+.controls{display:flex;flex-wrap:wrap;gap:12px}label{font-weight:700;display:grid;gap:5px;flex:1 1 210px}
+select{min-height:44px;padding:9px;border-radius:8px;border:1px solid #9ebcd0;background:white;color:inherit;font:inherit;width:100%}
+button{font:inherit;min-height:44px;padding:8px 12px;border:1px solid #91b0c4;border-radius:8px;background:#fff;color:inherit;font-weight:700;cursor:pointer}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+svg{width:100%;height:auto;display:block;background:#edf6fb;border-radius:10px;border:1px solid #aec9dc;touch-action:none}
+.sideA{fill:none;stroke:#156da0;stroke-width:2;stroke-linejoin:round;pointer-events:none}
+.sideB{fill:none;stroke:#df5b26;stroke-width:2;stroke-linejoin:round;pointer-events:none}
+.hot{fill:#dd2441;stroke:white;stroke-width:1.2;cursor:pointer}
+.hot.active{fill:#fdcc22;stroke:#531a1a;stroke-width:2}
+.status{padding:11px;border-radius:8px;background:#e5f1f8;font-weight:700;line-height:1.65}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin:9px 0;font-weight:700}
+.swatch{display:inline-block;width:23px;height:4px;vertical-align:middle;margin-right:5px}
+small{line-height:1.7;color:#526c7b}table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid #d1e0e8;text-align:left;padding:8px}
+.note{background:#fff6e8;padding:11px;border-radius:8px;line-height:1.7;font-size:14px}
+@media(max-width:520px){main{padding:10px 8px 36px}.panel{padding:10px}}
+</style></head><body><main>
+<a href="./official-2026-nationwide-pilot.html">← 全国統合試作に戻る</a>
+<h1>地方間の県境・詳細比較</h1>
+<p>別々に生成した2026年版データについて、地方をまたぐ県境の差が大きい5組を調べる診断用地図です。</p>
+<section class="panel">
+<div class="controls">
+<label>調査する県境<select id="pair">
+<option value="06-15">山形県 ― 新潟県</option>
+<option value="28-33">兵庫県 ― 岡山県</option>
+<option value="28-31">兵庫県 ― 鳥取県</option>
+<option value="07-08">福島県 ― 茨城県</option>
+<option value="07-15">福島県 ― 新潟県</option>
+</select></label>
+<label>ずれの大きい測定地点<select id="spot"><option value="">県境全体を表示</option></select></label>
+</div>
+<div class="tools">
+<button type="button" id="zoomIn">＋ 拡大</button><button type="button" id="zoomOut">− 縮小</button>
+<button type="button" id="mapReset">現在の範囲に戻す</button>
+<button type="button" id="all">県境全体を見る</button>
+<output id="zoom">1.0倍</output>
+</div>
+<div class="legend"><span><i class="swatch" style="background:#156da0"></i><span id="nameA">左側の県</span></span><span><i class="swatch" style="background:#df5b26"></i><span id="nameB">右側の県</span></span><span><i class="swatch" style="background:#dd2441;height:10px;width:10px;border-radius:50%"></i>距離の大きな測定点</span></div>
+<svg id="map" viewBox="0 0 850 670" role="img" aria-label="2県の外周境界線と測定点の詳細比較"></svg>
+<p id="status" class="status" role="status">診断データを読み込みます。</p>
+<small>赤い点をタップすると、その位置に拡大します。2本指のピンチ、1本指の移動、＋／−ボタンにも対応しています。描画しているのは両県の外周境界です。海岸線等も含むため、すべての線が両県の共有境界とは限りません。</small>
+</section>
+<section class="panel"><h2>測定結果</h2>
+<table><tbody><tr><th>近接測定点数</th><td id="samples">―</td></tr>
+<tr><th>中央値</th><td id="median">―</td></tr>
+<tr><th>95パーセンタイル</th><td id="p95">―</td></tr>
+<tr><th>測定点中の最大値</th><td id="maximum">―</td></tr>
+<tr><th>20m以内の割合</th><td id="within">―</td></tr>
+</tbody></table><p id="spotDetail"></p>
+<p class="note">この数値は外郭線から100m間隔で採取した点と、相手県の近くの外郭線との距離です。300mを超えて離れた点は集計していません。したがって、法的な県境の位置や、県境全線の最大ずれを確定するものではありません。地図とデータの診断専用であり、行政区域データそのものは変更していません。</p></section>
+</main>
+<script src="../shared/map-viewport.js"></script>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=670;
+const view=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:x=>$('zoom').textContent=x.toFixed(1)+'倍'});
+let data=null,requestId=0;
+const grouped={};
+const ns=(tag,cls)=>{const el=document.createElementNS(NS,tag);if(cls)el.setAttribute('class',cls);return el;};
+function project(bounds){
+ const [xmin,ymin,xmax,ymax]=bounds,lat=(ymin+ymax)/2,cos=Math.cos(lat*Math.PI/180),spanX=Math.max(.001,(xmax-xmin)*cos),spanY=Math.max(.001,ymax-ymin);
+ const s=Math.min((W-55)/spanX,(H-55)/spanY);
+ return p=>[W/2+(p[0]-(xmin+xmax)/2)*cos*s,H/2-(p[1]-(ymin+ymax)/2)*s];
+}
+function path(geom,p){
+ if(!geom||!geom.type)return '';
+ if(geom.type==='GeometryCollection')return geom.geometries.map(g=>path(g,p)).join('');
+ const lines=geom.type==='LineString'?[geom.coordinates]:geom.type==='MultiLineString'?geom.coordinates:[];
+ let d='';for(const line of lines){for(let i=0;i<line.length;i++){const xy=p(line[i]);d+=(i?'L':'M')+xy[0].toFixed(2)+','+xy[1].toFixed(2);}}
+ return d;
+}
+function getBounds(){
+ const points=[];for(const f of data.features){
+  if(f.properties.type==='sample')continue;
+  const walk=g=>{
+   if(g.type==='LineString')points.push(...g.coordinates);
+   else if(g.type==='MultiLineString')g.coordinates.forEach(line=>points.push(...line));
+   else if(g.type==='GeometryCollection')g.geometries.forEach(walk);
+  };walk(f.geometry);
+ }
+ if(!points.length)return data.properties.approximateExtent;
+ const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]);
+ const a=Math.min(...xs),b=Math.min(...ys),c=Math.max(...xs),d=Math.max(...ys);
+ const pad=Math.max(.02,(c-a)*.08,(d-b)*.08);
+ return [a-pad,b-pad,c+pad,d+pad];
+}
+function draw(){
+ if(!data)return;
+ const choice=$('spot').value,spots=data.features.filter(f=>f.properties.type==='sample');
+ const current=choice?spots[Number(choice)]:null;
+ let bounds=getBounds();
+ if(current){
+  const [x,y]=current.geometry.coordinates;
+  bounds=[x-.032,y-.024,x+.032,y+.024];
+ }
+ const p=project(bounds),svg=$('map'),fragment=document.createDocumentFragment();
+ const linesA=ns('path','sideA'),linesB=ns('path','sideB');
+ const [a,b]=data.properties.pair.split('-');
+ linesA.setAttribute('d',data.features.filter(f=>f.properties.type==='boundary'&&f.properties.side===a).map(f=>path(f.geometry,p)).join(''));
+ linesB.setAttribute('d',data.features.filter(f=>f.properties.type==='boundary'&&f.properties.side===b).map(f=>path(f.geometry,p)).join(''));
+ fragment.append(linesA,linesB);
+ spots.forEach((f,i)=>{
+  const loc=p(f.geometry.coordinates),circle=ns('circle','hot'+(choice===String(i)?' active':''));
+  circle.setAttribute('cx',loc[0]);circle.setAttribute('cy',loc[1]);circle.setAttribute('r',choice===String(i)?7:4);
+  circle.dataset.index=i;
+  const title=ns('title');title.textContent='差 '+f.properties.distanceM+'m';
+  circle.append(title);fragment.append(circle);
+ });
+ svg.replaceChildren(fragment);view.reset();
+ $('spotDetail').textContent=current?'選択地点の測定値：'+current.properties.distanceM+'m（測定地点 '+(Number(choice)+1)+'）':'赤い点をタップすると、その測定地点の周辺を表示します。';
+}
+async function load(){
+ const id=++requestId;data=null;$('status').textContent='境界比較データを読み込み中です…';
+ try{
+  const res=await fetch('../data/national/2026-common/cross-region-detail/'+$('pair').value+'.geojson');
+  if(!res.ok)throw Error('HTTP '+res.status);
+  const result=await res.json();
+  if(id!==requestId)return;
+  if(!result.features||!result.properties)throw Error('比較データ形式が不正です');
+  data=result;
+  const info=data.properties;
+  $('nameA').textContent=info.names[0];$('nameB').textContent=info.names[1];
+  $('samples').textContent=info.matchedSampleCount.toLocaleString('ja-JP')+'点';
+  $('median').textContent=info.medianM+'m';$('p95').textContent=info.p95M+'m';$('maximum').textContent=info.maxObservedM+'m';
+  $('within').textContent=(info.fractionWithin20m*100).toFixed(1)+'%';
+  const select=$('spot');select.replaceChildren(new Option('県境全体を表示',''));
+  const spots=data.features.filter(f=>f.properties.type==='sample');
+  for(let i=0;i<spots.length;i++)select.append(new Option((i+1)+'番目 '+spots[i].properties.distanceM+'m',String(i)));
+  draw();$('status').textContent=info.names.join('―')+'：詳細境界の比較を表示中です。';
+ }catch(e){if(id!==requestId)return;$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
+}
+$('pair').addEventListener('change',load);$('spot').addEventListener('change',draw);
+$('all').addEventListener('click',()=>{$('spot').value='';draw();});
+$('mapReset').addEventListener('click',()=>view.reset());
+$('zoomIn').addEventListener('click',()=>view.zoomIn());$('zoomOut').addEventListener('click',()=>view.zoomOut());
+$('map').addEventListener('click',e=>{const el=e.target.closest('[data-index]');if(!el)return;$('spot').value=el.dataset.index;draw();});
+load();
+})();
+</script>
+</body></html>
