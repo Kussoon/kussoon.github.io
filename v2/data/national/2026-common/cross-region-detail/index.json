@@ -1,0 +1,116 @@
+{
+  "description": "Dense 100m samples for five flagged cross-region borders, diagnostic only",
+  "warning": "Samples beyond 300m are excluded; readings do not certify exact boundary alignment or total worst-case offsets.",
+  "pairs": [
+    {
+      "pair": "07-08",
+      "names": [
+        "福島県",
+        "茨城県"
+      ],
+      "sampleStepM": 100,
+      "matchedSampleCount": 990,
+      "medianM": 0.53,
+      "p95M": 10.57,
+      "maxObservedM": 278.93,
+      "fractionWithin20m": 0.9818,
+      "samplesOutside20m": 18,
+      "displayedWorstSamples": 120,
+      "approximateExtent": [
+        140.263405,
+        36.791394,
+        140.793386,
+        36.945282
+      ],
+      "caution": "100m samples near opposite exterior boundaries (<=300m). Not a certified full-length province border match."
+    },
+    {
+      "pair": "07-15",
+      "names": [
+        "福島県",
+        "新潟県"
+      ],
+      "sampleStepM": 100,
+      "matchedSampleCount": 1916,
+      "medianM": 0.14,
+      "p95M": 16.04,
+      "maxObservedM": 299.66,
+      "fractionWithin20m": 0.9546,
+      "samplesOutside20m": 87,
+      "displayedWorstSamples": 120,
+      "approximateExtent": [
+        139.16484,
+        36.938585,
+        139.743246,
+        37.855898
+      ],
+      "caution": "100m samples near opposite exterior boundaries (<=300m). Not a certified full-length province border match."
+    },
+    {
+      "pair": "06-15",
+      "names": [
+        "山形県",
+        "新潟県"
+      ],
+      "sampleStepM": 100,
+      "matchedSampleCount": 1514,
+      "medianM": 0.11,
+      "p95M": 33.32,
+      "maxObservedM": 296.97,
+      "fractionWithin20m": 0.9306,
+      "samplesOutside20m": 105,
+      "displayedWorstSamples": 120,
+      "approximateExtent": [
+        139.544875,
+        37.820391,
+        139.899906,
+        38.554509
+      ],
+      "caution": "100m samples near opposite exterior boundaries (<=300m). Not a certified full-length province border match."
+    },
+    {
+      "pair": "28-31",
+      "names": [
+        "兵庫県",
+        "鳥取県"
+      ],
+      "sampleStepM": 100,
+      "matchedSampleCount": 689,
+      "medianM": 0.1,
+      "p95M": 6.59,
+      "maxObservedM": 295.38,
+      "fractionWithin20m": 0.9797,
+      "samplesOutside20m": 14,
+      "displayedWorstSamples": 120,
+      "approximateExtent": [
+        134.369989,
+        35.229318,
+        134.515356,
+        35.615008
+      ],
+      "caution": "100m samples near opposite exterior boundaries (<=300m). Not a certified full-length province border match."
+    },
+    {
+      "pair": "28-33",
+      "names": [
+        "兵庫県",
+        "岡山県"
+      ],
+      "sampleStepM": 100,
+      "matchedSampleCount": 1052,
+      "medianM": 0.1,
+      "p95M": 9.09,
+      "maxObservedM": 280.67,
+      "fractionWithin20m": 0.9629,
+      "samplesOutside20m": 39,
+      "displayedWorstSamples": 120,
+      "approximateExtent": [
+        134.252888,
+        34.719778,
+        134.413112,
+        35.240958
+      ],
+      "caution": "100m samples near opposite exterior boundaries (<=300m). Not a certified full-length province border match."
+    }
+  ]
+}
