@@ -1,0 +1,26 @@
+name: V2 shared municipal renderer regression
+on:
+  pull_request:
+    paths:
+      - 'v2/shared/municipality-renderer.js'
+      - 'v2/shared/test-municipality-renderer.cjs'
+      - 'v2/national/official-2026-tokai-four-20m-trial.html'
+      - 'v2/national/official-2026-kyushu-prefecture-20m-trial.html'
+      - 'v2/national/official-2026-kyushu-okinawa-eight-20m-trial.html'
+      - '.github/workflows/v2-shared-municipal-renderer.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify source syntax
+        run: |
+          node --check v2/shared/municipality-renderer.js
+          node --check v2/shared/test-municipality-renderer.cjs
+      - name: Validate shared arc layering and regional pages
+        run: node v2/shared/test-municipality-renderer.cjs
