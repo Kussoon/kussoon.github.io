@@ -1,0 +1,46 @@
+name: V2 Hokuriku-Koshinetsu municipality count regression
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-hokuriku-koshinetsu-six-20m-trial.html'
+      - '.github/workflows/v2-hokuriku-region-count-regression.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify official region counts and JavaScript syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          text=Path('v2/national/official-2026-hokuriku-koshinetsu-six-20m-trial.html').read_text()
+          expected="const counts={'15':37,'16':15,'17':19,'18':17,'19':27,'20':77};"
+          assert expected in text, "Official six-prefecture counts missing"
+          assert "items.length<20" not in text, "Incorrect minimum count remains"
+          assert "items.length!==counts[pref]" in text, "Exact count validation missing"
+          assert "KussoonV2MunicipalRenderer.render" in text
+          Path('/tmp/v2-hokuriku-count.js').write_text(text.split('<script>')[-1].split('</script>')[0])
+          print('PASS all six official region counts including Toyama, Ishikawa, Fukui')
+          PY
+          node --check /tmp/v2-hokuriku-count.js
+          node - <<'JS'
+          const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+          const src=fs.readFileSync('/tmp/v2-hokuriku-count.js','utf8');
+          const decl=src.match(/const counts=([^;]+);/);
+          assert(decl,'Missing regional count declaration');
+          const counts=vm.runInNewContext('('+decl[1]+')');
+          assert.equal(counts['16'],15);
+          assert.equal(counts['17'],19);
+          assert.equal(counts['18'],17);
+          assert.equal(Object.values(counts).reduce((a,b)=>a+b,0),192);
+          for(const [p,n] of Object.entries(counts)){
+            const valid=Array.from({length:n},(_,i)=>({properties:{N03_007:p+String(i).padStart(3,'0')}}));
+            assert(valid.length===counts[p]&&valid.every(g=>String(g.properties.N03_007).startsWith(p)));
+          }
+          console.log('PASS all six regional count validations');
+          JS
