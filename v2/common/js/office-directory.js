@@ -13,6 +13,9 @@ function destination(office){
  if(office?.status!=='verified'||!office.address||!office.name)return null;
  return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(office.name+' '+office.address);
 }
+function displayOfficeName(name){
+ return String(name||'').replace(/[\s　]*(?:[（(]\s*(?:第?[0-9０-９一二三四五六七八九十]+号館|本庁舎|新庁舎|本館)\s*[）)]|(?:第?[0-9０-９一二三四五六七八九十]+号館|本庁舎|新庁舎|本館))+$/u,'').trim();
+}
 function render(document,container,result,label){
  container.replaceChildren();
  const element=(tag,className,text)=>{
@@ -27,7 +30,7 @@ function render(document,container,result,label){
  const offices=result.offices.length?result.offices:[{name:'市役所・役場／区役所',status:'missing'}];
  for(const office of offices){
   const section=element('section','popup-facility','');
-  section.append(element('h3','popup-office',office.name));
+  section.append(element('h3','popup-office',displayOfficeName(office.name)));
   section.append(element('p','popup-address',
    (office.postalCode?'〒'+office.postalCode+'\n':'郵便番号：未確認\n')+(office.address||'所在地：未確認')));
   if(office.status!=='verified')section.append(element('p','popup-note','この施設の情報は確認待ちです。'));
@@ -37,7 +40,7 @@ function render(document,container,result,label){
  common.append(action('公式サイト',result.region?.official,label),action('Wikipedia',result.region?.wikipedia,label),action('ここへ行く',destination(result.offices[0]),label));
  container.append(common);
 }
-const api={safeUrl,resolve,destination,render};
+const api={safeUrl,resolve,destination,displayOfficeName,render};
 if(typeof module==='object'&&module.exports)module.exports=api;
 else root.KussoonOfficeDirectory=api;
 })(typeof window==='object'?window:globalThis);
