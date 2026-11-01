@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow"><meta name="theme-color" content="#edf7fc">
+<title>2021年版と2026年版の府県境を比較｜Kussoon V2</title>
+<meta name="description" content="大阪・奈良の行政界を、旧府県別データと国土交通省2026年版の共通TopoJSONで比較する試作。">
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#173a54;background:#f1f8fc}
+*{box-sizing:border-box}body{margin:0;line-height:1.6}main{max-width:960px;margin:auto;padding:14px 12px 48px}
+h1{font-size:clamp(22px,4.5vw,30px);line-height:1.4;margin:13px 0}h2{font-size:19px;margin:0 0 9px}
+a{color:#195e84}p{margin:8px 0 12px}
+.panel{background:white;border:1px solid #b9d0df;border-radius:14px;padding:14px;margin:12px 0}
+.controls{display:flex;align-items:end;flex-wrap:wrap;gap:10px}
+label{font-weight:800;display:grid;gap:6px;flex:1 1 185px}
+button,select{font:inherit;min-height:44px;border:1px solid #9bbacb;background:#fff;color:#183c55;border-radius:9px;padding:7px 10px}
+button{font-weight:800;cursor:pointer}button[aria-pressed="true"]{background:#245d82;color:#fff;border-color:#245d82}
+button:focus-visible,select:focus-visible{outline:3px solid #e5aa38;outline-offset:2px}
+#map{display:block;width:100%;height:auto;background:#edf6fb;border:1px solid #acc8da;border-radius:12px;aspect-ratio:850/720}
+.land{fill:#a8d5eb;stroke:#fff;stroke-width:1.1;fill-rule:evenodd;stroke-linejoin:round;vector-effect:non-scaling-stroke;cursor:pointer}
+.land.selected{fill:#ffc36e;stroke:none}
+.pref-outline{fill:none;stroke:#376383;stroke-width:2.1;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}
+.selection-outline{fill:none;stroke:#88420f;stroke-width:2.6;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}
+.map-label{font-size:21px;font-weight:850;fill:#194158;stroke:#fff;stroke-width:4;paint-order:stroke;stroke-linejoin:round;text-anchor:middle;pointer-events:none}
+.info{border-radius:10px;padding:10px 12px;background:#e6f1f8;font-weight:700;font-size:14px}
+.note{background:#fff7e7;border-left:3px solid #dca03e;padding:10px;font-size:13px}
+.caption{font-size:13px;color:#56748b}footer{font-size:13px;margin-top:18px}
+</style>
+<script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<script defer src="official-2026-border-compare.js?v=20261101-a"></script>
+</head><body><main>
+<a href="./density.html">← 全国市区町村マップへ戻る</a>
+<h1>2026年版・共通府県境の比較試作</h1>
+<p>大阪府・奈良県の境界を<strong>従来の2021年簡素化データ</strong>と、<strong>国土交通省2026年版を一括処理した共通データ</strong>で比較します。同じ場所・倍率のまま切り替えられます。</p>
+<section class="panel">
+<div class="controls" role="group" aria-label="地図データの比較">
+<button type="button" id="old" aria-pressed="false">従来：2021年府県別</button>
+<button type="button" id="new" aria-pressed="true">試作：2026年共通境界</button>
+</div>
+<div class="controls" style="margin-top:13px">
+<label>確認する地域
+<select id="area">
+<option value="sango" selected>柏原市・三郷町・平群町</option>
+<option value="taishi">太子町・香芝市</option>
+<option value="wide">大阪府・奈良県の府県境（広域）</option>
+</select></label>
+<label>選択する区域
+<select id="selection">
+<option value="29343" selected>奈良県 三郷町</option>
+<option value="27221">大阪府 柏原市</option>
+<option value="29342">奈良県 平群町</option>
+<option value="27381">大阪府 太子町</option>
+<option value="29210">奈良県 香芝市</option>
+<option value="none">選択なし</option>
+</select></label>
+</div></section>
+<section class="panel">
+<svg id="map" viewBox="0 0 850 720" role="img" aria-label="大阪府と奈良県の2021年・2026年行政区域を比較する地図"></svg>
+<p id="status" class="info" role="status">行政区域データを読み込み中です。</p>
+<p class="caption">地図上をタップして市町村を選択できます。2026年版は一つのTopoJSON内の共有アークを使用して府県境を一度だけ描画します。</p>
+</section>
+<section class="panel">
+<h2>確認したいこと</h2>
+<p>従来版では府県ごとの境界線がずれて二重になる場所があります。2026年版では、府県境の線データを一つにし、その共通の境界を両府県の市町村が共有するため、同じ箇所が一本の線として表示されるかを比較します。</p>
+<p class="note"><strong>注意：</strong>2021年版と2026年版は使用年度も簡素化処理も異なります。境界線の差が行政界の変更だけによるものとは限りません。府県境が一本に見えても、形状の正確さや島・飛び地の保持は別途検証が必要です。</p>
+<p class="caption">このページは独立した試作です。全国市区町村マップ本体、新案5C、住所情報は変更していません。2026年版の出典：国土交通省「国土数値情報・行政区域データ（N03）」。</p>
+</section>
+<footer><a href="./shared-vector-pilot.html">旧ベクター補正試作</a> ・ <a href="./density.html">全国市区町村マップ</a></footer>
+</main></body></html>

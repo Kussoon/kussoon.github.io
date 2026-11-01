@@ -1,0 +1,82 @@
+name: V2 generate official 2026 comparison topology
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-border-compare*'
+      - 'v2/tools/shared-topology/build.mjs'
+      - '.github/workflows/v2-2026-compare-data.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-official-osaka-nara:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install GIS tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+      - name: Install topojson toolchain
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Download official 2026 source and convert to one GeoJSON
+        run: python3 v2/tools/shared-topology/prepare-2026-osaka-nara.py "$RUNNER_TEMP/n03-input"
+      - name: Build shared-arc national topology and 2 prefecture slices
+        working-directory: v2/tools/shared-topology
+        run: |
+          node build.mjs \
+            --input "$RUNNER_TEMP/n03-input/osaka-nara-2026.geojson" \
+            --output "$RUNNER_TEMP/v2-2026-common" \
+            --quantization 1000000 --keep 0.02 --expect-prefectures 2 \
+            --emit-combined osaka-nara.topojson
+      - name: Audit prefecture split
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-2026-common"
+      - name: Validate browser topology geometry and shared boundaries
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          import {feature,mesh} from './v2/tools/shared-topology/node_modules/topojson-client/src/index.js';
+          const dir=process.env.RUNNER_TEMP+'/v2-2026-common';
+          const t=JSON.parse(readFileSync(dir+'/osaka-nara.topojson','utf8'));
+          const obj=t.objects.municipalities;
+          const items=feature(t,obj).features;
+          if(items.length!==111)throw Error('Expected 111 municipal polygons, got '+items.length);
+          const border=mesh(t,obj,(a,b)=>a!==b&&a.properties.N03_007.slice(0,2)!==b.properties.N03_007.slice(0,2));
+          const segments=border.coordinates.reduce((n,c)=>n+c.length-1,0);
+          if(segments<10)throw Error('Too few actual shared prefecture-border segments: '+segments);
+          for(const id of ['27221','29343','27381','29210']){
+            if(!items.some(f=>f.properties.N03_007===id))throw Error('Missing pilot municipality '+id);
+          }
+          console.log('Validated SVG feature count',items.length,'shared border line segments',segments);
+          NODE
+      - name: Publish generated test file to this PR branch only
+        if: github.event_name == 'pull_request'
+        run: |
+          mkdir -p v2/data/national/2026-common
+          cp "$RUNNER_TEMP/v2-2026-common/osaka-nara.topojson" v2/data/national/2026-common/osaka-nara.topojson
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/osaka-nara.topojson
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): add generated official 2026 Osaka-Nara comparison topojson"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - name: Archive reproducible outputs and manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-2026-common-border-comparison-data
+          path: |
+            ${{ runner.temp }}/v2-2026-common/manifest.json
+            ${{ runner.temp }}/v2-2026-common/osaka-nara.topojson
+          retention-days: 14
+          if-no-files-found: error
