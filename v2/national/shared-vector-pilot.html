@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow"><meta name="theme-color" content="#edf7fc">
+<title>大阪・奈良の共通ベクター境界｜Kussoon V2</title>
+<meta name="description" content="大阪・奈良の市区町村ポリゴンを共通境界へ調整し、従来の府県別境界とSVGで比較する試作。">
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:#eff7fc;color:#183c55}
+*{box-sizing:border-box}body{margin:0;line-height:1.6}
+main{max-width:960px;margin:auto;padding:14px 12px 45px}
+a{color:#215b80}h1{font-size:clamp(22px,4vw,30px);line-height:1.4;margin:15px 0}
+h2{font-size:19px;margin:0 0 10px}p{margin:8px 0 12px}
+.panel{background:#fff;border:1px solid #b9d0df;border-radius:14px;padding:14px;margin:12px 0}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+label{font-weight:750;flex:1 1 210px;display:flex;flex-direction:column;gap:5px}
+button,select{font:inherit;min-height:44px;border:1px solid #9bbacb;color:#173e58;border-radius:9px;background:#fff;padding:7px 10px}
+button{font-weight:800;cursor:pointer}button[aria-pressed=true]{background:#275f85;color:#fff;border-color:#275f85}
+button:focus-visible,select:focus-visible{outline:3px solid #eeae42;outline-offset:2px}
+#map{display:block;width:100%;height:auto;aspect-ratio:850/720;background:#eff7fb;border:1px solid #a9c7d8;border-radius:12px}
+.region{fill:#a8d5eb;stroke:#fff;stroke-width:1.1;stroke-linejoin:round;vector-effect:non-scaling-stroke;fill-rule:evenodd;cursor:pointer}
+.region.selected{fill:#ffc36e;stroke:none}
+.pref-border{fill:none;stroke:#376383;stroke-width:2.1;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}
+.selection-border{fill:none;stroke:#88420f;stroke-width:2.6;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}
+.map-label{font-size:21px;font-weight:850;fill:#194158;stroke:#fff;stroke-width:4;paint-order:stroke;stroke-linejoin:round;text-anchor:middle;pointer-events:none}
+.info{border-radius:9px;padding:9px 11px;background:#e6f1f8;font-size:14px;font-weight:650}
+.meta{font-size:13px;color:#53738a}.note{background:#fff9ed;border-left:3px solid #dba44b;padding:10px;font-size:13px}
+footer{font-size:13px;color:#53738a;margin-top:18px}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
+<script defer src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/polygon-clipping@0.15.7/dist/polygon-clipping.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/turf.min.js"></script>
+<script defer src="shared-vector-pilot.js?v=20261101-a"></script>
+</head><body><main>
+<a href="./density.html">← 全国市区町村マップへ</a>
+<h1>大阪・奈良の共通ベクター境界を比較</h1>
+<p>従来の府県ごとにずれた境界と、<strong>共通の線に合わせた市区町村ポリゴン</strong>を切り替えられる試作です。前回の画素方式とは異なり、SVGのベクター図形で描きます。</p>
+<section class="panel">
+ <div class="controls" role="group" aria-label="境界方式">
+  <button id="original" type="button" aria-pressed="false">従来：府県別の境界</button>
+  <button id="shared" type="button" aria-pressed="true">試作：共通ベクター境界</button>
+ </div>
+ <div class="controls" style="margin-top:12px">
+  <label>確認する地域
+   <select id="area">
+    <option value="sango" selected>柏原市・三郷町・平群町</option>
+    <option value="taishi">太子町・香芝市</option>
+   </select>
+  </label>
+  <label>選択する区域
+   <select id="selection">
+    <option value="29343" selected>奈良県 三郷町</option>
+    <option value="27221">大阪府 柏原市</option>
+    <option value="29342">奈良県 平群町</option>
+    <option value="27381">大阪府 太子町</option>
+    <option value="29210">奈良県 香芝市</option>
+    <option value="none">選択なし</option>
+   </select>
+  </label>
+ </div>
+</section>
+<section class="panel">
+ <svg id="map" viewBox="0 0 850 720" role="img" aria-label="大阪府と奈良県の共通ベクター境界の比較地図"></svg>
+ <p id="status" class="info" role="status">地図を読み込み中です。</p>
+ <p class="meta">地図上をタップして区域を選ぶこともできます。切替時に地図の中心・倍率は変わりません。</p>
+</section>
+<section class="panel">
+<h2>今回の処理</h2>
+<p>大阪府側を<strong>試験上の基準線</strong>とし、重複する奈良県側の区域を切り取り、境界付近の短い隙間をベクター演算で埋めます。その後、修正した同一ポリゴンから塗り・白い市町村境界・選択枠を描きます。府県境の濃い青線は大阪府側の線を一度だけ描きます。</p>
+<p class="note">この方式は<strong>正確な行政界を確定するものではありません</strong>。隙間の補完幅は試験値350mです。地形・法律上の境界を基準にしたものではなく、境界の真正性は保証しません。原本データも2021年の簡素化版です。</p>
+<p class="meta">検証結果が良好な場合の本採用は、全国で共通の原資料から単一のトポロジーを生成する方式を優先します。新案5C・住所データ・元の全国市区町村マップは変更していません。</p>
+</section>
+<footer><a href="./shared-border-pilot.html">前回の画素方式の試作</a> ・ <a href="./density.html">全国市区町村マップ</a></footer>
+</main></body></html>
