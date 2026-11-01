@@ -34,7 +34,8 @@ const KussoonV2MunicipalRenderer={
  render(opts){lastRender={count:opts.regions.length,selected:opts.selected};},
  focusBounds(){return [135,35,135.5,35.5];}
 };
-const KussoonV2PlaceLabels={matches(r,q){return r.name.includes(q)||r.code.includes(q);},show(){}};
+const KussoonV2PlaceLabels={matches(r,q){return r.name.includes(q)||r.reading?.includes(q)||r.code.includes(q);},show(){}};
+const KussoonV2ReadingBridge={attach(regions,source){return {regions:regions.map(r=>({...r,reading:source.items[r.code]?.name===r.name?source.items[r.code].reading:''})),stats:{total:regions.length,matched:0,missing:regions.length,mismatched:0}};}};
 const KussoonV2MapViewport={init({onZoomChange}){onZoomChange(1);return {reset(){onZoomChange(1);},zoomIn(){},zoomOut(){}};}};
 const fakeFetch=async url=>{
  const file=resolve(root,'v2/national',url);
@@ -44,7 +45,7 @@ const fakeFetch=async url=>{
  return {ok:true,status:200,text:async()=>content,json:async()=>JSON.parse(content)};
 };
 const script=page.split('<script>').at(-1).split('</script>')[0];
-const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
+const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,KussoonV2ReadingBridge,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
 vm.runInNewContext(script,context);
 async function until(predicate,label){
  for(let i=0;i<200;i++){
@@ -71,6 +72,8 @@ await selectPref('25',19); // Regression: load a newly extracted combined-prefec
 node('placeSearch').value='大津';
 callbacks.get('placeSearch:input')();
 assert(node('searchResults').children.length>0,'search result did not appear');
+assert(node('readingCoverage').textContent.includes('読み仮名：'),'reading coverage indicator should display');
+node('readingMode').value='off';callbacks.get('readingMode:change')();
 const region=node('region');region.value=region.children[1].value;
 callbacks.get('region:change')();
 assert(lastRender.selected,'municipality selection did not highlight region');
