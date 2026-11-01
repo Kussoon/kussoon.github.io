@@ -53,8 +53,10 @@ function init(options){
   if(e.pointerType==='mouse'&&e.button!==0)return;
   wheelArmed=true;
   fingers.set(e.pointerId,point(e));
-  if(svg.setPointerCapture)svg.setPointerCapture(e.pointerId);
-  if(fingers.size>1){dragged=true;suppressClick=true;}
+  // Do not capture a simple tap: Safari must deliver its click to the land path.
+  if(fingers.size>1){dragged=true;suppressClick=true;
+   if(svg.setPointerCapture)for(const id of fingers.keys())try{svg.setPointerCapture(id);}catch(_){/* another pointer may have ended */}
+  }
   startGesture();
  }
  function pointerMove(e){
@@ -68,7 +70,9 @@ function init(options){
   if(moved<.1)return;
   if(pts.length===1&&gesture.count===1){
    const dx=mid.x-gesture.midpoint.x,dy=mid.y-gesture.midpoint.y;
-   if(Math.hypot(dx,dy)>5)dragged=true;
+   if(Math.hypot(dx,dy)>5&&!dragged){dragged=true;
+    if(svg.setPointerCapture)try{svg.setPointerCapture(e.pointerId);}catch(_){}
+   }
    if(dragged){suppressClick=true;pan(dx,dy,gesture.box);}
   }else if(pts.length>=2&&gesture.count>=2){
    dragged=true;suppressClick=true;
