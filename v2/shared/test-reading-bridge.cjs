@@ -25,4 +25,13 @@ assert.equal(sapporo.regions[0].reading,'さっぽろしちゅうおうく');
 assert.deepEqual(Array.from(sapporo.regions[0].readingParts,x=>x.name),['札幌市','中央区']);
 const changedWard=bridge.attach([{code:'01101',name:'別の市'}],national);
 assert.equal(changedWard.stats.mismatched,1,'never attach a reading to an unexpected parent city');
+for(const [code,ward,reading] of [
+ ['22138','中央区','はままつしちゅうおうく'],
+ ['22139','浜名区','はままつしはまなく'],
+ ['22140','天竜区','はままつしてんりゅうく']]){
+ const value=bridge.attach([{code,name:'浜松市'}],national);
+ assert.equal(value.stats.matched,1,'officially verified 2024 Hamamatsu ward should match');
+ assert.equal(value.regions[0].name,ward);
+ assert.equal(value.regions[0].reading,reading);
+}
 console.log('PASS existing CC0 reading catalog, strict matching and no guessed readings');
