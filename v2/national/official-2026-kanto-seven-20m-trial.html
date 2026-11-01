@@ -95,7 +95,7 @@ async function load(pref){
 }
 $('zoomIn').addEventListener('click',()=>viewport.zoomIn());
 $('zoomOut').addEventListener('click',()=>viewport.zoomOut());
-$('zoomReset').addEventListener('click',()=>viewport.reset());
+$('zoomReset').addEventListener('click',()=>{$('region').value='';render();});
 $('pref').addEventListener('change',()=>load($('pref').value));
 $('region').addEventListener('change',render);
 $('tokyoArea').addEventListener('change',()=>{$('region').value='';render();});
