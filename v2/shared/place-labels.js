@@ -132,5 +132,5 @@ function show(options){
  svg.append(layer);
  return count;
 }
-global.KussoonV2PlaceLabels=Object.freeze({normalize,matches,anchor,show});
+global.KussoonV2PlaceLabels=Object.freeze({normalize,matches,anchor,insidePolygon,show});
 })(window);
