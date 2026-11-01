@@ -64,4 +64,8 @@ if "bbox" in data:
     result["bbox"] = data["bbox"]
 args.output.parent.mkdir(parents=True, exist_ok=True)
 args.output.write_text(json.dumps(result, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+assert len(result["arcs"]) == len(data["arcs"])
+assert result["objects"] == data["objects"]
+assert all(len(a) >= 2 for a in result["arcs"])
 print(args.output, args.output.stat().st_size, "bytes")
+print("arc count:", len(result["arcs"]), "vertices:", sum(map(len, result["arcs"])))
