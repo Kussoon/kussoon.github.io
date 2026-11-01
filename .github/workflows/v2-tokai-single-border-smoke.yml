@@ -1,0 +1,27 @@
+name: V2 Tokai municipal borders single-stroke smoke test
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-tokai-four-20m-trial.html'
+      - '.github/workflows/v2-tokai-single-border-smoke.yml'
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check border architecture and JavaScript syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          page=Path('v2/national/official-2026-tokai-four-20m-trial.html').read_text()
+          assert '.land{fill:#add9ef;stroke:none' in page
+          assert "borders.setAttribute('d',outline(current.arcs,proj))" in page
+          assert "focus.setAttribute('class','selected-outline')" in page
+          assert page.index("map.append(borders)")<page.index("map.append(focus)")
+          assert 'item={regions,arcs,box:b,' in page
+          Path('/tmp/v2-tokai-trial.js').write_text(page.split('<script>')[-1].split('</script>')[0])
+          print('PASS shared borders drawn once, selection above borders')
+          PY
+          node --check /tmp/v2-tokai-trial.js
