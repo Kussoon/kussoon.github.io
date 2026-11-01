@@ -77,11 +77,22 @@ function ringSimplify(ring){
  const reduced=dp([...rotated,rotated[0]],.018*.018);
  return reduced.length>=4?reduced:[...rotated.slice(0,3),rotated[0]];
 }
+function previewArea(ring){
+ let area=0;
+ for(let i=0;i<ring.length-1;i++)area+=ring[i][0]*ring[i+1][1]-ring[i+1][0]*ring[i][1];
+ return Math.abs(area)/2;
+}
 function simplifyGeometry(geometry){
  const polys=geometry.type==='Polygon'?[geometry.coordinates]:geometry.coordinates;
  const output=[];
+ // This is ONLY the nationwide locator. Omit speck-sized offshore islets
+ // (~1 sq km) that cannot be distinguished at Japan-wide screen scale.
+ // Every original polygon remains available in the detailed prefecture data.
  for(const polygon of polys){
-  const rings=polygon.map(ringSimplify).filter(r=>r.length>=4);
+  if(!polygon[0]||previewArea(polygon[0])<.00011)continue;
+  const rings=polygon.map(ringSimplify).filter(r=>r.length>=4).map(r=>
+   r.map(p=>[Number(p[0].toFixed(3)),Number(p[1].toFixed(3))])
+  );
   if(rings.length)output.push(rings);
  }
  return {type:'MultiPolygon',coordinates:output};
@@ -107,7 +118,7 @@ for(const {pref,source,combined} of entries){
  console.log('PASS',pref,codes.length,'regions,',geom.coordinates.length,'land polygons');
 }
 if(features.length!==47)throw Error('Incomplete nationwide preview');
-const collection={type:'FeatureCollection',metadata:{source:'MLIT N03-2026, pre-existing Kussoon regional V2 topology',purpose:'low-detail navigation only',note:'Inter-region shared border topology not yet nationally reconciled'},features};
+const collection={type:'FeatureCollection',metadata:{source:'MLIT N03-2026, pre-existing Kussoon regional V2 topology',purpose:'low-detail navigation only',note:'Inter-region shared border topology not yet nationally reconciled; small uninhabited islets omitted in preview only'},features};
 await writeFile(join(dest,'prefectures-overview.geojson'),JSON.stringify(collection)+'\n');
 await writeFile(join(dest,'manifest.json'),JSON.stringify({version:1,prefectureCount:47,municipalityCount:Object.values(counts).reduce((a,b)=>a+b,0),entries:manifest},null,2)+'\n');
 console.log('PASS nationwide overview 47 prefectures',Object.values(counts).reduce((a,b)=>a+b,0),'municipalities');
