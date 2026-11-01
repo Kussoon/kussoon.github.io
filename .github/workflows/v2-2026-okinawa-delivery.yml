@@ -1,0 +1,74 @@
+name: V2 official 2026 Okinawa 20m delivery
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/prepare-2026-okinawa.py'
+      - '.github/workflows/v2-2026-okinawa-delivery.yml'
+      - 'v2/national/official-2026-kyushu-okinawa-eight-20m-trial.html'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install GIS tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+      - name: Install topology tools
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Download official Okinawa N03 data
+        run: python3 v2/tools/shared-topology/prepare-2026-okinawa.py "$RUNNER_TEMP/n03-input"
+      - name: Build official common topology
+        working-directory: v2/tools/shared-topology
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03-input/okinawa-2026.geojson" --output "$RUNNER_TEMP/v2-2026-okinawa" --quantization 1000000 --keep 0.02 --expect-prefectures 1 --emit-combined okinawa.topojson
+      - name: Validate topology and region codes
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-2026-okinawa"
+      - name: Generate 20m and check original geometry references
+        run: |
+          python scripts/v2/simplify_topojson.py "$RUNNER_TEMP/v2-2026-okinawa/47.topojson" "$RUNNER_TEMP/v2-2026-okinawa/47-20m.topojson" --meters 20
+          python - <<'PY'
+          import json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'v2-2026-okinawa'
+          original=json.loads((root/'47.topojson').read_text())
+          light=json.loads((root/'47-20m.topojson').read_text())
+          assert original['objects']==light['objects']
+          assert len(original['arcs'])==len(light['arcs'])
+          geoms=light['objects']['municipalities']['geometries']
+          codes=[str(g['properties']['N03_007']) for g in geoms]
+          assert len(codes)>=40 and len(set(codes))==len(codes) and all(c.startswith('47') for c in codes)
+          page=pathlib.Path('v2/national/official-2026-kyushu-okinawa-eight-20m-trial.html').read_text()
+          assert "47" in page and "kyushu-prefecture-20m" in page
+          print('PASS Okinawa',len(codes),'unique regions, original',(root/'47.topojson').stat().st_size,'bytes, 20m',(root/'47-20m.topojson').stat().st_size,'bytes')
+          PY
+      - name: Commit Okinawa prefecture 20m data
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          mkdir -p v2/data/national/2026-common/kyushu-prefecture-20m
+          cp "$RUNNER_TEMP/v2-2026-okinawa/47-20m.topojson" v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): add official Okinawa 2026 20m topology"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: okinawa-2026-20m
+          path: |
+            ${{ runner.temp }}/v2-2026-okinawa/47-20m.topojson
+            ${{ runner.temp }}/v2-2026-okinawa/manifest.json
+          retention-days: 14
