@@ -1,0 +1,791 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "29",
+  "asOf": "2026-11-01",
+  "regions": {
+    "29201": {
+      "name": "奈良市",
+      "kind": "city",
+      "officeIds": [
+        "29201-city"
+      ],
+      "official": "https://www.city.nara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/奈良市"
+    },
+    "29202": {
+      "name": "大和高田市",
+      "kind": "city",
+      "officeIds": [
+        "29202-city"
+      ],
+      "official": "https://www.city.yamatotakada.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/大和高田市"
+    },
+    "29203": {
+      "name": "大和郡山市",
+      "kind": "city",
+      "officeIds": [
+        "29203-city"
+      ],
+      "official": "https://www.city.yamatokoriyama.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/大和郡山市"
+    },
+    "29204": {
+      "name": "天理市",
+      "kind": "city",
+      "officeIds": [
+        "29204-city"
+      ],
+      "official": "https://www.city.tenri.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/天理市"
+    },
+    "29205": {
+      "name": "橿原市",
+      "kind": "city",
+      "officeIds": [
+        "29205-city"
+      ],
+      "official": "https://www.city.kashihara.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/橿原市"
+    },
+    "29206": {
+      "name": "桜井市",
+      "kind": "city",
+      "officeIds": [
+        "29206-city"
+      ],
+      "official": "https://www.city.sakurai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/桜井市"
+    },
+    "29207": {
+      "name": "五條市",
+      "kind": "city",
+      "officeIds": [
+        "29207-city"
+      ],
+      "official": "https://www.city.gojo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/五條市"
+    },
+    "29208": {
+      "name": "御所市",
+      "kind": "city",
+      "officeIds": [
+        "29208-city"
+      ],
+      "official": "https://www.city.gose.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/御所市"
+    },
+    "29209": {
+      "name": "生駒市",
+      "kind": "city",
+      "officeIds": [
+        "29209-city"
+      ],
+      "official": "https://www.city.ikoma.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/生駒市"
+    },
+    "29210": {
+      "name": "香芝市",
+      "kind": "city",
+      "officeIds": [
+        "29210-city"
+      ],
+      "official": "https://www.city.kashiba.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/香芝市"
+    },
+    "29211": {
+      "name": "葛城市",
+      "kind": "city",
+      "officeIds": [
+        "29211-city"
+      ],
+      "official": "https://www.city.katsuragi.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/葛城市"
+    },
+    "29212": {
+      "name": "宇陀市",
+      "kind": "city",
+      "officeIds": [
+        "29212-city"
+      ],
+      "official": "https://www.city.uda.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/宇陀市"
+    },
+    "29322": {
+      "name": "山添村",
+      "kind": "village",
+      "officeIds": [
+        "29322-village"
+      ],
+      "official": "https://www.vill.yamazoe.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/山添村"
+    },
+    "29342": {
+      "name": "平群町",
+      "kind": "town",
+      "officeIds": [
+        "29342-town"
+      ],
+      "official": "https://www.town.heguri.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/平群町"
+    },
+    "29343": {
+      "name": "三郷町",
+      "kind": "town",
+      "officeIds": [
+        "29343-town"
+      ],
+      "official": "https://www.town.sango.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/三郷町_(奈良県)"
+    },
+    "29344": {
+      "name": "斑鳩町",
+      "kind": "town",
+      "officeIds": [
+        "29344-town"
+      ],
+      "official": "https://www.town.ikaruga.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/斑鳩町"
+    },
+    "29345": {
+      "name": "安堵町",
+      "kind": "town",
+      "officeIds": [
+        "29345-town"
+      ],
+      "official": "https://www.town.ando.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/安堵町"
+    },
+    "29361": {
+      "name": "川西町",
+      "kind": "town",
+      "officeIds": [
+        "29361-town"
+      ],
+      "official": "https://www.town.nara-kawanishi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/川西町_(奈良県)"
+    },
+    "29362": {
+      "name": "三宅町",
+      "kind": "town",
+      "officeIds": [
+        "29362-town"
+      ],
+      "official": "https://www.town.miyake.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/三宅町"
+    },
+    "29363": {
+      "name": "田原本町",
+      "kind": "town",
+      "officeIds": [
+        "29363-town"
+      ],
+      "official": "https://www.town.tawaramoto.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/田原本町"
+    },
+    "29385": {
+      "name": "曽爾村",
+      "kind": "village",
+      "officeIds": [
+        "29385-village"
+      ],
+      "official": "https://www.vill.soni.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/曽爾村"
+    },
+    "29386": {
+      "name": "御杖村",
+      "kind": "village",
+      "officeIds": [
+        "29386-village"
+      ],
+      "official": "https://www.vill.mitsue.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/御杖村"
+    },
+    "29401": {
+      "name": "高取町",
+      "kind": "town",
+      "officeIds": [
+        "29401-town"
+      ],
+      "official": "https://www.town.takatori.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/高取町"
+    },
+    "29402": {
+      "name": "明日香村",
+      "kind": "village",
+      "officeIds": [
+        "29402-village"
+      ],
+      "official": "https://asukamura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/明日香村"
+    },
+    "29424": {
+      "name": "上牧町",
+      "kind": "town",
+      "officeIds": [
+        "29424-town"
+      ],
+      "official": "https://www.town.kanmaki.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/上牧町"
+    },
+    "29425": {
+      "name": "王寺町",
+      "kind": "town",
+      "officeIds": [
+        "29425-town"
+      ],
+      "official": "https://www.town.oji.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/王寺町"
+    },
+    "29426": {
+      "name": "広陵町",
+      "kind": "town",
+      "officeIds": [
+        "29426-town"
+      ],
+      "official": "https://www.town.koryo.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/広陵町"
+    },
+    "29427": {
+      "name": "河合町",
+      "kind": "town",
+      "officeIds": [
+        "29427-town"
+      ],
+      "official": "https://www.town.kawai.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/河合町"
+    },
+    "29441": {
+      "name": "吉野町",
+      "kind": "town",
+      "officeIds": [
+        "29441-town"
+      ],
+      "official": "https://www.town.yoshino.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/吉野町_(奈良県)"
+    },
+    "29442": {
+      "name": "大淀町",
+      "kind": "town",
+      "officeIds": [
+        "29442-town"
+      ],
+      "official": "https://www.town.oyodo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/大淀町"
+    },
+    "29443": {
+      "name": "下市町",
+      "kind": "town",
+      "officeIds": [
+        "29443-town"
+      ],
+      "official": "https://www.town.shimoichi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/下市町"
+    },
+    "29444": {
+      "name": "黒滝村",
+      "kind": "village",
+      "officeIds": [
+        "29444-village"
+      ],
+      "official": "https://www.vill.kurotaki.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/黒滝村"
+    },
+    "29446": {
+      "name": "天川村",
+      "kind": "village",
+      "officeIds": [
+        "29446-village"
+      ],
+      "official": "https://www.vill.tenkawa.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/天川村"
+    },
+    "29447": {
+      "name": "野迫川村",
+      "kind": "village",
+      "officeIds": [
+        "29447-village"
+      ],
+      "official": "https://www.vill.nosegawa.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/野迫川村"
+    },
+    "29449": {
+      "name": "十津川村",
+      "kind": "village",
+      "officeIds": [
+        "29449-village"
+      ],
+      "official": "https://www.vill.totsukawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/十津川村"
+    },
+    "29450": {
+      "name": "下北山村",
+      "kind": "village",
+      "officeIds": [
+        "29450-village"
+      ],
+      "official": "https://www.vill.shimokitayama.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/下北山村"
+    },
+    "29451": {
+      "name": "上北山村",
+      "kind": "village",
+      "officeIds": [
+        "29451-village"
+      ],
+      "official": "https://vill.kamikitayama.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/上北山村"
+    },
+    "29452": {
+      "name": "川上村",
+      "kind": "village",
+      "officeIds": [
+        "29452-village"
+      ],
+      "official": "https://www.vill.kawakami.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/川上村"
+    },
+    "29453": {
+      "name": "東吉野村",
+      "kind": "village",
+      "officeIds": [
+        "29453-village"
+      ],
+      "official": "https://www.vill.higashiyoshino.nara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/東吉野村"
+    }
+  },
+  "offices": {
+    "29201-city": {
+      "name": "奈良市役所",
+      "kind": "cityHall",
+      "postalCode": "630-8580",
+      "address": "奈良県奈良市二条大路南一丁目1番1号",
+      "officialPage": "https://www.city.nara.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29202-city": {
+      "name": "大和高田市役所",
+      "kind": "cityHall",
+      "postalCode": "635-8511",
+      "address": "奈良県大和高田市大字大中98番地4",
+      "officialPage": "https://www.city.yamatotakada.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29203-city": {
+      "name": "大和郡山市役所",
+      "kind": "cityHall",
+      "postalCode": "639-1198",
+      "address": "奈良県大和郡山市北郡山町248-4",
+      "officialPage": "https://www.city.yamatokoriyama.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29204-city": {
+      "name": "天理市役所",
+      "kind": "cityHall",
+      "postalCode": "632-8555",
+      "address": "奈良県天理市川原城町605",
+      "officialPage": "https://www.city.tenri.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29205-city": {
+      "name": "橿原市役所",
+      "kind": "cityHall",
+      "postalCode": "634-8586",
+      "address": "奈良県橿原市八木町1-1-18",
+      "officialPage": "https://www.city.kashihara.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29206-city": {
+      "name": "桜井市役所",
+      "kind": "cityHall",
+      "postalCode": "633-8585",
+      "address": "奈良県桜井市大字粟殿432-1",
+      "officialPage": "https://www.city.sakurai.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29207-city": {
+      "name": "五條市役所",
+      "kind": "cityHall",
+      "postalCode": "637-8501",
+      "address": "奈良県五條市岡口1丁目3番1号",
+      "officialPage": "https://www.city.gojo.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29208-city": {
+      "name": "御所市役所",
+      "kind": "cityHall",
+      "postalCode": "639-2298",
+      "address": "奈良県御所市1番地の3",
+      "officialPage": "https://www.city.gose.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29209-city": {
+      "name": "生駒市役所",
+      "kind": "cityHall",
+      "postalCode": "630-0288",
+      "address": "奈良県生駒市東新町8番38号",
+      "officialPage": "https://www.city.ikoma.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29210-city": {
+      "name": "香芝市役所",
+      "kind": "cityHall",
+      "postalCode": "639-0292",
+      "address": "奈良県香芝市本町1397番地",
+      "officialPage": "https://www.city.kashiba.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29211-city": {
+      "name": "葛城市役所",
+      "kind": "cityHall",
+      "postalCode": "639-2195",
+      "address": "奈良県葛城市柿本166番地",
+      "officialPage": "https://www.city.katsuragi.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified",
+      "note": "県の所在地一覧に記載された新庄庁舎（代表）",
+      "sourceNote": "奈良県公式一覧は新庄庁舎を代表所在地として掲載"
+    },
+    "29212-city": {
+      "name": "宇陀市役所",
+      "kind": "cityHall",
+      "postalCode": "633-0292",
+      "address": "奈良県宇陀市榛原下井足17番地の3",
+      "officialPage": "https://www.city.uda.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29322-village": {
+      "name": "山添村役場",
+      "kind": "villageHall",
+      "postalCode": "630-2344",
+      "address": "奈良県山辺郡山添村大字大西151番地",
+      "officialPage": "https://www.vill.yamazoe.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29342-town": {
+      "name": "平群町役場",
+      "kind": "townHall",
+      "postalCode": "636-8585",
+      "address": "奈良県生駒郡平群町吉新1-1-1",
+      "officialPage": "https://www.town.heguri.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29343-town": {
+      "name": "三郷町役場",
+      "kind": "townHall",
+      "postalCode": "636-8535",
+      "address": "奈良県生駒郡三郷町勢野西1-1-1",
+      "officialPage": "https://www.town.sango.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29344-town": {
+      "name": "斑鳩町役場",
+      "kind": "townHall",
+      "postalCode": "636-0198",
+      "address": "奈良県生駒郡斑鳩町法隆寺西3丁目7番12号",
+      "officialPage": "https://www.town.ikaruga.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29345-town": {
+      "name": "安堵町役場",
+      "kind": "townHall",
+      "postalCode": "639-1095",
+      "address": "奈良県生駒郡安堵町大字東安堵958番地",
+      "officialPage": "https://www.town.ando.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29361-town": {
+      "name": "川西町役場",
+      "kind": "townHall",
+      "postalCode": "636-0202",
+      "address": "奈良県磯城郡川西町大字結崎28番地の1",
+      "officialPage": "https://www.town.nara-kawanishi.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29362-town": {
+      "name": "三宅町役場",
+      "kind": "townHall",
+      "postalCode": "636-0213",
+      "address": "奈良県磯城郡三宅町大字伴堂689番地",
+      "officialPage": "https://www.town.miyake.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29363-town": {
+      "name": "田原本町役場",
+      "kind": "townHall",
+      "postalCode": "636-0392",
+      "address": "奈良県磯城郡田原本町890-1",
+      "officialPage": "https://www.town.tawaramoto.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29385-village": {
+      "name": "曽爾村役場",
+      "kind": "villageHall",
+      "postalCode": "633-1212",
+      "address": "奈良県宇陀郡曽爾村今井495-1",
+      "officialPage": "https://www.vill.soni.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29386-village": {
+      "name": "御杖村役場",
+      "kind": "villageHall",
+      "postalCode": "633-1302",
+      "address": "奈良県宇陀郡御杖村大字菅野368",
+      "officialPage": "https://www.vill.mitsue.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29401-town": {
+      "name": "高取町役場",
+      "kind": "townHall",
+      "postalCode": "635-0154",
+      "address": "奈良県高市郡高取町観覚寺990-1",
+      "officialPage": "https://www.town.takatori.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29402-village": {
+      "name": "明日香村役場",
+      "kind": "villageHall",
+      "postalCode": "634-0142",
+      "address": "奈良県高市郡明日香村大字橘21番地",
+      "officialPage": "https://asukamura.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29424-town": {
+      "name": "上牧町役場",
+      "kind": "townHall",
+      "postalCode": "639-0293",
+      "address": "奈良県北葛城郡上牧町大字上牧3350",
+      "officialPage": "https://www.town.kanmaki.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29425-town": {
+      "name": "王寺町役場",
+      "kind": "townHall",
+      "postalCode": "636-8511",
+      "address": "奈良県北葛城郡王寺町王寺2丁目1-23",
+      "officialPage": "https://www.town.oji.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29426-town": {
+      "name": "広陵町役場",
+      "kind": "townHall",
+      "postalCode": "635-8515",
+      "address": "奈良県北葛城郡広陵町大字南郷583番地1",
+      "officialPage": "https://www.town.koryo.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29427-town": {
+      "name": "河合町役場",
+      "kind": "townHall",
+      "postalCode": "636-8501",
+      "address": "奈良県北葛城郡河合町池部1丁目1番1号",
+      "officialPage": "https://www.town.kawai.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29441-town": {
+      "name": "吉野町役場",
+      "kind": "townHall",
+      "postalCode": "639-3192",
+      "address": "奈良県吉野郡吉野町大字上市80番地の1",
+      "officialPage": "https://www.town.yoshino.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29442-town": {
+      "name": "大淀町役場",
+      "kind": "townHall",
+      "postalCode": "638-8501",
+      "address": "奈良県吉野郡大淀町大字桧垣本2090番地",
+      "officialPage": "https://www.town.oyodo.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29443-town": {
+      "name": "下市町役場",
+      "kind": "townHall",
+      "postalCode": "638-8510",
+      "address": "奈良県吉野郡下市町大字下市1960",
+      "officialPage": "https://www.town.shimoichi.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29444-village": {
+      "name": "黒滝村役場",
+      "kind": "villageHall",
+      "postalCode": "638-0292",
+      "address": "奈良県吉野郡黒滝村大字寺戸77番地",
+      "officialPage": "https://www.vill.kurotaki.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29446-village": {
+      "name": "天川村役場",
+      "kind": "villageHall",
+      "postalCode": "638-0392",
+      "address": "奈良県吉野郡天川村大字沢谷60番地",
+      "officialPage": "https://www.vill.tenkawa.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29447-village": {
+      "name": "野迫川村役場",
+      "kind": "villageHall",
+      "postalCode": "648-0392",
+      "address": "奈良県吉野郡野迫川村大字北股84番地",
+      "officialPage": "https://www.vill.nosegawa.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29449-village": {
+      "name": "十津川村役場",
+      "kind": "villageHall",
+      "postalCode": "637-1333",
+      "address": "奈良県吉野郡十津川村大字小原225-1",
+      "officialPage": "https://www.vill.totsukawa.lg.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29450-village": {
+      "name": "下北山村役場",
+      "kind": "villageHall",
+      "postalCode": "639-3803",
+      "address": "奈良県吉野郡下北山村大字寺垣内1002",
+      "officialPage": "https://www.vill.shimokitayama.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29451-village": {
+      "name": "上北山村役場",
+      "kind": "villageHall",
+      "postalCode": "639-3701",
+      "address": "奈良県吉野郡上北山村大字河合330",
+      "officialPage": "https://vill.kamikitayama.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29452-village": {
+      "name": "川上村役場",
+      "kind": "villageHall",
+      "postalCode": "639-3594",
+      "address": "奈良県吉野郡川上村大字迫1335番地の7",
+      "officialPage": "https://www.vill.kawakami.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    },
+    "29453-village": {
+      "name": "東吉野村役場",
+      "kind": "villageHall",
+      "postalCode": "633-2492",
+      "address": "奈良県吉野郡東吉野村大字小川99番地",
+      "officialPage": "https://www.vill.higashiyoshino.nara.jp/",
+      "sourceUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "sourcePostalUrl": "https://www.pref.nara.lg.jp/n006/9686.html",
+      "verifiedAt": "2026-11-01",
+      "status": "verified"
+    }
+  }
+}
