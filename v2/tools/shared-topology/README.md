@@ -36,7 +36,7 @@ node build.mjs --input /path/to/n03-2026-all.geojson --output ./generated \
   --quantization 1000000 --keep 0.02 --expect-prefectures 47
 ```
 
-出力：`generated/01.topojson` … `47.topojson` と `generated/manifest.json`。各府県ファイル内の共有アークは全国一括生成されたアークをそのままコピーします。量子化も簡素化も府県別には行いません。
+出力：`generated/01.topojson` … `47.topojson` と `generated/manifest.json`。生成後は `npm run validate` で、47ファイル間の共通アーク座標が一致することと地域コードが重複しないことを検査します。各府県ファイル内の共有アークは全国一括生成されたアークをそのままコピーします。量子化も簡素化も府県別には行いません。
 
 `--keep 0.02` は頂点を概ね2%残す**初期検討値**で、実際の完成品に適切かは未検証です。読みやすさ優先で飛び地や細い領域が欠けないか、1%、2%、5%などを比較して選択してください。生成スクリプトは小さな島を削除するフィルターを使いません。
 
@@ -49,7 +49,7 @@ node build.mjs --input /path/to/n03-2026-all.geojson --output ./generated \
 - 飛び地が消えない
 - 市区町村コード欠損のあるFeatureを黙って削除せず、生成を停止する
 
-生成時の `manifest.json` には府県ペアごとの共有アーク数を記録します。大阪・奈良の両方が入力にあるのに共有アークが0本なら生成を停止します。
+GitHub Actions (`.github/workflows/v2-common-topology.yml`) でも合成テストを実行します。生成時の `manifest.json` には府県ペアごとの共有アーク数を記録します。大阪・奈良の両方が入力にあるのに共有アークが0本なら生成を停止します。
 
 ## 本番投入前の追加監査（未実施）
 
