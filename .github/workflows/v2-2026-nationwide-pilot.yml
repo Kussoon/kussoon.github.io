@@ -6,6 +6,8 @@ on:
       - 'v2/tools/shared-topology/test-national-navigation.mjs'
       - 'v2/shared/place-labels.js'
       - 'v2/shared/test-place-labels.cjs'
+      - 'v2/shared/reading-bridge.js'
+      - 'v2/shared/test-reading-bridge.cjs'
       - 'v2/national/official-2026-nationwide-pilot.html'
       - '.github/workflows/v2-2026-nationwide-pilot.yml'
   workflow_dispatch:
@@ -68,6 +70,7 @@ jobs:
           node v2/shared/test-municipality-renderer.cjs
           node v2/shared/test-map-viewport.cjs
           node v2/shared/test-place-labels.cjs
+          node v2/shared/test-reading-bridge.cjs
           node v2/tools/shared-topology/test-national-navigation.mjs
       - name: Publish generated pilot assets to PR branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository

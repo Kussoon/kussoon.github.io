@@ -44,6 +44,10 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 <div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div>
 </div>
 <label class="label-toggle"><input type="checkbox" id="showNames">市区町村名を地図に表示する（選択中の地名は常時表示）</label>
+<div class="controls">
+<label>読み仮名の表示<select id="readingMode"><option value="on">漢字＋読み仮名</option><option value="off">漢字のみ</option></select></label>
+</div>
+<small id="readingCoverage">読み仮名は既存の確認済みデータを利用し、未収録・名称不一致の区域は漢字のみで表示します。</small>
 <div class="map-tools" role="group" aria-label="地図の操作">
 <button type="button" id="zoomIn">＋ 拡大</button>
 <button type="button" id="zoomOut">− 縮小</button>
@@ -66,10 +70,16 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 <script src="../shared/municipality-renderer.js"></script>
 <script src="../shared/map-viewport.js"></script>
 <script src="../shared/place-labels.js"></script>
+<script src="../shared/reading-bridge.js"></script>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=700;
 const base='../data/national/2026-common/',cache=new Map();
+let readingSourcePromise=null;
+async function getReadingSource(){
+ if(!readingSourcePromise)readingSourcePromise=fetch('../data/national/municipality-readings.json').then(res=>{if(!res.ok)throw Error('読み仮名データ HTTP '+res.status);return res.json();});
+ return readingSourcePromise;
+}
 const names=['','北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
 const nationBoxes={main:[122.7,24.0,146.2,46.1],all:[122.7,24.0,154.2,46.1]};
 let manifest=null,overview=null,current=null,requestId=0,mode='national';
@@ -111,14 +121,17 @@ function paint(){
  if(!current){
   drawOverview($('map'));$('locatorPanel').classList.remove('show');mode='national';activeProjection=null;
   $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('都道府県を選択してください',''));
+  $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
   $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
  }else{
   const selected=$('region').value,chosen=current.regions.find(r=>r.code===selected);
   const box=chosen?KussoonV2MunicipalRenderer.focusBounds(chosen.polys):current.box;
   activeProjection=project(box);
   KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.arcs,project:activeProjection,selected});
-  KussoonV2PlaceLabels.show({svg:$('map'),regions:current.regions,project:activeProjection,selected,all:$('showNames').checked});
+  KussoonV2PlaceLabels.show({svg:$('map'),regions:current.regions,project:activeProjection,selected,all:$('showNames').checked,readings:$('readingMode').value==='on'});
   $('prefBtn').disabled=false;$('region').disabled=false;
+  const cover=current.readingStats;
+  $('readingCoverage').textContent='読み仮名：'+cover.matched+'／'+cover.total+'区域で名称・コード照合済み（未収録 '+cover.missing+'、名称不一致 '+cover.mismatched+'）。未確認の読みは表示しません。';
   const pref=$('pref').value,region=chosen?' ＞ '+chosen.name:'';
   $('breadcrumb').textContent='日本全国 ＞ '+names[Number(pref)]+region;
   $('metrics').textContent=names[Number(pref)]+'：'+number(current.regions.length)+'区域、'+(current.bytes/1048576).toFixed(2)+'MB、初回読み込み・解析 '+current.ms.toFixed(0)+'ms';
@@ -134,7 +147,7 @@ function updateSearch(){
  if(!query)return;
  let results;
  if(current){
-  results=current.regions.filter(r=>KussoonV2PlaceLabels.matches(r,query)).map(r=>({name:r.name,code:r.code,kind:'region'}));
+  results=current.regions.filter(r=>KussoonV2PlaceLabels.matches(r,query)).map(r=>({name:r.name,reading:r.reading,code:r.code,kind:'region'}));
  }else{
   results=names.slice(1).map((name,i)=>({name,code:String(i+1).padStart(2,'0'),kind:'pref'}))
     .filter(r=>KussoonV2PlaceLabels.matches(r,query));
@@ -142,7 +155,7 @@ function updateSearch(){
  const shown=results.slice(0,35);
  for(const entry of shown){
   const button=document.createElement('button');button.type='button';
-  button.textContent=entry.kind==='region'?entry.name+'（'+entry.code+'）':entry.name;
+  button.textContent=entry.kind==='region'?entry.name+(entry.reading?'／'+entry.reading:'')+'（'+entry.code+'）':entry.name;
   button.addEventListener('click',()=>{
    if(entry.kind==='pref'){void goPref(entry.code);$('placeSearch').value='';host.replaceChildren();return;}
    $('region').value=entry.code;paint();$('status').textContent=entry.name+'を中央に表示しています。';
@@ -176,21 +189,26 @@ async function goPref(code){
    const codes=items.map(g=>String(g.properties?.N03_007));
    if(items.length!==meta.regions||codes.some(c=>c.length!==5||!c.startsWith(code))||new Set(codes).size!==items.length)throw Error('区域数か行政区域コードが不一致です');
    const arcs=arcDecode(t);
-   const regions=items.map(g=>({code:String(g.properties.N03_007),name:String(g.properties.N03_004),polys:geo(g,arcs)}));
+   const bareRegions=items.map(g=>({code:String(g.properties.N03_007),name:String(g.properties.N03_004),polys:geo(g,arcs)}));
+   let attached={regions:bareRegions,stats:{total:bareRegions.length,matched:0,missing:bareRegions.length,mismatched:0}};
+   try{attached=KussoonV2ReadingBridge.attach(bareRegions,await getReadingSource());}
+   catch(err){console.warn('読み仮名の取得に失敗したため漢字のみで表示します',err);}
+   const {regions}=attached;
    let b=[Infinity,Infinity,-Infinity,-Infinity];for(const r of regions){const q=bbox(r.polys);b=[Math.min(b[0],q[0]),Math.min(b[1],q[1]),Math.max(b[2],q[2]),Math.max(b[3],q[3])];}
-   entry={regions,arcs,box:b,ms:performance.now()-start,bytes:new TextEncoder().encode(raw).length};cache.set(code,entry);
+   entry={regions,arcs,box:b,readingStats:attached.stats,ms:performance.now()-start,bytes:new TextEncoder().encode(raw).length};cache.set(code,entry);
    // Avoid holding the whole country in memory on iPhone.
    if(cache.size>3){for(const key of cache.keys()){if(key!==code){cache.delete(key);break;}}}
   }
   if(id!==requestId)return;
   current=entry;
   const region=$('region');region.replaceChildren(new Option('選択なし',''));
-  for(const r of entry.regions)region.append(new Option(r.name+'（'+r.code+'）',r.code));
+  for(const r of entry.regions)region.append(new Option(r.name+(r.reading?'／'+r.reading:'')+'（'+r.code+'）',r.code));
   paint();$('status').textContent=names[Number(code)]+'を表示中です。市区町村を選べます。';
  }catch(e){if(id!==requestId)return;current=null;paint();$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
 }
 $('placeSearch').addEventListener('input',updateSearch);
-$('showNames').addEventListener('change',()=>{if(current&&activeProjection)KussoonV2PlaceLabels.show({svg:$('map'),regions:current.regions,project:activeProjection,selected:$('region').value,all:$('showNames').checked});});
+$('showNames').addEventListener('change',()=>{if(current&&activeProjection)KussoonV2PlaceLabels.show({svg:$('map'),regions:current.regions,project:activeProjection,selected:$('region').value,all:$('showNames').checked,readings:$('readingMode').value==='on'});});
+$('readingMode').addEventListener('change',()=>{if(current&&activeProjection)KussoonV2PlaceLabels.show({svg:$('map'),regions:current.regions,project:activeProjection,selected:$('region').value,all:$('showNames').checked,readings:$('readingMode').value==='on'});});
 $('pref').addEventListener('change',()=>{$('placeSearch').value='';goPref($('pref').value);});
 $('region').addEventListener('change',()=>{paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
 $('nationExtent').addEventListener('change',()=>{if(overview){if(current)drawOverview($('locator'),$('pref').value,true);else paint();}});

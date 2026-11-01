@@ -103,29 +103,28 @@ function show(options){
   if(!Number.isFinite(x)||!Number.isFinite(y))continue;
   const group=document.createElementNS(NS,'g');
   group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')');
-  const title=document.createElementNS(NS,'text');
-  title.setAttribute('text-anchor','middle');
-  title.setAttribute('paint-order','stroke');
-  title.setAttribute('stroke','#fff');
-  title.setAttribute('stroke-width',region.code===selected?'4':'3');
-  title.setAttribute('stroke-linejoin','round');
-  title.setAttribute('fill','#173b56');
-  title.setAttribute('font-size',region.code===selected?'18':'14');
-  title.setAttribute('font-weight',region.code===selected?'700':'600');
-  title.setAttribute('y',readings&&region.reading?'-5':'5');
-  title.textContent=region.name;
-  group.append(title);
-  if(readings&&region.reading){
-   const sub=document.createElementNS(NS,'text');
-   sub.setAttribute('text-anchor','middle');
-   sub.setAttribute('paint-order','stroke');
-   sub.setAttribute('stroke','#fff');
-   sub.setAttribute('stroke-width','3');
-   sub.setAttribute('fill','#173b56');
-   sub.setAttribute('font-size','11');
-   sub.setAttribute('y','12');
-   sub.textContent=region.reading;
-   group.append(sub);
+  const hasReading=readings&&region.reading;
+  const parts=hasReading&&Array.isArray(region.readingParts)&&region.readingParts.length===2?region.readingParts:null;
+  const rows=parts?[
+   {text:parts[0].name,small:false,y:-21},
+   {text:parts[0].reading,small:true,y:-8},
+   {text:parts[1].name,small:false,y:8},
+   {text:parts[1].reading,small:true,y:21}
+  ]:[{text:region.name,small:false,y:5}];
+  if(hasReading&&!parts)rows.push({text:region.reading,small:true,y:19});
+  for(const row of rows){
+   const t=document.createElementNS(NS,'text');
+   t.setAttribute('text-anchor','middle');
+   t.setAttribute('paint-order','stroke');
+   t.setAttribute('stroke','#fff');
+   t.setAttribute('stroke-width',region.code===selected?'4':'3');
+   t.setAttribute('stroke-linejoin','round');
+   t.setAttribute('fill','#173b56');
+   t.setAttribute('font-size',row.small?'11':region.code===selected?'18':'14');
+   t.setAttribute('font-weight',row.small?'600':region.code===selected?'700':'600');
+   t.setAttribute('y',String(row.y));
+   t.textContent=row.text;
+   group.append(t);
   }
   layer.append(group);count++;
  }
