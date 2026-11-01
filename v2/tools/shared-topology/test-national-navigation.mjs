@@ -9,11 +9,12 @@ import assert from 'node:assert/strict';
 const root=process.cwd(),page=await readFile('v2/national/official-2026-nationwide-pilot.html','utf8');
 const callbacks=new Map(),nodes=new Map(),viewEvents=new Map();
 function element(tag='div',id=''){
- return {tag,id,value:'',textContent:'',disabled:false,style:{},dataset:{},attrs:{},children:[],
+ return {tag,id,value:'',textContent:'',disabled:false,checked:false,style:{},dataset:{},attrs:{},children:[],
   classList:{add(){},remove(){}},
   setAttribute(k,v){this.attrs[k]=v;},
   append(child){this.children.push(child);},
   replaceChildren(...next){this.children=next;},
+  querySelector(){return null;},
   addEventListener(event,callback){callbacks.set((this.id||tag)+':'+event,callback);},
   getBoundingClientRect(){return {left:0,top:0,width:850,height:700};}
  };
@@ -33,6 +34,7 @@ const KussoonV2MunicipalRenderer={
  render(opts){lastRender={count:opts.regions.length,selected:opts.selected};},
  focusBounds(){return [135,35,135.5,35.5];}
 };
+const KussoonV2PlaceLabels={matches(r,q){return r.name.includes(q)||r.code.includes(q);},show(){}};
 const KussoonV2MapViewport={init({onZoomChange}){onZoomChange(1);return {reset(){onZoomChange(1);},zoomIn(){},zoomOut(){}};}};
 const fakeFetch=async url=>{
  const file=resolve(root,'v2/national',url);
@@ -42,7 +44,7 @@ const fakeFetch=async url=>{
  return {ok:true,status:200,text:async()=>content,json:async()=>JSON.parse(content)};
 };
 const script=page.split('<script>').at(-1).split('</script>')[0];
-const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
+const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
 vm.runInNewContext(script,context);
 async function until(predicate,label){
  for(let i=0;i<200;i++){
@@ -66,6 +68,9 @@ async function selectPref(code,count){
 }
 await selectPref('16',15); // Regression: do not reject prefectures under 20 municipalities.
 await selectPref('25',19); // Regression: load a newly extracted combined-prefecture slice.
+node('placeSearch').value='大津';
+callbacks.get('placeSearch:input')();
+assert(node('searchResults').children.length>0,'search result did not appear');
 const region=node('region');region.value=region.children[1].value;
 callbacks.get('region:change')();
 assert(lastRender.selected,'municipality selection did not highlight region');
