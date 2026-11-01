@@ -87,6 +87,8 @@ def convert(code):
             for child in geometry.get("geometries", []):
                 result.extend(collect_polygons(child))
             return result
+        if kind in ("LineString", "MultiLineString", "Point", "MultiPoint"):
+            return []  # Non-area components cannot form municipality polygons.
         raise RuntimeError(f"Unsupported source geometry {kind} in prefecture {code}")
 
     normalized = 0
@@ -94,7 +96,7 @@ def convert(code):
         if (feature.get("geometry") or {}).get("type") == "GeometryCollection":
             polygons = collect_polygons(feature["geometry"])
             if not polygons:
-                raise RuntimeError(f"Empty GeometryCollection in prefecture {code}")
+                raise RuntimeError(f"GeometryCollection has no area geometry in prefecture {code}")
             feature["geometry"] = {"type": "MultiPolygon", "coordinates": polygons}
             normalized += 1
     print(f"Prefecture {code}: normalized {normalized} GeometryCollection features", flush=True)
