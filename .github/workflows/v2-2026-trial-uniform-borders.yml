@@ -1,0 +1,43 @@
+name: V2 2026 trial municipal border rendering regression
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-kyushu-prefecture-20m-trial.html'
+      - 'v2/national/official-2026-kyushu-okinawa-eight-20m-trial.html'
+      - 'v2/national/official-2026-kinki-six-20m-trial.html'
+      - 'v2/national/official-2026-chugoku-shikoku-nine-20m-trial.html'
+      - 'v2/national/official-2026-shikoku-four-20m-trial.html'
+      - 'v2/national/official-2026-hyogo-wakayama-20m-trial.html'
+      - 'v2/national/official-2026-shiga-kyoto-20m-trial.html'
+      - '.github/workflows/v2-2026-trial-uniform-borders.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify all seven 2026 trials use a single border layer
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          names=['kyushu-prefecture','kyushu-okinawa-eight','kinki-six','chugoku-shikoku-nine','shikoku-four','hyogo-wakayama','shiga-kyoto']
+          for name in names:
+              page=Path('v2/national/official-2026-'+name+'-20m-trial.html')
+              text=page.read_text()
+              script=text.split('<script>')[-1].split('</script>')[0]
+              Path('/tmp/check-'+name+'.js').write_text(script)
+              assert 'selected-outline' not in text and "class:'sel'" not in script, name
+              if name.startswith('kyushu'):
+                  assert '.land{fill:#add9ef;stroke:none' in text, name
+                  assert '.land.chosen{fill:#ffc476}' in text, name
+                  assert "outline(current.arcs,proj)" in script, name
+                  assert 'item={regions,arcs,box:b,' in script, name
+              else:
+                  assert '.land{fill:#a8d5eb;stroke:none' in text, name
+                  assert "topojson.mesh(t,obj,()=>true)" in script, name
+                  assert "class:'municipal-borders'" in script, name
+                  assert "class:'pref'" in script, name
+              print('PASS',name,'unified municipality border rendering')
+          PY
+          for f in /tmp/check-*.js; do node --check "$f"; done
