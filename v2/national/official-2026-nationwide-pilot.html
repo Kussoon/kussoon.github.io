@@ -124,7 +124,12 @@ function bbox(polys){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const
 function drawLabels(){
  if(!current||!activeProjection)return;
  const selected=$('region').value,all=$('showNames').checked,readings=$('readingMode').value==='on';
- const positions=KussoonV2EstablishedLabelAdapter.layout({regions:current.regions,project:activeProjection,selected,all,readings});
+ let positions=null;
+ try{
+  positions=KussoonV2EstablishedLabelAdapter.layout({regions:current.regions,project:activeProjection,selected,all,readings});
+ }catch(error){
+  console.warn('従来V2ラベル計算を適用できず、簡易表示に切り替えます',error);
+ }
  KussoonV2PlaceLabels.show({svg:$('map'),regions:current.regions,project:activeProjection,selected,all,readings,positions});
 }
 function paint(){
