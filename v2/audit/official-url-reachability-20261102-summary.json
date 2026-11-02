@@ -1,0 +1,1520 @@
+{
+  "asOf": "2026-11-02",
+  "registeredRegions": 1912,
+  "uniqueUrls": 1792,
+  "counts": {
+    "network_or_other": 69,
+    "reachable": 1713,
+    "restricted": 3,
+    "server_error": 7
+  },
+  "crossHostRedirects": 20,
+  "reviewItemsTotal": 99,
+  "reviewItems": [
+    {
+      "url": "https://asukamura.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.asukamura.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "29",
+          "code": "29402",
+          "name": "明日香村"
+        }
+      ]
+    },
+    {
+      "url": "https://hirayamura.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.hirayamura.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20409",
+          "name": "平谷村"
+        }
+      ]
+    },
+    {
+      "url": "https://mombetsu.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01219",
+          "name": "紋別市"
+        }
+      ]
+    },
+    {
+      "url": "https://nebamura.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.nebamura.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20410",
+          "name": "根羽村"
+        }
+      ]
+    },
+    {
+      "url": "https://shirakawa-go.org/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'shirakawa-go.org'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "21",
+          "code": "21604",
+          "name": "白川村"
+        }
+      ]
+    },
+    {
+      "url": "https://town.higashikawa.hokkaido.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://higashikawa-town.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01458",
+          "name": "東川町"
+        }
+      ]
+    },
+    {
+      "url": "https://town.nagawa.nagano.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.town.nagawa.nagano.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20350",
+          "name": "長和町"
+        }
+      ]
+    },
+    {
+      "url": "https://town.tohma.hokkaido.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.town.tohma.hokkaido.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01454",
+          "name": "当麻町"
+        }
+      ]
+    },
+    {
+      "url": "https://vill.kamikitayama.nara.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.vill.kamikitayama.nara.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "29",
+          "code": "29451",
+          "name": "上北山村"
+        }
+      ]
+    },
+    {
+      "url": "https://vill.kitaaiki.nagano.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20307",
+          "name": "北相木村"
+        }
+      ]
+    },
+    {
+      "url": "https://vill.yasuoka.nagano.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.vill.yasuoka.nagano.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20414",
+          "name": "泰阜村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.gobo.wakayama.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "30",
+          "code": "30205",
+          "name": "御坊市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.hyuga.miyazaki.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno 111] Connection refused>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "45",
+          "code": "45206",
+          "name": "日向市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.ibusuki.lg.jp/",
+      "status": 503,
+      "result": "server_error",
+      "finalUrl": "https://www.city.ibusuki.lg.jp/",
+      "error": "Service Temporarily Unavailable",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "46",
+          "code": "46210",
+          "name": "指宿市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.imari.saga.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.city.imari.lg.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "41",
+          "code": "41205",
+          "name": "伊万里市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.kainan.wakayama.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "30",
+          "code": "30202",
+          "name": "海南市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.kanzaki.saga.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "41",
+          "code": "41210",
+          "name": "神埼市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.kitaakita.akita.jp/",
+      "status": 403,
+      "result": "restricted",
+      "finalUrl": "https://www.city.kitaakita.akita.jp/",
+      "error": "Forbidden",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "05",
+          "code": "05213",
+          "name": "北秋田市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.kofu.yamanashi.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.city.kofu.lg.jp/index.html",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "19",
+          "code": "19201",
+          "name": "甲府市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.kuji.iwate.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "03",
+          "code": "03207",
+          "name": "久慈市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.kumano.mie.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "24",
+          "code": "24212",
+          "name": "熊野市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nakatsugawa.gifu.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.city.nakatsugawa.gifu.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "21",
+          "code": "21206",
+          "name": "中津川市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nanyo.yamagata.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.city.nanyo.yamagata.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "06",
+          "code": "06213",
+          "name": "南陽市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.naruto.tokushima.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.city.naruto.lg.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "36",
+          "code": "36202",
+          "name": "鳴門市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nayoro.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01221",
+          "name": "名寄市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nogata.fukuoka.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "40",
+          "code": "40204",
+          "name": "直方市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.nomi.ishikawa.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.city.nomi.lg.jp/index.html",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "17",
+          "code": "17211",
+          "name": "能美市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.ohtawara.tochigi.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "09",
+          "code": "09210",
+          "name": "大田原市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.saga-kashima.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "41",
+          "code": "41207",
+          "name": "鹿島市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.saitama.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.city.saitama.lg.jp/",
+      "error": null,
+      "regionCount": 11,
+      "regions": [
+        {
+          "pref": "11",
+          "code": "11100",
+          "name": "さいたま市"
+        },
+        {
+          "pref": "11",
+          "code": "11101",
+          "name": "さいたま市西区"
+        },
+        {
+          "pref": "11",
+          "code": "11102",
+          "name": "さいたま市北区"
+        },
+        {
+          "pref": "11",
+          "code": "11103",
+          "name": "さいたま市大宮区"
+        },
+        {
+          "pref": "11",
+          "code": "11104",
+          "name": "さいたま市見沼区"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.seki.gifu.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.city.seki.gifu.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "21",
+          "code": "21205",
+          "name": "関市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.shimanto.lg.jp/",
+      "status": 503,
+      "result": "server_error",
+      "finalUrl": "https://www.city.shimanto.lg.jp/",
+      "error": "Service Unavailable",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "39",
+          "code": "39210",
+          "name": "四万十市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.takikawa.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01225",
+          "name": "滝川市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.tomioka.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_ALERT_INSUFFICIENT_SECURITY] tlsv1 alert insufficient security (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "10",
+          "code": "10210",
+          "name": "富岡市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.uda.nara.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "29",
+          "code": "29212",
+          "name": "宇陀市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.city.yamatokoriyama.nara.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "29",
+          "code": "29203",
+          "name": "大和郡山市"
+        }
+      ]
+    },
+    {
+      "url": "https://www.higashinaruse.com/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://vill.higashinaruse.lg.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "05",
+          "code": "05464",
+          "name": "東成瀬村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.kuromatsunai.com/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01393",
+          "name": "黒松内町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.nanmoku.ne.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "10",
+          "code": "10383",
+          "name": "南牧村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.samani.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01608",
+          "name": "様似町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.anan.nagano.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.anan.nagano.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20404",
+          "name": "阿南町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.chippubetsu.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01434",
+          "name": "秩父別町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.hamatonbetsu.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01512",
+          "name": "浜頓別町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.happou.akita.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "05",
+          "code": "05349",
+          "name": "八峰町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.higashiizu.shizuoka.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "22",
+          "code": "22301",
+          "name": "東伊豆町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.iide.yamagata.jp/",
+      "status": 502,
+      "result": "server_error",
+      "finalUrl": "https://www.town.iide.yamagata.jp/",
+      "error": "Bad Gateway",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "06",
+          "code": "06403",
+          "name": "飯豊町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.ikeda.gifu.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "21",
+          "code": "21404",
+          "name": "池田町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.itano.tokushima.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.itano.tokushima.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "36",
+          "code": "36404",
+          "name": "板野町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.iwate.iwate.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://town.iwate.iwate.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "03",
+          "code": "03303",
+          "name": "岩手町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kanra.gunma.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.kanra.gunma.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "10",
+          "code": "10384",
+          "name": "甘楽町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kiyosato.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01546",
+          "name": "清里町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kouhoku.saga.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "41",
+          "code": "41424",
+          "name": "江北町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kozagawa.wakayama.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.kozagawa.wakayama.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "30",
+          "code": "30424",
+          "name": "古座川町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kudoyama.wakayama.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "30",
+          "code": "30343",
+          "name": "九度山町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kumiyama.kyoto.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.kumiyama.kyoto.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "26",
+          "code": "26322",
+          "name": "久御山町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kushiro.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01661",
+          "name": "釧路町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kuzumaki.iwate.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.town.kuzumaki.lg.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "03",
+          "code": "03302",
+          "name": "葛巻町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.kyowa.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01401",
+          "name": "共和町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.matsushima.miyagi.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "04",
+          "code": "04401",
+          "name": "松島町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.mihama.wakayama.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "30",
+          "code": "30381",
+          "name": "美浜町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.minamiise.mie.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.town.minamiise.lg.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "24",
+          "code": "24472",
+          "name": "南伊勢町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.minamitane.kagoshima.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "46",
+          "code": "46502",
+          "name": "南種子町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.misaki.okayama.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.town.okayama-misaki.lg.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "33",
+          "code": "33666",
+          "name": "美咲町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.miyaki.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "41",
+          "code": "41346",
+          "name": "みやき町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.mogami.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "06",
+          "code": "06362",
+          "name": "最上町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.onjuku.chiba.jp/",
+      "status": 503,
+      "result": "server_error",
+      "finalUrl": "https://www.town.onjuku.chiba.jp/",
+      "error": "Service Unavailable",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "12",
+          "code": "12443",
+          "name": "御宿町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.owani.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "02",
+          "code": "02362",
+          "name": "大鰐町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.rankoshi.hokkaido.jp/",
+      "status": 403,
+      "result": "restricted",
+      "finalUrl": "https://www.town.rankoshi.hokkaido.jp/",
+      "error": "Forbidden",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01394",
+          "name": "蘭越町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.rishiri.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01518",
+          "name": "利尻町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.setana.lg.jp/",
+      "status": 503,
+      "result": "server_error",
+      "finalUrl": "https://www.town.setana.lg.jp/",
+      "error": "Service Unavailable",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01371",
+          "name": "せたな町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.shakotan.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01405",
+          "name": "積丹町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.shibecha.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01664",
+          "name": "標茶町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.shimane-misato.lg.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://gov.town.shimane-misato.lg.jp/",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "32",
+          "code": "32448",
+          "name": "美郷町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.shiroishi.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "41",
+          "code": "41425",
+          "name": "白石町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.suttu.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01392",
+          "name": "寿都町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.taka.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "28",
+          "code": "28365",
+          "name": "多可町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.takamori.kumamoto.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "43",
+          "code": "43428",
+          "name": "高森町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.takko.aomori.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.takko.aomori.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "02",
+          "code": "02443",
+          "name": "田子町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.tomamae.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01483",
+          "name": "苫前町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.toyako.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01584",
+          "name": "洞爺湖町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.toyo.kochi.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "39",
+          "code": "39301",
+          "name": "東洋町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.urakawa.hokkaido.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01607",
+          "name": "浦河町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.wakayama-hidaka.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "30",
+          "code": "30382",
+          "name": "日高町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.wakuya.miyagi.jp/",
+      "status": 502,
+      "result": "server_error",
+      "finalUrl": "https://www.town.wakuya.miyagi.jp/",
+      "error": "Bad Gateway",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "04",
+          "code": "04501",
+          "name": "涌谷町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.yokoze.saitama.jp/",
+      "status": 403,
+      "result": "restricted",
+      "finalUrl": "https://www.town.yokoze.saitama.jp/",
+      "error": "Forbidden",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "11",
+          "code": "11361",
+          "name": "横瀬町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.yura.wakayama.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "30",
+          "code": "30383",
+          "name": "由良町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.town.yusuhara.kochi.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno 111] Connection refused>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "39",
+          "code": "39405",
+          "name": "梼原町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.urahoro.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "TimeoutError: The read operation timed out",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "01",
+          "code": "01649",
+          "name": "浦幌町"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.aogashima.tokyo.jp/",
+      "status": 503,
+      "result": "server_error",
+      "finalUrl": "https://www.vill.aogashima.tokyo.jp/",
+      "error": "Service Temporarily Unavailable",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "13",
+          "code": "13402",
+          "name": "青ヶ島村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.chibu.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "32",
+          "code": "32527",
+          "name": "知夫村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.doshi.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "19",
+          "code": "19422",
+          "name": "道志村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.higashidoori.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "02",
+          "code": "02424",
+          "name": "東通村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.higashiyoshino.nara.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.vill.higashiyoshino.nara.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "29",
+          "code": "29453",
+          "name": "東吉野村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.inakadate.lg.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "02",
+          "code": "02367",
+          "name": "田舎館村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.kosuge.yamanashi.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error timed out>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "19",
+          "code": "19442",
+          "name": "小菅村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.okuwa.nagano.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [Errno -2] Name or service not known>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20430",
+          "name": "大桑村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.sakae.nagano.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.vill.sakae.nagano.jp'. (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "20",
+          "code": "20602",
+          "name": "栄村"
+        }
+      ]
+    },
+    {
+      "url": "https://www.vill.shinjo.okayama.jp/",
+      "status": null,
+      "result": "network_or_other",
+      "finalUrl": null,
+      "error": "URLError: <urlopen error [SSL] record layer failure (_ssl.c:1010)>",
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "33",
+          "code": "33586",
+          "name": "新庄村"
+        }
+      ]
+    },
+    {
+      "url": "https://www5.city.yokkaichi.mie.jp/",
+      "status": 200,
+      "result": "reachable",
+      "finalUrl": "https://www.city.yokkaichi.lg.jp/www/index.html",
+      "error": null,
+      "regionCount": 1,
+      "regions": [
+        {
+          "pref": "24",
+          "code": "24202",
+          "name": "四日市市"
+        }
+      ]
+    }
+  ]
+}
