@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "36",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.tokushima.lg.jp/kenseijoho/kanrennochiiki/shichouson/",
+    "https://www.j-lis.go.jp/spd/code-address/shikoku/cms_15714186.html"
+  ],
+  "regions": {
+    "36201": {
+      "name": "徳島市",
+      "kind": "city",
+      "officeIds": [
+        "36201-city"
+      ],
+      "official": "https://www.city.tokushima.tokushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E5%BE%B3%E5%B3%B6%E5%B8%82"
+    },
+    "36202": {
+      "name": "鳴門市",
+      "kind": "city",
+      "officeIds": [
+        "36202-city"
+      ],
+      "official": "https://www.city.naruto.tokushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E9%B3%B4%E9%96%80%E5%B8%82"
+    },
+    "36203": {
+      "name": "小松島市",
+      "kind": "city",
+      "officeIds": [
+        "36203-city"
+      ],
+      "official": "https://www.city.komatsushima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E5%B0%8F%E6%9D%BE%E5%B3%B6%E5%B8%82"
+    },
+    "36204": {
+      "name": "阿南市",
+      "kind": "city",
+      "officeIds": [
+        "36204-city"
+      ],
+      "official": "https://www.city.anan.tokushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E9%98%BF%E5%8D%97%E5%B8%82"
+    },
+    "36205": {
+      "name": "吉野川市",
+      "kind": "city",
+      "officeIds": [
+        "36205-city"
+      ],
+      "official": "https://www.city.yoshinogawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E5%90%89%E9%87%8E%E5%B7%9D%E5%B8%82"
+    },
+    "36206": {
+      "name": "阿波市",
+      "kind": "city",
+      "officeIds": [
+        "36206-city"
+      ],
+      "official": "https://www.city.awa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E9%98%BF%E6%B3%A2%E5%B8%82"
+    },
+    "36207": {
+      "name": "美馬市",
+      "kind": "city",
+      "officeIds": [
+        "36207-city"
+      ],
+      "official": "https://www.city.mima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E7%BE%8E%E9%A6%AC%E5%B8%82"
+    },
+    "36208": {
+      "name": "三好市",
+      "kind": "city",
+      "officeIds": [
+        "36208-city"
+      ],
+      "official": "https://www.miyoshi.i-tokushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E4%B8%89%E5%A5%BD%E5%B8%82"
+    },
+    "36301": {
+      "name": "勝浦町",
+      "kind": "town",
+      "officeIds": [
+        "36301-town"
+      ],
+      "official": "https://www.town.katsuura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E5%8B%9D%E6%B5%A6%E7%94%BA"
+    },
+    "36302": {
+      "name": "上勝町",
+      "kind": "town",
+      "officeIds": [
+        "36302-town"
+      ],
+      "official": "https://www.kamikatsu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E4%B8%8A%E5%8B%9D%E7%94%BA"
+    },
+    "36321": {
+      "name": "佐那河内村",
+      "kind": "village",
+      "officeIds": [
+        "36321-village"
+      ],
+      "official": "https://www.vill.sanagochi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E4%BD%90%E9%82%A3%E6%B2%B3%E5%86%85%E6%9D%91"
+    },
+    "36341": {
+      "name": "石井町",
+      "kind": "town",
+      "officeIds": [
+        "36341-town"
+      ],
+      "official": "https://www.town.ishii.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E7%9F%B3%E4%BA%95%E7%94%BA"
+    },
+    "36342": {
+      "name": "神山町",
+      "kind": "town",
+      "officeIds": [
+        "36342-town"
+      ],
+      "official": "https://www.town.kamiyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E7%A5%9E%E5%B1%B1%E7%94%BA"
+    },
+    "36368": {
+      "name": "那賀町",
+      "kind": "town",
+      "officeIds": [
+        "36368-town"
+      ],
+      "official": "https://www.town.tokushima-naka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E9%82%A3%E8%B3%80%E7%94%BA"
+    },
+    "36383": {
+      "name": "牟岐町",
+      "kind": "town",
+      "officeIds": [
+        "36383-town"
+      ],
+      "official": "https://www.town.tokushima-mugi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E7%89%9F%E5%B2%90%E7%94%BA"
+    },
+    "36387": {
+      "name": "美波町",
+      "kind": "town",
+      "officeIds": [
+        "36387-town"
+      ],
+      "official": "https://www.town.minami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E7%BE%8E%E6%B3%A2%E7%94%BA"
+    },
+    "36388": {
+      "name": "海陽町",
+      "kind": "town",
+      "officeIds": [
+        "36388-town"
+      ],
+      "official": "https://www.town.kaiyo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E6%B5%B7%E9%99%BD%E7%94%BA"
+    },
+    "36401": {
+      "name": "松茂町",
+      "kind": "town",
+      "officeIds": [
+        "36401-town"
+      ],
+      "official": "https://www.town.matsushige.tokushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E6%9D%BE%E8%8C%82%E7%94%BA"
+    },
+    "36402": {
+      "name": "北島町",
+      "kind": "town",
+      "officeIds": [
+        "36402-town"
+      ],
+      "official": "https://www.town.kitajima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E5%8C%97%E5%B3%B6%E7%94%BA"
+    },
+    "36403": {
+      "name": "藍住町",
+      "kind": "town",
+      "officeIds": [
+        "36403-town"
+      ],
+      "official": "https://www.town.aizumi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E8%97%8D%E4%BD%8F%E7%94%BA"
+    },
+    "36404": {
+      "name": "板野町",
+      "kind": "town",
+      "officeIds": [
+        "36404-town"
+      ],
+      "official": "https://www.town.itano.tokushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E6%9D%BF%E9%87%8E%E7%94%BA"
+    },
+    "36405": {
+      "name": "上板町",
+      "kind": "town",
+      "officeIds": [
+        "36405-town"
+      ],
+      "official": "https://www.townkamiita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E4%B8%8A%E6%9D%BF%E7%94%BA"
+    },
+    "36468": {
+      "name": "つるぎ町",
+      "kind": "town",
+      "officeIds": [
+        "36468-town"
+      ],
+      "official": "https://www.town.tokushima-tsurugi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E3%81%A4%E3%82%8B%E3%81%8E%E7%94%BA"
+    },
+    "36489": {
+      "name": "東みよし町",
+      "kind": "town",
+      "officeIds": [
+        "36489-town"
+      ],
+      "official": "https://www.town.higashimiyoshi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BE%B3%E5%B3%B6%E7%9C%8C%E6%9D%B1%E3%81%BF%E3%82%88%E3%81%97%E7%94%BA"
+    }
+  },
+  "offices": {
+    "36201-city": {
+      "name": "徳島市役所",
+      "status": "verified",
+      "postalCode": "770-8571",
+      "address": "徳島県徳島市幸町2-5"
+    },
+    "36202-city": {
+      "name": "鳴門市役所",
+      "status": "verified",
+      "postalCode": "772-8501",
+      "address": "徳島県鳴門市撫養町南浜字東浜170"
+    },
+    "36203-city": {
+      "name": "小松島市役所",
+      "status": "verified",
+      "postalCode": "773-8501",
+      "address": "徳島県小松島市横須町1-1"
+    },
+    "36204-city": {
+      "name": "阿南市役所",
+      "status": "verified",
+      "postalCode": "774-8501",
+      "address": "徳島県阿南市富岡町トノ町12-3"
+    },
+    "36205-city": {
+      "name": "吉野川市役所",
+      "status": "verified",
+      "postalCode": "776-8611",
+      "address": "徳島県吉野川市鴨島町鴨島115-1"
+    },
+    "36206-city": {
+      "name": "阿波市役所",
+      "status": "verified",
+      "postalCode": "771-1695",
+      "address": "徳島県阿波市市場町切幡字古田201番地1"
+    },
+    "36207-city": {
+      "name": "美馬市役所",
+      "status": "verified",
+      "postalCode": "777-8577",
+      "address": "徳島県美馬市穴吹町穴吹字九反地5"
+    },
+    "36208-city": {
+      "name": "三好市役所",
+      "status": "verified",
+      "postalCode": "778-8501",
+      "address": "徳島県三好市池田町サラダ1610番地1"
+    },
+    "36301-town": {
+      "name": "勝浦町役場",
+      "status": "verified",
+      "postalCode": "771-4395",
+      "address": "徳島県勝浦郡勝浦町大字久国字久保田3"
+    },
+    "36302-town": {
+      "name": "上勝町役場",
+      "status": "verified",
+      "postalCode": "771-4501",
+      "address": "徳島県勝浦郡上勝町大字福原字下横峯3-1"
+    },
+    "36321-village": {
+      "name": "佐那河内村役場",
+      "status": "verified",
+      "postalCode": "771-4195",
+      "address": "徳島県名東郡佐那河内村下字西ノハナ31番地"
+    },
+    "36341-town": {
+      "name": "石井町役場",
+      "status": "verified",
+      "postalCode": "779-3295",
+      "address": "徳島県名西郡石井町高川原字高川原121-1"
+    },
+    "36342-town": {
+      "name": "神山町役場",
+      "status": "verified",
+      "postalCode": "771-3395",
+      "address": "徳島県名西郡神山町神領字本野間100"
+    },
+    "36368-town": {
+      "name": "那賀町役場",
+      "status": "verified",
+      "postalCode": "771-5295",
+      "address": "徳島県那賀郡那賀町和食郷字南川104-1"
+    },
+    "36383-town": {
+      "name": "牟岐町役場",
+      "status": "verified",
+      "postalCode": "775-8570",
+      "address": "徳島県海部郡牟岐町大字中村字本村7-4"
+    },
+    "36387-town": {
+      "name": "美波町役場",
+      "status": "verified",
+      "postalCode": "779-2395",
+      "address": "徳島県海部郡美波町奥河内字本村18-1"
+    },
+    "36388-town": {
+      "name": "海陽町役場",
+      "status": "verified",
+      "postalCode": "775-0295",
+      "address": "徳島県海部郡海陽町大里字上中須128"
+    },
+    "36401-town": {
+      "name": "松茂町役場",
+      "status": "verified",
+      "postalCode": "771-0295",
+      "address": "徳島県板野郡松茂町広島字東裏30"
+    },
+    "36402-town": {
+      "name": "北島町役場",
+      "status": "verified",
+      "postalCode": "771-0285",
+      "address": "徳島県板野郡北島町中村字上地23-1"
+    },
+    "36403-town": {
+      "name": "藍住町役場",
+      "status": "verified",
+      "postalCode": "771-1292",
+      "address": "徳島県板野郡藍住町奥野字矢上前52-1"
+    },
+    "36404-town": {
+      "name": "板野町役場",
+      "status": "verified",
+      "postalCode": "779-0192",
+      "address": "徳島県板野郡板野町吹田字町南22-2"
+    },
+    "36405-town": {
+      "name": "上板町役場",
+      "status": "verified",
+      "postalCode": "771-1392",
+      "address": "徳島県板野郡上板町七條字経塚42"
+    },
+    "36468-town": {
+      "name": "つるぎ町役場",
+      "status": "verified",
+      "postalCode": "779-4195",
+      "address": "徳島県美馬郡つるぎ町貞光字東浦1-3"
+    },
+    "36489-town": {
+      "name": "東みよし町役場",
+      "status": "verified",
+      "postalCode": "779-4795",
+      "address": "徳島県三好郡東みよし町加茂3360"
+    }
+  }
+}
