@@ -62,7 +62,7 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         run: |
           mkdir -p v2/data/national/2026-common/national-shared-border-pilot
-          cp "$RUNNER_TEMP/national-border-pilot/"*.json v2/data/national/2026-common/national-shared-border-pilot/
+          cp "$RUNNER_TEMP/national-border-pilot/"* v2/data/national/2026-common/national-shared-border-pilot/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add v2/data/national/2026-common/national-shared-border-pilot/
