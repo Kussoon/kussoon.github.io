@@ -343,6 +343,7 @@ $('prefBtn').addEventListener('click',()=>{if(!current)return;$('region').value=
 $('zoomIn').addEventListener('click',()=>viewport.zoomIn());
 $('zoomOut').addEventListener('click',()=>viewport.zoomOut());
 $('zoomReset').addEventListener('click',()=>viewport.reset());
+$('popupClose').addEventListener('click',()=>{dismissedPopupCode=$('region').value;$('officePopup').hidden=true;});
 $('map').addEventListener('click',e=>{
  if(quizSession)return;
  const target=e.target.closest('[data-pref],[data-code]');if(!target)return;
