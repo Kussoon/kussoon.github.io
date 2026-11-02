@@ -14,6 +14,9 @@ on:
       - 'v2/shared/established-label-adapter.js'
       - 'v2/shared/test-established-label-adapter.cjs'
       - 'v2/national/official-2026-nationwide-pilot.html'
+      - 'v2/data/offices/**'
+      - 'v2/common/js/office-directory.js'
+      - 'v2/common/js/test-office-directory-data.cjs'
       - '.github/workflows/v2-2026-nationwide-pilot.yml'
   workflow_dispatch:
 permissions:
@@ -72,6 +75,7 @@ jobs:
           print('PASS national overview:',(root/'prefectures-overview.geojson').stat().st_size,'bytes, municipality total:',manifest['municipalityCount'])
           PY
           node --check /tmp/nation-ui.js
+          node v2/common/js/test-office-directory-data.cjs
           node v2/shared/test-municipality-renderer.cjs
           node v2/shared/test-map-viewport.cjs
           node v2/shared/test-place-labels.cjs
