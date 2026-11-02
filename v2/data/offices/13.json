@@ -1,0 +1,945 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "13",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kantou/cms_13414181.html",
+    "https://www.metro.tokyo.lg.jp/tosei/iken-sodan/sodan/ichiran",
+    "https://www.metro.tokyo.lg.jp/sitemap/link/link04",
+    "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html"
+  ],
+  "regions": {
+    "13101": {
+      "name": "千代田区",
+      "kind": "ward",
+      "officeIds": [
+        "13101-ward"
+      ],
+      "official": "https://www.city.chiyoda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8D%83%E4%BB%A3%E7%94%B0%E5%8C%BA"
+    },
+    "13102": {
+      "name": "中央区",
+      "kind": "ward",
+      "officeIds": [
+        "13102-ward"
+      ],
+      "official": "https://www.city.chuo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA"
+    },
+    "13103": {
+      "name": "港区",
+      "kind": "ward",
+      "officeIds": [
+        "13103-ward"
+      ],
+      "official": "https://www.city.minato.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA"
+    },
+    "13104": {
+      "name": "新宿区",
+      "kind": "ward",
+      "officeIds": [
+        "13104-ward"
+      ],
+      "official": "https://www.city.shinjuku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA"
+    },
+    "13105": {
+      "name": "文京区",
+      "kind": "ward",
+      "officeIds": [
+        "13105-ward"
+      ],
+      "official": "https://www.city.bunkyo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%87%E4%BA%AC%E5%8C%BA"
+    },
+    "13106": {
+      "name": "台東区",
+      "kind": "ward",
+      "officeIds": [
+        "13106-ward"
+      ],
+      "official": "https://www.city.taito.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA"
+    },
+    "13107": {
+      "name": "墨田区",
+      "kind": "ward",
+      "officeIds": [
+        "13107-ward"
+      ],
+      "official": "https://www.city.sumida.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A2%A8%E7%94%B0%E5%8C%BA"
+    },
+    "13108": {
+      "name": "江東区",
+      "kind": "ward",
+      "officeIds": [
+        "13108-ward"
+      ],
+      "official": "https://www.city.koto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B1%9F%E6%9D%B1%E5%8C%BA"
+    },
+    "13109": {
+      "name": "品川区",
+      "kind": "ward",
+      "officeIds": [
+        "13109-ward"
+      ],
+      "official": "https://www.city.shinagawa.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%93%81%E5%B7%9D%E5%8C%BA"
+    },
+    "13110": {
+      "name": "目黒区",
+      "kind": "ward",
+      "officeIds": [
+        "13110-ward"
+      ],
+      "official": "https://www.city.meguro.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%9B%AE%E9%BB%92%E5%8C%BA"
+    },
+    "13111": {
+      "name": "大田区",
+      "kind": "ward",
+      "officeIds": [
+        "13111-ward"
+      ],
+      "official": "https://www.city.ota.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%A7%E7%94%B0%E5%8C%BA"
+    },
+    "13112": {
+      "name": "世田谷区",
+      "kind": "ward",
+      "officeIds": [
+        "13112-ward"
+      ],
+      "official": "https://www.city.setagaya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%96%E7%94%B0%E8%B0%B7%E5%8C%BA"
+    },
+    "13113": {
+      "name": "渋谷区",
+      "kind": "ward",
+      "officeIds": [
+        "13113-ward"
+      ],
+      "official": "https://www.city.shibuya.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA"
+    },
+    "13114": {
+      "name": "中野区",
+      "kind": "ward",
+      "officeIds": [
+        "13114-ward"
+      ],
+      "official": "https://www.city.tokyo-nakano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E9%87%8E%E5%8C%BA"
+    },
+    "13115": {
+      "name": "杉並区",
+      "kind": "ward",
+      "officeIds": [
+        "13115-ward"
+      ],
+      "official": "https://www.city.suginami.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%9D%89%E4%B8%A6%E5%8C%BA"
+    },
+    "13116": {
+      "name": "豊島区",
+      "kind": "ward",
+      "officeIds": [
+        "13116-ward"
+      ],
+      "official": "https://www.city.toshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%B1%8A%E5%B3%B6%E5%8C%BA"
+    },
+    "13117": {
+      "name": "北区",
+      "kind": "ward",
+      "officeIds": [
+        "13117-ward"
+      ],
+      "official": "https://www.city.kita.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8C%97%E5%8C%BA"
+    },
+    "13118": {
+      "name": "荒川区",
+      "kind": "ward",
+      "officeIds": [
+        "13118-ward"
+      ],
+      "official": "https://www.city.arakawa.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%8D%92%E5%B7%9D%E5%8C%BA"
+    },
+    "13119": {
+      "name": "板橋区",
+      "kind": "ward",
+      "officeIds": [
+        "13119-ward"
+      ],
+      "official": "https://www.city.itabashi.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%9D%BF%E6%A9%8B%E5%8C%BA"
+    },
+    "13120": {
+      "name": "練馬区",
+      "kind": "ward",
+      "officeIds": [
+        "13120-ward"
+      ],
+      "official": "https://www.city.nerima.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%B7%B4%E9%A6%AC%E5%8C%BA"
+    },
+    "13121": {
+      "name": "足立区",
+      "kind": "ward",
+      "officeIds": [
+        "13121-ward"
+      ],
+      "official": "https://www.city.adachi.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%B6%B3%E7%AB%8B%E5%8C%BA"
+    },
+    "13122": {
+      "name": "葛飾区",
+      "kind": "ward",
+      "officeIds": [
+        "13122-ward"
+      ],
+      "official": "https://www.city.katsushika.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%91%9B%E9%A3%BE%E5%8C%BA"
+    },
+    "13123": {
+      "name": "江戸川区",
+      "kind": "ward",
+      "officeIds": [
+        "13123-ward"
+      ],
+      "official": "https://www.city.edogawa.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B1%9F%E6%88%B8%E5%B7%9D%E5%8C%BA"
+    },
+    "13201": {
+      "name": "八王子市",
+      "kind": "city",
+      "officeIds": [
+        "13201-city"
+      ],
+      "official": "https://www.city.hachioji.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82"
+    },
+    "13202": {
+      "name": "立川市",
+      "kind": "city",
+      "officeIds": [
+        "13202-city"
+      ],
+      "official": "https://www.city.tachikawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%AB%8B%E5%B7%9D%E5%B8%82"
+    },
+    "13203": {
+      "name": "武蔵野市",
+      "kind": "city",
+      "officeIds": [
+        "13203-city"
+      ],
+      "official": "https://www.city.musashino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%AD%A6%E8%94%B5%E9%87%8E%E5%B8%82"
+    },
+    "13204": {
+      "name": "三鷹市",
+      "kind": "city",
+      "officeIds": [
+        "13204-city"
+      ],
+      "official": "https://www.city.mitaka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%89%E9%B7%B9%E5%B8%82"
+    },
+    "13205": {
+      "name": "青梅市",
+      "kind": "city",
+      "officeIds": [
+        "13205-city"
+      ],
+      "official": "https://www.city.ome.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E9%9D%92%E6%A2%85%E5%B8%82"
+    },
+    "13206": {
+      "name": "府中市",
+      "kind": "city",
+      "officeIds": [
+        "13206-city"
+      ],
+      "official": "https://www.city.fuchu.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%BA%9C%E4%B8%AD%E5%B8%82"
+    },
+    "13207": {
+      "name": "昭島市",
+      "kind": "city",
+      "officeIds": [
+        "13207-city"
+      ],
+      "official": "https://www.city.akishima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%98%AD%E5%B3%B6%E5%B8%82"
+    },
+    "13208": {
+      "name": "調布市",
+      "kind": "city",
+      "officeIds": [
+        "13208-city"
+      ],
+      "official": "https://www.city.chofu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%AA%BF%E5%B8%83%E5%B8%82"
+    },
+    "13209": {
+      "name": "町田市",
+      "kind": "city",
+      "officeIds": [
+        "13209-city"
+      ],
+      "official": "https://www.city.machida.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%94%BA%E7%94%B0%E5%B8%82"
+    },
+    "13210": {
+      "name": "小金井市",
+      "kind": "city",
+      "officeIds": [
+        "13210-city"
+      ],
+      "official": "https://www.city.koganei.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%B0%8F%E9%87%91%E4%BA%95%E5%B8%82"
+    },
+    "13211": {
+      "name": "小平市",
+      "kind": "city",
+      "officeIds": [
+        "13211-city"
+      ],
+      "official": "https://www.city.kodaira.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%B0%8F%E5%B9%B3%E5%B8%82"
+    },
+    "13212": {
+      "name": "日野市",
+      "kind": "city",
+      "officeIds": [
+        "13212-city"
+      ],
+      "official": "https://www.city.hino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%97%A5%E9%87%8E%E5%B8%82"
+    },
+    "13213": {
+      "name": "東村山市",
+      "kind": "city",
+      "officeIds": [
+        "13213-city"
+      ],
+      "official": "https://www.city.higashimurayama.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%9D%B1%E6%9D%91%E5%B1%B1%E5%B8%82"
+    },
+    "13214": {
+      "name": "国分寺市",
+      "kind": "city",
+      "officeIds": [
+        "13214-city"
+      ],
+      "official": "https://www.city.kokubunji.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%9B%BD%E5%88%86%E5%AF%BA%E5%B8%82"
+    },
+    "13215": {
+      "name": "国立市",
+      "kind": "city",
+      "officeIds": [
+        "13215-city"
+      ],
+      "official": "https://www.city.kunitachi.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%9B%BD%E7%AB%8B%E5%B8%82"
+    },
+    "13218": {
+      "name": "福生市",
+      "kind": "city",
+      "officeIds": [
+        "13218-city"
+      ],
+      "official": "https://www.city.fussa.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%A6%8F%E7%94%9F%E5%B8%82"
+    },
+    "13219": {
+      "name": "狛江市",
+      "kind": "city",
+      "officeIds": [
+        "13219-city"
+      ],
+      "official": "https://www.city.komae.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%8B%9B%E6%B1%9F%E5%B8%82"
+    },
+    "13220": {
+      "name": "東大和市",
+      "kind": "city",
+      "officeIds": [
+        "13220-city"
+      ],
+      "official": "https://www.city.higashiyamato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%9D%B1%E5%A4%A7%E5%92%8C%E5%B8%82"
+    },
+    "13221": {
+      "name": "清瀬市",
+      "kind": "city",
+      "officeIds": [
+        "13221-city"
+      ],
+      "official": "https://www.city.kiyose.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%85%E7%80%AC%E5%B8%82"
+    },
+    "13222": {
+      "name": "東久留米市",
+      "kind": "city",
+      "officeIds": [
+        "13222-city"
+      ],
+      "official": "https://www.city.higashikurume.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%9D%B1%E4%B9%85%E7%95%99%E7%B1%B3%E5%B8%82"
+    },
+    "13223": {
+      "name": "武蔵村山市",
+      "kind": "city",
+      "officeIds": [
+        "13223-city"
+      ],
+      "official": "https://www.city.musashimurayama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%AD%A6%E8%94%B5%E6%9D%91%E5%B1%B1%E5%B8%82"
+    },
+    "13224": {
+      "name": "多摩市",
+      "kind": "city",
+      "officeIds": [
+        "13224-city"
+      ],
+      "official": "https://www.city.tama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%9A%E6%91%A9%E5%B8%82"
+    },
+    "13225": {
+      "name": "稲城市",
+      "kind": "city",
+      "officeIds": [
+        "13225-city"
+      ],
+      "official": "https://www.city.inagi.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%A8%B2%E5%9F%8E%E5%B8%82"
+    },
+    "13227": {
+      "name": "羽村市",
+      "kind": "city",
+      "officeIds": [
+        "13227-city"
+      ],
+      "official": "https://www.city.hamura.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%BE%BD%E6%9D%91%E5%B8%82"
+    },
+    "13228": {
+      "name": "あきる野市",
+      "kind": "city",
+      "officeIds": [
+        "13228-city"
+      ],
+      "official": "https://www.city.akiruno.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E3%81%82%E3%81%8D%E3%82%8B%E9%87%8E%E5%B8%82"
+    },
+    "13229": {
+      "name": "西東京市",
+      "kind": "city",
+      "officeIds": [
+        "13229-city"
+      ],
+      "official": "https://www.city.nishitokyo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E8%A5%BF%E6%9D%B1%E4%BA%AC%E5%B8%82"
+    },
+    "13303": {
+      "name": "瑞穂町",
+      "kind": "town",
+      "officeIds": [
+        "13303-town"
+      ],
+      "official": "https://www.town.mizuho.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%91%9E%E7%A9%82%E7%94%BA"
+    },
+    "13305": {
+      "name": "日の出町",
+      "kind": "town",
+      "officeIds": [
+        "13305-town"
+      ],
+      "official": "https://www.town.hinode.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%97%A5%E3%81%AE%E5%87%BA%E7%94%BA"
+    },
+    "13307": {
+      "name": "檜原村",
+      "kind": "village",
+      "officeIds": [
+        "13307-village"
+      ],
+      "official": "https://www.vill.hinohara.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%AA%9C%E5%8E%9F%E6%9D%91"
+    },
+    "13308": {
+      "name": "奥多摩町",
+      "kind": "town",
+      "officeIds": [
+        "13308-town"
+      ],
+      "official": "https://www.town.okutama.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A5%A5%E5%A4%9A%E6%91%A9%E7%94%BA"
+    },
+    "13361": {
+      "name": "大島町",
+      "kind": "town",
+      "officeIds": [
+        "13361-town"
+      ],
+      "official": "https://www.town.oshima.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%A4%A7%E5%B3%B6%E7%94%BA"
+    },
+    "13362": {
+      "name": "利島村",
+      "kind": "village",
+      "officeIds": [
+        "13362-village"
+      ],
+      "official": "https://www.toshimamura.org/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%88%A9%E5%B3%B6%E6%9D%91"
+    },
+    "13363": {
+      "name": "新島村",
+      "kind": "village",
+      "officeIds": [
+        "13363-village"
+      ],
+      "official": "https://www.niijima.com/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%B3%B6%E6%9D%91"
+    },
+    "13364": {
+      "name": "神津島村",
+      "kind": "village",
+      "officeIds": [
+        "13364-village"
+      ],
+      "official": "https://www.vill.kouzushima.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E7%A5%9E%E6%B4%A5%E5%B3%B6%E6%9D%91"
+    },
+    "13381": {
+      "name": "三宅村",
+      "kind": "village",
+      "officeIds": [
+        "13381-village"
+      ],
+      "official": "https://www.vill.miyake.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%89%E5%AE%85%E6%9D%91"
+    },
+    "13382": {
+      "name": "御蔵島村",
+      "kind": "village",
+      "officeIds": [
+        "13382-village"
+      ],
+      "official": "https://www.vill.mikurasima.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%BE%A1%E8%94%B5%E5%B3%B6%E6%9D%91"
+    },
+    "13401": {
+      "name": "八丈町",
+      "kind": "town",
+      "officeIds": [
+        "13401-town"
+      ],
+      "official": "https://www.town.hachijo.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E4%B8%88%E7%94%BA"
+    },
+    "13402": {
+      "name": "青ヶ島村",
+      "kind": "village",
+      "officeIds": [
+        "13402-village"
+      ],
+      "official": "https://www.vill.aogashima.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E9%9D%92%E3%83%B6%E5%B3%B6%E6%9D%91"
+    },
+    "13421": {
+      "name": "小笠原村",
+      "kind": "village",
+      "officeIds": [
+        "13421-village"
+      ],
+      "official": "https://www.vill.ogasawara.tokyo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%B0%8F%E7%AC%A0%E5%8E%9F%E6%9D%91"
+    }
+  },
+  "offices": {
+    "13101-ward": {
+      "name": "千代田区役所",
+      "status": "verified",
+      "postalCode": "102-8688",
+      "address": "東京都千代田区九段南1-2-1"
+    },
+    "13102-ward": {
+      "name": "中央区役所",
+      "status": "verified",
+      "postalCode": "104-8404",
+      "address": "東京都中央区築地1-1-1"
+    },
+    "13103-ward": {
+      "name": "港区役所",
+      "status": "verified",
+      "postalCode": "105-8511",
+      "address": "東京都港区芝公園1-5-25"
+    },
+    "13104-ward": {
+      "name": "新宿区役所",
+      "status": "verified",
+      "postalCode": "160-8484",
+      "address": "東京都新宿区歌舞伎町1-4-1"
+    },
+    "13105-ward": {
+      "name": "文京区役所",
+      "status": "verified",
+      "postalCode": "112-8555",
+      "address": "東京都文京区春日1-16-21"
+    },
+    "13106-ward": {
+      "name": "台東区役所",
+      "status": "verified",
+      "postalCode": "110-8615",
+      "address": "東京都台東区東上野4-5-6"
+    },
+    "13107-ward": {
+      "name": "墨田区役所",
+      "status": "verified",
+      "postalCode": "130-8640",
+      "address": "東京都墨田区吾妻橋1-23-20"
+    },
+    "13108-ward": {
+      "name": "江東区役所",
+      "status": "verified",
+      "postalCode": "135-8383",
+      "address": "東京都江東区東陽4-11-28"
+    },
+    "13109-ward": {
+      "name": "品川区役所",
+      "status": "verified",
+      "postalCode": "140-8715",
+      "address": "東京都品川区広町2-1-36"
+    },
+    "13110-ward": {
+      "name": "目黒区役所",
+      "status": "verified",
+      "postalCode": "153-8573",
+      "address": "東京都目黒区上目黒2-19-15"
+    },
+    "13111-ward": {
+      "name": "大田区役所",
+      "status": "verified",
+      "postalCode": "144-8621",
+      "address": "東京都大田区蒲田5-13-14"
+    },
+    "13112-ward": {
+      "name": "世田谷区役所",
+      "status": "verified",
+      "postalCode": "154-8504",
+      "address": "東京都世田谷区世田谷4-21-27"
+    },
+    "13113-ward": {
+      "name": "渋谷区役所",
+      "status": "verified",
+      "postalCode": "150-8010",
+      "address": "東京都渋谷区宇田川町1-1"
+    },
+    "13114-ward": {
+      "name": "中野区役所",
+      "status": "verified",
+      "postalCode": "164-8501",
+      "address": "東京都中野区中野4-11-19"
+    },
+    "13115-ward": {
+      "name": "杉並区役所",
+      "status": "verified",
+      "postalCode": "166-8570",
+      "address": "東京都杉並区阿佐谷南1-15-1"
+    },
+    "13116-ward": {
+      "name": "豊島区役所",
+      "status": "verified",
+      "postalCode": "171-8422",
+      "address": "東京都豊島区南池袋2-45-1"
+    },
+    "13117-ward": {
+      "name": "北区役所",
+      "status": "verified",
+      "postalCode": "114-8508",
+      "address": "東京都北区王子本町1-15-22"
+    },
+    "13118-ward": {
+      "name": "荒川区役所",
+      "status": "verified",
+      "postalCode": "116-8501",
+      "address": "東京都荒川区荒川2-2-3"
+    },
+    "13119-ward": {
+      "name": "板橋区役所",
+      "status": "verified",
+      "postalCode": "173-8501",
+      "address": "東京都板橋区板橋2-66-1"
+    },
+    "13120-ward": {
+      "name": "練馬区役所",
+      "status": "verified",
+      "postalCode": "176-8501",
+      "address": "東京都練馬区豊玉北6-12-1"
+    },
+    "13121-ward": {
+      "name": "足立区役所",
+      "status": "verified",
+      "postalCode": "120-8510",
+      "address": "東京都足立区中央本町1-17-1"
+    },
+    "13122-ward": {
+      "name": "葛飾区役所",
+      "status": "verified",
+      "postalCode": "124-8555",
+      "address": "東京都葛飾区立石5-13-1"
+    },
+    "13123-ward": {
+      "name": "江戸川区役所",
+      "status": "verified",
+      "postalCode": "132-8501",
+      "address": "東京都江戸川区中央1-4-1"
+    },
+    "13201-city": {
+      "name": "八王子市役所",
+      "status": "verified",
+      "postalCode": "192-8501",
+      "address": "東京都八王子市元本郷町3-24-1"
+    },
+    "13202-city": {
+      "name": "立川市役所",
+      "status": "verified",
+      "postalCode": "190-8666",
+      "address": "東京都立川市泉町1156-9"
+    },
+    "13203-city": {
+      "name": "武蔵野市役所",
+      "status": "verified",
+      "postalCode": "180-8777",
+      "address": "東京都武蔵野市緑町2-2-28"
+    },
+    "13204-city": {
+      "name": "三鷹市役所",
+      "status": "verified",
+      "postalCode": "181-8555",
+      "address": "東京都三鷹市野崎1-1-1"
+    },
+    "13205-city": {
+      "name": "青梅市役所",
+      "status": "verified",
+      "postalCode": "198-8701",
+      "address": "東京都青梅市東青梅1-11-1"
+    },
+    "13206-city": {
+      "name": "府中市役所",
+      "status": "verified",
+      "postalCode": "183-8703",
+      "address": "東京都府中市宮西町2-24"
+    },
+    "13207-city": {
+      "name": "昭島市役所",
+      "status": "verified",
+      "postalCode": "196-8511",
+      "address": "東京都昭島市田中町1-17-1"
+    },
+    "13208-city": {
+      "name": "調布市役所",
+      "status": "verified",
+      "postalCode": "182-8511",
+      "address": "東京都調布市小島町2-35-1"
+    },
+    "13209-city": {
+      "name": "町田市役所",
+      "status": "verified",
+      "postalCode": "194-8520",
+      "address": "東京都町田市森野2-2-22"
+    },
+    "13210-city": {
+      "name": "小金井市役所",
+      "status": "verified",
+      "postalCode": "184-8504",
+      "address": "東京都小金井市本町6-6-3"
+    },
+    "13211-city": {
+      "name": "小平市役所",
+      "status": "verified",
+      "postalCode": "187-8701",
+      "address": "東京都小平市小川町2-1333"
+    },
+    "13212-city": {
+      "name": "日野市役所",
+      "status": "verified",
+      "postalCode": "191-8686",
+      "address": "東京都日野市神明1-12-1"
+    },
+    "13213-city": {
+      "name": "東村山市役所",
+      "status": "verified",
+      "postalCode": "189-8501",
+      "address": "東京都東村山市本町1-2-3"
+    },
+    "13214-city": {
+      "name": "国分寺市役所",
+      "status": "verified",
+      "postalCode": "185-8501",
+      "address": "東京都国分寺市泉町2-2-18"
+    },
+    "13215-city": {
+      "name": "国立市役所",
+      "status": "verified",
+      "postalCode": "186-8501",
+      "address": "東京都国立市富士見台2-47-1"
+    },
+    "13218-city": {
+      "name": "福生市役所",
+      "status": "verified",
+      "postalCode": "197-8501",
+      "address": "東京都福生市本町5"
+    },
+    "13219-city": {
+      "name": "狛江市役所",
+      "status": "verified",
+      "postalCode": "201-8585",
+      "address": "東京都狛江市和泉本町1-1-5"
+    },
+    "13220-city": {
+      "name": "東大和市役所",
+      "status": "verified",
+      "postalCode": "207-8585",
+      "address": "東京都東大和市中央3-930"
+    },
+    "13221-city": {
+      "name": "清瀬市役所",
+      "status": "verified",
+      "postalCode": "204-8511",
+      "address": "東京都清瀬市中里5-842"
+    },
+    "13222-city": {
+      "name": "東久留米市役所",
+      "status": "verified",
+      "postalCode": "203-8555",
+      "address": "東京都東久留米市本町3-3-1"
+    },
+    "13223-city": {
+      "name": "武蔵村山市役所",
+      "status": "verified",
+      "postalCode": "208-8501",
+      "address": "東京都武蔵村山市本町1-1-1"
+    },
+    "13224-city": {
+      "name": "多摩市役所",
+      "status": "verified",
+      "postalCode": "206-8666",
+      "address": "東京都多摩市関戸6-12-1"
+    },
+    "13225-city": {
+      "name": "稲城市役所",
+      "status": "verified",
+      "postalCode": "206-8601",
+      "address": "東京都稲城市東長沼2111"
+    },
+    "13227-city": {
+      "name": "羽村市役所",
+      "status": "verified",
+      "postalCode": "205-8601",
+      "address": "東京都羽村市緑ヶ丘5-2-1"
+    },
+    "13228-city": {
+      "name": "あきる野市役所",
+      "status": "verified",
+      "postalCode": "197-0814",
+      "address": "東京都あきる野市二宮350"
+    },
+    "13229-city": {
+      "name": "西東京市役所",
+      "status": "verified",
+      "postalCode": "188-8666",
+      "address": "東京都西東京市南町5-6-13"
+    },
+    "13303-town": {
+      "name": "瑞穂町役場",
+      "status": "verified",
+      "postalCode": "190-1292",
+      "address": "東京都西多摩郡瑞穂町大字箱根ヶ崎2335"
+    },
+    "13305-town": {
+      "name": "日の出町役場",
+      "status": "verified",
+      "postalCode": "190-0192",
+      "address": "東京都西多摩郡日の出町平井2780"
+    },
+    "13307-village": {
+      "name": "檜原村役場",
+      "status": "verified",
+      "postalCode": "190-0212",
+      "address": "東京都西多摩郡檜原村467-1"
+    },
+    "13308-town": {
+      "name": "奥多摩町役場",
+      "status": "verified",
+      "postalCode": "198-0212",
+      "address": "東京都西多摩郡奥多摩町氷川215-6"
+    },
+    "13361-town": {
+      "name": "大島町役場",
+      "status": "verified",
+      "postalCode": "100-0101",
+      "address": "東京都大島町元町1-1-14"
+    },
+    "13362-village": {
+      "name": "利島村役場",
+      "status": "verified",
+      "postalCode": "100-0301",
+      "address": "東京都利島村248"
+    },
+    "13363-village": {
+      "name": "新島村役場",
+      "status": "verified",
+      "postalCode": "100-0402",
+      "address": "東京都新島村本村1-1-1"
+    },
+    "13364-village": {
+      "name": "神津島村役場",
+      "status": "verified",
+      "postalCode": "100-0601",
+      "address": "東京都神津島村904"
+    },
+    "13381-village": {
+      "name": "三宅村役場",
+      "status": "verified",
+      "postalCode": "100-1212",
+      "address": "東京都三宅島三宅村阿古497"
+    },
+    "13382-village": {
+      "name": "御蔵島村役場",
+      "status": "verified",
+      "postalCode": "100-1301",
+      "address": "東京都御蔵島村字入かねが沢"
+    },
+    "13401-town": {
+      "name": "八丈町役場",
+      "status": "verified",
+      "postalCode": "100-1498",
+      "address": "東京都八丈島八丈町大賀郷2551-2"
+    },
+    "13402-village": {
+      "name": "青ヶ島村役場",
+      "status": "verified",
+      "postalCode": "100-1701",
+      "address": "東京都青ヶ島村無番地"
+    },
+    "13421-village": {
+      "name": "小笠原村役場",
+      "status": "verified",
+      "postalCode": "100-2101",
+      "address": "東京都小笠原村父島字西町"
+    }
+  }
+}
