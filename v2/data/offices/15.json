@@ -1,0 +1,599 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "15",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/tyuubu/cms_13614182.html",
+    "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_163769145.html"
+  ],
+  "regions": {
+    "15100": {
+      "name": "新潟市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82"
+    },
+    "15101": {
+      "name": "新潟市北区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15101-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E5%8C%97%E5%8C%BA"
+    },
+    "15102": {
+      "name": "新潟市東区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15102-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E6%9D%B1%E5%8C%BA"
+    },
+    "15103": {
+      "name": "新潟市中央区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15103-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA"
+    },
+    "15104": {
+      "name": "新潟市江南区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15104-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E6%B1%9F%E5%8D%97%E5%8C%BA"
+    },
+    "15105": {
+      "name": "新潟市秋葉区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15105-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E7%A7%8B%E8%91%89%E5%8C%BA"
+    },
+    "15106": {
+      "name": "新潟市南区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15106-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E5%8D%97%E5%8C%BA"
+    },
+    "15107": {
+      "name": "新潟市西区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15107-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E8%A5%BF%E5%8C%BA"
+    },
+    "15108": {
+      "name": "新潟市西蒲区",
+      "kind": "ward",
+      "parentCode": "15100",
+      "officeIds": [
+        "15108-ward",
+        "15100-city"
+      ],
+      "official": "https://www.city.niigata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E6%BD%9F%E5%B8%82%E8%A5%BF%E8%92%B2%E5%8C%BA"
+    },
+    "15202": {
+      "name": "長岡市",
+      "kind": "city",
+      "officeIds": [
+        "15202-city"
+      ],
+      "official": "https://www.city.nagaoka.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%95%B7%E5%B2%A1%E5%B8%82"
+    },
+    "15204": {
+      "name": "三条市",
+      "kind": "city",
+      "officeIds": [
+        "15204-city"
+      ],
+      "official": "https://www.city.sanjo.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E4%B8%89%E6%9D%A1%E5%B8%82"
+    },
+    "15205": {
+      "name": "柏崎市",
+      "kind": "city",
+      "officeIds": [
+        "15205-city"
+      ],
+      "official": "https://www.city.kashiwazaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%9F%8F%E5%B4%8E%E5%B8%82"
+    },
+    "15206": {
+      "name": "新発田市",
+      "kind": "city",
+      "officeIds": [
+        "15206-city"
+      ],
+      "official": "https://www.city.shibata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%96%B0%E7%99%BA%E7%94%B0%E5%B8%82"
+    },
+    "15208": {
+      "name": "小千谷市",
+      "kind": "city",
+      "officeIds": [
+        "15208-city"
+      ],
+      "official": "https://www.city.ojiya.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%B0%8F%E5%8D%83%E8%B0%B7%E5%B8%82"
+    },
+    "15209": {
+      "name": "加茂市",
+      "kind": "city",
+      "officeIds": [
+        "15209-city"
+      ],
+      "official": "https://www.city.kamo.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%8A%A0%E8%8C%82%E5%B8%82"
+    },
+    "15210": {
+      "name": "十日町市",
+      "kind": "city",
+      "officeIds": [
+        "15210-city"
+      ],
+      "official": "https://www.city.tokamachi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%8D%81%E6%97%A5%E7%94%BA%E5%B8%82"
+    },
+    "15211": {
+      "name": "見附市",
+      "kind": "city",
+      "officeIds": [
+        "15211-city"
+      ],
+      "official": "https://www.city.mitsuke.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E8%A6%8B%E9%99%84%E5%B8%82"
+    },
+    "15212": {
+      "name": "村上市",
+      "kind": "city",
+      "officeIds": [
+        "15212-city"
+      ],
+      "official": "https://www.city.murakami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%9D%91%E4%B8%8A%E5%B8%82"
+    },
+    "15213": {
+      "name": "燕市",
+      "kind": "city",
+      "officeIds": [
+        "15213-city"
+      ],
+      "official": "https://www.city.tsubame.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E7%87%95%E5%B8%82"
+    },
+    "15216": {
+      "name": "糸魚川市",
+      "kind": "city",
+      "officeIds": [
+        "15216-city"
+      ],
+      "official": "https://www.city.itoigawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E7%B3%B8%E9%AD%9A%E5%B7%9D%E5%B8%82"
+    },
+    "15217": {
+      "name": "妙高市",
+      "kind": "city",
+      "officeIds": [
+        "15217-city"
+      ],
+      "official": "https://www.city.myoko.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%A6%99%E9%AB%98%E5%B8%82"
+    },
+    "15218": {
+      "name": "五泉市",
+      "kind": "city",
+      "officeIds": [
+        "15218-city"
+      ],
+      "official": "https://www.city.gosen.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E4%BA%94%E6%B3%89%E5%B8%82"
+    },
+    "15222": {
+      "name": "上越市",
+      "kind": "city",
+      "officeIds": [
+        "15222-city"
+      ],
+      "official": "https://www.city.joetsu.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E4%B8%8A%E8%B6%8A%E5%B8%82"
+    },
+    "15223": {
+      "name": "阿賀野市",
+      "kind": "city",
+      "officeIds": [
+        "15223-city"
+      ],
+      "official": "https://www.city.agano.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%98%BF%E8%B3%80%E9%87%8E%E5%B8%82"
+    },
+    "15224": {
+      "name": "佐渡市",
+      "kind": "city",
+      "officeIds": [
+        "15224-city"
+      ],
+      "official": "https://www.city.sado.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E4%BD%90%E6%B8%A1%E5%B8%82"
+    },
+    "15225": {
+      "name": "魚沼市",
+      "kind": "city",
+      "officeIds": [
+        "15225-city"
+      ],
+      "official": "https://www.city.uonuma.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%AD%9A%E6%B2%BC%E5%B8%82"
+    },
+    "15226": {
+      "name": "南魚沼市",
+      "kind": "city",
+      "officeIds": [
+        "15226-city"
+      ],
+      "official": "https://www.city.minamiuonuma.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%8D%97%E9%AD%9A%E6%B2%BC%E5%B8%82"
+    },
+    "15227": {
+      "name": "胎内市",
+      "kind": "city",
+      "officeIds": [
+        "15227-city"
+      ],
+      "official": "https://www.city.tainai.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E8%83%8E%E5%86%85%E5%B8%82"
+    },
+    "15307": {
+      "name": "聖籠町",
+      "kind": "town",
+      "officeIds": [
+        "15307-town"
+      ],
+      "official": "https://www.town.seiro.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E8%81%96%E7%B1%A0%E7%94%BA"
+    },
+    "15342": {
+      "name": "弥彦村",
+      "kind": "village",
+      "officeIds": [
+        "15342-village"
+      ],
+      "official": "https://www.vill.yahiko.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%BC%A5%E5%BD%A6%E6%9D%91"
+    },
+    "15361": {
+      "name": "田上町",
+      "kind": "town",
+      "officeIds": [
+        "15361-town"
+      ],
+      "official": "https://www.town.tagami.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E7%94%B0%E4%B8%8A%E7%94%BA"
+    },
+    "15385": {
+      "name": "阿賀町",
+      "kind": "town",
+      "officeIds": [
+        "15385-town"
+      ],
+      "official": "https://www.town.aga.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%98%BF%E8%B3%80%E7%94%BA"
+    },
+    "15405": {
+      "name": "出雲崎町",
+      "kind": "town",
+      "officeIds": [
+        "15405-town"
+      ],
+      "official": "https://www.town.izumozaki.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%87%BA%E9%9B%B2%E5%B4%8E%E7%94%BA"
+    },
+    "15461": {
+      "name": "湯沢町",
+      "kind": "town",
+      "officeIds": [
+        "15461-town"
+      ],
+      "official": "https://www.town.yuzawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%B9%AF%E6%B2%A2%E7%94%BA"
+    },
+    "15482": {
+      "name": "津南町",
+      "kind": "town",
+      "officeIds": [
+        "15482-town"
+      ],
+      "official": "https://www.town.tsunan.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E6%B4%A5%E5%8D%97%E7%94%BA"
+    },
+    "15504": {
+      "name": "刈羽村",
+      "kind": "village",
+      "officeIds": [
+        "15504-village"
+      ],
+      "official": "https://www.vill.kariwa.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E5%88%88%E7%BE%BD%E6%9D%91"
+    },
+    "15581": {
+      "name": "関川村",
+      "kind": "village",
+      "officeIds": [
+        "15581-village"
+      ],
+      "official": "https://www.vill.sekikawa.niigata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E9%96%A2%E5%B7%9D%E6%9D%91"
+    },
+    "15586": {
+      "name": "粟島浦村",
+      "kind": "village",
+      "officeIds": [
+        "15586-village"
+      ],
+      "official": "https://www.vill.awashimaura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%96%B0%E6%BD%9F%E7%9C%8C%E7%B2%9F%E5%B3%B6%E6%B5%A6%E6%9D%91"
+    }
+  },
+  "offices": {
+    "15100-city": {
+      "name": "新潟市役所",
+      "status": "verified",
+      "postalCode": "951-8550",
+      "address": "新潟県新潟市中央区学校町通1番町602-1"
+    },
+    "15101-ward": {
+      "name": "新潟市北区役所",
+      "status": "verified",
+      "postalCode": "950-3393",
+      "address": "新潟県新潟市北区東栄町1丁目1番14号"
+    },
+    "15102-ward": {
+      "name": "新潟市東区役所",
+      "status": "verified",
+      "postalCode": "950-8709",
+      "address": "新潟県新潟市東区下木戸1-4-1"
+    },
+    "15103-ward": {
+      "name": "新潟市中央区役所",
+      "status": "verified",
+      "postalCode": "951-8553",
+      "address": "新潟県新潟市中央区西堀通6番町866"
+    },
+    "15104-ward": {
+      "name": "新潟市江南区役所",
+      "status": "verified",
+      "postalCode": "950-0195",
+      "address": "新潟県新潟市江南区泉町3-4-5"
+    },
+    "15105-ward": {
+      "name": "新潟市秋葉区役所",
+      "status": "verified",
+      "postalCode": "956-8601",
+      "address": "新潟県新潟市秋葉区程島2009"
+    },
+    "15106-ward": {
+      "name": "新潟市南区役所",
+      "status": "verified",
+      "postalCode": "950-1292",
+      "address": "新潟県新潟市南区白根1235"
+    },
+    "15107-ward": {
+      "name": "新潟市西区役所",
+      "status": "verified",
+      "postalCode": "950-2097",
+      "address": "新潟県新潟市西区寺尾東3-14-41"
+    },
+    "15108-ward": {
+      "name": "新潟市西蒲区役所",
+      "status": "verified",
+      "postalCode": "953-8666",
+      "address": "新潟県新潟市西蒲区巻甲2690-1"
+    },
+    "15202-city": {
+      "name": "長岡市役所",
+      "status": "verified",
+      "postalCode": "940-8501",
+      "address": "新潟県長岡市大手通1-4-10"
+    },
+    "15204-city": {
+      "name": "三条市役所",
+      "status": "verified",
+      "postalCode": "955-8686",
+      "address": "新潟県三条市旭町2-3-1"
+    },
+    "15205-city": {
+      "name": "柏崎市役所",
+      "status": "verified",
+      "postalCode": "945-8511",
+      "address": "新潟県柏崎市日石町2-1"
+    },
+    "15206-city": {
+      "name": "新発田市役所",
+      "status": "verified",
+      "postalCode": "957-8686",
+      "address": "新潟県新発田市中央町3-3-3"
+    },
+    "15208-city": {
+      "name": "小千谷市役所",
+      "status": "verified",
+      "postalCode": "947-8501",
+      "address": "新潟県小千谷市城内2-7-5"
+    },
+    "15209-city": {
+      "name": "加茂市役所",
+      "status": "verified",
+      "postalCode": "959-1392",
+      "address": "新潟県加茂市幸町2-3-5"
+    },
+    "15210-city": {
+      "name": "十日町市役所",
+      "status": "verified",
+      "postalCode": "948-8501",
+      "address": "新潟県十日町市千歳町3-3"
+    },
+    "15211-city": {
+      "name": "見附市役所",
+      "status": "verified",
+      "postalCode": "954-8686",
+      "address": "新潟県見附市昭和町2-1-1"
+    },
+    "15212-city": {
+      "name": "村上市役所",
+      "status": "verified",
+      "postalCode": "958-8501",
+      "address": "新潟県村上市三之町1-1"
+    },
+    "15213-city": {
+      "name": "燕市役所",
+      "status": "verified",
+      "postalCode": "959-0295",
+      "address": "新潟県燕市吉田西太田1934"
+    },
+    "15216-city": {
+      "name": "糸魚川市役所",
+      "status": "verified",
+      "postalCode": "941-8501",
+      "address": "新潟県糸魚川市一の宮1-2-5"
+    },
+    "15217-city": {
+      "name": "妙高市役所",
+      "status": "verified",
+      "postalCode": "944-8686",
+      "address": "新潟県妙高市栄町5-1"
+    },
+    "15218-city": {
+      "name": "五泉市役所",
+      "status": "verified",
+      "postalCode": "959-1692",
+      "address": "新潟県五泉市太田1094-1"
+    },
+    "15222-city": {
+      "name": "上越市役所",
+      "status": "verified",
+      "postalCode": "943-8601",
+      "address": "新潟県上越市木田1丁目1-3"
+    },
+    "15223-city": {
+      "name": "阿賀野市役所",
+      "status": "verified",
+      "postalCode": "959-2092",
+      "address": "新潟県阿賀野市岡山町10-15"
+    },
+    "15224-city": {
+      "name": "佐渡市役所",
+      "status": "verified",
+      "postalCode": "952-1292",
+      "address": "新潟県佐渡市千種232"
+    },
+    "15225-city": {
+      "name": "魚沼市役所",
+      "status": "verified",
+      "postalCode": "946-8601",
+      "address": "新潟県魚沼市小出島910"
+    },
+    "15226-city": {
+      "name": "南魚沼市役所",
+      "status": "verified",
+      "postalCode": "949-6696",
+      "address": "新潟県南魚沼市六日町180-1"
+    },
+    "15227-city": {
+      "name": "胎内市役所",
+      "status": "verified",
+      "postalCode": "959-2693",
+      "address": "新潟県胎内市新和町2-10"
+    },
+    "15307-town": {
+      "name": "聖籠町役場",
+      "status": "verified",
+      "postalCode": "957-0192",
+      "address": "新潟県北蒲原郡聖籠町大字諏訪山1635-4"
+    },
+    "15342-village": {
+      "name": "弥彦村役場",
+      "status": "verified",
+      "postalCode": "959-0392",
+      "address": "新潟県西蒲原郡弥彦村大字矢作402"
+    },
+    "15361-town": {
+      "name": "田上町役場",
+      "status": "verified",
+      "postalCode": "959-1503",
+      "address": "新潟県南蒲原郡田上町原ヶ崎新田3070"
+    },
+    "15385-town": {
+      "name": "阿賀町役場",
+      "status": "verified",
+      "postalCode": "959-4495",
+      "address": "新潟県東蒲原郡阿賀町津川580"
+    },
+    "15405-town": {
+      "name": "出雲崎町役場",
+      "status": "verified",
+      "postalCode": "949-4392",
+      "address": "新潟県三島郡出雲崎町大字川西140"
+    },
+    "15461-town": {
+      "name": "湯沢町役場",
+      "status": "verified",
+      "postalCode": "949-6192",
+      "address": "新潟県南魚沼郡湯沢町大字神立300"
+    },
+    "15482-town": {
+      "name": "津南町役場",
+      "status": "verified",
+      "postalCode": "949-8292",
+      "address": "新潟県中魚沼郡津南町大字下船渡戊585"
+    },
+    "15504-village": {
+      "name": "刈羽村役場",
+      "status": "verified",
+      "postalCode": "945-0397",
+      "address": "新潟県刈羽郡刈羽村大字割町新田215-1"
+    },
+    "15581-village": {
+      "name": "関川村役場",
+      "status": "verified",
+      "postalCode": "959-3292",
+      "address": "新潟県岩船郡関川村大字下関912"
+    },
+    "15586-village": {
+      "name": "粟島浦村役場",
+      "status": "verified",
+      "postalCode": "958-0061",
+      "address": "新潟県岩船郡粟島浦村字日ノ見山1513-11"
+    }
+  }
+}
