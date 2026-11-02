@@ -59,7 +59,9 @@ function textBox(region,size,readings,measure){
  const maxWidth=Math.max(...rows.map(r=>measure(r.text,r.size)),1)+size*.34;
  const top=Math.min(...rows.map(r=>r.y-r.size*.62))-2;
  const bottom=Math.max(...rows.map(r=>r.y+r.size*.42))+2;
- return {width:maxWidth,height:bottom-top,centerY:(top+bottom)/2};
+ // The original collision/fit engines expect the label box centered on its
+ // anchor, so conservatively cover all rows by a symmetric box.
+ return {width:maxWidth,height:2*Math.max(Math.abs(top),Math.abs(bottom))};
 }
 const measure=(value,size)=>{
  // SVG labels have a consistent Japanese system font; canvas measures actual
@@ -84,12 +86,12 @@ function layout({regions,project,selected='',all=false,readings=false}){
    {anchor:'balanced',shift:all?'adjacent':'none'});
  const full=placed.map((p,i)=>{
   const size=seeds[i].code===selected?18:14;
-  const {width,height,centerY}=textBox(seeds[i].region,size,readings,measure);
+  const {width,height}=textBox(seeds[i].region,size,readings,measure);
   // The actual text rows have a minor Y-offset relative to the anchor.
   // Fit checks use this complete visual text rectangle (including furigana).
   return {...p,width,height,box:{
    x1:p.x-width/2,x2:p.x+width/2,
-   y1:p.y+centerY-height/2,y2:p.y+centerY+height/2
+   y1:p.y-height/2,y2:p.y+height/2
   }};
  });
  // Keep the tested non-destructive collision pass when all labels are shown.
