@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "09",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kantou/cms_13014181.html",
+    "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163069150.html",
+    "https://www.zck.or.jp/soshiki/2/4039.html",
+    "https://www.pref.tochigi.lg.jp/c05/intro/tochigi/link/lkshityouson.html"
+  ],
+  "regions": {
+    "09201": {
+      "name": "宇都宮市",
+      "kind": "city",
+      "officeIds": [
+        "09201-city"
+      ],
+      "official": "https://www.city.utsunomiya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E5%AE%87%E9%83%BD%E5%AE%AE%E5%B8%82"
+    },
+    "09202": {
+      "name": "足利市",
+      "kind": "city",
+      "officeIds": [
+        "09202-city"
+      ],
+      "official": "https://www.city.ashikaga.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E8%B6%B3%E5%88%A9%E5%B8%82"
+    },
+    "09203": {
+      "name": "栃木市",
+      "kind": "city",
+      "officeIds": [
+        "09203-city"
+      ],
+      "official": "https://www.city.tochigi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E6%A0%83%E6%9C%A8%E5%B8%82"
+    },
+    "09204": {
+      "name": "佐野市",
+      "kind": "city",
+      "officeIds": [
+        "09204-city"
+      ],
+      "official": "https://www.city.sano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E4%BD%90%E9%87%8E%E5%B8%82"
+    },
+    "09205": {
+      "name": "鹿沼市",
+      "kind": "city",
+      "officeIds": [
+        "09205-city"
+      ],
+      "official": "https://www.city.kanuma.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E9%B9%BF%E6%B2%BC%E5%B8%82"
+    },
+    "09206": {
+      "name": "日光市",
+      "kind": "city",
+      "officeIds": [
+        "09206-city"
+      ],
+      "official": "https://www.city.nikko.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E6%97%A5%E5%85%89%E5%B8%82"
+    },
+    "09208": {
+      "name": "小山市",
+      "kind": "city",
+      "officeIds": [
+        "09208-city"
+      ],
+      "official": "https://www.city.oyama.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E5%B0%8F%E5%B1%B1%E5%B8%82"
+    },
+    "09209": {
+      "name": "真岡市",
+      "kind": "city",
+      "officeIds": [
+        "09209-city"
+      ],
+      "official": "https://www.city.moka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E7%9C%9F%E5%B2%A1%E5%B8%82"
+    },
+    "09210": {
+      "name": "大田原市",
+      "kind": "city",
+      "officeIds": [
+        "09210-city"
+      ],
+      "official": "https://www.city.ohtawara.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E5%A4%A7%E7%94%B0%E5%8E%9F%E5%B8%82"
+    },
+    "09211": {
+      "name": "矢板市",
+      "kind": "city",
+      "officeIds": [
+        "09211-city"
+      ],
+      "official": "https://www.city.yaita.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E7%9F%A2%E6%9D%BF%E5%B8%82"
+    },
+    "09213": {
+      "name": "那須塩原市",
+      "kind": "city",
+      "officeIds": [
+        "09213-city"
+      ],
+      "official": "https://www.city.nasushiobara.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E9%82%A3%E9%A0%88%E5%A1%A9%E5%8E%9F%E5%B8%82"
+    },
+    "09214": {
+      "name": "さくら市",
+      "kind": "city",
+      "officeIds": [
+        "09214-city"
+      ],
+      "official": "https://www.city.tochigi-sakura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E3%81%95%E3%81%8F%E3%82%89%E5%B8%82"
+    },
+    "09215": {
+      "name": "那須烏山市",
+      "kind": "city",
+      "officeIds": [
+        "09215-city"
+      ],
+      "official": "https://www.city.nasukarasuyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E9%82%A3%E9%A0%88%E7%83%8F%E5%B1%B1%E5%B8%82"
+    },
+    "09216": {
+      "name": "下野市",
+      "kind": "city",
+      "officeIds": [
+        "09216-city"
+      ],
+      "official": "https://www.city.shimotsuke.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E4%B8%8B%E9%87%8E%E5%B8%82"
+    },
+    "09301": {
+      "name": "上三川町",
+      "kind": "town",
+      "officeIds": [
+        "09301-town"
+      ],
+      "official": "https://www.town.kaminokawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E4%B8%8A%E4%B8%89%E5%B7%9D%E7%94%BA"
+    },
+    "09342": {
+      "name": "益子町",
+      "kind": "town",
+      "officeIds": [
+        "09342-town"
+      ],
+      "official": "https://www.town.mashiko.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E7%9B%8A%E5%AD%90%E7%94%BA"
+    },
+    "09343": {
+      "name": "茂木町",
+      "kind": "town",
+      "officeIds": [
+        "09343-town"
+      ],
+      "official": "https://www.town.motegi.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E8%8C%82%E6%9C%A8%E7%94%BA"
+    },
+    "09344": {
+      "name": "市貝町",
+      "kind": "town",
+      "officeIds": [
+        "09344-town"
+      ],
+      "official": "https://www.town.ichikai.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E5%B8%82%E8%B2%9D%E7%94%BA"
+    },
+    "09345": {
+      "name": "芳賀町",
+      "kind": "town",
+      "officeIds": [
+        "09345-town"
+      ],
+      "official": "https://www.town.tochigi-haga.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E8%8A%B3%E8%B3%80%E7%94%BA"
+    },
+    "09361": {
+      "name": "壬生町",
+      "kind": "town",
+      "officeIds": [
+        "09361-town"
+      ],
+      "official": "https://www.town.mibu.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E5%A3%AC%E7%94%9F%E7%94%BA"
+    },
+    "09364": {
+      "name": "野木町",
+      "kind": "town",
+      "officeIds": [
+        "09364-town"
+      ],
+      "official": "https://www.town.nogi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E9%87%8E%E6%9C%A8%E7%94%BA"
+    },
+    "09384": {
+      "name": "塩谷町",
+      "kind": "town",
+      "officeIds": [
+        "09384-town"
+      ],
+      "official": "https://www.town.shioya.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E5%A1%A9%E8%B0%B7%E7%94%BA"
+    },
+    "09386": {
+      "name": "高根沢町",
+      "kind": "town",
+      "officeIds": [
+        "09386-town"
+      ],
+      "official": "https://www.town.takanezawa.tochigi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E9%AB%98%E6%A0%B9%E6%B2%A2%E7%94%BA"
+    },
+    "09407": {
+      "name": "那須町",
+      "kind": "town",
+      "officeIds": [
+        "09407-town"
+      ],
+      "official": "https://www.town.nasu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E9%82%A3%E9%A0%88%E7%94%BA"
+    },
+    "09411": {
+      "name": "那珂川町",
+      "kind": "town",
+      "officeIds": [
+        "09411-town"
+      ],
+      "official": "https://www.town.tochigi-nakagawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%A0%83%E6%9C%A8%E7%9C%8C%E9%82%A3%E7%8F%82%E5%B7%9D%E7%94%BA"
+    }
+  },
+  "offices": {
+    "09201-city": {
+      "name": "宇都宮市役所",
+      "status": "verified",
+      "postalCode": "320-8540",
+      "address": "栃木県宇都宮市旭1-1-5"
+    },
+    "09202-city": {
+      "name": "足利市役所",
+      "status": "verified",
+      "postalCode": "326-8601",
+      "address": "栃木県足利市本城3-2145"
+    },
+    "09203-city": {
+      "name": "栃木市役所",
+      "status": "verified",
+      "postalCode": "328-8686",
+      "address": "栃木県栃木市万町9-25"
+    },
+    "09204-city": {
+      "name": "佐野市役所",
+      "status": "verified",
+      "postalCode": "327-8501",
+      "address": "栃木県佐野市高砂町1"
+    },
+    "09205-city": {
+      "name": "鹿沼市役所",
+      "status": "verified",
+      "postalCode": "322-8601",
+      "address": "栃木県鹿沼市今宮町1688-1"
+    },
+    "09206-city": {
+      "name": "日光市役所",
+      "status": "verified",
+      "postalCode": "321-1292",
+      "address": "栃木県日光市今市本町1"
+    },
+    "09208-city": {
+      "name": "小山市役所",
+      "status": "verified",
+      "postalCode": "323-8686",
+      "address": "栃木県小山市中央町1-1-1"
+    },
+    "09209-city": {
+      "name": "真岡市役所",
+      "status": "verified",
+      "postalCode": "321-4395",
+      "address": "栃木県真岡市荒町5191"
+    },
+    "09210-city": {
+      "name": "大田原市役所",
+      "status": "verified",
+      "postalCode": "324-8641",
+      "address": "栃木県大田原市本町1-4-1"
+    },
+    "09211-city": {
+      "name": "矢板市役所",
+      "status": "verified",
+      "postalCode": "329-2192",
+      "address": "栃木県矢板市本町5-4"
+    },
+    "09213-city": {
+      "name": "那須塩原市役所",
+      "status": "verified",
+      "postalCode": "325-8501",
+      "address": "栃木県那須塩原市共墾社108-2"
+    },
+    "09214-city": {
+      "name": "さくら市役所",
+      "status": "verified",
+      "postalCode": "329-1392",
+      "address": "栃木県さくら市氏家2771"
+    },
+    "09215-city": {
+      "name": "那須烏山市役所",
+      "status": "verified",
+      "postalCode": "321-0692",
+      "address": "栃木県那須烏山市中央1-1-1"
+    },
+    "09216-city": {
+      "name": "下野市役所",
+      "status": "verified",
+      "postalCode": "329-0492",
+      "address": "栃木県下野市笹原26"
+    },
+    "09301-town": {
+      "name": "上三川町役場",
+      "status": "verified",
+      "postalCode": "329-0696",
+      "address": "栃木県河内郡上三川町しらさぎ1-1"
+    },
+    "09342-town": {
+      "name": "益子町役場",
+      "status": "verified",
+      "postalCode": "321-4293",
+      "address": "栃木県芳賀郡益子町大字益子2030"
+    },
+    "09343-town": {
+      "name": "茂木町役場",
+      "status": "verified",
+      "postalCode": "321-3598",
+      "address": "栃木県芳賀郡茂木町大字茂木155"
+    },
+    "09344-town": {
+      "name": "市貝町役場",
+      "status": "verified",
+      "postalCode": "321-3493",
+      "address": "栃木県芳賀郡市貝町大字市塙1280"
+    },
+    "09345-town": {
+      "name": "芳賀町役場",
+      "status": "verified",
+      "postalCode": "321-3392",
+      "address": "栃木県芳賀郡芳賀町祖母井1020"
+    },
+    "09361-town": {
+      "name": "壬生町役場",
+      "status": "verified",
+      "postalCode": "321-0292",
+      "address": "栃木県下都賀郡壬生町大字壬生甲3841-1"
+    },
+    "09364-town": {
+      "name": "野木町役場",
+      "status": "verified",
+      "postalCode": "329-0195",
+      "address": "栃木県下都賀郡野木町大字丸林571"
+    },
+    "09384-town": {
+      "name": "塩谷町役場",
+      "status": "verified",
+      "postalCode": "329-2292",
+      "address": "栃木県塩谷郡塩谷町大字玉生955-3"
+    },
+    "09386-town": {
+      "name": "高根沢町役場",
+      "status": "verified",
+      "postalCode": "329-1292",
+      "address": "栃木県塩谷郡高根沢町大字石末2053"
+    },
+    "09407-town": {
+      "name": "那須町役場",
+      "status": "verified",
+      "postalCode": "329-3292",
+      "address": "栃木県那須郡那須町大字寺子丙3-13"
+    },
+    "09411-town": {
+      "name": "那珂川町役場",
+      "status": "verified",
+      "postalCode": "324-0692",
+      "address": "栃木県那須郡那珂川町馬頭555"
+    }
+  }
+}
