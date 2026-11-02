@@ -5,9 +5,9 @@
   "sourceAudit": "v2/audit/official-url-reachability-20261102.json and v2/audit/official-url-reachability-20261102-summary.json",
   "counts": {
     "total": 61,
-    "A": 8,
+    "A": 10,
     "B": 11,
-    "C": 42
+    "C": 40
   },
   "method": "各登録URLを実ブラウザで1回ずつ開いて可視ページ・遷移先を確認。読み込みできない場合は自治体の公式情報・公式ページの確認を行った。HTTP/TLS/ネットワークエラーのみで廃止と断定していない。",
   "results": [
@@ -674,25 +674,25 @@
       "municipality": "江北町",
       "municipalityCode": "41424",
       "registeredUrl": "https://www.town.kouhoku.saga.jp/",
-      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "ユーザー提供のSafari画面で江北町の公式ページを表示。画面上のホストは town.kouhoku.saga.jp、ページ内に江北町のロゴ・名称と公式情報を確認。Safariのアドレス表示はwwwを省略する場合があるため、登録URLと同一ホストとして扱う。",
+      "finalUrl": "https://www.town.kouhoku.saga.jp/",
+      "classification": "A",
       "evidence": [
         "PR #188の通信検査: TimeoutError: The read operation timed out"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "sourceUrl": "https://www.town.kouhoku.saga.jp/",
       "machineCheck": {
         "status": null,
         "result": "network_or_other",
         "error": "TimeoutError: The read operation timed out"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "ユーザー提供の実ブラウザ画面で登録URLと一致する自治体公式ページおよび自治体名を確認。",
       "evidenceUrls": [
-        "https://www.town.kouhoku.saga.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+        "https://www.town.kouhoku.saga.jp/"
+      ],
+      "lastCheckedAt": "2026-11-03 (user-provided Safari screenshots; precise capture time unavailable)"
     },
     {
       "prefecture": "和歌山県",
@@ -828,14 +828,14 @@
       "municipality": "南種子町",
       "municipalityCode": "46502",
       "registeredUrl": "https://www.town.minamitane.kagoshima.jp/",
-      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: http://town.minamitane.kagoshima.jp/index.html (鹿児島県公式リンクの候補; ブラウザ確認できず)",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "ユーザー提供のSafari画面で南種子町公式サイトを表示。ページ内の「南種子町役場」「南種子町 Official Website」と町の公式コンテンツを確認。アドレスバーには登録URLと同じホストが表示されている（wwwはSafari表示上省略）。",
+      "finalUrl": "https://www.town.minamitane.kagoshima.jp/",
+      "classification": "A",
       "evidence": [
         "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "sourceUrl": "https://www.town.minamitane.kagoshima.jp/",
       "candidateUrl": "http://town.minamitane.kagoshima.jp/index.html",
       "machineCheck": {
         "status": null,
@@ -843,11 +843,11 @@
         "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "ユーザー提供の実ブラウザ画面で登録URLと一致する自治体公式ページおよび自治体名を確認。",
       "evidenceUrls": [
-        "https://www.town.minamitane.kagoshima.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+        "https://www.town.minamitane.kagoshima.jp/"
+      ],
+      "lastCheckedAt": "2026-11-03 (user-provided Safari screenshots; precise capture time unavailable)"
     },
     {
       "prefecture": "佐賀県",
@@ -1792,6 +1792,58 @@
           "result": "登録URLを実ブラウザで表示。北海道蘭越町のロゴ・名称と「ホームページの一時停止・一部機能の縮小について」の臨時案内を確認。サイト停止が明示され、通常サイトの復旧・移転先は確定できないためCを維持。",
           "evidenceUrls": [
             "https://www.town.rankoshi.hokkaido.jp/"
+          ]
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-11-03 (user-provided Safari screenshots; precise capture time unavailable)",
+      "scope": "ユーザー提供のSafari画面4件を確認。江北町・南種子町は登録URLの公式ページと確認したためAへ変更。日向市・指宿市は公式臨時停止ページの表示を確認しCを維持。",
+      "results": [
+        {
+          "municipalityCode": "41424",
+          "municipality": "江北町",
+          "previousClassification": "C",
+          "classification": "A",
+          "registeredUrl": "https://www.town.kouhoku.saga.jp/",
+          "observedHost": "town.kouhoku.saga.jp",
+          "result": "ユーザー提供のSafari画面で江北町の公式ページを表示。画面上のホストは town.kouhoku.saga.jp、ページ内に江北町のロゴ・名称と公式情報を確認。Safariのアドレス表示はwwwを省略する場合があるため、登録URLと同一ホストとして扱う。",
+          "evidenceUrls": [
+            "https://www.town.kouhoku.saga.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "45206",
+          "municipality": "日向市",
+          "classification": "C",
+          "registeredUrl": "https://www.city.hyuga.miyazaki.jp/",
+          "observedHost": "hyugacity.jp",
+          "result": "日向市ホームページ（臨時ページ）とシステム障害中の告知を表示。登録URLの通常サイトではなく臨時ページのためCを維持。",
+          "evidenceUrls": [
+            "https://www.hyugacity.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "46210",
+          "municipality": "指宿市",
+          "classification": "C",
+          "registeredUrl": "https://www.city.ibusuki.lg.jp/",
+          "observedHost": "city.ibusuki.lg.jp",
+          "result": "登録ドメインで公式「サービス一時停止のお知らせ」を表示。セキュリティ対応によるサービス停止中のためCを維持。",
+          "evidenceUrls": [
+            "https://www.city.ibusuki.lg.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "46502",
+          "municipality": "南種子町",
+          "previousClassification": "C",
+          "classification": "A",
+          "registeredUrl": "https://www.town.minamitane.kagoshima.jp/",
+          "observedHost": "town.minamitane.kagoshima.jp",
+          "result": "ユーザー提供のSafari画面で南種子町公式サイトを表示。ページ内の「南種子町役場」「南種子町 Official Website」と町の公式コンテンツを確認。アドレスバーには登録URLと同じホストが表示されている（wwwはSafari表示上省略）。",
+          "evidenceUrls": [
+            "https://www.town.minamitane.kagoshima.jp/"
           ]
         }
       ]
