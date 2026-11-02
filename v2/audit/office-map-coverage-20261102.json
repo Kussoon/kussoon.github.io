@@ -1,0 +1,609 @@
+{
+  "generatedAt": "2026-11-02",
+  "mapTotal": 1905,
+  "officeTotal": 1912,
+  "prefectures": [
+    {
+      "pref": "01",
+      "topo": "hokkaido-prefecture-20m/01.topojson",
+      "mapRegions": 194,
+      "officeRegions": 189,
+      "mapOnly": [
+        {
+          "code": "01695",
+          "name": "色丹村",
+          "prefecture": "01",
+          "city": ""
+        },
+        {
+          "code": "01696",
+          "name": "泊村",
+          "prefecture": "01",
+          "city": ""
+        },
+        {
+          "code": "01697",
+          "name": "留夜別村",
+          "prefecture": "01",
+          "city": ""
+        },
+        {
+          "code": "01698",
+          "name": "留別村",
+          "prefecture": "01",
+          "city": ""
+        },
+        {
+          "code": "01699",
+          "name": "紗那村",
+          "prefecture": "01",
+          "city": ""
+        },
+        {
+          "code": "01700",
+          "name": "蘂取村",
+          "prefecture": "01",
+          "city": ""
+        }
+      ],
+      "officeOnly": [
+        {
+          "code": "01100",
+          "name": "札幌市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "02",
+      "topo": "tohoku-prefecture-20m/02.topojson",
+      "mapRegions": 40,
+      "officeRegions": 40,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "03",
+      "topo": "tohoku-prefecture-20m/03.topojson",
+      "mapRegions": 33,
+      "officeRegions": 33,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "04",
+      "topo": "tohoku-prefecture-20m/04.topojson",
+      "mapRegions": 39,
+      "officeRegions": 40,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "04100",
+          "name": "仙台市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "05",
+      "topo": "tohoku-prefecture-20m/05.topojson",
+      "mapRegions": 25,
+      "officeRegions": 25,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "06",
+      "topo": "tohoku-prefecture-20m/06.topojson",
+      "mapRegions": 35,
+      "officeRegions": 35,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "07",
+      "topo": "tohoku-prefecture-20m/07.topojson",
+      "mapRegions": 59,
+      "officeRegions": 59,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "08",
+      "topo": "kanto-prefecture-20m/08.topojson",
+      "mapRegions": 44,
+      "officeRegions": 44,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "09",
+      "topo": "kanto-prefecture-20m/09.topojson",
+      "mapRegions": 25,
+      "officeRegions": 25,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "10",
+      "topo": "kanto-prefecture-20m/10.topojson",
+      "mapRegions": 35,
+      "officeRegions": 35,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "11",
+      "topo": "kanto-prefecture-20m/11.topojson",
+      "mapRegions": 72,
+      "officeRegions": 73,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "11100",
+          "name": "さいたま市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "12",
+      "topo": "kanto-prefecture-20m/12.topojson",
+      "mapRegions": 60,
+      "officeRegions": 60,
+      "mapOnly": [
+        {
+          "code": "12000",
+          "name": "所属未定地",
+          "prefecture": "12",
+          "city": ""
+        }
+      ],
+      "officeOnly": [
+        {
+          "code": "12100",
+          "name": "千葉市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "13",
+      "topo": "kanto-prefecture-20m/13.topojson",
+      "mapRegions": 63,
+      "officeRegions": 62,
+      "mapOnly": [
+        {
+          "code": "13000",
+          "name": "所属未定地",
+          "prefecture": "13",
+          "city": ""
+        }
+      ],
+      "officeOnly": []
+    },
+    {
+      "pref": "14",
+      "topo": "kanto-prefecture-20m/14.topojson",
+      "mapRegions": 58,
+      "officeRegions": 61,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "14100",
+          "name": "横浜市",
+          "kind": "designatedCity"
+        },
+        {
+          "code": "14130",
+          "name": "川崎市",
+          "kind": "designatedCity"
+        },
+        {
+          "code": "14150",
+          "name": "相模原市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "15",
+      "topo": "hokuriku-koshinetsu-prefecture-20m/15.topojson",
+      "mapRegions": 37,
+      "officeRegions": 38,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "15100",
+          "name": "新潟市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "16",
+      "topo": "hokuriku-koshinetsu-prefecture-20m/16.topojson",
+      "mapRegions": 15,
+      "officeRegions": 15,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "17",
+      "topo": "hokuriku-koshinetsu-prefecture-20m/17.topojson",
+      "mapRegions": 19,
+      "officeRegions": 19,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "18",
+      "topo": "hokuriku-koshinetsu-prefecture-20m/18.topojson",
+      "mapRegions": 17,
+      "officeRegions": 17,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "19",
+      "topo": "hokuriku-koshinetsu-prefecture-20m/19.topojson",
+      "mapRegions": 27,
+      "officeRegions": 27,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "20",
+      "topo": "hokuriku-koshinetsu-prefecture-20m/20.topojson",
+      "mapRegions": 77,
+      "officeRegions": 77,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "21",
+      "topo": "tokai-prefecture-20m/21.topojson",
+      "mapRegions": 42,
+      "officeRegions": 42,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "22",
+      "topo": "tokai-prefecture-20m/22.topojson",
+      "mapRegions": 39,
+      "officeRegions": 41,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "22100",
+          "name": "静岡市",
+          "kind": "designatedCity"
+        },
+        {
+          "code": "22130",
+          "name": "浜松市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "23",
+      "topo": "tokai-prefecture-20m/23.topojson",
+      "mapRegions": 70,
+      "officeRegions": 70,
+      "mapOnly": [
+        {
+          "code": "23000",
+          "name": "所属未定地",
+          "prefecture": "23",
+          "city": ""
+        }
+      ],
+      "officeOnly": [
+        {
+          "code": "23100",
+          "name": "名古屋市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "24",
+      "topo": "tokai-prefecture-20m/24.topojson",
+      "mapRegions": 29,
+      "officeRegions": 29,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "25",
+      "topo": "national-2026-pilot/25.topojson",
+      "mapRegions": 19,
+      "officeRegions": 19,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "26",
+      "topo": "national-2026-pilot/26.topojson",
+      "mapRegions": 36,
+      "officeRegions": 37,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "26100",
+          "name": "京都市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "27",
+      "topo": "national-2026-pilot/27.topojson",
+      "mapRegions": 72,
+      "officeRegions": 74,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "27100",
+          "name": "大阪市",
+          "kind": "designatedCity"
+        },
+        {
+          "code": "27140",
+          "name": "堺市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "28",
+      "topo": "national-2026-pilot/28.topojson",
+      "mapRegions": 49,
+      "officeRegions": 50,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "28100",
+          "name": "神戸市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "29",
+      "topo": "national-2026-pilot/29.topojson",
+      "mapRegions": 39,
+      "officeRegions": 39,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "30",
+      "topo": "national-2026-pilot/30.topojson",
+      "mapRegions": 31,
+      "officeRegions": 30,
+      "mapOnly": [
+        {
+          "code": "30000",
+          "name": "所属未定地",
+          "prefecture": "30",
+          "city": ""
+        }
+      ],
+      "officeOnly": []
+    },
+    {
+      "pref": "31",
+      "topo": "national-2026-pilot/31.topojson",
+      "mapRegions": 19,
+      "officeRegions": 19,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "32",
+      "topo": "national-2026-pilot/32.topojson",
+      "mapRegions": 19,
+      "officeRegions": 19,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "33",
+      "topo": "national-2026-pilot/33.topojson",
+      "mapRegions": 30,
+      "officeRegions": 31,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "33100",
+          "name": "岡山市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "34",
+      "topo": "national-2026-pilot/34.topojson",
+      "mapRegions": 30,
+      "officeRegions": 31,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "34100",
+          "name": "広島市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "35",
+      "topo": "national-2026-pilot/35.topojson",
+      "mapRegions": 19,
+      "officeRegions": 19,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "36",
+      "topo": "national-2026-pilot/36.topojson",
+      "mapRegions": 24,
+      "officeRegions": 24,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "37",
+      "topo": "national-2026-pilot/37.topojson",
+      "mapRegions": 17,
+      "officeRegions": 17,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "38",
+      "topo": "national-2026-pilot/38.topojson",
+      "mapRegions": 20,
+      "officeRegions": 20,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "39",
+      "topo": "national-2026-pilot/39.topojson",
+      "mapRegions": 34,
+      "officeRegions": 34,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "40",
+      "topo": "kyushu-prefecture-20m/40.topojson",
+      "mapRegions": 73,
+      "officeRegions": 74,
+      "mapOnly": [
+        {
+          "code": "40000",
+          "name": "所属未定地",
+          "prefecture": "40",
+          "city": ""
+        }
+      ],
+      "officeOnly": [
+        {
+          "code": "40100",
+          "name": "北九州市",
+          "kind": "designatedCity"
+        },
+        {
+          "code": "40130",
+          "name": "福岡市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "41",
+      "topo": "kyushu-prefecture-20m/41.topojson",
+      "mapRegions": 20,
+      "officeRegions": 20,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "42",
+      "topo": "kyushu-prefecture-20m/42.topojson",
+      "mapRegions": 21,
+      "officeRegions": 21,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "43",
+      "topo": "kyushu-prefecture-20m/43.topojson",
+      "mapRegions": 49,
+      "officeRegions": 50,
+      "mapOnly": [],
+      "officeOnly": [
+        {
+          "code": "43100",
+          "name": "熊本市",
+          "kind": "designatedCity"
+        }
+      ]
+    },
+    {
+      "pref": "44",
+      "topo": "kyushu-prefecture-20m/44.topojson",
+      "mapRegions": 18,
+      "officeRegions": 18,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "45",
+      "topo": "kyushu-prefecture-20m/45.topojson",
+      "mapRegions": 26,
+      "officeRegions": 26,
+      "mapOnly": [],
+      "officeOnly": []
+    },
+    {
+      "pref": "46",
+      "topo": "kyushu-prefecture-20m/46.topojson",
+      "mapRegions": 44,
+      "officeRegions": 43,
+      "mapOnly": [
+        {
+          "code": "46000",
+          "name": "所属未定地",
+          "prefecture": "46",
+          "city": ""
+        }
+      ],
+      "officeOnly": []
+    },
+    {
+      "pref": "47",
+      "topo": "kyushu-prefecture-20m/47.topojson",
+      "mapRegions": 42,
+      "officeRegions": 41,
+      "mapOnly": [
+        {
+          "code": "47000",
+          "name": "所属未定地",
+          "prefecture": "47",
+          "city": ""
+        }
+      ],
+      "officeOnly": []
+    }
+  ],
+  "mapOnlyTotal": 13,
+  "officeOnlyTotal": 20,
+  "duplicateMapCodes": [],
+  "invalidOfficeLinks": [],
+  "knownExceptions": {
+    "unassignedCodes": [
+      "12000",
+      "13000",
+      "23000",
+      "30000",
+      "40000",
+      "46000",
+      "47000"
+    ],
+    "northernTerritoriesCodes": [
+      "01695",
+      "01696",
+      "01697",
+      "01698",
+      "01699",
+      "01700"
+    ],
+    "designatedCityParentCount": 20
+  },
+  "unexpected": []
+}
