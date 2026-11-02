@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "10",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.gunma.jp/page/14524.html",
+    "https://gck.gr.jp/about/chousonchou"
+  ],
+  "regions": {
+    "10201": {
+      "name": "前橋市",
+      "kind": "city",
+      "officeIds": [
+        "10201-city"
+      ],
+      "official": "https://www.city.maebashi.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%89%8D%E6%A9%8B%E5%B8%82"
+    },
+    "10202": {
+      "name": "高崎市",
+      "kind": "city",
+      "officeIds": [
+        "10202-city"
+      ],
+      "official": "https://www.city.takasaki.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%AB%98%E5%B4%8E%E5%B8%82"
+    },
+    "10203": {
+      "name": "桐生市",
+      "kind": "city",
+      "officeIds": [
+        "10203-city"
+      ],
+      "official": "https://www.city.kiryu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%A1%90%E7%94%9F%E5%B8%82"
+    },
+    "10204": {
+      "name": "伊勢崎市",
+      "kind": "city",
+      "officeIds": [
+        "10204-city"
+      ],
+      "official": "https://www.city.isesaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E4%BC%8A%E5%8B%A2%E5%B4%8E%E5%B8%82"
+    },
+    "10205": {
+      "name": "太田市",
+      "kind": "city",
+      "officeIds": [
+        "10205-city"
+      ],
+      "official": "https://www.city.ota.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%A4%AA%E7%94%B0%E5%B8%82"
+    },
+    "10206": {
+      "name": "沼田市",
+      "kind": "city",
+      "officeIds": [
+        "10206-city"
+      ],
+      "official": "https://www.city.numata.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%B2%BC%E7%94%B0%E5%B8%82"
+    },
+    "10207": {
+      "name": "館林市",
+      "kind": "city",
+      "officeIds": [
+        "10207-city"
+      ],
+      "official": "https://www.city.tatebayashi.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%A4%A8%E6%9E%97%E5%B8%82"
+    },
+    "10208": {
+      "name": "渋川市",
+      "kind": "city",
+      "officeIds": [
+        "10208-city"
+      ],
+      "official": "https://www.city.shibukawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%B8%8B%E5%B7%9D%E5%B8%82"
+    },
+    "10209": {
+      "name": "藤岡市",
+      "kind": "city",
+      "officeIds": [
+        "10209-city"
+      ],
+      "official": "https://www.city.fujioka.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E8%97%A4%E5%B2%A1%E5%B8%82"
+    },
+    "10210": {
+      "name": "富岡市",
+      "kind": "city",
+      "officeIds": [
+        "10210-city"
+      ],
+      "official": "https://www.city.tomioka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%AF%8C%E5%B2%A1%E5%B8%82"
+    },
+    "10211": {
+      "name": "安中市",
+      "kind": "city",
+      "officeIds": [
+        "10211-city"
+      ],
+      "official": "https://www.city.annaka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%AE%89%E4%B8%AD%E5%B8%82"
+    },
+    "10212": {
+      "name": "みどり市",
+      "kind": "city",
+      "officeIds": [
+        "10212-city"
+      ],
+      "official": "https://www.city.midori.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E3%81%BF%E3%81%A9%E3%82%8A%E5%B8%82"
+    },
+    "10344": {
+      "name": "榛東村",
+      "kind": "village",
+      "officeIds": [
+        "10344-village"
+      ],
+      "official": "https://www.vill.shinto.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%A6%9B%E6%9D%B1%E6%9D%91"
+    },
+    "10345": {
+      "name": "吉岡町",
+      "kind": "town",
+      "officeIds": [
+        "10345-town"
+      ],
+      "official": "https://www.town.yoshioka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%90%89%E5%B2%A1%E7%94%BA"
+    },
+    "10366": {
+      "name": "上野村",
+      "kind": "village",
+      "officeIds": [
+        "10366-village"
+      ],
+      "official": "https://www.uenomura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E4%B8%8A%E9%87%8E%E6%9D%91"
+    },
+    "10367": {
+      "name": "神流町",
+      "kind": "town",
+      "officeIds": [
+        "10367-town"
+      ],
+      "official": "https://www.town.kanna.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E7%A5%9E%E6%B5%81%E7%94%BA"
+    },
+    "10382": {
+      "name": "下仁田町",
+      "kind": "town",
+      "officeIds": [
+        "10382-town"
+      ],
+      "official": "https://www.town.shimonita.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E4%B8%8B%E4%BB%81%E7%94%B0%E7%94%BA"
+    },
+    "10383": {
+      "name": "南牧村",
+      "kind": "village",
+      "officeIds": [
+        "10383-village"
+      ],
+      "official": "https://www.nanmoku.ne.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%8D%97%E7%89%A7%E6%9D%91"
+    },
+    "10384": {
+      "name": "甘楽町",
+      "kind": "town",
+      "officeIds": [
+        "10384-town"
+      ],
+      "official": "https://www.town.kanra.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E7%94%98%E6%A5%BD%E7%94%BA"
+    },
+    "10421": {
+      "name": "中之条町",
+      "kind": "town",
+      "officeIds": [
+        "10421-town"
+      ],
+      "official": "https://www.town.nakanojo.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E4%B8%AD%E4%B9%8B%E6%9D%A1%E7%94%BA"
+    },
+    "10424": {
+      "name": "長野原町",
+      "kind": "town",
+      "officeIds": [
+        "10424-town"
+      ],
+      "official": "https://www.town.naganohara.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%95%B7%E9%87%8E%E5%8E%9F%E7%94%BA"
+    },
+    "10425": {
+      "name": "嬬恋村",
+      "kind": "village",
+      "officeIds": [
+        "10425-village"
+      ],
+      "official": "https://www.vill.tsumagoi.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%AC%AC%E6%81%8B%E6%9D%91"
+    },
+    "10426": {
+      "name": "草津町",
+      "kind": "town",
+      "officeIds": [
+        "10426-town"
+      ],
+      "official": "https://www.town.kusatsu.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E8%8D%89%E6%B4%A5%E7%94%BA"
+    },
+    "10428": {
+      "name": "高山村",
+      "kind": "village",
+      "officeIds": [
+        "10428-village"
+      ],
+      "official": "https://vill.takayama.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%AB%98%E5%B1%B1%E6%9D%91"
+    },
+    "10429": {
+      "name": "東吾妻町",
+      "kind": "town",
+      "officeIds": [
+        "10429-town"
+      ],
+      "official": "https://www.town.higashiagatsuma.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%9D%B1%E5%90%BE%E5%A6%BB%E7%94%BA"
+    },
+    "10443": {
+      "name": "片品村",
+      "kind": "village",
+      "officeIds": [
+        "10443-village"
+      ],
+      "official": "https://www.vill.katashina.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E7%89%87%E5%93%81%E6%9D%91"
+    },
+    "10444": {
+      "name": "川場村",
+      "kind": "village",
+      "officeIds": [
+        "10444-village"
+      ],
+      "official": "https://www.vill.kawaba.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%B7%9D%E5%A0%B4%E6%9D%91"
+    },
+    "10448": {
+      "name": "昭和村",
+      "kind": "village",
+      "officeIds": [
+        "10448-village"
+      ],
+      "official": "https://www.vill.showa.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%98%AD%E5%92%8C%E6%9D%91"
+    },
+    "10449": {
+      "name": "みなかみ町",
+      "kind": "town",
+      "officeIds": [
+        "10449-town"
+      ],
+      "official": "https://www.town.minakami.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E3%81%BF%E3%81%AA%E3%81%8B%E3%81%BF%E7%94%BA"
+    },
+    "10464": {
+      "name": "玉村町",
+      "kind": "town",
+      "officeIds": [
+        "10464-town"
+      ],
+      "official": "https://www.town.tamamura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E7%8E%89%E6%9D%91%E7%94%BA"
+    },
+    "10521": {
+      "name": "板倉町",
+      "kind": "town",
+      "officeIds": [
+        "10521-town"
+      ],
+      "official": "https://www.town.itakura.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%9D%BF%E5%80%89%E7%94%BA"
+    },
+    "10522": {
+      "name": "明和町",
+      "kind": "town",
+      "officeIds": [
+        "10522-town"
+      ],
+      "official": "https://www.town.meiwa.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E6%98%8E%E5%92%8C%E7%94%BA"
+    },
+    "10523": {
+      "name": "千代田町",
+      "kind": "town",
+      "officeIds": [
+        "10523-town"
+      ],
+      "official": "https://www.town.chiyoda.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%8D%83%E4%BB%A3%E7%94%B0%E7%94%BA"
+    },
+    "10524": {
+      "name": "大泉町",
+      "kind": "town",
+      "officeIds": [
+        "10524-town"
+      ],
+      "official": "https://www.town.oizumi.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%A4%A7%E6%B3%89%E7%94%BA"
+    },
+    "10525": {
+      "name": "邑楽町",
+      "kind": "town",
+      "officeIds": [
+        "10525-town"
+      ],
+      "official": "https://www.town.ora.gunma.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%82%91%E6%A5%BD%E7%94%BA"
+    }
+  },
+  "offices": {
+    "10201-city": {
+      "name": "前橋市役所",
+      "status": "verified",
+      "postalCode": "371-8601",
+      "address": "群馬県前橋市大手町2-12-1"
+    },
+    "10202-city": {
+      "name": "高崎市役所",
+      "status": "verified",
+      "postalCode": "370-8501",
+      "address": "群馬県高崎市高松町35-1"
+    },
+    "10203-city": {
+      "name": "桐生市役所",
+      "status": "verified",
+      "postalCode": "376-8501",
+      "address": "群馬県桐生市織姫町1-1"
+    },
+    "10204-city": {
+      "name": "伊勢崎市役所",
+      "status": "verified",
+      "postalCode": "372-8501",
+      "address": "群馬県伊勢崎市今泉町2-410"
+    },
+    "10205-city": {
+      "name": "太田市役所",
+      "status": "verified",
+      "postalCode": "373-8718",
+      "address": "群馬県太田市浜町2-35"
+    },
+    "10206-city": {
+      "name": "沼田市役所",
+      "status": "verified",
+      "postalCode": "378-8501",
+      "address": "群馬県沼田市下之町888"
+    },
+    "10207-city": {
+      "name": "館林市役所",
+      "status": "verified",
+      "postalCode": "374-8501",
+      "address": "群馬県館林市城町1-1"
+    },
+    "10208-city": {
+      "name": "渋川市役所",
+      "status": "verified",
+      "postalCode": "377-8501",
+      "address": "群馬県渋川市石原80"
+    },
+    "10209-city": {
+      "name": "藤岡市役所",
+      "status": "verified",
+      "postalCode": "375-8601",
+      "address": "群馬県藤岡市中栗須327"
+    },
+    "10210-city": {
+      "name": "富岡市役所",
+      "status": "verified",
+      "postalCode": "370-2392",
+      "address": "群馬県富岡市富岡1460-1"
+    },
+    "10211-city": {
+      "name": "安中市役所",
+      "status": "verified",
+      "postalCode": "379-0192",
+      "address": "群馬県安中市安中2-13-7"
+    },
+    "10212-city": {
+      "name": "みどり市役所",
+      "status": "verified",
+      "postalCode": "379-2395",
+      "address": "群馬県みどり市笠懸町鹿2952"
+    },
+    "10344-village": {
+      "name": "榛東村役場",
+      "status": "verified",
+      "postalCode": "370-3593",
+      "address": "群馬県北群馬郡榛東村大字新井790-1"
+    },
+    "10345-town": {
+      "name": "吉岡町役場",
+      "status": "verified",
+      "postalCode": "370-3692",
+      "address": "群馬県北群馬郡吉岡町大字下野田560"
+    },
+    "10366-village": {
+      "name": "上野村役場",
+      "status": "verified",
+      "postalCode": "370-1614",
+      "address": "群馬県多野郡上野村大字川和11"
+    },
+    "10367-town": {
+      "name": "神流町役場",
+      "status": "verified",
+      "postalCode": "370-1592",
+      "address": "群馬県多野郡神流町大字万場90-6"
+    },
+    "10382-town": {
+      "name": "下仁田町役場",
+      "status": "verified",
+      "postalCode": "370-2601",
+      "address": "群馬県甘楽郡下仁田町大字下仁田682"
+    },
+    "10383-village": {
+      "name": "南牧村役場",
+      "status": "verified",
+      "postalCode": "370-2806",
+      "address": "群馬県甘楽郡南牧村大字大日向1098"
+    },
+    "10384-town": {
+      "name": "甘楽町役場",
+      "status": "verified",
+      "postalCode": "370-2292",
+      "address": "群馬県甘楽郡甘楽町大字小幡161-1"
+    },
+    "10421-town": {
+      "name": "中之条町役場",
+      "status": "verified",
+      "postalCode": "377-0494",
+      "address": "群馬県吾妻郡中之条町大字中之条町1091"
+    },
+    "10424-town": {
+      "name": "長野原町役場",
+      "status": "verified",
+      "postalCode": "377-1392",
+      "address": "群馬県吾妻郡長野原町大字長野原1340-1"
+    },
+    "10425-village": {
+      "name": "嬬恋村役場",
+      "status": "verified",
+      "postalCode": "377-1692",
+      "address": "群馬県吾妻郡嬬恋村大字大前110"
+    },
+    "10426-town": {
+      "name": "草津町役場",
+      "status": "verified",
+      "postalCode": "377-1792",
+      "address": "群馬県吾妻郡草津町大字草津28"
+    },
+    "10428-village": {
+      "name": "高山村役場",
+      "status": "verified",
+      "postalCode": "377-0792",
+      "address": "群馬県吾妻郡高山村大字中山2856-1"
+    },
+    "10429-town": {
+      "name": "東吾妻町役場",
+      "status": "verified",
+      "postalCode": "377-0892",
+      "address": "群馬県吾妻郡東吾妻町大字原町1046"
+    },
+    "10443-village": {
+      "name": "片品村役場",
+      "status": "verified",
+      "postalCode": "378-0498",
+      "address": "群馬県利根郡片品村大字鎌田3967-3"
+    },
+    "10444-village": {
+      "name": "川場村役場",
+      "status": "verified",
+      "postalCode": "378-0101",
+      "address": "群馬県利根郡川場村大字谷地3200"
+    },
+    "10448-village": {
+      "name": "昭和村役場",
+      "status": "verified",
+      "postalCode": "379-1298",
+      "address": "群馬県利根郡昭和村大字糸井388"
+    },
+    "10449-town": {
+      "name": "みなかみ町役場",
+      "status": "verified",
+      "postalCode": "379-1393",
+      "address": "群馬県利根郡みなかみ町後閑318"
+    },
+    "10464-town": {
+      "name": "玉村町役場",
+      "status": "verified",
+      "postalCode": "370-1192",
+      "address": "群馬県佐波郡玉村町大字下新田201"
+    },
+    "10521-town": {
+      "name": "板倉町役場",
+      "status": "verified",
+      "postalCode": "374-0192",
+      "address": "群馬県邑楽郡板倉町大字板倉2682-1"
+    },
+    "10522-town": {
+      "name": "明和町役場",
+      "status": "verified",
+      "postalCode": "370-0795",
+      "address": "群馬県邑楽郡明和町新里250-1"
+    },
+    "10523-town": {
+      "name": "千代田町役場",
+      "status": "verified",
+      "postalCode": "370-0598",
+      "address": "群馬県邑楽郡千代田町大字赤岩1895-1"
+    },
+    "10524-town": {
+      "name": "大泉町役場",
+      "status": "verified",
+      "postalCode": "370-0595",
+      "address": "群馬県邑楽郡大泉町日の出51-1"
+    },
+    "10525-town": {
+      "name": "邑楽町役場",
+      "status": "verified",
+      "postalCode": "370-0692",
+      "address": "群馬県邑楽郡邑楽町大字中野2570-1"
+    }
+  }
+}
