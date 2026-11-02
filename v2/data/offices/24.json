@@ -1,0 +1,449 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "24",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kinki/cms_14514183.html",
+    "https://www.pref.mie.lg.jp/SHICHOS/HP/23057019610.htm",
+    "https://www.kouiki-kansai.jp/koikirengo/jisijimu/bosai/bosaiportal/shicyoson/1522.html"
+  ],
+  "regions": {
+    "24201": {
+      "name": "津市",
+      "kind": "city",
+      "officeIds": [
+        "24201-city"
+      ],
+      "official": "https://www.info.city.tsu.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%B4%A5%E5%B8%82"
+    },
+    "24202": {
+      "name": "四日市市",
+      "kind": "city",
+      "officeIds": [
+        "24202-city"
+      ],
+      "official": "https://www5.city.yokkaichi.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%9B%9B%E6%97%A5%E5%B8%82%E5%B8%82"
+    },
+    "24203": {
+      "name": "伊勢市",
+      "kind": "city",
+      "officeIds": [
+        "24203-city"
+      ],
+      "official": "https://www.city.ise.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BC%8A%E5%8B%A2%E5%B8%82"
+    },
+    "24204": {
+      "name": "松阪市",
+      "kind": "city",
+      "officeIds": [
+        "24204-city"
+      ],
+      "official": "https://www.city.matsusaka.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%9D%BE%E9%98%AA%E5%B8%82"
+    },
+    "24205": {
+      "name": "桑名市",
+      "kind": "city",
+      "officeIds": [
+        "24205-city"
+      ],
+      "official": "https://www.city.kuwana.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%A1%91%E5%90%8D%E5%B8%82"
+    },
+    "24207": {
+      "name": "鈴鹿市",
+      "kind": "city",
+      "officeIds": [
+        "24207-city"
+      ],
+      "official": "https://www.city.suzuka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E9%88%B4%E9%B9%BF%E5%B8%82"
+    },
+    "24208": {
+      "name": "名張市",
+      "kind": "city",
+      "officeIds": [
+        "24208-city"
+      ],
+      "official": "https://www.city.nabari.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%90%8D%E5%BC%B5%E5%B8%82"
+    },
+    "24209": {
+      "name": "尾鷲市",
+      "kind": "city",
+      "officeIds": [
+        "24209-city"
+      ],
+      "official": "https://www.city.owase.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B0%BE%E9%B7%B2%E5%B8%82"
+    },
+    "24210": {
+      "name": "亀山市",
+      "kind": "city",
+      "officeIds": [
+        "24210-city"
+      ],
+      "official": "https://www.city.kameyama.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BA%80%E5%B1%B1%E5%B8%82"
+    },
+    "24211": {
+      "name": "鳥羽市",
+      "kind": "city",
+      "officeIds": [
+        "24211-city"
+      ],
+      "official": "https://www.city.toba.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E7%BE%BD%E5%B8%82"
+    },
+    "24212": {
+      "name": "熊野市",
+      "kind": "city",
+      "officeIds": [
+        "24212-city"
+      ],
+      "official": "https://www.city.kumano.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%86%8A%E9%87%8E%E5%B8%82"
+    },
+    "24214": {
+      "name": "いなべ市",
+      "kind": "city",
+      "officeIds": [
+        "24214-city"
+      ],
+      "official": "https://www.city.inabe.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E3%81%84%E3%81%AA%E3%81%B9%E5%B8%82"
+    },
+    "24215": {
+      "name": "志摩市",
+      "kind": "city",
+      "officeIds": [
+        "24215-city"
+      ],
+      "official": "https://www.city.shima.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%BF%97%E6%91%A9%E5%B8%82"
+    },
+    "24216": {
+      "name": "伊賀市",
+      "kind": "city",
+      "officeIds": [
+        "24216-city"
+      ],
+      "official": "https://www.city.iga.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%BC%8A%E8%B3%80%E5%B8%82"
+    },
+    "24303": {
+      "name": "木曽岬町",
+      "kind": "town",
+      "officeIds": [
+        "24303-town"
+      ],
+      "official": "https://www.town.kisosaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%9C%A8%E6%9B%BD%E5%B2%AC%E7%94%BA"
+    },
+    "24324": {
+      "name": "東員町",
+      "kind": "town",
+      "officeIds": [
+        "24324-town"
+      ],
+      "official": "https://www.town.toin.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%9D%B1%E5%93%A1%E7%94%BA"
+    },
+    "24341": {
+      "name": "菰野町",
+      "kind": "town",
+      "officeIds": [
+        "24341-town"
+      ],
+      "official": "https://www2.town.komono.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E8%8F%B0%E9%87%8E%E7%94%BA"
+    },
+    "24343": {
+      "name": "朝日町",
+      "kind": "town",
+      "officeIds": [
+        "24343-town"
+      ],
+      "official": "https://www2.town.asahi.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%9C%9D%E6%97%A5%E7%94%BA_(%E4%B8%89%E9%87%8D%E7%9C%8C)"
+    },
+    "24344": {
+      "name": "川越町",
+      "kind": "town",
+      "officeIds": [
+        "24344-town"
+      ],
+      "official": "https://www.town.kawagoe.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B7%9D%E8%B6%8A%E7%94%BA_(%E4%B8%89%E9%87%8D%E7%9C%8C)"
+    },
+    "24441": {
+      "name": "多気町",
+      "kind": "town",
+      "officeIds": [
+        "24441-town"
+      ],
+      "official": "https://www.town.taki.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%A4%9A%E6%B0%97%E7%94%BA"
+    },
+    "24442": {
+      "name": "明和町",
+      "kind": "town",
+      "officeIds": [
+        "24442-town"
+      ],
+      "official": "https://www.town.meiwa.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%98%8E%E5%92%8C%E7%94%BA_(%E4%B8%89%E9%87%8D%E7%9C%8C)"
+    },
+    "24443": {
+      "name": "大台町",
+      "kind": "town",
+      "officeIds": [
+        "24443-town"
+      ],
+      "official": "https://www.odaitown.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%8F%B0%E7%94%BA"
+    },
+    "24461": {
+      "name": "玉城町",
+      "kind": "town",
+      "officeIds": [
+        "24461-town"
+      ],
+      "official": "https://kizuna.town.tamaki.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%8E%89%E5%9F%8E%E7%94%BA"
+    },
+    "24470": {
+      "name": "度会町",
+      "kind": "town",
+      "officeIds": [
+        "24470-town"
+      ],
+      "official": "https://www.town.watarai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%BA%A6%E4%BC%9A%E7%94%BA"
+    },
+    "24471": {
+      "name": "大紀町",
+      "kind": "town",
+      "officeIds": [
+        "24471-town"
+      ],
+      "official": "https://www.town.taiki.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E7%B4%80%E7%94%BA"
+    },
+    "24472": {
+      "name": "南伊勢町",
+      "kind": "town",
+      "officeIds": [
+        "24472-town"
+      ],
+      "official": "https://www.town.minamiise.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%8D%97%E4%BC%8A%E5%8B%A2%E7%94%BA"
+    },
+    "24543": {
+      "name": "紀北町",
+      "kind": "town",
+      "officeIds": [
+        "24543-town"
+      ],
+      "official": "https://www.town.mie-kihoku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%B4%80%E5%8C%97%E7%94%BA_(%E4%B8%89%E9%87%8D%E7%9C%8C)"
+    },
+    "24561": {
+      "name": "御浜町",
+      "kind": "town",
+      "officeIds": [
+        "24561-town"
+      ],
+      "official": "https://www.town.mihama.mie.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%BE%A1%E6%B5%9C%E7%94%BA_(%E4%B8%89%E9%87%8D%E7%9C%8C)"
+    },
+    "24562": {
+      "name": "紀宝町",
+      "kind": "town",
+      "officeIds": [
+        "24562-town"
+      ],
+      "official": "https://www.town.kiho.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%B4%80%E5%AE%9D%E7%94%BA"
+    }
+  },
+  "offices": {
+    "24201-city": {
+      "name": "津市役所",
+      "status": "verified",
+      "postalCode": "514-8611",
+      "address": "三重県津市西丸之内23-1"
+    },
+    "24202-city": {
+      "name": "四日市市役所",
+      "status": "verified",
+      "postalCode": "510-8601",
+      "address": "三重県四日市市諏訪町1-5"
+    },
+    "24203-city": {
+      "name": "伊勢市役所",
+      "status": "verified",
+      "postalCode": "516-8601",
+      "address": "三重県伊勢市岩渕1-7-29"
+    },
+    "24204-city": {
+      "name": "松阪市役所",
+      "status": "verified",
+      "postalCode": "515-8515",
+      "address": "三重県松阪市殿町1340-1"
+    },
+    "24205-city": {
+      "name": "桑名市役所",
+      "status": "verified",
+      "postalCode": "511-8601",
+      "address": "三重県桑名市中央町2-37"
+    },
+    "24207-city": {
+      "name": "鈴鹿市役所",
+      "status": "verified",
+      "postalCode": "513-8701",
+      "address": "三重県鈴鹿市神戸1-18-18"
+    },
+    "24208-city": {
+      "name": "名張市役所",
+      "status": "verified",
+      "postalCode": "518-0492",
+      "address": "三重県名張市鴻之台1番町1番地"
+    },
+    "24209-city": {
+      "name": "尾鷲市役所",
+      "status": "verified",
+      "postalCode": "519-3696",
+      "address": "三重県尾鷲市中央町10-43"
+    },
+    "24210-city": {
+      "name": "亀山市役所",
+      "status": "verified",
+      "postalCode": "519-0195",
+      "address": "三重県亀山市本丸町577"
+    },
+    "24211-city": {
+      "name": "鳥羽市役所",
+      "status": "verified",
+      "postalCode": "517-0011",
+      "address": "三重県鳥羽市鳥羽三丁目1番1号"
+    },
+    "24212-city": {
+      "name": "熊野市役所",
+      "status": "verified",
+      "postalCode": "519-4392",
+      "address": "三重県熊野市井戸町796"
+    },
+    "24214-city": {
+      "name": "いなべ市役所",
+      "status": "verified",
+      "postalCode": "511-0498",
+      "address": "三重県いなべ市北勢町阿下喜31"
+    },
+    "24215-city": {
+      "name": "志摩市役所",
+      "status": "verified",
+      "postalCode": "517-0592",
+      "address": "三重県志摩市阿児町鵜方3098-22"
+    },
+    "24216-city": {
+      "name": "伊賀市役所",
+      "status": "verified",
+      "postalCode": "518-8501",
+      "address": "三重県伊賀市四十九町3184"
+    },
+    "24303-town": {
+      "name": "木曽岬町役場",
+      "status": "verified",
+      "postalCode": "498-8503",
+      "address": "三重県桑名郡木曽岬町大字西対海地251"
+    },
+    "24324-town": {
+      "name": "東員町役場",
+      "status": "verified",
+      "postalCode": "511-0295",
+      "address": "三重県員弁郡東員町大字山田1600"
+    },
+    "24341-town": {
+      "name": "菰野町役場",
+      "status": "verified",
+      "postalCode": "510-1292",
+      "address": "三重県三重郡菰野町大字潤田1250"
+    },
+    "24343-town": {
+      "name": "朝日町役場",
+      "status": "verified",
+      "postalCode": "510-8522",
+      "address": "三重県三重郡朝日町大字小向893"
+    },
+    "24344-town": {
+      "name": "川越町役場",
+      "status": "verified",
+      "postalCode": "510-8588",
+      "address": "三重県三重郡川越町大字豊田一色280"
+    },
+    "24441-town": {
+      "name": "多気町役場",
+      "status": "verified",
+      "postalCode": "519-2181",
+      "address": "三重県多気郡多気町相可1600"
+    },
+    "24442-town": {
+      "name": "明和町役場",
+      "status": "verified",
+      "postalCode": "515-0332",
+      "address": "三重県多気郡明和町大字馬之上945"
+    },
+    "24443-town": {
+      "name": "大台町役場",
+      "status": "verified",
+      "postalCode": "519-2404",
+      "address": "三重県多気郡大台町佐原750"
+    },
+    "24461-town": {
+      "name": "玉城町役場",
+      "status": "verified",
+      "postalCode": "519-0495",
+      "address": "三重県度会郡玉城町田丸114-2"
+    },
+    "24470-town": {
+      "name": "度会町役場",
+      "status": "verified",
+      "postalCode": "516-2195",
+      "address": "三重県度会郡度会町棚橋1215-1"
+    },
+    "24471-town": {
+      "name": "大紀町役場",
+      "status": "verified",
+      "postalCode": "519-2703",
+      "address": "三重県度会郡大紀町滝原1610-1"
+    },
+    "24472-town": {
+      "name": "南伊勢町役場",
+      "status": "verified",
+      "postalCode": "516-0194",
+      "address": "三重県度会郡南伊勢町五ヶ所浦3057"
+    },
+    "24543-town": {
+      "name": "紀北町役場",
+      "status": "verified",
+      "postalCode": "519-3292",
+      "address": "三重県北牟婁郡紀北町東長島769番地1"
+    },
+    "24561-town": {
+      "name": "御浜町役場",
+      "status": "verified",
+      "postalCode": "519-5292",
+      "address": "三重県南牟婁郡御浜町大字阿田和6120-1"
+    },
+    "24562-town": {
+      "name": "紀宝町役場",
+      "status": "verified",
+      "postalCode": "519-5701",
+      "address": "三重県南牟婁郡紀宝町鵜殿324"
+    }
+  }
+}
