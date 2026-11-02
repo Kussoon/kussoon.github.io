@@ -1,0 +1,926 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "12",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.chiba.lg.jp/kouhou/ichiran.html",
+    "https://www.j-lis.go.jp/spd/code-address/kantou/cms_13314181.html",
+    "https://www.chiba-chousonkai.jp/outline/member.html"
+  ],
+  "regions": {
+    "12100": {
+      "name": "千葉市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "12100-city"
+      ],
+      "official": "https://www.city.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82"
+    },
+    "12101": {
+      "name": "千葉市中央区",
+      "kind": "ward",
+      "parentCode": "12100",
+      "officeIds": [
+        "12101-ward",
+        "12100-city"
+      ],
+      "official": "https://www.city.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA"
+    },
+    "12102": {
+      "name": "千葉市花見川区",
+      "kind": "ward",
+      "parentCode": "12100",
+      "officeIds": [
+        "12102-ward",
+        "12100-city"
+      ],
+      "official": "https://www.city.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E8%8A%B1%E8%A6%8B%E5%B7%9D%E5%8C%BA"
+    },
+    "12103": {
+      "name": "千葉市稲毛区",
+      "kind": "ward",
+      "parentCode": "12100",
+      "officeIds": [
+        "12103-ward",
+        "12100-city"
+      ],
+      "official": "https://www.city.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E7%A8%B2%E6%AF%9B%E5%8C%BA"
+    },
+    "12104": {
+      "name": "千葉市若葉区",
+      "kind": "ward",
+      "parentCode": "12100",
+      "officeIds": [
+        "12104-ward",
+        "12100-city"
+      ],
+      "official": "https://www.city.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E8%8B%A5%E8%91%89%E5%8C%BA"
+    },
+    "12105": {
+      "name": "千葉市緑区",
+      "kind": "ward",
+      "parentCode": "12100",
+      "officeIds": [
+        "12105-ward",
+        "12100-city"
+      ],
+      "official": "https://www.city.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E7%B7%91%E5%8C%BA"
+    },
+    "12106": {
+      "name": "千葉市美浜区",
+      "kind": "ward",
+      "parentCode": "12100",
+      "officeIds": [
+        "12106-ward",
+        "12100-city"
+      ],
+      "official": "https://www.city.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%83%E8%91%89%E5%B8%82%E7%BE%8E%E6%B5%9C%E5%8C%BA"
+    },
+    "12202": {
+      "name": "銚子市",
+      "kind": "city",
+      "officeIds": [
+        "12202-city"
+      ],
+      "official": "https://www.city.choshi.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%8A%9A%E5%AD%90%E5%B8%82"
+    },
+    "12203": {
+      "name": "市川市",
+      "kind": "city",
+      "officeIds": [
+        "12203-city"
+      ],
+      "official": "https://www.city.ichikawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%B7%9D%E5%B8%82"
+    },
+    "12204": {
+      "name": "船橋市",
+      "kind": "city",
+      "officeIds": [
+        "12204-city"
+      ],
+      "official": "https://www.city.funabashi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E8%88%B9%E6%A9%8B%E5%B8%82"
+    },
+    "12205": {
+      "name": "館山市",
+      "kind": "city",
+      "officeIds": [
+        "12205-city"
+      ],
+      "official": "https://www.city.tateyama.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%A4%A8%E5%B1%B1%E5%B8%82"
+    },
+    "12206": {
+      "name": "木更津市",
+      "kind": "city",
+      "officeIds": [
+        "12206-city"
+      ],
+      "official": "https://www.city.kisarazu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%9C%A8%E6%9B%B4%E6%B4%A5%E5%B8%82"
+    },
+    "12207": {
+      "name": "松戸市",
+      "kind": "city",
+      "officeIds": [
+        "12207-city"
+      ],
+      "official": "https://www.city.matsudo.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%9D%BE%E6%88%B8%E5%B8%82"
+    },
+    "12208": {
+      "name": "野田市",
+      "kind": "city",
+      "officeIds": [
+        "12208-city"
+      ],
+      "official": "https://www.city.noda.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%87%8E%E7%94%B0%E5%B8%82"
+    },
+    "12210": {
+      "name": "茂原市",
+      "kind": "city",
+      "officeIds": [
+        "12210-city"
+      ],
+      "official": "https://www.city.mobara.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E8%8C%82%E5%8E%9F%E5%B8%82"
+    },
+    "12211": {
+      "name": "成田市",
+      "kind": "city",
+      "officeIds": [
+        "12211-city"
+      ],
+      "official": "https://www.city.narita.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%88%90%E7%94%B0%E5%B8%82"
+    },
+    "12212": {
+      "name": "佐倉市",
+      "kind": "city",
+      "officeIds": [
+        "12212-city"
+      ],
+      "official": "https://www.city.sakura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E4%BD%90%E5%80%89%E5%B8%82"
+    },
+    "12213": {
+      "name": "東金市",
+      "kind": "city",
+      "officeIds": [
+        "12213-city"
+      ],
+      "official": "https://www.city.togane.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%9D%B1%E9%87%91%E5%B8%82"
+    },
+    "12215": {
+      "name": "旭市",
+      "kind": "city",
+      "officeIds": [
+        "12215-city"
+      ],
+      "official": "https://www.city.asahi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%97%AD%E5%B8%82"
+    },
+    "12216": {
+      "name": "習志野市",
+      "kind": "city",
+      "officeIds": [
+        "12216-city"
+      ],
+      "official": "https://www.city.narashino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E7%BF%92%E5%BF%97%E9%87%8E%E5%B8%82"
+    },
+    "12217": {
+      "name": "柏市",
+      "kind": "city",
+      "officeIds": [
+        "12217-city"
+      ],
+      "official": "https://www.city.kashiwa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%9F%8F%E5%B8%82"
+    },
+    "12218": {
+      "name": "勝浦市",
+      "kind": "city",
+      "officeIds": [
+        "12218-city"
+      ],
+      "official": "https://www.city.katsuura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8B%9D%E6%B5%A6%E5%B8%82"
+    },
+    "12219": {
+      "name": "市原市",
+      "kind": "city",
+      "officeIds": [
+        "12219-city"
+      ],
+      "official": "https://www.city.ichihara.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%B8%82%E5%8E%9F%E5%B8%82"
+    },
+    "12220": {
+      "name": "流山市",
+      "kind": "city",
+      "officeIds": [
+        "12220-city"
+      ],
+      "official": "https://www.city.nagareyama.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%B5%81%E5%B1%B1%E5%B8%82"
+    },
+    "12221": {
+      "name": "八千代市",
+      "kind": "city",
+      "officeIds": [
+        "12221-city"
+      ],
+      "official": "https://www.city.yachiyo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%85%AB%E5%8D%83%E4%BB%A3%E5%B8%82"
+    },
+    "12222": {
+      "name": "我孫子市",
+      "kind": "city",
+      "officeIds": [
+        "12222-city"
+      ],
+      "official": "https://www.city.abiko.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%88%91%E5%AD%AB%E5%AD%90%E5%B8%82"
+    },
+    "12223": {
+      "name": "鴨川市",
+      "kind": "city",
+      "officeIds": [
+        "12223-city"
+      ],
+      "official": "https://www.city.kamogawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%B4%A8%E5%B7%9D%E5%B8%82"
+    },
+    "12224": {
+      "name": "鎌ケ谷市",
+      "kind": "city",
+      "officeIds": [
+        "12224-city"
+      ],
+      "official": "https://www.city.kamagaya.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%8E%8C%E3%82%B1%E8%B0%B7%E5%B8%82"
+    },
+    "12225": {
+      "name": "君津市",
+      "kind": "city",
+      "officeIds": [
+        "12225-city"
+      ],
+      "official": "https://www.city.kimitsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%90%9B%E6%B4%A5%E5%B8%82"
+    },
+    "12226": {
+      "name": "富津市",
+      "kind": "city",
+      "officeIds": [
+        "12226-city"
+      ],
+      "official": "https://www.city.futtsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E6%B4%A5%E5%B8%82"
+    },
+    "12227": {
+      "name": "浦安市",
+      "kind": "city",
+      "officeIds": [
+        "12227-city"
+      ],
+      "official": "https://www.city.urayasu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%B5%A6%E5%AE%89%E5%B8%82"
+    },
+    "12228": {
+      "name": "四街道市",
+      "kind": "city",
+      "officeIds": [
+        "12228-city"
+      ],
+      "official": "https://www.city.yotsukaido.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%9B%9B%E8%A1%97%E9%81%93%E5%B8%82"
+    },
+    "12229": {
+      "name": "袖ケ浦市",
+      "kind": "city",
+      "officeIds": [
+        "12229-city"
+      ],
+      "official": "https://www.city.sodegaura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E8%A2%96%E3%82%B1%E6%B5%A6%E5%B8%82"
+    },
+    "12230": {
+      "name": "八街市",
+      "kind": "city",
+      "officeIds": [
+        "12230-city"
+      ],
+      "official": "https://www.city.yachimata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%85%AB%E8%A1%97%E5%B8%82"
+    },
+    "12231": {
+      "name": "印西市",
+      "kind": "city",
+      "officeIds": [
+        "12231-city"
+      ],
+      "official": "https://www.city.inzai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%B0%E8%A5%BF%E5%B8%82"
+    },
+    "12232": {
+      "name": "白井市",
+      "kind": "city",
+      "officeIds": [
+        "12232-city"
+      ],
+      "official": "https://www.city.shiroi.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E7%99%BD%E4%BA%95%E5%B8%82"
+    },
+    "12233": {
+      "name": "富里市",
+      "kind": "city",
+      "officeIds": [
+        "12233-city"
+      ],
+      "official": "https://www.city.tomisato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82"
+    },
+    "12234": {
+      "name": "南房総市",
+      "kind": "city",
+      "officeIds": [
+        "12234-city"
+      ],
+      "official": "https://www.city.minamiboso.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8D%97%E6%88%BF%E7%B7%8F%E5%B8%82"
+    },
+    "12235": {
+      "name": "匝瑳市",
+      "kind": "city",
+      "officeIds": [
+        "12235-city"
+      ],
+      "official": "https://www.city.sosa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%8C%9D%E7%91%B3%E5%B8%82"
+    },
+    "12236": {
+      "name": "香取市",
+      "kind": "city",
+      "officeIds": [
+        "12236-city"
+      ],
+      "official": "https://www.city.katori.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%A6%99%E5%8F%96%E5%B8%82"
+    },
+    "12237": {
+      "name": "山武市",
+      "kind": "city",
+      "officeIds": [
+        "12237-city"
+      ],
+      "official": "https://www.city.sammu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%B1%B1%E6%AD%A6%E5%B8%82"
+    },
+    "12238": {
+      "name": "いすみ市",
+      "kind": "city",
+      "officeIds": [
+        "12238-city"
+      ],
+      "official": "https://www.city.isumi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E3%81%84%E3%81%99%E3%81%BF%E5%B8%82"
+    },
+    "12239": {
+      "name": "大網白里市",
+      "kind": "city",
+      "officeIds": [
+        "12239-city"
+      ],
+      "official": "https://www.city.oamishirasato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%A4%A7%E7%B6%B2%E7%99%BD%E9%87%8C%E5%B8%82"
+    },
+    "12322": {
+      "name": "酒々井町",
+      "kind": "town",
+      "officeIds": [
+        "12322-town"
+      ],
+      "official": "https://www.town.shisui.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%85%92%E3%80%85%E4%BA%95%E7%94%BA"
+    },
+    "12329": {
+      "name": "栄町",
+      "kind": "town",
+      "officeIds": [
+        "12329-town"
+      ],
+      "official": "https://www.town.sakae.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%A0%84%E7%94%BA"
+    },
+    "12342": {
+      "name": "神崎町",
+      "kind": "town",
+      "officeIds": [
+        "12342-town"
+      ],
+      "official": "https://www.town.kozaki.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E7%A5%9E%E5%B4%8E%E7%94%BA"
+    },
+    "12347": {
+      "name": "多古町",
+      "kind": "town",
+      "officeIds": [
+        "12347-town"
+      ],
+      "official": "https://www.town.tako.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%A4%9A%E5%8F%A4%E7%94%BA"
+    },
+    "12349": {
+      "name": "東庄町",
+      "kind": "town",
+      "officeIds": [
+        "12349-town"
+      ],
+      "official": "https://www.town.tohnosho.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%9D%B1%E5%BA%84%E7%94%BA"
+    },
+    "12403": {
+      "name": "九十九里町",
+      "kind": "town",
+      "officeIds": [
+        "12403-town"
+      ],
+      "official": "https://www.town.kujukuri.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E4%B9%9D%E5%8D%81%E4%B9%9D%E9%87%8C%E7%94%BA"
+    },
+    "12409": {
+      "name": "芝山町",
+      "kind": "town",
+      "officeIds": [
+        "12409-town"
+      ],
+      "official": "https://www.town.shibayama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E8%8A%9D%E5%B1%B1%E7%94%BA"
+    },
+    "12410": {
+      "name": "横芝光町",
+      "kind": "town",
+      "officeIds": [
+        "12410-town"
+      ],
+      "official": "https://www.town.yokoshibahikari.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E6%A8%AA%E8%8A%9D%E5%85%89%E7%94%BA"
+    },
+    "12421": {
+      "name": "一宮町",
+      "kind": "town",
+      "officeIds": [
+        "12421-town"
+      ],
+      "official": "https://www.town.ichinomiya.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E4%B8%80%E5%AE%AE%E7%94%BA"
+    },
+    "12422": {
+      "name": "睦沢町",
+      "kind": "town",
+      "officeIds": [
+        "12422-town"
+      ],
+      "official": "https://www.town.mutsuzawa.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E7%9D%A6%E6%B2%A2%E7%94%BA"
+    },
+    "12423": {
+      "name": "長生村",
+      "kind": "village",
+      "officeIds": [
+        "12423-village"
+      ],
+      "official": "https://www.vill.chosei.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%95%B7%E7%94%9F%E6%9D%91"
+    },
+    "12424": {
+      "name": "白子町",
+      "kind": "town",
+      "officeIds": [
+        "12424-town"
+      ],
+      "official": "https://www.town.shirako.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E7%99%BD%E5%AD%90%E7%94%BA"
+    },
+    "12426": {
+      "name": "長柄町",
+      "kind": "town",
+      "officeIds": [
+        "12426-town"
+      ],
+      "official": "https://www.town.nagara.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%95%B7%E6%9F%84%E7%94%BA"
+    },
+    "12427": {
+      "name": "長南町",
+      "kind": "town",
+      "officeIds": [
+        "12427-town"
+      ],
+      "official": "https://www.town.chonan.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%95%B7%E5%8D%97%E7%94%BA"
+    },
+    "12441": {
+      "name": "大多喜町",
+      "kind": "town",
+      "officeIds": [
+        "12441-town"
+      ],
+      "official": "https://www.town.otaki.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%A4%A7%E5%A4%9A%E5%96%9C%E7%94%BA"
+    },
+    "12443": {
+      "name": "御宿町",
+      "kind": "town",
+      "officeIds": [
+        "12443-town"
+      ],
+      "official": "https://www.town.onjuku.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E5%BE%A1%E5%AE%BF%E7%94%BA"
+    },
+    "12463": {
+      "name": "鋸南町",
+      "kind": "town",
+      "officeIds": [
+        "12463-town"
+      ],
+      "official": "https://www.town.kyonan.chiba.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%8D%83%E8%91%89%E7%9C%8C%E9%8B%B8%E5%8D%97%E7%94%BA"
+    }
+  },
+  "offices": {
+    "12100-city": {
+      "name": "千葉市役所",
+      "status": "verified",
+      "postalCode": "260-8722",
+      "address": "千葉県千葉市中央区千葉港1-1"
+    },
+    "12101-ward": {
+      "name": "千葉市中央区役所",
+      "status": "verified",
+      "postalCode": "260-8733",
+      "address": "千葉県千葉市中央区中央3-10-8"
+    },
+    "12102-ward": {
+      "name": "千葉市花見川区役所",
+      "status": "verified",
+      "postalCode": "262-8733",
+      "address": "千葉県千葉市花見川区瑞穂1-1"
+    },
+    "12103-ward": {
+      "name": "千葉市稲毛区役所",
+      "status": "verified",
+      "postalCode": "263-8733",
+      "address": "千葉県千葉市稲毛区穴川4-12-1"
+    },
+    "12104-ward": {
+      "name": "千葉市若葉区役所",
+      "status": "verified",
+      "postalCode": "264-8733",
+      "address": "千葉県千葉市若葉区桜木北2-1-1"
+    },
+    "12105-ward": {
+      "name": "千葉市緑区役所",
+      "status": "verified",
+      "postalCode": "266-8733",
+      "address": "千葉県千葉市緑区おゆみ野3-15-3"
+    },
+    "12106-ward": {
+      "name": "千葉市美浜区役所",
+      "status": "verified",
+      "postalCode": "261-8733",
+      "address": "千葉県千葉市美浜区真砂5-15-1"
+    },
+    "12202-city": {
+      "name": "銚子市役所",
+      "status": "verified",
+      "postalCode": "288-8601",
+      "address": "千葉県銚子市若宮町1-1"
+    },
+    "12203-city": {
+      "name": "市川市役所",
+      "status": "verified",
+      "postalCode": "272-8501",
+      "address": "千葉県市川市八幡1-1-1"
+    },
+    "12204-city": {
+      "name": "船橋市役所",
+      "status": "verified",
+      "postalCode": "273-8501",
+      "address": "千葉県船橋市湊町2-10-25"
+    },
+    "12205-city": {
+      "name": "館山市役所",
+      "status": "verified",
+      "postalCode": "294-8601",
+      "address": "千葉県館山市北条1145-1"
+    },
+    "12206-city": {
+      "name": "木更津市役所",
+      "status": "verified",
+      "postalCode": "292-8501",
+      "address": "千葉県木更津市富士見1-2-1"
+    },
+    "12207-city": {
+      "name": "松戸市役所",
+      "status": "verified",
+      "postalCode": "271-8588",
+      "address": "千葉県松戸市根本387-5"
+    },
+    "12208-city": {
+      "name": "野田市役所",
+      "status": "verified",
+      "postalCode": "278-8550",
+      "address": "千葉県野田市鶴奉7-1"
+    },
+    "12210-city": {
+      "name": "茂原市役所",
+      "status": "verified",
+      "postalCode": "297-8511",
+      "address": "千葉県茂原市道表1"
+    },
+    "12211-city": {
+      "name": "成田市役所",
+      "status": "verified",
+      "postalCode": "286-8585",
+      "address": "千葉県成田市花崎町760"
+    },
+    "12212-city": {
+      "name": "佐倉市役所",
+      "status": "verified",
+      "postalCode": "285-8501",
+      "address": "千葉県佐倉市海隣寺町97"
+    },
+    "12213-city": {
+      "name": "東金市役所",
+      "status": "verified",
+      "postalCode": "283-8511",
+      "address": "千葉県東金市東岩崎1-1"
+    },
+    "12215-city": {
+      "name": "旭市役所",
+      "status": "verified",
+      "postalCode": "289-2595",
+      "address": "千葉県旭市ニ2132"
+    },
+    "12216-city": {
+      "name": "習志野市役所",
+      "status": "verified",
+      "postalCode": "275-8601",
+      "address": "千葉県習志野市鷺沼2-1-1"
+    },
+    "12217-city": {
+      "name": "柏市役所",
+      "status": "verified",
+      "postalCode": "277-8505",
+      "address": "千葉県柏市柏5-10-1"
+    },
+    "12218-city": {
+      "name": "勝浦市役所",
+      "status": "verified",
+      "postalCode": "299-5292",
+      "address": "千葉県勝浦市新官1343-1"
+    },
+    "12219-city": {
+      "name": "市原市役所",
+      "status": "verified",
+      "postalCode": "290-8501",
+      "address": "千葉県市原市国分寺台中央1-1-1"
+    },
+    "12220-city": {
+      "name": "流山市役所",
+      "status": "verified",
+      "postalCode": "270-0192",
+      "address": "千葉県流山市平和台1-1-1"
+    },
+    "12221-city": {
+      "name": "八千代市役所",
+      "status": "verified",
+      "postalCode": "276-8501",
+      "address": "千葉県八千代市大和田新田312-5"
+    },
+    "12222-city": {
+      "name": "我孫子市役所",
+      "status": "verified",
+      "postalCode": "270-1192",
+      "address": "千葉県我孫子市我孫子1858"
+    },
+    "12223-city": {
+      "name": "鴨川市役所",
+      "status": "verified",
+      "postalCode": "296-8601",
+      "address": "千葉県鴨川市横渚1450"
+    },
+    "12224-city": {
+      "name": "鎌ケ谷市役所",
+      "status": "verified",
+      "postalCode": "273-0195",
+      "address": "千葉県鎌ケ谷市新鎌ケ谷2-6-1"
+    },
+    "12225-city": {
+      "name": "君津市役所",
+      "status": "verified",
+      "postalCode": "299-1192",
+      "address": "千葉県君津市久保2-13-1"
+    },
+    "12226-city": {
+      "name": "富津市役所",
+      "status": "verified",
+      "postalCode": "293-8506",
+      "address": "千葉県富津市下飯野2443"
+    },
+    "12227-city": {
+      "name": "浦安市役所",
+      "status": "verified",
+      "postalCode": "279-8501",
+      "address": "千葉県浦安市猫実1-1-1"
+    },
+    "12228-city": {
+      "name": "四街道市役所",
+      "status": "verified",
+      "postalCode": "284-8555",
+      "address": "千葉県四街道市鹿渡無番地"
+    },
+    "12229-city": {
+      "name": "袖ケ浦市役所",
+      "status": "verified",
+      "postalCode": "299-0292",
+      "address": "千葉県袖ケ浦市坂戸市場1-1"
+    },
+    "12230-city": {
+      "name": "八街市役所",
+      "status": "verified",
+      "postalCode": "289-1192",
+      "address": "千葉県八街市八街ほ35-29"
+    },
+    "12231-city": {
+      "name": "印西市役所",
+      "status": "verified",
+      "postalCode": "270-1396",
+      "address": "千葉県印西市大森2364-2"
+    },
+    "12232-city": {
+      "name": "白井市役所",
+      "status": "verified",
+      "postalCode": "270-1492",
+      "address": "千葉県白井市復1123"
+    },
+    "12233-city": {
+      "name": "富里市役所",
+      "status": "verified",
+      "postalCode": "286-0292",
+      "address": "千葉県富里市七栄652-1"
+    },
+    "12234-city": {
+      "name": "南房総市役所",
+      "status": "verified",
+      "postalCode": "299-2492",
+      "address": "千葉県南房総市富浦町青木28"
+    },
+    "12235-city": {
+      "name": "匝瑳市役所",
+      "status": "verified",
+      "postalCode": "289-2198",
+      "address": "千葉県匝瑳市八日市場ハ793-2"
+    },
+    "12236-city": {
+      "name": "香取市役所",
+      "status": "verified",
+      "postalCode": "287-8501",
+      "address": "千葉県香取市佐原ロ2127"
+    },
+    "12237-city": {
+      "name": "山武市役所",
+      "status": "verified",
+      "postalCode": "289-1392",
+      "address": "千葉県山武市殿台296"
+    },
+    "12238-city": {
+      "name": "いすみ市役所",
+      "status": "verified",
+      "postalCode": "298-8501",
+      "address": "千葉県いすみ市大原7400-1"
+    },
+    "12239-city": {
+      "name": "大網白里市役所",
+      "status": "verified",
+      "postalCode": "299-3292",
+      "address": "千葉県大網白里市大網115-2"
+    },
+    "12322-town": {
+      "name": "酒々井町役場",
+      "status": "verified",
+      "postalCode": "285-8510",
+      "address": "千葉県印旛郡酒々井町中央台4-11"
+    },
+    "12329-town": {
+      "name": "栄町役場",
+      "status": "verified",
+      "postalCode": "270-1592",
+      "address": "千葉県印旛郡栄町安食台1-2"
+    },
+    "12342-town": {
+      "name": "神崎町役場",
+      "status": "verified",
+      "postalCode": "289-0292",
+      "address": "千葉県香取郡神崎町神崎本宿163"
+    },
+    "12347-town": {
+      "name": "多古町役場",
+      "status": "verified",
+      "postalCode": "289-2292",
+      "address": "千葉県香取郡多古町多古584"
+    },
+    "12349-town": {
+      "name": "東庄町役場",
+      "status": "verified",
+      "postalCode": "289-0692",
+      "address": "千葉県香取郡東庄町笹川い4713-131"
+    },
+    "12403-town": {
+      "name": "九十九里町役場",
+      "status": "verified",
+      "postalCode": "283-0195",
+      "address": "千葉県山武郡九十九里町片貝4099"
+    },
+    "12409-town": {
+      "name": "芝山町役場",
+      "status": "verified",
+      "postalCode": "289-1692",
+      "address": "千葉県山武郡芝山町小池992"
+    },
+    "12410-town": {
+      "name": "横芝光町役場",
+      "status": "verified",
+      "postalCode": "289-1793",
+      "address": "千葉県山武郡横芝光町宮川11902"
+    },
+    "12421-town": {
+      "name": "一宮町役場",
+      "status": "verified",
+      "postalCode": "299-4396",
+      "address": "千葉県長生郡一宮町一宮2457"
+    },
+    "12422-town": {
+      "name": "睦沢町役場",
+      "status": "verified",
+      "postalCode": "299-4492",
+      "address": "千葉県長生郡睦沢町下之郷1650-1"
+    },
+    "12423-village": {
+      "name": "長生村役場",
+      "status": "verified",
+      "postalCode": "299-4394",
+      "address": "千葉県長生郡長生村本郷1-77"
+    },
+    "12424-town": {
+      "name": "白子町役場",
+      "status": "verified",
+      "postalCode": "299-4292",
+      "address": "千葉県長生郡白子町関5074-2"
+    },
+    "12426-town": {
+      "name": "長柄町役場",
+      "status": "verified",
+      "postalCode": "297-0298",
+      "address": "千葉県長生郡長柄町桜谷712"
+    },
+    "12427-town": {
+      "name": "長南町役場",
+      "status": "verified",
+      "postalCode": "297-0192",
+      "address": "千葉県長生郡長南町長南2110"
+    },
+    "12441-town": {
+      "name": "大多喜町役場",
+      "status": "verified",
+      "postalCode": "298-0292",
+      "address": "千葉県夷隅郡大多喜町大多喜93"
+    },
+    "12443-town": {
+      "name": "御宿町役場",
+      "status": "verified",
+      "postalCode": "299-5192",
+      "address": "千葉県夷隅郡御宿町須賀1522"
+    },
+    "12463-town": {
+      "name": "鋸南町役場",
+      "status": "verified",
+      "postalCode": "299-2192",
+      "address": "千葉県安房郡鋸南町下佐久間3458"
+    }
+  }
+}
