@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "17",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/tyuubu/cms_13814182.html",
+    "https://www.pref.ishikawa.lg.jp/sichousien/kennaiichiran2.html",
+    "https://www.pref.ishikawa.lg.jp/link/"
+  ],
+  "regions": {
+    "17201": {
+      "name": "金沢市",
+      "kind": "city",
+      "officeIds": [
+        "17201-city"
+      ],
+      "official": "https://www4.city.kanazawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E9%87%91%E6%B2%A2%E5%B8%82"
+    },
+    "17202": {
+      "name": "七尾市",
+      "kind": "city",
+      "officeIds": [
+        "17202-city"
+      ],
+      "official": "https://www.city.nanao.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E4%B8%83%E5%B0%BE%E5%B8%82"
+    },
+    "17203": {
+      "name": "小松市",
+      "kind": "city",
+      "officeIds": [
+        "17203-city"
+      ],
+      "official": "https://www.city.komatsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E5%B0%8F%E6%9D%BE%E5%B8%82"
+    },
+    "17204": {
+      "name": "輪島市",
+      "kind": "city",
+      "officeIds": [
+        "17204-city"
+      ],
+      "official": "https://www.city.wajima.ishikawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E8%BC%AA%E5%B3%B6%E5%B8%82"
+    },
+    "17205": {
+      "name": "珠洲市",
+      "kind": "city",
+      "officeIds": [
+        "17205-city"
+      ],
+      "official": "https://www.city.suzu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E7%8F%A0%E6%B4%B2%E5%B8%82"
+    },
+    "17206": {
+      "name": "加賀市",
+      "kind": "city",
+      "officeIds": [
+        "17206-city"
+      ],
+      "official": "https://www.city.kaga.ishikawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E5%8A%A0%E8%B3%80%E5%B8%82"
+    },
+    "17207": {
+      "name": "羽咋市",
+      "kind": "city",
+      "officeIds": [
+        "17207-city"
+      ],
+      "official": "https://www.city.hakui.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E7%BE%BD%E5%92%8B%E5%B8%82"
+    },
+    "17209": {
+      "name": "かほく市",
+      "kind": "city",
+      "officeIds": [
+        "17209-city"
+      ],
+      "official": "https://www.city.kahoku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E3%81%8B%E3%81%BB%E3%81%8F%E5%B8%82"
+    },
+    "17210": {
+      "name": "白山市",
+      "kind": "city",
+      "officeIds": [
+        "17210-city"
+      ],
+      "official": "https://www.city.hakusan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E7%99%BD%E5%B1%B1%E5%B8%82"
+    },
+    "17211": {
+      "name": "能美市",
+      "kind": "city",
+      "officeIds": [
+        "17211-city"
+      ],
+      "official": "https://www.city.nomi.ishikawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E8%83%BD%E7%BE%8E%E5%B8%82"
+    },
+    "17212": {
+      "name": "野々市市",
+      "kind": "city",
+      "officeIds": [
+        "17212-city"
+      ],
+      "official": "https://www.city.nonoichi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E9%87%8E%E3%80%85%E5%B8%82%E5%B8%82"
+    },
+    "17324": {
+      "name": "川北町",
+      "kind": "town",
+      "officeIds": [
+        "17324-town"
+      ],
+      "official": "https://www.town.kawakita.ishikawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%8C%97%E7%94%BA"
+    },
+    "17361": {
+      "name": "津幡町",
+      "kind": "town",
+      "officeIds": [
+        "17361-town"
+      ],
+      "official": "https://www.town.tsubata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E6%B4%A5%E5%B9%A1%E7%94%BA"
+    },
+    "17365": {
+      "name": "内灘町",
+      "kind": "town",
+      "officeIds": [
+        "17365-town"
+      ],
+      "official": "https://www.town.uchinada.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E5%86%85%E7%81%98%E7%94%BA"
+    },
+    "17384": {
+      "name": "志賀町",
+      "kind": "town",
+      "officeIds": [
+        "17384-town"
+      ],
+      "official": "https://www.town.shika.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E5%BF%97%E8%B3%80%E7%94%BA"
+    },
+    "17386": {
+      "name": "宝達志水町",
+      "kind": "town",
+      "officeIds": [
+        "17386-town"
+      ],
+      "official": "https://www.hodatsushimizu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E5%AE%9D%E9%81%94%E5%BF%97%E6%B0%B4%E7%94%BA"
+    },
+    "17407": {
+      "name": "中能登町",
+      "kind": "town",
+      "officeIds": [
+        "17407-town"
+      ],
+      "official": "https://www.town.nakanoto.ishikawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E4%B8%AD%E8%83%BD%E7%99%BB%E7%94%BA"
+    },
+    "17461": {
+      "name": "穴水町",
+      "kind": "town",
+      "officeIds": [
+        "17461-town"
+      ],
+      "official": "https://www.town.anamizu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E7%A9%B4%E6%B0%B4%E7%94%BA"
+    },
+    "17463": {
+      "name": "能登町",
+      "kind": "town",
+      "officeIds": [
+        "17463-town"
+      ],
+      "official": "https://www.town.noto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%9F%B3%E5%B7%9D%E7%9C%8C%E8%83%BD%E7%99%BB%E7%94%BA"
+    }
+  },
+  "offices": {
+    "17201-city": {
+      "name": "金沢市役所",
+      "status": "verified",
+      "postalCode": "920-8577",
+      "address": "石川県金沢市広坂1-1-1"
+    },
+    "17202-city": {
+      "name": "七尾市役所",
+      "status": "verified",
+      "postalCode": "926-8611",
+      "address": "石川県七尾市袖ヶ江町イ部25"
+    },
+    "17203-city": {
+      "name": "小松市役所",
+      "status": "verified",
+      "postalCode": "923-8650",
+      "address": "石川県小松市小馬出町91"
+    },
+    "17204-city": {
+      "name": "輪島市役所",
+      "status": "verified",
+      "postalCode": "928-8525",
+      "address": "石川県輪島市二ツ屋町2字29"
+    },
+    "17205-city": {
+      "name": "珠洲市役所",
+      "status": "verified",
+      "postalCode": "927-1295",
+      "address": "石川県珠洲市上戸町北方1字6-2"
+    },
+    "17206-city": {
+      "name": "加賀市役所",
+      "status": "verified",
+      "postalCode": "922-8622",
+      "address": "石川県加賀市大聖寺南町ニ41"
+    },
+    "17207-city": {
+      "name": "羽咋市役所",
+      "status": "verified",
+      "postalCode": "925-8501",
+      "address": "石川県羽咋市旭町ア200"
+    },
+    "17209-city": {
+      "name": "かほく市役所",
+      "status": "verified",
+      "postalCode": "929-1195",
+      "address": "石川県かほく市宇野気ニ81"
+    },
+    "17210-city": {
+      "name": "白山市役所",
+      "status": "verified",
+      "postalCode": "924-8688",
+      "address": "石川県白山市倉光2-1"
+    },
+    "17211-city": {
+      "name": "能美市役所",
+      "status": "verified",
+      "postalCode": "923-1297",
+      "address": "石川県能美市来丸町1110番地"
+    },
+    "17212-city": {
+      "name": "野々市市役所",
+      "status": "verified",
+      "postalCode": "921-8510",
+      "address": "石川県野々市市三納1-1"
+    },
+    "17324-town": {
+      "name": "川北町役場",
+      "status": "verified",
+      "postalCode": "923-1295",
+      "address": "石川県能美郡川北町壱ツ屋174"
+    },
+    "17361-town": {
+      "name": "津幡町役場",
+      "status": "verified",
+      "postalCode": "929-0393",
+      "address": "石川県河北郡津幡町加賀爪ニ3"
+    },
+    "17365-town": {
+      "name": "内灘町役場",
+      "status": "verified",
+      "postalCode": "920-0292",
+      "address": "石川県河北郡内灘町大学1-2-1"
+    },
+    "17384-town": {
+      "name": "志賀町役場",
+      "status": "verified",
+      "postalCode": "925-0198",
+      "address": "石川県羽咋郡志賀町末吉千古1-1"
+    },
+    "17386-town": {
+      "name": "宝達志水町役場",
+      "status": "verified",
+      "postalCode": "929-1492",
+      "address": "石川県羽咋郡宝達志水町子浦そ18-1"
+    },
+    "17407-town": {
+      "name": "中能登町役場",
+      "status": "verified",
+      "postalCode": "929-1792",
+      "address": "石川県鹿島郡中能登町末坂9部46番地"
+    },
+    "17461-town": {
+      "name": "穴水町役場",
+      "status": "verified",
+      "postalCode": "927-8601",
+      "address": "石川県鳳珠郡穴水町字川島ラ174"
+    },
+    "17463-town": {
+      "name": "能登町役場",
+      "status": "verified",
+      "postalCode": "927-0492",
+      "address": "石川県鳳珠郡能登町字宇出津ト字50番地1"
+    }
+  }
+}
