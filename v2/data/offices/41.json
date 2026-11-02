@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "41",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+    "https://www.j-lis.go.jp/spd/code-address/kyuusyuu/cms_16214187.html",
+    "https://www.zck.or.jp/soshiki/2/4028.html"
+  ],
+  "regions": {
+    "41201": {
+      "name": "佐賀市",
+      "kind": "city",
+      "officeIds": [
+        "41201-city"
+      ],
+      "official": "https://www.city.saga.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E4%BD%90%E8%B3%80%E5%B8%82"
+    },
+    "41202": {
+      "name": "唐津市",
+      "kind": "city",
+      "officeIds": [
+        "41202-city"
+      ],
+      "official": "https://www.city.karatsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%94%90%E6%B4%A5%E5%B8%82"
+    },
+    "41203": {
+      "name": "鳥栖市",
+      "kind": "city",
+      "officeIds": [
+        "41203-city"
+      ],
+      "official": "https://www.city.tosu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E9%B3%A5%E6%A0%96%E5%B8%82"
+    },
+    "41204": {
+      "name": "多久市",
+      "kind": "city",
+      "officeIds": [
+        "41204-city"
+      ],
+      "official": "https://www.city.taku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%A4%9A%E4%B9%85%E5%B8%82"
+    },
+    "41205": {
+      "name": "伊万里市",
+      "kind": "city",
+      "officeIds": [
+        "41205-city"
+      ],
+      "official": "https://www.city.imari.saga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E4%BC%8A%E4%B8%87%E9%87%8C%E5%B8%82"
+    },
+    "41206": {
+      "name": "武雄市",
+      "kind": "city",
+      "officeIds": [
+        "41206-city"
+      ],
+      "official": "https://www.city.takeo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E6%AD%A6%E9%9B%84%E5%B8%82"
+    },
+    "41207": {
+      "name": "鹿島市",
+      "kind": "city",
+      "officeIds": [
+        "41207-city"
+      ],
+      "official": "https://www.city.saga-kashima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E9%B9%BF%E5%B3%B6%E5%B8%82"
+    },
+    "41208": {
+      "name": "小城市",
+      "kind": "city",
+      "officeIds": [
+        "41208-city"
+      ],
+      "official": "https://www.city.ogi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%B0%8F%E5%9F%8E%E5%B8%82"
+    },
+    "41209": {
+      "name": "嬉野市",
+      "kind": "city",
+      "officeIds": [
+        "41209-city"
+      ],
+      "official": "https://www.city.ureshino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%AC%89%E9%87%8E%E5%B8%82"
+    },
+    "41210": {
+      "name": "神埼市",
+      "kind": "city",
+      "officeIds": [
+        "41210-city"
+      ],
+      "official": "https://www.city.kanzaki.saga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E7%A5%9E%E5%9F%BC%E5%B8%82"
+    },
+    "41327": {
+      "name": "吉野ヶ里町",
+      "kind": "town",
+      "officeIds": [
+        "41327-town"
+      ],
+      "official": "https://www.town.yoshinogari.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%90%89%E9%87%8E%E3%83%B6%E9%87%8C%E7%94%BA"
+    },
+    "41341": {
+      "name": "基山町",
+      "kind": "town",
+      "officeIds": [
+        "41341-town"
+      ],
+      "official": "https://www.town.kiyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%9F%BA%E5%B1%B1%E7%94%BA"
+    },
+    "41345": {
+      "name": "上峰町",
+      "kind": "town",
+      "officeIds": [
+        "41345-town"
+      ],
+      "official": "https://www.town.kamimine.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E4%B8%8A%E5%B3%B0%E7%94%BA"
+    },
+    "41346": {
+      "name": "みやき町",
+      "kind": "town",
+      "officeIds": [
+        "41346-town"
+      ],
+      "official": "https://www.town.miyaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E3%81%BF%E3%82%84%E3%81%8D%E7%94%BA"
+    },
+    "41387": {
+      "name": "玄海町",
+      "kind": "town",
+      "officeIds": [
+        "41387-town"
+      ],
+      "official": "https://www.town.genkai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E7%8E%84%E6%B5%B7%E7%94%BA"
+    },
+    "41401": {
+      "name": "有田町",
+      "kind": "town",
+      "officeIds": [
+        "41401-town"
+      ],
+      "official": "https://www.town.arita.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E6%9C%89%E7%94%B0%E7%94%BA"
+    },
+    "41423": {
+      "name": "大町町",
+      "kind": "town",
+      "officeIds": [
+        "41423-town"
+      ],
+      "official": "https://www.town.omachi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%A4%A7%E7%94%BA%E7%94%BA"
+    },
+    "41424": {
+      "name": "江北町",
+      "kind": "town",
+      "officeIds": [
+        "41424-town"
+      ],
+      "official": "https://www.town.kouhoku.saga.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E6%B1%9F%E5%8C%97%E7%94%BA"
+    },
+    "41425": {
+      "name": "白石町",
+      "kind": "town",
+      "officeIds": [
+        "41425-town"
+      ],
+      "official": "https://www.town.shiroishi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E7%99%BD%E7%9F%B3%E7%94%BA"
+    },
+    "41441": {
+      "name": "太良町",
+      "kind": "town",
+      "officeIds": [
+        "41441-town"
+      ],
+      "official": "https://www.town.tara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E4%BD%90%E8%B3%80%E7%9C%8C%E5%A4%AA%E8%89%AF%E7%94%BA"
+    }
+  },
+  "offices": {
+    "41201-city": {
+      "name": "佐賀市役所",
+      "status": "verified",
+      "postalCode": "840-8501",
+      "address": "佐賀県佐賀市栄町1-1"
+    },
+    "41202-city": {
+      "name": "唐津市役所",
+      "status": "verified",
+      "postalCode": "847-8511",
+      "address": "佐賀県唐津市西城内1-1"
+    },
+    "41203-city": {
+      "name": "鳥栖市役所",
+      "status": "verified",
+      "postalCode": "841-8511",
+      "address": "佐賀県鳥栖市宿町1118"
+    },
+    "41204-city": {
+      "name": "多久市役所",
+      "status": "verified",
+      "postalCode": "846-8501",
+      "address": "佐賀県多久市北多久町大字小侍7-1"
+    },
+    "41205-city": {
+      "name": "伊万里市役所",
+      "status": "verified",
+      "postalCode": "848-8501",
+      "address": "佐賀県伊万里市立花町1355-1"
+    },
+    "41206-city": {
+      "name": "武雄市役所",
+      "status": "verified",
+      "postalCode": "843-8639",
+      "address": "佐賀県武雄市武雄町大字昭和12-10"
+    },
+    "41207-city": {
+      "name": "鹿島市役所",
+      "status": "verified",
+      "postalCode": "849-1312",
+      "address": "佐賀県鹿島市大字納富分2643-1"
+    },
+    "41208-city": {
+      "name": "小城市役所",
+      "status": "verified",
+      "postalCode": "845-8511",
+      "address": "佐賀県小城市三日月町長神田2312-2"
+    },
+    "41209-city": {
+      "name": "嬉野市役所",
+      "status": "verified",
+      "postalCode": "849-1411",
+      "address": "佐賀県嬉野市塩田町大字馬場下甲1769"
+    },
+    "41210-city": {
+      "name": "神埼市役所",
+      "status": "verified",
+      "postalCode": "842-8601",
+      "address": "佐賀県神埼市神埼町鶴3542-1"
+    },
+    "41327-town": {
+      "name": "吉野ヶ里町役場",
+      "status": "verified",
+      "postalCode": "842-8501",
+      "address": "佐賀県神埼郡吉野ヶ里町吉田321-2"
+    },
+    "41341-town": {
+      "name": "基山町役場",
+      "status": "verified",
+      "postalCode": "841-0204",
+      "address": "佐賀県三養基郡基山町大字宮浦666"
+    },
+    "41345-town": {
+      "name": "上峰町役場",
+      "status": "verified",
+      "postalCode": "849-0123",
+      "address": "佐賀県三養基郡上峰町大字坊所383-1"
+    },
+    "41346-town": {
+      "name": "みやき町役場",
+      "status": "verified",
+      "postalCode": "849-0113",
+      "address": "佐賀県三養基郡みやき町大字東尾737-5"
+    },
+    "41387-town": {
+      "name": "玄海町役場",
+      "status": "verified",
+      "postalCode": "847-1421",
+      "address": "佐賀県東松浦郡玄海町大字諸浦348"
+    },
+    "41401-town": {
+      "name": "有田町役場",
+      "status": "verified",
+      "postalCode": "849-4192",
+      "address": "佐賀県西松浦郡有田町立部乙2202"
+    },
+    "41423-town": {
+      "name": "大町町役場",
+      "status": "verified",
+      "postalCode": "849-2101",
+      "address": "佐賀県杵島郡大町町大字大町5017"
+    },
+    "41424-town": {
+      "name": "江北町役場",
+      "status": "verified",
+      "postalCode": "849-0592",
+      "address": "佐賀県杵島郡江北町大字山口1651-1"
+    },
+    "41425-town": {
+      "name": "白石町役場",
+      "status": "verified",
+      "postalCode": "849-1292",
+      "address": "佐賀県杵島郡白石町大字福田1247-1"
+    },
+    "41441-town": {
+      "name": "太良町役場",
+      "status": "verified",
+      "postalCode": "849-1698",
+      "address": "佐賀県藤津郡太良町大字多良1-6"
+    }
+  }
+}
