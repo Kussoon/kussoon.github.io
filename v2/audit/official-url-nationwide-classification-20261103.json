@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 57,
+      "A": 76,
       "B": 0,
       "C": 1,
-      "unclassified": 1854
+      "unclassified": 1835
     },
-    "completedRegionReviews": 58,
+    "completedRegionReviews": 77,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1851,
+    "unreviewedOtherRegions": 1832,
     "totalCheck": 1912,
-    "reconciliationNote": "PR #205の既存監査を保持。追加8件のうち5件はA（由良町はPR #208修正後にA）、3件は未判定。既存C5件のうち蘭越町・御宿町・指宿市は現行公式ページを再確認してAへ、日向市はPR #209で登録URLを現行公式ドメインへ修正し、停止案内を公式性と通常利用可能性に分けてAとした。寿都町はC。次段階は未監査の残る1,851区域。"
+    "reconciliationNote": "PR #205の既存監査を保持。直近8件のうち5件A・3件未判定。既存Cを再評価し、蘭越町・御宿町・指宿市は最新の公式ページ内容を確認、日向市は現行公式ドメイン修正後に停止案内を確認しA。寿都町はC。新規の都道府県単位監査は鳥取県19区域を県公式リンク集と既存HTTP監査で確認（全件A）。残る未監査は既存61件内の3件とその他1,832件。"
   },
   "records": [
     {
@@ -24462,14 +24462,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tottori.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tottori.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.tottori.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24479,14 +24489,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yonago.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yonago.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.yonago.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24496,14 +24516,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kurayoshi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kurayoshi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.kurayoshi.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24513,14 +24543,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.sakaiminato.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sakaiminato.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.sakaiminato.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24530,14 +24570,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.iwami.gr.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.iwami.gr.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.iwami.gr.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24547,14 +24597,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.wakasa.tottori.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.wakasa.tottori.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.wakasa.tottori.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24564,14 +24624,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www1.town.chizu.tottori.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www1.town.chizu.tottori.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www1.town.chizu.tottori.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24581,14 +24651,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yazu.tottori.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yazu.tottori.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.yazu.tottori.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24598,14 +24678,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.misasa.tottori.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.misasa.tottori.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.misasa.tottori.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24615,14 +24705,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.yurihama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.yurihama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.yurihama.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24632,14 +24732,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kotoura.tottori.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kotoura.tottori.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.kotoura.tottori.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24649,14 +24759,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.e-hokuei.net/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.e-hokuei.net/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.e-hokuei.net/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24666,14 +24786,24 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.hiezu.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.hiezu.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.hiezu.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24683,14 +24813,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.daisen.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.daisen.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.daisen.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24700,14 +24840,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nanbu.tottori.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nanbu.tottori.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.nanbu.tottori.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24717,14 +24867,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.houki-town.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.houki-town.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.houki-town.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24734,14 +24894,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nichinan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nichinan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.nichinan.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24751,14 +24921,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hino.tottori.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hino.tottori.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.hino.tottori.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "31",
@@ -24768,14 +24948,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town-kofu.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town-kofu.jp/",
+      "evidenceUrls": [
+        "https://www.pref.tottori.lg.jp/9577.htm"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town-kofu.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "鳥取県公式の県内市町村一覧が当該自治体の公式サイトとしてリンク。登録URLは県のリンク先と一致し、既存HTTP監査は200・同一URL終端・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
