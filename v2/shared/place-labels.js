@@ -7,7 +7,7 @@ const NS='http://www.w3.org/2000/svg';
 const normalize=value=>String(value||'').normalize('NFKC').replace(/[\s　]+/g,'').toLocaleLowerCase('ja-JP');
 function matches(record,query){
  const q=normalize(query);
- return !q||[record.name,record.reading,record.code].some(s=>normalize(s).includes(q));
+ return !q||[record.fullName,record.name,record.reading,record.code].some(s=>normalize(s).includes(q));
 }
 // Use the largest land polygon. Its bounding-box centre alone can land outside
 // a crescent, L-shaped territory or island, so search for a point IN the land.
@@ -87,7 +87,7 @@ function anchor(polys){
  return result;
 }
 function show(options){
- const {svg,regions,project,selected='',all=false,readings=false}=options||{};
+ const {svg,regions,project,selected='',all=false,readings=false,positions=null}=options||{};
  if(!svg||!Array.isArray(regions)||typeof project!=='function')throw Error('Invalid label options');
  const existing=svg.querySelector('[data-v2-labels]');
  if(existing)existing.remove();
@@ -97,9 +97,9 @@ function show(options){
  let count=0;
  for(const region of regions){
   if(!all&&region.code!==selected)continue;
-  const pt=anchor(region.polys);
-  if(!pt)continue;
-  const [x,y]=project(pt);
+  const pt=positions?.get(region.code)||null;
+  if(!pt&&positions)continue;
+  const [x,y]=pt||project(anchor(region.polys));
   if(!Number.isFinite(x)||!Number.isFinite(y))continue;
   const group=document.createElementNS(NS,'g');
   group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')');
