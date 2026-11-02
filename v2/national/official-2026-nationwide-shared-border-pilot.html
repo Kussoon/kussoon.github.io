@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>全国共通トポロジー・県境比較試作 | Kussoon V2</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#19374a;background:#f0f7fc}
+*{box-sizing:border-box}body{margin:0}main{max-width:1000px;margin:auto;padding:14px 12px 48px}
+h1{font-size:clamp(22px,4vw,30px);margin:.55em 0}p{line-height:1.65}
+.panel{background:white;border:1px solid #bfd5e5;border-radius:12px;padding:14px;margin:12px 0}
+label{display:block;font-weight:700;margin-bottom:7px}
+select,button{font:inherit;min-height:44px;border:1px solid #9fbdd0;border-radius:8px;background:white;color:inherit;padding:8px 12px}
+select{width:100%;max-width:500px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+svg{display:block;width:100%;height:min(68vh,650px);min-height:430px;background:#edf6fb;border:1px solid #b7ccdb;border-radius:10px;touch-action:none}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-weight:700}.swatch{display:inline-block;width:24px;height:4px;vertical-align:middle;margin-right:5px}
+#status{background:#e6f2fa;border-radius:8px;padding:10px;font-weight:700}
+small{line-height:1.6;color:#526c7c}
+@media(max-width:600px){main{padding:10px 8px 32px}.panel{padding:10px}svg{height:58vh;min-height:360px}}
+</style>
+</head>
+<body><main>
+<a href="official-2026-nationwide-pilot.html">← 全国統合試作へ戻る</a>
+<h1>全国共通トポロジー・県境比較</h1>
+<p>現行の県別境界線と、2026年の全国データから一度に作った共有アークを、同じ範囲で重ねて比較します。試作データは公開済み全国版・試作5Cとは独立しています。</p>
+<section class="panel">
+<label for="pair">比較する県境</label><select id="pair"></select>
+<div class="tools"><button id="zoomIn">＋ 拡大</button><button id="zoomOut">− 縮小</button><button id="reset">全体表示</button><output id="zoom">1.0倍</output></div>
+<div class="legend"><span><i class="swatch" style="background:#126a9a"></i>現行側の県境（左側）</span><span><i class="swatch" style="background:#e17427"></i>現行側の県境（右側）</span><span><i class="swatch" style="background:#1a9a62;height:6px"></i>全国一括生成の共有アーク</span></div>
+<svg id="map" viewBox="0 0 900 620" role="img" aria-label="県境の重ね合わせ比較図"></svg>
+<p id="status" role="status">比較データを読み込んでいます。</p>
+<div id="stats"></div>
+</section>
+<section class="panel"><h2>見方と注意</h2>
+<p>青・橙は現行データを県ごとに抽出した外周線、緑は全国一括のTopoJSONで両県の区域が共通参照しているアークです。緑線が両県に別々の線として重複して配信される構成ではないことを確認する試作です。</p>
+<p>本試作は形状表現とトポロジー構造の比較で、法定境界の確定や国土地理院の測量精度の再認定を行うものではありません。境界未確定地では原典の注記を優先してください。</p>
+<small>出典：<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html" target="_blank" rel="noopener">国土数値情報 行政区域データ N03（2026年版）</a>。CC BY 4.0。原典表示：国土地理院「数値地図（国土基本情報）」等。測量法に基づく国土地理院長承認（複製）R 7JHf 351。</small>
+</section>
+</main>
+<script>
+(()=>{'use strict';
+const names=['','北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+const svg=document.getElementById('map'),pairSelect=document.getElementById('pair'),status=document.getElementById('status'),stats=document.getElementById('stats');
+const NS='http://www.w3.org/2000/svg';let data=null,features=[],base=null,zoom=1;
+const decodePair=p=>p.split('-');
+function xy(lon,lat){return [lon,lat];}
+function draw(){
+ if(!data||!features.length)return;
+ let minLon=Infinity,maxLon=-Infinity,minLat=Infinity,maxLat=-Infinity;
+ for(const f of features)for(const [lon,lat] of f.geometry.coordinates){
+  minLon=Math.min(minLon,lon);maxLon=Math.max(maxLon,lon);
+  minLat=Math.min(minLat,lat);maxLat=Math.max(maxLat,lat);
+ }
+ const cos=Math.cos(((minLat+maxLat)/2)*Math.PI/180);
+ const width=Math.max((maxLon-minLon)*cos,1e-5),height=Math.max(maxLat-minLat,1e-5);
+ const s=Math.min(860/width,580/height)*zoom;
+ const cx=(minLon+maxLon)/2,cy=(minLat+maxLat)/2;
+ svg.replaceChildren();
+ for(const f of features){
+  const el=document.createElementNS(NS,'path');let d='';
+  for(const [i,p] of f.geometry.coordinates.entries()){const x=450+(p[0]-cx)*cos*s,y=310-(p[1]-cy)*s;d+=(i?'L':'M')+x.toFixed(2)+','+y.toFixed(2);}
+  el.setAttribute('d',d);el.setAttribute('fill','none');
+  el.setAttribute('stroke',f.properties.stage==='common'?'#1a9a62':(f.properties.pref===decodePair(pairSelect.value)[0]?'#126a9a':'#e17427'));
+  el.setAttribute('stroke-width',f.properties.stage==='common'?'3.2':'1.5');
+  el.setAttribute('stroke-linecap','round');el.setAttribute('stroke-linejoin','round');
+  svg.append(el);
+ }
+ document.getElementById('zoom').textContent=zoom.toFixed(1)+'倍';
+ const [a,b]=decodePair(pairSelect.value);
+ const count=stage=>features.filter(f=>f.properties.stage===stage).length;
+ const countCurrent=pref=>features.filter(f=>f.properties.stage==='current'&&f.properties.pref===pref).length;
+ stats.innerHTML='<p>'+names[Number(a)]+'の現行線：'+countCurrent(a)+'アーク　／　'+names[Number(b)]+'の現行線：'+countCurrent(b)+'アーク<br>全国一括生成の共有アーク：'+count('common')+'本</p>';
+ status.textContent=names[Number(a)]+'―'+names[Number(b)]+'を同一範囲で比較中です。';
+}
+fetch('../data/national/2026-common/national-shared-border-pilot/border-comparison.geojson').then(r=>{if(!r.ok)throw Error('比較データ HTTP '+r.status);return r.json();}).then(json=>{
+ data=json;
+ for(const f of json.features){if(!pairSelect.querySelector('option[value="'+f.properties.pair+'"]')){const o=document.createElement('option');o.value=f.properties.pair;const [a,b]=f.properties.pair.split('-');o.textContent=names[Number(a)]+' ― '+names[Number(b)];pairSelect.append(o);}}
+ pairSelect.addEventListener('change',()=>{zoom=1;showPair();});document.getElementById('zoomIn').addEventListener('click',()=>{zoom=Math.min(zoom*1.35,12);draw();});document.getElementById('zoomOut').addEventListener('click',()=>{zoom=Math.max(zoom/1.35,1);draw();});document.getElementById('reset').addEventListener('click',()=>{zoom=1;draw();});
+ showPair();
+}).catch(e=>{status.textContent='比較データを読み込めませんでした：'+e.message;});
+function showPair(){features=data.features.filter(f=>f.properties.pair===pairSelect.value);if(!features.some(f=>f.properties.stage==='common')){status.textContent='この県境の共有アークデータがありません。';svg.replaceChildren();return;}draw();}
+})();
+</script></body></html>

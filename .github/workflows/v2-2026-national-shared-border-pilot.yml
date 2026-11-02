@@ -1,0 +1,75 @@
+name: V2 national shared-border comparison pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/prepare-2026-national.py'
+      - 'v2/tools/shared-topology/extract-national-border-pilot.mjs'
+      - 'v2/national/official-2026-nationwide-shared-border-pilot.html'
+      - '.github/workflows/v2-2026-national-shared-border-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  national-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install GIS command line tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+      - name: Install pinned topology dependencies
+        working-directory: v2/tools/shared-topology
+        run: npm install --no-audit --no-fund
+      - name: Download and convert all 47 official 2026 prefecture datasets
+        run: python3 v2/tools/shared-topology/prepare-2026-national.py "$RUNNER_TEMP/n03-2026-input"
+      - name: Build one topology before prefecture slicing
+        working-directory: v2/tools/shared-topology
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03-2026-input/national-2026.geojson" --output "$RUNNER_TEMP/v2-national-common" --quantization 1000000 --keep 0.02 --expect-prefectures 47 --emit-combined national.topojson
+      - name: Verify all 47 slices preserve the exact shared arcs
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-national-common"
+      - name: Create the isolated boundary comparison data
+        run: |
+          node v2/tools/shared-topology/extract-national-border-pilot.mjs "$RUNNER_TEMP/v2-national-common" v2/data/national/2026-common "$RUNNER_TEMP/national-border-pilot"
+          node --check v2/tools/shared-topology/extract-national-border-pilot.mjs
+          node --check v2/tools/shared-topology/build.mjs
+          python3 - <<'PY'
+          import json, pathlib
+          out=pathlib.Path('${{ runner.temp }}/national-border-pilot')
+          m=json.loads((out/'manifest.json').read_text())
+          d=json.loads((out/'border-comparison.geojson').read_text())
+          assert m['checkedPairs']==22 and m['allExpectedPairsHaveSharedArcs']
+          assert len(d['features'])>22
+          print('PASS: 22 cross-group land-border pairs,',len(d['features']),'comparison lines')
+          for p in m['pairs']:
+              print('PASS',p['pair'],p['commonArcCount'],'shared arcs')
+          PY
+      - name: Commit only the small comparison dataset to this PR branch
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          mkdir -p v2/data/national/2026-common/national-shared-border-pilot
+          cp "$RUNNER_TEMP/national-border-pilot/"*.json v2/data/national/2026-common/national-shared-border-pilot/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-common/national-shared-border-pilot/
+          if ! git diff --cached --quiet; then
+            git commit -m "test(v2): add national shared-border comparison data"
+            git push origin HEAD:${{ github.head_ref }}
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v2-national-shared-border-comparison-2026
+          path: ${{ runner.temp }}/national-border-pilot/
+          retention-days: 30
