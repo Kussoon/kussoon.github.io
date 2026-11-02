@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "35",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/chuugoku/cms_15614184.html",
+    "https://www.pref.yamaguchi.lg.jp/soshiki/21/26969.html"
+  ],
+  "regions": {
+    "35201": {
+      "name": "下関市",
+      "kind": "city",
+      "officeIds": [
+        "35201-city"
+      ],
+      "official": "https://www.city.shimonoseki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E4%B8%8B%E9%96%A2%E5%B8%82"
+    },
+    "35202": {
+      "name": "宇部市",
+      "kind": "city",
+      "officeIds": [
+        "35202-city"
+      ],
+      "official": "https://www.city.ube.yamaguchi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%AE%87%E9%83%A8%E5%B8%82"
+    },
+    "35203": {
+      "name": "山口市",
+      "kind": "city",
+      "officeIds": [
+        "35203-city"
+      ],
+      "official": "https://www.city.yamaguchi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%B1%B1%E5%8F%A3%E5%B8%82"
+    },
+    "35204": {
+      "name": "萩市",
+      "kind": "city",
+      "officeIds": [
+        "35204-city"
+      ],
+      "official": "https://www.city.hagi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E8%90%A9%E5%B8%82"
+    },
+    "35206": {
+      "name": "防府市",
+      "kind": "city",
+      "officeIds": [
+        "35206-city"
+      ],
+      "official": "https://www.city.hofu.yamaguchi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E9%98%B2%E5%BA%9C%E5%B8%82"
+    },
+    "35207": {
+      "name": "下松市",
+      "kind": "city",
+      "officeIds": [
+        "35207-city"
+      ],
+      "official": "https://www.city.kudamatsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E4%B8%8B%E6%9D%BE%E5%B8%82"
+    },
+    "35208": {
+      "name": "岩国市",
+      "kind": "city",
+      "officeIds": [
+        "35208-city"
+      ],
+      "official": "https://www.city.iwakuni.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%B2%A9%E5%9B%BD%E5%B8%82"
+    },
+    "35210": {
+      "name": "光市",
+      "kind": "city",
+      "officeIds": [
+        "35210-city"
+      ],
+      "official": "https://www.city.hikari.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%85%89%E5%B8%82"
+    },
+    "35211": {
+      "name": "長門市",
+      "kind": "city",
+      "officeIds": [
+        "35211-city"
+      ],
+      "official": "https://www.city.nagato.yamaguchi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E9%95%B7%E9%96%80%E5%B8%82"
+    },
+    "35212": {
+      "name": "柳井市",
+      "kind": "city",
+      "officeIds": [
+        "35212-city"
+      ],
+      "official": "https://www.city-yanai.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E6%9F%B3%E4%BA%95%E5%B8%82"
+    },
+    "35213": {
+      "name": "美祢市",
+      "kind": "city",
+      "officeIds": [
+        "35213-city"
+      ],
+      "official": "https://www2.city.mine.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E7%BE%8E%E7%A5%A2%E5%B8%82"
+    },
+    "35215": {
+      "name": "周南市",
+      "kind": "city",
+      "officeIds": [
+        "35215-city"
+      ],
+      "official": "https://www.city.shunan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%91%A8%E5%8D%97%E5%B8%82"
+    },
+    "35216": {
+      "name": "山陽小野田市",
+      "kind": "city",
+      "officeIds": [
+        "35216-city"
+      ],
+      "official": "https://www.city.sanyo-onoda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%B1%B1%E9%99%BD%E5%B0%8F%E9%87%8E%E7%94%B0%E5%B8%82"
+    },
+    "35305": {
+      "name": "周防大島町",
+      "kind": "town",
+      "officeIds": [
+        "35305-town"
+      ],
+      "official": "https://www.town.suo-oshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%91%A8%E9%98%B2%E5%A4%A7%E5%B3%B6%E7%94%BA"
+    },
+    "35321": {
+      "name": "和木町",
+      "kind": "town",
+      "officeIds": [
+        "35321-town"
+      ],
+      "official": "https://www.town.waki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%92%8C%E6%9C%A8%E7%94%BA"
+    },
+    "35341": {
+      "name": "上関町",
+      "kind": "town",
+      "officeIds": [
+        "35341-town"
+      ],
+      "official": "https://www.town.kaminoseki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E4%B8%8A%E9%96%A2%E7%94%BA"
+    },
+    "35343": {
+      "name": "田布施町",
+      "kind": "town",
+      "officeIds": [
+        "35343-town"
+      ],
+      "official": "https://www.town.tabuse.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E7%94%B0%E5%B8%83%E6%96%BD%E7%94%BA"
+    },
+    "35344": {
+      "name": "平生町",
+      "kind": "town",
+      "officeIds": [
+        "35344-town"
+      ],
+      "official": "https://www.town.hirao.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E5%B9%B3%E7%94%9F%E7%94%BA"
+    },
+    "35502": {
+      "name": "阿武町",
+      "kind": "town",
+      "officeIds": [
+        "35502-town"
+      ],
+      "official": "https://www.town.abu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E5%8F%A3%E7%9C%8C%E9%98%BF%E6%AD%A6%E7%94%BA"
+    }
+  },
+  "offices": {
+    "35201-city": {
+      "name": "下関市役所",
+      "status": "verified",
+      "postalCode": "750-8521",
+      "address": "山口県下関市南部町1-1"
+    },
+    "35202-city": {
+      "name": "宇部市役所",
+      "status": "verified",
+      "postalCode": "755-8601",
+      "address": "山口県宇部市常盤町1-7-1"
+    },
+    "35203-city": {
+      "name": "山口市役所",
+      "status": "verified",
+      "postalCode": "753-8650",
+      "address": "山口県山口市亀山町2-1"
+    },
+    "35204-city": {
+      "name": "萩市役所",
+      "status": "verified",
+      "postalCode": "758-8555",
+      "address": "山口県萩市江向510"
+    },
+    "35206-city": {
+      "name": "防府市役所",
+      "status": "verified",
+      "postalCode": "747-8501",
+      "address": "山口県防府市寿町7-1"
+    },
+    "35207-city": {
+      "name": "下松市役所",
+      "status": "verified",
+      "postalCode": "744-8585",
+      "address": "山口県下松市大手町3-3-3"
+    },
+    "35208-city": {
+      "name": "岩国市役所",
+      "status": "verified",
+      "postalCode": "740-8585",
+      "address": "山口県岩国市今津町1-14-51"
+    },
+    "35210-city": {
+      "name": "光市役所",
+      "status": "verified",
+      "postalCode": "743-8501",
+      "address": "山口県光市中央6-1-1"
+    },
+    "35211-city": {
+      "name": "長門市役所",
+      "status": "verified",
+      "postalCode": "759-4192",
+      "address": "山口県長門市東深川1339-2"
+    },
+    "35212-city": {
+      "name": "柳井市役所",
+      "status": "verified",
+      "postalCode": "742-8714",
+      "address": "山口県柳井市南町1-10-2"
+    },
+    "35213-city": {
+      "name": "美祢市役所",
+      "status": "verified",
+      "postalCode": "759-2292",
+      "address": "山口県美祢市大嶺町東分326-1"
+    },
+    "35215-city": {
+      "name": "周南市役所",
+      "status": "verified",
+      "postalCode": "745-8655",
+      "address": "山口県周南市岐山通1-1"
+    },
+    "35216-city": {
+      "name": "山陽小野田市役所",
+      "status": "verified",
+      "postalCode": "756-8601",
+      "address": "山口県山陽小野田市日の出1-1-1"
+    },
+    "35305-town": {
+      "name": "周防大島町役場",
+      "status": "verified",
+      "postalCode": "742-2192",
+      "address": "山口県大島郡周防大島町大字小松126-2"
+    },
+    "35321-town": {
+      "name": "和木町役場",
+      "status": "verified",
+      "postalCode": "740-8501",
+      "address": "山口県玖珂郡和木町和木1-1-1"
+    },
+    "35341-town": {
+      "name": "上関町役場",
+      "status": "verified",
+      "postalCode": "742-1402",
+      "address": "山口県熊毛郡上関町大字長島448"
+    },
+    "35343-town": {
+      "name": "田布施町役場",
+      "status": "verified",
+      "postalCode": "742-1592",
+      "address": "山口県熊毛郡田布施町大字下田布施3440-1"
+    },
+    "35344-town": {
+      "name": "平生町役場",
+      "status": "verified",
+      "postalCode": "742-1195",
+      "address": "山口県熊毛郡平生町大字平生町210-1"
+    },
+    "35502-town": {
+      "name": "阿武町役場",
+      "status": "verified",
+      "postalCode": "759-3622",
+      "address": "山口県阿武郡阿武町大字奈古2636"
+    }
+  }
+}
