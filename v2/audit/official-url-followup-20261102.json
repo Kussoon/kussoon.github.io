@@ -1552,5 +1552,108 @@
     "url": "https://github.com/Kussoon/kussoon.github.io/pull/193",
     "status": "merged",
     "changedOfficialUrlCount": 9
-  }
+  },
+  "followupChecks": [
+    {
+      "checkedAt": "2026-11-02T23:44 JST (approx.)",
+      "scope": "C判定のうち、公開ブラウザで再試行した自治体の追加記録。元の61件分類と件数は変更しない。",
+      "results": [
+        {
+          "municipalityCode": "45206",
+          "municipality": "日向市",
+          "result": "https://www.hyugacity.jp/ を実ブラウザで表示。日向市の臨時ページで、システム障害等により通常ホームページを臨時表示中と告知。最終更新は2026-10-30 18:30。通常の現行URL移転先とは確定できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.hyugacity.jp/",
+            "https://www.pref.miyazaki.lg.jp/documents/94558/94558_20250227153249-1.pdf"
+          ]
+        },
+        {
+          "municipalityCode": "46210",
+          "municipality": "指宿市",
+          "result": "登録URLを実ブラウザで表示。セキュリティ措置による全サービス一時停止の告知が表示され、再開時刻未定。恒久移転とは判断できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.city.ibusuki.lg.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "12443",
+          "municipality": "御宿町",
+          "result": "登録URLを実ブラウザで表示。『緊急メンテナンス実施中』とあり、町運営サイトの保守中と告知。移転先の根拠は確認できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.town.onjuku.chiba.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "06403",
+          "municipality": "飯豊町",
+          "result": "登録URLを実ブラウザで再試行するとHTTP 502 Server Error。検索インデックスには同じ自治体ドメインの飯豊町公式ページと2026年10月のお知らせが掲載されているが、公開ブラウザで公式本文を確認できず、URL変更とも断定しない。Cを維持。",
+          "evidenceUrls": [
+            "https://www.town.iide.yamagata.jp/",
+            "https://www.town.iide.yamagata.jp/index.html"
+          ]
+        },
+        {
+          "municipalityCode": "20404",
+          "municipality": "阿南町",
+          "result": "登録URLとwwwなし候補 town.anan.nagano.jp の双方をブラウザで試行したが、上流接続エラー。候補の公式性と移転を確定できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.town.anan.nagano.jp/",
+            "https://town.anan.nagano.jp/",
+            "https://machimura-nagano.jp/introduction/south/anan.php"
+          ]
+        },
+        {
+          "municipalityCode": "30381",
+          "municipality": "美浜町",
+          "result": "登録URLをブラウザで再試行したが接続タイムアウト。移転先を確認できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.town.mihama.wakayama.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "30383",
+          "municipality": "由良町",
+          "result": "登録URLをブラウザで再試行したが接続タイムアウト。移転先を確認できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.town.yura.wakayama.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "19422",
+          "municipality": "道志村",
+          "result": "登録URLをブラウザで再試行したが接続タイムアウト。移転先を確認できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.vill.doshi.lg.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "02362",
+          "municipality": "大鰐町",
+          "result": "青森県公式の市町村ホームページ一覧（2025-12-01更新）は登録URLと同じドメインを案内。別URLの根拠はなく、自治体サイト本文もブラウザで確認できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.pref.aomori.lg.jp/soshiki/zaimu/shichoson/shichoson.html",
+            "https://www.town.owani.lg.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "02367",
+          "municipality": "田舎館村",
+          "result": "青森県公式の市町村ホームページ一覧（2025-12-01更新）は登録URLと同じドメインを案内。別URLの根拠はなく、自治体サイト本文もブラウザで確認できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.pref.aomori.lg.jp/soshiki/zaimu/shichoson/shichoson.html",
+            "https://www.vill.inakadate.lg.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "02424",
+          "municipality": "東通村",
+          "result": "青森県公式の市町村ホームページ一覧（2025-12-01更新）は登録URLと同じドメインを案内。別URLの根拠はなく、自治体サイト本文もブラウザで確認できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.pref.aomori.lg.jp/soshiki/zaimu/shichoson/shichoson.html",
+            "https://www.vill.higashidoori.lg.jp/"
+          ]
+        }
+      ]
+    }
+  ]
 }
