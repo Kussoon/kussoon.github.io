@@ -36,6 +36,9 @@ const KussoonV2MunicipalRenderer={
 };
 const KussoonV2PlaceLabels={matches(r,q){return r.fullName?.includes(q)||r.name.includes(q)||r.reading?.includes(q)||r.code.includes(q);},show(){}};
 const KussoonV2EstablishedLabelAdapter={layout(){return new Map();}};
+const quizContext={window:{}};
+vm.runInNewContext(await readFile('v2/shared/municipality-quiz.js','utf8'),quizContext);
+const KussoonV2MunicipalityQuiz=quizContext.window.KussoonV2MunicipalityQuiz;
 const bridgeContext={window:{}};
 vm.runInNewContext(await readFile('v2/shared/reading-bridge.js','utf8'),bridgeContext);
 const KussoonV2ReadingBridge=bridgeContext.window.KussoonV2ReadingBridge;
@@ -48,7 +51,7 @@ const fakeFetch=async url=>{
  return {ok:true,status:200,text:async()=>content,json:async()=>JSON.parse(content)};
 };
 const script=page.split('<script>').at(-1).split('</script>')[0];
-const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,KussoonV2ReadingBridge,KussoonV2EstablishedLabelAdapter,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
+const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,KussoonV2ReadingBridge,KussoonV2EstablishedLabelAdapter,KussoonV2MunicipalityQuiz,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
 vm.runInNewContext(script,context);
 async function until(predicate,label){
  for(let i=0;i<200;i++){
@@ -80,6 +83,22 @@ callbacks.get('placeSearch:input')();
 assert(node('searchResults').children.some(b=>b.textContent.includes('静岡市葵区')),
        'full Shizuoka city-ward name must be searchable');
 
+assert(!node('quizStart').disabled,'quiz must be available after prefecture loads');
+callbacks.get('quizStart:click')();
+assert(node('quizPlay').hidden===false,'quiz must be displayed');
+assert(node('quizChoices').children.length===4,'quiz has four alternatives');
+assert(node('region').disabled===true,'menu should not reveal correct place during quiz');
+assert(lastRender?.selected,'correct area should be highlighted in quiz');
+assert(node('breadcrumb').textContent.includes('クイズ中')&&!node('breadcrumb').textContent.includes('大津市'),'question name must be hidden in breadcrumb');
+node('quizChoices').children[0].addEventListener; // ensure all choices are interactive
+const btn=node('quizChoices').children[0];
+callbacks.get('button:click')(); // quiz response
+assert(node('quizNext').hidden===false,'next control after answer');
+callbacks.get('quizNext:click')();
+assert(node('quizChoices').children.length===4,'new question has four choices');
+callbacks.get('quizStop:click')();
+assert(node('quizPlay').hidden===true,'quiz stops cleanly');
+assert(node('region').disabled===false,'regular map navigation restored');
 node('placeSearch').value='大津';
 callbacks.get('placeSearch:input')();
 assert(node('searchResults').children.length>0,'search result did not appear');

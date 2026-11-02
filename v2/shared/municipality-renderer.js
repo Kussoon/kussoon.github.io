@@ -70,7 +70,7 @@ function focusBounds(polys, options={}){
 
 function element(name){return document.createElementNS(NS,name);}
 function render(options){
- const {map,regions,arcs,project,selected='',landClass='land',chosenClass='chosen',borderClass='borders'}=options;
+ const {map,regions,arcs,project,selected='',landClass='land',chosenClass='chosen',borderClass='borders',hideTitles=false}=options;
  if(!map||!Array.isArray(regions)||!Array.isArray(arcs)||typeof project!=='function')throw Error('Invalid Kussoon V2 map arguments');
  const fragment=document.createDocumentFragment();
  for(const region of regions){
