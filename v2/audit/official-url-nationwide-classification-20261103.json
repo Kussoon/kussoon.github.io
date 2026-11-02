@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 48,
-      "B": 0,
+      "A": 52,
+      "B": 1,
       "C": 5,
-      "unclassified": 1859
+      "unclassified": 1854
     },
-    "completedRegionReviews": 53,
-    "pendingExisting61Reconciliation": 8,
+    "completedRegionReviews": 58,
+    "pendingExisting61Reconciliation": 3,
     "unreviewedOtherRegions": 1851,
     "totalCheck": 1912,
-    "reconciliationNote": "旧61件の最新エビデンスをコード単位で照合。URL修正済みの旧Bを反映。公式サイト停止と登録URLの到達不明を保守的に区別。全件監査完了ではない。"
+    "reconciliationNote": "PR #205の既存53件（A48/C5）を保持。追加8件のうち4件A・1件Bを個別根拠で記録し、3件は公式性/利用可能性が確定せず未判定。次段階は残る1,851区域。"
   },
   "records": [
     {
@@ -1105,13 +1105,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.setana.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.setana.lg.jp/",
       "evidenceUrls": [
         "https://www.town.setana.lg.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.chisou.go.jp/sousei/about/satellite-campus/collaboration/municipality/674.html"
       ],
       "connectivity": {
         "status": 503,
@@ -1119,10 +1120,12 @@
         "error": "Service Unavailable"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "current_official_page_search",
+        "official_domain_identity_check"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
     },
     {
       "prefectureCode": "01",
@@ -1332,13 +1335,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kyowa.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kyowa.hokkaido.jp/",
       "evidenceUrls": [
         "https://www.town.kyowa.hokkaido.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.town.kyowa.hokkaido.jp/content/?content=351"
       ],
       "connectivity": {
         "status": null,
@@ -1346,10 +1350,12 @@
         "error": "TimeoutError: The read operation timed out"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "current_official_page_search",
+        "official_domain_identity_check"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
     },
     {
       "prefectureCode": "01",
@@ -1677,13 +1683,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.chippubetsu.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.chippubetsu.hokkaido.jp/",
       "evidenceUrls": [
         "https://www.town.chippubetsu.hokkaido.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.town.chippubetsu.hokkaido.jp/category/detail.html?category=town&content=282"
       ],
       "connectivity": {
         "status": null,
@@ -1691,10 +1698,12 @@
         "error": "TimeoutError: The read operation timed out"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "current_official_page_search",
+        "official_domain_identity_check"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
     },
     {
       "prefectureCode": "01",
@@ -15475,7 +15484,9 @@
       "evidenceUrls": [
         "https://www.vill.doshi.lg.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.chisou.go.jp/sousei/about/satellite-campus/collaboration/municipality/768.html",
+        "https://www.pref.yamanashi.jp/"
       ],
       "connectivity": {
         "status": null,
@@ -15483,10 +15494,12 @@
         "error": "URLError: <urlopen error timed out>"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "official_directory_review",
+        "browser_check_attempt_environment_failure"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "内閣府の自治体情報は登録ドメインを道志村ホームページとして掲載するが、掲載情報の現行性を確認できず、今回も現行ページの利用可能性を確認できなかった。通信失敗のみを理由にCにせず未判定。"
     },
     {
       "prefectureCode": "19",
@@ -16022,7 +16035,9 @@
       "evidenceUrls": [
         "https://vill.kitaaiki.nagano.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://machimura-nagano.jp/introduction/east/kitaaiki.php",
+        "https://www.kaigokensaku.mhlw.go.jp/20/index.php?JigyosyoCd=2072000082-00&ServiceCd=430&action_kouhyou_detail_023_kihon=true"
       ],
       "connectivity": {
         "status": null,
@@ -16030,10 +16045,12 @@
         "error": "URLError: <urlopen error [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)>"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "official_directory_review",
+        "browser_check_attempt_environment_failure"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "長野県町村会および厚労省の公的ページは当該ドメインを北相木村公式サイトとして掲載。ただし登録HTTPS URLは既存監査でTLSハンドシェイク失敗。今回のクラウドブラウザも中継接続エラーで到達性を確認できず。公式性は裏付けられるが現行サイトの利用可能性を確認できないため未判定。"
     },
     {
       "prefectureCode": "20",
@@ -24154,7 +24171,9 @@
       "evidenceUrls": [
         "https://www.town.mihama.wakayama.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.pref.wakayama.lg.jp/prefg/130500/",
+        "https://warp.ndl.go.jp/waid/11409"
       ],
       "connectivity": {
         "status": null,
@@ -24162,10 +24181,12 @@
         "error": "URLError: <urlopen error timed out>"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "official_directory_review",
+        "browser_check_attempt_environment_failure"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "和歌山県日高振興局は登録ドメインを美浜町ホームページとしてリンク。国立国会図書館WARPに2026-09-05保存記録があるが、今回、現行ページの利用可能性を確認できなかった。公式性と利用可能性の確認が分かれるため未判定。"
     },
     {
       "prefectureCode": "30",
@@ -24202,13 +24223,16 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yura.wakayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
+      "classification": "B",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yura.lg.jp/",
       "evidenceUrls": [
         "https://www.town.yura.wakayama.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.town.yura.lg.jp/",
+        "https://www.pref.wakayama.lg.jp/prefg/130500/",
+        "https://www.wcsk.jp/rink"
       ],
       "connectivity": {
         "status": null,
@@ -24216,10 +24240,12 @@
         "error": "URLError: <urlopen error timed out>"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "current_official_page_search",
+        "official_prefecture_link_check"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "現行の由良町公式サイトは https://www.town.yura.lg.jp/ で、最近の町政情報・役場所在地・連絡先を掲載。旧登録URL town.yura.wakayama.jp は現行ドメインに更新が必要と判断。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
     },
     {
       "prefectureCode": "30",
@@ -27715,13 +27741,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.toyo.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.toyo.kochi.jp/",
       "evidenceUrls": [
         "https://www.town.toyo.kochi.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.town.toyo.kochi.jp/contents/approach.php"
       ],
       "connectivity": {
         "status": null,
@@ -27729,10 +27756,12 @@
         "error": "URLError: <urlopen error timed out>"
       },
       "method": [
-        "existing_2026_11_02_followup"
+        "existing_2026_11_02_followup",
+        "current_official_page_search",
+        "official_domain_identity_check"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "既存の通信失敗・接続保留記録だけでは公式URL不確定のCを確定できない。公的資料とブラウザの追加照合が必要。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
     },
     {
       "prefectureCode": "39",
@@ -33182,5 +33211,6 @@
       "checkedAt": null,
       "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
     }
-  ]
+  ],
+  "updatedAt": "2026-11-03 JST"
 }
