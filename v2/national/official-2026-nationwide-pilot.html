@@ -214,7 +214,7 @@ function ensureNationwideSearchIndex(){
   // The 20 designated-city parent records have no single map polygon; their wards do.
   const wardNames=Object.values(items).filter(x=>x&&x.name&&x.name.endsWith('区')).map(x=>x.name);
   nationwideSearchIndex=Object.entries(items).filter(([code,item])=>{
-   if(!/^\\d{5}$/.test(code)||!item||!item.name||Number(code.slice(0,2))<1||Number(code.slice(0,2))>47)return false;
+   if(!/^[0-9]{5}$/.test(code)||!item||!item.name||Number(code.slice(0,2))<1||Number(code.slice(0,2))>47)return false;
    return !(item.name.endsWith('市')&&wardNames.some(name=>name.startsWith(item.name)&&name!==item.name));
   }).map(([code,item])=>({name:item.name,reading:item.reading||'',code,pref:code.slice(0,2),kind:'national-region'}));
   nationwideSearchLoading=false;
