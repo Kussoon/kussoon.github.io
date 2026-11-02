@@ -1,0 +1,899 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "07",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.fukushima.lg.jp/sec/01145a/yakuba.html",
+    "https://www.j-lis.go.jp/spd/code-address/touhoku/cms_12814180.html",
+    "https://www.j-lis.go.jp/spd/map-search/touhoku/cms_162769144.html"
+  ],
+  "regions": {
+    "07201": {
+      "name": "福島市",
+      "kind": "city",
+      "officeIds": [
+        "07201-city"
+      ],
+      "official": "https://www.city.fukushima.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%A6%8F%E5%B3%B6%E5%B8%82"
+    },
+    "07202": {
+      "name": "会津若松市",
+      "kind": "city",
+      "officeIds": [
+        "07202-city"
+      ],
+      "official": "https://www.city.aizuwakamatsu.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82"
+    },
+    "07203": {
+      "name": "郡山市",
+      "kind": "city",
+      "officeIds": [
+        "07203-city"
+      ],
+      "official": "https://www.city.koriyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E9%83%A1%E5%B1%B1%E5%B8%82"
+    },
+    "07204": {
+      "name": "いわき市",
+      "kind": "city",
+      "officeIds": [
+        "07204-city"
+      ],
+      "official": "https://www.city.iwaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E3%81%84%E3%82%8F%E3%81%8D%E5%B8%82"
+    },
+    "07205": {
+      "name": "白河市",
+      "kind": "city",
+      "officeIds": [
+        "07205-city"
+      ],
+      "official": "https://www.city.shirakawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%99%BD%E6%B2%B3%E5%B8%82"
+    },
+    "07207": {
+      "name": "須賀川市",
+      "kind": "city",
+      "officeIds": [
+        "07207-city"
+      ],
+      "official": "https://www.city.sukagawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E9%A0%88%E8%B3%80%E5%B7%9D%E5%B8%82"
+    },
+    "07208": {
+      "name": "喜多方市",
+      "kind": "city",
+      "officeIds": [
+        "07208-city"
+      ],
+      "official": "https://www.city.kitakata.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%96%9C%E5%A4%9A%E6%96%B9%E5%B8%82"
+    },
+    "07209": {
+      "name": "相馬市",
+      "kind": "city",
+      "officeIds": [
+        "07209-city"
+      ],
+      "official": "https://www.city.soma.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%9B%B8%E9%A6%AC%E5%B8%82"
+    },
+    "07210": {
+      "name": "二本松市",
+      "kind": "city",
+      "officeIds": [
+        "07210-city"
+      ],
+      "official": "https://www.city.nihonmatsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BA%8C%E6%9C%AC%E6%9D%BE%E5%B8%82"
+    },
+    "07211": {
+      "name": "田村市",
+      "kind": "city",
+      "officeIds": [
+        "07211-city"
+      ],
+      "official": "https://www.city.tamura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%94%B0%E6%9D%91%E5%B8%82"
+    },
+    "07212": {
+      "name": "南相馬市",
+      "kind": "city",
+      "officeIds": [
+        "07212-city"
+      ],
+      "official": "https://www.city.minamisoma.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%8D%97%E7%9B%B8%E9%A6%AC%E5%B8%82"
+    },
+    "07213": {
+      "name": "伊達市",
+      "kind": "city",
+      "officeIds": [
+        "07213-city"
+      ],
+      "official": "https://www.city.fukushima-date.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%8A%E9%81%94%E5%B8%82"
+    },
+    "07214": {
+      "name": "本宮市",
+      "kind": "city",
+      "officeIds": [
+        "07214-city"
+      ],
+      "official": "https://www.city.motomiya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%9C%AC%E5%AE%AE%E5%B8%82"
+    },
+    "07301": {
+      "name": "桑折町",
+      "kind": "town",
+      "officeIds": [
+        "07301-town"
+      ],
+      "official": "https://www.town.koori.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%A1%91%E6%8A%98%E7%94%BA"
+    },
+    "07303": {
+      "name": "国見町",
+      "kind": "town",
+      "officeIds": [
+        "07303-town"
+      ],
+      "official": "https://www.town.kunimi.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%9B%BD%E8%A6%8B%E7%94%BA"
+    },
+    "07308": {
+      "name": "川俣町",
+      "kind": "town",
+      "officeIds": [
+        "07308-town"
+      ],
+      "official": "https://www.town.kawamata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%B7%9D%E4%BF%A3%E7%94%BA"
+    },
+    "07322": {
+      "name": "大玉村",
+      "kind": "village",
+      "officeIds": [
+        "07322-village"
+      ],
+      "official": "https://www.vill.otama.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%A4%A7%E7%8E%89%E6%9D%91"
+    },
+    "07342": {
+      "name": "鏡石町",
+      "kind": "town",
+      "officeIds": [
+        "07342-town"
+      ],
+      "official": "https://www.town.kagamiishi.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E9%8F%A1%E7%9F%B3%E7%94%BA"
+    },
+    "07344": {
+      "name": "天栄村",
+      "kind": "village",
+      "officeIds": [
+        "07344-village"
+      ],
+      "official": "https://www.vill.tenei.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%A4%A9%E6%A0%84%E6%9D%91"
+    },
+    "07362": {
+      "name": "下郷町",
+      "kind": "town",
+      "officeIds": [
+        "07362-town"
+      ],
+      "official": "https://www.town.shimogo.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%B8%8B%E9%83%B7%E7%94%BA"
+    },
+    "07364": {
+      "name": "檜枝岐村",
+      "kind": "village",
+      "officeIds": [
+        "07364-village"
+      ],
+      "official": "https://www.vill.hinoemata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%AA%9C%E6%9E%9D%E5%B2%90%E6%9D%91"
+    },
+    "07367": {
+      "name": "只見町",
+      "kind": "town",
+      "officeIds": [
+        "07367-town"
+      ],
+      "official": "https://www.town.tadami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%8F%AA%E8%A6%8B%E7%94%BA"
+    },
+    "07368": {
+      "name": "南会津町",
+      "kind": "town",
+      "officeIds": [
+        "07368-town"
+      ],
+      "official": "https://www.town.minamiaizu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%8D%97%E4%BC%9A%E6%B4%A5%E7%94%BA"
+    },
+    "07402": {
+      "name": "北塩原村",
+      "kind": "village",
+      "officeIds": [
+        "07402-village"
+      ],
+      "official": "https://www.vill.kitashiobara.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%8C%97%E5%A1%A9%E5%8E%9F%E6%9D%91"
+    },
+    "07405": {
+      "name": "西会津町",
+      "kind": "town",
+      "officeIds": [
+        "07405-town"
+      ],
+      "official": "https://www.town.nishiaizu.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E8%A5%BF%E4%BC%9A%E6%B4%A5%E7%94%BA"
+    },
+    "07407": {
+      "name": "磐梯町",
+      "kind": "town",
+      "officeIds": [
+        "07407-town"
+      ],
+      "official": "https://www.town.bandai.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%A3%90%E6%A2%AF%E7%94%BA"
+    },
+    "07408": {
+      "name": "猪苗代町",
+      "kind": "town",
+      "officeIds": [
+        "07408-town"
+      ],
+      "official": "https://www.town.inawashiro.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%8C%AA%E8%8B%97%E4%BB%A3%E7%94%BA"
+    },
+    "07421": {
+      "name": "会津坂下町",
+      "kind": "town",
+      "officeIds": [
+        "07421-town"
+      ],
+      "official": "https://www.town.aizubange.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%9A%E6%B4%A5%E5%9D%82%E4%B8%8B%E7%94%BA"
+    },
+    "07422": {
+      "name": "湯川村",
+      "kind": "village",
+      "officeIds": [
+        "07422-village"
+      ],
+      "official": "https://www.vill.yugawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%B9%AF%E5%B7%9D%E6%9D%91"
+    },
+    "07423": {
+      "name": "柳津町",
+      "kind": "town",
+      "officeIds": [
+        "07423-town"
+      ],
+      "official": "https://www.town.yanaizu.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%9F%B3%E6%B4%A5%E7%94%BA"
+    },
+    "07444": {
+      "name": "三島町",
+      "kind": "town",
+      "officeIds": [
+        "07444-town"
+      ],
+      "official": "https://www.town.mishima.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%B8%89%E5%B3%B6%E7%94%BA"
+    },
+    "07445": {
+      "name": "金山町",
+      "kind": "town",
+      "officeIds": [
+        "07445-town"
+      ],
+      "official": "https://www.town.kaneyama.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E9%87%91%E5%B1%B1%E7%94%BA"
+    },
+    "07446": {
+      "name": "昭和村",
+      "kind": "village",
+      "officeIds": [
+        "07446-village"
+      ],
+      "official": "https://www.vill.showa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%98%AD%E5%92%8C%E6%9D%91"
+    },
+    "07447": {
+      "name": "会津美里町",
+      "kind": "town",
+      "officeIds": [
+        "07447-town"
+      ],
+      "official": "https://www.town.aizumisato.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%9A%E6%B4%A5%E7%BE%8E%E9%87%8C%E7%94%BA"
+    },
+    "07461": {
+      "name": "西郷村",
+      "kind": "village",
+      "officeIds": [
+        "07461-village"
+      ],
+      "official": "https://www.vill.nishigo.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E8%A5%BF%E9%83%B7%E6%9D%91"
+    },
+    "07464": {
+      "name": "泉崎村",
+      "kind": "village",
+      "officeIds": [
+        "07464-village"
+      ],
+      "official": "https://www.vill.izumizaki.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%B3%89%E5%B4%8E%E6%9D%91"
+    },
+    "07465": {
+      "name": "中島村",
+      "kind": "village",
+      "officeIds": [
+        "07465-village"
+      ],
+      "official": "https://www.vill-nakajima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%B8%AD%E5%B3%B6%E6%9D%91"
+    },
+    "07466": {
+      "name": "矢吹町",
+      "kind": "town",
+      "officeIds": [
+        "07466-town"
+      ],
+      "official": "https://www.town.yabuki.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%9F%A2%E5%90%B9%E7%94%BA"
+    },
+    "07481": {
+      "name": "棚倉町",
+      "kind": "town",
+      "officeIds": [
+        "07481-town"
+      ],
+      "official": "https://www.town.tanagura.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%A3%9A%E5%80%89%E7%94%BA"
+    },
+    "07482": {
+      "name": "矢祭町",
+      "kind": "town",
+      "officeIds": [
+        "07482-town"
+      ],
+      "official": "https://www.town.yamatsuri.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%9F%A2%E7%A5%AD%E7%94%BA"
+    },
+    "07483": {
+      "name": "塙町",
+      "kind": "town",
+      "officeIds": [
+        "07483-town"
+      ],
+      "official": "https://www.town.hanawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%A1%99%E7%94%BA"
+    },
+    "07484": {
+      "name": "鮫川村",
+      "kind": "village",
+      "officeIds": [
+        "07484-village"
+      ],
+      "official": "https://www.vill.samegawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E9%AE%AB%E5%B7%9D%E6%9D%91"
+    },
+    "07501": {
+      "name": "石川町",
+      "kind": "town",
+      "officeIds": [
+        "07501-town"
+      ],
+      "official": "https://www.town.ishikawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%9F%B3%E5%B7%9D%E7%94%BA"
+    },
+    "07502": {
+      "name": "玉川村",
+      "kind": "village",
+      "officeIds": [
+        "07502-village"
+      ],
+      "official": "https://www.vill.tamakawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E7%8E%89%E5%B7%9D%E6%9D%91"
+    },
+    "07503": {
+      "name": "平田村",
+      "kind": "village",
+      "officeIds": [
+        "07503-village"
+      ],
+      "official": "https://www.vill.hirata.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%B9%B3%E7%94%B0%E6%9D%91"
+    },
+    "07504": {
+      "name": "浅川町",
+      "kind": "town",
+      "officeIds": [
+        "07504-town"
+      ],
+      "official": "https://www.town.asakawa.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%B5%85%E5%B7%9D%E7%94%BA"
+    },
+    "07505": {
+      "name": "古殿町",
+      "kind": "town",
+      "officeIds": [
+        "07505-town"
+      ],
+      "official": "https://www.town.furudono.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%8F%A4%E6%AE%BF%E7%94%BA"
+    },
+    "07521": {
+      "name": "三春町",
+      "kind": "town",
+      "officeIds": [
+        "07521-town"
+      ],
+      "official": "https://www.town.miharu.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%B8%89%E6%98%A5%E7%94%BA"
+    },
+    "07522": {
+      "name": "小野町",
+      "kind": "town",
+      "officeIds": [
+        "07522-town"
+      ],
+      "official": "https://www.town.ono.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%B0%8F%E9%87%8E%E7%94%BA"
+    },
+    "07541": {
+      "name": "広野町",
+      "kind": "town",
+      "officeIds": [
+        "07541-town"
+      ],
+      "official": "https://www.town.hirono.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%BA%83%E9%87%8E%E7%94%BA"
+    },
+    "07542": {
+      "name": "楢葉町",
+      "kind": "town",
+      "officeIds": [
+        "07542-town"
+      ],
+      "official": "https://www.town.naraha.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%A5%A2%E8%91%89%E7%94%BA"
+    },
+    "07543": {
+      "name": "富岡町",
+      "kind": "town",
+      "officeIds": [
+        "07543-town"
+      ],
+      "official": "https://www.tomioka-town.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%AF%8C%E5%B2%A1%E7%94%BA"
+    },
+    "07544": {
+      "name": "川内村",
+      "kind": "village",
+      "officeIds": [
+        "07544-village"
+      ],
+      "official": "https://www.kawauchimura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%B7%9D%E5%86%85%E6%9D%91"
+    },
+    "07545": {
+      "name": "大熊町",
+      "kind": "town",
+      "officeIds": [
+        "07545-town"
+      ],
+      "official": "https://www.town.okuma.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%A4%A7%E7%86%8A%E7%94%BA"
+    },
+    "07546": {
+      "name": "双葉町",
+      "kind": "town",
+      "officeIds": [
+        "07546-town"
+      ],
+      "official": "https://www.town.fukushima-futaba.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E5%8F%8C%E8%91%89%E7%94%BA"
+    },
+    "07547": {
+      "name": "浪江町",
+      "kind": "town",
+      "officeIds": [
+        "07547-town"
+      ],
+      "official": "https://www.town.namie.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%B5%AA%E6%B1%9F%E7%94%BA"
+    },
+    "07548": {
+      "name": "葛尾村",
+      "kind": "village",
+      "officeIds": [
+        "07548-village"
+      ],
+      "official": "https://www.katsurao.org/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E8%91%9B%E5%B0%BE%E6%9D%91"
+    },
+    "07561": {
+      "name": "新地町",
+      "kind": "town",
+      "officeIds": [
+        "07561-town"
+      ],
+      "official": "https://www.shinchi-town.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%96%B0%E5%9C%B0%E7%94%BA"
+    },
+    "07564": {
+      "name": "飯舘村",
+      "kind": "village",
+      "officeIds": [
+        "07564-village"
+      ],
+      "official": "https://www.vill.iitate.fukushima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E9%A3%AF%E8%88%98%E6%9D%91"
+    }
+  },
+  "offices": {
+    "07201-city": {
+      "name": "福島市役所",
+      "status": "verified",
+      "postalCode": "960-8601",
+      "address": "福島県福島市五老内町3-1"
+    },
+    "07202-city": {
+      "name": "会津若松市役所",
+      "status": "verified",
+      "postalCode": "965-8601",
+      "address": "福島県会津若松市東栄町3-46"
+    },
+    "07203-city": {
+      "name": "郡山市役所",
+      "status": "verified",
+      "postalCode": "963-8601",
+      "address": "福島県郡山市朝日1-23-7"
+    },
+    "07204-city": {
+      "name": "いわき市役所",
+      "status": "verified",
+      "postalCode": "970-8686",
+      "address": "福島県いわき市平字梅本21"
+    },
+    "07205-city": {
+      "name": "白河市役所",
+      "status": "verified",
+      "postalCode": "961-8602",
+      "address": "福島県白河市八幡小路7-1"
+    },
+    "07207-city": {
+      "name": "須賀川市役所",
+      "status": "verified",
+      "postalCode": "962-8601",
+      "address": "福島県須賀川市八幡町135"
+    },
+    "07208-city": {
+      "name": "喜多方市役所",
+      "status": "verified",
+      "postalCode": "966-8601",
+      "address": "福島県喜多方市字御清水東7244-2"
+    },
+    "07209-city": {
+      "name": "相馬市役所",
+      "status": "verified",
+      "postalCode": "976-8601",
+      "address": "福島県相馬市中村字北町63-3"
+    },
+    "07210-city": {
+      "name": "二本松市役所",
+      "status": "verified",
+      "postalCode": "964-8601",
+      "address": "福島県二本松市金色403-1"
+    },
+    "07211-city": {
+      "name": "田村市役所",
+      "status": "verified",
+      "postalCode": "963-4393",
+      "address": "福島県田村市船引町船引字畑添76-2"
+    },
+    "07212-city": {
+      "name": "南相馬市役所",
+      "status": "verified",
+      "postalCode": "975-8686",
+      "address": "福島県南相馬市原町区本町2-27"
+    },
+    "07213-city": {
+      "name": "伊達市役所",
+      "status": "verified",
+      "postalCode": "960-0692",
+      "address": "福島県伊達市保原町字舟橋180"
+    },
+    "07214-city": {
+      "name": "本宮市役所",
+      "status": "verified",
+      "postalCode": "969-1192",
+      "address": "福島県本宮市本宮字万世212"
+    },
+    "07301-town": {
+      "name": "桑折町役場",
+      "status": "verified",
+      "postalCode": "969-1692",
+      "address": "福島県伊達郡桑折町大字谷地字道下22-7"
+    },
+    "07303-town": {
+      "name": "国見町役場",
+      "status": "verified",
+      "postalCode": "969-1792",
+      "address": "福島県伊達郡国見町大字藤田字一丁田二1-7"
+    },
+    "07308-town": {
+      "name": "川俣町役場",
+      "status": "verified",
+      "postalCode": "960-1492",
+      "address": "福島県伊達郡川俣町字五百田30"
+    },
+    "07322-village": {
+      "name": "大玉村役場",
+      "status": "verified",
+      "postalCode": "969-1392",
+      "address": "福島県安達郡大玉村玉井字星内70"
+    },
+    "07342-town": {
+      "name": "鏡石町役場",
+      "status": "verified",
+      "postalCode": "969-0492",
+      "address": "福島県岩瀬郡鏡石町不時沼345"
+    },
+    "07344-village": {
+      "name": "天栄村役場",
+      "status": "verified",
+      "postalCode": "962-0592",
+      "address": "福島県岩瀬郡天栄村大字下松本字原畑78"
+    },
+    "07362-town": {
+      "name": "下郷町役場",
+      "status": "verified",
+      "postalCode": "969-5345",
+      "address": "福島県南会津郡下郷町大字塩生字大石1000"
+    },
+    "07364-village": {
+      "name": "檜枝岐村役場",
+      "status": "verified",
+      "postalCode": "967-0525",
+      "address": "福島県南会津郡檜枝岐村字下ノ原880"
+    },
+    "07367-town": {
+      "name": "只見町役場",
+      "status": "verified",
+      "postalCode": "968-0498",
+      "address": "福島県南会津郡只見町大字只見字雨堤1039"
+    },
+    "07368-town": {
+      "name": "南会津町役場",
+      "status": "verified",
+      "postalCode": "967-0004",
+      "address": "福島県南会津郡南会津町田島字後原甲3531-1"
+    },
+    "07402-village": {
+      "name": "北塩原村役場",
+      "status": "verified",
+      "postalCode": "966-0485",
+      "address": "福島県耶麻郡北塩原村大字北山字姥ヶ作3151"
+    },
+    "07405-town": {
+      "name": "西会津町役場",
+      "status": "verified",
+      "postalCode": "969-4495",
+      "address": "福島県耶麻郡西会津町野沢字下小屋上乙3308"
+    },
+    "07407-town": {
+      "name": "磐梯町役場",
+      "status": "verified",
+      "postalCode": "969-3392",
+      "address": "福島県耶麻郡磐梯町大字磐梯字中ノ橋1855"
+    },
+    "07408-town": {
+      "name": "猪苗代町役場",
+      "status": "verified",
+      "postalCode": "969-3123",
+      "address": "福島県耶麻郡猪苗代町字城南100"
+    },
+    "07421-town": {
+      "name": "会津坂下町役場",
+      "status": "verified",
+      "postalCode": "969-6592",
+      "address": "福島県河沼郡会津坂下町字市中三番甲3662"
+    },
+    "07422-village": {
+      "name": "湯川村役場",
+      "status": "verified",
+      "postalCode": "969-3593",
+      "address": "福島県河沼郡湯川村大字清水田字長瀞18"
+    },
+    "07423-town": {
+      "name": "柳津町役場",
+      "status": "verified",
+      "postalCode": "969-7201",
+      "address": "福島県河沼郡柳津町大字柳津字下平乙234"
+    },
+    "07444-town": {
+      "name": "三島町役場",
+      "status": "verified",
+      "postalCode": "969-7511",
+      "address": "福島県大沼郡三島町大字宮下字宮下350"
+    },
+    "07445-town": {
+      "name": "金山町役場",
+      "status": "verified",
+      "postalCode": "968-0011",
+      "address": "福島県大沼郡金山町大字川口字谷地393"
+    },
+    "07446-village": {
+      "name": "昭和村役場",
+      "status": "verified",
+      "postalCode": "968-0103",
+      "address": "福島県大沼郡昭和村大字下中津川字中島652"
+    },
+    "07447-town": {
+      "name": "会津美里町役場",
+      "status": "verified",
+      "postalCode": "969-6292",
+      "address": "福島県大沼郡会津美里町字新布才地1番地"
+    },
+    "07461-village": {
+      "name": "西郷村役場",
+      "status": "verified",
+      "postalCode": "961-8501",
+      "address": "福島県西白河郡西郷村大字熊倉字折口原40"
+    },
+    "07464-village": {
+      "name": "泉崎村役場",
+      "status": "verified",
+      "postalCode": "969-0101",
+      "address": "福島県西白河郡泉崎村大字泉崎字八丸145"
+    },
+    "07465-village": {
+      "name": "中島村役場",
+      "status": "verified",
+      "postalCode": "961-0192",
+      "address": "福島県西白河郡中島村大字滑津字中島西11-1"
+    },
+    "07466-town": {
+      "name": "矢吹町役場",
+      "status": "verified",
+      "postalCode": "969-0296",
+      "address": "福島県西白河郡矢吹町一本木101"
+    },
+    "07481-town": {
+      "name": "棚倉町役場",
+      "status": "verified",
+      "postalCode": "963-6192",
+      "address": "福島県東白川郡棚倉町大字棚倉字中居野33"
+    },
+    "07482-town": {
+      "name": "矢祭町役場",
+      "status": "verified",
+      "postalCode": "963-5192",
+      "address": "福島県東白川郡矢祭町大字東舘字舘本66"
+    },
+    "07483-town": {
+      "name": "塙町役場",
+      "status": "verified",
+      "postalCode": "963-5492",
+      "address": "福島県東白川郡塙町大字塙字大町3-21"
+    },
+    "07484-village": {
+      "name": "鮫川村役場",
+      "status": "verified",
+      "postalCode": "963-8401",
+      "address": "福島県東白川郡鮫川村大字赤坂中野字新宿39-5"
+    },
+    "07501-town": {
+      "name": "石川町役場",
+      "status": "verified",
+      "postalCode": "963-7893",
+      "address": "福島県石川郡石川町字長久保185-4"
+    },
+    "07502-village": {
+      "name": "玉川村役場",
+      "status": "verified",
+      "postalCode": "963-6392",
+      "address": "福島県石川郡玉川村大字小高字中畷9"
+    },
+    "07503-village": {
+      "name": "平田村役場",
+      "status": "verified",
+      "postalCode": "963-8292",
+      "address": "福島県石川郡平田村大字永田字切田116"
+    },
+    "07504-town": {
+      "name": "浅川町役場",
+      "status": "verified",
+      "postalCode": "963-6292",
+      "address": "福島県石川郡浅川町大字浅川字背戸谷地112-15"
+    },
+    "07505-town": {
+      "name": "古殿町役場",
+      "status": "verified",
+      "postalCode": "963-8304",
+      "address": "福島県石川郡古殿町大字松川字新桑原31"
+    },
+    "07521-town": {
+      "name": "三春町役場",
+      "status": "verified",
+      "postalCode": "963-7796",
+      "address": "福島県田村郡三春町字大町1-2"
+    },
+    "07522-town": {
+      "name": "小野町役場",
+      "status": "verified",
+      "postalCode": "963-3492",
+      "address": "福島県田村郡小野町大字小野新町字舘廻92"
+    },
+    "07541-town": {
+      "name": "広野町役場",
+      "status": "verified",
+      "postalCode": "979-0402",
+      "address": "福島県双葉郡広野町大字下北迫字苗代替35"
+    },
+    "07542-town": {
+      "name": "楢葉町役場",
+      "status": "verified",
+      "postalCode": "979-0696",
+      "address": "福島県双葉郡楢葉町大字北田字鐘突堂5-6"
+    },
+    "07543-town": {
+      "name": "富岡町役場",
+      "status": "verified",
+      "postalCode": "979-1192",
+      "address": "福島県双葉郡富岡町大字本岡字王塚622-1"
+    },
+    "07544-village": {
+      "name": "川内村役場",
+      "status": "verified",
+      "postalCode": "979-1292",
+      "address": "福島県双葉郡川内村大字上川内字早渡11-24"
+    },
+    "07545-town": {
+      "name": "大熊町役場",
+      "status": "verified",
+      "postalCode": "979-1306",
+      "address": "福島県双葉郡大熊町大字大川原字南平1717"
+    },
+    "07546-town": {
+      "name": "双葉町役場",
+      "status": "verified",
+      "postalCode": "979-1495",
+      "address": "福島県双葉郡双葉町大字長塚字町西73-4"
+    },
+    "07547-town": {
+      "name": "浪江町役場",
+      "status": "verified",
+      "postalCode": "979-1592",
+      "address": "福島県双葉郡浪江町大字幾世橋字六反田7-2"
+    },
+    "07548-village": {
+      "name": "葛尾村役場",
+      "status": "verified",
+      "postalCode": "979-1602",
+      "address": "福島県双葉郡葛尾村大字落合字落合16"
+    },
+    "07561-town": {
+      "name": "新地町役場",
+      "status": "verified",
+      "postalCode": "979-2792",
+      "address": "福島県相馬郡新地町谷地小屋字樋掛田30"
+    },
+    "07564-village": {
+      "name": "飯舘村役場",
+      "status": "verified",
+      "postalCode": "960-1892",
+      "address": "福島県相馬郡飯舘村伊丹沢字伊丹沢580-1"
+    }
+  }
+}
