@@ -103,7 +103,7 @@ def main():
         "counts":dict(sorted(summary.items())),
         "crossHostRedirects":sum(bool(o["redirectsToOtherHost"]) for o in outcomes),
         "reviewItemsTotal":len(action_items),"reviewItems":action_items
-    },ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    },ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print("OFFICIAL URL AUDIT:",len(records),"regions,",len(urls),"unique URLs,",round(time.monotonic()-started,1),"seconds")
     print(json.dumps(report["counts"],ensure_ascii=False,sort_keys=True))
     print("Cross-host redirects:",sum(bool(o["redirectsToOtherHost"]) for o in outcomes))
