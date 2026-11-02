@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "42",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.nagasaki.jp/pages/page-31.html",
+    "https://www.j-lis.go.jp/spd/code-address/kyuusyuu/cms_16314187.html",
+    "https://www.zck.or.jp/soshiki/2/4029.html"
+  ],
+  "regions": {
+    "42201": {
+      "name": "長崎市",
+      "kind": "city",
+      "officeIds": [
+        "42201-city"
+      ],
+      "official": "https://www.city.nagasaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E5%B4%8E%E5%B8%82"
+    },
+    "42202": {
+      "name": "佐世保市",
+      "kind": "city",
+      "officeIds": [
+        "42202-city"
+      ],
+      "official": "https://www.city.sasebo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E4%BD%90%E4%B8%96%E4%BF%9D%E5%B8%82"
+    },
+    "42203": {
+      "name": "島原市",
+      "kind": "city",
+      "officeIds": [
+        "42203-city"
+      ],
+      "official": "https://www.city.shimabara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%B3%B6%E5%8E%9F%E5%B8%82"
+    },
+    "42204": {
+      "name": "諫早市",
+      "kind": "city",
+      "officeIds": [
+        "42204-city"
+      ],
+      "official": "https://www.city.isahaya.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E8%AB%AB%E6%97%A9%E5%B8%82"
+    },
+    "42205": {
+      "name": "大村市",
+      "kind": "city",
+      "officeIds": [
+        "42205-city"
+      ],
+      "official": "https://www.city.omura.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%A4%A7%E6%9D%91%E5%B8%82"
+    },
+    "42207": {
+      "name": "平戸市",
+      "kind": "city",
+      "officeIds": [
+        "42207-city"
+      ],
+      "official": "https://www.city.hirado.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%B9%B3%E6%88%B8%E5%B8%82"
+    },
+    "42208": {
+      "name": "松浦市",
+      "kind": "city",
+      "officeIds": [
+        "42208-city"
+      ],
+      "official": "https://www.city-matsuura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E6%9D%BE%E6%B5%A6%E5%B8%82"
+    },
+    "42209": {
+      "name": "対馬市",
+      "kind": "city",
+      "officeIds": [
+        "42209-city"
+      ],
+      "official": "https://www.city.tsushima.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%AF%BE%E9%A6%AC%E5%B8%82"
+    },
+    "42210": {
+      "name": "壱岐市",
+      "kind": "city",
+      "officeIds": [
+        "42210-city"
+      ],
+      "official": "https://www.city.iki.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%A3%B1%E5%B2%90%E5%B8%82"
+    },
+    "42211": {
+      "name": "五島市",
+      "kind": "city",
+      "officeIds": [
+        "42211-city"
+      ],
+      "official": "https://www.city.goto.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E4%BA%94%E5%B3%B6%E5%B8%82"
+    },
+    "42212": {
+      "name": "西海市",
+      "kind": "city",
+      "officeIds": [
+        "42212-city"
+      ],
+      "official": "https://www.city.saikai.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E8%A5%BF%E6%B5%B7%E5%B8%82"
+    },
+    "42213": {
+      "name": "雲仙市",
+      "kind": "city",
+      "officeIds": [
+        "42213-city"
+      ],
+      "official": "https://www.city.unzen.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%9B%B2%E4%BB%99%E5%B8%82"
+    },
+    "42214": {
+      "name": "南島原市",
+      "kind": "city",
+      "officeIds": [
+        "42214-city"
+      ],
+      "official": "https://www.city.minamishimabara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%8D%97%E5%B3%B6%E5%8E%9F%E5%B8%82"
+    },
+    "42307": {
+      "name": "長与町",
+      "kind": "town",
+      "officeIds": [
+        "42307-town"
+      ],
+      "official": "https://webtown.nagayo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E9%95%B7%E4%B8%8E%E7%94%BA"
+    },
+    "42308": {
+      "name": "時津町",
+      "kind": "town",
+      "officeIds": [
+        "42308-town"
+      ],
+      "official": "https://www.town.togitsu.nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E6%99%82%E6%B4%A5%E7%94%BA"
+    },
+    "42321": {
+      "name": "東彼杵町",
+      "kind": "town",
+      "officeIds": [
+        "42321-town"
+      ],
+      "official": "https://www.town.higashisonogi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E6%9D%B1%E5%BD%BC%E6%9D%B5%E7%94%BA"
+    },
+    "42322": {
+      "name": "川棚町",
+      "kind": "town",
+      "officeIds": [
+        "42322-town"
+      ],
+      "official": "https://www.kawatana.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%B7%9D%E6%A3%9A%E7%94%BA"
+    },
+    "42323": {
+      "name": "波佐見町",
+      "kind": "town",
+      "officeIds": [
+        "42323-town"
+      ],
+      "official": "https://www.town.hasami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E6%B3%A2%E4%BD%90%E8%A6%8B%E7%94%BA"
+    },
+    "42383": {
+      "name": "小値賀町",
+      "kind": "town",
+      "officeIds": [
+        "42383-town"
+      ],
+      "official": "https://www.town.ojika.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%B0%8F%E5%80%A4%E8%B3%80%E7%94%BA"
+    },
+    "42391": {
+      "name": "佐々町",
+      "kind": "town",
+      "officeIds": [
+        "42391-town"
+      ],
+      "official": "https://www.sazacho-nagasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E4%BD%90%E3%80%85%E7%94%BA"
+    },
+    "42411": {
+      "name": "新上五島町",
+      "kind": "town",
+      "officeIds": [
+        "42411-town"
+      ],
+      "official": "https://official.shinkamigoto.net/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E5%B4%8E%E7%9C%8C%E6%96%B0%E4%B8%8A%E4%BA%94%E5%B3%B6%E7%94%BA"
+    }
+  },
+  "offices": {
+    "42201-city": {
+      "name": "長崎市役所",
+      "status": "verified",
+      "postalCode": "850-8685",
+      "address": "長崎県長崎市魚の町4-1"
+    },
+    "42202-city": {
+      "name": "佐世保市役所",
+      "status": "verified",
+      "postalCode": "857-8585",
+      "address": "長崎県佐世保市八幡町1-10"
+    },
+    "42203-city": {
+      "name": "島原市役所",
+      "status": "verified",
+      "postalCode": "855-8555",
+      "address": "長崎県島原市上の町537"
+    },
+    "42204-city": {
+      "name": "諫早市役所",
+      "status": "verified",
+      "postalCode": "854-8601",
+      "address": "長崎県諫早市東小路町7-1"
+    },
+    "42205-city": {
+      "name": "大村市役所",
+      "status": "verified",
+      "postalCode": "856-8686",
+      "address": "長崎県大村市玖島1-25"
+    },
+    "42207-city": {
+      "name": "平戸市役所",
+      "status": "verified",
+      "postalCode": "859-5192",
+      "address": "長崎県平戸市岩の上町1508-3"
+    },
+    "42208-city": {
+      "name": "松浦市役所",
+      "status": "verified",
+      "postalCode": "859-4598",
+      "address": "長崎県松浦市志佐町里免365"
+    },
+    "42209-city": {
+      "name": "対馬市役所",
+      "status": "verified",
+      "postalCode": "817-8510",
+      "address": "長崎県対馬市厳原町国分1441"
+    },
+    "42210-city": {
+      "name": "壱岐市役所",
+      "status": "verified",
+      "postalCode": "811-5192",
+      "address": "長崎県壱岐市郷ノ浦町本村触562"
+    },
+    "42211-city": {
+      "name": "五島市役所",
+      "status": "verified",
+      "postalCode": "853-8501",
+      "address": "長崎県五島市福江町1-1"
+    },
+    "42212-city": {
+      "name": "西海市役所",
+      "status": "verified",
+      "postalCode": "857-2392",
+      "address": "長崎県西海市大瀬戸町瀬戸樫浦郷2222"
+    },
+    "42213-city": {
+      "name": "雲仙市役所",
+      "status": "verified",
+      "postalCode": "859-1107",
+      "address": "長崎県雲仙市吾妻町牛口名714"
+    },
+    "42214-city": {
+      "name": "南島原市役所",
+      "status": "verified",
+      "postalCode": "859-2211",
+      "address": "長崎県南島原市西有家町里坊96-2"
+    },
+    "42307-town": {
+      "name": "長与町役場",
+      "status": "verified",
+      "postalCode": "851-2185",
+      "address": "長崎県西彼杵郡長与町嬉里郷659-1"
+    },
+    "42308-town": {
+      "name": "時津町役場",
+      "status": "verified",
+      "postalCode": "851-2198",
+      "address": "長崎県西彼杵郡時津町浦郷274-1"
+    },
+    "42321-town": {
+      "name": "東彼杵町役場",
+      "status": "verified",
+      "postalCode": "859-3808",
+      "address": "長崎県東彼杵郡東彼杵町蔵本郷1850-6"
+    },
+    "42322-town": {
+      "name": "川棚町役場",
+      "status": "verified",
+      "postalCode": "859-3692",
+      "address": "長崎県東彼杵郡川棚町中組郷1518-1"
+    },
+    "42323-town": {
+      "name": "波佐見町役場",
+      "status": "verified",
+      "postalCode": "859-3715",
+      "address": "長崎県東彼杵郡波佐見町宿郷660"
+    },
+    "42383-town": {
+      "name": "小値賀町役場",
+      "status": "verified",
+      "postalCode": "857-4701",
+      "address": "長崎県北松浦郡小値賀町笛吹郷2376-1"
+    },
+    "42391-town": {
+      "name": "佐々町役場",
+      "status": "verified",
+      "postalCode": "857-0392",
+      "address": "長崎県北松浦郡佐々町本田原免168-2"
+    },
+    "42411-town": {
+      "name": "新上五島町役場",
+      "status": "verified",
+      "postalCode": "857-4492",
+      "address": "長崎県南松浦郡新上五島町青方郷1585-1"
+    }
+  }
+}
