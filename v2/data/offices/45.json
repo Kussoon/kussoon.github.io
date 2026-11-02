@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "45",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kyuusyuu/cms_16614187.html",
+    "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+    "https://www.zck.or.jp/soshiki/2/4032.html"
+  ],
+  "regions": {
+    "45201": {
+      "name": "宮崎市",
+      "kind": "city",
+      "officeIds": [
+        "45201-city"
+      ],
+      "official": "https://www.city.miyazaki.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E5%AE%AE%E5%B4%8E%E5%B8%82"
+    },
+    "45202": {
+      "name": "都城市",
+      "kind": "city",
+      "officeIds": [
+        "45202-city"
+      ],
+      "official": "https://www.city.miyakonojo.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E9%83%BD%E5%9F%8E%E5%B8%82"
+    },
+    "45203": {
+      "name": "延岡市",
+      "kind": "city",
+      "officeIds": [
+        "45203-city"
+      ],
+      "official": "https://www.city.nobeoka.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E5%BB%B6%E5%B2%A1%E5%B8%82"
+    },
+    "45204": {
+      "name": "日南市",
+      "kind": "city",
+      "officeIds": [
+        "45204-city"
+      ],
+      "official": "https://www.city.nichinan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E6%97%A5%E5%8D%97%E5%B8%82"
+    },
+    "45205": {
+      "name": "小林市",
+      "kind": "city",
+      "officeIds": [
+        "45205-city"
+      ],
+      "official": "https://www.city.kobayashi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E5%B0%8F%E6%9E%97%E5%B8%82"
+    },
+    "45206": {
+      "name": "日向市",
+      "kind": "city",
+      "officeIds": [
+        "45206-city"
+      ],
+      "official": "https://www.city.hyuga.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E6%97%A5%E5%90%91%E5%B8%82"
+    },
+    "45207": {
+      "name": "串間市",
+      "kind": "city",
+      "officeIds": [
+        "45207-city"
+      ],
+      "official": "https://www.city.kushima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E4%B8%B2%E9%96%93%E5%B8%82"
+    },
+    "45208": {
+      "name": "西都市",
+      "kind": "city",
+      "officeIds": [
+        "45208-city"
+      ],
+      "official": "https://www.city.saito.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E8%A5%BF%E9%83%BD%E5%B8%82"
+    },
+    "45209": {
+      "name": "えびの市",
+      "kind": "city",
+      "officeIds": [
+        "45209-city"
+      ],
+      "official": "https://www.city.ebino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E3%81%88%E3%81%B3%E3%81%AE%E5%B8%82"
+    },
+    "45341": {
+      "name": "三股町",
+      "kind": "town",
+      "officeIds": [
+        "45341-town"
+      ],
+      "official": "https://www.town.mimata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E4%B8%89%E8%82%A1%E7%94%BA"
+    },
+    "45361": {
+      "name": "高原町",
+      "kind": "town",
+      "officeIds": [
+        "45361-town"
+      ],
+      "official": "https://www.town.takaharu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E9%AB%98%E5%8E%9F%E7%94%BA"
+    },
+    "45382": {
+      "name": "国富町",
+      "kind": "town",
+      "officeIds": [
+        "45382-town"
+      ],
+      "official": "https://www.town.kunitomi.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E5%9B%BD%E5%AF%8C%E7%94%BA"
+    },
+    "45383": {
+      "name": "綾町",
+      "kind": "town",
+      "officeIds": [
+        "45383-town"
+      ],
+      "official": "https://www.town.aya.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E7%B6%BE%E7%94%BA"
+    },
+    "45401": {
+      "name": "高鍋町",
+      "kind": "town",
+      "officeIds": [
+        "45401-town"
+      ],
+      "official": "https://www.town.takanabe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E9%AB%98%E9%8D%8B%E7%94%BA"
+    },
+    "45402": {
+      "name": "新富町",
+      "kind": "town",
+      "officeIds": [
+        "45402-town"
+      ],
+      "official": "https://www.town.shintomi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E6%96%B0%E5%AF%8C%E7%94%BA"
+    },
+    "45403": {
+      "name": "西米良村",
+      "kind": "village",
+      "officeIds": [
+        "45403-village"
+      ],
+      "official": "https://www.vill.nishimera.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E8%A5%BF%E7%B1%B3%E8%89%AF%E6%9D%91"
+    },
+    "45404": {
+      "name": "木城町",
+      "kind": "town",
+      "officeIds": [
+        "45404-town"
+      ],
+      "official": "https://www.town.kijo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E6%9C%A8%E5%9F%8E%E7%94%BA"
+    },
+    "45405": {
+      "name": "川南町",
+      "kind": "town",
+      "officeIds": [
+        "45405-town"
+      ],
+      "official": "https://www.town.kawaminami.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E5%B7%9D%E5%8D%97%E7%94%BA"
+    },
+    "45406": {
+      "name": "都農町",
+      "kind": "town",
+      "officeIds": [
+        "45406-town"
+      ],
+      "official": "https://www.town.tsuno.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E9%83%BD%E8%BE%B2%E7%94%BA"
+    },
+    "45421": {
+      "name": "門川町",
+      "kind": "town",
+      "officeIds": [
+        "45421-town"
+      ],
+      "official": "https://www.town.kadogawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E9%96%80%E5%B7%9D%E7%94%BA"
+    },
+    "45429": {
+      "name": "諸塚村",
+      "kind": "village",
+      "officeIds": [
+        "45429-village"
+      ],
+      "official": "https://www.vill.morotsuka.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E8%AB%B8%E5%A1%9A%E6%9D%91"
+    },
+    "45430": {
+      "name": "椎葉村",
+      "kind": "village",
+      "officeIds": [
+        "45430-village"
+      ],
+      "official": "https://www.vill.shiiba.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E6%A4%8E%E8%91%89%E6%9D%91"
+    },
+    "45431": {
+      "name": "美郷町",
+      "kind": "town",
+      "officeIds": [
+        "45431-town"
+      ],
+      "official": "https://www.town.miyazaki-misato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E7%BE%8E%E9%83%B7%E7%94%BA"
+    },
+    "45441": {
+      "name": "高千穂町",
+      "kind": "town",
+      "officeIds": [
+        "45441-town"
+      ],
+      "official": "https://www.town-takachiho.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E9%AB%98%E5%8D%83%E7%A9%82%E7%94%BA"
+    },
+    "45442": {
+      "name": "日之影町",
+      "kind": "town",
+      "officeIds": [
+        "45442-town"
+      ],
+      "official": "https://www.town.hinokage.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E6%97%A5%E4%B9%8B%E5%BD%B1%E7%94%BA"
+    },
+    "45443": {
+      "name": "五ヶ瀬町",
+      "kind": "town",
+      "officeIds": [
+        "45443-town"
+      ],
+      "official": "https://www.town.gokase.miyazaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%AE%AE%E5%B4%8E%E7%9C%8C%E4%BA%94%E3%83%B6%E7%80%AC%E7%94%BA"
+    }
+  },
+  "offices": {
+    "45201-city": {
+      "name": "宮崎市役所",
+      "status": "verified",
+      "postalCode": "880-8505",
+      "address": "宮崎県宮崎市橘通西1-1-1"
+    },
+    "45202-city": {
+      "name": "都城市役所",
+      "status": "verified",
+      "postalCode": "885-8555",
+      "address": "宮崎県都城市姫城町6街区21号"
+    },
+    "45203-city": {
+      "name": "延岡市役所",
+      "status": "verified",
+      "postalCode": "882-8686",
+      "address": "宮崎県延岡市東本小路2-1"
+    },
+    "45204-city": {
+      "name": "日南市役所",
+      "status": "verified",
+      "postalCode": "887-8585",
+      "address": "宮崎県日南市中央通1-1-1"
+    },
+    "45205-city": {
+      "name": "小林市役所",
+      "status": "verified",
+      "postalCode": "886-8501",
+      "address": "宮崎県小林市細野300"
+    },
+    "45206-city": {
+      "name": "日向市役所",
+      "status": "verified",
+      "postalCode": "883-8555",
+      "address": "宮崎県日向市本町10-5"
+    },
+    "45207-city": {
+      "name": "串間市役所",
+      "status": "verified",
+      "postalCode": "888-8555",
+      "address": "宮崎県串間市大字西方5550"
+    },
+    "45208-city": {
+      "name": "西都市役所",
+      "status": "verified",
+      "postalCode": "881-8501",
+      "address": "宮崎県西都市聖陵町2-1"
+    },
+    "45209-city": {
+      "name": "えびの市役所",
+      "status": "verified",
+      "postalCode": "889-4292",
+      "address": "宮崎県えびの市大字栗下1292"
+    },
+    "45341-town": {
+      "name": "三股町役場",
+      "status": "verified",
+      "postalCode": "889-1995",
+      "address": "宮崎県北諸県郡三股町五本松1-1"
+    },
+    "45361-town": {
+      "name": "高原町役場",
+      "status": "verified",
+      "postalCode": "889-4492",
+      "address": "宮崎県西諸県郡高原町大字西麓899"
+    },
+    "45382-town": {
+      "name": "国富町役場",
+      "status": "verified",
+      "postalCode": "880-1192",
+      "address": "宮崎県東諸県郡国富町大字本庄4800"
+    },
+    "45383-town": {
+      "name": "綾町役場",
+      "status": "verified",
+      "postalCode": "880-1392",
+      "address": "宮崎県東諸県郡綾町大字南俣515"
+    },
+    "45401-town": {
+      "name": "高鍋町役場",
+      "status": "verified",
+      "postalCode": "884-8655",
+      "address": "宮崎県児湯郡高鍋町大字上江8437"
+    },
+    "45402-town": {
+      "name": "新富町役場",
+      "status": "verified",
+      "postalCode": "889-1493",
+      "address": "宮崎県児湯郡新富町大字上富田7491"
+    },
+    "45403-village": {
+      "name": "西米良村役場",
+      "status": "verified",
+      "postalCode": "881-1411",
+      "address": "宮崎県児湯郡西米良村大字村所15"
+    },
+    "45404-town": {
+      "name": "木城町役場",
+      "status": "verified",
+      "postalCode": "884-0101",
+      "address": "宮崎県児湯郡木城町大字高城1227-1"
+    },
+    "45405-town": {
+      "name": "川南町役場",
+      "status": "verified",
+      "postalCode": "889-1301",
+      "address": "宮崎県児湯郡川南町大字川南13680-1"
+    },
+    "45406-town": {
+      "name": "都農町役場",
+      "status": "verified",
+      "postalCode": "889-1201",
+      "address": "宮崎県児湯郡都農町大字川北4874-2"
+    },
+    "45421-town": {
+      "name": "門川町役場",
+      "status": "verified",
+      "postalCode": "889-0696",
+      "address": "宮崎県東臼杵郡門川町平城東1番1号"
+    },
+    "45429-village": {
+      "name": "諸塚村役場",
+      "status": "verified",
+      "postalCode": "883-1392",
+      "address": "宮崎県東臼杵郡諸塚村大字家代2683"
+    },
+    "45430-village": {
+      "name": "椎葉村役場",
+      "status": "verified",
+      "postalCode": "883-1601",
+      "address": "宮崎県東臼杵郡椎葉村大字下福良1762-1"
+    },
+    "45431-town": {
+      "name": "美郷町役場",
+      "status": "verified",
+      "postalCode": "883-1101",
+      "address": "宮崎県東臼杵郡美郷町西郷田代1"
+    },
+    "45441-town": {
+      "name": "高千穂町役場",
+      "status": "verified",
+      "postalCode": "882-1192",
+      "address": "宮崎県西臼杵郡高千穂町大字三田井13"
+    },
+    "45442-town": {
+      "name": "日之影町役場",
+      "status": "verified",
+      "postalCode": "882-0401",
+      "address": "宮崎県西臼杵郡日之影町大字七折9079番地"
+    },
+    "45443-town": {
+      "name": "五ヶ瀬町役場",
+      "status": "verified",
+      "postalCode": "882-1295",
+      "address": "宮崎県西臼杵郡五ヶ瀬町大字三ヶ所1670"
+    }
+  }
+}
