@@ -1,0 +1,494 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "34",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/chuugoku/cms_15514184.html",
+    "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+  ],
+  "regions": {
+    "34100": {
+      "name": "広島市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82"
+    },
+    "34101": {
+      "name": "広島市中区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34101-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E4%B8%AD%E5%8C%BA"
+    },
+    "34102": {
+      "name": "広島市東区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34102-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E6%9D%B1%E5%8C%BA"
+    },
+    "34103": {
+      "name": "広島市南区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34103-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E5%8D%97%E5%8C%BA"
+    },
+    "34104": {
+      "name": "広島市西区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34104-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E8%A5%BF%E5%8C%BA"
+    },
+    "34105": {
+      "name": "広島市安佐南区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34105-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E5%AE%89%E4%BD%90%E5%8D%97%E5%8C%BA"
+    },
+    "34106": {
+      "name": "広島市安佐北区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34106-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E5%AE%89%E4%BD%90%E5%8C%97%E5%8C%BA"
+    },
+    "34107": {
+      "name": "広島市安芸区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34107-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E5%AE%89%E8%8A%B8%E5%8C%BA"
+    },
+    "34108": {
+      "name": "広島市佐伯区",
+      "kind": "ward",
+      "parentCode": "34100",
+      "officeIds": [
+        "34108-ward",
+        "34100-city"
+      ],
+      "official": "https://www.city.hiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%83%E5%B3%B6%E5%B8%82%E4%BD%90%E4%BC%AF%E5%8C%BA"
+    },
+    "34202": {
+      "name": "呉市",
+      "kind": "city",
+      "officeIds": [
+        "34202-city"
+      ],
+      "official": "https://www.city.kure.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%91%89%E5%B8%82"
+    },
+    "34203": {
+      "name": "竹原市",
+      "kind": "city",
+      "officeIds": [
+        "34203-city"
+      ],
+      "official": "https://www.city.takehara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E7%AB%B9%E5%8E%9F%E5%B8%82"
+    },
+    "34204": {
+      "name": "三原市",
+      "kind": "city",
+      "officeIds": [
+        "34204-city"
+      ],
+      "official": "https://www.city.mihara.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E4%B8%89%E5%8E%9F%E5%B8%82"
+    },
+    "34205": {
+      "name": "尾道市",
+      "kind": "city",
+      "officeIds": [
+        "34205-city"
+      ],
+      "official": "https://www.city.onomichi.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%B0%BE%E9%81%93%E5%B8%82"
+    },
+    "34207": {
+      "name": "福山市",
+      "kind": "city",
+      "officeIds": [
+        "34207-city"
+      ],
+      "official": "https://www.city.fukuyama.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E7%A6%8F%E5%B1%B1%E5%B8%82"
+    },
+    "34208": {
+      "name": "府中市",
+      "kind": "city",
+      "officeIds": [
+        "34208-city"
+      ],
+      "official": "https://www.city.fuchu.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%9C%E4%B8%AD%E5%B8%82"
+    },
+    "34209": {
+      "name": "三次市",
+      "kind": "city",
+      "officeIds": [
+        "34209-city"
+      ],
+      "official": "https://www.city.miyoshi.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E4%B8%89%E6%AC%A1%E5%B8%82"
+    },
+    "34210": {
+      "name": "庄原市",
+      "kind": "city",
+      "officeIds": [
+        "34210-city"
+      ],
+      "official": "https://www.city.shobara.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%84%E5%8E%9F%E5%B8%82"
+    },
+    "34211": {
+      "name": "大竹市",
+      "kind": "city",
+      "officeIds": [
+        "34211-city"
+      ],
+      "official": "https://www.city.otake.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%A4%A7%E7%AB%B9%E5%B8%82"
+    },
+    "34212": {
+      "name": "東広島市",
+      "kind": "city",
+      "officeIds": [
+        "34212-city"
+      ],
+      "official": "https://www.city.higashihiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E6%9D%B1%E5%BA%83%E5%B3%B6%E5%B8%82"
+    },
+    "34213": {
+      "name": "廿日市市",
+      "kind": "city",
+      "officeIds": [
+        "34213-city"
+      ],
+      "official": "https://www.city.hatsukaichi.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BB%BF%E6%97%A5%E5%B8%82%E5%B8%82"
+    },
+    "34214": {
+      "name": "安芸高田市",
+      "kind": "city",
+      "officeIds": [
+        "34214-city"
+      ],
+      "official": "https://www.akitakata.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%AE%89%E8%8A%B8%E9%AB%98%E7%94%B0%E5%B8%82"
+    },
+    "34215": {
+      "name": "江田島市",
+      "kind": "city",
+      "officeIds": [
+        "34215-city"
+      ],
+      "official": "https://www.city.etajima.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E6%B1%9F%E7%94%B0%E5%B3%B6%E5%B8%82"
+    },
+    "34302": {
+      "name": "府中町",
+      "kind": "town",
+      "officeIds": [
+        "34302-town"
+      ],
+      "official": "https://www.town.fuchu.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%BA%9C%E4%B8%AD%E7%94%BA"
+    },
+    "34304": {
+      "name": "海田町",
+      "kind": "town",
+      "officeIds": [
+        "34304-town"
+      ],
+      "official": "https://www.town.kaita.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E6%B5%B7%E7%94%B0%E7%94%BA"
+    },
+    "34307": {
+      "name": "熊野町",
+      "kind": "town",
+      "officeIds": [
+        "34307-town"
+      ],
+      "official": "https://www.town.kumano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E7%86%8A%E9%87%8E%E7%94%BA"
+    },
+    "34309": {
+      "name": "坂町",
+      "kind": "town",
+      "officeIds": [
+        "34309-town"
+      ],
+      "official": "https://www.town.saka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%9D%82%E7%94%BA"
+    },
+    "34368": {
+      "name": "安芸太田町",
+      "kind": "town",
+      "officeIds": [
+        "34368-town"
+      ],
+      "official": "https://www.akiota.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%AE%89%E8%8A%B8%E5%A4%AA%E7%94%B0%E7%94%BA"
+    },
+    "34369": {
+      "name": "北広島町",
+      "kind": "town",
+      "officeIds": [
+        "34369-town"
+      ],
+      "official": "https://www.town.kitahiroshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%8C%97%E5%BA%83%E5%B3%B6%E7%94%BA"
+    },
+    "34431": {
+      "name": "大崎上島町",
+      "kind": "town",
+      "officeIds": [
+        "34431-town"
+      ],
+      "official": "https://www.town.osakikamijima.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E5%A4%A7%E5%B4%8E%E4%B8%8A%E5%B3%B6%E7%94%BA"
+    },
+    "34462": {
+      "name": "世羅町",
+      "kind": "town",
+      "officeIds": [
+        "34462-town"
+      ],
+      "official": "https://www.town.sera.hiroshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E4%B8%96%E7%BE%85%E7%94%BA"
+    },
+    "34545": {
+      "name": "神石高原町",
+      "kind": "town",
+      "officeIds": [
+        "34545-town"
+      ],
+      "official": "https://www.jinsekigun.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%BA%83%E5%B3%B6%E7%9C%8C%E7%A5%9E%E7%9F%B3%E9%AB%98%E5%8E%9F%E7%94%BA"
+    }
+  },
+  "offices": {
+    "34100-city": {
+      "name": "広島市役所",
+      "status": "verified",
+      "postalCode": "730-8586",
+      "address": "広島県広島市中区国泰寺町1-6-34"
+    },
+    "34101-ward": {
+      "name": "広島市中区役所",
+      "status": "verified",
+      "postalCode": "730-8587",
+      "address": "広島県広島市中区国泰寺町1-4-21"
+    },
+    "34102-ward": {
+      "name": "広島市東区役所",
+      "status": "verified",
+      "postalCode": "732-8510",
+      "address": "広島県広島市東区東蟹屋町9-38"
+    },
+    "34103-ward": {
+      "name": "広島市南区役所",
+      "status": "verified",
+      "postalCode": "734-8522",
+      "address": "広島県広島市南区皆実町1-5-44"
+    },
+    "34104-ward": {
+      "name": "広島市西区役所",
+      "status": "verified",
+      "postalCode": "733-8530",
+      "address": "広島県広島市西区福島町2-2-1"
+    },
+    "34105-ward": {
+      "name": "広島市安佐南区役所",
+      "status": "verified",
+      "postalCode": "731-0193",
+      "address": "広島県広島市安佐南区古市1-33-14"
+    },
+    "34106-ward": {
+      "name": "広島市安佐北区役所",
+      "status": "verified",
+      "postalCode": "731-0292",
+      "address": "広島県広島市安佐北区可部4-13-13"
+    },
+    "34107-ward": {
+      "name": "広島市安芸区役所",
+      "status": "verified",
+      "postalCode": "736-8501",
+      "address": "広島県広島市安芸区船越南3-4-36"
+    },
+    "34108-ward": {
+      "name": "広島市佐伯区役所",
+      "status": "verified",
+      "postalCode": "731-5195",
+      "address": "広島県広島市佐伯区海老園2-5-28"
+    },
+    "34202-city": {
+      "name": "呉市役所",
+      "status": "verified",
+      "postalCode": "737-8501",
+      "address": "広島県呉市中央4-1-6"
+    },
+    "34203-city": {
+      "name": "竹原市役所",
+      "status": "verified",
+      "postalCode": "725-8666",
+      "address": "広島県竹原市中央5-6-28"
+    },
+    "34204-city": {
+      "name": "三原市役所",
+      "status": "verified",
+      "postalCode": "723-8601",
+      "address": "広島県三原市港町3-5-1"
+    },
+    "34205-city": {
+      "name": "尾道市役所",
+      "status": "verified",
+      "postalCode": "722-8501",
+      "address": "広島県尾道市久保1-15-1"
+    },
+    "34207-city": {
+      "name": "福山市役所",
+      "status": "verified",
+      "postalCode": "720-8501",
+      "address": "広島県福山市東桜町3-5"
+    },
+    "34208-city": {
+      "name": "府中市役所",
+      "status": "verified",
+      "postalCode": "726-8601",
+      "address": "広島県府中市府川町315"
+    },
+    "34209-city": {
+      "name": "三次市役所",
+      "status": "verified",
+      "postalCode": "728-8501",
+      "address": "広島県三次市十日市中2-8-1"
+    },
+    "34210-city": {
+      "name": "庄原市役所",
+      "status": "verified",
+      "postalCode": "727-8501",
+      "address": "広島県庄原市中本町1-10-1"
+    },
+    "34211-city": {
+      "name": "大竹市役所",
+      "status": "verified",
+      "postalCode": "739-0692",
+      "address": "広島県大竹市小方1-11-1"
+    },
+    "34212-city": {
+      "name": "東広島市役所",
+      "status": "verified",
+      "postalCode": "739-8601",
+      "address": "広島県東広島市西条栄町8-29"
+    },
+    "34213-city": {
+      "name": "廿日市市役所",
+      "status": "verified",
+      "postalCode": "738-8501",
+      "address": "広島県廿日市市下平良1-11-1"
+    },
+    "34214-city": {
+      "name": "安芸高田市役所",
+      "status": "verified",
+      "postalCode": "731-0592",
+      "address": "広島県安芸高田市吉田町吉田791"
+    },
+    "34215-city": {
+      "name": "江田島市役所",
+      "status": "verified",
+      "postalCode": "737-2297",
+      "address": "広島県江田島市大柿町大原505"
+    },
+    "34302-town": {
+      "name": "府中町役場",
+      "status": "verified",
+      "postalCode": "735-8686",
+      "address": "広島県安芸郡府中町大通3-5-1"
+    },
+    "34304-town": {
+      "name": "海田町役場",
+      "status": "verified",
+      "postalCode": "736-8601",
+      "address": "広島県安芸郡海田南昭和町14-17"
+    },
+    "34307-town": {
+      "name": "熊野町役場",
+      "status": "verified",
+      "postalCode": "731-4292",
+      "address": "広島県安芸郡熊野町中溝1-1-1"
+    },
+    "34309-town": {
+      "name": "坂町役場",
+      "status": "verified",
+      "postalCode": "731-4393",
+      "address": "広島県安芸郡坂町平成ヶ浜1-1-1"
+    },
+    "34368-town": {
+      "name": "安芸太田町役場",
+      "status": "verified",
+      "postalCode": "731-3810",
+      "address": "広島県山県郡安芸太田町戸河内784-1"
+    },
+    "34369-town": {
+      "name": "北広島町役場",
+      "status": "verified",
+      "postalCode": "731-1595",
+      "address": "広島県山県郡北広島町有田1234"
+    },
+    "34431-town": {
+      "name": "大崎上島町役場",
+      "status": "verified",
+      "postalCode": "725-0231",
+      "address": "広島県豊田郡大崎上島町東野6625-1"
+    },
+    "34462-town": {
+      "name": "世羅町役場",
+      "status": "verified",
+      "postalCode": "722-1192",
+      "address": "広島県世羅郡世羅町西上原123-1"
+    },
+    "34545-town": {
+      "name": "神石高原町役場",
+      "status": "verified",
+      "postalCode": "720-1522",
+      "address": "広島県神石郡神石高原町小畠1701"
+    }
+  }
+}
