@@ -5,9 +5,9 @@
   "sourceAudit": "v2/audit/official-url-reachability-20261102.json and v2/audit/official-url-reachability-20261102-summary.json",
   "counts": {
     "total": 61,
-    "A": 6,
+    "A": 8,
     "B": 11,
-    "C": 44
+    "C": 42
   },
   "method": "各登録URLを実ブラウザで1回ずつ開いて可視ページ・遷移先を確認。読み込みできない場合は自治体の公式情報・公式ページの確認を行った。HTTP/TLS/ネットワークエラーのみで廃止と断定していない。",
   "results": [
@@ -840,11 +840,11 @@
       "municipality": "みやき町",
       "municipalityCode": "41346",
       "registeredUrl": "https://www.town.miyaki.lg.jp/",
-      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "現登録URL https://www.town.miyaki.lg.jp/ を実ブラウザで表示。自治体名「みやき町」、2026年11月2日・11月1日付の更新、および役場所在地（佐賀県三養基郡みやき町大字東尾737-5）を確認。wwwなしURLへの同一自治体内の正常転送であり、現登録URLで問題なし。",
+      "finalUrl": "https://town.miyaki.lg.jp/",
+      "classification": "A",
       "evidence": [
-        "PR #188の通信検査: TimeoutError: The read operation timed out"
+        "現登録URLをブラウザで表示。みやき町の公式ホームページと自治体名・最新のお知らせ・役場情報を確認。"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
       "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
@@ -854,11 +854,12 @@
         "error": "TimeoutError: The read operation timed out"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "現登録URLから自治体の公式ページが表示され、自治体名と最新情報、役場情報を確認できた。wwwなしURLへの転送は同一自治体公式サイト内の正常転送。",
       "evidenceUrls": [
         "https://www.town.miyaki.lg.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+        "https://town.miyaki.lg.jp/"
+      ],
+      "lastCheckedAt": "2026-11-02T23:56 JST"
     },
     {
       "prefecture": "千葉県",
@@ -1016,11 +1017,11 @@
       "municipality": "白石町",
       "municipalityCode": "41425",
       "registeredUrl": "https://www.town.shiroishi.lg.jp/",
-      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "現登録URL https://www.town.shiroishi.lg.jp/ を実ブラウザで表示。ページ名「白石町ホームページ」、2026年11月2日付のお知らせ、白石町役場の所在地・電話番号を確認。",
+      "finalUrl": "https://www.town.shiroishi.lg.jp/",
+      "classification": "A",
       "evidence": [
-        "PR #188の通信検査: TimeoutError: The read operation timed out"
+        "現登録URLをブラウザで表示。白石町ホームページ、最新のお知らせ、白石町役場情報を確認。"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
       "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
@@ -1030,11 +1031,11 @@
         "error": "TimeoutError: The read operation timed out"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "現登録URLから自治体の公式ページが表示され、自治体名と最新情報、役場情報を確認できた。",
       "evidenceUrls": [
-        "https://www.town.shiroishi.lg.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+        "https://www.town.shiroishi.lg.jp/"
+      ],
+      "lastCheckedAt": "2026-11-02T23:56 JST"
     },
     {
       "prefecture": "北海道",
@@ -1651,6 +1652,37 @@
           "evidenceUrls": [
             "https://www.pref.aomori.lg.jp/soshiki/zaimu/shichoson/shichoson.html",
             "https://www.vill.higashidoori.lg.jp/"
+          ]
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-11-02T23:56 JST",
+      "scope": "候補URLとの取り違えを避けるため、登録URLを公開ブラウザで再確認。2件の分類をCからAへ変更。",
+      "results": [
+        {
+          "municipalityCode": "41346",
+          "municipality": "みやき町",
+          "previousClassification": "C",
+          "classification": "A",
+          "registeredUrl": "https://www.town.miyaki.lg.jp/",
+          "observedFinalUrl": "https://town.miyaki.lg.jp/",
+          "result": "登録URLから現行公式ページを表示でき、wwwなしURLへの正常転送と自治体情報を確認。",
+          "evidenceUrls": [
+            "https://www.town.miyaki.lg.jp/",
+            "https://town.miyaki.lg.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "41425",
+          "municipality": "白石町",
+          "previousClassification": "C",
+          "classification": "A",
+          "registeredUrl": "https://www.town.shiroishi.lg.jp/",
+          "observedFinalUrl": "https://www.town.shiroishi.lg.jp/",
+          "result": "登録URLから白石町公式ホームページを表示し、最新情報と役場所在地・電話番号を確認。候補の.saga.jpではなく、登録URLが利用可能。",
+          "evidenceUrls": [
+            "https://www.town.shiroishi.lg.jp/"
           ]
         }
       ]
