@@ -35,6 +35,8 @@ jobs:
         run: python3 v2/tools/shared-topology/prepare-2026-national.py "$RUNNER_TEMP/n03-2026-input"
       - name: Build one topology before prefecture slicing
         working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
         run: |
           node build.mjs --input "$RUNNER_TEMP/n03-2026-input/national-2026.geojson" --output "$RUNNER_TEMP/v2-national-common" --quantization 1000000 --keep 0.02 --expect-prefectures 47 --emit-combined national.topojson
       - name: Verify all 47 slices preserve the exact shared arcs
