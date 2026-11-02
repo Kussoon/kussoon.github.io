@@ -1,0 +1,614 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "02",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/touhoku/cms_12314180.html",
+    "https://www.zck.or.jp/soshiki/2/4004.html",
+    "https://www.pref.aomori.lg.jp/soshiki/zaimu/shichoson/shichoson.html"
+  ],
+  "regions": {
+    "02201": {
+      "name": "青森市",
+      "kind": "city",
+      "officeIds": [
+        "02201-city"
+      ],
+      "official": "https://www.city.aomori.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E9%9D%92%E6%A3%AE%E5%B8%82"
+    },
+    "02202": {
+      "name": "弘前市",
+      "kind": "city",
+      "officeIds": [
+        "02202-city"
+      ],
+      "official": "https://www.city.hirosaki.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%BC%98%E5%89%8D%E5%B8%82"
+    },
+    "02203": {
+      "name": "八戸市",
+      "kind": "city",
+      "officeIds": [
+        "02203-city"
+      ],
+      "official": "https://www.city.hachinohe.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%85%AB%E6%88%B8%E5%B8%82"
+    },
+    "02204": {
+      "name": "黒石市",
+      "kind": "city",
+      "officeIds": [
+        "02204-city"
+      ],
+      "official": "https://www.city.kuroishi.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E9%BB%92%E7%9F%B3%E5%B8%82"
+    },
+    "02205": {
+      "name": "五所川原市",
+      "kind": "city",
+      "officeIds": [
+        "02205-city"
+      ],
+      "official": "https://www.city.goshogawara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%BA%94%E6%89%80%E5%B7%9D%E5%8E%9F%E5%B8%82"
+    },
+    "02206": {
+      "name": "十和田市",
+      "kind": "city",
+      "officeIds": [
+        "02206-city"
+      ],
+      "official": "https://www.city.towada.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%8D%81%E5%92%8C%E7%94%B0%E5%B8%82"
+    },
+    "02207": {
+      "name": "三沢市",
+      "kind": "city",
+      "officeIds": [
+        "02207-city"
+      ],
+      "official": "https://www.city.misawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%B8%89%E6%B2%A2%E5%B8%82"
+    },
+    "02208": {
+      "name": "むつ市",
+      "kind": "city",
+      "officeIds": [
+        "02208-city"
+      ],
+      "official": "https://www.city.mutsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E3%82%80%E3%81%A4%E5%B8%82"
+    },
+    "02209": {
+      "name": "つがる市",
+      "kind": "city",
+      "officeIds": [
+        "02209-city"
+      ],
+      "official": "https://www.city.tsugaru.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E3%81%A4%E3%81%8C%E3%82%8B%E5%B8%82"
+    },
+    "02210": {
+      "name": "平川市",
+      "kind": "city",
+      "officeIds": [
+        "02210-city"
+      ],
+      "official": "https://www.city.hirakawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%B9%B3%E5%B7%9D%E5%B8%82"
+    },
+    "02301": {
+      "name": "平内町",
+      "kind": "town",
+      "officeIds": [
+        "02301-town"
+      ],
+      "official": "https://www.town.hiranai.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%B9%B3%E5%86%85%E7%94%BA"
+    },
+    "02303": {
+      "name": "今別町",
+      "kind": "town",
+      "officeIds": [
+        "02303-town"
+      ],
+      "official": "https://www.town.imabetsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%BB%8A%E5%88%A5%E7%94%BA"
+    },
+    "02304": {
+      "name": "蓬田村",
+      "kind": "village",
+      "officeIds": [
+        "02304-village"
+      ],
+      "official": "https://www.vill.yomogita.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E8%93%AC%E7%94%B0%E6%9D%91"
+    },
+    "02307": {
+      "name": "外ヶ浜町",
+      "kind": "town",
+      "officeIds": [
+        "02307-town"
+      ],
+      "official": "https://www.town.sotogahama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%A4%96%E3%83%B6%E6%B5%9C%E7%94%BA"
+    },
+    "02321": {
+      "name": "鰺ヶ沢町",
+      "kind": "town",
+      "officeIds": [
+        "02321-town"
+      ],
+      "official": "https://www.town.ajigasawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E9%B0%BA%E3%83%B6%E6%B2%A2%E7%94%BA"
+    },
+    "02323": {
+      "name": "深浦町",
+      "kind": "town",
+      "officeIds": [
+        "02323-town"
+      ],
+      "official": "https://www.town.fukaura.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E6%B7%B1%E6%B5%A6%E7%94%BA"
+    },
+    "02343": {
+      "name": "西目屋村",
+      "kind": "village",
+      "officeIds": [
+        "02343-village"
+      ],
+      "official": "https://www.nishimeya.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E8%A5%BF%E7%9B%AE%E5%B1%8B%E6%9D%91"
+    },
+    "02361": {
+      "name": "藤崎町",
+      "kind": "town",
+      "officeIds": [
+        "02361-town"
+      ],
+      "official": "https://www.town.fujisaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E8%97%A4%E5%B4%8E%E7%94%BA"
+    },
+    "02362": {
+      "name": "大鰐町",
+      "kind": "town",
+      "officeIds": [
+        "02362-town"
+      ],
+      "official": "https://www.town.owani.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%A4%A7%E9%B0%90%E7%94%BA"
+    },
+    "02367": {
+      "name": "田舎館村",
+      "kind": "village",
+      "officeIds": [
+        "02367-village"
+      ],
+      "official": "https://www.vill.inakadate.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E7%94%B0%E8%88%8E%E9%A4%A8%E6%9D%91"
+    },
+    "02381": {
+      "name": "板柳町",
+      "kind": "town",
+      "officeIds": [
+        "02381-town"
+      ],
+      "official": "https://www.town.itayanagi.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E6%9D%BF%E6%9F%B3%E7%94%BA"
+    },
+    "02384": {
+      "name": "鶴田町",
+      "kind": "town",
+      "officeIds": [
+        "02384-town"
+      ],
+      "official": "https://www.town.tsuruta.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E9%B6%B4%E7%94%B0%E7%94%BA"
+    },
+    "02387": {
+      "name": "中泊町",
+      "kind": "town",
+      "officeIds": [
+        "02387-town"
+      ],
+      "official": "https://www.town.nakadomari.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%B8%AD%E6%B3%8A%E7%94%BA"
+    },
+    "02401": {
+      "name": "野辺地町",
+      "kind": "town",
+      "officeIds": [
+        "02401-town"
+      ],
+      "official": "https://www.town.noheji.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E9%87%8E%E8%BE%BA%E5%9C%B0%E7%94%BA"
+    },
+    "02402": {
+      "name": "七戸町",
+      "kind": "town",
+      "officeIds": [
+        "02402-town"
+      ],
+      "official": "https://www.town.shichinohe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%B8%83%E6%88%B8%E7%94%BA"
+    },
+    "02405": {
+      "name": "六戸町",
+      "kind": "town",
+      "officeIds": [
+        "02405-town"
+      ],
+      "official": "https://www.town.rokunohe.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%85%AD%E6%88%B8%E7%94%BA"
+    },
+    "02406": {
+      "name": "横浜町",
+      "kind": "town",
+      "officeIds": [
+        "02406-town"
+      ],
+      "official": "https://www.town.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E6%A8%AA%E6%B5%9C%E7%94%BA"
+    },
+    "02408": {
+      "name": "東北町",
+      "kind": "town",
+      "officeIds": [
+        "02408-town"
+      ],
+      "official": "https://www.town.tohoku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E6%9D%B1%E5%8C%97%E7%94%BA"
+    },
+    "02411": {
+      "name": "六ヶ所村",
+      "kind": "village",
+      "officeIds": [
+        "02411-village"
+      ],
+      "official": "https://www.rokkasho.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%85%AD%E3%83%B6%E6%89%80%E6%9D%91"
+    },
+    "02412": {
+      "name": "おいらせ町",
+      "kind": "town",
+      "officeIds": [
+        "02412-town"
+      ],
+      "official": "https://www.town.oirase.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E3%81%8A%E3%81%84%E3%82%89%E3%81%9B%E7%94%BA"
+    },
+    "02423": {
+      "name": "大間町",
+      "kind": "town",
+      "officeIds": [
+        "02423-town"
+      ],
+      "official": "https://www.town.ooma.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%A4%A7%E9%96%93%E7%94%BA"
+    },
+    "02424": {
+      "name": "東通村",
+      "kind": "village",
+      "officeIds": [
+        "02424-village"
+      ],
+      "official": "https://www.vill.higashidoori.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E6%9D%B1%E9%80%9A%E6%9D%91"
+    },
+    "02425": {
+      "name": "風間浦村",
+      "kind": "village",
+      "officeIds": [
+        "02425-village"
+      ],
+      "official": "https://www.kazamaura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E9%A2%A8%E9%96%93%E6%B5%A6%E6%9D%91"
+    },
+    "02426": {
+      "name": "佐井村",
+      "kind": "village",
+      "officeIds": [
+        "02426-village"
+      ],
+      "official": "https://www.vill.sai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%BD%90%E4%BA%95%E6%9D%91"
+    },
+    "02441": {
+      "name": "三戸町",
+      "kind": "town",
+      "officeIds": [
+        "02441-town"
+      ],
+      "official": "https://www.town.sannohe.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%B8%89%E6%88%B8%E7%94%BA"
+    },
+    "02442": {
+      "name": "五戸町",
+      "kind": "town",
+      "officeIds": [
+        "02442-town"
+      ],
+      "official": "https://www.town.gonohe.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E4%BA%94%E6%88%B8%E7%94%BA"
+    },
+    "02443": {
+      "name": "田子町",
+      "kind": "town",
+      "officeIds": [
+        "02443-town"
+      ],
+      "official": "https://www.town.takko.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E7%94%B0%E5%AD%90%E7%94%BA"
+    },
+    "02445": {
+      "name": "南部町",
+      "kind": "town",
+      "officeIds": [
+        "02445-town"
+      ],
+      "official": "https://www.town.aomori-nanbu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E5%8D%97%E9%83%A8%E7%94%BA"
+    },
+    "02446": {
+      "name": "階上町",
+      "kind": "town",
+      "officeIds": [
+        "02446-town"
+      ],
+      "official": "https://www.town.hashikami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E9%9A%8E%E4%B8%8A%E7%94%BA"
+    },
+    "02450": {
+      "name": "新郷村",
+      "kind": "village",
+      "officeIds": [
+        "02450-village"
+      ],
+      "official": "https://www.vill.shingo.aomori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%92%E6%A3%AE%E7%9C%8C%E6%96%B0%E9%83%B7%E6%9D%91"
+    }
+  },
+  "offices": {
+    "02201-city": {
+      "name": "青森市役所",
+      "status": "verified",
+      "postalCode": "030-8555",
+      "address": "青森県青森市中央1-22-5"
+    },
+    "02202-city": {
+      "name": "弘前市役所",
+      "status": "verified",
+      "postalCode": "036-8551",
+      "address": "青森県弘前市大字上白銀町1-1"
+    },
+    "02203-city": {
+      "name": "八戸市役所",
+      "status": "verified",
+      "postalCode": "031-8686",
+      "address": "青森県八戸市内丸1-1-1"
+    },
+    "02204-city": {
+      "name": "黒石市役所",
+      "status": "verified",
+      "postalCode": "036-0396",
+      "address": "青森県黒石市大字市ノ町11-1"
+    },
+    "02205-city": {
+      "name": "五所川原市役所",
+      "status": "verified",
+      "postalCode": "037-8686",
+      "address": "青森県五所川原市字布屋町41-1"
+    },
+    "02206-city": {
+      "name": "十和田市役所",
+      "status": "verified",
+      "postalCode": "034-8615",
+      "address": "青森県十和田市西十二番町6-1"
+    },
+    "02207-city": {
+      "name": "三沢市役所",
+      "status": "verified",
+      "postalCode": "033-8666",
+      "address": "青森県三沢市桜町1-1-38"
+    },
+    "02208-city": {
+      "name": "むつ市役所",
+      "status": "verified",
+      "postalCode": "035-8686",
+      "address": "青森県むつ市中央1丁目8-1"
+    },
+    "02209-city": {
+      "name": "つがる市役所",
+      "status": "verified",
+      "postalCode": "038-3192",
+      "address": "青森県つがる市木造若緑61-1"
+    },
+    "02210-city": {
+      "name": "平川市役所",
+      "status": "verified",
+      "postalCode": "036-0104",
+      "address": "青森県平川市柏木町藤山25-6"
+    },
+    "02301-town": {
+      "name": "平内町役場",
+      "status": "verified",
+      "postalCode": "039-3393",
+      "address": "青森県東津軽郡平内町大字小湊字小湊63"
+    },
+    "02303-town": {
+      "name": "今別町役場",
+      "status": "verified",
+      "postalCode": "030-1502",
+      "address": "青森県東津軽郡今別町大字今別字今別167"
+    },
+    "02304-village": {
+      "name": "蓬田村役場",
+      "status": "verified",
+      "postalCode": "030-1211",
+      "address": "青森県東津軽郡蓬田村大字蓬田字汐越1-3"
+    },
+    "02307-town": {
+      "name": "外ヶ浜町役場",
+      "status": "verified",
+      "postalCode": "030-1393",
+      "address": "青森県東津軽郡外ヶ浜町字蟹田高銅屋44-2"
+    },
+    "02321-town": {
+      "name": "鰺ヶ沢町役場",
+      "status": "verified",
+      "postalCode": "038-2792",
+      "address": "青森県西津軽郡鰺ヶ沢町大字舞戸町字鳴戸321"
+    },
+    "02323-town": {
+      "name": "深浦町役場",
+      "status": "verified",
+      "postalCode": "038-2324",
+      "address": "青森県西津軽郡深浦町大字深浦字苗代沢84-2"
+    },
+    "02343-village": {
+      "name": "西目屋村役場",
+      "status": "verified",
+      "postalCode": "036-1492",
+      "address": "青森県中津軽郡西目屋村大字田代字神田57"
+    },
+    "02361-town": {
+      "name": "藤崎町役場",
+      "status": "verified",
+      "postalCode": "038-3892",
+      "address": "青森県南津軽郡藤崎町大字西豊田1-1"
+    },
+    "02362-town": {
+      "name": "大鰐町役場",
+      "status": "verified",
+      "postalCode": "038-0292",
+      "address": "青森県南津軽郡大鰐町大字大鰐字羽黒館5-3"
+    },
+    "02367-village": {
+      "name": "田舎館村役場",
+      "status": "verified",
+      "postalCode": "038-1113",
+      "address": "青森県南津軽郡田舎館村大字田舎館字中辻123-1"
+    },
+    "02381-town": {
+      "name": "板柳町役場",
+      "status": "verified",
+      "postalCode": "038-3692",
+      "address": "青森県北津軽郡板柳町大字板柳字土井239-3"
+    },
+    "02384-town": {
+      "name": "鶴田町役場",
+      "status": "verified",
+      "postalCode": "038-3595",
+      "address": "青森県北津軽郡鶴田町大字鶴田字早瀬200-1"
+    },
+    "02387-town": {
+      "name": "中泊町役場",
+      "status": "verified",
+      "postalCode": "037-0392",
+      "address": "青森県北津軽郡中泊町大字中里字紅葉坂209"
+    },
+    "02401-town": {
+      "name": "野辺地町役場",
+      "status": "verified",
+      "postalCode": "039-3131",
+      "address": "青森県上北郡野辺地町字野辺地123-1"
+    },
+    "02402-town": {
+      "name": "七戸町役場",
+      "status": "verified",
+      "postalCode": "039-2792",
+      "address": "青森県上北郡七戸町字森ノ上131-4"
+    },
+    "02405-town": {
+      "name": "六戸町役場",
+      "status": "verified",
+      "postalCode": "039-2392",
+      "address": "青森県上北郡六戸町大字犬落瀬字前谷地60"
+    },
+    "02406-town": {
+      "name": "横浜町役場",
+      "status": "verified",
+      "postalCode": "039-4145",
+      "address": "青森県上北郡横浜町字寺下35"
+    },
+    "02408-town": {
+      "name": "東北町役場",
+      "status": "verified",
+      "postalCode": "039-2492",
+      "address": "青森県上北郡東北町上北南4-32-484"
+    },
+    "02411-village": {
+      "name": "六ヶ所村役場",
+      "status": "verified",
+      "postalCode": "039-3212",
+      "address": "青森県上北郡六ヶ所村大字尾駮字野附475"
+    },
+    "02412-town": {
+      "name": "おいらせ町役場",
+      "status": "verified",
+      "postalCode": "039-2192",
+      "address": "青森県上北郡おいらせ町中下田135-2"
+    },
+    "02423-town": {
+      "name": "大間町役場",
+      "status": "verified",
+      "postalCode": "039-4601",
+      "address": "青森県下北郡大間町大字大間字奥戸下道20-4"
+    },
+    "02424-village": {
+      "name": "東通村役場",
+      "status": "verified",
+      "postalCode": "039-4292",
+      "address": "青森県下北郡東通村大字砂子又字沢内5-34"
+    },
+    "02425-village": {
+      "name": "風間浦村役場",
+      "status": "verified",
+      "postalCode": "039-4502",
+      "address": "青森県下北郡風間浦村大字易国間字大川目28-5"
+    },
+    "02426-village": {
+      "name": "佐井村役場",
+      "status": "verified",
+      "postalCode": "039-4711",
+      "address": "青森県下北郡佐井村大字佐井字糠森20"
+    },
+    "02441-town": {
+      "name": "三戸町役場",
+      "status": "verified",
+      "postalCode": "039-0198",
+      "address": "青森県三戸郡三戸町大字在府小路町43"
+    },
+    "02442-town": {
+      "name": "五戸町役場",
+      "status": "verified",
+      "postalCode": "039-1513",
+      "address": "青森県三戸郡五戸町字古館21-1"
+    },
+    "02443-town": {
+      "name": "田子町役場",
+      "status": "verified",
+      "postalCode": "039-0292",
+      "address": "青森県三戸郡田子町大字田子字天神堂平81"
+    },
+    "02445-town": {
+      "name": "南部町役場",
+      "status": "verified",
+      "postalCode": "039-0592",
+      "address": "青森県三戸郡南部町大字平字広場28-1"
+    },
+    "02446-town": {
+      "name": "階上町役場",
+      "status": "verified",
+      "postalCode": "039-1201",
+      "address": "青森県三戸郡階上町大字道仏字天当平1-87"
+    },
+    "02450-village": {
+      "name": "新郷村役場",
+      "status": "verified",
+      "postalCode": "039-1801",
+      "address": "青森県三戸郡新郷村大字戸来字風呂前10"
+    }
+  }
+}
