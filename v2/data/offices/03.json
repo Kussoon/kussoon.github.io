@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "03",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/touhoku/cms_12414180.html",
+    "https://www.zck.or.jp/soshiki/2/4015.html",
+    "https://www.pref.iwate.jp/kensei/toukei/toukei/1012206.html"
+  ],
+  "regions": {
+    "03201": {
+      "name": "盛岡市",
+      "kind": "city",
+      "officeIds": [
+        "03201-city"
+      ],
+      "official": "https://www.city.morioka.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E7%9B%9B%E5%B2%A1%E5%B8%82"
+    },
+    "03202": {
+      "name": "宮古市",
+      "kind": "city",
+      "officeIds": [
+        "03202-city"
+      ],
+      "official": "https://www.city.miyako.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%AE%AE%E5%8F%A4%E5%B8%82"
+    },
+    "03203": {
+      "name": "大船渡市",
+      "kind": "city",
+      "officeIds": [
+        "03203-city"
+      ],
+      "official": "https://www.city.ofunato.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%A4%A7%E8%88%B9%E6%B8%A1%E5%B8%82"
+    },
+    "03205": {
+      "name": "花巻市",
+      "kind": "city",
+      "officeIds": [
+        "03205-city"
+      ],
+      "official": "https://www.city.hanamaki.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E8%8A%B1%E5%B7%BB%E5%B8%82"
+    },
+    "03206": {
+      "name": "北上市",
+      "kind": "city",
+      "officeIds": [
+        "03206-city"
+      ],
+      "official": "https://www.city.kitakami.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%8C%97%E4%B8%8A%E5%B8%82"
+    },
+    "03207": {
+      "name": "久慈市",
+      "kind": "city",
+      "officeIds": [
+        "03207-city"
+      ],
+      "official": "https://www.city.kuji.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E4%B9%85%E6%85%88%E5%B8%82"
+    },
+    "03208": {
+      "name": "遠野市",
+      "kind": "city",
+      "officeIds": [
+        "03208-city"
+      ],
+      "official": "https://www.city.tono.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E9%81%A0%E9%87%8E%E5%B8%82"
+    },
+    "03209": {
+      "name": "一関市",
+      "kind": "city",
+      "officeIds": [
+        "03209-city"
+      ],
+      "official": "https://www.city.ichinoseki.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E4%B8%80%E9%96%A2%E5%B8%82"
+    },
+    "03210": {
+      "name": "陸前高田市",
+      "kind": "city",
+      "officeIds": [
+        "03210-city"
+      ],
+      "official": "https://www.city.rikuzentakata.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E9%99%B8%E5%89%8D%E9%AB%98%E7%94%B0%E5%B8%82"
+    },
+    "03211": {
+      "name": "釜石市",
+      "kind": "city",
+      "officeIds": [
+        "03211-city"
+      ],
+      "official": "https://www.city.kamaishi.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E9%87%9C%E7%9F%B3%E5%B8%82"
+    },
+    "03213": {
+      "name": "二戸市",
+      "kind": "city",
+      "officeIds": [
+        "03213-city"
+      ],
+      "official": "https://www.city.ninohe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E4%BA%8C%E6%88%B8%E5%B8%82"
+    },
+    "03214": {
+      "name": "八幡平市",
+      "kind": "city",
+      "officeIds": [
+        "03214-city"
+      ],
+      "official": "https://www.city.hachimantai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%85%AB%E5%B9%A1%E5%B9%B3%E5%B8%82"
+    },
+    "03215": {
+      "name": "奥州市",
+      "kind": "city",
+      "officeIds": [
+        "03215-city"
+      ],
+      "official": "https://www.city.oshu.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%A5%A5%E5%B7%9E%E5%B8%82"
+    },
+    "03216": {
+      "name": "滝沢市",
+      "kind": "city",
+      "officeIds": [
+        "03216-city"
+      ],
+      "official": "https://www.city.takizawa.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E6%BB%9D%E6%B2%A2%E5%B8%82"
+    },
+    "03301": {
+      "name": "雫石町",
+      "kind": "town",
+      "officeIds": [
+        "03301-town"
+      ],
+      "official": "https://www.town.shizukuishi.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E9%9B%AB%E7%9F%B3%E7%94%BA"
+    },
+    "03302": {
+      "name": "葛巻町",
+      "kind": "town",
+      "officeIds": [
+        "03302-town"
+      ],
+      "official": "https://www.town.kuzumaki.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E8%91%9B%E5%B7%BB%E7%94%BA"
+    },
+    "03303": {
+      "name": "岩手町",
+      "kind": "town",
+      "officeIds": [
+        "03303-town"
+      ],
+      "official": "https://www.town.iwate.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%B2%A9%E6%89%8B%E7%94%BA"
+    },
+    "03321": {
+      "name": "紫波町",
+      "kind": "town",
+      "officeIds": [
+        "03321-town"
+      ],
+      "official": "https://www.town.shiwa.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E7%B4%AB%E6%B3%A2%E7%94%BA"
+    },
+    "03322": {
+      "name": "矢巾町",
+      "kind": "town",
+      "officeIds": [
+        "03322-town"
+      ],
+      "official": "https://www.town.yahaba.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E7%9F%A2%E5%B7%BE%E7%94%BA"
+    },
+    "03366": {
+      "name": "西和賀町",
+      "kind": "town",
+      "officeIds": [
+        "03366-town"
+      ],
+      "official": "https://www.town.nishiwaga.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E8%A5%BF%E5%92%8C%E8%B3%80%E7%94%BA"
+    },
+    "03381": {
+      "name": "金ケ崎町",
+      "kind": "town",
+      "officeIds": [
+        "03381-town"
+      ],
+      "official": "https://www.town.kanegasaki.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E9%87%91%E3%82%B1%E5%B4%8E%E7%94%BA"
+    },
+    "03402": {
+      "name": "平泉町",
+      "kind": "town",
+      "officeIds": [
+        "03402-town"
+      ],
+      "official": "https://www.town.hiraizumi.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%B9%B3%E6%B3%89%E7%94%BA"
+    },
+    "03441": {
+      "name": "住田町",
+      "kind": "town",
+      "officeIds": [
+        "03441-town"
+      ],
+      "official": "https://www.town.sumita.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E4%BD%8F%E7%94%B0%E7%94%BA"
+    },
+    "03461": {
+      "name": "大槌町",
+      "kind": "town",
+      "officeIds": [
+        "03461-town"
+      ],
+      "official": "https://www.town.otsuchi.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%A4%A7%E6%A7%8C%E7%94%BA"
+    },
+    "03482": {
+      "name": "山田町",
+      "kind": "town",
+      "officeIds": [
+        "03482-town"
+      ],
+      "official": "https://www.town.yamada.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%B1%B1%E7%94%B0%E7%94%BA"
+    },
+    "03483": {
+      "name": "岩泉町",
+      "kind": "town",
+      "officeIds": [
+        "03483-town"
+      ],
+      "official": "https://www.town.iwaizumi.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E5%B2%A9%E6%B3%89%E7%94%BA"
+    },
+    "03484": {
+      "name": "田野畑村",
+      "kind": "village",
+      "officeIds": [
+        "03484-village"
+      ],
+      "official": "https://www.vill.tanohata.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E7%94%B0%E9%87%8E%E7%95%91%E6%9D%91"
+    },
+    "03485": {
+      "name": "普代村",
+      "kind": "village",
+      "officeIds": [
+        "03485-village"
+      ],
+      "official": "https://www.vill.fudai.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E6%99%AE%E4%BB%A3%E6%9D%91"
+    },
+    "03501": {
+      "name": "軽米町",
+      "kind": "town",
+      "officeIds": [
+        "03501-town"
+      ],
+      "official": "https://www.town.karumai.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E8%BB%BD%E7%B1%B3%E7%94%BA"
+    },
+    "03503": {
+      "name": "野田村",
+      "kind": "village",
+      "officeIds": [
+        "03503-village"
+      ],
+      "official": "https://www.vill.noda.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E9%87%8E%E7%94%B0%E6%9D%91"
+    },
+    "03506": {
+      "name": "九戸村",
+      "kind": "village",
+      "officeIds": [
+        "03506-village"
+      ],
+      "official": "https://www.vill.kunohe.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E4%B9%9D%E6%88%B8%E6%9D%91"
+    },
+    "03507": {
+      "name": "洋野町",
+      "kind": "town",
+      "officeIds": [
+        "03507-town"
+      ],
+      "official": "https://www.town.hirono.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E6%B4%8B%E9%87%8E%E7%94%BA"
+    },
+    "03524": {
+      "name": "一戸町",
+      "kind": "town",
+      "officeIds": [
+        "03524-town"
+      ],
+      "official": "https://www.town.ichinohe.iwate.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A9%E6%89%8B%E7%9C%8C%E4%B8%80%E6%88%B8%E7%94%BA"
+    }
+  },
+  "offices": {
+    "03201-city": {
+      "name": "盛岡市役所",
+      "status": "verified",
+      "postalCode": "020-8530",
+      "address": "岩手県盛岡市内丸12-2"
+    },
+    "03202-city": {
+      "name": "宮古市役所",
+      "status": "verified",
+      "postalCode": "027-8501",
+      "address": "岩手県宮古市宮町1-1-30"
+    },
+    "03203-city": {
+      "name": "大船渡市役所",
+      "status": "verified",
+      "postalCode": "022-8501",
+      "address": "岩手県大船渡市盛町字宇津野沢15"
+    },
+    "03205-city": {
+      "name": "花巻市役所",
+      "status": "verified",
+      "postalCode": "025-8601",
+      "address": "岩手県花巻市花城町9-30"
+    },
+    "03206-city": {
+      "name": "北上市役所",
+      "status": "verified",
+      "postalCode": "024-8501",
+      "address": "岩手県北上市芳町1-1"
+    },
+    "03207-city": {
+      "name": "久慈市役所",
+      "status": "verified",
+      "postalCode": "028-8030",
+      "address": "岩手県久慈市川崎町1-1"
+    },
+    "03208-city": {
+      "name": "遠野市役所",
+      "status": "verified",
+      "postalCode": "028-0592",
+      "address": "岩手県遠野市中央通り9-1"
+    },
+    "03209-city": {
+      "name": "一関市役所",
+      "status": "verified",
+      "postalCode": "021-8501",
+      "address": "岩手県一関市竹山町7-2"
+    },
+    "03210-city": {
+      "name": "陸前高田市役所",
+      "status": "verified",
+      "postalCode": "029-2292",
+      "address": "岩手県陸前高田市高田町字下和野100"
+    },
+    "03211-city": {
+      "name": "釜石市役所",
+      "status": "verified",
+      "postalCode": "026-8686",
+      "address": "岩手県釜石市只越町3-9-13"
+    },
+    "03213-city": {
+      "name": "二戸市役所",
+      "status": "verified",
+      "postalCode": "028-6192",
+      "address": "岩手県二戸市福岡字川又47"
+    },
+    "03214-city": {
+      "name": "八幡平市役所",
+      "status": "verified",
+      "postalCode": "028-7397",
+      "address": "岩手県八幡平市野駄21-170"
+    },
+    "03215-city": {
+      "name": "奥州市役所",
+      "status": "verified",
+      "postalCode": "023-8501",
+      "address": "岩手県奥州市水沢大手町1-1"
+    },
+    "03216-city": {
+      "name": "滝沢市役所",
+      "status": "verified",
+      "postalCode": "020-0692",
+      "address": "岩手県滝沢市中鵜飼55"
+    },
+    "03301-town": {
+      "name": "雫石町役場",
+      "status": "verified",
+      "postalCode": "020-0595",
+      "address": "岩手県岩手郡雫石町千刈田5-1"
+    },
+    "03302-town": {
+      "name": "葛巻町役場",
+      "status": "verified",
+      "postalCode": "028-5495",
+      "address": "岩手県岩手郡葛巻町葛巻第16地割1-1"
+    },
+    "03303-town": {
+      "name": "岩手町役場",
+      "status": "verified",
+      "postalCode": "028-4395",
+      "address": "岩手県岩手郡岩手町大字五日市第10地割44"
+    },
+    "03321-town": {
+      "name": "紫波町役場",
+      "status": "verified",
+      "postalCode": "028-3392",
+      "address": "岩手県紫波郡紫波町紫波中央駅前2丁目3-1"
+    },
+    "03322-town": {
+      "name": "矢巾町役場",
+      "status": "verified",
+      "postalCode": "028-3692",
+      "address": "岩手県紫波郡矢巾町大字南矢幅第13地割123"
+    },
+    "03366-town": {
+      "name": "西和賀町役場",
+      "status": "verified",
+      "postalCode": "029-5512",
+      "address": "岩手県和賀郡西和賀町川尻40地割40-71"
+    },
+    "03381-town": {
+      "name": "金ケ崎町役場",
+      "status": "verified",
+      "postalCode": "029-4592",
+      "address": "岩手県胆沢郡金ケ崎町西根南町22-1"
+    },
+    "03402-town": {
+      "name": "平泉町役場",
+      "status": "verified",
+      "postalCode": "029-4192",
+      "address": "岩手県西磐井郡平泉町平泉字志羅山45-2"
+    },
+    "03441-town": {
+      "name": "住田町役場",
+      "status": "verified",
+      "postalCode": "029-2396",
+      "address": "岩手県気仙郡住田町世田米字川向88-1"
+    },
+    "03461-town": {
+      "name": "大槌町役場",
+      "status": "verified",
+      "postalCode": "028-1115",
+      "address": "岩手県上閉伊郡大槌町上町1-3"
+    },
+    "03482-town": {
+      "name": "山田町役場",
+      "status": "verified",
+      "postalCode": "028-1392",
+      "address": "岩手県下閉伊郡山田町八幡町3-20"
+    },
+    "03483-town": {
+      "name": "岩泉町役場",
+      "status": "verified",
+      "postalCode": "027-0595",
+      "address": "岩手県下閉伊郡岩泉町岩泉字惣畑59-5"
+    },
+    "03484-village": {
+      "name": "田野畑村役場",
+      "status": "verified",
+      "postalCode": "028-8407",
+      "address": "岩手県下閉伊郡田野畑村田野畑143-1"
+    },
+    "03485-village": {
+      "name": "普代村役場",
+      "status": "verified",
+      "postalCode": "028-8392",
+      "address": "岩手県下閉伊郡普代村第9地割字銅屋13-2"
+    },
+    "03501-town": {
+      "name": "軽米町役場",
+      "status": "verified",
+      "postalCode": "028-6302",
+      "address": "岩手県九戸郡軽米町大字軽米第10地割85"
+    },
+    "03503-village": {
+      "name": "野田村役場",
+      "status": "verified",
+      "postalCode": "028-8201",
+      "address": "岩手県九戸郡野田村大字野田第20地割14"
+    },
+    "03506-village": {
+      "name": "九戸村役場",
+      "status": "verified",
+      "postalCode": "028-6502",
+      "address": "岩手県九戸郡九戸村大字伊保内第10地割11-6"
+    },
+    "03507-town": {
+      "name": "洋野町役場",
+      "status": "verified",
+      "postalCode": "028-7995",
+      "address": "岩手県九戸郡洋野町種市第23地割27"
+    },
+    "03524-town": {
+      "name": "一戸町役場",
+      "status": "verified",
+      "postalCode": "028-5311",
+      "address": "岩手県二戸郡一戸町高善寺字大川鉢24-9"
+    }
+  }
+}
