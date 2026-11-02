@@ -1603,20 +1603,24 @@
       "verifiedOfficialUrl": null,
       "evidenceUrls": [
         "https://www.town.suttu.lg.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://reserve.town.suttu.lg.jp/facility/use_monthly.php?fno=1"
       ],
       "connectivity": {
-        "status": null,
-        "result": "network_or_other",
-        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>",
-        "checkedUrl": "https://www.town.suttu.lg.jp/"
+        "checkedUrl": "https://www.town.suttu.lg.jp/",
+        "status": 502,
+        "result": "server_error",
+        "error": "Bad Gateway",
+        "otherOfficialSubdomain": "https://reserve.town.suttu.lg.jp/"
       },
       "method": [
         "existing_2026_11_02_followup",
-        "documented_user_browser_notice"
+        "documented_user_browser_notice",
+        "current_main_site_502_check",
+        "official_reservation_subdomain_review"
       ],
-      "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "公式ドメインの一時停止・メンテナンス案内を確認。通常サイトは利用できず、通常サイトの復旧先・恒久URLの状況は未確認。 最新記録上の判定=Aは現在URLの利用可能性基準によって再評価。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "登録URLの現行トップページは2026-11-03の取得でも502 Bad Gateway。町公式の施設予約サブドメインでは2026年10月の予約情報と町役場連絡先が確認でき、町ドメインの公式関連システムは稼働中だが、一般向け現行公式ホームページの利用・復旧時期は確認できない。施設予約ページを町全体の公式サイトURLとして代用できないためC（URL公式性とトップページ利用可能性を区別）。"
     },
     {
       "prefectureCode": "01",
