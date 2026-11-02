@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "31",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/chuugoku/cms_15214184.html",
+    "https://www.pref.tottori.lg.jp/12510.htm",
+    "https://www.pref.tottori.lg.jp/9577.htm"
+  ],
+  "regions": {
+    "31201": {
+      "name": "鳥取市",
+      "kind": "city",
+      "officeIds": [
+        "31201-city"
+      ],
+      "official": "https://www.city.tottori.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E9%B3%A5%E5%8F%96%E5%B8%82"
+    },
+    "31202": {
+      "name": "米子市",
+      "kind": "city",
+      "officeIds": [
+        "31202-city"
+      ],
+      "official": "https://www.city.yonago.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E7%B1%B3%E5%AD%90%E5%B8%82"
+    },
+    "31203": {
+      "name": "倉吉市",
+      "kind": "city",
+      "officeIds": [
+        "31203-city"
+      ],
+      "official": "https://www.city.kurayoshi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%80%89%E5%90%89%E5%B8%82"
+    },
+    "31204": {
+      "name": "境港市",
+      "kind": "city",
+      "officeIds": [
+        "31204-city"
+      ],
+      "official": "https://www.city.sakaiminato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%A2%83%E6%B8%AF%E5%B8%82"
+    },
+    "31302": {
+      "name": "岩美町",
+      "kind": "town",
+      "officeIds": [
+        "31302-town"
+      ],
+      "official": "https://www.iwami.gr.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%B2%A9%E7%BE%8E%E7%94%BA"
+    },
+    "31325": {
+      "name": "若桜町",
+      "kind": "town",
+      "officeIds": [
+        "31325-town"
+      ],
+      "official": "https://www.town.wakasa.tottori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E8%8B%A5%E6%A1%9C%E7%94%BA"
+    },
+    "31328": {
+      "name": "智頭町",
+      "kind": "town",
+      "officeIds": [
+        "31328-town"
+      ],
+      "official": "https://www1.town.chizu.tottori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%99%BA%E9%A0%AD%E7%94%BA"
+    },
+    "31329": {
+      "name": "八頭町",
+      "kind": "town",
+      "officeIds": [
+        "31329-town"
+      ],
+      "official": "https://www.town.yazu.tottori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%85%AB%E9%A0%AD%E7%94%BA"
+    },
+    "31364": {
+      "name": "三朝町",
+      "kind": "town",
+      "officeIds": [
+        "31364-town"
+      ],
+      "official": "https://www.town.misasa.tottori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E4%B8%89%E6%9C%9D%E7%94%BA"
+    },
+    "31370": {
+      "name": "湯梨浜町",
+      "kind": "town",
+      "officeIds": [
+        "31370-town"
+      ],
+      "official": "https://www.yurihama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%B9%AF%E6%A2%A8%E6%B5%9C%E7%94%BA"
+    },
+    "31371": {
+      "name": "琴浦町",
+      "kind": "town",
+      "officeIds": [
+        "31371-town"
+      ],
+      "official": "https://www.town.kotoura.tottori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E7%90%B4%E6%B5%A6%E7%94%BA"
+    },
+    "31372": {
+      "name": "北栄町",
+      "kind": "town",
+      "officeIds": [
+        "31372-town"
+      ],
+      "official": "https://www.e-hokuei.net/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%8C%97%E6%A0%84%E7%94%BA"
+    },
+    "31384": {
+      "name": "日吉津村",
+      "kind": "village",
+      "officeIds": [
+        "31384-village"
+      ],
+      "official": "https://www.hiezu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%97%A5%E5%90%89%E6%B4%A5%E6%9D%91"
+    },
+    "31386": {
+      "name": "大山町",
+      "kind": "town",
+      "officeIds": [
+        "31386-town"
+      ],
+      "official": "https://www.daisen.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%A4%A7%E5%B1%B1%E7%94%BA"
+    },
+    "31389": {
+      "name": "南部町",
+      "kind": "town",
+      "officeIds": [
+        "31389-town"
+      ],
+      "official": "https://www.town.nanbu.tottori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E5%8D%97%E9%83%A8%E7%94%BA"
+    },
+    "31390": {
+      "name": "伯耆町",
+      "kind": "town",
+      "officeIds": [
+        "31390-town"
+      ],
+      "official": "https://www.houki-town.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E4%BC%AF%E8%80%86%E7%94%BA"
+    },
+    "31401": {
+      "name": "日南町",
+      "kind": "town",
+      "officeIds": [
+        "31401-town"
+      ],
+      "official": "https://www.town.nichinan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%97%A5%E5%8D%97%E7%94%BA"
+    },
+    "31402": {
+      "name": "日野町",
+      "kind": "town",
+      "officeIds": [
+        "31402-town"
+      ],
+      "official": "https://www.town.hino.tottori.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%97%A5%E9%87%8E%E7%94%BA"
+    },
+    "31403": {
+      "name": "江府町",
+      "kind": "town",
+      "officeIds": [
+        "31403-town"
+      ],
+      "official": "https://www.town-kofu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B3%A5%E5%8F%96%E7%9C%8C%E6%B1%9F%E5%BA%9C%E7%94%BA"
+    }
+  },
+  "offices": {
+    "31201-city": {
+      "name": "鳥取市役所",
+      "status": "verified",
+      "postalCode": "680-8571",
+      "address": "鳥取県鳥取市幸町71番地"
+    },
+    "31202-city": {
+      "name": "米子市役所",
+      "status": "verified",
+      "postalCode": "683-8686",
+      "address": "鳥取県米子市加茂町1-1"
+    },
+    "31203-city": {
+      "name": "倉吉市役所",
+      "status": "verified",
+      "postalCode": "682-8611",
+      "address": "鳥取県倉吉市葵町722"
+    },
+    "31204-city": {
+      "name": "境港市役所",
+      "status": "verified",
+      "postalCode": "684-8501",
+      "address": "鳥取県境港市上道町3000"
+    },
+    "31302-town": {
+      "name": "岩美町役場",
+      "status": "verified",
+      "postalCode": "681-8501",
+      "address": "鳥取県岩美郡岩美町大字浦富675-1"
+    },
+    "31325-town": {
+      "name": "若桜町役場",
+      "status": "verified",
+      "postalCode": "680-0792",
+      "address": "鳥取県八頭郡若桜町大字若桜801-5"
+    },
+    "31328-town": {
+      "name": "智頭町役場",
+      "status": "verified",
+      "postalCode": "689-1402",
+      "address": "鳥取県八頭郡智頭町大字智頭2072-1"
+    },
+    "31329-town": {
+      "name": "八頭町役場",
+      "status": "verified",
+      "postalCode": "680-0493",
+      "address": "鳥取県八頭郡八頭町郡家493"
+    },
+    "31364-town": {
+      "name": "三朝町役場",
+      "status": "verified",
+      "postalCode": "682-0195",
+      "address": "鳥取県東伯郡三朝町大字大瀬999-2"
+    },
+    "31370-town": {
+      "name": "湯梨浜町役場",
+      "status": "verified",
+      "postalCode": "682-0723",
+      "address": "鳥取県東伯郡湯梨浜町大字久留19-1"
+    },
+    "31371-town": {
+      "name": "琴浦町役場",
+      "status": "verified",
+      "postalCode": "689-2392",
+      "address": "鳥取県東伯郡琴浦町大字徳万591-2"
+    },
+    "31372-town": {
+      "name": "北栄町役場",
+      "status": "verified",
+      "postalCode": "689-2292",
+      "address": "鳥取県東伯郡北栄町由良宿423-1"
+    },
+    "31384-village": {
+      "name": "日吉津村役場",
+      "status": "verified",
+      "postalCode": "689-3553",
+      "address": "鳥取県西伯郡日吉津村大字日吉津872-15"
+    },
+    "31386-town": {
+      "name": "大山町役場",
+      "status": "verified",
+      "postalCode": "689-3211",
+      "address": "鳥取県西伯郡大山町御来屋328"
+    },
+    "31389-town": {
+      "name": "南部町役場",
+      "status": "verified",
+      "postalCode": "683-0351",
+      "address": "鳥取県西伯郡南部町法勝寺377-1"
+    },
+    "31390-town": {
+      "name": "伯耆町役場",
+      "status": "verified",
+      "postalCode": "689-4133",
+      "address": "鳥取県西伯郡伯耆町吉長37-3"
+    },
+    "31401-town": {
+      "name": "日南町役場",
+      "status": "verified",
+      "postalCode": "689-5292",
+      "address": "鳥取県日野郡日南町霞800"
+    },
+    "31402-town": {
+      "name": "日野町役場",
+      "status": "verified",
+      "postalCode": "689-4503",
+      "address": "鳥取県日野郡日野町根雨101"
+    },
+    "31403-town": {
+      "name": "江府町役場",
+      "status": "verified",
+      "postalCode": "689-4401",
+      "address": "鳥取県日野郡江府町大字江尾1717番地1"
+    }
+  }
+}
