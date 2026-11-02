@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "18",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.fukui.lg.jp/doc/dx-suishin/shimachi_list.html",
+    "https://www.j-lis.go.jp/spd/code-address/tyuubu/cms_13914182.html"
+  ],
+  "regions": {
+    "18201": {
+      "name": "福井市",
+      "kind": "city",
+      "officeIds": [
+        "18201-city"
+      ],
+      "official": "https://www.city.fukui.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E7%A6%8F%E4%BA%95%E5%B8%82"
+    },
+    "18202": {
+      "name": "敦賀市",
+      "kind": "city",
+      "officeIds": [
+        "18202-city"
+      ],
+      "official": "https://www.city.tsuruga.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E6%95%A6%E8%B3%80%E5%B8%82"
+    },
+    "18204": {
+      "name": "小浜市",
+      "kind": "city",
+      "officeIds": [
+        "18204-city"
+      ],
+      "official": "https://www1.city.obama.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E5%B0%8F%E6%B5%9C%E5%B8%82"
+    },
+    "18205": {
+      "name": "大野市",
+      "kind": "city",
+      "officeIds": [
+        "18205-city"
+      ],
+      "official": "https://www.city.ono.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E5%A4%A7%E9%87%8E%E5%B8%82"
+    },
+    "18206": {
+      "name": "勝山市",
+      "kind": "city",
+      "officeIds": [
+        "18206-city"
+      ],
+      "official": "https://www.city.katsuyama.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E5%8B%9D%E5%B1%B1%E5%B8%82"
+    },
+    "18207": {
+      "name": "鯖江市",
+      "kind": "city",
+      "officeIds": [
+        "18207-city"
+      ],
+      "official": "https://www.city.sabae.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E9%AF%96%E6%B1%9F%E5%B8%82"
+    },
+    "18208": {
+      "name": "あわら市",
+      "kind": "city",
+      "officeIds": [
+        "18208-city"
+      ],
+      "official": "https://www.city.awara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E3%81%82%E3%82%8F%E3%82%89%E5%B8%82"
+    },
+    "18209": {
+      "name": "越前市",
+      "kind": "city",
+      "officeIds": [
+        "18209-city"
+      ],
+      "official": "https://www.city.echizen.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E8%B6%8A%E5%89%8D%E5%B8%82"
+    },
+    "18210": {
+      "name": "坂井市",
+      "kind": "city",
+      "officeIds": [
+        "18210-city"
+      ],
+      "official": "https://www.city.fukui-sakai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E5%9D%82%E4%BA%95%E5%B8%82"
+    },
+    "18322": {
+      "name": "永平寺町",
+      "kind": "town",
+      "officeIds": [
+        "18322-town"
+      ],
+      "official": "https://www.town.eiheiji.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E6%B0%B8%E5%B9%B3%E5%AF%BA%E7%94%BA"
+    },
+    "18382": {
+      "name": "池田町",
+      "kind": "town",
+      "officeIds": [
+        "18382-town"
+      ],
+      "official": "https://www.town.ikeda.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E6%B1%A0%E7%94%B0%E7%94%BA"
+    },
+    "18404": {
+      "name": "南越前町",
+      "kind": "town",
+      "officeIds": [
+        "18404-town"
+      ],
+      "official": "https://www.town.minamiechizen.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E5%8D%97%E8%B6%8A%E5%89%8D%E7%94%BA"
+    },
+    "18423": {
+      "name": "越前町",
+      "kind": "town",
+      "officeIds": [
+        "18423-town"
+      ],
+      "official": "https://www.town.echizen.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E8%B6%8A%E5%89%8D%E7%94%BA"
+    },
+    "18442": {
+      "name": "美浜町",
+      "kind": "town",
+      "officeIds": [
+        "18442-town"
+      ],
+      "official": "https://www.town.fukui-mihama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E7%BE%8E%E6%B5%9C%E7%94%BA"
+    },
+    "18481": {
+      "name": "高浜町",
+      "kind": "town",
+      "officeIds": [
+        "18481-town"
+      ],
+      "official": "https://www.town.takahama.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E9%AB%98%E6%B5%9C%E7%94%BA"
+    },
+    "18483": {
+      "name": "おおい町",
+      "kind": "town",
+      "officeIds": [
+        "18483-town"
+      ],
+      "official": "https://www.town.ohi.fukui.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E3%81%8A%E3%81%8A%E3%81%84%E7%94%BA"
+    },
+    "18501": {
+      "name": "若狭町",
+      "kind": "town",
+      "officeIds": [
+        "18501-town"
+      ],
+      "official": "https://www.town.fukui-wakasa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A6%8F%E4%BA%95%E7%9C%8C%E8%8B%A5%E7%8B%AD%E7%94%BA"
+    }
+  },
+  "offices": {
+    "18201-city": {
+      "name": "福井市役所",
+      "status": "verified",
+      "postalCode": "910-8511",
+      "address": "福井県福井市大手3-10-1"
+    },
+    "18202-city": {
+      "name": "敦賀市役所",
+      "status": "verified",
+      "postalCode": "914-8501",
+      "address": "福井県敦賀市中央町2-1-1"
+    },
+    "18204-city": {
+      "name": "小浜市役所",
+      "status": "verified",
+      "postalCode": "917-8585",
+      "address": "福井県小浜市大手町6-3"
+    },
+    "18205-city": {
+      "name": "大野市役所",
+      "status": "verified",
+      "postalCode": "912-8666",
+      "address": "福井県大野市天神町1-1"
+    },
+    "18206-city": {
+      "name": "勝山市役所",
+      "status": "verified",
+      "postalCode": "911-8501",
+      "address": "福井県勝山市元町1-1-1"
+    },
+    "18207-city": {
+      "name": "鯖江市役所",
+      "status": "verified",
+      "postalCode": "916-8666",
+      "address": "福井県鯖江市西山町13-1"
+    },
+    "18208-city": {
+      "name": "あわら市役所",
+      "status": "verified",
+      "postalCode": "919-0692",
+      "address": "福井県あわら市市姫3-1-1"
+    },
+    "18209-city": {
+      "name": "越前市役所",
+      "status": "verified",
+      "postalCode": "915-8530",
+      "address": "福井県越前市府中1-13-7"
+    },
+    "18210-city": {
+      "name": "坂井市役所",
+      "status": "verified",
+      "postalCode": "919-0592",
+      "address": "福井県坂井市坂井町下新庄1-1"
+    },
+    "18322-town": {
+      "name": "永平寺町役場",
+      "status": "verified",
+      "postalCode": "910-1192",
+      "address": "福井県吉田郡永平寺町松岡春日1-4"
+    },
+    "18382-town": {
+      "name": "池田町役場",
+      "status": "verified",
+      "postalCode": "910-2512",
+      "address": "福井県今立郡池田町稲荷35-4"
+    },
+    "18404-town": {
+      "name": "南越前町役場",
+      "status": "verified",
+      "postalCode": "919-0292",
+      "address": "福井県南条郡南越前町東大道29-1"
+    },
+    "18423-town": {
+      "name": "越前町役場",
+      "status": "verified",
+      "postalCode": "916-0192",
+      "address": "福井県丹生郡越前町西田中13-5-1"
+    },
+    "18442-town": {
+      "name": "美浜町役場",
+      "status": "verified",
+      "postalCode": "919-1192",
+      "address": "福井県三方郡美浜町郷市25-25"
+    },
+    "18481-town": {
+      "name": "高浜町役場",
+      "status": "verified",
+      "postalCode": "919-2292",
+      "address": "福井県大飯郡高浜町宮崎86-23-2"
+    },
+    "18483-town": {
+      "name": "おおい町役場",
+      "status": "verified",
+      "postalCode": "919-2111",
+      "address": "福井県大飯郡おおい町本郷136-1-1"
+    },
+    "18501-town": {
+      "name": "若狭町役場",
+      "status": "verified",
+      "postalCode": "919-1393",
+      "address": "福井県三方上中郡若狭町中央1-1"
+    }
+  }
+}
