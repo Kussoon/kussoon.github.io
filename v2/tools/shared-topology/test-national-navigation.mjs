@@ -34,18 +34,21 @@ const KussoonV2MunicipalRenderer={
  render(opts){lastRender={count:opts.regions.length,selected:opts.selected};},
  focusBounds(){return [135,35,135.5,35.5];}
 };
-const KussoonV2PlaceLabels={matches(r,q){return r.name.includes(q)||r.reading?.includes(q)||r.code.includes(q);},show(){}};
-const KussoonV2ReadingBridge={attach(regions,source){return {regions:regions.map(r=>({...r,reading:source.items[r.code]?.name===r.name?source.items[r.code].reading:''})),stats:{total:regions.length,matched:0,missing:regions.length,mismatched:0}};}};
+const KussoonV2PlaceLabels={matches(r,q){return r.fullName?.includes(q)||r.name.includes(q)||r.reading?.includes(q)||r.code.includes(q);},show(){}};
+const KussoonV2EstablishedLabelAdapter={layout(){return new Map();}};
+const bridgeContext={window:{}};
+vm.runInNewContext(await readFile('v2/shared/reading-bridge.js','utf8'),bridgeContext);
+const KussoonV2ReadingBridge=bridgeContext.window.KussoonV2ReadingBridge;
 const KussoonV2MapViewport={init({onZoomChange}){onZoomChange(1);return {reset(){onZoomChange(1);},zoomIn(){},zoomOut(){}};}};
 const fakeFetch=async url=>{
  const file=resolve(root,'v2/national',url);
  // Prevent a URL from escaping the project checkout.
- assert(file.startsWith(join(root,'v2/data/national/2026-common/')),url);
+ assert(file.startsWith(join(root,'v2/data/national/')),url);
  const content=await readFile(file,'utf8');
  return {ok:true,status:200,text:async()=>content,json:async()=>JSON.parse(content)};
 };
 const script=page.split('<script>').at(-1).split('</script>')[0];
-const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,KussoonV2ReadingBridge,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
+const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,KussoonV2ReadingBridge,KussoonV2EstablishedLabelAdapter,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
 vm.runInNewContext(script,context);
 async function until(predicate,label){
  for(let i=0;i<200;i++){
@@ -69,6 +72,14 @@ async function selectPref(code,count){
 }
 await selectPref('16',15); // Regression: do not reject prefectures under 20 municipalities.
 await selectPref('25',19); // Regression: load a newly extracted combined-prefecture slice.
+await selectPref('22',39); // Actual 2026 Shizuoka source and official city-ward readings.
+const aoi= node('region').children.find(o=>o.value==='22101');
+assert(aoi&&aoi.textContent.includes('静岡市葵区'),'Shizuoka Aoi must have full city-ward name in dropdown');
+node('placeSearch').value='静岡市葵区';
+callbacks.get('placeSearch:input')();
+assert(node('searchResults').children.some(b=>b.textContent.includes('静岡市葵区')),
+       'full Shizuoka city-ward name must be searchable');
+
 node('placeSearch').value='大津';
 callbacks.get('placeSearch:input')();
 assert(node('searchResults').children.length>0,'search result did not appear');

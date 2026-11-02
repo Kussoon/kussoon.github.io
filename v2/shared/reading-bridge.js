@@ -48,9 +48,9 @@ function attach(regions,source){
  const items=source?.items||{},stats={total:regions.length,matched:0,missing:0,mismatched:0};
  const mapped=regions.map(region=>{
   const entry=items[region.code]||reorganizedWards[region.code],found=verify(region,entry);
-  if(found){stats.matched++;return {...region,name:found.displayName||region.name,reading:found.reading,readingParts:found.parts};}
+  if(found){stats.matched++;return {...region,name:found.displayName||region.name,fullName:found.verifiedName||region.name,reading:found.reading,readingParts:found.parts};}
   if(entry)stats.mismatched++;else stats.missing++;
-  return {...region,reading:'',readingParts:[]};
+  return {...region,fullName:region.name,reading:'',readingParts:[]};
  });
  return {regions:mapped,stats};
 }

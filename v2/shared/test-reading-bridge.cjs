@@ -20,7 +20,8 @@ const national=JSON.parse(fs.readFileSync('v2/data/national/municipality-reading
 assert.equal(national.meta.count,1916,'nationwide snapshot completeness');
 const sapporo=bridge.attach([{code:'01101',name:'札幌市'}],national);
 assert.equal(sapporo.stats.matched,1,'2026 city-only ward geometry should use code-keyed source');
-assert.equal(sapporo.regions[0].name,'中央区','restore original source-listed ward label');
+assert.equal(sapporo.regions[0].name,'中央区','restore short map label');
+assert.equal(sapporo.regions[0].fullName,'札幌市中央区','retain full dropdown and search name');
 assert.equal(sapporo.regions[0].reading,'さっぽろしちゅうおうく');
 assert.deepEqual(Array.from(sapporo.regions[0].readingParts,x=>x.name),['札幌市','中央区']);
 const changedWard=bridge.attach([{code:'01101',name:'別の市'}],national);
@@ -34,4 +35,9 @@ for(const [code,ward,reading] of [
  assert.equal(value.regions[0].name,ward);
  assert.equal(value.regions[0].reading,reading);
 }
+const shizuoka=bridge.attach([{code:'22101',name:'静岡市'}],national);
+assert.equal(shizuoka.regions[0].name,'葵区');
+assert.equal(shizuoka.regions[0].fullName,'静岡市葵区');
+const selectedLabel=shizuoka.regions[0].readingParts.map(p=>p.name).join('');
+assert.equal(selectedLabel,'静岡市葵区');
 console.log('PASS existing CC0 reading catalog, strict matching and no guessed readings');
