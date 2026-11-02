@@ -1,0 +1,33 @@
+name: One-shot official municipality URL reachability audit
+on:
+  push:
+    branches:
+      - v2/official-url-reachability-audit-20261102
+    paths:
+      - v2/scripts/audit-official-site-urls.py
+      - .github/workflows/v2-one-shot-official-urls.yml
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Audit distinct official sites with bounded concurrency
+        run: python v2/scripts/audit-official-site-urls.py
+      - name: Save reports to audit branch
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add v2/audit/official-url-reachability-20261102*.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record official municipality URL HTTP audit results"
+            git push
+          fi
