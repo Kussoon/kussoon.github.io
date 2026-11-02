@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "21",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.gifu.lg.jp/page/6058.html",
+    "https://www.j-lis.go.jp/spd/code-address/tyuubu/cms_14214182.html",
+    "https://www.gaic.or.jp/link/"
+  ],
+  "regions": {
+    "21201": {
+      "name": "岐阜市",
+      "kind": "city",
+      "officeIds": [
+        "21201-city"
+      ],
+      "official": "https://www.city.gifu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%B2%90%E9%98%9C%E5%B8%82"
+    },
+    "21202": {
+      "name": "大垣市",
+      "kind": "city",
+      "officeIds": [
+        "21202-city"
+      ],
+      "official": "https://www.city.ogaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%A4%A7%E5%9E%A3%E5%B8%82"
+    },
+    "21203": {
+      "name": "高山市",
+      "kind": "city",
+      "officeIds": [
+        "21203-city"
+      ],
+      "official": "https://www.city.takayama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E9%AB%98%E5%B1%B1%E5%B8%82"
+    },
+    "21204": {
+      "name": "多治見市",
+      "kind": "city",
+      "officeIds": [
+        "21204-city"
+      ],
+      "official": "https://www.city.tajimi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%A4%9A%E6%B2%BB%E8%A6%8B%E5%B8%82"
+    },
+    "21205": {
+      "name": "関市",
+      "kind": "city",
+      "officeIds": [
+        "21205-city"
+      ],
+      "official": "https://www.city.seki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E9%96%A2%E5%B8%82"
+    },
+    "21206": {
+      "name": "中津川市",
+      "kind": "city",
+      "officeIds": [
+        "21206-city"
+      ],
+      "official": "https://www.city.nakatsugawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E4%B8%AD%E6%B4%A5%E5%B7%9D%E5%B8%82"
+    },
+    "21207": {
+      "name": "美濃市",
+      "kind": "city",
+      "officeIds": [
+        "21207-city"
+      ],
+      "official": "https://www.city.mino.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%BE%8E%E6%BF%83%E5%B8%82"
+    },
+    "21208": {
+      "name": "瑞浪市",
+      "kind": "city",
+      "officeIds": [
+        "21208-city"
+      ],
+      "official": "https://www.city.mizunami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%91%9E%E6%B5%AA%E5%B8%82"
+    },
+    "21209": {
+      "name": "羽島市",
+      "kind": "city",
+      "officeIds": [
+        "21209-city"
+      ],
+      "official": "https://www.city.hashima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%BE%BD%E5%B3%B6%E5%B8%82"
+    },
+    "21210": {
+      "name": "恵那市",
+      "kind": "city",
+      "officeIds": [
+        "21210-city"
+      ],
+      "official": "https://www.city.ena.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E6%81%B5%E9%82%A3%E5%B8%82"
+    },
+    "21211": {
+      "name": "美濃加茂市",
+      "kind": "city",
+      "officeIds": [
+        "21211-city"
+      ],
+      "official": "https://www.city.minokamo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%BE%8E%E6%BF%83%E5%8A%A0%E8%8C%82%E5%B8%82"
+    },
+    "21212": {
+      "name": "土岐市",
+      "kind": "city",
+      "officeIds": [
+        "21212-city"
+      ],
+      "official": "https://www.city.toki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%9C%9F%E5%B2%90%E5%B8%82"
+    },
+    "21213": {
+      "name": "各務原市",
+      "kind": "city",
+      "officeIds": [
+        "21213-city"
+      ],
+      "official": "https://www.city.kakamigahara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%90%84%E5%8B%99%E5%8E%9F%E5%B8%82"
+    },
+    "21214": {
+      "name": "可児市",
+      "kind": "city",
+      "officeIds": [
+        "21214-city"
+      ],
+      "official": "https://www.city.kani.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%8F%AF%E5%85%90%E5%B8%82"
+    },
+    "21215": {
+      "name": "山県市",
+      "kind": "city",
+      "officeIds": [
+        "21215-city"
+      ],
+      "official": "https://www.city.yamagata.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%B1%B1%E7%9C%8C%E5%B8%82"
+    },
+    "21216": {
+      "name": "瑞穂市",
+      "kind": "city",
+      "officeIds": [
+        "21216-city"
+      ],
+      "official": "https://www.city.mizuho.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%91%9E%E7%A9%82%E5%B8%82"
+    },
+    "21217": {
+      "name": "飛騨市",
+      "kind": "city",
+      "officeIds": [
+        "21217-city"
+      ],
+      "official": "https://www.city.hida.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E9%A3%9B%E9%A8%A8%E5%B8%82"
+    },
+    "21218": {
+      "name": "本巣市",
+      "kind": "city",
+      "officeIds": [
+        "21218-city"
+      ],
+      "official": "https://www.city.motosu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E6%9C%AC%E5%B7%A3%E5%B8%82"
+    },
+    "21219": {
+      "name": "郡上市",
+      "kind": "city",
+      "officeIds": [
+        "21219-city"
+      ],
+      "official": "https://www.city.gujo.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E9%83%A1%E4%B8%8A%E5%B8%82"
+    },
+    "21220": {
+      "name": "下呂市",
+      "kind": "city",
+      "officeIds": [
+        "21220-city"
+      ],
+      "official": "https://www.city.gero.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E4%B8%8B%E5%91%82%E5%B8%82"
+    },
+    "21221": {
+      "name": "海津市",
+      "kind": "city",
+      "officeIds": [
+        "21221-city"
+      ],
+      "official": "https://www.city.kaizu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E6%B5%B7%E6%B4%A5%E5%B8%82"
+    },
+    "21302": {
+      "name": "岐南町",
+      "kind": "town",
+      "officeIds": [
+        "21302-town"
+      ],
+      "official": "https://www.town.ginan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%B2%90%E5%8D%97%E7%94%BA"
+    },
+    "21303": {
+      "name": "笠松町",
+      "kind": "town",
+      "officeIds": [
+        "21303-town"
+      ],
+      "official": "https://www.town.kasamatsu.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%AC%A0%E6%9D%BE%E7%94%BA"
+    },
+    "21341": {
+      "name": "養老町",
+      "kind": "town",
+      "officeIds": [
+        "21341-town"
+      ],
+      "official": "https://www.town.yoro.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E9%A4%8A%E8%80%81%E7%94%BA"
+    },
+    "21361": {
+      "name": "垂井町",
+      "kind": "town",
+      "officeIds": [
+        "21361-town"
+      ],
+      "official": "https://www.town.tarui.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%9E%82%E4%BA%95%E7%94%BA"
+    },
+    "21362": {
+      "name": "関ケ原町",
+      "kind": "town",
+      "officeIds": [
+        "21362-town"
+      ],
+      "official": "https://www.town.sekigahara.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E9%96%A2%E3%82%B1%E5%8E%9F%E7%94%BA"
+    },
+    "21381": {
+      "name": "神戸町",
+      "kind": "town",
+      "officeIds": [
+        "21381-town"
+      ],
+      "official": "https://www.town.godo.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%A5%9E%E6%88%B8%E7%94%BA"
+    },
+    "21382": {
+      "name": "輪之内町",
+      "kind": "town",
+      "officeIds": [
+        "21382-town"
+      ],
+      "official": "https://town.wanouchi.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E8%BC%AA%E4%B9%8B%E5%86%85%E7%94%BA"
+    },
+    "21383": {
+      "name": "安八町",
+      "kind": "town",
+      "officeIds": [
+        "21383-town"
+      ],
+      "official": "https://www.town.anpachi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%AE%89%E5%85%AB%E7%94%BA"
+    },
+    "21401": {
+      "name": "揖斐川町",
+      "kind": "town",
+      "officeIds": [
+        "21401-town"
+      ],
+      "official": "https://www.town.ibigawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E6%8F%96%E6%96%90%E5%B7%9D%E7%94%BA"
+    },
+    "21403": {
+      "name": "大野町",
+      "kind": "town",
+      "officeIds": [
+        "21403-town"
+      ],
+      "official": "https://www.town-ono.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%A4%A7%E9%87%8E%E7%94%BA"
+    },
+    "21404": {
+      "name": "池田町",
+      "kind": "town",
+      "officeIds": [
+        "21404-town"
+      ],
+      "official": "https://www.town.gifu-ikeda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E6%B1%A0%E7%94%B0%E7%94%BA"
+    },
+    "21421": {
+      "name": "北方町",
+      "kind": "town",
+      "officeIds": [
+        "21421-town"
+      ],
+      "official": "https://www.town.kitagata.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%8C%97%E6%96%B9%E7%94%BA"
+    },
+    "21501": {
+      "name": "坂祝町",
+      "kind": "town",
+      "officeIds": [
+        "21501-town"
+      ],
+      "official": "https://www.town.sakahogi.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%9D%82%E7%A5%9D%E7%94%BA"
+    },
+    "21502": {
+      "name": "富加町",
+      "kind": "town",
+      "officeIds": [
+        "21502-town"
+      ],
+      "official": "https://www.town.tomika.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%AF%8C%E5%8A%A0%E7%94%BA"
+    },
+    "21503": {
+      "name": "川辺町",
+      "kind": "town",
+      "officeIds": [
+        "21503-town"
+      ],
+      "official": "https://www.kawabe-gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%B7%9D%E8%BE%BA%E7%94%BA"
+    },
+    "21504": {
+      "name": "七宗町",
+      "kind": "town",
+      "officeIds": [
+        "21504-town"
+      ],
+      "official": "https://www.hichiso.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E4%B8%83%E5%AE%97%E7%94%BA"
+    },
+    "21505": {
+      "name": "八百津町",
+      "kind": "town",
+      "officeIds": [
+        "21505-town"
+      ],
+      "official": "https://www.town.yaotsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%85%AB%E7%99%BE%E6%B4%A5%E7%94%BA"
+    },
+    "21506": {
+      "name": "白川町",
+      "kind": "town",
+      "officeIds": [
+        "21506-town"
+      ],
+      "official": "https://www.town.shirakawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%99%BD%E5%B7%9D%E7%94%BA"
+    },
+    "21507": {
+      "name": "東白川村",
+      "kind": "village",
+      "officeIds": [
+        "21507-village"
+      ],
+      "official": "https://www.vill.higashishirakawa.gifu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E6%9D%B1%E7%99%BD%E5%B7%9D%E6%9D%91"
+    },
+    "21521": {
+      "name": "御嵩町",
+      "kind": "town",
+      "officeIds": [
+        "21521-town"
+      ],
+      "official": "https://www.town.mitake.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E5%BE%A1%E5%B5%A9%E7%94%BA"
+    },
+    "21604": {
+      "name": "白川村",
+      "kind": "village",
+      "officeIds": [
+        "21604-village"
+      ],
+      "official": "https://shirakawa-go.org/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%90%E9%98%9C%E7%9C%8C%E7%99%BD%E5%B7%9D%E6%9D%91"
+    }
+  },
+  "offices": {
+    "21201-city": {
+      "name": "岐阜市役所",
+      "postalCode": "500-8701",
+      "address": "岐阜県岐阜市司町40-1",
+      "status": "verified"
+    },
+    "21202-city": {
+      "name": "大垣市役所",
+      "postalCode": "503-8601",
+      "address": "岐阜県大垣市丸の内2-29",
+      "status": "verified"
+    },
+    "21203-city": {
+      "name": "高山市役所",
+      "postalCode": "506-8555",
+      "address": "岐阜県高山市花岡町2-18",
+      "status": "verified"
+    },
+    "21204-city": {
+      "name": "多治見市役所",
+      "postalCode": "507-8703",
+      "address": "岐阜県多治見市日ノ出町2-15",
+      "status": "verified"
+    },
+    "21205-city": {
+      "name": "関市役所",
+      "postalCode": "501-3894",
+      "address": "岐阜県関市若草通3-1",
+      "status": "verified"
+    },
+    "21206-city": {
+      "name": "中津川市役所",
+      "postalCode": "508-8501",
+      "address": "岐阜県中津川市かやの木町2-1",
+      "status": "verified"
+    },
+    "21207-city": {
+      "name": "美濃市役所",
+      "postalCode": "501-3792",
+      "address": "岐阜県美濃市1350",
+      "status": "verified"
+    },
+    "21208-city": {
+      "name": "瑞浪市役所",
+      "postalCode": "509-6195",
+      "address": "岐阜県瑞浪市上平町1-1",
+      "status": "verified"
+    },
+    "21209-city": {
+      "name": "羽島市役所",
+      "postalCode": "501-6292",
+      "address": "岐阜県羽島市竹鼻町55",
+      "status": "verified"
+    },
+    "21210-city": {
+      "name": "恵那市役所",
+      "postalCode": "509-7292",
+      "address": "岐阜県恵那市長島町正家1-1-1",
+      "status": "verified"
+    },
+    "21211-city": {
+      "name": "美濃加茂市役所",
+      "postalCode": "505-8606",
+      "address": "岐阜県美濃加茂市太田町3431-1",
+      "status": "verified"
+    },
+    "21212-city": {
+      "name": "土岐市役所",
+      "postalCode": "509-5192",
+      "address": "岐阜県土岐市土岐津町土岐口2101",
+      "status": "verified"
+    },
+    "21213-city": {
+      "name": "各務原市役所",
+      "postalCode": "504-8555",
+      "address": "岐阜県各務原市那加桜町1-69",
+      "status": "verified"
+    },
+    "21214-city": {
+      "name": "可児市役所",
+      "postalCode": "509-0292",
+      "address": "岐阜県可児市広見1-1",
+      "status": "verified"
+    },
+    "21215-city": {
+      "name": "山県市役所",
+      "postalCode": "501-2192",
+      "address": "岐阜県山県市高木1000-1",
+      "status": "verified"
+    },
+    "21216-city": {
+      "name": "瑞穂市役所",
+      "postalCode": "501-0293",
+      "address": "岐阜県瑞穂市別府1288",
+      "status": "verified"
+    },
+    "21217-city": {
+      "name": "飛騨市役所",
+      "postalCode": "509-4292",
+      "address": "岐阜県飛騨市古川町本町2-22",
+      "status": "verified"
+    },
+    "21218-city": {
+      "name": "本巣市役所",
+      "postalCode": "501-0491",
+      "address": "岐阜県本巣市早野255",
+      "status": "verified"
+    },
+    "21219-city": {
+      "name": "郡上市役所",
+      "postalCode": "501-4297",
+      "address": "岐阜県郡上市八幡町島谷228",
+      "status": "verified"
+    },
+    "21220-city": {
+      "name": "下呂市役所",
+      "postalCode": "509-2295",
+      "address": "岐阜県下呂市森960",
+      "status": "verified"
+    },
+    "21221-city": {
+      "name": "海津市役所",
+      "postalCode": "503-0695",
+      "address": "岐阜県海津市海津町高須515",
+      "status": "verified"
+    },
+    "21302-town": {
+      "name": "岐南町役場",
+      "postalCode": "501-6197",
+      "address": "岐阜県羽島郡岐南町八剣7-107",
+      "status": "verified"
+    },
+    "21303-town": {
+      "name": "笠松町役場",
+      "postalCode": "501-6181",
+      "address": "岐阜県羽島郡笠松町司町1",
+      "status": "verified"
+    },
+    "21341-town": {
+      "name": "養老町役場",
+      "postalCode": "503-1392",
+      "address": "岐阜県養老郡養老町高田798",
+      "status": "verified"
+    },
+    "21361-town": {
+      "name": "垂井町役場",
+      "postalCode": "503-2193",
+      "address": "岐阜県不破郡垂井町宮代2957-11",
+      "status": "verified"
+    },
+    "21362-town": {
+      "name": "関ケ原町役場",
+      "postalCode": "503-1592",
+      "address": "岐阜県不破郡関ケ原町大字関ケ原894-58",
+      "status": "verified"
+    },
+    "21381-town": {
+      "name": "神戸町役場",
+      "postalCode": "503-2392",
+      "address": "岐阜県安八郡神戸町大字神戸1111",
+      "status": "verified"
+    },
+    "21382-town": {
+      "name": "輪之内町役場",
+      "postalCode": "503-0292",
+      "address": "岐阜県安八郡輪之内町四郷2530-1",
+      "status": "verified"
+    },
+    "21383-town": {
+      "name": "安八町役場",
+      "postalCode": "503-0198",
+      "address": "岐阜県安八郡安八町氷取161",
+      "status": "verified"
+    },
+    "21401-town": {
+      "name": "揖斐川町役場",
+      "postalCode": "501-0692",
+      "address": "岐阜県揖斐郡揖斐川町三輪133",
+      "status": "verified"
+    },
+    "21403-town": {
+      "name": "大野町役場",
+      "postalCode": "501-0592",
+      "address": "岐阜県揖斐郡大野町大字大野80",
+      "status": "verified"
+    },
+    "21404-town": {
+      "name": "池田町役場",
+      "postalCode": "503-2492",
+      "address": "岐阜県揖斐郡池田町六之井1468-1",
+      "status": "verified"
+    },
+    "21421-town": {
+      "name": "北方町役場",
+      "postalCode": "501-0492",
+      "address": "岐阜県本巣郡北方町長谷川1-1",
+      "status": "verified"
+    },
+    "21501-town": {
+      "name": "坂祝町役場",
+      "postalCode": "505-8501",
+      "address": "岐阜県加茂郡坂祝町取組46-18",
+      "status": "verified"
+    },
+    "21502-town": {
+      "name": "富加町役場",
+      "postalCode": "501-3392",
+      "address": "岐阜県加茂郡富加町滝田1511",
+      "status": "verified"
+    },
+    "21503-town": {
+      "name": "川辺町役場",
+      "postalCode": "509-0393",
+      "address": "岐阜県加茂郡川辺町中川辺1518-4",
+      "status": "verified"
+    },
+    "21504-town": {
+      "name": "七宗町役場",
+      "postalCode": "509-0492",
+      "address": "岐阜県加茂郡七宗町上麻生2442-3",
+      "status": "verified"
+    },
+    "21505-town": {
+      "name": "八百津町役場",
+      "postalCode": "505-0392",
+      "address": "岐阜県加茂郡八百津町八百津3903-2",
+      "status": "verified"
+    },
+    "21506-town": {
+      "name": "白川町役場",
+      "postalCode": "509-1192",
+      "address": "岐阜県加茂郡白川町河岐1705-2",
+      "status": "verified"
+    },
+    "21507-village": {
+      "name": "東白川村役場",
+      "postalCode": "509-1392",
+      "address": "岐阜県加茂郡東白川村神土548",
+      "status": "verified"
+    },
+    "21521-town": {
+      "name": "御嵩町役場",
+      "postalCode": "505-0192",
+      "address": "岐阜県可児郡御嵩町御嵩1239-1",
+      "status": "verified"
+    },
+    "21604-village": {
+      "name": "白川村役場",
+      "postalCode": "501-5692",
+      "address": "岐阜県大野郡白川村鳩谷517",
+      "status": "verified"
+    }
+  }
+}
