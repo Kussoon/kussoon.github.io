@@ -48,9 +48,11 @@ const decodePair=p=>p.split('-');
 function xy(lon,lat){return [lon,lat];}
 function draw(){
  if(!data||!features.length)return;
- const pts=features.flatMap(f=>f.geometry.coordinates),all=pts.flat();
- const xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
- const minLon=Math.min(...xs),maxLon=Math.max(...xs),minLat=Math.min(...ys),maxLat=Math.max(...ys);
+ let minLon=Infinity,maxLon=-Infinity,minLat=Infinity,maxLat=-Infinity;
+ for(const f of features)for(const [lon,lat] of f.geometry.coordinates){
+  minLon=Math.min(minLon,lon);maxLon=Math.max(maxLon,lon);
+  minLat=Math.min(minLat,lat);maxLat=Math.max(maxLat,lat);
+ }
  const cos=Math.cos(((minLat+maxLat)/2)*Math.PI/180);
  const width=Math.max((maxLon-minLon)*cos,1e-5),height=Math.max(maxLat-minLat,1e-5);
  const s=Math.min(860/width,580/height)*zoom;
@@ -68,7 +70,8 @@ function draw(){
  document.getElementById('zoom').textContent=zoom.toFixed(1)+'倍';
  const [a,b]=decodePair(pairSelect.value);
  const count=stage=>features.filter(f=>f.properties.stage===stage).length;
- stats.innerHTML='<p>'+names[Number(a)]+'の現行線：'+count('current')+'アーク　／　'+names[Number(b)]+'の現行線：'+count('current')+'アーク<br>全国一括生成の共有アーク：'+count('common')+'本</p>';
+ const countCurrent=pref=>features.filter(f=>f.properties.stage==='current'&&f.properties.pref===pref).length;
+ stats.innerHTML='<p>'+names[Number(a)]+'の現行線：'+countCurrent(a)+'アーク　／　'+names[Number(b)]+'の現行線：'+countCurrent(b)+'アーク<br>全国一括生成の共有アーク：'+count('common')+'本</p>';
  status.textContent=names[Number(a)]+'―'+names[Number(b)]+'を同一範囲で比較中です。';
 }
 fetch('../data/national/2026-common/national-shared-border-pilot/border-comparison.geojson').then(r=>{if(!r.ok)throw Error('比較データ HTTP '+r.status);return r.json();}).then(json=>{
