@@ -584,5 +584,26 @@
   "mapOnlyTotal": 13,
   "officeOnlyTotal": 20,
   "duplicateMapCodes": [],
-  "invalidOfficeLinks": []
+  "invalidOfficeLinks": [],
+  "knownExceptions": {
+    "unassignedCodes": [
+      "12000",
+      "13000",
+      "23000",
+      "30000",
+      "40000",
+      "46000",
+      "47000"
+    ],
+    "northernTerritoriesCodes": [
+      "01695",
+      "01696",
+      "01697",
+      "01698",
+      "01699",
+      "01700"
+    ],
+    "designatedCityParentCount": 20
+  },
+  "unexpected": []
 }
