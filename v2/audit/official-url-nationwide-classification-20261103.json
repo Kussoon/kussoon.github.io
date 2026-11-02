@@ -3,7 +3,7 @@
   "title": "Kussoon V2 全国公式サイトURL監査（進行中）",
   "createdAt": "2026-11-03",
   "repository": "Kussoon/kussoon.github.io",
-  "sourceRef": "main as of 2026-11-03 (PR #206 and #207 merged; municipality 29453 and 01518 URLs corrected)",
+  "sourceRef": "main as of 2026-11-03 (PR #206, #207, and #208 merged; municipalities 29453, 01518, and 30383 URLs corrected)",
   "scope": "v2/data/offices/01.json～47.json の regions。庁舎情報の登録区域数を基準とし、地図区域数とは区別。",
   "status": "in_progress",
   "methodology": {
@@ -21,8 +21,8 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 52,
-      "B": 1,
+      "A": 53,
+      "B": 0,
       "C": 5,
       "unclassified": 1854
     },
@@ -30,7 +30,7 @@
     "pendingExisting61Reconciliation": 3,
     "unreviewedOtherRegions": 1851,
     "totalCheck": 1912,
-    "reconciliationNote": "PR #205の既存53件（A48/C5）を保持。追加8件のうち4件A・1件Bを個別根拠で記録し、3件は公式性/利用可能性が確定せず未判定。次段階は残る1,851区域。"
+    "reconciliationNote": "PR #205の既存53件（A48/C5）を保持。追加8件のうち5件A（うち由良町はPR #208修正後にA）・3件は公式性/利用可能性が確定せず未判定。次段階は残る1,851区域。"
   },
   "records": [
     {
@@ -24222,8 +24222,8 @@
       "municipalityCode": "30383",
       "kind": "town",
       "parentCode": null,
-      "registeredUrl": "https://www.town.yura.wakayama.jp/",
-      "classification": "B",
+      "registeredUrl": "https://www.town.yura.lg.jp/",
+      "classification": "A",
       "auditStatus": "reviewed",
       "verifiedOfficialUrl": "https://www.town.yura.lg.jp/",
       "evidenceUrls": [
@@ -24245,7 +24245,7 @@
         "official_prefecture_link_check"
       ],
       "checkedAt": "2026-11-03 JST",
-      "notes": "現行の由良町公式サイトは https://www.town.yura.lg.jp/ で、最近の町政情報・役場所在地・連絡先を掲載。旧登録URL town.yura.wakayama.jp は現行ドメインに更新が必要と判断。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
+      "notes": "PR #208で登録URLを現行公式ドメイン https://www.town.yura.lg.jp/ に修正しmainへマージ。現行町公式ページを確認。"
     },
     {
       "prefectureCode": "30",
