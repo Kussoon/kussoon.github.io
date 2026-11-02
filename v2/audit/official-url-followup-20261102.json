@@ -6,8 +6,8 @@
   "counts": {
     "total": 61,
     "A": 10,
-    "B": 11,
-    "C": 40
+    "B": 12,
+    "C": 39
   },
   "method": "各登録URLを実ブラウザで1回ずつ開いて可視ページ・遷移先を確認。読み込みできない場合は自治体の公式情報・公式ページの確認を行った。HTTP/TLS/ネットワークエラーのみで廃止と断定していない。",
   "results": [
@@ -958,25 +958,26 @@
       "municipality": "利尻町",
       "municipalityCode": "01518",
       "registeredUrl": "https://www.town.rishiri.hokkaido.jp/",
-      "browserResult": "登録URLのブラウザ遷移がタイムアウト。自治体公式サイトが現在も運用中か判定できるページを取得できず保留。",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "ユーザー提供のSafariスクリーンショットで利尻町公式サイトを表示。URL欄は rishiri-town.jp、ページ内に「利尻町 / RISHIRI TOWN」の公式ロゴと町のお知らせを確認。登録URL https://www.town.rishiri.hokkaido.jp/ からの転送はスクリーンショットでは確認できないため、現行公式URLの変更候補としてB判定。",
+      "finalUrl": "https://rishiri-town.jp/",
+      "classification": "B",
       "evidence": [
-        "PR #188の通信検査: TimeoutError: The read operation timed out"
+        "ユーザー提供の実ブラウザ画面で、利尻町公式ロゴ・町のお知らせと現行ホスト rishiri-town.jp を確認。登録URLからの転送有無は未確認。"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "sourceUrl": "https://rishiri-town.jp/",
       "machineCheck": {
         "status": null,
         "result": "network_or_other",
         "error": "TimeoutError: The read operation timed out"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "登録URLとは異なる現行ホストで自治体公式ページを実ブラウザ画面から確認できた。旧登録URLからの転送は確認できないため、URL変更候補B。",
       "evidenceUrls": [
-        "https://www.town.rishiri.hokkaido.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+        "https://rishiri-town.jp/",
+        "https://www.town.rishiri.hokkaido.jp/"
+      ],
+      "lastCheckedAt": "2026-11-03 JST (user-provided Safari screenshot)"
     },
     {
       "prefecture": "北海道",
@@ -1844,6 +1845,25 @@
           "result": "ユーザー提供のSafari画面で南種子町公式サイトを表示。ページ内の「南種子町役場」「南種子町 Official Website」と町の公式コンテンツを確認。アドレスバーには登録URLと同じホストが表示されている（wwwはSafari表示上省略）。",
           "evidenceUrls": [
             "https://www.town.minamitane.kagoshima.jp/"
+          ]
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-11-03 JST (user-provided Safari screenshot)",
+      "scope": "利尻町のスクリーンショットを確認。現行公式サイトの証拠として分類CからBへ変更。登録URLからの転送は未確認。",
+      "results": [
+        {
+          "municipalityCode": "01518",
+          "municipality": "利尻町",
+          "previousClassification": "C",
+          "classification": "B",
+          "registeredUrl": "https://www.town.rishiri.hokkaido.jp/",
+          "observedUrl": "https://rishiri-town.jp/",
+          "result": "ユーザー提供のSafariスクリーンショットで利尻町公式サイトを表示。URL欄は rishiri-town.jp、ページ内に「利尻町 / RISHIRI TOWN」の公式ロゴと町のお知らせを確認。登録URL https://www.town.rishiri.hokkaido.jp/ からの転送はスクリーンショットでは確認できないため、現行公式URLの変更候補としてB判定。",
+          "evidenceUrls": [
+            "https://rishiri-town.jp/",
+            "https://www.town.rishiri.hokkaido.jp/"
           ]
         }
       ]
