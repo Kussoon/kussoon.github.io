@@ -1,0 +1,643 @@
+{
+  "schemaVersion": 1,
+  "source": "Single nationwide N03 GeoJSON provided by operator; see README and record provenance separately",
+  "prefectureCount": 47,
+  "regionCount": 1905,
+  "checkedPairs": 22,
+  "allExpectedPairsHaveSharedArcs": true,
+  "pairs": [
+    {
+      "pair": "07-08",
+      "names": [
+        "福島県",
+        "茨城県"
+      ],
+      "currentExternalArcCount": {
+        "07": 18,
+        "08": 40
+      },
+      "commonArcCount": 8,
+      "commonArcIDs": [
+        36078,
+        36275,
+        36281,
+        36282,
+        36284,
+        36285,
+        36286,
+        36288
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        140.26424106786038,
+        36.79132746036406,
+        140.79340292767023,
+        36.94530154296014
+      ]
+    },
+    {
+      "pair": "07-09",
+      "names": [
+        "福島県",
+        "栃木県"
+      ],
+      "currentExternalArcCount": {
+        "07": 8,
+        "09": 6
+      },
+      "commonArcCount": 9,
+      "commonArcIDs": [
+        36158,
+        36225,
+        36230,
+        36241,
+        36243,
+        36265,
+        36266,
+        36274,
+        36280
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        139.3932977861569,
+        36.910791844069436,
+        140.26424106786038,
+        37.15507426469486
+      ]
+    },
+    {
+      "pair": "07-15",
+      "names": [
+        "福島県",
+        "新潟県"
+      ],
+      "currentExternalArcCount": {
+        "15": 33,
+        "07": 8
+      },
+      "commonArcCount": 8,
+      "commonArcIDs": [
+        36168,
+        36169,
+        36233,
+        36238,
+        36239,
+        36240,
+        36249,
+        36263
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        139.16473961196672,
+        36.94045058018818,
+        139.74153846079938,
+        37.85439207404367
+      ]
+    },
+    {
+      "pair": "06-15",
+      "names": [
+        "山形県",
+        "新潟県"
+      ],
+      "currentExternalArcCount": {
+        "15": 967,
+        "06": 206
+      },
+      "commonArcCount": 6,
+      "commonArcIDs": [
+        35407,
+        35945,
+        35972,
+        35973,
+        35974,
+        35975
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        139.5478229865333,
+        37.84695225549186,
+        139.8999143695453,
+        38.55358421078181
+      ]
+    },
+    {
+      "pair": "10-15",
+      "names": [
+        "群馬県",
+        "新潟県"
+      ],
+      "currentExternalArcCount": {
+        "10": 6,
+        "15": 5
+      },
+      "commonArcCount": 5,
+      "commonArcIDs": [
+        36841,
+        36863,
+        36867,
+        36868,
+        36869
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        138.69594692207883,
+        36.7365342021108,
+        139.2379651791869,
+        37.0586331032647
+      ]
+    },
+    {
+      "pair": "10-20",
+      "names": [
+        "群馬県",
+        "長野県"
+      ],
+      "currentExternalArcCount": {
+        "10": 12,
+        "20": 23
+      },
+      "commonArcCount": 21,
+      "commonArcIDs": [
+        36772,
+        36821,
+        36824,
+        36825,
+        36826,
+        36827,
+        36837,
+        36838,
+        36839,
+        36840,
+        36842,
+        36843,
+        36844,
+        36853,
+        36854,
+        36855,
+        36857,
+        36858,
+        36859,
+        36860,
+        36861
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        138.39702015784587,
+        35.98533873907634,
+        138.71256086544727,
+        36.738519829359426
+      ]
+    },
+    {
+      "pair": "11-20",
+      "names": [
+        "埼玉県",
+        "長野県"
+      ],
+      "currentExternalArcCount": {
+        "11": 4,
+        "20": 7
+      },
+      "commonArcCount": 1,
+      "commonArcIDs": [
+        36968
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        138.71134975555685,
+        35.909231406053,
+        138.73926739123578,
+        35.98533873907634
+      ]
+    },
+    {
+      "pair": "14-22",
+      "names": [
+        "神奈川県",
+        "静岡県"
+      ],
+      "currentExternalArcCount": {
+        "14": 106,
+        "22": 97
+      },
+      "commonArcCount": 9,
+      "commonArcIDs": [
+        48976,
+        49160,
+        49161,
+        49162,
+        49163,
+        49164,
+        49166,
+        49252,
+        49253
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        138.91639997623318,
+        35.14019043230303,
+        139.11160604728747,
+        35.405183699167296
+      ]
+    },
+    {
+      "pair": "16-21",
+      "names": [
+        "富山県",
+        "岐阜県"
+      ],
+      "currentExternalArcCount": {
+        "16": 6,
+        "21": 3
+      },
+      "commonArcCount": 4,
+      "commonArcIDs": [
+        52082,
+        52092,
+        52163,
+        52166
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        136.79229955305277,
+        36.27436060910121,
+        137.58734661495723,
+        36.46505622853583
+      ]
+    },
+    {
+      "pair": "17-21",
+      "names": [
+        "石川県",
+        "岐阜県"
+      ],
+      "currentExternalArcCount": {
+        "17": 5,
+        "21": 3
+      },
+      "commonArcCount": 2,
+      "commonArcIDs": [
+        55216,
+        55217
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        136.7539787939562,
+        36.086278979968576,
+        136.85183026228137,
+        36.29921865149225
+      ]
+    },
+    {
+      "pair": "18-21",
+      "names": [
+        "福井県",
+        "岐阜県"
+      ],
+      "currentExternalArcCount": {
+        "18": 11,
+        "21": 6
+      },
+      "commonArcCount": 7,
+      "commonArcIDs": [
+        57056,
+        57059,
+        57060,
+        57061,
+        57062,
+        57176,
+        57373
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        136.28074536780346,
+        35.65864022037182,
+        136.83235934173555,
+        36.086278979968576
+      ]
+    },
+    {
+      "pair": "18-25",
+      "names": [
+        "福井県",
+        "滋賀県"
+      ],
+      "currentExternalArcCount": {
+        "18": 1343,
+        "25": 7
+      },
+      "commonArcCount": 7,
+      "commonArcIDs": [
+        56726,
+        56727,
+        56987,
+        57372,
+        57737,
+        58591,
+        59014
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        135.76878747925738,
+        35.35602057387217,
+        136.28074536780346,
+        35.70373155308115
+      ]
+    },
+    {
+      "pair": "18-26",
+      "names": [
+        "福井県",
+        "京都府"
+      ],
+      "currentExternalArcCount": {
+        "18": 1194,
+        "26": 237
+      },
+      "commonArcCount": 5,
+      "commonArcIDs": [
+        58142,
+        58154,
+        58432,
+        58589,
+        58590
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        135.44933395508696,
+        35.34367952350412,
+        135.76878747925738,
+        35.55805186278946
+      ]
+    },
+    {
+      "pair": "19-22",
+      "names": [
+        "山梨県",
+        "静岡県"
+      ],
+      "currentExternalArcCount": {
+        "19": 14,
+        "22": 35
+      },
+      "commonArcCount": 11,
+      "commonArcIDs": [
+        59138,
+        59161,
+        59191,
+        59193,
+        59196,
+        59198,
+        59199,
+        59200,
+        59204,
+        59205,
+        59207
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        138.21867646295806,
+        35.16839136613797,
+        138.91639997623318,
+        35.64594728669388
+      ]
+    },
+    {
+      "pair": "20-21",
+      "names": [
+        "長野県",
+        "岐阜県"
+      ],
+      "currentExternalArcCount": {
+        "20": 13,
+        "21": 8
+      },
+      "commonArcCount": 12,
+      "commonArcIDs": [
+        59222,
+        59306,
+        59378,
+        59381,
+        59382,
+        59383,
+        59400,
+        59404,
+        59405,
+        59407,
+        59408,
+        59409
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        137.32456682283802,
+        35.28926328308288,
+        137.6530570900369,
+        36.38980346926507
+      ]
+    },
+    {
+      "pair": "20-22",
+      "names": [
+        "長野県",
+        "静岡県"
+      ],
+      "currentExternalArcCount": {
+        "20": 7,
+        "22": 5
+      },
+      "commonArcCount": 6,
+      "commonArcIDs": [
+        59262,
+        59263,
+        59264,
+        59276,
+        59392,
+        59395
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        137.8368041982819,
+        35.21247731796191,
+        138.21867646295806,
+        35.64453975345435
+      ]
+    },
+    {
+      "pair": "20-23",
+      "names": [
+        "長野県",
+        "愛知県"
+      ],
+      "currentExternalArcCount": {
+        "20": 7,
+        "23": 6
+      },
+      "commonArcCount": 6,
+      "commonArcIDs": [
+        59373,
+        59384,
+        59385,
+        59386,
+        59389,
+        59391
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        137.54598255408476,
+        35.19837685104445,
+        137.83810847047158,
+        35.290168125879724
+      ]
+    },
+    {
+      "pair": "21-25",
+      "names": [
+        "岐阜県",
+        "滋賀県"
+      ],
+      "currentExternalArcCount": {
+        "21": 7,
+        "25": 4
+      },
+      "commonArcCount": 5,
+      "commonArcIDs": [
+        59437,
+        59438,
+        59549,
+        59555,
+        59556
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        136.27621146923937,
+        35.21775556761017,
+        136.44433836530808,
+        35.65864022037182
+      ]
+    },
+    {
+      "pair": "24-25",
+      "names": [
+        "三重県",
+        "滋賀県"
+      ],
+      "currentExternalArcCount": {
+        "24": 12,
+        "25": 8
+      },
+      "commonArcCount": 8,
+      "commonArcIDs": [
+        63112,
+        63192,
+        63838,
+        65072,
+        65073,
+        67366,
+        67371,
+        67372
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        136.0222820955501,
+        34.79056922941183,
+        136.45505202972325,
+        35.21775556761017
+      ]
+    },
+    {
+      "pair": "24-29",
+      "names": [
+        "三重県",
+        "奈良県"
+      ],
+      "currentExternalArcCount": {
+        "24": 1638,
+        "29": 21
+      },
+      "commonArcCount": 18,
+      "commonArcIDs": [
+        63097,
+        63098,
+        63173,
+        63174,
+        63175,
+        63194,
+        63195,
+        63196,
+        63316,
+        64993,
+        64994,
+        64996,
+        64998,
+        67368,
+        67369,
+        67392,
+        67393,
+        70448
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        135.85791274555166,
+        33.85895816649577,
+        136.22987875240625,
+        34.7385659031155
+      ]
+    },
+    {
+      "pair": "28-31",
+      "names": [
+        "兵庫県",
+        "鳥取県"
+      ],
+      "currentExternalArcCount": {
+        "28": 651,
+        "31": 533
+      },
+      "commonArcCount": 6,
+      "commonArcIDs": [
+        74074,
+        74367,
+        74572,
+        75333,
+        75334,
+        75336
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        134.36995555583397,
+        35.22916664065924,
+        134.51541295908217,
+        35.61457940307
+      ]
+    },
+    {
+      "pair": "28-33",
+      "names": [
+        "兵庫県",
+        "岡山県"
+      ],
+      "currentExternalArcCount": {
+        "28": 231,
+        "33": 99
+      },
+      "commonArcCount": 7,
+      "commonArcIDs": [
+        73901,
+        74019,
+        74368,
+        74369,
+        74419,
+        74421,
+        74422
+      ],
+      "exactSharedCoordinates": true,
+      "extent": [
+        134.25272632926223,
+        34.71986581864742,
+        134.41315180859192,
+        35.24103013510673
+      ]
+    }
+  ]
+}
