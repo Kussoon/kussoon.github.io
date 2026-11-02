@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "32",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/chuugoku/cms_15314184.html",
+    "https://www.pref.shimane.lg.jp/link01.html"
+  ],
+  "regions": {
+    "32201": {
+      "name": "松江市",
+      "kind": "city",
+      "officeIds": [
+        "32201-city"
+      ],
+      "official": "https://www.city.matsue.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E6%9D%BE%E6%B1%9F%E5%B8%82"
+    },
+    "32202": {
+      "name": "浜田市",
+      "kind": "city",
+      "officeIds": [
+        "32202-city"
+      ],
+      "official": "https://www.city.hamada.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E6%B5%9C%E7%94%B0%E5%B8%82"
+    },
+    "32203": {
+      "name": "出雲市",
+      "kind": "city",
+      "officeIds": [
+        "32203-city"
+      ],
+      "official": "https://www.city.izumo.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E5%87%BA%E9%9B%B2%E5%B8%82"
+    },
+    "32204": {
+      "name": "益田市",
+      "kind": "city",
+      "officeIds": [
+        "32204-city"
+      ],
+      "official": "https://www.city.masuda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E7%9B%8A%E7%94%B0%E5%B8%82"
+    },
+    "32205": {
+      "name": "大田市",
+      "kind": "city",
+      "officeIds": [
+        "32205-city"
+      ],
+      "official": "https://www.city.oda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E5%A4%A7%E7%94%B0%E5%B8%82"
+    },
+    "32206": {
+      "name": "安来市",
+      "kind": "city",
+      "officeIds": [
+        "32206-city"
+      ],
+      "official": "https://www.city.yasugi.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E5%AE%89%E6%9D%A5%E5%B8%82"
+    },
+    "32207": {
+      "name": "江津市",
+      "kind": "city",
+      "officeIds": [
+        "32207-city"
+      ],
+      "official": "https://www.city.gotsu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E6%B1%9F%E6%B4%A5%E5%B8%82"
+    },
+    "32209": {
+      "name": "雲南市",
+      "kind": "city",
+      "officeIds": [
+        "32209-city"
+      ],
+      "official": "https://www.city.unnan.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E9%9B%B2%E5%8D%97%E5%B8%82"
+    },
+    "32343": {
+      "name": "奥出雲町",
+      "kind": "town",
+      "officeIds": [
+        "32343-town"
+      ],
+      "official": "https://www.town.okuizumo.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E5%A5%A5%E5%87%BA%E9%9B%B2%E7%94%BA"
+    },
+    "32386": {
+      "name": "飯南町",
+      "kind": "town",
+      "officeIds": [
+        "32386-town"
+      ],
+      "official": "https://www.iinan.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E9%A3%AF%E5%8D%97%E7%94%BA"
+    },
+    "32441": {
+      "name": "川本町",
+      "kind": "town",
+      "officeIds": [
+        "32441-town"
+      ],
+      "official": "https://www.town.shimane-kawamoto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E5%B7%9D%E6%9C%AC%E7%94%BA"
+    },
+    "32448": {
+      "name": "美郷町",
+      "kind": "town",
+      "officeIds": [
+        "32448-town"
+      ],
+      "official": "https://www.town.shimane-misato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E7%BE%8E%E9%83%B7%E7%94%BA"
+    },
+    "32449": {
+      "name": "邑南町",
+      "kind": "town",
+      "officeIds": [
+        "32449-town"
+      ],
+      "official": "https://www.town.ohnan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E9%82%91%E5%8D%97%E7%94%BA"
+    },
+    "32501": {
+      "name": "津和野町",
+      "kind": "town",
+      "officeIds": [
+        "32501-town"
+      ],
+      "official": "https://www.town.tsuwano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E6%B4%A5%E5%92%8C%E9%87%8E%E7%94%BA"
+    },
+    "32505": {
+      "name": "吉賀町",
+      "kind": "town",
+      "officeIds": [
+        "32505-town"
+      ],
+      "official": "https://www.town.yoshika.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E5%90%89%E8%B3%80%E7%94%BA"
+    },
+    "32525": {
+      "name": "海士町",
+      "kind": "town",
+      "officeIds": [
+        "32525-town"
+      ],
+      "official": "https://www.town.ama.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E6%B5%B7%E5%A3%AB%E7%94%BA"
+    },
+    "32526": {
+      "name": "西ノ島町",
+      "kind": "town",
+      "officeIds": [
+        "32526-town"
+      ],
+      "official": "https://www.town.nishinoshima.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E8%A5%BF%E3%83%8E%E5%B3%B6%E7%94%BA"
+    },
+    "32527": {
+      "name": "知夫村",
+      "kind": "village",
+      "officeIds": [
+        "32527-village"
+      ],
+      "official": "https://www.vill.chibu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E7%9F%A5%E5%A4%AB%E6%9D%91"
+    },
+    "32528": {
+      "name": "隠岐の島町",
+      "kind": "town",
+      "officeIds": [
+        "32528-town"
+      ],
+      "official": "https://www.town.okinoshima.shimane.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B3%B6%E6%A0%B9%E7%9C%8C%E9%9A%A0%E5%B2%90%E3%81%AE%E5%B3%B6%E7%94%BA"
+    }
+  },
+  "offices": {
+    "32201-city": {
+      "name": "松江市役所",
+      "status": "verified",
+      "postalCode": "690-8540",
+      "address": "島根県松江市末次町86"
+    },
+    "32202-city": {
+      "name": "浜田市役所",
+      "status": "verified",
+      "postalCode": "697-8501",
+      "address": "島根県浜田市殿町1"
+    },
+    "32203-city": {
+      "name": "出雲市役所",
+      "status": "verified",
+      "postalCode": "693-8530",
+      "address": "島根県出雲市今市町70"
+    },
+    "32204-city": {
+      "name": "益田市役所",
+      "status": "verified",
+      "postalCode": "698-8650",
+      "address": "島根県益田市常盤町1-1"
+    },
+    "32205-city": {
+      "name": "大田市役所",
+      "status": "verified",
+      "postalCode": "694-0064",
+      "address": "島根県大田市大田町大田ロ1111"
+    },
+    "32206-city": {
+      "name": "安来市役所",
+      "status": "verified",
+      "postalCode": "692-8686",
+      "address": "島根県安来市安来町878-2"
+    },
+    "32207-city": {
+      "name": "江津市役所",
+      "status": "verified",
+      "postalCode": "695-8501",
+      "address": "島根県江津市江津町1016-4"
+    },
+    "32209-city": {
+      "name": "雲南市役所",
+      "status": "verified",
+      "postalCode": "699-1392",
+      "address": "島根県雲南市木次町里方521-1"
+    },
+    "32343-town": {
+      "name": "奥出雲町役場",
+      "status": "verified",
+      "postalCode": "699-1511",
+      "address": "島根県仁多郡奥出雲町三成358-1"
+    },
+    "32386-town": {
+      "name": "飯南町役場",
+      "status": "verified",
+      "postalCode": "690-3513",
+      "address": "島根県飯石郡飯南町下赤名880"
+    },
+    "32441-town": {
+      "name": "川本町役場",
+      "status": "verified",
+      "postalCode": "696-8501",
+      "address": "島根県邑智郡川本町大字川本271-3"
+    },
+    "32448-town": {
+      "name": "美郷町役場",
+      "status": "verified",
+      "postalCode": "699-4692",
+      "address": "島根県邑智郡美郷町粕渕168"
+    },
+    "32449-town": {
+      "name": "邑南町役場",
+      "status": "verified",
+      "postalCode": "696-0192",
+      "address": "島根県邑智郡邑南町矢上6000"
+    },
+    "32501-town": {
+      "name": "津和野町役場",
+      "status": "verified",
+      "postalCode": "699-5292",
+      "address": "島根県鹿足郡津和野町枕瀬218-18"
+    },
+    "32505-town": {
+      "name": "吉賀町役場",
+      "status": "verified",
+      "postalCode": "699-5513",
+      "address": "島根県鹿足郡吉賀町六日市750"
+    },
+    "32525-town": {
+      "name": "海士町役場",
+      "status": "verified",
+      "postalCode": "684-0403",
+      "address": "島根県隠岐郡海士町大字海士1490"
+    },
+    "32526-town": {
+      "name": "西ノ島町役場",
+      "status": "verified",
+      "postalCode": "684-0303",
+      "address": "島根県隠岐郡西ノ島町大字美田600番地4"
+    },
+    "32527-village": {
+      "name": "知夫村役場",
+      "status": "verified",
+      "postalCode": "684-0102",
+      "address": "島根県隠岐郡知夫村1065"
+    },
+    "32528-town": {
+      "name": "隠岐の島町役場",
+      "status": "verified",
+      "postalCode": "685-8585",
+      "address": "島根県隠岐郡隠岐の島町下西78番地2"
+    }
+  }
+}
