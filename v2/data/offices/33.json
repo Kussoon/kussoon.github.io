@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "33",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/chuugoku/cms_15414184.html",
+    "https://www.pref.okayama.jp/page/kanrenlink.html"
+  ],
+  "regions": {
+    "33100": {
+      "name": "岡山市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "33100-city"
+      ],
+      "official": "https://www.city.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%B2%A1%E5%B1%B1%E5%B8%82"
+    },
+    "33101": {
+      "name": "岡山市北区",
+      "kind": "ward",
+      "parentCode": "33100",
+      "officeIds": [
+        "33101-ward",
+        "33100-city"
+      ],
+      "official": "https://www.city.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%B2%A1%E5%B1%B1%E5%B8%82%E5%8C%97%E5%8C%BA"
+    },
+    "33102": {
+      "name": "岡山市中区",
+      "kind": "ward",
+      "parentCode": "33100",
+      "officeIds": [
+        "33102-ward",
+        "33100-city"
+      ],
+      "official": "https://www.city.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%B2%A1%E5%B1%B1%E5%B8%82%E4%B8%AD%E5%8C%BA"
+    },
+    "33103": {
+      "name": "岡山市東区",
+      "kind": "ward",
+      "parentCode": "33100",
+      "officeIds": [
+        "33103-ward",
+        "33100-city"
+      ],
+      "official": "https://www.city.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%B2%A1%E5%B1%B1%E5%B8%82%E6%9D%B1%E5%8C%BA"
+    },
+    "33104": {
+      "name": "岡山市南区",
+      "kind": "ward",
+      "parentCode": "33100",
+      "officeIds": [
+        "33104-ward",
+        "33100-city"
+      ],
+      "official": "https://www.city.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%B2%A1%E5%B1%B1%E5%B8%82%E5%8D%97%E5%8C%BA"
+    },
+    "33202": {
+      "name": "倉敷市",
+      "kind": "city",
+      "officeIds": [
+        "33202-city"
+      ],
+      "official": "https://www.city.kurashiki.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%80%89%E6%95%B7%E5%B8%82"
+    },
+    "33203": {
+      "name": "津山市",
+      "kind": "city",
+      "officeIds": [
+        "33203-city"
+      ],
+      "official": "https://www.city.tsuyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E6%B4%A5%E5%B1%B1%E5%B8%82"
+    },
+    "33204": {
+      "name": "玉野市",
+      "kind": "city",
+      "officeIds": [
+        "33204-city"
+      ],
+      "official": "https://www.city.tamano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%8E%89%E9%87%8E%E5%B8%82"
+    },
+    "33205": {
+      "name": "笠岡市",
+      "kind": "city",
+      "officeIds": [
+        "33205-city"
+      ],
+      "official": "https://www.city.kasaoka.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%AC%A0%E5%B2%A1%E5%B8%82"
+    },
+    "33207": {
+      "name": "井原市",
+      "kind": "city",
+      "officeIds": [
+        "33207-city"
+      ],
+      "official": "https://www.city.ibara.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E4%BA%95%E5%8E%9F%E5%B8%82"
+    },
+    "33208": {
+      "name": "総社市",
+      "kind": "city",
+      "officeIds": [
+        "33208-city"
+      ],
+      "official": "https://www.city.soja.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%B7%8F%E7%A4%BE%E5%B8%82"
+    },
+    "33209": {
+      "name": "高梁市",
+      "kind": "city",
+      "officeIds": [
+        "33209-city"
+      ],
+      "official": "https://www.city.takahashi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E9%AB%98%E6%A2%81%E5%B8%82"
+    },
+    "33210": {
+      "name": "新見市",
+      "kind": "city",
+      "officeIds": [
+        "33210-city"
+      ],
+      "official": "https://www.city.niimi.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E6%96%B0%E8%A6%8B%E5%B8%82"
+    },
+    "33211": {
+      "name": "備前市",
+      "kind": "city",
+      "officeIds": [
+        "33211-city"
+      ],
+      "official": "https://www.city.bizen.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%82%99%E5%89%8D%E5%B8%82"
+    },
+    "33212": {
+      "name": "瀬戸内市",
+      "kind": "city",
+      "officeIds": [
+        "33212-city"
+      ],
+      "official": "https://www.city.setouchi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%80%AC%E6%88%B8%E5%86%85%E5%B8%82"
+    },
+    "33213": {
+      "name": "赤磐市",
+      "kind": "city",
+      "officeIds": [
+        "33213-city"
+      ],
+      "official": "https://www.city.akaiwa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E8%B5%A4%E7%A3%90%E5%B8%82"
+    },
+    "33214": {
+      "name": "真庭市",
+      "kind": "city",
+      "officeIds": [
+        "33214-city"
+      ],
+      "official": "https://www.city.maniwa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%9C%9F%E5%BA%AD%E5%B8%82"
+    },
+    "33215": {
+      "name": "美作市",
+      "kind": "city",
+      "officeIds": [
+        "33215-city"
+      ],
+      "official": "https://www.city.mimasaka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%BE%8E%E4%BD%9C%E5%B8%82"
+    },
+    "33216": {
+      "name": "浅口市",
+      "kind": "city",
+      "officeIds": [
+        "33216-city"
+      ],
+      "official": "https://www.city.asakuchi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E6%B5%85%E5%8F%A3%E5%B8%82"
+    },
+    "33346": {
+      "name": "和気町",
+      "kind": "town",
+      "officeIds": [
+        "33346-town"
+      ],
+      "official": "https://www.town.wake.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%92%8C%E6%B0%97%E7%94%BA"
+    },
+    "33423": {
+      "name": "早島町",
+      "kind": "town",
+      "officeIds": [
+        "33423-town"
+      ],
+      "official": "https://www.town.hayashima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E6%97%A9%E5%B3%B6%E7%94%BA"
+    },
+    "33445": {
+      "name": "里庄町",
+      "kind": "town",
+      "officeIds": [
+        "33445-town"
+      ],
+      "official": "https://www.town.satosho.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E9%87%8C%E5%BA%84%E7%94%BA"
+    },
+    "33461": {
+      "name": "矢掛町",
+      "kind": "town",
+      "officeIds": [
+        "33461-town"
+      ],
+      "official": "https://www.town.yakage.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%9F%A2%E6%8E%9B%E7%94%BA"
+    },
+    "33586": {
+      "name": "新庄村",
+      "kind": "village",
+      "officeIds": [
+        "33586-village"
+      ],
+      "official": "https://www.vill.shinjo.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E6%96%B0%E5%BA%84%E6%9D%91"
+    },
+    "33606": {
+      "name": "鏡野町",
+      "kind": "town",
+      "officeIds": [
+        "33606-town"
+      ],
+      "official": "https://www.town.kagamino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E9%8F%A1%E9%87%8E%E7%94%BA"
+    },
+    "33622": {
+      "name": "勝央町",
+      "kind": "town",
+      "officeIds": [
+        "33622-town"
+      ],
+      "official": "https://www.town.shoo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%8B%9D%E5%A4%AE%E7%94%BA"
+    },
+    "33623": {
+      "name": "奈義町",
+      "kind": "town",
+      "officeIds": [
+        "33623-town"
+      ],
+      "official": "https://www.town.nagi.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%A5%88%E7%BE%A9%E7%94%BA"
+    },
+    "33643": {
+      "name": "西粟倉村",
+      "kind": "village",
+      "officeIds": [
+        "33643-village"
+      ],
+      "official": "https://www.vill.nishiawakura.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E8%A5%BF%E7%B2%9F%E5%80%89%E6%9D%91"
+    },
+    "33663": {
+      "name": "久米南町",
+      "kind": "town",
+      "officeIds": [
+        "33663-town"
+      ],
+      "official": "https://www.town.kumenan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E4%B9%85%E7%B1%B3%E5%8D%97%E7%94%BA"
+    },
+    "33666": {
+      "name": "美咲町",
+      "kind": "town",
+      "officeIds": [
+        "33666-town"
+      ],
+      "official": "https://www.town.misaki.okayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E7%BE%8E%E5%92%B2%E7%94%BA"
+    },
+    "33681": {
+      "name": "吉備中央町",
+      "kind": "town",
+      "officeIds": [
+        "33681-town"
+      ],
+      "official": "https://www.town.kibichuo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B2%A1%E5%B1%B1%E7%9C%8C%E5%90%89%E5%82%99%E4%B8%AD%E5%A4%AE%E7%94%BA"
+    }
+  },
+  "offices": {
+    "33100-city": {
+      "name": "岡山市役所",
+      "status": "verified",
+      "postalCode": "700-8544",
+      "address": "岡山県岡山市北区大供1-1-1"
+    },
+    "33101-ward": {
+      "name": "岡山市北区役所",
+      "status": "verified",
+      "postalCode": "700-8544",
+      "address": "岡山県岡山市北区大供1-1-1"
+    },
+    "33102-ward": {
+      "name": "岡山市中区役所",
+      "status": "verified",
+      "postalCode": "703-8544",
+      "address": "岡山県岡山市中区浜3-7-15"
+    },
+    "33103-ward": {
+      "name": "岡山市東区役所",
+      "status": "verified",
+      "postalCode": "704-8555",
+      "address": "岡山県岡山市東区西大寺南1-2-4"
+    },
+    "33104-ward": {
+      "name": "岡山市南区役所",
+      "status": "verified",
+      "postalCode": "702-8544",
+      "address": "岡山県岡山市南区浦安南町495-5"
+    },
+    "33202-city": {
+      "name": "倉敷市役所",
+      "status": "verified",
+      "postalCode": "710-8565",
+      "address": "岡山県倉敷市西中新田640"
+    },
+    "33203-city": {
+      "name": "津山市役所",
+      "status": "verified",
+      "postalCode": "708-8501",
+      "address": "岡山県津山市山北520"
+    },
+    "33204-city": {
+      "name": "玉野市役所",
+      "status": "verified",
+      "postalCode": "706-8510",
+      "address": "岡山県玉野市宇野1-27-1"
+    },
+    "33205-city": {
+      "name": "笠岡市役所",
+      "status": "verified",
+      "postalCode": "714-8601",
+      "address": "岡山県笠岡市中央町1-1"
+    },
+    "33207-city": {
+      "name": "井原市役所",
+      "status": "verified",
+      "postalCode": "715-8601",
+      "address": "岡山県井原市井原町311-1"
+    },
+    "33208-city": {
+      "name": "総社市役所",
+      "status": "verified",
+      "postalCode": "719-1192",
+      "address": "岡山県総社市中央1-1-1"
+    },
+    "33209-city": {
+      "name": "高梁市役所",
+      "status": "verified",
+      "postalCode": "716-8501",
+      "address": "岡山県高梁市松原通2043"
+    },
+    "33210-city": {
+      "name": "新見市役所",
+      "status": "verified",
+      "postalCode": "718-8501",
+      "address": "岡山県新見市新見310-3"
+    },
+    "33211-city": {
+      "name": "備前市役所",
+      "status": "verified",
+      "postalCode": "705-8602",
+      "address": "岡山県備前市東片上126"
+    },
+    "33212-city": {
+      "name": "瀬戸内市役所",
+      "status": "verified",
+      "postalCode": "701-4292",
+      "address": "岡山県瀬戸内市邑久町尾張300-1"
+    },
+    "33213-city": {
+      "name": "赤磐市役所",
+      "status": "verified",
+      "postalCode": "709-0898",
+      "address": "岡山県赤磐市下市344"
+    },
+    "33214-city": {
+      "name": "真庭市役所",
+      "status": "verified",
+      "postalCode": "719-3292",
+      "address": "岡山県真庭市久世2927-2"
+    },
+    "33215-city": {
+      "name": "美作市役所",
+      "status": "verified",
+      "postalCode": "707-8501",
+      "address": "岡山県美作市美来１番地"
+    },
+    "33216-city": {
+      "name": "浅口市役所",
+      "status": "verified",
+      "postalCode": "719-0295",
+      "address": "岡山県浅口市鴨方町六条院中3050"
+    },
+    "33346-town": {
+      "name": "和気町役場",
+      "status": "verified",
+      "postalCode": "709-0495",
+      "address": "岡山県和気郡和気町尺所555"
+    },
+    "33423-town": {
+      "name": "早島町役場",
+      "status": "verified",
+      "postalCode": "701-0303",
+      "address": "岡山県都窪郡早島町大字前潟360-1"
+    },
+    "33445-town": {
+      "name": "里庄町役場",
+      "status": "verified",
+      "postalCode": "719-0398",
+      "address": "岡山県浅口郡里庄町大字里見1107-2"
+    },
+    "33461-town": {
+      "name": "矢掛町役場",
+      "status": "verified",
+      "postalCode": "714-1297",
+      "address": "岡山県小田郡矢掛町矢掛3018"
+    },
+    "33586-village": {
+      "name": "新庄村役場",
+      "status": "verified",
+      "postalCode": "717-0201",
+      "address": "岡山県真庭郡新庄村2008-1"
+    },
+    "33606-town": {
+      "name": "鏡野町役場",
+      "status": "verified",
+      "postalCode": "708-0392",
+      "address": "岡山県苫田郡鏡野町竹田660"
+    },
+    "33622-town": {
+      "name": "勝央町役場",
+      "status": "verified",
+      "postalCode": "709-4316",
+      "address": "岡山県勝田郡勝央町勝間田201"
+    },
+    "33623-town": {
+      "name": "奈義町役場",
+      "status": "verified",
+      "postalCode": "708-1392",
+      "address": "岡山県勝田郡奈義町豊沢306-1"
+    },
+    "33643-village": {
+      "name": "西粟倉村役場",
+      "status": "verified",
+      "postalCode": "707-0503",
+      "address": "岡山県英田郡西粟倉村大字影石33-1"
+    },
+    "33663-town": {
+      "name": "久米南町役場",
+      "status": "verified",
+      "postalCode": "709-3614",
+      "address": "岡山県久米郡久米南町下弓削502-1"
+    },
+    "33666-town": {
+      "name": "美咲町役場",
+      "status": "verified",
+      "postalCode": "709-3717",
+      "address": "岡山県久米郡美咲町原田２１４４番地１"
+    },
+    "33681-town": {
+      "name": "吉備中央町役場",
+      "status": "verified",
+      "postalCode": "716-1192",
+      "address": "岡山県加賀郡吉備中央町豊野1-2"
+    }
+  }
+}
