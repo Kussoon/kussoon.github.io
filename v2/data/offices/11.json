@@ -1,0 +1,1130 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "11",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kantou/cms_13214181.html",
+    "https://www.city.saitama.lg.jp/008/001/p002685.html",
+    "https://www.pref.saitama.lg.jp/a0107/jyuuminnokatahe/sityousondate.html",
+    "https://www.city.asaka.lg.jp/soshiki/55/linkkensityoson.html"
+  ],
+  "regions": {
+    "11100": {
+      "name": "さいたま市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82"
+    },
+    "11101": {
+      "name": "さいたま市西区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11101-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E8%A5%BF%E5%8C%BA"
+    },
+    "11102": {
+      "name": "さいたま市北区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11102-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E5%8C%97%E5%8C%BA"
+    },
+    "11103": {
+      "name": "さいたま市大宮区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11103-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E5%A4%A7%E5%AE%AE%E5%8C%BA"
+    },
+    "11104": {
+      "name": "さいたま市見沼区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11104-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E8%A6%8B%E6%B2%BC%E5%8C%BA"
+    },
+    "11105": {
+      "name": "さいたま市中央区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11105-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA"
+    },
+    "11106": {
+      "name": "さいたま市桜区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11106-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E6%A1%9C%E5%8C%BA"
+    },
+    "11107": {
+      "name": "さいたま市浦和区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11107-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E6%B5%A6%E5%92%8C%E5%8C%BA"
+    },
+    "11108": {
+      "name": "さいたま市南区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11108-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E5%8D%97%E5%8C%BA"
+    },
+    "11109": {
+      "name": "さいたま市緑区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11109-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E7%B7%91%E5%8C%BA"
+    },
+    "11110": {
+      "name": "さいたま市岩槻区",
+      "kind": "ward",
+      "parentCode": "11100",
+      "officeIds": [
+        "11110-ward",
+        "11100-city"
+      ],
+      "official": "https://www.city.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%95%E3%81%84%E3%81%9F%E3%81%BE%E5%B8%82%E5%B2%A9%E6%A7%BB%E5%8C%BA"
+    },
+    "11201": {
+      "name": "川越市",
+      "kind": "city",
+      "officeIds": [
+        "11201-city"
+      ],
+      "official": "https://www.city.kawagoe.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B7%9D%E8%B6%8A%E5%B8%82"
+    },
+    "11202": {
+      "name": "熊谷市",
+      "kind": "city",
+      "officeIds": [
+        "11202-city"
+      ],
+      "official": "https://www.city.kumagaya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%86%8A%E8%B0%B7%E5%B8%82"
+    },
+    "11203": {
+      "name": "川口市",
+      "kind": "city",
+      "officeIds": [
+        "11203-city"
+      ],
+      "official": "https://www.city.kawaguchi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B7%9D%E5%8F%A3%E5%B8%82"
+    },
+    "11206": {
+      "name": "行田市",
+      "kind": "city",
+      "officeIds": [
+        "11206-city"
+      ],
+      "official": "https://www.city.gyoda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E8%A1%8C%E7%94%B0%E5%B8%82"
+    },
+    "11207": {
+      "name": "秩父市",
+      "kind": "city",
+      "officeIds": [
+        "11207-city"
+      ],
+      "official": "https://www.city.chichibu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%A7%A9%E7%88%B6%E5%B8%82"
+    },
+    "11208": {
+      "name": "所沢市",
+      "kind": "city",
+      "officeIds": [
+        "11208-city"
+      ],
+      "official": "https://www.city.tokorozawa.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%89%80%E6%B2%A2%E5%B8%82"
+    },
+    "11209": {
+      "name": "飯能市",
+      "kind": "city",
+      "officeIds": [
+        "11209-city"
+      ],
+      "official": "https://www.city.hanno.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E9%A3%AF%E8%83%BD%E5%B8%82"
+    },
+    "11210": {
+      "name": "加須市",
+      "kind": "city",
+      "officeIds": [
+        "11210-city"
+      ],
+      "official": "https://www.city.kazo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%8A%A0%E9%A0%88%E5%B8%82"
+    },
+    "11211": {
+      "name": "本庄市",
+      "kind": "city",
+      "officeIds": [
+        "11211-city"
+      ],
+      "official": "https://www.city.honjo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%9C%AC%E5%BA%84%E5%B8%82"
+    },
+    "11212": {
+      "name": "東松山市",
+      "kind": "city",
+      "officeIds": [
+        "11212-city"
+      ],
+      "official": "https://www.city.higashimatsuyama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%9D%B1%E6%9D%BE%E5%B1%B1%E5%B8%82"
+    },
+    "11214": {
+      "name": "春日部市",
+      "kind": "city",
+      "officeIds": [
+        "11214-city"
+      ],
+      "official": "https://www.city.kasukabe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%98%A5%E6%97%A5%E9%83%A8%E5%B8%82"
+    },
+    "11215": {
+      "name": "狭山市",
+      "kind": "city",
+      "officeIds": [
+        "11215-city"
+      ],
+      "official": "https://www.city.sayama.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%8B%AD%E5%B1%B1%E5%B8%82"
+    },
+    "11216": {
+      "name": "羽生市",
+      "kind": "city",
+      "officeIds": [
+        "11216-city"
+      ],
+      "official": "https://www.city.hanyu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%BE%BD%E7%94%9F%E5%B8%82"
+    },
+    "11217": {
+      "name": "鴻巣市",
+      "kind": "city",
+      "officeIds": [
+        "11217-city"
+      ],
+      "official": "https://www.city.kounosu.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E9%B4%BB%E5%B7%A3%E5%B8%82"
+    },
+    "11218": {
+      "name": "深谷市",
+      "kind": "city",
+      "officeIds": [
+        "11218-city"
+      ],
+      "official": "https://www.city.fukaya.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%B7%B1%E8%B0%B7%E5%B8%82"
+    },
+    "11219": {
+      "name": "上尾市",
+      "kind": "city",
+      "officeIds": [
+        "11219-city"
+      ],
+      "official": "https://www.city.ageo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E4%B8%8A%E5%B0%BE%E5%B8%82"
+    },
+    "11221": {
+      "name": "草加市",
+      "kind": "city",
+      "officeIds": [
+        "11221-city"
+      ],
+      "official": "https://www.city.soka.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E8%8D%89%E5%8A%A0%E5%B8%82"
+    },
+    "11222": {
+      "name": "越谷市",
+      "kind": "city",
+      "officeIds": [
+        "11222-city"
+      ],
+      "official": "https://www.city.koshigaya.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E8%B6%8A%E8%B0%B7%E5%B8%82"
+    },
+    "11223": {
+      "name": "蕨市",
+      "kind": "city",
+      "officeIds": [
+        "11223-city"
+      ],
+      "official": "https://www.city.warabi.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E8%95%A8%E5%B8%82"
+    },
+    "11224": {
+      "name": "戸田市",
+      "kind": "city",
+      "officeIds": [
+        "11224-city"
+      ],
+      "official": "https://www.city.toda.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%88%B8%E7%94%B0%E5%B8%82"
+    },
+    "11225": {
+      "name": "入間市",
+      "kind": "city",
+      "officeIds": [
+        "11225-city"
+      ],
+      "official": "https://www.city.iruma.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%A5%E9%96%93%E5%B8%82"
+    },
+    "11227": {
+      "name": "朝霞市",
+      "kind": "city",
+      "officeIds": [
+        "11227-city"
+      ],
+      "official": "https://www.city.asaka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%9C%9D%E9%9C%9E%E5%B8%82"
+    },
+    "11228": {
+      "name": "志木市",
+      "kind": "city",
+      "officeIds": [
+        "11228-city"
+      ],
+      "official": "https://www.city.shiki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%BF%97%E6%9C%A8%E5%B8%82"
+    },
+    "11229": {
+      "name": "和光市",
+      "kind": "city",
+      "officeIds": [
+        "11229-city"
+      ],
+      "official": "https://www.city.wako.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%92%8C%E5%85%89%E5%B8%82"
+    },
+    "11230": {
+      "name": "新座市",
+      "kind": "city",
+      "officeIds": [
+        "11230-city"
+      ],
+      "official": "https://www.city.niiza.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%96%B0%E5%BA%A7%E5%B8%82"
+    },
+    "11231": {
+      "name": "桶川市",
+      "kind": "city",
+      "officeIds": [
+        "11231-city"
+      ],
+      "official": "https://www.city.okegawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%A1%B6%E5%B7%9D%E5%B8%82"
+    },
+    "11232": {
+      "name": "久喜市",
+      "kind": "city",
+      "officeIds": [
+        "11232-city"
+      ],
+      "official": "https://www.city.kuki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E4%B9%85%E5%96%9C%E5%B8%82"
+    },
+    "11233": {
+      "name": "北本市",
+      "kind": "city",
+      "officeIds": [
+        "11233-city"
+      ],
+      "official": "https://www.city.kitamoto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%8C%97%E6%9C%AC%E5%B8%82"
+    },
+    "11234": {
+      "name": "八潮市",
+      "kind": "city",
+      "officeIds": [
+        "11234-city"
+      ],
+      "official": "https://www.city.yashio.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%85%AB%E6%BD%AE%E5%B8%82"
+    },
+    "11235": {
+      "name": "富士見市",
+      "kind": "city",
+      "officeIds": [
+        "11235-city"
+      ],
+      "official": "https://www.city.fujimi.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%AF%8C%E5%A3%AB%E8%A6%8B%E5%B8%82"
+    },
+    "11237": {
+      "name": "三郷市",
+      "kind": "city",
+      "officeIds": [
+        "11237-city"
+      ],
+      "official": "https://www.city.misato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E4%B8%89%E9%83%B7%E5%B8%82"
+    },
+    "11238": {
+      "name": "蓮田市",
+      "kind": "city",
+      "officeIds": [
+        "11238-city"
+      ],
+      "official": "https://www.city.hasuda.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E8%93%AE%E7%94%B0%E5%B8%82"
+    },
+    "11239": {
+      "name": "坂戸市",
+      "kind": "city",
+      "officeIds": [
+        "11239-city"
+      ],
+      "official": "https://www.city.sakado.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%9D%82%E6%88%B8%E5%B8%82"
+    },
+    "11240": {
+      "name": "幸手市",
+      "kind": "city",
+      "officeIds": [
+        "11240-city"
+      ],
+      "official": "https://www.city.satte.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B9%B8%E6%89%8B%E5%B8%82"
+    },
+    "11241": {
+      "name": "鶴ヶ島市",
+      "kind": "city",
+      "officeIds": [
+        "11241-city"
+      ],
+      "official": "https://www.city.tsurugashima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E9%B6%B4%E3%83%B6%E5%B3%B6%E5%B8%82"
+    },
+    "11242": {
+      "name": "日高市",
+      "kind": "city",
+      "officeIds": [
+        "11242-city"
+      ],
+      "official": "https://www.city.hidaka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%97%A5%E9%AB%98%E5%B8%82"
+    },
+    "11243": {
+      "name": "吉川市",
+      "kind": "city",
+      "officeIds": [
+        "11243-city"
+      ],
+      "official": "https://www.city.yoshikawa.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%90%89%E5%B7%9D%E5%B8%82"
+    },
+    "11245": {
+      "name": "ふじみ野市",
+      "kind": "city",
+      "officeIds": [
+        "11245-city"
+      ],
+      "official": "https://www.city.fujimino.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%B5%E3%81%98%E3%81%BF%E9%87%8E%E5%B8%82"
+    },
+    "11246": {
+      "name": "白岡市",
+      "kind": "city",
+      "officeIds": [
+        "11246-city"
+      ],
+      "official": "https://www.city.shiraoka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%99%BD%E5%B2%A1%E5%B8%82"
+    },
+    "11301": {
+      "name": "伊奈町",
+      "kind": "town",
+      "officeIds": [
+        "11301-town"
+      ],
+      "official": "https://www.town.saitama-ina.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E4%BC%8A%E5%A5%88%E7%94%BA"
+    },
+    "11324": {
+      "name": "三芳町",
+      "kind": "town",
+      "officeIds": [
+        "11324-town"
+      ],
+      "official": "https://www.town.saitama-miyoshi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E4%B8%89%E8%8A%B3%E7%94%BA"
+    },
+    "11326": {
+      "name": "毛呂山町",
+      "kind": "town",
+      "officeIds": [
+        "11326-town"
+      ],
+      "official": "https://www.town.moroyama.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%AF%9B%E5%91%82%E5%B1%B1%E7%94%BA"
+    },
+    "11327": {
+      "name": "越生町",
+      "kind": "town",
+      "officeIds": [
+        "11327-town"
+      ],
+      "official": "https://www.town.ogose.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E8%B6%8A%E7%94%9F%E7%94%BA"
+    },
+    "11341": {
+      "name": "滑川町",
+      "kind": "town",
+      "officeIds": [
+        "11341-town"
+      ],
+      "official": "https://www.town.namegawa.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%BB%91%E5%B7%9D%E7%94%BA"
+    },
+    "11342": {
+      "name": "嵐山町",
+      "kind": "town",
+      "officeIds": [
+        "11342-town"
+      ],
+      "official": "https://www.town.ranzan.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B5%90%E5%B1%B1%E7%94%BA"
+    },
+    "11343": {
+      "name": "小川町",
+      "kind": "town",
+      "officeIds": [
+        "11343-town"
+      ],
+      "official": "https://www.town.ogawa.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B0%8F%E5%B7%9D%E7%94%BA"
+    },
+    "11346": {
+      "name": "川島町",
+      "kind": "town",
+      "officeIds": [
+        "11346-town"
+      ],
+      "official": "https://www.town.kawajima.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B7%9D%E5%B3%B6%E7%94%BA"
+    },
+    "11347": {
+      "name": "吉見町",
+      "kind": "town",
+      "officeIds": [
+        "11347-town"
+      ],
+      "official": "https://www.town.yoshimi.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%90%89%E8%A6%8B%E7%94%BA"
+    },
+    "11348": {
+      "name": "鳩山町",
+      "kind": "town",
+      "officeIds": [
+        "11348-town"
+      ],
+      "official": "https://www.town.hatoyama.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E9%B3%A9%E5%B1%B1%E7%94%BA"
+    },
+    "11349": {
+      "name": "ときがわ町",
+      "kind": "town",
+      "officeIds": [
+        "11349-town"
+      ],
+      "official": "https://www.town.tokigawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E3%81%A8%E3%81%8D%E3%81%8C%E3%82%8F%E7%94%BA"
+    },
+    "11361": {
+      "name": "横瀬町",
+      "kind": "town",
+      "officeIds": [
+        "11361-town"
+      ],
+      "official": "https://www.town.yokoze.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%A8%AA%E7%80%AC%E7%94%BA"
+    },
+    "11362": {
+      "name": "皆野町",
+      "kind": "town",
+      "officeIds": [
+        "11362-town"
+      ],
+      "official": "https://www.town.minano.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%9A%86%E9%87%8E%E7%94%BA"
+    },
+    "11363": {
+      "name": "長瀞町",
+      "kind": "town",
+      "officeIds": [
+        "11363-town"
+      ],
+      "official": "https://www.town.nagatoro.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E9%95%B7%E7%80%9E%E7%94%BA"
+    },
+    "11365": {
+      "name": "小鹿野町",
+      "kind": "town",
+      "officeIds": [
+        "11365-town"
+      ],
+      "official": "https://www.town.ogano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B0%8F%E9%B9%BF%E9%87%8E%E7%94%BA"
+    },
+    "11369": {
+      "name": "東秩父村",
+      "kind": "village",
+      "officeIds": [
+        "11369-village"
+      ],
+      "official": "https://www.vill.higashichichibu.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%9D%B1%E7%A7%A9%E7%88%B6%E6%9D%91"
+    },
+    "11381": {
+      "name": "美里町",
+      "kind": "town",
+      "officeIds": [
+        "11381-town"
+      ],
+      "official": "https://www.town.saitama-misato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%BE%8E%E9%87%8C%E7%94%BA"
+    },
+    "11383": {
+      "name": "神川町",
+      "kind": "town",
+      "officeIds": [
+        "11383-town"
+      ],
+      "official": "https://www.town.kamikawa.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E7%A5%9E%E5%B7%9D%E7%94%BA"
+    },
+    "11385": {
+      "name": "上里町",
+      "kind": "town",
+      "officeIds": [
+        "11385-town"
+      ],
+      "official": "https://www.town.kamisato.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E4%B8%8A%E9%87%8C%E7%94%BA"
+    },
+    "11408": {
+      "name": "寄居町",
+      "kind": "town",
+      "officeIds": [
+        "11408-town"
+      ],
+      "official": "https://www.town.yorii.saitama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%AF%84%E5%B1%85%E7%94%BA"
+    },
+    "11442": {
+      "name": "宮代町",
+      "kind": "town",
+      "officeIds": [
+        "11442-town"
+      ],
+      "official": "https://www.town.miyashiro.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%AE%AE%E4%BB%A3%E7%94%BA"
+    },
+    "11464": {
+      "name": "杉戸町",
+      "kind": "town",
+      "officeIds": [
+        "11464-town"
+      ],
+      "official": "https://www.town.sugito.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%9D%89%E6%88%B8%E7%94%BA"
+    },
+    "11465": {
+      "name": "松伏町",
+      "kind": "town",
+      "officeIds": [
+        "11465-town"
+      ],
+      "official": "https://www.town.matsubushi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%9D%BE%E4%BC%8F%E7%94%BA"
+    }
+  },
+  "offices": {
+    "11100-city": {
+      "name": "さいたま市役所",
+      "status": "verified",
+      "postalCode": "330-9588",
+      "address": "埼玉県さいたま市浦和区常盤6-4-4"
+    },
+    "11101-ward": {
+      "name": "さいたま市西区役所",
+      "status": "verified",
+      "postalCode": "331-8587",
+      "address": "埼玉県さいたま市西区西大宮3-4-2"
+    },
+    "11102-ward": {
+      "name": "さいたま市北区役所",
+      "status": "verified",
+      "postalCode": "331-8586",
+      "address": "埼玉県さいたま市北区宮原町1-852-1"
+    },
+    "11103-ward": {
+      "name": "さいたま市大宮区役所",
+      "status": "verified",
+      "postalCode": "330-8501",
+      "address": "埼玉県さいたま市大宮区吉敷町1-124-1"
+    },
+    "11104-ward": {
+      "name": "さいたま市見沼区役所",
+      "status": "verified",
+      "postalCode": "337-8586",
+      "address": "埼玉県さいたま市見沼区堀崎町12-36"
+    },
+    "11105-ward": {
+      "name": "さいたま市中央区役所",
+      "status": "verified",
+      "postalCode": "338-8686",
+      "address": "埼玉県さいたま市中央区下落合5-7-10"
+    },
+    "11106-ward": {
+      "name": "さいたま市桜区役所",
+      "status": "verified",
+      "postalCode": "338-8586",
+      "address": "埼玉県さいたま市桜区道場4-3-1"
+    },
+    "11107-ward": {
+      "name": "さいたま市浦和区役所",
+      "status": "verified",
+      "postalCode": "330-9586",
+      "address": "埼玉県さいたま市浦和区常盤6-4-4"
+    },
+    "11108-ward": {
+      "name": "さいたま市南区役所",
+      "status": "verified",
+      "postalCode": "336-8586",
+      "address": "埼玉県さいたま市南区別所7-20-1"
+    },
+    "11109-ward": {
+      "name": "さいたま市緑区役所",
+      "status": "verified",
+      "postalCode": "336-8587",
+      "address": "埼玉県さいたま市緑区大字中尾975-1"
+    },
+    "11110-ward": {
+      "name": "さいたま市岩槻区役所",
+      "status": "verified",
+      "postalCode": "339-8585",
+      "address": "埼玉県さいたま市岩槻区本町3-2-5"
+    },
+    "11201-city": {
+      "name": "川越市役所",
+      "status": "verified",
+      "postalCode": "350-8601",
+      "address": "埼玉県川越市元町1-3-1"
+    },
+    "11202-city": {
+      "name": "熊谷市役所",
+      "status": "verified",
+      "postalCode": "360-8601",
+      "address": "埼玉県熊谷市宮町2-47-1"
+    },
+    "11203-city": {
+      "name": "川口市役所",
+      "status": "verified",
+      "postalCode": "332-8601",
+      "address": "埼玉県川口市青木2-1-1"
+    },
+    "11206-city": {
+      "name": "行田市役所",
+      "status": "verified",
+      "postalCode": "361-8601",
+      "address": "埼玉県行田市本丸2-5"
+    },
+    "11207-city": {
+      "name": "秩父市役所",
+      "status": "verified",
+      "postalCode": "368-8686",
+      "address": "埼玉県秩父市熊木町8-15"
+    },
+    "11208-city": {
+      "name": "所沢市役所",
+      "status": "verified",
+      "postalCode": "359-8501",
+      "address": "埼玉県所沢市並木1-1-1"
+    },
+    "11209-city": {
+      "name": "飯能市役所",
+      "status": "verified",
+      "postalCode": "357-8501",
+      "address": "埼玉県飯能市大字双柳1-1"
+    },
+    "11210-city": {
+      "name": "加須市役所",
+      "status": "verified",
+      "postalCode": "347-8501",
+      "address": "埼玉県加須市三俣2-1-1"
+    },
+    "11211-city": {
+      "name": "本庄市役所",
+      "status": "verified",
+      "postalCode": "367-8501",
+      "address": "埼玉県本庄市本庄3-5-3"
+    },
+    "11212-city": {
+      "name": "東松山市役所",
+      "status": "verified",
+      "postalCode": "355-8601",
+      "address": "埼玉県東松山市松葉町1-1-58"
+    },
+    "11214-city": {
+      "name": "春日部市役所",
+      "status": "verified",
+      "postalCode": "344-8577",
+      "address": "埼玉県春日部市中央7-2-1"
+    },
+    "11215-city": {
+      "name": "狭山市役所",
+      "status": "verified",
+      "postalCode": "350-1380",
+      "address": "埼玉県狭山市入間川1-23-5"
+    },
+    "11216-city": {
+      "name": "羽生市役所",
+      "status": "verified",
+      "postalCode": "348-8601",
+      "address": "埼玉県羽生市東6-15"
+    },
+    "11217-city": {
+      "name": "鴻巣市役所",
+      "status": "verified",
+      "postalCode": "365-8601",
+      "address": "埼玉県鴻巣市中央1-1"
+    },
+    "11218-city": {
+      "name": "深谷市役所",
+      "status": "verified",
+      "postalCode": "366-8501",
+      "address": "埼玉県深谷市仲町11-1"
+    },
+    "11219-city": {
+      "name": "上尾市役所",
+      "status": "verified",
+      "postalCode": "362-8501",
+      "address": "埼玉県上尾市本町3-1-1"
+    },
+    "11221-city": {
+      "name": "草加市役所",
+      "status": "verified",
+      "postalCode": "340-8550",
+      "address": "埼玉県草加市高砂1-1-1"
+    },
+    "11222-city": {
+      "name": "越谷市役所",
+      "status": "verified",
+      "postalCode": "343-8501",
+      "address": "埼玉県越谷市越ヶ谷4-2-1"
+    },
+    "11223-city": {
+      "name": "蕨市役所",
+      "status": "verified",
+      "postalCode": "335-8501",
+      "address": "埼玉県蕨市中央5-14-15"
+    },
+    "11224-city": {
+      "name": "戸田市役所",
+      "status": "verified",
+      "postalCode": "335-8588",
+      "address": "埼玉県戸田市上戸田1-18-1"
+    },
+    "11225-city": {
+      "name": "入間市役所",
+      "status": "verified",
+      "postalCode": "358-8511",
+      "address": "埼玉県入間市豊岡1-16-1"
+    },
+    "11227-city": {
+      "name": "朝霞市役所",
+      "status": "verified",
+      "postalCode": "351-8501",
+      "address": "埼玉県朝霞市本町1-1-1"
+    },
+    "11228-city": {
+      "name": "志木市役所",
+      "status": "verified",
+      "postalCode": "353-8501",
+      "address": "埼玉県志木市中宗岡1-1-1"
+    },
+    "11229-city": {
+      "name": "和光市役所",
+      "status": "verified",
+      "postalCode": "351-0192",
+      "address": "埼玉県和光市広沢1-5"
+    },
+    "11230-city": {
+      "name": "新座市役所",
+      "status": "verified",
+      "postalCode": "352-8623",
+      "address": "埼玉県新座市野火止1-1-1"
+    },
+    "11231-city": {
+      "name": "桶川市役所",
+      "status": "verified",
+      "postalCode": "363-8501",
+      "address": "埼玉県桶川市泉1-3-28"
+    },
+    "11232-city": {
+      "name": "久喜市役所",
+      "status": "verified",
+      "postalCode": "346-8501",
+      "address": "埼玉県久喜市大字下早見85-3"
+    },
+    "11233-city": {
+      "name": "北本市役所",
+      "status": "verified",
+      "postalCode": "364-8633",
+      "address": "埼玉県北本市本町1-111"
+    },
+    "11234-city": {
+      "name": "八潮市役所",
+      "status": "verified",
+      "postalCode": "340-8588",
+      "address": "埼玉県八潮市中央1-2-1"
+    },
+    "11235-city": {
+      "name": "富士見市役所",
+      "status": "verified",
+      "postalCode": "354-8511",
+      "address": "埼玉県富士見市大字鶴馬1800-1"
+    },
+    "11237-city": {
+      "name": "三郷市役所",
+      "status": "verified",
+      "postalCode": "341-8501",
+      "address": "埼玉県三郷市花和田648-1"
+    },
+    "11238-city": {
+      "name": "蓮田市役所",
+      "status": "verified",
+      "postalCode": "349-0193",
+      "address": "埼玉県蓮田市大字黒浜2799-1"
+    },
+    "11239-city": {
+      "name": "坂戸市役所",
+      "status": "verified",
+      "postalCode": "350-0292",
+      "address": "埼玉県坂戸市千代田1-1-1"
+    },
+    "11240-city": {
+      "name": "幸手市役所",
+      "status": "verified",
+      "postalCode": "340-0192",
+      "address": "埼玉県幸手市東4-6-8"
+    },
+    "11241-city": {
+      "name": "鶴ヶ島市役所",
+      "status": "verified",
+      "postalCode": "350-2292",
+      "address": "埼玉県鶴ヶ島市大字三ツ木16-1"
+    },
+    "11242-city": {
+      "name": "日高市役所",
+      "status": "verified",
+      "postalCode": "350-1292",
+      "address": "埼玉県日高市大字南平沢1020"
+    },
+    "11243-city": {
+      "name": "吉川市役所",
+      "status": "verified",
+      "postalCode": "342-8501",
+      "address": "埼玉県吉川市きよみ野1-1"
+    },
+    "11245-city": {
+      "name": "ふじみ野市役所",
+      "status": "verified",
+      "postalCode": "356-8501",
+      "address": "埼玉県ふじみ野市福岡1-1-1"
+    },
+    "11246-city": {
+      "name": "白岡市役所",
+      "status": "verified",
+      "postalCode": "349-0292",
+      "address": "埼玉県白岡市千駄野432"
+    },
+    "11301-town": {
+      "name": "伊奈町役場",
+      "status": "verified",
+      "postalCode": "362-8517",
+      "address": "埼玉県北足立郡伊奈町中央4-355"
+    },
+    "11324-town": {
+      "name": "三芳町役場",
+      "status": "verified",
+      "postalCode": "354-8555",
+      "address": "埼玉県入間郡三芳町大字藤久保1100-1"
+    },
+    "11326-town": {
+      "name": "毛呂山町役場",
+      "status": "verified",
+      "postalCode": "350-0493",
+      "address": "埼玉県入間郡毛呂山町中央2-1"
+    },
+    "11327-town": {
+      "name": "越生町役場",
+      "status": "verified",
+      "postalCode": "350-0494",
+      "address": "埼玉県入間郡越生町大字越生900-2"
+    },
+    "11341-town": {
+      "name": "滑川町役場",
+      "status": "verified",
+      "postalCode": "355-8585",
+      "address": "埼玉県比企郡滑川町大字福田750-1"
+    },
+    "11342-town": {
+      "name": "嵐山町役場",
+      "status": "verified",
+      "postalCode": "355-0211",
+      "address": "埼玉県比企郡嵐山町大字杉山1030-1"
+    },
+    "11343-town": {
+      "name": "小川町役場",
+      "status": "verified",
+      "postalCode": "355-0392",
+      "address": "埼玉県比企郡小川町大字大塚55"
+    },
+    "11346-town": {
+      "name": "川島町役場",
+      "status": "verified",
+      "postalCode": "350-0192",
+      "address": "埼玉県比企郡川島町大字下八ツ林870-1"
+    },
+    "11347-town": {
+      "name": "吉見町役場",
+      "status": "verified",
+      "postalCode": "355-0192",
+      "address": "埼玉県比企郡吉見町大字下細谷411"
+    },
+    "11348-town": {
+      "name": "鳩山町役場",
+      "status": "verified",
+      "postalCode": "350-0392",
+      "address": "埼玉県比企郡鳩山町大字大豆戸184-16"
+    },
+    "11349-town": {
+      "name": "ときがわ町役場",
+      "status": "verified",
+      "postalCode": "355-0395",
+      "address": "埼玉県比企郡ときがわ町大字玉川2490"
+    },
+    "11361-town": {
+      "name": "横瀬町役場",
+      "status": "verified",
+      "postalCode": "368-0072",
+      "address": "埼玉県秩父郡横瀬町大字横瀬4545"
+    },
+    "11362-town": {
+      "name": "皆野町役場",
+      "status": "verified",
+      "postalCode": "369-1492",
+      "address": "埼玉県秩父郡皆野町大字皆野1420-1"
+    },
+    "11363-town": {
+      "name": "長瀞町役場",
+      "status": "verified",
+      "postalCode": "369-1392",
+      "address": "埼玉県秩父郡長瀞町大字本野上1035-1"
+    },
+    "11365-town": {
+      "name": "小鹿野町役場",
+      "status": "verified",
+      "postalCode": "368-0192",
+      "address": "埼玉県秩父郡小鹿野町小鹿野89"
+    },
+    "11369-village": {
+      "name": "東秩父村役場",
+      "status": "verified",
+      "postalCode": "355-0393",
+      "address": "埼玉県秩父郡東秩父村大字御堂634"
+    },
+    "11381-town": {
+      "name": "美里町役場",
+      "status": "verified",
+      "postalCode": "367-0194",
+      "address": "埼玉県児玉郡美里町大字木部323-1"
+    },
+    "11383-town": {
+      "name": "神川町役場",
+      "status": "verified",
+      "postalCode": "367-0292",
+      "address": "埼玉県児玉郡神川町大字植竹909"
+    },
+    "11385-town": {
+      "name": "上里町役場",
+      "status": "verified",
+      "postalCode": "369-0392",
+      "address": "埼玉県児玉郡上里町大字七本木5518"
+    },
+    "11408-town": {
+      "name": "寄居町役場",
+      "status": "verified",
+      "postalCode": "369-1292",
+      "address": "埼玉県大里郡寄居町大字寄居1180-1"
+    },
+    "11442-town": {
+      "name": "宮代町役場",
+      "status": "verified",
+      "postalCode": "345-8504",
+      "address": "埼玉県南埼玉郡宮代町笠原1-4-1"
+    },
+    "11464-town": {
+      "name": "杉戸町役場",
+      "status": "verified",
+      "postalCode": "345-8502",
+      "address": "埼玉県北葛飾郡杉戸町清地2-9-29"
+    },
+    "11465-town": {
+      "name": "松伏町役場",
+      "status": "verified",
+      "postalCode": "343-0192",
+      "address": "埼玉県北葛飾郡松伏町大字松伏2424"
+    }
+  }
+}
