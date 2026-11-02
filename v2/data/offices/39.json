@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "39",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/shikoku/cms_16014186.html",
+    "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html",
+    "https://www.pref.kochi.lg.jp/doc/shozaichi-2/file_contents/file_2025612411502_1.pdf"
+  ],
+  "regions": {
+    "39201": {
+      "name": "高知市",
+      "kind": "city",
+      "officeIds": [
+        "39201-city"
+      ],
+      "official": "https://www.city.kochi.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E9%AB%98%E7%9F%A5%E5%B8%82"
+    },
+    "39202": {
+      "name": "室戸市",
+      "kind": "city",
+      "officeIds": [
+        "39202-city"
+      ],
+      "official": "https://www.city.muroto.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%AE%A4%E6%88%B8%E5%B8%82"
+    },
+    "39203": {
+      "name": "安芸市",
+      "kind": "city",
+      "officeIds": [
+        "39203-city"
+      ],
+      "official": "https://www.city.aki.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%AE%89%E8%8A%B8%E5%B8%82"
+    },
+    "39204": {
+      "name": "南国市",
+      "kind": "city",
+      "officeIds": [
+        "39204-city"
+      ],
+      "official": "https://www.city.nankoku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%8D%97%E5%9B%BD%E5%B8%82"
+    },
+    "39205": {
+      "name": "土佐市",
+      "kind": "city",
+      "officeIds": [
+        "39205-city"
+      ],
+      "official": "https://www.city.tosa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%9C%9F%E4%BD%90%E5%B8%82"
+    },
+    "39206": {
+      "name": "須崎市",
+      "kind": "city",
+      "officeIds": [
+        "39206-city"
+      ],
+      "official": "https://www.city.susaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E9%A0%88%E5%B4%8E%E5%B8%82"
+    },
+    "39208": {
+      "name": "宿毛市",
+      "kind": "city",
+      "officeIds": [
+        "39208-city"
+      ],
+      "official": "https://www.city.sukumo.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%AE%BF%E6%AF%9B%E5%B8%82"
+    },
+    "39209": {
+      "name": "土佐清水市",
+      "kind": "city",
+      "officeIds": [
+        "39209-city"
+      ],
+      "official": "https://www.city.tosashimizu.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%9C%9F%E4%BD%90%E6%B8%85%E6%B0%B4%E5%B8%82"
+    },
+    "39210": {
+      "name": "四万十市",
+      "kind": "city",
+      "officeIds": [
+        "39210-city"
+      ],
+      "official": "https://www.city.shimanto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%9B%9B%E4%B8%87%E5%8D%81%E5%B8%82"
+    },
+    "39211": {
+      "name": "香南市",
+      "kind": "city",
+      "officeIds": [
+        "39211-city"
+      ],
+      "official": "https://www.city.kochi-konan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E9%A6%99%E5%8D%97%E5%B8%82"
+    },
+    "39212": {
+      "name": "香美市",
+      "kind": "city",
+      "officeIds": [
+        "39212-city"
+      ],
+      "official": "https://www.city.kami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E9%A6%99%E7%BE%8E%E5%B8%82"
+    },
+    "39301": {
+      "name": "東洋町",
+      "kind": "town",
+      "officeIds": [
+        "39301-town"
+      ],
+      "official": "https://www.town.toyo.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E6%9D%B1%E6%B4%8B%E7%94%BA"
+    },
+    "39302": {
+      "name": "奈半利町",
+      "kind": "town",
+      "officeIds": [
+        "39302-town"
+      ],
+      "official": "https://www.town.nahari.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%A5%88%E5%8D%8A%E5%88%A9%E7%94%BA"
+    },
+    "39303": {
+      "name": "田野町",
+      "kind": "town",
+      "officeIds": [
+        "39303-town"
+      ],
+      "official": "https://tanocho.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E7%94%B0%E9%87%8E%E7%94%BA"
+    },
+    "39304": {
+      "name": "安田町",
+      "kind": "town",
+      "officeIds": [
+        "39304-town"
+      ],
+      "official": "https://www.town.yasuda.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%AE%89%E7%94%B0%E7%94%BA"
+    },
+    "39305": {
+      "name": "北川村",
+      "kind": "village",
+      "officeIds": [
+        "39305-village"
+      ],
+      "official": "https://www.kitagawamura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%8C%97%E5%B7%9D%E6%9D%91"
+    },
+    "39306": {
+      "name": "馬路村",
+      "kind": "village",
+      "officeIds": [
+        "39306-village"
+      ],
+      "official": "https://vill.umaji.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E9%A6%AC%E8%B7%AF%E6%9D%91"
+    },
+    "39307": {
+      "name": "芸西村",
+      "kind": "village",
+      "officeIds": [
+        "39307-village"
+      ],
+      "official": "https://www.vill.geisei.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E8%8A%B8%E8%A5%BF%E6%9D%91"
+    },
+    "39341": {
+      "name": "本山町",
+      "kind": "town",
+      "officeIds": [
+        "39341-town"
+      ],
+      "official": "https://www.town.motoyama.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E6%9C%AC%E5%B1%B1%E7%94%BA"
+    },
+    "39344": {
+      "name": "大豊町",
+      "kind": "town",
+      "officeIds": [
+        "39344-town"
+      ],
+      "official": "https://www.town.otoyo.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%A4%A7%E8%B1%8A%E7%94%BA"
+    },
+    "39363": {
+      "name": "土佐町",
+      "kind": "town",
+      "officeIds": [
+        "39363-town"
+      ],
+      "official": "https://www.town.tosa.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%9C%9F%E4%BD%90%E7%94%BA"
+    },
+    "39364": {
+      "name": "大川村",
+      "kind": "village",
+      "officeIds": [
+        "39364-village"
+      ],
+      "official": "https://www.vill.okawa.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%A4%A7%E5%B7%9D%E6%9D%91"
+    },
+    "39386": {
+      "name": "いの町",
+      "kind": "town",
+      "officeIds": [
+        "39386-town"
+      ],
+      "official": "https://www.town.ino.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E3%81%84%E3%81%AE%E7%94%BA"
+    },
+    "39387": {
+      "name": "仁淀川町",
+      "kind": "town",
+      "officeIds": [
+        "39387-town"
+      ],
+      "official": "https://www.town.niyodogawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E4%BB%81%E6%B7%80%E5%B7%9D%E7%94%BA"
+    },
+    "39401": {
+      "name": "中土佐町",
+      "kind": "town",
+      "officeIds": [
+        "39401-town"
+      ],
+      "official": "https://www.town.nakatosa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E4%B8%AD%E5%9C%9F%E4%BD%90%E7%94%BA"
+    },
+    "39402": {
+      "name": "佐川町",
+      "kind": "town",
+      "officeIds": [
+        "39402-town"
+      ],
+      "official": "https://www.town.sakawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E4%BD%90%E5%B7%9D%E7%94%BA"
+    },
+    "39403": {
+      "name": "越知町",
+      "kind": "town",
+      "officeIds": [
+        "39403-town"
+      ],
+      "official": "https://www.town.ochi.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E8%B6%8A%E7%9F%A5%E7%94%BA"
+    },
+    "39405": {
+      "name": "梼原町",
+      "kind": "town",
+      "officeIds": [
+        "39405-town"
+      ],
+      "official": "https://www.town.yusuhara.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E6%A2%BC%E5%8E%9F%E7%94%BA"
+    },
+    "39410": {
+      "name": "日高村",
+      "kind": "village",
+      "officeIds": [
+        "39410-village"
+      ],
+      "official": "https://www.vill.hidaka.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E6%97%A5%E9%AB%98%E6%9D%91"
+    },
+    "39411": {
+      "name": "津野町",
+      "kind": "town",
+      "officeIds": [
+        "39411-town"
+      ],
+      "official": "https://town.kochi-tsuno.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E6%B4%A5%E9%87%8E%E7%94%BA"
+    },
+    "39412": {
+      "name": "四万十町",
+      "kind": "town",
+      "officeIds": [
+        "39412-town"
+      ],
+      "official": "https://www.town.shimanto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%9B%9B%E4%B8%87%E5%8D%81%E7%94%BA"
+    },
+    "39424": {
+      "name": "大月町",
+      "kind": "town",
+      "officeIds": [
+        "39424-town"
+      ],
+      "official": "https://www.town.otsuki.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E5%A4%A7%E6%9C%88%E7%94%BA"
+    },
+    "39427": {
+      "name": "三原村",
+      "kind": "village",
+      "officeIds": [
+        "39427-village"
+      ],
+      "official": "https://www.vill.mihara.kochi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E4%B8%89%E5%8E%9F%E6%9D%91"
+    },
+    "39428": {
+      "name": "黒潮町",
+      "kind": "town",
+      "officeIds": [
+        "39428-town"
+      ],
+      "official": "https://www.town.kuroshio.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%AB%98%E7%9F%A5%E7%9C%8C%E9%BB%92%E6%BD%AE%E7%94%BA"
+    }
+  },
+  "offices": {
+    "39201-city": {
+      "name": "高知市役所",
+      "status": "verified",
+      "postalCode": "780-8571",
+      "address": "高知県高知市本町5-1-45"
+    },
+    "39202-city": {
+      "name": "室戸市役所",
+      "status": "verified",
+      "postalCode": "781-7185",
+      "address": "高知県室戸市浮津25-1"
+    },
+    "39203-city": {
+      "name": "安芸市役所",
+      "status": "verified",
+      "postalCode": "784-8501",
+      "address": "高知県安芸市土居82-1"
+    },
+    "39204-city": {
+      "name": "南国市役所",
+      "status": "verified",
+      "postalCode": "783-8501",
+      "address": "高知県南国市大そね甲2301"
+    },
+    "39205-city": {
+      "name": "土佐市役所",
+      "status": "verified",
+      "postalCode": "781-1192",
+      "address": "高知県土佐市高岡町甲2017-1"
+    },
+    "39206-city": {
+      "name": "須崎市役所",
+      "status": "verified",
+      "postalCode": "785-8601",
+      "address": "高知県須崎市山手町1-7"
+    },
+    "39208-city": {
+      "name": "宿毛市役所",
+      "status": "verified",
+      "postalCode": "788-8686",
+      "address": "高知県宿毛市希望ヶ丘１番地"
+    },
+    "39209-city": {
+      "name": "土佐清水市役所",
+      "status": "verified",
+      "postalCode": "787-0392",
+      "address": "高知県土佐清水市天神町11-2"
+    },
+    "39210-city": {
+      "name": "四万十市役所",
+      "status": "verified",
+      "postalCode": "787-8501",
+      "address": "高知県四万十市中村大橋通4-10"
+    },
+    "39211-city": {
+      "name": "香南市役所",
+      "status": "verified",
+      "postalCode": "781-5292",
+      "address": "高知県香南市野市町西野2706"
+    },
+    "39212-city": {
+      "name": "香美市役所",
+      "status": "verified",
+      "postalCode": "782-8501",
+      "address": "高知県香美市土佐山田町宝町1-2-1"
+    },
+    "39301-town": {
+      "name": "東洋町役場",
+      "status": "verified",
+      "postalCode": "781-7414",
+      "address": "高知県安芸郡東洋町大字生見758-3"
+    },
+    "39302-town": {
+      "name": "奈半利町役場",
+      "status": "verified",
+      "postalCode": "781-6402",
+      "address": "高知県安芸郡奈半利町乙1659-1"
+    },
+    "39303-town": {
+      "name": "田野町役場",
+      "status": "verified",
+      "postalCode": "781-6410",
+      "address": "高知県安芸郡田野町1828-5"
+    },
+    "39304-town": {
+      "name": "安田町役場",
+      "status": "verified",
+      "postalCode": "781-6421",
+      "address": "高知県安芸郡安田町大字安田1850"
+    },
+    "39305-village": {
+      "name": "北川村役場",
+      "status": "verified",
+      "postalCode": "781-6441",
+      "address": "高知県安芸郡北川村野友甲1530"
+    },
+    "39306-village": {
+      "name": "馬路村役場",
+      "status": "verified",
+      "postalCode": "781-6201",
+      "address": "高知県安芸郡馬路村馬路443"
+    },
+    "39307-village": {
+      "name": "芸西村役場",
+      "status": "verified",
+      "postalCode": "781-5792",
+      "address": "高知県安芸郡芸西村和食甲1262"
+    },
+    "39341-town": {
+      "name": "本山町役場",
+      "status": "verified",
+      "postalCode": "781-3692",
+      "address": "高知県長岡郡本山町本山636"
+    },
+    "39344-town": {
+      "name": "大豊町役場",
+      "status": "verified",
+      "postalCode": "789-0392",
+      "address": "高知県長岡郡大豊町津家1626"
+    },
+    "39363-town": {
+      "name": "土佐町役場",
+      "status": "verified",
+      "postalCode": "781-3492",
+      "address": "高知県土佐郡土佐町土居194"
+    },
+    "39364-village": {
+      "name": "大川村役場",
+      "status": "verified",
+      "postalCode": "781-3703",
+      "address": "高知県土佐郡大川村小松27-1"
+    },
+    "39386-town": {
+      "name": "いの町役場",
+      "status": "verified",
+      "postalCode": "781-2192",
+      "address": "高知県吾川郡いの町1700-1"
+    },
+    "39387-town": {
+      "name": "仁淀川町役場",
+      "status": "verified",
+      "postalCode": "781-1592",
+      "address": "高知県吾川郡仁淀川町大崎200"
+    },
+    "39401-town": {
+      "name": "中土佐町役場",
+      "status": "verified",
+      "postalCode": "789-1301",
+      "address": "高知県高岡郡中土佐町久礼6663-1"
+    },
+    "39402-town": {
+      "name": "佐川町役場",
+      "status": "verified",
+      "postalCode": "789-1292",
+      "address": "高知県高岡郡佐川町甲1650-2"
+    },
+    "39403-town": {
+      "name": "越知町役場",
+      "status": "verified",
+      "postalCode": "781-1301",
+      "address": "高知県高岡郡越知町越知甲1970"
+    },
+    "39405-town": {
+      "name": "梼原町役場",
+      "status": "verified",
+      "postalCode": "785-0695",
+      "address": "高知県高岡郡梼原町梼原1444-1"
+    },
+    "39410-village": {
+      "name": "日高村役場",
+      "status": "verified",
+      "postalCode": "781-2194",
+      "address": "高知県高岡郡日高村本郷61-1"
+    },
+    "39411-town": {
+      "name": "津野町役場",
+      "status": "verified",
+      "postalCode": "785-0201",
+      "address": "高知県高岡郡津野町永野225-1"
+    },
+    "39412-town": {
+      "name": "四万十町役場",
+      "status": "verified",
+      "postalCode": "786-8501",
+      "address": "高知県高岡郡四万十町琴平町16-17"
+    },
+    "39424-town": {
+      "name": "大月町役場",
+      "status": "verified",
+      "postalCode": "788-0302",
+      "address": "高知県幡多郡大月町弘見2230"
+    },
+    "39427-village": {
+      "name": "三原村役場",
+      "status": "verified",
+      "postalCode": "787-0892",
+      "address": "高知県幡多郡三原村来栖野346"
+    },
+    "39428-town": {
+      "name": "黒潮町役場",
+      "status": "verified",
+      "postalCode": "789-1992",
+      "address": "高知県幡多郡黒潮町入野5893"
+    }
+  }
+}
