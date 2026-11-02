@@ -42,16 +42,19 @@ const KussoonV2MunicipalityQuiz=quizContext.window.KussoonV2MunicipalityQuiz;
 const bridgeContext={window:{}};
 vm.runInNewContext(await readFile('v2/shared/reading-bridge.js','utf8'),bridgeContext);
 const KussoonV2ReadingBridge=bridgeContext.window.KussoonV2ReadingBridge;
+const officeContext={window:{}};
+vm.runInNewContext(await readFile('v2/common/js/office-directory.js','utf8'),officeContext);
+const KussoonOfficeDirectory=officeContext.window.KussoonOfficeDirectory;
 const KussoonV2MapViewport={init({onZoomChange}){onZoomChange(1);return {reset(){onZoomChange(1);},zoomIn(){},zoomOut(){}};}};
 const fakeFetch=async url=>{
  const file=resolve(root,'v2/national',url);
  // Prevent a URL from escaping the project checkout.
- assert(file.startsWith(join(root,'v2/data/national/')),url);
- const content=await readFile(file,'utf8');
+ assert(file.startsWith(join(root,'v2/data/national/'))||file.startsWith(join(root,'v2/data/offices/')),url);
+ const content=await readFile(file.split('?')[0],'utf8');
  return {ok:true,status:200,text:async()=>content,json:async()=>JSON.parse(content)};
 };
 const script=page.split('<script>').at(-1).split('</script>')[0];
-const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,KussoonV2ReadingBridge,KussoonV2EstablishedLabelAdapter,KussoonV2MunicipalityQuiz,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
+const context={document,Option,KussoonV2MunicipalRenderer,KussoonV2MapViewport,KussoonV2PlaceLabels,KussoonV2ReadingBridge,KussoonV2EstablishedLabelAdapter,KussoonV2MunicipalityQuiz,KussoonOfficeDirectory,fetch:fakeFetch,performance:{now:()=>1000},TextEncoder,console};
 vm.runInNewContext(script,context);
 async function until(predicate,label){
  for(let i=0;i<200;i++){
@@ -75,6 +78,14 @@ async function selectPref(code,count){
 }
 await selectPref('16',15); // Regression: do not reject prefectures under 20 municipalities.
 await selectPref('25',19); // Regression: load a newly extracted combined-prefecture slice.
+node('region').value='25201';callbacks.get('region:change')();
+assert.equal(node('officePopup').hidden,false,'verified office popup should open');
+assert(node('popupName').textContent.includes('大津市'),'office popup must show municipality');
+assert(node('popupActions').children.length>0,'verified office actions should render');
+callbacks.get('popupClose:click')();
+assert.equal(node('officePopup').hidden,true,'close only the popup');
+assert.equal(node('region').value,'25201','popup close must retain selection');
+node('region').value='';callbacks.get('region:change')();
 await selectPref('22',39); // Actual 2026 Shizuoka source and official city-ward readings.
 const aoi= node('region').children.find(o=>o.value==='22101');
 assert(aoi&&aoi.textContent.includes('静岡市葵区'),'Shizuoka Aoi must have full city-ward name in dropdown');
@@ -86,6 +97,7 @@ assert(node('searchResults').children.some(b=>b.textContent.includes('静岡市�
 assert(!node('quizStart').disabled,'quiz must be available after prefecture loads');
 callbacks.get('quizStart:click')();
 assert(node('quizPlay').hidden===false,'quiz must be displayed');
+assert.equal(node('officePopup').hidden,true,'quiz must not leak municipality names via popup');
 assert(node('quizChoices').children.length===4,'quiz has four alternatives');
 assert(node('region').disabled===true,'menu should not reveal correct place during quiz');
 assert(lastRender?.selected,'correct area should be highlighted in quiz');
