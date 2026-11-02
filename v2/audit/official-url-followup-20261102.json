@@ -5,9 +5,9 @@
   "sourceAudit": "v2/audit/official-url-reachability-20261102.json and v2/audit/official-url-reachability-20261102-summary.json",
   "counts": {
     "total": 61,
-    "A": 39,
-    "B": 12,
-    "C": 10
+    "A": 41,
+    "B": 11,
+    "C": 9
   },
   "method": "各登録URLを実ブラウザで1回ずつ開いて可視ページ・遷移先を確認。読み込みできない場合は自治体の公式情報・公式ページの確認を行った。HTTP/TLS/ネットワークエラーのみで廃止と断定していない。",
   "results": [
@@ -875,14 +875,14 @@
       "municipality": "御宿町",
       "municipalityCode": "12443",
       "registeredUrl": "https://www.town.onjuku.chiba.jp/",
-      "browserResult": "自治体公式ページが「緊急メンテナンス実施中」と表示。町運営サイトの一時メンテナンス告知のため保留。 調査候補: https://town.onjuku.chiba.jp/ (wwwなし候補; 登録先が自治体のメンテナンス表示のため保留)",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "ユーザー提供の実ブラウザ画面で御宿町公式の緊急メンテナンス案内を確認。サイトの公式自治体名・公式案内を表示しているためA。",
+      "finalUrl": "https://www.town.onjuku.chiba.jp/",
+      "classification": "A",
       "evidence": [
-        "PR #188の通信検査: HTTP 503 (server_error): Service Unavailable"
+        "ユーザー提供の実ブラウザ画面で自治体公式ページを確認。動画・メンテナンス告知の有無は公式性確認の妨げにならない。"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "sourceUrl": "https://www.town.onjuku.chiba.jp/",
       "candidateUrl": "https://town.onjuku.chiba.jp/",
       "machineCheck": {
         "status": 503,
@@ -890,11 +890,11 @@
         "error": "Service Unavailable"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "実ブラウザ画面で自治体公式サイトおよび自治体名・公式情報を確認できたためA。",
       "evidenceUrls": [
-        "https://www.town.onjuku.chiba.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+        "https://www.town.onjuku.chiba.jp/"
+      ],
+      "lastCheckedAt": "2026-11-03 JST (user-provided screenshot/video)"
     },
     {
       "prefecture": "青森県",
@@ -952,11 +952,11 @@
       "municipality": "利尻町",
       "municipalityCode": "01518",
       "registeredUrl": "https://www.town.rishiri.hokkaido.jp/",
-      "browserResult": "ユーザー提供のSafariスクリーンショットで利尻町公式サイトを表示。URL欄は rishiri-town.jp、ページ内に「利尻町 / RISHIRI TOWN」の公式ロゴと町のお知らせを確認。登録URL https://www.town.rishiri.hokkaido.jp/ からの転送はスクリーンショットでは確認できないため、現行公式URLの変更候補としてB判定。",
+      "browserResult": "ユーザー提供の実ブラウザ画面で利尻町公式ロゴと町のお知らせを確認。サイトの公式自治体名・公式案内を表示しているためA。",
       "finalUrl": "https://rishiri-town.jp/",
-      "classification": "B",
+      "classification": "A",
       "evidence": [
-        "ユーザー提供の実ブラウザ画面で、利尻町公式ロゴ・町のお知らせと現行ホスト rishiri-town.jp を確認。登録URLからの転送有無は未確認。"
+        "ユーザー提供の実ブラウザ画面で自治体公式ページを確認。動画・メンテナンス告知の有無は公式性確認の妨げにならない。"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
       "sourceUrl": "https://rishiri-town.jp/",
@@ -966,12 +966,11 @@
         "error": "TimeoutError: The read operation timed out"
       },
       "browserChecked": true,
-      "classificationReason": "登録URLとは異なる現行ホストで自治体公式ページを実ブラウザ画面から確認できた。旧登録URLからの転送は確認できないため、URL変更候補B。",
+      "classificationReason": "実ブラウザ画面で自治体公式サイトおよび自治体名・公式情報を確認できたためA。",
       "evidenceUrls": [
-        "https://rishiri-town.jp/",
-        "https://www.town.rishiri.hokkaido.jp/"
+        "https://rishiri-town.jp/"
       ],
-      "lastCheckedAt": "2026-11-03 JST (user-provided Safari screenshot)"
+      "lastCheckedAt": "2026-11-03 JST (user-provided screenshot/video)"
     },
     {
       "prefecture": "北海道",
@@ -2212,6 +2211,36 @@
           "result": "ユーザー提供スクリーンショット／画面録画で浦幌町公式サイトのロゴ・町名と町の情報を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。",
           "evidenceUrls": [
             "https://www.urahoro.jp/"
+          ]
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
+      "scope": "利尻町と御宿町の追加スクリーンショットも公式ページ確認としてAに訂正。",
+      "results": [
+        {
+          "municipalityCode": "01518",
+          "municipality": "利尻町",
+          "previousClassification": "B",
+          "classification": "A",
+          "registeredUrl": "https://www.town.rishiri.hokkaido.jp/",
+          "observedUrl": "https://rishiri-town.jp/",
+          "result": "ユーザー提供の実ブラウザ画面で利尻町公式ロゴと町のお知らせを確認。サイトの公式自治体名・公式案内を表示しているためA。",
+          "evidenceUrls": [
+            "https://rishiri-town.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "12443",
+          "municipality": "御宿町",
+          "previousClassification": "C",
+          "classification": "A",
+          "registeredUrl": "https://www.town.onjuku.chiba.jp/",
+          "observedUrl": "https://www.town.onjuku.chiba.jp/",
+          "result": "ユーザー提供の実ブラウザ画面で御宿町公式の緊急メンテナンス案内を確認。サイトの公式自治体名・公式案内を表示しているためA。",
+          "evidenceUrls": [
+            "https://www.town.onjuku.chiba.jp/"
           ]
         }
       ]
