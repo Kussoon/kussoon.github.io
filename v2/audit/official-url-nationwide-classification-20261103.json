@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 76,
+      "A": 111,
       "B": 0,
       "C": 1,
-      "unclassified": 1835
+      "unclassified": 1800
     },
-    "completedRegionReviews": 77,
+    "completedRegionReviews": 112,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1832,
+    "unreviewedOtherRegions": 1797,
     "totalCheck": 1912,
-    "reconciliationNote": "PR #205の既存監査を保持。直近8件のうち5件A・3件未判定。既存Cを再評価し、蘭越町・御宿町・指宿市は最新の公式ページ内容を確認、日向市は現行公式ドメイン修正後に停止案内を確認しA。寿都町はC。新規の都道府県単位監査は鳥取県19区域を県公式リンク集と既存HTTP監査で確認（全件A）。残る未監査は既存61件内の3件とその他1,832件。"
+    "reconciliationNote": "既存監査および直近8件の判定を保持。蘭越町・御宿町・指宿市は現行公式ページを確認、日向市は現行公式ドメイン修正後に公式停止案内を確認しA。寿都町はC。都道府県単位の公式リンク集と既存HTTP監査により鳥取県19件、島根県18件（知夫村は未判定維持）、香川県17件を確認し全54件をAとした。未判定は既存61件内3件とその他1,797件。"
   },
   "records": [
     {
@@ -24975,14 +24975,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.matsue.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.matsue.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.matsue.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -24992,14 +25002,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hamada.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hamada.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.hamada.shimane.jp/www/index.html",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25009,14 +25029,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.izumo.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.izumo.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.izumo.shimane.jp/www/index.html",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25026,14 +25056,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.masuda.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.masuda.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.masuda.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25043,14 +25083,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.oda.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.oda.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.oda.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25060,14 +25110,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yasugi.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yasugi.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.yasugi.shimane.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25077,14 +25137,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.gotsu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.gotsu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.gotsu.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25094,14 +25164,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.unnan.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.unnan.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.unnan.shimane.jp/unnan/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25111,14 +25191,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.okuizumo.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.okuizumo.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.okuizumo.shimane.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25128,14 +25218,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.iinan.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.iinan.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.iinan.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25145,14 +25245,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shimane-kawamoto.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shimane-kawamoto.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.shimane-kawamoto.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25162,14 +25272,26 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shimane-misato.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://gov.town.shimane-misato.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html",
+        "https://gov.town.shimane-misato.lg.jp/"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://gov.town.shimane-misato.lg.jp/",
+        "redirectsToOtherHost": true
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory",
+        "current_official_redirect_target_review"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式リンク集が登録URLを掲載。登録URLから同じ町ドメインの行政公式ホームページ（gov.town.shimane-misato.lg.jp）へリダイレクトし、現行の2026年10月お知らせ・町役場情報を確認。別サブドメインへの移転を公的リンクおよび現行公式ページで照合できたためA。"
     },
     {
       "prefectureCode": "32",
@@ -25179,14 +25301,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ohnan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ohnan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.ohnan.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25196,14 +25328,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tsuwano.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tsuwano.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.tsuwano.lg.jp/www/index.html",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25213,14 +25355,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yoshika.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yoshika.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.yoshika.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25230,14 +25382,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ama.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ama.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.ama.shimane.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25247,14 +25409,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nishinoshima.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nishinoshima.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.nishinoshima.shimane.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "32",
@@ -25269,7 +25441,8 @@
       "verifiedOfficialUrl": "https://www.vill.chibu.lg.jp/",
       "evidenceUrls": [
         "https://www.vill.chibu.lg.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.pref.shimane.lg.jp/link01.html"
       ],
       "connectivity": {
         "status": null,
@@ -25278,10 +25451,12 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "followup_user_or_browser_evidence"
+        "followup_user_or_browser_evidence",
+        "prefecture_official_link_directory",
+        "existing_2026_11_02_http_reachability"
       ],
       "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "ユーザー提供スクリーンショット／画面録画で知夫村公式サイトの村役場情報を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。"
+      "notes": "ユーザー提供スクリーンショット／画面録画で知夫村公式サイトの村役場情報を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。 島根県公式リンク集にも同一登録URLが掲載されているが、既存HTTP監査は通信失敗で、現在のサイト利用可能性を確認できず未判定を維持。"
     },
     {
       "prefectureCode": "32",
@@ -25291,14 +25466,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.okinoshima.shimane.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.okinoshima.shimane.jp/",
+      "evidenceUrls": [
+        "https://www.pref.shimane.lg.jp/link01.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.okinoshima.shimane.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "島根県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "33",
@@ -27113,14 +27298,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.takamatsu.kagawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.takamatsu.kagawa.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.takamatsu.kagawa.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27130,14 +27325,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.marugame.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.marugame.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.marugame.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27147,14 +27352,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.sakaide.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sakaide.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.sakaide.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27164,14 +27379,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.zentsuji.kagawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.zentsuji.kagawa.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.zentsuji.kagawa.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27181,14 +27406,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kanonji.kagawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kanonji.kagawa.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.kanonji.kagawa.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27198,14 +27433,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.sanuki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sanuki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.sanuki.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27215,14 +27460,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.higashikagawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.higashikagawa.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.higashikagawa.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27232,14 +27487,24 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.mitoyo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.mitoyo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.mitoyo.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27249,14 +27514,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tonosho.kagawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tonosho.kagawa.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.tonosho.kagawa.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27266,14 +27541,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shodoshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shodoshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.shodoshima.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27283,14 +27568,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.miki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.miki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.miki.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27300,14 +27595,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.naoshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.naoshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.naoshima.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27317,14 +27622,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.utazu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.utazu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.utazu.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27334,14 +27649,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ayagawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ayagawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.ayagawa.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27351,14 +27676,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kotohira.kagawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kotohira.kagawa.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.kotohira.kagawa.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27368,14 +27703,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tadotsu.kagawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tadotsu.kagawa.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.tadotsu.kagawa.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "37",
@@ -27385,14 +27730,24 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.manno.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
-      "connectivity": null,
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.manno.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kagawa.lg.jp/kocho/shokai/profile/w3cz95150312151105.html"
+      ],
+      "connectivity": {
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.town.manno.lg.jp/",
+        "redirectsToOtherHost": false
+      },
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "香川県公式市町村リンク集が当該自治体の登録ドメインへリンク。既存HTTP監査は200、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "38",
