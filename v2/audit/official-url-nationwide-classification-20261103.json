@@ -24232,7 +24232,8 @@
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
         "https://www.town.yura.lg.jp/",
         "https://www.pref.wakayama.lg.jp/prefg/130500/",
-        "https://www.wcsk.jp/rink"
+        "https://www.wcsk.jp/rink",
+        "https://kussoon.com/v2/national/official-2026-nationwide-pilot.html"
       ],
       "connectivity": {
         "status": null,
@@ -24242,10 +24243,11 @@
       "method": [
         "existing_2026_11_02_followup",
         "current_official_page_search",
-        "official_prefecture_link_check"
+        "official_prefecture_link_check",
+        "published_map_search_and_popup_link_check"
       ],
       "checkedAt": "2026-11-03 JST",
-      "notes": "PR #208で登録URLを現行公式ドメイン https://www.town.yura.lg.jp/ に修正しmainへマージ。現行町公式ページを確認。"
+      "notes": "PR #208で登録URLを現行公式ドメイン https://www.town.yura.lg.jp/ に修正しmainへマージ。公開地図で自治体コード30383を検索し、由良町の庁舎吹き出しの公式サイトボタンが修正後のURLへ遷移することを確認。遷移先表示はクラウドブラウザの中継接続タイムアウトで未確認。"
     },
     {
       "prefectureCode": "30",
