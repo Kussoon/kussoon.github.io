@@ -1,0 +1,1169 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "20",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+    "https://www.j-lis.go.jp/spd/code-address/tyuubu/cms_14114182.html",
+    "https://www.cheering-nagano.jp/shinko/link.html"
+  ],
+  "regions": {
+    "20201": {
+      "name": "長野市",
+      "kind": "city",
+      "officeIds": [
+        "20201-city"
+      ],
+      "official": "https://www.city.nagano.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%95%B7%E9%87%8E%E5%B8%82"
+    },
+    "20202": {
+      "name": "松本市",
+      "kind": "city",
+      "officeIds": [
+        "20202-city"
+      ],
+      "official": "https://www.city.matsumoto.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9D%BE%E6%9C%AC%E5%B8%82"
+    },
+    "20203": {
+      "name": "上田市",
+      "kind": "city",
+      "officeIds": [
+        "20203-city"
+      ],
+      "official": "https://www.city.ueda.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%8A%E7%94%B0%E5%B8%82"
+    },
+    "20204": {
+      "name": "岡谷市",
+      "kind": "city",
+      "officeIds": [
+        "20204-city"
+      ],
+      "official": "https://www.city.okaya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B2%A1%E8%B0%B7%E5%B8%82"
+    },
+    "20205": {
+      "name": "飯田市",
+      "kind": "city",
+      "officeIds": [
+        "20205-city"
+      ],
+      "official": "https://www.city.iida.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A3%AF%E7%94%B0%E5%B8%82"
+    },
+    "20206": {
+      "name": "諏訪市",
+      "kind": "city",
+      "officeIds": [
+        "20206-city"
+      ],
+      "official": "https://www.city.suwa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E8%AB%8F%E8%A8%AA%E5%B8%82"
+    },
+    "20207": {
+      "name": "須坂市",
+      "kind": "city",
+      "officeIds": [
+        "20207-city"
+      ],
+      "official": "https://www.city.suzaka.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A0%88%E5%9D%82%E5%B8%82"
+    },
+    "20208": {
+      "name": "小諸市",
+      "kind": "city",
+      "officeIds": [
+        "20208-city"
+      ],
+      "official": "https://www.city.komoro.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B0%8F%E8%AB%B8%E5%B8%82"
+    },
+    "20209": {
+      "name": "伊那市",
+      "kind": "city",
+      "officeIds": [
+        "20209-city"
+      ],
+      "official": "https://www.inacity.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%BC%8A%E9%82%A3%E5%B8%82"
+    },
+    "20210": {
+      "name": "駒ヶ根市",
+      "kind": "city",
+      "officeIds": [
+        "20210-city"
+      ],
+      "official": "https://www.city.komagane.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A7%92%E3%83%B6%E6%A0%B9%E5%B8%82"
+    },
+    "20211": {
+      "name": "中野市",
+      "kind": "city",
+      "officeIds": [
+        "20211-city"
+      ],
+      "official": "https://www.city.nakano.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%AD%E9%87%8E%E5%B8%82"
+    },
+    "20212": {
+      "name": "大町市",
+      "kind": "city",
+      "officeIds": [
+        "20212-city"
+      ],
+      "official": "https://www.city.omachi.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%A4%A7%E7%94%BA%E5%B8%82"
+    },
+    "20213": {
+      "name": "飯山市",
+      "kind": "city",
+      "officeIds": [
+        "20213-city"
+      ],
+      "official": "https://www.city.iiyama.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A3%AF%E5%B1%B1%E5%B8%82"
+    },
+    "20214": {
+      "name": "茅野市",
+      "kind": "city",
+      "officeIds": [
+        "20214-city"
+      ],
+      "official": "https://www.city.chino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E8%8C%85%E9%87%8E%E5%B8%82"
+    },
+    "20215": {
+      "name": "塩尻市",
+      "kind": "city",
+      "officeIds": [
+        "20215-city"
+      ],
+      "official": "https://www.city.shiojiri.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%A1%A9%E5%B0%BB%E5%B8%82"
+    },
+    "20217": {
+      "name": "佐久市",
+      "kind": "city",
+      "officeIds": [
+        "20217-city"
+      ],
+      "official": "https://www.city.saku.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%BD%90%E4%B9%85%E5%B8%82"
+    },
+    "20218": {
+      "name": "千曲市",
+      "kind": "city",
+      "officeIds": [
+        "20218-city"
+      ],
+      "official": "https://www.city.chikuma.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%8D%83%E6%9B%B2%E5%B8%82"
+    },
+    "20219": {
+      "name": "東御市",
+      "kind": "city",
+      "officeIds": [
+        "20219-city"
+      ],
+      "official": "https://www.city.tomi.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9D%B1%E5%BE%A1%E5%B8%82"
+    },
+    "20220": {
+      "name": "安曇野市",
+      "kind": "city",
+      "officeIds": [
+        "20220-city"
+      ],
+      "official": "https://www.city.azumino.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%AE%89%E6%9B%87%E9%87%8E%E5%B8%82"
+    },
+    "20303": {
+      "name": "小海町",
+      "kind": "town",
+      "officeIds": [
+        "20303-town"
+      ],
+      "official": "https://www.koumi-town.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B0%8F%E6%B5%B7%E7%94%BA"
+    },
+    "20304": {
+      "name": "川上村",
+      "kind": "village",
+      "officeIds": [
+        "20304-village"
+      ],
+      "official": "https://www.vill.kawakami.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B7%9D%E4%B8%8A%E6%9D%91"
+    },
+    "20305": {
+      "name": "南牧村",
+      "kind": "village",
+      "officeIds": [
+        "20305-village"
+      ],
+      "official": "https://www.minamimakimura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%8D%97%E7%89%A7%E6%9D%91"
+    },
+    "20306": {
+      "name": "南相木村",
+      "kind": "village",
+      "officeIds": [
+        "20306-village"
+      ],
+      "official": "https://www.minamiaiki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%8D%97%E7%9B%B8%E6%9C%A8%E6%9D%91"
+    },
+    "20307": {
+      "name": "北相木村",
+      "kind": "village",
+      "officeIds": [
+        "20307-village"
+      ],
+      "official": "https://vill.kitaaiki.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%8C%97%E7%9B%B8%E6%9C%A8%E6%9D%91"
+    },
+    "20309": {
+      "name": "佐久穂町",
+      "kind": "town",
+      "officeIds": [
+        "20309-town"
+      ],
+      "official": "https://www.town.sakuho.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%BD%90%E4%B9%85%E7%A9%82%E7%94%BA"
+    },
+    "20321": {
+      "name": "軽井沢町",
+      "kind": "town",
+      "officeIds": [
+        "20321-town"
+      ],
+      "official": "https://www.town.karuizawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E8%BB%BD%E4%BA%95%E6%B2%A2%E7%94%BA"
+    },
+    "20323": {
+      "name": "御代田町",
+      "kind": "town",
+      "officeIds": [
+        "20323-town"
+      ],
+      "official": "https://www.town.miyota.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%BE%A1%E4%BB%A3%E7%94%B0%E7%94%BA"
+    },
+    "20324": {
+      "name": "立科町",
+      "kind": "town",
+      "officeIds": [
+        "20324-town"
+      ],
+      "official": "https://www.town.tateshina.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E7%AB%8B%E7%A7%91%E7%94%BA"
+    },
+    "20349": {
+      "name": "青木村",
+      "kind": "village",
+      "officeIds": [
+        "20349-village"
+      ],
+      "official": "https://www.vill.aoki.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%9D%92%E6%9C%A8%E6%9D%91"
+    },
+    "20350": {
+      "name": "長和町",
+      "kind": "town",
+      "officeIds": [
+        "20350-town"
+      ],
+      "official": "https://town.nagawa.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%95%B7%E5%92%8C%E7%94%BA"
+    },
+    "20361": {
+      "name": "下諏訪町",
+      "kind": "town",
+      "officeIds": [
+        "20361-town"
+      ],
+      "official": "https://www.town.shimosuwa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%8B%E8%AB%8F%E8%A8%AA%E7%94%BA"
+    },
+    "20362": {
+      "name": "富士見町",
+      "kind": "town",
+      "officeIds": [
+        "20362-town"
+      ],
+      "official": "https://www.town.fujimi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%AF%8C%E5%A3%AB%E8%A6%8B%E7%94%BA"
+    },
+    "20363": {
+      "name": "原村",
+      "kind": "village",
+      "officeIds": [
+        "20363-village"
+      ],
+      "official": "https://www.vill.hara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%8E%9F%E6%9D%91"
+    },
+    "20382": {
+      "name": "辰野町",
+      "kind": "town",
+      "officeIds": [
+        "20382-town"
+      ],
+      "official": "https://www.town.tatsuno.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E8%BE%B0%E9%87%8E%E7%94%BA"
+    },
+    "20383": {
+      "name": "箕輪町",
+      "kind": "town",
+      "officeIds": [
+        "20383-town"
+      ],
+      "official": "https://www.town.minowa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E7%AE%95%E8%BC%AA%E7%94%BA"
+    },
+    "20384": {
+      "name": "飯島町",
+      "kind": "town",
+      "officeIds": [
+        "20384-town"
+      ],
+      "official": "https://www.town.iijima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A3%AF%E5%B3%B6%E7%94%BA"
+    },
+    "20385": {
+      "name": "南箕輪村",
+      "kind": "village",
+      "officeIds": [
+        "20385-village"
+      ],
+      "official": "https://www.vill.minamiminowa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%8D%97%E7%AE%95%E8%BC%AA%E6%9D%91"
+    },
+    "20386": {
+      "name": "中川村",
+      "kind": "village",
+      "officeIds": [
+        "20386-village"
+      ],
+      "official": "https://www.vill.nakagawa.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%AD%E5%B7%9D%E6%9D%91"
+    },
+    "20388": {
+      "name": "宮田村",
+      "kind": "village",
+      "officeIds": [
+        "20388-village"
+      ],
+      "official": "https://www.vill.miyada.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%AE%AE%E7%94%B0%E6%9D%91"
+    },
+    "20402": {
+      "name": "松川町",
+      "kind": "town",
+      "officeIds": [
+        "20402-town"
+      ],
+      "official": "https://www.town.matsukawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9D%BE%E5%B7%9D%E7%94%BA"
+    },
+    "20403": {
+      "name": "高森町",
+      "kind": "town",
+      "officeIds": [
+        "20403-town"
+      ],
+      "official": "https://www.town.nagano-takamori.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%AB%98%E6%A3%AE%E7%94%BA"
+    },
+    "20404": {
+      "name": "阿南町",
+      "kind": "town",
+      "officeIds": [
+        "20404-town"
+      ],
+      "official": "https://www.town.anan.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%98%BF%E5%8D%97%E7%94%BA"
+    },
+    "20407": {
+      "name": "阿智村",
+      "kind": "village",
+      "officeIds": [
+        "20407-village"
+      ],
+      "official": "https://www.vill.achi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%98%BF%E6%99%BA%E6%9D%91"
+    },
+    "20409": {
+      "name": "平谷村",
+      "kind": "village",
+      "officeIds": [
+        "20409-village"
+      ],
+      "official": "https://hirayamura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B9%B3%E8%B0%B7%E6%9D%91"
+    },
+    "20410": {
+      "name": "根羽村",
+      "kind": "village",
+      "officeIds": [
+        "20410-village"
+      ],
+      "official": "https://nebamura.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%A0%B9%E7%BE%BD%E6%9D%91"
+    },
+    "20411": {
+      "name": "下條村",
+      "kind": "village",
+      "officeIds": [
+        "20411-village"
+      ],
+      "official": "https://www.vill-shimojo.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%8B%E6%A2%9D%E6%9D%91"
+    },
+    "20412": {
+      "name": "売木村",
+      "kind": "village",
+      "officeIds": [
+        "20412-village"
+      ],
+      "official": "https://www.urugi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%A3%B2%E6%9C%A8%E6%9D%91"
+    },
+    "20413": {
+      "name": "天龍村",
+      "kind": "village",
+      "officeIds": [
+        "20413-village"
+      ],
+      "official": "https://www.vill-tenryu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%A4%A9%E9%BE%8D%E6%9D%91"
+    },
+    "20414": {
+      "name": "泰阜村",
+      "kind": "village",
+      "officeIds": [
+        "20414-village"
+      ],
+      "official": "https://vill.yasuoka.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%B3%B0%E9%98%9C%E6%9D%91"
+    },
+    "20415": {
+      "name": "喬木村",
+      "kind": "village",
+      "officeIds": [
+        "20415-village"
+      ],
+      "official": "https://www.vill.takagi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%96%AC%E6%9C%A8%E6%9D%91"
+    },
+    "20416": {
+      "name": "豊丘村",
+      "kind": "village",
+      "officeIds": [
+        "20416-village"
+      ],
+      "official": "https://www.vill.nagano-toyooka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E8%B1%8A%E4%B8%98%E6%9D%91"
+    },
+    "20417": {
+      "name": "大鹿村",
+      "kind": "village",
+      "officeIds": [
+        "20417-village"
+      ],
+      "official": "https://www.vill.ooshika.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%A4%A7%E9%B9%BF%E6%9D%91"
+    },
+    "20422": {
+      "name": "上松町",
+      "kind": "town",
+      "officeIds": [
+        "20422-town"
+      ],
+      "official": "https://www.town.agematsu.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%B8%8A%E6%9D%BE%E7%94%BA"
+    },
+    "20423": {
+      "name": "南木曽町",
+      "kind": "town",
+      "officeIds": [
+        "20423-town"
+      ],
+      "official": "https://www.town.nagiso.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%8D%97%E6%9C%A8%E6%9B%BD%E7%94%BA"
+    },
+    "20425": {
+      "name": "木祖村",
+      "kind": "village",
+      "officeIds": [
+        "20425-village"
+      ],
+      "official": "https://www.vill.kiso.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9C%A8%E7%A5%96%E6%9D%91"
+    },
+    "20429": {
+      "name": "王滝村",
+      "kind": "village",
+      "officeIds": [
+        "20429-village"
+      ],
+      "official": "https://www.vill.otaki.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E7%8E%8B%E6%BB%9D%E6%9D%91"
+    },
+    "20430": {
+      "name": "大桑村",
+      "kind": "village",
+      "officeIds": [
+        "20430-village"
+      ],
+      "official": "https://www.vill.okuwa.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%A4%A7%E6%A1%91%E6%9D%91"
+    },
+    "20432": {
+      "name": "木曽町",
+      "kind": "town",
+      "officeIds": [
+        "20432-town"
+      ],
+      "official": "https://www.town-kiso.com/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9C%A8%E6%9B%BD%E7%94%BA"
+    },
+    "20446": {
+      "name": "麻績村",
+      "kind": "village",
+      "officeIds": [
+        "20446-village"
+      ],
+      "official": "https://www.vill.omi.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%BA%BB%E7%B8%BE%E6%9D%91"
+    },
+    "20448": {
+      "name": "生坂村",
+      "kind": "village",
+      "officeIds": [
+        "20448-village"
+      ],
+      "official": "https://www.village.ikusaka.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E7%94%9F%E5%9D%82%E6%9D%91"
+    },
+    "20450": {
+      "name": "山形村",
+      "kind": "village",
+      "officeIds": [
+        "20450-village"
+      ],
+      "official": "https://www.vill.yamagata.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B1%B1%E5%BD%A2%E6%9D%91"
+    },
+    "20451": {
+      "name": "朝日村",
+      "kind": "village",
+      "officeIds": [
+        "20451-village"
+      ],
+      "official": "https://www.vill.asahi.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9C%9D%E6%97%A5%E6%9D%91"
+    },
+    "20452": {
+      "name": "筑北村",
+      "kind": "village",
+      "officeIds": [
+        "20452-village"
+      ],
+      "official": "https://www.vill.chikuhoku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E7%AD%91%E5%8C%97%E6%9D%91"
+    },
+    "20481": {
+      "name": "池田町",
+      "kind": "town",
+      "officeIds": [
+        "20481-town"
+      ],
+      "official": "https://www.ikedamachi.net/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%B1%A0%E7%94%B0%E7%94%BA"
+    },
+    "20482": {
+      "name": "松川村",
+      "kind": "village",
+      "officeIds": [
+        "20482-village"
+      ],
+      "official": "https://www.vill.matsukawa.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9D%BE%E5%B7%9D%E6%9D%91"
+    },
+    "20485": {
+      "name": "白馬村",
+      "kind": "village",
+      "officeIds": [
+        "20485-village"
+      ],
+      "official": "https://www.vill.hakuba.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E7%99%BD%E9%A6%AC%E6%9D%91"
+    },
+    "20486": {
+      "name": "小谷村",
+      "kind": "village",
+      "officeIds": [
+        "20486-village"
+      ],
+      "official": "https://www.vill.otari.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B0%8F%E8%B0%B7%E6%9D%91"
+    },
+    "20521": {
+      "name": "坂城町",
+      "kind": "town",
+      "officeIds": [
+        "20521-town"
+      ],
+      "official": "https://www.town.sakaki.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%9D%82%E5%9F%8E%E7%94%BA"
+    },
+    "20541": {
+      "name": "小布施町",
+      "kind": "town",
+      "officeIds": [
+        "20541-town"
+      ],
+      "official": "https://www.town.obuse.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B0%8F%E5%B8%83%E6%96%BD%E7%94%BA"
+    },
+    "20543": {
+      "name": "高山村",
+      "kind": "village",
+      "officeIds": [
+        "20543-village"
+      ],
+      "official": "https://www.vill.takayama.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%AB%98%E5%B1%B1%E6%9D%91"
+    },
+    "20561": {
+      "name": "山ノ内町",
+      "kind": "town",
+      "officeIds": [
+        "20561-town"
+      ],
+      "official": "https://www.town.yamanouchi.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B1%B1%E3%83%8E%E5%86%85%E7%94%BA"
+    },
+    "20562": {
+      "name": "木島平村",
+      "kind": "village",
+      "officeIds": [
+        "20562-village"
+      ],
+      "official": "https://www.vill.kijimadaira.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%9C%A8%E5%B3%B6%E5%B9%B3%E6%9D%91"
+    },
+    "20563": {
+      "name": "野沢温泉村",
+      "kind": "village",
+      "officeIds": [
+        "20563-village"
+      ],
+      "official": "https://www.vill.nozawaonsen.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%87%8E%E6%B2%A2%E6%B8%A9%E6%B3%89%E6%9D%91"
+    },
+    "20583": {
+      "name": "信濃町",
+      "kind": "town",
+      "officeIds": [
+        "20583-town"
+      ],
+      "official": "https://www.town.shinano.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E4%BF%A1%E6%BF%83%E7%94%BA"
+    },
+    "20588": {
+      "name": "小川村",
+      "kind": "village",
+      "officeIds": [
+        "20588-village"
+      ],
+      "official": "https://www.vill.ogawa.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E5%B0%8F%E5%B7%9D%E6%9D%91"
+    },
+    "20590": {
+      "name": "飯綱町",
+      "kind": "town",
+      "officeIds": [
+        "20590-town"
+      ],
+      "official": "https://www.town.iizuna.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E9%A3%AF%E7%B6%B1%E7%94%BA"
+    },
+    "20602": {
+      "name": "栄村",
+      "kind": "village",
+      "officeIds": [
+        "20602-village"
+      ],
+      "official": "https://www.vill.sakae.nagano.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%95%B7%E9%87%8E%E7%9C%8C%E6%A0%84%E6%9D%91"
+    }
+  },
+  "offices": {
+    "20201-city": {
+      "name": "長野市役所",
+      "status": "verified",
+      "postalCode": "380-8512",
+      "address": "長野県長野市大字鶴賀緑町1613"
+    },
+    "20202-city": {
+      "name": "松本市役所",
+      "status": "verified",
+      "postalCode": "390-8620",
+      "address": "長野県松本市丸の内3-7"
+    },
+    "20203-city": {
+      "name": "上田市役所",
+      "status": "verified",
+      "postalCode": "386-8601",
+      "address": "長野県上田市大手1-11-16"
+    },
+    "20204-city": {
+      "name": "岡谷市役所",
+      "status": "verified",
+      "postalCode": "394-8510",
+      "address": "長野県岡谷市幸町8-1"
+    },
+    "20205-city": {
+      "name": "飯田市役所",
+      "status": "verified",
+      "postalCode": "395-8501",
+      "address": "長野県飯田市大久保町2534"
+    },
+    "20206-city": {
+      "name": "諏訪市役所",
+      "status": "verified",
+      "postalCode": "392-8511",
+      "address": "長野県諏訪市高島1-22-30"
+    },
+    "20207-city": {
+      "name": "須坂市役所",
+      "status": "verified",
+      "postalCode": "382-8511",
+      "address": "長野県須坂市大字須坂1528-1"
+    },
+    "20208-city": {
+      "name": "小諸市役所",
+      "status": "verified",
+      "postalCode": "384-8501",
+      "address": "長野県小諸市相生町3-3-3"
+    },
+    "20209-city": {
+      "name": "伊那市役所",
+      "status": "verified",
+      "postalCode": "396-8617",
+      "address": "長野県伊那市下新田3050"
+    },
+    "20210-city": {
+      "name": "駒ヶ根市役所",
+      "status": "verified",
+      "postalCode": "399-4192",
+      "address": "長野県駒ヶ根市赤須町20-1"
+    },
+    "20211-city": {
+      "name": "中野市役所",
+      "status": "verified",
+      "postalCode": "383-8614",
+      "address": "長野県中野市三好町1-3-19"
+    },
+    "20212-city": {
+      "name": "大町市役所",
+      "status": "verified",
+      "postalCode": "398-8601",
+      "address": "長野県大町市大町3887"
+    },
+    "20213-city": {
+      "name": "飯山市役所",
+      "status": "verified",
+      "postalCode": "389-2292",
+      "address": "長野県飯山市大字飯山1110-1"
+    },
+    "20214-city": {
+      "name": "茅野市役所",
+      "status": "verified",
+      "postalCode": "391-8501",
+      "address": "長野県茅野市塚原2-6-1"
+    },
+    "20215-city": {
+      "name": "塩尻市役所",
+      "status": "verified",
+      "postalCode": "399-0786",
+      "address": "長野県塩尻市大門7番町3-3"
+    },
+    "20217-city": {
+      "name": "佐久市役所",
+      "status": "verified",
+      "postalCode": "385-8501",
+      "address": "長野県佐久市中込3056"
+    },
+    "20218-city": {
+      "name": "千曲市役所",
+      "status": "verified",
+      "postalCode": "387-8511",
+      "address": "長野県千曲市杭瀬下2丁目1番地"
+    },
+    "20219-city": {
+      "name": "東御市役所",
+      "status": "verified",
+      "postalCode": "389-0592",
+      "address": "長野県東御市県281-2"
+    },
+    "20220-city": {
+      "name": "安曇野市役所",
+      "status": "verified",
+      "postalCode": "399-8281",
+      "address": "長野県安曇野市豊科6000"
+    },
+    "20303-town": {
+      "name": "小海町役場",
+      "status": "verified",
+      "postalCode": "384-1192",
+      "address": "長野県南佐久郡小海町大字豊里57-1"
+    },
+    "20304-village": {
+      "name": "川上村役場",
+      "status": "verified",
+      "postalCode": "384-1405",
+      "address": "長野県南佐久郡川上村大字大深山525"
+    },
+    "20305-village": {
+      "name": "南牧村役場",
+      "status": "verified",
+      "postalCode": "384-1302",
+      "address": "長野県南佐久郡南牧村大字海ノ口1051"
+    },
+    "20306-village": {
+      "name": "南相木村役場",
+      "status": "verified",
+      "postalCode": "384-1211",
+      "address": "長野県南佐久郡南相木村3525-1"
+    },
+    "20307-village": {
+      "name": "北相木村役場",
+      "status": "verified",
+      "postalCode": "384-1201",
+      "address": "長野県南佐久郡北相木村2744"
+    },
+    "20309-town": {
+      "name": "佐久穂町役場",
+      "status": "verified",
+      "postalCode": "384-0697",
+      "address": "長野県南佐久郡佐久穂町大字高野町569"
+    },
+    "20321-town": {
+      "name": "軽井沢町役場",
+      "status": "verified",
+      "postalCode": "389-0192",
+      "address": "長野県北佐久郡軽井沢町大字長倉2381-1"
+    },
+    "20323-town": {
+      "name": "御代田町役場",
+      "status": "verified",
+      "postalCode": "389-0292",
+      "address": "長野県北佐久郡御代田町大字馬瀬口1794-6"
+    },
+    "20324-town": {
+      "name": "立科町役場",
+      "status": "verified",
+      "postalCode": "384-2305",
+      "address": "長野県北佐久郡立科町大字芦田2532"
+    },
+    "20349-village": {
+      "name": "青木村役場",
+      "status": "verified",
+      "postalCode": "386-1601",
+      "address": "長野県小県郡青木村大字田沢111"
+    },
+    "20350-town": {
+      "name": "長和町役場",
+      "status": "verified",
+      "postalCode": "386-0603",
+      "address": "長野県小県郡長和町古町4247-1"
+    },
+    "20361-town": {
+      "name": "下諏訪町役場",
+      "status": "verified",
+      "postalCode": "393-8501",
+      "address": "長野県諏訪郡下諏訪町4613-8"
+    },
+    "20362-town": {
+      "name": "富士見町役場",
+      "status": "verified",
+      "postalCode": "399-0292",
+      "address": "長野県諏訪郡富士見町落合10777"
+    },
+    "20363-village": {
+      "name": "原村役場",
+      "status": "verified",
+      "postalCode": "391-0192",
+      "address": "長野県諏訪郡原村6549-1"
+    },
+    "20382-town": {
+      "name": "辰野町役場",
+      "status": "verified",
+      "postalCode": "399-0493",
+      "address": "長野県上伊那郡辰野町中央1"
+    },
+    "20383-town": {
+      "name": "箕輪町役場",
+      "status": "verified",
+      "postalCode": "399-4695",
+      "address": "長野県上伊那郡箕輪町大字中箕輪10298"
+    },
+    "20384-town": {
+      "name": "飯島町役場",
+      "status": "verified",
+      "postalCode": "399-3797",
+      "address": "長野県上伊那郡飯島町飯島2537"
+    },
+    "20385-village": {
+      "name": "南箕輪村役場",
+      "status": "verified",
+      "postalCode": "399-4592",
+      "address": "長野県上伊那郡南箕輪村4825-1"
+    },
+    "20386-village": {
+      "name": "中川村役場",
+      "status": "verified",
+      "postalCode": "399-3892",
+      "address": "長野県上伊那郡中川村大草4045-1"
+    },
+    "20388-village": {
+      "name": "宮田村役場",
+      "status": "verified",
+      "postalCode": "399-4392",
+      "address": "長野県上伊那郡宮田村98"
+    },
+    "20402-town": {
+      "name": "松川町役場",
+      "status": "verified",
+      "postalCode": "399-3303",
+      "address": "長野県下伊那郡松川町元大島3823"
+    },
+    "20403-town": {
+      "name": "高森町役場",
+      "status": "verified",
+      "postalCode": "399-3193",
+      "address": "長野県下伊那郡高森町下市田2183-1"
+    },
+    "20404-town": {
+      "name": "阿南町役場",
+      "status": "verified",
+      "postalCode": "399-1511",
+      "address": "長野県下伊那郡阿南町東條58-1"
+    },
+    "20407-village": {
+      "name": "阿智村役場",
+      "status": "verified",
+      "postalCode": "395-0303",
+      "address": "長野県下伊那郡阿智村駒場483"
+    },
+    "20409-village": {
+      "name": "平谷村役場",
+      "status": "verified",
+      "postalCode": "395-0601",
+      "address": "長野県下伊那郡平谷村354"
+    },
+    "20410-village": {
+      "name": "根羽村役場",
+      "status": "verified",
+      "postalCode": "395-0701",
+      "address": "長野県下伊那郡根羽村2131-1"
+    },
+    "20411-village": {
+      "name": "下條村役場",
+      "status": "verified",
+      "postalCode": "399-2101",
+      "address": "長野県下伊那郡下條村睦沢8801-1"
+    },
+    "20412-village": {
+      "name": "売木村役場",
+      "status": "verified",
+      "postalCode": "399-1689",
+      "address": "長野県下伊那郡売木村968-1"
+    },
+    "20413-village": {
+      "name": "天龍村役場",
+      "status": "verified",
+      "postalCode": "399-1201",
+      "address": "長野県下伊那郡天龍村平岡878"
+    },
+    "20414-village": {
+      "name": "泰阜村役場",
+      "status": "verified",
+      "postalCode": "399-1895",
+      "address": "長野県下伊那郡泰阜村3236-1"
+    },
+    "20415-village": {
+      "name": "喬木村役場",
+      "status": "verified",
+      "postalCode": "395-1107",
+      "address": "長野県下伊那郡喬木村6664"
+    },
+    "20416-village": {
+      "name": "豊丘村役場",
+      "status": "verified",
+      "postalCode": "399-3295",
+      "address": "長野県下伊那郡豊丘村大字神稲3120"
+    },
+    "20417-village": {
+      "name": "大鹿村役場",
+      "status": "verified",
+      "postalCode": "399-3502",
+      "address": "長野県下伊那郡大鹿村大字大河原354"
+    },
+    "20422-town": {
+      "name": "上松町役場",
+      "status": "verified",
+      "postalCode": "399-5601",
+      "address": "長野県木曽郡上松町大字上松159番地4"
+    },
+    "20423-town": {
+      "name": "南木曽町役場",
+      "status": "verified",
+      "postalCode": "399-5301",
+      "address": "長野県木曽郡南木曽町大字読書3668-1"
+    },
+    "20425-village": {
+      "name": "木祖村役場",
+      "status": "verified",
+      "postalCode": "399-6201",
+      "address": "長野県木曽郡木祖村薮原1191-1"
+    },
+    "20429-village": {
+      "name": "王滝村役場",
+      "status": "verified",
+      "postalCode": "397-0201",
+      "address": "長野県木曽郡王滝村3623"
+    },
+    "20430-village": {
+      "name": "大桑村役場",
+      "status": "verified",
+      "postalCode": "399-5503",
+      "address": "長野県木曽郡大桑村大字長野880-1"
+    },
+    "20432-town": {
+      "name": "木曽町役場",
+      "status": "verified",
+      "postalCode": "397-8588",
+      "address": "長野県木曽郡木曽町福島2326-6"
+    },
+    "20446-village": {
+      "name": "麻績村役場",
+      "status": "verified",
+      "postalCode": "399-7701",
+      "address": "長野県東筑摩郡麻績村麻3837"
+    },
+    "20448-village": {
+      "name": "生坂村役場",
+      "status": "verified",
+      "postalCode": "399-7201",
+      "address": "長野県東筑摩郡生坂村5493-2"
+    },
+    "20450-village": {
+      "name": "山形村役場",
+      "status": "verified",
+      "postalCode": "390-1392",
+      "address": "長野県東筑摩郡山形村2030-1"
+    },
+    "20451-village": {
+      "name": "朝日村役場",
+      "status": "verified",
+      "postalCode": "390-1188",
+      "address": "長野県東筑摩郡朝日村大字古見1555-1"
+    },
+    "20452-village": {
+      "name": "筑北村役場",
+      "status": "verified",
+      "postalCode": "399-7501",
+      "address": "長野県東筑摩郡筑北村西条4195"
+    },
+    "20481-town": {
+      "name": "池田町役場",
+      "status": "verified",
+      "postalCode": "399-8696",
+      "address": "長野県北安曇郡池田町大字池田3203-6"
+    },
+    "20482-village": {
+      "name": "松川村役場",
+      "status": "verified",
+      "postalCode": "399-8501",
+      "address": "長野県北安曇郡松川村76-5"
+    },
+    "20485-village": {
+      "name": "白馬村役場",
+      "status": "verified",
+      "postalCode": "399-9393",
+      "address": "長野県北安曇郡白馬村大字北城7025"
+    },
+    "20486-village": {
+      "name": "小谷村役場",
+      "status": "verified",
+      "postalCode": "399-9494",
+      "address": "長野県北安曇郡小谷村大字中小谷丙131"
+    },
+    "20521-town": {
+      "name": "坂城町役場",
+      "status": "verified",
+      "postalCode": "389-0692",
+      "address": "長野県埴科郡坂城町大字坂城10050"
+    },
+    "20541-town": {
+      "name": "小布施町役場",
+      "status": "verified",
+      "postalCode": "381-0297",
+      "address": "長野県上高井郡小布施町大字小布施1491-2"
+    },
+    "20543-village": {
+      "name": "高山村役場",
+      "status": "verified",
+      "postalCode": "382-8510",
+      "address": "長野県上高井郡高山村大字高井4972"
+    },
+    "20561-town": {
+      "name": "山ノ内町役場",
+      "status": "verified",
+      "postalCode": "381-0498",
+      "address": "長野県下高井郡山ノ内町大字平穏3352-1"
+    },
+    "20562-village": {
+      "name": "木島平村役場",
+      "status": "verified",
+      "postalCode": "389-2392",
+      "address": "長野県下高井郡木島平村大字往郷914-6"
+    },
+    "20563-village": {
+      "name": "野沢温泉村役場",
+      "status": "verified",
+      "postalCode": "389-2592",
+      "address": "長野県下高井郡野沢温泉村大字豊郷9817"
+    },
+    "20583-town": {
+      "name": "信濃町役場",
+      "status": "verified",
+      "postalCode": "389-1392",
+      "address": "長野県上水内郡信濃町大字柏原428-2"
+    },
+    "20588-village": {
+      "name": "小川村役場",
+      "status": "verified",
+      "postalCode": "381-3302",
+      "address": "長野県上水内郡小川村大字高府8800-8"
+    },
+    "20590-town": {
+      "name": "飯綱町役場",
+      "status": "verified",
+      "postalCode": "389-1293",
+      "address": "長野県上水内郡飯綱町大字牟礼2795-1"
+    },
+    "20602-village": {
+      "name": "栄村役場",
+      "status": "verified",
+      "postalCode": "389-2792",
+      "address": "長野県下水内郡栄村大字北信3433"
+    }
+  }
+}
