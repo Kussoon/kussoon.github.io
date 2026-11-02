@@ -1,0 +1,283 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "44",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kyuusyuu/cms_16514187.html",
+    "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html"
+  ],
+  "regions": {
+    "44201": {
+      "name": "大分市",
+      "kind": "city",
+      "officeIds": [
+        "44201-city"
+      ],
+      "official": "https://www.city.oita.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E5%A4%A7%E5%88%86%E5%B8%82"
+    },
+    "44202": {
+      "name": "別府市",
+      "kind": "city",
+      "officeIds": [
+        "44202-city"
+      ],
+      "official": "https://www.city.beppu.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E5%88%A5%E5%BA%9C%E5%B8%82"
+    },
+    "44203": {
+      "name": "中津市",
+      "kind": "city",
+      "officeIds": [
+        "44203-city"
+      ],
+      "official": "https://www.city-nakatsu.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E4%B8%AD%E6%B4%A5%E5%B8%82"
+    },
+    "44204": {
+      "name": "日田市",
+      "kind": "city",
+      "officeIds": [
+        "44204-city"
+      ],
+      "official": "https://www.city.hita.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E6%97%A5%E7%94%B0%E5%B8%82"
+    },
+    "44205": {
+      "name": "佐伯市",
+      "kind": "city",
+      "officeIds": [
+        "44205-city"
+      ],
+      "official": "https://www.city.saiki.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E4%BD%90%E4%BC%AF%E5%B8%82"
+    },
+    "44206": {
+      "name": "臼杵市",
+      "kind": "city",
+      "officeIds": [
+        "44206-city"
+      ],
+      "official": "https://www.city.usuki.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E8%87%BC%E6%9D%B5%E5%B8%82"
+    },
+    "44207": {
+      "name": "津久見市",
+      "kind": "city",
+      "officeIds": [
+        "44207-city"
+      ],
+      "official": "https://www.city.tsukumi.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E6%B4%A5%E4%B9%85%E8%A6%8B%E5%B8%82"
+    },
+    "44208": {
+      "name": "竹田市",
+      "kind": "city",
+      "officeIds": [
+        "44208-city"
+      ],
+      "official": "https://www.city.taketa.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E7%AB%B9%E7%94%B0%E5%B8%82"
+    },
+    "44209": {
+      "name": "豊後高田市",
+      "kind": "city",
+      "officeIds": [
+        "44209-city"
+      ],
+      "official": "https://www.city.bungotakada.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E8%B1%8A%E5%BE%8C%E9%AB%98%E7%94%B0%E5%B8%82"
+    },
+    "44210": {
+      "name": "杵築市",
+      "kind": "city",
+      "officeIds": [
+        "44210-city"
+      ],
+      "official": "https://www.city.kitsuki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E6%9D%B5%E7%AF%89%E5%B8%82"
+    },
+    "44211": {
+      "name": "宇佐市",
+      "kind": "city",
+      "officeIds": [
+        "44211-city"
+      ],
+      "official": "https://www.city.usa.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E5%AE%87%E4%BD%90%E5%B8%82"
+    },
+    "44212": {
+      "name": "豊後大野市",
+      "kind": "city",
+      "officeIds": [
+        "44212-city"
+      ],
+      "official": "https://www.bungo-ohno.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E8%B1%8A%E5%BE%8C%E5%A4%A7%E9%87%8E%E5%B8%82"
+    },
+    "44213": {
+      "name": "由布市",
+      "kind": "city",
+      "officeIds": [
+        "44213-city"
+      ],
+      "official": "https://www.city.yufu.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E7%94%B1%E5%B8%83%E5%B8%82"
+    },
+    "44214": {
+      "name": "国東市",
+      "kind": "city",
+      "officeIds": [
+        "44214-city"
+      ],
+      "official": "https://www.city.kunisaki.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E5%9B%BD%E6%9D%B1%E5%B8%82"
+    },
+    "44322": {
+      "name": "姫島村",
+      "kind": "village",
+      "officeIds": [
+        "44322-village"
+      ],
+      "official": "https://www.himeshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E5%A7%AB%E5%B3%B6%E6%9D%91"
+    },
+    "44341": {
+      "name": "日出町",
+      "kind": "town",
+      "officeIds": [
+        "44341-town"
+      ],
+      "official": "https://www.town.hiji.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E6%97%A5%E5%87%BA%E7%94%BA"
+    },
+    "44461": {
+      "name": "九重町",
+      "kind": "town",
+      "officeIds": [
+        "44461-town"
+      ],
+      "official": "https://www.town.kokonoe.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E4%B9%9D%E9%87%8D%E7%94%BA"
+    },
+    "44462": {
+      "name": "玖珠町",
+      "kind": "town",
+      "officeIds": [
+        "44462-town"
+      ],
+      "official": "https://www.town.kusu.oita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%A4%A7%E5%88%86%E7%9C%8C%E7%8E%96%E7%8F%A0%E7%94%BA"
+    }
+  },
+  "offices": {
+    "44201-city": {
+      "name": "大分市役所",
+      "status": "verified",
+      "postalCode": "870-8504",
+      "address": "大分県大分市荷揚町2-31"
+    },
+    "44202-city": {
+      "name": "別府市役所",
+      "status": "verified",
+      "postalCode": "874-8511",
+      "address": "大分県別府市上野口町1-15"
+    },
+    "44203-city": {
+      "name": "中津市役所",
+      "status": "verified",
+      "postalCode": "871-8501",
+      "address": "大分県中津市豊田町14-3"
+    },
+    "44204-city": {
+      "name": "日田市役所",
+      "status": "verified",
+      "postalCode": "877-8601",
+      "address": "大分県日田市田島2-6-1"
+    },
+    "44205-city": {
+      "name": "佐伯市役所",
+      "status": "verified",
+      "postalCode": "876-8585",
+      "address": "大分県佐伯市中村南町1-1"
+    },
+    "44206-city": {
+      "name": "臼杵市役所",
+      "status": "verified",
+      "postalCode": "875-8501",
+      "address": "大分県臼杵市大字臼杵72-1"
+    },
+    "44207-city": {
+      "name": "津久見市役所",
+      "status": "verified",
+      "postalCode": "879-2435",
+      "address": "大分県津久見市宮本町20-15"
+    },
+    "44208-city": {
+      "name": "竹田市役所",
+      "status": "verified",
+      "postalCode": "878-8555",
+      "address": "大分県竹田市大字会々1650"
+    },
+    "44209-city": {
+      "name": "豊後高田市役所",
+      "status": "verified",
+      "postalCode": "879-0692",
+      "address": "大分県豊後高田市是永町39-3"
+    },
+    "44210-city": {
+      "name": "杵築市役所",
+      "status": "verified",
+      "postalCode": "873-0001",
+      "address": "大分県杵築市大字杵築377-1"
+    },
+    "44211-city": {
+      "name": "宇佐市役所",
+      "status": "verified",
+      "postalCode": "879-0492",
+      "address": "大分県宇佐市大字上田1030-1"
+    },
+    "44212-city": {
+      "name": "豊後大野市役所",
+      "status": "verified",
+      "postalCode": "879-7198",
+      "address": "大分県豊後大野市三重町市場1200"
+    },
+    "44213-city": {
+      "name": "由布市役所",
+      "status": "verified",
+      "postalCode": "879-5498",
+      "address": "大分県由布市庄内町柿原302"
+    },
+    "44214-city": {
+      "name": "国東市役所",
+      "status": "verified",
+      "postalCode": "873-0503",
+      "address": "大分県国東市国東町鶴川149"
+    },
+    "44322-village": {
+      "name": "姫島村役場",
+      "status": "verified",
+      "postalCode": "872-1501",
+      "address": "大分県東国東郡姫島村1630-1"
+    },
+    "44341-town": {
+      "name": "日出町役場",
+      "status": "verified",
+      "postalCode": "879-1592",
+      "address": "大分県速見郡日出町2974-1"
+    },
+    "44461-town": {
+      "name": "九重町役場",
+      "status": "verified",
+      "postalCode": "879-4895",
+      "address": "大分県玖珠郡九重町大字後野上8-1"
+    },
+    "44462-town": {
+      "name": "玖珠町役場",
+      "status": "verified",
+      "postalCode": "879-4492",
+      "address": "大分県玖珠郡玖珠町大字帆足268-5"
+    }
+  }
+}
