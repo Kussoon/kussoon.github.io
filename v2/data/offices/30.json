@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "30",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.wakayama.lg.jp/prefg/010600/02_gyosei/shichosonyakuba.html",
+    "https://www.j-lis.go.jp/spd/code-address/kinki/cms_15114183.html"
+  ],
+  "regions": {
+    "30201": {
+      "name": "和歌山市",
+      "kind": "city",
+      "officeIds": [
+        "30201-city"
+      ],
+      "official": "https://www.city.wakayama.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%92%8C%E6%AD%8C%E5%B1%B1%E5%B8%82"
+    },
+    "30202": {
+      "name": "海南市",
+      "kind": "city",
+      "officeIds": [
+        "30202-city"
+      ],
+      "official": "https://www.city.kainan.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%B5%B7%E5%8D%97%E5%B8%82"
+    },
+    "30203": {
+      "name": "橋本市",
+      "kind": "city",
+      "officeIds": [
+        "30203-city"
+      ],
+      "official": "https://www.city.hashimoto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%A9%8B%E6%9C%AC%E5%B8%82"
+    },
+    "30204": {
+      "name": "有田市",
+      "kind": "city",
+      "officeIds": [
+        "30204-city"
+      ],
+      "official": "https://www.city.arida.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%9C%89%E7%94%B0%E5%B8%82"
+    },
+    "30205": {
+      "name": "御坊市",
+      "kind": "city",
+      "officeIds": [
+        "30205-city"
+      ],
+      "official": "https://www.city.gobo.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%BE%A1%E5%9D%8A%E5%B8%82"
+    },
+    "30206": {
+      "name": "田辺市",
+      "kind": "city",
+      "officeIds": [
+        "30206-city"
+      ],
+      "official": "https://www.city.tanabe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%94%B0%E8%BE%BA%E5%B8%82"
+    },
+    "30207": {
+      "name": "新宮市",
+      "kind": "city",
+      "officeIds": [
+        "30207-city"
+      ],
+      "official": "https://www.city.shingu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%96%B0%E5%AE%AE%E5%B8%82"
+    },
+    "30208": {
+      "name": "紀の川市",
+      "kind": "city",
+      "officeIds": [
+        "30208-city"
+      ],
+      "official": "https://www.city.kinokawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%B4%80%E3%81%AE%E5%B7%9D%E5%B8%82"
+    },
+    "30209": {
+      "name": "岩出市",
+      "kind": "city",
+      "officeIds": [
+        "30209-city"
+      ],
+      "official": "https://www.city.iwade.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%B2%A9%E5%87%BA%E5%B8%82"
+    },
+    "30304": {
+      "name": "紀美野町",
+      "kind": "town",
+      "officeIds": [
+        "30304-town"
+      ],
+      "official": "https://www.town.kimino.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%B4%80%E7%BE%8E%E9%87%8E%E7%94%BA"
+    },
+    "30341": {
+      "name": "かつらぎ町",
+      "kind": "town",
+      "officeIds": [
+        "30341-town"
+      ],
+      "official": "https://www.town.katsuragi.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E3%81%8B%E3%81%A4%E3%82%89%E3%81%8E%E7%94%BA"
+    },
+    "30343": {
+      "name": "九度山町",
+      "kind": "town",
+      "officeIds": [
+        "30343-town"
+      ],
+      "official": "https://www.town.kudoyama.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%B9%9D%E5%BA%A6%E5%B1%B1%E7%94%BA"
+    },
+    "30344": {
+      "name": "高野町",
+      "kind": "town",
+      "officeIds": [
+        "30344-town"
+      ],
+      "official": "https://www.town.koya.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E9%AB%98%E9%87%8E%E7%94%BA_(%E5%92%8C%E6%AD%8C%E5%B1%B1%E7%9C%8C)"
+    },
+    "30361": {
+      "name": "湯浅町",
+      "kind": "town",
+      "officeIds": [
+        "30361-town"
+      ],
+      "official": "https://www.town.yuasa.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%B9%AF%E6%B5%85%E7%94%BA"
+    },
+    "30362": {
+      "name": "広川町",
+      "kind": "town",
+      "officeIds": [
+        "30362-town"
+      ],
+      "official": "https://www.town.hirogawa.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%BA%83%E5%B7%9D%E7%94%BA_(%E5%92%8C%E6%AD%8C%E5%B1%B1%E7%9C%8C)"
+    },
+    "30366": {
+      "name": "有田川町",
+      "kind": "town",
+      "officeIds": [
+        "30366-town"
+      ],
+      "official": "https://www.town.aridagawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%9C%89%E7%94%B0%E5%B7%9D%E7%94%BA"
+    },
+    "30381": {
+      "name": "美浜町",
+      "kind": "town",
+      "officeIds": [
+        "30381-town"
+      ],
+      "official": "https://www.town.mihama.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%BE%8E%E6%B5%9C%E7%94%BA_(%E5%92%8C%E6%AD%8C%E5%B1%B1%E7%9C%8C)"
+    },
+    "30382": {
+      "name": "日高町",
+      "kind": "town",
+      "officeIds": [
+        "30382-town"
+      ],
+      "official": "https://www.town.wakayama-hidaka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%97%A5%E9%AB%98%E7%94%BA_(%E5%92%8C%E6%AD%8C%E5%B1%B1%E7%9C%8C)"
+    },
+    "30383": {
+      "name": "由良町",
+      "kind": "town",
+      "officeIds": [
+        "30383-town"
+      ],
+      "official": "https://www.town.yura.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%94%B1%E8%89%AF%E7%94%BA_(%E5%92%8C%E6%AD%8C%E5%B1%B1%E7%9C%8C)"
+    },
+    "30390": {
+      "name": "印南町",
+      "kind": "town",
+      "officeIds": [
+        "30390-town"
+      ],
+      "official": "https://www.town.wakayama-inami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%8D%B0%E5%8D%97%E7%94%BA"
+    },
+    "30391": {
+      "name": "みなべ町",
+      "kind": "town",
+      "officeIds": [
+        "30391-town"
+      ],
+      "official": "https://www.town.minabe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E3%81%BF%E3%81%AA%E3%81%B9%E7%94%BA"
+    },
+    "30392": {
+      "name": "日高川町",
+      "kind": "town",
+      "officeIds": [
+        "30392-town"
+      ],
+      "official": "https://www.town.hidakagawa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E6%97%A5%E9%AB%98%E5%B7%9D%E7%94%BA"
+    },
+    "30401": {
+      "name": "白浜町",
+      "kind": "town",
+      "officeIds": [
+        "30401-town"
+      ],
+      "official": "https://www.town.shirahama.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E7%99%BD%E6%B5%9C%E7%94%BA_(%E5%92%8C%E6%AD%8C%E5%B1%B1%E7%9C%8C)"
+    },
+    "30404": {
+      "name": "上富田町",
+      "kind": "town",
+      "officeIds": [
+        "30404-town"
+      ],
+      "official": "https://www.town.kamitonda.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%B8%8A%E5%AF%8C%E7%94%B0%E7%94%BA"
+    },
+    "30406": {
+      "name": "すさみ町",
+      "kind": "town",
+      "officeIds": [
+        "30406-town"
+      ],
+      "official": "https://www.town.susami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E3%81%99%E3%81%95%E3%81%BF%E7%94%BA"
+    },
+    "30421": {
+      "name": "那智勝浦町",
+      "kind": "town",
+      "officeIds": [
+        "30421-town"
+      ],
+      "official": "https://www.town.nachikatsuura.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E9%82%A3%E6%99%BA%E5%8B%9D%E6%B5%A6%E7%94%BA"
+    },
+    "30422": {
+      "name": "太地町",
+      "kind": "town",
+      "officeIds": [
+        "30422-town"
+      ],
+      "official": "https://www.town.taiji.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%A4%AA%E5%9C%B0%E7%94%BA"
+    },
+    "30424": {
+      "name": "古座川町",
+      "kind": "town",
+      "officeIds": [
+        "30424-town"
+      ],
+      "official": "https://www.town.kozagawa.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%8F%A4%E5%BA%A7%E5%B7%9D%E7%94%BA"
+    },
+    "30427": {
+      "name": "北山村",
+      "kind": "village",
+      "officeIds": [
+        "30427-village"
+      ],
+      "official": "https://www.vill.kitayama.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E5%8C%97%E5%B1%B1%E6%9D%91"
+    },
+    "30428": {
+      "name": "串本町",
+      "kind": "town",
+      "officeIds": [
+        "30428-town"
+      ],
+      "official": "https://www.town.kushimoto.wakayama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/wiki/%E4%B8%B2%E6%9C%AC%E7%94%BA"
+    }
+  },
+  "offices": {
+    "30201-city": {
+      "name": "和歌山市役所",
+      "status": "verified",
+      "postalCode": "640-8511",
+      "address": "和歌山県和歌山市七番丁23番地"
+    },
+    "30202-city": {
+      "name": "海南市役所",
+      "status": "verified",
+      "postalCode": "642-8501",
+      "address": "和歌山県海南市南赤坂11番地"
+    },
+    "30203-city": {
+      "name": "橋本市役所",
+      "status": "verified",
+      "postalCode": "648-8585",
+      "address": "和歌山県橋本市東家一丁目1番1号"
+    },
+    "30204-city": {
+      "name": "有田市役所",
+      "status": "verified",
+      "postalCode": "649-0392",
+      "address": "和歌山県有田市箕島50番地"
+    },
+    "30205-city": {
+      "name": "御坊市役所",
+      "status": "verified",
+      "postalCode": "644-8686",
+      "address": "和歌山県御坊市薗350番地2"
+    },
+    "30206-city": {
+      "name": "田辺市役所",
+      "status": "verified",
+      "postalCode": "646-8545",
+      "address": "和歌山県田辺市東山一丁目5番1号"
+    },
+    "30207-city": {
+      "name": "新宮市役所",
+      "status": "verified",
+      "postalCode": "647-8555",
+      "address": "和歌山県新宮市春日1番1号"
+    },
+    "30208-city": {
+      "name": "紀の川市役所",
+      "status": "verified",
+      "postalCode": "649-6492",
+      "address": "和歌山県紀の川市西大井338番地"
+    },
+    "30209-city": {
+      "name": "岩出市役所",
+      "status": "verified",
+      "postalCode": "649-6292",
+      "address": "和歌山県岩出市西野209番地"
+    },
+    "30304-town": {
+      "name": "紀美野町役場",
+      "status": "verified",
+      "postalCode": "640-1192",
+      "address": "和歌山県海草郡紀美野町動木287番地"
+    },
+    "30341-town": {
+      "name": "かつらぎ町役場",
+      "status": "verified",
+      "postalCode": "649-7192",
+      "address": "和歌山県伊都郡かつらぎ町丁ノ町2160番地"
+    },
+    "30343-town": {
+      "name": "九度山町役場",
+      "status": "verified",
+      "postalCode": "648-0198",
+      "address": "和歌山県伊都郡九度山町九度山1190番地"
+    },
+    "30344-town": {
+      "name": "高野町役場",
+      "status": "verified",
+      "postalCode": "648-0281",
+      "address": "和歌山県伊都郡高野町大字高野山636番地"
+    },
+    "30361-town": {
+      "name": "湯浅町役場",
+      "status": "verified",
+      "postalCode": "643-0002",
+      "address": "和歌山県有田郡湯浅町青木668番地1"
+    },
+    "30362-town": {
+      "name": "広川町役場",
+      "status": "verified",
+      "postalCode": "643-0071",
+      "address": "和歌山県有田郡広川町広1500番地"
+    },
+    "30366-town": {
+      "name": "有田川町役場",
+      "status": "verified",
+      "postalCode": "643-0021",
+      "address": "和歌山県有田郡有田川町大字下津野2018番地4"
+    },
+    "30381-town": {
+      "name": "美浜町役場",
+      "status": "verified",
+      "postalCode": "644-0044",
+      "address": "和歌山県日高郡美浜町和田1138番地278"
+    },
+    "30382-town": {
+      "name": "日高町役場",
+      "status": "verified",
+      "postalCode": "649-1213",
+      "address": "和歌山県日高郡日高町高家626番地"
+    },
+    "30383-town": {
+      "name": "由良町役場",
+      "status": "verified",
+      "postalCode": "649-1111",
+      "address": "和歌山県日高郡由良町里1220番地1"
+    },
+    "30390-town": {
+      "name": "印南町役場",
+      "status": "verified",
+      "postalCode": "649-1534",
+      "address": "和歌山県日高郡印南町大字印南2570番地"
+    },
+    "30391-town": {
+      "name": "みなべ町役場",
+      "status": "verified",
+      "postalCode": "645-0002",
+      "address": "和歌山県日高郡みなべ町芝742番地"
+    },
+    "30392-town": {
+      "name": "日高川町役場",
+      "status": "verified",
+      "postalCode": "649-1324",
+      "address": "和歌山県日高郡日高川町大字土生160番地"
+    },
+    "30401-town": {
+      "name": "白浜町役場",
+      "status": "verified",
+      "postalCode": "649-2211",
+      "address": "和歌山県西牟婁郡白浜町1600番地"
+    },
+    "30404-town": {
+      "name": "上富田町役場",
+      "status": "verified",
+      "postalCode": "649-2192",
+      "address": "和歌山県西牟婁郡上富田町朝来763番地"
+    },
+    "30406-town": {
+      "name": "すさみ町役場",
+      "status": "verified",
+      "postalCode": "649-2621",
+      "address": "和歌山県西牟婁郡すさみ町周参見4089番地"
+    },
+    "30421-town": {
+      "name": "那智勝浦町役場",
+      "status": "verified",
+      "postalCode": "649-5392",
+      "address": "和歌山県東牟婁郡那智勝浦町築地7丁目1番地1"
+    },
+    "30422-town": {
+      "name": "太地町役場",
+      "status": "verified",
+      "postalCode": "649-5171",
+      "address": "和歌山県東牟婁郡太地町太地3767番地1"
+    },
+    "30424-town": {
+      "name": "古座川町役場",
+      "status": "verified",
+      "postalCode": "649-4104",
+      "address": "和歌山県東牟婁郡古座川町高池673番地2"
+    },
+    "30427-village": {
+      "name": "北山村役場",
+      "status": "verified",
+      "postalCode": "647-1603",
+      "address": "和歌山県東牟婁郡北山村大沼42番地"
+    },
+    "30428-town": {
+      "name": "串本町役場",
+      "status": "verified",
+      "postalCode": "649-3592",
+      "address": "和歌山県東牟婁郡串本町サンゴ台690番地5"
+    }
+  }
+}
