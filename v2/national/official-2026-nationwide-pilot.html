@@ -116,7 +116,7 @@ const names=['','北海道','青森県','岩手県','宮城県','秋田県','山
 const nationBoxes={main:[122.7,24.0,146.2,46.1],all:[122.7,24.0,154.2,46.1]};
 let manifest=null,overview=null,current=null,requestId=0,mode='national';
 let activeProjection=null,quizSession=null,quizBackup=null,dismissedPopupCode=null;
-const officeCache=new Map(),officeReady=new Set(['08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47']);
+const officeCache=new Map(),officeReady=new Set(['02','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47']);
 async function getOffices(code){
  if(!officeReady.has(code))return null;
  if(!officeCache.has(code))officeCache.set(code,fetch('../data/offices/'+code+'.json?v=2').then(r=>{if(!r.ok)throw Error('office HTTP '+r.status);return r.json();}).then(d=>{if(d.schemaVersion!==2||d.prefecture!==code||!d.regions||!d.offices)throw Error('office schema');return d;}).catch(e=>{console.warn(e);officeCache.delete(code);return null;}));
