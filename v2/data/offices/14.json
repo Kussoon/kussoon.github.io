@@ -1,0 +1,984 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "14",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.kanagawa.jp/docs/ie2/cnt/f530001/p780102.html",
+    "https://www.j-lis.go.jp/spd/code-address/kantou/cms_13514181.html"
+  ],
+  "regions": {
+    "14100": {
+      "name": "横浜市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82"
+    },
+    "14101": {
+      "name": "横浜市鶴見区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14101-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E9%B6%B4%E8%A6%8B%E5%8C%BA"
+    },
+    "14102": {
+      "name": "横浜市神奈川区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14102-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E7%A5%9E%E5%A5%88%E5%B7%9D%E5%8C%BA"
+    },
+    "14103": {
+      "name": "横浜市西区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14103-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E8%A5%BF%E5%8C%BA"
+    },
+    "14104": {
+      "name": "横浜市中区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14104-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E4%B8%AD%E5%8C%BA"
+    },
+    "14105": {
+      "name": "横浜市南区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14105-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E5%8D%97%E5%8C%BA"
+    },
+    "14106": {
+      "name": "横浜市保土ケ谷区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14106-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E4%BF%9D%E5%9C%9F%E3%82%B1%E8%B0%B7%E5%8C%BA"
+    },
+    "14107": {
+      "name": "横浜市磯子区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14107-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E7%A3%AF%E5%AD%90%E5%8C%BA"
+    },
+    "14108": {
+      "name": "横浜市金沢区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14108-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E9%87%91%E6%B2%A2%E5%8C%BA"
+    },
+    "14109": {
+      "name": "横浜市港北区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14109-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E6%B8%AF%E5%8C%97%E5%8C%BA"
+    },
+    "14110": {
+      "name": "横浜市戸塚区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14110-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E6%88%B8%E5%A1%9A%E5%8C%BA"
+    },
+    "14111": {
+      "name": "横浜市港南区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14111-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E6%B8%AF%E5%8D%97%E5%8C%BA"
+    },
+    "14112": {
+      "name": "横浜市旭区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14112-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E6%97%AD%E5%8C%BA"
+    },
+    "14113": {
+      "name": "横浜市緑区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14113-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E7%B7%91%E5%8C%BA"
+    },
+    "14114": {
+      "name": "横浜市瀬谷区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14114-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E7%80%AC%E8%B0%B7%E5%8C%BA"
+    },
+    "14115": {
+      "name": "横浜市栄区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14115-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E6%A0%84%E5%8C%BA"
+    },
+    "14116": {
+      "name": "横浜市泉区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14116-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E6%B3%89%E5%8C%BA"
+    },
+    "14117": {
+      "name": "横浜市青葉区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14117-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E9%9D%92%E8%91%89%E5%8C%BA"
+    },
+    "14118": {
+      "name": "横浜市都筑区",
+      "kind": "ward",
+      "parentCode": "14100",
+      "officeIds": [
+        "14118-ward",
+        "14100-city"
+      ],
+      "official": "https://www.city.yokohama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E6%B5%9C%E5%B8%82%E9%83%BD%E7%AD%91%E5%8C%BA"
+    },
+    "14130": {
+      "name": "川崎市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82"
+    },
+    "14131": {
+      "name": "川崎市川崎区",
+      "kind": "ward",
+      "parentCode": "14130",
+      "officeIds": [
+        "14131-ward",
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E5%B7%9D%E5%B4%8E%E5%8C%BA"
+    },
+    "14132": {
+      "name": "川崎市幸区",
+      "kind": "ward",
+      "parentCode": "14130",
+      "officeIds": [
+        "14132-ward",
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E5%B9%B8%E5%8C%BA"
+    },
+    "14133": {
+      "name": "川崎市中原区",
+      "kind": "ward",
+      "parentCode": "14130",
+      "officeIds": [
+        "14133-ward",
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E4%B8%AD%E5%8E%9F%E5%8C%BA"
+    },
+    "14134": {
+      "name": "川崎市高津区",
+      "kind": "ward",
+      "parentCode": "14130",
+      "officeIds": [
+        "14134-ward",
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E9%AB%98%E6%B4%A5%E5%8C%BA"
+    },
+    "14135": {
+      "name": "川崎市多摩区",
+      "kind": "ward",
+      "parentCode": "14130",
+      "officeIds": [
+        "14135-ward",
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E5%A4%9A%E6%91%A9%E5%8C%BA"
+    },
+    "14136": {
+      "name": "川崎市宮前区",
+      "kind": "ward",
+      "parentCode": "14130",
+      "officeIds": [
+        "14136-ward",
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E5%AE%AE%E5%89%8D%E5%8C%BA"
+    },
+    "14137": {
+      "name": "川崎市麻生区",
+      "kind": "ward",
+      "parentCode": "14130",
+      "officeIds": [
+        "14137-ward",
+        "14130-city"
+      ],
+      "official": "https://www.city.kawasaki.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B7%9D%E5%B4%8E%E5%B8%82%E9%BA%BB%E7%94%9F%E5%8C%BA"
+    },
+    "14150": {
+      "name": "相模原市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "14150-city"
+      ],
+      "official": "https://www.city.sagamihara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%9B%B8%E6%A8%A1%E5%8E%9F%E5%B8%82"
+    },
+    "14151": {
+      "name": "相模原市緑区",
+      "kind": "ward",
+      "parentCode": "14150",
+      "officeIds": [
+        "14151-ward",
+        "14150-city"
+      ],
+      "official": "https://www.city.sagamihara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%9B%B8%E6%A8%A1%E5%8E%9F%E5%B8%82%E7%B7%91%E5%8C%BA"
+    },
+    "14152": {
+      "name": "相模原市中央区",
+      "kind": "ward",
+      "parentCode": "14150",
+      "officeIds": [
+        "14152-ward",
+        "14150-city"
+      ],
+      "official": "https://www.city.sagamihara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%9B%B8%E6%A8%A1%E5%8E%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA"
+    },
+    "14153": {
+      "name": "相模原市南区",
+      "kind": "ward",
+      "parentCode": "14150",
+      "officeIds": [
+        "14153-ward",
+        "14150-city"
+      ],
+      "official": "https://www.city.sagamihara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%9B%B8%E6%A8%A1%E5%8E%9F%E5%B8%82%E5%8D%97%E5%8C%BA"
+    },
+    "14201": {
+      "name": "横須賀市",
+      "kind": "city",
+      "officeIds": [
+        "14201-city"
+      ],
+      "official": "https://www.city.yokosuka.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%A8%AA%E9%A0%88%E8%B3%80%E5%B8%82"
+    },
+    "14203": {
+      "name": "平塚市",
+      "kind": "city",
+      "officeIds": [
+        "14203-city"
+      ],
+      "official": "https://www.city.hiratsuka.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B9%B3%E5%A1%9A%E5%B8%82"
+    },
+    "14204": {
+      "name": "鎌倉市",
+      "kind": "city",
+      "officeIds": [
+        "14204-city"
+      ],
+      "official": "https://www.city.kamakura.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E9%8E%8C%E5%80%89%E5%B8%82"
+    },
+    "14205": {
+      "name": "藤沢市",
+      "kind": "city",
+      "officeIds": [
+        "14205-city"
+      ],
+      "official": "https://www.city.fujisawa.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E8%97%A4%E6%B2%A2%E5%B8%82"
+    },
+    "14206": {
+      "name": "小田原市",
+      "kind": "city",
+      "officeIds": [
+        "14206-city"
+      ],
+      "official": "https://www.city.odawara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B0%8F%E7%94%B0%E5%8E%9F%E5%B8%82"
+    },
+    "14207": {
+      "name": "茅ヶ崎市",
+      "kind": "city",
+      "officeIds": [
+        "14207-city"
+      ],
+      "official": "https://www.city.chigasaki.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E8%8C%85%E3%83%B6%E5%B4%8E%E5%B8%82"
+    },
+    "14208": {
+      "name": "逗子市",
+      "kind": "city",
+      "officeIds": [
+        "14208-city"
+      ],
+      "official": "https://www.city.zushi.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E9%80%97%E5%AD%90%E5%B8%82"
+    },
+    "14210": {
+      "name": "三浦市",
+      "kind": "city",
+      "officeIds": [
+        "14210-city"
+      ],
+      "official": "https://www.city.miura.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E4%B8%89%E6%B5%A6%E5%B8%82"
+    },
+    "14211": {
+      "name": "秦野市",
+      "kind": "city",
+      "officeIds": [
+        "14211-city"
+      ],
+      "official": "https://www.city.hadano.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%A7%A6%E9%87%8E%E5%B8%82"
+    },
+    "14212": {
+      "name": "厚木市",
+      "kind": "city",
+      "officeIds": [
+        "14212-city"
+      ],
+      "official": "https://www.city.atsugi.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%8E%9A%E6%9C%A8%E5%B8%82"
+    },
+    "14213": {
+      "name": "大和市",
+      "kind": "city",
+      "officeIds": [
+        "14213-city"
+      ],
+      "official": "https://www.city.yamato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%A4%A7%E5%92%8C%E5%B8%82"
+    },
+    "14214": {
+      "name": "伊勢原市",
+      "kind": "city",
+      "officeIds": [
+        "14214-city"
+      ],
+      "official": "https://www.city.isehara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E4%BC%8A%E5%8B%A2%E5%8E%9F%E5%B8%82"
+    },
+    "14215": {
+      "name": "海老名市",
+      "kind": "city",
+      "officeIds": [
+        "14215-city"
+      ],
+      "official": "https://www.city.ebina.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%B5%B7%E8%80%81%E5%90%8D%E5%B8%82"
+    },
+    "14216": {
+      "name": "座間市",
+      "kind": "city",
+      "officeIds": [
+        "14216-city"
+      ],
+      "official": "https://www.city.zama.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%BA%A7%E9%96%93%E5%B8%82"
+    },
+    "14217": {
+      "name": "南足柄市",
+      "kind": "city",
+      "officeIds": [
+        "14217-city"
+      ],
+      "official": "https://www.city.minamiashigara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%8D%97%E8%B6%B3%E6%9F%84%E5%B8%82"
+    },
+    "14218": {
+      "name": "綾瀬市",
+      "kind": "city",
+      "officeIds": [
+        "14218-city"
+      ],
+      "official": "https://www.city.ayase.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%B6%BE%E7%80%AC%E5%B8%82"
+    },
+    "14301": {
+      "name": "葉山町",
+      "kind": "town",
+      "officeIds": [
+        "14301-town"
+      ],
+      "official": "https://www.town.hayama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E8%91%89%E5%B1%B1%E7%94%BA"
+    },
+    "14321": {
+      "name": "寒川町",
+      "kind": "town",
+      "officeIds": [
+        "14321-town"
+      ],
+      "official": "https://www.town.samukawa.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%AF%92%E5%B7%9D%E7%94%BA"
+    },
+    "14341": {
+      "name": "大磯町",
+      "kind": "town",
+      "officeIds": [
+        "14341-town"
+      ],
+      "official": "https://www.town.oiso.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%A4%A7%E7%A3%AF%E7%94%BA"
+    },
+    "14342": {
+      "name": "二宮町",
+      "kind": "town",
+      "officeIds": [
+        "14342-town"
+      ],
+      "official": "https://www.town.ninomiya.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E4%BA%8C%E5%AE%AE%E7%94%BA"
+    },
+    "14361": {
+      "name": "中井町",
+      "kind": "town",
+      "officeIds": [
+        "14361-town"
+      ],
+      "official": "https://www.town.nakai.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E4%B8%AD%E4%BA%95%E7%94%BA"
+    },
+    "14362": {
+      "name": "大井町",
+      "kind": "town",
+      "officeIds": [
+        "14362-town"
+      ],
+      "official": "https://www.town.oi.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%A4%A7%E4%BA%95%E7%94%BA"
+    },
+    "14363": {
+      "name": "松田町",
+      "kind": "town",
+      "officeIds": [
+        "14363-town"
+      ],
+      "official": "https://town.matsuda.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%9D%BE%E7%94%B0%E7%94%BA"
+    },
+    "14364": {
+      "name": "山北町",
+      "kind": "town",
+      "officeIds": [
+        "14364-town"
+      ],
+      "official": "https://www.town.yamakita.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E5%B1%B1%E5%8C%97%E7%94%BA"
+    },
+    "14366": {
+      "name": "開成町",
+      "kind": "town",
+      "officeIds": [
+        "14366-town"
+      ],
+      "official": "https://www.town.kaisei.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E9%96%8B%E6%88%90%E7%94%BA"
+    },
+    "14382": {
+      "name": "箱根町",
+      "kind": "town",
+      "officeIds": [
+        "14382-town"
+      ],
+      "official": "https://www.town.hakone.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%AE%B1%E6%A0%B9%E7%94%BA"
+    },
+    "14383": {
+      "name": "真鶴町",
+      "kind": "town",
+      "officeIds": [
+        "14383-town"
+      ],
+      "official": "https://www.town.manazuru.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%9C%9F%E9%B6%B4%E7%94%BA"
+    },
+    "14384": {
+      "name": "湯河原町",
+      "kind": "town",
+      "officeIds": [
+        "14384-town"
+      ],
+      "official": "https://www.town.yugawara.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%B9%AF%E6%B2%B3%E5%8E%9F%E7%94%BA"
+    },
+    "14401": {
+      "name": "愛川町",
+      "kind": "town",
+      "officeIds": [
+        "14401-town"
+      ],
+      "official": "https://www.town.aikawa.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%84%9B%E5%B7%9D%E7%94%BA"
+    },
+    "14402": {
+      "name": "清川村",
+      "kind": "village",
+      "officeIds": [
+        "14402-village"
+      ],
+      "official": "https://www.town.kiyokawa.kanagawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E6%B8%85%E5%B7%9D%E6%9D%91"
+    }
+  },
+  "offices": {
+    "14100-city": {
+      "name": "横浜市役所",
+      "status": "verified",
+      "postalCode": "231-0005",
+      "address": "神奈川県横浜市中区本町6-50-10"
+    },
+    "14101-ward": {
+      "name": "横浜市鶴見区役所",
+      "status": "verified",
+      "postalCode": "230-0051",
+      "address": "神奈川県横浜市鶴見区鶴見中央3-20-1"
+    },
+    "14102-ward": {
+      "name": "横浜市神奈川区役所",
+      "status": "verified",
+      "postalCode": "221-0824",
+      "address": "神奈川県横浜市神奈川区広台太田町3-8"
+    },
+    "14103-ward": {
+      "name": "横浜市西区役所",
+      "status": "verified",
+      "postalCode": "220-0051",
+      "address": "神奈川県横浜市西区中央1-5-10"
+    },
+    "14104-ward": {
+      "name": "横浜市中区役所",
+      "status": "verified",
+      "postalCode": "231-0021",
+      "address": "神奈川県横浜市中区日本大通35"
+    },
+    "14105-ward": {
+      "name": "横浜市南区役所",
+      "status": "verified",
+      "postalCode": "232-0024",
+      "address": "神奈川県横浜市南区浦舟町2-33"
+    },
+    "14106-ward": {
+      "name": "横浜市保土ケ谷区役所",
+      "status": "verified",
+      "postalCode": "240-0001",
+      "address": "神奈川県横浜市保土ケ谷区川辺町2-9"
+    },
+    "14107-ward": {
+      "name": "横浜市磯子区役所",
+      "status": "verified",
+      "postalCode": "235-0016",
+      "address": "神奈川県横浜市磯子区磯子3-5-1"
+    },
+    "14108-ward": {
+      "name": "横浜市金沢区役所",
+      "status": "verified",
+      "postalCode": "236-0021",
+      "address": "神奈川県横浜市金沢区泥亀2-9-1"
+    },
+    "14109-ward": {
+      "name": "横浜市港北区役所",
+      "status": "verified",
+      "postalCode": "222-0032",
+      "address": "神奈川県横浜市港北区大豆戸町26-1"
+    },
+    "14110-ward": {
+      "name": "横浜市戸塚区役所",
+      "status": "verified",
+      "postalCode": "244-0003",
+      "address": "神奈川県横浜市戸塚区戸塚町16-17"
+    },
+    "14111-ward": {
+      "name": "横浜市港南区役所",
+      "status": "verified",
+      "postalCode": "233-0003",
+      "address": "神奈川県横浜市港南区港南4-2-10"
+    },
+    "14112-ward": {
+      "name": "横浜市旭区役所",
+      "status": "verified",
+      "postalCode": "241-0022",
+      "address": "神奈川県横浜市旭区鶴ケ峰1-4-12"
+    },
+    "14113-ward": {
+      "name": "横浜市緑区役所",
+      "status": "verified",
+      "postalCode": "226-0013",
+      "address": "神奈川県横浜市緑区寺山町118"
+    },
+    "14114-ward": {
+      "name": "横浜市瀬谷区役所",
+      "status": "verified",
+      "postalCode": "246-0021",
+      "address": "神奈川県横浜市瀬谷区二ツ橋町190"
+    },
+    "14115-ward": {
+      "name": "横浜市栄区役所",
+      "status": "verified",
+      "postalCode": "247-0005",
+      "address": "神奈川県横浜市栄区桂町303-19"
+    },
+    "14116-ward": {
+      "name": "横浜市泉区役所",
+      "status": "verified",
+      "postalCode": "245-0024",
+      "address": "神奈川県横浜市泉区和泉中央北5-1-1"
+    },
+    "14117-ward": {
+      "name": "横浜市青葉区役所",
+      "status": "verified",
+      "postalCode": "225-0024",
+      "address": "神奈川県横浜市青葉区市ケ尾町31-4"
+    },
+    "14118-ward": {
+      "name": "横浜市都筑区役所",
+      "status": "verified",
+      "postalCode": "224-0032",
+      "address": "神奈川県横浜市都筑区茅ケ崎中央32-1"
+    },
+    "14130-city": {
+      "name": "川崎市役所",
+      "status": "verified",
+      "postalCode": "210-8577",
+      "address": "神奈川県川崎市川崎区宮本町1"
+    },
+    "14131-ward": {
+      "name": "川崎市川崎区役所",
+      "status": "verified",
+      "postalCode": "210-8570",
+      "address": "神奈川県川崎市川崎区東田町8"
+    },
+    "14132-ward": {
+      "name": "川崎市幸区役所",
+      "status": "verified",
+      "postalCode": "212-8570",
+      "address": "神奈川県川崎市幸区戸手本町1-11-1"
+    },
+    "14133-ward": {
+      "name": "川崎市中原区役所",
+      "status": "verified",
+      "postalCode": "211-8570",
+      "address": "神奈川県川崎市中原区小杉町3-245"
+    },
+    "14134-ward": {
+      "name": "川崎市高津区役所",
+      "status": "verified",
+      "postalCode": "213-8570",
+      "address": "神奈川県川崎市高津区下作延2-8-1"
+    },
+    "14135-ward": {
+      "name": "川崎市多摩区役所",
+      "status": "verified",
+      "postalCode": "214-8570",
+      "address": "神奈川県川崎市多摩区登戸1775-1"
+    },
+    "14136-ward": {
+      "name": "川崎市宮前区役所",
+      "status": "verified",
+      "postalCode": "216-8570",
+      "address": "神奈川県川崎市宮前区宮前平2-20-5"
+    },
+    "14137-ward": {
+      "name": "川崎市麻生区役所",
+      "status": "verified",
+      "postalCode": "215-8570",
+      "address": "神奈川県川崎市麻生区万福寺1-5-1"
+    },
+    "14150-city": {
+      "name": "相模原市役所",
+      "status": "verified",
+      "postalCode": "252-5277",
+      "address": "神奈川県相模原市中央区中央2-11-15"
+    },
+    "14151-ward": {
+      "name": "相模原市緑区役所",
+      "status": "verified",
+      "postalCode": "252-5177",
+      "address": "神奈川県相模原市緑区西橋本5-3-21"
+    },
+    "14152-ward": {
+      "name": "相模原市中央区役所",
+      "status": "verified",
+      "postalCode": "252-5277",
+      "address": "神奈川県相模原市中央区中央2-11-15"
+    },
+    "14153-ward": {
+      "name": "相模原市南区役所",
+      "status": "verified",
+      "postalCode": "252-0377",
+      "address": "神奈川県相模原市南区相模大野5-31-1"
+    },
+    "14201-city": {
+      "name": "横須賀市役所",
+      "status": "verified",
+      "postalCode": "238-8550",
+      "address": "神奈川県横須賀市小川町11"
+    },
+    "14203-city": {
+      "name": "平塚市役所",
+      "status": "verified",
+      "postalCode": "254-8686",
+      "address": "神奈川県平塚市浅間町9-1"
+    },
+    "14204-city": {
+      "name": "鎌倉市役所",
+      "status": "verified",
+      "postalCode": "248-8686",
+      "address": "神奈川県鎌倉市御成町18-10"
+    },
+    "14205-city": {
+      "name": "藤沢市役所",
+      "status": "verified",
+      "postalCode": "251-8601",
+      "address": "神奈川県藤沢市朝日町1-1"
+    },
+    "14206-city": {
+      "name": "小田原市役所",
+      "status": "verified",
+      "postalCode": "250-8555",
+      "address": "神奈川県小田原市荻窪300"
+    },
+    "14207-city": {
+      "name": "茅ヶ崎市役所",
+      "status": "verified",
+      "postalCode": "253-8686",
+      "address": "神奈川県茅ヶ崎市茅ヶ崎1-1-1"
+    },
+    "14208-city": {
+      "name": "逗子市役所",
+      "status": "verified",
+      "postalCode": "249-8686",
+      "address": "神奈川県逗子市逗子5-2-16"
+    },
+    "14210-city": {
+      "name": "三浦市役所",
+      "status": "verified",
+      "postalCode": "238-0298",
+      "address": "神奈川県三浦市城山町1-1"
+    },
+    "14211-city": {
+      "name": "秦野市役所",
+      "status": "verified",
+      "postalCode": "257-8501",
+      "address": "神奈川県秦野市桜町1-3-2"
+    },
+    "14212-city": {
+      "name": "厚木市役所",
+      "status": "verified",
+      "postalCode": "243-8511",
+      "address": "神奈川県厚木市中町3-17-17"
+    },
+    "14213-city": {
+      "name": "大和市役所",
+      "status": "verified",
+      "postalCode": "242-8601",
+      "address": "神奈川県大和市下鶴間1-1-1"
+    },
+    "14214-city": {
+      "name": "伊勢原市役所",
+      "status": "verified",
+      "postalCode": "259-1188",
+      "address": "神奈川県伊勢原市田中348"
+    },
+    "14215-city": {
+      "name": "海老名市役所",
+      "status": "verified",
+      "postalCode": "243-0492",
+      "address": "神奈川県海老名市勝瀬175-1"
+    },
+    "14216-city": {
+      "name": "座間市役所",
+      "status": "verified",
+      "postalCode": "252-8566",
+      "address": "神奈川県座間市緑ケ丘1-1-1"
+    },
+    "14217-city": {
+      "name": "南足柄市役所",
+      "status": "verified",
+      "postalCode": "250-0192",
+      "address": "神奈川県南足柄市関本440"
+    },
+    "14218-city": {
+      "name": "綾瀬市役所",
+      "status": "verified",
+      "postalCode": "252-1192",
+      "address": "神奈川県綾瀬市早川550"
+    },
+    "14301-town": {
+      "name": "葉山町役場",
+      "status": "verified",
+      "postalCode": "240-0192",
+      "address": "神奈川県三浦郡葉山町堀内2135"
+    },
+    "14321-town": {
+      "name": "寒川町役場",
+      "status": "verified",
+      "postalCode": "253-0196",
+      "address": "神奈川県高座郡寒川町宮山165"
+    },
+    "14341-town": {
+      "name": "大磯町役場",
+      "status": "verified",
+      "postalCode": "255-8555",
+      "address": "神奈川県中郡大磯町東小磯183"
+    },
+    "14342-town": {
+      "name": "二宮町役場",
+      "status": "verified",
+      "postalCode": "259-0196",
+      "address": "神奈川県中郡二宮町二宮961"
+    },
+    "14361-town": {
+      "name": "中井町役場",
+      "status": "verified",
+      "postalCode": "259-0197",
+      "address": "神奈川県足柄上郡中井町比奈窪56"
+    },
+    "14362-town": {
+      "name": "大井町役場",
+      "status": "verified",
+      "postalCode": "258-8501",
+      "address": "神奈川県足柄上郡大井町金子1995"
+    },
+    "14363-town": {
+      "name": "松田町役場",
+      "status": "verified",
+      "postalCode": "258-8585",
+      "address": "神奈川県足柄上郡松田町松田惣領2037"
+    },
+    "14364-town": {
+      "name": "山北町役場",
+      "status": "verified",
+      "postalCode": "258-0195",
+      "address": "神奈川県足柄上郡山北町山北1301-4"
+    },
+    "14366-town": {
+      "name": "開成町役場",
+      "status": "verified",
+      "postalCode": "258-8502",
+      "address": "神奈川県足柄上郡開成町延沢773"
+    },
+    "14382-town": {
+      "name": "箱根町役場",
+      "status": "verified",
+      "postalCode": "250-0398",
+      "address": "神奈川県足柄下郡箱根町湯本256"
+    },
+    "14383-town": {
+      "name": "真鶴町役場",
+      "status": "verified",
+      "postalCode": "259-0202",
+      "address": "神奈川県足柄下郡真鶴町岩244-1"
+    },
+    "14384-town": {
+      "name": "湯河原町役場",
+      "status": "verified",
+      "postalCode": "259-0392",
+      "address": "神奈川県足柄下郡湯河原町中央2-2-1"
+    },
+    "14401-town": {
+      "name": "愛川町役場",
+      "status": "verified",
+      "postalCode": "243-0392",
+      "address": "神奈川県愛甲郡愛川町角田251-1"
+    },
+    "14402-village": {
+      "name": "清川村役場",
+      "status": "verified",
+      "postalCode": "243-0195",
+      "address": "神奈川県愛甲郡清川村煤ヶ谷2216"
+    }
+  }
+}
