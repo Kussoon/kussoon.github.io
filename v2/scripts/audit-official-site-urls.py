@@ -92,6 +92,18 @@ def main():
     }
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    summary_path=OUT.with_name("official-url-reachability-20261102-summary.json")
+    action_items=[{
+        "url":o["url"],"status":o["status"],"result":o["result"],
+        "finalUrl":o["finalUrl"],"error":o["error"],
+        "regionCount":len(o["regions"]),"regions":o["regions"][:5]
+    } for o in outcomes if o["result"]!="reachable" or o["redirectsToOtherHost"]]
+    summary_path.write_text(json.dumps({
+        "asOf":report["asOf"],"registeredRegions":len(records),"uniqueUrls":len(urls),
+        "counts":dict(sorted(summary.items())),
+        "crossHostRedirects":sum(bool(o["redirectsToOtherHost"]) for o in outcomes),
+        "reviewItemsTotal":len(action_items),"reviewItems":action_items
+    },ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
     print("OFFICIAL URL AUDIT:",len(records),"regions,",len(urls),"unique URLs,",round(time.monotonic()-started,1),"seconds")
     print(json.dumps(report["counts"],ensure_ascii=False,sort_keys=True))
     print("Cross-host redirects:",sum(bool(o["redirectsToOtherHost"]) for o in outcomes))
