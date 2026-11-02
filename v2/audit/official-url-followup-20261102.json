@@ -235,7 +235,9 @@
       "evidenceUrls": [
         "https://www.city.nayoro.lg.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "HTTP候補は登録URLと同じホストのHTTPSへ転送したが、公開ブラウザで上流接続エラー。公式ページ本文を確認できず、Cを維持。"
     },
     {
       "prefecture": "福岡県",
@@ -433,7 +435,9 @@
       "evidenceUrls": [
         "https://www.kuromatsunai.com/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "HTTP候補は登録URLと同じホストのHTTPSへ転送したが、公開ブラウザで上流接続エラー。公式ページ本文を確認できず、Cを維持。"
     },
     {
       "prefecture": "北海道",
@@ -458,7 +462,9 @@
       "evidenceUrls": [
         "https://www.samani.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "HTTP候補は登録URLと同じホストのHTTPSへ転送したが、公開ブラウザで上流接続エラー。公式ページ本文を確認できず、Cを維持。"
     },
     {
       "prefecture": "長野県",
@@ -508,7 +514,9 @@
       "evidenceUrls": [
         "https://www.town.chippubetsu.hokkaido.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "登録URLを実ブラウザで再試行したが、ページ遷移がタイムアウト。自治体ページを確認できず、Cを維持。"
     },
     {
       "prefecture": "北海道",
@@ -533,7 +541,9 @@
       "evidenceUrls": [
         "https://www.town.hamatonbetsu.hokkaido.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "北海道公式の市町村リンクが登録ドメインを案内。実ブラウザでは上流接続エラーでページ本文を確認できず、移転先を確定できないためCを維持。"
     },
     {
       "prefecture": "山形県",
@@ -757,7 +767,9 @@
       "evidenceUrls": [
         "https://www.town.kushiro.lg.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "北海道釧路総合振興局の紹介ページは同じホストのHTTP URLを案内。実ブラウザはHTTPSへ転送後、上流接続エラー。別ドメインへの移転は確認できず、Cを維持。"
     },
     {
       "prefecture": "北海道",
@@ -782,7 +794,9 @@
       "evidenceUrls": [
         "https://www.town.kyowa.hokkaido.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "登録URLを実ブラウザで再試行したが、ページ遷移がタイムアウト。自治体ページを確認できず、Cを維持。"
     },
     {
       "prefecture": "和歌山県",
@@ -935,7 +949,9 @@
       "evidenceUrls": [
         "https://www.town.rankoshi.hokkaido.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
-      ]
+      ],
+      "lastCheckedAt": "2026-11-02T23:58 JST",
+      "latestBrowserResult": "登録URLを実ブラウザで表示。北海道蘭越町のロゴ・名称と「ホームページの一時停止・一部機能の縮小について」の臨時案内を確認。サイト停止が明示され、通常サイトの復旧・移転先は確定できないためCを維持。"
     },
     {
       "prefecture": "北海道",
@@ -1683,6 +1699,99 @@
           "result": "登録URLから白石町公式ホームページを表示し、最新情報と役場所在地・電話番号を確認。候補の.saga.jpではなく、登録URLが利用可能。",
           "evidenceUrls": [
             "https://www.town.shiroishi.lg.jp/"
+          ]
+        }
+      ]
+    },
+    {
+      "checkedAt": "2026-11-02T23:58 JST",
+      "scope": "ユーザー提供候補の北海道8自治体を公開ブラウザで再確認。URL変更を裏付ける表示・公式情報がないため、分類はCのまま。",
+      "results": [
+        {
+          "municipalityCode": "01221",
+          "municipality": "名寄市",
+          "registeredUrl": "https://www.city.nayoro.lg.jp/",
+          "testedUrl": "http://www.city.nayoro.lg.jp/",
+          "observedFinalUrl": "https://www.city.nayoro.lg.jp/",
+          "result": "HTTP候補は登録URLと同じホストのHTTPSへ転送したが、公開ブラウザで上流接続エラー。公式ページ本文を確認できず、Cを維持。",
+          "evidenceUrls": [
+            "https://www.city.nayoro.lg.jp/",
+            "https://www.kamikawa.pref.hokkaido.lg.jp/gyosei/machi/index.html"
+          ]
+        },
+        {
+          "municipalityCode": "01393",
+          "municipality": "黒松内町",
+          "registeredUrl": "https://www.kuromatsunai.com/",
+          "testedUrl": "http://www.kuromatsunai.com/",
+          "observedFinalUrl": "https://www.kuromatsunai.com/",
+          "result": "HTTP候補は登録URLと同じホストのHTTPSへ転送したが、公開ブラウザで上流接続エラー。公式ページ本文を確認できず、Cを維持。",
+          "evidenceUrls": [
+            "https://www.kuromatsunai.com/"
+          ]
+        },
+        {
+          "municipalityCode": "01608",
+          "municipality": "様似町",
+          "registeredUrl": "https://www.samani.jp/",
+          "testedUrl": "http://www.samani.jp/",
+          "observedFinalUrl": "https://www.samani.jp/",
+          "result": "HTTP候補は登録URLと同じホストのHTTPSへ転送したが、公開ブラウザで上流接続エラー。公式ページ本文を確認できず、Cを維持。",
+          "evidenceUrls": [
+            "https://www.samani.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "01434",
+          "municipality": "秩父別町",
+          "registeredUrl": "https://www.town.chippubetsu.hokkaido.jp/",
+          "testedUrl": "https://www.town.chippubetsu.hokkaido.jp/",
+          "result": "登録URLを実ブラウザで再試行したが、ページ遷移がタイムアウト。自治体ページを確認できず、Cを維持。",
+          "evidenceUrls": [
+            "https://www.town.chippubetsu.hokkaido.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "01512",
+          "municipality": "浜頓別町",
+          "registeredUrl": "https://www.town.hamatonbetsu.hokkaido.jp/",
+          "testedUrl": "https://www.town.hamatonbetsu.hokkaido.jp/",
+          "result": "北海道公式の市町村リンクが登録ドメインを案内。実ブラウザでは上流接続エラーでページ本文を確認できず、移転先を確定できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.town.hamatonbetsu.hokkaido.jp/",
+            "https://www.pref.hokkaido.lg.jp/link/shichoson/souya.html"
+          ]
+        },
+        {
+          "municipalityCode": "01661",
+          "municipality": "釧路町",
+          "registeredUrl": "https://www.town.kushiro.lg.jp/",
+          "testedUrl": "http://www.town.kushiro.lg.jp/",
+          "observedFinalUrl": "https://www.town.kushiro.lg.jp/",
+          "result": "北海道釧路総合振興局の紹介ページは同じホストのHTTP URLを案内。実ブラウザはHTTPSへ転送後、上流接続エラー。別ドメインへの移転は確認できず、Cを維持。",
+          "evidenceUrls": [
+            "https://www.town.kushiro.lg.jp/",
+            "https://www.kushiro.pref.hokkaido.lg.jp/ts/tss/tisei/kushirochou.html"
+          ]
+        },
+        {
+          "municipalityCode": "01401",
+          "municipality": "共和町",
+          "registeredUrl": "https://www.town.kyowa.hokkaido.jp/",
+          "testedUrl": "https://www.town.kyowa.hokkaido.jp/",
+          "result": "登録URLを実ブラウザで再試行したが、ページ遷移がタイムアウト。自治体ページを確認できず、Cを維持。",
+          "evidenceUrls": [
+            "https://www.town.kyowa.hokkaido.jp/"
+          ]
+        },
+        {
+          "municipalityCode": "01394",
+          "municipality": "蘭越町",
+          "registeredUrl": "https://www.town.rankoshi.hokkaido.jp/",
+          "testedUrl": "https://www.town.rankoshi.hokkaido.jp/",
+          "result": "登録URLを実ブラウザで表示。北海道蘭越町のロゴ・名称と「ホームページの一時停止・一部機能の縮小について」の臨時案内を確認。サイト停止が明示され、通常サイトの復旧・移転先は確定できないためCを維持。",
+          "evidenceUrls": [
+            "https://www.town.rankoshi.hokkaido.jp/"
           ]
         }
       ]
