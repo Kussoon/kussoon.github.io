@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "19",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/tyuubu/cms_14014182.html",
+    "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164169145.html",
+    "https://www.zck.or.jp/soshiki/2/4003.html"
+  ],
+  "regions": {
+    "19201": {
+      "name": "甲府市",
+      "kind": "city",
+      "officeIds": [
+        "19201-city"
+      ],
+      "official": "https://www.city.kofu.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E7%94%B2%E5%BA%9C%E5%B8%82"
+    },
+    "19202": {
+      "name": "富士吉田市",
+      "kind": "city",
+      "officeIds": [
+        "19202-city"
+      ],
+      "official": "https://www.city.fujiyoshida.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%AF%8C%E5%A3%AB%E5%90%89%E7%94%B0%E5%B8%82"
+    },
+    "19204": {
+      "name": "都留市",
+      "kind": "city",
+      "officeIds": [
+        "19204-city"
+      ],
+      "official": "https://www.city.tsuru.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E9%83%BD%E7%95%99%E5%B8%82"
+    },
+    "19205": {
+      "name": "山梨市",
+      "kind": "city",
+      "officeIds": [
+        "19205-city"
+      ],
+      "official": "https://www.city.yamanashi.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%B1%B1%E6%A2%A8%E5%B8%82"
+    },
+    "19206": {
+      "name": "大月市",
+      "kind": "city",
+      "officeIds": [
+        "19206-city"
+      ],
+      "official": "https://www.city.otsuki.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%A4%A7%E6%9C%88%E5%B8%82"
+    },
+    "19207": {
+      "name": "韮崎市",
+      "kind": "city",
+      "officeIds": [
+        "19207-city"
+      ],
+      "official": "https://www.city.nirasaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E9%9F%AE%E5%B4%8E%E5%B8%82"
+    },
+    "19208": {
+      "name": "南アルプス市",
+      "kind": "city",
+      "officeIds": [
+        "19208-city"
+      ],
+      "official": "https://www.city.minami-alps.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%8D%97%E3%82%A2%E3%83%AB%E3%83%97%E3%82%B9%E5%B8%82"
+    },
+    "19209": {
+      "name": "北杜市",
+      "kind": "city",
+      "officeIds": [
+        "19209-city"
+      ],
+      "official": "https://www.city.hokuto.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%8C%97%E6%9D%9C%E5%B8%82"
+    },
+    "19210": {
+      "name": "甲斐市",
+      "kind": "city",
+      "officeIds": [
+        "19210-city"
+      ],
+      "official": "https://www.city.kai.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E7%94%B2%E6%96%90%E5%B8%82"
+    },
+    "19211": {
+      "name": "笛吹市",
+      "kind": "city",
+      "officeIds": [
+        "19211-city"
+      ],
+      "official": "https://www.city.fuefuki.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E7%AC%9B%E5%90%B9%E5%B8%82"
+    },
+    "19212": {
+      "name": "上野原市",
+      "kind": "city",
+      "officeIds": [
+        "19212-city"
+      ],
+      "official": "https://www.city.uenohara.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E4%B8%8A%E9%87%8E%E5%8E%9F%E5%B8%82"
+    },
+    "19213": {
+      "name": "甲州市",
+      "kind": "city",
+      "officeIds": [
+        "19213-city"
+      ],
+      "official": "https://www.city.koshu.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E7%94%B2%E5%B7%9E%E5%B8%82"
+    },
+    "19214": {
+      "name": "中央市",
+      "kind": "city",
+      "officeIds": [
+        "19214-city"
+      ],
+      "official": "https://www.city.chuo.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E4%B8%AD%E5%A4%AE%E5%B8%82"
+    },
+    "19346": {
+      "name": "市川三郷町",
+      "kind": "town",
+      "officeIds": [
+        "19346-town"
+      ],
+      "official": "https://www.town.ichikawamisato.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%B8%82%E5%B7%9D%E4%B8%89%E9%83%B7%E7%94%BA"
+    },
+    "19364": {
+      "name": "早川町",
+      "kind": "town",
+      "officeIds": [
+        "19364-town"
+      ],
+      "official": "https://www.town.hayakawa.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E6%97%A9%E5%B7%9D%E7%94%BA"
+    },
+    "19365": {
+      "name": "身延町",
+      "kind": "town",
+      "officeIds": [
+        "19365-town"
+      ],
+      "official": "https://www.town.minobu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E8%BA%AB%E5%BB%B6%E7%94%BA"
+    },
+    "19366": {
+      "name": "南部町",
+      "kind": "town",
+      "officeIds": [
+        "19366-town"
+      ],
+      "official": "https://www.town.nanbu.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%8D%97%E9%83%A8%E7%94%BA"
+    },
+    "19368": {
+      "name": "富士川町",
+      "kind": "town",
+      "officeIds": [
+        "19368-town"
+      ],
+      "official": "https://www.town.fujikawa.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%AF%8C%E5%A3%AB%E5%B7%9D%E7%94%BA"
+    },
+    "19384": {
+      "name": "昭和町",
+      "kind": "town",
+      "officeIds": [
+        "19384-town"
+      ],
+      "official": "https://www.town.showa.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E6%98%AD%E5%92%8C%E7%94%BA"
+    },
+    "19422": {
+      "name": "道志村",
+      "kind": "village",
+      "officeIds": [
+        "19422-village"
+      ],
+      "official": "https://www.vill.doshi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E9%81%93%E5%BF%97%E6%9D%91"
+    },
+    "19423": {
+      "name": "西桂町",
+      "kind": "town",
+      "officeIds": [
+        "19423-town"
+      ],
+      "official": "https://www.town.nishikatsura.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E8%A5%BF%E6%A1%82%E7%94%BA"
+    },
+    "19424": {
+      "name": "忍野村",
+      "kind": "village",
+      "officeIds": [
+        "19424-village"
+      ],
+      "official": "https://www.vill.oshino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%BF%8D%E9%87%8E%E6%9D%91"
+    },
+    "19425": {
+      "name": "山中湖村",
+      "kind": "village",
+      "officeIds": [
+        "19425-village"
+      ],
+      "official": "https://www.vill.yamanakako.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%B1%B1%E4%B8%AD%E6%B9%96%E6%9D%91"
+    },
+    "19429": {
+      "name": "鳴沢村",
+      "kind": "village",
+      "officeIds": [
+        "19429-village"
+      ],
+      "official": "https://www.vill.narusawa.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E9%B3%B4%E6%B2%A2%E6%9D%91"
+    },
+    "19430": {
+      "name": "富士河口湖町",
+      "kind": "town",
+      "officeIds": [
+        "19430-town"
+      ],
+      "official": "https://www.town.fujikawaguchiko.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%AF%8C%E5%A3%AB%E6%B2%B3%E5%8F%A3%E6%B9%96%E7%94%BA"
+    },
+    "19442": {
+      "name": "小菅村",
+      "kind": "village",
+      "officeIds": [
+        "19442-village"
+      ],
+      "official": "https://www.vill.kosuge.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E5%B0%8F%E8%8F%85%E6%9D%91"
+    },
+    "19443": {
+      "name": "丹波山村",
+      "kind": "village",
+      "officeIds": [
+        "19443-village"
+      ],
+      "official": "https://www.vill.tabayama.yamanashi.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E5%B1%B1%E6%A2%A8%E7%9C%8C%E4%B8%B9%E6%B3%A2%E5%B1%B1%E6%9D%91"
+    }
+  },
+  "offices": {
+    "19201-city": {
+      "name": "甲府市役所",
+      "status": "verified",
+      "postalCode": "400-8585",
+      "address": "山梨県甲府市丸の内1-18-1"
+    },
+    "19202-city": {
+      "name": "富士吉田市役所",
+      "status": "verified",
+      "postalCode": "403-8601",
+      "address": "山梨県富士吉田市下吉田6-1-1"
+    },
+    "19204-city": {
+      "name": "都留市役所",
+      "status": "verified",
+      "postalCode": "402-8501",
+      "address": "山梨県都留市上谷1-1-1"
+    },
+    "19205-city": {
+      "name": "山梨市役所",
+      "status": "verified",
+      "postalCode": "405-8501",
+      "address": "山梨県山梨市小原西843"
+    },
+    "19206-city": {
+      "name": "大月市役所",
+      "status": "verified",
+      "postalCode": "401-8601",
+      "address": "山梨県大月市大月2-6-20"
+    },
+    "19207-city": {
+      "name": "韮崎市役所",
+      "status": "verified",
+      "postalCode": "407-8501",
+      "address": "山梨県韮崎市水神1-3-1"
+    },
+    "19208-city": {
+      "name": "南アルプス市役所",
+      "status": "verified",
+      "postalCode": "400-0395",
+      "address": "山梨県南アルプス市小笠原376"
+    },
+    "19209-city": {
+      "name": "北杜市役所",
+      "status": "verified",
+      "postalCode": "408-0188",
+      "address": "山梨県北杜市須玉町大豆生田961-1"
+    },
+    "19210-city": {
+      "name": "甲斐市役所",
+      "status": "verified",
+      "postalCode": "400-0192",
+      "address": "山梨県甲斐市篠原2610"
+    },
+    "19211-city": {
+      "name": "笛吹市役所",
+      "status": "verified",
+      "postalCode": "406-8510",
+      "address": "山梨県笛吹市石和町市部777"
+    },
+    "19212-city": {
+      "name": "上野原市役所",
+      "status": "verified",
+      "postalCode": "409-0192",
+      "address": "山梨県上野原市上野原3832"
+    },
+    "19213-city": {
+      "name": "甲州市役所",
+      "status": "verified",
+      "postalCode": "404-8501",
+      "address": "山梨県甲州市塩山上於曽1085番地1"
+    },
+    "19214-city": {
+      "name": "中央市役所",
+      "status": "verified",
+      "postalCode": "409-3892",
+      "address": "山梨県中央市臼井阿原301-1"
+    },
+    "19346-town": {
+      "name": "市川三郷町役場",
+      "status": "verified",
+      "postalCode": "409-3601",
+      "address": "山梨県西八代郡市川三郷町市川大門1790-3"
+    },
+    "19364-town": {
+      "name": "早川町役場",
+      "status": "verified",
+      "postalCode": "409-2732",
+      "address": "山梨県南巨摩郡早川町高住758"
+    },
+    "19365-town": {
+      "name": "身延町役場",
+      "status": "verified",
+      "postalCode": "409-3392",
+      "address": "山梨県南巨摩郡身延町切石350"
+    },
+    "19366-town": {
+      "name": "南部町役場",
+      "status": "verified",
+      "postalCode": "409-2192",
+      "address": "山梨県南巨摩郡南部町福士28505-2"
+    },
+    "19368-town": {
+      "name": "富士川町役場",
+      "status": "verified",
+      "postalCode": "400-0592",
+      "address": "山梨県南巨摩郡富士川町天神中条1134"
+    },
+    "19384-town": {
+      "name": "昭和町役場",
+      "status": "verified",
+      "postalCode": "409-3880",
+      "address": "山梨県中巨摩郡昭和町押越542-2"
+    },
+    "19422-village": {
+      "name": "道志村役場",
+      "status": "verified",
+      "postalCode": "402-0209",
+      "address": "山梨県南都留郡道志村6181-1"
+    },
+    "19423-town": {
+      "name": "西桂町役場",
+      "status": "verified",
+      "postalCode": "403-0022",
+      "address": "山梨県南都留郡西桂町小沼1500-1"
+    },
+    "19424-village": {
+      "name": "忍野村役場",
+      "status": "verified",
+      "postalCode": "401-0592",
+      "address": "山梨県南都留郡忍野村忍草1514"
+    },
+    "19425-village": {
+      "name": "山中湖村役場",
+      "status": "verified",
+      "postalCode": "401-0595",
+      "address": "山梨県南都留郡山中湖村山中237-1"
+    },
+    "19429-village": {
+      "name": "鳴沢村役場",
+      "status": "verified",
+      "postalCode": "401-0398",
+      "address": "山梨県南都留郡鳴沢村1575"
+    },
+    "19430-town": {
+      "name": "富士河口湖町役場",
+      "status": "verified",
+      "postalCode": "401-0392",
+      "address": "山梨県南都留郡富士河口湖町船津1700"
+    },
+    "19442-village": {
+      "name": "小菅村役場",
+      "status": "verified",
+      "postalCode": "409-0211",
+      "address": "山梨県北都留郡小菅村4698"
+    },
+    "19443-village": {
+      "name": "丹波山村役場",
+      "status": "verified",
+      "postalCode": "409-0300",
+      "address": "山梨県北都留郡丹波山村2450"
+    }
+  }
+}
