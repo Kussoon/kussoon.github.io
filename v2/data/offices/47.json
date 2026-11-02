@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "47",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kyuusyuu/cms_16814187.html",
+    "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+    "https://www.pref.okinawa.jp/kensei/shinko/1016703/1016705/1016773/1022609/1016816.html"
+  ],
+  "regions": {
+    "47201": {
+      "name": "那覇市",
+      "kind": "city",
+      "officeIds": [
+        "47201-city"
+      ],
+      "official": "https://www.city.naha.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%82%A3%E8%A6%87%E5%B8%82"
+    },
+    "47205": {
+      "name": "宜野湾市",
+      "kind": "city",
+      "officeIds": [
+        "47205-city"
+      ],
+      "official": "https://www.city.ginowan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E6%B9%BE%E5%B8%82"
+    },
+    "47207": {
+      "name": "石垣市",
+      "kind": "city",
+      "officeIds": [
+        "47207-city"
+      ],
+      "official": "https://www.city.ishigaki.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%9F%B3%E5%9E%A3%E5%B8%82"
+    },
+    "47208": {
+      "name": "浦添市",
+      "kind": "city",
+      "officeIds": [
+        "47208-city"
+      ],
+      "official": "https://www.city.urasoe.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B5%A6%E6%B7%BB%E5%B8%82"
+    },
+    "47209": {
+      "name": "名護市",
+      "kind": "city",
+      "officeIds": [
+        "47209-city"
+      ],
+      "official": "https://www.city.nago.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%90%8D%E8%AD%B7%E5%B8%82"
+    },
+    "47210": {
+      "name": "糸満市",
+      "kind": "city",
+      "officeIds": [
+        "47210-city"
+      ],
+      "official": "https://www.city.itoman.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B3%B8%E6%BA%80%E5%B8%82"
+    },
+    "47211": {
+      "name": "沖縄市",
+      "kind": "city",
+      "officeIds": [
+        "47211-city"
+      ],
+      "official": "https://www.city.okinawa.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B2%96%E7%B8%84%E5%B8%82"
+    },
+    "47212": {
+      "name": "豊見城市",
+      "kind": "city",
+      "officeIds": [
+        "47212-city"
+      ],
+      "official": "https://www.city.tomigusuku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%B8%82"
+    },
+    "47213": {
+      "name": "うるま市",
+      "kind": "city",
+      "officeIds": [
+        "47213-city"
+      ],
+      "official": "https://www.city.uruma.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E3%81%86%E3%82%8B%E3%81%BE%E5%B8%82"
+    },
+    "47214": {
+      "name": "宮古島市",
+      "kind": "city",
+      "officeIds": [
+        "47214-city"
+      ],
+      "official": "https://www.city.miyakojima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%AE%E5%8F%A4%E5%B3%B6%E5%B8%82"
+    },
+    "47215": {
+      "name": "南城市",
+      "kind": "city",
+      "officeIds": [
+        "47215-city"
+      ],
+      "official": "https://www.city.nanjo.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%9F%8E%E5%B8%82"
+    },
+    "47301": {
+      "name": "国頭村",
+      "kind": "village",
+      "officeIds": [
+        "47301-village"
+      ],
+      "official": "https://www.vill.kunigami.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%9B%BD%E9%A0%AD%E6%9D%91"
+    },
+    "47302": {
+      "name": "大宜味村",
+      "kind": "village",
+      "officeIds": [
+        "47302-village"
+      ],
+      "official": "https://www.vill.ogimi.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%A4%A7%E5%AE%9C%E5%91%B3%E6%9D%91"
+    },
+    "47303": {
+      "name": "東村",
+      "kind": "village",
+      "officeIds": [
+        "47303-village"
+      ],
+      "official": "https://www.vill.higashi.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9D%B1%E6%9D%91"
+    },
+    "47306": {
+      "name": "今帰仁村",
+      "kind": "village",
+      "officeIds": [
+        "47306-village"
+      ],
+      "official": "https://www.nakijin.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%BB%8A%E5%B8%B0%E4%BB%81%E6%9D%91"
+    },
+    "47308": {
+      "name": "本部町",
+      "kind": "town",
+      "officeIds": [
+        "47308-town"
+      ],
+      "official": "https://www.town.motobu.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%9C%AC%E9%83%A8%E7%94%BA"
+    },
+    "47311": {
+      "name": "恩納村",
+      "kind": "village",
+      "officeIds": [
+        "47311-village"
+      ],
+      "official": "https://www.vill.onna.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%81%A9%E7%B4%8D%E6%9D%91"
+    },
+    "47313": {
+      "name": "宜野座村",
+      "kind": "village",
+      "officeIds": [
+        "47313-village"
+      ],
+      "official": "https://www.vill.ginoza.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%AE%9C%E9%87%8E%E5%BA%A7%E6%9D%91"
+    },
+    "47314": {
+      "name": "金武町",
+      "kind": "town",
+      "officeIds": [
+        "47314-town"
+      ],
+      "official": "https://www.town.kin.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E9%87%91%E6%AD%A6%E7%94%BA"
+    },
+    "47315": {
+      "name": "伊江村",
+      "kind": "village",
+      "officeIds": [
+        "47315-village"
+      ],
+      "official": "https://www.iejima.org/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%BC%8A%E6%B1%9F%E6%9D%91"
+    },
+    "47324": {
+      "name": "読谷村",
+      "kind": "village",
+      "officeIds": [
+        "47324-village"
+      ],
+      "official": "https://www.vill.yomitan.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%AA%AD%E8%B0%B7%E6%9D%91"
+    },
+    "47325": {
+      "name": "嘉手納町",
+      "kind": "town",
+      "officeIds": [
+        "47325-town"
+      ],
+      "official": "https://www.town.kadena.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%98%89%E6%89%8B%E7%B4%8D%E7%94%BA"
+    },
+    "47326": {
+      "name": "北谷町",
+      "kind": "town",
+      "officeIds": [
+        "47326-town"
+      ],
+      "official": "https://www.chatan.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E8%B0%B7%E7%94%BA"
+    },
+    "47327": {
+      "name": "北中城村",
+      "kind": "village",
+      "officeIds": [
+        "47327-village"
+      ],
+      "official": "https://www.vill.kitanakagusuku.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E4%B8%AD%E5%9F%8E%E6%9D%91"
+    },
+    "47328": {
+      "name": "中城村",
+      "kind": "village",
+      "officeIds": [
+        "47328-village"
+      ],
+      "official": "https://www.vill.nakagusuku.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%B8%AD%E5%9F%8E%E6%9D%91"
+    },
+    "47329": {
+      "name": "西原町",
+      "kind": "town",
+      "officeIds": [
+        "47329-town"
+      ],
+      "official": "https://www.town.nishihara.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E8%A5%BF%E5%8E%9F%E7%94%BA"
+    },
+    "47348": {
+      "name": "与那原町",
+      "kind": "town",
+      "officeIds": [
+        "47348-town"
+      ],
+      "official": "https://www.town.yonabaru.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%B8%8E%E9%82%A3%E5%8E%9F%E7%94%BA"
+    },
+    "47350": {
+      "name": "南風原町",
+      "kind": "town",
+      "officeIds": [
+        "47350-town"
+      ],
+      "official": "https://www.town.haebaru.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E9%A2%A8%E5%8E%9F%E7%94%BA"
+    },
+    "47353": {
+      "name": "渡嘉敷村",
+      "kind": "village",
+      "officeIds": [
+        "47353-village"
+      ],
+      "official": "https://www.vill.tokashiki.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B8%A1%E5%98%89%E6%95%B7%E6%9D%91"
+    },
+    "47354": {
+      "name": "座間味村",
+      "kind": "village",
+      "officeIds": [
+        "47354-village"
+      ],
+      "official": "https://www.vill.zamami.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%BA%A7%E9%96%93%E5%91%B3%E6%9D%91"
+    },
+    "47355": {
+      "name": "粟国村",
+      "kind": "village",
+      "officeIds": [
+        "47355-village"
+      ],
+      "official": "https://www.vill.aguni.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%B2%9F%E5%9B%BD%E6%9D%91"
+    },
+    "47356": {
+      "name": "渡名喜村",
+      "kind": "village",
+      "officeIds": [
+        "47356-village"
+      ],
+      "official": "https://www.vill.tonaki.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E6%B8%A1%E5%90%8D%E5%96%9C%E6%9D%91"
+    },
+    "47357": {
+      "name": "南大東村",
+      "kind": "village",
+      "officeIds": [
+        "47357-village"
+      ],
+      "official": "https://www.vill.minamidaito.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8D%97%E5%A4%A7%E6%9D%B1%E6%9D%91"
+    },
+    "47358": {
+      "name": "北大東村",
+      "kind": "village",
+      "officeIds": [
+        "47358-village"
+      ],
+      "official": "https://vill.kitadaito.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%8C%97%E5%A4%A7%E6%9D%B1%E6%9D%91"
+    },
+    "47359": {
+      "name": "伊平屋村",
+      "kind": "village",
+      "officeIds": [
+        "47359-village"
+      ],
+      "official": "https://www.vill.iheya.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%BC%8A%E5%B9%B3%E5%B1%8B%E6%9D%91"
+    },
+    "47360": {
+      "name": "伊是名村",
+      "kind": "village",
+      "officeIds": [
+        "47360-village"
+      ],
+      "official": "https://vill.izena.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%BC%8A%E6%98%AF%E5%90%8D%E6%9D%91"
+    },
+    "47361": {
+      "name": "久米島町",
+      "kind": "town",
+      "officeIds": [
+        "47361-town"
+      ],
+      "official": "https://www.town.kumejima.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%B9%85%E7%B1%B3%E5%B3%B6%E7%94%BA"
+    },
+    "47362": {
+      "name": "八重瀬町",
+      "kind": "town",
+      "officeIds": [
+        "47362-town"
+      ],
+      "official": "https://www.town.yaese.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%85%AB%E9%87%8D%E7%80%AC%E7%94%BA"
+    },
+    "47375": {
+      "name": "多良間村",
+      "kind": "village",
+      "officeIds": [
+        "47375-village"
+      ],
+      "official": "https://www.vill.tarama.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E5%A4%9A%E8%89%AF%E9%96%93%E6%9D%91"
+    },
+    "47381": {
+      "name": "竹富町",
+      "kind": "town",
+      "officeIds": [
+        "47381-town"
+      ],
+      "official": "https://www.town.taketomi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E7%AB%B9%E5%AF%8C%E7%94%BA"
+    },
+    "47382": {
+      "name": "与那国町",
+      "kind": "town",
+      "officeIds": [
+        "47382-town"
+      ],
+      "official": "https://www.town.yonaguni.okinawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%B2%96%E7%B8%84%E7%9C%8C%E4%B8%8E%E9%82%A3%E5%9B%BD%E7%94%BA"
+    }
+  },
+  "offices": {
+    "47201-city": {
+      "name": "那覇市役所",
+      "status": "verified",
+      "postalCode": "900-8585",
+      "address": "沖縄県那覇市泉崎1-1-1"
+    },
+    "47205-city": {
+      "name": "宜野湾市役所",
+      "status": "verified",
+      "postalCode": "901-2710",
+      "address": "沖縄県宜野湾市野嵩1-1-1"
+    },
+    "47207-city": {
+      "name": "石垣市役所",
+      "status": "verified",
+      "postalCode": "907-8501",
+      "address": "沖縄県石垣市美崎町14"
+    },
+    "47208-city": {
+      "name": "浦添市役所",
+      "status": "verified",
+      "postalCode": "901-2501",
+      "address": "沖縄県浦添市安波茶1-1-1"
+    },
+    "47209-city": {
+      "name": "名護市役所",
+      "status": "verified",
+      "postalCode": "905-8540",
+      "address": "沖縄県名護市港1-1-1"
+    },
+    "47210-city": {
+      "name": "糸満市役所",
+      "status": "verified",
+      "postalCode": "901-0392",
+      "address": "沖縄県糸満市潮崎町1-1"
+    },
+    "47211-city": {
+      "name": "沖縄市役所",
+      "status": "verified",
+      "postalCode": "904-8501",
+      "address": "沖縄県沖縄市仲宗根町26-1"
+    },
+    "47212-city": {
+      "name": "豊見城市役所",
+      "status": "verified",
+      "postalCode": "901-0292",
+      "address": "沖縄県豊見城市宜保1-1-1"
+    },
+    "47213-city": {
+      "name": "うるま市役所",
+      "status": "verified",
+      "postalCode": "904-2292",
+      "address": "沖縄県うるま市みどり町1-1-1"
+    },
+    "47214-city": {
+      "name": "宮古島市役所",
+      "status": "verified",
+      "postalCode": "906-8501",
+      "address": "沖縄県宮古島市平良字西里1140"
+    },
+    "47215-city": {
+      "name": "南城市役所",
+      "status": "verified",
+      "postalCode": "901-1495",
+      "address": "沖縄県南城市佐敷字新里1870"
+    },
+    "47301-village": {
+      "name": "国頭村役場",
+      "status": "verified",
+      "postalCode": "905-1495",
+      "address": "沖縄県国頭郡国頭村字辺土名121"
+    },
+    "47302-village": {
+      "name": "大宜味村役場",
+      "status": "verified",
+      "postalCode": "905-1392",
+      "address": "沖縄県国頭郡大宜味村字大兼久157"
+    },
+    "47303-village": {
+      "name": "東村役場",
+      "status": "verified",
+      "postalCode": "905-1292",
+      "address": "沖縄県国頭郡東村字平良804"
+    },
+    "47306-village": {
+      "name": "今帰仁村役場",
+      "status": "verified",
+      "postalCode": "905-0492",
+      "address": "沖縄県国頭郡今帰仁村字仲宗根219"
+    },
+    "47308-town": {
+      "name": "本部町役場",
+      "status": "verified",
+      "postalCode": "905-0292",
+      "address": "沖縄県国頭郡本部町字東5"
+    },
+    "47311-village": {
+      "name": "恩納村役場",
+      "status": "verified",
+      "postalCode": "904-0492",
+      "address": "沖縄県国頭郡恩納村字恩納2451"
+    },
+    "47313-village": {
+      "name": "宜野座村役場",
+      "status": "verified",
+      "postalCode": "904-1392",
+      "address": "沖縄県国頭郡宜野座村字宜野座296"
+    },
+    "47314-town": {
+      "name": "金武町役場",
+      "status": "verified",
+      "postalCode": "904-1292",
+      "address": "沖縄県国頭郡金武町字金武1"
+    },
+    "47315-village": {
+      "name": "伊江村役場",
+      "status": "verified",
+      "postalCode": "905-0592",
+      "address": "沖縄県国頭郡伊江村字東江前38"
+    },
+    "47324-village": {
+      "name": "読谷村役場",
+      "status": "verified",
+      "postalCode": "904-0392",
+      "address": "沖縄県中頭郡読谷村字座喜味2901"
+    },
+    "47325-town": {
+      "name": "嘉手納町役場",
+      "status": "verified",
+      "postalCode": "904-0293",
+      "address": "沖縄県中頭郡嘉手納町字嘉手納588"
+    },
+    "47326-town": {
+      "name": "北谷町役場",
+      "status": "verified",
+      "postalCode": "904-0192",
+      "address": "沖縄県中頭郡北谷町桑江1-1-1"
+    },
+    "47327-village": {
+      "name": "北中城村役場",
+      "status": "verified",
+      "postalCode": "901-2392",
+      "address": "沖縄県中頭郡北中城村字喜舎場426-2"
+    },
+    "47328-village": {
+      "name": "中城村役場",
+      "status": "verified",
+      "postalCode": "901-2493",
+      "address": "沖縄県中頭郡中城村字当間585番地1"
+    },
+    "47329-town": {
+      "name": "西原町役場",
+      "status": "verified",
+      "postalCode": "903-0220",
+      "address": "沖縄県中頭郡西原町字与那城140-1"
+    },
+    "47348-town": {
+      "name": "与那原町役場",
+      "status": "verified",
+      "postalCode": "901-1392",
+      "address": "沖縄県島尻郡与那原町字上与那原16"
+    },
+    "47350-town": {
+      "name": "南風原町役場",
+      "status": "verified",
+      "postalCode": "901-1195",
+      "address": "沖縄県島尻郡南風原町字兼城686"
+    },
+    "47353-village": {
+      "name": "渡嘉敷村役場",
+      "status": "verified",
+      "postalCode": "901-3592",
+      "address": "沖縄県島尻郡渡嘉敷村字渡嘉敷183"
+    },
+    "47354-village": {
+      "name": "座間味村役場",
+      "status": "verified",
+      "postalCode": "901-3496",
+      "address": "沖縄県島尻郡座間味村座間味109"
+    },
+    "47355-village": {
+      "name": "粟国村役場",
+      "status": "verified",
+      "postalCode": "901-3702",
+      "address": "沖縄県島尻郡粟国村字東483番地"
+    },
+    "47356-village": {
+      "name": "渡名喜村役場",
+      "status": "verified",
+      "postalCode": "901-3692",
+      "address": "沖縄県島尻郡渡名喜村1917-3"
+    },
+    "47357-village": {
+      "name": "南大東村役場",
+      "status": "verified",
+      "postalCode": "901-3895",
+      "address": "沖縄県島尻郡南大東村字南144-1"
+    },
+    "47358-village": {
+      "name": "北大東村役場",
+      "status": "verified",
+      "postalCode": "901-3992",
+      "address": "沖縄県島尻郡北大東村字中野218"
+    },
+    "47359-village": {
+      "name": "伊平屋村役場",
+      "status": "verified",
+      "postalCode": "905-0793",
+      "address": "沖縄県島尻郡伊平屋村字我喜屋251"
+    },
+    "47360-village": {
+      "name": "伊是名村役場",
+      "status": "verified",
+      "postalCode": "905-0695",
+      "address": "沖縄県島尻郡伊是名村字仲田1687番地22"
+    },
+    "47361-town": {
+      "name": "久米島町役場",
+      "status": "verified",
+      "postalCode": "901-3193",
+      "address": "沖縄県島尻郡久米島町字比嘉2870"
+    },
+    "47362-town": {
+      "name": "八重瀬町役場",
+      "status": "verified",
+      "postalCode": "901-0492",
+      "address": "沖縄県島尻郡八重瀬町字東風平1188"
+    },
+    "47375-village": {
+      "name": "多良間村役場",
+      "status": "verified",
+      "postalCode": "906-0692",
+      "address": "沖縄県宮古郡多良間村字仲筋99-2"
+    },
+    "47381-town": {
+      "name": "竹富町役場",
+      "status": "verified",
+      "postalCode": "907-8503",
+      "address": "沖縄県石垣市美崎町11-1"
+    },
+    "47382-town": {
+      "name": "与那国町役場",
+      "status": "verified",
+      "postalCode": "907-1801",
+      "address": "沖縄県八重山郡与那国町字与那国129"
+    }
+  }
+}
