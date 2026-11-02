@@ -3,7 +3,7 @@
   "title": "Kussoon V2 全国公式サイトURL監査（進行中）",
   "createdAt": "2026-11-03",
   "repository": "Kussoon/kussoon.github.io",
-  "sourceRef": "main as of 2026-11-03 (PR #206, #207, and #208 merged; municipalities 29453, 01518, and 30383 URLs corrected)",
+  "sourceRef": "main as of 2026-11-03 (PR #206, #207, #208, and #209 merged; municipalities 29453, 01518, 30383, and 45206 URLs corrected)",
   "scope": "v2/data/offices/01.json～47.json の regions。庁舎情報の登録区域数を基準とし、地図区域数とは区別。",
   "status": "in_progress",
   "methodology": {
@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 53,
+      "A": 57,
       "B": 0,
-      "C": 5,
+      "C": 1,
       "unclassified": 1854
     },
     "completedRegionReviews": 58,
     "pendingExisting61Reconciliation": 3,
     "unreviewedOtherRegions": 1851,
     "totalCheck": 1912,
-    "reconciliationNote": "PR #205の既存53件（A48/C5）を保持。追加8件のうち5件A（うち由良町はPR #208修正後にA）・3件は公式性/利用可能性が確定せず未判定。次段階は残る1,851区域。"
+    "reconciliationNote": "PR #205の既存監査を保持。追加8件のうち5件はA（由良町はPR #208修正後にA）、3件は未判定。既存C5件のうち蘭越町・御宿町・指宿市は現行公式ページを再確認してAへ、日向市はPR #209で登録URLを現行公式ドメインへ修正し、停止案内を公式性と通常利用可能性に分けてAとした。寿都町はC。次段階は未監査の残る1,851区域。"
   },
   "records": [
     {
@@ -1206,12 +1206,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.rankoshi.hokkaido.jp/",
-      "classification": "C",
+      "classification": "A",
       "auditStatus": "reviewed",
-      "verifiedOfficialUrl": null,
+      "verifiedOfficialUrl": "https://www.town.rankoshi.hokkaido.jp/",
       "evidenceUrls": [
         "https://www.town.rankoshi.hokkaido.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.town.rankoshi.hokkaido.jp/administration/"
       ],
       "connectivity": {
         "status": 403,
@@ -1220,10 +1221,12 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "documented_user_browser_notice"
+        "documented_user_browser_notice",
+        "current_official_homepage_search",
+        "current_official_news_review"
       ],
-      "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "公式ドメインの一時停止・メンテナンス案内を確認。通常サイトは利用できず、通常サイトの復旧先・恒久URLの状況は未確認。 最新記録上の判定=Aは現在URLの利用可能性基準によって再評価。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "現行登録先の蘭越町公式サイトおよび行政情報ページに、2026年10月のお知らせ、町役場情報、町の案内が掲載されていることを再確認。以前の停止案内記録のみを根拠にCを維持せずAへ変更。 接続評価: この監査環境からの直接取得は403。公式サイトの最新検索取得結果で現行ページ内容を確認。"
     },
     {
       "prefectureCode": "01",
@@ -11497,12 +11500,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.onjuku.chiba.jp/",
-      "classification": "C",
+      "classification": "A",
       "auditStatus": "reviewed",
-      "verifiedOfficialUrl": null,
+      "verifiedOfficialUrl": "https://www.town.onjuku.chiba.jp/",
       "evidenceUrls": [
         "https://www.town.onjuku.chiba.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.town.onjuku.chiba.jp/top.html"
       ],
       "connectivity": {
         "status": 503,
@@ -11511,10 +11515,12 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "documented_user_browser_notice"
+        "documented_user_browser_notice",
+        "current_official_homepage_search",
+        "current_official_news_review"
       ],
-      "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "公式ドメインの一時停止・メンテナンス案内を確認。通常サイトは利用できず、通常サイトの復旧先・恒久URLの状況は未確認。 最新記録上の判定=Aは現在URLの利用可能性基準によって再評価。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "現行登録先の御宿町公式サイトおよびトップページに、2026年10月のお知らせ、町役場情報、法人番号が掲載されていることを再確認。以前の停止案内記録のみを根拠にCを維持せずAへ変更。 接続評価: この監査環境からの直接取得はタイムアウト。公式サイトの最新検索取得結果で現行ページ内容を確認。"
     },
     {
       "prefectureCode": "12",
@@ -31403,15 +31409,16 @@
       "municipalityCode": "45206",
       "kind": "city",
       "parentCode": null,
-      "registeredUrl": "https://www.city.hyuga.miyazaki.jp/",
-      "classification": "C",
+      "registeredUrl": "https://www.hyugacity.jp/",
+      "classification": "A",
       "auditStatus": "reviewed",
-      "verifiedOfficialUrl": null,
+      "verifiedOfficialUrl": "https://www.hyugacity.jp/",
       "evidenceUrls": [
         "https://www.city.hyuga.miyazaki.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
         "https://www.hyugacity.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.hyugacity.jp/tempimg/20260611184204.pdf"
       ],
       "connectivity": {
         "status": null,
@@ -31420,10 +31427,12 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "temporary_official_notice"
+        "temporary_official_notice",
+        "official_site_stop_notice",
+        "current_official_url_from_merged_pr"
       ],
-      "checkedAt": "2026-11-03 (user-provided Safari screenshots; precise capture time unavailable)",
-      "notes": "登録URLの正常利用は確認できず、自治体の臨時ページのみ確認。通常の公式サイトURLが確定できない。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "PR #209でmainの登録URLを現行公式ドメイン https://www.hyugacity.jp/ に修正。市公式ホームページ上のセキュリティ対応による停止案内と、市公式リニューアル業務仕様書に記載の現行URLを照合。URLの公式性を確認したためA。通常サービスは停止中で再開時期未定であり、利用可能性は停止中として別記。"
     },
     {
       "prefectureCode": "45",
@@ -31858,12 +31867,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ibusuki.lg.jp/",
-      "classification": "C",
+      "classification": "A",
       "auditStatus": "reviewed",
-      "verifiedOfficialUrl": null,
+      "verifiedOfficialUrl": "https://www.city.ibusuki.lg.jp/",
       "evidenceUrls": [
         "https://www.city.ibusuki.lg.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.city.ibusuki.lg.jp/main/"
       ],
       "connectivity": {
         "status": 503,
@@ -31872,10 +31882,12 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "documented_user_browser_notice"
+        "documented_user_browser_notice",
+        "official_homepage_direct_browser",
+        "current_official_news_review"
       ],
-      "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "公式ドメインの一時停止・メンテナンス案内を確認。通常サイトは利用できず、通常サイトの復旧先・恒久URLの状況は未確認。 最新記録上の判定=Aは現在URLの利用可能性基準によって再評価。"
+      "checkedAt": "2026-11-03 JST",
+      "notes": "現行登録先を指宿市公式サイトとして直接取得。市役所住所・電話番号に加え、2026年10月の最新情報を確認。A。 接続評価: HTTP 200相当で公式トップページを直接取得。"
     },
     {
       "prefectureCode": "46",
@@ -33214,5 +33226,5 @@
       "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
     }
   ],
-  "updatedAt": "2026-11-03 JST"
+  "updatedAt": "2026-11-03"
 }
