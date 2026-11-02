@@ -1,0 +1,1553 @@
+{
+  "asOf": "2026-11-02",
+  "observedBetween": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+  "scope": "PR #188 review items 79件からPR #189-#192で修正した18コードを自治体コードで除外した残り61件",
+  "sourceAudit": "v2/audit/official-url-reachability-20261102.json and v2/audit/official-url-reachability-20261102-summary.json",
+  "counts": {
+    "total": 61,
+    "A": 6,
+    "B": 9,
+    "C": 46
+  },
+  "method": "各登録URLを実ブラウザで1回ずつ開いて可視ページ・遷移先を確認。読み込みできない場合は自治体の公式情報・公式ページの確認を行った。HTTP/TLS/ネットワークエラーのみで廃止と断定していない。",
+  "results": [
+    {
+      "prefecture": "長野県",
+      "municipality": "北相木村",
+      "municipalityCode": "20307",
+      "registeredUrl": "https://vill.kitaaiki.nagano.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://vill.kitaaiki.nagano.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "宮崎県",
+      "municipality": "日向市",
+      "municipalityCode": "45206",
+      "registeredUrl": "https://www.city.hyuga.miyazaki.jp/",
+      "browserResult": "登録URLは実ブラウザで接続できず、自治体が案内する臨時サイトはシステム障害対応中。通常の公式ホームページ現行URLと確定できないため保留。 調査候補: https://www.hyugacity.jp/ (公式臨時ページ; システム障害告知)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [Errno 111] Connection refused>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://www.hyugacity.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.city.hyuga.miyazaki.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "鹿児島県",
+      "municipality": "指宿市",
+      "municipalityCode": "46210",
+      "registeredUrl": "https://www.city.ibusuki.lg.jp/",
+      "browserResult": "自治体公式の「サービス一時停止のお知らせ」を表示。セキュリティ措置による全サービス停止が案内されており、恒久移転と区別できないため保留。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: HTTP 503 (server_error): Service Temporarily Unavailable"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": 503,
+        "result": "server_error",
+        "error": "Service Temporarily Unavailable"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.city.ibusuki.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "municipality": "神埼市",
+      "municipalityCode": "41210",
+      "registeredUrl": "https://www.city.kanzaki.saga.jp/",
+      "browserResult": "登録URLのブラウザ遷移がタイムアウト。自治体公式ページを確認できず、URL移転とも判断できないため保留。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.city.kanzaki.saga.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "秋田県",
+      "municipality": "北秋田市",
+      "municipalityCode": "05213",
+      "registeredUrl": "https://www.city.kitaakita.akita.jp/",
+      "browserResult": "北秋田市公式サイトを表示。行政情報への移動後、北秋田市のサイト名を確認。",
+      "finalUrl": "https://www.city.kitaakita.akita.jp/genre/shisei",
+      "classification": "A",
+      "evidence": [
+        "現登録URLをブラウザで表示でき、自治体の公式ページと確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.kitaakita.akita.jp/genre/shisei",
+      "machineCheck": {
+        "status": 403,
+        "result": "restricted",
+        "error": "Forbidden"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。",
+      "evidenceUrls": [
+        "https://www.city.kitaakita.akita.jp/",
+        "https://www.city.kitaakita.akita.jp/genre/shisei"
+      ]
+    },
+    {
+      "prefecture": "三重県",
+      "municipality": "熊野市",
+      "municipalityCode": "24212",
+      "registeredUrl": "https://www.city.kumano.mie.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.city.kumano.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.city.kumano.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで熊野市トップを表示。市の公式コンテンツ、熊野市役所の住所・電話を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.kumano.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.city.kumano.mie.jp/",
+        "https://www.city.kumano.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "岐阜県",
+      "municipality": "中津川市",
+      "municipalityCode": "21206",
+      "registeredUrl": "https://www.city.nakatsugawa.gifu.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.city.nakatsugawa.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.city.nakatsugawa.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「ホーム／中津川市」を表示。中津川市の市役所案内・所在地と市公式ページを確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.nakatsugawa.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.city.nakatsugawa.gifu.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.city.nakatsugawa.gifu.jp/",
+        "https://www.city.nakatsugawa.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "山形県",
+      "municipality": "南陽市",
+      "municipalityCode": "06213",
+      "registeredUrl": "https://www.city.nanyo.yamagata.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.city.nanyo.yamagata.jp'. (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.city.nanyo.yamagata.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.city.nanyo.yamagata.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "名寄市",
+      "municipalityCode": "01221",
+      "registeredUrl": "https://www.city.nayoro.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.city.nayoro.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "福岡県",
+      "municipality": "直方市",
+      "municipalityCode": "40204",
+      "registeredUrl": "https://www.city.nogata.fukuoka.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.city.nogata.fukuoka.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "栃木県",
+      "municipality": "大田原市",
+      "municipalityCode": "09210",
+      "registeredUrl": "https://www.city.ohtawara.tochigi.jp/",
+      "browserResult": "大田原市公式トップページを表示。自治体名を確認。",
+      "finalUrl": "https://www.city.ohtawara.tochigi.jp/",
+      "classification": "A",
+      "evidence": [
+        "現登録URLをブラウザで表示でき、自治体の公式ページと確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.ohtawara.tochigi.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。",
+      "evidenceUrls": [
+        "https://www.city.ohtawara.tochigi.jp/"
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "municipality": "鹿島市",
+      "municipalityCode": "41207",
+      "registeredUrl": "https://www.city.saga-kashima.lg.jp/",
+      "browserResult": "登録URLのブラウザ遷移がタイムアウト。自治体公式ページを確認できず、URL移転とも判断できないため保留.",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.city.saga-kashima.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "岐阜県",
+      "municipality": "関市",
+      "municipalityCode": "21205",
+      "registeredUrl": "https://www.city.seki.gifu.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.city.seki.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.city.seki.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「関市役所公式ホームページ」を表示。関市の法人番号・役所住所・連絡先を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.seki.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.city.seki.gifu.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.city.seki.gifu.jp/",
+        "https://www.city.seki.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "高知県",
+      "municipality": "四万十市",
+      "municipalityCode": "39210",
+      "registeredUrl": "https://www.city.shimanto.lg.jp/",
+      "browserResult": "四万十市公式トップページを表示。自治体名を確認。",
+      "finalUrl": "https://www.city.shimanto.lg.jp/",
+      "classification": "A",
+      "evidence": [
+        "現登録URLをブラウザで表示でき、自治体の公式ページと確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.shimanto.lg.jp/",
+      "machineCheck": {
+        "status": 503,
+        "result": "server_error",
+        "error": "Service Unavailable"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。",
+      "evidenceUrls": [
+        "https://www.city.shimanto.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "群馬県",
+      "municipality": "富岡市",
+      "municipalityCode": "10210",
+      "registeredUrl": "https://www.city.tomioka.lg.jp/",
+      "browserResult": "富岡市ホームページへ同一ドメイン内で転送し、現行トップページと市役所情報を確認。",
+      "finalUrl": "https://www.city.tomioka.lg.jp/www/index.html",
+      "classification": "A",
+      "evidence": [
+        "現登録URLをブラウザで表示でき、自治体の公式ページと確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.tomioka.lg.jp/www/index.html",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_ALERT_INSUFFICIENT_SECURITY] tlsv1 alert insufficient security (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。",
+      "evidenceUrls": [
+        "https://www.city.tomioka.lg.jp/",
+        "https://www.city.tomioka.lg.jp/www/index.html"
+      ]
+    },
+    {
+      "prefecture": "奈良県",
+      "municipality": "大和郡山市",
+      "municipalityCode": "29203",
+      "registeredUrl": "https://www.city.yamatokoriyama.nara.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.city.yamatokoriyama.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.city.yamatokoriyama.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「ホーム／大和郡山市」を表示。大和郡山市役所の住所・電話を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.city.yamatokoriyama.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.city.yamatokoriyama.nara.jp/",
+        "https://www.city.yamatokoriyama.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "黒松内町",
+      "municipalityCode": "01393",
+      "registeredUrl": "https://www.kuromatsunai.com/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.kuromatsunai.com/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "様似町",
+      "municipalityCode": "01608",
+      "registeredUrl": "https://www.samani.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.samani.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "長野県",
+      "municipality": "阿南町",
+      "municipalityCode": "20404",
+      "registeredUrl": "https://www.town.anan.nagano.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.anan.nagano.jp'. (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.anan.nagano.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.anan.nagano.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "秩父別町",
+      "municipalityCode": "01434",
+      "registeredUrl": "https://www.town.chippubetsu.hokkaido.jp/",
+      "browserResult": "登録URLのブラウザ遷移がタイムアウト。別の現行URLを自治体または道の一次資料から確認できず保留。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.chippubetsu.hokkaido.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "浜頓別町",
+      "municipalityCode": "01512",
+      "registeredUrl": "https://www.town.hamatonbetsu.hokkaido.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.hamatonbetsu.hokkaido.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "山形県",
+      "municipality": "飯豊町",
+      "municipalityCode": "06403",
+      "registeredUrl": "https://www.town.iide.yamagata.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（HTTP 502 server_error）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: HTTP 502 (server_error): Bad Gateway"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": 502,
+        "result": "server_error",
+        "error": "Bad Gateway"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.iide.yamagata.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "岐阜県",
+      "municipality": "池田町",
+      "municipalityCode": "21404",
+      "registeredUrl": "https://www.town.ikeda.gifu.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.town.gifu-ikeda.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.town.gifu-ikeda.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「岐阜県揖斐郡池田町」を表示。池田町の所在地・代表電話・2026年11月2日更新情報を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.town.gifu-ikeda.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.town.ikeda.gifu.jp/",
+        "https://www.town.gifu-ikeda.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "徳島県",
+      "municipality": "板野町",
+      "municipalityCode": "36404",
+      "registeredUrl": "https://www.town.itano.tokushima.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.itano.tokushima.jp'. (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.itano.tokushima.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.itano.tokushima.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "群馬県",
+      "municipality": "甘楽町",
+      "municipalityCode": "10384",
+      "registeredUrl": "https://www.town.kanra.gunma.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.town.kanra.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.town.kanra.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「甘楽町公式ホームページ」を表示。甘楽町役場の所在地・電話と2026年11月1日更新情報を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.town.kanra.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.kanra.gunma.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.town.kanra.gunma.jp/",
+        "https://www.town.kanra.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "清里町",
+      "municipalityCode": "01546",
+      "registeredUrl": "https://www.town.kiyosato.hokkaido.jp/",
+      "browserResult": "北海道清里町ホームページを表示。自治体公式サイトの内容を確認。",
+      "finalUrl": "https://www.town.kiyosato.hokkaido.jp/",
+      "classification": "A",
+      "evidence": [
+        "現登録URLをブラウザで表示でき、自治体の公式ページと確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.town.kiyosato.hokkaido.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。",
+      "evidenceUrls": [
+        "https://www.town.kiyosato.hokkaido.jp/"
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "municipality": "江北町",
+      "municipalityCode": "41424",
+      "registeredUrl": "https://www.town.kouhoku.saga.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.kouhoku.saga.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "和歌山県",
+      "municipality": "古座川町",
+      "municipalityCode": "30424",
+      "registeredUrl": "https://www.town.kozagawa.wakayama.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.town.kozagawa.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.town.kozagawa.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「古座川町役場ホームページ」を表示。2026年度の町のお知らせと古座川町役場住所を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.town.kozagawa.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.kozagawa.wakayama.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.town.kozagawa.wakayama.jp/",
+        "https://www.town.kozagawa.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "京都府",
+      "municipality": "久御山町",
+      "municipalityCode": "26322",
+      "registeredUrl": "https://www.town.kumiyama.kyoto.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.town.kumiyama.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.town.kumiyama.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「久御山町ホームページ」を表示。町役場所在地・電話と2026年11月2日更新情報を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.town.kumiyama.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.town.kumiyama.kyoto.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.town.kumiyama.kyoto.jp/",
+        "https://www.town.kumiyama.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "釧路町",
+      "municipalityCode": "01661",
+      "registeredUrl": "https://www.town.kushiro.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.kushiro.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "共和町",
+      "municipalityCode": "01401",
+      "registeredUrl": "https://www.town.kyowa.hokkaido.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.kyowa.hokkaido.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "和歌山県",
+      "municipality": "美浜町",
+      "municipalityCode": "30381",
+      "registeredUrl": "https://www.town.mihama.wakayama.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error timed out>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.mihama.wakayama.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "鹿児島県",
+      "municipality": "南種子町",
+      "municipalityCode": "46502",
+      "registeredUrl": "https://www.town.minamitane.kagoshima.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: http://town.minamitane.kagoshima.jp/index.html (鹿児島県公式リンクの候補; ブラウザ確認できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "http://town.minamitane.kagoshima.jp/index.html",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.minamitane.kagoshima.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "municipality": "みやき町",
+      "municipalityCode": "41346",
+      "registeredUrl": "https://www.town.miyaki.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.miyaki.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "千葉県",
+      "municipality": "御宿町",
+      "municipalityCode": "12443",
+      "registeredUrl": "https://www.town.onjuku.chiba.jp/",
+      "browserResult": "自治体公式ページが「緊急メンテナンス実施中」と表示。町運営サイトの一時メンテナンス告知のため保留。 調査候補: https://town.onjuku.chiba.jp/ (wwwなし候補; 登録先が自治体のメンテナンス表示のため保留)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: HTTP 503 (server_error): Service Unavailable"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://town.onjuku.chiba.jp/",
+      "machineCheck": {
+        "status": 503,
+        "result": "server_error",
+        "error": "Service Unavailable"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.onjuku.chiba.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "青森県",
+      "municipality": "大鰐町",
+      "municipalityCode": "02362",
+      "registeredUrl": "https://www.town.owani.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.owani.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "蘭越町",
+      "municipalityCode": "01394",
+      "registeredUrl": "https://www.town.rankoshi.hokkaido.jp/",
+      "browserResult": "登録ドメインに蘭越町の臨時案内ページを表示。アクセス制限・暫定ページの可能性があり、恒久URL変更と断定せず保留。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: HTTP 403 (restricted): Forbidden"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": 403,
+        "result": "restricted",
+        "error": "Forbidden"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.rankoshi.hokkaido.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "利尻町",
+      "municipalityCode": "01518",
+      "registeredUrl": "https://www.town.rishiri.hokkaido.jp/",
+      "browserResult": "登録URLのブラウザ遷移がタイムアウト。自治体公式サイトが現在も運用中か判定できるページを取得できず保留。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.rishiri.hokkaido.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "せたな町",
+      "municipalityCode": "01371",
+      "registeredUrl": "https://www.town.setana.lg.jp/",
+      "browserResult": "自治体公式ページにホームページ一時停止のお知らせを表示。一時的な停止のため保留。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: HTTP 503 (server_error): Service Unavailable"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": 503,
+        "result": "server_error",
+        "error": "Service Unavailable"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.setana.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "積丹町",
+      "municipalityCode": "01405",
+      "registeredUrl": "https://www.town.shakotan.hokkaido.jp/",
+      "browserResult": "登録URLはブラウザで接続不可またはTLSエラー。現行候補 https://www.town.shakotan.lg.jp/ は実ブラウザで自治体公式ページとして表示。",
+      "finalUrl": "https://www.town.shakotan.lg.jp/",
+      "classification": "B",
+      "evidence": [
+        "実ブラウザで「北海道積丹町ホームページ」を表示。2026年11月1日の新着情報、積丹町役場住所・電話を確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.town.shakotan.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLの到達性に問題があり、別の現行公式ページが実ブラウザで表示され、自治体名称・役場情報を確認できたためURL修正が必要。",
+      "evidenceUrls": [
+        "https://www.town.shakotan.hokkaido.jp/",
+        "https://www.town.shakotan.lg.jp/"
+      ]
+    },
+    {
+      "prefecture": "佐賀県",
+      "municipality": "白石町",
+      "municipalityCode": "41425",
+      "registeredUrl": "https://www.town.shiroishi.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.shiroishi.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "寿都町",
+      "municipalityCode": "01392",
+      "registeredUrl": "https://www.town.suttu.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.suttu.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "兵庫県",
+      "municipality": "多可町",
+      "municipalityCode": "28365",
+      "registeredUrl": "https://www.town.taka.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.taka.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "苫前町",
+      "municipalityCode": "01483",
+      "registeredUrl": "https://www.town.tomamae.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://town.tomamae.lg.jp/ (wwwなし; 公的機関のリンク候補; ブラウザ確認できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://town.tomamae.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.tomamae.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "洞爺湖町",
+      "municipalityCode": "01584",
+      "registeredUrl": "https://www.town.toyako.hokkaido.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://www.town.toyako.lg.jp/ (現行候補ページはブラウザから取得できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://www.town.toyako.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.toyako.hokkaido.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "高知県",
+      "municipality": "東洋町",
+      "municipalityCode": "39301",
+      "registeredUrl": "https://www.town.toyo.kochi.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://town.toyo.kochi.jp/ (wwwなしの候補; ブラウザから取得できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error timed out>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://town.toyo.kochi.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.toyo.kochi.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "浦河町",
+      "municipalityCode": "01607",
+      "registeredUrl": "https://www.town.urakawa.hokkaido.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://town.urakawa.hokkaido.jp/ (wwwなし; ブラウザ確認できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://town.urakawa.hokkaido.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.urakawa.hokkaido.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "和歌山県",
+      "municipality": "日高町",
+      "municipalityCode": "30382",
+      "registeredUrl": "https://www.town.wakayama-hidaka.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://town.wakayama-hidaka.lg.jp/ (wwwなしの候補; ブラウザから取得できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error timed out>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://town.wakayama-hidaka.lg.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.wakayama-hidaka.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "宮城県",
+      "municipality": "涌谷町",
+      "municipalityCode": "04501",
+      "registeredUrl": "https://www.town.wakuya.miyagi.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（HTTP 502 server_error）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://www.town.wakuya.miyagi.jp/ (現登録URLに502ページ; 自治体ページを取得できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: HTTP 502 (server_error): Bad Gateway"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://www.town.wakuya.miyagi.jp/",
+      "machineCheck": {
+        "status": 502,
+        "result": "server_error",
+        "error": "Bad Gateway"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.wakuya.miyagi.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "埼玉県",
+      "municipality": "横瀬町",
+      "municipalityCode": "11361",
+      "registeredUrl": "https://www.town.yokoze.saitama.jp/",
+      "browserResult": "埼玉県横瀬町公式ホームページを表示。自治体名を確認。",
+      "finalUrl": "https://www.town.yokoze.saitama.jp/",
+      "classification": "A",
+      "evidence": [
+        "現登録URLをブラウザで表示でき、自治体の公式ページと確認。"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://www.town.yokoze.saitama.jp/",
+      "machineCheck": {
+        "status": 403,
+        "result": "restricted",
+        "error": "Forbidden"
+      },
+      "browserChecked": true,
+      "classificationReason": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。",
+      "evidenceUrls": [
+        "https://www.town.yokoze.saitama.jp/"
+      ]
+    },
+    {
+      "prefecture": "和歌山県",
+      "municipality": "由良町",
+      "municipalityCode": "30383",
+      "registeredUrl": "https://www.town.yura.wakayama.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error timed out>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.town.yura.wakayama.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "北海道",
+      "municipality": "浦幌町",
+      "municipalityCode": "01649",
+      "registeredUrl": "https://www.urahoro.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: TimeoutError: The read operation timed out"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "TimeoutError: The read operation timed out"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.urahoro.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "東京都",
+      "municipality": "青ヶ島村",
+      "municipalityCode": "13402",
+      "registeredUrl": "https://www.vill.aogashima.tokyo.jp/",
+      "browserResult": "登録HTTPSルートと東京側案内のHTTP /top.html のどちらも、実ブラウザでは自治体サイトの「お探しのページを表示できません」となった。URL候補を確定できず保留。 調査候補: http://www.vill.aogashima.tokyo.jp/top.html (東京都の公式案内候補; ブラウザでは404表示)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: HTTP 503 (server_error): Service Temporarily Unavailable"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "http://www.vill.aogashima.tokyo.jp/top.html",
+      "machineCheck": {
+        "status": 503,
+        "result": "server_error",
+        "error": "Service Temporarily Unavailable"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.aogashima.tokyo.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "島根県",
+      "municipality": "知夫村",
+      "municipalityCode": "32527",
+      "registeredUrl": "https://www.vill.chibu.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.chibu.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "山梨県",
+      "municipality": "道志村",
+      "municipalityCode": "19422",
+      "registeredUrl": "https://www.vill.doshi.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error timed out>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.doshi.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "青森県",
+      "municipality": "東通村",
+      "municipalityCode": "02424",
+      "registeredUrl": "https://www.vill.higashidoori.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.higashidoori.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "奈良県",
+      "municipality": "東吉野村",
+      "municipalityCode": "29453",
+      "registeredUrl": "https://www.vill.higashiyoshino.nara.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://vill.higashiyoshino.nara.jp/ (wwwなし候補; ブラウザ確認できず)",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.vill.higashiyoshino.nara.jp'. (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "candidateUrl": "https://vill.higashiyoshino.nara.jp/",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.vill.higashiyoshino.nara.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.higashiyoshino.nara.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "青森県",
+      "municipality": "田舎館村",
+      "municipalityCode": "02367",
+      "registeredUrl": "https://www.vill.inakadate.lg.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.inakadate.lg.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "山梨県",
+      "municipality": "小菅村",
+      "municipalityCode": "19442",
+      "registeredUrl": "https://www.vill.kosuge.yamanashi.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error timed out>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error timed out>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.kosuge.yamanashi.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "長野県",
+      "municipality": "栄村",
+      "municipalityCode": "20602",
+      "registeredUrl": "https://www.vill.sakae.nagano.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.vill.sakae.nagano.jp'. (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.vill.sakae.nagano.jp'. (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.sakae.nagano.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    },
+    {
+      "prefecture": "岡山県",
+      "municipality": "新庄村",
+      "municipalityCode": "33586",
+      "registeredUrl": "https://www.vill.shinjo.okayama.jp/",
+      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。",
+      "finalUrl": null,
+      "classification": "C",
+      "evidence": [
+        "PR #188の通信検査: URLError: <urlopen error [SSL] record layer failure (_ssl.c:1010)>"
+      ],
+      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+      "machineCheck": {
+        "status": null,
+        "result": "network_or_other",
+        "error": "URLError: <urlopen error [SSL] record layer failure (_ssl.c:1010)>"
+      },
+      "browserChecked": true,
+      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "evidenceUrls": [
+        "https://www.vill.shinjo.okayama.jp/",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ]
+    }
+  ],
+  "remediationPR": {
+    "number": 193,
+    "url": "https://github.com/Kussoon/kussoon.github.io/pull/193",
+    "status": "merged",
+    "changedOfficialUrlCount": 9
+  }
+}
