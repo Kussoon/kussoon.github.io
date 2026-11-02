@@ -25,6 +25,16 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 .map-locator{margin-top:10px;display:none}.map-locator.show{display:block}
 .map-locator svg{max-width:260px;touch-action:auto}
 .locator-pref{fill:#b8d9ea;stroke:#fff;stroke-width:1}.locator-pref.active{fill:#f5a73a}
+.quiz-panel{border:2px solid #9cc6dd;background:#f7fbff}
+.quiz-action{font:inherit;background:#fff;color:#17435d;border:1px solid #96b5cb;border-radius:8px;padding:9px 12px;min-height:44px;font-weight:700;cursor:pointer}
+.quiz-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+.quiz-choices button{font:inherit;text-align:left;white-space:normal;min-height:54px;padding:10px;border:1px solid #9bbbd0;background:white;border-radius:9px;color:#143e58;font-weight:700}
+.quiz-choices button:disabled{opacity:1}
+.quiz-choices button.correct{background:#dcf5e6;border-color:#3b9271}
+.quiz-choices button.incorrect{background:#ffe4e1;border-color:#c9625c}
+.quiz-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.quiz-panel [hidden]{display:none!important}
+@media(max-width:480px){.quiz-choices{grid-template-columns:1fr}}
 @media(max-width:600px){main{padding:10px 8px 36px}.panel{padding:11px}}
 </style></head><body><main>
 <a href="../">← V2 試作一覧</a>
@@ -62,6 +72,21 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 <svg id="locator" viewBox="0 0 850 700" role="img" aria-label="都道府県の全国位置"></svg>
 </div>
 </section>
+<section class="panel quiz-panel" id="quizPanel">
+<h2>市区町村名・場所当てクイズ</h2>
+<p>都道府県を選択すると、その地域の市区町村を使って10問の4択クイズに挑戦できます。オレンジ色で示した区域の名前を選んでください。</p>
+<div class="quiz-controls">
+<button class="quiz-action" type="button" id="quizStart" disabled>この都道府県でクイズ開始</button>
+<button class="quiz-action" type="button" id="quizStop" hidden>クイズを終了</button>
+</div>
+<div id="quizPlay" hidden>
+<p id="quizProgress" aria-live="polite"></p>
+<p id="quizQuestion"><strong>オレンジ色の区域はどこでしょう？</strong></p>
+<div class="quiz-choices" id="quizChoices" role="group" aria-label="4択の市区町村名"></div>
+<p id="quizFeedback" class="status" aria-live="polite">選択肢から回答してください。</p>
+<button class="quiz-action" type="button" id="quizNext" hidden>次の問題へ</button>
+</div>
+</section>
 <section class="panel">
 <h2>読み込み計測</h2><p id="metrics">全国の軽量な輪郭だけを先に読み込みます。</p>
 <div class="note">全国地図はナビゲーション用に簡略化した輪郭です。都道府県を選択すると詳細な20m版に切り替わります。別々に構築した地方間の県境が厳密に一致するかは、全国共通トポロジーの検証を別途行う必要があります。ここでは全国の操作・配信方式を検証します。</div>
@@ -76,6 +101,7 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 <script src="../shared/established-label-adapter.js"></script>
 <script src="../shared/place-labels.js"></script>
 <script src="../shared/reading-bridge.js"></script>
+<script src="../shared/municipality-quiz.js"></script>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=700;
@@ -88,7 +114,7 @@ async function getReadingSource(){
 const names=['','北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
 const nationBoxes={main:[122.7,24.0,146.2,46.1],all:[122.7,24.0,154.2,46.1]};
 let manifest=null,overview=null,current=null,requestId=0,mode='national';
-let activeProjection=null;
+let activeProjection=null,quizSession=null,quizBackup=null;
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>$('zoomLevel').textContent=z.toFixed(1)+'倍'});
 const number=(n)=>n.toLocaleString('ja-JP');
@@ -124,6 +150,7 @@ function bbox(polys){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const
 function drawLabels(){
  if(!current||!activeProjection)return;
  const selected=$('region').value,all=$('showNames').checked,readings=$('readingMode').value==='on';
+ if(quizSession)return;
  let positions=null;
  try{
   positions=KussoonV2EstablishedLabelAdapter.layout({regions:current.regions,project:activeProjection,selected,all,readings});
@@ -140,21 +167,23 @@ function paint(){
   $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
   $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
  }else{
-  const selected=$('region').value,chosen=current.regions.find(r=>r.code===selected);
+  const question=quizSession?.state().question;
+  const selected=question?.code||$('region').value,chosen=current.regions.find(r=>r.code===selected);
   const box=chosen?KussoonV2MunicipalRenderer.focusBounds(chosen.polys):current.box;
   activeProjection=project(box);
-  KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.arcs,project:activeProjection,selected});
-  drawLabels();
-  $('prefBtn').disabled=false;$('region').disabled=false;
+  KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.arcs,project:activeProjection,selected,hideTitles:Boolean(quizSession)});
+  if(!quizSession)drawLabels();
+  $('prefBtn').disabled=Boolean(quizSession);$('region').disabled=Boolean(quizSession);
   const cover=current.readingStats;
   $('readingCoverage').textContent='読み仮名：'+cover.matched+'／'+cover.total+'区域で名称・コード照合済み（未収録 '+cover.missing+'、名称不一致 '+cover.mismatched+'）。未確認の読みは表示しません。';
-  const pref=$('pref').value,region=chosen?' ＞ '+(chosen.fullName||chosen.name):'';
+  const pref=$('pref').value,region=quizSession?' ＞ クイズ中':chosen?' ＞ '+(chosen.fullName||chosen.name):'';
   $('breadcrumb').textContent='日本全国 ＞ '+names[Number(pref)]+region;
   $('metrics').textContent=names[Number(pref)]+'：'+number(current.regions.length)+'区域、'+(current.bytes/1048576).toFixed(2)+'MB、初回読み込み・解析 '+current.ms.toFixed(0)+'ms';
   drawOverview($('locator'),pref,true);$('locatorPanel').classList.add('show');
-  mode=chosen?'region':'prefecture';
+  mode=quizSession?'quiz':chosen?'region':'prefecture';
  }
  viewport.reset();
+ $('quizStart').disabled=!current||Boolean(quizSession);
  updateSearch();
 }
 function updateSearch(){
@@ -186,7 +215,64 @@ function updateSearch(){
   const msg=document.createElement('small');msg.textContent='検索結果の先頭35件を表示しています。条件を絞ってください。';host.append(msg);
  }
 }
+function renderQuiz(){
+ if(!quizSession)return;
+ const state=quizSession.state(),q=state.question;
+ $('quizPlay').hidden=false;
+ $('quizProgress').textContent=state.finished?'全10問終了':q.number+'／'+q.total+'問　正解 '+state.correct+'問';
+ $('quizChoices').replaceChildren();
+ $('quizNext').hidden=!state.answered;
+ if(state.finished){
+  $('quizQuestion').textContent='結果発表';
+  $('quizFeedback').textContent='正解 '+state.correct+'／'+state.total+'問です。「クイズを終了」で通常の地図に戻ります。';
+  $('quizNext').hidden=true;return;
+ }
+ $('quizQuestion').textContent='オレンジ色の区域はどこでしょう？';
+ const correct=current.regions.find(r=>r.code===q.code);
+ for(const opt of q.options){
+  const button=document.createElement('button');
+  button.type='button';button.textContent=opt.name;
+  button.disabled=state.answered;
+  if(state.answered&&opt.code===q.code)button.classList.add('correct');
+  if(state.answered&&opt.code===state.choice&&state.choice!==q.code)button.classList.add('incorrect');
+  button.addEventListener('click',()=>{
+   const result=quizSession.answer(opt.code);
+   if(!result.state.answered)return;
+   $('quizFeedback').textContent=result.ok?'正解です！':'残念。正解は「'+(correct.fullName||correct.name)+'」です。';
+   renderQuiz();
+  });
+  $('quizChoices').append(button);
+ }
+ if(!state.answered)$('quizFeedback').textContent='地図のオレンジ色の区域を見て回答してください。';
+ else $('quizNext').textContent=q.number===q.total?'結果を見る':'次の問題へ';
+}
+function stopQuiz(){
+ if(!quizSession)return;
+ quizSession=null;
+ $('quizPlay').hidden=true;$('quizStop').hidden=true;$('quizStart').hidden=false;
+ $('showNames').disabled=false;$('readingMode').disabled=false;$('placeSearch').disabled=false;
+ if(quizBackup){
+  $('showNames').checked=quizBackup.names;
+  $('region').value=quizBackup.region;
+  quizBackup=null;
+ }
+ paint();
+ $('status').textContent='通常の市区町村地図に戻りました。';
+}
+function startQuiz(){
+ if(!current||quizSession)return;
+ try{quizSession=KussoonV2MunicipalityQuiz.create(current.regions,{count:10});}
+ catch(e){$('status').textContent='クイズ開始不可：'+e.message;return;}
+ quizBackup={names:$('showNames').checked,region:$('region').value};
+ $('region').value='';$('showNames').checked=false;$('showNames').disabled=true;
+ $('readingMode').disabled=true;$('placeSearch').value='';$('placeSearch').disabled=true;
+ $('searchResults').replaceChildren();
+ $('quizStart').hidden=true;$('quizStop').hidden=false;
+ paint();renderQuiz();
+ $('status').textContent='クイズ中です。オレンジ色の区域を見て回答してください。';
+}
 function returnNation(){
+ if(quizSession)stopQuiz();
  ++requestId;current=null;$('pref').value='';$('region').value='';
  paint();$('status').textContent='全国47都道府県を表示中です。';
 }
@@ -222,11 +308,14 @@ async function goPref(code){
   paint();$('status').textContent=names[Number(code)]+'を表示中です。市区町村を選べます。';
  }catch(e){if(id!==requestId)return;current=null;paint();$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
 }
+$('quizStart').addEventListener('click',startQuiz);
+$('quizStop').addEventListener('click',stopQuiz);
+$('quizNext').addEventListener('click',()=>{if(!quizSession)return;quizSession.next();if(quizSession.state().question)paint();renderQuiz();});
 $('placeSearch').addEventListener('input',updateSearch);
 $('showNames').addEventListener('change',drawLabels);
 $('readingMode').addEventListener('change',drawLabels);
-$('pref').addEventListener('change',()=>{$('placeSearch').value='';goPref($('pref').value);});
-$('region').addEventListener('change',()=>{paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
+$('pref').addEventListener('change',()=>{if(quizSession)stopQuiz();$('placeSearch').value='';goPref($('pref').value);});
+$('region').addEventListener('change',()=>{if(quizSession)return;paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
 $('nationExtent').addEventListener('change',()=>{if(overview){if(current)drawOverview($('locator'),$('pref').value,true);else paint();}});
 $('nationBtn').addEventListener('click',returnNation);
 $('prefBtn').addEventListener('click',()=>{if(!current)return;$('region').value='';paint();$('status').textContent='都道府県全体を表示しています。';});
@@ -234,6 +323,7 @@ $('zoomIn').addEventListener('click',()=>viewport.zoomIn());
 $('zoomOut').addEventListener('click',()=>viewport.zoomOut());
 $('zoomReset').addEventListener('click',()=>viewport.reset());
 $('map').addEventListener('click',e=>{
+ if(quizSession)return;
  const target=e.target.closest('[data-pref],[data-code]');if(!target)return;
  if(target.dataset.pref){void goPref(target.dataset.pref);return;}
  if(!current||!target.dataset.code)return;
