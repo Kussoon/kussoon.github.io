@@ -1,0 +1,659 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "46",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.kagoshima.jp/ab08/kensei/shityoson/gyosei/sityosonitiran.html",
+    "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+    "https://www.zck.or.jp/soshiki/2/4033.html"
+  ],
+  "regions": {
+    "46201": {
+      "name": "鹿児島市",
+      "kind": "city",
+      "officeIds": [
+        "46201-city"
+      ],
+      "official": "https://www.city.kagoshima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E9%B9%BF%E5%85%90%E5%B3%B6%E5%B8%82"
+    },
+    "46203": {
+      "name": "鹿屋市",
+      "kind": "city",
+      "officeIds": [
+        "46203-city"
+      ],
+      "official": "https://www.city.kanoya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E9%B9%BF%E5%B1%8B%E5%B8%82"
+    },
+    "46204": {
+      "name": "枕崎市",
+      "kind": "city",
+      "officeIds": [
+        "46204-city"
+      ],
+      "official": "https://www.city.makurazaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%9E%95%E5%B4%8E%E5%B8%82"
+    },
+    "46206": {
+      "name": "阿久根市",
+      "kind": "city",
+      "officeIds": [
+        "46206-city"
+      ],
+      "official": "https://www.city.akune.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E9%98%BF%E4%B9%85%E6%A0%B9%E5%B8%82"
+    },
+    "46208": {
+      "name": "出水市",
+      "kind": "city",
+      "officeIds": [
+        "46208-city"
+      ],
+      "official": "https://www.city.kagoshima-izumi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%87%BA%E6%B0%B4%E5%B8%82"
+    },
+    "46210": {
+      "name": "指宿市",
+      "kind": "city",
+      "officeIds": [
+        "46210-city"
+      ],
+      "official": "https://www.city.ibusuki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%8C%87%E5%AE%BF%E5%B8%82"
+    },
+    "46213": {
+      "name": "西之表市",
+      "kind": "city",
+      "officeIds": [
+        "46213-city"
+      ],
+      "official": "https://www.city.nishinoomote.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E8%A5%BF%E4%B9%8B%E8%A1%A8%E5%B8%82"
+    },
+    "46214": {
+      "name": "垂水市",
+      "kind": "city",
+      "officeIds": [
+        "46214-city"
+      ],
+      "official": "https://www.city.tarumizu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%9E%82%E6%B0%B4%E5%B8%82"
+    },
+    "46215": {
+      "name": "薩摩川内市",
+      "kind": "city",
+      "officeIds": [
+        "46215-city"
+      ],
+      "official": "https://www.city.satsumasendai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E8%96%A9%E6%91%A9%E5%B7%9D%E5%86%85%E5%B8%82"
+    },
+    "46216": {
+      "name": "日置市",
+      "kind": "city",
+      "officeIds": [
+        "46216-city"
+      ],
+      "official": "https://www.city.hioki.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%97%A5%E7%BD%AE%E5%B8%82"
+    },
+    "46217": {
+      "name": "曽於市",
+      "kind": "city",
+      "officeIds": [
+        "46217-city"
+      ],
+      "official": "https://www.city.soo.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%9B%BD%E6%96%BC%E5%B8%82"
+    },
+    "46218": {
+      "name": "霧島市",
+      "kind": "city",
+      "officeIds": [
+        "46218-city"
+      ],
+      "official": "https://www.city-kirishima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E9%9C%A7%E5%B3%B6%E5%B8%82"
+    },
+    "46219": {
+      "name": "いちき串木野市",
+      "kind": "city",
+      "officeIds": [
+        "46219-city"
+      ],
+      "official": "https://www.city.ichikikushikino.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E3%81%84%E3%81%A1%E3%81%8D%E4%B8%B2%E6%9C%A8%E9%87%8E%E5%B8%82"
+    },
+    "46220": {
+      "name": "南さつま市",
+      "kind": "city",
+      "officeIds": [
+        "46220-city"
+      ],
+      "official": "https://www.city.minamisatsuma.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%8D%97%E3%81%95%E3%81%A4%E3%81%BE%E5%B8%82"
+    },
+    "46221": {
+      "name": "志布志市",
+      "kind": "city",
+      "officeIds": [
+        "46221-city"
+      ],
+      "official": "https://www.city.shibushi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%BF%97%E5%B8%83%E5%BF%97%E5%B8%82"
+    },
+    "46222": {
+      "name": "奄美市",
+      "kind": "city",
+      "officeIds": [
+        "46222-city"
+      ],
+      "official": "https://www.city.amami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%A5%84%E7%BE%8E%E5%B8%82"
+    },
+    "46223": {
+      "name": "南九州市",
+      "kind": "city",
+      "officeIds": [
+        "46223-city"
+      ],
+      "official": "https://www.city.minamikyushu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%8D%97%E4%B9%9D%E5%B7%9E%E5%B8%82"
+    },
+    "46224": {
+      "name": "伊佐市",
+      "kind": "city",
+      "officeIds": [
+        "46224-city"
+      ],
+      "official": "https://www.city.isa.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E4%BC%8A%E4%BD%90%E5%B8%82"
+    },
+    "46225": {
+      "name": "姶良市",
+      "kind": "city",
+      "officeIds": [
+        "46225-city"
+      ],
+      "official": "https://www.city.aira.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%A7%B6%E8%89%AF%E5%B8%82"
+    },
+    "46303": {
+      "name": "三島村",
+      "kind": "village",
+      "officeIds": [
+        "46303-village"
+      ],
+      "official": "https://mishimamura.com/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E4%B8%89%E5%B3%B6%E6%9D%91"
+    },
+    "46304": {
+      "name": "十島村",
+      "kind": "village",
+      "officeIds": [
+        "46304-village"
+      ],
+      "official": "https://www.tokara.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%8D%81%E5%B3%B6%E6%9D%91"
+    },
+    "46392": {
+      "name": "さつま町",
+      "kind": "town",
+      "officeIds": [
+        "46392-town"
+      ],
+      "official": "https://www.satsuma-net.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E3%81%95%E3%81%A4%E3%81%BE%E7%94%BA"
+    },
+    "46404": {
+      "name": "長島町",
+      "kind": "town",
+      "officeIds": [
+        "46404-town"
+      ],
+      "official": "https://www.town.nagashima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E9%95%B7%E5%B3%B6%E7%94%BA"
+    },
+    "46452": {
+      "name": "湧水町",
+      "kind": "town",
+      "officeIds": [
+        "46452-town"
+      ],
+      "official": "https://www.town.yusui.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%B9%A7%E6%B0%B4%E7%94%BA"
+    },
+    "46468": {
+      "name": "大崎町",
+      "kind": "town",
+      "officeIds": [
+        "46468-town"
+      ],
+      "official": "https://www.town.kagoshima-osaki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%A4%A7%E5%B4%8E%E7%94%BA"
+    },
+    "46482": {
+      "name": "東串良町",
+      "kind": "town",
+      "officeIds": [
+        "46482-town"
+      ],
+      "official": "https://www.higashikushira.com/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E6%9D%B1%E4%B8%B2%E8%89%AF%E7%94%BA"
+    },
+    "46490": {
+      "name": "錦江町",
+      "kind": "town",
+      "officeIds": [
+        "46490-town"
+      ],
+      "official": "https://www.town.kinko.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E9%8C%A6%E6%B1%9F%E7%94%BA"
+    },
+    "46491": {
+      "name": "南大隅町",
+      "kind": "town",
+      "officeIds": [
+        "46491-town"
+      ],
+      "official": "https://www.town.minamiosumi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%8D%97%E5%A4%A7%E9%9A%85%E7%94%BA"
+    },
+    "46492": {
+      "name": "肝付町",
+      "kind": "town",
+      "officeIds": [
+        "46492-town"
+      ],
+      "official": "https://www.kimotsuki-town.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E8%82%9D%E4%BB%98%E7%94%BA"
+    },
+    "46501": {
+      "name": "中種子町",
+      "kind": "town",
+      "officeIds": [
+        "46501-town"
+      ],
+      "official": "https://town.nakatane.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E4%B8%AD%E7%A8%AE%E5%AD%90%E7%94%BA"
+    },
+    "46502": {
+      "name": "南種子町",
+      "kind": "town",
+      "officeIds": [
+        "46502-town"
+      ],
+      "official": "https://www.town.minamitane.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%8D%97%E7%A8%AE%E5%AD%90%E7%94%BA"
+    },
+    "46505": {
+      "name": "屋久島町",
+      "kind": "town",
+      "officeIds": [
+        "46505-town"
+      ],
+      "official": "https://www.town.yakushima.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%B1%8B%E4%B9%85%E5%B3%B6%E7%94%BA"
+    },
+    "46523": {
+      "name": "大和村",
+      "kind": "village",
+      "officeIds": [
+        "46523-village"
+      ],
+      "official": "https://www.vill.yamato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%A4%A7%E5%92%8C%E6%9D%91"
+    },
+    "46524": {
+      "name": "宇検村",
+      "kind": "village",
+      "officeIds": [
+        "46524-village"
+      ],
+      "official": "https://www.uken.net/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%AE%87%E6%A4%9C%E6%9D%91"
+    },
+    "46525": {
+      "name": "瀬戸内町",
+      "kind": "town",
+      "officeIds": [
+        "46525-town"
+      ],
+      "official": "https://www.town.setouchi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E7%80%AC%E6%88%B8%E5%86%85%E7%94%BA"
+    },
+    "46527": {
+      "name": "龍郷町",
+      "kind": "town",
+      "officeIds": [
+        "46527-town"
+      ],
+      "official": "https://www.town.tatsugo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E9%BE%8D%E9%83%B7%E7%94%BA"
+    },
+    "46529": {
+      "name": "喜界町",
+      "kind": "town",
+      "officeIds": [
+        "46529-town"
+      ],
+      "official": "https://www.town.kikai.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%96%9C%E7%95%8C%E7%94%BA"
+    },
+    "46530": {
+      "name": "徳之島町",
+      "kind": "town",
+      "officeIds": [
+        "46530-town"
+      ],
+      "official": "https://www.tokunoshima-town.org/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%BE%B3%E4%B9%8B%E5%B3%B6%E7%94%BA"
+    },
+    "46531": {
+      "name": "天城町",
+      "kind": "town",
+      "officeIds": [
+        "46531-town"
+      ],
+      "official": "https://www.town.amagi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%A4%A9%E5%9F%8E%E7%94%BA"
+    },
+    "46532": {
+      "name": "伊仙町",
+      "kind": "town",
+      "officeIds": [
+        "46532-town"
+      ],
+      "official": "https://www.town.isen.kagoshima.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E4%BC%8A%E4%BB%99%E7%94%BA"
+    },
+    "46533": {
+      "name": "和泊町",
+      "kind": "town",
+      "officeIds": [
+        "46533-town"
+      ],
+      "official": "https://www.town.wadomari.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E5%92%8C%E6%B3%8A%E7%94%BA"
+    },
+    "46534": {
+      "name": "知名町",
+      "kind": "town",
+      "officeIds": [
+        "46534-town"
+      ],
+      "official": "https://www.town.china.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E7%9F%A5%E5%90%8D%E7%94%BA"
+    },
+    "46535": {
+      "name": "与論町",
+      "kind": "town",
+      "officeIds": [
+        "46535-town"
+      ],
+      "official": "https://www.yoron.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%B9%BF%E5%85%90%E5%B3%B6%E7%9C%8C%E4%B8%8E%E8%AB%96%E7%94%BA"
+    }
+  },
+  "offices": {
+    "46201-city": {
+      "name": "鹿児島市役所",
+      "status": "verified",
+      "postalCode": "892-8677",
+      "address": "鹿児島県鹿児島市山下町11-1"
+    },
+    "46203-city": {
+      "name": "鹿屋市役所",
+      "status": "verified",
+      "postalCode": "893-8501",
+      "address": "鹿児島県鹿屋市共栄町20-1"
+    },
+    "46204-city": {
+      "name": "枕崎市役所",
+      "status": "verified",
+      "postalCode": "898-8501",
+      "address": "鹿児島県枕崎市千代田町27"
+    },
+    "46206-city": {
+      "name": "阿久根市役所",
+      "status": "verified",
+      "postalCode": "899-1696",
+      "address": "鹿児島県阿久根市鶴見町200"
+    },
+    "46208-city": {
+      "name": "出水市役所",
+      "status": "verified",
+      "postalCode": "899-0292",
+      "address": "鹿児島県出水市緑町1-3"
+    },
+    "46210-city": {
+      "name": "指宿市役所",
+      "status": "verified",
+      "postalCode": "891-0497",
+      "address": "鹿児島県指宿市十町2424"
+    },
+    "46213-city": {
+      "name": "西之表市役所",
+      "status": "verified",
+      "postalCode": "891-3193",
+      "address": "鹿児島県西之表市西之表7612"
+    },
+    "46214-city": {
+      "name": "垂水市役所",
+      "status": "verified",
+      "postalCode": "891-2192",
+      "address": "鹿児島県垂水市上町114"
+    },
+    "46215-city": {
+      "name": "薩摩川内市役所",
+      "status": "verified",
+      "postalCode": "895-8650",
+      "address": "鹿児島県薩摩川内市神田町3-22"
+    },
+    "46216-city": {
+      "name": "日置市役所",
+      "status": "verified",
+      "postalCode": "899-2592",
+      "address": "鹿児島県日置市伊集院町郡1-100"
+    },
+    "46217-city": {
+      "name": "曽於市役所",
+      "status": "verified",
+      "postalCode": "899-8692",
+      "address": "鹿児島県曽於市末吉町二之方1980"
+    },
+    "46218-city": {
+      "name": "霧島市役所",
+      "status": "verified",
+      "postalCode": "899-4394",
+      "address": "鹿児島県霧島市国分中央3-45-1"
+    },
+    "46219-city": {
+      "name": "いちき串木野市役所",
+      "status": "verified",
+      "postalCode": "896-8601",
+      "address": "鹿児島県いちき串木野市昭和通133-1"
+    },
+    "46220-city": {
+      "name": "南さつま市役所",
+      "status": "verified",
+      "postalCode": "897-8501",
+      "address": "鹿児島県南さつま市加世田川畑2648"
+    },
+    "46221-city": {
+      "name": "志布志市役所",
+      "status": "verified",
+      "postalCode": "899-7192",
+      "address": "鹿児島県志布志市志布志町志布志2-1-1"
+    },
+    "46222-city": {
+      "name": "奄美市役所",
+      "status": "verified",
+      "postalCode": "894-8555",
+      "address": "鹿児島県奄美市名瀬幸町25-8"
+    },
+    "46223-city": {
+      "name": "南九州市役所",
+      "status": "verified",
+      "postalCode": "897-0392",
+      "address": "鹿児島県南九州市知覧町郡17327"
+    },
+    "46224-city": {
+      "name": "伊佐市役所",
+      "status": "verified",
+      "postalCode": "895-2511",
+      "address": "鹿児島県伊佐市大口里1888"
+    },
+    "46225-city": {
+      "name": "姶良市役所",
+      "status": "verified",
+      "postalCode": "899-5492",
+      "address": "鹿児島県姶良市宮島町25"
+    },
+    "46303-village": {
+      "name": "三島村役場",
+      "status": "verified",
+      "postalCode": "892-0821",
+      "address": "鹿児島県鹿児島市名山町12-18"
+    },
+    "46304-village": {
+      "name": "十島村役場",
+      "status": "verified",
+      "postalCode": "892-0822",
+      "address": "鹿児島県鹿児島市泉町14-15"
+    },
+    "46392-town": {
+      "name": "さつま町役場",
+      "status": "verified",
+      "postalCode": "895-1803",
+      "address": "鹿児島県薩摩郡さつま町宮之城屋地1565-2"
+    },
+    "46404-town": {
+      "name": "長島町役場",
+      "status": "verified",
+      "postalCode": "899-1498",
+      "address": "鹿児島県出水郡長島町鷹巣1875-1"
+    },
+    "46452-town": {
+      "name": "湧水町役場",
+      "status": "verified",
+      "postalCode": "899-6292",
+      "address": "鹿児島県姶良郡湧水町木場222"
+    },
+    "46468-town": {
+      "name": "大崎町役場",
+      "status": "verified",
+      "postalCode": "899-7305",
+      "address": "鹿児島県曽於郡大崎町假宿1029"
+    },
+    "46482-town": {
+      "name": "東串良町役場",
+      "status": "verified",
+      "postalCode": "893-1693",
+      "address": "鹿児島県肝属郡東串良町川西1543"
+    },
+    "46490-town": {
+      "name": "錦江町役場",
+      "status": "verified",
+      "postalCode": "893-2392",
+      "address": "鹿児島県肝属郡錦江町城元963"
+    },
+    "46491-town": {
+      "name": "南大隅町役場",
+      "status": "verified",
+      "postalCode": "893-2501",
+      "address": "鹿児島県肝属郡南大隅町根占川北226"
+    },
+    "46492-town": {
+      "name": "肝付町役場",
+      "status": "verified",
+      "postalCode": "893-1207",
+      "address": "鹿児島県肝属郡肝付町新富98"
+    },
+    "46501-town": {
+      "name": "中種子町役場",
+      "status": "verified",
+      "postalCode": "891-3692",
+      "address": "鹿児島県熊毛郡中種子町野間5186"
+    },
+    "46502-town": {
+      "name": "南種子町役場",
+      "status": "verified",
+      "postalCode": "891-3792",
+      "address": "鹿児島県熊毛郡南種子町中之上2793-1"
+    },
+    "46505-town": {
+      "name": "屋久島町役場",
+      "status": "verified",
+      "postalCode": "891-4207",
+      "address": "鹿児島県熊毛郡屋久島町小瀬田849-20"
+    },
+    "46523-village": {
+      "name": "大和村役場",
+      "status": "verified",
+      "postalCode": "894-3192",
+      "address": "鹿児島県大島郡大和村大和浜100"
+    },
+    "46524-village": {
+      "name": "宇検村役場",
+      "status": "verified",
+      "postalCode": "894-3392",
+      "address": "鹿児島県大島郡宇検村湯湾字下朝戸915"
+    },
+    "46525-town": {
+      "name": "瀬戸内町役場",
+      "status": "verified",
+      "postalCode": "894-1592",
+      "address": "鹿児島県大島郡瀬戸内町古仁屋字船津23"
+    },
+    "46527-town": {
+      "name": "龍郷町役場",
+      "status": "verified",
+      "postalCode": "894-0192",
+      "address": "鹿児島県大島郡龍郷町浦110"
+    },
+    "46529-town": {
+      "name": "喜界町役場",
+      "status": "verified",
+      "postalCode": "891-6292",
+      "address": "鹿児島県大島郡喜界町湾1746"
+    },
+    "46530-town": {
+      "name": "徳之島町役場",
+      "status": "verified",
+      "postalCode": "891-7192",
+      "address": "鹿児島県大島郡徳之島町亀津7203"
+    },
+    "46531-town": {
+      "name": "天城町役場",
+      "status": "verified",
+      "postalCode": "891-7692",
+      "address": "鹿児島県大島郡天城町大字平土野2691-1"
+    },
+    "46532-town": {
+      "name": "伊仙町役場",
+      "status": "verified",
+      "postalCode": "891-8293",
+      "address": "鹿児島県大島郡伊仙町伊仙1842"
+    },
+    "46533-town": {
+      "name": "和泊町役場",
+      "status": "verified",
+      "postalCode": "891-9192",
+      "address": "鹿児島県大島郡和泊町和泊10"
+    },
+    "46534-town": {
+      "name": "知名町役場",
+      "status": "verified",
+      "postalCode": "891-9295",
+      "address": "鹿児島県大島郡知名町知名1100"
+    },
+    "46535-town": {
+      "name": "与論町役場",
+      "status": "verified",
+      "postalCode": "891-9301",
+      "address": "鹿児島県大島郡与論町茶花1418-1"
+    }
+  }
+}
