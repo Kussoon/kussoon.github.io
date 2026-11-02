@@ -1,0 +1,774 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "43",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/kyuusyuu/cms_16414187.html",
+    "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166969149.html",
+    "https://www.pref.kumamoto.jp/uploaded/attachment/264167.pdf"
+  ],
+  "regions": {
+    "43100": {
+      "name": "熊本市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "43100-city"
+      ],
+      "official": "https://www.city.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82"
+    },
+    "43101": {
+      "name": "熊本市中央区",
+      "kind": "ward",
+      "parentCode": "43100",
+      "officeIds": [
+        "43101-ward",
+        "43100-city"
+      ],
+      "official": "https://www.city.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA"
+    },
+    "43102": {
+      "name": "熊本市東区",
+      "kind": "ward",
+      "parentCode": "43100",
+      "officeIds": [
+        "43102-ward",
+        "43100-city"
+      ],
+      "official": "https://www.city.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E6%9D%B1%E5%8C%BA"
+    },
+    "43103": {
+      "name": "熊本市西区",
+      "kind": "ward",
+      "parentCode": "43100",
+      "officeIds": [
+        "43103-ward",
+        "43100-city"
+      ],
+      "official": "https://www.city.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E8%A5%BF%E5%8C%BA"
+    },
+    "43104": {
+      "name": "熊本市南区",
+      "kind": "ward",
+      "parentCode": "43100",
+      "officeIds": [
+        "43104-ward",
+        "43100-city"
+      ],
+      "official": "https://www.city.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E5%8D%97%E5%8C%BA"
+    },
+    "43105": {
+      "name": "熊本市北区",
+      "kind": "ward",
+      "parentCode": "43100",
+      "officeIds": [
+        "43105-ward",
+        "43100-city"
+      ],
+      "official": "https://www.city.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%86%8A%E6%9C%AC%E5%B8%82%E5%8C%97%E5%8C%BA"
+    },
+    "43202": {
+      "name": "八代市",
+      "kind": "city",
+      "officeIds": [
+        "43202-city"
+      ],
+      "official": "https://www.city.yatsushiro.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%85%AB%E4%BB%A3%E5%B8%82"
+    },
+    "43203": {
+      "name": "人吉市",
+      "kind": "city",
+      "officeIds": [
+        "43203-city"
+      ],
+      "official": "https://www.city.hitoyoshi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E4%BA%BA%E5%90%89%E5%B8%82"
+    },
+    "43204": {
+      "name": "荒尾市",
+      "kind": "city",
+      "officeIds": [
+        "43204-city"
+      ],
+      "official": "https://www.city.arao.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E8%8D%92%E5%B0%BE%E5%B8%82"
+    },
+    "43205": {
+      "name": "水俣市",
+      "kind": "city",
+      "officeIds": [
+        "43205-city"
+      ],
+      "official": "https://www.city.minamata.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E6%B0%B4%E4%BF%A3%E5%B8%82"
+    },
+    "43206": {
+      "name": "玉名市",
+      "kind": "city",
+      "officeIds": [
+        "43206-city"
+      ],
+      "official": "https://www.city.tamana.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%8E%89%E5%90%8D%E5%B8%82"
+    },
+    "43208": {
+      "name": "山鹿市",
+      "kind": "city",
+      "officeIds": [
+        "43208-city"
+      ],
+      "official": "https://www.city.yamaga.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%B1%B1%E9%B9%BF%E5%B8%82"
+    },
+    "43210": {
+      "name": "菊池市",
+      "kind": "city",
+      "officeIds": [
+        "43210-city"
+      ],
+      "official": "https://www.city.kikuchi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E8%8F%8A%E6%B1%A0%E5%B8%82"
+    },
+    "43211": {
+      "name": "宇土市",
+      "kind": "city",
+      "officeIds": [
+        "43211-city"
+      ],
+      "official": "https://www.city.uto.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%AE%87%E5%9C%9F%E5%B8%82"
+    },
+    "43212": {
+      "name": "上天草市",
+      "kind": "city",
+      "officeIds": [
+        "43212-city"
+      ],
+      "official": "https://www.city.kamiamakusa.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E4%B8%8A%E5%A4%A9%E8%8D%89%E5%B8%82"
+    },
+    "43213": {
+      "name": "宇城市",
+      "kind": "city",
+      "officeIds": [
+        "43213-city"
+      ],
+      "official": "https://www.city.uki.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%AE%87%E5%9F%8E%E5%B8%82"
+    },
+    "43214": {
+      "name": "阿蘇市",
+      "kind": "city",
+      "officeIds": [
+        "43214-city"
+      ],
+      "official": "https://www.city.aso.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E9%98%BF%E8%98%87%E5%B8%82"
+    },
+    "43215": {
+      "name": "天草市",
+      "kind": "city",
+      "officeIds": [
+        "43215-city"
+      ],
+      "official": "https://www.city.amakusa.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%A4%A9%E8%8D%89%E5%B8%82"
+    },
+    "43216": {
+      "name": "合志市",
+      "kind": "city",
+      "officeIds": [
+        "43216-city"
+      ],
+      "official": "https://www.city.koshi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%90%88%E5%BF%97%E5%B8%82"
+    },
+    "43348": {
+      "name": "美里町",
+      "kind": "town",
+      "officeIds": [
+        "43348-town"
+      ],
+      "official": "https://www.town.kumamoto-misato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%BE%8E%E9%87%8C%E7%94%BA"
+    },
+    "43364": {
+      "name": "玉東町",
+      "kind": "town",
+      "officeIds": [
+        "43364-town"
+      ],
+      "official": "https://www.town.gyokuto.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%8E%89%E6%9D%B1%E7%94%BA"
+    },
+    "43367": {
+      "name": "南関町",
+      "kind": "town",
+      "officeIds": [
+        "43367-town"
+      ],
+      "official": "https://www.town.nankan.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%8D%97%E9%96%A2%E7%94%BA"
+    },
+    "43368": {
+      "name": "長洲町",
+      "kind": "town",
+      "officeIds": [
+        "43368-town"
+      ],
+      "official": "https://www.town.nagasu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E9%95%B7%E6%B4%B2%E7%94%BA"
+    },
+    "43369": {
+      "name": "和水町",
+      "kind": "town",
+      "officeIds": [
+        "43369-town"
+      ],
+      "official": "https://www.town.nagomi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%92%8C%E6%B0%B4%E7%94%BA"
+    },
+    "43403": {
+      "name": "大津町",
+      "kind": "town",
+      "officeIds": [
+        "43403-town"
+      ],
+      "official": "https://www.town.ozu.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%A4%A7%E6%B4%A5%E7%94%BA"
+    },
+    "43404": {
+      "name": "菊陽町",
+      "kind": "town",
+      "officeIds": [
+        "43404-town"
+      ],
+      "official": "https://www.town.kikuyo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E8%8F%8A%E9%99%BD%E7%94%BA"
+    },
+    "43423": {
+      "name": "南小国町",
+      "kind": "town",
+      "officeIds": [
+        "43423-town"
+      ],
+      "official": "https://www.town.minamioguni.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%8D%97%E5%B0%8F%E5%9B%BD%E7%94%BA"
+    },
+    "43424": {
+      "name": "小国町",
+      "kind": "town",
+      "officeIds": [
+        "43424-town"
+      ],
+      "official": "https://www.town.kumamoto-oguni.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%B0%8F%E5%9B%BD%E7%94%BA"
+    },
+    "43425": {
+      "name": "産山村",
+      "kind": "village",
+      "officeIds": [
+        "43425-village"
+      ],
+      "official": "https://www.ubuyama-v.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%94%A3%E5%B1%B1%E6%9D%91"
+    },
+    "43428": {
+      "name": "高森町",
+      "kind": "town",
+      "officeIds": [
+        "43428-town"
+      ],
+      "official": "https://www.town.takamori.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E9%AB%98%E6%A3%AE%E7%94%BA"
+    },
+    "43432": {
+      "name": "西原村",
+      "kind": "village",
+      "officeIds": [
+        "43432-village"
+      ],
+      "official": "https://www.vill.nishihara.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E8%A5%BF%E5%8E%9F%E6%9D%91"
+    },
+    "43433": {
+      "name": "南阿蘇村",
+      "kind": "village",
+      "officeIds": [
+        "43433-village"
+      ],
+      "official": "https://www.vill.minamiaso.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%8D%97%E9%98%BF%E8%98%87%E6%9D%91"
+    },
+    "43441": {
+      "name": "御船町",
+      "kind": "town",
+      "officeIds": [
+        "43441-town"
+      ],
+      "official": "https://www.town.mifune.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%BE%A1%E8%88%B9%E7%94%BA"
+    },
+    "43442": {
+      "name": "嘉島町",
+      "kind": "town",
+      "officeIds": [
+        "43442-town"
+      ],
+      "official": "https://www.town.kumamoto-kashima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%98%89%E5%B3%B6%E7%94%BA"
+    },
+    "43443": {
+      "name": "益城町",
+      "kind": "town",
+      "officeIds": [
+        "43443-town"
+      ],
+      "official": "https://www.town.mashiki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%9B%8A%E5%9F%8E%E7%94%BA"
+    },
+    "43444": {
+      "name": "甲佐町",
+      "kind": "town",
+      "officeIds": [
+        "43444-town"
+      ],
+      "official": "https://www.town.kosa.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%94%B2%E4%BD%90%E7%94%BA"
+    },
+    "43447": {
+      "name": "山都町",
+      "kind": "town",
+      "officeIds": [
+        "43447-town"
+      ],
+      "official": "https://www.town.kumamoto-yamato.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%B1%B1%E9%83%BD%E7%94%BA"
+    },
+    "43468": {
+      "name": "氷川町",
+      "kind": "town",
+      "officeIds": [
+        "43468-town"
+      ],
+      "official": "https://www.town.hikawa.kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E6%B0%B7%E5%B7%9D%E7%94%BA"
+    },
+    "43482": {
+      "name": "芦北町",
+      "kind": "town",
+      "officeIds": [
+        "43482-town"
+      ],
+      "official": "https://www.town.ashikita.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E8%8A%A6%E5%8C%97%E7%94%BA"
+    },
+    "43484": {
+      "name": "津奈木町",
+      "kind": "town",
+      "officeIds": [
+        "43484-town"
+      ],
+      "official": "https://www.town.tsunagi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E6%B4%A5%E5%A5%88%E6%9C%A8%E7%94%BA"
+    },
+    "43501": {
+      "name": "錦町",
+      "kind": "town",
+      "officeIds": [
+        "43501-town"
+      ],
+      "official": "https://www.town.kumamoto-nishiki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E9%8C%A6%E7%94%BA"
+    },
+    "43505": {
+      "name": "多良木町",
+      "kind": "town",
+      "officeIds": [
+        "43505-town"
+      ],
+      "official": "https://www.town.taragi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%A4%9A%E8%89%AF%E6%9C%A8%E7%94%BA"
+    },
+    "43506": {
+      "name": "湯前町",
+      "kind": "town",
+      "officeIds": [
+        "43506-town"
+      ],
+      "official": "https://www.town.yunomae.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E6%B9%AF%E5%89%8D%E7%94%BA"
+    },
+    "43507": {
+      "name": "水上村",
+      "kind": "village",
+      "officeIds": [
+        "43507-village"
+      ],
+      "official": "https://www.vill.mizukami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E6%B0%B4%E4%B8%8A%E6%9D%91"
+    },
+    "43510": {
+      "name": "相良村",
+      "kind": "village",
+      "officeIds": [
+        "43510-village"
+      ],
+      "official": "https://www.vill.sagara.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%9B%B8%E8%89%AF%E6%9D%91"
+    },
+    "43511": {
+      "name": "五木村",
+      "kind": "village",
+      "officeIds": [
+        "43511-village"
+      ],
+      "official": "https://www.vill.itsuki.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E4%BA%94%E6%9C%A8%E6%9D%91"
+    },
+    "43512": {
+      "name": "山江村",
+      "kind": "village",
+      "officeIds": [
+        "43512-village"
+      ],
+      "official": "https://www.vill.yamae.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E5%B1%B1%E6%B1%9F%E6%9D%91"
+    },
+    "43513": {
+      "name": "球磨村",
+      "kind": "village",
+      "officeIds": [
+        "43513-village"
+      ],
+      "official": "https://www.kumamura.com/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E7%90%83%E7%A3%A8%E6%9D%91"
+    },
+    "43514": {
+      "name": "あさぎり町",
+      "kind": "town",
+      "officeIds": [
+        "43514-town"
+      ],
+      "official": "https://www.town.asagiri.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E3%81%82%E3%81%95%E3%81%8E%E3%82%8A%E7%94%BA"
+    },
+    "43531": {
+      "name": "苓北町",
+      "kind": "town",
+      "officeIds": [
+        "43531-town"
+      ],
+      "official": "https://reihoku-kumamoto.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%86%8A%E6%9C%AC%E7%9C%8C%E8%8B%93%E5%8C%97%E7%94%BA"
+    }
+  },
+  "offices": {
+    "43100-city": {
+      "name": "熊本市役所",
+      "status": "verified",
+      "postalCode": "860-8601",
+      "address": "熊本県熊本市中央区手取本町1-1"
+    },
+    "43101-ward": {
+      "name": "熊本市中央区役所",
+      "status": "verified",
+      "postalCode": "860-8618",
+      "address": "熊本県熊本市中央区手取本町1-1"
+    },
+    "43102-ward": {
+      "name": "熊本市東区役所",
+      "status": "verified",
+      "postalCode": "862-8555",
+      "address": "熊本県熊本市東区東本町16-30"
+    },
+    "43103-ward": {
+      "name": "熊本市西区役所",
+      "status": "verified",
+      "postalCode": "861-5292",
+      "address": "熊本県熊本市西区小島2丁目7-1"
+    },
+    "43104-ward": {
+      "name": "熊本市南区役所",
+      "status": "verified",
+      "postalCode": "861-4189",
+      "address": "熊本県熊本市南区富合町清藤405-3"
+    },
+    "43105-ward": {
+      "name": "熊本市北区役所",
+      "status": "verified",
+      "postalCode": "861-0195",
+      "address": "熊本県熊本市北区植木町岩野238-1"
+    },
+    "43202-city": {
+      "name": "八代市役所",
+      "status": "verified",
+      "postalCode": "866-8601",
+      "address": "熊本県八代市松江城町1-25"
+    },
+    "43203-city": {
+      "name": "人吉市役所",
+      "status": "verified",
+      "postalCode": "868-8601",
+      "address": "熊本県人吉市西間下町字永溝7番地1"
+    },
+    "43204-city": {
+      "name": "荒尾市役所",
+      "status": "verified",
+      "postalCode": "864-8686",
+      "address": "熊本県荒尾市宮内出目390"
+    },
+    "43205-city": {
+      "name": "水俣市役所",
+      "status": "verified",
+      "postalCode": "867-8555",
+      "address": "熊本県水俣市陣内1-1-1"
+    },
+    "43206-city": {
+      "name": "玉名市役所",
+      "status": "verified",
+      "postalCode": "865-8501",
+      "address": "熊本県玉名市岩崎163"
+    },
+    "43208-city": {
+      "name": "山鹿市役所",
+      "status": "verified",
+      "postalCode": "861-0592",
+      "address": "熊本県山鹿市山鹿987-3"
+    },
+    "43210-city": {
+      "name": "菊池市役所",
+      "status": "verified",
+      "postalCode": "861-1392",
+      "address": "熊本県菊池市隈府888"
+    },
+    "43211-city": {
+      "name": "宇土市役所",
+      "status": "verified",
+      "postalCode": "869-0492",
+      "address": "熊本県宇土市浦田町51"
+    },
+    "43212-city": {
+      "name": "上天草市役所",
+      "status": "verified",
+      "postalCode": "869-3692",
+      "address": "熊本県上天草市大矢野町上1514"
+    },
+    "43213-city": {
+      "name": "宇城市役所",
+      "status": "verified",
+      "postalCode": "869-0592",
+      "address": "熊本県宇城市松橋町大野85"
+    },
+    "43214-city": {
+      "name": "阿蘇市役所",
+      "status": "verified",
+      "postalCode": "869-2695",
+      "address": "熊本県阿蘇市一の宮町宮地504-1"
+    },
+    "43215-city": {
+      "name": "天草市役所",
+      "status": "verified",
+      "postalCode": "863-8631",
+      "address": "熊本県天草市東浜町8-1"
+    },
+    "43216-city": {
+      "name": "合志市役所",
+      "status": "verified",
+      "postalCode": "861-1195",
+      "address": "熊本県合志市竹迫2140"
+    },
+    "43348-town": {
+      "name": "美里町役場",
+      "status": "verified",
+      "postalCode": "861-4492",
+      "address": "熊本県下益城郡美里町馬場1100"
+    },
+    "43364-town": {
+      "name": "玉東町役場",
+      "status": "verified",
+      "postalCode": "869-0303",
+      "address": "熊本県玉名郡玉東町木葉759"
+    },
+    "43367-town": {
+      "name": "南関町役場",
+      "status": "verified",
+      "postalCode": "861-0898",
+      "address": "熊本県玉名郡南関町関町64番地"
+    },
+    "43368-town": {
+      "name": "長洲町役場",
+      "status": "verified",
+      "postalCode": "869-0198",
+      "address": "熊本県玉名郡長洲町大字長洲2766"
+    },
+    "43369-town": {
+      "name": "和水町役場",
+      "status": "verified",
+      "postalCode": "865-0192",
+      "address": "熊本県玉名郡和水町江田3886"
+    },
+    "43403-town": {
+      "name": "大津町役場",
+      "status": "verified",
+      "postalCode": "869-1292",
+      "address": "熊本県菊池郡大津町大字大津1233"
+    },
+    "43404-town": {
+      "name": "菊陽町役場",
+      "status": "verified",
+      "postalCode": "869-1192",
+      "address": "熊本県菊池郡菊陽町大字久保田2800"
+    },
+    "43423-town": {
+      "name": "南小国町役場",
+      "status": "verified",
+      "postalCode": "869-2492",
+      "address": "熊本県阿蘇郡南小国町大字赤馬場143"
+    },
+    "43424-town": {
+      "name": "小国町役場",
+      "status": "verified",
+      "postalCode": "869-2592",
+      "address": "熊本県阿蘇郡小国町大字宮原1567-1"
+    },
+    "43425-village": {
+      "name": "産山村役場",
+      "status": "verified",
+      "postalCode": "869-2703",
+      "address": "熊本県阿蘇郡産山村山鹿488-3"
+    },
+    "43428-town": {
+      "name": "高森町役場",
+      "status": "verified",
+      "postalCode": "869-1602",
+      "address": "熊本県阿蘇郡高森町大字高森2168"
+    },
+    "43432-village": {
+      "name": "西原村役場",
+      "status": "verified",
+      "postalCode": "861-2492",
+      "address": "熊本県阿蘇郡西原村大字小森3259"
+    },
+    "43433-village": {
+      "name": "南阿蘇村役場",
+      "status": "verified",
+      "postalCode": "869-1404",
+      "address": "熊本県阿蘇郡南阿蘇村大字河陽1705-1"
+    },
+    "43441-town": {
+      "name": "御船町役場",
+      "status": "verified",
+      "postalCode": "861-3296",
+      "address": "熊本県上益城郡御船町大字御船995-1"
+    },
+    "43442-town": {
+      "name": "嘉島町役場",
+      "status": "verified",
+      "postalCode": "861-3192",
+      "address": "熊本県上益城郡嘉島町上島530"
+    },
+    "43443-town": {
+      "name": "益城町役場",
+      "status": "verified",
+      "postalCode": "861-2295",
+      "address": "熊本県上益城郡益城町大字宮園702"
+    },
+    "43444-town": {
+      "name": "甲佐町役場",
+      "status": "verified",
+      "postalCode": "861-4696",
+      "address": "熊本県上益城郡甲佐町豊内719-4"
+    },
+    "43447-town": {
+      "name": "山都町役場",
+      "status": "verified",
+      "postalCode": "861-3592",
+      "address": "熊本県上益城郡山都町浜町6"
+    },
+    "43468-town": {
+      "name": "氷川町役場",
+      "status": "verified",
+      "postalCode": "869-4814",
+      "address": "熊本県八代郡氷川町島地642"
+    },
+    "43482-town": {
+      "name": "芦北町役場",
+      "status": "verified",
+      "postalCode": "869-5498",
+      "address": "熊本県葦北郡芦北町大字芦北2015"
+    },
+    "43484-town": {
+      "name": "津奈木町役場",
+      "status": "verified",
+      "postalCode": "869-5692",
+      "address": "熊本県葦北郡津奈木町大字小津奈木2123"
+    },
+    "43501-town": {
+      "name": "錦町役場",
+      "status": "verified",
+      "postalCode": "868-0302",
+      "address": "熊本県球磨郡錦町大字一武1587"
+    },
+    "43505-town": {
+      "name": "多良木町役場",
+      "status": "verified",
+      "postalCode": "868-0595",
+      "address": "熊本県球磨郡多良木町大字多良木1648"
+    },
+    "43506-town": {
+      "name": "湯前町役場",
+      "status": "verified",
+      "postalCode": "868-0621",
+      "address": "熊本県球磨郡湯前町1989-1"
+    },
+    "43507-village": {
+      "name": "水上村役場",
+      "status": "verified",
+      "postalCode": "868-0795",
+      "address": "熊本県球磨郡水上村大字岩野90"
+    },
+    "43510-village": {
+      "name": "相良村役場",
+      "status": "verified",
+      "postalCode": "868-8501",
+      "address": "熊本県球磨郡相良村大字深水2500-1"
+    },
+    "43511-village": {
+      "name": "五木村役場",
+      "status": "verified",
+      "postalCode": "868-0201",
+      "address": "熊本県球磨郡五木村甲2672-7"
+    },
+    "43512-village": {
+      "name": "山江村役場",
+      "status": "verified",
+      "postalCode": "868-8502",
+      "address": "熊本県球磨郡山江村大字山田甲1356-1"
+    },
+    "43513-village": {
+      "name": "球磨村役場",
+      "status": "verified",
+      "postalCode": "869-6401",
+      "address": "熊本県球磨郡球磨村大字渡丙1730"
+    },
+    "43514-town": {
+      "name": "あさぎり町役場",
+      "status": "verified",
+      "postalCode": "868-0408",
+      "address": "熊本県球磨郡あさぎり町免田東1199"
+    },
+    "43531-town": {
+      "name": "苓北町役場",
+      "status": "verified",
+      "postalCode": "863-2503",
+      "address": "熊本県天草郡苓北町志岐660"
+    }
+  }
+}
