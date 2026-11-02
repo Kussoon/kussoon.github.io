@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "05",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/touhoku/cms_12614180.html",
+    "https://www.pref.akita.lg.jp/pages/archive/569",
+    "https://www.j-lis.go.jp/spd/map-search/touhoku/cms_162569144.html"
+  ],
+  "regions": {
+    "05201": {
+      "name": "秋田市",
+      "kind": "city",
+      "officeIds": [
+        "05201-city"
+      ],
+      "official": "https://www.city.akita.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E7%A7%8B%E7%94%B0%E5%B8%82"
+    },
+    "05202": {
+      "name": "能代市",
+      "kind": "city",
+      "officeIds": [
+        "05202-city"
+      ],
+      "official": "https://www.city.noshiro.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E8%83%BD%E4%BB%A3%E5%B8%82"
+    },
+    "05203": {
+      "name": "横手市",
+      "kind": "city",
+      "officeIds": [
+        "05203-city"
+      ],
+      "official": "https://www.city.yokote.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E6%A8%AA%E6%89%8B%E5%B8%82"
+    },
+    "05204": {
+      "name": "大館市",
+      "kind": "city",
+      "officeIds": [
+        "05204-city"
+      ],
+      "official": "https://www.city.odate.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%A4%A7%E9%A4%A8%E5%B8%82"
+    },
+    "05206": {
+      "name": "男鹿市",
+      "kind": "city",
+      "officeIds": [
+        "05206-city"
+      ],
+      "official": "https://www.city.oga.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E7%94%B7%E9%B9%BF%E5%B8%82"
+    },
+    "05207": {
+      "name": "湯沢市",
+      "kind": "city",
+      "officeIds": [
+        "05207-city"
+      ],
+      "official": "https://www.city-yuzawa.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E6%B9%AF%E6%B2%A2%E5%B8%82"
+    },
+    "05209": {
+      "name": "鹿角市",
+      "kind": "city",
+      "officeIds": [
+        "05209-city"
+      ],
+      "official": "https://www.city.kazuno.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E9%B9%BF%E8%A7%92%E5%B8%82"
+    },
+    "05210": {
+      "name": "由利本荘市",
+      "kind": "city",
+      "officeIds": [
+        "05210-city"
+      ],
+      "official": "https://www.city.yurihonjo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E7%94%B1%E5%88%A9%E6%9C%AC%E8%8D%98%E5%B8%82"
+    },
+    "05211": {
+      "name": "潟上市",
+      "kind": "city",
+      "officeIds": [
+        "05211-city"
+      ],
+      "official": "https://www.city.katagami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E6%BD%9F%E4%B8%8A%E5%B8%82"
+    },
+    "05212": {
+      "name": "大仙市",
+      "kind": "city",
+      "officeIds": [
+        "05212-city"
+      ],
+      "official": "https://www.city.daisen.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%A4%A7%E4%BB%99%E5%B8%82"
+    },
+    "05213": {
+      "name": "北秋田市",
+      "kind": "city",
+      "officeIds": [
+        "05213-city"
+      ],
+      "official": "https://www.city.kitaakita.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%8C%97%E7%A7%8B%E7%94%B0%E5%B8%82"
+    },
+    "05214": {
+      "name": "にかほ市",
+      "kind": "city",
+      "officeIds": [
+        "05214-city"
+      ],
+      "official": "https://www.city.nikaho.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E3%81%AB%E3%81%8B%E3%81%BB%E5%B8%82"
+    },
+    "05215": {
+      "name": "仙北市",
+      "kind": "city",
+      "officeIds": [
+        "05215-city"
+      ],
+      "official": "https://www.city.semboku.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E4%BB%99%E5%8C%97%E5%B8%82"
+    },
+    "05303": {
+      "name": "小坂町",
+      "kind": "town",
+      "officeIds": [
+        "05303-town"
+      ],
+      "official": "https://www.town.kosaka.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%B0%8F%E5%9D%82%E7%94%BA"
+    },
+    "05327": {
+      "name": "上小阿仁村",
+      "kind": "village",
+      "officeIds": [
+        "05327-village"
+      ],
+      "official": "https://www.vill.kamikoani.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E4%B8%8A%E5%B0%8F%E9%98%BF%E4%BB%81%E6%9D%91"
+    },
+    "05346": {
+      "name": "藤里町",
+      "kind": "town",
+      "officeIds": [
+        "05346-town"
+      ],
+      "official": "https://www.town.fujisato.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E8%97%A4%E9%87%8C%E7%94%BA"
+    },
+    "05348": {
+      "name": "三種町",
+      "kind": "town",
+      "officeIds": [
+        "05348-town"
+      ],
+      "official": "https://www.town.mitane.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E4%B8%89%E7%A8%AE%E7%94%BA"
+    },
+    "05349": {
+      "name": "八峰町",
+      "kind": "town",
+      "officeIds": [
+        "05349-town"
+      ],
+      "official": "https://www.town.happou.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%85%AB%E5%B3%B0%E7%94%BA"
+    },
+    "05361": {
+      "name": "五城目町",
+      "kind": "town",
+      "officeIds": [
+        "05361-town"
+      ],
+      "official": "https://www.town.gojome.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E4%BA%94%E5%9F%8E%E7%9B%AE%E7%94%BA"
+    },
+    "05363": {
+      "name": "八郎潟町",
+      "kind": "town",
+      "officeIds": [
+        "05363-town"
+      ],
+      "official": "https://www.town.hachirogata.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%85%AB%E9%83%8E%E6%BD%9F%E7%94%BA"
+    },
+    "05366": {
+      "name": "井川町",
+      "kind": "town",
+      "officeIds": [
+        "05366-town"
+      ],
+      "official": "https://www.town.ikawa.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E4%BA%95%E5%B7%9D%E7%94%BA"
+    },
+    "05368": {
+      "name": "大潟村",
+      "kind": "village",
+      "officeIds": [
+        "05368-village"
+      ],
+      "official": "https://www.vill.ogata.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%A4%A7%E6%BD%9F%E6%9D%91"
+    },
+    "05434": {
+      "name": "美郷町",
+      "kind": "town",
+      "officeIds": [
+        "05434-town"
+      ],
+      "official": "https://www.town.misato.akita.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E7%BE%8E%E9%83%B7%E7%94%BA"
+    },
+    "05463": {
+      "name": "羽後町",
+      "kind": "town",
+      "officeIds": [
+        "05463-town"
+      ],
+      "official": "https://www.town.ugo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E7%BE%BD%E5%BE%8C%E7%94%BA"
+    },
+    "05464": {
+      "name": "東成瀬村",
+      "kind": "village",
+      "officeIds": [
+        "05464-village"
+      ],
+      "official": "https://www.higashinaruse.com/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E7%A7%8B%E7%94%B0%E7%9C%8C%E6%9D%B1%E6%88%90%E7%80%AC%E6%9D%91"
+    }
+  },
+  "offices": {
+    "05201-city": {
+      "name": "秋田市役所",
+      "status": "verified",
+      "postalCode": "010-8560",
+      "address": "秋田県秋田市山王1-1-1"
+    },
+    "05202-city": {
+      "name": "能代市役所",
+      "status": "verified",
+      "postalCode": "016-8501",
+      "address": "秋田県能代市上町1-3"
+    },
+    "05203-city": {
+      "name": "横手市役所",
+      "status": "verified",
+      "postalCode": "013-8601",
+      "address": "秋田県横手市中央町8-2"
+    },
+    "05204-city": {
+      "name": "大館市役所",
+      "status": "verified",
+      "postalCode": "017-8555",
+      "address": "秋田県大館市字中城20"
+    },
+    "05206-city": {
+      "name": "男鹿市役所",
+      "status": "verified",
+      "postalCode": "010-0595",
+      "address": "秋田県男鹿市船川港船川字泉台66-1"
+    },
+    "05207-city": {
+      "name": "湯沢市役所",
+      "status": "verified",
+      "postalCode": "012-8501",
+      "address": "秋田県湯沢市佐竹町1-1"
+    },
+    "05209-city": {
+      "name": "鹿角市役所",
+      "status": "verified",
+      "postalCode": "018-5292",
+      "address": "秋田県鹿角市花輪字荒田4-1"
+    },
+    "05210-city": {
+      "name": "由利本荘市役所",
+      "status": "verified",
+      "postalCode": "015-8501",
+      "address": "秋田県由利本荘市尾崎17"
+    },
+    "05211-city": {
+      "name": "潟上市役所",
+      "status": "verified",
+      "postalCode": "010-0201",
+      "address": "秋田県潟上市天王字棒沼台226-1"
+    },
+    "05212-city": {
+      "name": "大仙市役所",
+      "status": "verified",
+      "postalCode": "014-8601",
+      "address": "秋田県大仙市大曲花園町1-1"
+    },
+    "05213-city": {
+      "name": "北秋田市役所",
+      "status": "verified",
+      "postalCode": "018-3392",
+      "address": "秋田県北秋田市花園町19-1"
+    },
+    "05214-city": {
+      "name": "にかほ市役所",
+      "status": "verified",
+      "postalCode": "018-0192",
+      "address": "秋田県にかほ市象潟町字浜ノ田1"
+    },
+    "05215-city": {
+      "name": "仙北市役所",
+      "status": "verified",
+      "postalCode": "014-1298",
+      "address": "秋田県仙北市田沢湖生保内字宮ノ後30"
+    },
+    "05303-town": {
+      "name": "小坂町役場",
+      "status": "verified",
+      "postalCode": "017-0292",
+      "address": "秋田県鹿角郡小坂町小坂字上谷地41-1"
+    },
+    "05327-village": {
+      "name": "上小阿仁村役場",
+      "status": "verified",
+      "postalCode": "018-4494",
+      "address": "秋田県北秋田郡上小阿仁村小沢田字向川原118"
+    },
+    "05346-town": {
+      "name": "藤里町役場",
+      "status": "verified",
+      "postalCode": "018-3201",
+      "address": "秋田県山本郡藤里町藤琴字藤琴8"
+    },
+    "05348-town": {
+      "name": "三種町役場",
+      "status": "verified",
+      "postalCode": "018-2401",
+      "address": "秋田県山本郡三種町鵜川字岩谷子8"
+    },
+    "05349-town": {
+      "name": "八峰町役場",
+      "status": "verified",
+      "postalCode": "018-2502",
+      "address": "秋田県山本郡八峰町峰浜目名潟字目長田118"
+    },
+    "05361-town": {
+      "name": "五城目町役場",
+      "status": "verified",
+      "postalCode": "018-1792",
+      "address": "秋田県南秋田郡五城目町西磯ノ目1-1-1"
+    },
+    "05363-town": {
+      "name": "八郎潟町役場",
+      "status": "verified",
+      "postalCode": "018-1692",
+      "address": "秋田県南秋田郡八郎潟町字大道80"
+    },
+    "05366-town": {
+      "name": "井川町役場",
+      "status": "verified",
+      "postalCode": "018-1596",
+      "address": "秋田県南秋田郡井川町北川尻字海老沢樋ノ口78-1"
+    },
+    "05368-village": {
+      "name": "大潟村役場",
+      "status": "verified",
+      "postalCode": "010-0494",
+      "address": "秋田県南秋田郡大潟村字中央1-1"
+    },
+    "05434-town": {
+      "name": "美郷町役場",
+      "status": "verified",
+      "postalCode": "019-1541",
+      "address": "秋田県仙北郡美郷町土崎字上野乙170-10"
+    },
+    "05463-town": {
+      "name": "羽後町役場",
+      "status": "verified",
+      "postalCode": "012-1131",
+      "address": "秋田県雄勝郡羽後町西馬音内字中野177"
+    },
+    "05464-village": {
+      "name": "東成瀬村役場",
+      "status": "verified",
+      "postalCode": "019-0801",
+      "address": "秋田県雄勝郡東成瀬村田子内字仙人下30-1"
+    }
+  }
+}
