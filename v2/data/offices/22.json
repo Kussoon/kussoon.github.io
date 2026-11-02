@@ -1,0 +1,643 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "22",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.pref.shizuoka.jp/kensei/shichozaisei/1044883/1012124.html",
+    "https://www.j-lis.go.jp/spd/code-address/tyuubu/cms_14314182.html",
+    "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164469145.html",
+    "https://www.city.hamamatsu.shizuoka.jp/kikaku/kuseido/",
+    "https://www.city.shizuoka.lg.jp/s006303.html"
+  ],
+  "regions": {
+    "22100": {
+      "name": "静岡市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "22100-city"
+      ],
+      "official": "https://www.city.shizuoka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E9%9D%99%E5%B2%A1%E5%B8%82"
+    },
+    "22101": {
+      "name": "静岡市葵区",
+      "kind": "ward",
+      "parentCode": "22100",
+      "officeIds": [
+        "22101-ward",
+        "22100-city"
+      ],
+      "official": "https://www.city.shizuoka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E9%9D%99%E5%B2%A1%E5%B8%82%E8%91%B5%E5%8C%BA"
+    },
+    "22102": {
+      "name": "静岡市駿河区",
+      "kind": "ward",
+      "parentCode": "22100",
+      "officeIds": [
+        "22102-ward",
+        "22100-city"
+      ],
+      "official": "https://www.city.shizuoka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E9%9D%99%E5%B2%A1%E5%B8%82%E9%A7%BF%E6%B2%B3%E5%8C%BA"
+    },
+    "22103": {
+      "name": "静岡市清水区",
+      "kind": "ward",
+      "parentCode": "22100",
+      "officeIds": [
+        "22103-ward",
+        "22100-city"
+      ],
+      "official": "https://www.city.shizuoka.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E9%9D%99%E5%B2%A1%E5%B8%82%E6%B8%85%E6%B0%B4%E5%8C%BA"
+    },
+    "22130": {
+      "name": "浜松市",
+      "kind": "designatedCity",
+      "officeIds": [
+        "22130-city"
+      ],
+      "official": "https://www.city.hamamatsu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82"
+    },
+    "22138": {
+      "name": "浜松市中央区",
+      "kind": "ward",
+      "parentCode": "22130",
+      "officeIds": [
+        "22138-ward",
+        "22130-city"
+      ],
+      "official": "https://www.city.hamamatsu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA"
+    },
+    "22139": {
+      "name": "浜松市浜名区",
+      "kind": "ward",
+      "parentCode": "22130",
+      "officeIds": [
+        "22139-ward",
+        "22130-city"
+      ],
+      "official": "https://www.city.hamamatsu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E6%B5%9C%E5%90%8D%E5%8C%BA"
+    },
+    "22140": {
+      "name": "浜松市天竜区",
+      "kind": "ward",
+      "parentCode": "22130",
+      "officeIds": [
+        "22140-ward",
+        "22130-city"
+      ],
+      "official": "https://www.city.hamamatsu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B5%9C%E6%9D%BE%E5%B8%82%E5%A4%A9%E7%AB%9C%E5%8C%BA"
+    },
+    "22203": {
+      "name": "沼津市",
+      "kind": "city",
+      "officeIds": [
+        "22203-city"
+      ],
+      "official": "https://www.city.numazu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B2%BC%E6%B4%A5%E5%B8%82"
+    },
+    "22205": {
+      "name": "熱海市",
+      "kind": "city",
+      "officeIds": [
+        "22205-city"
+      ],
+      "official": "https://www.city.atami.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E7%86%B1%E6%B5%B7%E5%B8%82"
+    },
+    "22206": {
+      "name": "三島市",
+      "kind": "city",
+      "officeIds": [
+        "22206-city"
+      ],
+      "official": "https://www.city.mishima.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E4%B8%89%E5%B3%B6%E5%B8%82"
+    },
+    "22207": {
+      "name": "富士宮市",
+      "kind": "city",
+      "officeIds": [
+        "22207-city"
+      ],
+      "official": "https://www.city.fujinomiya.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%AF%8C%E5%A3%AB%E5%AE%AE%E5%B8%82"
+    },
+    "22208": {
+      "name": "伊東市",
+      "kind": "city",
+      "officeIds": [
+        "22208-city"
+      ],
+      "official": "https://www.city.ito.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E4%BC%8A%E6%9D%B1%E5%B8%82"
+    },
+    "22209": {
+      "name": "島田市",
+      "kind": "city",
+      "officeIds": [
+        "22209-city"
+      ],
+      "official": "https://www.city.shimada.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%B3%B6%E7%94%B0%E5%B8%82"
+    },
+    "22210": {
+      "name": "富士市",
+      "kind": "city",
+      "officeIds": [
+        "22210-city"
+      ],
+      "official": "https://www.city.fuji.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%AF%8C%E5%A3%AB%E5%B8%82"
+    },
+    "22211": {
+      "name": "磐田市",
+      "kind": "city",
+      "officeIds": [
+        "22211-city"
+      ],
+      "official": "https://www.city.iwata.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E7%A3%90%E7%94%B0%E5%B8%82"
+    },
+    "22212": {
+      "name": "焼津市",
+      "kind": "city",
+      "officeIds": [
+        "22212-city"
+      ],
+      "official": "https://www.city.yaizu.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E7%84%BC%E6%B4%A5%E5%B8%82"
+    },
+    "22213": {
+      "name": "掛川市",
+      "kind": "city",
+      "officeIds": [
+        "22213-city"
+      ],
+      "official": "https://www.city.kakegawa.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%8E%9B%E5%B7%9D%E5%B8%82"
+    },
+    "22214": {
+      "name": "藤枝市",
+      "kind": "city",
+      "officeIds": [
+        "22214-city"
+      ],
+      "official": "https://www.city.fujieda.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E8%97%A4%E6%9E%9D%E5%B8%82"
+    },
+    "22215": {
+      "name": "御殿場市",
+      "kind": "city",
+      "officeIds": [
+        "22215-city"
+      ],
+      "official": "https://www.city.gotemba.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%BE%A1%E6%AE%BF%E5%A0%B4%E5%B8%82"
+    },
+    "22216": {
+      "name": "袋井市",
+      "kind": "city",
+      "officeIds": [
+        "22216-city"
+      ],
+      "official": "https://www.city.fukuroi.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E8%A2%8B%E4%BA%95%E5%B8%82"
+    },
+    "22219": {
+      "name": "下田市",
+      "kind": "city",
+      "officeIds": [
+        "22219-city"
+      ],
+      "official": "https://www.city.shimoda.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E4%B8%8B%E7%94%B0%E5%B8%82"
+    },
+    "22220": {
+      "name": "裾野市",
+      "kind": "city",
+      "officeIds": [
+        "22220-city"
+      ],
+      "official": "https://www.city.susono.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E8%A3%BE%E9%87%8E%E5%B8%82"
+    },
+    "22221": {
+      "name": "湖西市",
+      "kind": "city",
+      "officeIds": [
+        "22221-city"
+      ],
+      "official": "https://www.city.kosai.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B9%96%E8%A5%BF%E5%B8%82"
+    },
+    "22222": {
+      "name": "伊豆市",
+      "kind": "city",
+      "officeIds": [
+        "22222-city"
+      ],
+      "official": "https://www.city.izu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E4%BC%8A%E8%B1%86%E5%B8%82"
+    },
+    "22223": {
+      "name": "御前崎市",
+      "kind": "city",
+      "officeIds": [
+        "22223-city"
+      ],
+      "official": "https://www.city.omaezaki.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%BE%A1%E5%89%8D%E5%B4%8E%E5%B8%82"
+    },
+    "22224": {
+      "name": "菊川市",
+      "kind": "city",
+      "officeIds": [
+        "22224-city"
+      ],
+      "official": "https://www.city.kikugawa.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E8%8F%8A%E5%B7%9D%E5%B8%82"
+    },
+    "22225": {
+      "name": "伊豆の国市",
+      "kind": "city",
+      "officeIds": [
+        "22225-city"
+      ],
+      "official": "https://www.city.izunokuni.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E4%BC%8A%E8%B1%86%E3%81%AE%E5%9B%BD%E5%B8%82"
+    },
+    "22226": {
+      "name": "牧之原市",
+      "kind": "city",
+      "officeIds": [
+        "22226-city"
+      ],
+      "official": "https://www.city.makinohara.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E7%89%A7%E4%B9%8B%E5%8E%9F%E5%B8%82"
+    },
+    "22301": {
+      "name": "東伊豆町",
+      "kind": "town",
+      "officeIds": [
+        "22301-town"
+      ],
+      "official": "https://www.town.higashiizu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%9D%B1%E4%BC%8A%E8%B1%86%E7%94%BA"
+    },
+    "22302": {
+      "name": "河津町",
+      "kind": "town",
+      "officeIds": [
+        "22302-town"
+      ],
+      "official": "https://www.town.kawazu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B2%B3%E6%B4%A5%E7%94%BA"
+    },
+    "22304": {
+      "name": "南伊豆町",
+      "kind": "town",
+      "officeIds": [
+        "22304-town"
+      ],
+      "official": "https://www.town.minamiizu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%8D%97%E4%BC%8A%E8%B1%86%E7%94%BA"
+    },
+    "22305": {
+      "name": "松崎町",
+      "kind": "town",
+      "officeIds": [
+        "22305-town"
+      ],
+      "official": "https://www.town.matsuzaki.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%9D%BE%E5%B4%8E%E7%94%BA"
+    },
+    "22306": {
+      "name": "西伊豆町",
+      "kind": "town",
+      "officeIds": [
+        "22306-town"
+      ],
+      "official": "https://www.town.nishiizu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E8%A5%BF%E4%BC%8A%E8%B1%86%E7%94%BA"
+    },
+    "22325": {
+      "name": "函南町",
+      "kind": "town",
+      "officeIds": [
+        "22325-town"
+      ],
+      "official": "https://www.town.kannami.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%87%BD%E5%8D%97%E7%94%BA"
+    },
+    "22341": {
+      "name": "清水町",
+      "kind": "town",
+      "officeIds": [
+        "22341-town"
+      ],
+      "official": "https://www.town.shimizu.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%B8%85%E6%B0%B4%E7%94%BA"
+    },
+    "22342": {
+      "name": "長泉町",
+      "kind": "town",
+      "officeIds": [
+        "22342-town"
+      ],
+      "official": "https://www.town.nagaizumi.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E9%95%B7%E6%B3%89%E7%94%BA"
+    },
+    "22344": {
+      "name": "小山町",
+      "kind": "town",
+      "officeIds": [
+        "22344-town"
+      ],
+      "official": "https://www.fuji-oyama.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%B0%8F%E5%B1%B1%E7%94%BA"
+    },
+    "22424": {
+      "name": "吉田町",
+      "kind": "town",
+      "officeIds": [
+        "22424-town"
+      ],
+      "official": "https://www.town.yoshida.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%90%89%E7%94%B0%E7%94%BA"
+    },
+    "22429": {
+      "name": "川根本町",
+      "kind": "town",
+      "officeIds": [
+        "22429-town"
+      ],
+      "official": "https://www.town.kawanehon.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E5%B7%9D%E6%A0%B9%E6%9C%AC%E7%94%BA"
+    },
+    "22461": {
+      "name": "森町",
+      "kind": "town",
+      "officeIds": [
+        "22461-town"
+      ],
+      "official": "https://www.town.morimachi.shizuoka.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E9%9D%99%E5%B2%A1%E7%9C%8C%E6%A3%AE%E7%94%BA"
+    }
+  },
+  "offices": {
+    "22100-city": {
+      "name": "静岡市役所",
+      "status": "verified",
+      "postalCode": "420-8602",
+      "address": "静岡県静岡市葵区追手町5-1"
+    },
+    "22101-ward": {
+      "name": "静岡市葵区役所",
+      "status": "verified",
+      "postalCode": "420-8602",
+      "address": "静岡県静岡市葵区追手町5-1"
+    },
+    "22102-ward": {
+      "name": "静岡市駿河区役所",
+      "status": "verified",
+      "postalCode": "422-8550",
+      "address": "静岡県静岡市駿河区南八幡町10-40"
+    },
+    "22103-ward": {
+      "name": "静岡市清水区役所",
+      "status": "verified",
+      "postalCode": "424-8701",
+      "address": "静岡県静岡市清水区旭町6-8"
+    },
+    "22130-city": {
+      "name": "浜松市役所",
+      "status": "verified",
+      "postalCode": "430-8652",
+      "address": "静岡県浜松市中央区元城町103-2"
+    },
+    "22138-ward": {
+      "name": "浜松市中央区役所",
+      "status": "verified",
+      "postalCode": "430-8652",
+      "address": "静岡県浜松市中央区元城町103-2"
+    },
+    "22139-ward": {
+      "name": "浜松市浜名区役所",
+      "status": "verified",
+      "postalCode": "434-8550",
+      "address": "静岡県浜松市浜名区貴布祢3000"
+    },
+    "22140-ward": {
+      "name": "浜松市天竜区役所",
+      "status": "verified",
+      "postalCode": "431-3392",
+      "address": "静岡県浜松市天竜区二俣町二俣481"
+    },
+    "22203-city": {
+      "name": "沼津市役所",
+      "status": "verified",
+      "postalCode": "410-8601",
+      "address": "静岡県沼津市御幸町16-1"
+    },
+    "22205-city": {
+      "name": "熱海市役所",
+      "status": "verified",
+      "postalCode": "413-8550",
+      "address": "静岡県熱海市中央町1-1"
+    },
+    "22206-city": {
+      "name": "三島市役所",
+      "status": "verified",
+      "postalCode": "411-8666",
+      "address": "静岡県三島市北田町4-47"
+    },
+    "22207-city": {
+      "name": "富士宮市役所",
+      "status": "verified",
+      "postalCode": "418-8601",
+      "address": "静岡県富士宮市弓沢町150"
+    },
+    "22208-city": {
+      "name": "伊東市役所",
+      "status": "verified",
+      "postalCode": "414-8555",
+      "address": "静岡県伊東市大原2-1-1"
+    },
+    "22209-city": {
+      "name": "島田市役所",
+      "status": "verified",
+      "postalCode": "427-8501",
+      "address": "静岡県島田市中央町1-1"
+    },
+    "22210-city": {
+      "name": "富士市役所",
+      "status": "verified",
+      "postalCode": "417-8601",
+      "address": "静岡県富士市永田町1-100"
+    },
+    "22211-city": {
+      "name": "磐田市役所",
+      "status": "verified",
+      "postalCode": "438-8650",
+      "address": "静岡県磐田市国府台3-1"
+    },
+    "22212-city": {
+      "name": "焼津市役所",
+      "status": "verified",
+      "postalCode": "425-8502",
+      "address": "静岡県焼津市本町2-16-32"
+    },
+    "22213-city": {
+      "name": "掛川市役所",
+      "status": "verified",
+      "postalCode": "436-8650",
+      "address": "静岡県掛川市長谷1-1-1"
+    },
+    "22214-city": {
+      "name": "藤枝市役所",
+      "status": "verified",
+      "postalCode": "426-8722",
+      "address": "静岡県藤枝市岡出山1-11-1"
+    },
+    "22215-city": {
+      "name": "御殿場市役所",
+      "status": "verified",
+      "postalCode": "412-8601",
+      "address": "静岡県御殿場市萩原483"
+    },
+    "22216-city": {
+      "name": "袋井市役所",
+      "status": "verified",
+      "postalCode": "437-8666",
+      "address": "静岡県袋井市新屋1-1-1"
+    },
+    "22219-city": {
+      "name": "下田市役所",
+      "status": "verified",
+      "postalCode": "415-8501",
+      "address": "静岡県下田市東本郷1-5-18"
+    },
+    "22220-city": {
+      "name": "裾野市役所",
+      "status": "verified",
+      "postalCode": "410-1192",
+      "address": "静岡県裾野市佐野1059"
+    },
+    "22221-city": {
+      "name": "湖西市役所",
+      "status": "verified",
+      "postalCode": "431-0492",
+      "address": "静岡県湖西市吉美3268"
+    },
+    "22222-city": {
+      "name": "伊豆市役所",
+      "status": "verified",
+      "postalCode": "410-2413",
+      "address": "静岡県伊豆市小立野38-2"
+    },
+    "22223-city": {
+      "name": "御前崎市役所",
+      "status": "verified",
+      "postalCode": "437-1692",
+      "address": "静岡県御前崎市池新田5585"
+    },
+    "22224-city": {
+      "name": "菊川市役所",
+      "status": "verified",
+      "postalCode": "439-8650",
+      "address": "静岡県菊川市堀之内61"
+    },
+    "22225-city": {
+      "name": "伊豆の国市役所",
+      "status": "verified",
+      "postalCode": "410-2292",
+      "address": "静岡県伊豆の国市長岡340-1"
+    },
+    "22226-city": {
+      "name": "牧之原市役所",
+      "status": "verified",
+      "postalCode": "421-0495",
+      "address": "静岡県牧之原市静波447-1"
+    },
+    "22301-town": {
+      "name": "東伊豆町役場",
+      "status": "verified",
+      "postalCode": "413-0411",
+      "address": "静岡県賀茂郡東伊豆町稲取3354"
+    },
+    "22302-town": {
+      "name": "河津町役場",
+      "status": "verified",
+      "postalCode": "413-0595",
+      "address": "静岡県賀茂郡河津町田中212-2"
+    },
+    "22304-town": {
+      "name": "南伊豆町役場",
+      "status": "verified",
+      "postalCode": "415-0392",
+      "address": "静岡県賀茂郡南伊豆町下賀茂315-1"
+    },
+    "22305-town": {
+      "name": "松崎町役場",
+      "status": "verified",
+      "postalCode": "410-3696",
+      "address": "静岡県賀茂郡松崎町宮内301-1"
+    },
+    "22306-town": {
+      "name": "西伊豆町役場",
+      "status": "verified",
+      "postalCode": "410-3514",
+      "address": "静岡県賀茂郡西伊豆町仁科401-1"
+    },
+    "22325-town": {
+      "name": "函南町役場",
+      "status": "verified",
+      "postalCode": "419-0192",
+      "address": "静岡県田方郡函南町平井717-13"
+    },
+    "22341-town": {
+      "name": "清水町役場",
+      "status": "verified",
+      "postalCode": "411-8650",
+      "address": "静岡県駿東郡清水町堂庭210-1"
+    },
+    "22342-town": {
+      "name": "長泉町役場",
+      "status": "verified",
+      "postalCode": "411-8668",
+      "address": "静岡県駿東郡長泉町中土狩828"
+    },
+    "22344-town": {
+      "name": "小山町役場",
+      "status": "verified",
+      "postalCode": "410-1395",
+      "address": "静岡県駿東郡小山町藤曲57-2"
+    },
+    "22424-town": {
+      "name": "吉田町役場",
+      "status": "verified",
+      "postalCode": "421-0395",
+      "address": "静岡県榛原郡吉田町住吉87"
+    },
+    "22429-town": {
+      "name": "川根本町役場",
+      "status": "verified",
+      "postalCode": "428-0313",
+      "address": "静岡県榛原郡川根本町上長尾627"
+    },
+    "22461-town": {
+      "name": "森町役場",
+      "status": "verified",
+      "postalCode": "437-0293",
+      "address": "静岡県周智郡森町森2101-1"
+    }
+  }
+}
