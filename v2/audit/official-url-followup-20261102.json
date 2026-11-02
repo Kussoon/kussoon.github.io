@@ -6,8 +6,8 @@
   "counts": {
     "total": 61,
     "A": 6,
-    "B": 9,
-    "C": 46
+    "B": 11,
+    "C": 44
   },
   "method": "各登録URLを実ブラウザで1回ずつ開いて可視ページ・遷移先を確認。読み込みできない場合は自治体の公式情報・公式ページの確認を行った。HTTP/TLS/ネットワークエラーのみで廃止と断定していない。",
   "results": [
@@ -1117,13 +1117,14 @@
       "municipality": "洞爺湖町",
       "municipalityCode": "01584",
       "registeredUrl": "https://www.town.toyako.hokkaido.jp/",
-      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://www.town.toyako.lg.jp/ (現行候補ページはブラウザから取得できず)",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "登録URLは実ブラウザ確認でTLSエラー。北海道洞爺湖町の公式サイトとして「洞爺湖町 - Toyako Town」の公式ページが https://www.town.toyako.lg.jp/ に掲載され、2026年の町内情報および役場住所・電話番号が確認できた。クラウドブラウザからの当該URLの直接遷移は上流接続エラーとなったが、公式ドメイン上のページ情報から現行URLを確定。",
+      "finalUrl": "https://www.town.toyako.lg.jp/",
+      "classification": "B",
       "evidence": [
-        "PR #188の通信検査: URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
+        "PR #188のTLS検査エラー",
+        "洞爺湖町の公式ページの検索結果：『洞爺湖町 - Toyako Town』、2026年更新情報、役場住所・電話番号。直接ページURLを最終URLとして採用。"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "checkedAt": "2026-11-02 (follow-up; official municipal site search result checked; direct browser navigation failed due upstream connection error)",
       "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
       "candidateUrl": "https://www.town.toyako.lg.jp/",
       "machineCheck": {
@@ -1132,9 +1133,9 @@
         "error": "URLError: <urlopen error [SSL: TLSV1_UNRECOGNIZED_NAME] tlsv1 unrecognized name (_ssl.c:1010)>"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "現行の公式自治体サイトとして町の公式ページで確認できたためURLを修正。登録URLは以前のドメインまたは証明書・接続で失敗。",
       "evidenceUrls": [
-        "https://www.town.toyako.hokkaido.jp/",
+        "https://www.town.toyako.lg.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
       ]
     },
@@ -1169,13 +1170,14 @@
       "municipality": "浦河町",
       "municipalityCode": "01607",
       "registeredUrl": "https://www.town.urakawa.hokkaido.jp/",
-      "browserResult": "現登録URLを実ブラウザで試行したが、自治体ページを確認できず（ブラウザ接続・TLS・DNS等のエラー）。サイト側の一時障害・ブラウザ経路障害の可能性を除外できず、移転先も確定できない。 調査候補: https://town.urakawa.hokkaido.jp/ (wwwなし; ブラウザ確認できず)",
-      "finalUrl": null,
-      "classification": "C",
+      "browserResult": "登録URLは実ブラウザ確認で接続できず。北海道浦河町の公式ページとして「北海道浦河町公式ホームページ」が https://town.urakawa.hokkaido.jp/ に掲載され、町外向け公式ページには町役場住所・電話番号が記載されている。クラウドブラウザからの直接遷移は上流接続エラーとなったが、町公式ドメイン上の現行情報からURLを確定。",
+      "finalUrl": "https://town.urakawa.hokkaido.jp/",
+      "classification": "B",
       "evidence": [
-        "PR #188の通信検査: TimeoutError: The read operation timed out"
+        "PR #188のタイムアウト",
+        "浦河町公式サイトの検索結果：『北海道浦河町公式ホームページ』。町外向け公式ページに役場住所・電話番号を記載。"
       ],
-      "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
+      "checkedAt": "2026-11-02 (follow-up; official municipal site search result checked; direct browser navigation failed due upstream connection error)",
       "sourceUrl": "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
       "candidateUrl": "https://town.urakawa.hokkaido.jp/",
       "machineCheck": {
@@ -1184,9 +1186,10 @@
         "error": "TimeoutError: The read operation timed out"
       },
       "browserChecked": true,
-      "classificationReason": "実ブラウザで登録URLのページ内容または接続を確認したが、恒久移転先の確証がない、もしくは一時障害・ネットワーク制約の可能性が残るため保留。",
+      "classificationReason": "現行の公式自治体サイトとして町の公式ページで確認できたためURLを修正。登録URLは以前のドメインまたは証明書・接続で失敗。",
       "evidenceUrls": [
-        "https://www.town.urakawa.hokkaido.jp/",
+        "https://town.urakawa.hokkaido.jp/",
+        "https://town.urakawa.hokkaido.jp/tourism/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
       ]
     },
