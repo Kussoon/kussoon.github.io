@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 2,
+  "prefecture": "38",
+  "asOf": "2026-11-02",
+  "sources": [
+    "https://www.j-lis.go.jp/spd/code-address/shikoku/cms_15914186.html",
+    "https://www.pref.ehime.jp/page/14990.html"
+  ],
+  "regions": {
+    "38201": {
+      "name": "松山市",
+      "kind": "city",
+      "officeIds": [
+        "38201-city"
+      ],
+      "official": "https://www.city.matsuyama.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%BE%E5%B1%B1%E5%B8%82"
+    },
+    "38202": {
+      "name": "今治市",
+      "kind": "city",
+      "officeIds": [
+        "38202-city"
+      ],
+      "official": "https://www.city.imabari.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E4%BB%8A%E6%B2%BB%E5%B8%82"
+    },
+    "38203": {
+      "name": "宇和島市",
+      "kind": "city",
+      "officeIds": [
+        "38203-city"
+      ],
+      "official": "https://www.city.uwajima.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E5%AE%87%E5%92%8C%E5%B3%B6%E5%B8%82"
+    },
+    "38204": {
+      "name": "八幡浜市",
+      "kind": "city",
+      "officeIds": [
+        "38204-city"
+      ],
+      "official": "https://www.city.yawatahama.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E5%85%AB%E5%B9%A1%E6%B5%9C%E5%B8%82"
+    },
+    "38205": {
+      "name": "新居浜市",
+      "kind": "city",
+      "officeIds": [
+        "38205-city"
+      ],
+      "official": "https://www.city.niihama.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%96%B0%E5%B1%85%E6%B5%9C%E5%B8%82"
+    },
+    "38206": {
+      "name": "西条市",
+      "kind": "city",
+      "officeIds": [
+        "38206-city"
+      ],
+      "official": "https://www.city.saijo.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E8%A5%BF%E6%9D%A1%E5%B8%82"
+    },
+    "38207": {
+      "name": "大洲市",
+      "kind": "city",
+      "officeIds": [
+        "38207-city"
+      ],
+      "official": "https://www.city.ozu.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E5%A4%A7%E6%B4%B2%E5%B8%82"
+    },
+    "38210": {
+      "name": "伊予市",
+      "kind": "city",
+      "officeIds": [
+        "38210-city"
+      ],
+      "official": "https://www.city.iyo.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E4%BC%8A%E4%BA%88%E5%B8%82"
+    },
+    "38213": {
+      "name": "四国中央市",
+      "kind": "city",
+      "officeIds": [
+        "38213-city"
+      ],
+      "official": "https://www.city.shikokuchuo.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E5%9B%9B%E5%9B%BD%E4%B8%AD%E5%A4%AE%E5%B8%82"
+    },
+    "38214": {
+      "name": "西予市",
+      "kind": "city",
+      "officeIds": [
+        "38214-city"
+      ],
+      "official": "https://www.city.seiyo.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E8%A5%BF%E4%BA%88%E5%B8%82"
+    },
+    "38215": {
+      "name": "東温市",
+      "kind": "city",
+      "officeIds": [
+        "38215-city"
+      ],
+      "official": "https://www.city.toon.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%B1%E6%B8%A9%E5%B8%82"
+    },
+    "38356": {
+      "name": "上島町",
+      "kind": "town",
+      "officeIds": [
+        "38356-town"
+      ],
+      "official": "https://www.town.kamijima.lg.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E4%B8%8A%E5%B3%B6%E7%94%BA"
+    },
+    "38386": {
+      "name": "久万高原町",
+      "kind": "town",
+      "officeIds": [
+        "38386-town"
+      ],
+      "official": "https://www.kumakogen.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E4%B9%85%E4%B8%87%E9%AB%98%E5%8E%9F%E7%94%BA"
+    },
+    "38401": {
+      "name": "松前町",
+      "kind": "town",
+      "officeIds": [
+        "38401-town"
+      ],
+      "official": "https://www.town.masaki.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%BE%E5%89%8D%E7%94%BA"
+    },
+    "38402": {
+      "name": "砥部町",
+      "kind": "town",
+      "officeIds": [
+        "38402-town"
+      ],
+      "official": "https://www.town.tobe.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E7%A0%A5%E9%83%A8%E7%94%BA"
+    },
+    "38422": {
+      "name": "内子町",
+      "kind": "town",
+      "officeIds": [
+        "38422-town"
+      ],
+      "official": "https://www.town.uchiko.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E5%86%85%E5%AD%90%E7%94%BA"
+    },
+    "38442": {
+      "name": "伊方町",
+      "kind": "town",
+      "officeIds": [
+        "38442-town"
+      ],
+      "official": "https://www.town.ikata.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E4%BC%8A%E6%96%B9%E7%94%BA"
+    },
+    "38484": {
+      "name": "松野町",
+      "kind": "town",
+      "officeIds": [
+        "38484-town"
+      ],
+      "official": "https://www.town.matsuno.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%9D%BE%E9%87%8E%E7%94%BA"
+    },
+    "38488": {
+      "name": "鬼北町",
+      "kind": "town",
+      "officeIds": [
+        "38488-town"
+      ],
+      "official": "https://www.town.kihoku.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E9%AC%BC%E5%8C%97%E7%94%BA"
+    },
+    "38506": {
+      "name": "愛南町",
+      "kind": "town",
+      "officeIds": [
+        "38506-town"
+      ],
+      "official": "https://www.town.ainan.ehime.jp/",
+      "wikipedia": "https://ja.wikipedia.org/w/index.php?search=%E6%84%9B%E5%AA%9B%E7%9C%8C%E6%84%9B%E5%8D%97%E7%94%BA"
+    }
+  },
+  "offices": {
+    "38201-city": {
+      "name": "松山市役所",
+      "status": "verified",
+      "postalCode": "790-8571",
+      "address": "愛媛県松山市二番町4-7-2"
+    },
+    "38202-city": {
+      "name": "今治市役所",
+      "status": "verified",
+      "postalCode": "794-8511",
+      "address": "愛媛県今治市別宮町1-4-1"
+    },
+    "38203-city": {
+      "name": "宇和島市役所",
+      "status": "verified",
+      "postalCode": "798-8601",
+      "address": "愛媛県宇和島市曙町1"
+    },
+    "38204-city": {
+      "name": "八幡浜市役所",
+      "status": "verified",
+      "postalCode": "796-8501",
+      "address": "愛媛県八幡浜市北浜1-1-1"
+    },
+    "38205-city": {
+      "name": "新居浜市役所",
+      "status": "verified",
+      "postalCode": "792-8585",
+      "address": "愛媛県新居浜市一宮町1-5-1"
+    },
+    "38206-city": {
+      "name": "西条市役所",
+      "status": "verified",
+      "postalCode": "793-8601",
+      "address": "愛媛県西条市明屋敷164"
+    },
+    "38207-city": {
+      "name": "大洲市役所",
+      "status": "verified",
+      "postalCode": "795-8601",
+      "address": "愛媛県大洲市大洲690-1"
+    },
+    "38210-city": {
+      "name": "伊予市役所",
+      "status": "verified",
+      "postalCode": "799-3193",
+      "address": "愛媛県伊予市米湊820"
+    },
+    "38213-city": {
+      "name": "四国中央市役所",
+      "status": "verified",
+      "postalCode": "799-0497",
+      "address": "愛媛県四国中央市三島宮川4-6-55"
+    },
+    "38214-city": {
+      "name": "西予市役所",
+      "status": "verified",
+      "postalCode": "797-8501",
+      "address": "愛媛県西予市宇和町卯之町3-434-1"
+    },
+    "38215-city": {
+      "name": "東温市役所",
+      "status": "verified",
+      "postalCode": "791-0292",
+      "address": "愛媛県東温市見奈良530-1"
+    },
+    "38356-town": {
+      "name": "上島町役場",
+      "status": "verified",
+      "postalCode": "794-2592",
+      "address": "愛媛県越智郡上島町弓削下弓削210"
+    },
+    "38386-town": {
+      "name": "久万高原町役場",
+      "status": "verified",
+      "postalCode": "791-1201",
+      "address": "愛媛県上浮穴郡久万高原町久万212"
+    },
+    "38401-town": {
+      "name": "松前町役場",
+      "status": "verified",
+      "postalCode": "791-3192",
+      "address": "愛媛県伊予郡松前町大字筒井631"
+    },
+    "38402-town": {
+      "name": "砥部町役場",
+      "status": "verified",
+      "postalCode": "791-2195",
+      "address": "愛媛県伊予郡砥部町宮内1392"
+    },
+    "38422-town": {
+      "name": "内子町役場",
+      "status": "verified",
+      "postalCode": "795-0392",
+      "address": "愛媛県喜多郡内子町平岡甲168"
+    },
+    "38442-town": {
+      "name": "伊方町役場",
+      "status": "verified",
+      "postalCode": "796-0301",
+      "address": "愛媛県西宇和郡伊方町湊浦1993-1"
+    },
+    "38484-town": {
+      "name": "松野町役場",
+      "status": "verified",
+      "postalCode": "798-2192",
+      "address": "愛媛県北宇和郡松野町大字松丸343"
+    },
+    "38488-town": {
+      "name": "鬼北町役場",
+      "status": "verified",
+      "postalCode": "798-1395",
+      "address": "愛媛県北宇和郡鬼北町大字近永800-1"
+    },
+    "38506-town": {
+      "name": "愛南町役場",
+      "status": "verified",
+      "postalCode": "798-4196",
+      "address": "愛媛県南宇和郡愛南町城辺甲2420"
+    }
+  }
+}
