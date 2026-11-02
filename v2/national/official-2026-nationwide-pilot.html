@@ -48,9 +48,9 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 <label>全国地図の表示範囲<select id="nationExtent"><option value="main">全国主要域（北海道〜沖縄）</option><option value="all">遠隔離島を含む全域</option></select></label>
 </div>
 <div class="search-area">
-<label for="placeSearch">地名検索（現在表示中の都道府県／全国では都道府県名）</label>
+<label for="placeSearch">地名検索（全国の都道府県・市区町村）</label>
 <input id="placeSearch" type="search" placeholder="例：西宮市、芦屋市、北海道" autocomplete="off">
-<div id="searchHint"><small>全国では都道府県名を検索し、県を選ぶと市区町村名・5桁コードで検索できます。</small></div>
+<div id="searchHint"><small>全国地図から市区町村名・読み仮名・5桁コードでも検索できます。候補を選ぶと、その地域を表示します。</small></div>
 <div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div>
 </div>
 <label class="label-toggle"><input type="checkbox" id="showNames">市区町村名を地図に表示する（選択中の地名は常時表示）</label>
@@ -108,6 +108,7 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',W=850,H=700;
 const base='../data/national/2026-common/',cache=new Map();
 let readingSourcePromise=null;
+let nationwideSearchIndex=null,nationwideSearchLoading=false,nationwideSearchFailed=false;
 async function getReadingSource(){
  if(!readingSourcePromise)readingSourcePromise=fetch('../data/national/municipality-readings-all-source.json').then(res=>{if(!res.ok)throw Error('読み仮名データ HTTP '+res.status);return res.json();});
  return readingSourcePromise;
@@ -205,6 +206,25 @@ function paint(){
  $('quizStart').disabled=!current||Boolean(quizSession);
  updateSearch();
 }
+function ensureNationwideSearchIndex(){
+ if(nationwideSearchIndex||nationwideSearchLoading||nationwideSearchFailed)return;
+ nationwideSearchLoading=true;
+ getReadingSource().then(data=>{
+  const items=data.items||{};
+  // The 20 designated-city parent records have no single map polygon; their wards do.
+  const wardNames=Object.values(items).filter(x=>x&&x.name&&x.name.endsWith('区')).map(x=>x.name);
+  nationwideSearchIndex=Object.entries(items).filter(([code,item])=>{
+   if(!/^[0-9]{5}$/.test(code)||!item||!item.name||Number(code.slice(0,2))<1||Number(code.slice(0,2))>47)return false;
+   return !(item.name.endsWith('市')&&wardNames.some(name=>name.startsWith(item.name)&&name!==item.name));
+  }).map(([code,item])=>({name:item.name,reading:item.reading||'',code,pref:code.slice(0,2),kind:'national-region'}));
+  nationwideSearchLoading=false;
+  if(!current&&$('placeSearch').value.trim())updateSearch();
+ }).catch(error=>{
+  nationwideSearchLoading=false;nationwideSearchFailed=true;
+  console.warn('全国市区町村検索データを取得できませんでした',error);
+  if(!current&&$('placeSearch').value.trim())updateSearch();
+ });
+}
 function updateSearch(){
  const host=$('searchResults');host.replaceChildren();
  const query=$('placeSearch').value.trim();
@@ -213,22 +233,34 @@ function updateSearch(){
  if(current){
   results=current.regions.filter(r=>KussoonV2PlaceLabels.matches(r,query)).map(r=>({name:r.fullName||r.name,reading:r.reading,code:r.code,kind:'region'}));
  }else{
-  results=names.slice(1).map((name,i)=>({name,code:String(i+1).padStart(2,'0'),kind:'pref'}))
-    .filter(r=>KussoonV2PlaceLabels.matches(r,query));
+  ensureNationwideSearchIndex();
+  const prefMatches=names.slice(1).map((name,i)=>({name,code:String(i+1).padStart(2,'0'),kind:'pref'}))
+   .filter(r=>KussoonV2PlaceLabels.matches(r,query));
+  const municipalMatches=(nationwideSearchIndex||[]).filter(r=>KussoonV2PlaceLabels.matches(r,query)||r.code.includes(query));
+  results=[...prefMatches,...municipalMatches];
  }
  const shown=results.slice(0,35);
  for(const entry of shown){
   const button=document.createElement('button');button.type='button';
-  button.textContent=entry.kind==='region'?entry.name+(entry.reading?'／'+entry.reading:'')+'（'+entry.code+'）':entry.name;
+  button.textContent=entry.kind==='pref'?entry.name:
+   (entry.kind==='national-region'?names[Number(entry.pref)]+' ＞ ':'')+
+   entry.name+(entry.reading?'／'+entry.reading:'')+'（'+entry.code+'）';
   button.addEventListener('click',()=>{
    if(entry.kind==='pref'){void goPref(entry.code);$('placeSearch').value='';host.replaceChildren();return;}
+   if(entry.kind==='national-region'){
+    $('placeSearch').value='';host.replaceChildren();
+    void goPref(entry.pref,entry.code);
+    return;
+   }
    $('region').value=entry.code;dismissedPopupCode=null;paint();$('status').textContent=entry.name+'を中央に表示しています。';
   });
   host.append(button);
  }
  if(!shown.length){
   const msg=document.createElement('small');
-  msg.textContent='該当する地名はありません。全国の市区町村を調べる場合は、先に都道府県を選択してください。';
+  msg.textContent=!current&&nationwideSearchLoading?'全国の市区町村検索データを読み込み中です…':
+   !current&&nationwideSearchFailed?'検索データの読み込みに失敗しました。都道府県を選択して検索してください。':
+   '該当する地名はありません。';
   host.append(msg);
  }else if(results.length>shown.length){
   const msg=document.createElement('small');msg.textContent='検索結果の先頭35件を表示しています。条件を絞ってください。';host.append(msg);
@@ -296,7 +328,7 @@ function returnNation(){
  ++requestId;current=null;dismissedPopupCode=null;$('pref').value='';$('region').value='';
  paint();$('status').textContent='全国47都道府県を表示中です。';
 }
-async function goPref(code){
+async function goPref(code,selectedCode=''){
  if(!code){returnNation();return;}
  const id=++requestId;dismissedPopupCode=null;$('officePopup').hidden=true;
  $('pref').value=code;$('status').textContent=names[Number(code)]+'の20m地図を読み込み中です…';
@@ -326,7 +358,8 @@ async function goPref(code){
   current=entry;
   const region=$('region');region.replaceChildren(new Option('選択なし',''));
   for(const r of entry.regions)region.append(new Option((r.fullName||r.name)+(r.reading?'／'+r.reading:'')+'（'+r.code+'）',r.code));
-  paint();$('status').textContent=names[Number(code)]+'を表示中です。市区町村を選べます。';
+  if(selectedCode&&entry.regions.some(r=>r.code===selectedCode))region.value=selectedCode;
+  paint();$('status').textContent=region.value?names[Number(code)]+' ＞ '+(entry.regions.find(r=>r.code===region.value)?.fullName||entry.regions.find(r=>r.code===region.value)?.name)+'を中央に表示しています。':names[Number(code)]+'を表示中です。市区町村を選べます。';
  }catch(e){if(id!==requestId)return;current=null;paint();$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
 }
 $('quizStart').addEventListener('click',startQuiz);
