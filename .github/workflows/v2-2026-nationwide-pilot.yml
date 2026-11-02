@@ -8,6 +8,9 @@ on:
       - 'v2/shared/test-place-labels.cjs'
       - 'v2/shared/reading-bridge.js'
       - 'v2/shared/test-reading-bridge.cjs'
+      - 'v2/shared/municipality-quiz.js'
+      - 'v2/shared/test-municipality-quiz.cjs'
+      - 'v2/shared/municipality-renderer.js'
       - 'v2/shared/established-label-adapter.js'
       - 'v2/shared/test-established-label-adapter.cjs'
       - 'v2/national/official-2026-nationwide-pilot.html'
@@ -73,6 +76,7 @@ jobs:
           node v2/shared/test-map-viewport.cjs
           node v2/shared/test-place-labels.cjs
           node v2/shared/test-reading-bridge.cjs
+          node v2/shared/test-municipality-quiz.cjs
           node v2/shared/test-established-label-adapter.cjs
           node v2/tools/shared-topology/test-national-navigation.mjs
       - name: Publish generated pilot assets to PR branch
