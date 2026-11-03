@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Kussoon ideas article ID: 001 (internal management) -->
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="canonical" href="https://kussoon.com/ideas/001/"><meta name="description" content="iPhoneのホーム画面に追加して使える時計・バータイマーWebアプリの機能と使い方を紹介します。"><title>バータイマー付きデジタル時計｜工夫・アイデア｜Kussoon</title><style>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="canonical" href="https://kussoon.com/ideas/001/"><meta name="description" content="大きなデジタル時計と60本バータイマー。クセなし版clock1と多機能版clock2を選んで使えます。"><title>バータイマー付きデジタル時計｜工夫・アイデア｜Kussoon</title><style>
 :root{color-scheme:light;--bg:#fbf7ef;--ink:#3e3b34;--accent:#806126;--line:#eadfc7;--soft:#fbf5e8}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fbf7ef 0%,#fff 45%,#faf9f6 100%);line-height:1.85}
 .container{max-width:900px;margin:auto;padding:18px 18px 55px}
@@ -31,6 +31,20 @@ summary{cursor:pointer;font-weight:700}
 .note{font-size:.93rem;color:#57626b;background:#f7f9fa;padding:12px 14px;border-radius:6px}
 .content-section .note{text-align:left}
 @media(max-width:580px){.use-cases{grid-template-columns:1fr}.use-case{padding:14px}}
+
+/* Clock1 / clock2 choice cards */
+.clock-variants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:16px 0 24px}
+.clock-card{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fffdfa;display:flex;flex-direction:column;min-width:0}
+.clock-card:nth-child(2){background:#fbf8f3}
+.clock-tag{margin:0 0 6px;color:#866329;font-size:.86rem;font-weight:750}
+.clock-card h3{margin:0 0 8px;font-size:1.35rem}
+.clock-card h3 small{font-size:.75rem;font-weight:500;color:#66717a}
+.clock-card p:not(.clock-tag){margin:6px 0 12px}
+.clock-actions{margin-top:auto;display:grid;gap:9px}
+.clock-actions a{display:block;text-align:center;padding:11px 12px;background:#86692f;color:#fff;font-weight:700;text-decoration:none;border-radius:10px}
+.clock-actions a:nth-child(2){background:#fff;color:#6d5221;border:1px solid #bda36a}
+.clock-actions a:focus-visible{outline:3px solid #1465a0;outline-offset:2px}
+@media(max-width:690px){.clock-variants{grid-template-columns:1fr}.clock-card{padding:17px}}
 </style><!-- Kussoon: Umami analytics (query values are not collected) -->
 <script>
 window.kussoonUmamiBeforeSend = function (type, payload) {
@@ -49,80 +63,72 @@ window.kussoonUmamiBeforeSend = function (type, payload) {
         data-before-send="kussoonUmamiBeforeSend"></script>
 </head><body><div class="container"><a class="back" href="../">← 工夫・アイデアへ戻る</a><main><article class="article-body"><p class="kicker">Kussoon ／ 💡 工夫・アイデア</p>
 <h1>バータイマー付きデジタル時計</h1>
-<p class="app-label">iPhoneのホーム画面に追加して使える時計・タイマーWebアプリ</p>
-<p class="lead">大きく見やすい時計と、時間の経過を色とバーで確認できるタイマーです。スマートフォンを横向き・縦向きのどちらでも使えます。</p>
-<p class="action"><a class="launch" href="/ideas/001/clock.html?mode=clock" data-umami-event="ideas-001-clock-open-click">時計を表示する</a></p>
+<p class="lead">大きく見やすいデジタル時計と、残り時間がひと目で分かるバータイマーを組み合わせました。スマートフォンの縦向き・横向きに対応。全画面表示でも使えます。</p>
+<section class="content-section" aria-labelledby="choose-clock">
+<h2 id="choose-clock">2つの時計から選ぶ</h2>
+<div class="clock-variants">
+<div class="clock-card">
+<p class="clock-tag">シンプル</p>
+<h3>クセなし版 <small>clock1</small></h3>
+<p>時刻と日付、曜日、西暦・令和だけのすっきりした時計。タイマーには60本のバーを使用し、刀やメッセージ、点滅はありません。</p>
+<div class="clock-actions">
+<a href="/ideas/001/clock1.html?mode=clock" data-umami-event="ideas-001-clock1-clock-open">時計を表示する</a>
+<a href="/ideas/001/clock1.html?mode=timer" data-umami-event="ideas-001-clock1-timer-open">タイマーを表示する</a>
+</div>
+</div>
+<div class="clock-card">
+<p class="clock-tag">多機能</p>
+<h3>従来版 <small>clock2</small></h3>
+<p>二十四節気、和暦、残り日数、「今日は何の日」なども表示。15分ごとのメッセージ、座りすぎ注意、鳩時計、刀の付いたバータイマーがあります。</p>
+<div class="clock-actions">
+<a href="/ideas/001/clock2.html?mode=clock" data-umami-event="ideas-001-clock2-clock-open">時計を表示する</a>
+<a href="/ideas/001/clock2.html?mode=timer" data-umami-event="ideas-001-clock2-timer-open">タイマーを表示する</a>
+</div>
+</div>
+</div>
+</section>
 <section class="content-section">
-<h2>この時計の使い方は2通りあります</h2>
-<p>表示される時計・タイマーの機能は同じですが、開き方と画面の見え方が異なります。</p>
-<div class="use-cases">
-<div class="use-case">
-<h3>① 説明書からそのまま開く</h3>
-<p>このページの「時計を表示する」「タイマーを表示する」を押すと、SafariのWebページとしてすぐに使えます。</p>
-<p>インストールせずに試したいときや、一時的に使うときに便利です。Safariのアドレスバーや操作部分が表示されることがあります。</p>
-</div>
-<div class="use-case recommended">
-<h3>② ホーム画面に追加して開く（おすすめ）</h3>
-<p>iPhoneのホーム画面にアイコンを追加すると、時計専用のアプリのように、ホーム画面から直接起動できます。</p>
-<p>通常はSafariのアドレスバーやタブが表示されないため、普段使いはこちらがおすすめです。</p>
-</div>
-</div>
-<h3>ホーム画面への追加方法</h3>
+<h2>主な機能</h2>
+<h3>時計</h3>
+<ul class="features">
+<li>時・分・秒、日付・曜日を大きく表示</li>
+<li>西暦・令和を表示（多機能版では平成・昭和なども表示）</li>
+<li>スマートフォンの縦表示・横表示・全画面表示に対応</li>
+</ul>
+<h3>バータイマー</h3>
+<ul class="features">
+<li>分・秒をテンキーで設定。開始・一時停止・リセットに対応</li>
+<li>60本のカラーバーで残り時間を表示</li>
+<li>クセなし版は通知や点滅なし。多機能版には5分刻みの点滅などの演出あり</li>
+</ul>
+</section>
+<section class="content-section">
+<h2>使い方</h2>
+<p>上のボタンを押すだけで、すぐに使えます。</p>
+<p>iPhoneでは、時計画面をSafariで開き、共有メニューから「ホーム画面に追加」を選ぶと、ホーム画面からアプリのように起動できます。</p>
+<details>
+<summary>iPhoneのホーム画面への追加方法</summary>
 <ol class="steps">
-<li>この説明書をSafariで開きます。</li>
-<li>Safariの共有ボタン（四角から上向き矢印が出ているボタン）を押します。</li>
-<li>「ホーム画面に追加」を選び、右上の「追加」を押します。</li>
-<li>ホーム画面にできたアイコンから時計を起動します。</li>
+<li>追加したい時計（clock1 または clock2）をSafariで開きます。</li>
+<li>Safariの共有メニューから「ホーム画面に追加」を選びます。</li>
+<li>「追加」を押して、ホーム画面のアイコンから起動します。</li>
 </ol>
-<p class="important-note">この時計は、ホーム画面から起動し、時計・タイマー画面の「全画面」を選んだ状態に最適化しています。通常表示では、端末の向きと「横／縦」の組み合わせによって数字が重なる場合があります。全画面表示は右上の「×」で終了できます。</p>
-</section>
-<section class="content-section">
-<h2>時計</h2>
-<p>時刻だけでなく、今日と一年の流れもひと目で分かる時計です。</p>
-<ul class="features">
-<li>大きな時・分・秒表示。横表示／縦表示／全画面表示に対応</li>
-<li>月日・曜日と現在の二十四節気を表示</li>
-<li>西暦・令和・平成・昭和の年数を同時表示</li>
-<li>今年の残り週数・日数と、366日分の「今日は何の日」を表示</li>
-<li>15分ごとのメッセージ、毎時50分からの「⚠️座りすぎ注意」、毎正時の鳩時計</li>
-</ul>
-<div class="action"><a href="/ideas/001/clock.html?mode=clock" data-umami-event="ideas-001-clock-open-click">時計を表示する</a></div>
-</section>
-<section class="content-section">
-<h2>タイマー</h2>
-<p>残り時間を数字だけでなく、60本のカラーバーでも直感的に確認できます。</p>
-<ul class="features">
-<li>テンキーで分・秒を直接入力</li>
-<li>オレンジ・黄緑・緑・青の60本バーで残り時間を表示</li>
-<li>刀の位置で、残り時間と経過時間の境界を確認</li>
-<li>横表示／縦表示／全画面表示に対応</li>
-<li>残り時間が5分刻みになるたび画面全体がフラッシュ。0になったときもフラッシュ</li>
-</ul>
-<div class="action"><a href="/ideas/001/clock.html?mode=timer" data-umami-event="ideas-001-timer-open-click">タイマーを表示する</a></div>
-</section>
-<section class="content-section help">
-<h2>画面を消さずに使いたいとき</h2>
-<details>
-<summary>iPhone / iPad</summary>
-<p>「設定 → アクセシビリティ → アクセスガイド」でアクセスガイドをオンにし、「画面の自動ロック」を「しない」にします。時計を表示してからサイドボタン（ホームボタン搭載機種ではホームボタン）を3回押して、アクセスガイドを開始します。</p>
-<p class="note">終了方法は端末の設定によって異なります。Face IDを使う場合は、アクセスガイドのパスコード設定でFace IDを有効にしておくと便利です。</p>
+<p class="note">Safariのバージョンや設定によって操作表示は異なります。全画面表示は時計内のボタンから切り替えます。</p>
 </details>
 <details>
-<summary>Android</summary>
-<p>対応ブラウザでは、この時計が画面のスリープを防ぐ機能を利用します。まずはそのままお試しください。画面が消える場合は、端末の「画面消灯」「スリープ」「画面タイムアウト」などの設定を確認してください。</p>
-<p class="note">「アプリの固定（画面の固定）」がある端末では、他のアプリへ移動しにくくできます。ただし、これは画面の自動消灯を止める機能とは別です。名称や設定方法は機種によって異なります。</p>
+<summary>画面を消さずに使いたいとき</summary>
+<p>対応ブラウザでは画面のスリープ防止機能を利用しますが、端末や利用条件によっては画面が消えることがあります。端末の自動ロックや画面消灯の設定もご確認ください。</p>
+<p>iPhone／iPadでは、必要に応じて「設定 → アクセシビリティ → アクセスガイド」で画面を固定する方法もあります。</p>
+</details>
+<details>
+<summary>設定・プライバシーについて</summary>
+<p>クセなし版の横／縦表示・明るさの設定は、この端末のブラウザ内に保存します。これらの設定は運営者へ送信されません。時計の時刻や日付は端末の時計を使います。</p>
+<p>詳しくは<a href="/privacy/">プライバシーポリシー</a>をご覧ください。</p>
+</details>
+<details>
+<summary>多機能版の表示情報について</summary>
+<p>二十四節気は概算であり、暦の切替時刻と差が生じることがあります。「今日は何の日」は代表的な記念日を選んだ参考情報で、公式な全件一覧ではありません。詳しくは<a href="/sources/">データ出典</a>と<a href="/terms/">利用上の注意</a>をご覧ください。</p>
 </details>
 </section>
-<section class="content-section privacy-note">
-<h2>設定内容とプライバシー</h2>
-<p>時計／タイマー、横／縦表示、画面の明るさなどの設定は、この端末のブラウザ内に保存されます。これらの設定が運営者へ送信されることはありません。</p>
-<p>対応ブラウザでは、時計の使用中に画面のスリープを一時的に防ぐ機能を利用します。詳しくは<a href="https://kussoon.com/privacy/">プライバシーポリシー</a>をご確認ください。</p>
-</section>
-<section class="content-section data-note">
-<h2>掲載情報について</h2>
-<p>時刻と日付は、ご利用の端末の時計をもとに表示します。二十四節気は太陽の見かけの黄経から概算しているため、暦資料の切替時刻と差が生じる場合があります。</p>
-<p>「今日は何の日」は、公開情報をもとに当サイトが代表的な記念日を1日1件選び、独自に整理したものです。記念日には複数の説や制定主体があるため、網羅的・公式な一覧ではありません。一般的な参考情報としてご利用ください。</p>
-<p>時計の使用中に外部のデータAPIへ問い合わせることはありません。サイト全体の方針は<a href="https://kussoon.com/sources/">データ出典</a>と<a href="https://kussoon.com/terms/">利用上の注意</a>をご確認ください。</p>
-</section>
-<div class="version">時計・タイマー Version 2.1.4</div></article></main><!-- 広告・アフィリエイト導入時は明示と規約準拠のリンクを追加します。審査前のため広告コードや空枠は設置しません。 --><footer class="footer" aria-label="Kussoon共通フッター"><a href="../">← 工夫・アイデアへ戻る</a><a href="/">Kussoonトップ</a><nav class="site-links" aria-label="サイト共通案内"><a href="/ideas/">工夫・アイデア</a><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/about/">このサイトについて</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p></footer></div><script defer src="/common/footer-links.js"></script>
+</article></main><!-- 広告・アフィリエイト導入時は明示と規約準拠のリンクを追加します。審査前のため広告コードや空枠は設置しません。 --><footer class="footer" aria-label="Kussoon共通フッター"><a href="../">← 工夫・アイデアへ戻る</a><a href="/">Kussoonトップ</a><nav class="site-links" aria-label="サイト共通案内"><a href="/ideas/">工夫・アイデア</a><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/about/">このサイトについて</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p></footer></div><script defer src="/common/footer-links.js"></script>
 </body></html>
