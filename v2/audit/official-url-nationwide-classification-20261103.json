@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 339,
+      "A": 380,
       "B": 0,
       "C": 1,
-      "unclassified": 1572
+      "unclassified": 1531
     },
-    "completedRegionReviews": 340,
+    "completedRegionReviews": 381,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1569,
+    "unreviewedOtherRegions": 1528,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。"
   },
   "records": [
     {
@@ -46883,21 +46883,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.naha.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.naha.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.naha.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.naha.okinawa.jp/",
         "finalUrl": "https://www.city.naha.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -46907,21 +46913,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ginowan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ginowan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.ginowan.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.ginowan.lg.jp/",
         "finalUrl": "https://www.city.ginowan.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -46931,21 +46943,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ishigaki.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ishigaki.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.ishigaki.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.ishigaki.okinawa.jp/",
         "finalUrl": "https://www.city.ishigaki.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -46955,21 +46973,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.urasoe.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.urasoe.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.urasoe.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.urasoe.lg.jp/",
         "finalUrl": "https://www.city.urasoe.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -46979,21 +47003,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nago.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nago.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.nago.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.nago.okinawa.jp/",
         "finalUrl": "https://www.city.nago.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47003,21 +47033,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.itoman.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.itoman.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.itoman.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.itoman.lg.jp/",
         "finalUrl": "https://www.city.itoman.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47027,21 +47063,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.okinawa.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okinawa.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.okinawa.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.okinawa.okinawa.jp/",
         "finalUrl": "https://www.city.okinawa.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47051,21 +47093,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tomigusuku.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tomigusuku.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.tomigusuku.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.tomigusuku.lg.jp/",
         "finalUrl": "https://www.city.tomigusuku.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47075,21 +47123,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.uruma.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.uruma.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.uruma.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.uruma.lg.jp/",
         "finalUrl": "https://www.city.uruma.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47099,21 +47153,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.miyakojima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.miyakojima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.miyakojima.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.miyakojima.lg.jp/",
         "finalUrl": "https://www.city.miyakojima.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47123,21 +47183,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nanjo.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nanjo.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.nanjo.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.nanjo.okinawa.jp/",
         "finalUrl": "https://www.city.nanjo.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47147,21 +47213,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.kunigami.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.kunigami.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.kunigami.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.kunigami.okinawa.jp/",
         "finalUrl": "https://www.vill.kunigami.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47171,21 +47243,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.ogimi.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.ogimi.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.ogimi.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.ogimi.okinawa.jp/",
         "finalUrl": "https://www.vill.ogimi.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47195,21 +47273,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.higashi.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.higashi.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.higashi.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.higashi.okinawa.jp/",
         "finalUrl": "https://www.vill.higashi.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47219,21 +47303,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.nakijin.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.nakijin.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.nakijin.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.nakijin.jp/",
         "finalUrl": "https://www.nakijin.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47243,21 +47333,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.motobu.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.motobu.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.motobu.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.motobu.okinawa.jp/",
         "finalUrl": "https://www.town.motobu.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47267,21 +47363,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.onna.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.onna.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.onna.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.onna.okinawa.jp/",
         "finalUrl": "https://www.vill.onna.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47291,21 +47393,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.ginoza.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.ginoza.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.ginoza.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.ginoza.okinawa.jp/",
         "finalUrl": "https://www.vill.ginoza.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47315,21 +47423,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kin.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kin.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kin.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kin.okinawa.jp/",
         "finalUrl": "https://www.town.kin.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47339,21 +47453,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.iejima.org/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.iejima.org/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.iejima.org/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.iejima.org/",
         "finalUrl": "https://www.iejima.org/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47363,21 +47483,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.yomitan.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.yomitan.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.yomitan.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.yomitan.okinawa.jp/",
         "finalUrl": "https://www.vill.yomitan.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47387,21 +47513,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kadena.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kadena.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kadena.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kadena.okinawa.jp/",
         "finalUrl": "https://www.town.kadena.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47411,21 +47543,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.chatan.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.chatan.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.chatan.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.chatan.jp/",
         "finalUrl": "https://www.chatan.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47435,21 +47573,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.kitanakagusuku.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.kitanakagusuku.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.kitanakagusuku.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.kitanakagusuku.lg.jp/",
         "finalUrl": "https://www.vill.kitanakagusuku.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47459,21 +47603,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.nakagusuku.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.nakagusuku.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.nakagusuku.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.nakagusuku.okinawa.jp/",
         "finalUrl": "https://www.vill.nakagusuku.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47483,21 +47633,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nishihara.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nishihara.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.nishihara.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.nishihara.okinawa.jp/",
         "finalUrl": "https://www.town.nishihara.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47507,21 +47663,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yonabaru.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yonabaru.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.yonabaru.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.yonabaru.okinawa.jp/",
         "finalUrl": "https://www.town.yonabaru.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47531,21 +47693,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.haebaru.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.haebaru.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.haebaru.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.haebaru.lg.jp/",
         "finalUrl": "https://www.town.haebaru.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47555,21 +47723,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.tokashiki.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.tokashiki.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.tokashiki.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.tokashiki.okinawa.jp/",
         "finalUrl": "https://www.vill.tokashiki.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47579,21 +47753,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.zamami.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.zamami.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.zamami.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.zamami.okinawa.jp/",
         "finalUrl": "https://www.vill.zamami.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47603,21 +47783,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.aguni.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.aguni.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.aguni.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.aguni.okinawa.jp/",
         "finalUrl": "https://www.vill.aguni.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47627,21 +47813,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.tonaki.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "http://www.vill.tonaki.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.tonaki.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.tonaki.okinawa.jp/",
         "finalUrl": "http://www.vill.tonaki.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47651,21 +47843,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.minamidaito.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.minamidaito.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.minamidaito.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.minamidaito.okinawa.jp/",
         "finalUrl": "https://www.vill.minamidaito.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47675,21 +47873,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://vill.kitadaito.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://vill.kitadaito.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://vill.kitadaito.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://vill.kitadaito.okinawa.jp/",
         "finalUrl": "https://vill.kitadaito.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47699,21 +47903,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.iheya.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.iheya.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.iheya.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.iheya.okinawa.jp/",
         "finalUrl": "https://www.vill.iheya.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47723,21 +47933,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://vill.izena.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://vill.izena.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://vill.izena.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://vill.izena.okinawa.jp/",
         "finalUrl": "https://vill.izena.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47747,21 +47963,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumejima.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumejima.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kumejima.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kumejima.okinawa.jp/",
         "finalUrl": "https://www.town.kumejima.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47771,21 +47993,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yaese.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yaese.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.yaese.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.yaese.lg.jp/",
         "finalUrl": "https://www.town.yaese.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47795,21 +48023,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.tarama.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.tarama.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.tarama.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.tarama.okinawa.jp/",
         "finalUrl": "https://www.vill.tarama.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47819,21 +48053,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.taketomi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.taketomi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.taketomi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.taketomi.lg.jp/",
         "finalUrl": "https://www.town.taketomi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     },
     {
       "prefectureCode": "47",
@@ -47843,21 +48083,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yonaguni.okinawa.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yonaguni.okinawa.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167369149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.yonaguni.okinawa.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.yonaguni.okinawa.jp/",
         "finalUrl": "https://www.town.yonaguni.okinawa.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS沖縄県ページの自治体ホームページリンクと登録URLを照合。既存HTTP監査でHTTP 200を確認。HTTPへの同一ホストリダイレクトは正常到達としてA。"
     }
   ],
   "updatedAt": "2026-11-03"
