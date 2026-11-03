@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 191,
+      "A": 206,
       "B": 0,
       "C": 1,
-      "unclassified": 1720
+      "unclassified": 1705
     },
-    "completedRegionReviews": 192,
+    "completedRegionReviews": 207,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1717,
+    "unreviewedOtherRegions": 1702,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,717件。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,717件。 佐賀県は公式「県内市町リンク」と既存HTTP監査を照合し15区域を新規A判定（登録20区域のうち既監査4区域を維持）。"
   },
   "records": [
     {
@@ -41676,21 +41676,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.saga.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.saga.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.saga.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.saga.lg.jp/",
         "finalUrl": "https://www.city.saga.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41700,21 +41706,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.karatsu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.karatsu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.karatsu.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.karatsu.lg.jp/",
         "finalUrl": "https://www.city.karatsu.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41724,21 +41736,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tosu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tosu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.tosu.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.tosu.lg.jp/",
         "finalUrl": "https://www.city.tosu.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41748,21 +41766,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.taku.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.taku.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.taku.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.taku.lg.jp/",
         "finalUrl": "https://www.city.taku.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41772,21 +41796,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.imari.saga.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.imari.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
+        "https://www.city.imari.lg.jp/"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.imari.saga.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.imari.saga.jp/",
         "finalUrl": "https://www.city.imari.lg.jp/",
-        "redirectsToOtherHost": true,
-        "error": null
+        "redirectsToOtherHost": true
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、現行市公式サイトへリダイレクト。移転先の公式サイトも確認でき、正常なリダイレクトとしてA。"
     },
     {
       "prefectureCode": "41",
@@ -41796,21 +41827,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.takeo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.takeo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.takeo.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.takeo.lg.jp/",
         "finalUrl": "https://www.city.takeo.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41848,21 +41885,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ogi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ogi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.ogi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.ogi.lg.jp/",
         "finalUrl": "https://www.city.ogi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41872,21 +41915,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ureshino.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ureshino.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.ureshino.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.ureshino.lg.jp/",
         "finalUrl": "https://www.city.ureshino.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41924,21 +41973,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yoshinogari.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yoshinogari.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.yoshinogari.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.yoshinogari.lg.jp/",
         "finalUrl": "https://www.town.yoshinogari.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41948,21 +42003,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kiyama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kiyama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kiyama.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kiyama.lg.jp/",
         "finalUrl": "https://www.town.kiyama.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -41972,21 +42033,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kamimine.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kamimine.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kamimine.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kamimine.lg.jp/",
         "finalUrl": "https://www.town.kamimine.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -42025,21 +42092,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.genkai.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.genkai.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.genkai.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.genkai.lg.jp/",
         "finalUrl": "https://www.town.genkai.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -42049,21 +42122,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.arita.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.arita.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.arita.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.arita.lg.jp/",
         "finalUrl": "https://www.town.arita.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -42073,21 +42152,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.omachi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.omachi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.omachi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.omachi.lg.jp/",
         "finalUrl": "https://www.town.omachi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "41",
@@ -42153,21 +42238,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tara.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tara.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.tara.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.tara.lg.jp/",
         "finalUrl": "https://www.town.tara.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "佐賀県公式「県内市町リンク」で自治体名と登録URLを照合。2026-11-02接続監査で登録URLはHTTP 200、終端URLも同一。A。"
     },
     {
       "prefectureCode": "42",
