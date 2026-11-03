@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 1177,
+      "A": 1238,
       "B": 0,
       "C": 1,
-      "unclassified": 734
+      "unclassified": 673
     },
-    "completedRegionReviews": 1178,
+    "completedRegionReviews": 1239,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 894,
+    "unreviewedOtherRegions": 670,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,233件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。 北海道・空知総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定23区域をA判定。滝川市はHTTP監査の数値ステータスがないため、現行公式トップページを直接確認。秩父別町の既存A判定にも公式リンク根拠を追記。 北海道・石狩振興局は北海道公式リンク一覧と既存HTTP監査を照合し、18区域をA判定。札幌市の10区は市公式サイト共通URLへの登録を市の公式リンク根拠と照合。 北海道・根室振興局の公式リンク一覧と既存HTTP監査を照合し、5区域をA判定。 北海道・留萌振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定7区域をA判定。苫前町の既存A判定にも公式リンク根拠を追記。 北海道・日高振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定5区域をA判定。浦河町・様似町の既存A判定にも公式リンク根拠を追記。 北海道・渡島総合振興局の公式リンク一覧と既存HTTP監査を照合し、11区域をA判定。 北海道・後志総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定15区域をA判定。既存Aの黒松内町・蘭越町・共和町・積丹町に公式リンク根拠を追記し、寿都町はHTTP 502のためCを維持し公式掲載根拠を追記。 北海道・檜山振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。せたな町の既存A判定にも公式リンク根拠を追記。 北海道・胆振総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定10区域をA判定。洞爺湖町の既存A判定にも公式リンク根拠を追記。 北海道・釧路総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。標茶町はスナップショットにHTTP記録がないため現行公式ページを直接確認してA判定。釧路町の既存A判定にも公式リンク根拠を追記。 北海道・十勝総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定18区域をA判定。浦幌町の既存A判定にも公式リンク根拠を追記。 北海道・上川総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定22区域をA判定。東川町は登録URLから現行公式サイトへの転送先も確認。 北海道・宗谷総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定8区域をA判定。 北海道・オホーツク総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定16区域をA判定。遠軽町のホームページは脆弱性対応で一時停止し公式臨時案内へ遷移する点を記録。紋別市は現行検索結果で登録www URL上の市公式コンテンツを確認したためA判定。直接取得のHTTP数値は未確認。 既存61件の追加確認対象の北相木村・和歌山県美浜町・道志村は公式情報を再確認したが、2026-11-03の現行トップページ取得も不成立。公式性の根拠を追記し、未判定のまま維持。 青森県の未判定37区域は県公式市町村ホームページ一覧と既存HTTP監査を照合しA。田子町は県掲載リンクと台帳URLのドメインが異なるが、台帳URLの現行公式ページ表示とHTTP 200を直接確認。 岩手県は県公式の市町村リンク一覧と既存HTTP監査を照合し未判定33区域をA判定。久慈市は県掲載先と台帳URLのホストが異なるため、台帳URLの直接HTTP 200と現行市公式ページ表示を確認し、その差異と県掲載先への接続失敗を記録。 宮城県は県公式の市町村リンク集と既存HTTP監査を照合し未判定39区域をA判定。松島町はHTTP数値記録がないため、現行公式トップページと最新のお知らせをブラウザで直接確認しA判定。 秋田県は県公式市町村ウェブサイト一覧と既存HTTP監査を照合し未判定24区域をA判定。八峰町は数値HTTPステータス未確認のため、現行公式トップページと直近のお知らせをブラウザで直接確認。 山形県は県公式の市町村ホームページ一覧と既存HTTP監査を照合し未判定33区域をA判定。最上町は数値HTTPステータス未確認のため、登録URL上の現行公式ページをブラウザで直接確認。 福島県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定59区域をA判定。登録URLのHTTP 200は全59件。いわき市は同一ホスト内のトップページパスへの到達を記録。 茨城県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定44区域をA判定。43区域はHTTP 200、河内町はHTTP 202を記録し、県公式市町村データページで登録URLの公式性を追加確認。 栃木県は全25区域を照合。未判定24区域のうち23区域を県公式市町一覧・J-LISと既存HTTP 200の一致によりA判定。大田原市の既存Aにも両公的根拠を追記。益子町は登録URLのHTTP 202と現行町公式ページのドメイン差異が解消できないため未判定を維持。 群馬県は県公式市町村外部リンク集（2026年9月更新）と登録URLを照合し、未判定33区域をA判定。32区域は既存HTTP 200、南牧村は現行公式トップと直近のお知らせをブラウザ確認し、数値HTTPコード未確認と記録。富岡市・甘楽町の既存Aにも県公式リンク根拠を追記。 埼玉県は県公式の市町村リンク一覧と登録URLを照合し、既存未判定71区域をA判定。71区域はいずれも既存HTTP監査でHTTP 200、うちさいたま市と10区の登録URLは市公式サイトの現行ドメインへの転送を確認。横瀬町の既存Aにも県公式リンク根拠を追記。鶴ヶ島市は県公式一覧掲載URLとHTTP 202を確認したが、ブラウザはロボット確認画面となるため未判定を維持。 千葉県は県公式県内市町村リンク集（2025年更新）とJ-LISリンク一覧（2020年更新）を照合し、未判定59区域をA判定。59区域はいずれも既存HTTP監査で200。市川市・佐倉市・八千代市は両公的リンク一覧の旧ホストと台帳登録URLの差を確認し、現行公式ページまたは市の公式URL告知で登録URLを個別確認。御宿町の既存Aにも県・J-LIS掲載根拠を追記（HTTP 503は別項目で維持）。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,233件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。 北海道・空知総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定23区域をA判定。滝川市はHTTP監査の数値ステータスがないため、現行公式トップページを直接確認。秩父別町の既存A判定にも公式リンク根拠を追記。 北海道・石狩振興局は北海道公式リンク一覧と既存HTTP監査を照合し、18区域をA判定。札幌市の10区は市公式サイト共通URLへの登録を市の公式リンク根拠と照合。 北海道・根室振興局の公式リンク一覧と既存HTTP監査を照合し、5区域をA判定。 北海道・留萌振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定7区域をA判定。苫前町の既存A判定にも公式リンク根拠を追記。 北海道・日高振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定5区域をA判定。浦河町・様似町の既存A判定にも公式リンク根拠を追記。 北海道・渡島総合振興局の公式リンク一覧と既存HTTP監査を照合し、11区域をA判定。 北海道・後志総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定15区域をA判定。既存Aの黒松内町・蘭越町・共和町・積丹町に公式リンク根拠を追記し、寿都町はHTTP 502のためCを維持し公式掲載根拠を追記。 北海道・檜山振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。せたな町の既存A判定にも公式リンク根拠を追記。 北海道・胆振総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定10区域をA判定。洞爺湖町の既存A判定にも公式リンク根拠を追記。 北海道・釧路総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。標茶町はスナップショットにHTTP記録がないため現行公式ページを直接確認してA判定。釧路町の既存A判定にも公式リンク根拠を追記。 北海道・十勝総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定18区域をA判定。浦幌町の既存A判定にも公式リンク根拠を追記。 北海道・上川総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定22区域をA判定。東川町は登録URLから現行公式サイトへの転送先も確認。 北海道・宗谷総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定8区域をA判定。 北海道・オホーツク総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定16区域をA判定。遠軽町のホームページは脆弱性対応で一時停止し公式臨時案内へ遷移する点を記録。紋別市は現行検索結果で登録www URL上の市公式コンテンツを確認したためA判定。直接取得のHTTP数値は未確認。 既存61件の追加確認対象の北相木村・和歌山県美浜町・道志村は公式情報を再確認したが、2026-11-03の現行トップページ取得も不成立。公式性の根拠を追記し、未判定のまま維持。 青森県の未判定37区域は県公式市町村ホームページ一覧と既存HTTP監査を照合しA。田子町は県掲載リンクと台帳URLのドメインが異なるが、台帳URLの現行公式ページ表示とHTTP 200を直接確認。 岩手県は県公式の市町村リンク一覧と既存HTTP監査を照合し未判定33区域をA判定。久慈市は県掲載先と台帳URLのホストが異なるため、台帳URLの直接HTTP 200と現行市公式ページ表示を確認し、その差異と県掲載先への接続失敗を記録。 宮城県は県公式の市町村リンク集と既存HTTP監査を照合し未判定39区域をA判定。松島町はHTTP数値記録がないため、現行公式トップページと最新のお知らせをブラウザで直接確認しA判定。 秋田県は県公式市町村ウェブサイト一覧と既存HTTP監査を照合し未判定24区域をA判定。八峰町は数値HTTPステータス未確認のため、現行公式トップページと直近のお知らせをブラウザで直接確認。 山形県は県公式の市町村ホームページ一覧と既存HTTP監査を照合し未判定33区域をA判定。最上町は数値HTTPステータス未確認のため、登録URL上の現行公式ページをブラウザで直接確認。 福島県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定59区域をA判定。登録URLのHTTP 200は全59件。いわき市は同一ホスト内のトップページパスへの到達を記録。 茨城県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定44区域をA判定。43区域はHTTP 200、河内町はHTTP 202を記録し、県公式市町村データページで登録URLの公式性を追加確認。 栃木県は全25区域を照合。未判定24区域のうち23区域を県公式市町一覧・J-LISと既存HTTP 200の一致によりA判定。大田原市の既存Aにも両公的根拠を追記。益子町は登録URLのHTTP 202と現行町公式ページのドメイン差異が解消できないため未判定を維持。 群馬県は県公式市町村外部リンク集（2026年9月更新）と登録URLを照合し、未判定33区域をA判定。32区域は既存HTTP 200、南牧村は現行公式トップと直近のお知らせをブラウザ確認し、数値HTTPコード未確認と記録。富岡市・甘楽町の既存Aにも県公式リンク根拠を追記。 埼玉県は県公式の市町村リンク一覧と登録URLを照合し、既存未判定71区域をA判定。71区域はいずれも既存HTTP監査でHTTP 200、うちさいたま市と10区の登録URLは市公式サイトの現行ドメインへの転送を確認。横瀬町の既存Aにも県公式リンク根拠を追記。鶴ヶ島市は県公式一覧掲載URLとHTTP 202を確認したが、ブラウザはロボット確認画面となるため未判定を維持。 千葉県は県公式県内市町村リンク集（2025年更新）とJ-LISリンク一覧（2020年更新）を照合し、未判定59区域をA判定。59区域はいずれも既存HTTP監査で200。市川市・佐倉市・八千代市は両公的リンク一覧の旧ホストと台帳登録URLの差を確認し、現行公式ページまたは市の公式URL告知で登録URLを個別確認。御宿町の既存Aにも県・J-LIS掲載根拠を追記（HTTP 503は別項目で維持）。 東京都はJ-LIS全国自治体マップ検索のリンク一覧と登録URL・既存HTTP監査を照合し、未判定61区域をA判定。登録URLは61区域すべてHTTP 200。北区・御蔵島村はJ-LIS一覧の掲載URLが旧ホストのため、現行公式ページおよび補助的な公的リンクで登録URLを確認し差異を注記。青ヶ島村の既存AにもJ-LIS掲載根拠を追加し、既存HTTP 503は別項目で維持。"
   },
   "records": [
     {
@@ -20206,10 +20206,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.chiyoda.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.chiyoda.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.chiyoda.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.chiyoda.lg.jp/",
         "status": 200,
@@ -20218,9 +20221,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20230,10 +20236,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.chuo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.chuo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.chuo.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.chuo.lg.jp/",
         "status": 200,
@@ -20242,9 +20251,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20254,10 +20266,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.minato.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.minato.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.minato.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.minato.tokyo.jp/",
         "status": 200,
@@ -20266,9 +20281,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20278,10 +20296,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.shinjuku.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shinjuku.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.shinjuku.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shinjuku.lg.jp/",
         "status": 200,
@@ -20290,9 +20311,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20302,10 +20326,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.bunkyo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.bunkyo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.bunkyo.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.bunkyo.lg.jp/",
         "status": 200,
@@ -20314,9 +20341,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20326,10 +20356,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.taito.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.taito.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.taito.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.taito.lg.jp/",
         "status": 200,
@@ -20338,9 +20371,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20350,10 +20386,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.sumida.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sumida.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.sumida.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.sumida.lg.jp/",
         "status": 200,
@@ -20362,9 +20401,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20374,10 +20416,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.koto.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.koto.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.koto.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.koto.lg.jp/",
         "status": 200,
@@ -20386,9 +20431,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20398,10 +20446,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.shinagawa.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shinagawa.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.shinagawa.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shinagawa.tokyo.jp/",
         "status": 200,
@@ -20410,9 +20461,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20422,10 +20476,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.meguro.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.meguro.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.meguro.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.meguro.tokyo.jp/",
         "status": 200,
@@ -20434,9 +20491,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20446,10 +20506,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.ota.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ota.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.ota.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ota.tokyo.jp/",
         "status": 200,
@@ -20458,9 +20521,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20470,10 +20536,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.setagaya.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.setagaya.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.setagaya.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.setagaya.lg.jp/",
         "status": 200,
@@ -20482,9 +20551,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20494,10 +20566,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.shibuya.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shibuya.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.shibuya.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shibuya.tokyo.jp/",
         "status": 200,
@@ -20506,9 +20581,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20518,10 +20596,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.tokyo-nakano.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tokyo-nakano.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.tokyo-nakano.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tokyo-nakano.lg.jp/",
         "status": 200,
@@ -20530,9 +20611,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20542,10 +20626,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.suginami.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.suginami.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.suginami.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.suginami.tokyo.jp/",
         "status": 200,
@@ -20554,9 +20641,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20566,10 +20656,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.toshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.toshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.toshima.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.toshima.lg.jp/",
         "status": 200,
@@ -20578,9 +20671,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20590,10 +20686,15 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.kita.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kita.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.kita.lg.jp/",
+        "https://www.metro.tokyo.lg.jp/sitemap/link/link04",
+        "https://www.city.kita.lg.jp/city-information/mayor/1014803/1014804.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kita.lg.jp/",
         "status": 200,
@@ -20602,9 +20703,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LISの2020年リンク一覧には旧ドメイン city.kita.tokyo.jp が掲載されている。北区公式サイトの2025年3月リニューアル後の現行トップページは登録URLの city.kita.lg.jp であり、現在の公式ページ表示と既存HTTP 200を確認。旧一覧との差異を記録してA。"
     },
     {
       "prefectureCode": "13",
@@ -20614,10 +20718,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.arakawa.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.arakawa.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.arakawa.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.arakawa.tokyo.jp/",
         "status": 200,
@@ -20626,9 +20733,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20638,10 +20748,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.itabashi.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.itabashi.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.itabashi.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.itabashi.tokyo.jp/",
         "status": 200,
@@ -20650,9 +20763,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20662,10 +20778,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.nerima.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nerima.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.nerima.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nerima.tokyo.jp/",
         "status": 200,
@@ -20674,9 +20793,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20686,10 +20808,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.adachi.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.adachi.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.adachi.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.adachi.tokyo.jp/",
         "status": 200,
@@ -20698,9 +20823,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20710,10 +20838,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.katsushika.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.katsushika.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.katsushika.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.katsushika.lg.jp/",
         "status": 200,
@@ -20722,9 +20853,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20734,10 +20868,13 @@
       "kind": "ward",
       "parentCode": null,
       "registeredUrl": "https://www.city.edogawa.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.edogawa.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.edogawa.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.edogawa.tokyo.jp/",
         "status": 200,
@@ -20746,9 +20883,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20758,10 +20898,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hachioji.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hachioji.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.hachioji.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hachioji.tokyo.jp/",
         "status": 200,
@@ -20770,9 +20913,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20782,10 +20928,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tachikawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tachikawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.tachikawa.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tachikawa.lg.jp/",
         "status": 200,
@@ -20794,9 +20943,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20806,10 +20958,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.musashino.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.musashino.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.musashino.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.musashino.lg.jp/",
         "status": 200,
@@ -20818,9 +20973,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20830,10 +20988,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.mitaka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.mitaka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.mitaka.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.mitaka.lg.jp/",
         "status": 200,
@@ -20842,9 +21003,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20854,10 +21018,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ome.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ome.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.ome.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ome.tokyo.jp/",
         "status": 200,
@@ -20866,9 +21033,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20878,10 +21048,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.fuchu.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fuchu.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.fuchu.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fuchu.tokyo.jp/",
         "status": 200,
@@ -20890,9 +21063,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20902,10 +21078,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.akishima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.akishima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.akishima.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.akishima.lg.jp/",
         "status": 200,
@@ -20914,9 +21093,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20926,10 +21108,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.chofu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.chofu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.chofu.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.chofu.lg.jp/",
         "status": 200,
@@ -20938,9 +21123,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20950,10 +21138,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.machida.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.machida.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.machida.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.machida.tokyo.jp/",
         "status": 200,
@@ -20962,9 +21153,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20974,10 +21168,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.koganei.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.koganei.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.koganei.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.koganei.lg.jp/",
         "status": 200,
@@ -20986,9 +21183,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -20998,10 +21198,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kodaira.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kodaira.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.kodaira.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kodaira.tokyo.jp/",
         "status": 200,
@@ -21010,9 +21213,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21022,10 +21228,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hino.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hino.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.hino.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hino.lg.jp/",
         "status": 200,
@@ -21034,9 +21243,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21046,10 +21258,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.higashimurayama.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.higashimurayama.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.higashimurayama.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.higashimurayama.tokyo.jp/",
         "status": 200,
@@ -21058,9 +21273,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21070,10 +21288,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kokubunji.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kokubunji.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.kokubunji.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kokubunji.tokyo.jp/",
         "status": 200,
@@ -21082,9 +21303,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21094,10 +21318,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kunitachi.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kunitachi.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.kunitachi.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kunitachi.tokyo.jp/",
         "status": 200,
@@ -21106,9 +21333,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21118,10 +21348,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.fussa.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fussa.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.fussa.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fussa.tokyo.jp/",
         "status": 200,
@@ -21130,9 +21363,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21142,10 +21378,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.komae.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.komae.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.komae.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.komae.tokyo.jp/",
         "status": 200,
@@ -21154,9 +21393,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21166,10 +21408,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.higashiyamato.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.higashiyamato.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.higashiyamato.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.higashiyamato.lg.jp/",
         "status": 200,
@@ -21178,9 +21423,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21190,10 +21438,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kiyose.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kiyose.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.kiyose.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kiyose.lg.jp/",
         "status": 200,
@@ -21202,9 +21453,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21214,10 +21468,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.higashikurume.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.higashikurume.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.higashikurume.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.higashikurume.lg.jp/",
         "status": 200,
@@ -21226,9 +21483,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21238,10 +21498,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.musashimurayama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.musashimurayama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.musashimurayama.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.musashimurayama.lg.jp/",
         "status": 200,
@@ -21250,9 +21513,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21262,10 +21528,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.tama.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tama.lg.jp/",
         "status": 200,
@@ -21274,9 +21543,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21286,10 +21558,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.inagi.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.inagi.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.inagi.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.inagi.tokyo.jp/",
         "status": 200,
@@ -21298,9 +21573,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21310,10 +21588,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hamura.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hamura.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.hamura.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hamura.tokyo.jp/",
         "status": 200,
@@ -21322,9 +21603,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21334,10 +21618,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.akiruno.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.akiruno.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.akiruno.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.akiruno.tokyo.jp/",
         "status": 200,
@@ -21346,9 +21633,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21358,10 +21648,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nishitokyo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nishitokyo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.city.nishitokyo.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nishitokyo.lg.jp/",
         "status": 200,
@@ -21370,9 +21663,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21382,10 +21678,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.mizuho.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.mizuho.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.town.mizuho.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.mizuho.tokyo.jp/",
         "status": 200,
@@ -21394,9 +21693,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21406,10 +21708,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hinode.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hinode.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.town.hinode.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hinode.tokyo.jp/",
         "status": 200,
@@ -21418,9 +21723,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21430,10 +21738,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.hinohara.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.hinohara.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.vill.hinohara.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.hinohara.tokyo.jp/",
         "status": 200,
@@ -21442,9 +21753,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21454,10 +21768,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.okutama.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.okutama.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.town.okutama.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.okutama.tokyo.jp/",
         "status": 200,
@@ -21466,9 +21783,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21478,10 +21798,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.oshima.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.oshima.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.town.oshima.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.oshima.tokyo.jp/",
         "status": 200,
@@ -21490,9 +21813,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21502,10 +21828,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.toshimamura.org/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.toshimamura.org/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.toshimamura.org/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.toshimamura.org/",
         "status": 200,
@@ -21514,9 +21843,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21526,10 +21858,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.niijima.com/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.niijima.com/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.niijima.com/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.niijima.com/",
         "status": 200,
@@ -21538,9 +21873,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21550,10 +21888,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.kouzushima.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.kouzushima.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.vill.kouzushima.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.kouzushima.tokyo.jp/",
         "status": 200,
@@ -21562,9 +21903,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21574,10 +21918,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.miyake.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.miyake.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.vill.miyake.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.miyake.tokyo.jp/",
         "status": 200,
@@ -21586,9 +21933,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21598,10 +21948,16 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.mikurasima.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.mikurasima.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.vill.mikurasima.tokyo.jp/",
+        "https://www.metro.tokyo.lg.jp/sitemap/link/link04",
+        "https://www.tokyoislands-net.jp/islands/mikurajima/",
+        "https://www.tokyo39ctv-saiyou.jp/0000000036.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.mikurasima.tokyo.jp/",
         "status": 200,
@@ -21610,9 +21966,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LISの2020年リンク一覧は旧ホスト mikurasima.jp を掲載するが、東京都の島しょ振興公社と東京39市町村職員採用情報サイトは登録URLの vill.mikurasima.tokyo.jp を御蔵島村公式ホームページとして案内。登録URLの現行村公式トップページ表示および既存HTTP 200を確認し、旧一覧との差異を記録してA。"
     },
     {
       "prefectureCode": "13",
@@ -21622,10 +21981,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hachijo.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hachijo.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.town.hachijo.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hachijo.tokyo.jp/",
         "status": 200,
@@ -21634,9 +21996,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "13",
@@ -21651,7 +22016,8 @@
       "verifiedOfficialUrl": "https://www.vill.aogashima.tokyo.jp/",
       "evidenceUrls": [
         "https://www.vill.aogashima.tokyo.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html"
       ],
       "connectivity": {
         "status": 503,
@@ -21661,10 +22027,11 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "followup_user_or_browser_evidence"
+        "followup_user_or_browser_evidence",
+        "jlis_official_municipal_link"
       ],
       "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "ユーザー提供スクリーンショット／画面録画で青ヶ島村公式サイトの村名と公式ページを確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。"
+      "notes": "ユーザー提供スクリーンショット／画面録画で青ヶ島村公式サイトの村名と公式ページを確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。 J-LIS東京都リンク一覧にも登録URLが掲載されていることを確認。既存のブラウザ証拠およびHTTP 503の接続記録は維持。"
     },
     {
       "prefectureCode": "13",
@@ -21674,10 +22041,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.ogasawara.tokyo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.ogasawara.tokyo.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kantou/cms_163469150.html",
+        "https://www.vill.ogasawara.tokyo.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.ogasawara.tokyo.jp/",
         "status": 200,
@@ -21686,9 +22056,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS全国自治体マップ検索の東京都ページに自治体公式ホームページとして掲載。登録URLと掲載先が一致し、既存HTTP監査でHTTP 200・到達を確認してA。"
     },
     {
       "prefectureCode": "14",
