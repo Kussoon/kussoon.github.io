@@ -194,7 +194,7 @@ for(let i=0;i<60;i++){
  el.style.backgroundColor=i<15?"#ed9b49":i<30?"#a8c952":i<45?"#58b99b":"#5d9fe6";
  bars.appendChild(el);barEls.push(el);
 }
-let digits="0500",selected=300,remaining=300,deadline=null,running=false,ticker=null,ended=false;
+let digits="0500",selected=300,remaining=300,deadline=null,running=false,ticker=null,ended=false,editStarted=false;
 function secondsFromDigits(s){const n=s.padStart(4,"0");const m=Number(n.slice(0,2)),sec=Number(n.slice(2,4));return sec<=59?m*60+sec:-1;}
 function format(sec){const s=Math.max(0,Math.ceil(sec));return two(Math.floor(s/60))+":"+two(s%60);}
 function clearTicker(){if(ticker!==null){clearInterval(ticker);ticker=null;}}
@@ -215,12 +215,12 @@ function recalcInput(){
  if(running)return;ended=false;selected=secondsFromDigits(digits);remaining=Math.max(0,selected);
  renderTimer();
 }
-function inputDigit(value){if(running)return;digits=(digits+value).slice(-4);recalcInput();}
+function inputDigit(value){if(running)return;if(!editStarted){digits="0000";editStarted=true;}digits=(digits+value).slice(-4);recalcInput();}
 $("keypad").addEventListener("click",e=>{
  const button=e.target.closest("button");if(!button||button.disabled)return;
  if(button.dataset.digit!==undefined)inputDigit(button.dataset.digit);
- else if(button.id==="clearButton"){digits="0000";recalcInput();}
- else if(button.id==="backButton"){digits=("0"+digits.slice(0,-1));recalcInput();}
+ else if(button.id==="clearButton"){digits="0000";editStarted=true;recalcInput();}
+ else if(button.id==="backButton"){if(!editStarted){digits="0000";editStarted=true;}else digits=("0"+digits.slice(0,-1));recalcInput();}
 });
 function finish(){
  clearTicker();running=false;deadline=null;remaining=0;ended=true;renderTimer();if(!focus)releaseWake();
@@ -236,11 +236,11 @@ function toggleTimer(){
  }
  if(selected<=0)return;
  if(remaining<=0)remaining=selected;
- ended=false;running=true;deadline=Date.now()+remaining*1000;
+ ended=false;running=true;editStarted=false;deadline=Date.now()+remaining*1000;
  clearTicker();ticker=setInterval(updateCountdown,150);requestWake();renderTimer();
 }
 function resetTimer(){
- running=false;deadline=null;ended=false;clearTicker();selected=secondsFromDigits(digits);remaining=Math.max(0,selected);
+ running=false;deadline=null;ended=false;editStarted=false;clearTicker();selected=secondsFromDigits(digits);remaining=Math.max(0,selected);
  renderTimer();if(!focus)releaseWake();
 }
 $("startButton").addEventListener("click",toggleTimer);
@@ -248,7 +248,7 @@ $("resetButton").addEventListener("click",resetTimer);
 window.addEventListener("keydown",e=>{
  if(mode!=="timer"||e.altKey||e.ctrlKey||e.metaKey||document.activeElement?.matches("button"))return;
  if(/^[0-9]$/.test(e.key)){inputDigit(e.key);e.preventDefault();}
- else if(e.key==="Backspace"){digits="0"+digits.slice(0,-1);recalcInput();e.preventDefault();}
+ else if(e.key==="Backspace"){if(!editStarted){digits="0000";editStarted=true;}else digits="0"+digits.slice(0,-1);recalcInput();e.preventDefault();}
 });
 setMode(mode);renderTimer();
 })();
