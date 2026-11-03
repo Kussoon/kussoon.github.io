@@ -19,7 +19,7 @@
   }};
  }
  function arrange(models,labels,options){
-  const {view,mode,density,selectedId,screenWidth,screenHeight}=options;
+  const {view,mode,density,selectedId,screenWidth,screenHeight,stableAnchors=false}=options;
   if(mode==='all')return {visible:models.map(()=>true),labels};
   const width=screenWidth||390,height=screenHeight||390;
   const ratio=Math.min(width/view.w,height/view.h);
@@ -69,12 +69,12 @@
    const priority=(code===capitals[pref]?100000:0)+
     Math.pow(Math.max(0,(m.box?.w||0)*(m.box?.h||0)),.3);
    const anchors=[p];
-   if(Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)){
+   if(!stableAnchors&&Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)){
     const alt=shift(p,m.polylabel[0],m.polylabel[1]);
     if(Math.hypot(p.x-alt.x,p.y-alt.y)>p.height*.3)anchors.push(alt);
    }
    // Try locally visible parts of long, clipped or irregular regions, too.
-   for(const alt of viewportAnchors(m,p)){
+   for(const alt of stableAnchors?[]:viewportAnchors(m,p)){
     if(anchors.every(a=>Math.hypot(a.x-alt.x,a.y-alt.y)>p.height*.4))
      anchors.push(alt);
    }
