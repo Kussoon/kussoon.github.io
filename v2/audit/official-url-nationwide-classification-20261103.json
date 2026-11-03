@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 141,
+      "A": 172,
       "B": 0,
       "C": 1,
-      "unclassified": 1770
+      "unclassified": 1739
     },
-    "completedRegionReviews": 142,
+    "completedRegionReviews": 173,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1767,
+    "unreviewedOtherRegions": 1736,
     "totalCheck": 1912,
-    "reconciliationNote": "既存監査を保持。鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30を今回新規に確認しA。岡山県内政令市の親市・区は同じ親市公式サイトへの登録を確認。未判定は既存61件内3件とその他1,767件。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31を県公式リンク集と既存HTTP監査で確認しA。既存Cや未判定の追試結果を保持。未判定は既存61件内3件とその他1,736件。"
   },
   "records": [
     {
@@ -36078,10 +36078,12 @@
       "kind": "designatedCity",
       "parentCode": null,
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36090,9 +36092,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36102,10 +36107,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36114,9 +36121,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36126,10 +36136,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36138,9 +36150,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36150,10 +36165,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36162,9 +36179,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36174,10 +36194,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36186,9 +36208,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36198,10 +36223,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36210,9 +36237,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36222,10 +36252,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36234,9 +36266,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36246,10 +36281,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36258,9 +36295,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36270,10 +36310,12 @@
       "kind": "ward",
       "parentCode": "34100",
       "registeredUrl": "https://www.city.hiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hiroshima.lg.jp/",
         "status": 200,
@@ -36282,9 +36324,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式リンク集掲載の広島市公式サイトと登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。HTTP監査は200・他ホスト転送なし。"
     },
     {
       "prefectureCode": "34",
@@ -36294,10 +36339,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kure.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kure.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kure.lg.jp/",
         "status": 200,
@@ -36306,9 +36353,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36318,10 +36368,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.takehara.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.takehara.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.takehara.lg.jp/",
         "status": 200,
@@ -36330,9 +36382,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36342,10 +36397,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.mihara.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.mihara.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.mihara.hiroshima.jp/",
         "status": 200,
@@ -36354,9 +36411,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36366,10 +36426,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.onomichi.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.onomichi.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.onomichi.hiroshima.jp/",
         "status": 200,
@@ -36378,9 +36440,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36390,10 +36455,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.fukuyama.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuyama.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuyama.hiroshima.jp/",
         "status": 200,
@@ -36402,9 +36469,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36414,10 +36484,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.fuchu.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fuchu.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fuchu.hiroshima.jp/",
         "status": 200,
@@ -36426,9 +36498,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36438,10 +36513,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.miyoshi.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.miyoshi.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.miyoshi.hiroshima.jp/",
         "status": 200,
@@ -36450,9 +36527,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36462,10 +36542,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.shobara.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shobara.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shobara.hiroshima.jp/",
         "status": 200,
@@ -36474,9 +36556,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36486,10 +36571,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.otake.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.otake.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.otake.hiroshima.jp/",
         "status": 200,
@@ -36498,9 +36585,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36510,10 +36600,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.higashihiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.higashihiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.higashihiroshima.lg.jp/",
         "status": 200,
@@ -36522,9 +36614,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36534,10 +36629,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hatsukaichi.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hatsukaichi.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hatsukaichi.hiroshima.jp/",
         "status": 200,
@@ -36546,9 +36643,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36558,10 +36658,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.akitakata.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.akitakata.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.akitakata.jp/",
         "status": 200,
@@ -36570,9 +36672,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36582,10 +36687,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.etajima.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.etajima.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.etajima.hiroshima.jp/",
         "status": 200,
@@ -36594,9 +36701,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36606,10 +36716,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.fuchu.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.fuchu.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.fuchu.hiroshima.jp/",
         "status": 200,
@@ -36618,9 +36730,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36630,10 +36745,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kaita.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kaita.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kaita.lg.jp/",
         "status": 200,
@@ -36642,9 +36759,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36654,10 +36774,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumano.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumano.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kumano.lg.jp/",
         "status": 200,
@@ -36666,9 +36788,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36678,10 +36803,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.saka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.saka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.saka.lg.jp/",
         "status": 200,
@@ -36690,9 +36817,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36702,10 +36832,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.akiota.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.akiota.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.akiota.jp/",
         "status": 200,
@@ -36714,9 +36846,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36726,10 +36861,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kitahiroshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kitahiroshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kitahiroshima.lg.jp/",
         "status": 200,
@@ -36738,9 +36875,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36750,10 +36890,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.osakikamijima.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.osakikamijima.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.osakikamijima.hiroshima.jp/",
         "status": 200,
@@ -36762,9 +36904,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36774,10 +36919,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.sera.hiroshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.sera.hiroshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.sera.hiroshima.jp/",
         "status": 200,
@@ -36786,9 +36933,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "34",
@@ -36798,10 +36948,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.jinsekigun.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.jinsekigun.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hiroshima.lg.jp/site/kankeikikanlink/1172556346224.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.jinsekigun.jp/",
         "status": 200,
@@ -36810,9 +36962,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_municipality_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "広島県公式の県内市町リンク集に該当自治体の公式サイトとして掲載。登録URLはリンク先と一致し、既存HTTP監査は200・他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
