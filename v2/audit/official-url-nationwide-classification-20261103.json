@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 474,
+      "A": 497,
       "B": 0,
       "C": 1,
-      "unclassified": 1437
+      "unclassified": 1414
     },
-    "completedRegionReviews": 475,
+    "completedRegionReviews": 498,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1434,
+    "unreviewedOtherRegions": 1411,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,528件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,411件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。"
   },
   "records": [
     {
@@ -37528,10 +37528,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tokushima.tokushima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tokushima.tokushima.jp/",
+      "evidenceUrls": [
+        "https://www.city.tokushima.tokushima.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tokushima.tokushima.jp/",
         "status": 200,
@@ -37540,9 +37543,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37552,10 +37558,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.naruto.tokushima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.naruto.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.naruto.tokushima.jp/",
+        "https://www.city.naruto.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.naruto.tokushima.jp/",
         "status": 200,
@@ -37564,9 +37574,12 @@
         "redirectsToOtherHost": true,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに掲載された登録URLは別ホストの現行公式URLへ正常転送。鳴門市公式トップ（city.naruto.lg.jp）には2026年11月2日付のお知らせ、市役所所在地・電話番号および法人番号が掲載されている。登録URLの転送先を確認済みの公式URLとして記録しA。"
     },
     {
       "prefectureCode": "36",
@@ -37576,10 +37589,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.komatsushima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.komatsushima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.komatsushima.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.komatsushima.lg.jp/",
         "status": 200,
@@ -37588,9 +37604,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37600,10 +37619,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.anan.tokushima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.anan.tokushima.jp/",
+      "evidenceUrls": [
+        "https://www.city.anan.tokushima.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.anan.tokushima.jp/",
         "status": 200,
@@ -37612,9 +37634,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37624,10 +37649,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yoshinogawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yoshinogawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.yoshinogawa.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.yoshinogawa.lg.jp/",
         "status": 200,
@@ -37636,9 +37664,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37648,10 +37679,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.awa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.awa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.awa.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.awa.lg.jp/",
         "status": 200,
@@ -37660,9 +37694,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37672,10 +37709,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.mima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.mima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.mima.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.mima.lg.jp/",
         "status": 200,
@@ -37684,9 +37724,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37696,10 +37739,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.miyoshi.i-tokushima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.miyoshi.i-tokushima.jp/",
+      "evidenceUrls": [
+        "https://www.miyoshi.i-tokushima.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.miyoshi.i-tokushima.jp/",
         "status": 200,
@@ -37708,9 +37754,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37720,10 +37769,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.katsuura.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.katsuura.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.katsuura.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.katsuura.lg.jp/",
         "status": 200,
@@ -37732,9 +37784,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37744,10 +37799,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.kamikatsu.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.kamikatsu.jp/",
+      "evidenceUrls": [
+        "https://www.kamikatsu.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.kamikatsu.jp/",
         "status": 200,
@@ -37756,9 +37814,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37768,10 +37829,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.sanagochi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.sanagochi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.vill.sanagochi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.sanagochi.lg.jp/",
         "status": 200,
@@ -37780,9 +37844,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37792,10 +37859,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ishii.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ishii.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.ishii.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ishii.lg.jp/",
         "status": 200,
@@ -37804,9 +37874,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37816,10 +37889,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kamiyama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kamiyama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kamiyama.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kamiyama.lg.jp/",
         "status": 200,
@@ -37828,9 +37904,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37840,10 +37919,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tokushima-naka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tokushima-naka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.tokushima-naka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tokushima-naka.lg.jp/",
         "status": 200,
@@ -37852,9 +37934,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37864,10 +37949,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tokushima-mugi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tokushima-mugi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.tokushima-mugi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tokushima-mugi.lg.jp/",
         "status": 200,
@@ -37876,9 +37964,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37888,10 +37979,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.minami.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.minami.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.minami.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.minami.lg.jp/",
         "status": 200,
@@ -37900,9 +37994,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37912,10 +38009,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kaiyo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kaiyo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kaiyo.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kaiyo.lg.jp/",
         "status": 200,
@@ -37924,9 +38024,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37936,10 +38039,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.matsushige.tokushima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.matsushige.tokushima.jp/",
+      "evidenceUrls": [
+        "https://www.town.matsushige.tokushima.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.matsushige.tokushima.jp/",
         "status": 200,
@@ -37948,9 +38054,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37960,10 +38069,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kitajima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kitajima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kitajima.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kitajima.lg.jp/",
         "status": 200,
@@ -37972,9 +38084,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -37984,10 +38099,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.aizumi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.aizumi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.aizumi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.aizumi.lg.jp/",
         "status": 200,
@@ -37996,9 +38114,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -38013,7 +38134,8 @@
       "verifiedOfficialUrl": "https://www.town.itano.tokushima.jp/",
       "evidenceUrls": [
         "https://www.town.itano.tokushima.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
       ],
       "connectivity": {
         "status": null,
@@ -38023,10 +38145,11 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "followup_user_or_browser_evidence"
+        "followup_user_or_browser_evidence",
+        "j_lis_prefecture_link"
       ],
       "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "ユーザー提供スクリーンショット／画面録画で板野町公式サイトのロゴ・町名と行政情報を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。"
+      "notes": "ユーザー提供スクリーンショット／画面録画で板野町公式サイトのロゴ・町名と行政情報を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。 J-LIS徳島県ページの掲載先も登録URLと一致。"
     },
     {
       "prefectureCode": "36",
@@ -38036,10 +38159,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.townkamiita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.townkamiita.jp/",
+      "evidenceUrls": [
+        "https://www.townkamiita.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.townkamiita.jp/",
         "status": 200,
@@ -38048,9 +38174,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -38060,10 +38189,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tokushima-tsurugi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tokushima-tsurugi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.tokushima-tsurugi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tokushima-tsurugi.lg.jp/",
         "status": 200,
@@ -38072,9 +38204,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "36",
@@ -38084,10 +38219,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.higashimiyoshi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.higashimiyoshi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.higashimiyoshi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166169148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.higashimiyoshi.lg.jp/",
         "status": 200,
@@ -38096,9 +38234,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「徳島県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "37",
