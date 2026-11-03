@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 206,
+      "A": 224,
       "B": 0,
       "C": 1,
-      "unclassified": 1705
+      "unclassified": 1687
     },
-    "completedRegionReviews": 207,
+    "completedRegionReviews": 225,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1702,
+    "unreviewedOtherRegions": 1684,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。"
   },
   "records": [
     {
@@ -43977,21 +43977,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.oita.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.oita.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.oita.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.oita.oita.jp/",
         "finalUrl": "https://www.city.oita.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44001,21 +44007,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.beppu.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.beppu.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.beppu.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.beppu.oita.jp/",
         "finalUrl": "https://www.city.beppu.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44025,21 +44037,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city-nakatsu.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city-nakatsu.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city-nakatsu.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city-nakatsu.jp/",
         "finalUrl": "https://www.city-nakatsu.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44049,21 +44067,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hita.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hita.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.hita.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.hita.oita.jp/",
         "finalUrl": "https://www.city.hita.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44073,21 +44097,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.saiki.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.saiki.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.saiki.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.saiki.oita.jp/",
         "finalUrl": "https://www.city.saiki.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44097,21 +44127,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.usuki.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.usuki.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.usuki.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.usuki.oita.jp/",
         "finalUrl": "https://www.city.usuki.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44121,21 +44157,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tsukumi.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tsukumi.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.tsukumi.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.tsukumi.oita.jp/",
         "finalUrl": "https://www.city.tsukumi.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44145,21 +44187,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.taketa.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.taketa.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.taketa.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.taketa.oita.jp/",
         "finalUrl": "https://www.city.taketa.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44169,21 +44217,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.bungotakada.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.bungotakada.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.bungotakada.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.bungotakada.oita.jp/",
         "finalUrl": "https://www.city.bungotakada.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44193,21 +44247,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kitsuki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitsuki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kitsuki.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kitsuki.lg.jp/",
         "finalUrl": "https://www.city.kitsuki.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44217,21 +44277,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.usa.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.usa.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.usa.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.usa.oita.jp/",
         "finalUrl": "https://www.city.usa.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44241,21 +44307,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.bungo-ohno.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.bungo-ohno.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.bungo-ohno.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.bungo-ohno.jp/",
         "finalUrl": "https://www.bungo-ohno.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44265,21 +44337,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yufu.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yufu.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.yufu.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.yufu.oita.jp/",
         "finalUrl": "https://www.city.yufu.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44289,21 +44367,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kunisaki.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kunisaki.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kunisaki.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kunisaki.oita.jp/",
         "finalUrl": "https://www.city.kunisaki.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44313,21 +44397,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.himeshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.himeshima.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.himeshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.himeshima.jp/",
         "finalUrl": "https://www.himeshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44337,21 +44427,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hiji.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hiji.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.hiji.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.hiji.lg.jp/",
         "finalUrl": "https://www.town.hiji.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44361,21 +44457,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kokonoe.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kokonoe.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kokonoe.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kokonoe.oita.jp/",
         "finalUrl": "https://www.town.kokonoe.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "44",
@@ -44385,21 +44487,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kusu.oita.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kusu.oita.jp/",
+      "evidenceUrls": [
+        "https://www.pref.oita.jp/soshiki/75008/kennai-sityoson.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kusu.oita.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kusu.oita.jp/",
         "finalUrl": "https://www.town.kusu.oita.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "大分県公式「県内市町村（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200、終端URLも一致。A。"
     },
     {
       "prefectureCode": "45",
