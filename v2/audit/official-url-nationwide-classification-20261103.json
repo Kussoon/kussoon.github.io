@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 517,
+      "A": 529,
       "B": 0,
       "C": 1,
-      "unclassified": 1394
+      "unclassified": 1362
     },
-    "completedRegionReviews": 518,
+    "completedRegionReviews": 550,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1391,
+    "unreviewedOtherRegions": 1359,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,391件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,359件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。"
   },
   "records": [
     {
@@ -39325,10 +39325,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kochi.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kochi.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.city.kochi.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kochi.kochi.jp/",
         "status": 200,
@@ -39337,9 +39341,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39349,10 +39357,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.muroto.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.muroto.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.city.muroto.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.muroto.kochi.jp/",
         "status": 200,
@@ -39361,9 +39373,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39373,10 +39389,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.aki.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.aki.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.city.aki.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.aki.kochi.jp/",
         "status": 200,
@@ -39385,9 +39405,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39397,10 +39421,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nankoku.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nankoku.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.nankoku.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nankoku.lg.jp/",
         "status": 200,
@@ -39409,9 +39437,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39421,10 +39453,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tosa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tosa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.tosa.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tosa.lg.jp/",
         "status": 200,
@@ -39433,9 +39469,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39445,10 +39485,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.susaki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.susaki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.susaki.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.susaki.lg.jp/",
         "status": 200,
@@ -39457,9 +39501,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39469,10 +39517,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.sukumo.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sukumo.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.city.sukumo.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.sukumo.kochi.jp/",
         "status": 200,
@@ -39481,9 +39533,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39493,10 +39549,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tosashimizu.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tosashimizu.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.city.tosashimizu.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tosashimizu.kochi.jp/",
         "status": 200,
@@ -39505,9 +39565,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39522,7 +39586,9 @@
       "verifiedOfficialUrl": "https://www.city.shimanto.lg.jp/",
       "evidenceUrls": [
         "https://www.city.shimanto.lg.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
       ],
       "connectivity": {
         "status": 503,
@@ -39532,10 +39598,12 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "prior_browser_or_user_evidence"
+        "prior_browser_or_user_evidence",
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link"
       ],
       "checkedAt": "2026-11-02T17:05–17:17 JST (approx.; 61 registered URLs were opened in four batches)",
-      "notes": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。"
+      "notes": "登録URLから公式ページが表示され、自治体名称・公式情報を確認できた。転送があった場合は同一自治体公式サイト内の正常転送を確認。 高知県公式の市町村一覧およびJ-LIS県別リンク一覧でも登録URLを公式サイトとして掲載。"
     },
     {
       "prefectureCode": "39",
@@ -39545,10 +39613,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kochi-konan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kochi-konan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kochi-konan.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kochi-konan.lg.jp/",
         "status": 200,
@@ -39557,9 +39629,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39569,10 +39645,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kami.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kami.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kami.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kami.lg.jp/",
         "status": 200,
@@ -39581,9 +39661,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39600,7 +39684,9 @@
         "https://www.town.toyo.kochi.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
-        "https://www.town.toyo.kochi.jp/contents/approach.php"
+        "https://www.town.toyo.kochi.jp/contents/approach.php",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
       ],
       "connectivity": {
         "status": null,
@@ -39611,10 +39697,12 @@
       "method": [
         "existing_2026_11_02_followup",
         "current_official_page_search",
-        "official_domain_identity_check"
+        "official_domain_identity_check",
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link"
       ],
       "checkedAt": "2026-11-03 JST",
-      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
+      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。 高知県公式の市町村一覧およびJ-LIS県別リンク一覧でも登録URLを公式サイトとして掲載。"
     },
     {
       "prefectureCode": "39",
@@ -39624,10 +39712,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nahari.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nahari.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.nahari.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.nahari.kochi.jp/",
         "status": 200,
@@ -39636,9 +39728,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39648,10 +39744,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://tanocho.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://tanocho.jp/",
+      "evidenceUrls": [
+        "https://tanocho.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://tanocho.jp/",
         "status": 200,
@@ -39660,9 +39760,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39672,10 +39776,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yasuda.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yasuda.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.yasuda.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yasuda.kochi.jp/",
         "status": 200,
@@ -39684,9 +39792,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39696,10 +39808,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.kitagawamura.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.kitagawamura.jp/",
+      "evidenceUrls": [
+        "https://www.kitagawamura.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.kitagawamura.jp/",
         "status": 200,
@@ -39708,9 +39824,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39720,10 +39840,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://vill.umaji.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://vill.umaji.lg.jp/",
+      "evidenceUrls": [
+        "https://vill.umaji.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://vill.umaji.lg.jp/",
         "status": 200,
@@ -39732,9 +39856,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39744,10 +39872,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.geisei.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.geisei.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.vill.geisei.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.geisei.kochi.jp/",
         "status": 200,
@@ -39756,9 +39888,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39768,10 +39904,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.motoyama.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.motoyama.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.motoyama.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.motoyama.kochi.jp/",
         "status": 200,
@@ -39780,9 +39920,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39792,10 +39936,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.otoyo.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.otoyo.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.otoyo.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.otoyo.kochi.jp/",
         "status": 200,
@@ -39804,9 +39952,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39816,10 +39968,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tosa.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tosa.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.tosa.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tosa.kochi.jp/",
         "status": 200,
@@ -39828,9 +39984,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39840,10 +40000,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.okawa.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.okawa.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.vill.okawa.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.okawa.kochi.jp/",
         "status": 200,
@@ -39852,9 +40016,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39864,10 +40032,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ino.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ino.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.ino.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ino.kochi.jp/",
         "status": 200,
@@ -39876,9 +40048,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39888,10 +40064,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.niyodogawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.niyodogawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.niyodogawa.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.niyodogawa.lg.jp/",
         "status": 200,
@@ -39900,9 +40080,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39912,10 +40096,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nakatosa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nakatosa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.nakatosa.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.nakatosa.lg.jp/",
         "status": 200,
@@ -39924,9 +40112,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39936,10 +40128,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.sakawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.sakawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.sakawa.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.sakawa.lg.jp/",
         "status": 200,
@@ -39948,9 +40144,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39960,10 +40160,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ochi.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ochi.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.ochi.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ochi.kochi.jp/",
         "status": 200,
@@ -39972,9 +40176,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -39984,10 +40192,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yusuhara.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yusuhara.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.yusuhara.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://warp.ndl.go.jp/waid/11571"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yusuhara.lg.jp/",
         "status": null,
@@ -40001,9 +40213,13 @@
           "error": "URLError: <urlopen error [Errno 111] Connection refused>"
         }
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "current_official_site_content_check",
+        "archived_url_history_cross_check"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧は別ホスト（town.yusuhara.kochi.jp）を掲載するが、登録URL（town.yusuhara.lg.jp）で現在の梼原町公式トップが閲覧でき、2026年のお知らせ・役場住所・電話番号を確認。国立国会図書館WARPは .kochi.jp を過去URLとして記録し、現行登録URLを起点URLとしているためA。2026-11-02 HTTPスナップショットには未収録。"
     },
     {
       "prefectureCode": "39",
@@ -40013,10 +40229,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.hidaka.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.hidaka.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.vill.hidaka.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.hidaka.kochi.jp/",
         "status": 200,
@@ -40025,9 +40245,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -40037,10 +40261,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://town.kochi-tsuno.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://town.kochi-tsuno.lg.jp/",
+      "evidenceUrls": [
+        "https://town.kochi-tsuno.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://town.kochi-tsuno.lg.jp/",
         "status": 200,
@@ -40049,9 +40277,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -40061,10 +40293,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shimanto.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shimanto.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.shimanto.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shimanto.lg.jp/",
         "status": 200,
@@ -40073,9 +40309,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -40085,10 +40325,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.otsuki.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.otsuki.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.town.otsuki.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.otsuki.kochi.jp/",
         "status": 200,
@@ -40097,9 +40341,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -40109,10 +40357,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.mihara.kochi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.mihara.kochi.jp/",
+      "evidenceUrls": [
+        "https://www.vill.mihara.kochi.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.mihara.kochi.jp/",
         "status": 200,
@@ -40121,9 +40373,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
@@ -40133,10 +40389,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kuroshio.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kuroshio.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kuroshio.lg.jp/",
+        "https://www.pref.kochi.lg.jp/link/kennai_shichoson.html",
+        "https://www.j-lis.go.jp/spd/map-search/shikoku/cms_166469148.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kuroshio.lg.jp/",
         "status": 200,
@@ -40145,9 +40405,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "高知県公式「県内市町村」一覧およびJ-LIS「高知県」ページに当該自治体のホームページとして掲載。リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
