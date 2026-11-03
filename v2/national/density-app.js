@@ -196,7 +196,7 @@ function drawMap(topologies,projectPoint){
  for(const model of models){
   const t=tag('text',{class:'place-label'});
   // Names are always stored independently of their display lines.
-  if($('reading').value==='on')
+  if($('reading').value==='on'&&model.readingParts?.length)
    NR.paint(t,model,0,0,15,measure);
   else L.paint(t,model,0,15);
   labelLayer.append(t);
@@ -371,8 +371,8 @@ function renderLabels(){
  // and designated-city ward, including in Fuji plate overview mode.
  const original=planned.map((l,i)=>{
   const m=workModels[i];
-  if(m.id==='plate'&&readingEnabled)
-   return NR.boxFor(m,l,size*1.2,measure);
+  if(readingEnabled&&m.readingParts?.length)
+   return NR.boxFor(m,l,m.id==='plate'?size*1.2:size,measure);
   if(m.id==='plate'){
    const width=measure(m.name,size*1.2)+size*.3;
    const height=size*1.5;
@@ -415,7 +415,7 @@ function renderLabels(){
   if(!target)return;
   target.setAttribute('x',position.x.toFixed(2));
   target.setAttribute('y',position.y.toFixed(2));
-  if(readingEnabled)
+  if(readingEnabled&&workModels[i].readingParts?.length)
    NR.paint(target,workModels[i],position.x,position.y,
     target.classList.contains('plate-label')?size*1.2:size,measure);
   else L.paint(target,workModels[i],position.x,size);
@@ -437,7 +437,7 @@ function renderLabels(){
   if(!visible[i]||position===resultLabels[i])return;
   const target=labelNodes[i]?.node,m=workModels[i];
   if(!target)return;
-  if(readingEnabled)NR.paint(target,m,position.x,position.y,
+  if(readingEnabled&&m.readingParts?.length)NR.paint(target,m,position.x,position.y,
    target.classList.contains('plate-label')?size*1.2:size,measure);
   else L.paint(target,m,position.x,size);
   target.setAttribute('x',position.x.toFixed(2));
@@ -567,7 +567,11 @@ async function load(area,mode){
  const grouped=N.registry(topologies,catalog,mode==='ward'?'ward':'municipality');
  const projected=N.project(grouped,E);
  if(token!==runId)return;
- models=NR.attach(projected.models,readingData,countyData).map(m=>{
+ const attachedModels=area==='japan'?projected.models.map(model=>{
+  try{return NR.attach([model],readingData,countyData)[0];}
+  catch(_){return {...model,readingParts:[],reading:''};}
+ }):NR.attach(projected.models,readingData,countyData);
+ models=attachedModels.map(m=>{
   const site=officeReferencePoints[m.code];
   const ok=site&&Number.isFinite(site.longitude)&&Number.isFinite(site.latitude)&&
    site.longitude>=-180&&site.longitude<=180&&site.latitude>=-90&&site.latitude<=90;
