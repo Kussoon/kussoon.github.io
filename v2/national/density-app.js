@@ -444,6 +444,10 @@ function renderLabels(){
   target.setAttribute('y',position.y.toFixed(2));
  });
  labelNodes.forEach(({node},i)=>{node.style.display=visible[i]?'':'none';});
+ if(nationalMap){
+  setStatus('拡大 '+zoom.toFixed(2)+'倍・地名ラベル '+visible.reduce((n,x)=>n+(x?1:0),0)+'件表示');
+  return;
+ }
  renderDiagnostic();
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
@@ -585,11 +589,13 @@ async function load(area,mode){
  }
  state={area,mode};
  labelAnchorCache.clear();
+ if(area==='japan')models.forEach(m=>labelAnchorCache.set(m.id,m.polylabel||m.centroid));
  if(area==='japan'){
   $('density-mode').value='adaptive';
   $('density-level').value='dense';
   $('density-level').disabled=false;
  }
+ if(area!=='japan'){
  // Compute only when geometry or municipality/ward mode changes.
  // Never move labels in response to zoom, pan, reading toggle, or selection.
  const referenceFont=7*bounds.w/390;
@@ -658,6 +664,7 @@ async function load(area,mode){
   notes.join(' ／ ')+'。';
 
  $('diagnostic-output').textContent='市町村を選ぶと新案1と新案2の位置・距離を表示します。';
+ }
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
