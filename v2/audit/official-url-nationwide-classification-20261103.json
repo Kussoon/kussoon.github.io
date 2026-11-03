@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 401,
+      "A": 474,
       "B": 0,
       "C": 1,
-      "unclassified": 1510
+      "unclassified": 1437
     },
-    "completedRegionReviews": 402,
+    "completedRegionReviews": 475,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1507,
+    "unreviewedOtherRegions": 1434,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,528件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,528件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。"
   },
   "records": [
     {
@@ -39896,10 +39896,13 @@
       "kind": "designatedCity",
       "parentCode": null,
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -39908,9 +39911,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -39920,10 +39926,13 @@
       "kind": "ward",
       "parentCode": "40100",
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -39932,9 +39941,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -39944,10 +39956,13 @@
       "kind": "ward",
       "parentCode": "40100",
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -39956,9 +39971,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -39968,10 +39986,13 @@
       "kind": "ward",
       "parentCode": "40100",
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -39980,9 +40001,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -39992,10 +40016,13 @@
       "kind": "ward",
       "parentCode": "40100",
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -40004,9 +40031,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40016,10 +40046,13 @@
       "kind": "ward",
       "parentCode": "40100",
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -40028,9 +40061,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40040,10 +40076,13 @@
       "kind": "ward",
       "parentCode": "40100",
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -40052,9 +40091,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40064,10 +40106,13 @@
       "kind": "ward",
       "parentCode": "40100",
       "registeredUrl": "https://www.city.kitakyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kitakyushu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakyushu.lg.jp/",
         "status": 200,
@@ -40076,9 +40121,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40088,10 +40136,13 @@
       "kind": "designatedCity",
       "parentCode": null,
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40100,9 +40151,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40112,10 +40166,13 @@
       "kind": "ward",
       "parentCode": "40130",
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40124,9 +40181,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40136,10 +40196,13 @@
       "kind": "ward",
       "parentCode": "40130",
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40148,9 +40211,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40160,10 +40226,13 @@
       "kind": "ward",
       "parentCode": "40130",
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40172,9 +40241,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40184,10 +40256,13 @@
       "kind": "ward",
       "parentCode": "40130",
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40196,9 +40271,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40208,10 +40286,13 @@
       "kind": "ward",
       "parentCode": "40130",
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40220,9 +40301,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40232,10 +40316,13 @@
       "kind": "ward",
       "parentCode": "40130",
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40244,9 +40331,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40256,10 +40346,13 @@
       "kind": "ward",
       "parentCode": "40130",
       "registeredUrl": "https://www.city.fukuoka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukuoka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukuoka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukuoka.lg.jp/",
         "status": 200,
@@ -40268,9 +40361,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40280,10 +40376,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.omuta.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.omuta.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.omuta.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.omuta.lg.jp/",
         "status": 200,
@@ -40292,9 +40391,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40304,10 +40406,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kurume.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kurume.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.kurume.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kurume.fukuoka.jp/",
         "status": 200,
@@ -40316,9 +40421,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40333,7 +40441,8 @@
       "verifiedOfficialUrl": "https://www.city.nogata.fukuoka.jp/",
       "evidenceUrls": [
         "https://www.city.nogata.fukuoka.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
       ],
       "connectivity": {
         "status": null,
@@ -40343,10 +40452,11 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "followup_user_or_browser_evidence"
+        "followup_user_or_browser_evidence",
+        "j_lis_prefecture_link"
       ],
       "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "ユーザー提供スクリーンショット／画面録画で直方市公式サイトのロゴ・市名と行政情報を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。"
+      "notes": "ユーザー提供スクリーンショット／画面録画で直方市公式サイトのロゴ・市名と行政情報を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。 J-LIS福岡県ページの掲載先ホストも登録URLと一致。"
     },
     {
       "prefectureCode": "40",
@@ -40356,10 +40466,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.iizuka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.iizuka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.iizuka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.iizuka.lg.jp/",
         "status": 200,
@@ -40368,9 +40481,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40380,10 +40496,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.joho.tagawa.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.joho.tagawa.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.joho.tagawa.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.joho.tagawa.fukuoka.jp/",
         "status": 200,
@@ -40392,9 +40511,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40404,10 +40526,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yanagawa.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yanagawa.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.yanagawa.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.yanagawa.fukuoka.jp/",
         "status": 200,
@@ -40416,9 +40541,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40428,10 +40556,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yame.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yame.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.yame.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.yame.fukuoka.jp/",
         "status": 200,
@@ -40440,9 +40571,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40452,10 +40586,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.chikugo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.chikugo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.chikugo.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.chikugo.lg.jp/",
         "status": 200,
@@ -40464,9 +40601,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40476,10 +40616,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.okawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.okawa.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.okawa.lg.jp/",
         "status": 200,
@@ -40488,9 +40631,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40500,10 +40646,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yukuhashi.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yukuhashi.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.yukuhashi.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.yukuhashi.fukuoka.jp/",
         "status": 200,
@@ -40512,9 +40661,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40524,10 +40676,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.buzen.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.buzen.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.buzen.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.buzen.lg.jp/",
         "status": 200,
@@ -40536,9 +40691,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40548,10 +40706,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nakama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nakama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.nakama.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nakama.lg.jp/",
         "status": 200,
@@ -40560,9 +40721,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40572,10 +40736,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ogori.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ogori.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.ogori.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ogori.fukuoka.jp/",
         "status": 200,
@@ -40584,9 +40751,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40596,10 +40766,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.chikushino.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.chikushino.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.chikushino.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.chikushino.fukuoka.jp/",
         "status": 200,
@@ -40608,9 +40781,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40620,10 +40796,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kasuga.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kasuga.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.kasuga.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kasuga.fukuoka.jp/",
         "status": 200,
@@ -40632,9 +40811,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40644,10 +40826,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.onojo.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.onojo.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.onojo.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.onojo.fukuoka.jp/",
         "status": 200,
@@ -40656,9 +40841,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40668,10 +40856,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.munakata.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.munakata.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.munakata.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.munakata.lg.jp/",
         "status": 200,
@@ -40680,9 +40871,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40692,10 +40886,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.dazaifu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.dazaifu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.dazaifu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.dazaifu.lg.jp/",
         "status": 200,
@@ -40704,9 +40901,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40716,10 +40916,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.koga.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.koga.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.koga.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.koga.fukuoka.jp/",
         "status": 200,
@@ -40728,9 +40931,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40740,10 +40946,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.fukutsu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukutsu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.fukutsu.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukutsu.lg.jp/",
         "status": 200,
@@ -40752,9 +40961,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40764,10 +40976,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ukiha.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ukiha.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.city.ukiha.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ukiha.fukuoka.jp/",
         "status": 200,
@@ -40776,9 +40991,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40788,10 +41006,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.miyawaka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.miyawaka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.miyawaka.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.miyawaka.lg.jp/",
         "status": 200,
@@ -40800,9 +41021,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40812,10 +41036,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.kama.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kama.lg.jp/",
         "status": 200,
@@ -40824,9 +41051,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40836,10 +41066,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.asakura.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.asakura.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.asakura.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.asakura.lg.jp/",
         "status": 200,
@@ -40848,9 +41081,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40860,10 +41096,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.miyama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.miyama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.miyama.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.miyama.lg.jp/",
         "status": 200,
@@ -40872,9 +41111,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40884,10 +41126,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.itoshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.itoshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.itoshima.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.itoshima.lg.jp/",
         "status": 200,
@@ -40896,9 +41141,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40908,10 +41156,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nakagawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nakagawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.nakagawa.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nakagawa.lg.jp/",
         "status": 200,
@@ -40920,9 +41171,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40932,10 +41186,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.umi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.umi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.umi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.umi.lg.jp/",
         "status": 200,
@@ -40944,9 +41201,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40956,10 +41216,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.sasaguri.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.sasaguri.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.sasaguri.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.sasaguri.fukuoka.jp/",
         "status": 200,
@@ -40968,9 +41231,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -40980,10 +41246,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shime.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shime.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.shime.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shime.lg.jp/",
         "status": 200,
@@ -40992,9 +41261,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41004,10 +41276,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.sue.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.sue.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.sue.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.sue.fukuoka.jp/",
         "status": 200,
@@ -41016,9 +41291,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41028,10 +41306,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shingu.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shingu.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.shingu.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shingu.fukuoka.jp/",
         "status": 200,
@@ -41040,9 +41321,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41052,10 +41336,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hisayama.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hisayama.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.hisayama.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hisayama.fukuoka.jp/",
         "status": 200,
@@ -41064,9 +41351,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41076,10 +41366,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kasuya.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kasuya.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.kasuya.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kasuya.fukuoka.jp/",
         "status": 200,
@@ -41088,9 +41381,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41100,10 +41396,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ashiya.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ashiya.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.ashiya.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ashiya.lg.jp/",
         "status": 200,
@@ -41112,9 +41411,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41124,10 +41426,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.mizumaki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.mizumaki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.mizumaki.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.mizumaki.lg.jp/",
         "status": 200,
@@ -41136,9 +41441,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41148,10 +41456,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.okagaki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.okagaki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.okagaki.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.okagaki.lg.jp/",
         "status": 200,
@@ -41160,9 +41471,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41172,10 +41486,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.onga.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.onga.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.onga.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.onga.lg.jp/",
         "status": 200,
@@ -41184,9 +41501,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41196,10 +41516,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://town.kotake.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://town.kotake.lg.jp/",
+      "evidenceUrls": [
+        "https://town.kotake.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://town.kotake.lg.jp/",
         "status": 200,
@@ -41208,9 +41531,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41220,10 +41546,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kurate.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kurate.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kurate.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kurate.lg.jp/",
         "status": 200,
@@ -41232,9 +41561,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41244,10 +41576,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.keisen.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.keisen.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.keisen.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.keisen.fukuoka.jp/",
         "status": 200,
@@ -41256,9 +41591,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41268,10 +41606,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.chikuzen.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.chikuzen.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.chikuzen.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.chikuzen.fukuoka.jp/",
         "status": 200,
@@ -41280,9 +41621,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41292,10 +41636,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://vill.toho-info.com/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://vill.toho-info.com/",
+      "evidenceUrls": [
+        "https://vill.toho-info.com/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://vill.toho-info.com/",
         "status": 200,
@@ -41304,9 +41651,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41316,10 +41666,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tachiarai.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tachiarai.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.tachiarai.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tachiarai.fukuoka.jp/",
         "status": 200,
@@ -41328,9 +41681,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41340,10 +41696,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ooki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ooki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.ooki.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ooki.lg.jp/",
         "status": 200,
@@ -41352,9 +41711,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41364,10 +41726,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hirokawa.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hirokawa.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.hirokawa.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hirokawa.fukuoka.jp/",
         "status": 200,
@@ -41376,9 +41741,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41388,10 +41756,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kawara.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kawara.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.kawara.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kawara.fukuoka.jp/",
         "status": 200,
@@ -41400,9 +41771,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41412,10 +41786,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.soeda.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.soeda.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.soeda.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.soeda.fukuoka.jp/",
         "status": 200,
@@ -41424,9 +41801,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41436,10 +41816,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.itoda.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.itoda.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.itoda.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.itoda.lg.jp/",
         "status": 200,
@@ -41448,9 +41831,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41460,10 +41846,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town-kawasaki.com/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town-kawasaki.com/",
+      "evidenceUrls": [
+        "https://www.town-kawasaki.com/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town-kawasaki.com/",
         "status": 200,
@@ -41472,9 +41861,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41484,10 +41876,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.oto.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.oto.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.oto.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.oto.fukuoka.jp/",
         "status": 200,
@@ -41496,9 +41891,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41508,10 +41906,13 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.akamura.net/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.akamura.net/",
+      "evidenceUrls": [
+        "https://www.akamura.net/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.akamura.net/",
         "status": 200,
@@ -41520,9 +41921,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41532,10 +41936,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.fukuchi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.fukuchi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.fukuchi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.fukuchi.lg.jp/",
         "status": 200,
@@ -41544,9 +41951,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41556,10 +41966,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kanda.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kanda.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kanda.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kanda.lg.jp/",
         "status": 200,
@@ -41568,9 +41981,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41580,10 +41996,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.miyako.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.miyako.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.miyako.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.miyako.lg.jp/",
         "status": 200,
@@ -41592,9 +42011,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41604,10 +42026,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yoshitomi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yoshitomi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.yoshitomi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yoshitomi.lg.jp/",
         "status": 200,
@@ -41616,9 +42041,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41628,10 +42056,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.koge.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.koge.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.koge.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.koge.lg.jp/",
         "status": 200,
@@ -41640,9 +42071,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "40",
@@ -41652,10 +42086,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.chikujo.fukuoka.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.chikujo.fukuoka.jp/",
+      "evidenceUrls": [
+        "https://www.town.chikujo.fukuoka.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166669149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.chikujo.fukuoka.jp/",
         "status": 200,
@@ -41664,9 +42101,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「福岡県」ページに当該自治体（政令市区は親市）のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "41",
