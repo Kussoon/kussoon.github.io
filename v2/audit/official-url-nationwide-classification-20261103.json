@@ -21587,18 +21587,20 @@
         "https://www.pref.yamanashi.jp/"
       ],
       "connectivity": {
+        "checkedUrl": "https://www.vill.doshi.lg.jp/",
         "status": null,
-        "result": "network_or_other",
-        "error": "URLError: <urlopen error timed out>",
-        "checkedUrl": "https://www.vill.doshi.lg.jp/"
+        "result": "current_fetch_unverified",
+        "error": "Timeout fetching"
       },
       "method": [
         "existing_2026_11_02_followup",
         "official_directory_review",
-        "browser_check_attempt_environment_failure"
+        "browser_check_attempt_environment_failure",
+        "current_official_root_fetch_attempt_2026_11_03",
+        "browser_or_fetch_environment_limitation"
       ],
       "checkedAt": "2026-11-03 JST",
-      "notes": "内閣府の自治体情報は登録ドメインを道志村ホームページとして掲載するが、掲載情報の現行性を確認できず、今回も現行ページの利用可能性を確認できなかった。通信失敗のみを理由にCにせず未判定。"
+      "notes": "内閣府の自治体情報は登録ドメインを道志村ホームページとして掲載するが、掲載情報の現行性を確認できず、今回も現行ページの利用可能性を確認できなかった。通信失敗のみを理由にCにせず未判定。 2026-11-03に登録トップページを再取得したが、北相木村は当該取得ツールから非対応、和歌山県美浜町・道志村はタイムアウト。これはサイト停止の確証とせず、公式性・現行利用可能性を確定できないため未判定を維持。"
     },
     {
       "prefectureCode": "19",
@@ -22340,21 +22342,24 @@
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
         "https://machimura-nagano.jp/introduction/east/kitaaiki.php",
-        "https://www.kaigokensaku.mhlw.go.jp/20/index.php?JigyosyoCd=2072000082-00&ServiceCd=430&action_kouhyou_detail_023_kihon=true"
+        "https://www.kaigokensaku.mhlw.go.jp/20/index.php?JigyosyoCd=2072000082-00&ServiceCd=430&action_kouhyou_detail_023_kihon=true",
+        "https://www.vill.kitaaiki.nagano.jp/fs/6/3/8/1/_/29__________________________.pdf"
       ],
       "connectivity": {
+        "checkedUrl": "https://vill.kitaaiki.nagano.jp/",
         "status": null,
-        "result": "network_or_other",
-        "error": "URLError: <urlopen error [SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)>",
-        "checkedUrl": "https://vill.kitaaiki.nagano.jp/"
+        "result": "current_fetch_unverified",
+        "error": "URL is not accessible via current search fetch"
       },
       "method": [
         "existing_2026_11_02_followup",
         "official_directory_review",
-        "browser_check_attempt_environment_failure"
+        "browser_check_attempt_environment_failure",
+        "current_official_root_fetch_attempt_2026_11_03",
+        "browser_or_fetch_environment_limitation"
       ],
       "checkedAt": "2026-11-03 JST",
-      "notes": "長野県町村会および厚労省の公的ページは当該ドメインを北相木村公式サイトとして掲載。ただし登録HTTPS URLは既存監査でTLSハンドシェイク失敗。今回のクラウドブラウザも中継接続エラーで到達性を確認できず。公式性は裏付けられるが現行サイトの利用可能性を確認できないため未判定。"
+      "notes": "長野県町村会および厚労省の公的ページは当該ドメインを北相木村公式サイトとして掲載。ただし登録HTTPS URLは既存監査でTLSハンドシェイク失敗。今回のクラウドブラウザも中継接続エラーで到達性を確認できず。公式性は裏付けられるが現行サイトの利用可能性を確認できないため未判定。 2026-11-03に登録トップページを再取得したが、北相木村は当該取得ツールから非対応、和歌山県美浜町・道志村はタイムアウト。これはサイト停止の確証とせず、公式性・現行利用可能性を確定できないため未判定を維持。"
     },
     {
       "prefectureCode": "20",
@@ -33745,18 +33750,20 @@
         "https://warp.ndl.go.jp/waid/11409"
       ],
       "connectivity": {
+        "checkedUrl": "https://www.town.mihama.wakayama.jp/",
         "status": null,
-        "result": "network_or_other",
-        "error": "URLError: <urlopen error timed out>",
-        "checkedUrl": "https://www.town.mihama.wakayama.jp/"
+        "result": "current_fetch_unverified",
+        "error": "Timeout fetching"
       },
       "method": [
         "existing_2026_11_02_followup",
         "official_directory_review",
-        "browser_check_attempt_environment_failure"
+        "browser_check_attempt_environment_failure",
+        "current_official_root_fetch_attempt_2026_11_03",
+        "browser_or_fetch_environment_limitation"
       ],
       "checkedAt": "2026-11-03 JST",
-      "notes": "和歌山県日高振興局は登録ドメインを美浜町ホームページとしてリンク。国立国会図書館WARPに2026-09-05保存記録があるが、今回、現行ページの利用可能性を確認できなかった。公式性と利用可能性の確認が分かれるため未判定。"
+      "notes": "和歌山県日高振興局は登録ドメインを美浜町ホームページとしてリンク。国立国会図書館WARPに2026-09-05保存記録があるが、今回、現行ページの利用可能性を確認できなかった。公式性と利用可能性の確認が分かれるため未判定。 2026-11-03に登録トップページを再取得したが、北相木村は当該取得ツールから非対応、和歌山県美浜町・道志村はタイムアウト。これはサイト停止の確証とせず、公式性・現行利用可能性を確定できないため未判定を維持。"
     },
     {
       "prefectureCode": "30",
