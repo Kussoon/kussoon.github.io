@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 759,
+      "A": 792,
       "B": 0,
       "C": 1,
-      "unclassified": 1152
+      "unclassified": 1119
     },
-    "completedRegionReviews": 760,
+    "completedRegionReviews": 793,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1149,
+    "unreviewedOtherRegions": 1116,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,233件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。 北海道・空知総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定23区域をA判定。滝川市はHTTP監査の数値ステータスがないため、現行公式トップページを直接確認。秩父別町の既存A判定にも公式リンク根拠を追記。 北海道・石狩振興局は北海道公式リンク一覧と既存HTTP監査を照合し、18区域をA判定。札幌市の10区は市公式サイト共通URLへの登録を市の公式リンク根拠と照合。 北海道・根室振興局の公式リンク一覧と既存HTTP監査を照合し、5区域をA判定。 北海道・留萌振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定7区域をA判定。苫前町の既存A判定にも公式リンク根拠を追記。 北海道・日高振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定5区域をA判定。浦河町・様似町の既存A判定にも公式リンク根拠を追記。 北海道・渡島総合振興局の公式リンク一覧と既存HTTP監査を照合し、11区域をA判定。 北海道・後志総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定15区域をA判定。既存Aの黒松内町・蘭越町・共和町・積丹町に公式リンク根拠を追記し、寿都町はHTTP 502のためCを維持し公式掲載根拠を追記。 北海道・檜山振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。せたな町の既存A判定にも公式リンク根拠を追記。 北海道・胆振総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定10区域をA判定。洞爺湖町の既存A判定にも公式リンク根拠を追記。 北海道・釧路総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。標茶町はスナップショットにHTTP記録がないため現行公式ページを直接確認してA判定。釧路町の既存A判定にも公式リンク根拠を追記。 北海道・十勝総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定18区域をA判定。浦幌町の既存A判定にも公式リンク根拠を追記。 北海道・上川総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定22区域をA判定。東川町は登録URLから現行公式サイトへの転送先も確認。 北海道・宗谷総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定8区域をA判定。 北海道・オホーツク総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定16区域をA判定。遠軽町のホームページは脆弱性対応で一時停止し公式臨時案内へ遷移する点を記録。紋別市は現行検索結果で登録www URL上の市公式コンテンツを確認したためA判定。直接取得のHTTP数値は未確認。 既存61件の追加確認対象の北相木村・和歌山県美浜町・道志村は公式情報を再確認したが、2026-11-03の現行トップページ取得も不成立。公式性の根拠を追記し、未判定のまま維持。 青森県の未判定37区域は県公式市町村ホームページ一覧と既存HTTP監査を照合しA。田子町は県掲載リンクと台帳URLのドメインが異なるが、台帳URLの現行公式ページ表示とHTTP 200を直接確認。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,233件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。 北海道・空知総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定23区域をA判定。滝川市はHTTP監査の数値ステータスがないため、現行公式トップページを直接確認。秩父別町の既存A判定にも公式リンク根拠を追記。 北海道・石狩振興局は北海道公式リンク一覧と既存HTTP監査を照合し、18区域をA判定。札幌市の10区は市公式サイト共通URLへの登録を市の公式リンク根拠と照合。 北海道・根室振興局の公式リンク一覧と既存HTTP監査を照合し、5区域をA判定。 北海道・留萌振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定7区域をA判定。苫前町の既存A判定にも公式リンク根拠を追記。 北海道・日高振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定5区域をA判定。浦河町・様似町の既存A判定にも公式リンク根拠を追記。 北海道・渡島総合振興局の公式リンク一覧と既存HTTP監査を照合し、11区域をA判定。 北海道・後志総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定15区域をA判定。既存Aの黒松内町・蘭越町・共和町・積丹町に公式リンク根拠を追記し、寿都町はHTTP 502のためCを維持し公式掲載根拠を追記。 北海道・檜山振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。せたな町の既存A判定にも公式リンク根拠を追記。 北海道・胆振総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定10区域をA判定。洞爺湖町の既存A判定にも公式リンク根拠を追記。 北海道・釧路総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。標茶町はスナップショットにHTTP記録がないため現行公式ページを直接確認してA判定。釧路町の既存A判定にも公式リンク根拠を追記。 北海道・十勝総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定18区域をA判定。浦幌町の既存A判定にも公式リンク根拠を追記。 北海道・上川総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定22区域をA判定。東川町は登録URLから現行公式サイトへの転送先も確認。 北海道・宗谷総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定8区域をA判定。 北海道・オホーツク総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定16区域をA判定。遠軽町のホームページは脆弱性対応で一時停止し公式臨時案内へ遷移する点を記録。紋別市は現行検索結果で登録www URL上の市公式コンテンツを確認したためA判定。直接取得のHTTP数値は未確認。 既存61件の追加確認対象の北相木村・和歌山県美浜町・道志村は公式情報を再確認したが、2026-11-03の現行トップページ取得も不成立。公式性の根拠を追記し、未判定のまま維持。 青森県の未判定37区域は県公式市町村ホームページ一覧と既存HTTP監査を照合しA。田子町は県掲載リンクと台帳URLのドメインが異なるが、台帳URLの現行公式ページ表示とHTTP 200を直接確認。 岩手県は県公式の市町村リンク一覧と既存HTTP監査を照合し未判定33区域をA判定。久慈市は県掲載先と台帳URLのホストが異なるため、台帳URLの直接HTTP 200と現行市公式ページ表示を確認し、その差異と県掲載先への接続失敗を記録。"
   },
   "records": [
     {
@@ -6980,21 +6980,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.morioka.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.morioka.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.morioka.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.morioka.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7004,21 +7011,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.miyako.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.miyako.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.miyako.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.miyako.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7028,21 +7042,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ofunato.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ofunato.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ofunato.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.ofunato.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7052,21 +7073,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hanamaki.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hanamaki.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hanamaki.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.hanamaki.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7076,21 +7104,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kitakami.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kitakami.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kitakami.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.kitakami.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7100,26 +7135,36 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kuji.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kuji.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kuji.lg.jp/",
-        "status": null,
-        "result": "not_in_2026_11_02_snapshot",
-        "error": "登録URLが前回HTTP接続監査に含まれていない。",
+        "status": 200,
+        "result": "reachable",
+        "finalUrl": "https://www.city.kuji.lg.jp/",
+        "redirectsToOtherHost": false,
+        "error": null,
+        "checkMethod": "direct_urllib_current_http_check_2026_11_03",
         "previousCheck": {
           "checkedUrl": "https://www.city.kuji.iwate.jp/",
           "status": null,
           "result": "network_or_other",
           "finalUrl": null,
-          "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)>"
+          "error": "2026-11-02 HTTP監査記録ではSSL証明書期限切れ。2026-11-03の直接取得ではタイムアウト/503となり数値HTTP状態を取得できず。"
         }
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "direct_browser_current_page",
+        "direct_http_check_2026_11_03"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧は久慈市公式サイトとして city.kuji.iwate.jp を掲載。一方、登録URL city.kuji.lg.jp は2026-11-03の直接HTTP確認で200・同一URLを返し、現行ページ見出し「ホーム／久慈市」と久慈市の著作権表記をブラウザで確認したため、登録URLも現行の市公式ページに到達すると判断しA。県掲載リンク先とのホスト差異と、掲載先を今回取得できなかったことを記録。"
     },
     {
       "prefectureCode": "03",
@@ -7129,21 +7174,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tono.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tono.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tono.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.tono.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7153,21 +7205,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ichinoseki.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ichinoseki.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ichinoseki.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.ichinoseki.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7177,21 +7236,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.rikuzentakata.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.rikuzentakata.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.rikuzentakata.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.rikuzentakata.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7201,21 +7267,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kamaishi.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kamaishi.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kamaishi.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.kamaishi.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7225,21 +7298,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ninohe.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ninohe.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ninohe.lg.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.ninohe.lg.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7249,21 +7329,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hachimantai.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hachimantai.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hachimantai.lg.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.hachimantai.lg.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7273,21 +7360,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.oshu.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.oshu.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.oshu.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.oshu.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7297,21 +7391,28 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.takizawa.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.takizawa.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.takizawa.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.city.takizawa.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7321,21 +7422,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shizukuishi.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shizukuishi.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shizukuishi.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.shizukuishi.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7345,21 +7453,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kuzumaki.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kuzumaki.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kuzumaki.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.kuzumaki.lg.jp/",
         "redirectsToOtherHost": true,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7369,21 +7484,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.iwate.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.iwate.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.iwate.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://town.iwate.iwate.jp/",
         "redirectsToOtherHost": true,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7393,21 +7515,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shiwa.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shiwa.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shiwa.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.shiwa.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7417,21 +7546,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yahaba.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yahaba.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yahaba.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.yahaba.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7441,21 +7577,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nishiwaga.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nishiwaga.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.nishiwaga.lg.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.nishiwaga.lg.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7465,21 +7608,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kanegasaki.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kanegasaki.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kanegasaki.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.kanegasaki.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7489,21 +7639,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hiraizumi.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hiraizumi.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hiraizumi.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.hiraizumi.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7513,21 +7670,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.sumita.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.sumita.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.sumita.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.sumita.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7537,21 +7701,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.otsuchi.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.otsuchi.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.otsuchi.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.otsuchi.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7561,21 +7732,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yamada.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yamada.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yamada.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.yamada.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7585,21 +7763,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.iwaizumi.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.iwaizumi.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.iwaizumi.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.iwaizumi.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7609,21 +7794,28 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.tanohata.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.tanohata.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.tanohata.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.vill.tanohata.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7633,21 +7825,28 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.fudai.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.fudai.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.fudai.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.vill.fudai.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7657,21 +7856,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.karumai.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.karumai.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.karumai.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.karumai.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7681,21 +7887,28 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.noda.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.noda.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.noda.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.vill.noda.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7705,21 +7918,28 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.kunohe.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.kunohe.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.kunohe.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.vill.kunohe.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7729,21 +7949,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hirono.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hirono.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hirono.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.hirono.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "03",
@@ -7753,21 +7980,28 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ichinohe.iwate.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ichinohe.iwate.jp/",
+      "evidenceUrls": [
+        "https://www.pref.iwate.jp/kensei/profile/links/1000665.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ichinohe.iwate.jp/",
         "status": 200,
         "result": "reachable",
         "finalUrl": "https://www.town.ichinohe.iwate.jp/",
         "redirectsToOtherHost": false,
-        "error": null
+        "error": null,
+        "checkMethod": "existing_http_audit_snapshot_2026_11_02"
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岩手県公式の市町村リンク一覧に掲載された公式リンク先ホストと登録URLが一致。既存HTTP監査で登録URLのHTTP 200・同一ホストへの到達を確認しA。"
     },
     {
       "prefectureCode": "04",
