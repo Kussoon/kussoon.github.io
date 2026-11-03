@@ -10,8 +10,8 @@ const C=window.KussoonCollisionRefinement,F=window.KussoonRegionFit,N=window.Kus
 const L=window.KussoonAdministrativeLabels,NR=window.KussoonNationalReadings;
 const D=window.KussoonDensityLabels,M=window.KussoonCenteredLabels;
 const map=$('map');
-const sourceCache=new Map(),pointers=new Map();
-const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
+const sourceCache=new Map(),pointers=new Map(),labelAnchorCache=new Map();
+const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}},japan:{title:'全国47都道府県',expected:{municipality:1747,ward:1902}}};
 let catalog=null,readingData=null,countyData=null,officeDirectory={},models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selectionOutline=null,selection=null,plate=null,plateShape=null;
 let popupDismissed=false;
@@ -31,6 +31,7 @@ const tag=(name,attrs={})=>{
  return el;
 };
 const pathData=rings=>rings.map(ring=>'M'+ring.map(([x,y])=>x.toFixed(2)+','+y.toFixed(2)).join('L')+'Z').join('');
+const lineData=lines=>lines.map(line=>'M'+line.map(([x,y])=>x.toFixed(2)+','+y.toFixed(2)).join('L')).join('');
 const nameOf=m=>m.fullName||m.name;
 function setStatus(message){$('status').textContent=message;}
 function fit(){view={...bounds};map.setAttribute('viewBox',[view.x,view.y,view.w,view.h].join(' '));}
@@ -44,7 +45,7 @@ function zoomBy(factor,fx=.5,fy=.5){
  if(!models.length)return;
  // Wide-area maps need more than the legacy 18x cap to inspect a town.
  // Keep the already-tested limits for single-region and Fuji modes.
- const maxZoom=state.area==='west-shikoku'?96:
+ const maxZoom=state.area==='japan'?96:state.area==='west-shikoku'?96:
   state.area==='chugoku-shikoku'?72:state.area==='west'?72:18;
  const newWidth=Math.max(bounds.w/maxZoom,Math.min(bounds.w,view.w/factor));
  const newHeight=newWidth*bounds.h/bounds.w;
@@ -132,7 +133,7 @@ function highlight(){
  if(selectionOutline){
   const active=state.mode==='plate'?null:
    models.find(model=>selection?.type==='model'&&model.id===selection.id);
-  if(active)selectionOutline.setAttribute('d',pathData(active.rings));
+  if(active&&state.area!=='japan')selectionOutline.setAttribute('d',pathData(active.rings));
   else selectionOutline.removeAttribute('d');
  }
  showSelection();
@@ -163,13 +164,26 @@ function buildPrefOutlines(topologies,projectPoint){
 }
 function drawMap(topologies,projectPoint){
  const shapeLayer=tag('g'),labelLayer=tag('g',{'aria-hidden':'true'}),outlines=buildPrefOutlines(topologies,projectPoint);
+ const nationalMap=state.area==='japan';
+ const boundaryLayer=tag('g',{'aria-hidden':'true'});
+ if(nationalMap){
+  for(const topo of Object.values(topologies)){
+   const object=topo.objects[Object.keys(topo.objects)[0]];
+   const mesh=window.topojson.mesh(topo,object,(a,b)=>a!==b);
+   boundaryLayer.append(tag('path',{
+    d:lineData(mesh.coordinates.map(line=>line.map(projectPoint))),
+    class:'municipal-boundaries'
+   }));
+  }
+ }
  const selectionLayer=tag('g',{'aria-hidden':'true'});
  selectionOutline=tag('path',{class:'selection-outline'});
- selectionLayer.append(selectionOutline);
+ if(!nationalMap)selectionLayer.append(selectionOutline);
  diagnosticLayer=tag('g',{class:'label-diagnostic','aria-hidden':'true'});
  drawing=[];labelNodes=[];outlineNodes=[];
  const isPlate=state.mode==='plate'&&Boolean(plate);
  map.classList.toggle('plate-mode',isPlate);
+ map.classList.toggle('national-map-mode',nationalMap);
  for(const model of models){
   const attributes={d:pathData(model.rings),class:'land','aria-label':nameOf(model)};
   if(!isPlate)Object.assign(attributes,{tabindex:0,role:'button','data-id':model.id});
@@ -195,12 +209,11 @@ function drawMap(topologies,projectPoint){
   labelLayer.append(t);
   labelNodes.push({node:t,model:plateShape});
  }
- map.replaceChildren(shapeLayer,outlines,selectionLayer,diagnosticLayer,labelLayer);
+ map.replaceChildren(shapeLayer,outlines,boundaryLayer,selectionLayer,diagnosticLayer,labelLayer);
  highlight();
 }
 function labelSize(zoom,compact){
- // Full-label experiment: all labels are present from the beginning.
- // Small at overview and progressively legible when zooming in.
+ // Keep overview labels compact and grow them smoothly as the user zooms.
  // Font dimensions are screen pixels; the SVG units are recomputed per view.
  if(compact)return Math.min(18,7+2.6*Math.log2(Math.max(1,zoom)));
  return 15+Math.min(2,Math.max(0,zoom-1)*.18);
@@ -303,7 +316,8 @@ function renderLabels(){
  if(!models.length)return;
  const start=performance.now(),zoom=bounds.w/view.w;
  const compareMode=['proposal5','mainland5','office5','proposal4','conditional','horizontal','vertical','multi','center','fixed','light'].includes($('density-mode').value);
- const screenPx=labelSize(zoom,compareMode);
+ const nationalMap=state.area==='japan';
+ const screenPx=labelSize(zoom,compareMode||nationalMap);
  const rect=map.getBoundingClientRect();
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
  if(!(ratio>0))return;
@@ -316,7 +330,16 @@ function renderLabels(){
  const layoutModels=workModels.map(m=>L.widestRowModel(m,size,measure));
  // A/B both start from a stable point belonging to the municipality.
  // Avoid the adaptive engine's adjacent-region shifts in the full-label trial.
- const planned=compareMode?layoutModels.map(m=>{
+ const planned=nationalMap?layoutModels.map((m,i)=>{
+  const source=workModels[i];
+  let anchor=labelAnchorCache.get(source.id);
+  if(!anchor){
+   anchor=office5Centers.get(source.id)||mainland5Centers.get(source.id)||proposal5Centers.get(source.id)||source.polylabel||source.centroid;
+   labelAnchorCache.set(source.id,anchor);
+  }
+  const point={x:anchor[0],y:anchor[1]};
+  return readingEnabled?NR.boxFor(source,point,size,measure):L.boxFor(source,point,size,measure);
+ }):compareMode?layoutModels.map(m=>{
   const [x,y]=$('density-mode').value==='office5'?
    (office5Centers.get(m.id)||mainland5Centers.get(m.id)||proposal5Centers.get(m.id)||m.polylabel||m.centroid):
    $('density-mode').value==='mainland5'?
@@ -364,7 +387,10 @@ function renderLabels(){
  // B: same anchors, then at most 8px of movement to reduce collisions.
  // Both versions render all labels (no hiding).
  let resultLabels,containment=null,clearance=null,collisionResult={labels:original};
- if(compareMode){
+ if(nationalMap){
+  // Nationwide anchors remain fixed; only visibility and font size respond to zoom.
+  resultLabels=original;
+ }else if(compareMode){
   resultLabels=D.fullCompare(workModels,original,{
    mode:['proposal5','mainland5','office5','proposal4','conditional','horizontal','vertical','center','multi'].includes($('density-mode').value)?'fixed':$('density-mode').value,view,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
@@ -402,7 +428,8 @@ function renderLabels(){
   D.arrange(workModels,resultLabels,{
    view,zoom,mode:$('density-mode').value,density:$('density-level').value,
    selectedId:selection?.type==='model'?selection.id:null,
-   screenWidth:rect.width||390,screenHeight:rect.height||390
+   screenWidth:rect.width||390,screenHeight:rect.height||390,
+   stableAnchors:nationalMap
   });
  const visible=arrangement.visible;
  // The legacy declutter trial may choose an alternative label anchor.
@@ -417,6 +444,10 @@ function renderLabels(){
   target.setAttribute('y',position.y.toFixed(2));
  });
  labelNodes.forEach(({node},i)=>{node.style.display=visible[i]?'':'none';});
+ if(nationalMap){
+  setStatus('拡大 '+zoom.toFixed(2)+'倍・地名ラベル '+visible.reduce((n,x)=>n+(x?1:0),0)+'件表示');
+  return;
+ }
  renderDiagnostic();
  const visibleCount=visible.reduce((n,x)=>n+(x?1:0),0);
  $('density-output').textContent='地名ラベル '+visibleCount+'／'+workModels.length+
@@ -528,7 +559,7 @@ async function load(area,mode){
  setStatus(needed.length+'府県の地図データを読み込んでいます…');
  const [pairs,,officeReferencePoints]=await Promise.all([
   Promise.all(needed.map(async p=>[p.code,await getTopology(p.code)])),
-  Promise.all(needed.filter(p=>['25','26','27','28','29'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code))),
+  Promise.all(needed.filter(p=>area==='japan'||['25','26','27','28','29'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code))),
   loadOfficeReferencePoints()
  ]);
  if(token!==runId)return;
@@ -557,6 +588,14 @@ async function load(area,mode){
   plateShape.readingParts=[{name:plate.name,reading:plate.reading}];
  }
  state={area,mode};
+ labelAnchorCache.clear();
+ if(area==='japan')models.forEach(m=>labelAnchorCache.set(m.id,m.polylabel||m.centroid));
+ if(area==='japan'){
+  $('density-mode').value='adaptive';
+  $('density-level').value='dense';
+  $('density-level').disabled=false;
+ }
+ if(area!=='japan'){
  // Compute only when geometry or municipality/ward mode changes.
  // Never move labels in response to zoom, pan, reading toggle, or selection.
  const referenceFont=7*bounds.w/390;
@@ -625,6 +664,7 @@ async function load(area,mode){
   notes.join(' ／ ')+'。';
 
  $('diagnostic-output').textContent='市町村を選ぶと新案1と新案2の位置・距離を表示します。';
+ }
  $('map-title').textContent=SCOPES[area].title+' — '+(
   mode==='plate'?'富士山ナンバー':mode==='ward'?'市区町村単位':'市町村単位')+
   '（'+models.length+'区域）';
@@ -786,7 +826,7 @@ window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
-   fetch('../data/national/catalog.json?v=20261031-density'),
+   fetch('../data/national/catalog.json?v=20261103-japan-map'),
    fetch('../data/national/municipality-readings.json?v=20261031-shikoku'),
    fetch('../data/national/county-readings.json?v=20261031-shikoku')
   ]);
