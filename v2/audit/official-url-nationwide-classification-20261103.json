@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 380,
+      "A": 401,
       "B": 0,
       "C": 1,
-      "unclassified": 1531
+      "unclassified": 1510
     },
-    "completedRegionReviews": 381,
+    "completedRegionReviews": 402,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1528,
+    "unreviewedOtherRegions": 1507,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,528件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。"
   },
   "records": [
     {
@@ -42268,10 +42268,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nagasaki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nagasaki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.nagasaki.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nagasaki.lg.jp/",
         "status": 200,
@@ -42280,9 +42283,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42292,10 +42298,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.sasebo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sasebo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.sasebo.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.sasebo.lg.jp/",
         "status": 200,
@@ -42304,9 +42313,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42316,10 +42328,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.shimabara.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shimabara.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.shimabara.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shimabara.lg.jp/",
         "status": 200,
@@ -42328,9 +42343,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42340,10 +42358,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.isahaya.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.isahaya.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.isahaya.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.isahaya.nagasaki.jp/",
         "status": 200,
@@ -42352,9 +42373,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42364,10 +42388,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.omura.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.omura.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.omura.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.omura.nagasaki.jp/",
         "status": 200,
@@ -42376,9 +42403,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42388,10 +42418,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hirado.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hirado.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.hirado.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hirado.nagasaki.jp/",
         "status": 200,
@@ -42400,9 +42433,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42412,10 +42448,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city-matsuura.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city-matsuura.jp/",
+      "evidenceUrls": [
+        "https://www.city-matsuura.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city-matsuura.jp/",
         "status": 200,
@@ -42424,9 +42463,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42436,10 +42478,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tsushima.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tsushima.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.tsushima.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tsushima.nagasaki.jp/",
         "status": 200,
@@ -42448,9 +42493,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42460,10 +42508,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.iki.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.iki.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.iki.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.iki.nagasaki.jp/",
         "status": 200,
@@ -42472,9 +42523,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42484,10 +42538,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.goto.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.goto.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.goto.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.goto.nagasaki.jp/",
         "status": 200,
@@ -42496,9 +42553,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42508,10 +42568,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.saikai.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.saikai.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.saikai.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.saikai.nagasaki.jp/",
         "status": 200,
@@ -42520,9 +42583,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42532,10 +42598,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.unzen.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.unzen.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.city.unzen.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.unzen.nagasaki.jp/",
         "status": 200,
@@ -42544,9 +42613,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42556,10 +42628,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.minamishimabara.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.minamishimabara.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.minamishimabara.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.minamishimabara.lg.jp/",
         "status": 200,
@@ -42568,9 +42643,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42580,10 +42658,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://webtown.nagayo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://webtown.nagayo.jp/",
+      "evidenceUrls": [
+        "https://webtown.nagayo.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://webtown.nagayo.jp/",
         "status": 200,
@@ -42592,9 +42673,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42604,10 +42688,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.togitsu.nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.togitsu.nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.town.togitsu.nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.togitsu.nagasaki.jp/",
         "status": 200,
@@ -42616,9 +42703,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42628,10 +42718,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.higashisonogi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.higashisonogi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.higashisonogi.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.higashisonogi.lg.jp/",
         "status": 200,
@@ -42640,9 +42733,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42652,10 +42748,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.kawatana.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.kawatana.jp/",
+      "evidenceUrls": [
+        "https://www.kawatana.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.kawatana.jp/",
         "status": 200,
@@ -42664,9 +42763,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42676,10 +42778,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hasami.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hasami.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.hasami.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hasami.lg.jp/",
         "status": 200,
@@ -42688,9 +42793,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42700,10 +42808,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ojika.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ojika.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.ojika.lg.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ojika.lg.jp/",
         "status": 200,
@@ -42712,9 +42823,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42724,10 +42838,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.sazacho-nagasaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.sazacho-nagasaki.jp/",
+      "evidenceUrls": [
+        "https://www.sazacho-nagasaki.jp/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.sazacho-nagasaki.jp/",
         "status": 200,
@@ -42736,9 +42853,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "42",
@@ -42748,10 +42868,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://official.shinkamigoto.net/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://official.shinkamigoto.net/",
+      "evidenceUrls": [
+        "https://official.shinkamigoto.net/",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166869149.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://official.shinkamigoto.net/",
         "status": 200,
@@ -42760,9 +42883,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "j_lis_prefecture_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS「長崎県」ページに当該自治体のホームページとして掲載されたリンク先と登録URLのホストが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "43",
