@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 298,
+      "A": 339,
       "B": 0,
       "C": 1,
-      "unclassified": 1613
+      "unclassified": 1572
     },
-    "completedRegionReviews": 299,
+    "completedRegionReviews": 340,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1610,
+    "unreviewedOtherRegions": 1569,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。"
   },
   "records": [
     {
@@ -45594,21 +45594,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kagoshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kagoshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kagoshima.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kagoshima.lg.jp/",
         "finalUrl": "https://www.city.kagoshima.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45618,21 +45624,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kanoya.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kanoya.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kanoya.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kanoya.lg.jp/",
         "finalUrl": "https://www.city.kanoya.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45642,21 +45654,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.makurazaki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.makurazaki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.makurazaki.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.makurazaki.lg.jp/",
         "finalUrl": "https://www.city.makurazaki.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45666,21 +45684,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.akune.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.akune.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.akune.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.akune.lg.jp/",
         "finalUrl": "https://www.city.akune.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45690,21 +45714,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kagoshima-izumi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kagoshima-izumi.lg.jp/welcome/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kagoshima-izumi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kagoshima-izumi.lg.jp/",
         "finalUrl": "https://www.city.kagoshima-izumi.lg.jp/welcome/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45745,21 +45775,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nishinoomote.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nishinoomote.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.nishinoomote.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.nishinoomote.lg.jp/",
         "finalUrl": "https://www.city.nishinoomote.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45769,21 +45805,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tarumizu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tarumizu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.tarumizu.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.tarumizu.lg.jp/",
         "finalUrl": "https://www.city.tarumizu.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45793,21 +45835,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.satsumasendai.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.satsumasendai.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.satsumasendai.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.satsumasendai.lg.jp/",
         "finalUrl": "https://www.city.satsumasendai.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45817,21 +45865,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hioki.kagoshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hioki.kagoshima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.hioki.kagoshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.hioki.kagoshima.jp/",
         "finalUrl": "https://www.city.hioki.kagoshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45841,21 +45895,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.soo.kagoshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.soo.kagoshima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.soo.kagoshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.soo.kagoshima.jp/",
         "finalUrl": "https://www.city.soo.kagoshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45865,21 +45925,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city-kirishima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city-kirishima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city-kirishima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city-kirishima.jp/",
         "finalUrl": "https://www.city-kirishima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45889,21 +45955,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ichikikushikino.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ichikikushikino.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.ichikikushikino.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.ichikikushikino.lg.jp/",
         "finalUrl": "https://www.city.ichikikushikino.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45913,21 +45985,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.minamisatsuma.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.minamisatsuma.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.minamisatsuma.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.minamisatsuma.lg.jp/",
         "finalUrl": "https://www.city.minamisatsuma.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45937,21 +46015,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.shibushi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shibushi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.shibushi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.shibushi.lg.jp/",
         "finalUrl": "https://www.city.shibushi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45961,21 +46045,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.amami.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.amami.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.amami.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.amami.lg.jp/",
         "finalUrl": "https://www.city.amami.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -45985,21 +46075,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.minamikyushu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.minamikyushu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.minamikyushu.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.minamikyushu.lg.jp/",
         "finalUrl": "https://www.city.minamikyushu.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46009,21 +46105,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.isa.kagoshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.isa.kagoshima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.isa.kagoshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.isa.kagoshima.jp/",
         "finalUrl": "https://www.city.isa.kagoshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46033,21 +46135,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.aira.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.aira.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.aira.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.aira.lg.jp/",
         "finalUrl": "https://www.city.aira.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46057,21 +46165,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://mishimamura.com/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://mishimamura.com/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://mishimamura.com/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://mishimamura.com/",
         "finalUrl": "https://mishimamura.com/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46081,21 +46195,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.tokara.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.tokara.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.tokara.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.tokara.jp/",
         "finalUrl": "https://www.tokara.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46105,21 +46225,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.satsuma-net.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.satsuma-net.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.satsuma-net.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.satsuma-net.jp/",
         "finalUrl": "https://www.satsuma-net.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46129,21 +46255,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nagashima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nagashima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.nagashima.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.nagashima.lg.jp/",
         "finalUrl": "https://www.town.nagashima.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46153,21 +46285,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yusui.kagoshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yusui.kagoshima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.yusui.kagoshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.yusui.kagoshima.jp/",
         "finalUrl": "https://www.town.yusui.kagoshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46177,21 +46315,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kagoshima-osaki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kagoshima-osaki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kagoshima-osaki.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kagoshima-osaki.lg.jp/",
         "finalUrl": "https://www.town.kagoshima-osaki.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46201,21 +46345,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.higashikushira.com/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.higashikushira.com/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.higashikushira.com/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.higashikushira.com/",
         "finalUrl": "https://www.higashikushira.com/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46225,21 +46375,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kinko.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kinko.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kinko.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kinko.lg.jp/",
         "finalUrl": "https://www.town.kinko.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46249,21 +46405,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.minamiosumi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.minamiosumi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.minamiosumi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.minamiosumi.lg.jp/",
         "finalUrl": "https://www.town.minamiosumi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46273,21 +46435,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.kimotsuki-town.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.kimotsuki-town.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.kimotsuki-town.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.kimotsuki-town.jp/",
         "finalUrl": "https://www.kimotsuki-town.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46297,21 +46465,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://town.nakatane.kagoshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://town.nakatane.kagoshima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://town.nakatane.kagoshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://town.nakatane.kagoshima.jp/",
         "finalUrl": "https://town.nakatane.kagoshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46349,21 +46523,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yakushima.kagoshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yakushima.kagoshima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.yakushima.kagoshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.yakushima.kagoshima.jp/",
         "finalUrl": "https://www.town.yakushima.kagoshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46373,21 +46553,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.yamato.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.yamato.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.yamato.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.yamato.lg.jp/",
         "finalUrl": "https://www.vill.yamato.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46397,21 +46583,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.uken.net/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.uken.net/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.uken.net/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.uken.net/",
         "finalUrl": "https://www.uken.net/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46421,21 +46613,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.setouchi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.setouchi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.setouchi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.setouchi.lg.jp/",
         "finalUrl": "https://www.town.setouchi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46445,21 +46643,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tatsugo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tatsugo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.tatsugo.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.tatsugo.lg.jp/",
         "finalUrl": "https://www.town.tatsugo.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46469,21 +46673,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kikai.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kikai.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kikai.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kikai.lg.jp/",
         "finalUrl": "https://www.town.kikai.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46493,21 +46703,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.tokunoshima-town.org/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.tokunoshima-town.org/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.tokunoshima-town.org/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.tokunoshima-town.org/",
         "finalUrl": "https://www.tokunoshima-town.org/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46517,21 +46733,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.amagi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.amagi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.amagi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.amagi.lg.jp/",
         "finalUrl": "https://www.town.amagi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46541,21 +46763,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.isen.kagoshima.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.isen.kagoshima.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.isen.kagoshima.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.isen.kagoshima.jp/",
         "finalUrl": "https://www.town.isen.kagoshima.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46565,21 +46793,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.wadomari.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.wadomari.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.wadomari.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.wadomari.lg.jp/",
         "finalUrl": "https://www.town.wadomari.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46589,21 +46823,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.china.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.china.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.china.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.china.lg.jp/",
         "finalUrl": "https://www.town.china.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
@@ -46613,21 +46853,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.yoron.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.yoron.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167269149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.yoron.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.yoron.jp/",
         "finalUrl": "https://www.yoron.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS鹿児島県ページの市町村公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "47",
