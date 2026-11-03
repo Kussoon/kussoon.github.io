@@ -107,17 +107,17 @@ details.advanced-panel{margin:12px 0;border:1px solid var(--line);border-radius:
 .national-map-mode .land,.national-map-mode .land.selected,.national-map-mode .land.focused{stroke:none}
 .national-map-mode .municipal-boundaries{fill:none;stroke:#fff;stroke-width:1;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 .national-map-mode .outline{stroke-width:1.25}
-body.national-focus main{max-width:1120px}
-body.national-focus main>section[aria-label],body.national-focus main>details,body.national-focus .workarea>details{display:none}
-body.national-focus main>.panel{display:none}
-body.national-focus .notice{font-size:12px;margin:8px 0;padding:8px 10px}
-body.national-focus .workarea{display:block}
-body.national-focus .workarea>.panel{margin-top:8px}
-body.national-focus main>h1{margin-top:7px}
-body.national-focus main>h1+p{font-size:14px;color:#55738a;margin-bottom:8px}
-@media(max-width:500px){body.national-focus #map{height:68vh;min-height:430px}}
+html.national-focus main{max-width:1120px}
+html.national-focus main>section[aria-label],html.national-focus main>details,html.national-focus .workarea>details{display:none}
+html.national-focus main>.panel{display:none}
+html.national-focus .notice{font-size:12px;margin:8px 0;padding:8px 10px}
+html.national-focus .workarea{display:block}
+html.national-focus .workarea>.panel{margin-top:8px}
+html.national-focus main>h1{margin-top:7px}
+html.national-focus main>h1+p{font-size:14px;color:#55738a;margin-bottom:8px}
+@media(max-width:500px){html.national-focus #map{height:68vh;min-height:430px}}
 </style>
-<script>if(new URLSearchParams(location.search).get('area')==='japan'){document.body.classList.add('national-focus');document.querySelector('main>h1').textContent='全国の市区町村';document.querySelector('main>h1+p').textContent='地図を拡大すると市町村名が順に表示されます。区域をタップすると自治体情報の吹き出しが開きます。';document.querySelector('.notice').innerHTML='<strong>試作地図：</strong>境界データは2021年時点の簡素化データです。';}</script>
+<script>if(new URLSearchParams(location.search).get('area')==='japan'){document.documentElement.classList.add('national-focus');document.addEventListener('DOMContentLoaded',()=>{document.querySelector('main>h1').textContent='全国の市区町村';document.querySelector('main>h1+p').textContent='地図を拡大すると市町村名が順に表示されます。区域をタップすると自治体情報の吹き出しが開きます。';document.querySelector('.notice').innerHTML='<strong>試作地図：</strong>境界データは2021年時点の簡素化データです。';});}</script>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(!payload)return false;for(const k of ['url','referrer'])if(typeof payload[k]==='string')payload[k]=payload[k].split(/[?#]/)[0];return payload};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
 <script defer src="/common/site-footer.js"></script>
