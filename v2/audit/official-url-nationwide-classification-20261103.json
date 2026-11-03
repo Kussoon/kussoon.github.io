@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 172,
+      "A": 191,
       "B": 0,
       "C": 1,
-      "unclassified": 1739
+      "unclassified": 1720
     },
-    "completedRegionReviews": 173,
+    "completedRegionReviews": 192,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1736,
+    "unreviewedOtherRegions": 1717,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31を県公式リンク集と既存HTTP監査で確認しA。既存Cや未判定の追試結果を保持。未判定は既存61件内3件とその他1,736件。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,717件。"
   },
   "records": [
     {
@@ -36977,10 +36977,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.shimonoseki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shimonoseki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shimonoseki.lg.jp/",
         "status": 200,
@@ -36989,9 +36991,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37001,10 +37006,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ube.yamaguchi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ube.yamaguchi.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ube.yamaguchi.jp/",
         "status": 200,
@@ -37013,9 +37020,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37025,10 +37035,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yamaguchi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yamaguchi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.yamaguchi.lg.jp/",
         "status": 200,
@@ -37037,9 +37049,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37049,10 +37064,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hagi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hagi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hagi.lg.jp/",
         "status": 200,
@@ -37061,9 +37078,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37073,10 +37093,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hofu.yamaguchi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hofu.yamaguchi.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hofu.yamaguchi.jp/",
         "status": 200,
@@ -37085,9 +37107,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37097,10 +37122,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kudamatsu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kudamatsu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kudamatsu.lg.jp/",
         "status": 200,
@@ -37109,9 +37136,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37121,10 +37151,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.iwakuni.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.iwakuni.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.iwakuni.lg.jp/",
         "status": 200,
@@ -37133,9 +37165,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37145,10 +37180,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hikari.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hikari.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.hikari.lg.jp/",
         "status": 200,
@@ -37157,9 +37194,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37169,10 +37209,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nagato.yamaguchi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nagato.yamaguchi.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nagato.yamaguchi.jp/",
         "status": 200,
@@ -37181,9 +37223,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37193,10 +37238,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city-yanai.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city-yanai.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city-yanai.jp/",
         "status": 200,
@@ -37205,9 +37252,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37217,10 +37267,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www2.city.mine.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www2.city.mine.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www2.city.mine.lg.jp/",
         "status": 200,
@@ -37229,9 +37281,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37241,10 +37296,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.shunan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shunan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shunan.lg.jp/",
         "status": 200,
@@ -37253,9 +37310,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37265,10 +37325,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.sanyo-onoda.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sanyo-onoda.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.sanyo-onoda.lg.jp/",
         "status": 200,
@@ -37277,9 +37339,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37289,10 +37354,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.suo-oshima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.suo-oshima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.suo-oshima.lg.jp/",
         "status": 200,
@@ -37301,9 +37368,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37313,10 +37383,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.waki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.waki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.waki.lg.jp/",
         "status": 200,
@@ -37325,9 +37397,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37337,10 +37412,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kaminoseki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kaminoseki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kaminoseki.lg.jp/",
         "status": 200,
@@ -37349,9 +37426,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37361,10 +37441,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tabuse.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tabuse.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tabuse.lg.jp/",
         "status": 200,
@@ -37373,9 +37455,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37385,10 +37470,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hirao.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hirao.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hirao.lg.jp/",
         "status": 200,
@@ -37397,9 +37484,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "35",
@@ -37409,10 +37499,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.abu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.abu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.yamaguchi.lg.jp/soshiki/22/15391.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.abu.lg.jp/",
         "status": 200,
@@ -37421,9 +37513,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "山口県公式の統計主管課リンク集（2026年4月更新）が当該市町の公式ホームページとして登録URLを掲載。既存HTTP監査は200、終端URL一致、他ホスト転送なし。A。"
     },
     {
       "prefectureCode": "36",
