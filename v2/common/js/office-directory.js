@@ -32,7 +32,7 @@ function render(document,container,result,label){
  const multi=result.region?.kind==='ward'&&offices.length>1;
  const links=(region,office,context)=>{
   const row=element('div','popup-actions region-links','');
-  row.append(action('公式サイト',region?.official,context),
+  row.append(action('公式サイト',region?.officialAuditStatus==='A'?region?.official:null,context),
    action('Wikipedia',region?.wikipedia,context),
    action('ここへ行く',destination(office),context));
   return row;

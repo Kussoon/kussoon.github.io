@@ -491,7 +491,7 @@ async function loadOfficePrefecture(code){
  if(loadedOfficePrefectures.has(code))return;
  if(!officeLoads.has(code))officeLoads.set(code,(async()=>{
   try{
-   const response=await fetch('../data/offices/'+code+'.json?v=2');
+   const response=await fetch('../data/offices/'+code+'.json?v=6');
    if(!response.ok)throw Error('庁舎データ '+code+' HTTP '+response.status);
    const directory=await response.json();
    if(directory.schemaVersion!==2||directory.prefecture!==code||!directory.regions||!directory.offices)
