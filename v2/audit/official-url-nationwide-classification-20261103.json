@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 497,
+      "A": 517,
       "B": 0,
       "C": 1,
-      "unclassified": 1414
+      "unclassified": 1394
     },
-    "completedRegionReviews": 498,
+    "completedRegionReviews": 518,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1411,
+    "unreviewedOtherRegions": 1391,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,411件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,391件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。"
   },
   "records": [
     {
@@ -38725,10 +38725,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.matsuyama.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.matsuyama.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.matsuyama.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.matsuyama.ehime.jp/",
         "status": 200,
@@ -38737,9 +38740,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38749,10 +38755,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.imabari.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.imabari.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.imabari.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.imabari.ehime.jp/",
         "status": 200,
@@ -38761,9 +38770,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38773,10 +38785,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.uwajima.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.uwajima.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.uwajima.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.uwajima.ehime.jp/",
         "status": 200,
@@ -38785,9 +38800,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38797,10 +38815,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yawatahama.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yawatahama.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.yawatahama.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.yawatahama.ehime.jp/",
         "status": 200,
@@ -38809,9 +38830,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38821,10 +38845,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.niihama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.niihama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.niihama.lg.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.niihama.lg.jp/",
         "status": 200,
@@ -38833,9 +38860,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38845,10 +38875,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.saijo.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.saijo.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.saijo.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.saijo.ehime.jp/",
         "status": 200,
@@ -38857,9 +38890,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38869,10 +38905,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ozu.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ozu.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.ozu.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ozu.ehime.jp/",
         "status": 200,
@@ -38881,9 +38920,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38893,10 +38935,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.iyo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.iyo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.city.iyo.lg.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.iyo.lg.jp/",
         "status": 200,
@@ -38905,9 +38950,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38917,10 +38965,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.shikokuchuo.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shikokuchuo.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.shikokuchuo.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shikokuchuo.ehime.jp/",
         "status": 200,
@@ -38929,9 +38980,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38941,10 +38995,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.seiyo.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.seiyo.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.seiyo.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.seiyo.ehime.jp/",
         "status": 200,
@@ -38953,9 +39010,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38965,10 +39025,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.toon.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.toon.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.city.toon.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.toon.ehime.jp/",
         "status": 200,
@@ -38977,9 +39040,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -38989,10 +39055,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kamijima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kamijima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kamijima.lg.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kamijima.lg.jp/",
         "status": 200,
@@ -39001,9 +39070,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39013,10 +39085,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.kumakogen.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.kumakogen.jp/",
+      "evidenceUrls": [
+        "https://www.kumakogen.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.kumakogen.jp/",
         "status": 200,
@@ -39025,9 +39100,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39037,10 +39115,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.masaki.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.masaki.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.town.masaki.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.masaki.ehime.jp/",
         "status": 200,
@@ -39049,9 +39130,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39061,10 +39145,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tobe.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tobe.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.town.tobe.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tobe.ehime.jp/",
         "status": 200,
@@ -39073,9 +39160,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39085,10 +39175,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.uchiko.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.uchiko.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.town.uchiko.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.uchiko.ehime.jp/",
         "status": 200,
@@ -39097,9 +39190,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39109,10 +39205,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ikata.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ikata.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.town.ikata.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ikata.ehime.jp/",
         "status": 200,
@@ -39121,9 +39220,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39133,10 +39235,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.matsuno.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.matsuno.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.town.matsuno.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.matsuno.ehime.jp/",
         "status": 200,
@@ -39145,9 +39250,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39157,10 +39265,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kihoku.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kihoku.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.town.kihoku.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kihoku.ehime.jp/",
         "status": 200,
@@ -39169,9 +39280,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "38",
@@ -39181,10 +39295,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ainan.ehime.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ainan.ehime.jp/",
+      "evidenceUrls": [
+        "https://www.town.ainan.ehime.jp/",
+        "https://www.pref.ehime.jp/page/14990.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.ainan.ehime.jp/",
         "status": 200,
@@ -39193,9 +39310,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "愛媛県公式ページ「県内市町情報」の市町公式ページ一覧に当該自治体が掲載され、リンク先ホストと登録URLが一致。既存HTTP監査（2026-11-02）では登録URLがHTTP 200で到達し、別ホストへの転送なし。"
     },
     {
       "prefectureCode": "39",
