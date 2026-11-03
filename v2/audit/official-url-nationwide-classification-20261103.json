@@ -21,16 +21,17 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 1413,
+      "A": 1487,
       "B": 0,
       "C": 1,
-      "unclassified": 498
+      "unclassified": 424
     },
-    "completedRegionReviews": 1414,
+    "completedRegionReviews": 1488,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 495,
+    "unreviewedOtherRegions": 421,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,233件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。 北海道・空知総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定23区域をA判定。滝川市はHTTP監査の数値ステータスがないため、現行公式トップページを直接確認。秩父別町の既存A判定にも公式リンク根拠を追記。 北海道・石狩振興局は北海道公式リンク一覧と既存HTTP監査を照合し、18区域をA判定。札幌市の10区は市公式サイト共通URLへの登録を市の公式リンク根拠と照合。 北海道・根室振興局の公式リンク一覧と既存HTTP監査を照合し、5区域をA判定。 北海道・留萌振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定7区域をA判定。苫前町の既存A判定にも公式リンク根拠を追記。 北海道・日高振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定5区域をA判定。浦河町・様似町の既存A判定にも公式リンク根拠を追記。 北海道・渡島総合振興局の公式リンク一覧と既存HTTP監査を照合し、11区域をA判定。 北海道・後志総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定15区域をA判定。既存Aの黒松内町・蘭越町・共和町・積丹町に公式リンク根拠を追記し、寿都町はHTTP 502のためCを維持し公式掲載根拠を追記。 北海道・檜山振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。せたな町の既存A判定にも公式リンク根拠を追記。 北海道・胆振総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定10区域をA判定。洞爺湖町の既存A判定にも公式リンク根拠を追記。 北海道・釧路総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。標茶町はスナップショットにHTTP記録がないため現行公式ページを直接確認してA判定。釧路町の既存A判定にも公式リンク根拠を追記。 北海道・十勝総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定18区域をA判定。浦幌町の既存A判定にも公式リンク根拠を追記。 北海道・上川総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定22区域をA判定。東川町は登録URLから現行公式サイトへの転送先も確認。 北海道・宗谷総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定8区域をA判定。 北海道・オホーツク総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定16区域をA判定。遠軽町のホームページは脆弱性対応で一時停止し公式臨時案内へ遷移する点を記録。紋別市は現行検索結果で登録www URL上の市公式コンテンツを確認したためA判定。直接取得のHTTP数値は未確認。 既存61件の追加確認対象の北相木村・和歌山県美浜町・道志村は公式情報を再確認したが、2026-11-03の現行トップページ取得も不成立。公式性の根拠を追記し、未判定のまま維持。 青森県の未判定37区域は県公式市町村ホームページ一覧と既存HTTP監査を照合しA。田子町は県掲載リンクと台帳URLのドメインが異なるが、台帳URLの現行公式ページ表示とHTTP 200を直接確認。 岩手県は県公式の市町村リンク一覧と既存HTTP監査を照合し未判定33区域をA判定。久慈市は県掲載先と台帳URLのホストが異なるため、台帳URLの直接HTTP 200と現行市公式ページ表示を確認し、その差異と県掲載先への接続失敗を記録。 宮城県は県公式の市町村リンク集と既存HTTP監査を照合し未判定39区域をA判定。松島町はHTTP数値記録がないため、現行公式トップページと最新のお知らせをブラウザで直接確認しA判定。 秋田県は県公式市町村ウェブサイト一覧と既存HTTP監査を照合し未判定24区域をA判定。八峰町は数値HTTPステータス未確認のため、現行公式トップページと直近のお知らせをブラウザで直接確認。 山形県は県公式の市町村ホームページ一覧と既存HTTP監査を照合し未判定33区域をA判定。最上町は数値HTTPステータス未確認のため、登録URL上の現行公式ページをブラウザで直接確認。 福島県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定59区域をA判定。登録URLのHTTP 200は全59件。いわき市は同一ホスト内のトップページパスへの到達を記録。 茨城県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定44区域をA判定。43区域はHTTP 200、河内町はHTTP 202を記録し、県公式市町村データページで登録URLの公式性を追加確認。 栃木県は全25区域を照合。未判定24区域のうち23区域を県公式市町一覧・J-LISと既存HTTP 200の一致によりA判定。大田原市の既存Aにも両公的根拠を追記。益子町は登録URLのHTTP 202と現行町公式ページのドメイン差異が解消できないため未判定を維持。 群馬県は県公式市町村外部リンク集（2026年9月更新）と登録URLを照合し、未判定33区域をA判定。32区域は既存HTTP 200、南牧村は現行公式トップと直近のお知らせをブラウザ確認し、数値HTTPコード未確認と記録。富岡市・甘楽町の既存Aにも県公式リンク根拠を追記。 埼玉県は県公式の市町村リンク一覧と登録URLを照合し、既存未判定71区域をA判定。71区域はいずれも既存HTTP監査でHTTP 200、うちさいたま市と10区の登録URLは市公式サイトの現行ドメインへの転送を確認。横瀬町の既存Aにも県公式リンク根拠を追記。鶴ヶ島市は県公式一覧掲載URLとHTTP 202を確認したが、ブラウザはロボット確認画面となるため未判定を維持。 千葉県は県公式県内市町村リンク集（2025年更新）とJ-LISリンク一覧（2020年更新）を照合し、未判定59区域をA判定。59区域はいずれも既存HTTP監査で200。市川市・佐倉市・八千代市は両公的リンク一覧の旧ホストと台帳登録URLの差を確認し、現行公式ページまたは市の公式URL告知で登録URLを個別確認。御宿町の既存Aにも県・J-LIS掲載根拠を追記（HTTP 503は別項目で維持）。 東京都はJ-LIS全国自治体マップ検索のリンク一覧と登録URL・既存HTTP監査を照合し、未判定61区域をA判定。登録URLは61区域すべてHTTP 200。北区・御蔵島村はJ-LIS一覧の掲載URLが旧ホストのため、現行公式ページおよび補助的な公的リンクで登録URLを確認し差異を注記。青ヶ島村の既存AにもJ-LIS掲載根拠を追加し、既存HTTP 503は別項目で維持。 神奈川県はJ-LIS県別リンク一覧と登録URL・既存HTTP監査を照合し、未判定61区域をA判定。61区域すべて掲載URLと登録URLが一致し、HTTP 200を確認。横浜市・川崎市・相模原市の各区はJ-LISの区別掲載名称および市公式ホームページへのリンクを照合。 山梨県はJ-LIS県別リンク一覧と山梨県市町村リンクページ、登録URL、既存HTTP監査を照合。未判定26区域のうち25区域をA判定し、既存Aの小菅村にもJ-LIS掲載根拠を追記。道志村は公的リンク一覧で登録ドメインを確認したが現行ページがタイムアウトするため未判定を維持。 新潟県は県公式「新潟県内市町村・観光協会等ホームページ一覧」（2025年更新）とJ-LIS県別リンク一覧、登録URL、既存HTTP監査を照合し、未判定38区域をA判定。38区域すべて掲載先と登録URLが一致し、HTTP 200を確認。新潟市の8区はJ-LISで区名ごとの公式ホームページ掲載を確認し、市公式トップページの共通URLを登録。 富山県は県公式市町村プロフィールとJ-LIS県別一覧、登録URL、既存HTTP監査を照合し15区域をA判定。全15区域がHTTP 200。富山市は両リンク一覧が旧ホストを掲載するため、市公式リニューアル告知で現登録URLの現行公式性を確認し差異を記録。 石川県は県公式の県内市町ページ・リンク集とJ-LIS県別リンク一覧、登録URL、既存HTTP監査を照合し19区域をA判定。19区域すべてHTTP 200。能美市は登録URLから現行公式サイトへのホスト転送と市公式の正規URL告知を確認し差異を記録。 福井県は県公式「福井県内市町リンク集」とJ-LIS福井県リンク一覧、登録URL、既存HTTP監査を照合し17区域をA判定。全17区域で公式リンク先と登録URLが一致し、HTTP 200を確認。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,233件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。 北海道・空知総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定23区域をA判定。滝川市はHTTP監査の数値ステータスがないため、現行公式トップページを直接確認。秩父別町の既存A判定にも公式リンク根拠を追記。 北海道・石狩振興局は北海道公式リンク一覧と既存HTTP監査を照合し、18区域をA判定。札幌市の10区は市公式サイト共通URLへの登録を市の公式リンク根拠と照合。 北海道・根室振興局の公式リンク一覧と既存HTTP監査を照合し、5区域をA判定。 北海道・留萌振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定7区域をA判定。苫前町の既存A判定にも公式リンク根拠を追記。 北海道・日高振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定5区域をA判定。浦河町・様似町の既存A判定にも公式リンク根拠を追記。 北海道・渡島総合振興局の公式リンク一覧と既存HTTP監査を照合し、11区域をA判定。 北海道・後志総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定15区域をA判定。既存Aの黒松内町・蘭越町・共和町・積丹町に公式リンク根拠を追記し、寿都町はHTTP 502のためCを維持し公式掲載根拠を追記。 北海道・檜山振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。せたな町の既存A判定にも公式リンク根拠を追記。 北海道・胆振総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定10区域をA判定。洞爺湖町の既存A判定にも公式リンク根拠を追記。 北海道・釧路総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定6区域をA判定。標茶町はスナップショットにHTTP記録がないため現行公式ページを直接確認してA判定。釧路町の既存A判定にも公式リンク根拠を追記。 北海道・十勝総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定18区域をA判定。浦幌町の既存A判定にも公式リンク根拠を追記。 北海道・上川総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定22区域をA判定。東川町は登録URLから現行公式サイトへの転送先も確認。 北海道・宗谷総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定8区域をA判定。 北海道・オホーツク総合振興局は公式リンク一覧と既存HTTP監査を照合し、未判定16区域をA判定。遠軽町のホームページは脆弱性対応で一時停止し公式臨時案内へ遷移する点を記録。紋別市は現行検索結果で登録www URL上の市公式コンテンツを確認したためA判定。直接取得のHTTP数値は未確認。 既存61件の追加確認対象の北相木村・和歌山県美浜町・道志村は公式情報を再確認したが、2026-11-03の現行トップページ取得も不成立。公式性の根拠を追記し、未判定のまま維持。 青森県の未判定37区域は県公式市町村ホームページ一覧と既存HTTP監査を照合しA。田子町は県掲載リンクと台帳URLのドメインが異なるが、台帳URLの現行公式ページ表示とHTTP 200を直接確認。 岩手県は県公式の市町村リンク一覧と既存HTTP監査を照合し未判定33区域をA判定。久慈市は県掲載先と台帳URLのホストが異なるため、台帳URLの直接HTTP 200と現行市公式ページ表示を確認し、その差異と県掲載先への接続失敗を記録。 宮城県は県公式の市町村リンク集と既存HTTP監査を照合し未判定39区域をA判定。松島町はHTTP数値記録がないため、現行公式トップページと最新のお知らせをブラウザで直接確認しA判定。 秋田県は県公式市町村ウェブサイト一覧と既存HTTP監査を照合し未判定24区域をA判定。八峰町は数値HTTPステータス未確認のため、現行公式トップページと直近のお知らせをブラウザで直接確認。 山形県は県公式の市町村ホームページ一覧と既存HTTP監査を照合し未判定33区域をA判定。最上町は数値HTTPステータス未確認のため、登録URL上の現行公式ページをブラウザで直接確認。 福島県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定59区域をA判定。登録URLのHTTP 200は全59件。いわき市は同一ホスト内のトップページパスへの到達を記録。 茨城県はJ-LIS県別自治体リンク一覧と既存HTTP監査を照合し、未判定44区域をA判定。43区域はHTTP 200、河内町はHTTP 202を記録し、県公式市町村データページで登録URLの公式性を追加確認。 栃木県は全25区域を照合。未判定24区域のうち23区域を県公式市町一覧・J-LISと既存HTTP 200の一致によりA判定。大田原市の既存Aにも両公的根拠を追記。益子町は登録URLのHTTP 202と現行町公式ページのドメイン差異が解消できないため未判定を維持。 群馬県は県公式市町村外部リンク集（2026年9月更新）と登録URLを照合し、未判定33区域をA判定。32区域は既存HTTP 200、南牧村は現行公式トップと直近のお知らせをブラウザ確認し、数値HTTPコード未確認と記録。富岡市・甘楽町の既存Aにも県公式リンク根拠を追記。 埼玉県は県公式の市町村リンク一覧と登録URLを照合し、既存未判定71区域をA判定。71区域はいずれも既存HTTP監査でHTTP 200、うちさいたま市と10区の登録URLは市公式サイトの現行ドメインへの転送を確認。横瀬町の既存Aにも県公式リンク根拠を追記。鶴ヶ島市は県公式一覧掲載URLとHTTP 202を確認したが、ブラウザはロボット確認画面となるため未判定を維持。 千葉県は県公式県内市町村リンク集（2025年更新）とJ-LISリンク一覧（2020年更新）を照合し、未判定59区域をA判定。59区域はいずれも既存HTTP監査で200。市川市・佐倉市・八千代市は両公的リンク一覧の旧ホストと台帳登録URLの差を確認し、現行公式ページまたは市の公式URL告知で登録URLを個別確認。御宿町の既存Aにも県・J-LIS掲載根拠を追記（HTTP 503は別項目で維持）。 東京都はJ-LIS全国自治体マップ検索のリンク一覧と登録URL・既存HTTP監査を照合し、未判定61区域をA判定。登録URLは61区域すべてHTTP 200。北区・御蔵島村はJ-LIS一覧の掲載URLが旧ホストのため、現行公式ページおよび補助的な公的リンクで登録URLを確認し差異を注記。青ヶ島村の既存AにもJ-LIS掲載根拠を追加し、既存HTTP 503は別項目で維持。 神奈川県はJ-LIS県別リンク一覧と登録URL・既存HTTP監査を照合し、未判定61区域をA判定。61区域すべて掲載URLと登録URLが一致し、HTTP 200を確認。横浜市・川崎市・相模原市の各区はJ-LISの区別掲載名称および市公式ホームページへのリンクを照合。 山梨県はJ-LIS県別リンク一覧と山梨県市町村リンクページ、登録URL、既存HTTP監査を照合。未判定26区域のうち25区域をA判定し、既存Aの小菅村にもJ-LIS掲載根拠を追記。道志村は公的リンク一覧で登録ドメインを確認したが現行ページがタイムアウトするため未判定を維持。 新潟県は県公式「新潟県内市町村・観光協会等ホームページ一覧」（2025年更新）とJ-LIS県別リンク一覧、登録URL、既存HTTP監査を照合し、未判定38区域をA判定。38区域すべて掲載先と登録URLが一致し、HTTP 200を確認。新潟市の8区はJ-LISで区名ごとの公式ホームページ掲載を確認し、市公式トップページの共通URLを登録。 富山県は県公式市町村プロフィールとJ-LIS県別一覧、登録URL、既存HTTP監査を照合し15区域をA判定。全15区域がHTTP 200。富山市は両リンク一覧が旧ホストを掲載するため、市公式リニューアル告知で現登録URLの現行公式性を確認し差異を記録。 石川県は県公式の県内市町ページ・リンク集とJ-LIS県別リンク一覧、登録URL、既存HTTP監査を照合し19区域をA判定。19区域すべてHTTP 200。能美市は登録URLから現行公式サイトへのホスト転送と市公式の正規URL告知を確認し差異を記録。 福井県は県公式「福井県内市町リンク集」とJ-LIS福井県リンク一覧、登録URL、既存HTTP監査を照合し17区域をA判定。全17区域で公式リンク先と登録URLが一致し、HTTP 200を確認。 長野県は県公式市町村一覧（2026-10-16更新）とJ-LIS県別一覧、登録URL、既存HTTP監査を照合し、未判定75区域のうち74区域をA判定。73区域は掲載URL一致と既存HTTP 200。大桑村はJ-LISに旧ホストが掲載されているため、県の最新一覧・村公式現行ページ・2024年の公式リニューアル告知で登録URLを確認し、数値HTTPコードを記録せずA。北相木村は現行到達性を確認できないため未判定を維持。",
+    "updatedAt": "2026-11-03"
   },
   "records": [
     {
@@ -27556,10 +27557,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nagano.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nagano.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nagano.nagano.jp/",
         "status": 200,
@@ -27568,9 +27573,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27580,10 +27589,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.matsumoto.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.matsumoto.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.matsumoto.nagano.jp/",
         "status": 200,
@@ -27592,9 +27605,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27604,10 +27621,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ueda.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ueda.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ueda.nagano.jp/",
         "status": 200,
@@ -27616,9 +27637,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27628,10 +27653,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.okaya.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okaya.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.okaya.lg.jp/",
         "status": 200,
@@ -27640,9 +27669,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27652,10 +27685,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.iida.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.iida.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.iida.lg.jp/",
         "status": 200,
@@ -27664,9 +27701,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27676,10 +27717,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.suwa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.suwa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.suwa.lg.jp/",
         "status": 200,
@@ -27688,9 +27733,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27700,10 +27749,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.suzaka.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.suzaka.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.suzaka.nagano.jp/",
         "status": 200,
@@ -27712,9 +27765,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27724,10 +27781,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.komoro.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.komoro.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.komoro.lg.jp/",
         "status": 200,
@@ -27736,9 +27797,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27748,10 +27813,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.inacity.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.inacity.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.inacity.jp/",
         "status": 200,
@@ -27760,9 +27829,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27772,10 +27845,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.komagane.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.komagane.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.komagane.nagano.jp/",
         "status": 200,
@@ -27784,9 +27861,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27796,10 +27877,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nakano.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nakano.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.nakano.nagano.jp/",
         "status": 200,
@@ -27808,9 +27893,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27820,10 +27909,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.omachi.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.omachi.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.omachi.nagano.jp/",
         "status": 200,
@@ -27832,9 +27925,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27844,10 +27941,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.iiyama.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.iiyama.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.iiyama.nagano.jp/",
         "status": 200,
@@ -27856,9 +27957,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27868,10 +27973,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.chino.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.chino.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.chino.lg.jp/",
         "status": 200,
@@ -27880,9 +27989,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27892,10 +28005,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.shiojiri.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.shiojiri.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.shiojiri.lg.jp/",
         "status": 200,
@@ -27904,9 +28021,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27916,10 +28037,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.saku.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.saku.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.saku.nagano.jp/",
         "status": 200,
@@ -27928,9 +28053,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27940,10 +28069,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.chikuma.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.chikuma.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.chikuma.lg.jp/",
         "status": 200,
@@ -27952,9 +28085,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27964,10 +28101,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tomi.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tomi.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tomi.nagano.jp/",
         "status": 200,
@@ -27976,9 +28117,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -27988,10 +28133,14 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.azumino.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.azumino.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.azumino.nagano.jp/",
         "status": 200,
@@ -28000,9 +28149,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28012,10 +28165,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.koumi-town.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.koumi-town.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.koumi-town.jp/",
         "status": 200,
@@ -28024,9 +28181,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28036,10 +28197,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.kawakami.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.kawakami.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.kawakami.nagano.jp/",
         "status": 200,
@@ -28048,9 +28213,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28060,10 +28229,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.minamimakimura.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.minamimakimura.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.minamimakimura.jp/",
         "status": 200,
@@ -28072,9 +28245,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28084,10 +28261,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.minamiaiki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.minamiaiki.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.minamiaiki.jp/",
         "status": 200,
@@ -28096,9 +28277,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28146,10 +28331,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.sakuho.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.sakuho.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.sakuho.nagano.jp/",
         "status": 200,
@@ -28158,9 +28347,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28170,10 +28363,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.karuizawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.karuizawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.karuizawa.lg.jp/",
         "status": 200,
@@ -28182,9 +28379,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28194,10 +28395,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.miyota.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.miyota.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.miyota.nagano.jp/",
         "status": 200,
@@ -28206,9 +28411,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28218,10 +28427,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tateshina.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tateshina.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tateshina.nagano.jp/",
         "status": 200,
@@ -28230,9 +28443,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28242,10 +28459,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.aoki.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.aoki.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.aoki.nagano.jp/",
         "status": 200,
@@ -28254,9 +28475,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28266,10 +28491,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://town.nagawa.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://town.nagawa.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://town.nagawa.nagano.jp/",
         "status": 200,
@@ -28278,9 +28507,13 @@
         "redirectsToOtherHost": true,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28290,10 +28523,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shimosuwa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shimosuwa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shimosuwa.lg.jp/",
         "status": 200,
@@ -28302,9 +28539,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28314,10 +28555,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.fujimi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.fujimi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.fujimi.lg.jp/",
         "status": 200,
@@ -28326,9 +28571,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28338,10 +28587,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.hara.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.hara.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.hara.lg.jp/",
         "status": 200,
@@ -28350,9 +28603,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28362,10 +28619,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tatsuno.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tatsuno.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tatsuno.lg.jp/",
         "status": 200,
@@ -28374,9 +28635,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28386,10 +28651,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.minowa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.minowa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.minowa.lg.jp/",
         "status": 200,
@@ -28398,9 +28667,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28410,10 +28683,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.iijima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.iijima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.iijima.lg.jp/",
         "status": 200,
@@ -28422,9 +28699,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28434,10 +28715,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.minamiminowa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.minamiminowa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.minamiminowa.lg.jp/",
         "status": 200,
@@ -28446,9 +28731,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28458,10 +28747,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.nakagawa.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.nakagawa.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.nakagawa.nagano.jp/",
         "status": 200,
@@ -28470,9 +28763,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28482,10 +28779,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.miyada.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.miyada.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.miyada.nagano.jp/",
         "status": 200,
@@ -28494,9 +28795,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28506,10 +28811,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.matsukawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.matsukawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.matsukawa.lg.jp/",
         "status": 200,
@@ -28518,9 +28827,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28530,10 +28843,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nagano-takamori.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nagano-takamori.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.nagano-takamori.lg.jp/",
         "status": 200,
@@ -28542,9 +28859,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28582,10 +28903,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.achi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.achi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.achi.lg.jp/",
         "status": 200,
@@ -28594,9 +28919,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28606,10 +28935,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://hirayamura.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://hirayamura.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://hirayamura.jp/",
         "status": 200,
@@ -28618,9 +28951,13 @@
         "redirectsToOtherHost": true,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28630,10 +28967,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://nebamura.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://nebamura.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://nebamura.jp/",
         "status": 200,
@@ -28642,9 +28983,13 @@
         "redirectsToOtherHost": true,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28654,10 +28999,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill-shimojo.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill-shimojo.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill-shimojo.jp/",
         "status": 200,
@@ -28666,9 +29015,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28678,10 +29031,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.urugi.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.urugi.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.urugi.jp/",
         "status": 200,
@@ -28690,9 +29047,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28702,10 +29063,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill-tenryu.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill-tenryu.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill-tenryu.jp/",
         "status": 200,
@@ -28714,9 +29079,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28726,10 +29095,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://vill.yasuoka.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://vill.yasuoka.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://vill.yasuoka.nagano.jp/",
         "status": 200,
@@ -28738,9 +29111,13 @@
         "redirectsToOtherHost": true,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28750,10 +29127,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.takagi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.takagi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.takagi.lg.jp/",
         "status": 200,
@@ -28762,9 +29143,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28774,10 +29159,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.nagano-toyooka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.nagano-toyooka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.nagano-toyooka.lg.jp/",
         "status": 200,
@@ -28786,9 +29175,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28798,10 +29191,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.ooshika.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.ooshika.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.ooshika.nagano.jp/",
         "status": 200,
@@ -28810,9 +29207,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28822,10 +29223,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.agematsu.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.agematsu.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.agematsu.nagano.jp/",
         "status": 200,
@@ -28834,9 +29239,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28846,10 +29255,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nagiso.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nagiso.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.nagiso.nagano.jp/",
         "status": 200,
@@ -28858,9 +29271,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28870,10 +29287,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.kiso.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.kiso.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.kiso.nagano.jp/",
         "status": 200,
@@ -28882,9 +29303,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28894,10 +29319,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.otaki.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.otaki.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.otaki.nagano.jp/",
         "status": 200,
@@ -28906,9 +29335,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28918,26 +29351,30 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.okuwa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.okuwa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://www.vill.okuwa.lg.jp/",
+        "https://www.vill.okuwa.lg.jp/notfound.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.okuwa.lg.jp/",
         "status": null,
-        "result": "not_in_2026_11_02_snapshot",
-        "error": "登録URLが前回HTTP接続監査に含まれていない。",
-        "previousCheck": {
-          "checkedUrl": "https://www.vill.okuwa.nagano.jp/",
-          "status": null,
-          "result": "network_or_other",
-          "finalUrl": null,
-          "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
-        }
+        "result": "current_official_page_confirmed",
+        "finalUrl": "https://www.vill.okuwa.lg.jp/",
+        "redirectsToOtherHost": false,
+        "error": "Current official page was directly confirmed; no numeric HTTP status was recorded. J-LIS lists a superseded host."
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipality_directory",
+        "current_official_page_check",
+        "official_site_renewal_notice"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）は登録URL https://www.vill.okuwa.lg.jp/ を掲載。村公式サイトの現行トップページと、旧サイトのリニューアル告知（2024-03-15、現登録URLへの変更）を確認。J-LIS長野県ページは旧ホスト www.vill.ookuwa.nagano.jp を掲載しているため差異を記録。現登録URLは村公式の現行サイトとして確認。数値HTTPステータスは未記録。"
     },
     {
       "prefectureCode": "20",
@@ -28947,10 +29384,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town-kiso.com/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town-kiso.com/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town-kiso.com/",
         "status": 200,
@@ -28959,9 +29400,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28971,10 +29416,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.omi.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.omi.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.omi.nagano.jp/",
         "status": 200,
@@ -28983,9 +29432,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -28995,10 +29448,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.village.ikusaka.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.village.ikusaka.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.village.ikusaka.nagano.jp/",
         "status": 200,
@@ -29007,9 +29464,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29019,10 +29480,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.yamagata.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.yamagata.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.yamagata.nagano.jp/",
         "status": 200,
@@ -29031,9 +29496,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29043,10 +29512,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.asahi.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.asahi.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.asahi.nagano.jp/",
         "status": 200,
@@ -29055,9 +29528,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29067,10 +29544,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.chikuhoku.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.chikuhoku.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.chikuhoku.lg.jp/",
         "status": 200,
@@ -29079,9 +29560,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29091,10 +29576,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.ikedamachi.net/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.ikedamachi.net/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.ikedamachi.net/",
         "status": 200,
@@ -29103,9 +29592,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29115,10 +29608,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.matsukawa.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.matsukawa.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.matsukawa.nagano.jp/",
         "status": 200,
@@ -29127,9 +29624,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29139,10 +29640,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.hakuba.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.hakuba.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.hakuba.lg.jp/",
         "status": 200,
@@ -29151,9 +29656,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29163,10 +29672,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.otari.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.otari.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.otari.nagano.jp/",
         "status": 200,
@@ -29175,9 +29688,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29187,10 +29704,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.sakaki.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.sakaki.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.sakaki.nagano.jp/",
         "status": 200,
@@ -29199,9 +29720,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29211,10 +29736,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.obuse.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.obuse.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.obuse.nagano.jp/",
         "status": 200,
@@ -29223,9 +29752,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29235,10 +29768,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.takayama.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.takayama.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.takayama.nagano.jp/",
         "status": 200,
@@ -29247,9 +29784,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29259,10 +29800,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yamanouchi.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yamanouchi.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yamanouchi.nagano.jp/",
         "status": 200,
@@ -29271,9 +29816,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29283,10 +29832,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.kijimadaira.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.kijimadaira.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.kijimadaira.lg.jp/",
         "status": 200,
@@ -29295,9 +29848,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29307,10 +29864,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.nozawaonsen.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.nozawaonsen.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.nozawaonsen.nagano.jp/",
         "status": 200,
@@ -29319,9 +29880,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29331,10 +29896,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shinano.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shinano.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shinano.lg.jp/",
         "status": 200,
@@ -29343,9 +29912,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29355,10 +29928,14 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.ogawa.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.ogawa.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.ogawa.nagano.jp/",
         "status": 200,
@@ -29367,9 +29944,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
@@ -29379,10 +29960,14 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.iizuna.nagano.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.iizuna.nagano.jp/",
+      "evidenceUrls": [
+        "https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/",
+        "https://www.j-lis.go.jp/spd/map-search/tyuubu/cms_164269145.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.iizuna.nagano.jp/",
         "status": 200,
@@ -29391,9 +29976,13 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_directory",
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "A判定。長野県公式市町村一覧（2026-10-16更新）およびJ-LIS長野県ページの掲載URLが登録URLと一致。既存HTTP到達性台帳で登録URLのHTTP 200を確認。"
     },
     {
       "prefectureCode": "20",
