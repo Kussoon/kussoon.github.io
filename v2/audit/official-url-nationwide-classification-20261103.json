@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 530,
+      "A": 553,
       "B": 0,
       "C": 1,
-      "unclassified": 1361
+      "unclassified": 1338
     },
-    "completedRegionReviews": 551,
+    "completedRegionReviews": 574,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1358,
+    "unreviewedOtherRegions": 1335,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,358件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,335件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。 北海道・空知総合振興局は北海道公式リンク一覧と既存HTTP監査を照合し、未判定23区域をA判定。滝川市はHTTP監査の数値ステータスがないため、現行公式トップページを直接確認。秩父別町の既存A判定にも公式リンク根拠を追記。"
   },
   "records": [
     {
@@ -473,10 +473,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yubari.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yubari.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.yubari.lg.jp/",
         "status": 200,
@@ -485,9 +488,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -497,10 +503,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.iwamizawa.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.iwamizawa.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.iwamizawa.hokkaido.jp/",
         "status": 200,
@@ -509,9 +518,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -617,10 +629,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.bibai.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.bibai.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.bibai.hokkaido.jp/",
         "status": 200,
@@ -629,9 +644,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -641,10 +659,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ashibetsu.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ashibetsu.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ashibetsu.hokkaido.jp/",
         "status": 200,
@@ -653,9 +674,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -689,10 +713,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.akabira.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.akabira.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.akabira.hokkaido.jp/",
         "status": 200,
@@ -701,9 +728,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -794,10 +824,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.mikasa.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.mikasa.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.mikasa.hokkaido.jp/",
         "status": 200,
@@ -806,9 +839,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -866,10 +902,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.takikawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.takikawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://www.city.takikawa.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.takikawa.lg.jp/",
         "status": null,
@@ -883,9 +922,12 @@
           "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
         }
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "current_official_page_check"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に登録URLのホストが掲載。2026-11-02の既存HTTP監査に数値ステータスはなく、現行トップページの公式表記、2026-11-02付の更新、庁舎情報を直接確認してA。数値HTTPコードは記録しない。"
     },
     {
       "prefectureCode": "01",
@@ -895,10 +937,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.sunagawa.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.sunagawa.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.sunagawa.hokkaido.jp/",
         "status": 200,
@@ -907,9 +952,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -919,10 +967,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.utashinai.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.utashinai.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.utashinai.hokkaido.jp/",
         "status": 200,
@@ -931,9 +982,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -943,10 +997,13 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.fukagawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.fukagawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.fukagawa.lg.jp/",
         "status": 200,
@@ -955,9 +1012,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2062,10 +2122,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nanporo.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nanporo.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.nanporo.hokkaido.jp/",
         "status": 200,
@@ -2074,9 +2137,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2086,10 +2152,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.naie.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.naie.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.naie.hokkaido.jp/",
         "status": 200,
@@ -2098,9 +2167,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2110,10 +2182,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://town.kamisunagawa.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://town.kamisunagawa.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://town.kamisunagawa.hokkaido.jp/",
         "status": 200,
@@ -2122,9 +2197,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2134,10 +2212,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yuni.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yuni.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yuni.lg.jp/",
         "status": 200,
@@ -2146,9 +2227,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2158,10 +2242,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.maoi-net.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.maoi-net.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.maoi-net.jp/",
         "status": 200,
@@ -2170,9 +2257,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2182,10 +2272,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kuriyama.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kuriyama.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kuriyama.hokkaido.jp/",
         "status": 200,
@@ -2194,9 +2287,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2206,10 +2302,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tsukigata.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tsukigata.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.tsukigata.hokkaido.jp/",
         "status": 200,
@@ -2218,9 +2317,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2230,10 +2332,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.urausu.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.urausu.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.urausu.hokkaido.jp/",
         "status": 200,
@@ -2242,9 +2347,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2254,10 +2362,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shintotsukawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shintotsukawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shintotsukawa.lg.jp/",
         "status": 200,
@@ -2266,9 +2377,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2278,10 +2392,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.moseushi.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.moseushi.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.moseushi.hokkaido.jp/",
         "status": 200,
@@ -2290,9 +2407,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2309,7 +2429,8 @@
         "https://www.town.chippubetsu.hokkaido.jp/",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json",
         "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
-        "https://www.town.chippubetsu.hokkaido.jp/category/detail.html?category=town&content=282"
+        "https://www.town.chippubetsu.hokkaido.jp/category/detail.html?category=town&content=282",
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html"
       ],
       "connectivity": {
         "status": null,
@@ -2320,10 +2441,11 @@
       "method": [
         "existing_2026_11_02_followup",
         "current_official_page_search",
-        "official_domain_identity_check"
+        "official_domain_identity_check",
+        "prefecture_official_municipal_link"
       ],
       "checkedAt": "2026-11-03 JST",
-      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。"
+      "notes": "登録URLと同一ドメイン上の現行自治体公式ページを確認。検索結果には最近の行政情報が掲載され、URLは現行公式ページとして確認できた。クラウドブラウザからの直接表示は中継接続タイムアウトのため未確認。北海道公式の空知総合振興局リンク一覧にも現登録URLが掲載されていることを照合。"
     },
     {
       "prefectureCode": "01",
@@ -2333,10 +2455,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.uryu.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.uryu.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.uryu.hokkaido.jp/",
         "status": 200,
@@ -2345,9 +2470,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2357,10 +2485,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hokuryu.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hokuryu.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hokuryu.hokkaido.jp/",
         "status": 200,
@@ -2369,9 +2500,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
@@ -2381,10 +2515,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.numata.hokkaido.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.numata.hokkaido.jp/",
+      "evidenceUrls": [
+        "https://www.pref.hokkaido.lg.jp/link/shichoson/sorachi.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.numata.hokkaido.jp/",
         "status": 200,
@@ -2393,9 +2530,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "existing_http_audit_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "北海道公式の空知総合振興局リンク一覧に自治体ホームページとして掲載されたホストと登録URLが一致。既存HTTP監査でHTTP 200・同一URLへの到達を確認しA。"
     },
     {
       "prefectureCode": "01",
