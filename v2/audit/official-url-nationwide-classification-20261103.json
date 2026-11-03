@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 273,
+      "A": 298,
       "B": 0,
       "C": 1,
-      "unclassified": 1638
+      "unclassified": 1613
     },
-    "completedRegionReviews": 274,
+    "completedRegionReviews": 299,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1635,
+    "unreviewedOtherRegions": 1610,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。"
   },
   "records": [
     {
@@ -44811,21 +44811,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.miyazaki.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.miyazaki.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.miyazaki.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.miyazaki.miyazaki.jp/",
         "finalUrl": "https://www.city.miyazaki.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -44835,21 +44841,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.miyakonojo.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.miyakonojo.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.miyakonojo.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.miyakonojo.miyazaki.jp/",
         "finalUrl": "https://www.city.miyakonojo.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -44859,21 +44871,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nobeoka.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nobeoka.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.nobeoka.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.nobeoka.miyazaki.jp/",
         "finalUrl": "https://www.city.nobeoka.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -44883,21 +44901,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.nichinan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.nichinan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.nichinan.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.nichinan.lg.jp/",
         "finalUrl": "https://www.city.nichinan.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -44907,21 +44931,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kobayashi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kobayashi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kobayashi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kobayashi.lg.jp/",
         "finalUrl": "https://www.city.kobayashi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -44964,21 +44994,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kushima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kushima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kushima.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kushima.lg.jp/",
         "finalUrl": "https://www.city.kushima.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -44988,21 +45024,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.saito.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.saito.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.saito.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.saito.lg.jp/",
         "finalUrl": "https://www.city.saito.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45012,21 +45054,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ebino.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ebino.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.ebino.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.ebino.lg.jp/",
         "finalUrl": "https://www.city.ebino.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45036,21 +45084,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.mimata.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.mimata.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.mimata.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.mimata.lg.jp/",
         "finalUrl": "https://www.town.mimata.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45060,21 +45114,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.takaharu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.takaharu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.takaharu.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.takaharu.lg.jp/",
         "finalUrl": "https://www.town.takaharu.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45084,21 +45144,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kunitomi.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kunitomi.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kunitomi.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kunitomi.miyazaki.jp/",
         "finalUrl": "https://www.town.kunitomi.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45108,21 +45174,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.aya.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.aya.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.aya.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.aya.miyazaki.jp/",
         "finalUrl": "https://www.town.aya.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45132,21 +45204,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.takanabe.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.takanabe.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.takanabe.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.takanabe.lg.jp/",
         "finalUrl": "https://www.town.takanabe.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45156,21 +45234,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shintomi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shintomi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.shintomi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.shintomi.lg.jp/",
         "finalUrl": "https://www.town.shintomi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45180,21 +45264,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.nishimera.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.nishimera.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.nishimera.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.nishimera.lg.jp/",
         "finalUrl": "https://www.vill.nishimera.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45204,21 +45294,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kijo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kijo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kijo.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kijo.lg.jp/",
         "finalUrl": "https://www.town.kijo.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45228,21 +45324,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kawaminami.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kawaminami.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kawaminami.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kawaminami.miyazaki.jp/",
         "finalUrl": "https://www.town.kawaminami.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45252,21 +45354,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tsuno.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tsuno.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.tsuno.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.tsuno.lg.jp/",
         "finalUrl": "https://www.town.tsuno.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45276,21 +45384,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kadogawa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kadogawa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kadogawa.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kadogawa.lg.jp/",
         "finalUrl": "https://www.town.kadogawa.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45300,21 +45414,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.morotsuka.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.morotsuka.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.morotsuka.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.morotsuka.miyazaki.jp/",
         "finalUrl": "https://www.vill.morotsuka.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45324,21 +45444,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.shiiba.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.shiiba.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.shiiba.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.shiiba.miyazaki.jp/",
         "finalUrl": "https://www.vill.shiiba.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45348,21 +45474,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.miyazaki-misato.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.miyazaki-misato.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.miyazaki-misato.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.miyazaki-misato.lg.jp/",
         "finalUrl": "https://www.town.miyazaki-misato.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45372,21 +45504,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town-takachiho.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town-takachiho.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town-takachiho.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town-takachiho.jp/",
         "finalUrl": "https://www.town-takachiho.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45396,21 +45534,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hinokage.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hinokage.lg.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.hinokage.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.hinokage.lg.jp/",
         "finalUrl": "https://www.town.hinokage.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "45",
@@ -45420,21 +45564,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.gokase.miyazaki.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.gokase.miyazaki.jp/",
+      "evidenceUrls": [
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_167169149.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.gokase.miyazaki.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.gokase.miyazaki.jp/",
         "finalUrl": "https://www.town.gokase.miyazaki.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "jlis_prefecture_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "J-LIS宮崎県ページの自治体公式ホームページリンクと登録URLを照合。既存HTTP監査で200を確認。A。"
     },
     {
       "prefectureCode": "46",
