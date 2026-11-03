@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 111,
+      "A": 141,
       "B": 0,
       "C": 1,
-      "unclassified": 1800
+      "unclassified": 1770
     },
-    "completedRegionReviews": 112,
+    "completedRegionReviews": 142,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1797,
+    "unreviewedOtherRegions": 1767,
     "totalCheck": 1912,
-    "reconciliationNote": "既存監査および直近8件の判定を保持。蘭越町・御宿町・指宿市は現行公式ページを確認、日向市は現行公式ドメイン修正後に公式停止案内を確認しA。寿都町はC。都道府県単位の公式リンク集と既存HTTP監査により鳥取県19件、島根県18件（知夫村は未判定維持）、香川県17件を確認し全54件をAとした。未判定は既存61件内3件とその他1,797件。"
+    "reconciliationNote": "既存監査を保持。鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30を今回新規に確認しA。岡山県内政令市の親市・区は同じ親市公式サイトへの登録を確認。未判定は既存61件内3件とその他1,767件。"
   },
   "records": [
     {
@@ -35168,10 +35168,12 @@
       "kind": "designatedCity",
       "parentCode": null,
       "registeredUrl": "https://www.city.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.okayama.jp/",
         "status": 200,
@@ -35180,9 +35182,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35192,10 +35197,12 @@
       "kind": "ward",
       "parentCode": "33100",
       "registeredUrl": "https://www.city.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.okayama.jp/",
         "status": 200,
@@ -35204,9 +35211,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集掲載の岡山市公式サイトと、区データの登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。"
     },
     {
       "prefectureCode": "33",
@@ -35216,10 +35226,12 @@
       "kind": "ward",
       "parentCode": "33100",
       "registeredUrl": "https://www.city.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.okayama.jp/",
         "status": 200,
@@ -35228,9 +35240,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集掲載の岡山市公式サイトと、区データの登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。"
     },
     {
       "prefectureCode": "33",
@@ -35240,10 +35255,12 @@
       "kind": "ward",
       "parentCode": "33100",
       "registeredUrl": "https://www.city.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.okayama.jp/",
         "status": 200,
@@ -35252,9 +35269,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集掲載の岡山市公式サイトと、区データの登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。"
     },
     {
       "prefectureCode": "33",
@@ -35264,10 +35284,12 @@
       "kind": "ward",
       "parentCode": "33100",
       "registeredUrl": "https://www.city.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.okayama.jp/",
         "status": 200,
@@ -35276,9 +35298,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集掲載の岡山市公式サイトと、区データの登録URLが一致。政令市の区も親市公式サイトを参照する既存仕様に沿ってA。"
     },
     {
       "prefectureCode": "33",
@@ -35288,10 +35313,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kurashiki.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kurashiki.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kurashiki.okayama.jp/",
         "status": 200,
@@ -35300,9 +35327,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35312,10 +35342,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tsuyama.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tsuyama.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tsuyama.lg.jp/",
         "status": 200,
@@ -35324,9 +35356,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35336,10 +35371,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tamano.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tamano.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.tamano.lg.jp/",
         "status": 200,
@@ -35348,9 +35385,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35360,10 +35400,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kasaoka.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kasaoka.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.kasaoka.okayama.jp/",
         "status": 200,
@@ -35372,9 +35414,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35384,10 +35429,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.ibara.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.ibara.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.ibara.okayama.jp/",
         "status": 200,
@@ -35396,9 +35443,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35408,10 +35458,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.soja.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.soja.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.soja.okayama.jp/",
         "status": 200,
@@ -35420,9 +35472,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35432,10 +35487,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.takahashi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.takahashi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.takahashi.lg.jp/",
         "status": 200,
@@ -35444,9 +35501,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35456,10 +35516,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.niimi.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.niimi.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.niimi.okayama.jp/",
         "status": 200,
@@ -35468,9 +35530,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35480,10 +35545,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.bizen.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.bizen.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.bizen.okayama.jp/",
         "status": 200,
@@ -35492,9 +35559,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35504,10 +35574,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.setouchi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.setouchi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.setouchi.lg.jp/",
         "status": 200,
@@ -35516,9 +35588,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35528,10 +35603,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.akaiwa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.akaiwa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.akaiwa.lg.jp/",
         "status": 200,
@@ -35540,9 +35617,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35552,10 +35632,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.maniwa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.maniwa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.maniwa.lg.jp/",
         "status": 200,
@@ -35564,9 +35646,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35576,10 +35661,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.mimasaka.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.mimasaka.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.mimasaka.lg.jp/",
         "status": 200,
@@ -35588,9 +35675,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35600,10 +35690,12 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.asakuchi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.asakuchi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.city.asakuchi.lg.jp/",
         "status": 200,
@@ -35612,9 +35704,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35624,10 +35719,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.wake.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.wake.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.wake.lg.jp/",
         "status": 200,
@@ -35636,9 +35733,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35648,10 +35748,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hayashima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hayashima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.hayashima.lg.jp/",
         "status": 200,
@@ -35660,9 +35762,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35672,10 +35777,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.satosho.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.satosho.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.satosho.okayama.jp/",
         "status": 200,
@@ -35684,9 +35791,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35696,10 +35806,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yakage.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yakage.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.yakage.okayama.jp/",
         "status": 200,
@@ -35708,9 +35820,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35725,7 +35840,8 @@
       "verifiedOfficialUrl": "https://www.vill.shinjo.okayama.jp/",
       "evidenceUrls": [
         "https://www.vill.shinjo.okayama.jp/",
-        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json"
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-followup-20261102.json",
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
       ],
       "connectivity": {
         "status": null,
@@ -35735,10 +35851,12 @@
       },
       "method": [
         "existing_2026_11_02_followup",
-        "followup_user_or_browser_evidence"
+        "followup_user_or_browser_evidence",
+        "prefecture_official_link_directory",
+        "existing_official_user_browser_evidence"
       ],
       "checkedAt": "2026-11-03 JST (user-provided screenshots/video)",
-      "notes": "ユーザー提供スクリーンショット／画面録画で新庄村公式サイトの公式案内を確認。Safariのアドレス欄に表示されたホストは登録ドメインと一致（www表示省略を含む）。"
+      "notes": "岡山県公式リンク集に新庄村の公式サイトとして登録URLが掲載され、別の現行公的情報も同じドメインへリンク。今回の既存HTTP監査は通信失敗だが、先行する利用者提供Safari証拠が登録ドメイン上の村公式情報を確認しているため既存Aを維持。今回の再通信確認は不可。"
     },
     {
       "prefectureCode": "33",
@@ -35748,10 +35866,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kagamino.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kagamino.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kagamino.lg.jp/",
         "status": 200,
@@ -35760,9 +35880,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35772,10 +35895,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.shoo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.shoo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.shoo.lg.jp/",
         "status": 200,
@@ -35784,9 +35909,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35796,10 +35924,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nagi.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nagi.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.nagi.okayama.jp/",
         "status": 200,
@@ -35808,9 +35938,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35820,10 +35953,12 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.nishiawakura.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.nishiawakura.okayama.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.vill.nishiawakura.okayama.jp/",
         "status": 200,
@@ -35832,9 +35967,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35844,10 +35982,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumenan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumenan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kumenan.lg.jp/",
         "status": 200,
@@ -35856,9 +35996,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "33",
@@ -35868,10 +36011,13 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.misaki.okayama.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.okayama-misaki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html",
+        "https://www.town.okayama-misaki.lg.jp/"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.misaki.okayama.jp/",
         "status": 200,
@@ -35880,9 +36026,13 @@
         "redirectsToOtherHost": true,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory",
+        "current_official_redirect_target_review"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集が登録URLを掲載。登録URLは同じ町のwwwサブドメインへ転送し、現行の美咲町公式トップページ、2026年10月の新着情報、役場住所・法人番号を確認。転送先は現在の町公式サイトと確認できたためA。"
     },
     {
       "prefectureCode": "33",
@@ -35892,10 +36042,12 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kibichuo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kibichuo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.okayama.jp/page/kanrenlink.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kibichuo.lg.jp/",
         "status": 200,
@@ -35904,9 +36056,12 @@
         "redirectsToOtherHost": false,
         "error": null
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "existing_2026_11_02_http_reachability",
+        "prefecture_official_link_directory"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "岡山県公式リンク集に当該自治体のホームページとして登録URLが掲載。既存HTTP監査で200を確認し、公式性と接続状態が一致するためA。"
     },
     {
       "prefectureCode": "34",
