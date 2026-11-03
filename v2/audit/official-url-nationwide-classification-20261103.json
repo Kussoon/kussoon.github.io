@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 529,
+      "A": 530,
       "B": 0,
       "C": 1,
-      "unclassified": 1362
+      "unclassified": 1361
     },
-    "completedRegionReviews": 550,
+    "completedRegionReviews": 551,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1359,
+    "unreviewedOtherRegions": 1358,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,359件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,358件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。 宮崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し25区域を新規A判定。日向市の既存A判定は維持。 鹿児島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。既存A判定2件は維持。 沖縄県はJ-LIS県別リンク一覧と既存HTTP監査を照合し41区域を新規A判定。 長崎県はJ-LIS県別リンク一覧と既存HTTP監査を照合し21区域をA判定。 福岡県はJ-LIS県別リンク一覧と既存HTTP監査を照合し、未判定73区域をA判定。直方市の既存A判定もJ-LIS掲載先との一致を確認。 徳島県はJ-LIS県別リンク一覧と既存HTTP監査を照合し未判定23区域をA判定。鳴門市は登録URLから別ホストの現行公式サイトへの転送先も確認。板野町の既存A判定は維持しJ-LIS掲載先との一致を追記。 愛媛県は県公式「県内市町情報」の市町公式リンク一覧と既存HTTP監査を照合し20区域をA判定。 高知県は県公式市町村リンク一覧とJ-LISを照合し、未判定32区域をA判定。梼原町は県リンクの旧ホストと異なる登録URLが現在の公式トップとして稼働していること、および旧URL履歴を確認。四万十市・東洋町の既存A判定を維持し公的掲載根拠を追記。 高森町は熊本県公式市町村リンク一覧に現登録URLが掲載され、現行トップページと町の一部機能停止告知を確認してA判定。過去HTTP監査の数値ステータスなしを記録し、サイト機能の一部停止とトップページの閲覧可否を区別。"
   },
   "records": [
     {
@@ -44733,10 +44733,15 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumamoto-takamori.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumamoto-takamori.lg.jp/",
+      "evidenceUrls": [
+        "https://www.town.kumamoto-takamori.lg.jp/",
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://www.j-lis.go.jp/spd/map-search/kyuusyuu/cms_166969149.html",
+        "https://www.town.kumamoto-takamori.lg.jp/page/11301.html"
+      ],
       "connectivity": {
         "checkedUrl": "https://www.town.kumamoto-takamori.lg.jp/",
         "status": null,
@@ -44750,9 +44755,13 @@
           "error": "URLError: <urlopen error [Errno -2] Name or service not known>"
         }
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefecture_official_municipal_link",
+        "current_official_page_check",
+        "municipal_notice_check"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式の市町村ホームページ一覧に登録URL（town.kumamoto-takamori.lg.jp）が掲載され、J-LISにも高森町公式リンクが掲載。登録URLのトップページを2026-11-03に確認し、高森町のサイト名・町公式コンテンツ・著作権表示があることを確認。町の公式告知ではPHPを使う一部機能（検索等）のみ一時停止と説明し、トップページの閲覧は可能。前回HTTP監査には現登録URLの数値ステータスなし。"
     },
     {
       "prefectureCode": "43",
