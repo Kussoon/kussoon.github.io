@@ -2651,7 +2651,10 @@
       }
 
       function triggerTimerFlash() {
-        triggerTimerFlash();
+        stopFinishFlash();
+        void flashOverlay.offsetWidth;
+        flashOverlay.classList.add("flashing");
+        flashTimerId = setTimeout(stopFinishFlash, 1200);
       }
 
       function checkFiveMinuteFlash(previousSeconds, currentSeconds) {
