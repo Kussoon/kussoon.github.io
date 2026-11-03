@@ -11,7 +11,7 @@ const L=window.KussoonAdministrativeLabels,NR=window.KussoonNationalReadings;
 const D=window.KussoonDensityLabels,M=window.KussoonCenteredLabels;
 const map=$('map');
 const sourceCache=new Map(),pointers=new Map();
-const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}}};
+const SCOPES={kansai:{title:'関西2府4県',expected:{municipality:198,ward:245}},chugoku:{title:'中国地方5県',expected:{municipality:107,ward:117}},west:{title:'関西・中国11府県',expected:{municipality:305,ward:362}},shikoku:{title:'四国4県',expected:{municipality:95,ward:95}},'chugoku-shikoku':{title:'中国・四国9県',expected:{municipality:202,ward:212}},'west-shikoku':{title:'関西・中国・四国15府県',expected:{municipality:400,ward:457}},fuji:{title:'山梨県・静岡県',expected:{municipality:62,ward:70}},japan:{title:'全国47都道府県',expected:{municipality:1747,ward:1902}}};
 let catalog=null,readingData=null,countyData=null,officeDirectory={},models=[],bounds={x:0,y:0,w:900,h:900},view={...bounds};
 let drawing=[],labelNodes=[],outlineNodes=[],selectionOutline=null,selection=null,plate=null,plateShape=null;
 let popupDismissed=false;
@@ -528,7 +528,7 @@ async function load(area,mode){
  setStatus(needed.length+'府県の地図データを読み込んでいます…');
  const [pairs,,officeReferencePoints]=await Promise.all([
   Promise.all(needed.map(async p=>[p.code,await getTopology(p.code)])),
-  Promise.all(needed.filter(p=>['25','26','27','28','29'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code))),
+  Promise.all(needed.filter(p=>area==='japan'||['25','26','27','28','29'].includes(String(p.code))).map(p=>loadOfficePrefecture(p.code))),
   loadOfficeReferencePoints()
  ]);
  if(token!==runId)return;
@@ -786,7 +786,7 @@ window.addEventListener('resize',scheduleLabels);
 (async()=>{
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
-   fetch('../data/national/catalog.json?v=20261031-density'),
+   fetch('../data/national/catalog.json?v=20261103-japan-map'),
    fetch('../data/national/municipality-readings.json?v=20261031-shikoku'),
    fetch('../data/national/county-readings.json?v=20261031-shikoku')
   ]);
