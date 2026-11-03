@@ -21,16 +21,16 @@
     "missingOfficialUrls": 0,
     "duplicateMunicipalityCodes": 0,
     "counts": {
-      "A": 224,
+      "A": 273,
       "B": 0,
       "C": 1,
-      "unclassified": 1687
+      "unclassified": 1638
     },
-    "completedRegionReviews": 225,
+    "completedRegionReviews": 274,
     "pendingExisting61Reconciliation": 3,
-    "unreviewedOtherRegions": 1684,
+    "unreviewedOtherRegions": 1635,
     "totalCheck": 1912,
-    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。"
+    "reconciliationNote": "鳥取県19、島根県18新規（知夫村は既存Safari証拠でA維持）、香川県17、岡山県30、広島県31、山口県19、佐賀県15を県公式リンク集と既存HTTP監査で照合しA。未判定は既存61件内3件とその他1,702件。 大分県は県公式リンク集（2010年更新）と既存HTTP監査を照合し18区域を新規A判定。 熊本県は県公式リンク集と既存HTTP監査を照合し49区域を新規A判定。高森町は接続記録がなく未判定を維持。"
   },
   "records": [
     {
@@ -42772,21 +42772,27 @@
       "kind": "designatedCity",
       "parentCode": null,
       "registeredUrl": "https://www.city.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kumamoto.jp/",
         "finalUrl": "https://www.city.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42796,21 +42802,27 @@
       "kind": "ward",
       "parentCode": "43100",
       "registeredUrl": "https://www.city.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kumamoto.jp/",
         "finalUrl": "https://www.city.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42820,21 +42832,27 @@
       "kind": "ward",
       "parentCode": "43100",
       "registeredUrl": "https://www.city.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kumamoto.jp/",
         "finalUrl": "https://www.city.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42844,21 +42862,27 @@
       "kind": "ward",
       "parentCode": "43100",
       "registeredUrl": "https://www.city.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kumamoto.jp/",
         "finalUrl": "https://www.city.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42868,21 +42892,27 @@
       "kind": "ward",
       "parentCode": "43100",
       "registeredUrl": "https://www.city.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kumamoto.jp/",
         "finalUrl": "https://www.city.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42892,21 +42922,27 @@
       "kind": "ward",
       "parentCode": "43100",
       "registeredUrl": "https://www.city.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kumamoto.jp/",
         "finalUrl": "https://www.city.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42916,21 +42952,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yatsushiro.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yatsushiro.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.yatsushiro.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.yatsushiro.lg.jp/",
         "finalUrl": "https://www.city.yatsushiro.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42940,21 +42982,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.hitoyoshi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.hitoyoshi.lg.jp/index.php",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.hitoyoshi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.hitoyoshi.lg.jp/",
         "finalUrl": "https://www.city.hitoyoshi.lg.jp/index.php",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42964,21 +43012,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.arao.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.arao.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.arao.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.arao.lg.jp/",
         "finalUrl": "https://www.city.arao.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -42988,21 +43042,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.minamata.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.minamata.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.minamata.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.minamata.lg.jp/",
         "finalUrl": "https://www.city.minamata.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43012,21 +43072,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.tamana.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.tamana.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.tamana.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.tamana.lg.jp/",
         "finalUrl": "https://www.city.tamana.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43036,21 +43102,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.yamaga.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.yamaga.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.yamaga.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.yamaga.kumamoto.jp/",
         "finalUrl": "https://www.city.yamaga.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43060,21 +43132,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kikuchi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kikuchi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kikuchi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kikuchi.lg.jp/",
         "finalUrl": "https://www.city.kikuchi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43084,21 +43162,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.uto.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.uto.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.uto.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.uto.lg.jp/",
         "finalUrl": "https://www.city.uto.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43108,21 +43192,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.kamiamakusa.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.kamiamakusa.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.kamiamakusa.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.kamiamakusa.kumamoto.jp/",
         "finalUrl": "https://www.city.kamiamakusa.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43132,21 +43222,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.uki.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.uki.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.uki.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.uki.kumamoto.jp/",
         "finalUrl": "https://www.city.uki.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43156,21 +43252,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.aso.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.aso.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.aso.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.aso.kumamoto.jp/",
         "finalUrl": "https://www.city.aso.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43180,21 +43282,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.amakusa.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.amakusa.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.amakusa.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.amakusa.kumamoto.jp/",
         "finalUrl": "https://www.city.amakusa.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43204,21 +43312,27 @@
       "kind": "city",
       "parentCode": null,
       "registeredUrl": "https://www.city.koshi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.city.koshi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.city.koshi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.city.koshi.lg.jp/",
         "finalUrl": "https://www.city.koshi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43228,21 +43342,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumamoto-misato.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumamoto-misato.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kumamoto-misato.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kumamoto-misato.lg.jp/",
         "finalUrl": "https://www.town.kumamoto-misato.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43252,21 +43372,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.gyokuto.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.gyokuto.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.gyokuto.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.gyokuto.kumamoto.jp/",
         "finalUrl": "https://www.town.gyokuto.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43276,21 +43402,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nankan.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nankan.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.nankan.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.nankan.lg.jp/",
         "finalUrl": "https://www.town.nankan.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43300,21 +43432,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nagasu.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nagasu.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.nagasu.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.nagasu.lg.jp/",
         "finalUrl": "https://www.town.nagasu.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43324,21 +43462,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.nagomi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.nagomi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.nagomi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.nagomi.lg.jp/",
         "finalUrl": "https://www.town.nagomi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43348,21 +43492,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ozu.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ozu.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.ozu.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.ozu.kumamoto.jp/",
         "finalUrl": "https://www.town.ozu.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43372,21 +43522,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kikuyo.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kikuyo.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kikuyo.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kikuyo.lg.jp/",
         "finalUrl": "https://www.town.kikuyo.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43396,21 +43552,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.minamioguni.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.minamioguni.lg.jp/top.html",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.minamioguni.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.minamioguni.lg.jp/",
         "finalUrl": "https://www.town.minamioguni.lg.jp/top.html",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43420,21 +43582,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumamoto-oguni.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumamoto-oguni.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kumamoto-oguni.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kumamoto-oguni.lg.jp/",
         "finalUrl": "https://www.town.kumamoto-oguni.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43444,21 +43612,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.ubuyama-v.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.ubuyama-v.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.ubuyama-v.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.ubuyama-v.jp/",
         "finalUrl": "https://www.ubuyama-v.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43497,21 +43671,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.nishihara.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.nishihara.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.nishihara.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.nishihara.kumamoto.jp/",
         "finalUrl": "https://www.vill.nishihara.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43521,21 +43701,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.minamiaso.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.minamiaso.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.minamiaso.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.minamiaso.lg.jp/",
         "finalUrl": "https://www.vill.minamiaso.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43545,21 +43731,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.mifune.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.mifune.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.mifune.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.mifune.kumamoto.jp/",
         "finalUrl": "https://www.town.mifune.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43569,21 +43761,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumamoto-kashima.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumamoto-kashima.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kumamoto-kashima.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kumamoto-kashima.lg.jp/",
         "finalUrl": "https://www.town.kumamoto-kashima.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43593,21 +43791,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.mashiki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.mashiki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.mashiki.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.mashiki.lg.jp/",
         "finalUrl": "https://www.town.mashiki.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43617,21 +43821,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kosa.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kosa.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kosa.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kosa.lg.jp/",
         "finalUrl": "https://www.town.kosa.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43641,21 +43851,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumamoto-yamato.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumamoto-yamato.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kumamoto-yamato.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kumamoto-yamato.lg.jp/",
         "finalUrl": "https://www.town.kumamoto-yamato.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43665,21 +43881,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.hikawa.kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.hikawa.kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.hikawa.kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.hikawa.kumamoto.jp/",
         "finalUrl": "https://www.town.hikawa.kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43689,21 +43911,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.ashikita.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.ashikita.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.ashikita.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.ashikita.lg.jp/",
         "finalUrl": "https://www.town.ashikita.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43713,21 +43941,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.tsunagi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.tsunagi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.tsunagi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.tsunagi.lg.jp/",
         "finalUrl": "https://www.town.tsunagi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43737,21 +43971,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.kumamoto-nishiki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.kumamoto-nishiki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.kumamoto-nishiki.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.kumamoto-nishiki.lg.jp/",
         "finalUrl": "https://www.town.kumamoto-nishiki.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43761,21 +44001,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.taragi.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.taragi.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.taragi.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.taragi.lg.jp/",
         "finalUrl": "https://www.town.taragi.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43785,21 +44031,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.yunomae.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.yunomae.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.yunomae.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.yunomae.lg.jp/",
         "finalUrl": "https://www.town.yunomae.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43809,21 +44061,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.mizukami.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.mizukami.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.mizukami.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.mizukami.lg.jp/",
         "finalUrl": "https://www.vill.mizukami.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43833,21 +44091,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.sagara.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.sagara.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.sagara.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.sagara.lg.jp/",
         "finalUrl": "https://www.vill.sagara.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43857,21 +44121,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.itsuki.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.itsuki.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.itsuki.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.itsuki.lg.jp/",
         "finalUrl": "https://www.vill.itsuki.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43881,21 +44151,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.vill.yamae.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.vill.yamae.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.vill.yamae.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.vill.yamae.lg.jp/",
         "finalUrl": "https://www.vill.yamae.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43905,21 +44181,27 @@
       "kind": "village",
       "parentCode": null,
       "registeredUrl": "https://www.kumamura.com/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.kumamura.com/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.kumamura.com/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.kumamura.com/",
         "finalUrl": "https://www.kumamura.com/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43929,21 +44211,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://www.town.asagiri.lg.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://www.town.asagiri.lg.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://www.town.asagiri.lg.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://www.town.asagiri.lg.jp/",
         "finalUrl": "https://www.town.asagiri.lg.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "43",
@@ -43953,21 +44241,27 @@
       "kind": "town",
       "parentCode": null,
       "registeredUrl": "https://reihoku-kumamoto.jp/",
-      "classification": null,
-      "auditStatus": "not_audited",
-      "verifiedOfficialUrl": null,
-      "evidenceUrls": [],
+      "classification": "A",
+      "auditStatus": "reviewed",
+      "verifiedOfficialUrl": "https://reihoku-kumamoto.jp/",
+      "evidenceUrls": [
+        "https://www.pref.kumamoto.jp/soshiki/1/177925.html",
+        "https://github.com/Kussoon/kussoon.github.io/blob/main/v2/audit/official-url-reachability-20261102.json"
+      ],
       "connectivity": {
-        "checkedUrl": "https://reihoku-kumamoto.jp/",
         "status": 200,
         "result": "reachable",
+        "error": null,
+        "checkedUrl": "https://reihoku-kumamoto.jp/",
         "finalUrl": "https://reihoku-kumamoto.jp/",
-        "redirectsToOtherHost": false,
-        "error": null
+        "redirectsToOtherHost": false
       },
-      "method": [],
-      "checkedAt": null,
-      "notes": "自治体公式性の個別確認未完了。未監査のためA/B/Cは未判定。"
+      "method": [
+        "prefectural_official_municipality_directory",
+        "existing_http_reachability_2026_11_02"
+      ],
+      "checkedAt": "2026-11-03 JST",
+      "notes": "熊本県公式「県内市町村のホームページ（リンク集）」で自治体名と登録URLを照合。2026-11-02接続監査でHTTP 200を確認。A。"
     },
     {
       "prefectureCode": "44",
