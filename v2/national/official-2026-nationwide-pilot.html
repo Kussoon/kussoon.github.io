@@ -16,7 +16,8 @@ label{display:grid;gap:6px;font-weight:700}
 select{font:inherit;min-height:44px;padding:9px;border:1px solid #9fbdd0;border-radius:8px;background:#fff;color:inherit;max-width:100%}
 .map-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}.map-tools button,.nav button{font:inherit;font-weight:700;color:inherit;background:#fff;border:1px solid #9fbdd0;border-radius:8px;padding:9px 12px;min-height:44px;cursor:pointer}.map-tools output{min-width:54px;text-align:center;font-weight:700}
 svg{display:block;width:100%;height:auto;background:#edf6fb;border:1px solid #b7ccdb;border-radius:10px;touch-action:none;user-select:none;overflow:hidden}
-.land{fill:#add9ef;stroke:none;fill-rule:evenodd;cursor:pointer}.land.chosen{fill:#ffc476}.borders{fill:none;stroke:white;stroke-width:.9;stroke-linejoin:round;pointer-events:none}
+.land{fill:#add9ef;stroke:none;fill-rule:evenodd;cursor:pointer}.land.chosen{fill:#ffc476}/* Keep one 2026 shared-arc stroke constant at every SVG zoom; no per-border overlay. */
+.borders{fill:none;stroke:white;stroke-width:.9;vector-effect:non-scaling-stroke;stroke-linejoin:round;pointer-events:none}
 .prefecture{fill:#add9ef;stroke:#fff;stroke-width:.75;fill-rule:evenodd;cursor:pointer}
 .prefecture:focus{outline:none;stroke:#174b71;stroke-width:2}.prefecture:hover{fill:#7bc5e7}
 .nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}.nav span{font-weight:700}
