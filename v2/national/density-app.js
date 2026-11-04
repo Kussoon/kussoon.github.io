@@ -341,7 +341,7 @@ function renderLabels(){
   const source=workModels[i];
   let anchor=labelAnchorCache.get(source.id);
   if(!anchor){
-   anchor=office5Centers.get(source.id)||mainland5Centers.get(source.id)||proposal5Centers.get(source.id)||source.polylabel||source.centroid;
+   anchor=M.officeComponent5(source).point;
    labelAnchorCache.set(source.id,anchor);
   }
   const x=anchor[0],y=anchor[1];
@@ -605,7 +605,14 @@ async function load(area,mode){
  }
  state={area,mode};
  labelAnchorCache.clear();
- if(area==='japan')models.forEach(m=>labelAnchorCache.set(m.id,m.polylabel||m.centroid));
+ if(area==='japan'){
+  // Apply the accepted 5C rule once to every national model.
+  // Verified office component first; otherwise 5B's largest component.
+  const office=models.map(m=>[m.id,M.officeComponent5(m)]);
+  office5Results=new Map(office);
+  office5Centers=new Map(office.map(([id,result])=>[id,result.point]));
+  models.forEach(m=>labelAnchorCache.set(m.id,office5Centers.get(m.id)));
+ }
  if(area==='japan'){
   $('density-mode').value='adaptive';
   $('density-level').value='dense';
