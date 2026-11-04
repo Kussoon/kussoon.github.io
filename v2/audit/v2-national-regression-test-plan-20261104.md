@@ -2,7 +2,7 @@
 
 基準: main `c69c970c982724b20d9a327e1fd1c223f356aebd`、PR #1〜#245。
 今回は計画・根拠の記録のみ。下記の新規テスト・workflowは未実装である。
-[有効仕様](../national/MAINTENANCE_RULES.md)、[S-ID台帳](pr-spec-ledger.md)、[優先課題](regression-findings.md)を参照する。
+[有効仕様](../national/MAINTENANCE_RULES.md)、[S-ID台帳](v2-national-pr-ledger-20261104.md)、[優先課題](v2-national-regressions-20261104.md)を参照する。
 
 ## 今回実行した既存検査
 
@@ -91,3 +91,5 @@ viewBoxはSVG座標系の値なので、投影の変更を検出するには地�
 
 文書だけの本PRでは多くのworkflowのpathsに一致しないため、Actions 0件は「全テスト成功」を意味しない。
 PR作成後にrun/checkを確認し、0件なら未起動と報告する。今回確認した既存テスト失敗2件が残るため、正常な検証基盤として完成したとは扱わず、PRはマージを保留する方針とする。
+
+先行PR #246には別環境での11合格／3配信データ未展開という実行記録がある。今回の11合格／旧庁舎2失敗とは実行対象・環境が異なり、件数を合算せず、[先行原文](https://github.com/Kussoon/kussoon.github.io/blob/b42cec489878c0774053b334d326eb0c42406c38/v2/audit/v2-national-regression-test-plan-20261104.md)を別証拠として保存する。

@@ -18,8 +18,8 @@
 ### 監査基準とページ別の適用状況
 
 2026-11-04監査の正本mainは `c69c970c982724b20d9a327e1fd1c223f356aebd`。
-[監査入口](../audit/README.md)、[PR #1〜#245照合台帳](../audit/pr-spec-ledger.md)、
-[未反映・回帰疑い](../audit/regression-findings.md)、[回帰テスト計画](../audit/regression-test-plan.md)を参照する。
+[監査入口](../audit/v2-national-audit-summary-20261104.md)、[PR #1〜#245照合台帳](../audit/v2-national-pr-ledger-20261104.md)、
+[未反映・回帰疑い](../audit/v2-national-regressions-20261104.md)、[回帰テスト計画](../audit/v2-national-regression-test-plan-20261104.md)を参照する。
 本書を有効規則の正本として再利用し、PR履歴と現在の達成状況は台帳へ分離する。
 
 以下の固定5C・13画面px・768倍は、#100/#217/#224/#225/#228で主に
