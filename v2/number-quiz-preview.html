@@ -80,6 +80,14 @@
 /* 登録自家用車のプレート色はOSの外観によらず白地・緑文字に固定 */
 @media(prefers-color-scheme:dark){.plate,.hero-plate{background:#f7f8ef;color:#226d45;box-shadow:inset 0 0 0 2px #f7f8ef,0 4px 15px #123c2430}}
 .quiz-scope-note{margin:0 0 15px;padding:11px 14px;border:1px solid var(--line);border-radius:11px;background:var(--tint);font-size:.88rem;line-height:1.65}.quiz-scope-note strong{color:var(--navy);display:block;margin-bottom:2px}.quiz-scope-note p{margin:0}
+
+/* Stacked blank license plates: preserve the existing front plate and all quiz controls. */
+.hero-plate-stack{position:relative;isolation:isolate;width:min(94%,430px);margin:18px auto 24px;padding:0 24px 24px 0;}
+.hero-plate-stack .hero-plate{position:relative;z-index:3;box-sizing:border-box;width:100%;max-width:none;margin:0;border-radius:18px;box-shadow:0 5px 15px #123c2430;}
+.hero-plate-stack .stack-plate{position:absolute;box-sizing:border-box;display:block;width:calc(100% - 24px);height:calc(100% - 24px);background:#f7f8ef;border:4px solid #39966a;border-radius:18px;box-shadow:0 5px 14px #123c2430;pointer-events:none;}
+.hero-plate-stack .stack-plate-middle{top:10px;left:13px;z-index:2;}
+.hero-plate-stack .stack-plate-back{top:22px;left:23px;z-index:1;}
+@media(max-width:440px){.hero-plate-stack{margin:15px auto 22px;padding-right:19px;padding-bottom:20px}.hero-plate-stack .stack-plate{width:calc(100% - 19px);height:calc(100% - 20px)}.hero-plate-stack .stack-plate-middle{top:8px;left:10px}.hero-plate-stack .stack-plate-back{top:18px;left:18px}}
 </style>
 <script>
 // 公開時のみUmamiを導入。クエリ・ハッシュを解析へ送らない。
@@ -145,7 +153,7 @@ footer.ks-unified-footer .ksu-version { margin:7px 0 0; font-size:.76rem; color:
 <body>
 <main>
 <section id="intro" class="intro-page">
-<div class="number-hero"><div class="intro-eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="plate hero-plate" role="img" aria-label="神戸 500 さ 20-26 のナンバープレート"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span>20-26</span></div></div><h2>次のナンバーは？</h2><p>ナンバープレートの数字・ひらがな・分類番号を読み解くクイズ</p></div>
+<div class="number-hero"><div class="intro-eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="hero-plate-stack"><span class="stack-plate stack-plate-back" aria-hidden="true"></span><span class="stack-plate stack-plate-middle" aria-hidden="true"></span><div class="plate hero-plate" role="img" aria-label="神戸 500 さ 20-26 のナンバープレート。その後ろに無地の2枚が重なっています"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span>20-26</span></div></div></div><h2>次のナンバーは？</h2><p>ナンバープレートの数字・ひらがな・分類番号を読み解くクイズ</p></div>
 <div class="intro-content"><p class="intro-lead">車のナンバープレートは、どんな規則で数字が進んでいくのでしょうか。難易度を選んで挑戦しましょう。</p>
 <div class="quiz-scope-note" role="note"><strong>このクイズの対象</strong><p>自家用の登録乗用車（小型乗用車・普通乗用車）を対象としています。軽自動車、事業用車、バス・トラックなどは対象外です。</p></div>
 <div class="intro-warnings"><p>※<a class="hope-guide-link" href="#hope-number-guide" id="hope-guide-jump" data-umami-event="number-quiz-hope-guide-jump">希望番号制度</a>でしか使われない数字の並びがあります。</p><p>※実在する自動車の登録番号を照会する機能ではありません。</p></div>
