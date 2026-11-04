@@ -215,7 +215,7 @@ function drawMap(topologies,projectPoint){
 function labelSize(zoom,compact){
  // Keep overview labels compact and grow them smoothly as the user zooms.
  // Font dimensions are screen pixels; the SVG units are recomputed per view.
- if(compact)return Math.min(18,7+2.6*Math.log2(Math.max(1,zoom)));
+ if(compact)return Math.min(13,7+1.8*Math.log2(Math.max(1,zoom)));
  return 15+Math.min(2,Math.max(0,zoom-1)*.18);
 }
 const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
