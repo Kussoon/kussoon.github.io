@@ -14,7 +14,7 @@ permissions:
   contents: read
 jobs:
   data-and-components:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +25,8 @@ jobs:
       - name: Confirm tests did not rewrite data or URL audit
         run: git diff --exit-code -- v2/data v2/audit/*.json
   real-browser:
-    runs-on: ubuntu-latest
+    # Keep the OS aligned with the pinned Playwright browser dependencies.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
