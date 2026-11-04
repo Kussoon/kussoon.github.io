@@ -1,0 +1,25 @@
+name: V2 2026 overview focus and toolbar
+on:
+  pull_request:
+    paths:
+      - 'v2/national/official-2026-nationwide-pilot.html'
+      - 'v2/national/test-2026-overview-focus-toolbar.cjs'
+      - '.github/workflows/v2-2026-overview-toolbar.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/official-2026-nationwide-pilot.html'
+      - 'v2/national/test-2026-overview-focus-toolbar.cjs'
+      - '.github/workflows/v2-2026-overview-toolbar.yml'
+jobs:
+  ui-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify non-scaling national focus and map toolbar
+        run: |
+          node --check v2/national/test-2026-overview-focus-toolbar.cjs
+          node v2/national/test-2026-overview-focus-toolbar.cjs
