@@ -1,0 +1,41 @@
+name: V2 2021-2026 municipal code compatibility
+on:
+  pull_request:
+    paths:
+      - 'v2/national/audit-2021-2026-code-crosswalk.cjs'
+      - 'v2/data/national/2021/**'
+      - 'v2/data/national/2026-common/**'
+      - 'v2/data/offices/**'
+      - 'v2/data/national/municipality-readings.json'
+      - 'v2/national/density-app.js'
+      - '.github/workflows/v2-national-code-crosswalk.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/audit-2021-2026-code-crosswalk.cjs'
+      - 'v2/data/national/2021/**'
+      - 'v2/data/national/2026-common/**'
+      - 'v2/data/offices/**'
+      - 'v2/data/national/municipality-readings.json'
+      - 'v2/national/density-app.js'
+      - '.github/workflows/v2-national-code-crosswalk.yml'
+jobs:
+  code-crosswalk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit all 47 prefectures and office-directory codes
+        run: |
+          node --check v2/national/audit-2021-2026-code-crosswalk.cjs
+          node v2/national/audit-2021-2026-code-crosswalk.cjs "$RUNNER_TEMP/national-code-crosswalk.json"
+      - name: Save diagnostic result (never production data)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-national-2021-2026-code-crosswalk
+          path: ${{ runner.temp }}/national-code-crosswalk.json
+          if-no-files-found: ignore
+          retention-days: 30
