@@ -3,7 +3,9 @@
 const fs=require('node:fs'),assert=require('node:assert/strict');
 const html=fs.readFileSync('v2/national/official-2026-nationwide-pilot.html','utf8');
 assert(html.includes('.office-popup{position:absolute;left:8px;right:auto;bottom:8px;'));
-assert(html.includes('@media(max-width:600px){\n .office-popup{left:8px;right:8px;bottom:230px;width:auto;max-height:calc(100% - 242px);min-width:0}'));
+assert(html.includes('.office-popup{left:8px;right:108px;top:8px;bottom:8px;width:auto;max-height:none;min-width:0;overflow:auto}'));
+assert(!html.includes('max-height:calc(100% - 242px)'),'short maps must not collapse popup height');
+assert(html.includes('.map-toolbar{width:88px}'),'mobile toolbar width must fit reserved right strip');
 assert(html.includes('.popup-actions{grid-template-columns:repeat(3,minmax(0,1fr))}'));
 assert(html.includes('class="map-toolbar"'));
 assert(html.includes('id="officePopup"'));
