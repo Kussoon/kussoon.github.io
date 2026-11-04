@@ -1,12 +1,22 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const fs=require('node:fs');
-const path=require('node:path');
 const directory=require('../data/offices/28.json');
 const sources=require('../data/offices/28-sources.json');
 const api=require('../common/js/office-directory.js');
 const readings=require('../data/national/municipality-readings.json').items;
 const pilot=require('../data/national/municipality-offices-pilot.json').offices;
+
+// Exercise the renderer's observable DOM, not a spelling of its source code.
+function rendered(result,label){
+ const createElement=tag=>({tag,children:[],attributes:{},
+  append(...children){this.children.push(...children);},
+  replaceChildren(...children){this.children=children;},
+  setAttribute(key,value){this.attributes[key]=value;},
+ });
+ const container=createElement('div');api.render({createElement},container,result,label);
+ const walk=node=>[node,...node.children.flatMap(walk)];
+ return {container,nodes:walk(container)};
+}
 
 test('Hyogo covers exactly 41 municipalities and 9 valid Kobe wards',()=>{
  const expected=Object.keys(readings).filter(c=>c.startsWith('28')).sort();
@@ -70,11 +80,12 @@ test('regional links match confirmed Wikipedia articles and official top pages',
  assert.ok(directory.regions['28464'].wikipedia.endsWith('太子町_(兵庫県)'));
 });
 test('unknown regions and partial wards never invent destinations',()=>{
- assert.deepEqual(api.resolve(directory,'99999'),{region:null,offices:[]});
+ assert.deepEqual(api.resolve(directory,'99999'),{region:null,parentRegion:null,offices:[]});
  assert.equal(api.resolve(directory,'99999').offices.length,0);
  const partial=structuredClone(directory);partial.offices['28110-ward']={name:'中央区役所',status:'missing'};
  const pair=api.resolve(partial,'28110').offices;
  assert.equal(pair[0].address,undefined);assert.ok(pair[1].address);
+ assert.equal(api.destination(pair[0]),null);assert.ok(api.destination(pair[1]));
  for(const u of [undefined,null,'javascript:alert(1)','http://example.com','https://user:secret@example.com'])assert.equal(api.safeUrl(u),null);
 });
 
@@ -97,13 +108,26 @@ test('all 50 facilities are verified, including the official Taka confirmation',
  assert.ok(sources['28365'].evidence.some(e=>e.excerpt.includes(office.address)&&e.excerpt.includes(office.postalCode)));
 });
 
-test('office addresses remain reference text and regional direction link uses the first office',()=>{
- const source=fs.readFileSync(path.join(__dirname,'../common/js/office-directory.js'),'utf8');
- assert.ok(source.includes("action('公式サイト',result.region?.official,label)"));
- assert.ok(source.includes("action('Wikipedia',result.region?.wikipedia,label)"));
- assert.ok(source.includes("action('ここへ行く',destination(result.offices[0]),label)"));
- assert.ok(!source.includes("action('庁舎案内'"));
- assert.ok(source.includes('google.com/maps/dir'));
+test('regional cards render three actions per facility and distinct ward/city destinations',()=>{
+ for(const code of ['28204','28365','28110']){
+  const result=api.resolve(directory,code),{container,nodes}=rendered(result,result.region.name);
+  const links=nodes.filter(n=>n.tag==='a'),expected=code==='28110'?6:3;
+  assert.equal(links.length,expected);
+  assert.equal(nodes.filter(n=>n.textContent==='庁舎案内').length,0);
+  assert.equal(container.children.filter(n=>n.tag==='section').length,result.offices.length);
+  const regions=code==='28110'?[result.region,result.parentRegion]:[result.region];
+  for(let i=0;i<regions.length;i++){
+   const row=links.slice(i*3,i*3+3);
+   assert.deepEqual(row.map(n=>n.textContent),['公式サイト','Wikipedia','ここへ行く']);
+   assert.equal(row[0].href,api.safeUrl(regions[i].official));assert.equal(row[1].href,api.safeUrl(regions[i].wikipedia));
+   assert.equal(row[2].href,api.destination(result.offices[i]));
+   for(const node of row){assert.equal(node.target,'_blank');assert.equal(node.rel,'noopener noreferrer');}
+  }
+  for(const office of result.offices){
+   assert(nodes.some(n=>n.tag==='p'&&n.textContent.includes(office.address)),'address is reference text');
+   assert(nodes.some(n=>n.tag==='h3'&&n.textContent===api.displayOfficeName(office.name)));
+  }
+ }
  assert.equal(directory.regions['28365'].official,'https://www.town.taka.lg.jp/');
  const ward=api.resolve(directory,'28110');
  assert.equal(ward.offices.length,2);
@@ -112,6 +136,21 @@ test('office addresses remain reference text and regional direction link uses th
  assert.notEqual(api.destination(ward.offices[0]),api.destination(ward.offices[1]));
  assert.equal(api.destination({name:'未確認',address:null,status:'missing'}),null);
  assert.equal(ward.region.wikipedia,directory.regions['28110'].wikipedia);
+});
+
+test('only URL audit A with a safe URL becomes an official link, including ward/city independence',()=>{
+ for(const status of ['A','B','C','unclassified'])for(const url of ['https://example.com/','http://example.com/','javascript:alert(1)']){
+  const copy=structuredClone(directory);copy.regions['28204'].officialAuditStatus=status;copy.regions['28204'].official=url;
+  const {nodes}=rendered(api.resolve(copy,'28204'),'西宮市');
+  const action=nodes.find(n=>n.textContent==='公式サイト');
+  assert.equal(action.tag,status==='A'&&url.startsWith('https:')?'a':'span');
+  if(action.tag==='span')assert.equal(action.attributes['aria-disabled'],'true');
+ }
+ const copy=structuredClone(directory);copy.regions['28110'].officialAuditStatus='B';
+ const {nodes}=rendered(api.resolve(copy,'28110'),'神戸市中央区');
+ const official=nodes.filter(n=>n.textContent==='公式サイト');
+ assert.deepEqual(official.map(n=>n.tag),['span','a'],'parent A does not enable ward B');
+ assert.equal(official[1].href,api.safeUrl(copy.regions['28100'].official));
 });
 
 test('display removes building suffixes without modifying stored names or route destinations',()=>{

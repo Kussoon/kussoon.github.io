@@ -11,10 +11,8 @@ const files=[
  'v2/common/js/test-office-directory-data.cjs','v2/tools/shared-topology/test-national-navigation.mjs',
  'v2/tests/national-2026-data.test.cjs',
  'v2/tests/audit-ledger.test.cjs',
+ 'v2/tests/office-directory.test.cjs',
 ];
-// office-directory.test.cjs is a separate known-failing legacy suite (T01).
-// It was not wired into existing CI. Its dedicated follow-up adds it here once
-// obsolete pre-#93 expectations have been corrected; no test is skipped/deleted.
 for(const file of files){
  const result=spawnSync(process.execPath,[file],{cwd:path.resolve(__dirname,'../..'),stdio:'inherit'});
  if(result.error)throw result.error;
