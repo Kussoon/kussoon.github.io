@@ -47,6 +47,7 @@ jobs:
           node v2/tests/compare-2026-labels.browser.cjs
           node v2/tests/pilot-ui.browser.cjs
           node v2/tests/pilot-map-ui.browser.cjs
+          node v2/tests/pilot-label-scope.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser
           KUSSOON_LABEL_REPORT: ${{ runner.temp }}/kussoon-browser/label-comparison.json
@@ -54,6 +55,7 @@ jobs:
         run: |
           node v2/tests/pilot-ui.browser.cjs
           node v2/tests/pilot-map-ui.browser.cjs
+          node v2/tests/pilot-label-scope.browser.cjs
         env:
           KUSSOON_BROWSER_ENGINE: webkit
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser/webkit
