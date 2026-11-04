@@ -343,7 +343,7 @@ function quizBank(){
  return directions.flatMap(direction=>NAMES.flatMap(attack=>NAMES.map(defense=>({direction,attack,defense,v:MATRIX[attack][defense]}))));
 }
 function chooseQuiz(review){
- const bank=quizBank();
+ const bank=review?["attack","defense"].flatMap(direction=>NAMES.flatMap(attack=>NAMES.map(defense=>({direction,attack,defense,v:MATRIX[attack][defense]})))):quizBank();
  if(review)return shuffleQuiz(bank.filter(q=>qerrors.has(quizId(q)))).slice(0,10);
  const buckets=[0,0.5,1,2].map(v=>shuffleQuiz(bank.filter(q=>q.v===v)));
  const out=[],used=new Set();
@@ -432,7 +432,7 @@ quizRefreshMistakes();
 /* Give each visible kanji a correct kana reading without changing source wording.
    Ruby is deliberately not applied to SVG, attributes, script, rt or nested ruby. */
 const FURIGANA_WORDS={
-"正解":"せいかい","問題":"もんだい","回答":"かいとう","保存":"ほぞん","記録":"きろく","結果":"けっか","両方":"りょうほう","選択肢":"せんたくし","組み合わせ":"くみあわせ","切り替え":"きりかえ","攻撃":"こうげき","防御":"ぼうぎょ",
+"消す":"けす","消え":"きえ","回":"かい","正解":"せいかい","問題":"もんだい","回答":"かいとう","保存":"ほぞん","記録":"きろく","結果":"けっか","両方":"りょうほう","選択肢":"せんたくし","組み合わせ":"くみあわせ","切り替え":"きりかえ","攻撃":"こうげき","防御":"ぼうぎょ",
 "相性":"あいしょう","効果":"こうか","該当":"がいとう","通常":"つうじょう",
 "学習":"がくしゅう","練習":"れんしゅう","試作":"しさく","検証":"けんしょう",
 "段階":"だんかい","準備中":"じゅんびちゅう","開発":"かいはつ",
