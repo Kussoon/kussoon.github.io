@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow"><title>全国60組・2026年版県境共有線比較｜Kussoon V2</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#173d56;background:#eff7fb}*{box-sizing:border-box}
+body{margin:0}main{max-width:960px;margin:auto;padding:14px 12px 50px}h1{font-size:clamp(22px,4vw,29px);line-height:1.4}
+p{line-height:1.65}.panel{background:#fff;border:1px solid #b5d0df;border-radius:13px;padding:14px;margin:12px 0}
+.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end}.controls label{flex:1 1 200px;font-weight:700;display:grid;gap:7px}
+button,select{font:inherit;background:#fff;color:inherit;border:1px solid #9fbccd;border-radius:8px;min-height:44px;padding:8px 11px}
+button{cursor:pointer;font-weight:700}button[aria-pressed="true"]{background:#175d83;color:#fff}
+button:focus-visible,select:focus-visible{outline:3px solid #dfaa38;outline-offset:2px}
+svg{display:block;width:100%;background:#f4f9fd;border:1px solid #b5cbd9;border-radius:10px;aspect-ratio:900/600}
+svg path{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.old-a{stroke:#c06431;stroke-width:1.7}.old-b{stroke:#5552a8;stroke-width:1.7}
+.shared{stroke:#00876a;stroke-width:2.4}.unknown-a{stroke:#c06431;stroke-width:1.5;opacity:.8}.unknown-b{stroke:#5552a8;stroke-width:1.5;opacity:.8}
+.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:14px;margin-top:9px}.legend span::before{content:"";display:inline-block;width:24px;border-top:3px solid var(--c);vertical-align:middle;margin-right:5px}
+.note{background:#fff5e3;padding:10px;border-radius:8px;font-size:14px}.status{padding:10px;background:#e5f2f9;border-radius:8px;font-weight:700}
+small{color:#526f83}a{color:#155c89}
+</style>
+<script defer src="./prefecture-seam-national-visual.js?v=20261104"></script></head><body><main>
+<a href="./density.html">← 全国市区町村マップへ</a>
+<h1>全国60組・県境共有線の比較試作</h1>
+<p>PR #233〜#235で確認した共有線60組を全国から選び、個別に検証する独立試作です。県ごとに外周を描く場合と、県間で完全一致する線分を一度だけ描く場合を切り替えられます。</p>
+<section class="panel"><div class="controls">
+<label>確認する府県境（共有辺が確認された60組）<select id="pair">
+<option value="02-03" data-expected="478">青森県・岩手県（478線分）</option>
+<option value="02-05" data-expected="903">青森県・秋田県（903線分）</option>
+<option value="03-04" data-expected="853">岩手県・宮城県（853線分）</option>
+<option value="03-05" data-expected="1080">岩手県・秋田県（1,080線分）</option>
+<option value="04-05" data-expected="123">宮城県・秋田県（123線分）</option>
+<option value="04-06" data-expected="772">宮城県・山形県（772線分）</option>
+<option value="04-07" data-expected="588">宮城県・福島県（588線分）</option>
+<option value="05-06" data-expected="315">秋田県・山形県（315線分）</option>
+<option value="06-07" data-expected="517">山形県・福島県（517線分）</option>
+<option value="08-09" data-expected="848">茨城県・栃木県（848線分）</option>
+<option value="08-11" data-expected="43">茨城県・埼玉県（43線分）</option>
+<option value="08-12" data-expected="247">茨城県・千葉県（247線分）</option>
+<option value="09-10" data-expected="824">栃木県・群馬県（824線分）</option>
+<option value="09-11" data-expected="14">栃木県・埼玉県（14線分）</option>
+<option value="10-11" data-expected="440">群馬県・埼玉県（440線分）</option>
+<option value="11-12" data-expected="84">埼玉県・千葉県（84線分）</option>
+<option value="11-13" data-expected="728">埼玉県・東京都（728線分）</option>
+<option value="12-13" data-expected="48">千葉県・東京都（48線分）</option>
+<option value="13-14" data-expected="768">東京都・神奈川県（768線分）</option>
+<option value="15-16" data-expected="141">新潟県・富山県（141線分）</option>
+<option value="15-20" data-expected="819">新潟県・長野県（819線分）</option>
+<option value="16-17" data-expected="579">富山県・石川県（579線分）</option>
+<option value="16-20" data-expected="291">富山県・長野県（291線分）</option>
+<option value="17-18" data-expected="381">石川県・福井県（381線分）</option>
+<option value="19-20" data-expected="483">山梨県・長野県（483線分）</option>
+<option value="21-23" data-expected="650">岐阜県・愛知県（650線分）</option>
+<option value="21-24" data-expected="278">岐阜県・三重県（278線分）</option>
+<option value="22-23" data-expected="463">静岡県・愛知県（463線分）</option>
+<option value="23-24" data-expected="26">愛知県・三重県（26線分）</option>
+<option value="25-26" data-expected="621">滋賀県・京都府（621線分）</option>
+<option value="26-27" data-expected="543">京都府・大阪府（543線分）</option>
+<option value="26-28" data-expected="910">京都府・兵庫県（910線分）</option>
+<option value="26-29" data-expected="324">京都府・奈良県（324線分）</option>
+<option value="27-28" data-expected="375">大阪府・兵庫県（375線分）</option>
+<option value="27-29" data-expected="343" selected>大阪府・奈良県（343線分）</option>
+<option value="27-30" data-expected="452">大阪府・和歌山県（452線分）</option>
+<option value="29-30" data-expected="815">奈良県・和歌山県（815線分）</option>
+<option value="31-32" data-expected="398">鳥取県・島根県（398線分）</option>
+<option value="31-33" data-expected="1129">鳥取県・岡山県（1,129線分）</option>
+<option value="31-34" data-expected="107">鳥取県・広島県（107線分）</option>
+<option value="32-34" data-expected="1231">島根県・広島県（1,231線分）</option>
+<option value="32-35" data-expected="695">島根県・山口県（695線分）</option>
+<option value="33-34" data-expected="517">岡山県・広島県（517線分）</option>
+<option value="33-37" data-expected="16">岡山県・香川県（16線分）</option>
+<option value="34-35" data-expected="278">広島県・山口県（278線分）</option>
+<option value="34-38" data-expected="1">広島県・愛媛県（1線分）</option>
+<option value="36-37" data-expected="558">徳島県・香川県（558線分）</option>
+<option value="36-38" data-expected="99">徳島県・愛媛県（99線分）</option>
+<option value="36-39" data-expected="513">徳島県・高知県（513線分）</option>
+<option value="37-38" data-expected="57">香川県・愛媛県（57線分）</option>
+<option value="38-39" data-expected="1079">愛媛県・高知県（1,079線分）</option>
+<option value="40-41" data-expected="585">福岡県・佐賀県（585線分）</option>
+<option value="40-43" data-expected="398">福岡県・熊本県（398線分）</option>
+<option value="40-44" data-expected="542">福岡県・大分県（542線分）</option>
+<option value="41-42" data-expected="426">佐賀県・長崎県（426線分）</option>
+<option value="43-44" data-expected="618">熊本県・大分県（618線分）</option>
+<option value="43-45" data-expected="779">熊本県・宮崎県（779線分）</option>
+<option value="43-46" data-expected="258">熊本県・鹿児島県（258線分）</option>
+<option value="44-45" data-expected="397">大分県・宮崎県（397線分）</option>
+<option value="45-46" data-expected="592">宮崎県・鹿児島県（592線分）</option>
+</select></label>
+<div><button id="old" type="button" aria-pressed="false">県別外周（2県）</button>
+<button id="shared" type="button" aria-pressed="true">一致線を一重化</button></div>
+</div></section>
+<section class="panel">
+<svg id="map" viewBox="0 0 900 600" role="img" aria-label="県境の座標一致診断を表示する地図"></svg>
+<div class="legend"><span style="--c:#00876a">2県で一致した共有線</span><span style="--c:#c06431">県Aの外周</span><span style="--c:#5552a8">県Bの外周</span></div>
+<p id="coverage" class="status">確認済み県ペア 60組／共有線の全体数 29,440本。表示は選択した2県分だけを読み込みます。</p>
+<p id="status" class="status" role="status">県境データを読み込んでいます。</p>
+<p class="note"><strong>重要：</strong>オレンジと紫が残る部分は「県間で完全一致する線分として確認できなかった外周」です。海岸線・島・飛地・分割点の違いなども含まれ、赤信号として不具合を断定するものではありません。表示は共有線付近の一部を自動拡大しています。</p>
+<small>使用データ：サイト内の2026年版20m TopoJSON。小数7桁で辺を比較。一致線分を一度だけ描画する比較です。県境全体の連続性や正確さを証明する検査ではありません。</small>
+</section>
+<section class="panel"><h2>既存機能への影響</h2><p>このページは独立した検証ページです。全国市区町村マップの地図、ラベル、読み仮名初期OFF、固定5C、13px上限、最大倍率768、検索、吹き出し、庁舎台帳を変更しません。</p></section>
+</main></body></html>

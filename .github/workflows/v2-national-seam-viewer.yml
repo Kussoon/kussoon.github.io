@@ -1,0 +1,39 @@
+name: V2 nationwide prefecture seam viewer guard
+on:
+  pull_request:
+    paths:
+      - 'v2/national/prefecture-seam-national-visual.html'
+      - 'v2/national/prefecture-seam-national-visual.js'
+      - '.github/workflows/v2-national-seam-viewer.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/prefecture-seam-national-visual.html'
+      - 'v2/national/prefecture-seam-national-visual.js'
+      - '.github/workflows/v2-national-seam-viewer.yml'
+jobs:
+  viewer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JS, noindex, 60 baseline pairs and unchanged main map
+        run: |
+          node --check v2/national/prefecture-seam-national-visual.js
+          node - <<'NODE'
+          const assert=require('node:assert/strict');
+          const fs=require('node:fs');
+          const html=fs.readFileSync('v2/national/prefecture-seam-national-visual.html','utf8');
+          const js=fs.readFileSync('v2/national/prefecture-seam-national-visual.js','utf8');
+          const options=[...html.matchAll(/<option value="(\d{2})-(\d{2})" data-expected="(\d+)"/g)];
+          assert.equal(options.length,60);
+          assert.equal(new Set(options.map(x=>x[1]+'-'+x[2])).size,60);
+          assert.equal(options.reduce((s,x)=>s+Number(x[3]),0),29440);
+          assert(html.includes('noindex,follow'));
+          assert(html.includes('prefecture-seam-national-visual.js'));
+          assert(js.includes('common.length!==expected'));
+          assert(!html.includes('density-app.js'));
+          console.log('PASS independent 60-pair viewer baseline and noindex safeguards');
+          NODE
