@@ -44,7 +44,9 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 /* On narrow screens keep the information card entirely within the map,
    positioned above the right-hand controls rather than shifted offscreen. */
 @media(max-width:600px){
- .office-popup{left:8px;right:8px;bottom:230px;width:auto;max-height:calc(100% - 242px);min-width:0}
+ /* Reserve an independent right strip for the map controls. The popup
+    scrolls inside the map height, instead of becoming unusably short. */
+ .office-popup{left:8px;right:108px;top:8px;bottom:8px;width:auto;max-height:none;min-width:0;overflow:auto}
  .popup-head{gap:8px}.popup-head strong{min-width:0;overflow-wrap:anywhere}
  .popup-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
