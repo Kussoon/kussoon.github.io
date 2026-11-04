@@ -100,6 +100,22 @@ ruby rt{font-size:.58em;font-weight:600;line-height:1.05;letter-spacing:0}
 .quiz-end-score{text-align:center;font-size:clamp(30px,7vw,46px);font-weight:900;padding:16px;color:#225f8a}
 #quiz-message{text-align:center;font-weight:800}
 @media(max-width:480px){.quiz-type .type-symbol{width:54px;height:54px}.quiz-pair{gap:8px}.quiz-answer{font-size:14px}.quiz-answer strong{font-size:22px}}
+
+/* Quiz playing: progress at the very top, reclaim space for the Next button. */
+body.quiz-active main{padding-top:max(5px,env(safe-area-inset-top))}
+body.quiz-active main>a,
+body.quiz-active main>.eyebrow,
+body.quiz-active main>h1,
+body.quiz-active main>p,
+body.quiz-active .mode-tabs,
+body.quiz-active .quiz-board>h2,
+body.quiz-active .quiz-board>.quiz-introduction,
+body.quiz-active .quiz-settings{display:none}
+body.quiz-active .quiz-board{margin-top:0;padding-top:7px}
+body.quiz-active .quiz-progress{margin-bottom:8px}
+body.quiz-active .quiz-scene{margin-top:6px}
+.quiz-stop{border:0;background:none;color:#245d84;font:inherit;font-size:13px;font-weight:800;text-decoration:underline;cursor:pointer;padding:3px}
+.quiz-stop:focus-visible{outline:3px solid #176da4;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -142,7 +158,7 @@ ruby rt{font-size:.58em;font-weight:600;line-height:1.05;letter-spacing:0}
 <div id="quiz-page" role="tabpanel" aria-labelledby="tab-quiz" hidden>
 <section class="panel quiz-board" aria-labelledby="quiz-heading">
 <h2 id="quiz-heading">❔ タイプ相性 4択クイズ</h2>
-<p>わざと あいての タイプを見て、こうかを えらぼう！</p>
+<p class="quiz-introduction">わざと あいての タイプを見て、こうかを えらぼう！</p>
 <div class="quiz-settings"><label for="quiz-mode">問題のタイプ</label>
 <select id="quiz-mode"><option value="mixed">こうげき・ぼうぎょ 両方</option><option value="attack">こうげきだけ</option><option value="defense">ぼうぎょだけ</option></select></div>
 <div id="quiz-intro"><p>1回10問です。まちがえた問題はあとでふくしゅうできます。</p>
@@ -150,7 +166,7 @@ ruby rt{font-size:.58em;font-weight:600;line-height:1.05;letter-spacing:0}
 <button class="action" id="quiz-review" type="button">🔁 まちがいをふくしゅう（<span id="quiz-mistake-count">0</span>問）</button></div>
 <p class="notice">まちがえた問題はこのブラウザに保存されます。ブラウザのデータを消すと記録も消えます。</p></div>
 <div id="quiz-play" hidden>
-<div class="quiz-progress"><span id="quiz-count"></span><span id="quiz-score"></span></div>
+<div class="quiz-progress"><span id="quiz-count"></span><span id="quiz-score"></span><button class="quiz-stop" id="quiz-stop" type="button">やめる</button></div>
 <div class="quiz-scene"><p id="quiz-category"></p>
 <div class="quiz-pair"><div class="quiz-type" id="quiz-attacker"></div><span aria-hidden="true">➜</span><div class="quiz-type" id="quiz-defender"></div></div>
 <p id="quiz-question"></p></div>
@@ -370,7 +386,8 @@ function quizStart(review){
  if(!qstate.items.length){quizRefreshMistakes();return}
  qstate.index=0;qstate.correct=0;qstate.answered=false;qstate.review=review;
  QE("quiz-intro").hidden=true;QE("quiz-end").hidden=true;QE("quiz-play").hidden=false;
- quizRender();
+ document.body.classList.add("quiz-active");
+ quizRender();window.scrollTo(0,0);
 }
 function quizShowType(id,name,caption){
  const el=QE(id),tag=document.createElement("span"),nameEl=document.createElement("span");
@@ -416,12 +433,18 @@ function quizAnswer(value){
 function quizNext(){
  if(!qstate.answered)return;
  qstate.index++;
- if(qstate.index<qstate.items.length){quizRender();return}
+ if(qstate.index<qstate.items.length){quizRender();window.scrollTo(0,0);return}
  QE("quiz-play").hidden=true;QE("quiz-end").hidden=false;
+ document.body.classList.remove("quiz-active");
  QE("quiz-final").textContent=qstate.correct+" / "+qstate.items.length+"問 正解！";
  QE("quiz-message").textContent=qstate.correct===qstate.items.length?"すごい！ ぜんもんせいかい！":"よくがんばりました！ まちがえた問題はふくしゅうしよう。";
  quizRefreshMistakes();
 }
+QE("quiz-stop").addEventListener("click",()=>{
+ document.body.classList.remove("quiz-active");
+ QE("quiz-play").hidden=true;QE("quiz-intro").hidden=false;
+ window.scrollTo(0,0);
+});
 QE("quiz-start").addEventListener("click",()=>quizStart(false));
 QE("quiz-review").addEventListener("click",()=>quizStart(true));
 QE("quiz-next").addEventListener("click",quizNext);
