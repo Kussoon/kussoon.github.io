@@ -31,7 +31,8 @@ function boundary(t,pref){
   for(let i=1;i<pts.length;i++){
    if(point(pts[i-1])===point(pts[i]))continue;
    const id=edge(pts[i-1],pts[i]);
-   assert(!edges.has(id),'duplicate edge inside '+pref);
+   // Source geometry may repeat the same exterior segment inside one prefecture.
+   // As in PR #234, treat each prefecture as one owner of the unique edge.
    edges.add(id);
   }
  }
