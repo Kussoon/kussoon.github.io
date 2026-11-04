@@ -1,67 +1,47 @@
-# V2回帰テスト整備計画（初回）
+# V2全国統合版 回帰テスト整備計画
 
-更新日：2026-11-04  
-実装は別PRで行う。既存テストを再利用し、テストが保証する範囲と実機での確認範囲を分ける。
+監査日：2026-11-04 JST
 
-## 既存テスト資産
+固定main：[`c69c970c982724b20d9a327e1fd1c223f356aebd`](https://github.com/Kussoon/kussoon.github.io/commit/c69c970c982724b20d9a327e1fd1c223f356aebd)
+対象：`v2/national/official-2026-nationwide-pilot.html`
 
-| 分類 | 既存ファイル | 保護している内容 | 足りない点 |
-|---|---|---|---|
-| ラベル配置 | `v2/tests/label-engine.test.cjs`, `administrative-labels.test.cjs`, `national-centered-labels.test.cjs`, `hyogo49-labels.test.cjs` | 配置エンジン、行政名、5C等の幾何・代表例 | 実画面の重なり、全国・地域横断操作 |
-| 読み仮名 | `v2/tests/readable-labels.test.cjs`, `national-readings.test.cjs` | 読みの付与・複数行構成・データ整合 | 全国ページの初期OFF・UI操作状態を含む実ブラウザ |
-| 県境・描画 | `national-boundaries.test.cjs`, `test-shared-border-contract.cjs`, `test-2026-single-stroke.cjs` | データ契約、共有境界・単一pathの構造 | 全国47県の画面上の太線・二重線確認 |
-| 庁舎情報・リンク | `office-directory.test.cjs`, `office-popup.browser.cjs` | 住所・郵便番号・URL安全性、旧densityページの3/6リンク | 2026統合HTML・公式URL判定表示の全区域横断 |
-| ズーム・境界 | `national-zoom.test.cjs`, `test-map-viewport-touch-pan.cjs` | ズーム上限、PointerEventのパン境界・タッチ | 全国統合ページでの選択・解除・画面実操作 |
-| データ整合性 | `national-boundaries.test.cjs`, `audit-2021-2026-code-crosswalk.cjs`, 庁舎データ検査 | 区域数・コード・地図年版・庁舎対応 | 2026年1,905区域と庁舎1,912件・A/B/C台帳の一括照合 |
+本PRは設計・記録のみ。新しい実行テストやCI、本体コードを追加・変更しない。
 
-ファイル名はmain上で確認したものです。PR単位の導入履歴と全CI実行結果は別途照合が必要です。
+|分類|既存検査|追加提案（優先順）|根拠PR・仕様|限界|
+|---|---|---|---|---|
+|選択・吹き出し|test-national-navigation.mjs、office-directory.test.cjs|P0 v2/tests/nationwide-selection.browser.cjs：西宮8手順、同一path.d・地理点画面位置・viewBox・contentBounds比較|81/148/245、S01–06|DOMモックだけでは再投影を逃す|
+|地図操作|test-map-viewport.cjs、test-map-viewport-touch-pan.cjs|P0 上記E2Eへ多可町×後の上下左右パン、実SVG子path capture、ドラッグ後誤選択防止を追加|136/239–241/245、S15–20|合成pointerはiOS暗黙captureの実発火を証明しない|
+|ラベル配置|test-density-contract.cjs、test-established-label-adapter.cjs、centered-labels各試験|P1 v2/tests/nationwide-label-contract.browser.cjs：田尻/中央区/三田、固定5C地理座標、ON/OFF・選択・ズーム後不変、13画面pxと768上限|79/95/146/224/225/228、S11–14|文字列存在チェックでは実接続を保証しない|
+|読み仮名|test-reading-bridge.cjs、test-place-labels.cjs|P1 v2/tests/nationwide-readings.browser.cjs：初期OFF、三重/岐阜/長野、区4行、名称不一致fallback、郡の同名異読|144/145/223/226/239、S08–11|コード照合成功と画面内での可読性は別|
+|県境・描画|test-municipality-renderer.cjs、test-2026-single-stroke.cjs、test-shared-border-contract.cjs、233–237診断|P2 v2/tests/nationwide-borders.browser.cjs：選択とfocus時の線幅、DOM path数、拡大スクリーンショット。元地形に対する正式な隣接基準/カバレッジ検査は別計画|102/107–131/187/230/233–239、S23–26|一致辺抽出の正確性≠全境界品質|
+|庁舎・リンク|test-office-directory-data.cjs、office-directory.test.cjs、test-2026-mobile-popup.cjs|P1 v2/tests/nationwide-popup-layout.browser.cjs：320/390/428/960幅、3/6リンク、下端、内部scroll、A以外hrefなし|86/87/89/91/93/186/212/242–244、S05–07/27/30|HTTP200のみでAにしない。住所最新性は別監査|
+|全国整合|audit-office-map-codes.cjs、audit-2021-2026-code-crosswalk.cjs|P2 47県実データ・manifest・読み・officeコード・指定市親参照の同一SHA検証を再利用、例外コードを理由付き固定|150–212/231、S22/25–28|1902/1905/1912を同じ件数とみなさない|
+|検索・クイズ|test-place-labels.cjs、test-municipality-quiz.cjs、test-national-navigation.mjs|P2 同名市・県不要の市名検索・読み・5桁コード・非同期順序を実入口で検査。クイズUI非表示は維持|142/149/204、S28–29|共通クイズが成功しても公開再開の承認ではない|
 
-## 追加提案（実装順）
+## CI設計
 
-### 1. 全国地図操作・選択・吹き出し（最優先）
+将来追加するワークフロー案：`.github/workflows/v2-nationwide-contracts.yml`。対象HTMLだけでなく読み込むshared/common JS、データ、仕様書、対応テスト自身の変更をトリガーにする。文書変更だけのPRで巨大データ再生成を起動しない。
+各テストは仕様IDと関連PRを保持し、修正前に失敗/修正後に成功を確認する。状態テスト・実ページE2E・目視/実機を別ジョブ/別記録にし、未実施を合格と表示しない。失敗を文字列期待値の変更だけで消さない。
 
-新規候補：`v2/tests/official-2026-interaction.browser.cjs`
+## 今回の既存テスト実行
 
-2026全国HTMLの実要素を操作するPlaywrightテスト。兵庫県を選び、西宮市をタップ→×→同区域再タップ→再選択を実行。次を検証します。
+Node v24.22.1。固定mainからの既存チェックアウトに、比較APIで確認した変更ファイルを重ねた読み取り用スナップショット。地図本体をコミットしない。
 
-- ×直後は選択色・選択コード・投影範囲が保持され、吹き出しだけ非表示。
-- 再タップで選択色・コード・吹き出しが消え、区域の画面上bbox・投影範囲が維持される。
-- 次のタップで色・吹き出しが復帰。
-- 別区域、検索結果、県全体へ戻る、全国へ戻る操作は期待どおりにviewportを更新。
-- 区域コードを空にする操作を、同一区域の再タップと「都道府県全体へ戻る」ボタンで分ける。前者は区域bbox・投影範囲を維持し、後者は県全体投影へ戻る。
-- 検索・地図タップ経路の双方から同じ状態遷移を確認。
-- 単独自治体3リンク、神戸市中央区6リンク、多可町の住所表示。
-- 公式サイトはA判定だけに現れる。
+|既存コマンド（node以下）|結果|
+|---|---|
+|`v2/shared/test-map-viewport.cjs`|合格|
+|`v2/shared/test-place-labels.cjs`|合格|
+|`v2/shared/test-municipality-quiz.cjs`|合格|
+|`v2/shared/test-municipality-renderer.cjs`|合格|
+|`v2/shared/test-established-label-adapter.cjs`|実行不可：必要データ未展開（ENOENT）|
+|`v2/shared/test-reading-bridge.cjs`|合格|
+|`v2/shared/test-map-viewport-touch-pan.cjs`|合格|
+|`v2/national/test-2026-mobile-popup.cjs`|合格|
+|`v2/national/test-shared-border-contract.cjs`|実行不可：必要データ未展開（ENOENT）|
+|`v2/national/test-density-contract.cjs`|合格|
+|`v2/national/test-2026-single-stroke.cjs`|合格|
+|`v2/national/test-2026-overview-focus-toolbar.cjs`|合格|
+|`v2/tools/shared-topology/test-national-navigation.mjs`|実行不可：必要データ未展開（ENOENT）|
+|`v2/common/js/test-office-directory-data.cjs`|合格|
 
-対応PR：#80/#81/#89/#91/#93/#148/#212/#204/#245。
-
-### 2. 地図操作の広域回帰
-
-既存の `map-viewport` 合成PointerEventテストを再利用し、全国HTMLの県選択・自治体選択で生成されるcontent boundsを検査します。端点での上下左右ドラッグ、パン途中のpointer capture、選択解除後の範囲復帰を確認。合成イベントはiOS Safariの実入力の代替ではないため、リリース時に実機チェック欄を運用します。
-
-対応PR：#65/#70/#82/#135/#136/#224/#239〜#245。
-
-### 3. ラベル配置・読み仮名
-
-既存データテストを維持し、全国2026ページを読み込んで初期OFF、ON/OFF、ズーム中の位置固定、区名の市名＋区名表示、county読みの順序を追加検査。小区域・飛地・田尻町の住所点フォールバックを含めます。
-
-対応PR：#31〜#38/#55〜#79/#94/#95/#100/#143〜#146/#214〜#228。
-
-### 4. 県境・描画
-
-共有アークの一意性・県境組数・重複・欠落は既存トポロジーテストを再利用。DOM構造では1境界レイヤー、区域選択後も二重pathを追加しない、線幅がズームで膨らまないことを検査。スクリーンショット比較は描画回帰検出に限り、地理的正確さの根拠はデータ比較に置きます。
-
-対応PR：#102/#107〜#114/#120〜#131/#187/#230〜#239。
-
-### 5. 庁舎・全国データ整合
-
-全区域について行政コード重複なし、全国地図区域と庁舎レコードを区別、A/B/C判定・登録URL・表示条件一致、区役所の親市参照、3/6リンク数、安全なHTTPSを検査。既存 `office-directory.test.cjs` とURL監査台帳を入力に使用します。
-
-対応PR：#86/#87/#89/#93/#150〜#212。
-
-## 運用
-
-- PR本文に触れた仕様ID・対象テストを記載する。
-- 全国統合版の実装変更時は対応する仕様テストを必須CIにする。
-- 合成PointerEvent、Nodeテスト、実ブラウザ、iPhone実機の証拠を混ぜず、各結果を別に記録する。
-- テストが通ったことは、そのテストが操作した状態遷移だけを保証する。スクリーンショットなしの構造テストは見た目の合格証明にしない。
+14コマンド中11合格、3実行不可。コマンド数と内部assert数を混同しない。ローカルのデータ不足であり、リポジトリのデータ欠落と断定しない。GitHub Actionsのチェック結果は監査PRの確認記録で別途報告する。
