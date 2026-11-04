@@ -201,6 +201,7 @@ function drawLabels(){
 function paint(){
  if(!overview)return;
  if(!current){
+  viewport.setContentBounds(null);
   drawOverview($('map'));$('locatorPanel').classList.remove('show');mode='national';activeProjection=null;
   $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('都道府県を選択してください',''));
   $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
@@ -211,6 +212,15 @@ function paint(){
   const selected=question?.code||$('region').value,chosen=current.regions.find(r=>r.code===selected);
   const box=chosen?KussoonV2MunicipalRenderer.focusBounds(chosen.polys):current.box;
   activeProjection=project(box);
+  // A municipality-focused projection places the rest of its prefecture
+  // outside the initial SVG viewBox. Permit dragging over that real geometry
+  // instead of prematurely stopping at the original 850x700 frame.
+  if(chosen){
+   const nw=activeProjection([current.box[0],current.box[3]]);
+   const se=activeProjection([current.box[2],current.box[1]]);
+   viewport.setContentBounds({minX:Math.min(nw[0],se[0]),minY:Math.min(nw[1],se[1]),
+    maxX:Math.max(nw[0],se[0]),maxY:Math.max(nw[1],se[1])});
+  }else viewport.setContentBounds(null);
   KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.arcs,project:activeProjection,selected,hideTitles:Boolean(quizSession)});
   if(!quizSession)drawLabels();
   $('prefBtn').disabled=Boolean(quizSession);$('region').disabled=Boolean(quizSession);
