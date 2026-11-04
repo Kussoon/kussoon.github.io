@@ -1,0 +1,26 @@
+name: V2 touch pan gesture regression
+on:
+  pull_request:
+    paths:
+      - 'v2/shared/map-viewport.js'
+      - 'v2/shared/test-map-viewport-touch-pan.cjs'
+      - '.github/workflows/v2-map-touch-pan.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/shared/map-viewport.js'
+      - 'v2/shared/test-map-viewport-touch-pan.cjs'
+      - '.github/workflows/v2-map-touch-pan.yml'
+jobs:
+  gestures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check tap drag and pointer capture
+        run: |
+          node --check v2/shared/map-viewport.js
+          node --check v2/shared/test-map-viewport-touch-pan.cjs
+          node v2/shared/test-map-viewport-touch-pan.cjs
