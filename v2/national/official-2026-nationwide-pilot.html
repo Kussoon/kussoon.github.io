@@ -46,7 +46,7 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 @media(max-width:600px){
  /* Reserve an independent right strip for the map controls. The popup
     scrolls inside the map height, instead of becoming unusably short. */
- .office-popup{left:8px;right:108px;top:8px;bottom:8px;width:auto;max-height:none;min-width:0;overflow:auto}
+ .office-popup{left:8px;right:108px;top:auto;bottom:8px;width:auto;height:min(var(--map-toolbar-height,190px),calc(100% - 16px));max-height:calc(100% - 16px);min-width:0;overflow:auto}
  .popup-head{gap:8px}.popup-head strong{min-width:0;overflow-wrap:anywhere}
  .popup-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
@@ -78,7 +78,7 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 <button type="button" id="zoomReset">表示範囲を戻す</button>
 <output id="zoomLevel">1.0倍</output>
 </div>
-<div class="map-frame"><svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg><div class="map-toolbar" role="group" aria-label="地図右下の操作"><button type="button" id="mapZoomIn" aria-label="地図を拡大">＋ 拡大</button><button type="button" id="mapZoomOut" aria-label="地図を縮小">－ 縮小</button><button type="button" id="mapReset" aria-label="地図を全域表示">全体表示</button><button type="button" id="mapReadingToggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button></div><aside id="officePopup" class="office-popup" aria-label="自治体情報" hidden><div class="popup-head"><strong id="popupName"></strong><button type="button" id="popupClose" class="popup-close" aria-label="吹き出しを閉じる">×</button></div><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></aside></div>
+<div class="map-frame" id="mapFrame"><svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg><div class="map-toolbar" id="mapToolbar" role="group" aria-label="地図右下の操作"><button type="button" id="mapZoomIn" aria-label="地図を拡大">＋ 拡大</button><button type="button" id="mapZoomOut" aria-label="地図を縮小">－ 縮小</button><button type="button" id="mapReset" aria-label="地図を全域表示">全体表示</button><button type="button" id="mapReadingToggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button></div><aside id="officePopup" class="office-popup" aria-label="自治体情報" hidden><div class="popup-head"><strong id="popupName"></strong><button type="button" id="popupClose" class="popup-close" aria-label="吹き出しを閉じる">×</button></div><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></aside></div>
 <p id="status" class="status" role="status">全国地図を読み込みます。</p>
 <small>全国地図上で都道府県をタップするか、上のメニューから選択してください。都道府県内では市区町村を選択・タップできます。地図はピンチ・ドラッグ・＋／−で操作できます。縮小しきってからの位置関係は「都道府県全体へ」「日本全国へ」で確認できます。</small>
 <div class="map-locator" id="locatorPanel">
@@ -149,6 +149,13 @@ function renderOfficePopup(){
 }
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>$('zoomLevel').textContent=z.toFixed(1)+'倍'});
+// Match the mobile info popup height to the four right-hand buttons.
+// ResizeObserver reacts only to layout changes, never to pan/zoom frames.
+const mapToolbar=$('mapToolbar');
+const mapFrame=$('mapFrame');
+function syncToolbarHeight(){if(mapToolbar.offsetHeight>0)mapFrame.style.setProperty('--map-toolbar-height',mapToolbar.offsetHeight+'px');}
+syncToolbarHeight();
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(syncToolbarHeight).observe(mapToolbar);
 const number=(n)=>n.toLocaleString('ja-JP');
 function project(b){
  const cos=Math.cos(((b[1]+b[3])/2)*Math.PI/180),bw=Math.max((b[2]-b[0])*cos,.04),bh=Math.max(b[3]-b[1],.04);
