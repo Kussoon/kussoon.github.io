@@ -45,7 +45,8 @@ const KussoonV2ReadingBridge=bridgeContext.window.KussoonV2ReadingBridge;
 const officeContext={window:{}};
 vm.runInNewContext(await readFile('v2/common/js/office-directory.js','utf8'),officeContext);
 const KussoonOfficeDirectory=officeContext.window.KussoonOfficeDirectory;
-const KussoonV2MapViewport={init({onZoomChange}){onZoomChange(1);return {reset(){onZoomChange(1);},zoomIn(){},zoomOut(){}};}};
+let projectedBounds=null;
+const KussoonV2MapViewport={init({onZoomChange}){onZoomChange(1);return {reset(){onZoomChange(1);},zoomIn(){},zoomOut(){},setContentBounds(bounds){projectedBounds=bounds;}};}};
 const fakeFetch=async url=>{
  const file=resolve(root,'v2/national',url);
  // Prevent a URL from escaping the project checkout.
@@ -79,13 +80,16 @@ async function selectPref(code,count){
 await selectPref('16',15); // Regression: do not reject prefectures under 20 municipalities.
 await selectPref('25',19); // Regression: load a newly extracted combined-prefecture slice.
 node('region').value='25201';callbacks.get('region:change')();
+assert(projectedBounds?.minY<0||projectedBounds?.maxY>700,'focused municipality should expand projected pan bounds');
 assert.equal(node('officePopup').hidden,false,'verified office popup should open');
 assert(node('popupName').textContent.includes('大津市'),'office popup must show municipality');
 assert(node('popupActions').children.length>0,'verified office actions should render');
 callbacks.get('popupClose:click')();
 assert.equal(node('officePopup').hidden,true,'close only the popup');
 assert.equal(node('region').value,'25201','popup close must retain selection');
+assert(projectedBounds,'closing popup must preserve focused map bounds');
 node('region').value='';callbacks.get('region:change')();
+assert.equal(projectedBounds,null,'prefecture overview must restore original pan bounds');
 await selectPref('22',39); // Actual 2026 Shizuoka source and official city-ward readings.
 const aoi= node('region').children.find(o=>o.value==='22101');
 assert(aoi&&aoi.textContent.includes('静岡市葵区'),'Shizuoka Aoi must have full city-ward name in dropdown');

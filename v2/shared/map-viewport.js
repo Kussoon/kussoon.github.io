@@ -8,6 +8,10 @@ function init(options){
  const {svg,width=850,height=700,minZoom=1,maxZoom=128,onZoomChange}=options||{};
  if(!svg)throw Error('SVG map element is required');
  let box={x:0,y:0,w:width,h:height};
+ // Bounds are expressed in projected SVG map units, not geographic degrees.
+ // A selected municipality can project the rest of its prefecture far outside
+ // the initial 850x700 frame, so panning must use the true content extents.
+ let contentBounds={minX:0,minY:0,maxX:width,maxY:height};
  let fingers=new Map(), gesture=null, dragged=false, suppressClick=false, wheelArmed=false;
  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
  const view=()=>({x:box.x,y:box.y,w:box.w,h:box.h});
@@ -21,8 +25,8 @@ function init(options){
   // Allow the map to pan out of the initial frame by up to half a viewport
   // (useful when inspecting outer and remote islands).
   const marginX=width/2,marginY=height/2;
-  const x=clamp(next.x,-marginX,width+marginX-w);
-  const y=clamp(next.y,-marginY,height+marginY-h);
+  const x=clamp(next.x,contentBounds.minX-marginX,contentBounds.maxX+marginX-w);
+  const y=clamp(next.y,contentBounds.minY-marginY,contentBounds.maxY+marginY-h);
   return {x,y,w,h};
  }
  function setView(next){box=bound(next);emit();}
@@ -124,7 +128,14 @@ function init(options){
  svg.addEventListener('click',onClickCapture,true);
  document.addEventListener('pointerdown',outside,true);
  emit();
- return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,destroy(){
+ function setContentBounds(bounds){
+  if(bounds==null){contentBounds={minX:0,minY:0,maxX:width,maxY:height};return;}
+  const {minX,minY,maxX,maxY}=bounds;
+  if(![minX,minY,maxX,maxY].every(Number.isFinite)||maxX<minX||maxY<minY)
+   throw Error('Invalid projected map bounds');
+  contentBounds={minX,minY,maxX,maxY};
+ }
+ return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,setContentBounds,destroy(){
   svg.removeEventListener('pointerdown',pointerDown);
   svg.removeEventListener('pointermove',pointerMove);
   svg.removeEventListener('pointerup',pointerUp);

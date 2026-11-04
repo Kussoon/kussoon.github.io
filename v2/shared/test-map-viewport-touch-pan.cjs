@@ -83,3 +83,30 @@ function mock(){
  assert.equal(t.vp.view().x,before,'true map capture loss should end pan');
  console.log('PASS genuine SVG capture loss still cancels gesture');
 }
+
+{
+ // Regression: after municipality focus, the province projects beyond the
+ // original 850x700 box. Downward drags must follow those real land extents,
+ // even after the info popup is dismissed (dismissal does not reset view).
+ const t=mock();t.vp.setContentBounds({minX:-1200,minY:-2200,maxX:1700,maxY:1900});
+ t.vp.zoomIn();
+ for(let k=0;k<9;k++){
+  t.fire('pointerdown',t.event('touch',100+k,400,270));
+  t.fire('pointermove',t.event('touch',100+k,400,600));
+  t.fire('pointerup',t.event('touch',100+k,400,600));
+ }
+ const down=t.vp.view().y;
+ assert(down < -500,'focused map must keep moving downward past legacy -350 clamp');
+ for(let k=0;k<5;k++){
+  t.fire('pointerdown',t.event('touch',200+k,270,350));
+  t.fire('pointermove',t.event('touch',200+k,590,350));
+  t.fire('pointerup',t.event('touch',200+k,590,350));
+ }
+ assert(t.vp.view().x < -425,'focused map must also keep moving right past legacy -425 clamp');
+ t.vp.setContentBounds(null);t.vp.reset();t.vp.zoomIn();
+ t.fire('pointerdown',t.event('touch',400,430,270));
+ t.fire('pointermove',t.event('touch',400,430,600));
+ assert(t.vp.view().y>=-350,'regular overview should retain original half-frame overscroll');
+ t.fire('pointerup',t.event('touch',400,430,600));
+ console.log('PASS focused map pans beyond original viewBox in both directions; overview limits retained');
+}
