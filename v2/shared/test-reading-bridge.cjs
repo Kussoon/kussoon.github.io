@@ -41,3 +41,21 @@ assert.equal(shizuoka.regions[0].fullName,'静岡市葵区');
 const selectedLabel=shizuoka.regions[0].readingParts.map(p=>p.name).join('');
 assert.equal(selectedLabel,'静岡市葵区');
 console.log('PASS existing CC0 reading catalog, strict matching and no guessed readings');
+{
+ const before=JSON.stringify(national),index=bridge.searchIndex(national);
+ assert.equal(JSON.stringify(national),before,'official source snapshot remains immutable');
+ for(const code of ['22131','22132','22133','22134','22135','22136','22137'])
+  assert(!index.some(r=>r.code===code),'retired Hamamatsu ward '+code);
+ for(const [code,name,reading] of [
+  ['22138','浜松市中央区','はままつしちゅうおうく'],
+  ['22139','浜松市浜名区','はままつしはまなく'],
+  ['22140','浜松市天竜区','はままつしてんりゅうく'],
+ ]){
+  const entry=index.find(r=>r.code===code);assert(entry);assert.equal(entry.name,name);assert.equal(bridge.kana(entry.reading),reading);
+  const attached=bridge.attach([{code,name:'浜松市'}],national).regions[0];assert.equal(attached.fullName,entry.name);assert.equal(attached.reading,reading);
+ }
+ assert(!index.some(r=>r.code==='22130'),'city parent has no standalone map polygon');
+ assert(index.some(r=>r.code==='13101'),'Tokyo special wards remain searchable');
+ assert(index.some(r=>r.code==='01233')&&index.some(r=>r.code==='07213'),'same-name cities in different prefectures remain distinct');
+ console.log('PASS shared current-ward search/reading reorganization without source mutation');
+}
