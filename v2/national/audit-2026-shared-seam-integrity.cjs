@@ -4,7 +4,7 @@
 // must appear exactly once in generated overlay. Unmatched edges remain unverified.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'../..');
-const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+const read=p=>JSON.parse(fs.readFileSync(path.isAbsolute(p)?p:path.join(root,p),'utf8'));
 const manifest=read('v2/data/national/2026-common/national-2026-pilot/manifest.json');
 const point=p=>p.map(n=>Number(n).toFixed(7)).join(',');
 const edge=(a,b)=>[point(a),point(b)].sort().join('|');
