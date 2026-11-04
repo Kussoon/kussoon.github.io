@@ -56,3 +56,30 @@ function mock(){
  t.fire('pointerup',t.event('mouse',3,480,350));
  console.log('PASS mouse threshold unchanged');
 }
+
+{
+ // On iOS, touch has implicit pointer capture on the original SVG path.
+ // Once SVG obtains capture, that child emits a *bubbling* loss event.
+ // It must not clear the active finger or stop continued movement.
+ const t=mock();t.vp.zoomIn();
+ t.fire('pointerdown',t.event('touch',4,470,340));
+ t.fire('pointermove',t.event('touch',4,466,340));
+ assert(t.captures.has(4),'the map should capture dragging');
+ const before=t.vp.view().x;
+ t.fire('lostpointercapture',{pointerId:4,target:{tagName:'path'},pointerType:'touch'});
+ t.fire('pointermove',t.event('touch',4,260,340));
+ assert(t.vp.view().x>before+100,'bubbling child capture loss must not stop pan');
+ t.fire('pointerup',t.event('touch',4,260,340));
+ console.log('PASS Safari implicit SVG-child capture loss does not terminate drag');
+}
+{
+ // Genuine capture loss from the SVG itself still terminates the gesture.
+ const t=mock();t.vp.zoomIn();
+ t.fire('pointerdown',t.event('touch',5,470,340));
+ t.fire('pointermove',t.event('touch',5,466,340));
+ t.fire('lostpointercapture',{pointerId:5,target:t.svg,pointerType:'touch'});
+ const before=t.vp.view().x;
+ t.fire('pointermove',t.event('touch',5,270,340));
+ assert.equal(t.vp.view().x,before,'true map capture loss should end pan');
+ console.log('PASS genuine SVG capture loss still cancels gesture');
+}
