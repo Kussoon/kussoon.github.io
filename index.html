@@ -78,6 +78,26 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
   .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 
+
+/* Compact content directory on the overall site top */
+.directory{display:grid;gap:14px}
+.directory-section{background:#fff;border:1px solid #cbdfe9;border-radius:15px;overflow:hidden;box-shadow:0 3px 10px #1f557310}
+.directory-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0;padding:12px 13px;color:#fff;font-size:17px;line-height:1.35}
+.directory-heading a{color:#fff;font-size:11px;font-weight:800;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.directory-section.learn .directory-heading{background:#1f78c8}
+.directory-section.local .directory-heading{background:#3f9b64}
+.directory-section.tips .directory-heading{background:#e49a2f}
+.directory-section.driving .directory-heading{background:#6f5aa8}
+.directory-section.reading .directory-heading{background:#a66b47}
+.directory-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#e9eff3}
+.directory-links a{display:flex;align-items:center;min-width:0;padding:10px 9px;background:#fff;color:#24516c;text-decoration:none;font-size:12px;font-weight:750;line-height:1.45;overflow-wrap:anywhere}
+.directory-links a::before{content:"›";color:#6693aa;margin-right:5px;font-weight:900}
+.directory-links a:focus-visible{position:relative;z-index:1}
+.directory-links a:hover{background:#f0f8fd}
+.directory-intro{margin:0 2px 12px;color:#45667b;font-size:13px;font-weight:700;text-align:center;line-height:1.6}
+@media(min-width:768px){.directory{gap:18px}.directory-heading{font-size:21px;padding:14px 18px}.directory-heading a{font-size:13px}.directory-links{grid-template-columns:repeat(3,minmax(0,1fr))}.directory-links a{font-size:14px;padding:13px 14px}.directory-intro{font-size:15px}}
+@media(max-width:360px){.directory-links a{font-size:11px;padding:9px 7px}.directory-heading{font-size:15px}}
+
 </style>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"></script>
 </head>
@@ -96,51 +116,74 @@ a:focus-visible{outline:3px solid #d58b34;outline-offset:3px}
   </div>
 </section>
 
-<section class="grid" aria-label="Kussoonの主なコンテンツ">
-  <a class="card learn" href="/games/">
-    <h2>🧠 学ぶ・遊ぶ</h2>
-    <p>都道府県、市町村、町名、魚へんの漢字などを、地図やクイズで見て・探して・覚えます。</p>
-    <span class="go">学ぶ・遊ぶへ →</span>
-  </a>
-
-  <a class="card local" href="/local/">
-    <h2>🗺️ 地域を調べる</h2>
-    <p>町名、パン屋、和洋菓子店、交差点看板など、地域の情報を地図で分かりやすく整理します。</p>
-    <span class="go">地域を調べる →</span>
-  </a>
-
-  <a class="card tips" href="/ideas/">
-    <h2>💡 工夫・アイデア</h2>
-    <p>実際に使って便利だった工夫や、自分で作ったツールなど、小さくても役立つものを紹介します。</p>
-    <span class="go">工夫・アイデアを見る →</span>
-  </a>
-
-  <a class="card driving" href="/driving/">
-    <h2>🚗 運転・モビリティ</h2>
-    <p>道路・交差点の見方や、運転で気づいたこと、自動運転・モビリティなどへ広げていきます。</p>
-    <span class="go">運転・モビリティを見る →</span>
-  </a>
-
-  <a class="card reading" href="/reading/">
-    <h2>📖 読み物・雑学</h2>
-    <p>昔は当たり前だったもの、心に残る言葉、暮らしの知恵など。知ると誰かに話したくなる話題を紹介します。</p>
-    <span class="go">読み物・雑学を見る →</span>
-  </a>
-</section>
-
-<section class="quick">
-  <h2>いま公開しているものから</h2>
-  <div class="quick-links">
-    <a href="/games/todofuken.html">都道府県を地図で覚える</a>
-    <a href="/hyogo/">兵庫県の市町村を地図で覚える</a>
-    <a href="/nishinomiya/">西宮市の町名を地図で覚える</a>
-    <a href="/maps/unified-bread-map.html">阪神間 パン屋マップ</a>
-    <a href="/maps/unified-sweets-map.html">阪神間 お菓子マップ</a>
-    <a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレート地域名マップ</a>
-    <a href="/ideas/001/">バータイマー付きデジタル時計</a>
-    <a href="/reading/showa/">昭和の遺物 ― あれ、いつの間に消えた？</a>
-  </div>
-</section>
+<p class="directory-intro">作った地図・クイズ・便利なツールを、ここから直接開けます。</p>
+<div class="directory" aria-label="Kussoonのコンテンツ一覧">
+  <section class="directory-section learn" id="games">
+    <h2 class="directory-heading"><span>🧠 学ぶ・遊ぶ</span><a href="/games/">カテゴリーのトップへ</a></h2>
+    <nav class="directory-links" aria-label="🧠 学ぶ・遊ぶのページ一覧">
+      <a href="/games/sakana.html">さかなへんの漢字を覚える</a>
+      <a href="/games/todofuken.html">都道府県を地図で覚える</a>
+      <a href="/hyogo/">兵庫県の市町村を覚える</a>
+      <a href="/hyogo/meisan/">兵庫県の名産品クイズ</a>
+      <a href="/games/kazoekata/kazoekata.html">数え方クイズ</a>
+      <a href="/driving/vehicleregistrationplates/number10.html">ナンバー10・計算ゲーム</a>
+      <a href="/nishinomiya/">西宮市の町名学習・クイズ</a>
+      <a href="/takarazuka/">宝塚市の町名学習</a>
+      <a href="/games/piano-fingering/">ピアノ運指トレーニング</a>
+      <a href="/games/">学ぶ・遊ぶの一覧</a>
+    </nav>
+  </section>
+  <section class="directory-section local" id="local">
+    <h2 class="directory-heading"><span>🗺️ 地域を調べる</span><a href="/local/">カテゴリーのトップへ</a></h2>
+    <nav class="directory-links" aria-label="🗺️ 地域を調べるのページ一覧">
+      <a href="/nishinomiya/town-search.html">西宮市の町名検索</a>
+      <a href="/nishinomiya/all-area-labeled.html">西宮市・町名入り全域図</a>
+      <a href="/nishinomiya/all-area-transport.html">西宮市・交通入り全域図</a>
+      <a href="/nishinomiya/">西宮市の地域ガイド</a>
+      <a href="/takarazuka/">宝塚市の地域ガイド</a>
+      <a href="/amagasaki/">尼崎市の町名検索</a>
+      <a href="/itami/">伊丹市の町名検索</a>
+      <a href="/ashiya/">芦屋市の町名検索</a>
+      <a href="/maps/unified-bread-map.html">阪神間のパン屋マップ</a>
+      <a href="/maps/unified-sweets-map.html">阪神間のお菓子マップ</a>
+      <a href="/nishinomiya/sweets/">西宮市のお菓子店</a>
+      <a href="/nishinomiya/nishinomiya-early-night-map.html">早朝パン屋・深夜カフェ</a>
+      <a href="/nishinomiya/jisha/">西宮市の神社・寺院</a>
+      <a href="/nishinomiya/nishinomiya-intersections-map.html">西宮市の交差点看板</a>
+      <a href="/nishinomiya/okome-map.html">おこめ券取扱店舗の記録</a>
+      <a href="/local/">地域コンテンツの一覧</a>
+    </nav>
+  </section>
+  <section class="directory-section tips" id="ideas">
+    <h2 class="directory-heading"><span>💡 工夫・アイデア</span><a href="/ideas/">カテゴリーのトップへ</a></h2>
+    <nav class="directory-links" aria-label="💡 工夫・アイデアのページ一覧">
+      <a href="/ideas/001/">バータイマー付きデジタル時計</a>
+      <a href="/ideas/002/">Ctrl＋Alt＋Deleteを片手で</a>
+      <a href="/ideas/003/">運転席のボールペン差し</a>
+      <a href="/ideas/">工夫・アイデアの一覧</a>
+    </nav>
+  </section>
+  <section class="directory-section driving" id="driving">
+    <h2 class="directory-heading"><span>🚗 運転・モビリティ</span><a href="/driving/">カテゴリーのトップへ</a></h2>
+    <nav class="directory-links" aria-label="🚗 運転・モビリティのページ一覧">
+      <a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップ</a>
+      <a href="/driving/vehicleregistrationplates/hyogo-number-map.html">兵庫県ナンバーマップ</a>
+      <a href="/driving/vehicleregistrationplates/number10.html">ナンバー10</a>
+      <a href="/driving/news/">自動運転・AIニュース</a>
+      <a href="/driving/news/guide/">自動運転入門</a>
+      <a href="/driving/news/japan-timeline/">日本の自動運転年表</a>
+      <a href="/driving/">運転・モビリティの一覧</a>
+    </nav>
+  </section>
+  <section class="directory-section reading" id="reading">
+    <h2 class="directory-heading"><span>📖 読み物・雑学</span><a href="/reading/">カテゴリーのトップへ</a></h2>
+    <nav class="directory-links" aria-label="📖 読み物・雑学のページ一覧">
+      <a href="/reading/showa/">昭和の遺物・シリーズ</a>
+      <a href="/reading/showa/001akachin.html">赤チンはなぜ消えた？</a>
+      <a href="/reading/">読み物・雑学の一覧</a>
+    </nav>
+  </section>
+</div>
 
 <p class="note">Kussoonは個人制作サイトです。掲載内容はできる限り確認していますが、店舗・施設・地域情報などは変更される場合があります。各ページの出典・注意事項もあわせてご覧ください。</p>
 
