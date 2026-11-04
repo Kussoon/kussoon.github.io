@@ -19,7 +19,7 @@
   }};
  }
  function arrange(models,labels,options){
-  const {view,mode,density,selectedId,screenWidth,screenHeight,stableAnchors=false}=options;
+  const {view,mode,density,selectedId,screenWidth,screenHeight,stableAnchors=false,zoom=1}=options;
   if(mode==='all')return {visible:models.map(()=>true),labels};
   const width=screenWidth||390,height=screenHeight||390;
   const ratio=Math.min(width/view.w,height/view.h);
@@ -78,7 +78,9 @@
     if(anchors.every(a=>Math.hypot(a.x-alt.x,a.y-alt.y)>p.height*.4))
      anchors.push(alt);
    }
-   return {i,priority,pref,code,selected:m.id===selectedId,anchors};
+   const projectedExtent=Math.max(m.box?.w||0,m.box?.h||0)*ratio;
+   const allowOverlap=stableAnchors&&zoom>=2&&projectedExtent>=95/Math.sqrt(zoom);
+   return {i,priority,pref,code,selected:m.id===selectedId,anchors,allowOverlap};
   }).filter(Boolean);
   function cellOf(p){
    const cx=Math.max(0,Math.min(countX-1,Math.floor((p.x-view.x)*ratio/tile)));
@@ -107,7 +109,7 @@
   for(let cellId=0;cellId<byCell.length&&active.length<limit;cellId++){
    for(const {c,p} of byCell[cellId]){
     if(result[c.i])continue;
-    if(claim(c,p))break;
+    if(claim(c,p)||(c.allowOverlap&&claim(c,p,true)))break;
    }
   }
   // Second pass: fill ALL remaining non-overlapping areas, without the
@@ -117,7 +119,7 @@
   for(const c of rest){
    if(active.length>=limit)break;
    for(const p of c.anchors){
-    if(claim(c,p))break;
+    if(claim(c,p)||(c.allowOverlap&&claim(c,p,true)))break;
    }
   }
   return {visible:result,labels:placed};
