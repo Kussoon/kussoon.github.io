@@ -329,8 +329,7 @@ function renderLabels(){
   y:view.y-(rect.height/ratio-view.h)/2,
   w:rect.width/ratio,h:rect.height/ratio
  }:view;
- const readingEnabled=$('reading').value==='on' &&
-  (compareMode||$('density-mode').value==='all'||zoom>=6);
+ const readingEnabled=$('reading').value==='on';
  const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
  // Measure whichever row is wider, not the concatenated county + town string.
  // Search and selection continue to use the complete administrative name.
@@ -850,8 +849,8 @@ window.addEventListener('resize',scheduleLabels);
  try{
   const [catalogResponse,municipalitiesResponse,countiesResponse]=await Promise.all([
    fetch('../data/national/catalog.json?v=20261103-japan-map'),
-   fetch('../data/national/municipality-readings.json?v=20261031-shikoku'),
-   fetch('../data/national/county-readings.json?v=20261031-shikoku')
+   fetch('../data/national/municipality-readings.json?v=20261104-nationwide'),
+   fetch('../data/national/county-readings.json?v=20261104-nationwide')
   ]);
   if(!catalogResponse.ok||!municipalitiesResponse.ok||!countiesResponse.ok)
    throw Error('全国区域・読み仮名データ定義が読み込めません');
