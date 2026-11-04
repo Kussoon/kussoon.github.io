@@ -25,7 +25,7 @@ async function start(){
  const select=async code=>{await page.selectOption('#region',code);await page.locator('#map .chosen[data-code="'+code+'"]').waitFor();await page.locator('#officePopup').waitFor();};
  const snapshot=()=>page.locator('#map').evaluate(map=>({viewBox:map.getAttribute('viewBox'),paths:[...map.querySelectorAll('[data-code]')].map(p=>[p.dataset.code,p.getAttribute('d')]),selected:map.querySelector('.chosen')?.dataset.code||'',popupHidden:document.querySelector('#officePopup').hidden}));
  async function close(){
-  if(process.env.KUSSOON_BROWSER_ARTIFACTS){const dir=process.env.KUSSOON_BROWSER_ARTIFACTS;await fs.mkdir(dir,{recursive:true});await page.screenshot({path:path.join(dir,'national-final.png'),fullPage:true});await fs.writeFile(path.join(dir,'page-errors.json'),JSON.stringify(errors,null,2));}
+  if(process.env.KUSSOON_BROWSER_ARTIFACTS){const dir=process.env.KUSSOON_BROWSER_ARTIFACTS,name=path.basename(process.argv[1],'.cjs');await fs.mkdir(dir,{recursive:true});await page.screenshot({path:path.join(dir,name+'.png'),fullPage:true});await fs.writeFile(path.join(dir,name+'-errors.json'),JSON.stringify(errors,null,2));}
   await browser.close();await new Promise(resolve=>server.close(resolve));
  }
  return {browser,context,page,errors,open,pref,select,snapshot,close};
