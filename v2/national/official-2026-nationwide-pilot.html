@@ -46,7 +46,7 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 @media(max-width:600px){
  /* Reserve an independent right strip for the map controls. The popup
     scrolls inside the map height, instead of becoming unusably short. */
- .office-popup{left:8px;right:108px;top:8px;bottom:8px;width:auto;max-height:none;min-width:0;overflow:auto}
+ .office-popup{left:8px;right:108px;top:auto;bottom:8px;width:auto;height:min(var(--map-toolbar-height,190px),calc(100% - 16px));max-height:calc(100% - 16px);min-width:0;overflow:auto}
  .popup-head{gap:8px}.popup-head strong{min-width:0;overflow-wrap:anywhere}
  .popup-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
@@ -149,6 +149,13 @@ function renderOfficePopup(){
 }
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>$('zoomLevel').textContent=z.toFixed(1)+'倍'});
+// Match the mobile info popup height to the four right-hand buttons.
+// ResizeObserver reacts only to layout changes, never to pan/zoom frames.
+const mapToolbar=document.querySelector('.map-toolbar');
+const mapFrame=document.querySelector('.map-frame');
+function syncToolbarHeight(){mapFrame.style.setProperty('--map-toolbar-height',mapToolbar.offsetHeight+'px');}
+syncToolbarHeight();
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(syncToolbarHeight).observe(mapToolbar);
 const number=(n)=>n.toLocaleString('ja-JP');
 function project(b){
  const cos=Math.cos(((b[1]+b[3])/2)*Math.PI/180),bw=Math.max((b[2]-b[0])*cos,.04),bh=Math.max(b[3]-b[1],.04);
