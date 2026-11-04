@@ -37,7 +37,7 @@ jobs:
           cache-dependency-path: v2/tests/browser/package-lock.json
       - run: npm ci --no-audit --no-fund
         working-directory: v2/tests/browser
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
         working-directory: v2/tests/browser
       - run: |
           node v2/tests/nationwide-2026.browser.cjs
@@ -45,9 +45,18 @@ jobs:
           node v2/tests/nationwide-search.browser.cjs
           node v2/tests/nationwide-touch.browser.cjs
           node v2/tests/compare-2026-labels.browser.cjs
+          node v2/tests/pilot-ui.browser.cjs
+          node v2/tests/pilot-map-ui.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser
           KUSSOON_LABEL_REPORT: ${{ runner.temp }}/kussoon-browser/label-comparison.json
+      - name: iPhone-like WebKit layout and reset contracts
+        run: |
+          node v2/tests/pilot-ui.browser.cjs
+          node v2/tests/pilot-map-ui.browser.cjs
+        env:
+          KUSSOON_BROWSER_ENGINE: webkit
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser/webkit
       - uses: actions/upload-artifact@v4
         if: always()
         with:

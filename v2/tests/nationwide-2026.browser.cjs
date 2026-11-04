@@ -56,9 +56,9 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   const boxes=await page.evaluate(()=>{const box=id=>{const r=document.getElementById(id).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};return {map:box('map'),popup:box('officePopup'),toolbar:box('mapToolbar')};});
   assert(boxes.popup.x>=boxes.map.x&&boxes.popup.right<=boxes.toolbar.x,'popup fits left of toolbar');
   assert(boxes.popup.bottom<=boxes.map.bottom&&boxes.popup.y>=boxes.map.y,'popup fits vertically');
-  assert(Math.abs(boxes.popup.height-boxes.toolbar.height)<=2,'popup follows toolbar height');
-  await page.locator('#officePopup').evaluate(n=>n.scrollTop=n.scrollHeight);
-  assert(await page.locator('#officePopup').evaluate(n=>n.scrollTop+n.clientHeight>=n.scrollHeight-2),'six-link card can scroll to end');
+  assert(boxes.popup.height>=boxes.toolbar.height,'popup is not restricted to a clipped toolbar-sized card');
+  await page.locator('#popupScroll').evaluate(n=>n.scrollTop=n.scrollHeight);
+  assert(await page.locator('#popupScroll').evaluate(n=>n.scrollTop+n.clientHeight>=n.scrollHeight-2),'six-link card can scroll to end');
   // S04/S30: nationwide queries disambiguate prefectures without loading all maps.
   await page.click('#nationBtn');await page.fill('#placeSearch','西宮市');
   const result=page.locator('#searchResults button').filter({hasText:'西宮市'});await result.waitFor();assert((await result.textContent()).includes('兵庫県'));

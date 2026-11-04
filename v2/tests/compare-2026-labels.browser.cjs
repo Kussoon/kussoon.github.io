@@ -47,7 +47,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    result.screenFontAt5_832x=await page.locator('#map [data-v2-labels] text').first().evaluate(t=>parseFloat(getComputedStyle(t).fontSize)*Math.hypot(t.getScreenCTM().a,t.getScreenCTM().b));
    if(code==='28110'){
     const rows=()=>page.locator('#map [data-v2-labels] text').evaluateAll(nodes=>nodes.map(n=>({text:n.textContent,y:n.getAttribute('y')})));
-    result.readingOffRows=await rows();await page.selectOption('#readingMode','on');result.readingOnRows=await rows();await page.selectOption('#readingMode','off');
+    result.readingOffRows=await rows();await app.readings('on');result.readingOnRows=await rows();await app.readings('off');
    }
    for(let n=0;n<12;n++)await page.click('#mapZoomIn');
    result.actualMaximumZoom=await page.textContent('#zoomLevel');results.push(result);

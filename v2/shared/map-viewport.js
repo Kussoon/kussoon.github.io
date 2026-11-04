@@ -31,6 +31,16 @@ function init(options){
  }
  function setView(next){box=bound(next);emit();}
  function point(e){
+  // Production-sized maps may have SVG meet letterboxing. Map the actual
+  // screen transform back to viewport fractions instead of stretching its
+  // full CSS rectangle over the viewBox (which shifts pinch/wheel anchors).
+  const matrix=svg.getScreenCTM?.();
+  if(matrix&&svg.createSVGPoint){
+   const screen=svg.createSVGPoint();screen.x=e.clientX;screen.y=e.clientY;
+   const world=screen.matrixTransform(matrix.inverse());
+   if(Number.isFinite(world.x)&&Number.isFinite(world.y))
+    return {x:(world.x-box.x)/box.w*width,y:(world.y-box.y)/box.h*height};
+  }
   const rect=svg.getBoundingClientRect();
   const cx=Math.max(1,rect.width),cy=Math.max(1,rect.height);
   return {x:((e.clientX-rect.left)/cx)*width,y:((e.clientY-rect.top)/cy)*height};
