@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>ナンバーの次は？｜Kussoon</title>
+<title>次のナンバーは？｜Kussoon</title>
 <meta name="description" content="ナンバープレートの数字・ひらがな・分類番号を読み解くクイズ。2017年の払出し規則をもとに、次の番号を考えます。">
 <style>
 :root{font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color-scheme:light;--bg:#f4f7f9;--card:#fff;--ink:#182d42;--muted:#53677b;--line:#dbe3e9;--navy:#154b78;--tint:#e8f1f8;--ok:#176944;--bad:#b72d3d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.6}header{background:#183b5b;color:white;padding:18px 16px}header .inner,main,footer{max-width:730px;margin:auto}header h1{font-size:1.45rem;margin:0}header p{margin:3px 0 0;font-size:.86rem;color:#deebf6}main{padding:18px 14px 30px}section,.panel{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;margin-bottom:14px;box-shadow:0 2px 12px #193d5d0a}h2{margin:0 0 10px;font-size:1.06rem}p{margin:8px 0}small,.sub{color:var(--muted);font-size:.84rem}.tag{background:var(--tint);color:var(--navy);padding:4px 9px;border-radius:99px;font-size:.75rem;font-weight:700}button,select{font:inherit}button{border:1px solid var(--navy);background:white;color:var(--navy);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;min-height:44px}button.primary{background:var(--navy);color:white}button:disabled{opacity:.55;cursor:not-allowed}button:focus-visible,select:focus-visible{outline:3px solid #f5a623;outline-offset:2px}select{padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);min-height:44px}.actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.plate{border:3px solid #206b42;background:#f7f8ef;color:#226d45;border-radius:11px;max-width:430px;margin:20px auto;padding:14px 15px 10px;font-family:system-ui,"Hiragino Kaku Gothic ProN",sans-serif;box-shadow:inset 0 0 0 2px #f7f8ef,0 4px 15px #123c2430}.pl-top{display:flex;justify-content:center;align-items:baseline;gap:22px;font-weight:800;font-size:clamp(1.45rem,6vw,2rem);line-height:1.15}.pl-bottom{display:flex;justify-content:center;align-items:center;gap:19px;font-weight:800;font-size:clamp(2.1rem,10vw,3.45rem);line-height:1.3;white-space:nowrap}.plate .kana{font-size:.79em}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.choices button{padding:14px 6px;font-size:1.16rem;letter-spacing:.02em}.choices button.correct{background:#dcf2e4;color:#0c5c34;border:2px solid #218553}.choices button.wrong{background:#fbe5e6;color:#9b2630;border:2px solid #c34b51}.feedback{border-left:4px solid var(--ok);padding:12px 14px;background:#f0f9f3;border-radius:6px;margin-top:14px;color:#153b2a}.feedback.error{border-left-color:var(--bad);background:#fff2f3;color:#56252a}.feedback p{margin:5px 0}.notice{background:#fff7e9;border:1px solid #e9d1a5;border-radius:8px;padding:10px 12px;font-size:.88rem;margin-top:10px;color:#574121}.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}.bar{height:8px;border-radius:12px;background:#e4eaf0;overflow:hidden;margin:12px 0}.bar>div{height:100%;background:#2b779e;transition:width .25s}.help summary{cursor:pointer;font-weight:700}.hidden{display:none!important}footer{padding:0 15px 36px;color:var(--muted);font-size:.8rem}footer a{color:var(--navy)}.results{text-align:center}.results strong{font-size:2.1rem;color:var(--navy)}.choice-label{font-size:.9rem;color:var(--muted)}.level-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.level-option{display:block;border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}.level-option:has(input:checked){border:2px solid #2572ad;background:var(--tint);padding:9px 11px}.level-option input{accent-color:#216a9a}.level-option strong{display:block}.level-option small{display:block}.topic-display{border:2px solid var(--line);border-radius:12px;background:var(--tint);text-align:center;padding:24px 10px;margin:18px 0;font-weight:800;font-size:clamp(1.6rem,6vw,2.3rem)}.source-link{font-size:.82rem;overflow-wrap:anywhere}.level-head{margin-top:18px}.intro-note{font-size:.88rem}@media(max-width:440px){section,.panel{padding:15px}.plate{padding:12px 7px}.pl-top{gap:15px}.pl-bottom{gap:12px}.choices{gap:7px}}@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#101923;--card:#1b2b3a;--ink:#eff5fa;--muted:#b5c6d5;--line:#385064;--navy:#80bce8;--tint:#28445a}header{background:#0b2c4a}button{background:var(--card)}button.primary{background:#265f91;color:#fff;border-color:#6aa6d5}.feedback{background:#193d32;color:#e5f8ec}.feedback.error{background:#512a32;color:#fff2f3}.notice{background:#453921;border-color:#836a3a;color:#ffebb9}.plate{color:#226d45}.bar{background:#324657}footer a{color:#9bcdf0}}
@@ -79,6 +79,14 @@
 /* 登録自家用車のプレート色はOSの外観によらず白地・緑文字に固定 */
 @media(prefers-color-scheme:dark){.plate,.hero-plate{background:#f7f8ef;color:#226d45;box-shadow:inset 0 0 0 2px #f7f8ef,0 4px 15px #123c2430}}
 .quiz-scope-note{margin:0 0 15px;padding:11px 14px;border:1px solid var(--line);border-radius:11px;background:var(--tint);font-size:.88rem;line-height:1.65}.quiz-scope-note strong{color:var(--navy);display:block;margin-bottom:2px}.quiz-scope-note p{margin:0}
+
+/* Stacked blank license plates: preserve the existing front plate and all quiz controls. */
+.hero-plate-stack{position:relative;isolation:isolate;width:min(94%,430px);margin:18px auto 24px;padding:0 24px 24px 0;}
+.hero-plate-stack .hero-plate{position:relative;z-index:3;box-sizing:border-box;width:100%;max-width:none;margin:0;border-radius:18px;box-shadow:0 5px 15px #123c2430;}
+.hero-plate-stack .stack-plate{position:absolute;box-sizing:border-box;display:block;width:calc(100% - 24px);height:calc(100% - 24px);background:#f7f8ef;border:4px solid #39966a;border-radius:18px;box-shadow:0 5px 14px #123c2430;pointer-events:none;}
+.hero-plate-stack .stack-plate-middle{top:10px;left:13px;z-index:2;}
+.hero-plate-stack .stack-plate-back{top:22px;left:23px;z-index:1;}
+@media(max-width:440px){.hero-plate-stack{margin:15px auto 22px;padding-right:19px;padding-bottom:20px}.hero-plate-stack .stack-plate{width:calc(100% - 19px);height:calc(100% - 20px)}.hero-plate-stack .stack-plate-middle{top:8px;left:10px}.hero-plate-stack .stack-plate-back{top:18px;left:18px}}
 </style>
 <script>
 // 公開時のみUmamiを導入。クエリ・ハッシュを解析へ送らない。
@@ -144,17 +152,17 @@ footer.ks-unified-footer .ksu-version { margin:7px 0 0; font-size:.76rem; color:
 <body>
 <main>
 <section id="intro" class="intro-page">
-<div class="number-hero"><div class="intro-eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="plate hero-plate" role="img" aria-label="神戸 500 さ 20-26 のナンバープレート"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span>20-26</span></div></div><h2>ナンバーの次は？</h2><p>ナンバープレートの数字・ひらがな・分類番号を読み解くクイズ</p></div>
+<div class="number-hero"><div class="intro-eyebrow">KUSSOON · 学ぶ・遊ぶ</div><div class="hero-plate-stack"><span class="stack-plate stack-plate-back" aria-hidden="true"></span><span class="stack-plate stack-plate-middle" aria-hidden="true"></span><div class="plate hero-plate" role="img" aria-label="神戸 500 さ 20-26 のナンバープレート。その後ろに無地の2枚が重なっています"><div class="pl-top"><span>神戸</span><span>500</span></div><div class="pl-bottom"><span class="kana">さ</span><span>20-26</span></div></div></div><h2>次のナンバーは？</h2><p>ナンバープレートの数字・ひらがな・分類番号を読み解くクイズ</p></div>
 <div class="intro-content"><p class="intro-lead">車のナンバープレートは、どんな規則で数字が進んでいくのでしょうか。難易度を選んで挑戦しましょう。</p>
 <div class="quiz-scope-note" role="note"><strong>このクイズの対象</strong><p>自家用の登録乗用車（小型乗用車・普通乗用車）を対象としています。軽自動車、事業用車、バス・トラックなどは対象外です。</p></div>
 <div class="intro-warnings"><p>※<a class="hope-guide-link" href="#hope-number-guide" id="hope-guide-jump" data-umami-event="number-quiz-hope-guide-jump">希望番号制度</a>でしか使われない数字の並びがあります。</p><p>※実在する自動車の登録番号を照会する機能ではありません。</p></div>
 <h2 class="level-head">難易度を選んでください</h2>
 <div class="level-options" role="radiogroup" aria-label="難易度">
-<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="easy"><strong>初級｜数字の進み方</strong><small>1ずつ増える・桁上がり</small></label><p class="level-detail sub" hidden>数字が1ずつ増える問題と桁上がりを出題します。</p></div>
+<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="easy" checked><strong>初級｜数字の進み方</strong><small>1ずつ増える・桁上がり</small></label><p class="level-detail sub">数字が1ずつ増える問題と桁上がりを出題します。</p></div>
 <div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="middle"><strong>中級｜欠番の扱い</strong><small>42と49を含む数字</small></label><p class="level-detail sub" hidden>42と49を含む数字の問題です。</p></div>
 <div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="hard"><strong>上級｜ひらがな</strong><small>文字の進み方と、使用されない文字</small></label><p class="level-detail sub" hidden>自家用登録車のひらがなの使用順と、使用されない「お・し・へ・よ・ん」などを扱います。</p></div>
 <div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="expert"><strong>超上級｜分類番号</strong><small>分類番号と英字入り系列の切替</small></label><p class="level-detail sub" hidden>2017年通知に基づく基本的な払出し規則で、通常一連番号・一般希望番号・抽選対象希望番号の進行を扱います。実際の交付順序を予測するものではありません。</p></div>
-<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="mix" checked><strong>総合｜全難易度</strong><small>初級から超上級まで混合</small></label><p class="level-detail sub">全難易度から出題します。</p></div>
+<div class="level-choice"><label class="level-option"><input type="radio" name="difficulty" value="mix"><strong>総合｜全難易度</strong><small>初級から超上級まで混合</small></label><p class="level-detail sub" hidden>全難易度から出題します。</p></div>
 </div>
 <div id="course-actions" class="actions"><label for="count">問題数：</label><select id="count"><option value="5">5問</option><option value="10" selected>10問</option><option value="15">15問</option></select><button id="start" class="primary" data-umami-event="number-quiz-start">スタート</button></div>
 
@@ -193,7 +201,7 @@ footer.ks-unified-footer .ksu-version { margin:7px 0 0; font-size:.76rem; color:
 <a href="/sources/">データ出典</a>
 <a href="/terms/">利用上の注意</a></nav>
 <p class="ksu-copy">© 2026 Kussoon. All rights reserved.</p>
-<p class="ksu-version">ナンバーの次は？　Version 0.13.7</p>
+<p class="ksu-version">次のナンバーは？　Version 0.13.7</p>
 </div>
 </div>
 </footer>
