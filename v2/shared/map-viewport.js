@@ -70,7 +70,11 @@ function init(options){
   if(moved<.1)return;
   if(pts.length===1&&gesture.count===1){
    const dx=mid.x-gesture.midpoint.x,dy=mid.y-gesture.midpoint.y;
-   if(Math.hypot(dx,dy)>5&&!dragged){dragged=true;
+   // Keep simple taps native (county/municipality click), but capture the
+   // first actual touch movement. Safari can otherwise lose later pointermove
+   // events when the finger crosses SVG child paths during a long pan.
+   const threshold=e.pointerType==='touch'?1:5;
+   if(Math.hypot(dx,dy)>threshold&&!dragged){dragged=true;
     if(svg.setPointerCapture)try{svg.setPointerCapture(e.pointerId);}catch(_){}
    }
    if(dragged){suppressClick=true;pan(dx,dy,gesture.box);}
