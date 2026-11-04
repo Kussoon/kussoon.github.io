@@ -1,0 +1,125 @@
+# V2全国統合版・未反映／回帰疑い一覧
+
+基準main: `c69c970c982724b20d9a327e1fd1c223f356aebd`、2026-11-04。
+[仕様ID・判定・PR別履歴](pr-spec-ledger.md)と対にして読む。
+本体の修正は適用していない。以下の修正案は次回の個別PR向けである。
+
+## 優先順位
+
+|項目|優先度|関連仕様|影響・根拠|推奨する次工程|
+|---|---|---|---|---|
+|R01 再タップで県全体へ戻る|P1|S02、#81/#139/#148/#245|全国統合版の選択解除全般。実コードのreset経路とNode VMで再現|表示状態を選択状態から分離し、表示位置不変の回帰ケースを先に用意|
+|R05 全国検索に浜松旧区、新区欠落|P1|S31、#144/#145/#170/#204/#231|現行読込元が旧7区。実ページ処理で新区候補なし／旧区候補あり|2026コード集合と照合した検索indexへ統一。新区の根拠と廃止コード除外を検査|
+|R02 固定5Cを通らない|P2・継承判断あり|S21、#79/#95/#100/#146/#225/#228|2026はbalanced方式。田尻町の庁舎成分を選ぶ経路がない|#146の採用意図と後続の全国共通規則の適用範囲を決め、同じ地理座標で比較|
+|R04 区・郡・読みの書式差|P2|S24〜S26、#35/#41/#55〜#61/#144/#146/#226|OFFで区名のみ、郡をモデルへ引き継がず、区の漢字yがON/OFFで変わる|正式名・漢字行・読み行・郡情報を分け、祖先コード／名称との照合を維持|
+|R03 文字上限・倍率のページ間差|P2・継承判断あり|S22/S23、#217/#224/#228|旧版13画面px／768、2026は14/18 SVG単位／既定128|同値適用を先に確認。文字をSVG単位で固定したまま上限だけ引き上げない|
+|T01 既存庁舎テストの期待値不整合|P1（検証基盤）|#87/#89/#93/#212|旧テスト8項目中2失敗。親市追加・リンク処理変更を未追従|次回に現行有効仕様を検査する期待値へ更新。旧動作へ本体を戻さない|
+|V01 実機の総合確認が未実施|P2（検証残件）|S12/S13/S18〜S20/S29/S37〜S40|実ブラウザ起動不可、全47形状の再検証も未実施|ブラウザが使える環境で計画の手順を実施。未確認を正常へ数えない|
+
+「B=回帰疑い」はS-IDで8件。R02/R03は異なるページ系統の適用方針を含み、廃止・誤実装のどちらとも断定していない。R04は3仕様をまとめた課題である。
+T01/V01は8件に足し込まない。
+
+## R01：PR #81の優先調査
+
+過去の根拠:
+[PR #81本文・差分](https://github.com/Kussoon/kussoon.github.io/pull/81/files)は、
+`popupDismissed` を導入し、×を `select(null)` から「吹き出しのみhidden」へ変更した。
+旧 `density-app.js` の `toggleMunicipality → select(sel, scroll=false)` は、通常の同一市域タップでは
+選択・ラベル表示を更新し、`scroll=true` の場合だけfitする。
+「再タップ後に地図位置を維持」という挙動はこの旧コード経路と今回の依頼に基づく。
+#81本文自体に地図の投影・viewBox不変を数値で要求する記述や実機最終合格の記録はなく、本文はiPhone最終確認未実施としている。
+#148は同一再タップ解除と×のみ閉じを2026版に移植したが、投影の保持まで分離していない。
+
+現行の根拠（固定SHA）:
+
+- [popupCloseと地図click](https://github.com/Kussoon/kussoon.github.io/blob/c69c970c982724b20d9a327e1fd1c223f356aebd/v2/national/official-2026-nationwide-pilot.html#L416): ×は選択コードを `dismissedPopupCode` に記録してhiddenにするだけ。map clickは同一コードならregion値を空にし `paint()` を呼ぶ。
+- [paint](https://github.com/Kussoon/kussoon.github.io/blob/c69c970c982724b20d9a327e1fd1c223f356aebd/v2/national/official-2026-nationwide-pilot.html#L201): `chosen ? focusBounds(chosen.polys) : current.box` から投影を作り直す。解除時は県全体boxを選び、`setContentBounds(null)` に戻す。
+- 同関数末尾の無条件 `viewport.reset()` はviewBoxも初期化する。viewBoxのみ不変にしても投影が変わるため修正にならない。
+- [PR #139](https://github.com/Kussoon/kussoon.github.io/pull/139/files)で選択とフォーカスを結合する統合版を導入、[PR #148](https://github.com/Kussoon/kussoon.github.io/pull/148/files)で再タップ解除を追加。[PR #245](https://github.com/Kussoon/kussoon.github.io/pull/245/files)は投影後の移動範囲を追加したが、この結合を作ったPRではない。
+
+#245本文の「選択を解除し県全体・全国へ戻る際は初期枠へ戻す」は戻る操作と選択解除を同一視し得る記述だが、同時に#81維持も明記する。
+同一再タップで意図的に県全体へ戻すことを承認した証拠とは判定しない。
+
+|依頼の手順|今回の確認|確認の限界|
+|---|---|---|
+|1 兵庫県選択|実ページJSに県28の読込を実行|VMの地図形状は合成、実県形状ではない|
+|2〜3 西宮市タップ、琥珀色・吹き出し|code28204がrenderへ渡り吹き出しが開く。色CSSは別の静的検査|画面上の琥珀色は未目視|
+|4〜5 ×、色と位置を保持|選択コード保持、hidden=true、reset回数とcontentBoundsは不変|viewportはスタブ。実地図の画素位置未測定|
+|6〜7 同一市域再タップ|選択空、paint実行、resetが1回増え、contentBounds=null|依頼の期待に反する経路を再現。実ブラウザの再現は未実施|
+|8 再タップ|code28204へ再選択、吹き出し再表示|実タッチのhit test未確認|
+
+同じNode VM手順を多可町28365・神戸市中央区28110にも実施し、reset経路は共通だった。
+これは現行inline scriptを実行した調査用プローブであり、描画・viewportをスタブにしたもの。
+今回、新しいテスト実装としては保存・導入していない。
+
+推奨修正設計:
+
+1. 選択コード／吹き出し閉じ状態と、地理フォーカスbox／投影／viewBox／移動可能範囲を独立させる。
+2. 同一再タップは色・吹き出し・必要なラベル状態を更新し、投影とviewBoxとcontentBoundsを保持する。
+3. 別区域選択・検索選択ではその区域をフォーカスする。県全体・全国へ戻る専用ボタンではフォーカス・移動範囲を明示的に初期化する。
+4. #245の投影範囲と#241のcapture処理を保持する。単に `reset()` を除去する、既存投影の上へ県全体を再投影する、DOMを塗り替えるだけの修正は避ける。
+
+必要な回帰条件は、①選択コード②chosenの数③popup hidden④viewBox⑤同じ地理点の画面座標⑥contentBounds。
+×と再タップの前後で④⑤⑥が不変であることを検査し、viewBoxだけの一致で合格させない。
+
+## R02〜R04：ラベル・読み・倍率
+
+[旧5C](../national/PROPOSAL5C-TRIAL.md)の参照点は田尻町27362と神戸市中央区28110の2件だけで、全国の庁舎住所が揃ったことは全国の庁舎座標が揃ったことを意味しない。
+[2026 adapter](https://github.com/Kussoon/kussoon.github.io/blob/c69c970c982724b20d9a327e1fd1c223f356aebd/v2/shared/established-label-adapter.js)は最大成分を選んで `planCenterFirstLabels(anchor:'balanced')`、衝突・適合度・余白を再評価する。
+#146はこの別方式を明示的に採用している一方、#225/#228は後に旧density系で固定5Cを強化した。
+したがって「古い関数を戻せばよい」とは結論しない。対象ページへどの規則を継承するか明記して比較する。
+
+[place-labels.show](https://github.com/Kussoon/kussoon.github.io/blob/c69c970c982724b20d9a327e1fd1c223f356aebd/v2/shared/place-labels.js#L107)は読み有効時だけ市＋区のpartsを使う。
+OFFでは `region.name` の1行、ONでは市y=-21／区y=8になる。`goPref` は `N03_004` だけを地名モデルに残し郡の `N03_003` を保持しない。
+読みの未収録時フォールバックを壊さず、漢字行と読み行の定義を独立させる必要がある。
+
+共通viewportの[既定最大倍率128](https://github.com/Kussoon/kussoon.github.io/blob/c69c970c982724b20d9a327e1fd1c223f356aebd/v2/shared/map-viewport.js#L8)を2026版は上書きしない。
+文字14/18はSVG単位なので画面px固定ではない。倍率768へ単独変更すると文字も巨大化し得る。
+旧版の同名「全国」テストが通っただけで2026経路を保護したとは扱わない。
+
+## R05：浜松市の全国検索
+
+[ensureNationwideSearchIndex](https://github.com/Kussoon/kussoon.github.io/blob/c69c970c982724b20d9a327e1fd1c223f356aebd/v2/national/official-2026-nationwide-pilot.html#L240)は
+`municipality-readings-all-source.json` のitemsを直接候補にする。現行正本には22131〜22137の旧7区があり、22138〜22140の新3区はない。
+[reading-bridge.reorganizedWards](https://github.com/Kussoon/kussoon.github.io/blob/c69c970c982724b20d9a327e1fd1c223f356aebd/v2/shared/reading-bridge.js#L14)には新3区の公式根拠付き補正があるが、全国検索indexはそれを利用しない。
+
+実ページNode VM＋現行正本の結果:
+
+- 「浜松市中央区」→「該当する地名はありません。」
+- 「22131」→「静岡県 ＞ 浜松市中区…（22131）」
+- 候補から `goPref(pref,selectedCode)` に渡ったコードが当該2026データにない場合、現在は区域を選択できず県表示へ留まる経路になる。実2026形状を読み込んだ画面遷移は未確認。
+
+修正案は新3区を単純に追加するだけでなく、検索候補が2026 geometryコード集合に含まれることを保証し、旧7区を候補から除外すること。
+全県のTopoJSON先読みを増やさない軽量index方式とし、#204の県別遅延読込を守る。
+
+## T01：既存テストの不整合
+
+`node v2/tests/office-directory.test.cjs` は8項目中2失敗。
+
+1. 72行付近: 不明コードの戻り値を `{region:null,offices:[]}` と比較しているが、#93以降は `parentRegion:null` も返る。
+2. 100行付近: `action('公式サイト',result.region?.official,label)` という旧ソース文字列を要求する。#93の施設別 `links` と#212のA限定に追随していない。
+
+いずれも旧期待値の存在を確認した。これだけで現行リンク機能の故障とは判定しない。
+既存ブラウザテストにもdensity-mode初期proposal5／読みON／区で公式リンク1個など過去条件が残るため、2026版へそのまま流用してはならない。
+
+## 実ブラウザ確認の記録
+
+Workのブラウザ操作ツールは利用可能一覧に現れなかった。ローカルPlaywright＋Chromiumの起動を試みたが、
+`crashpad ... setsockopt: Operation not permitted` とSIGTRAPで終了した。
+追加の起動確認は中断され、公開ページへの到達・画面操作は確認できなかった。Git cloneもプロキシ接続失敗で、GitHub連携から固定SHAを取得した。
+
+|確認対象|実ブラウザ結果|代替で得た根拠|
+|---|---|---|
+|全国→兵庫県→西宮市|未確認|ソース経路、合成地図によるVM|
+|多可町・中央区の選択／×／再タップ|未確認|3コードに共通するVMの状態遷移|
+|色・地図位置・上下左右パン・ピンチ|未確認|部品・合成イベント、CSS、reset呼出し記録|
+|3リンク／6リンク／内部スクロール／高さ|未確認|実台帳＋DOMスタブのリンク数、静的レイアウト検査|
+|読み初期OFF・切替の見た目|未確認|初期HTML・同期経路・読み照合テスト|
+|二重線・太線|未確認|単一境界path構造、一定線幅CSSの検査|
+
+## 公式URL・データ監査の境界
+
+全国分類台帳と現行庁舎データの1,912件はURL・分類一致（未判定nullは`unclassified`へ正規化）。
+Bは益子町09342、Cは寿都町01392、未判定は北相木村20307・道志村19422・和歌山県美浜町30381。
+公式性・HTTP到達・一時的なサービス停止は別の判断である。今回、これらの外部到達性を再分類していない。
+既存の[コード照合結果](office-map-coverage-20261102.json)は想定差を記録するが、今回それを全47地図で再生成したわけではない。
