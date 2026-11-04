@@ -78,7 +78,8 @@
     if(anchors.every(a=>Math.hypot(a.x-alt.x,a.y-alt.y)>p.height*.4))
      anchors.push(alt);
    }
-   const allowOverlap=stableAnchors&&zoom>=2;
+   const projectedExtent=Math.max(m.box?.w||0,m.box?.h||0)*ratio;
+   const allowOverlap=stableAnchors&&zoom>=2&&projectedExtent>=42/Math.sqrt(zoom);
    return {i,priority,pref,code,selected:m.id===selectedId,anchors,allowOverlap};
   }).filter(Boolean);
   function cellOf(p){
