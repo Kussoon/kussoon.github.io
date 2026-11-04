@@ -69,6 +69,16 @@ h1{color:#173c61}.mode-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7
 @media(max-width:700px){.choice-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
 @media(max-width:480px){.choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.choice{min-height:68px;flex-direction:row;justify-content:center;font-size:13px}.choice .type-symbol{width:30px;height:30px}.duo{gap:7px}.duo-card{padding:9px 5px}.duo-card h2{font-size:13px}.chosen .type-symbol{width:62px;height:62px}.pick-arrow{width:30px;height:38px;flex-basis:30px;font-size:19px}.chosen{font-size:15px}}
 
+
+/* Small-reader support: semantic ruby is added to every visible kanji phrase,
+   including content that changes after a type selection. */
+ruby{ruby-position:over;white-space:nowrap}
+ruby rt{font-size:.58em;font-weight:600;line-height:1.05;letter-spacing:0}
+.tab,.mode,.action,.type,.choice{line-height:1.65}
+.type,.choice{padding-top:9px;padding-bottom:9px}
+.summary,.effect-result p,.group h3{line-height:1.9}
+@media(max-width:480px){.tab{font-size:14px}.type{min-height:62px}.choice{min-height:75px}}
+
 </style>
 </head>
 <body>
@@ -263,6 +273,67 @@ function renderPractice(){
  document.getElementById("effect-explanation").textContent=practice.attack+"タイプの技は "+practice.defense+"タイプに "+phrase;
 }
 renderPractice();
+
+
+/* Give each visible kanji a correct kana reading without changing source wording.
+   Ruby is deliberately not applied to SVG, attributes, script, rt or nested ruby. */
+const FURIGANA_WORDS={
+"組み合わせ":"くみあわせ","切り替え":"きりかえ","攻撃":"こうげき","防御":"ぼうぎょ",
+"相性":"あいしょう","効果":"こうか","該当":"がいとう","通常":"つうじょう",
+"学習":"がくしゅう","練習":"れんしゅう","試作":"しさく","検証":"けんしょう",
+"段階":"だんかい","準備中":"じゅんびちゅう","開発":"かいはつ",
+"複合":"ふくごう","今後":"こんご","追加":"ついか","予定":"よてい",
+"相手":"あいて","特性":"とくせい","特殊":"とくしゅ","考慮":"こうりょ",
+"画像":"がぞう","非公式":"ひこうしき","公式":"こうしき","使用":"しよう",
+"本編":"ほんぺん","一覧":"いちらん","変更":"へんこう",
+"選択肢":"せんたくし","選択":"せんたく","同士":"どうし","選ぶ":"えらぶ","覚える":"おぼえる",
+"調べる":"しらべる","受ける":"うける","使う":"つかう",
+"戻す":"もどす","進める":"すすめる","試そう":"ためそう",
+"第":"だい","調":"しら","組":"く","合":"あ","覚":"おぼ",
+"選":"えら","見":"み","技":"わざ","持":"も","物":"もの",
+"単":"たん","試":"ため","下":"した","向":"む",
+"側":"がわ","切":"き","受":"う","使":"つか",
+"次":"つぎ","例":"れい","問":"もん"
+};
+const FURI_KEYS=Object.keys(FURIGANA_WORDS).sort((a,b)=>b.length-a.length);
+const HAS_KANJI=/[一-龯々〆ヶ]/;
+function addFuriganaToText(node){
+ const source=node.nodeValue;
+ if(!HAS_KANJI.test(source))return;
+ const fragment=document.createDocumentFragment();
+ let unmarked="", i=0;
+ const flush=()=>{if(unmarked){fragment.appendChild(document.createTextNode(unmarked));unmarked=""}};
+ while(i<source.length){
+   if(!HAS_KANJI.test(source[i])){unmarked+=source[i++];continue}
+   const key=FURI_KEYS.find(k=>source.startsWith(k,i));
+   if(!key){unmarked+=source[i++];continue}
+   flush();
+   const ruby=document.createElement("ruby");
+   ruby.appendChild(document.createTextNode(key));
+   const rt=document.createElement("rt");rt.textContent=FURIGANA_WORDS[key];ruby.appendChild(rt);
+   fragment.appendChild(ruby);i+=key.length;
+ }
+ flush();
+ node.replaceWith(fragment);
+}
+function addVisibleFurigana(){
+ const root=document.querySelector("main");
+ if(!root)return;
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ const pending=[];
+ while(walker.nextNode()){
+   const t=walker.currentNode;
+   if(!HAS_KANJI.test(t.nodeValue||""))continue;
+   if(t.parentElement?.closest("ruby,script,style,svg,textarea"))continue;
+   pending.push(t);
+ }
+ pending.forEach(addFuriganaToText);
+}
+addVisibleFurigana();
+// render() and renderPractice() update text nodes dynamically.
+// Observe additions, not just the first screen, so readings remain after every tap.
+const furiganaObserver=new MutationObserver(()=>addVisibleFurigana());
+furiganaObserver.observe(document.querySelector("main"),{childList:true,subtree:true,characterData:true});
 
 </script>
 </body></html>
