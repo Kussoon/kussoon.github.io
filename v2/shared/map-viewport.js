@@ -111,7 +111,14 @@ function init(options){
  svg.addEventListener('pointermove',pointerMove);
  svg.addEventListener('pointerup',pointerUp);
  svg.addEventListener('pointercancel',pointerUp);
- svg.addEventListener('lostpointercapture',pointerUp);
+ // A touch starts with implicit capture on the tapped SVG child in Safari.
+ // Transferring capture to the map fires a *bubbling* lostpointercapture on
+ // that child. It is NOT the end of the user's drag, so ignore it.
+ function onLostMapCapture(e){
+  if(e.target!==svg)return;
+  pointerUp(e);
+ }
+ svg.addEventListener('lostpointercapture',onLostMapCapture);
  svg.addEventListener('wheel',onWheel,{passive:false});
  svg.addEventListener('dblclick',onDoubleClick);
  svg.addEventListener('click',onClickCapture,true);
@@ -122,7 +129,7 @@ function init(options){
   svg.removeEventListener('pointermove',pointerMove);
   svg.removeEventListener('pointerup',pointerUp);
   svg.removeEventListener('pointercancel',pointerUp);
-  svg.removeEventListener('lostpointercapture',pointerUp);
+  svg.removeEventListener('lostpointercapture',onLostMapCapture);
   svg.removeEventListener('wheel',onWheel);
   svg.removeEventListener('dblclick',onDoubleClick);
   svg.removeEventListener('click',onClickCapture,true);
