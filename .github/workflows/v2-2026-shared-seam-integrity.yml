@@ -1,0 +1,40 @@
+name: V2 2026 shared seam integrity
+on:
+  pull_request:
+    paths:
+      - 'v2/national/audit-2026-shared-seam-integrity.cjs'
+      - 'v2/national/build-2026-shared-prefecture-seams.cjs'
+      - 'v2/data/national/2026-common/**'
+      - '.github/workflows/v2-2026-shared-seam-integrity.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/audit-2026-shared-seam-integrity.cjs'
+      - 'v2/national/build-2026-shared-prefecture-seams.cjs'
+      - 'v2/data/national/2026-common/**'
+      - '.github/workflows/v2-2026-shared-seam-integrity.yml'
+  workflow_dispatch:
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check syntax and negative controls
+        run: |
+          node --check v2/national/audit-2026-shared-seam-integrity.cjs
+          node v2/national/audit-2026-shared-seam-integrity.cjs --self-test
+      - name: Generate unchanged candidate overlay
+        run: node v2/national/build-2026-shared-prefecture-seams.cjs "$RUNNER_TEMP/seams.geojson"
+      - name: Verify every exact shared edge against original source
+        run: node v2/national/audit-2026-shared-seam-integrity.cjs "$RUNNER_TEMP/seams.geojson" "$RUNNER_TEMP/integrity.json"
+      - name: Archive diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-2026-shared-seam-integrity
+          path: ${{ runner.temp }}/integrity.json
+          if-no-files-found: ignore
+          retention-days: 30
