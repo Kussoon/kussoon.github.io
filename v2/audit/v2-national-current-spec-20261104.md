@@ -1,6 +1,6 @@
 # V2全国統合版・確定仕様と実装照合（2026-11-04）
 
-基準main: `c69c970c982724b20d9a327e1fd1c223f356aebd`。有効規則の正本は[既存MAINTENANCE_RULES](../national/MAINTENANCE_RULES.md)を更新して再利用する。ここには40仕様の適用状況を記録する。A17／B8／C4／要確認11。Cは過去の失効・保留仕様であり、現在有効な要件・継承確認は36件。詳細な定義・集計方法は[PR照合台帳](v2-national-pr-ledger-20261104.md)参照。
+基準main: `c69c970c982724b20d9a327e1fd1c223f356aebd`。有効規則の正本は[既存MAINTENANCE_RULES](../national/MAINTENANCE_RULES.md)を更新して再利用する。ここには40仕様の適用状況を記録する。A18／B7／C4／要確認11。Cは過去の失効・保留仕様であり、現在有効な要件・継承確認は36件。詳細な定義・集計方法は[PR照合台帳](v2-national-pr-ledger-20261104.md)参照。
 
 ## 機能別の有効仕様と現行照合
 
@@ -9,7 +9,7 @@
 |ID|判定|仕様／決定|過去PR・後続変更|現在の経路|検証・回帰テストの限界|
 |---|---|---|---|---|---|
 |S01|A|×は吹き出しのみ閉じ、選択色・投影・表示位置を維持|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#245](https://github.com/Kussoon/kussoon.github.io/pull/245)|pilot: popupClose / renderOfficePopup|Node VMの実ページ処理で西宮・多可・中央区コードを確認。geometry・viewportはスタブ。実画面未確認|
-|S02|B|同一市域再タップは選択色のみ解除し表示範囲を維持|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#139](https://github.com/Kussoon/kussoon.github.io/pull/139) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#245](https://github.com/Kussoon/kussoon.github.io/pull/245)|pilot: map click → paint → viewport.reset|実ページNode VMで再タップ時reset呼出し・contentBounds消失を確認。R01|
+|S02|A|同一市域再タップは選択色のみ解除し表示範囲を維持|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#139](https://github.com/Kussoon/kussoon.github.io/pull/139) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#245](https://github.com/Kussoon/kussoon.github.io/pull/245)|pilot: map click → paint → viewport.reset|個別修正: refocusを選択変更から分離。実Chromiumの1280/390px・西宮/多可/中央区のnative clickで全path投影とviewBox不変、明示戻りと多可の移動範囲を検査。修正前には同テストが失敗。iPhone未確認|
 |S03|A|解除後の再タップで選択色と吹き出しが再表示|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148)|pilot: map click / renderOfficePopup|同じVMで3コードの選択・×・解除・再選択を確認。実タッチは未確認|
 |S04|要確認|別区域・検索候補選択で閉じ状態を解除|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#142](https://github.com/Kussoon/kussoon.github.io/pull/142) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#204](https://github.com/Kussoon/kussoon.github.io/pull/204)|pilot: dismissedPopupCode / updateSearch|代入経路は存在。実検索操作を通した状態遷移のテスト不足|
 |S05|要確認|県・全国へ移動すると選択と吹き出し状態を初期化|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#139](https://github.com/Kussoon/kussoon.github.io/pull/139) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148)|pilot: goPref / returnNation / prefBtn|専用戻る操作と再タップを区別するE2Eが必要|
