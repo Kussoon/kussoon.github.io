@@ -1,0 +1,36 @@
+name: V2 2026 prefecture seam diagnostic
+on:
+  pull_request:
+    paths:
+      - 'v2/national/audit-2026-prefecture-seams.cjs'
+      - 'v2/data/national/2026-common/**'
+      - '.github/workflows/v2-national-prefecture-seams.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/audit-2026-prefecture-seams.cjs'
+      - 'v2/data/national/2026-common/**'
+      - '.github/workflows/v2-national-prefecture-seams.yml'
+  workflow_dispatch:
+jobs:
+  seams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check script and synthetic borders
+        run: |
+          node --check v2/national/audit-2026-prefecture-seams.cjs
+          node v2/national/audit-2026-prefecture-seams.cjs --self-test
+      - name: Audit all 47 existing 2026 prefecture datasets
+        run: node v2/national/audit-2026-prefecture-seams.cjs "$RUNNER_TEMP/v2-prefecture-seams.json"
+      - name: Preserve report for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-2026-prefecture-seam-diagnostic
+          path: ${{ runner.temp }}/v2-prefecture-seams.json
+          retention-days: 30
+          if-no-files-found: ignore
