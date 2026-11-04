@@ -1,0 +1,49 @@
+name: V2 2026 regression contracts
+on:
+  pull_request:
+    paths:
+      - 'v2/**'
+      - '.github/workflows/v2-nationwide-contracts.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/**'
+      - '.github/workflows/v2-nationwide-contracts.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  data-and-components:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node v2/tests/run-national-contracts.cjs
+      - name: Confirm tests did not rewrite data or URL audit
+        run: git diff --exit-code -- v2/data v2/audit/*.json
+  real-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium
+        working-directory: v2/tests/browser
+      - run: node v2/tests/nationwide-2026.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v2-2026-browser-evidence
+          path: ${{ runner.temp }}/kussoon-browser
+          if-no-files-found: ignore
