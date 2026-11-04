@@ -12,7 +12,7 @@ assert.equal(manifest.prefectureCount,47);
 assert.equal(manifest.municipalityCount,1905);
 assert.equal(manifest.entries.length,47);
 const allOld=new Set(),allNew=new Set(),allOffices=new Set();
-const rows=[], diffs=[];
+const rows=[], diffs=[], special2026=[];
 let oldCount=0,newCount=0;
 function geometryCodes(topo,pref,version){
  assert.equal(topo.type,'Topology',version+' '+pref);
@@ -32,7 +32,12 @@ for(const entry of manifest.entries){
  const pref=entry.pref;
  assert.match(pref,/^\d{2}$/);
  const old=geometryCodes(read('v2/data/national/2021/'+pref+'.topojson'),pref,'2021');
- const modern=geometryCodes(read('v2/data/national/2026-common/'+entry.source),pref,'2026');
+ const modernSource=read('v2/data/national/2026-common/'+entry.source);
+ const modern=geometryCodes(modernSource,pref,'2026');
+ for(const geom of Object.values(modernSource.objects)[0].geometries){
+  const code=String(geom.properties?.N03_007||'');
+  if(code.endsWith('000'))special2026.push({code,pref,name:geom.properties?.N03_004||'',geometryType:geom.type});
+ }
  assert.equal(modern.codes.size,entry.regions,'2026 manifest mismatch '+pref);
  const directory=read('v2/data/offices/'+pref+'.json');
  assert.equal(directory.prefecture,pref,'office prefecture mismatch '+pref);
@@ -57,6 +62,10 @@ assert.equal(newCount,1905);
 assert.equal(oldCount,1902);
 const only2021=[...allOld].filter(c=>!allNew.has(c)).sort();
 const only2026=[...allNew].filter(c=>!allOld.has(c)).sort();
+const unassigned2026=special2026.filter(x=>x.name==='所属未定地');
+const officialUnits2026=allNew.size-unassigned2026.length;
+assert.equal(unassigned2026.length,7,'unassigned-land code count changed: explicitly review boundaries before switching');
+assert(special2026.every(x=>x.name==='所属未定地'),'a non-municipal 000 code has an unexpected label');
 assert.equal(allNew.size-allOld.size,only2026.length-only2021.length);
 const ham=rows.find(x=>x.pref==='22');
 for(const c of ['22131','22132','22133','22134','22135','22136','22137'])
@@ -68,8 +77,9 @@ const result={
  legend:{removed:'2021 map code absent in 2026',added:'2026 map code absent in 2021',
   missingOffice2026:'2026 geometry lacks matching office-directory region'},
  totals:{prefectures:47,oldMapCodes:allOld.size,newMapCodes:allNew.size,officeRegions:allOffices.size,
-  unchangedCodes:allOld.size-only2021.length,removedCodes:only2021.length,addedCodes:only2026.length},
- only2021,only2026,affectedPrefectures:diffs,byPrefecture:rows
+  unchangedCodes:allOld.size-only2021.length,removedCodes:only2021.length,addedCodes:only2026.length,
+  unassignedLandCodes2026:unassigned2026.length,municipalOrWardCodes2026:officialUnits2026},
+ only2021,only2026,unassignedLand2026:special2026,affectedPrefectures:diffs,byPrefecture:rows
 };
 const dest=process.argv[2];
 if(dest){fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,JSON.stringify(result,null,2)+'\n');}
@@ -77,4 +87,5 @@ console.log('PASS static 2021/2026 map+office crosswalk: '+JSON.stringify(result
 for(const r of rows)if(r.removed.length||r.added.length||r.missingOffice2026.length)
  console.log('PREF '+r.pref+' old-only='+r.removed.join(',')+' new-only='+r.added.join(',')+
  ' 2026-without-office='+r.missingOffice2026.join(','));
+console.log('Unassigned land is geometry, not a municipality: '+unassigned2026.map(x=>x.code).join(','));
 console.log('No production map or office files were changed.');
