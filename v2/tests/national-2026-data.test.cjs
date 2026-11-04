@@ -3,6 +3,7 @@
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
+const vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
 const json=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 
@@ -87,4 +88,13 @@ for(const record of ledger.records){
  assert(Object.hasOwn(counts,region.officialAuditStatus));counts[region.officialAuditStatus]++;
 }
 assert.equal(seen.size,officeCount);assert.deepEqual(counts,{A:1907,B:1,C:1,unclassified:3});
+// PR #204: every searchable record must route to an actual current polygon.
+// Do not fetch every detailed topology in the browser just to build the index.
+const context={window:{}};
+vm.runInNewContext(fs.readFileSync(path.join(root,'shared/reading-bridge.js'),'utf8'),context);
+const source=json('data/national/municipality-readings-all-source.json');
+const original=JSON.stringify(source),index=context.window.KussoonV2ReadingBridge.searchIndex(source);
+assert.equal(JSON.stringify(source),original,'search must not mutate the source snapshot');
+assert.equal(new Set(index.map(r=>r.code)).size,index.length,'unique search codes');
+assert.deepEqual(Array.from(index,r=>r.code).sort(),[...allCodes].filter(c=>!mapOnly.has(c)).sort(),'all 1892 named municipalities route to 2026 geometry, including Hamamatsu');
 console.log('PASS S09/S11/S28/S38-S40: 47 real 2026 assets, 1905 unique map codes, 1912 offices/URL audit records, explicit exceptions and negative controls');

@@ -42,6 +42,7 @@ jobs:
       - run: |
           node v2/tests/nationwide-2026.browser.cjs
           node v2/tests/nationwide-retap.browser.cjs
+          node v2/tests/nationwide-search.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser
       - uses: actions/upload-artifact@v4

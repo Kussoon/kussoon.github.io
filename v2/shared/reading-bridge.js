@@ -16,6 +16,22 @@ const reorganizedWards=Object.freeze({
  '22139':{name:'浜松市浜名区',reading:'はままつし はまなく'},
  '22140':{name:'浜松市天竜区',reading:'はままつし てんりゅうく'}
 });
+const retiredWardCodes=Object.freeze(['22131','22132','22133','22134','22135','22136','22137']);
+// Keep the official reorganization shared by labels and nationwide search.
+// This overlays the source in memory; neither source JSON nor geometry changes.
+function currentItems(source){
+ const items={...(source?.items||{}),...reorganizedWards};
+ for(const code of retiredWardCodes)delete items[code];
+ return items;
+}
+function searchIndex(source){
+ const entries=Object.entries(currentItems(source)).filter(([code,item])=>
+  /^\d{5}$/.test(code)&&Number(code.slice(0,2))>=1&&Number(code.slice(0,2))<=47&&item?.name);
+ const parents=new Set(entries.filter(([,item])=>item.name.endsWith('区')&&item.name.includes('市'))
+  .map(([code,item])=>code.slice(0,2)+':'+item.name.slice(0,item.name.lastIndexOf('市')+1)));
+ return entries.filter(([code,item])=>!parents.has(code.slice(0,2)+':'+item.name))
+  .map(([code,item])=>({name:item.name,reading:item.reading||'',code,pref:code.slice(0,2),kind:'national-region'}));
+}
 function verify(region,entry){
  if(!region||!entry||!/^[0-9]{5}$/.test(String(region.code||'')))return null;
  const display=String(region.name||''),full=String(entry.name||''),raw=String(entry.reading||'').trim();
@@ -45,7 +61,7 @@ function verify(region,entry){
  return {reading:cityReading+wardReading,parts:[{name:city,reading:cityReading},{name:display,reading:wardReading}],verifiedName:full};
 }
 function attach(regions,source){
- const items=source?.items||{},stats={total:regions.length,matched:0,missing:0,mismatched:0};
+ const items=currentItems(source),stats={total:regions.length,matched:0,missing:0,mismatched:0};
  const mapped=regions.map(region=>{
   const entry=items[region.code]||reorganizedWards[region.code],found=verify(region,entry);
   if(found){stats.matched++;return {...region,name:found.displayName||region.name,fullName:found.verifiedName||region.name,reading:found.reading,readingParts:found.parts};}
@@ -54,5 +70,5 @@ function attach(regions,source){
  });
  return {regions:mapped,stats};
 }
-global.KussoonV2ReadingBridge=Object.freeze({kana,verify,attach});
+global.KussoonV2ReadingBridge=Object.freeze({kana,verify,attach,searchIndex});
 })(window);
