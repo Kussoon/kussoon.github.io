@@ -7,6 +7,13 @@ on:
       - 'v2/national/centered-labels.js'
       - 'v2/data/national/office-reference-points.json'
       - 'v2/national/test-density-contract.cjs'
+      - 'v2/national/test-shared-border-contract.cjs'
+      - 'v2/shared/municipality-renderer.js'
+      - 'v2/shared/test-municipality-renderer.cjs'
+      - 'v2/tools/shared-topology/**'
+      - 'v2/data/national/catalog.json'
+      - 'v2/data/national/2026-common/national-shared-border-pilot/manifest.json'
+      - 'v2/data/national/2026-common/national-2026-pilot/manifest.json'
       - '.github/workflows/v2-national-map-contract.yml'
   push:
     branches: [main]
@@ -16,6 +23,13 @@ on:
       - 'v2/national/centered-labels.js'
       - 'v2/data/national/office-reference-points.json'
       - 'v2/national/test-density-contract.cjs'
+      - 'v2/national/test-shared-border-contract.cjs'
+      - 'v2/shared/municipality-renderer.js'
+      - 'v2/shared/test-municipality-renderer.cjs'
+      - 'v2/tools/shared-topology/**'
+      - 'v2/data/national/catalog.json'
+      - 'v2/data/national/2026-common/national-shared-border-pilot/manifest.json'
+      - 'v2/data/national/2026-common/national-2026-pilot/manifest.json'
       - '.github/workflows/v2-national-map-contract.yml'
 jobs:
   accepted-contracts:
@@ -26,4 +40,7 @@ jobs:
         with:
           node-version: '22'
       - name: Validate accepted national-map behavior
-        run: node v2/national/test-density-contract.cjs
+        run: |
+          node v2/national/test-density-contract.cjs
+          node v2/national/test-shared-border-contract.cjs
+          node v2/shared/test-municipality-renderer.cjs
