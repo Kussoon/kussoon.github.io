@@ -337,7 +337,12 @@ function renderLabels(){
    anchor=office5Centers.get(source.id)||mainland5Centers.get(source.id)||proposal5Centers.get(source.id)||source.polylabel||source.centroid;
    labelAnchorCache.set(source.id,anchor);
   }
-  const point={x:anchor[0],y:anchor[1]};
+  const x=anchor[0],y=anchor[1];
+  // Single-row city names need a collision box too; L.boxFor only adds
+  // county/ward rows and otherwise keeps this base geometry.
+  const width=measure(source.name,size)+size*.24,height=size*1.2;
+  const point={x,y,width,height,box:{x1:x-width/2,x2:x+width/2,
+   y1:y-height/2,y2:y+height/2}};
   return readingEnabled&&source.readingParts?.length?NR.boxFor(source,point,size,measure):L.boxFor(source,point,size,measure);
  }):compareMode?layoutModels.map(m=>{
   const [x,y]=$('density-mode').value==='office5'?
@@ -730,7 +735,7 @@ $('city-shortcuts').addEventListener('click',async e=>{
 function syncReadingButton(){
  const pressed=$('reading').value==='on';
  $('reading-toggle').setAttribute('aria-pressed',String(pressed));
- $('reading-toggle').textContent=pressed?'よみがな ON':'よみがな';
+ $('reading-toggle').textContent=pressed?'よみがな ON':'よみがな OFF';
 }
 $('reading-toggle').addEventListener('click',()=>{
  $('reading').value=$('reading').value==='on'?'off':'on';

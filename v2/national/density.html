@@ -132,7 +132,7 @@ html.national-focus main>h1+p{font-size:14px;color:#55738a;margin-bottom:8px}
 <script defer src="density-labels.js?v=20261104-progressive-zoom"></script>
 <script defer src="centered-labels.js?v=20261101-office5"></script>
 <script defer src="../common/js/office-directory.js?v=6-ward-city-links"></script>
-<script defer src="density-app.js?v=20261104-reading-fallback"></script>
+<script defer src="density-app.js?v=20261104-single-row-labels"></script>
 </head><body><main>
 <a href="/v2/">← V2試験トップへ</a>
 <h1>全国市区町村マップ</h1>
@@ -202,7 +202,7 @@ html.national-focus main>h1+p{font-size:14px;color:#55738a;margin-bottom:8px}
 <div class="controls">
 <label>表示エリア<select id="area"><option value="japan">全国47都道府県（市区町村名表示）</option><option value="kansai">関西2府4県</option><option value="chugoku">中国地方5県</option><option value="west">関西＋中国11府県</option><option value="shikoku">四国4県</option><option value="chugoku-shikoku">中国＋四国9県</option><option value="west-shikoku" selected>関西＋中国＋四国15府県</option><option value="fuji">山梨・静岡（富士山ナンバー）</option></select></label>
 <label>表示単位<select id="mode"><option value="municipality">市町村名（政令市を統合）</option><option value="ward" selected>市区町村名（政令市の区も表示）</option><option value="plate">富士山ナンバー（県境横断）</option></select></label>
-<label>読み仮名表示<select id="reading"><option value="on" selected>漢字＋よみがな</option><option value="off">漢字のみ</option></select></label>
+<label>読み仮名表示<select id="reading"><option value="on">漢字＋よみがな</option><option value="off" selected>漢字のみ</option></select></label>
 <div class="searchbox"><label for="search" style="display:block;font-size:13px;font-weight:800">市区町村・地域名を検索</label><input id="search" type="search" autocomplete="off" placeholder="例：西宮、大阪市、富士山" aria-controls="suggestions"><div id="suggestions" class="suggest" hidden></div></div>
 </div>
 </section>
@@ -226,7 +226,7 @@ html.national-focus main>h1+p{font-size:14px;color:#55738a;margin-bottom:8px}
 <button type="button" id="zoom-in" aria-label="地図を拡大">＋ 拡大</button>
 <button type="button" id="zoom-out" aria-label="地図を縮小">－ 縮小</button>
 <button type="button" id="reset" aria-label="地図を全域表示">全体表示</button>
-<button type="button" id="reading-toggle" aria-label="読み仮名の表示を切り替え" aria-pressed="true">よみがな ON</button>
+<button type="button" id="reading-toggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button>
 </div>
 </div>
 <p class="meta">市区町村をタップすると区域が琥珀色になり、庁舎情報の吹き出しが開きます。×印は吹き出しだけを閉じ、選択色は残します。同じ市区町村を再度タップすると選択色が解除され、その次のタップで再び色と吹き出しが表示されます。</p>
