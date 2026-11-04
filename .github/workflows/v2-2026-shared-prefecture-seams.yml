@@ -1,0 +1,35 @@
+name: V2 2026 shared prefecture seam overlay trial
+on:
+  pull_request:
+    paths:
+      - 'v2/national/build-2026-shared-prefecture-seams.cjs'
+      - 'v2/data/national/2026-common/**'
+      - '.github/workflows/v2-2026-shared-prefecture-seams.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/build-2026-shared-prefecture-seams.cjs'
+      - 'v2/data/national/2026-common/**'
+      - '.github/workflows/v2-2026-shared-prefecture-seams.yml'
+  workflow_dispatch:
+jobs:
+  build-shared-seams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript and synthetic geometry
+        run: |
+          node --check v2/national/build-2026-shared-prefecture-seams.cjs
+          node v2/national/build-2026-shared-prefecture-seams.cjs --self-test
+      - name: Generate diagnostic-only unique shared segments
+        run: node v2/national/build-2026-shared-prefecture-seams.cjs "$RUNNER_TEMP/2026-shared-prefecture-seams.geojson"
+      - name: Keep trial geometry as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-2026-shared-prefecture-seams-trial
+          path: ${{ runner.temp }}/2026-shared-prefecture-seams.geojson
+          if-no-files-found: error
+          retention-days: 30
