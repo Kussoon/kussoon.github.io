@@ -45,7 +45,7 @@ function zoomBy(factor,fx=.5,fy=.5){
  if(!models.length)return;
  // Wide-area maps need more than the legacy 18x cap to inspect a town.
  // Keep the already-tested limits for single-region and Fuji modes.
- const maxZoom=state.area==='japan'?96:state.area==='west-shikoku'?96:
+ const maxZoom=state.area==='japan'?768:state.area==='west-shikoku'?96:
   state.area==='chugoku-shikoku'?72:state.area==='west'?72:18;
  const newWidth=Math.max(bounds.w/maxZoom,Math.min(bounds.w,view.w/factor));
  const newHeight=newWidth*bounds.h/bounds.w;
@@ -322,6 +322,13 @@ function renderLabels(){
  const ratio=Math.min((rect.width||390)/view.w,(rect.height||390)/view.h);
  if(!(ratio>0))return;
  const size=screenPx/ratio;
+ // SVG meet preserves aspect ratio: portrait screens show map geometry
+ // above and below the nominal viewBox. Declutter the full visible viewport.
+ const visibleView=nationalMap?{
+  x:view.x-(rect.width/ratio-view.w)/2,
+  y:view.y-(rect.height/ratio-view.h)/2,
+  w:rect.width/ratio,h:rect.height/ratio
+ }:view;
  const readingEnabled=$('reading').value==='on' &&
   (compareMode||$('density-mode').value==='all'||zoom>=6);
  const workModels=state.mode==='plate'&&plateShape?[...models,plateShape]:models;
@@ -431,7 +438,7 @@ function renderLabels(){
  const arrangement=compareMode?
   {visible:workModels.map(()=>true),labels:resultLabels}:
   D.arrange(workModels,resultLabels,{
-   view,zoom,mode:$('density-mode').value,density:$('density-level').value,
+   view:visibleView,zoom,mode:$('density-mode').value,density:$('density-level').value,
    selectedId:selection?.type==='model'?selection.id:null,
    screenWidth:rect.width||390,screenHeight:rect.height||390,
    stableAnchors:nationalMap
