@@ -338,7 +338,7 @@ function renderLabels(){
    labelAnchorCache.set(source.id,anchor);
   }
   const point={x:anchor[0],y:anchor[1]};
-  return readingEnabled?NR.boxFor(source,point,size,measure):L.boxFor(source,point,size,measure);
+  return readingEnabled&&source.readingParts?.length?NR.boxFor(source,point,size,measure):L.boxFor(source,point,size,measure);
  }):compareMode?layoutModels.map(m=>{
   const [x,y]=$('density-mode').value==='office5'?
    (office5Centers.get(m.id)||mainland5Centers.get(m.id)||proposal5Centers.get(m.id)||m.polylabel||m.centroid):
@@ -379,7 +379,7 @@ function renderLabels(){
    return {...l,width,height,box:{x1:l.x-width/2,y1:l.y-height/2,
     x2:l.x+width/2,y2:l.y+height/2}};
   }
-  return readingEnabled?NR.boxFor(m,l,size,measure):L.boxFor(m,l,size,measure);
+  return readingEnabled&&m.readingParts?.length?NR.boxFor(m,l,size,measure):L.boxFor(m,l,size,measure);
  });
  const pinned=state.mode==='plate'?layoutModels.length-1:
    selection?.type==='model'?models.findIndex(m=>m.id===selection.id):-1;
