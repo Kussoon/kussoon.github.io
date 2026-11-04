@@ -19,7 +19,7 @@
     if(p.length!==2)throw Error('市と区の読みが分離されていません：'+entry.name);
     parts=[{name:model.major,reading:kana(p[0])},{name:model.name,reading:kana(p[1])}];
    }else if(model.county){
-    const countykana=counties[model.county];
+    const countykana=countySource?.byPrefecture?.[model.code.slice(0,2)+'|'+model.county]||counties[model.county];
     if(!countykana)throw Error('郡名の読みが未収録：'+model.county);
     parts=[{name:model.county,reading:kana(countykana)},{name:model.name,reading:kana(entry.reading)}];
    }else{
