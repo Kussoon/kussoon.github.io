@@ -79,6 +79,27 @@ ruby rt{font-size:.58em;font-weight:600;line-height:1.05;letter-spacing:0}
 .summary,.effect-result p,.group h3{line-height:1.9}
 @media(max-width:480px){.tab{font-size:14px}.type{min-height:62px}.choice{min-height:75px}}
 
+
+.quiz-board{background:#fcfdff}
+.quiz-settings{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0;font-weight:800}
+.quiz-settings select{font:inherit;background:white;color:#18334b;border:1px solid #9cbacd;border-radius:10px;min-height:46px;padding:9px}
+.quiz-progress{display:flex;justify-content:space-between;padding:12px;border-radius:11px;background:#edf5fa;font-weight:800}
+.quiz-scene{margin:12px 0;padding:15px;background:#f1f8ff;border:2px solid #c6dae9;border-radius:17px;text-align:center;font-weight:800}
+.quiz-pair{display:flex;align-items:center;justify-content:center;gap:15px;font-size:23px}
+.quiz-type{display:flex;align-items:center;flex-direction:column;gap:5px;font-size:16px}
+.quiz-type .type-symbol{width:65px;height:65px;border-radius:15px}
+.quiz-answers{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:15px 0}
+.quiz-answer{font:inherit;min-height:75px;padding:10px 6px;border-radius:13px;border:2px solid #bed1df;background:#fff;color:#20435e;font-weight:800;cursor:pointer;line-height:1.7}
+.quiz-answer strong{display:block;font-size:24px}
+.quiz-answer.correct{border-color:#249c72;background:#def9eb;color:#135a41}
+.quiz-answer.wrong{border-color:#d75d58;background:#ffe9e7;color:#96392e}
+.quiz-answer:disabled{opacity:1;cursor:default}
+.quiz-answer:focus-visible{outline:3px solid #176da4;outline-offset:2px}
+.quiz-feedback{background:#e9f9ef;border:1px solid #8bcdad;border-radius:12px;padding:13px;font-weight:700;line-height:1.8;margin:12px 0}
+.quiz-feedback.wrong{background:#fff1e9;border-color:#e5b49e}
+.quiz-end-score{text-align:center;font-size:clamp(30px,7vw,46px);font-weight:900;padding:16px;color:#225f8a}
+#quiz-message{text-align:center;font-weight:800}
+@media(max-width:480px){.quiz-type .type-symbol{width:54px;height:54px}.quiz-pair{gap:8px}.quiz-answer{font-size:14px}.quiz-answer strong{font-size:22px}}
 </style>
 </head>
 <body>
@@ -87,7 +108,7 @@ ruby rt{font-size:.58em;font-weight:600;line-height:1.05;letter-spacing:0}
 <p class="eyebrow">Kussoon / 学習アプリ試作・第2段階</p>
 <h1>18タイプ相性トレーニング</h1>
 <p>18タイプの相性を、調べたり組み合わせたりして覚えよう！</p>
-<nav class="mode-tabs" role="tablist" aria-label="学習モード"><button class="tab" id="tab-study" role="tab" aria-selected="false" aria-controls="study-page" type="button">📖 まなぶ</button><button class="tab" id="tab-practice" role="tab" aria-selected="true" aria-controls="practice-page" type="button">🎯 れんしゅう</button><button class="tab" type="button" disabled aria-label="クイズ（次の開発段階）">❔ クイズ（準備中）</button></nav>
+<nav class="mode-tabs" role="tablist" aria-label="学習モード"><button class="tab" id="tab-study" role="tab" aria-selected="false" aria-controls="study-page" type="button">📖 まなぶ</button><button class="tab" id="tab-practice" role="tab" aria-selected="true" aria-controls="practice-page" type="button">🎯 れんしゅう</button><button class="tab" id="tab-quiz" role="tab" aria-selected="false" aria-controls="quiz-page" type="button">❔ クイズ</button></nav>
 <div id="study-page" role="tabpanel" aria-labelledby="tab-study" hidden>
 <section class="panel" aria-labelledby="pick-heading">
 <h2 id="pick-heading">① タイプを選ぼう</h2>
@@ -117,6 +138,29 @@ ruby rt{font-size:.58em;font-weight:600;line-height:1.05;letter-spacing:0}
 <div class="actions"><button class="action" type="button" id="random-match">🔀 べつの組み合わせ</button><button class="action primary" type="button" id="go-study">📖 まなぶへ</button></div>
 <p class="notice">※第2段階は単タイプ同士の練習です。複合タイプとクイズは今後追加する予定です。</p></section>
 </div>
+
+<div id="quiz-page" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+<section class="panel quiz-board" aria-labelledby="quiz-heading">
+<h2 id="quiz-heading">❔ タイプ相性 4択クイズ</h2>
+<p>わざと あいての タイプを見て、こうかを えらぼう！</p>
+<div class="quiz-settings"><label for="quiz-mode">問題のタイプ</label>
+<select id="quiz-mode"><option value="mixed">こうげき・ぼうぎょ 両方</option><option value="attack">こうげきだけ</option><option value="defense">ぼうぎょだけ</option></select></div>
+<div id="quiz-intro"><p>1回10問です。まちがえた問題はあとでふくしゅうできます。</p>
+<div class="actions"><button class="action primary" id="quiz-start" type="button">▶ クイズをはじめる</button>
+<button class="action" id="quiz-review" type="button">🔁 まちがいをふくしゅう（<span id="quiz-mistake-count">0</span>問）</button></div>
+<p class="notice">まちがえた問題はこのブラウザに保存されます。ブラウザのデータを消すと記録も消えます。</p></div>
+<div id="quiz-play" hidden>
+<div class="quiz-progress"><span id="quiz-count"></span><span id="quiz-score"></span></div>
+<div class="quiz-scene"><p id="quiz-category"></p>
+<div class="quiz-pair"><div class="quiz-type" id="quiz-attacker"></div><span aria-hidden="true">➜</span><div class="quiz-type" id="quiz-defender"></div></div>
+<p id="quiz-question"></p></div>
+<div id="quiz-answers" class="quiz-answers" role="group" aria-label="回答を選ぶ"></div>
+<div id="quiz-feedback" class="quiz-feedback" role="status" aria-live="polite" hidden></div>
+<div class="actions"><button type="button" class="action primary" id="quiz-next" hidden>つぎの問題へ</button></div>
+</div>
+<div id="quiz-end" hidden><div class="quiz-end-score" id="quiz-final"></div><p id="quiz-message"></p>
+<div class="actions"><button class="action primary" id="quiz-again" type="button">もういちど</button><button class="action" id="quiz-review-end" type="button">🔁 まちがいをふくしゅう</button></div></div>
+</section></div>
 <footer class="foot">キャラクター画像や公式ロゴは使用していません。ゲーム本編向けの非公式学習用試作です。<br><a href="/">Kussoonトップ</a></footer>
 </main>
 <script>
@@ -238,14 +282,14 @@ NAMES.forEach(name=>{
  palette.appendChild(b);
 });
 function selectPage(page){
- const study=page==="study";
- document.getElementById("study-page").hidden=!study;
- document.getElementById("practice-page").hidden=study;
- document.getElementById("tab-study").setAttribute("aria-selected",String(study));
- document.getElementById("tab-practice").setAttribute("aria-selected",String(!study));
+ for(const p of ["study","practice","quiz"]){
+  document.getElementById(p+"-page").hidden=p!==page;
+  document.getElementById("tab-"+p).setAttribute("aria-selected",String(p===page));
+ }
 }
 document.getElementById("tab-study").addEventListener("click",()=>selectPage("study"));
 document.getElementById("tab-practice").addEventListener("click",()=>selectPage("practice"));
+document.getElementById("tab-quiz").addEventListener("click",()=>selectPage("quiz"));
 document.getElementById("go-study").addEventListener("click",()=>{selectPage("study");window.scrollTo({top:0,behavior:"smooth"})});
 document.querySelectorAll('input[name="change-side"]').forEach(i=>i.addEventListener("change",()=>{practice.side=i.value;renderPractice()}));
 document.querySelectorAll(".pick-arrow").forEach(b=>b.addEventListener("click",()=>{
@@ -275,10 +319,120 @@ function renderPractice(){
 renderPractice();
 
 
+
+const QUIZ_KEY="kussoon-type-quiz-mistakes-v1";
+const QOP=[{v:2,t:"ばつぐん"},{v:1,t:"ふつう"},{v:0.5,t:"いまひとつ"},{v:0,t:"こうかなし"}];
+const QE=id=>document.getElementById(id);
+const qstate={items:[],index:0,correct:0,answered:false,review:false};
+function quizId(q){return [q.direction,q.attack,q.defense].join("|")}
+function loadErrors(){
+ try{
+  const x=JSON.parse(localStorage.getItem(QUIZ_KEY)||"[]");
+  return new Set(Array.isArray(x)?x.filter(s=>typeof s==="string"):[]);
+ }catch(e){return new Set()}
+}
+const qerrors=loadErrors();
+function storeErrors(){try{localStorage.setItem(QUIZ_KEY,JSON.stringify([...qerrors].slice(-648)))}catch(e){}}
+function shuffleQuiz(a){
+ for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+ return a;
+}
+function quizBank(){
+ const m=QE("quiz-mode").value;
+ const directions=m==="mixed"?["attack","defense"]:[m];
+ return directions.flatMap(direction=>NAMES.flatMap(attack=>NAMES.map(defense=>({direction,attack,defense,v:MATRIX[attack][defense]}))));
+}
+function chooseQuiz(review){
+ const bank=quizBank();
+ if(review)return shuffleQuiz(bank.filter(q=>qerrors.has(quizId(q)))).slice(0,10);
+ const buckets=[0,0.5,1,2].map(v=>shuffleQuiz(bank.filter(q=>q.v===v)));
+ const out=[],used=new Set();
+ while(out.length<10&&buckets.some(b=>b.length)){
+  for(const bucket of buckets){
+   while(bucket.length){
+    const q=bucket.pop();
+    if(used.has(quizId(q)))continue;
+    used.add(quizId(q));out.push(q);break;
+   }
+   if(out.length===10)break;
+  }
+ }
+ return shuffleQuiz(out);
+}
+function quizRefreshMistakes(){
+ const count=qerrors.size;
+ QE("quiz-mistake-count").textContent=String(count);
+ QE("quiz-review").disabled=count===0;
+ QE("quiz-review-end").disabled=count===0;
+}
+function quizStart(review){
+ qstate.items=chooseQuiz(review);
+ if(!qstate.items.length){quizRefreshMistakes();return}
+ qstate.index=0;qstate.correct=0;qstate.answered=false;qstate.review=review;
+ QE("quiz-intro").hidden=true;QE("quiz-end").hidden=true;QE("quiz-play").hidden=false;
+ quizRender();
+}
+function quizShowType(id,name,caption){
+ const el=QE(id),tag=document.createElement("span"),nameEl=document.createElement("span");
+ tag.textContent=caption;nameEl.textContent=name;
+ el.replaceChildren(tag,symbol(name),nameEl);
+}
+function quizRender(){
+ const q=qstate.items[qstate.index];qstate.answered=false;
+ QE("quiz-count").textContent=(qstate.review?"ふくしゅう ":"")+"第"+(qstate.index+1)+"問 / "+qstate.items.length+"問";
+ QE("quiz-score").textContent="正解 "+qstate.correct+"問";
+ QE("quiz-category").textContent=q.direction==="attack"?"⚔️ こうげきの問題":"🛡️ ぼうぎょの問題";
+ quizShowType("quiz-attacker",q.attack,"わざ");
+ quizShowType("quiz-defender",q.defense,"あいて");
+ QE("quiz-question").textContent=q.direction==="attack"?
+  q.attack+"のわざで "+q.defense+"にこうげきすると、こうかは？":
+  q.defense+"タイプが "+q.attack+"のわざをうけると、こうかは？";
+ const root=QE("quiz-answers");root.replaceChildren();
+ QOP.forEach(o=>{
+  const b=document.createElement("button");b.type="button";b.className="quiz-answer";b.dataset.v=String(o.v);
+  const number=document.createElement("strong");number.textContent="×"+o.v;
+  b.append(number,document.createTextNode(o.t));
+  b.addEventListener("click",()=>quizAnswer(o.v));root.appendChild(b);
+ });
+ QE("quiz-feedback").hidden=true;QE("quiz-next").hidden=true;
+}
+function quizAnswer(value){
+ if(qstate.answered)return;
+ const q=qstate.items[qstate.index],ok=value===q.v; qstate.answered=true;
+ if(ok){qstate.correct++;qerrors.delete(quizId(q))}
+ else qerrors.add(quizId(q));
+ storeErrors();quizRefreshMistakes();
+ QE("quiz-score").textContent="正解 "+qstate.correct+"問";
+ QE("quiz-answers").querySelectorAll("button").forEach(b=>{
+  b.disabled=true;
+  if(Number(b.dataset.v)===q.v)b.classList.add("correct");
+  else if(Number(b.dataset.v)===value)b.classList.add("wrong");
+ });
+ const f=QE("quiz-feedback");f.hidden=false;f.classList.toggle("wrong",!ok);
+ f.textContent=(ok?"🎉 正解！":"おしい！")+" 正解は ×"+q.v+"（"+QOP.find(x=>x.v===q.v).t+"）です。 "+q.attack+"のわざが "+q.defense+"にあたるときのこうかです。";
+ const b=QE("quiz-next");b.hidden=false;
+ b.textContent=qstate.index===qstate.items.length-1?"けっかを見る":"つぎの問題へ";
+}
+function quizNext(){
+ if(!qstate.answered)return;
+ qstate.index++;
+ if(qstate.index<qstate.items.length){quizRender();return}
+ QE("quiz-play").hidden=true;QE("quiz-end").hidden=false;
+ QE("quiz-final").textContent=qstate.correct+" / "+qstate.items.length+"問 正解！";
+ QE("quiz-message").textContent=qstate.correct===qstate.items.length?"すごい！ ぜんもんせいかい！":"よくがんばりました！ まちがえた問題はふくしゅうしよう。";
+ quizRefreshMistakes();
+}
+QE("quiz-start").addEventListener("click",()=>quizStart(false));
+QE("quiz-review").addEventListener("click",()=>quizStart(true));
+QE("quiz-next").addEventListener("click",quizNext);
+QE("quiz-again").addEventListener("click",()=>quizStart(false));
+QE("quiz-review-end").addEventListener("click",()=>quizStart(true));
+quizRefreshMistakes();
+
 /* Give each visible kanji a correct kana reading without changing source wording.
    Ruby is deliberately not applied to SVG, attributes, script, rt or nested ruby. */
 const FURIGANA_WORDS={
-"組み合わせ":"くみあわせ","切り替え":"きりかえ","攻撃":"こうげき","防御":"ぼうぎょ",
+"正解":"せいかい","問題":"もんだい","回答":"かいとう","保存":"ほぞん","記録":"きろく","結果":"けっか","両方":"りょうほう","選択肢":"せんたくし","組み合わせ":"くみあわせ","切り替え":"きりかえ","攻撃":"こうげき","防御":"ぼうぎょ",
 "相性":"あいしょう","効果":"こうか","該当":"がいとう","通常":"つうじょう",
 "学習":"がくしゅう","練習":"れんしゅう","試作":"しさく","検証":"けんしょう",
 "段階":"だんかい","準備中":"じゅんびちゅう","開発":"かいはつ",
@@ -299,7 +453,7 @@ const FURI_KEYS=Object.keys(FURIGANA_WORDS).sort((a,b)=>b.length-a.length);
 const HAS_KANJI=/[一-龯々〆ヶ]/;
 function addFuriganaToText(node){
  const source=node.nodeValue;
- if(!HAS_KANJI.test(source))return;
+ if(!HAS_KANJI.test(source)||!FURI_KEYS.some(k=>source.includes(k)))return;
  const fragment=document.createDocumentFragment();
  let unmarked="", i=0;
  const flush=()=>{if(unmarked){fragment.appendChild(document.createTextNode(unmarked));unmarked=""}};
