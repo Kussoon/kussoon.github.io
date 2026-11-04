@@ -1,0 +1,35 @@
+name: V2 prefecture seam visual pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/national/prefecture-seam-visual.html'
+      - 'v2/national/prefecture-seam-visual.js'
+      - '.github/workflows/v2-prefecture-seam-visual.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/prefecture-seam-visual.html'
+      - 'v2/national/prefecture-seam-visual.js'
+      - '.github/workflows/v2-prefecture-seam-visual.yml'
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate isolated page and JS
+        run: |
+          node --check v2/national/prefecture-seam-visual.js
+          node - <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const html=fs.readFileSync('v2/national/prefecture-seam-visual.html','utf8');
+          const js=fs.readFileSync('v2/national/prefecture-seam-visual.js','utf8');
+          assert(html.includes('noindex,follow'));
+          assert(html.includes('prefecture-seam-visual.js'));
+          assert(js.includes("national-2026-pilot/manifest.json"));
+          assert(js.includes("counts.get(n<0?~n:n)!==1"));
+          assert(!js.includes('density-app.js'));
+          console.log('PASS independent noindex comparison pilot');
+          NODE
