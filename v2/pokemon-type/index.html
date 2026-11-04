@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#f5f8fc">
-<title>18タイプ相性トレーニング・学習編（試作） | Kussoon</title>
+<title>18タイプ相性トレーニング（試作） | Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#18334b;background:#f3f7fb;font-size:16px}
 *{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:auto;padding:18px 14px 60px}
@@ -27,14 +27,58 @@ h2{font-size:20px;margin:0 0 12px}.types{display:grid;grid-template-columns:repe
 .g2{border-left:5px solid #15966f}.g1{border-left:5px solid #6f8eab}.g05{border-left:5px solid #dd9937}.g0{border-left:5px solid #c95365}
 .legend{font-size:14px;color:#526477}.notice{font-size:13px;color:#54687a}.foot{margin-top:24px;font-size:13px;border-top:1px solid #cddce6;padding-top:14px}
 @media(max-width:660px){main{padding:14px 10px 40px}.panel{padding:13px}.types{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.results{grid-template-columns:1fr}.type{min-height:52px;font-size:14px}.mode{flex:1;min-width:0;padding:10px 6px;font-size:14px}}
+
+/* Stage 2: independent practice mode; keep the first stage learning panels intact. */
+:root{background:#f2f9fb}
+h1{color:#173c61}.mode-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:15px 0}
+.tab{min-height:50px;border:2px solid #bdd6e9;border-radius:13px;background:white;color:#274861;font:inherit;font-weight:800;cursor:pointer}
+.tab[aria-selected="true"]{background:#fada61;border-color:#e5b633;color:#493314}
+.tab:disabled{color:#7a858b;background:#f1f3f4;border-color:#dce2e5}
+.tab:focus-visible,.pick-arrow:focus-visible,.choice:focus-visible,.action:focus-visible{outline:3px solid #176ba3;outline-offset:3px}
+[hidden]{display:none!important}
+.practice-intro{margin:0 0 12px;font-weight:700}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.duo-card{border:2px solid #eec9be;background:#fff7f5;border-radius:18px;padding:12px;text-align:center}
+.duo-card.target{background:#f3fbf5;border-color:#b5dcc6}
+.duo-card h2{font-size:16px;margin:0 0 10px}
+.picker{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.pick-arrow{border:1px solid #d4dce4;border-radius:100%;width:42px;height:42px;flex:0 0 42px;font-size:22px;background:#fff;cursor:pointer}
+.chosen{display:flex;align-items:center;flex-direction:column;gap:6px;font-size:17px;font-weight:800;min-width:0}
+.type-symbol{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;flex-shrink:0;border-radius:10px;background:var(--tile);color:white}
+.type-symbol svg{width:75%;height:75%;display:block;fill:none;stroke:currentColor;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
+.chosen .type-symbol{width:85px;height:85px;border-radius:20px}
+.choose-title{font-weight:800;margin:18px 0 9px}
+.choice-grid{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px}
+.choice{display:flex;align-items:center;flex-direction:column;gap:4px;padding:7px 2px;border:2px solid #d9e3ea;border-radius:10px;background:#fff;color:#1f3445;min-width:0;min-height:70px;font:inherit;font-size:11px;font-weight:750;cursor:pointer}
+.choice .type-symbol{width:37px;height:37px}
+.choice[aria-pressed="true"]{border-color:#e59f27;background:#fff4d7;box-shadow:inset 0 0 0 1px #e59f27}
+.picker-side{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0;font-size:14px;font-weight:750}
+.picker-side label{cursor:pointer;padding:6px 10px;border-radius:10px;background:#edf4f9}
+.picker-side input{accent-color:#245e85}
+.effect-result{margin:15px 0;border:2px solid #f1d2a1;border-radius:18px;background:#fffbeb;padding:15px;text-align:center}
+.effect-result[data-result="2"]{background:#fff2d9;border-color:#efa33e}
+.effect-result[data-result="0.5"]{background:#f0f5ff;border-color:#9eb7e8}
+.effect-result[data-result="0"]{background:#f2f1fa;border-color:#b6a6da}
+.effect-result strong{display:block;font-size:clamp(23px,4.7vw,32px);color:#b54a19}
+.effect-result output{display:block;font-size:clamp(46px,10vw,76px);font-weight:900;line-height:1.15;color:#b64719}
+.effect-result p{font-weight:750;margin:6px 0}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.action{border:1px solid #9fbcd0;border-radius:13px;min-height:46px;padding:10px 16px;background:#fff;font:inherit;font-weight:800;color:#204d6b;cursor:pointer}
+.action.primary{background:#ef922e;border-color:#d87b1b;color:#fff}
+.study-type{display:flex;align-items:center;gap:7px;justify-content:center}.study-type .type-symbol{width:31px;height:31px}
+@media(max-width:700px){.choice-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media(max-width:480px){.choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.choice{min-height:68px;flex-direction:row;justify-content:center;font-size:13px}.choice .type-symbol{width:30px;height:30px}.duo{gap:7px}.duo-card{padding:9px 5px}.duo-card h2{font-size:13px}.chosen .type-symbol{width:62px;height:62px}.pick-arrow{width:30px;height:38px;flex-basis:30px;font-size:19px}.chosen{font-size:15px}}
+
 </style>
 </head>
 <body>
 <main>
 <a href="/v2/">← V2検証エリアへ</a>
-<p class="eyebrow">Kussoon / 学習アプリ試作・第1段階</p>
+<p class="eyebrow">Kussoon / 学習アプリ試作・第2段階</p>
 <h1>18タイプ相性トレーニング</h1>
-<p>タイプをひとつ選んで、<strong>攻撃するとき</strong>と<strong>攻撃されるとき</strong>の相性を調べよう！</p>
+<p>18タイプの相性を、調べたり組み合わせたりして覚えよう！</p>
+<nav class="mode-tabs" role="tablist" aria-label="学習モード"><button class="tab" id="tab-study" role="tab" aria-selected="false" aria-controls="study-page" type="button">📖 まなぶ</button><button class="tab" id="tab-practice" role="tab" aria-selected="true" aria-controls="practice-page" type="button">🎯 れんしゅう</button><button class="tab" type="button" disabled aria-label="クイズ（次の開発段階）">❔ クイズ（準備中）</button></nav>
+<div id="study-page" role="tabpanel" aria-labelledby="tab-study" hidden>
 <section class="panel" aria-labelledby="pick-heading">
 <h2 id="pick-heading">① タイプを選ぼう</h2>
 <div class="types" id="types" aria-label="18タイプ一覧"></div>
@@ -50,6 +94,19 @@ h2{font-size:20px;margin:0 0 12px}.types{display:grid;grid-template-columns:repe
 <p class="legend">×2：効果ばつぐん ／ ×1：通常 ／ ×0.5：いまひとつ ／ ×0：効果なし</p>
 <p class="notice">※通常のポケットモンスターシリーズの「技のタイプ」と「相手のタイプ」の相性です。特性・持ち物・特殊な技の効果は考慮していません。第1段階は単タイプのみです。</p>
 </section>
+</div>
+<div id="practice-page" role="tabpanel" aria-labelledby="tab-practice">
+<section class="panel" aria-labelledby="practice-title"><h2 id="practice-title">タイプを2つ選んで相性を試そう</h2>
+<p class="practice-intro">こうげきする技と、あいてのタイプを選んでください。</p>
+<div class="duo"><div class="duo-card"><h2>⚔️ こうげきする技</h2><div class="picker"><button class="pick-arrow" type="button" data-step="-1" data-side="attack" aria-label="攻撃タイプをひとつ戻す">‹</button><div class="chosen" id="attack-picked"></div><button class="pick-arrow" type="button" data-step="1" data-side="attack" aria-label="攻撃タイプをひとつ進める">›</button></div></div>
+<div class="duo-card target"><h2>🛡️ あいてのタイプ</h2><div class="picker"><button class="pick-arrow" type="button" data-step="-1" data-side="defense" aria-label="相手タイプをひとつ戻す">‹</button><div class="chosen" id="defense-picked"></div><button class="pick-arrow" type="button" data-step="1" data-side="defense" aria-label="相手タイプをひとつ進める">›</button></div></div></div>
+<div class="choose-title">下の18タイプから選ぶ</div>
+<div class="picker-side" role="radiogroup" aria-label="変更する側"><label><input type="radio" name="change-side" value="attack" checked> 攻撃する技</label><label><input type="radio" name="change-side" value="defense"> あいてのタイプ</label></div>
+<div class="choice-grid" id="practice-types" aria-label="18タイプの選択肢"></div>
+<div class="effect-result" id="practice-result" aria-live="polite"><strong id="effect-label"></strong><output id="effect-multiplier"></output><p id="effect-explanation"></p></div>
+<div class="actions"><button class="action" type="button" id="random-match">🔀 べつの組み合わせ</button><button class="action primary" type="button" id="go-study">📖 まなぶへ</button></div>
+<p class="notice">※第2段階は単タイプ同士の練習です。複合タイプとクイズは今後追加する予定です。</p></section>
+</div>
 <footer class="foot">キャラクター画像や公式ロゴは使用していません。ゲーム本編向けの非公式学習用試作です。<br><a href="/">Kussoonトップ</a></footer>
 </main>
 <script>
@@ -106,7 +163,7 @@ TYPES.forEach(([name,sym,bg,fg])=>{
 });
 document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;render()}));
 function render(){
- document.querySelectorAll(".type").forEach(b=>b.setAttribute("aria-pressed",String(b.textContent.trim().endsWith(selected))));
+ document.querySelectorAll(".type").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.type===selected)));
  document.querySelectorAll(".mode").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===mode)));
  document.getElementById("summary").textContent=mode==="attack" ? selected+"タイプの技で攻撃すると…" : selected+"タイプのポケモンが攻撃を受けると…";
  const results=document.getElementById("results");results.replaceChildren();
@@ -122,5 +179,90 @@ function render(){
  });
 }
 render();
+
+/* original illustrated type concepts redrawn as scalable SVG: no official assets */
+const SVG_ICONS={
+"ノーマル":'<circle cx="12" cy="12" r="7"/><path d="M12 1v2M4 3l1.4 2M20 3l-1.4 2"/>',
+"ほのお":'<path d="M12 2c2 5-1 5 3 9 2-2 2-4 2-5 6 7 5 16-5 16S3 15 8 9c0 5 2 4 4-7z"/><path d="M12 12c2 3-2 4-1 7 2 2 5-1 3-4"/>',
+"みず":'<path d="M3 16c4-5 6 3 10-1s6-3 8-1M3 20c5-3 7 3 12-1 2-1 4-1 6 0M10 11c-2-4 4-7 4-10 5 7-1 10-4 10"/>',
+"でんき":'<path d="M13 2L5 14h7l-1 8 8-12h-7z"/>',
+"くさ":'<path d="M12 22V11M12 15C5 15 3 11 3 5c7 0 9 3 9 10M12 12c0-7 3-9 9-9 0 7-3 9-9 9"/>',
+"こおり":'<path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19M9 4l3 3 3-3M9 20l3-3 3 3"/>',
+"かくとう":'<path d="M5 14V9a2 2 0 0 1 4 0V6a2 2 0 0 1 4 0v2a2 2 0 0 1 4 0v2a2 2 0 0 1 4 0v5c0 5-4 7-8 7-5 0-8-3-8-8zM9 9v3M13 8v4M17 10v3"/>',
+"どく":'<path d="M9 2h6M11 2v7l-7 10a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L13 9V2M8 16h8"/><circle cx="10" cy="19" r="1"/><circle cx="14" cy="19" r="1"/>',
+"じめん":'<path d="M2 14l5-6 4 4 4-8 7 10M2 17c4-2 7 2 10 0s7-1 10 0M3 21h18"/>',
+"ひこう":'<path d="M2 15C9 6 14 5 22 3c-3 8-9 12-17 13l5-1M4 21c7-4 11-1 17-5"/>',
+"エスパー":'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',
+"むし":'<circle cx="12" cy="13" r="8"/><path d="M12 5v16M6 3L4 1M18 3l2-2M3 9L1 7M21 9l2-2M3 17l-2 2M21 17l2 2"/><circle cx="8" cy="11" r="1"/><circle cx="16" cy="11" r="1"/>',
+"いわ":'<path d="M3 20l-1-9 7-8 7 3 6 8-3 8zM9 3l3 9-9 8M12 12l10 2M12 12l7 10"/>',
+"ゴースト":'<path d="M4 21V11a8 8 0 0 1 16 0v10l-4-3-4 3-4-3z"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/>',
+"ドラゴン":'<path d="M3 20c6 1 9-4 8-8l4-2-2-5 5 2 3-3-1 9-5 3-2 5M7 13l-5-1 5-3M14 13l2 1"/>',
+"あく":'<path d="M2 9c6 2 13 2 20-4-2 11-7 16-13 16C5 21 3 17 2 9z"/><path d="M11 12l4-1-2 5z"/>',
+"はがね":'<path d="M8 2h8l6 10-6 10H8L2 12z"/><circle cx="12" cy="12" r="4"/>',
+"フェアリー":'<path d="M12 12C7 1 1 5 3 12c2 5 7 5 9 0zm0 0c5-11 11-7 9 0-2 5-7 5-9 0zM12 12v9M5 3l1 2M19 3l-1 2"/>'
+};
+const TILE_COLORS={
+"ノーマル":"#8e949a","ほのお":"#ef6a32","みず":"#238add","でんき":"#efb918","くさ":"#41a64b","こおり":"#20bade",
+"かくとう":"#dd6a29","どく":"#8651a0","じめん":"#a27745","ひこう":"#69aee8","エスパー":"#e86b8b","むし":"#8cae31",
+"いわ":"#b3a16b","ゴースト":"#6a4b91","ドラゴン":"#4c59ae","あく":"#414148","はがね":"#498da7","フェアリー":"#eb8fbc"
+};
+function symbol(name){
+ const span=document.createElement("span");span.className="type-symbol";span.style.setProperty("--tile",TILE_COLORS[name]);
+ span.innerHTML='<svg viewBox="0 0 24 24" role="img" aria-label="'+name+'のアイコン">'+SVG_ICONS[name]+'</svg>';
+ return span;
+}
+const oldButtons=[...document.querySelectorAll("#types .type")];
+oldButtons.forEach(b=>{
+ const name=NAMES.find(n=>b.textContent.trim().endsWith(n));
+ if(!name)return;
+ b.replaceChildren(symbol(name),document.createTextNode(name));
+ b.classList.add("study-type");
+ b.dataset.type=name;
+});
+const practice={attack:"ほのお",defense:"くさ",side:"attack"};
+const palette=document.getElementById("practice-types");
+NAMES.forEach(name=>{
+ const b=document.createElement("button");b.type="button";b.className="choice";b.dataset.type=name;
+ b.append(symbol(name),document.createTextNode(name));
+ b.addEventListener("click",()=>{practice[practice.side]=name;renderPractice()});
+ palette.appendChild(b);
+});
+function selectPage(page){
+ const study=page==="study";
+ document.getElementById("study-page").hidden=!study;
+ document.getElementById("practice-page").hidden=study;
+ document.getElementById("tab-study").setAttribute("aria-selected",String(study));
+ document.getElementById("tab-practice").setAttribute("aria-selected",String(!study));
+}
+document.getElementById("tab-study").addEventListener("click",()=>selectPage("study"));
+document.getElementById("tab-practice").addEventListener("click",()=>selectPage("practice"));
+document.getElementById("go-study").addEventListener("click",()=>{selectPage("study");window.scrollTo({top:0,behavior:"smooth"})});
+document.querySelectorAll('input[name="change-side"]').forEach(i=>i.addEventListener("change",()=>{practice.side=i.value;renderPractice()}));
+document.querySelectorAll(".pick-arrow").forEach(b=>b.addEventListener("click",()=>{
+ const side=b.dataset.side, step=Number(b.dataset.step);
+ practice.side=side;practice[side]=NAMES[(NAMES.indexOf(practice[side])+step+NAMES.length)%NAMES.length];
+ document.querySelector('input[name="change-side"][value="'+side+'"]').checked=true;renderPractice();
+}));
+document.getElementById("random-match").addEventListener("click",()=>{
+ const old=practice.attack+"|"+practice.defense;
+ do{practice.attack=NAMES[Math.floor(Math.random()*18)];practice.defense=NAMES[Math.floor(Math.random()*18)]}while(practice.attack+"|"+practice.defense===old);
+ renderPractice();
+});
+function renderPractice(){
+ for(const side of ["attack","defense"]){
+ const target=document.getElementById(side+"-picked");
+ target.replaceChildren(symbol(practice[side]),document.createTextNode(practice[side]));
+ }
+ palette.querySelectorAll(".choice").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.type===practice[practice.side])));
+ const mult=MATRIX[practice.attack][practice.defense];
+ const label=mult===2?"こうかは ばつぐん！":mult===0.5?"こうかは いまひとつ":mult===0?"こうかが ない":"通常の効果";
+ const phrase=mult===2?"つよい！":mult===0.5?"あまり きかない。":mult===0?"きかない。":"ふつうの効果。";
+ document.getElementById("practice-result").dataset.result=String(mult);
+ document.getElementById("effect-label").textContent=label;
+ document.getElementById("effect-multiplier").textContent="×"+mult;
+ document.getElementById("effect-explanation").textContent=practice.attack+"タイプの技は "+practice.defense+"タイプに "+phrase;
+}
+renderPractice();
+
 </script>
 </body></html>
