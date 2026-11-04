@@ -8,8 +8,8 @@ const {start}=require('./helpers/nationwide-browser.cjs');
 (async()=>{
  const app=await start(),{page}=app,results=[];
  try{
-  await app.open();await page.addScriptTag({url:new URL('centered-labels.js',page.url()).href});
-  for(const [pref,code] of [['27','27362'],['28','28110'],['28','28204'],['28','28219'],['22','22205'],['01','01102']]){
+  await app.open();await page.locator('#showNames').uncheck();await page.addScriptTag({url:new URL('centered-labels.js',page.url()).href});
+  for(const [pref,code] of [['27','27362'],['28','28110'],['28','28204'],['28','28219'],['22','22138'],['22','22205'],['01','01102']]){
    await app.pref(pref);await app.select(code);
    const result=await page.evaluate(async({pref,code})=>{
     const manifest=await fetch('../data/national/2026-common/national-2026-pilot/manifest.json').then(r=>r.json());
@@ -52,7 +52,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    for(let n=0;n<12;n++)await page.click('#mapZoomIn');
    result.actualMaximumZoom=await page.textContent('#zoomLevel');results.push(result);
   }
-  const report={scope:'Six selected real 2026 regions in desktop Chromium; readings OFF; equal current text box for anchor comparison; five in-process samples, no timing threshold; not whole-prefecture collision/readability or iPhone FPS testing',browser:app.browser.version(),results};
+  const report={scope:'Seven selected real 2026 regions in desktop Chromium; readings OFF; equal current text box for anchor comparison; five in-process samples, no timing threshold; not whole-prefecture collision/readability or iPhone FPS testing',browser:app.browser.version(),results};
   if(process.env.KUSSOON_LABEL_REPORT){await fs.mkdir(path.dirname(process.env.KUSSOON_LABEL_REPORT),{recursive:true});await fs.writeFile(process.env.KUSSOON_LABEL_REPORT,JSON.stringify(report,null,2)+'\n');}
   console.log(JSON.stringify(report,null,2));assert.deepEqual(app.errors,[]);
  }finally{await app.close();}

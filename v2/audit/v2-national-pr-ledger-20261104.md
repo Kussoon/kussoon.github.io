@@ -2559,3 +2559,11 @@ PR本文、全245件の変更ファイル一覧（計1027エントリ）、API�
 |[#226](https://github.com/Kussoon/kussoon.github.io/pull/226/files)|`v2/data/national/municipality-readings.json`|8765|
 
 対象外PR 27件、V2関連 218件。未マージ 5件。patch省略 77ファイル。分類や仕様数は推定で水増ししない。
+
+
+## pilot UI是正の後続PR（過去245件の集計とは別）
+
+- [#259](https://github.com/Kussoon/kussoon.github.io/pull/259): S08/S12/S13/S19。高さ175px制約によるリンク/親市の見切れを是正。S12の高さ一致は今回の明示要件に従い置換。map-firstとdebugフラグ退避。Chromium/WebKit新2スイートと既存17コマンド/既存5スイート、画像は正式仕様・回帰計画参照。
+- [#260](https://github.com/Kussoon/kussoon.github.io/pull/260): S21〜S26のB6件を維持し、配置前の対象フィルターによる周辺名非表示を是正。県内周辺名初期ON、4県各配置段の件数維持、パン/ズーム再計算なし、同じ浜松2026形状の現行/旧5C比較。隣県先読み・手動座標・旧方式全面復帰はしない。
+
+作業開始main `958fe45` → 作業中main `301371c`（差分はPokémonページのみ）を#259へ取り込み、全国版の既存マージ済み修正を維持。推奨は#259→#260。自動マージなし。

@@ -1,5 +1,12 @@
 # 正式監査台帳と回帰防止基盤・実装進捗
 
+## 今回のレビュー順序（自動マージなし）
+
+1. [PR #259](https://github.com/Kussoon/kussoon.github.io/pull/259): 吹き出し到達性・区/親市の表示・地図中心UI・S19回帰。基準head `de1c4b9` のActions全8 workflow成功。
+2. [PR #260](https://github.com/Kussoon/kussoon.github.io/pull/260): 県内周辺名の初期表示・段別件数と描画負荷の回帰・浜松同形状比較。baseは#259のブランチ。#259のマージ後にmainへbase変更し、差分/Checksを再確認する。
+
+地図/庁舎/URL監査JSONは変更なし。現在40仕様はA24/B6/C4/要確認6。S21〜S26のB6件は保留を維持。[周辺表示の原因・範囲・性能・画像](v2-national-regression-test-plan-20261104.md#周辺ラベルの対象範囲と現行方式の比較pilot-ui後続段階)に比較結果を記録した。
+
 ## pilot UI是正（今回・未マージ）
 
 基準main `958fe45b8c69780f4f5fb1a83905a3783aaaeac0` では#248/#250〜#253がすべてマージ済み。以下の旧「未マージ」は履歴として残す。今回の正式仕様はA24/B6/C4/要確認6。S12/S13/S19はChromium/WebKitの検証範囲でA、iPhone Safari実機は未確認。
