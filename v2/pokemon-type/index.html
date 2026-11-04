@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#f5f8fc">
+<title>18タイプ相性トレーニング・学習編（試作） | Kussoon</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#18334b;background:#f3f7fb;font-size:16px}
+*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:auto;padding:18px 14px 60px}
+a{color:#165681}h1{font-size:clamp(24px,5vw,34px);margin:12px 0 8px}p{line-height:1.7}
+.eyebrow{font-size:13px;color:#5b6f80;font-weight:700}.panel{background:white;border:1px solid #cddce6;border-radius:18px;padding:18px;margin-top:16px;box-shadow:0 4px 18px #173d5510}
+h2{font-size:20px;margin:0 0 12px}.types{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.type{font:inherit;font-weight:800;border:2px solid transparent;border-radius:12px;min-height:56px;padding:7px 3px;background:var(--bg);color:var(--fg);cursor:pointer}
+.type[aria-pressed="true"]{outline:3px solid #163e5a;outline-offset:1px;box-shadow:0 0 0 2px #fff inset}
+.type:focus-visible,.mode:focus-visible{outline:3px solid #1976c4;outline-offset:2px}
+.icon{font-size:20px;margin-right:3px}.modes{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.mode{font:inherit;background:#eaf1f7;border:1px solid #bed2df;color:#21475e;border-radius:12px;font-weight:800;padding:12px 16px;min-height:48px;cursor:pointer}
+.mode[aria-pressed="true"]{background:#245d84;color:white;border-color:#245d84}
+.summary{font-weight:700;background:#edf5fa;border-radius:10px;padding:12px;margin:10px 0 14px}
+.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.group{border-radius:13px;border:1px solid #d7e1e9;padding:12px;background:#fff}
+.group h3{font-size:17px;margin:0 0 10px}.group .note{font-size:13px;color:#54687a;margin:0 0 10px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid #c3d2de;border-radius:9px;padding:6px 9px;background:#f6f9fc;font-size:14px;font-weight:750}
+.chip.empty{font-weight:400;color:#607586}
+.g2{border-left:5px solid #15966f}.g1{border-left:5px solid #6f8eab}.g05{border-left:5px solid #dd9937}.g0{border-left:5px solid #c95365}
+.legend{font-size:14px;color:#526477}.notice{font-size:13px;color:#54687a}.foot{margin-top:24px;font-size:13px;border-top:1px solid #cddce6;padding-top:14px}
+@media(max-width:660px){main{padding:14px 10px 40px}.panel{padding:13px}.types{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.results{grid-template-columns:1fr}.type{min-height:52px;font-size:14px}.mode{flex:1;min-width:0;padding:10px 6px;font-size:14px}}
+</style>
+</head>
+<body>
+<main>
+<a href="/v2/">← V2検証エリアへ</a>
+<p class="eyebrow">Kussoon / 学習アプリ試作・第1段階</p>
+<h1>18タイプ相性トレーニング</h1>
+<p>タイプをひとつ選んで、<strong>攻撃するとき</strong>と<strong>攻撃されるとき</strong>の相性を調べよう！</p>
+<section class="panel" aria-labelledby="pick-heading">
+<h2 id="pick-heading">① タイプを選ぼう</h2>
+<div class="types" id="types" aria-label="18タイプ一覧"></div>
+</section>
+<section class="panel" aria-labelledby="effect-heading">
+<h2 id="effect-heading">② 相性を見よう</h2>
+<div class="modes" role="group" aria-label="攻撃・防御の切り替え">
+<button class="mode" type="button" data-mode="attack" aria-pressed="true">⚔️ 攻撃するとき</button>
+<button class="mode" type="button" data-mode="defense" aria-pressed="false">🛡️ 攻撃されるとき</button>
+</div>
+<div class="summary" id="summary" aria-live="polite"></div>
+<div class="results" id="results"></div>
+<p class="legend">×2：効果ばつぐん ／ ×1：通常 ／ ×0.5：いまひとつ ／ ×0：効果なし</p>
+<p class="notice">※通常のポケットモンスターシリーズの「技のタイプ」と「相手のタイプ」の相性です。特性・持ち物・特殊な技の効果は考慮していません。第1段階は単タイプのみです。</p>
+</section>
+<footer class="foot">キャラクター画像や公式ロゴは使用していません。ゲーム本編向けの非公式学習用試作です。<br><a href="/">Kussoonトップ</a></footer>
+</main>
+<script>
+"use strict";
+const TYPES=[
+["ノーマル","◯","#d7d4cd","#232d3a"],
+["ほのお","♨","#f8b27b","#412016"],
+["みず","●","#92c6fa","#183853"],
+["でんき","⚡","#ffe17a","#463b0c"],
+["くさ","♣","#a9df9a","#1e4728"],
+["こおり","❄","#a2e4e4","#15434d"],
+["かくとう","✊","#e6a29e","#4d2023"],
+["どく","◆","#cca1de","#402450"],
+["じめん","▰","#e5cd92","#483818"],
+["ひこう","➶","#b7c8ed","#263b5c"],
+["エスパー","✦","#f6a4b6","#522536"],
+["むし","✳","#c6d985","#354518"],
+["いわ","⬡","#d0c394","#493e21"],
+["ゴースト","☾","#a8a0cb","#272344"],
+["ドラゴン","♢","#9ab3eb","#253661"],
+["あく","◈","#b5a7a0","#332722"],
+["はがね","⬢","#bfcdd2","#283c47"],
+["フェアリー","♡","#f3bddc","#582c46"]
+];
+const NAMES=TYPES.map(t=>t[0]);
+// 攻撃タイプごとの「×2」「×0.5」「×0」の防御タイプ。その他は×1。
+const RULES={
+"ノーマル":[[],["いわ","はがね"],["ゴースト"]],
+"ほのお":[["くさ","こおり","むし","はがね"],["ほのお","みず","いわ","ドラゴン"],[]],
+"みず":[["ほのお","じめん","いわ"],["みず","くさ","ドラゴン"],[]],
+"でんき":[["みず","ひこう"],["でんき","くさ","ドラゴン"],["じめん"]],
+"くさ":[["みず","じめん","いわ"],["ほのお","くさ","どく","ひこう","むし","ドラゴン","はがね"],[]],
+"こおり":[["くさ","じめん","ひこう","ドラゴン"],["ほのお","みず","こおり","はがね"],[]],
+"かくとう":[["ノーマル","こおり","いわ","あく","はがね"],["どく","ひこう","エスパー","むし","フェアリー"],["ゴースト"]],
+"どく":[["くさ","フェアリー"],["どく","じめん","いわ","ゴースト"],["はがね"]],
+"じめん":[["ほのお","でんき","どく","いわ","はがね"],["くさ","むし"],["ひこう"]],
+"ひこう":[["くさ","かくとう","むし"],["でんき","いわ","はがね"],[]],
+"エスパー":[["かくとう","どく"],["エスパー","はがね"],["あく"]],
+"むし":[["くさ","エスパー","あく"],["ほのお","かくとう","どく","ひこう","ゴースト","はがね","フェアリー"],[]],
+"いわ":[["ほのお","こおり","ひこう","むし"],["かくとう","じめん","はがね"],[]],
+"ゴースト":[["エスパー","ゴースト"],["あく"],["ノーマル"]],
+"ドラゴン":[["ドラゴン"],["はがね"],["フェアリー"]],
+"あく":[["エスパー","ゴースト"],["かくとう","あく","フェアリー"],[]],
+"はがね":[["こおり","いわ","フェアリー"],["ほのお","みず","でんき","はがね"],[]],
+"フェアリー":[["かくとう","ドラゴン","あく"],["ほのお","どく","はがね"],[]]
+};
+const MATRIX=Object.fromEntries(NAMES.map(a=>[a,Object.fromEntries(NAMES.map(d=>[d,RULES[a][0].includes(d)?2:RULES[a][1].includes(d)?0.5:RULES[a][2].includes(d)?0:1]))]));
+let selected="ほのお",mode="attack";
+const buttons=document.getElementById("types");
+TYPES.forEach(([name,sym,bg,fg])=>{
+ const b=document.createElement("button");b.type="button";b.className="type";b.style.setProperty("--bg",bg);b.style.setProperty("--fg",fg);
+ b.setAttribute("aria-pressed",String(name===selected));b.innerHTML='<span class="icon" aria-hidden="true">'+sym+'</span>'+name;
+ b.addEventListener("click",()=>{selected=name;render()});buttons.appendChild(b);
+});
+document.querySelectorAll(".mode").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;render()}));
+function render(){
+ document.querySelectorAll(".type").forEach(b=>b.setAttribute("aria-pressed",String(b.textContent.trim().endsWith(selected))));
+ document.querySelectorAll(".mode").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===mode)));
+ document.getElementById("summary").textContent=mode==="attack" ? selected+"タイプの技で攻撃すると…" : selected+"タイプのポケモンが攻撃を受けると…";
+ const results=document.getElementById("results");results.replaceChildren();
+ [[2,"×2","効果ばつぐん！","g2"],[1,"×1","通常の効果","g1"],[0.5,"×0.5","効果はいまひとつ","g05"],[0,"×0","効果がない","g0"]].forEach(([val,mult,label,cls])=>{
+  const box=document.createElement("section");box.className="group "+cls;
+  const head=document.createElement("h3");head.textContent=mult+"　"+label;box.appendChild(head);
+  const note=document.createElement("p");note.className="note";note.textContent=mode==="attack"?"相手の防御タイプ":"相手が使う技のタイプ";box.appendChild(note);
+  const chips=document.createElement("div");chips.className="chips";
+  const matches=NAMES.filter(other=>(mode==="attack"?MATRIX[selected][other]:MATRIX[other][selected])===val);
+  if(!matches.length){const span=document.createElement("span");span.className="chip empty";span.textContent="該当なし";chips.appendChild(span)}
+  matches.forEach(n=>{const span=document.createElement("span");span.className="chip";span.textContent=n;chips.appendChild(span)});
+  box.appendChild(chips);results.appendChild(box);
+ });
+}
+render();
+</script>
+</body></html>
