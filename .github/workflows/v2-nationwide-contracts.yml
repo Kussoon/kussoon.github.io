@@ -43,8 +43,11 @@ jobs:
           node v2/tests/nationwide-2026.browser.cjs
           node v2/tests/nationwide-retap.browser.cjs
           node v2/tests/nationwide-search.browser.cjs
+          node v2/tests/nationwide-touch.browser.cjs
+          node v2/tests/compare-2026-labels.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser
+          KUSSOON_LABEL_REPORT: ${{ runner.temp }}/kussoon-browser/label-comparison.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
