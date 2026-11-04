@@ -1,0 +1,29 @@
+name: V2 national-map accepted contracts
+on:
+  pull_request:
+    paths:
+      - 'v2/national/density.html'
+      - 'v2/national/density-app.js'
+      - 'v2/national/centered-labels.js'
+      - 'v2/data/national/office-reference-points.json'
+      - 'v2/national/test-density-contract.cjs'
+      - '.github/workflows/v2-national-map-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/density.html'
+      - 'v2/national/density-app.js'
+      - 'v2/national/centered-labels.js'
+      - 'v2/data/national/office-reference-points.json'
+      - 'v2/national/test-density-contract.cjs'
+      - '.github/workflows/v2-national-map-contract.yml'
+jobs:
+  accepted-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate accepted national-map behavior
+        run: node v2/national/test-density-contract.cjs
