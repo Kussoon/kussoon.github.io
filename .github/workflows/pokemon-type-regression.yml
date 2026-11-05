@@ -1,0 +1,27 @@
+name: Pokemon type trainer regression
+
+on:
+  push:
+    paths:
+      - 'v2/pokemon-type/**'
+      - '.github/workflows/pokemon-type-regression.yml'
+  pull_request:
+    paths:
+      - 'v2/pokemon-type/**'
+      - '.github/workflows/pokemon-type-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check 18-type chart, dual-type multipliers, navigation and quiz invariants
+        run: node --test v2/pokemon-type/tests/regression.test.mjs
