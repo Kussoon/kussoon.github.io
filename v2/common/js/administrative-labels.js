@@ -31,7 +31,7 @@ function boxFor(model,label,size,measure){
   x2:label.x+width/2,y2:label.y+height/2};
  return {...label,width,height,box};
 }
-function paint(textElement,model,x,size){
+function paint(textElement,model,x,size,precision=2){
  const pair=rows(model);
  if(!pair){
   if(textElement.textContent!==model.name)textElement.textContent=model.name;
@@ -47,11 +47,11 @@ function paint(textElement,model,x,size){
   bottom.textContent=pair[1];
   textElement.replaceChildren(top,bottom);
  }
- const pos=Number(x).toFixed(2);
+ const pos=Number(x).toFixed(precision);
  top.setAttribute('x',pos);
  bottom.setAttribute('x',pos);
- top.setAttribute('dy',(-size*.58).toFixed(2));
- bottom.setAttribute('dy',(size*1.16).toFixed(2));
+ top.setAttribute('dy',(-size*.58).toFixed(precision));
+ bottom.setAttribute('dy',(size*1.16).toFixed(precision));
  return true;
 }
 global.KussoonAdministrativeLabels={rows,widestRowModel,boxFor,paint};

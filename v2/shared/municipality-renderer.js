@@ -6,22 +6,22 @@
 (function(global){
 'use strict';
 const NS='http://www.w3.org/2000/svg';
-function pathFromPolygons(polys, project){
+function pathFromPolygons(polys, project, precision=2){
  let d='';
  for(const polygon of polys)for(const ring of polygon){
   for(let i=0;i<ring.length;i++){
-   const p=project(ring[i]);d+=(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2);
+   const p=project(ring[i]);d+=(i?'L':'M')+p[0].toFixed(precision)+','+p[1].toFixed(precision);
   }
   d+='Z';
  }
  return d;
 }
-function pathFromArcs(arcs,project){
+function pathFromArcs(arcs,project,precision=2){
  let d='';
  for(const arc of arcs){
   if(arc.length<2)continue;
   for(let i=0;i<arc.length;i++){
-   const p=project(arc[i]);d+=(i?'L':'M')+p[0].toFixed(2)+','+p[1].toFixed(2);
+   const p=project(arc[i]);d+=(i?'L':'M')+p[0].toFixed(precision)+','+p[1].toFixed(precision);
   }
  }
  return d;

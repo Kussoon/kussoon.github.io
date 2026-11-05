@@ -1,3 +1,9 @@
+> PR #263 性能改善追記: [原因分離・同条件比較・メモリ・操作検査・残る制約](v2-national-regression-test-plan-20261104.md#progressive-performance)。Draft/opt-inを維持し、旧801ms等の記録は当時の履歴として読む。通常版49判定と旧24失敗は維持。
+
+## 段階表示復元のレビュー入口（2026-11-05）
+
+補完監査 [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) → 設計/実装前比較 [#262](https://github.com/Kussoon/kussoon.github.io/pull/262) → [PR #263（Draft試作）](https://github.com/Kussoon/kussoon.github.io/pull/263)、の順でレビューする。自動マージなし。[試作・実表示・性能・未確認範囲](v2-national-regression-test-plan-20261104.md#progressive-restoration-prototype)を参照。以下の「監査のみ」は#261記録当時の範囲で、試作PRでは新索引・共通描画の後方互換拡張・フラグ処理・回帰テスト/CIを追加する。通常版の49判定は変更しない。
+
 # 総合監査の補完：利用者動作の継承範囲（今回・監査のみ）
 
 補完記録日: 2026-11-05 UTC（既存台帳のファイル名を継続）。基準main: `6bdd8693841e0723cfa427f5fb9532cd9930ee94`。[補完監査PR #261](https://github.com/Kussoon/kussoon.github.io/pull/261)は未マージ・自動マージなし。#248〜#253/#259/#260はマージ済み。#249はPokémon別コンテンツで全国地図監査対象外。本PRは文書と観測用診断/証拠だけで、本体機能・地図/庁舎/URL監査データ・既存テスト/CIを変更しない。

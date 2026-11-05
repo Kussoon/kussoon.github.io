@@ -1,0 +1,303 @@
+{
+  "sourceRef": "767561d91ba1974f03047ec9b7df62c6e5fa552b",
+  "scope": "Chromium JS heap/DOM/transfer and main thread tasks; not RSS/GPU/physical iPhone FPS",
+  "rows": [
+    {
+      "name": "initial",
+      "heap": {
+        "usedSize": 9221604,
+        "totalSize": 15904768,
+        "embedderHeapUsedSize": 6201496,
+        "backingStorageSize": 1484911
+      },
+      "app": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 1824,
+        "count": 1905,
+        "store": {
+          "cached": 0,
+          "cachedBytes": 0,
+          "byteCapacity": 12582912,
+          "keys": [],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 0,
+          "loads": 0
+        },
+        "labelPasses": 2,
+        "lastLabelMs": 7.399999998509884,
+        "firstLabelMs": 260.59999999403954,
+        "maxLabelMs": 260.59999999403954,
+        "shapePasses": 1,
+        "lastShapeMs": 28.600000001490116,
+        "maxShapeMs": 28.600000001490116,
+        "indexBytes": 659025
+      },
+      "nodes": 293,
+      "labels": 43,
+      "viewBox": "0 0 850 700",
+      "bytes": 872547,
+      "longTasks": [
+        {
+          "ms": 309,
+          "start": 507.80000000447035
+        }
+      ]
+    },
+    {
+      "name": "mie",
+      "heap": {
+        "usedSize": 99367712,
+        "totalSize": 148094976,
+        "embedderHeapUsedSize": 8203968,
+        "backingStorageSize": 907307
+      },
+      "app": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 3,
+          "cachedBytes": 10228816,
+          "byteCapacity": 12582912,
+          "keys": [
+            "29",
+            "24",
+            "25"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 3
+        },
+        "labelPasses": 4,
+        "lastLabelMs": 44.80000000447035,
+        "firstLabelMs": 260.59999999403954,
+        "maxLabelMs": 260.59999999403954,
+        "shapePasses": 2,
+        "lastShapeMs": 801,
+        "maxShapeMs": 801,
+        "indexBytes": 659025
+      },
+      "nodes": 779,
+      "labels": 295,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "bytes": 11271079,
+      "longTasks": [
+        {
+          "ms": 68,
+          "start": 1434.5
+        },
+        {
+          "ms": 65,
+          "start": 1549.6000000014901
+        },
+        {
+          "ms": 88,
+          "start": 1664.3000000044703
+        },
+        {
+          "ms": 849,
+          "start": 1755.6000000014901
+        }
+      ]
+    },
+    {
+      "name": "kobe",
+      "heap": {
+        "usedSize": 127860840,
+        "totalSize": 172974080,
+        "embedderHeapUsedSize": 10349648,
+        "backingStorageSize": 11635138
+      },
+      "app": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 3,
+          "cachedBytes": 5362727,
+          "byteCapacity": 12582912,
+          "keys": [
+            "27",
+            "28",
+            "26"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 6
+        },
+        "labelPasses": 6,
+        "lastLabelMs": 22.5,
+        "firstLabelMs": 260.59999999403954,
+        "maxLabelMs": 260.59999999403954,
+        "shapePasses": 3,
+        "lastShapeMs": 178.39999999850988,
+        "maxShapeMs": 801,
+        "indexBytes": 659025
+      },
+      "nodes": 688,
+      "labels": 72,
+      "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+      "bytes": 16633806,
+      "longTasks": [
+        {
+          "ms": 52,
+          "start": 2841.5
+        },
+        {
+          "ms": 242,
+          "start": 2943.10000000149
+        }
+      ]
+    },
+    {
+      "name": "sapporo",
+      "heap": {
+        "usedSize": 56966756,
+        "totalSize": 106688512,
+        "embedderHeapUsedSize": 8404560,
+        "backingStorageSize": 23248890
+      },
+      "app": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 1,
+          "cachedBytes": 11548216,
+          "byteCapacity": 12582912,
+          "keys": [
+            "01"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 7
+        },
+        "labelPasses": 8,
+        "lastLabelMs": 23.799999997019768,
+        "firstLabelMs": 260.59999999403954,
+        "maxLabelMs": 260.59999999403954,
+        "shapePasses": 4,
+        "lastShapeMs": 239.30000000447035,
+        "maxShapeMs": 801,
+        "indexBytes": 659025
+      },
+      "nodes": 541,
+      "labels": 45,
+      "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+      "bytes": 28182022,
+      "longTasks": [
+        {
+          "ms": 376,
+          "start": 3515.60000000149
+        }
+      ]
+    },
+    {
+      "name": "okinawa",
+      "heap": {
+        "usedSize": 87122072,
+        "totalSize": 147955712,
+        "embedderHeapUsedSize": 16516496,
+        "backingStorageSize": 30929540
+      },
+      "app": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 1,
+          "cachedBytes": 15388561,
+          "byteCapacity": 12582912,
+          "keys": [
+            "47"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 8
+        },
+        "labelPasses": 10,
+        "lastLabelMs": 20.100000001490116,
+        "firstLabelMs": 260.59999999403954,
+        "maxLabelMs": 260.59999999403954,
+        "shapePasses": 5,
+        "lastShapeMs": 355.79999999701977,
+        "maxShapeMs": 801,
+        "indexBytes": 659025
+      },
+      "nodes": 337,
+      "labels": 21,
+      "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+      "bytes": 43570583,
+      "longTasks": [
+        {
+          "ms": 59,
+          "start": 4135.80000000447
+        },
+        {
+          "ms": 57,
+          "start": 4195.9000000059605
+        },
+        {
+          "ms": 553,
+          "start": 4255.70000000298
+        }
+      ]
+    },
+    {
+      "name": "overview-again",
+      "heap": {
+        "usedSize": 95094188,
+        "totalSize": 148480000,
+        "embedderHeapUsedSize": 16846752,
+        "backingStorageSize": 30931222
+      },
+      "app": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 1,
+          "cachedBytes": 15388561,
+          "byteCapacity": 12582912,
+          "keys": [
+            "47"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 8
+        },
+        "labelPasses": 11,
+        "lastLabelMs": 4.200000002980232,
+        "firstLabelMs": 260.59999999403954,
+        "maxLabelMs": 260.59999999403954,
+        "shapePasses": 6,
+        "lastShapeMs": 9.899999998509884,
+        "maxShapeMs": 801,
+        "indexBytes": 659025
+      },
+      "nodes": 293,
+      "labels": 43,
+      "viewBox": "0 0 850 700",
+      "bytes": 43570583,
+      "longTasks": []
+    }
+  ]
+}

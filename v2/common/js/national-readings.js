@@ -60,7 +60,7 @@
   return {...label,width:g.width,height:g.height,
    box:{x1:x-g.width/2,x2:x+g.width/2,y1:y-g.height/2,y2:y+g.height/2}};
  }
- function paint(textElement,model,x,y,size,measure){
+ function paint(textElement,model,x,y,size,measure,precision=2){
   const g=geometry(model,size,measure);
   const existing=[...textElement.querySelectorAll('tspan')];
   if(existing.length!==g.rows.length||existing.some((node,i)=>node.textContent!==g.rows[i].text)){
@@ -73,11 +73,11 @@
   const spans=[...textElement.querySelectorAll('tspan')];
   spans.forEach((span,i)=>{
    const row=g.rows[i],font=size*row.scale;
-   span.setAttribute('x',Number(x).toFixed(2));
-   span.setAttribute('y',(y+g.positions[i]).toFixed(2));
-   span.setAttribute('font-size',font.toFixed(2));
+   span.setAttribute('x',Number(x).toFixed(precision));
+   span.setAttribute('y',(y+g.positions[i]).toFixed(precision));
+   span.setAttribute('font-size',font.toFixed(precision));
    span.setAttribute('font-weight',row.kind==='reading'?'700':'850');
-   span.setAttribute('stroke-width',(font*.18).toFixed(2));
+   span.setAttribute('stroke-width',(font*.18).toFixed(precision));
    span.setAttribute('dominant-baseline','central');
    span.setAttribute('data-kind',row.kind);
   });

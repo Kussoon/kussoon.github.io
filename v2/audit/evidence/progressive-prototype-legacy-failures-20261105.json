@@ -1,0 +1,47 @@
+[
+  {
+    "file": "national-boundaries",
+    "exit": 1,
+    "counts": {
+      "tests": 10,
+      "pass": 9,
+      "fail": 1
+    }
+  },
+  {
+    "file": "national-centered-labels",
+    "exit": 1,
+    "counts": {
+      "tests": 42,
+      "pass": 31,
+      "fail": 11
+    }
+  },
+  {
+    "file": "national-density",
+    "exit": 1,
+    "counts": {
+      "tests": 14,
+      "pass": 8,
+      "fail": 6
+    }
+  },
+  {
+    "file": "national-readings",
+    "exit": 1,
+    "counts": {
+      "tests": 10,
+      "pass": 4,
+      "fail": 6
+    }
+  },
+  {
+    "file": "administrative-labels",
+    "exit": 0,
+    "counts": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0
+    }
+  }
+]

@@ -1,0 +1,872 @@
+{
+  "scope": "Same head, original main-thread algorithm via geometry=main vs worker. All 28 matched cameras and label counts. Single-run observations, not physical-device FPS or performance approval. Original instrumented PR263 and rejected reply-buffer experiment separately retained.",
+  "rows": [
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "height": 1000,
+      "frame": "initial",
+      "labels": 124,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 22.899999998509884,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 15.5,
+        "maxFrameGapMs": 16.799999999999955,
+        "pageHeapMiB": 6.2213592529296875,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      },
+      "after": {
+        "mainShapeMs": 17.399999998509884,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 11.199999995529652,
+        "maxFrameGapMs": 16.800000000000182,
+        "pageHeapMiB": 6.222949981689453,
+        "workerHeapMiB": 0.3084449768066406,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "height": 1000,
+      "frame": "mie",
+      "labels": 322,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 773.6000000014901,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 837.2000000029802,
+        "maxFrameGapMs": 816.6000000000004,
+        "pageHeapMiB": 20.750179290771484,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 3
+      },
+      "after": {
+        "mainShapeMs": 30.80000000447035,
+        "workerBuildMs": 467.5,
+        "maxTimerGapMs": 63.30000000447035,
+        "maxFrameGapMs": 50.09999999999991,
+        "pageHeapMiB": 39.30015563964844,
+        "workerHeapMiB": 3.6507568359375,
+        "workerBufferBytes": 9623744,
+        "cached": 3,
+        "loads": 3
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "height": 1000,
+      "frame": "kobe",
+      "labels": 61,
+      "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 91,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 125.39999999850988,
+        "maxFrameGapMs": 333.4000000000001,
+        "pageHeapMiB": 28.798702239990234,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 5
+      },
+      "after": {
+        "mainShapeMs": 4.899999998509884,
+        "workerBuildMs": 92.19999999552965,
+        "maxTimerGapMs": 54.5,
+        "maxFrameGapMs": 233.30000000000018,
+        "pageHeapMiB": 53.753639221191406,
+        "workerHeapMiB": 13.366828918457031,
+        "workerBufferBytes": 4737264,
+        "cached": 3,
+        "loads": 5
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "height": 1000,
+      "frame": "sapporo",
+      "labels": 40,
+      "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+      "before": {
+        "mainShapeMs": 160,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 259.79999999701977,
+        "maxFrameGapMs": 250,
+        "pageHeapMiB": 72.9548454284668,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 6
+      },
+      "after": {
+        "mainShapeMs": 10.600000001490116,
+        "workerBuildMs": 132.20000000298023,
+        "maxTimerGapMs": 126.30000000447035,
+        "maxFrameGapMs": 116.59999999999991,
+        "pageHeapMiB": 48.9461669921875,
+        "workerHeapMiB": 23.496856689453125,
+        "workerBufferBytes": 10140160,
+        "cached": 1,
+        "loads": 6
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "height": 1000,
+      "frame": "okinawa",
+      "labels": 17,
+      "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 256.79999999701977,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 395.6000000014901,
+        "maxFrameGapMs": 383.40000000000055,
+        "pageHeapMiB": 53.96980285644531,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 7
+      },
+      "after": {
+        "mainShapeMs": 15.5,
+        "workerBuildMs": 175.79999999701977,
+        "maxTimerGapMs": 127.29999999701977,
+        "maxFrameGapMs": 116.69999999999982,
+        "pageHeapMiB": 38.870601654052734,
+        "workerHeapMiB": 34.72056579589844,
+        "workerBufferBytes": 12543312,
+        "cached": 1,
+        "loads": 7
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "height": 1000,
+      "frame": "mie-revisit",
+      "labels": 322,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 669.5999999940395,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 725,
+        "maxFrameGapMs": 733.3000000000002,
+        "pageHeapMiB": 150.1882781982422,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 10
+      },
+      "after": {
+        "mainShapeMs": 32.100000001490116,
+        "workerBuildMs": 499.80000000447035,
+        "maxTimerGapMs": 126.29999999701977,
+        "maxFrameGapMs": 99.89999999999964,
+        "pageHeapMiB": 66.22957992553711,
+        "workerHeapMiB": 3.662090301513672,
+        "workerBufferBytes": 9623744,
+        "cached": 3,
+        "loads": 10
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 1280,
+      "height": 1000,
+      "frame": "overview",
+      "labels": 124,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 13.399999998509884,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 80.60000000149012,
+        "maxFrameGapMs": 316.6999999999998,
+        "pageHeapMiB": 157.73799514770508,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 10
+      },
+      "after": {
+        "mainShapeMs": 0.7000000029802322,
+        "workerBuildMs": 13.699999995529652,
+        "maxTimerGapMs": 21.799999997019768,
+        "maxFrameGapMs": 216.69999999999982,
+        "pageHeapMiB": 68.87135314941406,
+        "workerHeapMiB": 9.19375228881836,
+        "workerBufferBytes": 9623744,
+        "cached": 3,
+        "loads": 10
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "frame": "initial",
+      "labels": 43,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 11.299999997019768,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 18,
+        "maxFrameGapMs": 16.799999999999955,
+        "pageHeapMiB": 6.142612457275391,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      },
+      "after": {
+        "mainShapeMs": 21,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 12.600000001490116,
+        "maxFrameGapMs": 16.700000000000045,
+        "pageHeapMiB": 7.589618682861328,
+        "workerHeapMiB": 0.3084449768066406,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "frame": "mie",
+      "labels": 295,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 638.2000000029802,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 681.3000000044703,
+        "maxFrameGapMs": 666.6999999999998,
+        "pageHeapMiB": 95.13025283813477,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 3
+      },
+      "after": {
+        "mainShapeMs": 28.099999994039536,
+        "workerBuildMs": 442.8999999985099,
+        "maxTimerGapMs": 96.89999999850988,
+        "maxFrameGapMs": 66.70000000000005,
+        "pageHeapMiB": 32.298057556152344,
+        "workerHeapMiB": 3.2802276611328125,
+        "workerBufferBytes": 8604096,
+        "cached": 3,
+        "loads": 3
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "frame": "kobe",
+      "labels": 72,
+      "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 116.5,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 159.19999999552965,
+        "maxFrameGapMs": 150,
+        "pageHeapMiB": 11.994190216064453,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 6
+      },
+      "after": {
+        "mainShapeMs": 6.9000000059604645,
+        "workerBuildMs": 81.29999999701977,
+        "maxTimerGapMs": 37.5,
+        "maxFrameGapMs": 83.40000000000009,
+        "pageHeapMiB": 55.95564651489258,
+        "workerHeapMiB": 18.496288299560547,
+        "workerBufferBytes": 4737264,
+        "cached": 3,
+        "loads": 6
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "frame": "sapporo",
+      "labels": 45,
+      "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+      "before": {
+        "mainShapeMs": 205.5,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 313.1000000014901,
+        "maxFrameGapMs": 316.6999999999998,
+        "pageHeapMiB": 59.031150817871094,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 7
+      },
+      "after": {
+        "mainShapeMs": 10.100000001490116,
+        "workerBuildMs": 143.10000000149012,
+        "maxTimerGapMs": 117.30000000447035,
+        "maxFrameGapMs": 116.69999999999982,
+        "pageHeapMiB": 28.614933013916016,
+        "workerHeapMiB": 26.815876007080078,
+        "workerBufferBytes": 10140160,
+        "cached": 1,
+        "loads": 7
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "frame": "okinawa",
+      "labels": 21,
+      "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 337.20000000298023,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 475.6000000014901,
+        "maxFrameGapMs": 483.39999999999964,
+        "pageHeapMiB": 88.11355590820312,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 8
+      },
+      "after": {
+        "mainShapeMs": 18,
+        "workerBuildMs": 232.10000000149012,
+        "maxTimerGapMs": 131.60000000149012,
+        "maxFrameGapMs": 133.30000000000018,
+        "pageHeapMiB": 73.23961639404297,
+        "workerHeapMiB": 46.726837158203125,
+        "workerBufferBytes": 12543312,
+        "cached": 1,
+        "loads": 8
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "frame": "mie-revisit",
+      "labels": 295,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 567.5,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 606.7999999970198,
+        "maxFrameGapMs": 600,
+        "pageHeapMiB": 174.8930320739746,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 11
+      },
+      "after": {
+        "mainShapeMs": 31.5,
+        "workerBuildMs": 399.5,
+        "maxTimerGapMs": 88.5,
+        "maxFrameGapMs": 83.30000000000018,
+        "pageHeapMiB": 40.04351806640625,
+        "workerHeapMiB": 3.2906951904296875,
+        "workerBufferBytes": 8604096,
+        "cached": 3,
+        "loads": 11
+      }
+    },
+    {
+      "engine": "chromium",
+      "width": 390,
+      "height": 844,
+      "frame": "overview",
+      "labels": 43,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 13,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 22.100000001490116,
+        "maxFrameGapMs": 100.10000000000036,
+        "pageHeapMiB": 168.46136093139648,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 11
+      },
+      "after": {
+        "mainShapeMs": 0.6999999955296516,
+        "workerBuildMs": 10,
+        "maxTimerGapMs": 28.19999999552965,
+        "maxFrameGapMs": 66.69999999999982,
+        "pageHeapMiB": 42.64652633666992,
+        "workerHeapMiB": 9.40816879272461,
+        "workerBufferBytes": 8604096,
+        "cached": 3,
+        "loads": 11
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "height": 1000,
+      "frame": "initial",
+      "labels": 124,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 29,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 29,
+        "maxFrameGapMs": 356,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      },
+      "after": {
+        "mainShapeMs": 36,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 12,
+        "maxFrameGapMs": 516,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "height": 1000,
+      "frame": "mie",
+      "labels": 322,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 932.0000000000005,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 1223,
+        "maxFrameGapMs": 1045,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 3
+      },
+      "after": {
+        "mainShapeMs": 40.999999999999545,
+        "workerBuildMs": 565,
+        "maxTimerGapMs": 187,
+        "maxFrameGapMs": 269,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 9623744,
+        "cached": 3,
+        "loads": 3
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "height": 1000,
+      "frame": "kobe",
+      "labels": 61,
+      "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 110,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 275,
+        "maxFrameGapMs": 191,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 5
+      },
+      "after": {
+        "mainShapeMs": 9,
+        "workerBuildMs": 89,
+        "maxTimerGapMs": 148,
+        "maxFrameGapMs": 142,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 4737264,
+        "cached": 3,
+        "loads": 5
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "height": 1000,
+      "frame": "sapporo",
+      "labels": 40,
+      "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+      "before": {
+        "mainShapeMs": 180,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 427,
+        "maxFrameGapMs": 169,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 6
+      },
+      "after": {
+        "mainShapeMs": 12,
+        "workerBuildMs": 127,
+        "maxTimerGapMs": 246,
+        "maxFrameGapMs": 147,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 10140160,
+        "cached": 1,
+        "loads": 6
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "height": 1000,
+      "frame": "okinawa",
+      "labels": 17,
+      "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 294,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 693,
+        "maxFrameGapMs": 596,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 7
+      },
+      "after": {
+        "mainShapeMs": 28.00000000000091,
+        "workerBuildMs": 215,
+        "maxTimerGapMs": 369,
+        "maxFrameGapMs": 207,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 12543312,
+        "cached": 1,
+        "loads": 7
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "height": 1000,
+      "frame": "mie-revisit",
+      "labels": 322,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 881,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 1127,
+        "maxFrameGapMs": 1087,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 10
+      },
+      "after": {
+        "mainShapeMs": 47.00000000000091,
+        "workerBuildMs": 591,
+        "maxTimerGapMs": 284,
+        "maxFrameGapMs": 158,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 9623744,
+        "cached": 3,
+        "loads": 10
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 1280,
+      "height": 1000,
+      "frame": "overview",
+      "labels": 124,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 14,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 101,
+        "maxFrameGapMs": 365,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 10
+      },
+      "after": {
+        "mainShapeMs": 6,
+        "workerBuildMs": 16,
+        "maxTimerGapMs": 72,
+        "maxFrameGapMs": 302,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 9623744,
+        "cached": 3,
+        "loads": 10
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "frame": "initial",
+      "labels": 43,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 31,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 11.000000000000227,
+        "maxFrameGapMs": 911,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      },
+      "after": {
+        "mainShapeMs": 27,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 12.000000000000114,
+        "maxFrameGapMs": 692,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 0,
+        "loads": 0
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "frame": "mie",
+      "labels": 295,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 835,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 993,
+        "maxFrameGapMs": 919,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 3
+      },
+      "after": {
+        "mainShapeMs": 37,
+        "workerBuildMs": 491.00000000000045,
+        "maxTimerGapMs": 177,
+        "maxFrameGapMs": 129,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 8604096,
+        "cached": 3,
+        "loads": 3
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "frame": "kobe",
+      "labels": 72,
+      "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 99.00000000000091,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 194,
+        "maxFrameGapMs": 144,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 6
+      },
+      "after": {
+        "mainShapeMs": 9,
+        "workerBuildMs": 81.00000000000045,
+        "maxTimerGapMs": 93,
+        "maxFrameGapMs": 117,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 4737264,
+        "cached": 3,
+        "loads": 6
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "frame": "sapporo",
+      "labels": 45,
+      "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+      "before": {
+        "mainShapeMs": 205,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 437,
+        "maxFrameGapMs": 378,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 7
+      },
+      "after": {
+        "mainShapeMs": 13,
+        "workerBuildMs": 138.9999999999991,
+        "maxTimerGapMs": 221,
+        "maxFrameGapMs": 133,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 10140160,
+        "cached": 1,
+        "loads": 7
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "frame": "okinawa",
+      "labels": 21,
+      "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+      "before": {
+        "mainShapeMs": 435.9999999999991,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 700,
+        "maxFrameGapMs": 682,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 1,
+        "loads": 8
+      },
+      "after": {
+        "mainShapeMs": 21.99999999999909,
+        "workerBuildMs": 259.9999999999991,
+        "maxTimerGapMs": 337,
+        "maxFrameGapMs": 173,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 12543312,
+        "cached": 1,
+        "loads": 8
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "frame": "mie-revisit",
+      "labels": 295,
+      "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+      "before": {
+        "mainShapeMs": 696.9999999999991,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 802,
+        "maxFrameGapMs": 763,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 11
+      },
+      "after": {
+        "mainShapeMs": 41.00000000000091,
+        "workerBuildMs": 578,
+        "maxTimerGapMs": 219,
+        "maxFrameGapMs": 123,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 8604096,
+        "cached": 3,
+        "loads": 11
+      }
+    },
+    {
+      "engine": "webkit",
+      "width": 390,
+      "height": 844,
+      "frame": "overview",
+      "labels": 43,
+      "viewBox": "0 0 850 700",
+      "before": {
+        "mainShapeMs": 10,
+        "workerBuildMs": null,
+        "maxTimerGapMs": 73,
+        "maxFrameGapMs": 270,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": null,
+        "cached": 3,
+        "loads": 11
+      },
+      "after": {
+        "mainShapeMs": 1,
+        "workerBuildMs": 10,
+        "maxTimerGapMs": 81,
+        "maxFrameGapMs": 207,
+        "pageHeapMiB": null,
+        "workerHeapMiB": null,
+        "workerBufferBytes": 8604096,
+        "cached": 3,
+        "loads": 11
+      }
+    }
+  ],
+  "sha256": {
+    "progressive-performance-before-chromium-20261105.json": "9f7ee97ec9bae0fc231f6d47aa6fab1efe4ddc3d53c4e59b60c2d58fc81b0d44",
+    "progressive-performance-before-chromium-1280-20261105.png": "907dad57f2348fa27046dc0b5320f9d8fb886849a97d8a4beda22d6ec5325c3e",
+    "progressive-performance-before-chromium-390-20261105.png": "ef46f4809cb2fea8ee1d5c2658a7f7646db11b714752e756a66ddec74133b6ba",
+    "progressive-performance-before-webkit-20261105.json": "d280944440233ae1fe31b26a30b47005bd34d311cfc9bb3d0ec21d94feb26805",
+    "progressive-performance-before-webkit-1280-20261105.png": "f7afe0ca4a1b5746448986b28be7d8eb1c27167251f62e477206c3825a9991c5",
+    "progressive-performance-before-webkit-390-20261105.png": "f269e240e802cd5ca9c8018d0191ad892a15e15fb8b37e9d8e4eb30988e3a16f",
+    "progressive-performance-after-chromium-20261105.json": "f328ffc1cb871b56836a17672eee24e220a127067cfd300fce94ada37e02131b",
+    "progressive-performance-after-chromium-1280-20261105.png": "907dad57f2348fa27046dc0b5320f9d8fb886849a97d8a4beda22d6ec5325c3e",
+    "progressive-performance-after-chromium-390-20261105.png": "ef46f4809cb2fea8ee1d5c2658a7f7646db11b714752e756a66ddec74133b6ba",
+    "progressive-performance-after-webkit-20261105.json": "8e0ea2b340d914f90a79adbe3430f0215efe4ab20fd3ea53f37cb1ddc4770f1d",
+    "progressive-performance-after-webkit-1280-20261105.png": "f7afe0ca4a1b5746448986b28be7d8eb1c27167251f62e477206c3825a9991c5",
+    "progressive-performance-after-webkit-390-20261105.png": "f269e240e802cd5ca9c8018d0191ad892a15e15fb8b37e9d8e4eb30988e3a16f",
+    "progressive-performance-original-chromium-20261105.json": "e8901d869dd6df53d1a2b0b8cb8cb9d8d397ceb734da06cdf20be939cda17dac",
+    "progressive-performance-original-webkit-20261105.json": "67afdbad1eb64f00f74f28f5ec1c0b4f2896fbea90c93f5e771bb7c107cafd8b",
+    "progressive-performance-reply-buffer-experiment-webkit-20261105.json": "1d69b85158795087f945e003825e93ff39f02504810cd794d860f78951e0d67b",
+    "progressive-performance-legacy-failures-20261105.json": "a53730f3a43079b2c388b9151351af56b31e614c3a0179c8acdc57c7a001a232",
+    "progressive-performance-browser-chromium-20261105.json": "98163afb7f0d5e817f1c8c59b12c8eb910dad4ce5b29b53b78d2b3a64ed08d08",
+    "progressive-performance-browser-webkit-20261105.json": "8f7097cc098b5075ef54535387c9337818d172c7284b18de3f09279d62a7f130",
+    "progressive-performance-reach-chromium-20261105.json": "531b7773492fb6b2100d8d5730339ab784b956c88c60e7178f39f60aa0113a1c",
+    "progressive-performance-reach-webkit-20261105.json": "b6e196c01a8daa502dcaaa77759784912fe6ac9b8731a0929bfd0d0eaf65f257"
+  },
+  "measurementSourceRef": "b126285580e04af71a7f6ec2cb8a1e7c05b5ff24",
+  "browserReachSourceRef": "ce1c65f",
+  "finalOwnershipGuardSourceRef": "2941811",
+  "notes": "Timing comparisons at b126285; local full reachability at ce1c65f (same display algorithm), ownership-race fix and targeted performance/failure browser tests at 2941811. Final documentation head is rerun by CI; no old failure expectations changed.",
+  "browserPerformanceSourceRef": "29418114a76c821bdb881e19af022904147c3390"
+}

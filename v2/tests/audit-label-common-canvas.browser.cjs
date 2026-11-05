@@ -5,10 +5,10 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
 const {createHash}=require('node:crypto'),{execFileSync}=require('node:child_process');const {start}=require('./helpers/nationwide-browser.cjs');
 const out=process.env.KUSSOON_AUDIT_OUTPUT||'/tmp/kussoon-common-canvas',client=process.env.KUSSOON_AUDIT_TOPOJSON;
 async function setup(kind,viewport){
- const a=await start({contextOptions:{viewport}}),p=a.page;
+ const a=await start({contextOptions:{viewport},query:kind==='pilot'&&process.env.KUSSOON_COMPARE_PROGRESSIVE?'progressive=1':''}),p=a.page;
  await p.addInitScript(()=>{window.probe={};let module;Object.defineProperty(window,'KussoonNationalBoundaries',{get(){return module},set(value){module={...value,project(...args){const r=value.project(...args);probe.project=r.projectPoint;return r;}}}});let labels;Object.defineProperty(window,'KussoonV2PlaceLabels',{get(){return labels},set(value){labels={...value,show(options){probe.project=options.project;return value.show(options)}}}});});
  await a.context.route('https://unpkg.com/topojson-client@3/dist/topojson-client.min.js',r=>r.fulfill({path:client,contentType:'application/javascript'}));
- await a.open();if(kind==='legacy'){await p.goto(new URL('density.html?area=japan',p.url()).href);await p.waitForFunction(()=>document.querySelectorAll('#map .place-label').length===1902,null,{timeout:120000});}else await a.pref('24');
+ await a.open();if(kind==='legacy'){await p.goto(new URL('density.html?area=japan',p.url()).href);await p.waitForFunction(()=>document.querySelectorAll('#map .place-label').length===1902,null,{timeout:120000});}else if(process.env.KUSSOON_COMPARE_PROGRESSIVE)await p.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905);else await a.pref('24');
  await p.addStyleTag({content:'#map{width:'+(viewport.width===1280?900:356)+'px!important;height:'+(viewport.width===1280?700:574)+'px!important}'});await p.evaluate(()=>window.dispatchEvent(new Event('resize')));await p.waitForTimeout(220);await p.locator('#map').scrollIntoViewIfNeeded();
  return a;
 }
@@ -17,9 +17,9 @@ async function resources(a){
  return {heap,domNodes:await a.page.locator('*').count(),resources:await a.page.evaluate(()=>performance.getEntriesByType('resource').filter(x=>new URL(x.name).origin===location.origin).map(x=>({path:new URL(x.name).pathname,bytes:x.decodedBodySize}))) };
 }
 async function state(a,kind){return a.page.locator('#map').evaluate((svg,kind)=>{
- const project=probe.project,center=project([136.5,34.7]),east=project([136.6,34.7]),m=svg.getScreenCTM(),r=svg.getBoundingClientRect(),v=svg.viewBox.baseVal;
- const nodes=[...svg.querySelectorAll(kind==='legacy'?'.place-label':'[data-v2-labels] > g')];let count=0,full=0,fonts=[];const names=[];
- for(const n of nodes){const b=n.getBoundingClientRect();if(getComputedStyle(n).display==='none'||!b.width||b.right<r.left||b.left>r.right||b.bottom<r.top||b.top>r.bottom)continue;count++;names.push(n.textContent);if(b.left>=r.left&&b.right<=r.right&&b.top>=r.top&&b.bottom<=r.bottom)full++;const t=kind==='legacy'?n:n.querySelector('text'),matrix=t.getScreenCTM();fonts.push(parseFloat(getComputedStyle(t).fontSize)*Math.hypot(matrix.a,matrix.b));}
+ const project=probe.project||window.KussoonV2ProgressivePreview?.controller.project,center=project([136.5,34.7]),east=project([136.6,34.7]),m=svg.getScreenCTM(),r=svg.getBoundingClientRect(),v=svg.viewBox.baseVal;
+ const nodes=[...svg.querySelectorAll(kind==='legacy'?'.place-label':window.KussoonV2ProgressivePreview?'[data-label-code]':'[data-v2-labels] > g')];let count=0,full=0,fonts=[];const names=[];
+ for(const n of nodes){const b=n.getBoundingClientRect();if(getComputedStyle(n).display==='none'||!b.width||b.right<r.left||b.left>r.right||b.bottom<r.top||b.top>r.bottom)continue;count++;names.push(n.textContent);if(b.left>=r.left&&b.right<=r.right&&b.top>=r.top&&b.bottom<=r.bottom)full++;const t=n.tagName.toLowerCase()==='text'?n:n.querySelector('text'),matrix=t.getScreenCTM();fonts.push(parseFloat(getComputedStyle(t).fontSize)*Math.hypot(matrix.a,matrix.b));}
  fonts.sort((a,b)=>a-b);
  return {scalePxPerPointOneLongitude:Math.abs(east[0]-center[0])*m.a,view:{x:v.x,y:v.y,w:v.width,h:v.height},map:{x:r.x,y:r.y,width:r.width,height:r.height},center,unitX:kind==='legacy'?r.width/v.width:m.a,unitY:kind==='legacy'?r.height/v.height:m.d,centerOffsetPx:{x:(v.x+v.width/2-center[0])*m.a,y:(v.y+v.height/2-center[1])*m.d},generated:nodes.length,inViewport:count,completeBoxes:full,fontPx:fonts.length?{min:fonts[0],median:fonts[Math.floor(fonts.length/2)],max:fonts.at(-1)}:null,names};
  },kind);}
@@ -32,7 +32,7 @@ async function zoom(a,kind,scale){
 }
 (async()=>{
  assert(client,'KUSSOON_AUDIT_TOPOJSON required');assert.equal(createHash('sha256').update(await fs.readFile(client)).digest('hex'),'25cd02ae486cc5063e0215a4e4cfb15de83700c87ac48bac4d57dc6aaf3ebb89');await fs.mkdir(out,{recursive:true});
- const report={scope:'Controlled test-only CSS; same canvas, centre 136.5E/34.7N and pixels per 0.1 degree longitude, readings OFF. 2021/2026 geometry and latitude projection differ; no pixel-perfect equivalence claimed.',sourceRef:execFileSync('git',['rev-parse','HEAD'],{cwd:path.resolve(__dirname,'../..'),encoding:'utf8'}).trim(),runs:[]};
+ const report={progressive:process.env.KUSSOON_COMPARE_PROGRESSIVE==='1',scope:'Controlled test-only CSS; same canvas, centre 136.5E/34.7N and pixels per 0.1 degree longitude, readings OFF. 2021/2026 geometry and latitude projection differ; no pixel-perfect equivalence claimed.',sourceRef:execFileSync('git',['rev-parse','HEAD'],{cwd:path.resolve(__dirname,'../..'),encoding:'utf8'}).trim(),runs:[]};
  for(const viewport of [{width:1280,height:1000},{width:390,height:844}]){
   const legacy=await setup('legacy',viewport),pilot=await setup('pilot',viewport),rows=[];
   try{

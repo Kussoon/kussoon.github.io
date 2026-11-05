@@ -1,0 +1,1945 @@
+{
+  "sourceRef": "b9df3a883915d7aa5c5cd563f5563511abbd0a77",
+  "engine": "webkit",
+  "scope": "Same cameras/zoom and viewport; RAF gaps on automated desktop host, not iPhone device FPS. Worker heap excluded from CDP page heap.",
+  "runs": [
+    {
+      "width": 1280,
+      "height": 1000,
+      "rows": [
+        {
+          "name": "initial",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 1824,
+            "count": 1905,
+            "store": {
+              "cached": 0,
+              "cachedBytes": 0,
+              "byteCapacity": 12582912,
+              "keys": [],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 0,
+              "loads": 0
+            },
+            "labelPasses": 3,
+            "lastLabelMs": 8,
+            "firstLabelMs": 89,
+            "maxLabelMs": 89,
+            "shapePasses": 1,
+            "lastShapeMs": 14,
+            "maxShapeMs": 14,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 3,
+              "dedupMs": 6,
+              "borderPathMs": 5,
+              "domCommitMs": 0,
+              "segments": 3917
+            }
+          },
+          "loads": [],
+          "worker": null,
+          "nodes": 376,
+          "labels": 124,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 872829,
+          "maxFrameGapMs": 289,
+          "p95FrameGapMs": 32,
+          "longTasks": [],
+          "resources": []
+        },
+        {
+          "name": "mie",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 11414721,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "26"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 3
+            },
+            "labelPasses": 5,
+            "lastLabelMs": 85,
+            "firstLabelMs": 89,
+            "maxLabelMs": 89,
+            "shapePasses": 2,
+            "lastShapeMs": 966,
+            "maxShapeMs": 966,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 130,
+              "dedupMs": 508,
+              "borderPathMs": 328,
+              "domCommitMs": 0,
+              "segments": 280134
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 14.000000000000227,
+              "bodyMs": 0,
+              "parseMs": 2.9999999999997726,
+              "decodeMs": 3.0000000000002274,
+              "regionsMs": 0.9999999999997726,
+              "readingsAndBoundsMs": 157
+            },
+            {
+              "code": "24",
+              "headersMs": 179,
+              "bodyMs": 21,
+              "parseMs": 36,
+              "decodeMs": 6,
+              "regionsMs": 5,
+              "readingsAndBoundsMs": 8
+            },
+            {
+              "code": "26",
+              "headersMs": 124,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            }
+          ],
+          "worker": null,
+          "nodes": 918,
+          "labels": 322,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 12457266,
+          "maxFrameGapMs": 1070,
+          "p95FrameGapMs": 1070,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 2.0000000000002274,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 84,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 3.0000000000004547,
+              "bytes": 1377465
+            }
+          ]
+        },
+        {
+          "name": "kobe",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 5362727,
+              "byteCapacity": 12582912,
+              "keys": [
+                "26",
+                "27",
+                "28"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 5
+            },
+            "labelPasses": 7,
+            "lastLabelMs": 10,
+            "firstLabelMs": 89,
+            "maxLabelMs": 89,
+            "shapePasses": 3,
+            "lastShapeMs": 89,
+            "maxShapeMs": 966,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 28,
+              "dedupMs": 39,
+              "borderPathMs": 21,
+              "domCommitMs": 1,
+              "segments": 29640
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 14.000000000000227,
+              "bodyMs": 0,
+              "parseMs": 2.9999999999997726,
+              "decodeMs": 3.0000000000002274,
+              "regionsMs": 0.9999999999997726,
+              "readingsAndBoundsMs": 157
+            },
+            {
+              "code": "24",
+              "headersMs": 179,
+              "bodyMs": 21,
+              "parseMs": 36,
+              "decodeMs": 6,
+              "regionsMs": 5,
+              "readingsAndBoundsMs": 8
+            },
+            {
+              "code": "26",
+              "headersMs": 124,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 1,
+              "parseMs": 3.0000000000004547,
+              "decodeMs": 0.9999999999990905,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 96,
+              "bodyMs": 12,
+              "parseMs": 40,
+              "decodeMs": 21,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 3
+            }
+          ],
+          "worker": null,
+          "nodes": 659,
+          "labels": 61,
+          "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+          "decodedBytes": 16442528,
+          "maxFrameGapMs": 269,
+          "p95FrameGapMs": 269,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 2.0000000000002274,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 84,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 3.0000000000004547,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 37,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 5,
+              "bytes": 442574
+            }
+          ]
+        },
+        {
+          "name": "sapporo",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 11548216,
+              "byteCapacity": 12582912,
+              "keys": [
+                "01"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 6
+            },
+            "labelPasses": 9,
+            "lastLabelMs": 19,
+            "firstLabelMs": 89,
+            "maxLabelMs": 89,
+            "shapePasses": 4,
+            "lastShapeMs": 167,
+            "maxShapeMs": 966,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 44,
+              "dedupMs": 64,
+              "borderPathMs": 59,
+              "domCommitMs": 0,
+              "segments": 59849
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 14.000000000000227,
+              "bodyMs": 0,
+              "parseMs": 2.9999999999997726,
+              "decodeMs": 3.0000000000002274,
+              "regionsMs": 0.9999999999997726,
+              "readingsAndBoundsMs": 157
+            },
+            {
+              "code": "24",
+              "headersMs": 179,
+              "bodyMs": 21,
+              "parseMs": 36,
+              "decodeMs": 6,
+              "regionsMs": 5,
+              "readingsAndBoundsMs": 8
+            },
+            {
+              "code": "26",
+              "headersMs": 124,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 1,
+              "parseMs": 3.0000000000004547,
+              "decodeMs": 0.9999999999990905,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 96,
+              "bodyMs": 12,
+              "parseMs": 40,
+              "decodeMs": 21,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "01",
+              "headersMs": 146,
+              "bodyMs": 25.00000000000091,
+              "parseMs": 36.99999999999909,
+              "decodeMs": 16,
+              "regionsMs": 17,
+              "readingsAndBoundsMs": 9
+            }
+          ],
+          "worker": null,
+          "nodes": 504,
+          "labels": 40,
+          "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+          "decodedBytes": 27990744,
+          "maxFrameGapMs": 333,
+          "p95FrameGapMs": 333,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 2.0000000000002274,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 84,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 3.0000000000004547,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 37,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 5,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 45,
+              "bytes": 11548216
+            }
+          ]
+        },
+        {
+          "name": "okinawa",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 15388561,
+              "byteCapacity": 12582912,
+              "keys": [
+                "47"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 7
+            },
+            "labelPasses": 11,
+            "lastLabelMs": 28.99999999999909,
+            "firstLabelMs": 89,
+            "maxLabelMs": 89,
+            "shapePasses": 5,
+            "lastShapeMs": 310.0000000000009,
+            "maxShapeMs": 966,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 62,
+              "dedupMs": 135,
+              "borderPathMs": 112,
+              "domCommitMs": 1.0000000000009095,
+              "segments": 102710
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 14.000000000000227,
+              "bodyMs": 0,
+              "parseMs": 2.9999999999997726,
+              "decodeMs": 3.0000000000002274,
+              "regionsMs": 0.9999999999997726,
+              "readingsAndBoundsMs": 157
+            },
+            {
+              "code": "24",
+              "headersMs": 179,
+              "bodyMs": 21,
+              "parseMs": 36,
+              "decodeMs": 6,
+              "regionsMs": 5,
+              "readingsAndBoundsMs": 8
+            },
+            {
+              "code": "26",
+              "headersMs": 124,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 1,
+              "parseMs": 3.0000000000004547,
+              "decodeMs": 0.9999999999990905,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 96,
+              "bodyMs": 12,
+              "parseMs": 40,
+              "decodeMs": 21,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "01",
+              "headersMs": 146,
+              "bodyMs": 25.00000000000091,
+              "parseMs": 36.99999999999909,
+              "decodeMs": 16,
+              "regionsMs": 17,
+              "readingsAndBoundsMs": 9
+            },
+            {
+              "code": "47",
+              "headersMs": 190,
+              "bodyMs": 34.00000000000091,
+              "parseMs": 80.99999999999909,
+              "decodeMs": 5,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 6
+            }
+          ],
+          "worker": null,
+          "nodes": 319,
+          "labels": 17,
+          "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+          "decodedBytes": 43379305,
+          "maxFrameGapMs": 532,
+          "p95FrameGapMs": 532,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 2.0000000000002274,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 84,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 3.0000000000004547,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 37,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 5,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 45,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 58,
+              "bytes": 15388561
+            }
+          ]
+        },
+        {
+          "name": "mie-revisit",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 11414721,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "26",
+                "24"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 10
+            },
+            "labelPasses": 13,
+            "lastLabelMs": 67,
+            "firstLabelMs": 89,
+            "maxLabelMs": 89,
+            "shapePasses": 6,
+            "lastShapeMs": 893,
+            "maxShapeMs": 966,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 147.0000000000009,
+              "dedupMs": 487.9999999999991,
+              "borderPathMs": 257,
+              "domCommitMs": 1,
+              "segments": 280134
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 14.000000000000227,
+              "bodyMs": 0,
+              "parseMs": 2.9999999999997726,
+              "decodeMs": 3.0000000000002274,
+              "regionsMs": 0.9999999999997726,
+              "readingsAndBoundsMs": 157
+            },
+            {
+              "code": "24",
+              "headersMs": 179,
+              "bodyMs": 21,
+              "parseMs": 36,
+              "decodeMs": 6,
+              "regionsMs": 5,
+              "readingsAndBoundsMs": 8
+            },
+            {
+              "code": "26",
+              "headersMs": 124,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 1,
+              "parseMs": 3.0000000000004547,
+              "decodeMs": 0.9999999999990905,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 96,
+              "bodyMs": 12,
+              "parseMs": 40,
+              "decodeMs": 21,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "01",
+              "headersMs": 146,
+              "bodyMs": 25.00000000000091,
+              "parseMs": 36.99999999999909,
+              "decodeMs": 16,
+              "regionsMs": 17,
+              "readingsAndBoundsMs": 9
+            },
+            {
+              "code": "47",
+              "headersMs": 190,
+              "bodyMs": 34.00000000000091,
+              "parseMs": 80.99999999999909,
+              "decodeMs": 5,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "29",
+              "headersMs": 32,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "26",
+              "headersMs": 147,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "24",
+              "headersMs": 209,
+              "bodyMs": 19,
+              "parseMs": 41,
+              "decodeMs": 3.0000000000009095,
+              "regionsMs": 4.9999999999990905,
+              "readingsAndBoundsMs": 5
+            }
+          ],
+          "worker": null,
+          "nodes": 918,
+          "labels": 322,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 54794026,
+          "maxFrameGapMs": 1069,
+          "p95FrameGapMs": 1069,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 84,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 2.0000000000002274,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 3.0000000000004547,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 37,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 5,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 45,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 58,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 7,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 93.00000000000091,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 7,
+              "bytes": 1377465
+            }
+          ]
+        },
+        {
+          "name": "overview",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 11414721,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "26",
+                "24"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 10
+            },
+            "labelPasses": 14,
+            "lastLabelMs": 22,
+            "firstLabelMs": 89,
+            "maxLabelMs": 89,
+            "shapePasses": 7,
+            "lastShapeMs": 16,
+            "maxShapeMs": 966,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 2,
+              "dedupMs": 7,
+              "borderPathMs": 7,
+              "domCommitMs": 0,
+              "segments": 3917
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 14.000000000000227,
+              "bodyMs": 0,
+              "parseMs": 2.9999999999997726,
+              "decodeMs": 3.0000000000002274,
+              "regionsMs": 0.9999999999997726,
+              "readingsAndBoundsMs": 157
+            },
+            {
+              "code": "24",
+              "headersMs": 179,
+              "bodyMs": 21,
+              "parseMs": 36,
+              "decodeMs": 6,
+              "regionsMs": 5,
+              "readingsAndBoundsMs": 8
+            },
+            {
+              "code": "26",
+              "headersMs": 124,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 1,
+              "parseMs": 3.0000000000004547,
+              "decodeMs": 0.9999999999990905,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 96,
+              "bodyMs": 12,
+              "parseMs": 40,
+              "decodeMs": 21,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "01",
+              "headersMs": 146,
+              "bodyMs": 25.00000000000091,
+              "parseMs": 36.99999999999909,
+              "decodeMs": 16,
+              "regionsMs": 17,
+              "readingsAndBoundsMs": 9
+            },
+            {
+              "code": "47",
+              "headersMs": 190,
+              "bodyMs": 34.00000000000091,
+              "parseMs": 80.99999999999909,
+              "decodeMs": 5,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "29",
+              "headersMs": 32,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "26",
+              "headersMs": 147,
+              "bodyMs": 1,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "24",
+              "headersMs": 209,
+              "bodyMs": 19,
+              "parseMs": 41,
+              "decodeMs": 3.0000000000009095,
+              "regionsMs": 4.9999999999990905,
+              "readingsAndBoundsMs": 5
+            }
+          ],
+          "worker": null,
+          "nodes": 376,
+          "labels": 124,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 54794026,
+          "maxFrameGapMs": 387,
+          "p95FrameGapMs": 184,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 84,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 2.0000000000002274,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 3.0000000000004547,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 37,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 5,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 45,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 58,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 7,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 93.00000000000091,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 7,
+              "bytes": 1377465
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "rows": [
+        {
+          "name": "initial",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 1824,
+            "count": 1905,
+            "store": {
+              "cached": 0,
+              "cachedBytes": 0,
+              "byteCapacity": 12582912,
+              "keys": [],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 0,
+              "loads": 0
+            },
+            "labelPasses": 3,
+            "lastLabelMs": 6,
+            "firstLabelMs": 98,
+            "maxLabelMs": 98,
+            "shapePasses": 1,
+            "lastShapeMs": 21,
+            "maxShapeMs": 21,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 5.000000000000057,
+              "dedupMs": 9.999999999999943,
+              "borderPathMs": 6,
+              "domCommitMs": 0,
+              "segments": 3917
+            }
+          },
+          "loads": [],
+          "worker": null,
+          "nodes": 293,
+          "labels": 43,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 872829,
+          "maxFrameGapMs": 959,
+          "p95FrameGapMs": 231,
+          "longTasks": [],
+          "resources": []
+        },
+        {
+          "name": "mie",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 10228816,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "25"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 3
+            },
+            "labelPasses": 5,
+            "lastLabelMs": 52,
+            "firstLabelMs": 98,
+            "maxLabelMs": 98,
+            "shapePasses": 2,
+            "lastShapeMs": 796,
+            "maxShapeMs": 796,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 148,
+              "dedupMs": 429,
+              "borderPathMs": 218,
+              "domCommitMs": 1,
+              "segments": 251227
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 12.999999999999545,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 163
+            },
+            {
+              "code": "24",
+              "headersMs": 180.99999999999955,
+              "bodyMs": 24,
+              "parseMs": 42,
+              "decodeMs": 7.000000000000455,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 5.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 134,
+              "bodyMs": 4,
+              "parseMs": 4,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            }
+          ],
+          "worker": null,
+          "nodes": 779,
+          "labels": 295,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 11271361,
+          "maxFrameGapMs": 868,
+          "p95FrameGapMs": 868,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 62,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 0.9999999999995453,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 4,
+              "bytes": 191560
+            }
+          ]
+        },
+        {
+          "name": "kobe",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 5362727,
+              "byteCapacity": 12582912,
+              "keys": [
+                "27",
+                "28",
+                "26"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 6
+            },
+            "labelPasses": 7,
+            "lastLabelMs": 15,
+            "firstLabelMs": 98,
+            "maxLabelMs": 98,
+            "shapePasses": 3,
+            "lastShapeMs": 105,
+            "maxShapeMs": 796,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 43,
+              "dedupMs": 34,
+              "borderPathMs": 28,
+              "domCommitMs": 0,
+              "segments": 32596
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 12.999999999999545,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 163
+            },
+            {
+              "code": "24",
+              "headersMs": 180.99999999999955,
+              "bodyMs": 24,
+              "parseMs": 42,
+              "decodeMs": 7.000000000000455,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 5.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 134,
+              "bodyMs": 4,
+              "parseMs": 4,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 34,
+              "bodyMs": 39,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 29
+            },
+            {
+              "code": "28",
+              "headersMs": 76,
+              "bodyMs": 6.0000000000009095,
+              "parseMs": 14.99999999999909,
+              "decodeMs": 1.0000000000009095,
+              "regionsMs": 3.9999999999990905,
+              "readingsAndBoundsMs": 7
+            },
+            {
+              "code": "26",
+              "headersMs": 16,
+              "bodyMs": 2,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            }
+          ],
+          "worker": null,
+          "nodes": 688,
+          "labels": 72,
+          "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+          "decodedBytes": 16634088,
+          "maxFrameGapMs": 137,
+          "p95FrameGapMs": 137,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 62,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 0.9999999999995453,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 4,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 7,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 6.0000000000009095,
+              "bytes": 1377465
+            }
+          ]
+        },
+        {
+          "name": "sapporo",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 11548216,
+              "byteCapacity": 12582912,
+              "keys": [
+                "01"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 7
+            },
+            "labelPasses": 9,
+            "lastLabelMs": 16.99999999999909,
+            "firstLabelMs": 98,
+            "maxLabelMs": 98,
+            "shapePasses": 4,
+            "lastShapeMs": 202,
+            "maxShapeMs": 796,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 62.99999999999909,
+              "dedupMs": 84,
+              "borderPathMs": 54,
+              "domCommitMs": 1.0000000000009095,
+              "segments": 72563
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 12.999999999999545,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 163
+            },
+            {
+              "code": "24",
+              "headersMs": 180.99999999999955,
+              "bodyMs": 24,
+              "parseMs": 42,
+              "decodeMs": 7.000000000000455,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 5.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 134,
+              "bodyMs": 4,
+              "parseMs": 4,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 34,
+              "bodyMs": 39,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 29
+            },
+            {
+              "code": "28",
+              "headersMs": 76,
+              "bodyMs": 6.0000000000009095,
+              "parseMs": 14.99999999999909,
+              "decodeMs": 1.0000000000009095,
+              "regionsMs": 3.9999999999990905,
+              "readingsAndBoundsMs": 7
+            },
+            {
+              "code": "26",
+              "headersMs": 16,
+              "bodyMs": 2,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 125,
+              "parseMs": 39,
+              "decodeMs": 18.00000000000091,
+              "regionsMs": 9.99999999999909,
+              "readingsAndBoundsMs": 6.0000000000009095
+            }
+          ],
+          "worker": null,
+          "nodes": 541,
+          "labels": 45,
+          "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+          "decodedBytes": 28182304,
+          "maxFrameGapMs": 366,
+          "p95FrameGapMs": 53,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 62,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 0.9999999999995453,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 4,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 7,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 6.0000000000009095,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 48,
+              "bytes": 11548216
+            }
+          ]
+        },
+        {
+          "name": "okinawa",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 15388561,
+              "byteCapacity": 12582912,
+              "keys": [
+                "47"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 8
+            },
+            "labelPasses": 11,
+            "lastLabelMs": 36.00000000000091,
+            "firstLabelMs": 98,
+            "maxLabelMs": 98,
+            "shapePasses": 5,
+            "lastShapeMs": 368,
+            "maxShapeMs": 796,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 72,
+              "dedupMs": 186,
+              "borderPathMs": 110,
+              "domCommitMs": 0,
+              "segments": 141454
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 12.999999999999545,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 163
+            },
+            {
+              "code": "24",
+              "headersMs": 180.99999999999955,
+              "bodyMs": 24,
+              "parseMs": 42,
+              "decodeMs": 7.000000000000455,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 5.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 134,
+              "bodyMs": 4,
+              "parseMs": 4,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 34,
+              "bodyMs": 39,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 29
+            },
+            {
+              "code": "28",
+              "headersMs": 76,
+              "bodyMs": 6.0000000000009095,
+              "parseMs": 14.99999999999909,
+              "decodeMs": 1.0000000000009095,
+              "regionsMs": 3.9999999999990905,
+              "readingsAndBoundsMs": 7
+            },
+            {
+              "code": "26",
+              "headersMs": 16,
+              "bodyMs": 2,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 125,
+              "parseMs": 39,
+              "decodeMs": 18.00000000000091,
+              "regionsMs": 9.99999999999909,
+              "readingsAndBoundsMs": 6.0000000000009095
+            },
+            {
+              "code": "47",
+              "headersMs": 155.0000000000009,
+              "bodyMs": 30.99999999999909,
+              "parseMs": 63,
+              "decodeMs": 4,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 9
+            }
+          ],
+          "worker": null,
+          "nodes": 337,
+          "labels": 21,
+          "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+          "decodedBytes": 43570865,
+          "maxFrameGapMs": 571,
+          "p95FrameGapMs": 571,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 62,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 0.9999999999995453,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 4,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 7,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 6.0000000000009095,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 48,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 46.00000000000091,
+              "bytes": 15388561
+            }
+          ]
+        },
+        {
+          "name": "mie-revisit",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 10228816,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "25"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 11
+            },
+            "labelPasses": 13,
+            "lastLabelMs": 45.99999999999909,
+            "firstLabelMs": 98,
+            "maxLabelMs": 98,
+            "shapePasses": 6,
+            "lastShapeMs": 676.0000000000009,
+            "maxShapeMs": 796,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 115,
+              "dedupMs": 335,
+              "borderPathMs": 223.0000000000009,
+              "domCommitMs": 3,
+              "segments": 251227
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 12.999999999999545,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 163
+            },
+            {
+              "code": "24",
+              "headersMs": 180.99999999999955,
+              "bodyMs": 24,
+              "parseMs": 42,
+              "decodeMs": 7.000000000000455,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 5.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 134,
+              "bodyMs": 4,
+              "parseMs": 4,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 34,
+              "bodyMs": 39,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 29
+            },
+            {
+              "code": "28",
+              "headersMs": 76,
+              "bodyMs": 6.0000000000009095,
+              "parseMs": 14.99999999999909,
+              "decodeMs": 1.0000000000009095,
+              "regionsMs": 3.9999999999990905,
+              "readingsAndBoundsMs": 7
+            },
+            {
+              "code": "26",
+              "headersMs": 16,
+              "bodyMs": 2,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 125,
+              "parseMs": 39,
+              "decodeMs": 18.00000000000091,
+              "regionsMs": 9.99999999999909,
+              "readingsAndBoundsMs": 6.0000000000009095
+            },
+            {
+              "code": "47",
+              "headersMs": 155.0000000000009,
+              "bodyMs": 30.99999999999909,
+              "parseMs": 63,
+              "decodeMs": 4,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 9
+            },
+            {
+              "code": "29",
+              "headersMs": 113,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "24",
+              "headersMs": 117,
+              "bodyMs": 18,
+              "parseMs": 45,
+              "decodeMs": 3,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "25",
+              "headersMs": 110,
+              "bodyMs": 2,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            }
+          ],
+          "worker": null,
+          "nodes": 779,
+          "labels": 295,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 53799681,
+          "maxFrameGapMs": 732,
+          "p95FrameGapMs": 732,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 62,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 0.9999999999995453,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 4,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 7,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 6.0000000000009095,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 48,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 46.00000000000091,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 26,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 5,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 3.0000000000009095,
+              "bytes": 191560
+            }
+          ]
+        },
+        {
+          "name": "overview",
+          "heap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 10228816,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "25"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 11
+            },
+            "labelPasses": 14,
+            "lastLabelMs": 7,
+            "firstLabelMs": 98,
+            "maxLabelMs": 98,
+            "shapePasses": 7,
+            "lastShapeMs": 9,
+            "maxShapeMs": 796,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 2,
+              "dedupMs": 4,
+              "borderPathMs": 3,
+              "domCommitMs": 0,
+              "segments": 3917
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 12.999999999999545,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 163
+            },
+            {
+              "code": "24",
+              "headersMs": 180.99999999999955,
+              "bodyMs": 24,
+              "parseMs": 42,
+              "decodeMs": 7.000000000000455,
+              "regionsMs": 8,
+              "readingsAndBoundsMs": 5.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 134,
+              "bodyMs": 4,
+              "parseMs": 4,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 34,
+              "bodyMs": 39,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 29
+            },
+            {
+              "code": "28",
+              "headersMs": 76,
+              "bodyMs": 6.0000000000009095,
+              "parseMs": 14.99999999999909,
+              "decodeMs": 1.0000000000009095,
+              "regionsMs": 3.9999999999990905,
+              "readingsAndBoundsMs": 7
+            },
+            {
+              "code": "26",
+              "headersMs": 16,
+              "bodyMs": 2,
+              "parseMs": 5,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 125,
+              "parseMs": 39,
+              "decodeMs": 18.00000000000091,
+              "regionsMs": 9.99999999999909,
+              "readingsAndBoundsMs": 6.0000000000009095
+            },
+            {
+              "code": "47",
+              "headersMs": 155.0000000000009,
+              "bodyMs": 30.99999999999909,
+              "parseMs": 63,
+              "decodeMs": 4,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 9
+            },
+            {
+              "code": "29",
+              "headersMs": 113,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "24",
+              "headersMs": 117,
+              "bodyMs": 18,
+              "parseMs": 45,
+              "decodeMs": 3,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "25",
+              "headersMs": 110,
+              "bodyMs": 2,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            }
+          ],
+          "worker": null,
+          "nodes": 293,
+          "labels": 43,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 53799681,
+          "maxFrameGapMs": 228,
+          "p95FrameGapMs": 61,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 62,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 0.9999999999995453,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 4,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 7,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 6.0000000000009095,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 48,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 46.00000000000091,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 26,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 5,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 3.0000000000009095,
+              "bytes": 191560
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
