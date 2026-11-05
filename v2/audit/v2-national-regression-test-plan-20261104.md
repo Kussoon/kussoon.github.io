@@ -413,3 +413,48 @@ mainは6bdd869、#261は未マージ。まず#261→本設計→フラグ付き�
 - 県別・検索・区と親市の6リンク・×・再タップ・全体表示とcamera/選択の不変を確認。通信遅延/失敗/競合/同一県再訪・LRU上限・重複fetchを検査する。
 - CPU/Long Task/heap/DOM/転送を初期・中縮尺・詳細・移動後で記録。閾値を勝手に合意済みとしない。iPhone Safari実機/Edge/RSS/GPU/全国全境界の目視は残す。
 - S41/S42はフラグ試作の証拠で通常版のAへ昇格させない。S44〜S46/S48と旧24失敗を修正/skip/期待値変更して今回の成功数へ取り込まない。
+
+
+<a id="progressive-restoration-prototype"></a>
+
+## フラグ付き全国段階表示の試作と検証（2026-11-05）
+
+設計PR [#262](https://github.com/Kussoon/kussoon.github.io/pull/262)を基点とする別PR。既定URLは変更せず、同じpilotの `?progressive=1` だけで有効になる。公開への既定化・自動マージは行わない。再取得した最新mainは `400929fd66ea61397d13e7ff7bc8017ee286cc82`（追加差分はニュース3ファイルだけ）。#261は未マージで、本ブランチは#261→#262の積み上げである。現在判定49件 A23/B12/C5/要確認9は変更しない。
+
+### 実装範囲とデータ正本
+
+新 `v2/shared/national-progressive-labels.js` が既存D.arrange、行政名/読みの共通描画、viewportとoffice rendererを利用する。新索引 `v2/data/national/2026-common/national-2026-pilot/label-index.json` は659,026 bytes（末尾改行込み）。`node v2/tools/progressive-labels/build-index.cjs --check` が47県の現2026形状から再計算し、source SHA256/1905コードの一意性/区域内anchor/名称/参照点/派生物一致を検証する。既存47地図・庁舎・#205 URL監査JSONは変更していない。
+
+旧1902との差は浜松旧7区→新3区と所属未定7区域の追加で1905。読みは既存bridgeの確認済み値のみ1892件。北方6と所属未定7を旧データから無断補完しない。既存出典付き2庁舎参照以外の手動座標は追加していない。
+
+全国試作だけで5C/5B anchor・7〜13画面px・最大768を使用し、通常県別balanced/最大128を維持する。SVG座標/文字の丸めを全国試作のみ高精度化（既定2桁は維持）。表示許可は旧密度ルールで段階変化し、カメラ移動後160msで更新する。可視外をDOMから外し、文字測定キャッシュを12,000件以内に抑える。押下中はラベル/詳細形状を再構築しない。
+
+初期全国は索引のみで詳細TopoJSON要求0。zoom8以上の画面周辺だけを既存県別配信から読む。LRU最大3県・同時2要求・raw JSON予算12MiB。予算超の1県（沖縄約14.7MiB）は単独保持を許可する。この予算はJS heap/RSSの上限ではなく、索引/選択1区域/庁舎/デコードオブジェクトは別に存在する。不要キュー破棄、同一要求共有、再試行、古い応答と画面遷移の競合を扱う。
+
+全国自治体選択・×・再タップはカメラを変えず、既存3/6リンクを使用する。全国検索は全国のまま該当位置へ移動する。索引障害時は既存県別検索へ戻し、遅延索引の完了は明示的県変更を上書きしない。
+
+### 同条件比較と実表示
+
+[旧/試作の共通canvas実測](evidence/progressive-prototype-comparison-20261105.json)は実装前比較と同じviewport・中心・経度画面縮尺を使用。8条件中7条件で中心差8px以内。mobile最初の条件は旧版/試作双方に大きな中心ずれがあり除外し、比較済みと数えない。元投影の緯度倍率と年度差があるため完全な同一地理範囲ではない。desktop約93.19px/経度0.1度で旧33名/試作34名、全文字箱内23/23、文字中央値12.94/13.00px。約161.04pxでは3/3名、全文字箱内2/2。さらに拡大した同中心にはanchorがなく双方0名となるため、これを全国到達性の代用にしない。郡名欠落はS25として残す。
+
+画像: [旧desktop](evidence/progressive-legacy-desktop-20261105.png)、[試作desktop](evidence/progressive-prototype-desktop-20261105.png)、[試作mobile](evidence/progressive-prototype-mobile-20261105.png)。画面端の文字箱は途中で切れる場合があり、全位置で全文字表示する保証ではない。
+
+native wheelで全国のままzoom1→2→4→8にした実DOM件数はdesktop124→174→507→463、mobile43→70→80→269。画面内地理範囲が縮むため件数の単調増加を仕様にしない。固定地理コホートで新規名の追加/縮小時の削除を単体検査し、ブラウザでは実際の名前集合の増加とreset時の間引きを検査する。
+
+[Chromium実表示結果](evidence/progressive-prototype-chromium-20261105.json)と[WebKit実表示結果](evidence/progressive-prototype-webkit-20261105.json)で1905区域それぞれへ合法cameraを設定し、読みOFF/ONとも実SVGコード・全文字箱の画面内収まり・文字上限13.05pxをdesktop1280×1000/mobile390×844で検証する。両engine合計15,240区域状態で欠落/切れなし。これは1905回の実指操作ではなく、実レンダラーへのprogrammatic camera検査。代表操作のみ実イベントとヒットテストを使用する。重なりは許容し、全市域内に文字箱全体が収まる保証とは区別する。
+
+### 性能の観測と本番化条件
+
+[最終profile](evidence/progressive-prototype-profile-20261105.json)はChromium mobile相当の単発観測。初期JS heap8.8MiB/DOM293/decoded resource0.83MiB、詳細県要求0。初回label260.6ms（以降4.2〜44.8ms）、詳細境界処理は三重801ms/神戸178ms/札幌239ms/沖縄356ms。観測最大JS heapは神戸121.9MiB、全体へ戻した直後90.7MiBでGC回収は保証していない。最大Long Task849ms。総読込は移動経路で約41.6MiBへ増える。
+
+初期実装の可視外形状も描く約4.1秒の問題は画面周辺culling/byte budgetで改善したが、cold詳細の約0.8秒停止が残る。raw cache上限だけで省メモリ/FPS合格とは判定しない。workerでのdecode、簡略LOD/タイル、詳細描画延期などが本番化前の比較候補。OS/RSS/GPU/実機iPhone Safari/低速CPU/通信/GCは未検証で、現在はdraft/opt-inの試作評価に限定する。
+
+### 回帰検査と未解決事項
+
+追加単体10件: 1905データ/欠落重複/フォント/固定コホート/単一逆線分/LRU・並列・retry・取消・byte上限/全anchor/段組み/viewport上限とreset。既存17コマンドと旧テストは保持。追加browserは全国連続zoom、全文字到達、読み初期OFF/区4行、3/6リンク・×・再タップ・S19、county keyboard入口47、境界strokeなし/完全一致線分dedup、実pinch/四方向pan（Chromium CDP）、押下中DOM維持、rotation、通常県別/検索、失敗retry・遅延競合・索引fallbackを検査する。WebKitにCDP pinch検査を実施したと主張しない。
+
+GitHub Actions既存workflowへ索引再現/10単体/両engine実表示を追加し、既存検査を削除しない。profile/旧新比較は診断資料であり性能閾値の自動合格には使用しない。旧24失敗は[再実行記録](evidence/progressive-prototype-legacy-failures-20261105.json)のまま（boundary1/centered11/density6/readings6）、削除/skip/期待値変更なし。
+
+残件: S44空白クリック解除、S45自治体keyboard、S46検索Enter、S48北方6読み、S25郡属性、S39非一致/部分重複県境。完全一致線分dedupでS39全体を解決したとは扱わない。S21〜S26は全国フラグの候補処理を通常版へ一律適用せずBを保持する。
+
+未読込の粗い県面クリックは従来の県別遷移を維持する。全国自治体選択はラベルか読込済み詳細面から可能。低倍率でも全自治体面を直接hit-testする旧体験は完全復元していない。県単位遷移維持/座標hit-testで遅延読込のどちらを採用するか、別途UI判断が必要。iPhone Safari実機の指到達/ピンチ・ドラッグ/吹き出し/表示復帰と性能、Edge、全境界目視は未確認。通常URLのS41/S42をAへ変更しない。

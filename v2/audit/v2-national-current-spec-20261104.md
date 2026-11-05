@@ -1,3 +1,5 @@
+> 2026-11-05 段階表示の別PR試作: [実装・証拠・限界](v2-national-regression-test-plan-20261104.md#progressive-restoration-prototype)。`?progressive=1`のみ。通常版49項目の判定とS44/S45/S46/S48・旧24失敗は維持し、本番解消扱いにしない。
+
 # V2全国統合版・確定仕様と実装照合（2026-11-04）
 
 初回監査の基準main: `c69c970c982724b20d9a327e1fd1c223f356aebd`。有効規則の正本は[既存MAINTENANCE_RULES](../national/MAINTENANCE_RULES.md)を更新して再利用する。今回は既存40項目を再評価し、新規S41〜S49を追加した49項目を記録する。A23／B12／C5／要確認9。Cは明示的変更・廃止の記録であり、Aも表に記した観測条件の範囲に限る。詳細な定義・集計方法は[PR照合台帳](v2-national-pr-ledger-20261104.md)参照。

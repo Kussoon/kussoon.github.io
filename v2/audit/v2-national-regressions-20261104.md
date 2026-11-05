@@ -1,3 +1,5 @@
+> 2026-11-05 段階表示の別PR試作: [実装・証拠・限界](v2-national-regression-test-plan-20261104.md#progressive-restoration-prototype)。`?progressive=1`のみ。通常版49項目の判定とS44/S45/S46/S48・旧24失敗は維持し、本番解消扱いにしない。
+
 # 2026-11-05 補完監査の不整合と残件
 
 main `6bdd869`、[PR #261](https://github.com/Kussoon/kussoon.github.io/pull/261)。#248〜#253/#259/#260はマージ済み。以下の旧「未マージ」は記録当時の履歴で、既に修正済みの再タップ/検索/庁舎/吹き出しを旧記録だけで再修正しない。今回の残件と優先順位は[補完一覧](#behavior-regressions)、現在判定は[正式49仕様](v2-national-current-spec-20261104.md)を参照。本PRは監査のみ。
