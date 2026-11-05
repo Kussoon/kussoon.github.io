@@ -188,7 +188,9 @@ function renderOfficePopup(){
  const r=entry.regions.find(x=>x.code===code);if(!r){popup.hidden=true;return;}
  const result=KussoonOfficeDirectory.resolve(entry.offices,code);
  const selectedName=nationalLabels?.fullNameFor(code)||r.fullName||r.name;
- $('popupName').textContent=result.parentRegion&&result.offices.length>1?selectedName+'・'+result.parentRegion.name:selectedName;
+ // R07/R17: Use the same municipality name as the map label. Do not append the parent city twice.
+ const parentName=result.parentRegion?.name||'';
+ $('popupName').textContent=parentName&&result.offices.length>1&&!selectedName.startsWith(parentName)?parentName+selectedName:selectedName;
  KussoonOfficeDirectory.render(document,$('popupActions'),result,r.fullName||r.name);
  $('popupNote').textContent=!entry.offices?(officeReady.has(national?.pref||$('pref').value)?'庁舎データを取得できませんでした。':'この地域の庁舎情報は今後追加します。'):(result.offices.length&&result.offices.every(o=>o.status==='verified')?'住所は参考情報です。リンクは別タブで開きます。':'庁舎情報に未確認の項目があります。');
  popup.hidden=false;
