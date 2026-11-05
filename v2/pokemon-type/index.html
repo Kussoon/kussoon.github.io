@@ -177,6 +177,7 @@ body.quiz-active #quiz-next{min-height:44px}
 .advanced-total{font-size:17px;font-weight:900;color:#164c70}
 @media(max-width:600px){.advanced-results{grid-template-columns:1fr}.advanced-selectors{gap:7px}.advanced-selected{gap:6px}.advanced-chosen .type-symbol{width:36px;height:36px}.advanced-chosen{font-size:14px}.advanced-selectors label{font-size:14px}}
 .study-level-link{display:flex;align-items:center;justify-content:center;text-decoration:none}.study-level-link:visited{color:#254c64}
+body.quiz-active .advanced-quiz-levels{display:none}
 </style>
 </head>
 <body>
@@ -242,6 +243,10 @@ body.quiz-active #quiz-next{min-height:44px}
 </div>
 
 <div id="quiz-page" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+<div class="study-levels advanced-quiz-levels" role="group" aria-label="クイズのむずかしさ">
+<button class="study-level" type="button" aria-pressed="true">🌱 初級：1タイプ</button>
+<a class="study-level study-level-link" href="./advanced-quiz.html">⭐ 上級：2タイプ</a>
+</div>
 <section class="panel quiz-board" aria-labelledby="quiz-heading">
 <h2 id="quiz-heading">❔ タイプ相性 4択クイズ</h2>
 <p class="quiz-introduction">わざと あいての タイプを見て、こうかを えらぼう！</p>
