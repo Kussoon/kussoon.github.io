@@ -145,6 +145,7 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 <script src="density-labels.js"></script>
 <script src="../progressive-preview/progressive-geometry.js"></script>
 <script src="../progressive-preview/progressive-geometry-client.js"></script>
+<script src="../progressive-preview/county-overlay.js"></script>
 <script src="../progressive-preview/national-progressive-labels.js"></script>
 <script src="../shared/municipality-quiz.js"></script>
 <script src="../common/js/office-directory.js"></script>
@@ -241,7 +242,7 @@ function paint({refocus=true}={}){
   $('officePopup').hidden=true;
   if(progressive&&nationalView){
    const projection=project(nationBoxes[$('nationExtent').value]);
-   if(!nationalLabels){nationalLabels=KussoonV2NationalProgressive.create({map:$('map'),viewport,loadIndex:()=>fetch('../progressive-preview/label-index.json').then(r=>{if(!r.ok)throw Error('label index HTTP '+r.status);return r.json();}),store:progressiveStore,loadOffices:getOffices,prefName:code=>names[Number(code)],overview:()=>overview,project:projection,isActive:()=>nationalView&&!current,onSelection:()=>{dismissedPopupCode=null;renderOfficePopup();},onStatus:text=>$('status').textContent=text});
+   if(!nationalLabels){nationalLabels=KussoonV2NationalProgressive.create({map:$('map'),viewport,loadIndex:()=>Promise.all([fetch('../progressive-preview/label-index.json'),fetch('../progressive-preview/county-overlay.json')]).then(async ([indexRes,countyRes])=>{if(!indexRes.ok||!countyRes.ok)throw Error('label metadata HTTP '+indexRes.status+'/'+countyRes.status);return KussoonV2CountyOverlay.apply(await indexRes.json(),await countyRes.json());}),store:progressiveStore,loadOffices:getOffices,prefName:code=>names[Number(code)],overview:()=>overview,project:projection,isActive:()=>nationalView&&!current,onSelection:()=>{dismissedPopupCode=null;renderOfficePopup();},onStatus:text=>$('status').textContent=text});
     nationalLabels.ready.catch(e=>{$('status').textContent='地名索引を読み込めませんでした。再読込してください。';console.warn(e);});
     window.KussoonV2ProgressivePreview=Object.freeze({controller:nationalLabels,viewport,store:progressiveStore});
    }
