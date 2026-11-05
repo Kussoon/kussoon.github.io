@@ -31,10 +31,20 @@ jobs:
           cd v2/tools/shared-topology && npm test
       - name: Download official 2026 N03 source and build a single nationwide input
         run: python3 v2/tools/shared-topology/prepare-2026-national.py "$RUNNER_TEMP/n03"
+      - name: Measure 0.02 baseline with the same geometry tests
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+          KUSSOON_COLLECT_ONLY: '1'
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep020" --quantization 1000000 --keep 0.02 --expect-prefectures 47
+          node validate.mjs --dir "$RUNNER_TEMP/keep020"
+          node compare-lightweight.cjs "$RUNNER_TEMP/keep020" "$RUNNER_TEMP/keep020-report.json"
       - name: Build 0.005 (0.5 percent) national simplification
         working-directory: v2/tools/shared-topology
         env:
           NODE_OPTIONS: --max-old-space-size=12288
+          KUSSOON_COLLECT_ONLY: '1'
         run: |
           node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep005" --quantization 1000000 --keep 0.005 --expect-prefectures 47
           node validate.mjs --dir "$RUNNER_TEMP/keep005"
@@ -43,21 +53,37 @@ jobs:
         working-directory: v2/tools/shared-topology
         env:
           NODE_OPTIONS: --max-old-space-size=12288
+          KUSSOON_COLLECT_ONLY: '1'
         run: |
           node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep002" --quantization 1000000 --keep 0.002 --expect-prefectures 47
           node validate.mjs --dir "$RUNNER_TEMP/keep002"
           node compare-lightweight.cjs "$RUNNER_TEMP/keep002" "$RUNNER_TEMP/keep002-report.json"
-      - name: Summarize size and preserved geometry without publishing data
+      - name: Summarize all three measurements and enforce the shape/size gate
         run: |
           python3 - <<'PY'
-          import json,os
+          import json,os,sys
           root=os.environ['RUNNER_TEMP']
-          a=json.load(open(root+'/keep005-report.json'))
-          b=json.load(open(root+'/keep002-report.json'))
-          print('S39 SIMPLIFICATION COMPARISON')
-          print('keep0.02 baseline=370.99MiB, keep0.005='+str(a['totalMiB'])+'MiB, keep0.002='+str(b['totalMiB'])+'MiB')
-          print('0.005 regions',a['regions'],'rings',a['rings'],'holes',a['holes'],'shared pairs',a['sharedPairs'])
-          print('0.002 regions',b['regions'],'rings',b['rings'],'holes',b['holes'],'shared pairs',b['sharedPairs'])
+          names=['keep020','keep005','keep002']
+          reports={n:json.load(open(root+'/'+n+'-report.json')) for n in names}
+          print('S39 STRICT CANDIDATE REVIEW')
+          for n,r in reports.items():
+              print(n, 'MiB=',r['totalMiB'],'regions=',r['regions'],'rings=',r['rings'],'holes=',r['holes'],
+                    'degenerate=',r['totalDegenerateRings'],'discontinuous=',r['totalDiscontinuousRings'],
+                    'sharedPairs=',r['sharedPairs'])
+          baseline=reports['keep020']
+          issues=[]
+          for n in ['keep005','keep002']:
+              r=reports[n]
+              if r['regions']!=1905 or r['sharedPairs']<22: issues.append(n+': code or shared arc regression')
+              if r['totalDegenerateRings']>0 or r['totalDiscontinuousRings']>0: issues.append(n+': candidate rings are not all valid')
+              if r['rings']<baseline['rings'] or r['holes']<baseline['holes']: issues.append(n+': lost rings or holes relative to baseline')
+              if r['totalMiB']>=baseline['totalMiB']*.98: issues.append(n+': no material reduction in bytes')
+          if baseline['totalDegenerateRings']:
+              print('BASELINE WARNING: baseline also contains degenerate rings; requires independent source/algorithm investigation.')
+          if issues:
+              for reason in issues: print('REJECT:',reason)
+              sys.exit(1)
+          print('PASS geometry/size gate only; visual and real-device acceptance still required')
           PY
       - name: Confirm published data and scripts remain unchanged
         run: git diff --exit-code -- v2/data v2/national v2/shared
@@ -67,6 +93,7 @@ jobs:
         with:
           name: s39-national-2026-keep-comparison-report
           path: |
+            ${{ runner.temp }}/keep020-report.json
             ${{ runner.temp }}/keep005-report.json
             ${{ runner.temp }}/keep002-report.json
           retention-days: 14
