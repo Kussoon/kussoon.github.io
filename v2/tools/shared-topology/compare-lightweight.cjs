@@ -58,6 +58,7 @@ const report={keep:candidate.keep,quantization:candidate.quantization,regions:se
  rows,ringFailures:ringFailures.slice(0,40)};
 if(process.argv[3])fs.writeFileSync(process.argv[3],JSON.stringify(report,null,2)+'\n');
 console.log('CANDIDATE_SUMMARY '+JSON.stringify({keep:report.keep,totalMiB:report.totalMiB,rings:report.rings,holes:report.holes,degenerate:report.totalDegenerateRings,discontinuous:report.totalDiscontinuousRings,sharedPairs:report.sharedPairs}));
+if(process.env.KUSSOON_COLLECT_ONLY==='1'){console.log('DIAGNOSTIC_ONLY: unapproved candidate, failure counts retained');process.exit(0);}
 assert.equal(report.totalDegenerateRings,0,'candidate contains degenerate rings');
 assert.equal(report.totalDiscontinuousRings,0,'candidate contains unclosed/discontinuous rings');
 assert(report.sharedPairs>=22,'known land-seam coverage lost');
