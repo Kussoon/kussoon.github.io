@@ -24,6 +24,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    },{},{timeout:90000});
    const geo=await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.snapshot().geometry);
    assert.equal(geo.backend,'worker','relocated map must not silently fall back to the main-thread renderer');
+   await page.click('#mapReset'); // Return to all 47 overview fills before palette assertions.
    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/maps/national-municipalities.html');
    assert.equal(await page.locator('meta[name="robots"]').count(),0,'public map should be indexable');
    const publicLinks=await page.evaluate(async()=>{
