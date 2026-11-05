@@ -1,0 +1,30 @@
+name: Maps national municipality move smoke test
+on:
+  pull_request:
+    paths:
+      - 'maps/index.html'
+      - 'maps/national-municipalities.html'
+      - 'v2/national/map.html'
+      - 'index.html'
+      - 'local/index.html'
+      - 'v2/tests/national-map-move.browser.cjs'
+      - '.github/workflows/maps-national-move.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Check new map URL, old redirect, all V2 geometry assets and category links
+        run: node v2/tests/national-map-move.browser.cjs
