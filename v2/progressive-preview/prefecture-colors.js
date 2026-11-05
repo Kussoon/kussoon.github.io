@@ -12,7 +12,7 @@ const palette=Object.freeze([
  '#c9cfed', // periwinkle
  '#bce3db'  // mint
 ]);
-const order=[0,4,2,6,1,5,3,7];
+const order=[0,4,2,1,5,6,3,7];
 function color(code){
  const n=Number(String(code).slice(0,2));
  if(!Number.isInteger(n)||n<1||n>47)return null;
