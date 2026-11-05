@@ -1,0 +1,32 @@
+{
+  "source": "2021 N03_003 validated by 2026 five-digit code and visible municipality name; 2026 N03 source needed before production",
+  "sourceReadings": "v2/data/national/county-readings.json",
+  "entries": {},
+  "unmatched": [],
+  "errors": [
+    {
+      "pref": "01",
+      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    },
+    {
+      "pref": "02",
+      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    },
+    {
+      "pref": "03",
+      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    },
+    {
+      "pref": "04",
+      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    },
+    {
+      "pref": "05",
+      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    },
+    {
+      "pref": "06",
+      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    }
+  ]
+}
