@@ -1,0 +1,72 @@
+name: V2 national 2026 common topology candidate (read-only)
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/audit-2026-candidate.cjs'
+      - '.github/workflows/v2-national-2026-candidate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install converter and pinned topology dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+          npm install --no-audit --no-fund
+        working-directory: v2/tools/shared-topology
+      - name: Test topology builder using synthetic common-border fixtures
+        working-directory: v2/tools/shared-topology
+        run: |
+          npm test
+          node --check audit-2026-candidate.cjs
+      - name: Download and convert 47 MLIT N03-2026 prefecture files into one national GeoJSON
+        run: |
+          python3 v2/tools/shared-topology/prepare-2026-national.py "$RUNNER_TEMP/n03-source"
+      - name: Build nationwide common arcs and independently loadable prefecture slices
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03-source/national-2026.geojson" --output "$RUNNER_TEMP/v2-common" --quantization 1000000 --keep 0.02 --expect-prefectures 47 --emit-combined national.topojson
+      - name: Validate exact prefecture-to-prefecture arc reuse
+        working-directory: v2/tools/shared-topology
+        run: node validate.mjs --dir "$RUNNER_TEMP/v2-common"
+      - name: Validate current 1905 region code and name identity
+        run: |
+          node v2/tools/shared-topology/audit-2026-candidate.cjs "$RUNNER_TEMP/v2-common" "$RUNNER_TEMP/v2-common/candidate-audit.json"
+          cp "$RUNNER_TEMP/n03-source/source-summary.json" "$RUNNER_TEMP/v2-common/source-summary.json"
+      - name: Confirm all source code and published data unchanged
+        run: git diff --exit-code -- v2/data v2/national v2/shared
+      - name: Archive only generated common-topology candidate (never auto-publish)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-2026-47pref-common-topology-candidate
+          path: |
+            ${{ runner.temp }}/v2-common/*.topojson
+            ${{ runner.temp }}/v2-common/*.json
+          retention-days: 7
+          compression-level: 6
+          if-no-files-found: error
+      - name: Archive build summary even if validation fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-2026-common-topology-build-summary
+          path: |
+            ${{ runner.temp }}/n03-source/source-summary.json
+            ${{ runner.temp }}/v2-common/manifest.json
+            ${{ runner.temp }}/v2-common/candidate-audit.json
+          retention-days: 7
+          if-no-files-found: ignore
