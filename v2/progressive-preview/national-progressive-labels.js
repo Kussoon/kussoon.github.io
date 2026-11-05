@@ -25,7 +25,7 @@ function plan(ms,{view,width,height,ratio,zoom,readings=false,selected='',measur
  return {...result,size,px};
 }
 function uniqueSegments(arcs,project=null,clip=null){const seen=new Set(),out=[];for(const arc of arcs)for(let i=1;i<arc.length;i++){const a=arc[i-1],b=arc[i],pa=project?project(a):a,pb=project?project(b):b;if(clip&&(Math.max(pa[0],pb[0])<clip.x||Math.min(pa[0],pb[0])>clip.x+clip.w||Math.max(pa[1],pb[1])<clip.y||Math.min(pa[1],pb[1])>clip.y+clip.h))continue;const ka=pa.map(n=>n.toFixed(project?4:9)).join(','),kb=pb.map(n=>n.toFixed(project?4:9)).join(',');if(ka===kb)continue;const k=ka<kb?ka+'|'+kb:kb+'|'+ka;if(seen.has(k))continue;seen.add(k);out.push([a,b]);}return out;}
-function create({map,viewport,loadIndex,store,loadOffices,overview,project,isActive,onSelection,onStatus,prefName=code=>code}){
+function create({map,viewport,loadIndex,store,loadOffices,overview,project,isActive,onSelection,onStatus,prefName=code=>code,geometryWorkerUrl='../progressive-preview/progressive-geometry.worker.js'}){
  let index=null,ms=[],selected='',selectionEntry=null,selectionSequence=0,generation=0,timer=null,disposed=false,shapeKey=null,shapes=null,labelLayer=null,projection=project,labelNodes=new Map(),prepared=new WeakMap(),activePointers=new Set(),selectionError='',detailError='';
  const timing={labelPasses:0,lastLabelMs:0,firstLabelMs:0,maxLabelMs:0,shapePasses:0,lastShapeMs:0,maxShapeMs:0,indexBytes:0},canvas=document.createElement('canvas'),context=canvas.getContext('2d'),widths=new Map();
  const tag=(n,attrs={})=>{const x=document.createElementNS(NS,n);for(const [k,v] of Object.entries(attrs))x.setAttribute(k,v);return x;};
@@ -33,7 +33,7 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
  function frame(){const r=map.getBoundingClientRect(),m=map.getScreenCTM(),inverse=m.inverse();function pt(x,y){const p=map.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(inverse);}const a=pt(r.left+1,r.top+1),b=pt(r.right-1,r.bottom-1);return {view:{x:a.x,y:a.y,w:b.x-a.x,h:b.y-a.y},width:r.width-2,height:r.height-2,ratio:Math.hypot(m.a,m.b),zoom:850/viewport.view().w};}
  function measure(text,size){const px=fontSize(850/viewport.view().w),physical=size*frameRatio,cacheKey=text+'|'+physical.toFixed(4);if(!widths.has(cacheKey)){if(widths.size>=12000)widths.clear();context.font='850 '+physical+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';widths.set(cacheKey,context.measureText(text).width);}return widths.get(cacheKey)/frameRatio;}
  let frameRatio=1,shapePending=false,sceneSequence=0,requestKey='',overviewEntry=null;
- const geometry=global.KussoonProgressiveGeometryClient&&new URLSearchParams(location.search).get('geometry')!=='main'?global.KussoonProgressiveGeometryClient.create({url:'../progressive-preview/progressive-geometry.worker.js',canWork:()=>!activePointers.size,ownsEntry:(key,entry)=>store.peek(key)===entry}):null;
+ const geometry=global.KussoonProgressiveGeometryClient&&new URLSearchParams(location.search).get('geometry')!=='main'?global.KussoonProgressiveGeometryClient.create({url:geometryWorkerUrl,canWork:()=>!activePointers.size,ownsEntry:(key,entry)=>store.peek(key)===entry}):null;
  function refreshLabels(){
   if(!index||!isActive()||!labelLayer||disposed||activePointers.size)return null;const start=performance.now(),f=frame();frameRatio=f.ratio;
   const readings=document.getElementById('readingMode').value==='on',p=plan(ms,{...f,readings,selected,measure});
