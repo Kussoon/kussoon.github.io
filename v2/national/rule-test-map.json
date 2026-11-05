@@ -1,0 +1,553 @@
+{
+  "source": "v2/national/MAINTENANCE_RULES.md",
+  "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success.",
+  "rules": {
+    "R01": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/data/national/2026-common/"
+      ],
+      "tests": [
+        "v2/tests/national-2026-data.test.cjs"
+      ],
+      "legacy_ids": [
+        "S38",
+        "S40"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R02": {
+      "paths": [
+        "v2/progressive-preview/municipality-renderer.js",
+        "v2/progressive-preview/progressive-geometry.js",
+        "maps/national-municipalities.html",
+        "v2/data/national/2026-shared-preview/"
+      ],
+      "tests": [
+        "v2/national/test-2026-single-stroke.cjs",
+        "v2/tests/progressive-seam-visual.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S35",
+        "S36",
+        "S37",
+        "S39"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R03": {
+      "paths": [
+        "v2/progressive-preview/national-progressive-labels.js",
+        "v2/progressive-preview/progressive-geometry.worker.js",
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/tests/national-2026-rc1.browser.cjs",
+        "v2/tests/national-map-move.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S41",
+        "S42",
+        "S43"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R04": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/progressive-preview/national-progressive-labels.js"
+      ],
+      "tests": [
+        "v2/tests/national-map-move.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S20"
+      ],
+      "coverage_gap": true,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R05": {
+      "paths": [
+        "v2/progressive-preview/national-progressive-labels.js",
+        "v2/shared/established-label-adapter.js"
+      ],
+      "tests": [
+        "v2/tests/pilot-label-scope.browser.cjs",
+        "v2/tests/national-2026-rc1.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S22",
+        "S24",
+        "S41",
+        "S43"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R06": {
+      "paths": [
+        "v2/shared/established-label-adapter.js",
+        "v2/progressive-preview/label-index.json",
+        "maps/national-municipalities.html",
+        "v2/shared/place-labels.js"
+      ],
+      "tests": [
+        "v2/tests/compare-2026-labels.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S21",
+        "S26",
+        "S29"
+      ],
+      "coverage_gap": true,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R07": {
+      "paths": [
+        "v2/progressive-preview/county-overlay.js",
+        "v2/progressive-preview/administrative-labels.js"
+      ],
+      "tests": [
+        "v2/tests/progressive-county-labels.test.cjs"
+      ],
+      "legacy_ids": [
+        "S24",
+        "S25"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R08": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/shared/reading-bridge.js"
+      ],
+      "tests": [
+        "v2/tests/national-2026-public.browser.cjs",
+        "v2/tests/national-readings.test.cjs"
+      ],
+      "legacy_ids": [
+        "S27",
+        "S28",
+        "S34",
+        "S48"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R09": {
+      "paths": [
+        "v2/progressive-preview/prefecture-colors.js",
+        "v2/progressive-preview/prefecture-colors.css",
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/tests/prefecture-colors-pulse.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S06"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R10": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/progressive-preview/prefecture-colors.css",
+        ".github/workflows/v2-national-2026-public.yml",
+        ".github/workflows/maps-national-move.yml"
+      ],
+      "tests": [
+        "v2/tests/national-2026-public.browser.cjs",
+        "v2/tests/national-map-move.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S06",
+        "S35"
+      ],
+      "coverage_gap": true,
+      "test_scope": "outdated_public_expectation"
+    },
+    "R11": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/progressive-preview/national-progressive-labels.js"
+      ],
+      "tests": [
+        "v2/tests/nationwide-retap.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S01",
+        "S02",
+        "S03"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R12": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/progressive-preview/national-progressive-labels.js"
+      ],
+      "tests": [
+        "v2/tests/audit-legacy-behavior.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S04",
+        "S05",
+        "S44"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R13": {
+      "paths": [
+        "v2/progressive-preview/map-viewport.js",
+        "maps/national-municipalities.html",
+        "v2/shared/map-viewport.js"
+      ],
+      "tests": [
+        "v2/tests/nationwide-touch.browser.cjs",
+        "v2/tests/national-map-move.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S23"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R14": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/progressive-preview/map-viewport.js"
+      ],
+      "tests": [
+        "v2/tests/pilot-map-ui.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S19"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R15": {
+      "paths": [
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/tests/pilot-ui.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S07",
+        "S12",
+        "S13"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R16": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/common/js/office-directory.js"
+      ],
+      "tests": [
+        "v2/tests/pilot-ui.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S01",
+        "S12",
+        "S13"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R17": {
+      "paths": [
+        "v2/common/js/office-directory.js",
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/tests/office-directory.test.cjs",
+        "v2/tests/pilot-ui.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S08"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R18": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/shared/reading-bridge.js"
+      ],
+      "tests": [
+        "v2/tests/nationwide-search.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S18",
+        "S30",
+        "S31",
+        "S45",
+        "S46"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R19": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/national/map.html",
+        "maps/index.html"
+      ],
+      "tests": [
+        "v2/tests/national-map-move.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S49"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R20": {
+      "paths": [
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/tests/pilot-ui.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S12",
+        "S37",
+        "S47"
+      ],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R21": {
+      "paths": [
+        "maps/national-municipalities.html",
+        "v2/progressive-preview/national-progressive-labels.js"
+      ],
+      "tests": [
+        "v2/tests/national-map-move.browser.cjs",
+        "v2/tests/national-2026-data.test.cjs"
+      ],
+      "legacy_ids": [
+        "S11",
+        "S20"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R22": {
+      "paths": [
+        "v2/common/js/office-directory.js",
+        "v2/data/offices/"
+      ],
+      "tests": [
+        "v2/tests/office-directory.test.cjs"
+      ],
+      "legacy_ids": [
+        "S10",
+        "S11"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R23": {
+      "paths": [
+        "v2/common/js/office-directory.js",
+        "v2/audit/official-url-nationwide-classification-20261103.json"
+      ],
+      "tests": [
+        "v2/tests/office-directory.test.cjs",
+        "v2/common/js/test-office-directory-data.cjs"
+      ],
+      "legacy_ids": [
+        "S07",
+        "S09",
+        "S33"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R24": {
+      "paths": [
+        "v2/tests/run-national-contracts.cjs",
+        ".github/workflows/"
+      ],
+      "tests": [
+        "v2/tests/audit-ledger.test.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R25": {
+      "paths": [
+        "v2/tests/national-2026-public.browser.cjs",
+        ".github/workflows/v2-national-2026-public.yml",
+        "maps/national-municipalities.html",
+        ".github/workflows/maps-national-move.yml",
+        "v2/progressive-preview/prefecture-colors.css"
+      ],
+      "tests": [
+        "v2/tests/national-2026-public.browser.cjs",
+        "v2/tests/national-map-move.browser.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "outdated_public_expectation"
+    },
+    "R26": {
+      "paths": [
+        "v2/shared/municipality-quiz.js",
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/shared/test-municipality-quiz.cjs"
+      ],
+      "legacy_ids": [
+        "S32"
+      ],
+      "coverage_gap": false,
+      "test_scope": "existing_coverage_see_rule"
+    },
+    "R27": {
+      "paths": [
+        "v2/national/shared-seam-test.html",
+        "v2/national/progressive-shared-test.html"
+      ],
+      "tests": [
+        "v2/tests/shared-seam-preview.browser.cjs",
+        "v2/tests/progressive-shared-seven.browser.cjs"
+      ],
+      "legacy_ids": [
+        "S39"
+      ],
+      "coverage_gap": false,
+      "test_scope": "historical_or_trial"
+    },
+    "R28": {
+      "paths": [],
+      "tests": [],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "pr_evidence_only",
+      "regional_paths": {
+        "Kussoon/nishinomiya": [
+          "town-search.html"
+        ],
+        "Kussoon/takarazuka": [
+          "town-search.html"
+        ],
+        "Kussoon/amagasaki": [
+          "town-search.html"
+        ],
+        "Kussoon/ashiya": [
+          "town-search.html"
+        ],
+        "Kussoon/itami": [
+          "town-search.html"
+        ]
+      }
+    },
+    "R29": {
+      "paths": [],
+      "tests": [],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "pr_evidence_only",
+      "regional_paths": {
+        "Kussoon/nishinomiya": [
+          "community-map-quiz.html",
+          "communities/*/location-quiz.html"
+        ],
+        "Kussoon/takarazuka": [
+          "community-map-quiz.html",
+          "communities/01nigawa/location-quiz.html"
+        ]
+      }
+    },
+    "R30": {
+      "paths": [],
+      "tests": [],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "pr_evidence_only",
+      "regional_paths": {
+        "Kussoon/amagasaki": [
+          "town-search.html"
+        ]
+      }
+    },
+    "R31": {
+      "paths": [
+        "v2/nishinomiya/full-map-app.js",
+        "v2/nishinomiya-four-town-test/pilot.js",
+        "v2/irregular/",
+        "v2/national/density.html"
+      ],
+      "tests": [
+        "v2/tests/nishinomiya-staggers.test.cjs",
+        "v2/tests/universal-centers.test.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
+    },
+    "R32": {
+      "paths": [
+        "v2/hyogo/labels.html",
+        "v2/ashiya/labels-app.js",
+        "v2/hyogo/labels-app.js"
+      ],
+      "tests": [
+        "v2/tests/hyogo49-labels.test.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": false,
+      "test_scope": "historical_or_trial",
+      "regional_paths": {
+        "Kussoon/hyogo": [
+          "study-all.html"
+        ]
+      }
+    },
+    "R33": {
+      "paths": [
+        "v2/ashiya/readings.html",
+        "v2/ashiya/readings-app.js"
+      ],
+      "tests": [
+        "v2/tests/readable-labels.test.cjs",
+        "v2/tests/universal-centers.test.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": false,
+      "test_scope": "historical_or_trial"
+    },
+    "R34": {
+      "paths": [],
+      "tests": [],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "pr_evidence_only",
+      "regional_paths": {
+        "Kussoon/nishinomiya": [
+          "full-location-quiz.html"
+        ]
+      }
+    }
+  }
+}

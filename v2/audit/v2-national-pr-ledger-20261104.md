@@ -2603,7 +2603,7 @@ PR本文、全245件の変更ファイル一覧（計1027エントリ）、API�
 
 ## 2026-11-05追補：PR #246〜#290 と公開版の優先判断
 
-基準main `476a6f91dbb7a95a99bb10caf571c125411ca9d2`。実在43 PR（地図関連29／別コンテンツ14）。#267/#282はPR番号ではない。各行は本文・マージ状態を確認した分類であり、重点6件以外の全patch/レビュー逐条調査を完了した意味ではない。**現行規則の正本**は[MAINTENANCE_RULES.md](../national/MAINTENANCE_RULES.md)のR01〜R27。旧S-IDのA/B/Cは当時のpilotの記録として保持する。
+基準main `476a6f91dbb7a95a99bb10caf571c125411ca9d2`。実在43 PR（地図関連29／別コンテンツ14）。#267/#282はPR番号ではない。各行は本文・マージ状態・取得可能な差分を確認した分類。大容量データの形状差分、レビュー全件、実機原本の逐条確認は未実施。**現行規則の正本**は[MAINTENANCE_RULES.md](../national/MAINTENANCE_RULES.md)のR01〜R34。旧S-IDのA/B/Cは当時のpilotの記録として保持する。
 
 |PR|マージ|分類・当時の決定／現在の位置付け|
 |---|---|---|
@@ -2652,3 +2652,42 @@ PR本文、全245件の変更ファイル一覧（計1027エントリ）、API�
 |[#246](https://github.com/Kussoon/kussoon.github.io/pull/246) docs(v2): 全国統合版の初回仕様監査と回帰防止記録|未|旧監査案→#248へ統合|
 
 #91→#244→#259→#287→#288→#290のCSS・JS差分により、#290が単独/二施設ともtoolbar高さ上限を撤去した最終決定と確認した。公開コードは`maps/national-municipalities.html`。#289は#281の脈動と#286/#287の黄赤交互を公開版で置換した。#270/#272/#275/#263は未マージ、#277/#279は独立試験のみ。#283/284/285により正式入口は`/maps/national-municipalities.html`、旧pilotは比較対象である。
+
+<a id="regional-pr-trace"></a>
+
+## 2026-11-06 地域学習マップの別リポジトリ追補（日本時間）
+
+公開地域6リポジトリのPR一覧を最初から最新まで確認。計59件のうち、操作・描画・地名学習に関わる19件は本文・差分とマージ状態を確認し、40件は共通案内・計測・別テーマとして一覧分類した。地図PR以前の直コミットや、各地域の全ページ実機確認は別範囲。地域サイトへのV2移行の可否は正本のR28〜R34を参照。
+
+|リポジトリ|実在PR|詳細照合|一覧分類のみ|
+|---|---:|---:|---:|
+|nishinomiya|22|9|13|
+|takarazuka|7|3|4|
+|hyogo|4|0|4|
+|amagasaki|12|4|8|
+|ashiya|9|1|8|
+|itami|5|2|3|
+
+|PR|マージ|現在の位置付け|
+|---|---|---|
+|[nishinomiya #14](https://github.com/Kussoon/nishinomiya/pull/14) 芦原の場所当てクイズでPCの地図操作を改善|済|R29|
+|[nishinomiya #15](https://github.com/Kussoon/nishinomiya/pull/15) 全域場所当てクイズのPC地図表示を拡大|済|R34（全域クイズの広幅レイアウト）|
+|[nishinomiya #16](https://github.com/Kussoon/nishinomiya/pull/16) 26コミュニティ場所当てに地図ホイール操作を導入|済|R29|
+|[nishinomiya #17](https://github.com/Kussoon/nishinomiya/pull/17) 地域別場所当てクイズ21ページの地図操作を改善|済|R29|
+|[nishinomiya #18](https://github.com/Kussoon/nishinomiya/pull/18) 上ヶ原・西宮浜・広田の場所当て地図操作を改善|済|R29|
+|[nishinomiya #19](https://github.com/Kussoon/nishinomiya/pull/19) 甲東の場所当てに地図ホイール操作を導入|済|R29|
+|[nishinomiya #20](https://github.com/Kussoon/nishinomiya/pull/20) 甲東クイズのホイール案内を地図ボタンから離す|済|R29|
+|[nishinomiya #21](https://github.com/Kussoon/nishinomiya/pull/21) 西宮市町名検索に地図ホイール操作モードを追加|済|R28|
+|[nishinomiya #22](https://github.com/Kussoon/nishinomiya/pull/22) 町名検索の地図上で町域を直接選択できるようにする|済|R28|
+|[takarazuka #5](https://github.com/Kussoon/takarazuka/pull/5) 宝塚コミュニティ場所当ての地図ホイール操作を改善|済|R29|
+|[takarazuka #6](https://github.com/Kussoon/takarazuka/pull/6) 仁川の場所当てクイズの地図操作を改善|済|R29|
+|[takarazuka #7](https://github.com/Kussoon/takarazuka/pull/7) 宝塚市町名検索のSVG地図にホイール操作モードを追加|済|R28|
+|[amagasaki #9](https://github.com/Kussoon/amagasaki/pull/9) 尼崎市町名検索のSVG地図にホイール操作モードを追加|済|R28|
+|[amagasaki #10](https://github.com/Kussoon/amagasaki/pull/10) 塚口町の選択表示で内部境界線を目立たなくする|済|R30（塚口町・選択のみ。後続で拡張）|
+|[amagasaki #11](https://github.com/Kussoon/amagasaki/pull/11) 町域の選択時の内部境界とタッチ時の表示を改善|済|R30（全町選択とhover）|
+|[amagasaki #12](https://github.com/Kussoon/amagasaki/pull/12) 通常の町名地図で町内の丁目境界線を非表示にする|済|R30（通常表示も対象）|
+|[ashiya #9](https://github.com/Kussoon/ashiya/pull/9) 芦屋市町名検索のSVG地図にホイール操作モードを追加|済|R28|
+|[itami #4](https://github.com/Kussoon/itami/pull/4) 伊丹市町名検索のSVG地図にホイール操作モードを追加|済|R28|
+|[itami #5](https://github.com/Kussoon/itami/pull/5) 町名検索で地図上の町域を直接選択できるようにする|済|R28|
+
+既存棚卸しに加え、各市の `town-search.html`、西宮・宝塚の `community-map-quiz.html` と甲東・仁川の代表回答ページ、西宮の全域場所当て、兵庫県の `study-all.html` を各mainから読み取った。試験ページ側のアンカー設定と地域公開版の採用状況を分けて記録した。
