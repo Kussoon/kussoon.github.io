@@ -1,32 +1,1568 @@
 {
   "source": "2021 N03_003 validated by 2026 five-digit code and visible municipality name; 2026 N03 source needed before production",
   "sourceReadings": "v2/data/national/county-readings.json",
-  "entries": {},
-  "unmatched": [],
-  "errors": [
-    {
-      "pref": "01",
-      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+  "entries": {
+    "01331": {
+      "name": "松前町",
+      "county": "松前郡",
+      "countyReading": "まつまえぐん"
     },
-    {
-      "pref": "02",
-      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    "01371": {
+      "name": "せたな町",
+      "county": "久遠郡",
+      "countyReading": "くどうぐん"
     },
-    {
-      "pref": "03",
-      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    "01391": {
+      "name": "島牧村",
+      "county": "島牧郡",
+      "countyReading": "しままきぐん"
     },
-    {
-      "pref": "04",
-      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    "01405": {
+      "name": "積丹町",
+      "county": "積丹郡",
+      "countyReading": "しゃこたんぐん"
     },
-    {
-      "pref": "05",
-      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    "01406": {
+      "name": "古平町",
+      "county": "古平郡",
+      "countyReading": "ふるびらぐん"
     },
-    {
-      "pref": "06",
-      "error": "TypeError: Cannot read properties of undefined (reading 'geometries')"
+    "01517": {
+      "name": "礼文町",
+      "county": "礼文郡",
+      "countyReading": "れぶんぐん"
+    },
+    "01303": {
+      "name": "当別町",
+      "county": "石狩郡",
+      "countyReading": "いしかりぐん"
+    },
+    "01304": {
+      "name": "新篠津村",
+      "county": "石狩郡",
+      "countyReading": "いしかりぐん"
+    },
+    "01332": {
+      "name": "福島町",
+      "county": "松前郡",
+      "countyReading": "まつまえぐん"
+    },
+    "01333": {
+      "name": "知内町",
+      "county": "上磯郡",
+      "countyReading": "かみいそぐん"
+    },
+    "01334": {
+      "name": "木古内町",
+      "county": "上磯郡",
+      "countyReading": "かみいそぐん"
+    },
+    "01337": {
+      "name": "七飯町",
+      "county": "亀田郡",
+      "countyReading": "かめだぐん"
+    },
+    "01343": {
+      "name": "鹿部町",
+      "county": "茅部郡",
+      "countyReading": "かやべぐん"
+    },
+    "01345": {
+      "name": "森町",
+      "county": "茅部郡",
+      "countyReading": "かやべぐん"
+    },
+    "01346": {
+      "name": "八雲町",
+      "county": "二海郡",
+      "countyReading": "ふたみぐん"
+    },
+    "01347": {
+      "name": "長万部町",
+      "county": "山越郡",
+      "countyReading": "やまこしぐん"
+    },
+    "01361": {
+      "name": "江差町",
+      "county": "檜山郡",
+      "countyReading": "ひやまぐん"
+    },
+    "01362": {
+      "name": "上ノ国町",
+      "county": "檜山郡",
+      "countyReading": "ひやまぐん"
+    },
+    "01700": {
+      "name": "蘂取村",
+      "county": "蘂取郡",
+      "countyReading": "しべとろぐん"
+    },
+    "01363": {
+      "name": "厚沢部町",
+      "county": "檜山郡",
+      "countyReading": "ひやまぐん"
+    },
+    "01364": {
+      "name": "乙部町",
+      "county": "爾志郡",
+      "countyReading": "にしぐん"
+    },
+    "01367": {
+      "name": "奥尻町",
+      "county": "奥尻郡",
+      "countyReading": "おくしりぐん"
+    },
+    "01370": {
+      "name": "今金町",
+      "county": "瀬棚郡",
+      "countyReading": "せたなぐん"
+    },
+    "01392": {
+      "name": "寿都町",
+      "county": "寿都郡",
+      "countyReading": "すっつぐん"
+    },
+    "01393": {
+      "name": "黒松内町",
+      "county": "寿都郡",
+      "countyReading": "すっつぐん"
+    },
+    "01394": {
+      "name": "蘭越町",
+      "county": "磯谷郡",
+      "countyReading": "いそやぐん"
+    },
+    "01395": {
+      "name": "ニセコ町",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01396": {
+      "name": "真狩村",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01397": {
+      "name": "留寿都村",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01398": {
+      "name": "喜茂別町",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01399": {
+      "name": "京極町",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01400": {
+      "name": "倶知安町",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01401": {
+      "name": "共和町",
+      "county": "岩内郡",
+      "countyReading": "いわないぐん"
+    },
+    "01402": {
+      "name": "岩内町",
+      "county": "岩内郡",
+      "countyReading": "いわないぐん"
+    },
+    "01403": {
+      "name": "泊村",
+      "county": "古宇郡",
+      "countyReading": "ふるうぐん"
+    },
+    "01404": {
+      "name": "神恵内村",
+      "county": "古宇郡",
+      "countyReading": "ふるうぐん"
+    },
+    "01407": {
+      "name": "仁木町",
+      "county": "余市郡",
+      "countyReading": "よいちぐん"
+    },
+    "01408": {
+      "name": "余市町",
+      "county": "余市郡",
+      "countyReading": "よいちぐん"
+    },
+    "01409": {
+      "name": "赤井川村",
+      "county": "余市郡",
+      "countyReading": "よいちぐん"
+    },
+    "01423": {
+      "name": "南幌町",
+      "county": "空知郡",
+      "countyReading": "そらちぐん"
+    },
+    "01424": {
+      "name": "奈井江町",
+      "county": "空知郡",
+      "countyReading": "そらちぐん"
+    },
+    "01425": {
+      "name": "上砂川町",
+      "county": "空知郡",
+      "countyReading": "そらちぐん"
+    },
+    "01427": {
+      "name": "由仁町",
+      "county": "夕張郡",
+      "countyReading": "ゆうばりぐん"
+    },
+    "01428": {
+      "name": "長沼町",
+      "county": "夕張郡",
+      "countyReading": "ゆうばりぐん"
+    },
+    "01429": {
+      "name": "栗山町",
+      "county": "夕張郡",
+      "countyReading": "ゆうばりぐん"
+    },
+    "01430": {
+      "name": "月形町",
+      "county": "樺戸郡",
+      "countyReading": "かばとぐん"
+    },
+    "01431": {
+      "name": "浦臼町",
+      "county": "樺戸郡",
+      "countyReading": "かばとぐん"
+    },
+    "01432": {
+      "name": "新十津川町",
+      "county": "樺戸郡",
+      "countyReading": "かばとぐん"
+    },
+    "01433": {
+      "name": "妹背牛町",
+      "county": "雨竜郡",
+      "countyReading": "うりゅうぐん"
+    },
+    "01434": {
+      "name": "秩父別町",
+      "county": "雨竜郡",
+      "countyReading": "うりゅうぐん"
+    },
+    "01436": {
+      "name": "雨竜町",
+      "county": "雨竜郡",
+      "countyReading": "うりゅうぐん"
+    },
+    "01437": {
+      "name": "北竜町",
+      "county": "雨竜郡",
+      "countyReading": "うりゅうぐん"
+    },
+    "01438": {
+      "name": "沼田町",
+      "county": "雨竜郡",
+      "countyReading": "うりゅうぐん"
+    },
+    "01452": {
+      "name": "鷹栖町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01453": {
+      "name": "東神楽町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01454": {
+      "name": "当麻町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01455": {
+      "name": "比布町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01456": {
+      "name": "愛別町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01457": {
+      "name": "上川町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01458": {
+      "name": "東川町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01459": {
+      "name": "美瑛町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01460": {
+      "name": "上富良野町",
+      "county": "空知郡",
+      "countyReading": "そらちぐん"
+    },
+    "01461": {
+      "name": "中富良野町",
+      "county": "空知郡",
+      "countyReading": "そらちぐん"
+    },
+    "01462": {
+      "name": "南富良野町",
+      "county": "空知郡",
+      "countyReading": "そらちぐん"
+    },
+    "01463": {
+      "name": "占冠村",
+      "county": "勇払郡",
+      "countyReading": "ゆうふつぐん"
+    },
+    "01464": {
+      "name": "和寒町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01465": {
+      "name": "剣淵町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01468": {
+      "name": "下川町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01469": {
+      "name": "美深町",
+      "county": "中川郡",
+      "countyReading": "なかがわぐん"
+    },
+    "01470": {
+      "name": "音威子府村",
+      "county": "中川郡",
+      "countyReading": "なかがわぐん"
+    },
+    "01471": {
+      "name": "中川町",
+      "county": "中川郡",
+      "countyReading": "なかがわぐん"
+    },
+    "01472": {
+      "name": "幌加内町",
+      "county": "雨竜郡",
+      "countyReading": "うりゅうぐん"
+    },
+    "01481": {
+      "name": "増毛町",
+      "county": "増毛郡",
+      "countyReading": "ましけぐん"
+    },
+    "01482": {
+      "name": "小平町",
+      "county": "留萌郡",
+      "countyReading": "るもいぐん"
+    },
+    "01483": {
+      "name": "苫前町",
+      "county": "苫前郡",
+      "countyReading": "とままえぐん"
+    },
+    "01484": {
+      "name": "羽幌町",
+      "county": "苫前郡",
+      "countyReading": "とままえぐん"
+    },
+    "01485": {
+      "name": "初山別村",
+      "county": "苫前郡",
+      "countyReading": "とままえぐん"
+    },
+    "01486": {
+      "name": "遠別町",
+      "county": "天塩郡",
+      "countyReading": "てしおぐん"
+    },
+    "01487": {
+      "name": "天塩町",
+      "county": "天塩郡",
+      "countyReading": "てしおぐん"
+    },
+    "01511": {
+      "name": "猿払村",
+      "county": "宗谷郡",
+      "countyReading": "そうやぐん"
+    },
+    "01512": {
+      "name": "浜頓別町",
+      "county": "枝幸郡",
+      "countyReading": "えさしぐん"
+    },
+    "01513": {
+      "name": "中頓別町",
+      "county": "枝幸郡",
+      "countyReading": "えさしぐん"
+    },
+    "01514": {
+      "name": "枝幸町",
+      "county": "枝幸郡",
+      "countyReading": "えさしぐん"
+    },
+    "01516": {
+      "name": "豊富町",
+      "county": "天塩郡",
+      "countyReading": "てしおぐん"
+    },
+    "01518": {
+      "name": "利尻町",
+      "county": "利尻郡",
+      "countyReading": "りしりぐん"
+    },
+    "01519": {
+      "name": "利尻富士町",
+      "county": "利尻郡",
+      "countyReading": "りしりぐん"
+    },
+    "01520": {
+      "name": "幌延町",
+      "county": "天塩郡",
+      "countyReading": "てしおぐん"
+    },
+    "01543": {
+      "name": "美幌町",
+      "county": "網走郡",
+      "countyReading": "あばしりぐん"
+    },
+    "01544": {
+      "name": "津別町",
+      "county": "網走郡",
+      "countyReading": "あばしりぐん"
+    },
+    "01545": {
+      "name": "斜里町",
+      "county": "斜里郡",
+      "countyReading": "しゃりぐん"
+    },
+    "01546": {
+      "name": "清里町",
+      "county": "斜里郡",
+      "countyReading": "しゃりぐん"
+    },
+    "01547": {
+      "name": "小清水町",
+      "county": "斜里郡",
+      "countyReading": "しゃりぐん"
+    },
+    "01549": {
+      "name": "訓子府町",
+      "county": "常呂郡",
+      "countyReading": "ところぐん"
+    },
+    "01550": {
+      "name": "置戸町",
+      "county": "常呂郡",
+      "countyReading": "ところぐん"
+    },
+    "01552": {
+      "name": "佐呂間町",
+      "county": "常呂郡",
+      "countyReading": "ところぐん"
+    },
+    "01555": {
+      "name": "遠軽町",
+      "county": "紋別郡",
+      "countyReading": "もんべつぐん"
+    },
+    "01559": {
+      "name": "湧別町",
+      "county": "紋別郡",
+      "countyReading": "もんべつぐん"
+    },
+    "01560": {
+      "name": "滝上町",
+      "county": "紋別郡",
+      "countyReading": "もんべつぐん"
+    },
+    "01561": {
+      "name": "興部町",
+      "county": "紋別郡",
+      "countyReading": "もんべつぐん"
+    },
+    "01562": {
+      "name": "西興部村",
+      "county": "紋別郡",
+      "countyReading": "もんべつぐん"
+    },
+    "01563": {
+      "name": "雄武町",
+      "county": "紋別郡",
+      "countyReading": "もんべつぐん"
+    },
+    "01564": {
+      "name": "大空町",
+      "county": "網走郡",
+      "countyReading": "あばしりぐん"
+    },
+    "01571": {
+      "name": "豊浦町",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01575": {
+      "name": "壮瞥町",
+      "county": "有珠郡",
+      "countyReading": "うすぐん"
+    },
+    "01578": {
+      "name": "白老町",
+      "county": "白老郡",
+      "countyReading": "しらおいぐん"
+    },
+    "01581": {
+      "name": "厚真町",
+      "county": "勇払郡",
+      "countyReading": "ゆうふつぐん"
+    },
+    "01584": {
+      "name": "洞爺湖町",
+      "county": "虻田郡",
+      "countyReading": "あぶたぐん"
+    },
+    "01585": {
+      "name": "安平町",
+      "county": "勇払郡",
+      "countyReading": "ゆうふつぐん"
+    },
+    "01586": {
+      "name": "むかわ町",
+      "county": "勇払郡",
+      "countyReading": "ゆうふつぐん"
+    },
+    "01601": {
+      "name": "日高町",
+      "county": "沙流郡",
+      "countyReading": "さるぐん"
+    },
+    "01602": {
+      "name": "平取町",
+      "county": "沙流郡",
+      "countyReading": "さるぐん"
+    },
+    "01604": {
+      "name": "新冠町",
+      "county": "新冠郡",
+      "countyReading": "にいかっぷぐん"
+    },
+    "01607": {
+      "name": "浦河町",
+      "county": "浦河郡",
+      "countyReading": "うらかわぐん"
+    },
+    "01608": {
+      "name": "様似町",
+      "county": "様似郡",
+      "countyReading": "さまにぐん"
+    },
+    "01609": {
+      "name": "えりも町",
+      "county": "幌泉郡",
+      "countyReading": "ほろいずみぐん"
+    },
+    "01610": {
+      "name": "新ひだか町",
+      "county": "日高郡",
+      "countyReading": "ひだかぐん"
+    },
+    "01631": {
+      "name": "音更町",
+      "county": "河東郡",
+      "countyReading": "かとうぐん"
+    },
+    "01632": {
+      "name": "士幌町",
+      "county": "河東郡",
+      "countyReading": "かとうぐん"
+    },
+    "01633": {
+      "name": "上士幌町",
+      "county": "河東郡",
+      "countyReading": "かとうぐん"
+    },
+    "01634": {
+      "name": "鹿追町",
+      "county": "河東郡",
+      "countyReading": "かとうぐん"
+    },
+    "01635": {
+      "name": "新得町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01636": {
+      "name": "清水町",
+      "county": "上川郡",
+      "countyReading": "かみかわぐん"
+    },
+    "01637": {
+      "name": "芽室町",
+      "county": "河西郡",
+      "countyReading": "かさいぐん"
+    },
+    "01638": {
+      "name": "中札内村",
+      "county": "河西郡",
+      "countyReading": "かさいぐん"
+    },
+    "01639": {
+      "name": "更別村",
+      "county": "河西郡",
+      "countyReading": "かさいぐん"
+    },
+    "01641": {
+      "name": "大樹町",
+      "county": "広尾郡",
+      "countyReading": "ひろおぐん"
+    },
+    "01642": {
+      "name": "広尾町",
+      "county": "広尾郡",
+      "countyReading": "ひろおぐん"
+    },
+    "01643": {
+      "name": "幕別町",
+      "county": "中川郡",
+      "countyReading": "なかがわぐん"
+    },
+    "01644": {
+      "name": "池田町",
+      "county": "中川郡",
+      "countyReading": "なかがわぐん"
+    },
+    "01645": {
+      "name": "豊頃町",
+      "county": "中川郡",
+      "countyReading": "なかがわぐん"
+    },
+    "01646": {
+      "name": "本別町",
+      "county": "中川郡",
+      "countyReading": "なかがわぐん"
+    },
+    "01647": {
+      "name": "足寄町",
+      "county": "足寄郡",
+      "countyReading": "あしょろぐん"
+    },
+    "01648": {
+      "name": "陸別町",
+      "county": "足寄郡",
+      "countyReading": "あしょろぐん"
+    },
+    "01649": {
+      "name": "浦幌町",
+      "county": "十勝郡",
+      "countyReading": "とかちぐん"
+    },
+    "01661": {
+      "name": "釧路町",
+      "county": "釧路郡",
+      "countyReading": "くしろぐん"
+    },
+    "01662": {
+      "name": "厚岸町",
+      "county": "厚岸郡",
+      "countyReading": "あっけしぐん"
+    },
+    "01663": {
+      "name": "浜中町",
+      "county": "厚岸郡",
+      "countyReading": "あっけしぐん"
+    },
+    "01664": {
+      "name": "標茶町",
+      "county": "川上郡",
+      "countyReading": "かわかみぐん"
+    },
+    "01665": {
+      "name": "弟子屈町",
+      "county": "川上郡",
+      "countyReading": "かわかみぐん"
+    },
+    "01667": {
+      "name": "鶴居村",
+      "county": "阿寒郡",
+      "countyReading": "あかんぐん"
+    },
+    "01668": {
+      "name": "白糠町",
+      "county": "白糠郡",
+      "countyReading": "しらぬかぐん"
+    },
+    "01691": {
+      "name": "別海町",
+      "county": "野付郡",
+      "countyReading": "のつけぐん"
+    },
+    "01692": {
+      "name": "中標津町",
+      "county": "標津郡",
+      "countyReading": "しべつぐん"
+    },
+    "01693": {
+      "name": "標津町",
+      "county": "標津郡",
+      "countyReading": "しべつぐん"
+    },
+    "01694": {
+      "name": "羅臼町",
+      "county": "目梨郡",
+      "countyReading": "めなしぐん"
+    },
+    "01695": {
+      "name": "色丹村",
+      "county": "色丹郡",
+      "countyReading": "しこたんぐん"
+    },
+    "01696": {
+      "name": "泊村",
+      "county": "国後郡",
+      "countyReading": "くなしりぐん"
+    },
+    "01697": {
+      "name": "留夜別村",
+      "county": "国後郡",
+      "countyReading": "くなしりぐん"
+    },
+    "01698": {
+      "name": "留別村",
+      "county": "択捉郡",
+      "countyReading": "えとろふぐん"
+    },
+    "01699": {
+      "name": "紗那村",
+      "county": "紗那郡",
+      "countyReading": "しゃなぐん"
+    },
+    "02301": {
+      "name": "平内町",
+      "county": "東津軽郡",
+      "countyReading": "ひがしつがるぐん"
+    },
+    "02303": {
+      "name": "今別町",
+      "county": "東津軽郡",
+      "countyReading": "ひがしつがるぐん"
+    },
+    "02304": {
+      "name": "蓬田村",
+      "county": "東津軽郡",
+      "countyReading": "ひがしつがるぐん"
+    },
+    "02307": {
+      "name": "外ヶ浜町",
+      "county": "東津軽郡",
+      "countyReading": "ひがしつがるぐん"
+    },
+    "02321": {
+      "name": "鰺ヶ沢町",
+      "county": "西津軽郡",
+      "countyReading": "にしつがるぐん"
+    },
+    "02323": {
+      "name": "深浦町",
+      "county": "西津軽郡",
+      "countyReading": "にしつがるぐん"
+    },
+    "02343": {
+      "name": "西目屋村",
+      "county": "中津軽郡",
+      "countyReading": "なかつがるぐん"
+    },
+    "02361": {
+      "name": "藤崎町",
+      "county": "南津軽郡",
+      "countyReading": "みなみつがるぐん"
+    },
+    "02362": {
+      "name": "大鰐町",
+      "county": "南津軽郡",
+      "countyReading": "みなみつがるぐん"
+    },
+    "02367": {
+      "name": "田舎館村",
+      "county": "南津軽郡",
+      "countyReading": "みなみつがるぐん"
+    },
+    "02381": {
+      "name": "板柳町",
+      "county": "北津軽郡",
+      "countyReading": "きたつがるぐん"
+    },
+    "02384": {
+      "name": "鶴田町",
+      "county": "北津軽郡",
+      "countyReading": "きたつがるぐん"
+    },
+    "02387": {
+      "name": "中泊町",
+      "county": "北津軽郡",
+      "countyReading": "きたつがるぐん"
+    },
+    "02401": {
+      "name": "野辺地町",
+      "county": "上北郡",
+      "countyReading": "かみきたぐん"
+    },
+    "02402": {
+      "name": "七戸町",
+      "county": "上北郡",
+      "countyReading": "かみきたぐん"
+    },
+    "02405": {
+      "name": "六戸町",
+      "county": "上北郡",
+      "countyReading": "かみきたぐん"
+    },
+    "02406": {
+      "name": "横浜町",
+      "county": "上北郡",
+      "countyReading": "かみきたぐん"
+    },
+    "02408": {
+      "name": "東北町",
+      "county": "上北郡",
+      "countyReading": "かみきたぐん"
+    },
+    "02411": {
+      "name": "六ヶ所村",
+      "county": "上北郡",
+      "countyReading": "かみきたぐん"
+    },
+    "02412": {
+      "name": "おいらせ町",
+      "county": "上北郡",
+      "countyReading": "かみきたぐん"
+    },
+    "02423": {
+      "name": "大間町",
+      "county": "下北郡",
+      "countyReading": "しもきたぐん"
+    },
+    "02424": {
+      "name": "東通村",
+      "county": "下北郡",
+      "countyReading": "しもきたぐん"
+    },
+    "02425": {
+      "name": "風間浦村",
+      "county": "下北郡",
+      "countyReading": "しもきたぐん"
+    },
+    "02426": {
+      "name": "佐井村",
+      "county": "下北郡",
+      "countyReading": "しもきたぐん"
+    },
+    "02441": {
+      "name": "三戸町",
+      "county": "三戸郡",
+      "countyReading": "さんのへぐん"
+    },
+    "02442": {
+      "name": "五戸町",
+      "county": "三戸郡",
+      "countyReading": "さんのへぐん"
+    },
+    "02443": {
+      "name": "田子町",
+      "county": "三戸郡",
+      "countyReading": "さんのへぐん"
+    },
+    "02445": {
+      "name": "南部町",
+      "county": "三戸郡",
+      "countyReading": "さんのへぐん"
+    },
+    "02446": {
+      "name": "階上町",
+      "county": "三戸郡",
+      "countyReading": "さんのへぐん"
+    },
+    "02450": {
+      "name": "新郷村",
+      "county": "三戸郡",
+      "countyReading": "さんのへぐん"
+    },
+    "03482": {
+      "name": "山田町",
+      "county": "下閉伊郡",
+      "countyReading": "しもへいぐん"
+    },
+    "03483": {
+      "name": "岩泉町",
+      "county": "下閉伊郡",
+      "countyReading": "しもへいぐん"
+    },
+    "03484": {
+      "name": "田野畑村",
+      "county": "下閉伊郡",
+      "countyReading": "しもへいぐん"
+    },
+    "03485": {
+      "name": "普代村",
+      "county": "下閉伊郡",
+      "countyReading": "しもへいぐん"
+    },
+    "03301": {
+      "name": "雫石町",
+      "county": "岩手郡",
+      "countyReading": "いわてぐん"
+    },
+    "03302": {
+      "name": "葛巻町",
+      "county": "岩手郡",
+      "countyReading": "いわてぐん"
+    },
+    "03303": {
+      "name": "岩手町",
+      "county": "岩手郡",
+      "countyReading": "いわてぐん"
+    },
+    "03321": {
+      "name": "紫波町",
+      "county": "紫波郡",
+      "countyReading": "しわぐん"
+    },
+    "03322": {
+      "name": "矢巾町",
+      "county": "紫波郡",
+      "countyReading": "しわぐん"
+    },
+    "03366": {
+      "name": "西和賀町",
+      "county": "和賀郡",
+      "countyReading": "わがぐん"
+    },
+    "03381": {
+      "name": "金ケ崎町",
+      "county": "胆沢郡",
+      "countyReading": "いさわぐん"
+    },
+    "03402": {
+      "name": "平泉町",
+      "county": "西磐井郡",
+      "countyReading": "にしいわいぐん"
+    },
+    "03441": {
+      "name": "住田町",
+      "county": "気仙郡",
+      "countyReading": "けせんぐん"
+    },
+    "03461": {
+      "name": "大槌町",
+      "county": "上閉伊郡",
+      "countyReading": "かみへいぐん"
+    },
+    "03501": {
+      "name": "軽米町",
+      "county": "九戸郡",
+      "countyReading": "くのへぐん"
+    },
+    "03503": {
+      "name": "野田村",
+      "county": "九戸郡",
+      "countyReading": "くのへぐん"
+    },
+    "03506": {
+      "name": "九戸村",
+      "county": "九戸郡",
+      "countyReading": "くのへぐん"
+    },
+    "03507": {
+      "name": "洋野町",
+      "county": "九戸郡",
+      "countyReading": "くのへぐん"
+    },
+    "03524": {
+      "name": "一戸町",
+      "county": "二戸郡",
+      "countyReading": "にのへぐん"
+    },
+    "04581": {
+      "name": "女川町",
+      "county": "牡鹿郡",
+      "countyReading": "おしかぐん"
+    },
+    "04606": {
+      "name": "南三陸町",
+      "county": "本吉郡",
+      "countyReading": "もとよしぐん"
+    },
+    "04404": {
+      "name": "七ヶ浜町",
+      "county": "宮城郡",
+      "countyReading": "みやぎぐん"
+    },
+    "04301": {
+      "name": "蔵王町",
+      "county": "刈田郡",
+      "countyReading": "かったぐん"
+    },
+    "04302": {
+      "name": "七ヶ宿町",
+      "county": "刈田郡",
+      "countyReading": "かったぐん"
+    },
+    "04321": {
+      "name": "大河原町",
+      "county": "柴田郡",
+      "countyReading": "しばたぐん"
+    },
+    "04322": {
+      "name": "村田町",
+      "county": "柴田郡",
+      "countyReading": "しばたぐん"
+    },
+    "04323": {
+      "name": "柴田町",
+      "county": "柴田郡",
+      "countyReading": "しばたぐん"
+    },
+    "04324": {
+      "name": "川崎町",
+      "county": "柴田郡",
+      "countyReading": "しばたぐん"
+    },
+    "04341": {
+      "name": "丸森町",
+      "county": "伊具郡",
+      "countyReading": "いぐぐん"
+    },
+    "04361": {
+      "name": "亘理町",
+      "county": "亘理郡",
+      "countyReading": "わたりぐん"
+    },
+    "04362": {
+      "name": "山元町",
+      "county": "亘理郡",
+      "countyReading": "わたりぐん"
+    },
+    "04401": {
+      "name": "松島町",
+      "county": "宮城郡",
+      "countyReading": "みやぎぐん"
+    },
+    "04406": {
+      "name": "利府町",
+      "county": "宮城郡",
+      "countyReading": "みやぎぐん"
+    },
+    "04421": {
+      "name": "大和町",
+      "county": "黒川郡",
+      "countyReading": "くろかわぐん"
+    },
+    "04422": {
+      "name": "大郷町",
+      "county": "黒川郡",
+      "countyReading": "くろかわぐん"
+    },
+    "04424": {
+      "name": "大衡村",
+      "county": "黒川郡",
+      "countyReading": "くろかわぐん"
+    },
+    "04444": {
+      "name": "色麻町",
+      "county": "加美郡",
+      "countyReading": "かみぐん"
+    },
+    "04445": {
+      "name": "加美町",
+      "county": "加美郡",
+      "countyReading": "かみぐん"
+    },
+    "04501": {
+      "name": "涌谷町",
+      "county": "遠田郡",
+      "countyReading": "とおだぐん"
+    },
+    "04505": {
+      "name": "美里町",
+      "county": "遠田郡",
+      "countyReading": "とおだぐん"
+    },
+    "05303": {
+      "name": "小坂町",
+      "county": "鹿角郡",
+      "countyReading": "かづのぐん"
+    },
+    "05327": {
+      "name": "上小阿仁村",
+      "county": "北秋田郡",
+      "countyReading": "きたあきたぐん"
+    },
+    "05346": {
+      "name": "藤里町",
+      "county": "山本郡",
+      "countyReading": "やまもとぐん"
+    },
+    "05348": {
+      "name": "三種町",
+      "county": "山本郡",
+      "countyReading": "やまもとぐん"
+    },
+    "05349": {
+      "name": "八峰町",
+      "county": "山本郡",
+      "countyReading": "やまもとぐん"
+    },
+    "05361": {
+      "name": "五城目町",
+      "county": "南秋田郡",
+      "countyReading": "みなみあきたぐん"
+    },
+    "05363": {
+      "name": "八郎潟町",
+      "county": "南秋田郡",
+      "countyReading": "みなみあきたぐん"
+    },
+    "05366": {
+      "name": "井川町",
+      "county": "南秋田郡",
+      "countyReading": "みなみあきたぐん"
+    },
+    "05368": {
+      "name": "大潟村",
+      "county": "南秋田郡",
+      "countyReading": "みなみあきたぐん"
+    },
+    "05434": {
+      "name": "美郷町",
+      "county": "仙北郡",
+      "countyReading": "せんぼくぐん"
+    },
+    "05463": {
+      "name": "羽後町",
+      "county": "雄勝郡",
+      "countyReading": "おがちぐん"
+    },
+    "05464": {
+      "name": "東成瀬村",
+      "county": "雄勝郡",
+      "countyReading": "おがちぐん"
+    },
+    "06301": {
+      "name": "山辺町",
+      "county": "東村山郡",
+      "countyReading": "ひがしむらやまぐん"
+    },
+    "06302": {
+      "name": "中山町",
+      "county": "東村山郡",
+      "countyReading": "ひがしむらやまぐん"
+    },
+    "06321": {
+      "name": "河北町",
+      "county": "西村山郡",
+      "countyReading": "にしむらやまぐん"
+    },
+    "06322": {
+      "name": "西川町",
+      "county": "西村山郡",
+      "countyReading": "にしむらやまぐん"
+    },
+    "06323": {
+      "name": "朝日町",
+      "county": "西村山郡",
+      "countyReading": "にしむらやまぐん"
+    },
+    "06324": {
+      "name": "大江町",
+      "county": "西村山郡",
+      "countyReading": "にしむらやまぐん"
+    },
+    "06341": {
+      "name": "大石田町",
+      "county": "北村山郡",
+      "countyReading": "きたむらやまぐん"
+    },
+    "06361": {
+      "name": "金山町",
+      "county": "最上郡",
+      "countyReading": "もがみぐん"
+    },
+    "06362": {
+      "name": "最上町",
+      "county": "最上郡",
+      "countyReading": "もがみぐん"
+    },
+    "06363": {
+      "name": "舟形町",
+      "county": "最上郡",
+      "countyReading": "もがみぐん"
+    },
+    "06364": {
+      "name": "真室川町",
+      "county": "最上郡",
+      "countyReading": "もがみぐん"
+    },
+    "06365": {
+      "name": "大蔵村",
+      "county": "最上郡",
+      "countyReading": "もがみぐん"
+    },
+    "06366": {
+      "name": "鮭川村",
+      "county": "最上郡",
+      "countyReading": "もがみぐん"
+    },
+    "06367": {
+      "name": "戸沢村",
+      "county": "最上郡",
+      "countyReading": "もがみぐん"
+    },
+    "06381": {
+      "name": "高畠町",
+      "county": "東置賜郡",
+      "countyReading": "ひがしおきたまぐん"
+    },
+    "06382": {
+      "name": "川西町",
+      "county": "東置賜郡",
+      "countyReading": "ひがしおきたまぐん"
+    },
+    "06401": {
+      "name": "小国町",
+      "county": "西置賜郡",
+      "countyReading": "にしおきたまぐん"
+    },
+    "06402": {
+      "name": "白鷹町",
+      "county": "西置賜郡",
+      "countyReading": "にしおきたまぐん"
+    },
+    "06403": {
+      "name": "飯豊町",
+      "county": "西置賜郡",
+      "countyReading": "にしおきたまぐん"
+    },
+    "06426": {
+      "name": "三川町",
+      "county": "東田川郡",
+      "countyReading": "ひがしたがわぐん"
+    },
+    "06428": {
+      "name": "庄内町",
+      "county": "東田川郡",
+      "countyReading": "ひがしたがわぐん"
+    },
+    "06461": {
+      "name": "遊佐町",
+      "county": "飽海郡",
+      "countyReading": "あくみぐん"
+    },
+    "07301": {
+      "name": "桑折町",
+      "county": "伊達郡",
+      "countyReading": "だてぐん"
+    },
+    "07303": {
+      "name": "国見町",
+      "county": "伊達郡",
+      "countyReading": "だてぐん"
+    },
+    "07308": {
+      "name": "川俣町",
+      "county": "伊達郡",
+      "countyReading": "だてぐん"
+    },
+    "07322": {
+      "name": "大玉村",
+      "county": "安達郡",
+      "countyReading": "あだちぐん"
+    },
+    "07342": {
+      "name": "鏡石町",
+      "county": "岩瀬郡",
+      "countyReading": "いわせぐん"
+    },
+    "07344": {
+      "name": "天栄村",
+      "county": "岩瀬郡",
+      "countyReading": "いわせぐん"
+    },
+    "07362": {
+      "name": "下郷町",
+      "county": "南会津郡",
+      "countyReading": "みなみあいづぐん"
+    },
+    "07364": {
+      "name": "檜枝岐村",
+      "county": "南会津郡",
+      "countyReading": "みなみあいづぐん"
+    },
+    "07367": {
+      "name": "只見町",
+      "county": "南会津郡",
+      "countyReading": "みなみあいづぐん"
+    },
+    "07368": {
+      "name": "南会津町",
+      "county": "南会津郡",
+      "countyReading": "みなみあいづぐん"
+    },
+    "07402": {
+      "name": "北塩原村",
+      "county": "耶麻郡",
+      "countyReading": "やまぐん"
+    },
+    "07405": {
+      "name": "西会津町",
+      "county": "耶麻郡",
+      "countyReading": "やまぐん"
+    },
+    "07407": {
+      "name": "磐梯町",
+      "county": "耶麻郡",
+      "countyReading": "やまぐん"
+    },
+    "07408": {
+      "name": "猪苗代町",
+      "county": "耶麻郡",
+      "countyReading": "やまぐん"
+    },
+    "07421": {
+      "name": "会津坂下町",
+      "county": "河沼郡",
+      "countyReading": "かわぬまぐん"
+    },
+    "07422": {
+      "name": "湯川村",
+      "county": "河沼郡",
+      "countyReading": "かわぬまぐん"
+    },
+    "07423": {
+      "name": "柳津町",
+      "county": "河沼郡",
+      "countyReading": "かわぬまぐん"
+    },
+    "07444": {
+      "name": "三島町",
+      "county": "大沼郡",
+      "countyReading": "おおぬまぐん"
+    },
+    "07445": {
+      "name": "金山町",
+      "county": "大沼郡",
+      "countyReading": "おおぬまぐん"
+    },
+    "07446": {
+      "name": "昭和村",
+      "county": "大沼郡",
+      "countyReading": "おおぬまぐん"
+    },
+    "07447": {
+      "name": "会津美里町",
+      "county": "大沼郡",
+      "countyReading": "おおぬまぐん"
+    },
+    "07461": {
+      "name": "西郷村",
+      "county": "西白河郡",
+      "countyReading": "にししらかわぐん"
+    },
+    "07464": {
+      "name": "泉崎村",
+      "county": "西白河郡",
+      "countyReading": "にししらかわぐん"
+    },
+    "07465": {
+      "name": "中島村",
+      "county": "西白河郡",
+      "countyReading": "にししらかわぐん"
+    },
+    "07466": {
+      "name": "矢吹町",
+      "county": "西白河郡",
+      "countyReading": "にししらかわぐん"
+    },
+    "07481": {
+      "name": "棚倉町",
+      "county": "東白川郡",
+      "countyReading": "ひがししらかわぐん"
+    },
+    "07482": {
+      "name": "矢祭町",
+      "county": "東白川郡",
+      "countyReading": "ひがししらかわぐん"
+    },
+    "07483": {
+      "name": "塙町",
+      "county": "東白川郡",
+      "countyReading": "ひがししらかわぐん"
+    },
+    "07484": {
+      "name": "鮫川村",
+      "county": "東白川郡",
+      "countyReading": "ひがししらかわぐん"
+    },
+    "07501": {
+      "name": "石川町",
+      "county": "石川郡",
+      "countyReading": "いしかわぐん"
+    },
+    "07502": {
+      "name": "玉川村",
+      "county": "石川郡",
+      "countyReading": "いしかわぐん"
+    },
+    "07503": {
+      "name": "平田村",
+      "county": "石川郡",
+      "countyReading": "いしかわぐん"
+    },
+    "07504": {
+      "name": "浅川町",
+      "county": "石川郡",
+      "countyReading": "いしかわぐん"
+    },
+    "07505": {
+      "name": "古殿町",
+      "county": "石川郡",
+      "countyReading": "いしかわぐん"
+    },
+    "07521": {
+      "name": "三春町",
+      "county": "田村郡",
+      "countyReading": "たむらぐん"
+    },
+    "07522": {
+      "name": "小野町",
+      "county": "田村郡",
+      "countyReading": "たむらぐん"
+    },
+    "07541": {
+      "name": "広野町",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07542": {
+      "name": "楢葉町",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07543": {
+      "name": "富岡町",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07544": {
+      "name": "川内村",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07545": {
+      "name": "大熊町",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07546": {
+      "name": "双葉町",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07547": {
+      "name": "浪江町",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07548": {
+      "name": "葛尾村",
+      "county": "双葉郡",
+      "countyReading": "ふたばぐん"
+    },
+    "07561": {
+      "name": "新地町",
+      "county": "相馬郡",
+      "countyReading": "そうまぐん"
+    },
+    "07564": {
+      "name": "飯舘村",
+      "county": "相馬郡",
+      "countyReading": "そうまぐん"
+    },
+    "08302": {
+      "name": "茨城町",
+      "county": "東茨城郡",
+      "countyReading": "ひがしいばらきぐん"
+    },
+    "08309": {
+      "name": "大洗町",
+      "county": "東茨城郡",
+      "countyReading": "ひがしいばらきぐん"
+    },
+    "08310": {
+      "name": "城里町",
+      "county": "東茨城郡",
+      "countyReading": "ひがしいばらきぐん"
+    },
+    "08341": {
+      "name": "東海村",
+      "county": "那珂郡",
+      "countyReading": "なかぐん"
+    },
+    "08364": {
+      "name": "大子町",
+      "county": "久慈郡",
+      "countyReading": "くじぐん"
+    },
+    "08442": {
+      "name": "美浦村",
+      "county": "稲敷郡",
+      "countyReading": "いなしきぐん"
+    },
+    "08443": {
+      "name": "阿見町",
+      "county": "稲敷郡",
+      "countyReading": "いなしきぐん"
+    },
+    "08447": {
+      "name": "河内町",
+      "county": "稲敷郡",
+      "countyReading": "いなしきぐん"
+    },
+    "08521": {
+      "name": "八千代町",
+      "county": "結城郡",
+      "countyReading": "ゆうきぐん"
+    },
+    "08542": {
+      "name": "五霞町",
+      "county": "猿島郡",
+      "countyReading": "さしまぐん"
+    },
+    "08546": {
+      "name": "境町",
+      "county": "猿島郡",
+      "countyReading": "さしまぐん"
+    },
+    "08564": {
+      "name": "利根町",
+      "county": "北相馬郡",
+      "countyReading": "きたそうまぐん"
     }
-  ]
+  },
+  "unmatched": [],
+  "errors": []
 }
