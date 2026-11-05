@@ -176,6 +176,7 @@ body.quiz-active #quiz-next{min-height:44px}
 .advanced-math{font-size:13px;margin-top:5px;color:#34566d}
 .advanced-total{font-size:17px;font-weight:900;color:#164c70}
 @media(max-width:600px){.advanced-results{grid-template-columns:1fr}.advanced-selectors{gap:7px}.advanced-selected{gap:6px}.advanced-chosen .type-symbol{width:36px;height:36px}.advanced-chosen{font-size:14px}.advanced-selectors label{font-size:14px}}
+.study-level-link{display:flex;align-items:center;justify-content:center;text-decoration:none}.study-level-link:visited{color:#254c64}
 </style>
 </head>
 <body>
@@ -189,7 +190,7 @@ body.quiz-active #quiz-next{min-height:44px}
 
 <div class="study-levels" role="group" aria-label="まなぶのむずかしさ">
 <button class="study-level" id="study-basic-button" type="button" aria-pressed="true">🌱 初級：1タイプ</button>
-<button class="study-level" id="study-advanced-button" type="button" aria-pressed="false">⭐ 上級：2タイプ</button>
+<a class="study-level study-level-link" id="study-advanced-button" href="./advanced.html" aria-pressed="false">⭐ 上級：2タイプ</a>
 </div>
 <div id="study-basic">
 <section class="panel" aria-labelledby="pick-heading">
