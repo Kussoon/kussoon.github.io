@@ -10,13 +10,18 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await app.open();
    await page.goto(page.url().replace('/v2/national/official-2026-nationwide-pilot.html','/maps/national-municipalities.html'));
    await page.waitForFunction(()=>window.KussoonV2PrefectureColors&&window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:90000});
-   await page.waitForTimeout(2200);
-   const debug=await page.evaluate(()=>({
-      controller:window.KussoonV2ProgressivePreview?.controller.snapshot(),
-      scripts:[...document.scripts].map(x=>x.src).filter(Boolean).slice(0,8),
-      status:document.getElementById('status')?.textContent
-   }));
-   console.log('RELOCATED MAP DIAGNOSTIC',JSON.stringify(debug).slice(0,2100));
+   // Worker scenes are only scheduled after regional detail zoom; initial
+   // nationwide overview intentionally uses the lightweight main renderer.
+   await page.evaluate(()=>{
+      const {viewport,controller}=window.KussoonV2ProgressivePreview;
+      const p=controller.project([135.4,34.9]),w=850/24,h=700/24;
+      viewport.setView({x:p[0]-w/2,y:p[1]-h/2,w,h});
+      controller.schedule();
+   });
+   await page.waitForFunction(()=>{
+      const g=window.KussoonV2ProgressivePreview?.controller.snapshot().geometry;
+      return g?.sceneRequests>0;
+   },{},{timeout:90000});
    const geo=await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.snapshot().geometry);
    assert.equal(geo.backend,'worker','relocated map must not silently fall back to the main-thread renderer');
    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/maps/national-municipalities.html');
