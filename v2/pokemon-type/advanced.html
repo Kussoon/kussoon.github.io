@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow"><meta name="theme-color" content="#f3f8fc">
+<title>上級：2タイプの相性をまなぶ | Kussoon</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#203d53;background:#f3f8fc}
+*{box-sizing:border-box}body{margin:0}main{max-width:900px;margin:auto;padding:16px 12px 50px}
+a{color:#165b81}h1{font-size:clamp(22px,5vw,30px);line-height:1.5;margin:12px 0}
+p{line-height:1.75}.panel{border-radius:18px;border:1px solid #c5dbe8;background:#fff;padding:16px;margin:13px 0}
+.eyebrow{font-size:13px;color:#54748b;font-weight:750}
+.level{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.level a{padding:10px 14px;min-height:46px;border-radius:11px;border:2px solid #bad2df;background:#fff;text-decoration:none;font-weight:800;display:flex;align-items:center}
+.level a.current{background:#ffe59b;border-color:#e2b43d;color:#533c14}
+.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.selectors label{display:grid;gap:6px;font-weight:800;font-size:15px}
+select{width:100%;font:inherit;background:#fff;color:#153e57;border:2px solid #a6c5d8;border-radius:11px;padding:10px;min-height:48px}
+select:focus-visible,a:focus-visible{outline:3px solid #2473b7;outline-offset:2px}
+.chosen{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;background:#f1f8fc;border-radius:14px;padding:12px;margin-top:13px;font-weight:800}
+.chosen-one{display:flex;align-items:center;gap:5px}.type-symbol{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;flex-shrink:0;border-radius:9px;background:var(--tile);color:#fff}
+.type-symbol svg{width:75%;height:75%;display:block;fill:none;stroke:currentColor;stroke-width:2.7;stroke-linecap:round;stroke-linejoin:round}
+.chosen .type-symbol{width:43px;height:43px}
+.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.group{border:1px solid #cddde9;border-radius:13px;padding:12px;background:#fff}
+.group h2{font-size:18px;line-height:1.8;margin:0 0 8px}
+.g4,.g2{border-left:5px solid #e8942a}.g1{border-left:5px solid #7b9eb8}
+.g05,.g025{border-left:5px solid #447ac4}.g0{border-left:5px solid #8361a4}
+.card{border:1px solid #d7e3eb;border-radius:10px;padding:9px;margin:7px 0;background:#f8fbfd}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800}
+.math{font-size:13px;color:#445d70;margin-top:6px;line-height:1.65}
+.number{margin-left:auto;font-size:19px;color:#205d86}
+.note{color:#476679;font-size:14px}
+ruby{ruby-position:over}rt{font-size:.58em;line-height:1.05;font-weight:600}
+@media(max-width:600px){.results{grid-template-columns:1fr}.panel{padding:12px}.selectors{gap:7px}.selectors label{font-size:14px}}
+</style></head><body><main>
+<a href="./">← 18タイプ<ruby>相性<rt>あいしょう</rt></ruby>トレーニングへ</a>
+<p class="eyebrow">Kussoon / まなぶ・<ruby>上級<rt>じょうきゅう</rt></ruby></p>
+<h1>⭐ <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプの<ruby>相性<rt>あいしょう</rt></ruby></h1>
+<div class="level"><a href="./">🌱 <ruby>初級<rt>しょきゅう</rt></ruby>へもどる</a><a href="./advanced.html" class="current" aria-current="page">⭐ <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプ</a></div>
+<section class="panel"><h2>2つのタイプをえらぼう</h2>
+<p>あいてがもつ2つのタイプをえらぶと、18<ruby>種類<rt>しゅるい</rt></ruby>のわざから<ruby>攻撃<rt>こうげき</rt></ruby>されたときの<ruby>相性<rt>あいしょう</rt></ruby>がわかります。</p>
+<div class="selectors"><label>1つめのタイプ<select id="first"></select></label><label>2つめのタイプ<select id="second"></select></label></div>
+<div class="chosen" id="chosen" aria-live="polite"></div>
+<p class="note">2つの<ruby>倍率<rt>ばいりつ</rt></ruby>をかけ<ruby>算<rt>ざん</rt></ruby>します。たとえば、いわ → ほのお・ひこう は ×2 × ×2 = ×4 です。</p>
+</section><section class="panel">
+<h2>わざの<ruby>相性<rt>あいしょう</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby></h2>
+<div id="results" class="results" aria-live="polite"></div>
+<p class="note">※<ruby>特性<rt>とくせい</rt></ruby>、もちもの、<ruby>特殊<rt>とくしゅ</rt></ruby>なわざの<ruby>効果<rt>こうか</rt></ruby>は<ruby>考慮<rt>こうりょ</rt></ruby>していません。</p>
+</section><p><a href="./">← <ruby>初級<rt>しょきゅう</rt></ruby>・れんしゅう・クイズにもどる</a></p>
+</main>
+<script>
+"use strict";
+const TYPES=[
+["ノーマル","◯","#d7d4cd","#232d3a"],
+["ほのお","♨","#f8b27b","#412016"],
+["みず","●","#92c6fa","#183853"],
+["でんき","⚡","#ffe17a","#463b0c"],
+["くさ","♣","#a9df9a","#1e4728"],
+["こおり","❄","#a2e4e4","#15434d"],
+["かくとう","✊","#e6a29e","#4d2023"],
+["どく","◆","#cca1de","#402450"],
+["じめん","▰","#e5cd92","#483818"],
+["ひこう","➶","#b7c8ed","#263b5c"],
+["エスパー","✦","#f6a4b6","#522536"],
+["むし","✳","#c6d985","#354518"],
+["いわ","⬡","#d0c394","#493e21"],
+["ゴースト","☾","#a8a0cb","#272344"],
+["ドラゴン","♢","#9ab3eb","#253661"],
+["あく","◈","#b5a7a0","#332722"],
+["はがね","⬢","#bfcdd2","#283c47"],
+["フェアリー","♡","#f3bddc","#582c46"]
+];
+const NAMES=TYPES.map(t=>t[0]);
+// 攻撃タイプごとの「×2」「×0.5」「×0」の防御タイプ。その他は×1。
+const RULES={
+"ノーマル":[[],["いわ","はがね"],["ゴースト"]],
+"ほのお":[["くさ","こおり","むし","はがね"],["ほのお","みず","いわ","ドラゴン"],[]],
+"みず":[["ほのお","じめん","いわ"],["みず","くさ","ドラゴン"],[]],
+"でんき":[["みず","ひこう"],["でんき","くさ","ドラゴン"],["じめん"]],
+"くさ":[["みず","じめん","いわ"],["ほのお","くさ","どく","ひこう","むし","ドラゴン","はがね"],[]],
+"こおり":[["くさ","じめん","ひこう","ドラゴン"],["ほのお","みず","こおり","はがね"],[]],
+"かくとう":[["ノーマル","こおり","いわ","あく","はがね"],["どく","ひこう","エスパー","むし","フェアリー"],["ゴースト"]],
+"どく":[["くさ","フェアリー"],["どく","じめん","いわ","ゴースト"],["はがね"]],
+"じめん":[["ほのお","でんき","どく","いわ","はがね"],["くさ","むし"],["ひこう"]],
+"ひこう":[["くさ","かくとう","むし"],["でんき","いわ","はがね"],[]],
+"エスパー":[["かくとう","どく"],["エスパー","はがね"],["あく"]],
+"むし":[["くさ","エスパー","あく"],["ほのお","かくとう","どく","ひこう","ゴースト","はがね","フェアリー"],[]],
+"いわ":[["ほのお","こおり","ひこう","むし"],["かくとう","じめん","はがね"],[]],
+"ゴースト":[["エスパー","ゴースト"],["あく"],["ノーマル"]],
+"ドラゴン":[["ドラゴン"],["はがね"],["フェアリー"]],
+"あく":[["エスパー","ゴースト"],["かくとう","あく","フェアリー"],[]],
+"はがね":[["こおり","いわ","フェアリー"],["ほのお","みず","でんき","はがね"],[]],
+"フェアリー":[["かくとう","ドラゴン","あく"],["ほのお","どく","はがね"],[]]
+};
+const MATRIX=Object.fromEntries(NAMES.map(a=>[a,Object.fromEntries(NAMES.map(d=>[d,RULES[a][0].includes(d)?2:RULES[a][1].includes(d)?0.5:RULES[a][2].includes(d)?0:1]))]));
+
+const SVG_ICONS={
+"ノーマル":'<circle cx="12" cy="12" r="7"/><path d="M12 1v2M4 3l1.4 2M20 3l-1.4 2"/>',
+"ほのお":'<path d="M12 2c2 5-1 5 3 9 2-2 2-4 2-5 6 7 5 16-5 16S3 15 8 9c0 5 2 4 4-7z"/><path d="M12 12c2 3-2 4-1 7 2 2 5-1 3-4"/>',
+"みず":'<path d="M3 16c4-5 6 3 10-1s6-3 8-1M3 20c5-3 7 3 12-1 2-1 4-1 6 0M10 11c-2-4 4-7 4-10 5 7-1 10-4 10"/>',
+"でんき":'<path d="M13 2L5 14h7l-1 8 8-12h-7z"/>',
+"くさ":'<path d="M12 22V11M12 15C5 15 3 11 3 5c7 0 9 3 9 10M12 12c0-7 3-9 9-9 0 7-3 9-9 9"/>',
+"こおり":'<path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19M9 4l3 3 3-3M9 20l3-3 3 3"/>',
+"かくとう":'<path d="M5 14V9a2 2 0 0 1 4 0V6a2 2 0 0 1 4 0v2a2 2 0 0 1 4 0v2a2 2 0 0 1 4 0v5c0 5-4 7-8 7-5 0-8-3-8-8zM9 9v3M13 8v4M17 10v3"/>',
+"どく":'<path d="M9 2h6M11 2v7l-7 10a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L13 9V2M8 16h8"/><circle cx="10" cy="19" r="1"/><circle cx="14" cy="19" r="1"/>',
+"じめん":'<path d="M2 14l5-6 4 4 4-8 7 10M2 17c4-2 7 2 10 0s7-1 10 0M3 21h18"/>',
+"ひこう":'<path d="M2 15C9 6 14 5 22 3c-3 8-9 12-17 13l5-1M4 21c7-4 11-1 17-5"/>',
+"エスパー":'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',
+"むし":'<circle cx="12" cy="13" r="8"/><path d="M12 5v16M6 3L4 1M18 3l2-2M3 9L1 7M21 9l2-2M3 17l-2 2M21 17l2 2"/><circle cx="8" cy="11" r="1"/><circle cx="16" cy="11" r="1"/>',
+"いわ":'<path d="M3 20l-1-9 7-8 7 3 6 8-3 8zM9 3l3 9-9 8M12 12l10 2M12 12l7 10"/>',
+"ゴースト":'<path d="M4 21V11a8 8 0 0 1 16 0v10l-4-3-4 3-4-3z"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/>',
+"ドラゴン":'<path d="M3 20c6 1 9-4 8-8l4-2-2-5 5 2 3-3-1 9-5 3-2 5M7 13l-5-1 5-3M14 13l2 1"/>',
+"あく":'<path d="M2 9c6 2 13 2 20-4-2 11-7 16-13 16C5 21 3 17 2 9z"/><path d="M11 12l4-1-2 5z"/>',
+"はがね":'<path d="M8 2h8l6 10-6 10H8L2 12z"/><circle cx="12" cy="12" r="4"/>',
+"フェアリー":'<path d="M12 12C7 1 1 5 3 12c2 5 7 5 9 0zm0 0c5-11 11-7 9 0-2 5-7 5-9 0zM12 12v9M5 3l1 2M19 3l-1 2"/>'
+};
+const TILE_COLORS={
+"ノーマル":"#8e949a","ほのお":"#ef6a32","みず":"#238add","でんき":"#efb918","くさ":"#41a64b","こおり":"#20bade",
+"かくとう":"#dd6a29","どく":"#8651a0","じめん":"#a27745","ひこう":"#69aee8","エスパー":"#e86b8b","むし":"#8cae31",
+"いわ":"#b3a16b","ゴースト":"#6a4b91","ドラゴン":"#4c59ae","あく":"#414148","はがね":"#498da7","フェアリー":"#eb8fbc"
+};
+function symbol(name){
+ const span=document.createElement("span");span.className="type-symbol";span.style.setProperty("--tile",TILE_COLORS[name]);
+ span.innerHTML='<svg viewBox="0 0 24 24" role="img" aria-label="'+name+'のアイコン">'+SVG_ICONS[name]+'</svg>';
+ return span;
+}
+
+const first=document.getElementById("first"),second=document.getElementById("second");
+NAMES.forEach(n=>{for(const s of [first,second]){const o=document.createElement("option");o.value=n;o.textContent=n;s.appendChild(o)}});
+first.value="ほのお";second.value="ひこう";
+const outcomes=[[4,"×4：とても ばつぐん","g4"],[2,"×2：ばつぐん","g2"],[1,"×1：ふつう","g1"],[0.5,"×0.5：いまひとつ","g05"],[0.25,"×0.25：とても いまひとつ","g025"],[0,"×0：こうかなし","g0"]];
+function render(changed){
+ if(first.value===second.value){
+  const other=NAMES.find(n=>n!==first.value);
+  if(changed==="first")second.value=other;
+  else first.value=other;
+ }
+ const a=first.value,b=second.value,chosen=document.getElementById("chosen");
+ chosen.replaceChildren();
+ for(const name of [a,b]){
+  const el=document.createElement("span");el.className="chosen-one";
+  el.append(symbol(name),document.createTextNode(name));chosen.appendChild(el);
+ }
+ const root=document.getElementById("results");root.replaceChildren();
+ for(const [mult,label,klass] of outcomes){
+  const panel=document.createElement("section");panel.className="group "+klass;
+  const head=document.createElement("h2");head.textContent=label;panel.appendChild(head);
+  let count=0;
+  for(const attack of NAMES){
+   const p=MATRIX[attack][a],q=MATRIX[attack][b];
+   if(p*q!==mult)continue;
+   count++;
+   const card=document.createElement("div");card.className="card";
+   const row=document.createElement("div");row.className="row";
+   row.append(symbol(attack),document.createTextNode(attack+"のわざ"));
+   const total=document.createElement("strong");total.className="number";total.textContent="×"+mult;
+   row.appendChild(total);
+   const math=document.createElement("div");math.className="math";
+   math.textContent=a+" ×"+p+" × "+b+" ×"+q+" = ×"+mult;
+   card.append(row,math);panel.appendChild(card);
+  }
+  if(!count){const empty=document.createElement("span");empty.className="note";empty.textContent="あてはまるタイプはありません";panel.appendChild(empty)}
+  root.appendChild(panel);
+ }
+}
+first.addEventListener("change",()=>render("first"));
+second.addEventListener("change",()=>render("second"));
+render();
+</script></body></html>
