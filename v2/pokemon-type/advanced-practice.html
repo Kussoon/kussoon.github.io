@@ -3,7 +3,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="index,follow"><meta name="description" content="複合タイプの相性を練習。攻撃1タイプと防御2タイプを選び、効果の倍率を確認できます。">
 <meta name="theme-color" content="#f3f8fc">
-<title>上級：2タイプの相性をれんしゅう | Kussoon</title>
+<title>ポケモンの相性マスター｜上級・れんしゅう | Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#203d53;background:#f3f8fc}
 *{box-sizing:border-box}body{margin:0}main{max-width:900px;margin:auto;padding:16px 12px 50px}
@@ -48,10 +48,17 @@ ruby{ruby-position:over}rt{font-size:.58em;line-height:1.05;font-weight:600}
 .actions button{min-height:48px;padding:10px 16px;border-radius:11px;background:#1c6b9a;color:white;font:inherit;font-weight:800;border:0;cursor:pointer}
 .actions button:focus-visible{outline:3px solid #f5b74b;outline-offset:3px}
 @media(max-width:600px){.practice-grid{grid-template-columns:1fr}.defense-panel .selectors{grid-template-columns:1fr 1fr}}
+
+/* Shared v1.0 release title, version, and site footer */
+.page-mode{font-size:15px;font-weight:750;color:#476780;margin:0 0 10px}
+.page-version{text-align:center;font-size:11px;line-height:1.9;color:#71828f;margin:18px auto 4px}
+body.quiz-active .page-version,body.playing .page-version{display:none}
+.kussoon-common-footer{max-width:none;width:100%;margin:24px auto 0}
 </style></head><body><main>
 <a href="/games/">← 学ぶ・遊ぶへ</a>　<a href="./">18タイプ<ruby>相性<rt>あいしょう</rt></ruby>トレーニングへ</a>
 <p class="eyebrow">Kussoon / れんしゅう・<ruby>上級<rt>じょうきゅう</rt></ruby></p>
-<h1>🎯 <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプのれんしゅう</h1>
+<h1>ポケモンの<ruby>相性<rt>あいしょう</rt></ruby>マスター</h1>
+<p class="page-mode">⭐ <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプ・🎯 れんしゅう</p>
 <div class="level"><a href="./">🌱 <ruby>初級<rt>しょきゅう</rt></ruby>へもどる</a><a class="current" href="./advanced-practice.html" aria-current="page">⭐ <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプ</a></div>
 <section class="panel">
 <p>こうげきする わざを1つ、あいてのタイプを2つえらんで、わざの<ruby>相性<rt>あいしょう</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>しましょう。</p>
@@ -75,7 +82,9 @@ ruby{ruby-position:over}rt{font-size:.58em;line-height:1.05;font-weight:600}
 </section>
 <p><a href="./advanced.html">📖 <ruby>上級<rt>じょうきゅう</rt></ruby>「まなぶ」へ</a></p>
 <p><a href="./">← <ruby>初級<rt>しょきゅう</rt></ruby>・クイズにもどる</a></p>
-</main><script>
+<div class="page-version" aria-label="ページのバージョンと最終更新日"><div>Version 1.0</div><div><ruby>最終更新<rt>さいしゅうこうしん</rt></ruby>：<time datetime="2026-11-05">2026<ruby>年<rt>ねん</rt></ruby>11<ruby>月<rt>がつ</rt></ruby>5<ruby>日<rt>にち</rt></ruby></time></div></div>
+</main>
+<footer class="kussoon-common-footer" aria-label="Kussoon共通フッター"><small>© 2026 Kussoon. All rights reserved.</small></footer><script>
 "use strict";
 
 const TYPES=[
@@ -194,4 +203,5 @@ document.getElementById("random").addEventListener("click",()=>{
  render("random");
 });
 render("initial");
-</script></body></html>
+</script><script defer src="/common/site-footer.js"></script>
+</body></html>
