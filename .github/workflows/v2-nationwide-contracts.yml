@@ -26,6 +26,7 @@ jobs:
         run: |
           node v2/tools/progressive-labels/build-index.cjs --check
           node v2/tests/progressive-labels.test.cjs
+          node v2/tests/progressive-geometry.test.cjs
       - name: Confirm tests did not rewrite data or URL audit
         run: git diff --exit-code -- v2/data v2/audit/*.json
   real-browser:
@@ -53,6 +54,7 @@ jobs:
           node v2/tests/pilot-map-ui.browser.cjs
           node v2/tests/pilot-label-scope.browser.cjs
           node v2/tests/national-progressive.browser.cjs
+          node v2/tests/progressive-performance.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser
           KUSSOON_LABEL_REPORT: ${{ runner.temp }}/kussoon-browser/label-comparison.json
@@ -62,6 +64,7 @@ jobs:
           node v2/tests/pilot-map-ui.browser.cjs
           node v2/tests/pilot-label-scope.browser.cjs
           node v2/tests/national-progressive.browser.cjs
+          node v2/tests/progressive-performance.browser.cjs
         env:
           KUSSOON_BROWSER_ENGINE: webkit
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser/webkit

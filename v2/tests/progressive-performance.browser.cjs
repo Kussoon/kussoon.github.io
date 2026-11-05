@@ -1,0 +1,33 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path');const {start}=require('./helpers/nationwide-browser.cjs');
+const settle=page=>page.waitForFunction(()=>{const a=KussoonV2ProgressivePreview,s=a.store.stats();return !s.active&&!s.queued&&!a.controller.snapshot().shapePending;},{},{timeout:60000});
+(async()=>{
+ const engine=process.env.KUSSOON_BROWSER_ENGINE||'chromium',report={engine,scope:'Real input during deliberately busy worker plus real cold/warm detail requests. Automated browser, not physical Safari.',runs:[]};
+ for(const [width,height] of [[1280,1000],[390,844]]){
+  const a=await start({query:'progressive=1',contextOptions:{viewport:{width,height},isMobile:width===390,hasTouch:width===390}}),{page}=a;
+  try{
+   // The artificial 600ms task belongs only to this test's worker response.
+   await page.addInitScript(()=>{const NativeWorker=window.Worker;window.__busy=false;window.Worker=class extends NativeWorker{constructor(...args){super(...args);this.addEventListener('message',e=>{if(e.data.__busy!==undefined)window.__busy=e.data.__busy;});}};});
+   await page.route('**/progressive-geometry.worker.js',async route=>{const r=await route.fetch(),body=await r.text();await route.fulfill({response:r,body:body.replace("else if(m.type==='scene'){","else if(m.type==='scene'){self.postMessage({__busy:true});const until=performance.now()+600;while(performance.now()<until){};self.postMessage({__busy:false});")});});
+   await a.open();await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905);
+   await page.evaluate(()=>{const api=KussoonV2ProgressivePreview,p=api.controller.anchors().find(x=>x.code==='24201').point;api.viewport.setView({x:p[0]-850/16/2,y:p[1]-700/16/2,w:850/16,h:700/16});});
+   await page.waitForFunction(()=>window.__busy);await page.locator('#map').scrollIntoViewIfNeeded();const b=await page.locator('#map').boundingBox(),old=await page.getAttribute('#map','viewBox');
+   const tick=await page.evaluate(()=>new Promise(resolve=>{const t=performance.now();setTimeout(()=>resolve({ms:performance.now()-t,busy:window.__busy}),0);}));assert(tick.busy,'main thread services timers during worker computation');assert(tick.ms<250,'600ms worker task does not become a 600ms page task');
+   await page.mouse.move(b.x+b.width*.5,b.y+b.height*.5);await page.mouse.down();for(const [x,y] of [[20,0],[40,0],[40,20],[20,20],[0,0]])await page.mouse.move(b.x+b.width*.5+x,b.y+b.height*.5+y);
+   const held=await page.evaluate(()=>({view:document.querySelector('#map').getAttribute('viewBox'),passes:KussoonV2ProgressivePreview.controller.snapshot().shapePasses}));await page.mouse.move(b.x+b.width*.5+30,b.y+b.height*.5+20);assert.notEqual(await page.getAttribute('#map','viewBox'),old);await page.waitForTimeout(200);assert.equal((await page.evaluate(()=>KussoonV2ProgressivePreview.controller.snapshot())).shapePasses,held.passes,'worker response cannot replace hit targets during held drag');await page.mouse.up();if(width===390){const oldWidth=await page.getAttribute('#map','viewBox');await page.touchscreen.tap(b.x+b.width-45,b.y+b.height-160);if(await page.getAttribute('#map','viewBox')===oldWidth)await page.locator('#mapZoomIn').tap();assert.notEqual(await page.getAttribute('#map','viewBox'),oldWidth,'mobile touch zoom changes camera');}await page.waitForTimeout(350);await settle(page);
+   const ready=await page.evaluate(()=>KussoonV2ProgressivePreview.controller.snapshot());assert.equal(ready.geometry.backend,'worker');assert(ready.geometry.bufferBytes>0);assert(ready.geometry.cached<=3);assert(ready.shapePhases.worker.workerCached<=3);assert(ready.shapePhases.worker.workerBufferBytes<64*1048576,'compact numeric cache stays bounded on representative frame');
+   // An unchanged viewport and cached counties must not fetch again.
+   const loads=ready.store.loads;await page.evaluate(()=>KussoonV2ProgressivePreview.controller.schedule());await page.waitForTimeout(350);await settle(page);assert.equal((await page.evaluate(()=>KussoonV2ProgressivePreview.store.stats())).loads,loads);
+   // After four far-apart views, revisiting an evicted county reloads it; totals
+   // are bounded resident cache, not an incorrect promise of zero refetches.
+   for(const code of ['01101','47201','28101','24201']){await page.evaluate(code=>{const api=KussoonV2ProgressivePreview,p=api.controller.anchors().find(x=>x.code===code).point;api.viewport.setView({x:p[0]-850/32/2,y:p[1]-700/32/2,w:850/32,h:700/32});},code);await page.waitForTimeout(350);await settle(page);}
+   const after=await page.evaluate(()=>KussoonV2ProgressivePreview.controller.snapshot());assert(after.store.loads>loads);assert(after.store.cached<=3);assert(after.store.peakConcurrent<=2);assert(after.geometry.cached<=3);assert(after.shapePhases.worker.workerCached<=3);assert(after.shapePhases.worker.workerBufferBytes<64*1048576);assert.deepEqual(a.errors,[]);report.runs.push({width,height,timerWhileBusy:tick,before:ready,after});
+  }finally{await a.close();}
+ }
+ // Worker startup/runtime failures must preserve the original complete renderer.
+ for(const failure of ['blocked','crash']){const a=await start({query:'progressive=1'});try{
+  if(failure==='blocked')await a.page.addInitScript(()=>{window.Worker=class {constructor(){throw Error('Workers blocked');}};});else await a.page.route('**/progressive-geometry.worker.js',r=>r.fulfill({contentType:'application/javascript',body:"throw Error('test crash')"}));
+  await a.open();await a.page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905);await a.page.evaluate(()=>KussoonV2ProgressivePreview.controller.focus('28101'));await a.page.locator('#officePopup').waitFor();await a.page.waitForTimeout(350);assert.equal(await a.page.locator('#officePopup a').count(),6);assert.equal(await a.page.locator('[data-label-code="28101"]').count(),1);assert.equal((await a.page.evaluate(()=>KussoonV2ProgressivePreview.controller.snapshot())).geometry.backend,'main-fallback');assert.deepEqual(a.errors,[]);
+ }finally{await a.close();}}
+ if(process.env.KUSSOON_BROWSER_ARTIFACTS){await fs.mkdir(process.env.KUSSOON_BROWSER_ARTIFACTS,{recursive:true});await fs.writeFile(path.join(process.env.KUSSOON_BROWSER_ARTIFACTS,'performance-'+engine+'.json'),JSON.stringify(report,null,2));}console.log('PASS worker input responsiveness, no held-drag commit, bounded cache/refetch, blocked/crashed worker fallback '+engine);
+})().catch(e=>{console.error(e);process.exitCode=1;});

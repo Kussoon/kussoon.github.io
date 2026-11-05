@@ -142,6 +142,8 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 <script src="../common/js/administrative-labels.js"></script>
 <script src="../common/js/national-readings.js"></script>
 <script src="density-labels.js"></script>
+<script src="../shared/progressive-geometry.js"></script>
+<script src="../shared/progressive-geometry-client.js"></script>
 <script src="../shared/national-progressive-labels.js"></script>
 <script src="../shared/municipality-quiz.js"></script>
 <script src="../common/js/office-directory.js"></script>
@@ -182,7 +184,7 @@ function renderOfficePopup(){
 }
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive)nationalLabels?.schedule();}});
-const progressiveStore=progressive?KussoonV2NationalProgressive.createStore({load:fetchPrefEntry,byteCapacity:12*1048576,pinned:()=>nationalView?'':$('pref').value}):null;
+const progressiveStore=progressive?KussoonV2NationalProgressive.createStore({load:fetchPrefEntry,byteCapacity:12*1048576,pinned:()=>nationalView?'':$('pref').value,onEvict:key=>nationalLabels?.releaseGeometry(key)}):null;
 const number=(n)=>n.toLocaleString('ja-JP');
 function project(b){
  const cos=Math.cos(((b[1]+b[3])/2)*Math.PI/180),bw=Math.max((b[2]-b[0])*cos,.04),bh=Math.max(b[3]-b[1],.04);
