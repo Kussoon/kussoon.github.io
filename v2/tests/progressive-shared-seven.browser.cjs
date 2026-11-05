@@ -19,6 +19,7 @@ async function run(engine){
   await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:90000});
   assert.deepEqual(await page.evaluate(()=>window.KussoonV2SharedSeamTrial.prefectures),shared);
   assert.equal(await page.locator('#mapReadingToggle').getAttribute('aria-pressed'),'false','readings must start off');
+  await page.locator('#areaSettings').evaluate(el=>{el.open=true;});
   for(const pref of [...shared,'01']){
    await page.selectOption('#pref',pref);
    await page.waitForFunction(code=>{
