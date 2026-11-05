@@ -14,6 +14,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 import {topology as makeTopology} from 'topojson-server';
 import {presimplify,simplify,quantile} from 'topojson-simplify';
+import {protectRings} from './protect-rings.mjs';
 
 function arg(name,fallback){
  const i=process.argv.indexOf(name);
@@ -23,6 +24,7 @@ const input=arg('--input');
 const output=resolve(arg('--output','./generated'));
 const quantization=Number(arg('--quantization','1000000'));
 const keep=Number(arg('--keep','0.02'));
+const protect=process.argv.includes('--protect-rings');
 const expected=Number(arg('--expect-prefectures','0'));
 const combinedName=arg('--emit-combined',null);
 if(combinedName && !/^[a-zA-Z0-9-]+\.topojson$/.test(combinedName))throw Error('Invalid --emit-combined filename');
@@ -120,7 +122,17 @@ console.log('Input regions:',features.length,'prefectures:',prefs.length);
 let topo=makeTopology({municipalities:{type:'FeatureCollection',features}},quantization);
 if(keep<1){
  const weighted=presimplify(topo);
- topo=simplify(weighted,quantile(weighted,1-keep));
+ // topojson-simplify quantile() sorts weights DESCENDING: p=0.02 keeps
+ // approximately the most significant 2%, NOT p=0.98 (which retains ~98%).
+ // Previous 1-keep silently made 2%, 0.5% and 0.2% produce ~the same size.
+ const threshold=quantile(weighted,keep);
+ if(!Number.isFinite(threshold)||threshold<0)throw Error('Invalid simplification threshold '+threshold);
+ if(protect){const stats=protectRings(weighted,threshold);console.log('RING_PROTECTION_METRICS '+JSON.stringify(stats));}
+ const before=topo.arcs.reduce((n,arc)=>n+arc.length,0);
+ topo=simplify(weighted,threshold);
+ const after=topo.arcs.reduce((n,arc)=>n+arc.length,0);
+ if(keep<0.5&&after>=before*.98)throw Error('Simplification ineffective: '+after+'/'+before+' vertices for keep='+keep);
+ console.log('SIMPLIFICATION_METRICS '+JSON.stringify({keep,threshold,before,after,reductionPercent:Number(((1-after/before)*100).toFixed(3))}));
 }
 const cross=borderAudit(topo);
 const hasOsaka=prefs.includes('27'),hasNara=prefs.includes('29');
@@ -132,7 +144,7 @@ if(combinedName)await writeFile(join(output,combinedName),JSON.stringify(topo)+'
 const manifest={
  schemaVersion:1,
  source:'Single nationwide N03 GeoJSON provided by operator; see README and record provenance separately',
- quantization,keep,prefectureCount:prefs.length,regionCount:features.length,
+ quantization,keep,protectRings:protect,prefectureCount:prefs.length,regionCount:features.length,
  sharedPrefectureArcCounts:cross,
  output:'Prefecture slices retain exactly the same arcs and transform as the nationwide topology; no independent simplification'
 };
