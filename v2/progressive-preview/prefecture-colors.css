@@ -1,0 +1,30 @@
+/* Kussoon V2 draft visual contract: keep each municipality's prefecture colour
+ * during selection. Only the selected polygon's opacity pulses.
+ * Never recompute SVG paths, add a stroke, or animate the border layer.
+ */
+.colored-national #map path.land,
+.colored-national #map path.prefecture {
+  fill:var(--pref-color,#add9ef);
+}
+.colored-national #map path.land.chosen {
+  fill:var(--pref-color,#add9ef);
+  animation:kussoon-selected-area-pulse 1.8s ease-in-out infinite;
+}
+@keyframes kussoon-selected-area-pulse{
+  0%,100%{opacity:1}
+  50%{opacity:.48}
+}
+/* Keep the prefecture itself coloured rather than changing hue on hover. */
+@media(hover:hover) and (pointer:fine) {
+  .colored-national #map path.prefecture:hover {
+    fill:var(--pref-color,#add9ef);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+ .colored-national #map path.land.chosen {
+   animation:none;
+   opacity:1;
+   /* A single fill-only outline effect highlights without any extra border path. */
+   filter:drop-shadow(0 0 2px #153f60);
+ }
+}
