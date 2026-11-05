@@ -31,7 +31,7 @@
 
 /* Public nationwide map: two solid high-contrast colours, no fade. */
 .colored-national.two-tone-selection #map path.land.chosen {
-  animation:kussoon-selected-area-two-tone 1.2s step-end infinite;
+  animation:kussoon-selected-area-two-tone 1s step-end infinite;
   opacity:1;
 }
 @keyframes kussoon-selected-area-two-tone {
