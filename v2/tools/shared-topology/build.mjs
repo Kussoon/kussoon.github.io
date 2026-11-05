@@ -120,7 +120,16 @@ console.log('Input regions:',features.length,'prefectures:',prefs.length);
 let topo=makeTopology({municipalities:{type:'FeatureCollection',features}},quantization);
 if(keep<1){
  const weighted=presimplify(topo);
- topo=simplify(weighted,quantile(weighted,1-keep));
+ // topojson-simplify quantile() sorts weights DESCENDING: p=0.02 keeps
+ // approximately the most significant 2%, NOT p=0.98 (which retains ~98%).
+ // Previous 1-keep silently made 2%, 0.5% and 0.2% produce ~the same size.
+ const threshold=quantile(weighted,keep);
+ if(!Number.isFinite(threshold)||threshold<0)throw Error('Invalid simplification threshold '+threshold);
+ const before=topo.arcs.reduce((n,arc)=>n+arc.length,0);
+ topo=simplify(weighted,threshold);
+ const after=topo.arcs.reduce((n,arc)=>n+arc.length,0);
+ if(keep<0.5&&after>=before*.98)throw Error('Simplification ineffective: '+after+'/'+before+' vertices for keep='+keep);
+ console.log('SIMPLIFICATION_METRICS '+JSON.stringify({keep,threshold,before,after,reductionPercent:Number(((1-after/before)*100).toFixed(3))}));
 }
 const cross=borderAudit(topo);
 const hasOsaka=prefs.includes('27'),hasNara=prefs.includes('29');
