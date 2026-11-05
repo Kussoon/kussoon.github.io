@@ -1,0 +1,37 @@
+name: V2 S39 shared seam preview real-browser check
+on:
+  pull_request:
+    paths:
+      - 'v2/national/shared-seam-test.html'
+      - 'v2/national/shared-seam-test.js'
+      - 'v2/data/national/2026-shared-preview/**'
+      - 'v2/tests/shared-seam-preview.browser.cjs'
+      - '.github/workflows/v2-shared-seam-preview-browser.yml'
+permissions:
+  contents: read
+jobs:
+  four-pairs-two-engines:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Compare four pairs with the same viewport in iPhone-sized Chromium/WebKit
+        run: node v2/tests/shared-seam-preview.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/s39-preview-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s39-seven-prefecture-shared-seam-mobile-comparison
+          path: ${{ runner.temp }}/s39-preview-browser
+          retention-days: 14
+          if-no-files-found: ignore
