@@ -1,0 +1,27 @@
+name: V2 nationwide 2026 release candidate validation
+on:
+  pull_request:
+    paths:
+      - 'v2/national/2026-release-candidate.html'
+      - 'v2/national/2026-release-plan.md'
+      - 'v2/tests/national-2026-rc1.browser.cjs'
+      - '.github/workflows/v2-national-2026-rc1.yml'
+permissions:
+  contents: read
+jobs:
+  mobile-chromium-webkit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Exercise RC1 province colour and selection pulse, without touching production
+        run: node v2/tests/national-2026-rc1.browser.cjs
