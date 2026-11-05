@@ -3,7 +3,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="index,follow"><meta name="description" content="複合タイプの相性を6択・10問クイズで練習。間違えた問題は復習できます。">
 <meta name="theme-color" content="#f3f8fc">
-<title>上級：2タイプ相性クイズ | Kussoon</title>
+<title>ポケモンの相性マスター｜上級・クイズ | Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#203d53;background:#f3f8fc}
 *{box-sizing:border-box}body{margin:0}main{max-width:640px;margin:auto;padding:14px 12px 44px}
@@ -48,11 +48,18 @@ body.playing main{padding-top:8px}
 body.playing .panel{margin:0;padding:11px}
 @media(max-width:430px){.match-box{padding:7px 3px}.match-types{gap:3px}.type-symbol{width:29px;height:29px}.type-chip{font-size:13px}.answer{min-height:55px}.answers{gap:7px}.panel{padding:11px}}
 @media(max-height:700px){body.playing .question{margin:5px 0}body.playing .match{margin:6px 0}body.playing .answer{min-height:49px}body.playing .answers{gap:6px;margin-top:7px}body.playing .match-box{padding:5px 3px}body.playing .type-symbol{width:26px;height:26px}body.playing .feedback{padding:6px;margin-top:6px}}
+
+/* Shared v1.0 release title, version, and site footer */
+.page-mode{font-size:15px;font-weight:750;color:#476780;margin:0 0 10px}
+.page-version{text-align:center;font-size:11px;line-height:1.9;color:#71828f;margin:18px auto 4px}
+body.quiz-active .page-version,body.playing .page-version{display:none}
+.kussoon-common-footer{max-width:none;width:100%;margin:24px auto 0}
 </style></head><body><main>
 <div class="intro-only">
 <a href="/games/">← 学ぶ・遊ぶへ</a>　<a href="./">18タイプ<ruby>相性<rt>あいしょう</rt></ruby>トレーニングへ</a>
 <p class="eyebrow">Kussoon / クイズ・<ruby>上級<rt>じょうきゅう</rt></ruby></p>
-<h1>❔ <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプクイズ</h1>
+<h1>ポケモンの<ruby>相性<rt>あいしょう</rt></ruby>マスター</h1>
+<p class="page-mode">⭐ <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプ・❔ クイズ</p>
 <div class="level"><a href="./">🌱 <ruby>初級<rt>しょきゅう</rt></ruby>へもどる</a><a class="current" href="./advanced-quiz.html" aria-current="page">⭐ <ruby>上級<rt>じょうきゅう</rt></ruby>：2タイプ</a></div>
 </div>
 <section class="panel" aria-label="上級クイズ">
@@ -77,7 +84,9 @@ body.playing .panel{margin:0;padding:11px}
 </div>
 </section>
 <p class="intro-only"><a href="./advanced-practice.html">🎯 <ruby>上級<rt>じょうきゅう</rt></ruby>「れんしゅう」へ</a>　<a href="./advanced.html">📖 <ruby>上級<rt>じょうきゅう</rt></ruby>「まなぶ」へ</a></p>
+<div class="page-version" aria-label="ページのバージョンと最終更新日"><div>Version 1.0</div><div><ruby>最終更新<rt>さいしゅうこうしん</rt></ruby>：<time datetime="2026-11-05">2026<ruby>年<rt>ねん</rt></ruby>11<ruby>月<rt>がつ</rt></ruby>5<ruby>日<rt>にち</rt></ruby></time></div></div>
 </main>
+<footer class="kussoon-common-footer" aria-label="Kussoon共通フッター"><small>© 2026 Kussoon. All rights reserved.</small></footer>
 <script>
 "use strict";
 
@@ -266,4 +275,5 @@ $("stop").addEventListener("click",()=>{
  $("play").hidden=true;$("intro").hidden=false;window.scrollTo(0,0);
 });
 refreshMistakes();
-</script></body></html>
+</script><script defer src="/common/site-footer.js"></script>
+</body></html>
