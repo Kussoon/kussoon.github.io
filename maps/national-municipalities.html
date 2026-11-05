@@ -187,7 +187,7 @@ function renderOfficePopup(){
  if(!entry||!code||quizSession||dismissedPopupCode===code){popup.hidden=true;return;}
  const r=entry.regions.find(x=>x.code===code);if(!r){popup.hidden=true;return;}
  const result=KussoonOfficeDirectory.resolve(entry.offices,code);
- const selectedName=r.fullName||r.name;
+ const selectedName=nationalLabels?.fullNameFor(code)||r.fullName||r.name;
  $('popupName').textContent=result.parentRegion&&result.offices.length>1?selectedName+'・'+result.parentRegion.name:selectedName;
  KussoonOfficeDirectory.render(document,$('popupActions'),result,r.fullName||r.name);
  $('popupNote').textContent=!entry.offices?(officeReady.has(national?.pref||$('pref').value)?'庁舎データを取得できませんでした。':'この地域の庁舎情報は今後追加します。'):(result.offices.length&&result.offices.every(o=>o.status==='verified')?'住所は参考情報です。リンクは別タブで開きます。':'庁舎情報に未確認の項目があります。');
@@ -216,7 +216,7 @@ function drawOverview(svg,selected='',locator=false){
   el.setAttribute('d',path(polygons(feat.geometry),p));
   el.setAttribute('class',locator?'locator-pref'+(code===selected?' active':''):'prefecture');
   el.dataset.pref=code;
-  if(!locator){el.setAttribute('tabindex','0');el.setAttribute('role','button');el.setAttribute('aria-label',names[Number(code)]);}
+  if(!locator){el.setAttribute('aria-label',names[Number(code)]);}
   const title=document.createElementNS(NS,'title');title.textContent=names[Number(code)];el.append(title);
   fragment.append(el);
  }
@@ -280,7 +280,7 @@ function paint({refocus=true}={}){
   $('prefBtn').disabled=Boolean(quizSession);$('region').disabled=Boolean(quizSession);
   const cover=current.readingStats;
   $('readingCoverage').textContent='読み仮名：'+cover.matched+'／'+cover.total+'区域で名称・コード照合済み（未収録 '+cover.missing+'、名称不一致 '+cover.mismatched+'）。未確認の読みは表示しません。';
-  const pref=$('pref').value,region=quizSession?' ＞ クイズ中':chosen?' ＞ '+(chosen.fullName||chosen.name):'';
+  const pref=$('pref').value,region=quizSession?' ＞ クイズ中':chosen?' ＞ '+(nationalLabels?.fullNameFor(chosen.code)||chosen.fullName||chosen.name):'';
   $('breadcrumb').textContent='日本全国 ＞ '+names[Number(pref)]+region;
   $('metrics').textContent=names[Number(pref)]+'：'+number(current.regions.length)+'区域、'+(current.bytes/1048576).toFixed(2)+'MB、初回読み込み・解析 '+current.ms.toFixed(0)+'ms';
   drawOverview($('locator'),pref,true);$('locatorPanel').classList.add('show');
@@ -313,10 +313,8 @@ function updateSearch(){
   results=current.regions.filter(r=>KussoonV2PlaceLabels.matches(r,query)).map(r=>({name:r.fullName||r.name,reading:r.reading,code:r.code,kind:'region'}));
  }else{
   ensureNationwideSearchIndex();
-  const prefMatches=names.slice(1).map((name,i)=>({name,code:String(i+1).padStart(2,'0'),kind:'pref'}))
-   .filter(r=>KussoonV2PlaceLabels.matches(r,query));
   const municipalMatches=(nationwideSearchIndex||[]).filter(r=>KussoonV2PlaceLabels.matches(r,query)||r.code.includes(query));
-  results=[...prefMatches,...municipalMatches];
+  results=municipalMatches;
  }
  const shown=results.slice(0,35);
  for(const entry of shown){
@@ -325,7 +323,6 @@ function updateSearch(){
    (entry.kind==='national-region'?names[Number(entry.pref)]+' ＞ ':'')+
    entry.name+(entry.reading?'／'+entry.reading:'')+'（'+entry.code+'）';
   button.addEventListener('click',()=>{
-   if(entry.kind==='pref'){void goPref(entry.code);$('placeSearch').value='';host.replaceChildren();return;}
    if(entry.kind==='national-region'){
     if(progressive&&nationalView){$('placeSearch').value='';host.replaceChildren();void nationalLabels.focus(entry.code).catch(()=>goPref(entry.pref,entry.code));return;}
     $('placeSearch').value='';host.replaceChildren();
@@ -446,9 +443,9 @@ async function goPref(code,selectedCode=''){
   if(id!==requestId)return;
   current=entry;
   const region=$('region');region.replaceChildren(new Option('選択なし',''));
-  for(const r of entry.regions)region.append(new Option((r.fullName||r.name)+(r.reading?'／'+r.reading:'')+'（'+r.code+'）',r.code));
+  for(const r of entry.regions)region.append(new Option((nationalLabels?.fullNameFor(r.code)||r.fullName||r.name)+(r.reading?'／'+r.reading:'')+'（'+r.code+'）',r.code));
   if(selectedCode&&entry.regions.some(r=>r.code===selectedCode))region.value=selectedCode;
-  paint();$('status').textContent=region.value?names[Number(code)]+' ＞ '+(entry.regions.find(r=>r.code===region.value)?.fullName||entry.regions.find(r=>r.code===region.value)?.name)+'を中央に表示しています。':names[Number(code)]+'を表示中です。市区町村を選べます。';
+  paint();$('status').textContent=region.value?names[Number(code)]+' ＞ '+(nationalLabels?.fullNameFor(region.value)||entry.regions.find(r=>r.code===region.value)?.fullName||entry.regions.find(r=>r.code===region.value)?.name)+'を中央に表示しています。':names[Number(code)]+'を表示中です。市区町村を選べます。';
  }catch(e){if(id!==requestId)return;current=null;if(progressive)nationalView=true;paint();$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
 }
 $('quizStart').addEventListener('click',startQuiz);
@@ -476,13 +473,15 @@ $('map').addEventListener('click',e=>{
  if(quizSession)return;
  if(progressive&&nationalView&&!current){const label=e.target.closest('[data-national-code]');if(label){void nationalLabels.select(label.dataset.nationalCode);return;}}
  const target=e.target.closest('[data-pref],[data-code]');if(!target)return;
- if(target.dataset.pref){void goPref(target.dataset.pref);return;}
+ // Prefecture-only navigation is restricted to the #pref dropdown.
+ if(target.dataset.pref)return;
  if(!current||!target.dataset.code)return;
  const deselect=$('region').value===target.dataset.code;
  $('region').value=deselect?'':target.dataset.code;
  dismissedPopupCode=null;paint({refocus:!deselect});
 });
-$('map').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset.pref){e.preventDefault();void goPref(e.target.dataset.pref);}});
+// Prefecture map shapes are not navigation controls; only the prefecture select changes level.
+
 (async()=>{
  try{
   const start=performance.now();
