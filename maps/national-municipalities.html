@@ -51,24 +51,24 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 .map-toolbar button{width:100%;min-height:42px;padding:5px 3px;white-space:nowrap;font-size:11px;font-weight:800;color:#183951;background:rgba(255,255,255,.96);border:1px solid #96b3c7;border-radius:8px;box-shadow:0 2px 7px #183c5533;touch-action:manipulation}
 .map-toolbar button[aria-pressed="true"]{background:#245879;color:#fff}
 .map-toolbar button:focus-visible{outline:3px solid #e5aa38;outline-offset:1px}
-.office-popup{position:absolute;left:8px;right:auto;bottom:8px;z-index:5;width:min(350px,calc(100% - 128px));max-height:calc(100% - 16px);box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid #86aac2;border-radius:10px;padding:9px;box-shadow:0 5px 18px #2345}
+.office-popup{position:absolute;left:8px;right:auto;bottom:8px;z-index:5;width:min(350px,calc(100% - 128px));max-height:min(calc(100% - 16px),var(--toolbar-height,183px));box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid #86aac2;border-radius:10px;padding:9px;box-shadow:0 5px 18px #2345}
 .office-popup[hidden]{display:none}
 .popup-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-shrink:0;margin-bottom:4px}
 .popup-head strong{min-width:0;overflow-wrap:anywhere}.popup-close{min-width:44px;min-height:44px;font-size:20px;flex-shrink:0}
 .popup-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;scroll-padding-block:8px}
-.popup-content{padding:0 2px calc(12px + env(safe-area-inset-bottom,0px))}
+.popup-content{padding:0 2px 0}
 .popup-facility{border-bottom:1px solid #ccdbe4;margin:5px 0;padding:4px 0}
 .popup-office{font-size:14px;margin:3px 0}.popup-address{font-size:12px;white-space:pre-line;margin:3px 0;overflow-wrap:anywhere}
 .popup-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:6px 0}
 .popup-actions a,.popup-actions span{display:flex;justify-content:center;align-items:center;text-align:center;min-height:44px;padding:3px 1px;background:#edf6fc;border:1px solid #aacbdd;border-radius:6px;font-size:11px;color:#24516a;text-decoration:none;overflow-wrap:anywhere}
-.popup-actions span{color:#888;background:#eee}.popup-note{font-size:11px;color:#526b80}
+.popup-actions span{color:#888;background:#eee}.popup-note{font-size:11px;color:#526b80;margin:6px 0 0}
 .region-picker summary,.debug-panel summary{cursor:pointer;font-weight:700;min-height:36px}
 .region-picker .controls{margin-top:10px}.page-links{font-size:13px;color:#55738a}
 [data-debug][hidden]{display:none!important}
 @media(max-width:600px){.office-popup{left:8px;right:108px;width:auto;min-width:0}}
 @media(max-width:500px){.map-toolbar{width:88px}.map-toolbar button{min-height:40px;font-size:10px}}
 .progressive-national .prefecture{stroke:none}.prefecture-focus{fill:none;stroke:none;pointer-events:none}.prefecture-focus:focus-visible{stroke:#174b71;stroke-width:2;vector-effect:non-scaling-stroke}.label-toggle[hidden]{display:none}
-</style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css"></head><body class="colored-national two-tone-selection"><main>
+</style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=287"></head><body class="colored-national two-tone-selection"><main>
 <h1>全国市区町村マップ 2026</h1>
 <p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。県別の淡い色、地名検索、読み仮名、役所・役場情報に対応しています。</p>
 <p class="intro">地図をタップして自治体の名前と役所・役場の情報を調べられます。</p>
@@ -180,6 +180,12 @@ async function getOffices(code){
  if(!officeCache.has(code))officeCache.set(code,fetch('/v2/data/offices/'+code+'.json?v=6').then(r=>{if(!r.ok)throw Error('office HTTP '+r.status);return r.json();}).then(d=>{if(d.schemaVersion!==2||d.prefecture!==code||!d.regions||!d.offices)throw Error('office schema');return d;}).catch(e=>{console.warn(e);officeCache.delete(code);return null;}));
  return officeCache.get(code);
 }
+// Keep the popup within the four map controls' measured height; content can scroll.
+function syncPopupToolbarHeight(){
+ const toolbar=$('mapToolbar'),frame=$('mapFrame');
+ if(toolbar&&frame)frame.style.setProperty('--toolbar-height',Math.ceil(toolbar.getBoundingClientRect().height)+'px');
+}
+window.addEventListener('resize',syncPopupToolbarHeight);
 function renderOfficePopup(){
  const national=!current&&nationalView?nationalLabels?.selection():null,entry=current||national?.entry;
  const code=current?$('region').value:national?.code||'',popup=$('officePopup');
@@ -191,6 +197,7 @@ function renderOfficePopup(){
  KussoonOfficeDirectory.render(document,$('popupActions'),result,r.fullName||r.name);
  $('popupNote').textContent=!entry.offices?(officeReady.has(national?.pref||$('pref').value)?'庁舎データを取得できませんでした。':'この地域の庁舎情報は今後追加します。'):(result.offices.length&&result.offices.every(o=>o.status==='verified')?'住所は参考情報です。リンクは別タブで開きます。':'庁舎情報に未確認の項目があります。');
  popup.hidden=false;
+ syncPopupToolbarHeight();
 }
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive)nationalLabels?.schedule();}});
