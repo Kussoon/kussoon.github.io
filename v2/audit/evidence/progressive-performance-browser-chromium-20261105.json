@@ -1,0 +1,270 @@
+{
+  "engine": "chromium",
+  "scope": "Real input during deliberately busy worker plus real cold/warm detail requests. Automated browser, not physical Safari.",
+  "runs": [
+    {
+      "width": 1280,
+      "height": 1000,
+      "timerWhileBusy": {
+        "ms": 0,
+        "busy": true
+      },
+      "before": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 3,
+          "cachedBytes": 11414721,
+          "byteCapacity": 12582912,
+          "keys": [
+            "24",
+            "29",
+            "26"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 3
+        },
+        "labelPasses": 5,
+        "lastLabelMs": 9.199999995529652,
+        "firstLabelMs": 279.6000000014901,
+        "maxLabelMs": 279.6000000014901,
+        "shapePasses": 2,
+        "lastShapeMs": 48.30000000447035,
+        "maxShapeMs": 48.30000000447035,
+        "indexBytes": 659025,
+        "shapePhases": {
+          "backend": "worker",
+          "wallMs": 1875.1000000014901,
+          "worker": {
+            "buildMs": 506.29999999701977,
+            "overviewMs": 3.7999999970197678,
+            "sortMs": 62.69999999552965,
+            "edgeBufferBytes": 6273115,
+            "segments": 280148,
+            "fillPoints": 310775,
+            "pathChars": 10808740,
+            "workerCached": 3,
+            "workerBufferBytes": 9623744,
+            "sentAt": 1793854063970,
+            "receiveLagMs": 36
+          },
+          "domCommitMs": 0.30000000447034836,
+          "domMaxSliceMs": 15.599999994039536
+        },
+        "shapePending": false,
+        "scheduled": false,
+        "activePointers": 0,
+        "geometry": {
+          "backend": "worker",
+          "packMaxSliceMs": 7.600000001490116,
+          "packWallMs": 71.29999999701977,
+          "transferMs": 12.100000001490116,
+          "bufferBytes": 9539904,
+          "sceneRequests": 2,
+          "coalesced": 0,
+          "cached": 3,
+          "pending": 0
+        }
+      },
+      "after": {
+        "selected": "",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 3,
+          "cachedBytes": 11414721,
+          "byteCapacity": 12582912,
+          "keys": [
+            "29",
+            "26",
+            "24"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 10
+        },
+        "labelPasses": 15,
+        "lastLabelMs": 5.100000001490116,
+        "firstLabelMs": 279.6000000014901,
+        "maxLabelMs": 279.6000000014901,
+        "shapePasses": 6,
+        "lastShapeMs": 29.299999997019768,
+        "maxShapeMs": 48.30000000447035,
+        "indexBytes": 659025,
+        "shapePhases": {
+          "backend": "worker",
+          "wallMs": 1257.2999999970198,
+          "worker": {
+            "buildMs": 473,
+            "overviewMs": 1.2000000029802322,
+            "sortMs": 41,
+            "edgeBufferBytes": 5586655,
+            "segments": 248117,
+            "fillPoints": 278421,
+            "pathChars": 9627964,
+            "workerCached": 3,
+            "workerBufferBytes": 9623744,
+            "sentAt": 1793854069882,
+            "receiveLagMs": 24
+          },
+          "domCommitMs": 0.3999999985098839,
+          "domMaxSliceMs": 15.199999995529652
+        },
+        "shapePending": false,
+        "scheduled": false,
+        "activePointers": 0,
+        "geometry": {
+          "backend": "worker",
+          "packMaxSliceMs": 20.799999997019768,
+          "packWallMs": 386.5,
+          "transferMs": 15.5,
+          "bufferBytes": 9539904,
+          "sceneRequests": 6,
+          "coalesced": 0,
+          "cached": 3,
+          "pending": 0
+        }
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "timerWhileBusy": {
+        "ms": 0,
+        "busy": true
+      },
+      "before": {
+        "selected": "24216",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 3,
+          "cachedBytes": 10228816,
+          "byteCapacity": 12582912,
+          "keys": [
+            "24",
+            "25",
+            "29"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 3
+        },
+        "labelPasses": 12,
+        "lastLabelMs": 2.899999998509884,
+        "firstLabelMs": 218,
+        "maxLabelMs": 218,
+        "shapePasses": 3,
+        "lastShapeMs": 15.800000004470348,
+        "maxShapeMs": 26.30000000447035,
+        "indexBytes": 659025,
+        "shapePhases": {
+          "backend": "worker",
+          "wallMs": 989.5,
+          "worker": {
+            "buildMs": 356.20000000298023,
+            "overviewMs": 1.8000000044703484,
+            "sortMs": 32.399999998509884,
+            "edgeBufferBytes": 4735519,
+            "segments": 208455,
+            "fillPoints": 235096,
+            "pathChars": 8099672,
+            "workerCached": 3,
+            "workerBufferBytes": 8620384,
+            "sentAt": 1793854077588,
+            "receiveLagMs": 15
+          },
+          "domCommitMs": 0.20000000298023224,
+          "domMaxSliceMs": 11.399999998509884
+        },
+        "shapePending": false,
+        "scheduled": false,
+        "activePointers": 0,
+        "geometry": {
+          "backend": "worker",
+          "packMaxSliceMs": 10.5,
+          "packWallMs": 66.39999999850988,
+          "transferMs": 9,
+          "bufferBytes": 8520256,
+          "sceneRequests": 5,
+          "coalesced": 0,
+          "cached": 3,
+          "pending": 0
+        }
+      },
+      "after": {
+        "selected": "24216",
+        "selectionError": "",
+        "detailError": "",
+        "measureEntries": 3648,
+        "count": 1905,
+        "store": {
+          "cached": 3,
+          "cachedBytes": 10228816,
+          "byteCapacity": 12582912,
+          "keys": [
+            "29",
+            "25",
+            "24"
+          ],
+          "active": 0,
+          "queued": 0,
+          "peakConcurrent": 2,
+          "loads": 11
+        },
+        "labelPasses": 22,
+        "lastLabelMs": 3.6999999955296516,
+        "firstLabelMs": 218,
+        "maxLabelMs": 218,
+        "shapePasses": 7,
+        "lastShapeMs": 38,
+        "maxShapeMs": 38,
+        "indexBytes": 659025,
+        "shapePhases": {
+          "backend": "worker",
+          "wallMs": 1175.8000000044703,
+          "worker": {
+            "buildMs": 441,
+            "overviewMs": 1.2999999970197678,
+            "sortMs": 41.5,
+            "edgeBufferBytes": 5630221,
+            "segments": 250751,
+            "fillPoints": 277213,
+            "pathChars": 9656333,
+            "workerCached": 3,
+            "workerBufferBytes": 8620384,
+            "sentAt": 1793854083486,
+            "receiveLagMs": 21
+          },
+          "domCommitMs": 0.7000000029802322,
+          "domMaxSliceMs": 19.299999997019768
+        },
+        "shapePending": false,
+        "scheduled": false,
+        "activePointers": 0,
+        "geometry": {
+          "backend": "worker",
+          "packMaxSliceMs": 18.5,
+          "packWallMs": 339.80000000447035,
+          "transferMs": 11.199999995529652,
+          "bufferBytes": 8520256,
+          "sceneRequests": 9,
+          "coalesced": 0,
+          "cached": 3,
+          "pending": 0
+        }
+      }
+    }
+  ]
+}

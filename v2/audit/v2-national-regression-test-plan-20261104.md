@@ -460,3 +460,64 @@ GitHub Actions既存workflowへ索引再現/10単体/両engine実表示を追加
 残件: S44空白クリック解除、S45自治体keyboard、S46検索Enter、S48北方6読み、S25郡属性、S39非一致/部分重複県境。完全一致線分dedupでS39全体を解決したとは扱わない。S21〜S26は全国フラグの候補処理を通常版へ一律適用せずBを保持する。
 
 未読込の粗い県面クリックは従来の県別遷移を維持する。全国自治体選択はラベルか読込済み詳細面から可能。低倍率でも全自治体面を直接hit-testする旧体験は完全復元していない。県単位遷移維持/座標hit-testで遅延読込のどちらを採用するか、別途UI判断が必要。iPhone Safari実機の指到達/ピンチ・ドラッグ/吹き出し/表示復帰と性能、Edge、全境界目視は未確認。通常URLのS41/S42をAへ変更しない。
+
+<a id="progressive-performance"></a>
+
+## PR #263 性能改善・操作継承の追検証（2026-11-05）
+
+[Draft #263](https://github.com/Kussoon/kussoon.github.io/pull/263)へ追記。#261→#262→#263の積み上げを維持し、通常URLは変更せず `?progressive=1` の試作だけを改善する。既定化・自動マージは行わない。直前main確認は `2a5d1bc220aaddba6b60b3501fbb35d0306a1105`（#263作成以後の追加はニュースと別コンテンツPokémonで、全国地図の変更なし）。以降の性能値は実機iPhone Safariの合格ではなく、ローカル自動ブラウザの単発観測である。
+
+### 停止原因の分離
+
+旧試作に計測だけを追加した `b9df3a883915d7aa5c5cd563f5563511abbd0a77` で、同じ三重県周辺camera（津市anchor、16倍）を測った。[元Chromium](evidence/progressive-performance-original-chromium-20261105.json)・[元WebKit](evidence/progressive-performance-original-webkit-20261105.json)。PC Chromiumの詳細描画842.8msは、形状範囲準備/塗り164.7ms、境界dedup390.7ms、境界パス287.1ms、DOM差替え0.3ms。主因は境界を重複除去して大量の文字列を組み立てるページ側計算だった。
+
+県別取得はheaders待ち/body読取/JSON.parse/arc decode/region復元/読みとboundsを別記録した。例: 同PCの三重は43.0/104.7/53.3/3.9/2.0/20.8ms。headers/bodyと読みsource待ちは非同期の経過時間を含み、全値を「主スレッド停止」と足し合わせない。ネットワークはローカルHTTP配信であり実通信環境の速度は未確認。解析・GC・SVGのネイティブ表示更新にはWorker化後も負荷が残る。
+
+### 採用方式と比較した選択肢
+
+|方式|比較結果・判断|
+|---|---|
+|従来のページ側dedup/path生成|機能を保持するfallbackと比較用 `geometry=main` として残す。初回の長い停止を確認|
+|Worker＋協調的な受け渡し|採用。`progressive-geometry.js` / `progressive-geometry.worker.js` / clientを追加し、exactな境界の並べ替え/dedupとSVGパス生成をWorkerへ移す|
+|文字列SetによるWorker内dedup|試作したが一時文字列のメモリが大きい。最終方式は丸め後の端点をInt32配列へ格納し、線分を正規化して数値sort/dedupする。元の順序・向きで描く|
+|Worker返信もUTF-8バッファ転送|[比較実験](evidence/progressive-performance-reply-buffer-experiment-webkit-20261105.json)を保存。WebKitのPC三重でページ側50ms/RAF575msとなり、文字列返信の43ms/512msより改善を確認できなかった。追加のencode/decodeを最終実装には採用しない。入力座標のbuffer転送は維持|
+|LOD・点の間引き・一括全国詳細|今回は採用しない。全座標・島/穴・境界の同一性を保つ方式でまず改善。画面LODは共有境界/塗りとの整合性を別途証明する必要があり、無条件に粗くしない|
+
+座標の受け渡しはFloat64Arrayをtransferし、ページ側のpackとDOM作成は約4msを目標にyieldする（割当て/GC等で超過するため4msの上限保証ではない）。背景処理の入力は同時1scene＋最新1件にまとめ、古いカメラの結果は破棄する。pointer押下中はpackを待機し、DOMを差し替えない。押したまま届いた結果を破棄した場合も、同じ位置で離した後に再描画する。47県の粗い入口は初回に同期描画し、Worker待ちで全国地図が空白になることを防ぐ。
+
+DOMには塗りstrokeなし＋境界1pathを維持。連続するLコマンドにまとめても、実際に描く丸め後の線分集合は同じで、LODや区域削減は行わない。実2026三重の塗りpathと境界集合を旧関数と比較する。既存ブラウザ検査のSVG解析はM/Lの連続コマンドを展開する形へ拡張し、詳細landが実在してから重複を検査する（空集合の合格を防ぐ）。非一致/部分重複県境S39は未解決で、単一pathだけを根拠に全面解決としない。
+
+### 同条件の最終比較
+
+計測head `b126285`（この後の`2941811`は待機entryの所有権guard追加。計算/配置規則は同一）。同一headの原処理 `?progressive=1&geometry=main` と改善処理 `?progressive=1` を、1280×1000/390×844・同じ7cameraで測った。[比較集約・sourceRef・SHA256](evidence/progressive-performance-comparison-20261105.json)、[旧Chromium](evidence/progressive-performance-before-chromium-20261105.json)・[新Chromium](evidence/progressive-performance-after-chromium-20261105.json)、[旧WebKit](evidence/progressive-performance-before-webkit-20261105.json)・[新WebKit](evidence/progressive-performance-after-webkit-20261105.json)。28条件すべてでviewBoxと実ラベル件数が一致した。三重ではPC322件/mobile295件。stage別の増加・縮小時の間引きと全区域到達は別の実表示テストで保護する。
+
+三重16倍の旧→改善（ms、丸め）。ページ描画は旧「計算＋DOM」と新「Worker後のDOM作成/適用」の比較であり、詳細が完成する総時間と混同しない。
+
+|engine/viewport|ページ側描画|最大timer間隔|最大RAF間隔|
+|---|---:|---:|---:|
+|Chromium PC|774→31|837→63|817→50|
+|Chromium 390px|638→28|681→97|667→67|
+|WebKit PC|932→41|1223→187|1045→269|
+|WebKit 390px|835→37|993→177|919→129|
+
+Workerの三重計算は約0.45〜0.55秒を要し、通信/pack/適用を含む表示完了までの待ちは残る。その間、ラベル・既存地図・カメラ操作を保つ。RAFはpresentation/エンジンのスケジューリングも含むため、timer間隔・Chromium Long Task・実イベント応答と区別する。初期WebKitのRAFは旧/新とも大きく変動し、今回の改善対象外の初期描画を含む。都合のよい条件だけを全体性能の保証には使わない。
+
+画像比較（同じ三重camera）: Chromium [旧PC](evidence/progressive-performance-before-chromium-1280-20261105.png)/[新PC](evidence/progressive-performance-after-chromium-1280-20261105.png)、[旧390px](evidence/progressive-performance-before-chromium-390-20261105.png)/[新390px](evidence/progressive-performance-after-chromium-390-20261105.png)。WebKit [旧PC](evidence/progressive-performance-before-webkit-1280-20261105.png)/[新PC](evidence/progressive-performance-after-webkit-1280-20261105.png)、[旧390px](evidence/progressive-performance-before-webkit-390-20261105.png)/[新390px](evidence/progressive-performance-after-webkit-390-20261105.png)。境界端点・全塗り座標の自動比較と併せて参照する。
+
+### メモリ・LRU・再取得
+
+県別LRU最大3・同時要求2・raw予算12MiBと単独超過県の例外は維持。Workerの数値座標も同じLRU破棄通知で解放し、別の47県キャッシュにしない。待機sceneが動き始める時とpack完了時にもstoreの所有状態を再確認し、破棄済みentryをWorkerへ再登録しない（競合再現の単体検査を追加）。選択中1区域とoverviewは別に小さく保持する。選択県全体を固定して持ち続けない。warm再描画は追加取得0、遠い4地域を移動後に破棄済み県を再訪すると再取得することを検査し、「キャッシュがあるから常に再取得0」とは主張しない。
+
+CDPでページ/WorkerのJS heapを別々に観測し、GCは強制しない。専用Worker分を無視してページheapだけを改善値にしない。V8 heapと配列のbacking storage/RSS/GPUは別物。同一head比較の最大観測JS heap（page＋worker、MiB）はPC157.7→78.1、390px174.9→120.0。強制GCなしの経路上7点の観測であり割当てピークではない。他の反復では値が変わるため、全体メモリの恒久的低下を保証しない。最終値は原JSONを参照し、値がGCで変動することを明示する。Worker常駐座標bufferはこの経路で約4.5〜12MiB、数値sort作業bufferは三重で約6MiB。これらはJS heapやプロセス全体の上限ではない。追加ブラウザ検査は県数/並列数/Worker所有数/代表経路buffer上限を検査するが、全端末のメモリ合格を保証しない。
+
+### 回帰検査と残件
+
+- 既存の段階表示単体10件を保持し、追加6件（塗り/線分完全一致、選択島の保持、協調pack、LRU所有権破棄、実2026三重比較、待機sceneによる破棄済み県の復活防止）をCIへ追加。
+- 実表示は両engine×PC/390px×読みOFF/ONで全1905コード・全文字箱・画面fontを検査。全件は実SVGへのprogrammatic cameraであり、1905回の実指操作ではない。読み初期OFF・段組み・anchor規則・max768・県別max128は変更しない。
+- 新しい性能操作検査はテスト専用にWorkerへ600ms負荷を注入し、busy中のページtimer応答と実drag、押下中の結果不適用、静止押下後の再描画、狭幅touchボタン、LRU/再取得、Worker拒否/クラッシュ時の旧完全描画fallbackを検査する。注入はテストのrouteだけで、本体に待機コードを置かない。
+- 通常の全国/県別・検索/浜松・再タップ・×/3・6リンク・全体表示・pinch/panの既存検査を削除せず実行。GitHub Actionsへ新6単体と性能操作browserを追加（Chromium/WebKit）。計測診断自体は硬いFPS閾値としてCI合格にしない。押下中DOM不変の既存検査は、CDP送信前のsnapshotから、pointer-down受信・2指activeの確認後のsnapshotへ変更した。送信前の未押下時間に起きる合法なWorker完了を失敗に数えず、押下後は同じ厳密な件数不変を検査する。
+- 旧24失敗は[同じ直接実行による再確認](evidence/progressive-performance-legacy-failures-20261105.json)でboundary1/centered11/density6/readings6のまま。失敗を消すための削除・skip・期待値変更なし。
+
+S44空白解除、S45自治体keyboard、S46検索Enter、S47 Edge配色実機、S48北方6読みは独立残件として維持。S25郡属性、S39非一致県境、低倍率での全自治体面直接hit-test、S21〜S26の採否も解消扱いにしない。既存49仕様のA23/B12/C5/要確認9は変更しない。
+
+性能の残件: JSON.parse/一部復元はまだページ側。最終観測でChromiumのtimer最大約132ms、WebKit約369ms、RAFも移動/初期表示時に長い間隔が残る。Worker拒否時は機能を優先する旧rendererへ戻り、高速化の保証はない。iPhone Safari実機/WebKit native複数指pinch/低速CPU・実通信/GPU/RSS/長時間連続操作は未確認で、常時60fpsや本番快適性の合格とはしない。今後は残る解析・表示更新をトレースし、必要なら解析移管や整合性を証明した画面LODを別段階で比較する。Draft・opt-inを維持してレビューする。

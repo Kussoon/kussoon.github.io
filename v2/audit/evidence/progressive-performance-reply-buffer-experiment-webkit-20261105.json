@@ -1,0 +1,2323 @@
+{
+  "sourceRef": "74eb0626fbd91b5751919792e5eb3d1a9bfe8e50",
+  "engine": "webkit",
+  "scope": "Same cameras/zoom and viewport; RAF gaps on automated desktop host, not iPhone device FPS. Page and dedicated worker CDP JS heaps are separate, without forced GC; neither is RSS/GPU/whole browser memory.",
+  "runs": [
+    {
+      "width": 1280,
+      "height": 1000,
+      "rows": [
+        {
+          "name": "initial",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 1824,
+            "count": 1905,
+            "store": {
+              "cached": 0,
+              "cachedBytes": 0,
+              "byteCapacity": 12582912,
+              "keys": [],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 0,
+              "loads": 0
+            },
+            "labelPasses": 3,
+            "lastLabelMs": 7.000000000000227,
+            "firstLabelMs": 77,
+            "maxLabelMs": 77,
+            "shapePasses": 1,
+            "lastShapeMs": 20,
+            "maxShapeMs": 20,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 5,
+              "dedupMs": 10,
+              "borderPathMs": 5,
+              "domCommitMs": 0,
+              "segments": 3917
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 0,
+              "packWallMs": 0,
+              "transferMs": 0,
+              "bufferBytes": 0,
+              "sceneRequests": 0,
+              "coalesced": 0,
+              "cached": 0,
+              "pending": 0
+            }
+          },
+          "loads": [],
+          "worker": null,
+          "nodes": 378,
+          "labels": 124,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 888013,
+          "maxFrameGapMs": 56,
+          "p95FrameGapMs": 18,
+          "longTasks": [],
+          "resources": []
+        },
+        {
+          "name": "mie",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 11414721,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "26"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 3
+            },
+            "labelPasses": 5,
+            "lastLabelMs": 6,
+            "firstLabelMs": 77,
+            "maxLabelMs": 77,
+            "shapePasses": 2,
+            "lastShapeMs": 50.000000000000455,
+            "maxShapeMs": 50.000000000000455,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 727.0000000000005,
+              "worker": {
+                "buildMs": 572,
+                "overviewMs": 5,
+                "sortMs": 74,
+                "edgeBufferBytes": 6273020,
+                "segments": 280134,
+                "fillPoints": 310775,
+                "pathChars": 10808434,
+                "workerCached": 3,
+                "workerBufferBytes": 9623744,
+                "encodeMs": 40,
+                "replyBytes": 10808434,
+                "sentAt": 1793853305109,
+                "receiveLagMs": 1
+              },
+              "domCommitMs": 1.0000000000004547,
+              "domMaxSliceMs": 25
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 4,
+              "packWallMs": 40,
+              "transferMs": 12,
+              "bufferBytes": 9539904,
+              "sceneRequests": 1,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 11,
+              "bodyMs": 0,
+              "parseMs": 6,
+              "decodeMs": 2,
+              "regionsMs": 3,
+              "readingsAndBoundsMs": 243
+            },
+            {
+              "code": "24",
+              "headersMs": 33,
+              "bodyMs": 152,
+              "parseMs": 54,
+              "decodeMs": 11,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 10
+            },
+            {
+              "code": "26",
+              "headersMs": 8.999999999999545,
+              "bodyMs": 14,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            }
+          ],
+          "worker": null,
+          "nodes": 920,
+          "labels": 322,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 12472450,
+          "maxFrameGapMs": 575,
+          "p95FrameGapMs": 98,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 3,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 41,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5.000000000000455,
+              "bytes": 1377465
+            }
+          ]
+        },
+        {
+          "name": "kobe",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 5362727,
+              "byteCapacity": 12582912,
+              "keys": [
+                "26",
+                "27",
+                "28"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 5
+            },
+            "labelPasses": 7,
+            "lastLabelMs": 4,
+            "firstLabelMs": 77,
+            "maxLabelMs": 77,
+            "shapePasses": 3,
+            "lastShapeMs": 13,
+            "maxShapeMs": 50.000000000000455,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 150,
+              "worker": {
+                "buildMs": 86,
+                "overviewMs": 3,
+                "sortMs": 7,
+                "edgeBufferBytes": 790260,
+                "segments": 29640,
+                "fillPoints": 55777,
+                "pathChars": 1551051,
+                "workerCached": 3,
+                "workerBufferBytes": 4737264,
+                "encodeMs": 5.999999999999545,
+                "replyBytes": 1551051,
+                "sentAt": 1793853306219,
+                "receiveLagMs": 4
+              },
+              "domCommitMs": 0,
+              "domMaxSliceMs": 5
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 4,
+              "packWallMs": 67,
+              "transferMs": 12,
+              "bufferBytes": 4653424,
+              "sceneRequests": 2,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 11,
+              "bodyMs": 0,
+              "parseMs": 6,
+              "decodeMs": 2,
+              "regionsMs": 3,
+              "readingsAndBoundsMs": 243
+            },
+            {
+              "code": "24",
+              "headersMs": 33,
+              "bodyMs": 152,
+              "parseMs": 54,
+              "decodeMs": 11,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 10
+            },
+            {
+              "code": "26",
+              "headersMs": 8.999999999999545,
+              "bodyMs": 14,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 60,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "28",
+              "headersMs": 73.00000000000045,
+              "bodyMs": 12.999999999999545,
+              "parseMs": 13,
+              "decodeMs": 2.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            }
+          ],
+          "worker": null,
+          "nodes": 661,
+          "labels": 61,
+          "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+          "decodedBytes": 16457712,
+          "maxFrameGapMs": 73,
+          "p95FrameGapMs": 73,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 3,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 41,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5.000000000000455,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 11,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            }
+          ]
+        },
+        {
+          "name": "sapporo",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 11548216,
+              "byteCapacity": 12582912,
+              "keys": [
+                "01"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 6
+            },
+            "labelPasses": 9,
+            "lastLabelMs": 6,
+            "firstLabelMs": 77,
+            "maxLabelMs": 77,
+            "shapePasses": 4,
+            "lastShapeMs": 15,
+            "maxShapeMs": 50.000000000000455,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 243.9999999999991,
+              "worker": {
+                "buildMs": 140,
+                "overviewMs": 2,
+                "sortMs": 16,
+                "edgeBufferBytes": 1449201,
+                "segments": 59849,
+                "fillPoints": 92790,
+                "pathChars": 2786652,
+                "workerCached": 1,
+                "workerBufferBytes": 10140160,
+                "encodeMs": 15,
+                "replyBytes": 2786652,
+                "sentAt": 1793853307039,
+                "receiveLagMs": 1
+              },
+              "domCommitMs": 0,
+              "domMaxSliceMs": 7
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 4,
+              "packWallMs": 109.99999999999909,
+              "transferMs": 20,
+              "bufferBytes": 10056320,
+              "sceneRequests": 3,
+              "coalesced": 0,
+              "cached": 1,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 11,
+              "bodyMs": 0,
+              "parseMs": 6,
+              "decodeMs": 2,
+              "regionsMs": 3,
+              "readingsAndBoundsMs": 243
+            },
+            {
+              "code": "24",
+              "headersMs": 33,
+              "bodyMs": 152,
+              "parseMs": 54,
+              "decodeMs": 11,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 10
+            },
+            {
+              "code": "26",
+              "headersMs": 8.999999999999545,
+              "bodyMs": 14,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 60,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "28",
+              "headersMs": 73.00000000000045,
+              "bodyMs": 12.999999999999545,
+              "parseMs": 13,
+              "decodeMs": 2.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 122,
+              "parseMs": 54,
+              "decodeMs": 9,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 6
+            }
+          ],
+          "worker": null,
+          "nodes": 506,
+          "labels": 40,
+          "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+          "decodedBytes": 28005928,
+          "maxFrameGapMs": 179,
+          "p95FrameGapMs": 141,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 3,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 41,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5.000000000000455,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 11,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 40,
+              "bytes": 11548216
+            }
+          ]
+        },
+        {
+          "name": "okinawa",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 15388561,
+              "byteCapacity": 12582912,
+              "keys": [
+                "47"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 7
+            },
+            "labelPasses": 11,
+            "lastLabelMs": 5,
+            "firstLabelMs": 77,
+            "maxLabelMs": 77,
+            "shapePasses": 5,
+            "lastShapeMs": 22,
+            "maxShapeMs": 50.000000000000455,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 287,
+              "worker": {
+                "buildMs": 176,
+                "overviewMs": 1,
+                "sortMs": 22,
+                "edgeBufferBytes": 2365804,
+                "segments": 102710,
+                "fillPoints": 113373,
+                "pathChars": 3934631,
+                "workerCached": 1,
+                "workerBufferBytes": 12543312,
+                "encodeMs": 12.99999999999909,
+                "replyBytes": 3934631,
+                "sentAt": 1793853307917,
+                "receiveLagMs": 0
+              },
+              "domCommitMs": 0,
+              "domMaxSliceMs": 8
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 4.9999999999990905,
+              "packWallMs": 168.9999999999991,
+              "transferMs": 20,
+              "bufferBytes": 12459472,
+              "sceneRequests": 4,
+              "coalesced": 0,
+              "cached": 1,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 11,
+              "bodyMs": 0,
+              "parseMs": 6,
+              "decodeMs": 2,
+              "regionsMs": 3,
+              "readingsAndBoundsMs": 243
+            },
+            {
+              "code": "24",
+              "headersMs": 33,
+              "bodyMs": 152,
+              "parseMs": 54,
+              "decodeMs": 11,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 10
+            },
+            {
+              "code": "26",
+              "headersMs": 8.999999999999545,
+              "bodyMs": 14,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 60,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "28",
+              "headersMs": 73.00000000000045,
+              "bodyMs": 12.999999999999545,
+              "parseMs": 13,
+              "decodeMs": 2.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 122,
+              "parseMs": 54,
+              "decodeMs": 9,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "47",
+              "headersMs": 55,
+              "bodyMs": 135,
+              "parseMs": 55,
+              "decodeMs": 5,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 4
+            }
+          ],
+          "worker": null,
+          "nodes": 321,
+          "labels": 17,
+          "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+          "decodedBytes": 43394489,
+          "maxFrameGapMs": 152,
+          "p95FrameGapMs": 72,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 3,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 41,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5.000000000000455,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 11,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 40,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 46,
+              "bytes": 15388561
+            }
+          ]
+        },
+        {
+          "name": "mie-revisit",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 11414721,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "26"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 10
+            },
+            "labelPasses": 13,
+            "lastLabelMs": 5,
+            "firstLabelMs": 77,
+            "maxLabelMs": 77,
+            "shapePasses": 6,
+            "lastShapeMs": 53,
+            "maxShapeMs": 53,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 708.9999999999991,
+              "worker": {
+                "buildMs": 547,
+                "overviewMs": 2,
+                "sortMs": 78,
+                "edgeBufferBytes": 6273020,
+                "segments": 280134,
+                "fillPoints": 310775,
+                "pathChars": 10808434,
+                "workerCached": 3,
+                "workerBufferBytes": 9623744,
+                "encodeMs": 44,
+                "replyBytes": 10808434,
+                "sentAt": 1793853309216,
+                "receiveLagMs": 1
+              },
+              "domCommitMs": 1,
+              "domMaxSliceMs": 26
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 203.99999999999727,
+              "transferMs": 20,
+              "bufferBytes": 9539904,
+              "sceneRequests": 5,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 11,
+              "bodyMs": 0,
+              "parseMs": 6,
+              "decodeMs": 2,
+              "regionsMs": 3,
+              "readingsAndBoundsMs": 243
+            },
+            {
+              "code": "24",
+              "headersMs": 33,
+              "bodyMs": 152,
+              "parseMs": 54,
+              "decodeMs": 11,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 10
+            },
+            {
+              "code": "26",
+              "headersMs": 8.999999999999545,
+              "bodyMs": 14,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 60,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "28",
+              "headersMs": 73.00000000000045,
+              "bodyMs": 12.999999999999545,
+              "parseMs": 13,
+              "decodeMs": 2.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 122,
+              "parseMs": 54,
+              "decodeMs": 9,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "47",
+              "headersMs": 55,
+              "bodyMs": 135,
+              "parseMs": 55,
+              "decodeMs": 5,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "29",
+              "headersMs": 16.99999999999909,
+              "bodyMs": 1,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "24",
+              "headersMs": 175.9999999999991,
+              "bodyMs": 14,
+              "parseMs": 43,
+              "decodeMs": 4,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "26",
+              "headersMs": 258,
+              "bodyMs": 2,
+              "parseMs": 13,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            }
+          ],
+          "worker": null,
+          "nodes": 920,
+          "labels": 322,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 54809210,
+          "maxFrameGapMs": 137,
+          "p95FrameGapMs": 106,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 3,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 41,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5.000000000000455,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 11,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 40,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 46,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4.0000000000009095,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 98,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 29,
+              "bytes": 1377465
+            }
+          ]
+        },
+        {
+          "name": "overview",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 11414721,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "26"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 10
+            },
+            "labelPasses": 14,
+            "lastLabelMs": 13,
+            "firstLabelMs": 77,
+            "maxLabelMs": 77,
+            "shapePasses": 7,
+            "lastShapeMs": 2,
+            "maxShapeMs": 53,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 17,
+              "worker": {
+                "buildMs": 14,
+                "overviewMs": 6,
+                "sortMs": 1,
+                "edgeBufferBytes": 103674,
+                "segments": 3917,
+                "fillPoints": 5240,
+                "pathChars": 171857,
+                "workerCached": 3,
+                "workerBufferBytes": 9623744,
+                "encodeMs": 1,
+                "replyBytes": 171857,
+                "sentAt": 1793853309813,
+                "receiveLagMs": 0
+              },
+              "domCommitMs": 0,
+              "domMaxSliceMs": 2
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 203.99999999999727,
+              "transferMs": 20,
+              "bufferBytes": 9539904,
+              "sceneRequests": 6,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 11,
+              "bodyMs": 0,
+              "parseMs": 6,
+              "decodeMs": 2,
+              "regionsMs": 3,
+              "readingsAndBoundsMs": 243
+            },
+            {
+              "code": "24",
+              "headersMs": 33,
+              "bodyMs": 152,
+              "parseMs": 54,
+              "decodeMs": 11,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 10
+            },
+            {
+              "code": "26",
+              "headersMs": 8.999999999999545,
+              "bodyMs": 14,
+              "parseMs": 5,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "27",
+              "headersMs": 60,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 3
+            },
+            {
+              "code": "28",
+              "headersMs": 73.00000000000045,
+              "bodyMs": 12.999999999999545,
+              "parseMs": 13,
+              "decodeMs": 2.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 31,
+              "bodyMs": 122,
+              "parseMs": 54,
+              "decodeMs": 9,
+              "regionsMs": 10,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "47",
+              "headersMs": 55,
+              "bodyMs": 135,
+              "parseMs": 55,
+              "decodeMs": 5,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "29",
+              "headersMs": 16.99999999999909,
+              "bodyMs": 1,
+              "parseMs": 1,
+              "decodeMs": 1,
+              "regionsMs": 0,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "24",
+              "headersMs": 175.9999999999991,
+              "bodyMs": 14,
+              "parseMs": 43,
+              "decodeMs": 4,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "26",
+              "headersMs": 258,
+              "bodyMs": 2,
+              "parseMs": 13,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2
+            }
+          ],
+          "worker": null,
+          "nodes": 378,
+          "labels": 124,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 54809210,
+          "maxFrameGapMs": 264,
+          "p95FrameGapMs": 254,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 3,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 41,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5.000000000000455,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 11,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 19,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 40,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 46,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4.0000000000009095,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 98,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 29,
+              "bytes": 1377465
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "rows": [
+        {
+          "name": "initial",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 1824,
+            "count": 1905,
+            "store": {
+              "cached": 0,
+              "cachedBytes": 0,
+              "byteCapacity": 12582912,
+              "keys": [],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 0,
+              "loads": 0
+            },
+            "labelPasses": 3,
+            "lastLabelMs": 5.000000000000227,
+            "firstLabelMs": 68,
+            "maxLabelMs": 68,
+            "shapePasses": 1,
+            "lastShapeMs": 31,
+            "maxShapeMs": 31,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "prepareAndFillsMs": 4,
+              "dedupMs": 6,
+              "borderPathMs": 21,
+              "domCommitMs": 0,
+              "segments": 3917
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 0,
+              "packWallMs": 0,
+              "transferMs": 0,
+              "bufferBytes": 0,
+              "sceneRequests": 0,
+              "coalesced": 0,
+              "cached": 0,
+              "pending": 0
+            }
+          },
+          "loads": [],
+          "worker": null,
+          "nodes": 295,
+          "labels": 43,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 888013,
+          "maxFrameGapMs": 737,
+          "p95FrameGapMs": 110,
+          "longTasks": [],
+          "resources": []
+        },
+        {
+          "name": "mie",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 10228816,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "25"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 3
+            },
+            "labelPasses": 5,
+            "lastLabelMs": 7,
+            "firstLabelMs": 68,
+            "maxLabelMs": 68,
+            "shapePasses": 2,
+            "lastShapeMs": 41,
+            "maxShapeMs": 41,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 621,
+              "worker": {
+                "buildMs": 465,
+                "overviewMs": 4,
+                "sortMs": 69,
+                "edgeBufferBytes": 5633026,
+                "segments": 251227,
+                "fillPoints": 277213,
+                "pathChars": 9665891,
+                "workerCached": 3,
+                "workerBufferBytes": 8604096,
+                "encodeMs": 38,
+                "replyBytes": 9665891,
+                "sentAt": 1793853313683,
+                "receiveLagMs": 1
+              },
+              "domCommitMs": 0,
+              "domMaxSliceMs": 23
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 46,
+              "transferMs": 16,
+              "bufferBytes": 8520256,
+              "sceneRequests": 1,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 24,
+              "bodyMs": 1,
+              "parseMs": 4,
+              "decodeMs": 3,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 116
+            },
+            {
+              "code": "24",
+              "headersMs": 150,
+              "bodyMs": 18,
+              "parseMs": 38.000000000000455,
+              "decodeMs": 4.999999999999545,
+              "regionsMs": 7.000000000000455,
+              "readingsAndBoundsMs": 6.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 117,
+              "bodyMs": 0,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            }
+          ],
+          "worker": null,
+          "nodes": 781,
+          "labels": 295,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 11286545,
+          "maxFrameGapMs": 147,
+          "p95FrameGapMs": 96,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 65,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 2,
+              "bytes": 191560
+            }
+          ]
+        },
+        {
+          "name": "kobe",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 5362727,
+              "byteCapacity": 12582912,
+              "keys": [
+                "27",
+                "28",
+                "26"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 6
+            },
+            "labelPasses": 7,
+            "lastLabelMs": 7,
+            "firstLabelMs": 68,
+            "maxLabelMs": 68,
+            "shapePasses": 3,
+            "lastShapeMs": 16,
+            "maxShapeMs": 41,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 213,
+              "worker": {
+                "buildMs": 95,
+                "overviewMs": 4,
+                "sortMs": 9,
+                "edgeBufferBytes": 874302,
+                "segments": 32596,
+                "fillPoints": 62987,
+                "pathChars": 1736608,
+                "workerCached": 3,
+                "workerBufferBytes": 4737264,
+                "encodeMs": 6,
+                "replyBytes": 1736608,
+                "sentAt": 1793853314981,
+                "receiveLagMs": 0
+              },
+              "domCommitMs": 1,
+              "domMaxSliceMs": 6
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 130,
+              "transferMs": 16,
+              "bufferBytes": 4653424,
+              "sceneRequests": 2,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 24,
+              "bodyMs": 1,
+              "parseMs": 4,
+              "decodeMs": 3,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 116
+            },
+            {
+              "code": "24",
+              "headersMs": 150,
+              "bodyMs": 18,
+              "parseMs": 38.000000000000455,
+              "decodeMs": 4.999999999999545,
+              "regionsMs": 7.000000000000455,
+              "readingsAndBoundsMs": 6.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 117,
+              "bodyMs": 0,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 92,
+              "bodyMs": 6.000000000000455,
+              "parseMs": 16.999999999999545,
+              "decodeMs": 1,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "26",
+              "headersMs": 73,
+              "bodyMs": 2.0000000000004547,
+              "parseMs": 6.999999999999545,
+              "decodeMs": 1.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            }
+          ],
+          "worker": null,
+          "nodes": 690,
+          "labels": 72,
+          "viewBox": "438.4130404302352 353.80811061538463 13.28125 10.9375",
+          "decodedBytes": 16649272,
+          "maxFrameGapMs": 100,
+          "p95FrameGapMs": 84,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 65,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 2,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 6,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 17,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5,
+              "bytes": 1377465
+            }
+          ]
+        },
+        {
+          "name": "sapporo",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 11548216,
+              "byteCapacity": 12582912,
+              "keys": [
+                "01"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 7
+            },
+            "labelPasses": 9,
+            "lastLabelMs": 28,
+            "firstLabelMs": 68,
+            "maxLabelMs": 68,
+            "shapePasses": 4,
+            "lastShapeMs": 17.00000000000091,
+            "maxShapeMs": 41,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 330.0000000000009,
+              "worker": {
+                "buildMs": 195,
+                "overviewMs": 2,
+                "sortMs": 21,
+                "edgeBufferBytes": 1723588,
+                "segments": 72563,
+                "fillPoints": 110674,
+                "pathChars": 3324069,
+                "workerCached": 1,
+                "workerBufferBytes": 10140160,
+                "encodeMs": 18,
+                "replyBytes": 3324069,
+                "sentAt": 1793853315936,
+                "receiveLagMs": 0
+              },
+              "domCommitMs": 1.0000000000009095,
+              "domMaxSliceMs": 8
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 192,
+              "transferMs": 20,
+              "bufferBytes": 10056320,
+              "sceneRequests": 3,
+              "coalesced": 0,
+              "cached": 1,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 24,
+              "bodyMs": 1,
+              "parseMs": 4,
+              "decodeMs": 3,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 116
+            },
+            {
+              "code": "24",
+              "headersMs": 150,
+              "bodyMs": 18,
+              "parseMs": 38.000000000000455,
+              "decodeMs": 4.999999999999545,
+              "regionsMs": 7.000000000000455,
+              "readingsAndBoundsMs": 6.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 117,
+              "bodyMs": 0,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 92,
+              "bodyMs": 6.000000000000455,
+              "parseMs": 16.999999999999545,
+              "decodeMs": 1,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "26",
+              "headersMs": 73,
+              "bodyMs": 2.0000000000004547,
+              "parseMs": 6.999999999999545,
+              "decodeMs": 1.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 179,
+              "bodyMs": 18,
+              "parseMs": 52,
+              "decodeMs": 4,
+              "regionsMs": 7,
+              "readingsAndBoundsMs": 6
+            }
+          ],
+          "worker": null,
+          "nodes": 543,
+          "labels": 45,
+          "viewBox": "580.2503992330433 99.67026968325786 26.5625 21.875",
+          "decodedBytes": 28197488,
+          "maxFrameGapMs": 166,
+          "p95FrameGapMs": 91,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 65,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 2,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 6,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 17,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 64,
+              "bytes": 11548216
+            }
+          ]
+        },
+        {
+          "name": "okinawa",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 1,
+              "cachedBytes": 15388561,
+              "byteCapacity": 12582912,
+              "keys": [
+                "47"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 8
+            },
+            "labelPasses": 11,
+            "lastLabelMs": 6,
+            "firstLabelMs": 68,
+            "maxLabelMs": 68,
+            "shapePasses": 5,
+            "lastShapeMs": 36,
+            "maxShapeMs": 41,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 502.9999999999991,
+              "worker": {
+                "buildMs": 342.0000000000009,
+                "overviewMs": 2,
+                "sortMs": 49,
+                "edgeBufferBytes": 3236103,
+                "segments": 141454,
+                "fillPoints": 153839,
+                "pathChars": 5368091,
+                "workerCached": 1,
+                "workerBufferBytes": 12543312,
+                "encodeMs": 27.99999999999909,
+                "replyBytes": 5368091,
+                "sentAt": 1793853317159,
+                "receiveLagMs": 7
+              },
+              "domCommitMs": 0,
+              "domMaxSliceMs": 20
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 237.9999999999991,
+              "transferMs": 27,
+              "bufferBytes": 12459472,
+              "sceneRequests": 4,
+              "coalesced": 0,
+              "cached": 1,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 24,
+              "bodyMs": 1,
+              "parseMs": 4,
+              "decodeMs": 3,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 116
+            },
+            {
+              "code": "24",
+              "headersMs": 150,
+              "bodyMs": 18,
+              "parseMs": 38.000000000000455,
+              "decodeMs": 4.999999999999545,
+              "regionsMs": 7.000000000000455,
+              "readingsAndBoundsMs": 6.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 117,
+              "bodyMs": 0,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 92,
+              "bodyMs": 6.000000000000455,
+              "parseMs": 16.999999999999545,
+              "decodeMs": 1,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "26",
+              "headersMs": 73,
+              "bodyMs": 2.0000000000004547,
+              "parseMs": 6.999999999999545,
+              "decodeMs": 1.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 179,
+              "bodyMs": 18,
+              "parseMs": 52,
+              "decodeMs": 4,
+              "regionsMs": 7,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "47",
+              "headersMs": 33,
+              "bodyMs": 242,
+              "parseMs": 81,
+              "decodeMs": 3,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 5
+            }
+          ],
+          "worker": null,
+          "nodes": 339,
+          "labels": 21,
+          "viewBox": "252.72212681599552 609.2930576923076 13.28125 10.9375",
+          "decodedBytes": 43586049,
+          "maxFrameGapMs": 189,
+          "p95FrameGapMs": 65,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 65,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 2,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 6,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 17,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 64,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 67,
+              "bytes": 15388561
+            }
+          ]
+        },
+        {
+          "name": "mie-revisit",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 10228816,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "25"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 11
+            },
+            "labelPasses": 13,
+            "lastLabelMs": 7,
+            "firstLabelMs": 68,
+            "maxLabelMs": 68,
+            "shapePasses": 6,
+            "lastShapeMs": 59,
+            "maxShapeMs": 59,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 865,
+              "worker": {
+                "buildMs": 642.0000000000009,
+                "overviewMs": 3,
+                "sortMs": 88,
+                "edgeBufferBytes": 5633026,
+                "segments": 251227,
+                "fillPoints": 277213,
+                "pathChars": 9665891,
+                "workerCached": 3,
+                "workerBufferBytes": 8604096,
+                "encodeMs": 50.99999999999909,
+                "replyBytes": 9665891,
+                "sentAt": 1793853318629,
+                "receiveLagMs": 1
+              },
+              "domCommitMs": 1.9999999999990905,
+              "domMaxSliceMs": 22.00000000000091
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 364.9999999999991,
+              "transferMs": 27,
+              "bufferBytes": 8520256,
+              "sceneRequests": 5,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 24,
+              "bodyMs": 1,
+              "parseMs": 4,
+              "decodeMs": 3,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 116
+            },
+            {
+              "code": "24",
+              "headersMs": 150,
+              "bodyMs": 18,
+              "parseMs": 38.000000000000455,
+              "decodeMs": 4.999999999999545,
+              "regionsMs": 7.000000000000455,
+              "readingsAndBoundsMs": 6.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 117,
+              "bodyMs": 0,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 92,
+              "bodyMs": 6.000000000000455,
+              "parseMs": 16.999999999999545,
+              "decodeMs": 1,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "26",
+              "headersMs": 73,
+              "bodyMs": 2.0000000000004547,
+              "parseMs": 6.999999999999545,
+              "decodeMs": 1.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 179,
+              "bodyMs": 18,
+              "parseMs": 52,
+              "decodeMs": 4,
+              "regionsMs": 7,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "47",
+              "headersMs": 33,
+              "bodyMs": 242,
+              "parseMs": 81,
+              "decodeMs": 3,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 5
+            },
+            {
+              "code": "29",
+              "headersMs": 34,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 6.0000000000009095,
+              "readingsAndBoundsMs": 0.9999999999990905
+            },
+            {
+              "code": "24",
+              "headersMs": 159.0000000000009,
+              "bodyMs": 13.99999999999909,
+              "parseMs": 57,
+              "decodeMs": 4,
+              "regionsMs": 5.0000000000009095,
+              "readingsAndBoundsMs": 2.9999999999990905
+            },
+            {
+              "code": "25",
+              "headersMs": 231,
+              "bodyMs": 1.0000000000009095,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 0.9999999999990905,
+              "readingsAndBoundsMs": 1
+            }
+          ],
+          "worker": null,
+          "nodes": 781,
+          "labels": 295,
+          "viewBox": "445.28717049514785 340.2287473936651 53.125 43.75",
+          "decodedBytes": 53814865,
+          "maxFrameGapMs": 116,
+          "p95FrameGapMs": 80,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 65,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 2,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 6,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 17,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 64,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 67,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 11.00000000000091,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 71,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 3,
+              "bytes": 191560
+            }
+          ]
+        },
+        {
+          "name": "overview",
+          "heap": null,
+          "workerHeap": null,
+          "snapshot": {
+            "selected": "",
+            "selectionError": "",
+            "detailError": "",
+            "measureEntries": 3648,
+            "count": 1905,
+            "store": {
+              "cached": 3,
+              "cachedBytes": 10228816,
+              "byteCapacity": 12582912,
+              "keys": [
+                "29",
+                "24",
+                "25"
+              ],
+              "active": 0,
+              "queued": 0,
+              "peakConcurrent": 2,
+              "loads": 11
+            },
+            "labelPasses": 14,
+            "lastLabelMs": 8.000000000001819,
+            "firstLabelMs": 68,
+            "maxLabelMs": 68,
+            "shapePasses": 7,
+            "lastShapeMs": 9,
+            "maxShapeMs": 59,
+            "indexBytes": 659025,
+            "shapePhases": {
+              "backend": "worker",
+              "wallMs": 32,
+              "worker": {
+                "buildMs": 16,
+                "overviewMs": 3,
+                "sortMs": 1.000000000001819,
+                "edgeBufferBytes": 103674,
+                "segments": 3917,
+                "fillPoints": 5240,
+                "pathChars": 171857,
+                "workerCached": 3,
+                "workerBufferBytes": 8604096,
+                "encodeMs": 1.0000000000009095,
+                "replyBytes": 171857,
+                "sentAt": 1793853319257,
+                "receiveLagMs": 0
+              },
+              "domCommitMs": 0,
+              "domMaxSliceMs": 9
+            },
+            "shapePending": false,
+            "scheduled": false,
+            "activePointers": 0,
+            "geometry": {
+              "backend": "worker",
+              "packMaxSliceMs": 5,
+              "packWallMs": 364.9999999999991,
+              "transferMs": 27,
+              "bufferBytes": 8520256,
+              "sceneRequests": 6,
+              "coalesced": 0,
+              "cached": 3,
+              "pending": 0
+            }
+          },
+          "loads": [
+            {
+              "code": "29",
+              "headersMs": 24,
+              "bodyMs": 1,
+              "parseMs": 4,
+              "decodeMs": 3,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 116
+            },
+            {
+              "code": "24",
+              "headersMs": 150,
+              "bodyMs": 18,
+              "parseMs": 38.000000000000455,
+              "decodeMs": 4.999999999999545,
+              "regionsMs": 7.000000000000455,
+              "readingsAndBoundsMs": 6.999999999999545
+            },
+            {
+              "code": "25",
+              "headersMs": 117,
+              "bodyMs": 0,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 1
+            },
+            {
+              "code": "27",
+              "headersMs": 85,
+              "bodyMs": 0,
+              "parseMs": 2,
+              "decodeMs": 0,
+              "regionsMs": 1,
+              "readingsAndBoundsMs": 2.0000000000004547
+            },
+            {
+              "code": "28",
+              "headersMs": 92,
+              "bodyMs": 6.000000000000455,
+              "parseMs": 16.999999999999545,
+              "decodeMs": 1,
+              "regionsMs": 2,
+              "readingsAndBoundsMs": 4
+            },
+            {
+              "code": "26",
+              "headersMs": 73,
+              "bodyMs": 2.0000000000004547,
+              "parseMs": 6.999999999999545,
+              "decodeMs": 1.0000000000004547,
+              "regionsMs": 0.9999999999995453,
+              "readingsAndBoundsMs": 2
+            },
+            {
+              "code": "01",
+              "headersMs": 179,
+              "bodyMs": 18,
+              "parseMs": 52,
+              "decodeMs": 4,
+              "regionsMs": 7,
+              "readingsAndBoundsMs": 6
+            },
+            {
+              "code": "47",
+              "headersMs": 33,
+              "bodyMs": 242,
+              "parseMs": 81,
+              "decodeMs": 3,
+              "regionsMs": 6,
+              "readingsAndBoundsMs": 5
+            },
+            {
+              "code": "29",
+              "headersMs": 34,
+              "bodyMs": 0,
+              "parseMs": 1,
+              "decodeMs": 0,
+              "regionsMs": 6.0000000000009095,
+              "readingsAndBoundsMs": 0.9999999999990905
+            },
+            {
+              "code": "24",
+              "headersMs": 159.0000000000009,
+              "bodyMs": 13.99999999999909,
+              "parseMs": 57,
+              "decodeMs": 4,
+              "regionsMs": 5.0000000000009095,
+              "readingsAndBoundsMs": 2.9999999999990905
+            },
+            {
+              "code": "25",
+              "headersMs": 231,
+              "bodyMs": 1.0000000000009095,
+              "parseMs": 0,
+              "decodeMs": 0,
+              "regionsMs": 0.9999999999990905,
+              "readingsAndBoundsMs": 1
+            }
+          ],
+          "worker": null,
+          "nodes": 295,
+          "labels": 43,
+          "viewBox": "0 0 850 700",
+          "decodedBytes": 53814865,
+          "maxFrameGapMs": 289,
+          "p95FrameGapMs": 72,
+          "longTasks": [],
+          "resources": [
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 4,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 65,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 2,
+              "bytes": 191560
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/27.topojson",
+              "ms": 6,
+              "bytes": 442574
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/28.topojson",
+              "ms": 17,
+              "bytes": 3542688
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/26.topojson",
+              "ms": 5,
+              "bytes": 1377465
+            },
+            {
+              "path": "/v2/data/national/2026-common/hokkaido-prefecture-20m/01.topojson",
+              "ms": 64,
+              "bytes": 11548216
+            },
+            {
+              "path": "/v2/data/national/2026-common/kyushu-prefecture-20m/47.topojson",
+              "ms": 67,
+              "bytes": 15388561
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/29.topojson",
+              "ms": 11.00000000000091,
+              "bytes": 277481
+            },
+            {
+              "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+              "ms": 71,
+              "bytes": 9759775
+            },
+            {
+              "path": "/v2/data/national/2026-common/national-2026-pilot/25.topojson",
+              "ms": 3,
+              "bytes": 191560
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
