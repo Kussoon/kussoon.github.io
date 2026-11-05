@@ -2595,3 +2595,5 @@ PR本文、全245件の変更ファイル一覧（計1027エントリ）、API�
 |[#260](https://github.com/Kussoon/kussoon.github.io/pull/260)|県内周辺名初期ON・段別件数|県内全件生成の検査はS41/S42の全国段階表示を検出しない。layout呼出し不変だけでは不十分|[scope検査](../tests/pilot-label-scope.browser.cjs)|
 
 今回調査した追加仕様は、廃止を示す根拠がないものを勝手にCへ移さずB/要確認に残す。既存40の操作・zoom・状態・性能の検証範囲は[正式仕様の再評価行列](v2-national-current-spec-20261104.md#behavior-reassessment)へ明記。採用/修正は別PRで判断し、本監査PRでは適用しない。
+
+補完成果のPR: [#261](https://github.com/Kussoon/kussoon.github.io/pull/261)。監査資料・観測専用スクリプト・証拠のみ。既存テスト/CI/本体/データを修正せず、24失敗と未確認範囲をそのまま記録する。自動マージしない。
