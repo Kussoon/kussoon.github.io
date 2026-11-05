@@ -52,6 +52,7 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 .map-toolbar button[aria-pressed="true"]{background:#245879;color:#fff}
 .map-toolbar button:focus-visible{outline:3px solid #e5aa38;outline-offset:1px}
 .office-popup{position:absolute;left:8px;right:auto;bottom:8px;z-index:5;width:min(350px,calc(100% - 128px));max-height:min(calc(100% - 16px),var(--toolbar-height,183px));box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid #86aac2;border-radius:10px;padding:9px;box-shadow:0 5px 18px #2345}
+.office-popup.multi-office{max-height:calc(100% - 16px)}
 .office-popup[hidden]{display:none}
 .popup-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-shrink:0;margin-bottom:4px}
 .popup-head strong{min-width:0;overflow-wrap:anywhere}.popup-close{min-width:44px;min-height:44px;font-size:20px;flex-shrink:0}
@@ -180,7 +181,7 @@ async function getOffices(code){
  if(!officeCache.has(code))officeCache.set(code,fetch('/v2/data/offices/'+code+'.json?v=6').then(r=>{if(!r.ok)throw Error('office HTTP '+r.status);return r.json();}).then(d=>{if(d.schemaVersion!==2||d.prefecture!==code||!d.regions||!d.offices)throw Error('office schema');return d;}).catch(e=>{console.warn(e);officeCache.delete(code);return null;}));
  return officeCache.get(code);
 }
-// Keep the popup within the four map controls' measured height; content can scroll.
+// PR #244 applies to single-office popups; PR #259 exempts multi-office popups.
 function syncPopupToolbarHeight(){
  const toolbar=$('mapToolbar'),frame=$('mapFrame');
  if(toolbar&&frame)frame.style.setProperty('--toolbar-height',Math.ceil(toolbar.getBoundingClientRect().height)+'px');
@@ -192,6 +193,8 @@ function renderOfficePopup(){
  if(!entry||!code||quizSession||dismissedPopupCode===code){popup.hidden=true;return;}
  const r=entry.regions.find(x=>x.code===code);if(!r){popup.hidden=true;return;}
  const result=KussoonOfficeDirectory.resolve(entry.offices,code);
+ // PR #259: Two offices must not be capped at the four-button toolbar height.
+ popup.classList.toggle('multi-office',result.offices.length>1);
  const selectedName=r.fullName||r.name;
  $('popupName').textContent=result.parentRegion&&result.offices.length>1?selectedName+'・'+result.parentRegion.name:selectedName;
  KussoonOfficeDirectory.render(document,$('popupActions'),result,r.fullName||r.name);
