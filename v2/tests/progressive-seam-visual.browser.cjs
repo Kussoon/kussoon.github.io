@@ -36,8 +36,20 @@ async function capture(engine,backend,spot){
   const state=await app.page.evaluate(()=>{
    const s=window.KussoonV2ProgressivePreview.controller.snapshot(),svg=document.querySelector('#map');
    const border=svg.querySelector('.borders'),paths=[...svg.querySelectorAll('[data-national-shapes] path')];
+   const d=border?.getAttribute('d')||'',edges=new Set(),command=/([ML])(-?[0-9.]+),(-?[0-9.]+)/g;
+   let part,last=null,unique=0;
+   while((part=command.exec(d))){
+    const pt=part[2]+','+part[3];
+    if(part[1]==='L'&&last&&last!==pt){
+     const edge=last<pt?last+'|'+pt:pt+'|'+last;
+     edges.add(edge);
+    }
+    last=pt;
+   }
+   const hash=arr=>{let h=2166136261;for(const str of arr)for(let i=0;i<str.length;i++){h=Math.imul(h^str.charCodeAt(i),16777619);}return (h>>>0).toString(16);};
    return {
-    borderD:border?.getAttribute('d')||'',
+    edgeCount:edges.size,edgeHash:hash([...edges].sort()),
+    borderD:d,
     borderPathCount:svg.querySelectorAll('.borders').length,
     loadedPrefectures:paths.filter(p=>p.classList.contains('prefecture-focus')).map(p=>p.dataset.pref),
     detailRegionCount:paths.filter(p=>p.classList.contains('land')).length,
@@ -72,6 +84,9 @@ async function capture(engine,backend,spot){
   assert.equal(worker.mapBox,main.mapBox,'equal camera');
   assert.equal(worker.borderPathCount,main.borderPathCount,'same single-path contract');
   assert.deepEqual(worker.loadedPrefectures,main.loadedPrefectures,'same detail vs overview selection');
+  const sameEdges=worker.edgeCount===main.edgeCount&&worker.edgeHash===main.edgeHash;
+  row.sameBorderGeometry=sameEdges;
+  console.log('S39 '+spot.name+' Worker edges='+worker.edgeCount+'/'+worker.edgeHash+' Main edges='+main.edgeCount+'/'+main.edgeHash+' '+(sameEdges?'SAME':'DIFFERENT'));
   console.log('S39 '+spot.name+' detailed='+worker.loadedPrefectures.join(',')+' workerLabels='+worker.visibleLabels+' mainLabels='+main.visibleLabels);
  }
  if(output)await fs.writeFile(path.join(output,'seam-worker-main-comparison.json'),JSON.stringify(report,null,2));
