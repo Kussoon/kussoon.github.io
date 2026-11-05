@@ -5,7 +5,8 @@
 (function(global){
 'use strict';
 function init(options){
- const {svg,width=850,height=700,minZoom=1,maxZoom=128,onZoomChange}=options||{};
+ const {svg,width=850,height=700,minZoom=1,maxZoom:initialMaxZoom=128,onZoomChange}=options||{};
+ let maxZoom=initialMaxZoom;
  if(!svg)throw Error('SVG map element is required');
  let box={x:0,y:0,w:width,h:height};
  // Bounds are expressed in projected SVG map units, not geographic degrees.
@@ -29,7 +30,7 @@ function init(options){
   const y=clamp(next.y,contentBounds.minY-marginY,contentBounds.maxY+marginY-h);
   return {x,y,w,h};
  }
- function setView(next){box=bound(next);emit();}
+ function setView(next){if(![next.x,next.y,next.w].every(Number.isFinite)||next.w<=0)throw Error('Invalid viewport');box=bound(next);emit();}
  function point(e){
   // Production-sized maps may have SVG meet letterboxing. Map the actual
   // screen transform back to viewport fractions instead of stretching its
@@ -145,7 +146,7 @@ function init(options){
    throw Error('Invalid projected map bounds');
   contentBounds={minX,minY,maxX,maxY};
  }
- return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,setContentBounds,destroy(){
+ return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,setContentBounds,setView,setMaxZoom(value){if(!Number.isFinite(value)||value<minZoom)throw Error('Invalid maximum zoom');if(value===maxZoom)return;maxZoom=value;setView(view());},destroy(){
   svg.removeEventListener('pointerdown',pointerDown);
   svg.removeEventListener('pointermove',pointerMove);
   svg.removeEventListener('pointerup',pointerUp);
