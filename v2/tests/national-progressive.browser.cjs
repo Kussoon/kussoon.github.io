@@ -69,5 +69,11 @@ async function clickLabel(page,code){
   const retained=await race.page.getAttribute('#map','viewBox');await race.page.waitForTimeout(800);assert.equal(await race.page.getAttribute('#map','data-national-selection'),'13101');assert.equal(await race.page.getAttribute('#map','viewBox'),retained);assert((await race.page.textContent('#popupName')).includes('千代田'));
   assert.deepEqual(race.errors,[]);report.delayedFailureRetry={attempts,state:await race.page.evaluate(()=>KussoonV2ProgressivePreview.controller.snapshot())};
  }finally{await race.close();}
+ const unavailable=await start({query:'progressive=1'});
+ try{await unavailable.page.route('**/label-index.json',r=>r.fulfill({status:503,body:'unavailable'}));await unavailable.open();await unavailable.page.fill('#placeSearch','28101');await unavailable.page.locator('#searchResults button').first().click();await unavailable.page.locator('#map .chosen[data-code="28101"]').waitFor();assert.equal(await unavailable.page.locator('#officePopup a').count(),6);assert.equal(await unavailable.page.inputValue('#pref'),'28');assert.deepEqual(unavailable.errors,[]);report.indexFailureFallback='existing prefecture search and six links remain available';}
+ finally{await unavailable.close();}
+ const delayedIndex=await start({query:'progressive=1'});
+ try{await delayedIndex.page.route('**/label-index.json',async r=>{await new Promise(resolve=>setTimeout(resolve,600));await r.continue();});await delayedIndex.open();await delayedIndex.page.evaluate(()=>{void KussoonV2ProgressivePreview.controller.focus('28101')});await delayedIndex.pref('16');await delayedIndex.page.waitForTimeout(700);assert.equal(await delayedIndex.page.inputValue('#pref'),'16');assert.equal(await delayedIndex.page.locator('#map .land').count(),15);assert.deepEqual(delayedIndex.errors,[]);report.cancelledPendingSearch='late nationwide index cannot undo explicit prefecture navigation';}
+ finally{await delayedIndex.close();}
  if(out)await fs.writeFile(path.join(out,'progressive-report.json'),JSON.stringify(report,null,2));console.log('PASS native nationwide zoom/culling/selection/3+6 links, actual SVG 1905 targets × 2 viewports, reading rows, LRU, existing prefecture/search');
 })().catch(e=>{console.error(e);process.exitCode=1;});
