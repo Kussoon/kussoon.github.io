@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: '22'
       - run: node v2/tests/run-national-contracts.cjs
+      - run: node v2/tests/progressive-county-labels.test.cjs
       - name: Confirm tests did not rewrite data or URL audit
         run: git diff --exit-code -- v2/data v2/audit/*.json
   real-browser:
