@@ -8,13 +8,13 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   page.on('pageerror',e=>errors.push(e.message));
   try{
    await app.open();
-   await page.goto(page.url().replace('official-2026-nationwide-pilot.html','map.html'));
+   await page.goto(page.url().replace('/v2/national/official-2026-nationwide-pilot.html','/maps/national-municipalities.html'));
    await page.waitForFunction(()=>window.KussoonV2PrefectureColors&&window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:90000});
-   assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/v2/national/map.html');
+   assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/maps/national-municipalities.html');
    assert.equal(await page.locator('meta[name="robots"]').count(),0,'public map should be indexable');
    const publicLinks=await page.evaluate(async()=>{
      const [home,local]=await Promise.all([fetch('/index.html').then(x=>x.text()),fetch('/local/index.html').then(x=>x.text())]);
-     return {home:home.includes('href="/v2/national/map.html"'),local:local.includes('href="/v2/national/map.html"')};
+     return {home:home.includes('href="/maps/national-municipalities.html"'),local:local.includes('href="/maps/national-municipalities.html"')};
    });
    assert(publicLinks.home&&publicLinks.local,'new public map must be linked from home and local');
    assert(await page.locator('footer .kussoon-footer-links-unified a').count()>=7,'public footer present');
