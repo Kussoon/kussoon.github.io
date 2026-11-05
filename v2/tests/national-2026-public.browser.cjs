@@ -13,7 +13,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/v2/national/map.html');
    assert.equal(await page.locator('meta[name="robots"]').count(),0,'public map should be indexable');
    const publicLinks=await page.evaluate(async()=>{
-     const [home,local]=await Promise.all([fetch('/').then(x=>x.text()),fetch('/local/').then(x=>x.text())]);
+     const [home,local]=await Promise.all([fetch('/index.html').then(x=>x.text()),fetch('/local/index.html').then(x=>x.text())]);
      return {home:home.includes('href="/v2/national/map.html"'),local:local.includes('href="/v2/national/map.html"')};
    });
    assert(publicLinks.home&&publicLinks.local,'new public map must be linked from home and local');
