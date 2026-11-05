@@ -1,0 +1,2808 @@
+{
+  "scope": "Controlled test-only CSS; same canvas, centre 136.5E/34.7N and pixels per 0.1 degree longitude, readings OFF. 2021/2026 geometry and latitude projection differ; no pixel-perfect equivalence claimed.",
+  "sourceRef": "e02df9c57d42aaa5d2727bd95eb360b53bc7658c",
+  "runs": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "rows": [
+        {
+          "requested": 80,
+          "matchedCenter": true,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 93.19216149254389,
+            "view": {
+              "x": 389.4749755859375,
+              "y": 386.1436767578125,
+              "w": 23.736488342285156,
+              "h": 20.501991271972656
+            },
+            "map": {
+              "x": 107,
+              "y": 256.84375,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 37.91630788100626,
+            "unitY": 34.14302497323459,
+            "centerOffsetPx": {
+              "x": 0.0005735683602291173,
+              "y": -0.00013970814829813917
+            },
+            "generated": 1902,
+            "inViewport": 33,
+            "completeBoxes": 23,
+            "fontPx": {
+              "min": 12.937279919858204,
+              "median": 12.937279919858204,
+              "max": 12.937279919858204
+            },
+            "names": [
+              "半田市",
+              "碧南市",
+              "常滑市",
+              "知多市",
+              "高浜市",
+              "知多郡阿久比町",
+              "知多郡東浦町",
+              "知多郡南知多町",
+              "知多郡美浜町",
+              "知多郡武豊町",
+              "津市",
+              "四日市市",
+              "伊勢市",
+              "松阪市",
+              "鈴鹿市",
+              "名張市",
+              "亀山市",
+              "鳥羽市",
+              "伊賀市",
+              "多気郡多気町",
+              "多気郡明和町",
+              "度会郡玉城町",
+              "度会郡度会町",
+              "栗東市",
+              "甲賀市",
+              "湖南市",
+              "蒲生郡日野町",
+              "相楽郡南山城村",
+              "宇陀市",
+              "山辺郡山添村",
+              "宇陀郡曽爾村",
+              "宇陀郡御杖村",
+              "吉野郡東吉野村"
+            ]
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 93.19216171016684,
+            "view": {
+              "x": 291.17999267578125,
+              "y": 126.35099029541016,
+              "w": 323.3578186035156,
+              "h": 266.294677734375
+            },
+            "map": {
+              "x": 101,
+              "y": -0.40625,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 2.6211564043959026,
+            "unitY": 2.6211564043959026,
+            "centerOffsetPx": {
+              "x": -0.00006656137613901439,
+              "y": 0.000007407002434023593
+            },
+            "generated": 29,
+            "inViewport": 16,
+            "completeBoxes": 12,
+            "fontPx": {
+              "min": 36.69618966154263,
+              "median": 36.69618966154263,
+              "max": 36.69618966154263
+            },
+            "names": [
+              "津市",
+              "四日市市",
+              "伊勢市",
+              "松阪市",
+              "鈴鹿市",
+              "名張市",
+              "亀山市",
+              "鳥羽市",
+              "志摩市",
+              "伊賀市",
+              "菰野町",
+              "川越町",
+              "多気町",
+              "明和町",
+              "玉城町",
+              "度会町"
+            ]
+          }
+        },
+        {
+          "requested": 160,
+          "matchedCenter": true,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 161.0360555385259,
+            "view": {
+              "x": 394.4750061035156,
+              "y": 390.46429443359375,
+              "w": 13.736393928527832,
+              "h": 11.864578247070312
+            },
+            "map": {
+              "x": 107,
+              "y": 256.84375,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 65.51937900753371,
+            "unitY": 58.99914732939193,
+            "centerOffsetPx": {
+              "x": 0.000009284926788011992,
+              "y": 0.11219342832402754
+            },
+            "generated": 1902,
+            "inViewport": 3,
+            "completeBoxes": 2,
+            "fontPx": {
+              "min": 12.942727234144893,
+              "median": 12.942727234144893,
+              "max": 12.942727234144893
+            },
+            "names": [
+              "津市",
+              "亀山市",
+              "多気郡明和町"
+            ]
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 161.03605897850105,
+            "view": {
+              "x": 359.2947082519531,
+              "y": 182.51077270507812,
+              "w": 187.1283721923828,
+              "h": 154.105712890625
+            },
+            "map": {
+              "x": 101,
+              "y": -0.40625,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 4.529358366457177,
+            "unitY": 4.529358366457177,
+            "centerOffsetPx": {
+              "x": -0.00014957432245011931,
+              "y": 0.29577984534012214
+            },
+            "generated": 29,
+            "inViewport": 7,
+            "completeBoxes": 3,
+            "fontPx": {
+              "min": 63.411017130400474,
+              "median": 63.411017130400474,
+              "max": 63.411017130400474
+            },
+            "names": [
+              "津市",
+              "伊勢市",
+              "松阪市",
+              "鈴鹿市",
+              "亀山市",
+              "伊賀市",
+              "明和町"
+            ]
+          }
+        },
+        {
+          "requested": 320,
+          "matchedCenter": true,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 333.92437644581554,
+            "view": {
+              "x": 398.031005859375,
+              "y": 393.537109375,
+              "w": 6.624418258666992,
+              "h": 5.721729278564453
+            },
+            "map": {
+              "x": 107,
+              "y": 256.84375,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 135.86098655870558,
+            "unitY": 122.34063618186873,
+            "centerOffsetPx": {
+              "x": 0.0014735003598692626,
+              "y": 0.40226768693826626
+            },
+            "generated": 1902,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 333.92437486031366,
+            "view": {
+              "x": 407.7372741699219,
+              "y": 222.4510955810547,
+              "w": 90.24323272705078,
+              "h": 74.31795501708984
+            },
+            "map": {
+              "x": 101,
+              "y": -0.40625,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 9.392077592009775,
+            "unitY": 9.392077592009775,
+            "centerOffsetPx": {
+              "x": -0.0003459852504929834,
+              "y": 1.0495341734679466
+            },
+            "generated": 29,
+            "inViewport": 1,
+            "completeBoxes": 0,
+            "fontPx": {
+              "min": 131.48908628813686,
+              "median": 131.48908628813686,
+              "max": 131.48908628813686
+            },
+            "names": [
+              "津市"
+            ]
+          }
+        },
+        {
+          "requested": 640,
+          "matchedCenter": true,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 692.425565577827,
+            "view": {
+              "x": 399.7458801269531,
+              "y": 395.0189514160156,
+              "w": 3.194646120071411,
+              "h": 2.759321689605713
+            },
+            "map": {
+              "x": 107,
+              "y": 256.84375,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 281.7213444536016,
+            "unitY": 253.68553533894953,
+            "centerOffsetPx": {
+              "x": 0.00007007875349566943,
+              "y": 0.9955935528755023
+            },
+            "generated": 1902,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 692.4255485666152,
+            "view": {
+              "x": 431.0988464355469,
+              "y": 241.71243286132812,
+              "w": 43.52008056640625,
+              "h": 35.840065002441406
+            },
+            "map": {
+              "x": 101,
+              "y": -0.40625,
+              "width": 900,
+              "height": 700
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 19.47541110632619,
+            "unitY": 19.47541110632619,
+            "centerOffsetPx": {
+              "x": -0.0007917277765034027,
+              "y": 2.6124126729364514
+            },
+            "generated": 29,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          }
+        }
+      ],
+      "resources": {
+        "before": {
+          "legacy": {
+            "heap": {
+              "usedSize": 22292776,
+              "totalSize": 102879232,
+              "embedderHeapUsedSize": 16318248,
+              "backingStorageSize": 240445
+            },
+            "domNodes": 8246,
+            "resources": [
+              {
+                "path": "/common/site-footer.js",
+                "bytes": 2206
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/common/js/national-boundaries.js",
+                "bytes": 6395
+              },
+              {
+                "path": "/v2/common/js/administrative-labels.js",
+                "bytes": 2260
+              },
+              {
+                "path": "/v2/common/js/national-readings.js",
+                "bytes": 3977
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/national/density-labels.js",
+                "bytes": 8111
+              },
+              {
+                "path": "/v2/national/centered-labels.js",
+                "bytes": 17649
+              },
+              {
+                "path": "/v2/national/density-app.js",
+                "bytes": 44459
+              },
+              {
+                "path": "/v2/data/national/catalog.json",
+                "bytes": 9516
+              },
+              {
+                "path": "/v2/data/national/municipality-readings.json",
+                "bytes": 170667
+              },
+              {
+                "path": "/v2/data/national/county-readings.json",
+                "bytes": 20054
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2021/01.topojson",
+                "bytes": 140114
+              },
+              {
+                "path": "/v2/data/national/2021/02.topojson",
+                "bytes": 26769
+              },
+              {
+                "path": "/v2/data/national/2021/03.topojson",
+                "bytes": 84452
+              },
+              {
+                "path": "/v2/data/national/2021/04.topojson",
+                "bytes": 74325
+              },
+              {
+                "path": "/v2/data/national/2021/05.topojson",
+                "bytes": 21637
+              },
+              {
+                "path": "/v2/data/national/2021/06.topojson",
+                "bytes": 16825
+              },
+              {
+                "path": "/v2/data/national/2021/07.topojson",
+                "bytes": 32450
+              },
+              {
+                "path": "/v2/data/national/2021/08.topojson",
+                "bytes": 17675
+              },
+              {
+                "path": "/v2/data/national/2021/09.topojson",
+                "bytes": 11491
+              },
+              {
+                "path": "/v2/data/national/2021/10.topojson",
+                "bytes": 14807
+              },
+              {
+                "path": "/v2/data/national/2021/11.topojson",
+                "bytes": 22848
+              },
+              {
+                "path": "/v2/data/national/2021/12.topojson",
+                "bytes": 28601
+              },
+              {
+                "path": "/v2/data/national/2021/13.topojson",
+                "bytes": 53320
+              },
+              {
+                "path": "/v2/data/national/2021/14.topojson",
+                "bytes": 27878
+              },
+              {
+                "path": "/v2/data/national/2021/15.topojson",
+                "bytes": 29027
+              },
+              {
+                "path": "/v2/data/national/2021/16.topojson",
+                "bytes": 8103
+              },
+              {
+                "path": "/v2/data/national/2021/17.topojson",
+                "bytes": 16898
+              },
+              {
+                "path": "/v2/data/national/2021/18.topojson",
+                "bytes": 20140
+              },
+              {
+                "path": "/v2/data/national/2021/19.topojson",
+                "bytes": 12943
+              },
+              {
+                "path": "/v2/data/national/2021/20.topojson",
+                "bytes": 31521
+              },
+              {
+                "path": "/v2/data/national/2021/21.topojson",
+                "bytes": 16003
+              },
+              {
+                "path": "/v2/data/national/2021/22.topojson",
+                "bytes": 47550
+              },
+              {
+                "path": "/v2/data/national/2021/23.topojson",
+                "bytes": 31190
+              },
+              {
+                "path": "/v2/data/national/2021/24.topojson",
+                "bytes": 57966
+              },
+              {
+                "path": "/v2/data/national/2021/25.topojson",
+                "bytes": 7009
+              },
+              {
+                "path": "/v2/data/national/2021/26.topojson",
+                "bytes": 20464
+              },
+              {
+                "path": "/v2/data/national/2021/27.topojson",
+                "bytes": 22692
+              },
+              {
+                "path": "/v2/data/national/2021/28.topojson",
+                "bytes": 36849
+              },
+              {
+                "path": "/v2/data/national/2021/29.topojson",
+                "bytes": 13667
+              },
+              {
+                "path": "/v2/data/national/2021/30.topojson",
+                "bytes": 35646
+              },
+              {
+                "path": "/v2/data/national/2021/31.topojson",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/national/2021/32.topojson",
+                "bytes": 32096
+              },
+              {
+                "path": "/v2/data/national/2021/33.topojson",
+                "bytes": 18823
+              },
+              {
+                "path": "/v2/data/national/2021/34.topojson",
+                "bytes": 27342
+              },
+              {
+                "path": "/v2/data/national/2021/35.topojson",
+                "bytes": 31615
+              },
+              {
+                "path": "/v2/data/national/2021/36.topojson",
+                "bytes": 27843
+              },
+              {
+                "path": "/v2/data/national/2021/37.topojson",
+                "bytes": 20098
+              },
+              {
+                "path": "/v2/data/national/2021/38.topojson",
+                "bytes": 42550
+              },
+              {
+                "path": "/v2/data/national/2021/39.topojson",
+                "bytes": 31939
+              },
+              {
+                "path": "/v2/data/national/2021/40.topojson",
+                "bytes": 38617
+              },
+              {
+                "path": "/v2/data/national/2021/41.topojson",
+                "bytes": 11181
+              },
+              {
+                "path": "/v2/data/national/2021/42.topojson",
+                "bytes": 95989
+              },
+              {
+                "path": "/v2/data/national/2021/43.topojson",
+                "bytes": 29883
+              },
+              {
+                "path": "/v2/data/national/2021/44.topojson",
+                "bytes": 20097
+              },
+              {
+                "path": "/v2/data/national/2021/45.topojson",
+                "bytes": 28531
+              },
+              {
+                "path": "/v2/data/national/2021/46.topojson",
+                "bytes": 73632
+              },
+              {
+                "path": "/v2/data/national/2021/47.topojson",
+                "bytes": 53797
+              },
+              {
+                "path": "/v2/data/offices/01.json",
+                "bytes": 98908
+              },
+              {
+                "path": "/v2/data/offices/02.json",
+                "bytes": 21342
+              },
+              {
+                "path": "/v2/data/offices/03.json",
+                "bytes": 17435
+              },
+              {
+                "path": "/v2/data/offices/04.json",
+                "bytes": 21535
+              },
+              {
+                "path": "/v2/data/offices/05.json",
+                "bytes": 13311
+              },
+              {
+                "path": "/v2/data/offices/06.json",
+                "bytes": 18469
+              },
+              {
+                "path": "/v2/data/offices/07.json",
+                "bytes": 31559
+              },
+              {
+                "path": "/v2/data/offices/08.json",
+                "bytes": 22929
+              },
+              {
+                "path": "/v2/data/offices/09.json",
+                "bytes": 13271
+              },
+              {
+                "path": "/v2/data/offices/10.json",
+                "bytes": 18293
+              },
+              {
+                "path": "/v2/data/offices/11.json",
+                "bytes": 38880
+              },
+              {
+                "path": "/v2/data/offices/12.json",
+                "bytes": 31383
+              },
+              {
+                "path": "/v2/data/offices/13.json",
+                "bytes": 32005
+              },
+              {
+                "path": "/v2/data/offices/14.json",
+                "bytes": 34899
+              },
+              {
+                "path": "/v2/data/offices/15.json",
+                "bytes": 20486
+              },
+              {
+                "path": "/v2/data/offices/16.json",
+                "bytes": 7901
+              },
+              {
+                "path": "/v2/data/offices/17.json",
+                "bytes": 10038
+              },
+              {
+                "path": "/v2/data/offices/18.json",
+                "bytes": 8947
+              },
+              {
+                "path": "/v2/data/offices/19.json",
+                "bytes": 14451
+              },
+              {
+                "path": "/v2/data/offices/20.json",
+                "bytes": 40159
+              },
+              {
+                "path": "/v2/data/offices/21.json",
+                "bytes": 21644
+              },
+              {
+                "path": "/v2/data/offices/22.json",
+                "bytes": 22030
+              },
+              {
+                "path": "/v2/data/offices/23.json",
+                "bytes": 37787
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              },
+              {
+                "path": "/v2/data/offices/25.json",
+                "bytes": 13716
+              },
+              {
+                "path": "/v2/data/offices/26.json",
+                "bytes": 28633
+              },
+              {
+                "path": "/v2/data/offices/27.json",
+                "bytes": 58897
+              },
+              {
+                "path": "/v2/data/offices/28.json",
+                "bytes": 37889
+              },
+              {
+                "path": "/v2/data/offices/29.json",
+                "bytes": 28238
+              },
+              {
+                "path": "/v2/data/offices/30.json",
+                "bytes": 15085
+              },
+              {
+                "path": "/v2/data/offices/31.json",
+                "bytes": 9979
+              },
+              {
+                "path": "/v2/data/offices/32.json",
+                "bytes": 9989
+              },
+              {
+                "path": "/v2/data/offices/33.json",
+                "bytes": 16386
+              },
+              {
+                "path": "/v2/data/offices/34.json",
+                "bytes": 16983
+              },
+              {
+                "path": "/v2/data/offices/35.json",
+                "bytes": 9926
+              },
+              {
+                "path": "/v2/data/offices/36.json",
+                "bytes": 12825
+              },
+              {
+                "path": "/v2/data/offices/37.json",
+                "bytes": 9086
+              },
+              {
+                "path": "/v2/data/offices/38.json",
+                "bytes": 10510
+              },
+              {
+                "path": "/v2/data/offices/39.json",
+                "bytes": 17747
+              },
+              {
+                "path": "/v2/data/offices/40.json",
+                "bytes": 39548
+              },
+              {
+                "path": "/v2/data/offices/41.json",
+                "bytes": 10571
+              },
+              {
+                "path": "/v2/data/offices/42.json",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/offices/43.json",
+                "bytes": 26440
+              },
+              {
+                "path": "/v2/data/offices/44.json",
+                "bytes": 9429
+              },
+              {
+                "path": "/v2/data/offices/45.json",
+                "bytes": 13746
+              },
+              {
+                "path": "/v2/data/offices/46.json",
+                "bytes": 23037
+              },
+              {
+                "path": "/v2/data/offices/47.json",
+                "bytes": 21821
+              },
+              {
+                "path": "/v2/data/national/office-reference-points.json",
+                "bytes": 1351
+              }
+            ]
+          },
+          "pilot": {
+            "heap": {
+              "usedSize": 21802988,
+              "totalSize": 88678400,
+              "embedderHeapUsedSize": 2475304,
+              "backingStorageSize": 19637272
+            },
+            "domNodes": 391,
+            "resources": [
+              {
+                "path": "/v2/shared/municipality-renderer.js",
+                "bytes": 3638
+              },
+              {
+                "path": "/v2/shared/map-viewport.js",
+                "bytes": 7624
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/shared/established-label-adapter.js",
+                "bytes": 5288
+              },
+              {
+                "path": "/v2/shared/place-labels.js",
+                "bytes": 5604
+              },
+              {
+                "path": "/v2/shared/reading-bridge.js",
+                "bytes": 4550
+              },
+              {
+                "path": "/v2/shared/municipality-quiz.js",
+                "bytes": 2747
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+                "bytes": 5114
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/prefectures-overview.geojson",
+                "bytes": 94361
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+                "bytes": 9759775
+              },
+              {
+                "path": "/v2/data/national/municipality-readings-all-source.json",
+                "bytes": 169716
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              }
+            ]
+          }
+        },
+        "after": {
+          "legacy": {
+            "heap": {
+              "usedSize": 41755536,
+              "totalSize": 91824128,
+              "embedderHeapUsedSize": 188613608,
+              "backingStorageSize": 248597
+            },
+            "domNodes": 8246,
+            "resources": [
+              {
+                "path": "/common/site-footer.js",
+                "bytes": 2206
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/common/js/national-boundaries.js",
+                "bytes": 6395
+              },
+              {
+                "path": "/v2/common/js/administrative-labels.js",
+                "bytes": 2260
+              },
+              {
+                "path": "/v2/common/js/national-readings.js",
+                "bytes": 3977
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/national/density-labels.js",
+                "bytes": 8111
+              },
+              {
+                "path": "/v2/national/centered-labels.js",
+                "bytes": 17649
+              },
+              {
+                "path": "/v2/national/density-app.js",
+                "bytes": 44459
+              },
+              {
+                "path": "/v2/data/national/catalog.json",
+                "bytes": 9516
+              },
+              {
+                "path": "/v2/data/national/municipality-readings.json",
+                "bytes": 170667
+              },
+              {
+                "path": "/v2/data/national/county-readings.json",
+                "bytes": 20054
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2021/01.topojson",
+                "bytes": 140114
+              },
+              {
+                "path": "/v2/data/national/2021/02.topojson",
+                "bytes": 26769
+              },
+              {
+                "path": "/v2/data/national/2021/03.topojson",
+                "bytes": 84452
+              },
+              {
+                "path": "/v2/data/national/2021/04.topojson",
+                "bytes": 74325
+              },
+              {
+                "path": "/v2/data/national/2021/05.topojson",
+                "bytes": 21637
+              },
+              {
+                "path": "/v2/data/national/2021/06.topojson",
+                "bytes": 16825
+              },
+              {
+                "path": "/v2/data/national/2021/07.topojson",
+                "bytes": 32450
+              },
+              {
+                "path": "/v2/data/national/2021/08.topojson",
+                "bytes": 17675
+              },
+              {
+                "path": "/v2/data/national/2021/09.topojson",
+                "bytes": 11491
+              },
+              {
+                "path": "/v2/data/national/2021/10.topojson",
+                "bytes": 14807
+              },
+              {
+                "path": "/v2/data/national/2021/11.topojson",
+                "bytes": 22848
+              },
+              {
+                "path": "/v2/data/national/2021/12.topojson",
+                "bytes": 28601
+              },
+              {
+                "path": "/v2/data/national/2021/13.topojson",
+                "bytes": 53320
+              },
+              {
+                "path": "/v2/data/national/2021/14.topojson",
+                "bytes": 27878
+              },
+              {
+                "path": "/v2/data/national/2021/15.topojson",
+                "bytes": 29027
+              },
+              {
+                "path": "/v2/data/national/2021/16.topojson",
+                "bytes": 8103
+              },
+              {
+                "path": "/v2/data/national/2021/17.topojson",
+                "bytes": 16898
+              },
+              {
+                "path": "/v2/data/national/2021/18.topojson",
+                "bytes": 20140
+              },
+              {
+                "path": "/v2/data/national/2021/19.topojson",
+                "bytes": 12943
+              },
+              {
+                "path": "/v2/data/national/2021/20.topojson",
+                "bytes": 31521
+              },
+              {
+                "path": "/v2/data/national/2021/21.topojson",
+                "bytes": 16003
+              },
+              {
+                "path": "/v2/data/national/2021/22.topojson",
+                "bytes": 47550
+              },
+              {
+                "path": "/v2/data/national/2021/23.topojson",
+                "bytes": 31190
+              },
+              {
+                "path": "/v2/data/national/2021/24.topojson",
+                "bytes": 57966
+              },
+              {
+                "path": "/v2/data/national/2021/25.topojson",
+                "bytes": 7009
+              },
+              {
+                "path": "/v2/data/national/2021/26.topojson",
+                "bytes": 20464
+              },
+              {
+                "path": "/v2/data/national/2021/27.topojson",
+                "bytes": 22692
+              },
+              {
+                "path": "/v2/data/national/2021/28.topojson",
+                "bytes": 36849
+              },
+              {
+                "path": "/v2/data/national/2021/29.topojson",
+                "bytes": 13667
+              },
+              {
+                "path": "/v2/data/national/2021/30.topojson",
+                "bytes": 35646
+              },
+              {
+                "path": "/v2/data/national/2021/31.topojson",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/national/2021/32.topojson",
+                "bytes": 32096
+              },
+              {
+                "path": "/v2/data/national/2021/33.topojson",
+                "bytes": 18823
+              },
+              {
+                "path": "/v2/data/national/2021/34.topojson",
+                "bytes": 27342
+              },
+              {
+                "path": "/v2/data/national/2021/35.topojson",
+                "bytes": 31615
+              },
+              {
+                "path": "/v2/data/national/2021/36.topojson",
+                "bytes": 27843
+              },
+              {
+                "path": "/v2/data/national/2021/37.topojson",
+                "bytes": 20098
+              },
+              {
+                "path": "/v2/data/national/2021/38.topojson",
+                "bytes": 42550
+              },
+              {
+                "path": "/v2/data/national/2021/39.topojson",
+                "bytes": 31939
+              },
+              {
+                "path": "/v2/data/national/2021/40.topojson",
+                "bytes": 38617
+              },
+              {
+                "path": "/v2/data/national/2021/41.topojson",
+                "bytes": 11181
+              },
+              {
+                "path": "/v2/data/national/2021/42.topojson",
+                "bytes": 95989
+              },
+              {
+                "path": "/v2/data/national/2021/43.topojson",
+                "bytes": 29883
+              },
+              {
+                "path": "/v2/data/national/2021/44.topojson",
+                "bytes": 20097
+              },
+              {
+                "path": "/v2/data/national/2021/45.topojson",
+                "bytes": 28531
+              },
+              {
+                "path": "/v2/data/national/2021/46.topojson",
+                "bytes": 73632
+              },
+              {
+                "path": "/v2/data/national/2021/47.topojson",
+                "bytes": 53797
+              },
+              {
+                "path": "/v2/data/offices/01.json",
+                "bytes": 98908
+              },
+              {
+                "path": "/v2/data/offices/02.json",
+                "bytes": 21342
+              },
+              {
+                "path": "/v2/data/offices/03.json",
+                "bytes": 17435
+              },
+              {
+                "path": "/v2/data/offices/04.json",
+                "bytes": 21535
+              },
+              {
+                "path": "/v2/data/offices/05.json",
+                "bytes": 13311
+              },
+              {
+                "path": "/v2/data/offices/06.json",
+                "bytes": 18469
+              },
+              {
+                "path": "/v2/data/offices/07.json",
+                "bytes": 31559
+              },
+              {
+                "path": "/v2/data/offices/08.json",
+                "bytes": 22929
+              },
+              {
+                "path": "/v2/data/offices/09.json",
+                "bytes": 13271
+              },
+              {
+                "path": "/v2/data/offices/10.json",
+                "bytes": 18293
+              },
+              {
+                "path": "/v2/data/offices/11.json",
+                "bytes": 38880
+              },
+              {
+                "path": "/v2/data/offices/12.json",
+                "bytes": 31383
+              },
+              {
+                "path": "/v2/data/offices/13.json",
+                "bytes": 32005
+              },
+              {
+                "path": "/v2/data/offices/14.json",
+                "bytes": 34899
+              },
+              {
+                "path": "/v2/data/offices/15.json",
+                "bytes": 20486
+              },
+              {
+                "path": "/v2/data/offices/16.json",
+                "bytes": 7901
+              },
+              {
+                "path": "/v2/data/offices/17.json",
+                "bytes": 10038
+              },
+              {
+                "path": "/v2/data/offices/18.json",
+                "bytes": 8947
+              },
+              {
+                "path": "/v2/data/offices/19.json",
+                "bytes": 14451
+              },
+              {
+                "path": "/v2/data/offices/20.json",
+                "bytes": 40159
+              },
+              {
+                "path": "/v2/data/offices/21.json",
+                "bytes": 21644
+              },
+              {
+                "path": "/v2/data/offices/22.json",
+                "bytes": 22030
+              },
+              {
+                "path": "/v2/data/offices/23.json",
+                "bytes": 37787
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              },
+              {
+                "path": "/v2/data/offices/25.json",
+                "bytes": 13716
+              },
+              {
+                "path": "/v2/data/offices/26.json",
+                "bytes": 28633
+              },
+              {
+                "path": "/v2/data/offices/27.json",
+                "bytes": 58897
+              },
+              {
+                "path": "/v2/data/offices/28.json",
+                "bytes": 37889
+              },
+              {
+                "path": "/v2/data/offices/29.json",
+                "bytes": 28238
+              },
+              {
+                "path": "/v2/data/offices/30.json",
+                "bytes": 15085
+              },
+              {
+                "path": "/v2/data/offices/31.json",
+                "bytes": 9979
+              },
+              {
+                "path": "/v2/data/offices/32.json",
+                "bytes": 9989
+              },
+              {
+                "path": "/v2/data/offices/33.json",
+                "bytes": 16386
+              },
+              {
+                "path": "/v2/data/offices/34.json",
+                "bytes": 16983
+              },
+              {
+                "path": "/v2/data/offices/35.json",
+                "bytes": 9926
+              },
+              {
+                "path": "/v2/data/offices/36.json",
+                "bytes": 12825
+              },
+              {
+                "path": "/v2/data/offices/37.json",
+                "bytes": 9086
+              },
+              {
+                "path": "/v2/data/offices/38.json",
+                "bytes": 10510
+              },
+              {
+                "path": "/v2/data/offices/39.json",
+                "bytes": 17747
+              },
+              {
+                "path": "/v2/data/offices/40.json",
+                "bytes": 39548
+              },
+              {
+                "path": "/v2/data/offices/41.json",
+                "bytes": 10571
+              },
+              {
+                "path": "/v2/data/offices/42.json",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/offices/43.json",
+                "bytes": 26440
+              },
+              {
+                "path": "/v2/data/offices/44.json",
+                "bytes": 9429
+              },
+              {
+                "path": "/v2/data/offices/45.json",
+                "bytes": 13746
+              },
+              {
+                "path": "/v2/data/offices/46.json",
+                "bytes": 23037
+              },
+              {
+                "path": "/v2/data/offices/47.json",
+                "bytes": 21821
+              },
+              {
+                "path": "/v2/data/national/office-reference-points.json",
+                "bytes": 1351
+              }
+            ]
+          },
+          "pilot": {
+            "heap": {
+              "usedSize": 23361316,
+              "totalSize": 88678400,
+              "embedderHeapUsedSize": 3982296,
+              "backingStorageSize": 19639041
+            },
+            "domNodes": 391,
+            "resources": [
+              {
+                "path": "/v2/shared/municipality-renderer.js",
+                "bytes": 3638
+              },
+              {
+                "path": "/v2/shared/map-viewport.js",
+                "bytes": 7624
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/shared/established-label-adapter.js",
+                "bytes": 5288
+              },
+              {
+                "path": "/v2/shared/place-labels.js",
+                "bytes": 5604
+              },
+              {
+                "path": "/v2/shared/reading-bridge.js",
+                "bytes": 4550
+              },
+              {
+                "path": "/v2/shared/municipality-quiz.js",
+                "bytes": 2747
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+                "bytes": 5114
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/prefectures-overview.geojson",
+                "bytes": 94361
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+                "bytes": 9759775
+              },
+              {
+                "path": "/v2/data/national/municipality-readings-all-source.json",
+                "bytes": 169716
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rows": [
+        {
+          "requested": 80,
+          "matchedCenter": false,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 84.65093973726435,
+            "view": {
+              "x": 409.2120056152344,
+              "y": 391.4510803222656,
+              "w": 11.44699478149414,
+              "h": 9.887147903442383
+            },
+            "map": {
+              "x": 20,
+              "y": 269.796875,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 31.099865667409034,
+            "unitY": 58.05516470529908,
+            "centerOffsetPx": {
+              "x": 420.34388290036554,
+              "y": -0.0006872615123030833
+            },
+            "generated": 1902,
+            "inViewport": 14,
+            "completeBoxes": 12,
+            "fontPx": {
+              "min": 12.988561874804423,
+              "median": 12.988561874804423,
+              "max": 12.988561874804423
+            },
+            "names": [
+              "半田市",
+              "碧南市",
+              "安城市",
+              "西尾市",
+              "常滑市",
+              "知多市",
+              "高浜市",
+              "知多郡阿久比町",
+              "知多郡東浦町",
+              "知多郡南知多町",
+              "知多郡美浜町",
+              "知多郡武豊町",
+              "額田郡幸田町",
+              "鳥羽市"
+            ]
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 84.65093183358903,
+            "view": {
+              "x": 378.51800537109375,
+              "y": 198.27638244628906,
+              "w": 148.68185424804688,
+              "h": 122.44387817382812
+            },
+            "map": {
+              "x": 17,
+              "y": 0.390625,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 2.3809226875084537,
+            "unitY": 2.3809226875084537,
+            "centerOffsetPx": {
+              "x": 0.000012199088284453122,
+              "y": -0.000011436861243596412
+            },
+            "generated": 29,
+            "inViewport": 9,
+            "completeBoxes": 8,
+            "fontPx": {
+              "min": 33.332917625118355,
+              "median": 33.332917625118355,
+              "max": 33.332917625118355
+            },
+            "names": [
+              "津市",
+              "四日市市",
+              "伊勢市",
+              "松阪市",
+              "鈴鹿市",
+              "亀山市",
+              "多気町",
+              "明和町",
+              "玉城町"
+            ]
+          }
+        },
+        {
+          "requested": 160,
+          "matchedCenter": true,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 175.5321891071585,
+            "view": {
+              "x": 398.6504821777344,
+              "y": 394.0106201171875,
+              "w": 5.52034854888916,
+              "h": 4.768107891082764
+            },
+            "map": {
+              "x": 20,
+              "y": 269.796875,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 64.48868161986557,
+            "unitY": 120.38318198996404,
+            "centerOffsetPx": {
+              "x": 4.32555186251636,
+              "y": -0.00015612497038189487
+            },
+            "generated": 1902,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 175.53220309071926,
+            "view": {
+              "x": 417.0077819824219,
+              "y": 229.888916015625,
+              "w": 71.7022705078125,
+              "h": 59.04893112182617
+            },
+            "map": {
+              "x": 17,
+              "y": 0.390625,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 4.937082152251079,
+            "unitY": 4.937082152251079,
+            "centerOffsetPx": {
+              "x": -0.00005003786123433795,
+              "y": -0.4193792595435859
+            },
+            "generated": 29,
+            "inViewport": 3,
+            "completeBoxes": 0,
+            "fontPx": {
+              "min": 69.1191501315151,
+              "median": 69.1191501315151,
+              "max": 69.1191501315151
+            },
+            "names": [
+              "津市",
+              "松阪市",
+              "明和町"
+            ]
+          }
+        },
+        {
+          "requested": 320,
+          "matchedCenter": true,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 363.9835345553057,
+            "view": {
+              "x": 400.0120849609375,
+              "y": 395.2449645996094,
+              "w": 2.662205219268799,
+              "h": 2.2994346618652344
+            },
+            "map": {
+              "x": 20,
+              "y": 269.796875,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 133.7237255127082,
+            "unitY": 249.6265754010979,
+            "centerOffsetPx": {
+              "x": -0.002039715597960622,
+              "y": 0.0007224618047663739
+            },
+            "generated": 1902,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 363.98350940480435,
+            "view": {
+              "x": 435.5696105957031,
+              "y": 245.1341552734375,
+              "w": 34.57864761352539,
+              "h": 28.476533889770508
+            },
+            "map": {
+              "x": 17,
+              "y": 0.390625,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 10.237531668576112,
+            "unitY": 10.237531668576112,
+            "centerOffsetPx": {
+              "x": 0.00007198038830501218,
+              "y": -1.2889473995493776
+            },
+            "generated": 29,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          }
+        },
+        {
+          "requested": 640,
+          "matchedCenter": true,
+          "legacy": {
+            "scalePxPerPointOneLongitude": 754.7562886172926,
+            "view": {
+              "x": 400.7012634277344,
+              "y": 395.84063720703125,
+              "w": 1.2838566303253174,
+              "h": 1.1089094877243042
+            },
+            "map": {
+              "x": 20,
+              "y": 269.796875,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              401.3432029099547,
+              396.39467649737367
+            ],
+            "unitX": 277.28952874573923,
+            "unitY": 517.625655073038,
+            "centerOffsetPx": {
+              "x": -0.0030791120439817954,
+              "y": 0.11455371457575755
+            },
+            "generated": 1902,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          },
+          "pilot": {
+            "scalePxPerPointOneLongitude": 754.7563075501947,
+            "view": {
+              "x": 444.5211181640625,
+              "y": 252.4862060546875,
+              "w": 16.675657272338867,
+              "h": 13.732894897460938
+            },
+            "map": {
+              "x": 17,
+              "y": 0.390625,
+              "width": 356,
+              "height": 574
+            },
+            "center": [
+              452.8589273714362,
+              259.49832633674475
+            ],
+            "unitX": 21.22854854945992,
+            "unitY": 21.22854854945992,
+            "centerOffsetPx": {
+              "x": 0.00041244513328982856,
+              "y": -3.0924228146150323
+            },
+            "generated": 29,
+            "inViewport": 0,
+            "completeBoxes": 0,
+            "fontPx": null,
+            "names": []
+          }
+        }
+      ],
+      "resources": {
+        "before": {
+          "legacy": {
+            "heap": {
+              "usedSize": 26986172,
+              "totalSize": 99471360,
+              "embedderHeapUsedSize": 23820000,
+              "backingStorageSize": 247585
+            },
+            "domNodes": 8246,
+            "resources": [
+              {
+                "path": "/common/site-footer.js",
+                "bytes": 2206
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/common/js/national-boundaries.js",
+                "bytes": 6395
+              },
+              {
+                "path": "/v2/common/js/administrative-labels.js",
+                "bytes": 2260
+              },
+              {
+                "path": "/v2/common/js/national-readings.js",
+                "bytes": 3977
+              },
+              {
+                "path": "/v2/national/density-labels.js",
+                "bytes": 8111
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/national/centered-labels.js",
+                "bytes": 17649
+              },
+              {
+                "path": "/v2/national/density-app.js",
+                "bytes": 44459
+              },
+              {
+                "path": "/v2/data/national/catalog.json",
+                "bytes": 9516
+              },
+              {
+                "path": "/v2/data/national/county-readings.json",
+                "bytes": 20054
+              },
+              {
+                "path": "/v2/data/national/municipality-readings.json",
+                "bytes": 170667
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2021/01.topojson",
+                "bytes": 140114
+              },
+              {
+                "path": "/v2/data/national/2021/02.topojson",
+                "bytes": 26769
+              },
+              {
+                "path": "/v2/data/national/2021/03.topojson",
+                "bytes": 84452
+              },
+              {
+                "path": "/v2/data/national/2021/04.topojson",
+                "bytes": 74325
+              },
+              {
+                "path": "/v2/data/national/2021/05.topojson",
+                "bytes": 21637
+              },
+              {
+                "path": "/v2/data/national/2021/06.topojson",
+                "bytes": 16825
+              },
+              {
+                "path": "/v2/data/national/2021/07.topojson",
+                "bytes": 32450
+              },
+              {
+                "path": "/v2/data/national/2021/08.topojson",
+                "bytes": 17675
+              },
+              {
+                "path": "/v2/data/national/2021/09.topojson",
+                "bytes": 11491
+              },
+              {
+                "path": "/v2/data/national/2021/10.topojson",
+                "bytes": 14807
+              },
+              {
+                "path": "/v2/data/national/2021/11.topojson",
+                "bytes": 22848
+              },
+              {
+                "path": "/v2/data/national/2021/12.topojson",
+                "bytes": 28601
+              },
+              {
+                "path": "/v2/data/national/2021/13.topojson",
+                "bytes": 53320
+              },
+              {
+                "path": "/v2/data/national/2021/14.topojson",
+                "bytes": 27878
+              },
+              {
+                "path": "/v2/data/national/2021/15.topojson",
+                "bytes": 29027
+              },
+              {
+                "path": "/v2/data/national/2021/16.topojson",
+                "bytes": 8103
+              },
+              {
+                "path": "/v2/data/national/2021/17.topojson",
+                "bytes": 16898
+              },
+              {
+                "path": "/v2/data/national/2021/18.topojson",
+                "bytes": 20140
+              },
+              {
+                "path": "/v2/data/national/2021/19.topojson",
+                "bytes": 12943
+              },
+              {
+                "path": "/v2/data/national/2021/20.topojson",
+                "bytes": 31521
+              },
+              {
+                "path": "/v2/data/national/2021/21.topojson",
+                "bytes": 16003
+              },
+              {
+                "path": "/v2/data/national/2021/22.topojson",
+                "bytes": 47550
+              },
+              {
+                "path": "/v2/data/national/2021/23.topojson",
+                "bytes": 31190
+              },
+              {
+                "path": "/v2/data/national/2021/24.topojson",
+                "bytes": 57966
+              },
+              {
+                "path": "/v2/data/national/2021/25.topojson",
+                "bytes": 7009
+              },
+              {
+                "path": "/v2/data/national/2021/26.topojson",
+                "bytes": 20464
+              },
+              {
+                "path": "/v2/data/national/2021/27.topojson",
+                "bytes": 22692
+              },
+              {
+                "path": "/v2/data/national/2021/28.topojson",
+                "bytes": 36849
+              },
+              {
+                "path": "/v2/data/national/2021/29.topojson",
+                "bytes": 13667
+              },
+              {
+                "path": "/v2/data/national/2021/30.topojson",
+                "bytes": 35646
+              },
+              {
+                "path": "/v2/data/national/2021/31.topojson",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/national/2021/32.topojson",
+                "bytes": 32096
+              },
+              {
+                "path": "/v2/data/national/2021/33.topojson",
+                "bytes": 18823
+              },
+              {
+                "path": "/v2/data/national/2021/34.topojson",
+                "bytes": 27342
+              },
+              {
+                "path": "/v2/data/national/2021/35.topojson",
+                "bytes": 31615
+              },
+              {
+                "path": "/v2/data/national/2021/36.topojson",
+                "bytes": 27843
+              },
+              {
+                "path": "/v2/data/national/2021/37.topojson",
+                "bytes": 20098
+              },
+              {
+                "path": "/v2/data/national/2021/38.topojson",
+                "bytes": 42550
+              },
+              {
+                "path": "/v2/data/national/2021/39.topojson",
+                "bytes": 31939
+              },
+              {
+                "path": "/v2/data/national/2021/40.topojson",
+                "bytes": 38617
+              },
+              {
+                "path": "/v2/data/national/2021/41.topojson",
+                "bytes": 11181
+              },
+              {
+                "path": "/v2/data/national/2021/42.topojson",
+                "bytes": 95989
+              },
+              {
+                "path": "/v2/data/national/2021/43.topojson",
+                "bytes": 29883
+              },
+              {
+                "path": "/v2/data/national/2021/44.topojson",
+                "bytes": 20097
+              },
+              {
+                "path": "/v2/data/national/2021/45.topojson",
+                "bytes": 28531
+              },
+              {
+                "path": "/v2/data/national/2021/46.topojson",
+                "bytes": 73632
+              },
+              {
+                "path": "/v2/data/national/2021/47.topojson",
+                "bytes": 53797
+              },
+              {
+                "path": "/v2/data/offices/01.json",
+                "bytes": 98908
+              },
+              {
+                "path": "/v2/data/offices/02.json",
+                "bytes": 21342
+              },
+              {
+                "path": "/v2/data/offices/03.json",
+                "bytes": 17435
+              },
+              {
+                "path": "/v2/data/offices/04.json",
+                "bytes": 21535
+              },
+              {
+                "path": "/v2/data/offices/05.json",
+                "bytes": 13311
+              },
+              {
+                "path": "/v2/data/offices/06.json",
+                "bytes": 18469
+              },
+              {
+                "path": "/v2/data/offices/07.json",
+                "bytes": 31559
+              },
+              {
+                "path": "/v2/data/offices/08.json",
+                "bytes": 22929
+              },
+              {
+                "path": "/v2/data/offices/09.json",
+                "bytes": 13271
+              },
+              {
+                "path": "/v2/data/offices/10.json",
+                "bytes": 18293
+              },
+              {
+                "path": "/v2/data/offices/11.json",
+                "bytes": 38880
+              },
+              {
+                "path": "/v2/data/offices/12.json",
+                "bytes": 31383
+              },
+              {
+                "path": "/v2/data/offices/13.json",
+                "bytes": 32005
+              },
+              {
+                "path": "/v2/data/offices/14.json",
+                "bytes": 34899
+              },
+              {
+                "path": "/v2/data/offices/15.json",
+                "bytes": 20486
+              },
+              {
+                "path": "/v2/data/offices/16.json",
+                "bytes": 7901
+              },
+              {
+                "path": "/v2/data/offices/17.json",
+                "bytes": 10038
+              },
+              {
+                "path": "/v2/data/offices/18.json",
+                "bytes": 8947
+              },
+              {
+                "path": "/v2/data/offices/19.json",
+                "bytes": 14451
+              },
+              {
+                "path": "/v2/data/offices/20.json",
+                "bytes": 40159
+              },
+              {
+                "path": "/v2/data/offices/21.json",
+                "bytes": 21644
+              },
+              {
+                "path": "/v2/data/offices/22.json",
+                "bytes": 22030
+              },
+              {
+                "path": "/v2/data/offices/23.json",
+                "bytes": 37787
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              },
+              {
+                "path": "/v2/data/offices/25.json",
+                "bytes": 13716
+              },
+              {
+                "path": "/v2/data/offices/26.json",
+                "bytes": 28633
+              },
+              {
+                "path": "/v2/data/offices/27.json",
+                "bytes": 58897
+              },
+              {
+                "path": "/v2/data/offices/28.json",
+                "bytes": 37889
+              },
+              {
+                "path": "/v2/data/offices/29.json",
+                "bytes": 28238
+              },
+              {
+                "path": "/v2/data/offices/30.json",
+                "bytes": 15085
+              },
+              {
+                "path": "/v2/data/offices/31.json",
+                "bytes": 9979
+              },
+              {
+                "path": "/v2/data/offices/32.json",
+                "bytes": 9989
+              },
+              {
+                "path": "/v2/data/offices/33.json",
+                "bytes": 16386
+              },
+              {
+                "path": "/v2/data/offices/34.json",
+                "bytes": 16983
+              },
+              {
+                "path": "/v2/data/offices/35.json",
+                "bytes": 9926
+              },
+              {
+                "path": "/v2/data/offices/36.json",
+                "bytes": 12825
+              },
+              {
+                "path": "/v2/data/offices/37.json",
+                "bytes": 9086
+              },
+              {
+                "path": "/v2/data/offices/38.json",
+                "bytes": 10510
+              },
+              {
+                "path": "/v2/data/offices/39.json",
+                "bytes": 17747
+              },
+              {
+                "path": "/v2/data/offices/40.json",
+                "bytes": 39548
+              },
+              {
+                "path": "/v2/data/offices/41.json",
+                "bytes": 10571
+              },
+              {
+                "path": "/v2/data/offices/42.json",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/offices/43.json",
+                "bytes": 26440
+              },
+              {
+                "path": "/v2/data/offices/44.json",
+                "bytes": 9429
+              },
+              {
+                "path": "/v2/data/offices/45.json",
+                "bytes": 13746
+              },
+              {
+                "path": "/v2/data/offices/46.json",
+                "bytes": 23037
+              },
+              {
+                "path": "/v2/data/offices/47.json",
+                "bytes": 21821
+              },
+              {
+                "path": "/v2/data/national/office-reference-points.json",
+                "bytes": 1351
+              }
+            ]
+          },
+          "pilot": {
+            "heap": {
+              "usedSize": 22698432,
+              "totalSize": 88678400,
+              "embedderHeapUsedSize": 2426192,
+              "backingStorageSize": 19637322
+            },
+            "domNodes": 391,
+            "resources": [
+              {
+                "path": "/v2/shared/municipality-renderer.js",
+                "bytes": 3638
+              },
+              {
+                "path": "/v2/shared/map-viewport.js",
+                "bytes": 7624
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/shared/established-label-adapter.js",
+                "bytes": 5288
+              },
+              {
+                "path": "/v2/shared/reading-bridge.js",
+                "bytes": 4550
+              },
+              {
+                "path": "/v2/shared/place-labels.js",
+                "bytes": 5604
+              },
+              {
+                "path": "/v2/shared/municipality-quiz.js",
+                "bytes": 2747
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+                "bytes": 5114
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/prefectures-overview.geojson",
+                "bytes": 94361
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+                "bytes": 9759775
+              },
+              {
+                "path": "/v2/data/national/municipality-readings-all-source.json",
+                "bytes": 169716
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              }
+            ]
+          }
+        },
+        "after": {
+          "legacy": {
+            "heap": {
+              "usedSize": 35985196,
+              "totalSize": 88416256,
+              "embedderHeapUsedSize": 369162256,
+              "backingStorageSize": 250512
+            },
+            "domNodes": 8246,
+            "resources": [
+              {
+                "path": "/common/site-footer.js",
+                "bytes": 2206
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/common/js/national-boundaries.js",
+                "bytes": 6395
+              },
+              {
+                "path": "/v2/common/js/administrative-labels.js",
+                "bytes": 2260
+              },
+              {
+                "path": "/v2/common/js/national-readings.js",
+                "bytes": 3977
+              },
+              {
+                "path": "/v2/national/density-labels.js",
+                "bytes": 8111
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/national/centered-labels.js",
+                "bytes": 17649
+              },
+              {
+                "path": "/v2/national/density-app.js",
+                "bytes": 44459
+              },
+              {
+                "path": "/v2/data/national/catalog.json",
+                "bytes": 9516
+              },
+              {
+                "path": "/v2/data/national/county-readings.json",
+                "bytes": 20054
+              },
+              {
+                "path": "/v2/data/national/municipality-readings.json",
+                "bytes": 170667
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2021/01.topojson",
+                "bytes": 140114
+              },
+              {
+                "path": "/v2/data/national/2021/02.topojson",
+                "bytes": 26769
+              },
+              {
+                "path": "/v2/data/national/2021/03.topojson",
+                "bytes": 84452
+              },
+              {
+                "path": "/v2/data/national/2021/04.topojson",
+                "bytes": 74325
+              },
+              {
+                "path": "/v2/data/national/2021/05.topojson",
+                "bytes": 21637
+              },
+              {
+                "path": "/v2/data/national/2021/06.topojson",
+                "bytes": 16825
+              },
+              {
+                "path": "/v2/data/national/2021/07.topojson",
+                "bytes": 32450
+              },
+              {
+                "path": "/v2/data/national/2021/08.topojson",
+                "bytes": 17675
+              },
+              {
+                "path": "/v2/data/national/2021/09.topojson",
+                "bytes": 11491
+              },
+              {
+                "path": "/v2/data/national/2021/10.topojson",
+                "bytes": 14807
+              },
+              {
+                "path": "/v2/data/national/2021/11.topojson",
+                "bytes": 22848
+              },
+              {
+                "path": "/v2/data/national/2021/12.topojson",
+                "bytes": 28601
+              },
+              {
+                "path": "/v2/data/national/2021/13.topojson",
+                "bytes": 53320
+              },
+              {
+                "path": "/v2/data/national/2021/14.topojson",
+                "bytes": 27878
+              },
+              {
+                "path": "/v2/data/national/2021/15.topojson",
+                "bytes": 29027
+              },
+              {
+                "path": "/v2/data/national/2021/16.topojson",
+                "bytes": 8103
+              },
+              {
+                "path": "/v2/data/national/2021/17.topojson",
+                "bytes": 16898
+              },
+              {
+                "path": "/v2/data/national/2021/18.topojson",
+                "bytes": 20140
+              },
+              {
+                "path": "/v2/data/national/2021/19.topojson",
+                "bytes": 12943
+              },
+              {
+                "path": "/v2/data/national/2021/20.topojson",
+                "bytes": 31521
+              },
+              {
+                "path": "/v2/data/national/2021/21.topojson",
+                "bytes": 16003
+              },
+              {
+                "path": "/v2/data/national/2021/22.topojson",
+                "bytes": 47550
+              },
+              {
+                "path": "/v2/data/national/2021/23.topojson",
+                "bytes": 31190
+              },
+              {
+                "path": "/v2/data/national/2021/24.topojson",
+                "bytes": 57966
+              },
+              {
+                "path": "/v2/data/national/2021/25.topojson",
+                "bytes": 7009
+              },
+              {
+                "path": "/v2/data/national/2021/26.topojson",
+                "bytes": 20464
+              },
+              {
+                "path": "/v2/data/national/2021/27.topojson",
+                "bytes": 22692
+              },
+              {
+                "path": "/v2/data/national/2021/28.topojson",
+                "bytes": 36849
+              },
+              {
+                "path": "/v2/data/national/2021/29.topojson",
+                "bytes": 13667
+              },
+              {
+                "path": "/v2/data/national/2021/30.topojson",
+                "bytes": 35646
+              },
+              {
+                "path": "/v2/data/national/2021/31.topojson",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/national/2021/32.topojson",
+                "bytes": 32096
+              },
+              {
+                "path": "/v2/data/national/2021/33.topojson",
+                "bytes": 18823
+              },
+              {
+                "path": "/v2/data/national/2021/34.topojson",
+                "bytes": 27342
+              },
+              {
+                "path": "/v2/data/national/2021/35.topojson",
+                "bytes": 31615
+              },
+              {
+                "path": "/v2/data/national/2021/36.topojson",
+                "bytes": 27843
+              },
+              {
+                "path": "/v2/data/national/2021/37.topojson",
+                "bytes": 20098
+              },
+              {
+                "path": "/v2/data/national/2021/38.topojson",
+                "bytes": 42550
+              },
+              {
+                "path": "/v2/data/national/2021/39.topojson",
+                "bytes": 31939
+              },
+              {
+                "path": "/v2/data/national/2021/40.topojson",
+                "bytes": 38617
+              },
+              {
+                "path": "/v2/data/national/2021/41.topojson",
+                "bytes": 11181
+              },
+              {
+                "path": "/v2/data/national/2021/42.topojson",
+                "bytes": 95989
+              },
+              {
+                "path": "/v2/data/national/2021/43.topojson",
+                "bytes": 29883
+              },
+              {
+                "path": "/v2/data/national/2021/44.topojson",
+                "bytes": 20097
+              },
+              {
+                "path": "/v2/data/national/2021/45.topojson",
+                "bytes": 28531
+              },
+              {
+                "path": "/v2/data/national/2021/46.topojson",
+                "bytes": 73632
+              },
+              {
+                "path": "/v2/data/national/2021/47.topojson",
+                "bytes": 53797
+              },
+              {
+                "path": "/v2/data/offices/01.json",
+                "bytes": 98908
+              },
+              {
+                "path": "/v2/data/offices/02.json",
+                "bytes": 21342
+              },
+              {
+                "path": "/v2/data/offices/03.json",
+                "bytes": 17435
+              },
+              {
+                "path": "/v2/data/offices/04.json",
+                "bytes": 21535
+              },
+              {
+                "path": "/v2/data/offices/05.json",
+                "bytes": 13311
+              },
+              {
+                "path": "/v2/data/offices/06.json",
+                "bytes": 18469
+              },
+              {
+                "path": "/v2/data/offices/07.json",
+                "bytes": 31559
+              },
+              {
+                "path": "/v2/data/offices/08.json",
+                "bytes": 22929
+              },
+              {
+                "path": "/v2/data/offices/09.json",
+                "bytes": 13271
+              },
+              {
+                "path": "/v2/data/offices/10.json",
+                "bytes": 18293
+              },
+              {
+                "path": "/v2/data/offices/11.json",
+                "bytes": 38880
+              },
+              {
+                "path": "/v2/data/offices/12.json",
+                "bytes": 31383
+              },
+              {
+                "path": "/v2/data/offices/13.json",
+                "bytes": 32005
+              },
+              {
+                "path": "/v2/data/offices/14.json",
+                "bytes": 34899
+              },
+              {
+                "path": "/v2/data/offices/15.json",
+                "bytes": 20486
+              },
+              {
+                "path": "/v2/data/offices/16.json",
+                "bytes": 7901
+              },
+              {
+                "path": "/v2/data/offices/17.json",
+                "bytes": 10038
+              },
+              {
+                "path": "/v2/data/offices/18.json",
+                "bytes": 8947
+              },
+              {
+                "path": "/v2/data/offices/19.json",
+                "bytes": 14451
+              },
+              {
+                "path": "/v2/data/offices/20.json",
+                "bytes": 40159
+              },
+              {
+                "path": "/v2/data/offices/21.json",
+                "bytes": 21644
+              },
+              {
+                "path": "/v2/data/offices/22.json",
+                "bytes": 22030
+              },
+              {
+                "path": "/v2/data/offices/23.json",
+                "bytes": 37787
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              },
+              {
+                "path": "/v2/data/offices/25.json",
+                "bytes": 13716
+              },
+              {
+                "path": "/v2/data/offices/26.json",
+                "bytes": 28633
+              },
+              {
+                "path": "/v2/data/offices/27.json",
+                "bytes": 58897
+              },
+              {
+                "path": "/v2/data/offices/28.json",
+                "bytes": 37889
+              },
+              {
+                "path": "/v2/data/offices/29.json",
+                "bytes": 28238
+              },
+              {
+                "path": "/v2/data/offices/30.json",
+                "bytes": 15085
+              },
+              {
+                "path": "/v2/data/offices/31.json",
+                "bytes": 9979
+              },
+              {
+                "path": "/v2/data/offices/32.json",
+                "bytes": 9989
+              },
+              {
+                "path": "/v2/data/offices/33.json",
+                "bytes": 16386
+              },
+              {
+                "path": "/v2/data/offices/34.json",
+                "bytes": 16983
+              },
+              {
+                "path": "/v2/data/offices/35.json",
+                "bytes": 9926
+              },
+              {
+                "path": "/v2/data/offices/36.json",
+                "bytes": 12825
+              },
+              {
+                "path": "/v2/data/offices/37.json",
+                "bytes": 9086
+              },
+              {
+                "path": "/v2/data/offices/38.json",
+                "bytes": 10510
+              },
+              {
+                "path": "/v2/data/offices/39.json",
+                "bytes": 17747
+              },
+              {
+                "path": "/v2/data/offices/40.json",
+                "bytes": 39548
+              },
+              {
+                "path": "/v2/data/offices/41.json",
+                "bytes": 10571
+              },
+              {
+                "path": "/v2/data/offices/42.json",
+                "bytes": 11139
+              },
+              {
+                "path": "/v2/data/offices/43.json",
+                "bytes": 26440
+              },
+              {
+                "path": "/v2/data/offices/44.json",
+                "bytes": 9429
+              },
+              {
+                "path": "/v2/data/offices/45.json",
+                "bytes": 13746
+              },
+              {
+                "path": "/v2/data/offices/46.json",
+                "bytes": 23037
+              },
+              {
+                "path": "/v2/data/offices/47.json",
+                "bytes": 21821
+              },
+              {
+                "path": "/v2/data/national/office-reference-points.json",
+                "bytes": 1351
+              }
+            ]
+          },
+          "pilot": {
+            "heap": {
+              "usedSize": 24329364,
+              "totalSize": 88678400,
+              "embedderHeapUsedSize": 4478088,
+              "backingStorageSize": 19639158
+            },
+            "domNodes": 391,
+            "resources": [
+              {
+                "path": "/v2/shared/municipality-renderer.js",
+                "bytes": 3638
+              },
+              {
+                "path": "/v2/shared/map-viewport.js",
+                "bytes": 7624
+              },
+              {
+                "path": "/v2/common/js/label-engine.js",
+                "bytes": 18149
+              },
+              {
+                "path": "/v2/common/js/readable-labels.js",
+                "bytes": 20007
+              },
+              {
+                "path": "/v2/common/js/collision-refinement.js",
+                "bytes": 3913
+              },
+              {
+                "path": "/v2/common/js/region-fit.js",
+                "bytes": 8847
+              },
+              {
+                "path": "/v2/shared/established-label-adapter.js",
+                "bytes": 5288
+              },
+              {
+                "path": "/v2/shared/reading-bridge.js",
+                "bytes": 4550
+              },
+              {
+                "path": "/v2/shared/place-labels.js",
+                "bytes": 5604
+              },
+              {
+                "path": "/v2/shared/municipality-quiz.js",
+                "bytes": 2747
+              },
+              {
+                "path": "/v2/common/js/office-directory.js",
+                "bytes": 3118
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+                "bytes": 5114
+              },
+              {
+                "path": "/v2/data/national/2026-common/national-2026-pilot/prefectures-overview.geojson",
+                "bytes": 94361
+              },
+              {
+                "path": "/favicon.ico",
+                "bytes": 0
+              },
+              {
+                "path": "/v2/data/national/2026-common/tokai-prefecture-20m/24.topojson",
+                "bytes": 9759775
+              },
+              {
+                "path": "/v2/data/national/municipality-readings-all-source.json",
+                "bytes": 169716
+              },
+              {
+                "path": "/v2/data/offices/24.json",
+                "bytes": 14072
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

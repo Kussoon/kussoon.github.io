@@ -12,6 +12,10 @@ async function setup(kind,viewport){
  await p.addStyleTag({content:'#map{width:'+(viewport.width===1280?900:356)+'px!important;height:'+(viewport.width===1280?700:574)+'px!important}'});await p.evaluate(()=>window.dispatchEvent(new Event('resize')));await p.waitForTimeout(220);await p.locator('#map').scrollIntoViewIfNeeded();
  return a;
 }
+async function resources(a){
+ const cdp=await a.context.newCDPSession(a.page);const heap=await cdp.send('Runtime.getHeapUsage');await cdp.detach();
+ return {heap,domNodes:await a.page.locator('*').count(),resources:await a.page.evaluate(()=>performance.getEntriesByType('resource').filter(x=>new URL(x.name).origin===location.origin).map(x=>({path:new URL(x.name).pathname,bytes:x.decodedBodySize}))) };
+}
 async function state(a,kind){return a.page.locator('#map').evaluate((svg,kind)=>{
  const project=probe.project,center=project([136.5,34.7]),east=project([136.6,34.7]),m=svg.getScreenCTM(),r=svg.getBoundingClientRect(),v=svg.viewBox.baseVal;
  const nodes=[...svg.querySelectorAll(kind==='legacy'?'.place-label':'[data-v2-labels] > g')];let count=0,full=0,fonts=[];const names=[];
@@ -32,6 +36,7 @@ async function zoom(a,kind,scale){
  for(const viewport of [{width:1280,height:1000},{width:390,height:844}]){
   const legacy=await setup('legacy',viewport),pilot=await setup('pilot',viewport),rows=[];
   try{
+   const beforeResources={legacy:await resources(legacy),pilot:await resources(pilot)};
    for(const requested of [80,160,320,640]){
     await zoom(legacy,'legacy',requested);await center(legacy,'legacy');const before=await state(legacy,'legacy');await zoom(pilot,'pilot',before.scalePxPerPointOneLongitude);await center(pilot,'pilot');const after=await state(pilot,'pilot');
     assert(Math.abs(before.scalePxPerPointOneLongitude-after.scalePxPerPointOneLongitude)<.01,'equal longitudinal screen scale: '+before.scalePxPerPointOneLongitude+' vs '+after.scalePxPerPointOneLongitude);
@@ -39,7 +44,7 @@ async function zoom(a,kind,scale){
     if([80,640].includes(requested))for(const [kind,a] of [['legacy',legacy],['pilot',pilot]])await a.page.locator('#map').screenshot({path:path.join(out,kind+'-'+viewport.width+'-scale'+requested+'.png')});
    }
    for(const a of [legacy,pilot])assert.deepEqual(a.errors,[]);
-   report.runs.push({viewport,rows});await fs.writeFile(path.join(out,'common-canvas.json'),JSON.stringify(report,null,2));
+   report.runs.push({viewport,rows,resources:{before:beforeResources,after:{legacy:await resources(legacy),pilot:await resources(pilot)}}});await fs.writeFile(path.join(out,'common-canvas.json'),JSON.stringify(report,null,2));
   }finally{await legacy.close();await pilot.close();}
  }
  console.log('RECORDED controlled measurements only: '+path.join(out,'common-canvas.json'));
