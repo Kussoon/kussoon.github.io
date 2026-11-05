@@ -31,3 +31,12 @@ test('real 2026 Mie geometry keeps the original fills and clipped boundary edge 
  const old=segments(R.pathFromArcs(P.uniqueSegments(arcs,project,clip),project,4)),next=segments(scene.border);assert.deepEqual(next.sort(),old.sort());assert.equal(new Set(next).size,next.length);assert(scene.border.length<R.pathFromArcs(P.uniqueSegments(arcs,project,clip),project,4).length,'contiguous paths compress commands without dropping edges');
  for(const item of scene.paths){const r=regions.find(x=>x.code===item.code),polys=r.polys.filter(poly=>{const b=G.boxOf(poly);return b[2]*30>=clip.x&&b[0]*30<=clip.x+clip.w&&-b[1]*30>=clip.y&&-b[3]*30<=clip.y+clip.h;});assert.equal(item.d,R.pathFromPolygons(polys,project,4));}assert(scene.paths.length>0);
 });
+test('a queued scene cannot resurrect an evicted county in the worker cache',async()=>{
+ const owners=new Map(),keys=new Set();let fake;
+ class Worker {constructor(){fake=this;this.scenes=[];}postMessage(m){if(m.type==='release'){keys.delete(m.key);return;}if(m.type==='put')keys.add(m.key);if(m.type==='scene'){this.scenes.push(m);return;}setTimeout(()=>this.onmessage({data:{id:m.id,result:{bufferBytes:0}}}),0);}terminate(){}reply(){const m=this.scenes.shift();this.onmessage({data:{id:m.id,result:{metrics:{}}}});}}
+ ctx.Worker=Worker;vm.runInContext(fs.readFileSync('v2/shared/progressive-geometry-client.js','utf8'),ctx);
+ const a=entry(),b=entry(),overview={arcs:[],regions:[]};owners.set('01',a);owners.set('02',b);const client=ctx.window.KussoonProgressiveGeometryClient.create({url:'test',ownsEntry:(k,e)=>owners.get(k)===e});
+ const first=client.scene({entries:[['01',a]],overview,selection:null,projection:[1,0,-1,0],clip:{x:0,y:0,w:1,h:1}});
+ while(!fake.scenes.length)await new Promise(r=>setTimeout(r,1));
+ const second=client.scene({entries:[['02',b]],overview,selection:null,projection:[1,0,-1,0],clip:{x:0,y:0,w:1,h:1}}),rejected=assert.rejects(second,/expired/);owners.delete('02');client.release('02');fake.reply();await first;await rejected;assert(!keys.has('02'));assert.equal(client.stats().cached,1);client.destroy();
+});

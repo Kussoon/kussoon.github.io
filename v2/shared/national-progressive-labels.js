@@ -33,7 +33,7 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
  function frame(){const r=map.getBoundingClientRect(),m=map.getScreenCTM(),inverse=m.inverse();function pt(x,y){const p=map.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(inverse);}const a=pt(r.left+1,r.top+1),b=pt(r.right-1,r.bottom-1);return {view:{x:a.x,y:a.y,w:b.x-a.x,h:b.y-a.y},width:r.width-2,height:r.height-2,ratio:Math.hypot(m.a,m.b),zoom:850/viewport.view().w};}
  function measure(text,size){const px=fontSize(850/viewport.view().w),physical=size*frameRatio,cacheKey=text+'|'+physical.toFixed(4);if(!widths.has(cacheKey)){if(widths.size>=12000)widths.clear();context.font='850 '+physical+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';widths.set(cacheKey,context.measureText(text).width);}return widths.get(cacheKey)/frameRatio;}
  let frameRatio=1,shapePending=false,sceneSequence=0,requestKey='',overviewEntry=null;
- const geometry=global.KussoonProgressiveGeometryClient&&new URLSearchParams(location.search).get('geometry')!=='main'?global.KussoonProgressiveGeometryClient.create({url:'../shared/progressive-geometry.worker.js',canWork:()=>!activePointers.size}):null;
+ const geometry=global.KussoonProgressiveGeometryClient&&new URLSearchParams(location.search).get('geometry')!=='main'?global.KussoonProgressiveGeometryClient.create({url:'../shared/progressive-geometry.worker.js',canWork:()=>!activePointers.size,ownsEntry:(key,entry)=>store.peek(key)===entry}):null;
  function refreshLabels(){
   if(!index||!isActive()||!labelLayer||disposed||activePointers.size)return null;const start=performance.now(),f=frame();frameRatio=f.ratio;
   const readings=document.getElementById('readingMode').value==='on',p=plan(ms,{...f,readings,selected,measure});

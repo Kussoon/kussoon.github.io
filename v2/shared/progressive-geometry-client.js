@@ -2,7 +2,7 @@
  * Falls back to the retained original renderer if workers are unavailable.
  */
 (function(global){'use strict';
-function create({url,canWork=()=>true}){
+function create({url,canWork=()=>true,ownsEntry=()=>true}){
  let worker=null,next=0,dead=false,busy=false,latest=null,selectionRef=null,overviewRef=null;const pending=new Map(),packed=new Map(),metrics={backend:'worker',packMaxSliceMs:0,packWallMs:0,transferMs:0,bufferBytes:0,sceneRequests:0,coalesced:0};
  try{worker=new Worker(url);}catch(e){dead=true;metrics.backend='main-fallback';}
  function fail(e){dead=true;metrics.backend='main-fallback';worker?.terminate();for(const p of pending.values())p.reject(e);pending.clear();for(const p of packed.values())p.cancelled=true;packed.clear();}
@@ -10,7 +10,7 @@ function create({url,canWork=()=>true}){
  function request(data,transfer=[]){if(dead)return Promise.reject(Error('Geometry worker unavailable'));const id=++next;return new Promise((resolve,reject)=>{pending.set(id,{resolve,reject});const t=performance.now();worker.postMessage({...data,id},transfer);metrics.transferMs=Math.max(metrics.transferMs,performance.now()-t);});}
  const yieldTask=async()=>{await new Promise(r=>setTimeout(r,0));while(!canWork()&&!dead)await new Promise(r=>setTimeout(r,32));};
  async function pack(entry){const data=await global.KussoonProgressiveGeometry.pack(entry,yieldTask);metrics.packMaxSliceMs=Math.max(metrics.packMaxSliceMs,data.metrics.maxSliceMs);metrics.packWallMs+=data.metrics.packWallMs;return data;}
- function ensure(key,entry){if(packed.get(key)?.entry===entry)return packed.get(key).promise;const token={entry,cancelled:false};token.promise=(async()=>{const data=await pack(entry);if(token.cancelled)throw Error('Geometry entry expired');const r=await request({type:'put',key,entry:data},[data.points.buffer]);metrics.bufferBytes=r.bufferBytes;return true;})();token.promise=token.promise.catch(e=>{if(packed.get(key)===token)packed.delete(key);throw e;});packed.set(key,token);return token.promise;}
+ function ensure(key,entry){if(!ownsEntry(key,entry))return Promise.reject(Error('Geometry entry expired'));if(packed.get(key)?.entry===entry)return packed.get(key).promise;const token={entry,cancelled:false};token.promise=(async()=>{const data=await pack(entry);if(token.cancelled||!ownsEntry(key,entry))throw Error('Geometry entry expired');const r=await request({type:'put',key,entry:data},[data.points.buffer]);metrics.bufferBytes=r.bufferBytes;return true;})();token.promise=token.promise.catch(e=>{if(packed.get(key)===token)packed.delete(key);throw e;});packed.set(key,token);return token.promise;}
  async function scene(input){
   if(dead)throw Error('Geometry worker unavailable');
   // One job plus one latest request, so a fast pan cannot queue old expensive scenes.
