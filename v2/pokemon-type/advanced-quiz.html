@@ -217,8 +217,8 @@ function begin(review){
 function render(){
  state.answered=false;
  const q=state.items[state.index];
- $("count").textContent=(state.index+1)+" / "+state.items.length+"問";
- $("current-score").textContent="せいかい "+state.correct+"問";
+ $("count").textContent=(state.index+1)+" / "+state.items.length+"もん";
+ $("current-score").textContent="せいかい "+state.correct+"もん";
  $("attack").replaceChildren(typeChip(q.attack));
  $("defense").replaceChildren(typeChip(q.first),typeChip(q.second));
  const answerBox=$("answers");answerBox.replaceChildren();
@@ -229,7 +229,7 @@ function render(){
   answerBox.appendChild(button);
  }
  $("feedback").hidden=true;$("next").hidden=true;
- $("next").textContent=state.index===state.items.length-1?"けっかを見る":"つぎの問題へ";
+ $("next").textContent=state.index===state.items.length-1?"けっかをみる":"つぎのもんだいへ";
 }
 function choose(mult){
  if(state.answered)return;
@@ -251,8 +251,8 @@ function next(){
  state.index++;
  if(state.index<state.items.length){render();window.scrollTo(0,0);return}
  $("play").hidden=true;$("end").hidden=false;document.body.classList.remove("playing");
- $("final").textContent=state.correct+" / "+state.items.length+"問 せいかい！";
- $("message").textContent=state.correct===state.items.length?"すごい！ ぜんもんせいかい！":"よくがんばりました！ まちがえた問題をふくしゅうしよう。";
+ $("final").textContent=state.correct+" / "+state.items.length+"もん せいかい！";
+ $("message").textContent=state.correct===state.items.length?"すごい！ ぜんもんせいかい！":"よくがんばりました！ まちがえたもんだいをふくしゅうしよう。";
  refreshMistakes();window.scrollTo(0,0);
 }
 $("start").addEventListener("click",()=>begin(false));
