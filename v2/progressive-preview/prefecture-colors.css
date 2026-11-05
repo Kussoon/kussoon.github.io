@@ -29,19 +29,22 @@
  }
 }
 
-/* Public nationwide map: two solid high-contrast colours, no fade. */
+/* Public nationwide map: switch instantly every 0.5s between white
+ * and each prefecture's original colour, without fading or border changes.
+ * PR #259's popup layout and all map geometry are unaffected.
+ */
 .colored-national.two-tone-selection #map path.land.chosen {
   animation:kussoon-selected-area-two-tone 1s step-end infinite;
   opacity:1;
 }
 @keyframes kussoon-selected-area-two-tone {
-  0%,49.999% {fill:#ffe14a;opacity:1}
-  50%,100% {fill:#e83d54;opacity:1}
+  0%,49.999% {fill:#fff;opacity:1}
+  50%,100% {fill:var(--pref-color,#add9ef);opacity:1}
 }
 @media(prefers-reduced-motion:reduce) {
   .colored-national.two-tone-selection #map path.land.chosen {
     animation:none;
-    fill:#ffe14a;
+    fill:var(--pref-color,#add9ef);
     opacity:1;
   }
 }
