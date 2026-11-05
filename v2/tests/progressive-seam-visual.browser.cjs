@@ -30,7 +30,7 @@ async function capture(engine,backend,spot){
   },spot);
   await app.page.waitForFunction(()=>{
    const s=window.KussoonV2ProgressivePreview.controller.snapshot();
-   return !s.scheduled&&!s.shapePending&&s.store.active===0&&s.store.queued===0&&s.shapePasses>=1;
+   return !s.scheduled&&!s.shapePending&&s.store.active===0&&s.store.queued===0&&document.querySelectorAll('#map .prefecture-focus').length>0;
   },{},{timeout:90000});
   await app.page.waitForTimeout(220);
   const state=await app.page.evaluate(()=>{
