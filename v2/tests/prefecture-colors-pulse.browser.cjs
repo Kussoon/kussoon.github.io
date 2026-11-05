@@ -35,7 +35,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
        expected:KussoonV2PrefectureColors.color(c)};
     },code);
     assert.equal(selected.property,selected.expected,'selected municipality keeps original prefecture palette '+pref);
-    const motion=await page.evaluate(()=>({reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,body:document.body.className,sheet:!![...document.styleSheets].find(x=>x.href?.includes('prefecture-colors.css'))}));
+    const motion=await page.evaluate(()=>({reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,body:document.body.className,sheet:!![...document.styleSheets].find(x=>x.href?.includes('prefecture-colors.css')),rules:(()=>{const x=[...document.styleSheets].find(x=>x.href?.includes('prefecture-colors.css'));try{return x?.cssRules?.length}catch(e){return e.message}})(),href:[...document.styleSheets].find(x=>x.href?.includes('prefecture-colors.css'))?.href}));
     console.log('S39 PULSE DIAG',JSON.stringify({engine,pref,motion,selected}));
     if(motion.reduced)assert.equal(selected.animation,'none','reduced-motion disables pulse');
     else assert.equal(selected.animation,'kussoon-selected-area-pulse','only selected path animates');
