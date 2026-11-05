@@ -10,7 +10,13 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await app.open();
    await page.goto(page.url().replace('/v2/national/official-2026-nationwide-pilot.html','/maps/national-municipalities.html'));
    await page.waitForFunction(()=>window.KussoonV2PrefectureColors&&window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:90000});
-   await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().geometry.sceneRequests>0,{},{timeout:90000});
+   await page.waitForTimeout(2200);
+   const debug=await page.evaluate(()=>({
+      controller:window.KussoonV2ProgressivePreview?.controller.snapshot(),
+      scripts:[...document.scripts].map(x=>x.src).filter(Boolean).slice(0,8),
+      status:document.getElementById('status')?.textContent
+   }));
+   console.log('RELOCATED MAP DIAGNOSTIC',JSON.stringify(debug).slice(0,2100));
    const geo=await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.snapshot().geometry);
    assert.equal(geo.backend,'worker','relocated map must not silently fall back to the main-thread renderer');
    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/maps/national-municipalities.html');
