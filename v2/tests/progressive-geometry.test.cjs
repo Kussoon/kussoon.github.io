@@ -21,3 +21,13 @@ test('packing yields instead of holding the UI thread and uses transferable nume
 test('LRU eviction releases worker ownership exactly once; hits are not evictions',async()=>{
  const evicted=[],store=P.createStore({capacity:2,onEvict:key=>evicted.push(key),load:async key=>({bytes:100,key})});await store.get('01');await store.get('02');await store.get('01');await store.get('03');assert.deepEqual(evicted,['02']);assert.equal(store.stats().cached,2);
 });
+test('real 2026 Mie geometry keeps the original fills and clipped boundary edge set',async()=>{
+ const path=require('node:path'),base='v2/data/national/2026-common',manifest=JSON.parse(fs.readFileSync(base+'/national-2026-pilot/manifest.json')),meta=manifest.entries.find(x=>x.pref==='24'),t=JSON.parse(fs.readFileSync(path.join(base,meta.source)));
+ const arcs=t.arcs.map(a=>{let x=0,y=0;return a.map(q=>{if(!t.transform)return q;x+=q[0];y+=q[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];});});
+ const ring=ids=>ids.flatMap((id,i)=>{const a=arcs[id<0?~id:id],points=id<0?a.slice().reverse():a;return points.slice(i?1:0);});
+ const regions=t.objects.municipalities.geometries.map(g=>({code:String(g.properties.N03_007),name:g.properties.N03_004,polys:(g.type==='Polygon'?[g.arcs]:g.arcs).map(p=>p.map(ring))}));
+ const data=await G.pack({arcs,regions});data.code='24';const overview=await G.pack({arcs:[],regions:[]}),project=p=>[p[0]*30,-p[1]*30],clip={x:4080,y:-1050,w:60,h:60};
+ const scene=G.buildScene({entries:[data],overview,projection:[30,0,-30,0],clip});
+ const old=segments(R.pathFromArcs(P.uniqueSegments(arcs,project,clip),project,4)),next=segments(scene.border);assert.deepEqual(next.sort(),old.sort());assert.equal(new Set(next).size,next.length);assert(scene.border.length<R.pathFromArcs(P.uniqueSegments(arcs,project,clip),project,4).length,'contiguous paths compress commands without dropping edges');
+ for(const item of scene.paths){const r=regions.find(x=>x.code===item.code),polys=r.polys.filter(poly=>{const b=G.boxOf(poly);return b[2]*30>=clip.x&&b[0]*30<=clip.x+clip.w&&-b[1]*30>=clip.y&&-b[3]*30<=clip.y+clip.h;});assert.equal(item.d,R.pathFromPolygons(polys,project,4));}assert(scene.paths.length>0);
+});
