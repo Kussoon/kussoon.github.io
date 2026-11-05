@@ -6,7 +6,7 @@
 <meta name="robots" content="index,follow">
 <meta name="description" content="18タイプの相性を初級・上級で学べる無料の学習ツール。まなぶ・れんしゅう・クイズに対応。">
 <meta name="theme-color" content="#f5f8fc">
-<title>18タイプ相性トレーニング｜まなぶ・れんしゅう・クイズ | Kussoon</title>
+<title>ポケモンの相性マスター | Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#18334b;background:#f3f7fb;font-size:16px}
 *{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:auto;padding:18px 14px 60px}
@@ -179,13 +179,20 @@ body.quiz-active #quiz-next{min-height:44px}
 @media(max-width:600px){.advanced-results{grid-template-columns:1fr}.advanced-selectors{gap:7px}.advanced-selected{gap:6px}.advanced-chosen .type-symbol{width:36px;height:36px}.advanced-chosen{font-size:14px}.advanced-selectors label{font-size:14px}}
 .study-level-link{display:flex;align-items:center;justify-content:center;text-decoration:none}.study-level-link:visited{color:#254c64}
 body.quiz-active .advanced-quiz-levels{display:none}
+
+/* Shared v1.0 release title, version, and site footer */
+.page-mode{font-size:15px;font-weight:750;color:#476780;margin:0 0 10px}
+.page-version{text-align:center;font-size:11px;line-height:1.9;color:#71828f;margin:18px auto 4px}
+body.quiz-active .page-version,body.playing .page-version,body.quiz-active .page-mode{display:none}
+.kussoon-common-footer{max-width:none;width:100%;margin:24px auto 0}
 </style>
 </head>
 <body>
 <main>
 <a href="/games/">← 学ぶ・遊ぶへ</a>
-<p class="eyebrow">Kussoon / 18タイプ相性トレーニング v1.0</p>
-<h1>18タイプ相性トレーニング</h1>
+<p class="eyebrow">Kussoon / <ruby>学習<rt>がくしゅう</rt></ruby>ツール</p>
+<h1>ポケモンの<ruby>相性<rt>あいしょう</rt></ruby>マスター</h1>
+<p class="page-mode">📖 まなぶ ／ 🎯 れんしゅう ／ ❔ クイズ（<ruby>初級<rt>しょきゅう</rt></ruby>・<ruby>上級<rt>じょうきゅう</rt></ruby>）</p>
 <p>18タイプの相性を、調べたり組み合わせたりして覚えよう！</p>
 <nav class="mode-tabs" role="tablist" aria-label="学習モード"><button class="tab" id="tab-study" role="tab" aria-selected="false" aria-controls="study-page" type="button">📖 まなぶ</button><button class="tab" id="tab-practice" role="tab" aria-selected="true" aria-controls="practice-page" type="button">🎯 れんしゅう</button><button class="tab" id="tab-quiz" role="tab" aria-selected="false" aria-controls="quiz-page" type="button">❔ クイズ</button></nav>
 <div id="study-page" role="tabpanel" aria-labelledby="tab-study" hidden>
@@ -269,8 +276,10 @@ body.quiz-active .advanced-quiz-levels{display:none}
 <div id="quiz-end" hidden><div class="quiz-end-score" id="quiz-final"></div><p id="quiz-message"></p>
 <div class="actions"><button class="action primary" id="quiz-again" type="button">もういちど</button><button class="action" id="quiz-review-end" type="button">🔁 まちがいをふくしゅう</button></div></div>
 </section></div>
-<footer class="foot">キャラクター画像や公式ロゴは使用していません。ポケットモンスターのタイプ相性を学ぶ非公式の学習ツールです。<br><a href="/">Kussoonトップ</a></footer>
+<p class="foot">キャラクター<ruby>画像<rt>がぞう</rt></ruby>や<ruby>公式<rt>こうしき</rt></ruby>ロゴは<ruby>使用<rt>しよう</rt></ruby>していません。ポケットモンスターのタイプ<ruby>相性<rt>あいしょう</rt></ruby>を<ruby>学<rt>まな</rt></ruby>ぶ<ruby>非公式<rt>ひこうしき</rt></ruby>の<ruby>学習<rt>がくしゅう</rt></ruby>ツールです。</p>
+<div class="page-version" aria-label="ページのバージョンと最終更新日"><div>Version 1.0</div><div><ruby>最終更新<rt>さいしゅうこうしん</rt></ruby>：<time datetime="2026-11-05">2026<ruby>年<rt>ねん</rt></ruby>11<ruby>月<rt>がつ</rt></ruby>5<ruby>日<rt>にち</rt></ruby></time></div></div>
 </main>
+<footer class="kussoon-common-footer" aria-label="Kussoon共通フッター"><small>© 2026 Kussoon. All rights reserved.</small></footer>
 <script>
 /* Level tabs are bound independently of the larger game script.
    Capture handling ensures the choice remains responsive if another feature fails. */
@@ -716,4 +725,5 @@ const furiganaObserver=new MutationObserver(()=>addVisibleFurigana());
 furiganaObserver.observe(document.querySelector("main"),{childList:true,subtree:true,characterData:true});
 
 </script>
+<script defer src="/common/site-footer.js"></script>
 </body></html>
