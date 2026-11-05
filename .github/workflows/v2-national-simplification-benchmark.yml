@@ -1,0 +1,73 @@
+name: V2 common 2026 lightness benchmark (no public file writes)
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/compare-lightweight.cjs'
+      - '.github/workflows/v2-national-simplification-benchmark.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  national-simplification-benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Set up GDAL and pinned topology packages
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+          npm install --no-audit --no-fund
+        working-directory: v2/tools/shared-topology
+      - name: Verify synthetic shared arc fixtures
+        run: |
+          node --check v2/tools/shared-topology/compare-lightweight.cjs
+          cd v2/tools/shared-topology && npm test
+      - name: Download official 2026 N03 source and build a single nationwide input
+        run: python3 v2/tools/shared-topology/prepare-2026-national.py "$RUNNER_TEMP/n03"
+      - name: Build 0.005 (0.5 percent) national simplification
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep005" --quantization 1000000 --keep 0.005 --expect-prefectures 47
+          node validate.mjs --dir "$RUNNER_TEMP/keep005"
+          node compare-lightweight.cjs "$RUNNER_TEMP/keep005" "$RUNNER_TEMP/keep005-report.json"
+      - name: Build 0.002 (0.2 percent) national simplification
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep002" --quantization 1000000 --keep 0.002 --expect-prefectures 47
+          node validate.mjs --dir "$RUNNER_TEMP/keep002"
+          node compare-lightweight.cjs "$RUNNER_TEMP/keep002" "$RUNNER_TEMP/keep002-report.json"
+      - name: Summarize size and preserved geometry without publishing data
+        run: |
+          python3 - <<'PY'
+          import json,os
+          root=os.environ['RUNNER_TEMP']
+          a=json.load(open(root+'/keep005-report.json'))
+          b=json.load(open(root+'/keep002-report.json'))
+          print('S39 SIMPLIFICATION COMPARISON')
+          print('keep0.02 baseline=370.99MiB, keep0.005='+str(a['totalMiB'])+'MiB, keep0.002='+str(b['totalMiB'])+'MiB')
+          print('0.005 regions',a['regions'],'rings',a['rings'],'holes',a['holes'],'shared pairs',a['sharedPairs'])
+          print('0.002 regions',b['regions'],'rings',b['rings'],'holes',b['holes'],'shared pairs',b['sharedPairs'])
+          PY
+      - name: Confirm published data and scripts remain unchanged
+        run: git diff --exit-code -- v2/data v2/national v2/shared
+      - name: Archive reports only (not unreviewed geo datasets)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: s39-national-2026-keep-comparison-report
+          path: |
+            ${{ runner.temp }}/keep005-report.json
+            ${{ runner.temp }}/keep002-report.json
+          retention-days: 14
+          if-no-files-found: ignore
