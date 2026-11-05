@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow"><title>全国共通境界・実機比較試験｜Kussoon V2</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#173c56;background:#edf6fb}
+*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:0 auto;padding:12px 12px 48px}
+h1{font-size:clamp(20px,4.6vw,29px);line-height:1.4}
+p{line-height:1.65}.panel{background:white;border:1px solid #bfd5e5;border-radius:12px;padding:12px;margin:12px 0}
+.controls{display:flex;flex-wrap:wrap;align-items:end;gap:8px}.controls label{display:grid;gap:5px;flex:1 1 170px;font-weight:700}
+select,button{font:inherit;color:inherit;background:#fff;border:1px solid #9fbcd0;border-radius:8px;min-height:42px;padding:8px}
+button{font-weight:700;cursor:pointer}button[aria-pressed=true]{background:#14638c;color:white}
+.map{position:relative}svg{display:block;width:100%;aspect-ratio:850/700;border:1px solid #b5cada;border-radius:10px;background:#f7fafc;touch-action:none}
+svg .land{stroke:none;fill:#c6e1d8;fill-rule:evenodd;pointer-events:none}
+svg .land.other{fill:#f7e3c2}
+svg .borders{fill:none;stroke:#27435a;stroke-width:.9px;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}
+.note{font-size:13px;color:#4f6e81}.status{font-weight:700;min-height:1.5em}
+.small{font-size:13px}a{color:#17618b}
+</style>
+<script src="../shared/map-viewport.js"></script>
+<script defer src="./shared-seam-test.js"></script></head>
+<body><main>
+<a href="./progressive-test.html">← 段階ラベル表示テストへ</a>
+<h1>全国共通境界・iPhone比較試験</h1>
+<p>県境の二重線、白い隙間、不自然な直線を確認する独立ページです。旧・県別データと、全国を一括生成した新しい共通境界を同じ地図位置のまま切り替えて比較できます。</p>
+<section class="panel">
+<div class="controls">
+<label>調べる県境<select id="pair">
+<option value="04-07">宮城県・福島県</option>
+<option value="27-28">大阪府・兵庫県</option>
+<option value="27-29">大阪府・奈良県</option>
+<option value="43-44">熊本県・大分県</option>
+</select></label>
+<button id="old" aria-pressed="true">従来の県別データ</button>
+<button id="new" aria-pressed="false">新・全国共通境界</button>
+</div>
+<p id="status" class="status" role="status">データを読み込み中です…</p>
+<div class="controls"><button id="minus" aria-label="縮小">−</button><button id="plus" aria-label="拡大">＋</button><button id="reset">全体</button><span id="zoom" class="small">1.0倍</span></div>
+<div class="map"><svg id="map" viewBox="0 0 850 700" aria-label="県境比較地図" role="img"></svg></div>
+<p class="note">地図をピンチ・ドラッグして確認できます。ボタンの切替ではズーム位置を保ちます。旧・新のいずれも原データそのものの正しさを保証する表示ではありません。</p>
+<p class="note">新データは2026年N03を全国一体でTopoJSON化し、リング保護付き0.5％簡略化を行った試作です。県別ファイルの共有アークが一致することは検査していますが、未簡略化Topologyからある縮退リング2,577件、面積・島・飛び地・細い地形の実測は未解決です。従来の本番全国版やラベル・吹き出しには影響しません。</p>
+<p class="note">出典：国土交通省「<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html" target="_blank" rel="noopener noreferrer">国土数値情報・行政区域データ（2026年版）</a>」。当サイトが比較用に変換・簡略化しています。出典・利用条件を確認のうえ表示しています。地図は法的な境界証明には使用できません。</p>
+</section>
+</main></body></html>
