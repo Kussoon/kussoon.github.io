@@ -72,5 +72,5 @@ const weeks=[
 ];
 const esc=s=>s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 document.getElementById("toc").innerHTML=weeks.map((w,i)=>'<a href="#week-'+(i+1)+'">'+esc(w[0])+'</a>').join("");
-const confirmed=new Set(["7/27（月）","7/28（火）","8/7（金）","8/13（木）","8/21（金）","9/16（水）","9/17（木）","9/18（金）","9/25（金）","9/30（水）"]);document.getElementById("articles").innerHTML=weeks.map((w,i)=>'<section class="week" id="week-'+(i+1)+'"><h2>'+esc(w[0])+'</h2>'+w[1].map(x=>'<article class="item"><div class="date">2026年'+esc(x[0])+'　'+(x[1]==='休刊'?'休刊':confirmed.has(x[0])?'一次資料照合済み':'未確認・掲載保留')+'</div><h3>'+esc(x[1])+'</h3><p>'+esc(x[2])+'</p></article>').join("")+'</section>').join("");
+const confirmed=new Set(["7/27（月）","7/28（火）","8/7（金）","8/13（木）","8/21（金）","9/16（水）","9/17（木）","9/18（金）","9/25（金）","9/30（水）"]);document.getElementById("articles").innerHTML=weeks.map((w,i)=>'<section class="week" id="week-'+(i+1)+'"><h2>'+esc(w[0])+'</h2>'+w[1].map(x=>'<article class="item"><div class="date">2026年'+esc(x[0])+'　'+(x[1]==='休刊'?'休刊':confirmed.has(x[0])?'一次資料照合済み':'未確認・掲載保留')+'</div><h3>'+esc(x[1])+'</h3><p>'+(x[1]==='休刊'||confirmed.has(x[0])?esc(x[2]):'当時の配信見出しを記録していますが、本文の裏付けが確認できていないため掲載を保留しています。')+'</p></article>').join("")+'</section>').join("");
 </script></body></html>
