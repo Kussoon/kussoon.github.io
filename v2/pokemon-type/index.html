@@ -261,6 +261,44 @@ body.quiz-active #quiz-next{min-height:44px}
 <footer class="foot">キャラクター画像や公式ロゴは使用していません。ゲーム本編向けの非公式学習用試作です。<br><a href="/">Kussoonトップ</a></footer>
 </main>
 <script>
+/* Level tabs are bound independently of the larger game script.
+   Capture handling ensures the choice remains responsive if another feature fails. */
+(function(){
+  function switchLearningLevel(level){
+    const advanced=level==="advanced";
+    const basicPage=document.getElementById("study-basic");
+    const advancedPage=document.getElementById("study-advanced");
+    const basicButton=document.getElementById("study-basic-button");
+    const advancedButton=document.getElementById("study-advanced-button");
+    if(!basicPage||!advancedPage||!basicButton||!advancedButton)return;
+    basicPage.hidden=advanced;
+    advancedPage.hidden=!advanced;
+    basicButton.setAttribute("aria-pressed",String(!advanced));
+    advancedButton.setAttribute("aria-pressed",String(advanced));
+    if(advanced){
+      try{
+        if(typeof renderAdvanced==="function")renderAdvanced();
+        else {
+          const result=document.getElementById("advanced-results");
+          if(result&&!result.children.length)result.textContent="上級のデータを読み込めませんでした。もう一度お試しください。";
+        }
+      }catch(error){
+        const result=document.getElementById("advanced-results");
+        if(result)result.textContent="相性の表示で問題が発生しました。もう一度お試しください。";
+        console.error("Advanced study render failed",error);
+      }
+    }
+  }
+  for(const pair of [["study-basic-button","basic"],["study-advanced-button","advanced"]]){
+    const button=document.getElementById(pair[0]);
+    if(button)button.addEventListener("click",function(event){
+      event.stopImmediatePropagation();
+      switchLearningLevel(pair[1]);
+    },true);
+  }
+})();
+</script>
+<script>
 "use strict";
 const TYPES=[
 ["ノーマル","◯","#d7d4cd","#232d3a"],
