@@ -59,6 +59,8 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
  async function renderShapes(){
   if(!geometry?.available()){renderShapesMain();return;}
   if(!index||!isActive()||!shapes||disposed)return;if(activePointers.size){schedule();return;}
+  // Selection paint is immediate and independent of asynchronous geometry.
+  for(const n of shapes.querySelectorAll('.land'))n.classList.toggle('chosen',n.dataset.code===selected);
   const f=frame(),v={x:f.view.x-f.view.w*.5,y:f.view.y-f.view.h*.5,w:f.view.w*2,h:f.view.h*2};
   const overlaps=b=>{const a=projection([b[0],b[3]]),z=projection([b[2],b[1]]);return z[0]>=v.x&&a[0]<=v.x+v.w&&z[1]>=v.y&&a[1]<=v.y+v.h;};
   const entries=f.zoom>=8?store.entries().filter(([,e])=>overlaps(e.box)):[],key=entries.map(([code])=>code).sort().join(',')+'|'+[v.x,v.y,v.w,v.h].map(n=>n.toFixed(3)).join(',')+'|'+(selectionEntry?selected:'');
