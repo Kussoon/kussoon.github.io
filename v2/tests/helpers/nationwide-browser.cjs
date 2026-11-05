@@ -10,7 +10,7 @@ async function start({engine=process.env.KUSSOON_BROWSER_ENGINE||'chromium',cont
  const server=http.createServer(async(req,res)=>{
   const file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));
   if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
-  try{const data=await fs.readFile(file);res.setHeader('Content-Type',file.endsWith('.html')?'text/html; charset=utf-8':file.endsWith('.js')?'application/javascript':file.endsWith('.json')||file.endsWith('.topojson')||file.endsWith('.geojson')?'application/json':'application/octet-stream');res.end(data);}
+  try{const data=await fs.readFile(file);res.setHeader('Content-Type',file.endsWith('.html')?'text/html; charset=utf-8':file.endsWith('.css')?'text/css; charset=utf-8':file.endsWith('.js')?'application/javascript':file.endsWith('.json')||file.endsWith('.topojson')||file.endsWith('.geojson')?'application/json':'application/octet-stream');res.end(data);}
   catch{res.writeHead(404).end();}
  });
  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
