@@ -419,7 +419,7 @@ mainは6bdd869、#261は未マージ。まず#261→本設計→フラグ付き�
 
 ## フラグ付き全国段階表示の試作と検証（2026-11-05）
 
-設計PR [#262](https://github.com/Kussoon/kussoon.github.io/pull/262)を基点とする別PR。既定URLは変更せず、同じpilotの `?progressive=1` だけで有効になる。公開への既定化・自動マージは行わない。再取得した最新mainは `400929fd66ea61397d13e7ff7bc8017ee286cc82`（追加差分はニュース3ファイルだけ）。#261は未マージで、本ブランチは#261→#262の積み上げである。現在判定49件 A23/B12/C5/要確認9は変更しない。
+設計PR [#262](https://github.com/Kussoon/kussoon.github.io/pull/262)を基点とする[PR #263（Draft）](https://github.com/Kussoon/kussoon.github.io/pull/263)。既定URLは変更せず、同じpilotの `?progressive=1` だけで有効になる。公開への既定化・自動マージは行わない。再取得した最新mainは `400929fd66ea61397d13e7ff7bc8017ee286cc82`（追加差分はニュース3ファイルだけ）。#261は未マージで、本ブランチは#261→#262の積み上げである。現在判定49件 A23/B12/C5/要確認9は変更しない。
 
 ### 実装範囲とデータ正本
 
@@ -452,6 +452,8 @@ native wheelで全国のままzoom1→2→4→8にした実DOM件数はdesktop12
 ### 回帰検査と未解決事項
 
 追加単体10件: 1905データ/欠落重複/フォント/固定コホート/単一逆線分/LRU・並列・retry・取消・byte上限/全anchor/段組み/viewport上限とreset。既存17コマンドと旧テストは保持。追加browserは全国連続zoom、全文字到達、読み初期OFF/区4行、3/6リンク・×・再タップ・S19、county keyboard入口47、境界strokeなし/完全一致線分dedup、実pinch/四方向pan（Chromium CDP）、押下中DOM維持、rotation、通常県別/検索、失敗retry・遅延競合・索引fallbackを検査する。WebKitにCDP pinch検査を実施したと主張しない。
+
+既存通常経路はChromium8スイートとWebKit UI/reset/scope3スイートも成功。ローカルWebKitは隔離Debianライブラリを使いhost依存キャッシュ検査のみ省略した（テストskipではない）。CIは通常のPlaywright依存インストールを使用する。
 
 GitHub Actions既存workflowへ索引再現/10単体/両engine実表示を追加し、既存検査を削除しない。profile/旧新比較は診断資料であり性能閾値の自動合格には使用しない。旧24失敗は[再実行記録](evidence/progressive-prototype-legacy-failures-20261105.json)のまま（boundary1/centered11/density6/readings6）、削除/skip/期待値変更なし。
 
