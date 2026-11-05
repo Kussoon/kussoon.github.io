@@ -202,7 +202,8 @@
         "S44"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial"
+      "test_scope": "historical_or_trial",
+      "legacy_decision": "Do not clear selection on blank map tap. Confirmed by user 2026-11-06 JST."
     },
     "R13": {
       "paths": [
@@ -301,7 +302,9 @@
         "S46"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial"
+      "test_scope": "pilot_only_needs_public_regression",
+      "user_decision": "Support keyboard activation of municipality map targets with Enter/Space and select the first search result with Enter. Confirmed by user 2026-11-06 JST.",
+      "implementation_status": "not_implemented_in_public_map"
     },
     "R19": {
       "paths": [
