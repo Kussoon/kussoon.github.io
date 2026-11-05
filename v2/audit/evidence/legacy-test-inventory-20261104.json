@@ -1,0 +1,172 @@
+[
+  {
+    "file": "v2/tests/administrative-labels.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 4",
+      "ℹ pass 4",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/audit-ledger.test.cjs",
+    "exit": 0,
+    "summary": [
+      "PASS formal ledger: 40 unique specifications, all 30 legacy mappings, 245 PR records and document links"
+    ]
+  },
+  {
+    "file": "v2/tests/hyogo49-labels.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 16",
+      "ℹ pass 16",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/label-engine.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 16",
+      "ℹ pass 16",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/national-2026-data.test.cjs",
+    "exit": 0,
+    "summary": [
+      "PASS S09/S11/S28/S38-S40: 47 real 2026 assets, 1905 unique map codes, 1912 offices/URL audit records, explicit exceptions and negative controls"
+    ]
+  },
+  {
+    "file": "v2/tests/national-boundaries.test.cjs",
+    "exit": 1,
+    "summary": [
+      "✖ source years and loaded prefectures remain explicit and non-production (1.871545ms)",
+      "ℹ tests 10",
+      "ℹ pass 9",
+      "ℹ fail 1",
+      "✖ failing tests:",
+      "✖ source years and loaded prefectures remain explicit and non-production (1.871545ms)"
+    ]
+  },
+  {
+    "file": "v2/tests/national-centered-labels.test.cjs",
+    "exit": 1,
+    "summary": [
+      "✖ comparison page loads the centred module before density app (2.476789ms)",
+      "✖ four-city comparison controls and script versions exist (1.482595ms)",
+      "✖ new proposal 3 is cached at load and not recomputed on zoom (3.432446ms)",
+      "✖ diagnostic overlay shows both exact cross-sections without moving anchors (0.686896ms)",
+      "✖ proposal 4 remains a precomputed map and horizontal marker shows full width (35.060666ms)",
+      "✖ proposal5 uses cached anchors and displays selected longest interval (1.163527ms)",
+      "✖ office overlay has separate selection, safe links, and unverified fallback (0.680376ms)",
+      "✖ map toolbar sits at the lower-right and ruby starts enabled (0.453086ms)",
+      "✖ B popup becomes the default layout; zip codes render above addresses (1.264758ms)",
+      "✖ default ward display, narrow right control, and non-purple selection (0.834346ms)",
+      "✖ all-region compact popup keeps three actions and larger text for dual offices (0.439566ms)",
+      "ℹ tests 42",
+      "ℹ pass 31",
+      "ℹ fail 11",
+      "✖ failing tests:"
+    ]
+  },
+  {
+    "file": "v2/tests/national-density.test.cjs",
+    "exit": 1,
+    "summary": [
+      "✖ natural mode suppresses colliding labels (2.323279ms)",
+      "✖ selected label remains visible even when it conflicts with capital (0.60308ms)",
+      "✖ separated labels are not needlessly hidden (0.373578ms)",
+      "✖ out of viewport labels are excluded from the natural mode (0.514438ms)",
+      "✖ density setting is monotonic for isolated candidates (0.61581ms)",
+      "✖ full-label trial begins with tiny type and enlarges smoothly (8.21428ms)",
+      "ℹ tests 14",
+      "ℹ pass 8",
+      "ℹ fail 6",
+      "✖ failing tests:",
+      "✖ natural mode suppresses colliding labels (2.323279ms)",
+      "✖ selected label remains visible even when it conflicts with capital (0.60308ms)",
+      "✖ separated labels are not needlessly hidden (0.373578ms)",
+      "✖ out of viewport labels are excluded from the natural mode (0.514438ms)",
+      "✖ density setting is monotonic for isolated candidates (0.61581ms)"
+    ]
+  },
+  {
+    "file": "v2/tests/national-readings.test.cjs",
+    "exit": 1,
+    "summary": [
+      "✖ one ordinary city becomes kanji then a small hiragana row (6.96502ms)",
+      "✖ designated city shows name, reading, ward, reading in that exact order (5.64503ms)",
+      "✖ county name and town name are interleaved, never concatenated into a single line (0.623591ms)",
+      "✖ 2021 pilot geometry names match 440 code-verified readings, with 74 district readings (13.544154ms)",
+      "✖ Chugoku city/ward and county readings preserve four-line interleaved order (0.632685ms)",
+      "✖ Shikoku readings and the documented variant are valid (0.574618ms)",
+      "ℹ tests 10",
+      "ℹ pass 4",
+      "ℹ fail 6",
+      "✖ failing tests:",
+      "✖ one ordinary city becomes kanji then a small hiragana row (6.96502ms)",
+      "✖ designated city shows name, reading, ward, reading in that exact order (5.64503ms)",
+      "✖ county name and town name are interleaved, never concatenated into a single line (0.623591ms)",
+      "✖ 2021 pilot geometry names match 440 code-verified readings, with 74 district readings (13.544154ms)",
+      "✖ Chugoku city/ward and county readings preserve four-line interleaved order (0.632685ms)"
+    ]
+  },
+  {
+    "file": "v2/tests/national-zoom.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 8",
+      "ℹ pass 8",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/nishinomiya-staggers.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 10",
+      "ℹ pass 10",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/office-directory.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 9",
+      "ℹ pass 9",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/readable-labels.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 20",
+      "ℹ pass 20",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/region-fit.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 8",
+      "ℹ pass 8",
+      "ℹ fail 0"
+    ]
+  },
+  {
+    "file": "v2/tests/universal-centers.test.cjs",
+    "exit": 0,
+    "summary": [
+      "ℹ tests 11",
+      "ℹ pass 11",
+      "ℹ fail 0"
+    ]
+  }
+]
