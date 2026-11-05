@@ -1,0 +1,27 @@
+name: V2 prefecture colour and selected municipality pulse trial
+on:
+  pull_request:
+    paths:
+      - 'v2/national/progressive-color-test.html'
+      - 'v2/progressive-preview/prefecture-colors.*'
+      - 'v2/tests/prefecture-colors-pulse.browser.cjs'
+      - '.github/workflows/v2-prefecture-colors-pulse.yml'
+permissions:
+  contents: read
+jobs:
+  mobile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Verify colour retention and single selected pulse
+        run: node v2/tests/prefecture-colors-pulse.browser.cjs
