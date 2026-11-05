@@ -1,0 +1,67 @@
+{
+  "scope": "Audit measurements, not a comprehensive conformance pass. Native national zoom ratios; different source years/projections. See docs for reachability limitations.",
+  "sourceMain": "6bdd8693841e0723cfa427f5fb9532cd9930ee94",
+  "engine": "chromium",
+  "topojsonClient": {
+    "version": "3.1.0",
+    "sha256": "25cd02ae486cc5063e0215a4e4cfb15de83700c87ac48bac4d57dc6aaf3ebb89"
+  },
+  "runs": [
+    {
+      "kind": "legacy",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scope": "native background click; focusability and native key presses; old general density UI vs pilot",
+      "interactions": {
+        "escapeDismissed": true,
+        "enterSelected": true,
+        "blankInput": "native mouse click on hit-tested SVG background",
+        "blankClickCleared": true,
+        "keyboard": {
+          "tabIndex": "0",
+          "role": "button",
+          "nativeFocusable": true,
+          "enterSelected": true,
+          "spaceSelected": true
+        }
+      },
+      "errors": []
+    },
+    {
+      "kind": "pilot",
+      "viewport": {
+        "width": 1280,
+        "height": 1000
+      },
+      "scope": "native background click; focusability and native key presses; old general density UI vs pilot",
+      "interactions": {
+        "escapeDismissed": true,
+        "enterSelected": false,
+        "blankInput": "native mouse click on hit-tested SVG background",
+        "blankClickCleared": false,
+        "keyboard": {
+          "tabIndex": null,
+          "role": null,
+          "nativeFocusable": false,
+          "enterSelected": false,
+          "spaceSelected": false
+        }
+      },
+      "errors": []
+    }
+  ],
+  "sourceHashes": {
+    "v2/national/density.html": "e64e1cc87d6e39f46fa6949543826af0fb687c94b01cd9d97361fc6addd0df9f",
+    "v2/national/density-app.js": "f2ea9d9e479c57ed0c0a32883be78c2e8f8fd8f9947ccd3188361cca5301f9bb",
+    "v2/national/density-labels.js": "8be9c8c032ba66c022302e34498e92b46daec54cbb21919f8b89803353377265",
+    "v2/national/official-2026-nationwide-pilot.html": "b1a290e310654c0e874bdca9cba6a8f3c3a03272768e67341df67c8d309dd271",
+    "v2/shared/established-label-adapter.js": "edde9f356f2e9818743f8c5b14f118936d0496833a107a906292b4a69c57eecd",
+    "v2/shared/place-labels.js": "5c046bfd1869fe6e61cc317b5394d8e8b95df4e0c1f4c6165fca7f03d2b8b691",
+    "v2/shared/map-viewport.js": "d4e2522bd4979961967258be095f827c44fedb3e0d638dd2392d27afa23111ae",
+    "v2/shared/reading-bridge.js": "72e5d653b875d36c9e3d843646864f587cdaa175ab76977f396b467654bcf250",
+    "v2/data/national/municipality-readings.json": "1dfbc940824b59f5d771d201a78c79b6b1736368f27b50c250b32ed917452e88",
+    "v2/data/national/municipality-readings-all-source.json": "2ce2742eda91c35d7948a1a6f97f826a1a4bb5012c1be6129ba1266216b83c57"
+  }
+}

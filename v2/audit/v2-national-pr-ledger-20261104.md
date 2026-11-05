@@ -2567,3 +2567,31 @@ PR本文、全245件の変更ファイル一覧（計1027エントリ）、API�
 - [#260](https://github.com/Kussoon/kussoon.github.io/pull/260): S21〜S26のB6件を維持し、配置前の対象フィルターによる周辺名非表示を是正。県内周辺名初期ON、4県各配置段の件数維持、パン/ズーム再計算なし、同じ浜松2026形状の現行/旧5C比較。隣県先読み・手動座標・旧方式全面復帰はしない。
 
 作業開始main `958fe45` → 作業中main `301371c`（差分はPokémonページのみ）を#259へ取り込み、全国版の既存マージ済み修正を維持。推奨は#259→#260。自動マージなし。
+
+<a id="behavior-pr-trace"></a>
+
+## 補完監査：段階表示の追跡と過去監査の不足
+
+既存のPR #1〜#245レコードを削除せず、下記の有効経路と対応仕様を補う。旧40項目への要約で失った動作は新規S41〜S49として正式仕様表へ追加した。PR件数の列挙と、利用者向け動作の抽出完了を同一視しない。
+
+|PR|最終規則/後続との関係|仕様と今回の判断|コード/diff根拠|
+|---|---|---|---|
+|[#66](https://github.com/Kussoon/kussoon.github.io/pull/66)、[#67](https://github.com/Kussoon/kussoon.github.io/pull/67)|一般densityの検索Enter/Escape、地図keyboard、空白解除。全国focus UIの検索は後に非表示|S44/S45/S46は新版に同じ操作なし。6倍で読む旧実験条件は#226後の最終ではない|[66差分](https://github.com/Kussoon/kussoon.github.io/pull/66/files)、[67差分](https://github.com/Kussoon/kussoon.github.io/pull/67/files)。blame bbf00bb/478a162|
+|[#139](https://github.com/Kussoon/kussoon.github.io/pull/139)|2026県別ドリルダウンの意図的導入。地図の継続一括ロードとは別|県別ロードは正当。後発S41/S42の廃止承認は確認できない。空白/市区keyboardは当初から未接続|[固定9bec871](https://github.com/Kussoon/kussoon.github.io/blob/9bec871da5d46aacb59edf71f828f9e7a68c2b48/v2/national/official-2026-nationwide-pilot.html)|
+|[#146](https://github.com/Kussoon/kussoon.github.io/pull/146)|balanced/全文字箱fitの共通engine再利用|座標engine再利用は可視性・文字px・ズーム状態機械の継承証明ではない|[715ca671](https://github.com/Kussoon/kussoon.github.io/blob/715ca671bced108beee88106677eb063ac4238f6/v2/shared/established-label-adapter.js)|
+|[#213](https://github.com/Kussoon/kussoon.github.io/pull/213)|旧2021の全国1902モデルと縮尺別ラベル|S41/S42の始点。新版#139より後の別経路改善|[ce988157](https://github.com/Kussoon/kussoon.github.io/commit/ce9881575bb70a1a4f4fedb632251cfaa90505a4)|
+|[#217](https://github.com/Kussoon/kussoon.github.io/pull/217)|画面文字7〜13px|S22 B。旧18pxテスト期待はこの変更を追跡していない|[4eb4d6cb](https://github.com/Kussoon/kussoon.github.io/commit/4eb4d6cbd8bb3286e9c53b10a021121f42a158a5)|
+|[#219](https://github.com/Kussoon/kussoon.github.io/pull/219)→[#220](https://github.com/Kussoon/kussoon.github.io/pull/220)→[#221](https://github.com/Kussoon/kussoon.github.io/pull/221)|重なりの段階許容。一律2倍を面積/倍率依存へ変更|S41 B。#221式が最終、#220だけを再適用しない。Edge配色はS47要確認|[d6468e8差分](https://github.com/Kussoon/kussoon.github.io/commit/d6468e86970e6e7a1ec124c902709f518d6138c6)|
+|[#222](https://github.com/Kussoon/kussoon.github.io/pull/222)→[#223](https://github.com/Kussoon/kussoon.github.io/pull/223)|欠けたreadingPartsで6倍から停止する経路を修正。通常市にも文字箱を与え、初期読みOFF|S27/S28だけでなく、全zoomの非停止と単行市の表示許可が必要|[222差分](https://github.com/Kussoon/kussoon.github.io/pull/222/files)、[223差分](https://github.com/Kussoon/kussoon.github.io/pull/223/files)|
+|[#224](https://github.com/Kussoon/kussoon.github.io/pull/224)|実可視帯のculling/全国768倍|S43は県内観測A、S23/S42はB。縦長画面の余白帯も判定する|[c67c19bf](https://github.com/Kussoon/kussoon.github.io/commit/c67c19bf252d1162fb089633852c089be0b9cecd)|
+|[#225](https://github.com/Kussoon/kussoon.github.io/pull/225)|全国1902の5Cを一度計算/cache|S21 BとS20/S41性能境界。ズームで文字を更新しないという契約ではない|[45accd99](https://github.com/Kussoon/kussoon.github.io/commit/45accd99823bd4ace0a28469910a171e3cba8b1f)|
+|[#226](https://github.com/Kussoon/kussoon.github.io/pull/226)|全国1902読み、北方6を出典付き補完、6倍ゲート撤廃|S48 B。新版別sourceには北方6がなく、13件例外の内訳を読み検査へ渡さなかった|[369e20e8](https://github.com/Kussoon/kussoon.github.io/commit/369e20e8e4b0ffc2924bc7a72afd265f137ef86e)|
+|[#228](https://github.com/Kussoon/kussoon.github.io/pull/228)|旧静的保護の追加|5C/13px/768等は検査するが段階表示は検査していなかった|[静的契約](../national/test-density-contract.cjs)|
+|[#248](https://github.com/Kussoon/kussoon.github.io/pull/248)|台帳統合・実データ/実ブラウザCI|旧densityの実ブラウザ対照/段階表示を含まず、40契約の分母に抜け|[既存runner](../tests/run-national-contracts.cjs)|
+|[#249](https://github.com/Kussoon/kussoon.github.io/pull/249)|Pokémonタイプ相性|対象外。番号範囲に含まれるが全国地図監査とは別|[249変更](https://github.com/Kussoon/kussoon.github.io/pull/249/files)|
+|[#250](https://github.com/Kussoon/kussoon.github.io/pull/250)〜[#252](https://github.com/Kussoon/kussoon.github.io/pull/252)|再タップ/浜松検索/庁舎テストの個別保護|当該動作の有用な検査。空白/keyboard/全国zoom/北方読みの網羅保証へ拡張しない|[実再タップ](../tests/nationwide-retap.browser.cjs)、[検索](../tests/nationwide-search.browser.cjs)、[庁舎](../tests/office-directory.test.cjs)|
+|[#253](https://github.com/Kussoon/kussoon.github.io/pull/253)|選択1ラベル同形状比較と実タッチ|段階可視性/全国到達/全件性能は検査していない。7例に増えても同じ境界|[比較](../tests/compare-2026-labels.browser.cjs)|
+|[#259](https://github.com/Kussoon/kussoon.github.io/pull/259)|吹き出し可変高・map-first・debug退避|S12/S13/S19保護は維持。S49は意図的UI変更。全面的な機能廃止とは扱わない|[UI検査](../tests/pilot-map-ui.browser.cjs)|
+|[#260](https://github.com/Kussoon/kussoon.github.io/pull/260)|県内周辺名初期ON・段別件数|県内全件生成の検査はS41/S42の全国段階表示を検出しない。layout呼出し不変だけでは不十分|[scope検査](../tests/pilot-label-scope.browser.cjs)|
+
+今回調査した追加仕様は、廃止を示す根拠がないものを勝手にCへ移さずB/要確認に残す。既存40の操作・zoom・状態・性能の検証範囲は[正式仕様の再評価行列](v2-national-current-spec-20261104.md#behavior-reassessment)へ明記。採用/修正は別PRで判断し、本監査PRでは適用しない。
