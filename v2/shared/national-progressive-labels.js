@@ -68,10 +68,10 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
   try{
    const scene=await geometry.scene({entries,overview:overviewEntry,selection:selectionEntry,projection:[x[0]-o[0],o[0],y[1]-o[1],o[1]],clip:v,selected});
    if(!scene||id!==sceneSequence||layer!==shapes||version!==generation||!isActive()||activePointers.size)return;
-   const fragment=document.createDocumentFragment(),domStart=performance.now();let sliceStart=domStart,maxSlice=0;
-   for(const item of scene.paths){const county=item.kind!=='land',node=tag('path',{d:item.d,class:item.kind+(item.kind==='land'&&item.code===selected?' chosen':''),...(county?{'data-pref':item.code,tabindex:0,role:'button','aria-label':prefName(item.code)}:{'data-code':item.code,'data-national-code':item.code})});node.append(tag('title'));node.firstChild.textContent=county?prefName(item.code):item.name;fragment.append(node);
+   const fragment=document.createDocumentFragment(),decoder=new TextDecoder(),domStart=performance.now();let sliceStart=domStart,maxSlice=0;
+   for(const item of scene.paths){const county=item.kind!=='land',node=tag('path',{d:decoder.decode(item.data),class:item.kind+(item.kind==='land'&&item.code===selected?' chosen':''),...(county?{'data-pref':item.code,tabindex:0,role:'button','aria-label':prefName(item.code)}:{'data-code':item.code,'data-national-code':item.code})});node.append(tag('title'));node.firstChild.textContent=county?prefName(item.code):item.name;fragment.append(node);
     if(performance.now()-sliceStart>=4){maxSlice=Math.max(maxSlice,performance.now()-sliceStart);await new Promise(r=>setTimeout(r,0));sliceStart=performance.now();if(id!==sceneSequence||version!==generation||activePointers.size)return;}}
-   fragment.append(tag('path',{d:scene.border,class:'borders','pointer-events':'none'}));maxSlice=Math.max(maxSlice,performance.now()-sliceStart);
+   fragment.append(tag('path',{d:decoder.decode(scene.borderData),class:'borders','pointer-events':'none'}));maxSlice=Math.max(maxSlice,performance.now()-sliceStart);
    if(id!==sceneSequence||version!==generation||layer!==shapes||activePointers.size||!isActive())return;
    const commitAt=performance.now();shapes.replaceChildren(fragment);shapeKey=key;timing.shapePasses++;timing.lastShapeMs=performance.now()-domStart;timing.maxShapeMs=Math.max(timing.maxShapeMs,timing.lastShapeMs);timing.shapePhases={backend:'worker',wallMs:performance.now()-start,worker:scene.metrics,domCommitMs:performance.now()-commitAt,domMaxSliceMs:maxSlice};
   }catch(e){if(id===sceneSequence&&version===generation&&isActive()&&!activePointers.size){if(!geometry.available())renderShapesMain();else{requestKey='';schedule();}}}
