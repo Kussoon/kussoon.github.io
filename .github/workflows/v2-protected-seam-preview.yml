@@ -1,0 +1,100 @@
+name: V2 S39 protected national seam visual test assets
+on:
+  pull_request:
+    paths:
+      - 'v2/national/shared-seam-test.html'
+      - 'v2/national/shared-seam-test.js'
+      - '.github/workflows/v2-protected-seam-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-review-only-preview-data:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'trial/v2-common-boundary-visual-preview-20261105'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install converter and topojson dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+          npm install --no-audit --no-fund
+        working-directory: v2/tools/shared-topology
+      - name: Validate protected-ring synthetic fixtures
+        working-directory: v2/tools/shared-topology
+        run: npm test
+      - name: Download and convert official nationwide 2026 N03 source
+        run: python3 v2/tools/shared-topology/prepare-2026-national.py "$RUNNER_TEMP/source"
+      - name: Generate one topology then independently loadable 47 slices
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/source/national-2026.geojson" --output "$RUNNER_TEMP/common" --quantization 1000000 --keep 0.005 --expect-prefectures 47 --protect-rings
+          node validate.mjs --dir "$RUNNER_TEMP/common"
+      - name: Check known baseline shape defects are not amplified
+        env:
+          KUSSOON_COLLECT_ONLY: '1'
+        run: |
+          node v2/tools/shared-topology/compare-lightweight.cjs "$RUNNER_TEMP/common" "$RUNNER_TEMP/shape-report.json"
+          python3 - <<'PY'
+          import os,json
+          p=os.environ['RUNNER_TEMP']
+          j=json.load(open(p+'/shape-report.json'))
+          assert j['regions']==1905 and j['prefectures']==47 and j['sharedPairs']>=88
+          assert j['totalDiscontinuousRings']==0
+          assert j['totalDegenerateRings']<=2577, 'Candidate introduces extra collapsed rings'
+          assert j['holes']==192 and j['rings']==125323
+          print('PASS trial only, known base defects:',j['totalDegenerateRings'])
+          PY
+      - name: Stage only selected seven prefectures for visual review
+        run: |
+          set -e
+          DEST=v2/data/national/2026-shared-preview
+          mkdir -p "$DEST"
+          for pref in 04 07 27 28 29 43 44; do
+            cp "$RUNNER_TEMP/common/$pref.topojson" "$DEST/$pref.topojson"
+          done
+          python3 - <<'PY'
+          import pathlib,json
+          p=pathlib.Path('v2/data/national/2026-shared-preview')
+          entries=sorted(p.glob('*.topojson'))
+          assert len(entries)==7
+          total=sum(f.stat().st_size for f in entries)
+          assert total<16*1048576, 'Review files too heavy for isolated trial'
+          for f in entries:
+              d=json.loads(f.read_text())
+              assert d['type']=='Topology' and d['objects']['municipalities']['geometries']
+              print('TRIAL',f.name,'bytes',f.stat().st_size)
+          print('TRIAL TOTAL MiB',round(total/1048576,2))
+          PY
+      - name: Commit only seven prototype assets to review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v2/data/national/2026-shared-preview/
+          if ! git diff --cached --quiet; then
+            git commit -m "trial(v2): attach seven review-only common topology prefecture slices"
+            git push origin "HEAD:${{ github.head_ref }}"
+          fi
+      - name: Archive only validation and source summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: s39-protected-preview-generation-evidence
+          path: |
+            ${{ runner.temp }}/shape-report.json
+            ${{ runner.temp }}/source/source-summary.json
+            ${{ runner.temp }}/common/manifest.json
+          retention-days: 14
+          if-no-files-found: ignore
