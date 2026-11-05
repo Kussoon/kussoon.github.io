@@ -1,0 +1,36 @@
+name: V2 progressive shared-border seven-prefecture iPhone trials
+on:
+  pull_request:
+    paths:
+      - 'v2/national/progressive-shared-test.html'
+      - 'v2/tests/progressive-shared-seven.browser.cjs'
+      - '.github/workflows/v2-progressive-shared-seven.yml'
+      - 'v2/data/national/2026-shared-preview/**'
+permissions:
+  contents: read
+jobs:
+  progressive-iphone-webkit-and-chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Validate 7 pref shared geometry with 40 pref fallback, S25 labels and gestures
+        run: node v2/tests/progressive-shared-seven.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/v2-progressive-shared-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v2-progressive-shared-seven-mobile-webkit-evidence
+          path: ${{ runner.temp }}/v2-progressive-shared-evidence
+          retention-days: 14
+          if-no-files-found: ignore
