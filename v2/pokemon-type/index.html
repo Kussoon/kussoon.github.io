@@ -225,6 +225,10 @@ body.quiz-active #quiz-next{min-height:44px}
 </div>
 </div>
 <div id="practice-page" role="tabpanel" aria-labelledby="tab-practice">
+<div class="study-levels" role="group" aria-label="れんしゅうのむずかしさ">
+<button class="study-level" type="button" aria-pressed="true">🌱 初級：1タイプ</button>
+<a class="study-level study-level-link" href="./advanced-practice.html">⭐ 上級：2タイプ</a>
+</div>
 <section class="panel" aria-labelledby="practice-title"><h2 id="practice-title">タイプを2つ選んで相性を試そう</h2>
 <p class="practice-intro">こうげきする技と、あいてのタイプを選んでください。</p>
 <div class="duo"><div class="duo-card"><h2>⚔️ こうげきする技</h2><div class="picker"><button class="pick-arrow" type="button" data-step="-1" data-side="attack" aria-label="攻撃タイプをひとつ戻す">‹</button><div class="chosen" id="attack-picked"></div><button class="pick-arrow" type="button" data-step="1" data-side="attack" aria-label="攻撃タイプをひとつ進める">›</button></div></div>
@@ -234,7 +238,7 @@ body.quiz-active #quiz-next{min-height:44px}
 <div class="choice-grid" id="practice-types" aria-label="18タイプの選択肢"></div>
 <div class="effect-result" id="practice-result" aria-live="polite"><strong id="effect-label"></strong><output id="effect-multiplier"></output><p id="effect-explanation"></p></div>
 <div class="actions"><button class="action" type="button" id="random-match">🔀 べつの組み合わせ</button><button class="action primary" type="button" id="go-study">📖 まなぶへ</button></div>
-<p class="notice">※この「れんしゅう」は単タイプ同士です。上級の複合タイプは「まなぶ」で確認できます。</p></section>
+<p class="notice">※こちらは初級・単タイプのれんしゅうです。上級は「上級：2タイプ」から始められます。</p></section>
 </div>
 
 <div id="quiz-page" role="tabpanel" aria-labelledby="tab-quiz" hidden>
