@@ -127,7 +127,7 @@
         "v2/shared/reading-bridge.js"
       ],
       "tests": [
-        "v2/tests/national-2026-public.browser.cjs",
+        "v2/tests/nationwide-2026.browser.cjs",
         "v2/tests/national-readings.test.cjs"
       ],
       "legacy_ids": [
@@ -136,8 +136,8 @@
         "S34",
         "S48"
       ],
-      "coverage_gap": false,
-      "test_scope": "existing_coverage_see_rule"
+      "coverage_gap": true,
+      "test_scope": "historical_or_trial"
     },
     "R09": {
       "paths": [

@@ -36,7 +36,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R08 よみ初期OFF|初期状態は漢字のみ。切替時に検証済みコード・名称の読みだけ表示し、欠落を推測しない。 **条件・例外:** 北方6の読み欠落S48は未解決。初期ONの旧仕様は#223/#226で置換。|[#223](https://github.com/Kussoon/kussoon.github.io/pull/223) [#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284)|`maps/national-municipalities.html#readingMode`<br>`v2/shared/reading-bridge.js`|`national-2026-public.browser.cjs`<br>`national-readings.test.cjs`|限定確認|
+|R08 よみ初期OFF|初期状態は漢字のみ。切替時に検証済みコード・名称の読みだけ表示し、欠落を推測しない。 **条件・例外:** 北方6の読み欠落S48は未解決。初期ONの旧仕様は#223/#226で置換。|[#223](https://github.com/Kussoon/kussoon.github.io/pull/223) [#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284)|`maps/national-municipalities.html#readingMode`<br>`v2/shared/reading-bridge.js`|`nationwide-2026.browser.cjs`（pilot）<br>`national-readings.test.cjs`（既知6失敗）<br>公開版の初期OFF・切替回帰なし|コード確認／公開版検査不足|
 
 ## 5. 区域の選択・色分け・点滅
 
@@ -77,7 +77,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
 |R18 全国検索|名称・読み・5桁コードから現行区域に到達し同名候補へ県名を付ける。浜松旧7区を候補から除外。 **条件・例外:** 旧S45の地図上の市区町村へのキー操作と旧S46の検索入力から先頭候補を選ぶ操作は、公開版の入力処理にない。候補ボタン自体の標準キーボード操作とは別。復元の採否は要確認。|[#204](https://github.com/Kussoon/kussoon.github.io/pull/204) [#251](https://github.com/Kussoon/kussoon.github.io/pull/251) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283)|`maps/national-municipalities.html`<br>`v2/shared/reading-bridge.js`|`nationwide-search.browser.cjs（pilot）`|要確認|
-|R19 公開URLと導線|正式URLは/maps/national-municipalities.html。旧/v2/national/map.htmlからクエリ/ハッシュ付きで転送。総合トップ・地域トップ・地図一覧から案内する。 **条件・例外:** pilot/RC1は比較資料。|[#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285)|`maps/national-municipalities.html`<br>`v2/national/map.html`<br>`maps/index.html`|`national-map-move.browser.cjs`|限定確認|
+|R19 公開URLと導線|正式URLは/maps/national-municipalities.html。旧/v2/national/map.htmlからクエリ/ハッシュ付きで転送。総合トップ・地域トップ・地図一覧から案内する。正式ページに読み込みに時間がかかる場合の注意書きを表示する。 **条件・例外:** pilot/RC1は比較資料。|[#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285)|`maps/national-municipalities.html`<br>`v2/national/map.html`<br>`maps/index.html`|`national-map-move.browser.cjs`|限定確認|
 
 ## 11. スマートフォン・タブレット・PC
 
@@ -165,8 +165,8 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 ### 集計と変更前の照合
 
 - R-IDは34件。地域・用途限定の比較規則と、採否確認の条件を含む。廃止・置換は全国7系統に、尼崎の選択時限定から通常表示への拡張（R30）を加えた8系統。
-- 現行コードとの確認済みの差は、旧S-IDからの未反映3項目（S44・S45・S46、採否は要判断）と、検査側2系統（点滅の旧期待値、workflow監視範囲）。境界S39は保留。
-- 回帰検査の未整備・不足を確認した規則は18件（全国12件 R02/R04/R06/R09/R11/R12/R14/R15/R16/R18/R20/R25、地域の継続検査を確認できなかった4件 R28/R29/R30/R34、試験の不足2件 R10/R31）。R10は既存テストが現在の点滅を検証しない。実機だけで評価する性能・可読性はこの数に加えない。
+- 現行コードとの確認済みの差は、旧S-IDからの未反映3項目（S44・S45・S46、採否は要判断）と、検査側2系統（点滅の旧期待値、workflow監視範囲）。境界S39は保留。別途、Node v24で既存の読みテスト6件の失敗を再現した。別VMで生成した配列の比較5件と旧データ件数の期待値1件で、[既存回帰計画](../audit/v2-national-regression-test-plan-20261104.md)に記録済み。
+- 回帰検査の未整備・不足を確認した規則は19件（全国13件 R02/R04/R06/R08/R09/R11/R12/R14/R15/R16/R18/R20/R25、地域の継続検査を確認できなかった4件 R28/R29/R30/R34、試験の不足2件 R10/R31）。R10は既存テストが現在の点滅を検証しない。実機だけで評価する性能・可読性はこの数に加えない。
 - [機械照合用の対応表](rule-test-map.json)はR-ID、コード・テストの起点、旧S-ID、確認の粒度を記録する。変更前に対象ファイルと照合し、関連R-IDをPR本文に記入する。依存先やデータだけを変える場合も、対応する入口まで辿る。
 
 変更前に `R-ID・対象ページ・最後に優先するPR・置換理由・コード経路・現在のテスト範囲・新しい正負テスト・実機未確認範囲` をPR本文へ記載する。ルールを変える場合はこの1ファイルを同じPRで更新し、旧決定とユーザー承認根拠を削らず記録する。地図本体の修正と規則集の監査は別PRにする。
