@@ -50,7 +50,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
 |R11 ×と再タップ|×は吹き出しのみ閉じ、選択と投影・位置を保持。同一区域再タップは選択のみ解除、次のタップで再選択・吹き出し。 **条件・例外:** 県/全国へ戻る専用操作と区別。公開版での一連の実機再検証は未記録。|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#139](https://github.com/Kussoon/kussoon.github.io/pull/139) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#250](https://github.com/Kussoon/kussoon.github.io/pull/250) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283)|`maps/national-municipalities.html`<br>`v2/progressive-preview/national-progressive-labels.js`|`nationwide-retap.browser.cjs（pilot対象）`|公開版要確認|
-|R12 空白・他区域|空白操作や別区域・検索選択で選択状態と閉じ状態を明確に遷移させる。 **条件・例外:** 旧S44の空白解除は公開版のクリック処理で未実装。空白を押しても現行選択は維持される。今後の採否は要確認。|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#204](https://github.com/Kussoon/kussoon.github.io/pull/204) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261)|`maps/national-municipalities.html`<br>`national-progressive-labels.js`|`audit-legacy-behavior.browser.cjs（診断）`|要確認|
+|R12 空白・他区域|空白操作や別区域・検索選択で選択状態と閉じ状態を明確に遷移させる。 **条件・例外:** 空白タップでは選択を解除しない（2026-11-06ユーザー決定）。空白クリックを選択解除に使う旧S44は不採用。別区域・検索での状態遷移は維持する。|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#204](https://github.com/Kussoon/kussoon.github.io/pull/204) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261)|`maps/national-municipalities.html`<br>`national-progressive-labels.js`|`audit-legacy-behavior.browser.cjs（診断）`|コード確認・決定済み|
 
 ## 7. 拡大・縮小・ドラッグ・スクロール
 
@@ -76,7 +76,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R18 全国検索|名称・読み・5桁コードから現行区域に到達し同名候補へ県名を付ける。浜松旧7区を候補から除外。 **条件・例外:** 旧S45の地図上の市区町村へのキー操作と旧S46の検索入力から先頭候補を選ぶ操作は、公開版の入力処理にない。候補ボタン自体の標準キーボード操作とは別。復元の採否は要確認。|[#204](https://github.com/Kussoon/kussoon.github.io/pull/204) [#251](https://github.com/Kussoon/kussoon.github.io/pull/251) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283)|`maps/national-municipalities.html`<br>`v2/shared/reading-bridge.js`|`nationwide-search.browser.cjs（pilot）`|要確認|
+|R18 全国検索|名称・読み・5桁コードから現行区域に到達し同名候補へ県名を付ける。浜松旧7区を候補から除外。市区町村の地図要素はキーボードでフォーカスし、Enter/Spaceで選択する。検索欄のEnterは先頭候補を選択する（2026-11-06ユーザー決定）。候補ボタン自体の標準キーボード操作も維持する。**現行公開コードでは市区町村へのEnter/Space選択と検索欄Enter処理が未実装。**|[#204](https://github.com/Kussoon/kussoon.github.io/pull/204) [#251](https://github.com/Kussoon/kussoon.github.io/pull/251) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283)|`maps/national-municipalities.html`<br>`v2/shared/reading-bridge.js`|`nationwide-search.browser.cjs（pilot）`|実装待ち・回帰テスト不足|
 |R19 公開URLと導線|正式URLは/maps/national-municipalities.html。旧/v2/national/map.htmlからクエリ/ハッシュ付きで転送。総合トップ・地域トップ・地図一覧から案内する。正式ページに読み込みに時間がかかる場合の注意書きを表示する。 **条件・例外:** pilot/RC1は比較資料。|[#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285)|`maps/national-municipalities.html`<br>`v2/national/map.html`<br>`maps/index.html`|`national-map-move.browser.cjs`|限定確認|
 
 ## 11. スマートフォン・タブレット・PC
@@ -165,7 +165,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 ### 集計と変更前の照合
 
 - R-IDは34件。地域・用途限定の比較規則と、採否確認の条件を含む。廃止・置換は全国7系統に、尼崎の選択時限定から通常表示への拡張（R30）を加えた8系統。
-- 現行コードとの確認済みの差は、旧S-IDからの未反映3項目（S44・S45・S46、採否は要判断）と、検査側2系統（点滅の旧期待値、workflow監視範囲）。境界S39は保留。別途、Node v24で既存の読みテスト6件の失敗を再現した。別VMで生成した配列の比較5件と旧データ件数の期待値1件で、[既存回帰計画](../audit/v2-national-regression-test-plan-20261104.md)に記録済み。
+- 現行コードとの確認済みの差は、旧S-IDからの差2項目（S45・S46は2026-11-06ユーザー決定で採用確定、公開コードには未実装）。S44空白解除は不採用。検査側にも2系統（点滅の旧期待値、workflow監視範囲）。境界S39は保留。別途、Node v24で既存の読みテスト6件の失敗を再現した。別VMで生成した配列の比較5件と旧データ件数の期待値1件で、[既存回帰計画](../audit/v2-national-regression-test-plan-20261104.md)に記録済み。
 - 回帰検査の未整備・不足を確認した規則は19件（全国13件 R02/R04/R06/R08/R09/R11/R12/R14/R15/R16/R18/R20/R25、地域の継続検査を確認できなかった4件 R28/R29/R30/R34、試験の不足2件 R10/R31）。R10は既存テストが現在の点滅を検証しない。実機だけで評価する性能・可読性はこの数に加えない。
 - [機械照合用の対応表](rule-test-map.json)はR-ID、コード・テストの起点、旧S-ID、確認の粒度を記録する。変更前に対象ファイルと照合し、関連R-IDをPR本文に記入する。依存先やデータだけを変える場合も、対応する入口まで辿る。
 
