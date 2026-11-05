@@ -2599,3 +2599,56 @@ PR本文、全245件の変更ファイル一覧（計1027エントリ）、API�
 今回調査した追加仕様は、廃止を示す根拠がないものを勝手にCへ移さずB/要確認に残す。既存40の操作・zoom・状態・性能の検証範囲は[正式仕様の再評価行列](v2-national-current-spec-20261104.md#behavior-reassessment)へ明記。採用/修正は別PRで判断し、本監査PRでは適用しない。
 
 補完成果のPR: [#261](https://github.com/Kussoon/kussoon.github.io/pull/261)。監査資料・観測専用スクリプト・証拠のみ。既存テスト/CI/本体/データを修正せず、24失敗と未確認範囲をそのまま記録する。自動マージしない。
+
+
+## 2026-11-05追補：PR #246〜#290 と公開版の優先判断
+
+基準main `476a6f91dbb7a95a99bb10caf571c125411ca9d2`。実在43 PR（地図関連29／別コンテンツ14）。#267/#282はPR番号ではない。各行は本文・マージ状態を確認した分類であり、重点6件以外の全patch/レビュー逐条調査を完了した意味ではない。**現行規則の正本**は[MAINTENANCE_RULES.md](../national/MAINTENANCE_RULES.md)のR01〜R27。旧S-IDのA/B/Cは当時のpilotの記録として保持する。
+
+|PR|マージ|分類・当時の決定／現在の位置付け|
+|---|---|---|
+|[#290](https://github.com/Kussoon/kussoon.github.io/pull/290) 全国マップ：単独市町村でも吹き出し下端を切らず内容に合わせて表示|済|R15 全施設可変高・現行|
+|[#289](https://github.com/Kussoon/kussoon.github.io/pull/289) 全国マップ：選択区域を白と元の県別色で0.5秒交互点滅|済|R10 白↔県色0.5秒・現行|
+|[#288](https://github.com/Kussoon/kussoon.github.io/pull/288) PR #259の例外規則を復元：市役所＋区役所の吹き出し高さ制限を解除|済|R15 二施設暫定例外（#290で置換）|
+|[#287](https://github.com/Kussoon/kussoon.github.io/pull/287) 全国マップ：0.5秒ごとの2色点滅と吹き出し余白修正|済|R10 黄赤0.5秒／R15高さ回帰（#289/#290で置換）|
+|[#286](https://github.com/Kussoon/kussoon.github.io/pull/286) 全国市区町村マップ：選択区域を2色交互点滅に変更|済|R10 黄赤0.6秒（#289で置換）|
+|[#285](https://github.com/Kussoon/kussoon.github.io/pull/285) feat(maps): 全国市区町村マップ移動＋注意書き＋総合トップ「地図」区分|済|R19 /maps/へ移動|
+|[#284](https://github.com/Kussoon/kussoon.github.io/pull/284) release(v2): 全国市区町村マップ2026を正式公開し総合・地域トップに掲載|済|R01/R19 正式公開|
+|[#283](https://github.com/Kussoon/kussoon.github.io/pull/283) release(v2): 全国市区町村マップ2026 RC1と全国→兵庫→西宮→近畿の展開計画|済|R03/R07/R09 RC1|
+|[#281](https://github.com/Kussoon/kussoon.github.io/pull/281) trial(v2): 全国47県の淡色塗分けと選択市区町村の元色明滅|済|R09 県色・脈動試作|
+|[#280](https://github.com/Kussoon/kussoon.github.io/pull/280) ポケモンの相性マスターの旧V2 URLを新gamesページへ転送|済|対象外：ポケモン相性等の別コンテンツ|
+|[#279](https://github.com/Kussoon/kussoon.github.io/pull/279) trial(v2): 7県の全国共通境界を段階表示に接続した独立iPhone試験ページ（S39）|済|R02 7県段階試験|
+|[#278](https://github.com/Kussoon/kussoon.github.io/pull/278) ポケモンの相性マスター：全4ページのタイトル・共通フッター・バージョン統一|済|対象外：ポケモン相性等の別コンテンツ|
+|[#277](https://github.com/Kussoon/kussoon.github.io/pull/277) trial(v2): 2026全国共通県境をiPhoneで旧版と切替比較する独立ページ|済|R02 7県比較、正式版未適用|
+|[#276](https://github.com/Kussoon/kussoon.github.io/pull/276) 18タイプ相性トレーニング v1.0 正式公開・回帰テスト整備|済|対象外：ポケモン相性等の別コンテンツ|
+|[#275](https://github.com/Kussoon/kussoon.github.io/pull/275) trial(v2): S39 全国共通境界の同位置切替比較ページと7県サンプル|未|R02 比較候補、未マージ|
+|[#274](https://github.com/Kussoon/kussoon.github.io/pull/274) タイプ相性トレーニング 第6段階：上級6択・10問クイズ|済|対象外：ポケモン相性等の別コンテンツ|
+|[#273](https://github.com/Kussoon/kussoon.github.io/pull/273) タイプ相性トレーニング 第5段階：れんしゅう上級（1攻撃×2防御）|済|対象外：ポケモン相性等の別コンテンツ|
+|[#272](https://github.com/Kussoon/kussoon.github.io/pull/272) trial(v2): 全国共通境界の軽量化を0.5%／0.2%で比較・形状検査（S39）|未|R02 簡略化候補、未マージ|
+|[#271](https://github.com/Kussoon/kussoon.github.io/pull/271) 上級ボタン無反応を回避：独立した上級学習ページへ直接移動|済|対象外：ポケモン相性等の別コンテンツ|
+|[#270](https://github.com/Kussoon/kussoon.github.io/pull/270) trial(v2): 2026年全国47県を一括トポロジー化し安全なArtifactへ出力（S39）|未|R02 全国一括候補、未マージ|
+|[#269](https://github.com/Kussoon/kussoon.github.io/pull/269) 「上級：2タイプ」ボタンの切り替えを独立・堅牢化|済|対象外：ポケモン相性等の別コンテンツ|
+|[#268](https://github.com/Kussoon/kussoon.github.io/pull/268) audit(v2): S39 全国47県の概要・詳細境界の混在差分を計測|済|R02 S39診断|
+|[#266](https://github.com/Kussoon/kussoon.github.io/pull/266) fix(v2): restore county + town labels in isolated progressive preview (S25)|済|R07 郡名922件限定|
+|[#265](https://github.com/Kussoon/kussoon.github.io/pull/265) test(v2): iPhone用・全国段階ラベル表示の独立試験ページ|済|R03 試験ページ|
+|[#264](https://github.com/Kussoon/kussoon.github.io/pull/264) 18タイプ相性トレーニング 第4段階：まなぶ上級（複合タイプ）|済|対象外：ポケモン相性等の別コンテンツ|
+|[#263](https://github.com/Kussoon/kussoon.github.io/pull/263) [Draft] V2全国段階ラベルの復元・境界計算Worker化と回帰検査|未|Worker/pilot opt-in、未マージ|
+|[#262](https://github.com/Kussoon/kussoon.github.io/pull/262) docs(v2): 段階ラベル復元の設計と実装前の同縮尺・メモリ比較|済|R03/R04 事前設計|
+|[#261](https://github.com/Kussoon/kussoon.github.io/pull/261) docs(v2): 段階ラベル継承の監査漏れを補完し、49仕様を操作・状態・性能で再評価|済|S41〜S49 追加監査|
+|[#260](https://github.com/Kussoon/kussoon.github.io/pull/260) fix(v2): 現行ラベル配置を維持して県内周辺名を初期表示し、段別回帰を追加|済|R05 県内ラベル初期表示|
+|[#259](https://github.com/Kussoon/kussoon.github.io/pull/259) fix(v2): pilotを地図中心のUIへ整理し、区・親市の6リンク見切れを解消|済|R14–R16 可変高・全体表示|
+|[#258](https://github.com/Kussoon/kussoon.github.io/pull/258) iPhone SEでもクイズ全体が収まる小型画面レイアウト|済|対象外：ポケモン相性等の別コンテンツ|
+|[#257](https://github.com/Kussoon/kussoon.github.io/pull/257) クイズ中の問題数を画面最上部に固定し縦幅を節約|済|対象外：ポケモン相性等の別コンテンツ|
+|[#256](https://github.com/Kussoon/kussoon.github.io/pull/256) 18タイプ相性トレーニング 第3段階：4択クイズと復習|済|対象外：ポケモン相性等の別コンテンツ|
+|[#255](https://github.com/Kussoon/kussoon.github.io/pull/255) 18タイプ相性トレーニング：学習・練習画面の漢字にふりがな追加|済|対象外：ポケモン相性等の別コンテンツ|
+|[#254](https://github.com/Kussoon/kussoon.github.io/pull/254) 18タイプ相性トレーニング 第2段階：アイコンと練習モード|済|対象外：ポケモン相性等の別コンテンツ|
+|[#253](https://github.com/Kussoon/kussoon.github.io/pull/253) test(v2): 2026実形状で現行/5Cラベルを比較し実タッチ回帰を追加|済|R06/R13 ラベル・タッチ比較|
+|[#252](https://github.com/Kussoon/kussoon.github.io/pull/252) test(v2): 庁舎の旧期待値2件を現行3/6リンク仕様へ更新しCIへ接続|済|R17/R23 庁舎テスト|
+|[#251](https://github.com/Kussoon/kussoon.github.io/pull/251) fix(v2): 全国検索に浜松の現行3区を反映し旧7区を除外|済|R01/R18 浜松検索|
+|[#250](https://github.com/Kussoon/kussoon.github.io/pull/250) fix(v2): 同一市域の再タップ解除で投影・表示位置・パン範囲を保持|済|R11 再タップ修正|
+|[#249](https://github.com/Kussoon/kussoon.github.io/pull/249) 試作: 18タイプ相性トレーニング 第1段階（学習モード）|済|対象外：ポケモン相性等の別コンテンツ|
+|[#248](https://github.com/Kussoon/kussoon.github.io/pull/248) test(v2): 監査台帳を一本化し全国2026の実データ・実ブラウザ回帰CIを追加|済|監査台帳/既存S01〜S40|
+|[#247](https://github.com/Kussoon/kussoon.github.io/pull/247) docs(v2): PR245件の監査・回帰計画を既存資料名へ統合（未完事項あり）|未|旧監査案→#248へ統合|
+|[#246](https://github.com/Kussoon/kussoon.github.io/pull/246) docs(v2): 全国統合版の初回仕様監査と回帰防止記録|未|旧監査案→#248へ統合|
+
+#91→#244→#259→#287→#288→#290のCSS・JS差分により、#290が単独/二施設ともtoolbar高さ上限を撤去した最終決定と確認した。公開コードは`maps/national-municipalities.html`。#289は#281の脈動と#286/#287の黄赤交互を公開版で置換した。#270/#272/#275/#263は未マージ、#277/#279は独立試験のみ。#283/284/285により正式入口は`/maps/national-municipalities.html`、旧pilotは比較対象である。
