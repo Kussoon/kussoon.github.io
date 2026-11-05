@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'v2/national/audit-progressive-mixed-boundaries.cjs'
+      - 'v2/tests/progressive-seam-visual.browser.cjs'
       - '.github/workflows/v2-progressive-mixed-seams.yml'
       - 'v2/data/national/2026-common/**'
   workflow_dispatch:
@@ -31,5 +32,31 @@ jobs:
         with:
           name: s39-progressive-nationwide-mixed-border-comparison
           path: ${{ runner.temp }}/v2-mixed-seams.json
+          if-no-files-found: ignore
+          retention-days: 30
+
+  browser-seam-comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps webkit chromium
+        working-directory: v2/tests/browser
+      - name: Compare Worker and main fallback at representative seams
+        run: node v2/tests/progressive-seam-visual.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/s39-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: s39-worker-main-mobile-svg-screenshots
+          path: ${{ runner.temp }}/s39-browser
           if-no-files-found: ignore
           retention-days: 30
