@@ -154,16 +154,44 @@ body.quiz-active #quiz-next{min-height:44px}
  body.quiz-active .quiz-feedback{margin:5px 0;padding:6px 8px}
  body.quiz-active #quiz-next{min-height:42px}
 }
+
+/* Stage 4: independent two-defense-type study, no changes to beginner logic. */
+.study-levels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.study-level{min-height:48px;background:#fff;color:#254c64;border:2px solid #bad1e0;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;padding:8px}
+.study-level[aria-pressed="true"]{background:#ffe79b;color:#533a10;border-color:#e9bb45}
+.study-level:focus-visible,.advanced-selectors select:focus-visible{outline:3px solid #2372b3;outline-offset:2px}
+.advanced-lead{margin-top:4px}.advanced-selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.advanced-selectors label{display:grid;gap:6px;font-weight:800}
+.advanced-selectors select{font:inherit;min-width:0;width:100%;min-height:48px;border:2px solid #adc8d9;background:white;border-radius:10px;padding:9px;color:#173c55}
+.advanced-selected{display:flex;align-items:center;gap:12px;justify-content:center;background:#edf7fd;border-radius:14px;padding:12px;margin:12px 0;font-weight:800}
+.advanced-chosen{display:flex;align-items:center;gap:5px;flex-wrap:wrap;justify-content:center}
+.advanced-chosen .type-symbol{width:44px;height:44px}
+.advanced-explain{font-size:14px;color:#3e5f78}
+.advanced-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.advanced-group{border:1px solid #cbdce7;border-radius:13px;background:white;padding:10px}
+.advanced-group h3{font-size:16px;margin:0 0 8px}
+.advanced-card{border:1px solid #d6e3ec;border-radius:10px;padding:9px;margin:7px 0;background:#f8fbfd}
+.advanced-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800}
+.advanced-row .type-symbol{width:32px;height:32px}
+.advanced-math{font-size:13px;margin-top:5px;color:#34566d}
+.advanced-total{font-size:17px;font-weight:900;color:#164c70}
+@media(max-width:600px){.advanced-results{grid-template-columns:1fr}.advanced-selectors{gap:7px}.advanced-selected{gap:6px}.advanced-chosen .type-symbol{width:36px;height:36px}.advanced-chosen{font-size:14px}.advanced-selectors label{font-size:14px}}
 </style>
 </head>
 <body>
 <main>
 <a href="/v2/">← V2検証エリアへ</a>
-<p class="eyebrow">Kussoon / 学習アプリ試作・第2段階</p>
+<p class="eyebrow">Kussoon / 学習アプリ試作</p>
 <h1>18タイプ相性トレーニング</h1>
 <p>18タイプの相性を、調べたり組み合わせたりして覚えよう！</p>
 <nav class="mode-tabs" role="tablist" aria-label="学習モード"><button class="tab" id="tab-study" role="tab" aria-selected="false" aria-controls="study-page" type="button">📖 まなぶ</button><button class="tab" id="tab-practice" role="tab" aria-selected="true" aria-controls="practice-page" type="button">🎯 れんしゅう</button><button class="tab" id="tab-quiz" role="tab" aria-selected="false" aria-controls="quiz-page" type="button">❔ クイズ</button></nav>
 <div id="study-page" role="tabpanel" aria-labelledby="tab-study" hidden>
+
+<div class="study-levels" role="group" aria-label="まなぶのむずかしさ">
+<button class="study-level" id="study-basic-button" type="button" aria-pressed="true">🌱 初級：1タイプ</button>
+<button class="study-level" id="study-advanced-button" type="button" aria-pressed="false">⭐ 上級：2タイプ</button>
+</div>
+<div id="study-basic">
 <section class="panel" aria-labelledby="pick-heading">
 <h2 id="pick-heading">① タイプを選ぼう</h2>
 <div class="types" id="types" aria-label="18タイプ一覧"></div>
@@ -177,8 +205,23 @@ body.quiz-active #quiz-next{min-height:44px}
 <div class="summary" id="summary" aria-live="polite"></div>
 <div class="results" id="results"></div>
 <p class="legend">×2：効果ばつぐん ／ ×1：通常 ／ ×0.5：いまひとつ ／ ×0：効果なし</p>
-<p class="notice">※通常のポケットモンスターシリーズの「技のタイプ」と「相手のタイプ」の相性です。特性・持ち物・特殊な技の効果は考慮していません。第1段階は単タイプのみです。</p>
+<p class="notice">※通常のポケットモンスターシリーズの「技のタイプ」と「相手のタイプ」の相性です。特性・持ち物・特殊な技の効果は考慮していません。こちらは初級・単タイプの相性です。</p>
 </section>
+</div>
+<div id="study-advanced" hidden>
+<section class="panel" aria-labelledby="advanced-heading">
+<h2 id="advanced-heading">⭐ 上級：2つのタイプの相性</h2>
+<p class="advanced-lead">あいてのポケモンが持つ2つのタイプをえらぼう。18タイプのわざを受けたときの相性がわかるよ。</p>
+<div class="advanced-selectors">
+<label>1つめのタイプ<select id="advanced-first" aria-label="1つめの防御タイプ"></select></label>
+<label>2つめのタイプ<select id="advanced-second" aria-label="2つめの防御タイプ"></select></label>
+</div>
+<div class="advanced-selected" id="advanced-selected" aria-live="polite"></div>
+<p class="advanced-explain">相性は、2つのタイプそれぞれの倍率をかけ算して計算します。</p>
+<div class="advanced-results" id="advanced-results"></div>
+<p class="notice">※1つの技に対する防御側の2タイプの相性です。特性・持ち物・特殊な技の効果は考慮していません。上級の「れんしゅう」「クイズ」は今後追加する予定です。</p>
+</section>
+</div>
 </div>
 <div id="practice-page" role="tabpanel" aria-labelledby="tab-practice">
 <section class="panel" aria-labelledby="practice-title"><h2 id="practice-title">タイプを2つ選んで相性を試そう</h2>
@@ -190,7 +233,7 @@ body.quiz-active #quiz-next{min-height:44px}
 <div class="choice-grid" id="practice-types" aria-label="18タイプの選択肢"></div>
 <div class="effect-result" id="practice-result" aria-live="polite"><strong id="effect-label"></strong><output id="effect-multiplier"></output><p id="effect-explanation"></p></div>
 <div class="actions"><button class="action" type="button" id="random-match">🔀 べつの組み合わせ</button><button class="action primary" type="button" id="go-study">📖 まなぶへ</button></div>
-<p class="notice">※第2段階は単タイプ同士の練習です。複合タイプとクイズは今後追加する予定です。</p></section>
+<p class="notice">※この「れんしゅう」は単タイプ同士です。上級の複合タイプは「まなぶ」で確認できます。</p></section>
 </div>
 
 <div id="quiz-page" role="tabpanel" aria-labelledby="tab-quiz" hidden>
@@ -374,6 +417,76 @@ renderPractice();
 
 
 
+
+/* Two-type defense study: reuse all 18x18 canonical single-type multipliers. */
+const advancedFirst=document.getElementById("advanced-first");
+const advancedSecond=document.getElementById("advanced-second");
+NAMES.forEach(name=>{
+ for(const select of [advancedFirst,advancedSecond]){
+  const option=document.createElement("option");
+  option.value=name;option.textContent=name;select.appendChild(option);
+ }
+});
+advancedFirst.value="ほのお";advancedSecond.value="ひこう";
+function studyLevel(level){
+ const advanced=level==="advanced";
+ document.getElementById("study-basic").hidden=advanced;
+ document.getElementById("study-advanced").hidden=!advanced;
+ document.getElementById("study-basic-button").setAttribute("aria-pressed",String(!advanced));
+ document.getElementById("study-advanced-button").setAttribute("aria-pressed",String(advanced));
+ if(advanced)renderAdvanced();
+}
+document.getElementById("study-basic-button").addEventListener("click",()=>studyLevel("basic"));
+document.getElementById("study-advanced-button").addEventListener("click",()=>studyLevel("advanced"));
+function renderAdvanced(){
+ const first=advancedFirst.value,second=advancedSecond.value;
+ if(first===second){
+  // A dual type consists of two different types. Move only the selector that was changed.
+  const other=NAMES.find(name=>name!==first);
+  if(document.activeElement===advancedFirst)advancedSecond.value=other;
+  else advancedFirst.value=other;
+ }
+ const a=advancedFirst.value,b=advancedSecond.value;
+ const chosen=document.getElementById("advanced-selected");chosen.replaceChildren();
+ for(const name of [a,b]){
+  const box=document.createElement("span");box.className="advanced-chosen";
+  box.append(symbol(name),document.createTextNode(name));chosen.appendChild(box);
+ }
+ const result=document.getElementById("advanced-results");result.replaceChildren();
+ const outcomes=[
+  [4,"×4：とても効果ばつぐん","g2"],
+  [2,"×2：効果ばつぐん","g2"],
+  [1,"×1：通常の効果","g1"],
+  [0.5,"×0.5：いまひとつ","g05"],
+  [0.25,"×0.25：とてもいまひとつ","g05"],
+  [0,"×0：効果なし","g0"]
+ ];
+ for(const [mult,title,klass] of outcomes){
+  const group=document.createElement("section");group.className="advanced-group "+klass;
+  const heading=document.createElement("h3");heading.textContent=title;group.appendChild(heading);
+  let count=0;
+  for(const move of NAMES){
+   const m1=MATRIX[move][a],m2=MATRIX[move][b],total=m1*m2;
+   if(total!==mult)continue;
+   count++;
+   const card=document.createElement("div");card.className="advanced-card";
+   const row=document.createElement("div");row.className="advanced-row";
+   row.append(symbol(move),document.createTextNode(move+"のわざ"));
+   const totalNode=document.createElement("strong");totalNode.className="advanced-total";totalNode.textContent="×"+total;row.appendChild(totalNode);
+   const math=document.createElement("div");math.className="advanced-math";
+   math.textContent=a+" ×"+m1+" × "+b+" ×"+m2+" ＝ ×"+total;
+   card.append(row,math);group.appendChild(card);
+  }
+  if(count===0){
+   const empty=document.createElement("p");empty.className="notice";empty.textContent="該当なし";group.appendChild(empty);
+  }
+  result.appendChild(group);
+ }
+}
+advancedFirst.addEventListener("change",renderAdvanced);
+advancedSecond.addEventListener("change",renderAdvanced);
+renderAdvanced();
+
 const QUIZ_KEY="kussoon-type-quiz-mistakes-v1";
 const QOP=[{v:2,t:"ばつぐん"},{v:1,t:"ふつう"},{v:0.5,t:"いまひとつ"},{v:0,t:"こうかなし"}];
 const QE=id=>document.getElementById(id);
@@ -496,7 +609,7 @@ quizRefreshMistakes();
 /* Give each visible kanji a correct kana reading without changing source wording.
    Ruby is deliberately not applied to SVG, attributes, script, rt or nested ruby. */
 const FURIGANA_WORDS={
-"消す":"けす","消え":"きえ","回":"かい","正解":"せいかい","問題":"もんだい","回答":"かいとう","保存":"ほぞん","記録":"きろく","結果":"けっか","両方":"りょうほう","選択肢":"せんたくし","組み合わせ":"くみあわせ","切り替え":"きりかえ","攻撃":"こうげき","防御":"ぼうぎょ",
+"対する":"たいする","確認":"かくにん","かけ算":"かけざん","計算":"けいさん","倍率":"ばいりつ","初級":"しょきゅう","上級":"じょうきゅう","該当":"がいとう","消す":"けす","消え":"きえ","回":"かい","正解":"せいかい","問題":"もんだい","回答":"かいとう","保存":"ほぞん","記録":"きろく","結果":"けっか","両方":"りょうほう","選択肢":"せんたくし","組み合わせ":"くみあわせ","切り替え":"きりかえ","攻撃":"こうげき","防御":"ぼうぎょ",
 "相性":"あいしょう","効果":"こうか","該当":"がいとう","通常":"つうじょう",
 "学習":"がくしゅう","練習":"れんしゅう","試作":"しさく","検証":"けんしょう",
 "段階":"だんかい","準備中":"じゅんびちゅう","開発":"かいはつ",
