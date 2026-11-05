@@ -29,7 +29,7 @@ async function run(engine){
    const source=await page.evaluate(code=>window.KussoonV2SharedSeamTrial.sourceFor(code),pref);
    assert.equal(Boolean(source),shared.includes(pref));
    if(source)assert(requests.some(u=>u.includes('/2026-shared-preview/'+pref+'.topojson')),'must load shared source '+pref);
-   else assert(requests.some(u=>u.includes('/national-2026-pilot/'+pref+'.topojson')),'fallback must load original source '+pref);
+   else assert(requests.some(u=>u.includes('/2026-common/')&&u.endsWith('/'+pref+'.topojson')&&!u.includes('/2026-shared-preview/')),'fallback must load original source '+pref);
    assert(await page.locator('#map .land').count()>0,'prefecture must have visible shape '+pref);
    assert.equal(await page.locator('#map .borders').count(),1);
    console.log('PASS shared progressive '+engine+' '+pref+' source='+(source?'common':'old')+' paths='+await page.locator('#map .land').count());
