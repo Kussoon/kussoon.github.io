@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="canonical" href="https://kussoon.com/maps/">
+<meta name="description" content="Kussoonの地図一覧。全国市区町村マップ、西宮市の町名・交通マップ、兵庫県、全国ナンバープレート、阪神間のお菓子・パン屋マップなど。">
+<title>地図｜Kussoon</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(#eaf6fa,#fff);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#163c56}
+main{width:min(960px,100%);margin:auto;padding:20px 14px 40px}
+h1{margin:12px 0 4px;font-size:clamp(26px,4vw,36px)}
+p{margin:5px 0 14px;color:#4d6c7b}
+a{color:#14608c}a:focus-visible{outline:3px solid #e9a33d;outline-offset:3px}
+.top{font-size:14px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:13px;margin:16px 0}
+.card{border:1px solid #b9d1e0;background:#fff;border-radius:14px;padding:17px;box-shadow:0 3px 8px #134f6d13}
+.card h2{font-size:19px;margin:0 0 7px}
+.card p{font-size:14px;margin:0 0 12px}
+.card a{display:inline-block;min-height:36px;font-weight:750}
+.main-card{border:2px solid #358f9b;background:#f6fffd}
+.more{padding:12px;border-radius:10px;background:#eef6f9;font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<a class="top" href="/">← Kussoonトップへ</a>
+<h1>🗺️ 地図</h1>
+<p>全国や地域の位置を調べたり、町名を覚えたり、お店を探したり。公開中の地図をまとめました。</p>
+<section class="grid" aria-label="地図一覧">
+<article class="card main-card"><h2>全国市区町村マップ 2026</h2><p>47都道府県・1,905区域。県別色分け、地名検索、役所・役場の情報、選択区域の明滅表示。</p><a href="/maps/national-municipalities.html">全国市区町村マップを開く</a></article>
+<article class="card"><h2>兵庫県の市区町村</h2><p>兵庫県内の市町村・神戸市の区を学ぶための地図とクイズです。</p><a href="/hyogo/">兵庫県マップを開く</a></article>
+<article class="card"><h2>西宮市・町名入り全域図</h2><p>西宮市の町の位置を、町名が入った全域図で確認できます。</p><a href="/nishinomiya/all-area-labeled.html">町名入り地図を開く</a></article>
+<article class="card"><h2>西宮市・交通入り全域図</h2><p>道路・鉄道と町名の位置関係を一緒に調べられます。</p><a href="/nishinomiya/all-area-transport.html">交通入り地図を開く</a></article>
+<article class="card"><h2>全国ナンバープレートマップ</h2><p>自動車ナンバーの地域名を全国地図で調べられます。</p><a href="/driving/vehicleregistrationplates/region/index.html">ナンバープレートマップを開く</a></article>
+<article class="card"><h2>阪神間 お菓子マップ</h2><p>西宮・芦屋・尼崎・宝塚・伊丹のお菓子のお店を地図から探せます。</p><a href="/maps/unified-sweets-map.html">お菓子マップを開く</a></article>
+<article class="card"><h2>阪神間 パン屋マップ</h2><p>阪神間のパン屋を一覧と地図で探せます。</p><a href="/maps/unified-bread-map.html">パン屋マップを開く</a></article>
+<article class="card"><h2>地域ごとの町名マップ</h2><p>西宮・宝塚・尼崎・芦屋・伊丹の町名を調べられます。</p><a href="/local/">地域別マップの入口へ</a></article>
+</section>
+<p class="more">全国市区町村マップは広域のデータを読み込むため、表示に時間がかかる場合があります。</p>
+</main>
+<script defer src="/common/site-footer.js"></script>
+</body>
+</html>
