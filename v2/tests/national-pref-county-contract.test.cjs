@@ -22,4 +22,11 @@ assert(/selectedName=nationalLabels\?\.fullNameFor\(code\)/.test(html),'Popup ti
 assert(/entry\.fullName=item\.county\+entry\.name/.test(county),'County overlay defines verified full name');
 assert(/nationalLabels\?\.fullNameFor\(r\.code\)/.test(html),'Prefecture region picker uses county-aware name');
 assert(/indexed\?\.fullName\)region\.fullName=indexed\.fullName/.test(progressive),'Detail selection adopts overlay full name');
+assert(/parentName&&result\.offices\.length>1&&\!selectedName\.startsWith\(parentName\)\?parentName\+selectedName:selectedName/.test(html),'Popup heading must not repeat parent municipality');
+// R07/R17 example: map label and popup title are both 大阪市鶴見区, not 大阪市鶴見区・大阪市.
+const popupHeading=(selectedName,parentName,count)=>parentName&&count>1&&!selectedName.startsWith(parentName)?parentName+selectedName:selectedName;
+assert.equal(popupHeading('大阪市鶴見区','大阪市',2),'大阪市鶴見区');
+assert.equal(popupHeading('鶴見区','大阪市',2),'大阪市鶴見区');
+assert.equal(popupHeading('川辺郡猪名川町','',1),'川辺郡猪名川町');
+assert.equal(popupHeading('神戸市中央区','神戸市',2),'神戸市中央区');
 console.log('Public nationwide tap and county detail contract: OK');
