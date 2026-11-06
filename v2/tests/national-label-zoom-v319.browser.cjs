@@ -78,6 +78,32 @@ async function focus(page,query){
      }
     }
     await page.setViewportSize({width:390,height:844});
+    // Repeat the shared-engine prefecture-level check in two different density
+    // profiles: Hokkaido with Sapporo and Tokyo's 23 special wards.
+    for(const pref of ['北海道','東京都']){
+     await page.click('#nationBtn');
+     await page.click('#prefTrigger');
+     await page.locator('#prefChoices button').filter({hasText:pref}).click();
+     await page.waitForFunction(name=>document.querySelector('#breadcrumb')?.textContent.includes(name)&&document.querySelectorAll('#map text[data-national-code]').length>0,pref,{timeout:30000});
+     await page.click('#mapReset');
+     await page.waitForTimeout(500);
+     for(let step=0;step<2;step++){
+      await page.click('#mapZoomIn');
+      await page.waitForTimeout(300);
+      const regional=await metrics(page);
+      assert(regional.count>0,pref+' shared labels are visible');
+      assert(regional.maxFont<=13.1&&regional.maxFont>=6.9,pref+' keeps physical labels within 7–13px: '+regional.maxFont);
+      assert.equal(regional.overlaps,0,pref+' keeps labels collision-free after zoom '+(step+1));
+     }
+     console.log('PASS prefecture '+pref+' labels='+ (await metrics(page)).count+' overlaps=0');
+    }
+    // Restore the Hyogo screen for pinch-style and repeated state transitions.
+    await page.click('#nationBtn');
+    await page.click('#prefTrigger');
+    await page.locator('#prefChoices button').filter({hasText:'兵庫県'}).click();
+    await page.waitForFunction(()=>document.querySelector('#breadcrumb')?.textContent.includes('兵庫県')&&document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
+    await page.click('#mapReset');
+    await page.waitForTimeout(400);
 
     const beforeGesture=await metrics(page);
     const duringGesture=await page.evaluate(()=>{
