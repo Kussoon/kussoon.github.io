@@ -1,0 +1,28 @@
+name: National label zoom v319 trial regression
+on:
+  pull_request:
+    paths:
+      - 'v2/national/label-zoom-trial-v319.html'
+      - 'v2/national/national-progressive-labels-trial-v319.js'
+      - 'v2/tests/national-label-zoom-v319.test.cjs'
+      - 'v2/tests/national-label-zoom-v319.browser.cjs'
+      - '.github/workflows/national-label-zoom-v319.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium
+        working-directory: v2/tests/browser
+      - run: node v2/tests/national-label-zoom-v319.test.cjs
+      - run: node v2/tests/national-label-zoom-v319.browser.cjs
