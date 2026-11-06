@@ -348,9 +348,10 @@ function ensureNationwideSearchIndex(){
  });
 }
 function updateSearch(){
- const host=$('searchResults');host.replaceChildren();
+ const host=$('searchResults');host.replaceChildren();host.scrollTop=0;
+ $('searchResultsShell').hidden=!$('placeSearch').value.trim();
  const query=$('placeSearch').value.trim();
- if(!query)return;
+ if(!query){syncSearchScrollRail();return;}
  let results;
  if(current){
   results=current.regions.filter(r=>KussoonV2PlaceLabels.matches(r,query)).map(r=>({name:r.fullName||r.name,reading:r.reading,code:r.code,kind:'region'}));
@@ -385,6 +386,7 @@ function updateSearch(){
  }else if(results.length>shown.length){
   const msg=document.createElement('small');msg.textContent='検索結果の先頭35件を表示しています。条件を絞ってください。';host.append(msg);
  }
+ requestAnimationFrame(syncSearchScrollRail);
 }
 function renderQuiz(){
  if(!quizSession)return;
@@ -494,6 +496,36 @@ async function goPref(code,selectedCode=''){
 $('quizStart').addEventListener('click',startQuiz);
 $('quizStop').addEventListener('click',stopQuiz);
 $('quizNext').addEventListener('click',()=>{if(!quizSession)return;quizSession.next();if(quizSession.state().question)paint();renderQuiz();});
+// Left rail stays visibly anchored on iPhone Safari, where the native bar fades.
+function syncSearchScrollRail(){
+ const host=$('searchResults'),rail=$('searchResultsRail'),thumb=$('searchResultsThumb');
+ if($('searchResultsShell').hidden)return;
+ const range=Math.max(0,host.scrollHeight-host.clientHeight),visible=host.clientHeight;
+ rail.hidden=range<2||visible<1;
+ if(rail.hidden)return;
+ const track=Math.max(24,rail.clientHeight-2),thumbH=Math.min(track,Math.max(24,track*visible/host.scrollHeight));
+ thumb.style.height=thumbH+'px';
+ thumb.style.transform='translateY('+((track-thumbH)*host.scrollTop/range)+'px)';
+ rail.setAttribute('aria-valuenow',String(Math.round(100*host.scrollTop/range)));
+}
+$('searchResults').addEventListener('scroll',syncSearchScrollRail,{passive:true});
+if(window.ResizeObserver)new ResizeObserver(syncSearchScrollRail).observe($('searchResults'));
+(function(){
+ const rail=$('searchResultsRail'),host=$('searchResults');
+ let drag=null;
+ function seek(clientY){
+  const r=rail.getBoundingClientRect(),range=Math.max(0,host.scrollHeight-host.clientHeight);
+  const thumbHeight=$('searchResultsThumb').getBoundingClientRect().height;
+  host.scrollTop=Math.max(0,Math.min(range,(clientY-r.top-thumbHeight/2)/Math.max(1,r.height-thumbHeight)*range));
+ }
+ rail.addEventListener('pointerdown',e=>{e.preventDefault();drag=e.pointerId;rail.setPointerCapture(e.pointerId);seek(e.clientY);});
+ rail.addEventListener('pointermove',e=>{if(drag===e.pointerId){e.preventDefault();seek(e.clientY);}});
+ for(const type of ['pointerup','pointercancel','lostpointercapture'])rail.addEventListener(type,()=>{drag=null;});
+ rail.addEventListener('keydown',e=>{if(!['ArrowUp','ArrowDown','PageUp','PageDown','Home','End'].includes(e.key))return;e.preventDefault();
+ const step=e.key.startsWith('Page')?host.clientHeight:52;
+ if(e.key==='Home')host.scrollTop=0;else if(e.key==='End')host.scrollTop=host.scrollHeight;else host.scrollTop+=(e.key==='ArrowUp'||e.key==='PageUp'?-step:step);
+ });
+})();
 $('placeSearch').addEventListener('input',updateSearch);
 $('showNames').addEventListener('change',drawLabels);
 function syncMapReadingToggle(){const on=$('readingMode').value==='on';$('mapReadingToggle').textContent='よみがな '+(on?'ON':'OFF');$('mapReadingToggle').setAttribute('aria-pressed',String(on));$('mapReadingToggle').disabled=$('readingMode').disabled;}
@@ -502,6 +534,38 @@ $('readingMode').addEventListener('change',()=>{
  const national=!current&&nationalView?nationalLabels?.selection():null;
  const entry=current||national?.entry,code=current?$('region').value:national?.code||'';
  if(entry&&code&&!$('officePopup').hidden)syncPopupReading(code,entry.regions.find(r=>r.code===code));
+});
+// Use native Fullscreen API where available; iPhone Safari uses fixed viewport layout.
+const mapFrame=$('mapFrame'),fullscreenButton=$('mapFullscreen');
+function syncFullscreenUI(){
+ const on=document.body.classList.contains('map-screen-mode');
+ fullscreenButton.textContent=on?'⤡ 戻る':'⛶ 全画面';
+ fullscreenButton.setAttribute('aria-label',on?'地図の全画面表示を終了':'地図を全画面表示');
+ fullscreenButton.setAttribute('aria-pressed',String(on));
+ $('mapScreenTitle').hidden=!on;
+ if(on)$('officePopup').hidden=true;
+ else renderOfficePopup();
+ if(progressive)nationalLabels?.schedule();
+}
+fullscreenButton.addEventListener('click',async()=>{
+ const on=document.body.classList.contains('map-screen-mode');
+ if(on){
+  document.body.classList.remove('map-screen-mode');syncFullscreenUI();
+  if(document.fullscreenElement)try{await document.exitFullscreen();}catch(e){console.warn(e);}
+  return;
+ }
+ document.body.classList.add('map-screen-mode');syncFullscreenUI();
+ if(document.fullscreenEnabled&&mapFrame.requestFullscreen)try{await mapFrame.requestFullscreen();}catch(e){/* Fixed viewport fallback. */}
+});
+document.addEventListener('fullscreenchange',()=>{
+ if(!document.fullscreenElement&&document.body.classList.contains('map-screen-mode')){
+  document.body.classList.remove('map-screen-mode');syncFullscreenUI();
+ }
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&document.body.classList.contains('map-screen-mode')&&!document.fullscreenElement){
+  document.body.classList.remove('map-screen-mode');syncFullscreenUI();
+ }
 });
 $('mapReadingToggle').addEventListener('click',()=>{if($('readingMode').disabled)return;$('readingMode').value=$('readingMode').value==='on'?'off':'on';$('readingMode').dispatchEvent(new Event('change'));});
 $('pref').addEventListener('change',()=>{if(quizSession)stopQuiz();$('placeSearch').value='';goPref($('pref').value);});
@@ -516,6 +580,14 @@ $('mapZoomIn').addEventListener('click',()=>viewport.zoomIn());
 $('mapZoomOut').addEventListener('click',()=>viewport.zoomOut());
 $('mapReset').addEventListener('click',()=>viewport.reset());
 syncMapReadingToggle();
+function syncPopupScrollControls(){
+ const el=$('popupScroll');
+ $('popupScrollControls').hidden=$('officePopup').hidden||el.scrollHeight<=el.clientHeight+2;
+}
+if(window.ResizeObserver)new ResizeObserver(syncPopupScrollControls).observe($('popupScroll'));
+new MutationObserver(()=>requestAnimationFrame(syncPopupScrollControls)).observe($('popupActions'),{childList:true,subtree:true});
+$('popupScrollUp').addEventListener('click',()=>{$('popupScroll').scrollBy({top:-Math.max(110,$('popupScroll').clientHeight*.65),behavior:'smooth'});});
+$('popupScrollDown').addEventListener('click',()=>{$('popupScroll').scrollBy({top:Math.max(110,$('popupScroll').clientHeight*.65),behavior:'smooth'});});
 $('popupClose').addEventListener('click',()=>{dismissedPopupCode=current?$('region').value:nationalLabels?.selected()||'';$('officePopup').hidden=true;});
 $('map').addEventListener('click',e=>{
  if(quizSession)return;
@@ -545,11 +617,11 @@ $('map').addEventListener('click',e=>{
 <script src="/v2/progressive-preview/prefecture-colors.js"></script>
 <script>window.KussoonV2PrefectureColors.attach(document.getElementById('map'));</script>
 <script>
-/* Production: move only the popup, preserving map viewport
- * or document scrolling. Allow the header to remain reachable on-screen. */
+/* Move the popup vertically from any noninteractive portion; map remains unchanged.
+ * Content scrolling remains available through up/down buttons and mouse wheel. */
 (function(){
  const popup=document.getElementById('officePopup');
- const handle=popup.querySelector('.popup-head');
+ const handle=popup;
  const close=document.getElementById('popupClose');
  let offset=0,start=null,shownCode='';
  function setOffset(value){
@@ -567,7 +639,7 @@ $('map').addEventListener('click',e=>{
  }
  new MutationObserver(resetOnSelection).observe(popup,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden']});
  handle.addEventListener('pointerdown',function(event){
-   if(event.target===close||close.contains(event.target)||popup.hidden||event.button>0)return;
+   if(popup.hidden||event.button>0||event.target.closest('button,a,input,select,textarea,[role="button"]'))return;
    event.preventDefault();event.stopPropagation();
    const rect=popup.getBoundingClientRect();
    start={id:event.pointerId,y:event.clientY,offset,baseTop:rect.top-offset};
