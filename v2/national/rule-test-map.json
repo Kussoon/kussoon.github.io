@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide. PR #305 aligns prefecture and nationwide municipality labels with verified full names and Tokyo special ward display prefixes.",
   "rules": {
     "R01": {
       "paths": [
@@ -78,7 +78,8 @@
       "paths": [
         "v2/progressive-preview/national-progressive-labels.js",
         "v2/shared/established-label-adapter.js",
-        "maps/national-municipalities.html"
+        "maps/national-municipalities.html",
+        "v2/shared/place-labels.js"
       ],
       "tests": [
         "v2/tests/pilot-label-scope.browser.cjs",
@@ -92,8 +93,8 @@
         "S43"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_picker_labels_island_extent_only_safari_unverified",
-      "decision": "PR #300 hide surrounding-names toggle; always display names in ordinary municipality map, except guessing quiz."
+      "test_scope": "index_data_name_assertions_and_static_paths_passed_safari_edge_visual_unverified",
+      "decision": "PR #305: prefecture and nationwide visible label widths and placement use full names, never only short ward name."
     },
     "R06": {
       "paths": [
@@ -119,7 +120,9 @@
         "v2/progressive-preview/administrative-labels.js",
         "maps/national-municipalities.html",
         "v2/national/vertical-popup-trial.html",
-        "v2/progressive-preview/national-progressive-labels.js"
+        "v2/progressive-preview/national-progressive-labels.js",
+        "v2/shared/place-labels.js",
+        "v2/shared/established-label-adapter.js"
       ],
       "tests": [
         "v2/tests/progressive-county-labels.test.cjs",
@@ -130,14 +133,17 @@
         "S25"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified"
+      "test_scope": "index_data_name_assertions_and_static_paths_passed_safari_edge_visual_unverified",
+      "decision": "PR #305: nationwide and prefecture map labels use full formal municipality name; Tokyo 23 wards prefixed 東京都; all designated city wards keep their city."
     },
     "R08": {
       "paths": [
         "maps/national-municipalities.html",
         "v2/shared/reading-bridge.js",
         "v2/national/vertical-popup-trial.html",
-        "v2/progressive-preview/national-progressive-labels.js"
+        "v2/progressive-preview/national-progressive-labels.js",
+        "v2/shared/place-labels.js",
+        "v2/shared/established-label-adapter.js"
       ],
       "tests": [
         "v2/tests/nationwide-2026.browser.cjs",
@@ -151,7 +157,8 @@
         "S48"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified"
+      "test_scope": "index_data_name_assertions_and_static_paths_passed_safari_edge_visual_unverified",
+      "decision": "PR #305: Tokyo special wards' name and reading prepend 東京都／とうきょうと on index display model; initial reading OFF retained."
     },
     "R09": {
       "paths": [
@@ -302,7 +309,10 @@
       "paths": [
         "v2/common/js/office-directory.js",
         "maps/national-municipalities.html",
-        "v2/national/vertical-popup-trial.html"
+        "v2/national/vertical-popup-trial.html",
+        "v2/progressive-preview/national-progressive-labels.js",
+        "v2/shared/place-labels.js",
+        "v2/shared/established-label-adapter.js"
       ],
       "tests": [
         "v2/tests/office-directory.test.cjs",
@@ -313,7 +323,7 @@
         "S08"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified"
+      "test_scope": "index_data_name_assertions_and_static_paths_passed_safari_edge_visual_unverified"
     },
     "R18": {
       "paths": [
