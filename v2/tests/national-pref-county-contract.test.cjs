@@ -51,11 +51,20 @@ assert(/syncSearchScrollRail\(\)/.test(html),'Scrollbar thumb synchronizes with 
 assert(/市区町村の位置を押すと吹き出しが出ます/.test(html),'Simple map-use instructions');
 assert(/地図内のボタンでよみがなが出せます/.test(html),'Reading-toggle instructions');
 assert(/id="mapFullscreen"/.test(html)&&/fullscreenButton\.addEventListener\('click'/.test(html),'Fullscreen map control exists');
-assert(/if\(document\.body\.classList\.contains\('map-screen-mode'\)\)\{\$\('officePopup'\)\.hidden=true;return;\}/.test(html),'Popup suppressed while map-only mode');
-assert(/body\.map-screen-mode #officePopup[^\n]*display:none!important/.test(html),'Fullscreen popup is never painted');
+assert(!/if\(document\.body\.classList\.contains\('map-screen-mode'\)\)\{\$\('officePopup'\)\.hidden=true;return;\}/.test(html),'Fullscreen mode must not suppress popup rendering');
+assert(/body\.map-screen-mode #officePopup,#mapFrame:fullscreen #officePopup\{left:8px;bottom:8px;z-index:9\}/.test(html),'Fullscreen popup appears at bottom-left above map toolbar');
 assert(/document\.fullscreenEnabled&&mapFrame\.requestFullscreen/.test(html),'Native fullscreen when supported');
 assert(/position:fixed;inset:0;width:100vw;height:100dvh/.test(html),'iPhone uses viewport-sized fallback');
 assert(/const handle=popup;/.test(html),'All noninteractive popup surfaces support vertical drag');
 assert(/event\.target\.closest\('button,a,input,select,textarea/.test(html),'Links and controls keep their normal taps');
 assert(/id="popupScrollDown"/.test(html)&&/syncPopupScrollControls/.test(html),'Overflowing popup has explicit scroll controls');
+// R18/R19/R37: code-order results, public-only status and fullscreen popup.
+assert(/results\.sort\(\(a,b\)=>String\(a\.code\)\.localeCompare\(String\(b\.code\),'ja',\{numeric:true\}\)\)/.test(html),'Search candidates sort by five-digit municipality code before slicing');
+const municipalityCodes=['10209','10208','03201','45203','12205'].sort((a,b)=>a.localeCompare(b,'ja',{numeric:true}));
+assert.deepEqual(municipalityCodes,['03201','10208','10209','12205','45203'],'Leading-zero municipality codes sort nationwide');
+assert(!html.includes('開発時の比較版</a>'),'Development comparison link omitted from public navigation');
+assert(html.includes('読み込みに時間がかかることがあります。'),'Simplified loading notice');
+assert(!html.includes('読み込みに時間がかかることがありますが、ご容赦ください。'),'Old loading notice removed');
+assert(/new MutationObserver\(syncPublicStatus\)/.test(html),'Routine map status is hidden without removing error/loading status');
+assert(/読み込み中[\s\S]*読み込みエラー/.test(html),'Loading and error signals remain visible');
 console.log('Public nationwide tap and county detail contract: OK');

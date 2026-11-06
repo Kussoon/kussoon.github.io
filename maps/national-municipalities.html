@@ -33,6 +33,7 @@ svg{display:block;width:100%;height:auto;background:#edf6fb;border:1px solid #b7
 @media(hover:hover) and (pointer:fine){.prefecture:hover{fill:#7bc5e7}}
 .nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}.nav span{font-weight:700}
 .status{background:#e6f2fa;padding:10px;border-radius:8px;font-weight:700;line-height:1.6}
+.status[hidden]{display:none!important}
 small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border-radius:8px;font-size:14px;line-height:1.6}
 .map-locator{margin-top:10px;display:none}.map-locator.show{display:block}
 .map-locator svg{max-width:260px;touch-action:auto}
@@ -67,7 +68,8 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 body.map-screen-mode{overflow:hidden}
 body.map-screen-mode #mapFrame,#mapFrame:fullscreen{position:fixed;inset:0;width:100vw;height:100dvh;margin:0;padding:0;background:#edf6fb;z-index:1000;border-radius:0;overflow:hidden}
 body.map-screen-mode #mapFrame #map,#mapFrame:fullscreen #map{width:100%;height:100%;max-height:none;border-radius:0;border:0}
-body.map-screen-mode #officePopup,#mapFrame:fullscreen #officePopup{display:none!important}
+/* A selected municipality keeps its information popup at the map's bottom-left in fullscreen. */
+body.map-screen-mode #officePopup,#mapFrame:fullscreen #officePopup{left:8px;bottom:8px;z-index:9}
 body.map-screen-mode #mapToolbar,#mapFrame:fullscreen #mapToolbar{right:max(8px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom))}
 #mapFullscreen{background:#e7f4fc}
 .map-screen-title{position:absolute;left:12px;top:max(8px,env(safe-area-inset-top));z-index:8;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#163b52;font-size:12px;font-weight:700;pointer-events:none}
@@ -100,7 +102,7 @@ body.map-screen-mode #mapToolbar,#mapFrame:fullscreen #mapToolbar{right:max(8px,
 <h1>全国市区町村マップ 2026</h1>
 <p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。</p>
 <ul class="map-guide"><li>市区町村の位置を押すと吹き出しが出ます。</li><li>地図内のボタンでよみがなが出せます。</li><li>都道府県は下の「地域・表示範囲を選んで移動」で選べます。</li><li>吹き出しは上下に移動でき、×で閉じられます。</li></ul>
-<p class="note"><strong>読み込みに時間がかかることがありますが、ご容赦ください。</strong></p>
+<p class="note"><strong>読み込みに時間がかかることがあります。</strong></p>
 <section class="panel" aria-label="地域を探す">
 <div class="search-area">
 <label for="placeSearch">市区町村を検索</label>
@@ -119,7 +121,7 @@ body.map-screen-mode #mapToolbar,#mapFrame:fullscreen #mapToolbar{right:max(8px,
 </section>
 <section class="panel map-panel" aria-label="全国と都道府県の地図">
 <p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
-<div class="map-frame" id="mapFrame"><span class="map-screen-title" id="mapScreenTitle" hidden>地図のみ表示中（吹き出しなし）</span>
+<div class="map-frame" id="mapFrame"><span class="map-screen-title" id="mapScreenTitle" hidden>全画面表示中</span>
 <svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
 <div class="map-toolbar" id="mapToolbar" role="group" aria-label="地図右下の操作">
 <button type="button" id="mapZoomIn" aria-label="地図を拡大">＋ 拡大</button>
@@ -160,7 +162,7 @@ body.map-screen-mode #mapToolbar,#mapFrame:fullscreen #mapToolbar{right:max(8px,
 <h2>読み込み計測</h2><p id="metrics">全国の軽量な輪郭だけを先に読み込みます。</p>
 <div class="note">全国地図はナビゲーション用に簡略化した輪郭です。都道府県を選択すると詳細な20m版に切り替わります。別々に構築した地方間の県境が厳密に一致するかは、全国共通トポロジーの検証を別途行う必要があります。ここでは全国の操作・配信方式を検証します。</div>
 </section>
-<p class="page-links"><a href="/maps/">地図一覧</a> ／ <a href="/local/">地域を調べる</a> ／ <a href="/">Kussoonトップ</a> ／ <a href="/v2/national/2026-release-candidate.html">開発時の比較版</a></p>
+<p class="page-links"><a href="/maps/">地図一覧</a> ／ <a href="/local/">地域を調べる</a> ／ <a href="/">Kussoonトップ</a></p>
 <p class="page-links">2026年版行政区域を使用しています。境界線は表示速度を優先して簡略化した部分があり、詳細な境界・離島・飛び地の確認には自治体の公式資料をご利用ください。</p>
 
 </main>
@@ -220,7 +222,6 @@ function syncPopupReading(code,region){
 }
 // PR #259: popup height follows content, never a fixed four-button height.
 function renderOfficePopup(){
- if(document.body.classList.contains('map-screen-mode')){$('officePopup').hidden=true;return;}
  const national=!current&&nationalView?nationalLabels?.selection():null,entry=current||national?.entry;
  const code=current?$('region').value:national?.code||'',popup=$('officePopup');
  if(!entry||!code||quizSession||dismissedPopupCode===code){popup.hidden=true;return;}
@@ -360,6 +361,8 @@ function updateSearch(){
   const municipalMatches=(nationwideSearchIndex||[]).filter(r=>KussoonV2PlaceLabels.matches(r,query)||r.code.includes(query));
   results=municipalMatches;
  }
+ // Municipality codes are 5-digit, prefecture-first; sort before truncating to 35.
+ results.sort((a,b)=>String(a.code).localeCompare(String(b.code),'ja',{numeric:true}));
  const shown=results.slice(0,35);
  for(const entry of shown){
   const button=document.createElement('button');button.type='button';
@@ -527,6 +530,16 @@ if(window.ResizeObserver)new ResizeObserver(syncSearchScrollRail).observe($('sea
  if(e.key==='Home')host.scrollTop=0;else if(e.key==='End')host.scrollTop=host.scrollHeight;else host.scrollTop+=(e.key==='ArrowUp'||e.key==='PageUp'?-step:step);
  });
 })();
+// Keep loading/failure notices; hide routine map diagnostics in the public UI.
+(function(){
+ const status=$('status');
+ function syncPublicStatus(){
+  const message=status.textContent.trim();
+  status.hidden=!(/読み込み中|読み込みます|取得中|処理中|準備中|読み込みエラー|初期読み込みエラー|読み込めません|読み込みに失敗|エラー|失敗|できませんでした|クイズ開始不可/.test(message));
+ }
+ new MutationObserver(syncPublicStatus).observe(status,{childList:true,characterData:true,subtree:true});
+ syncPublicStatus();
+})();
 $('placeSearch').addEventListener('input',updateSearch);
 $('showNames').addEventListener('change',drawLabels);
 function syncMapReadingToggle(){const on=$('readingMode').value==='on';$('mapReadingToggle').textContent='よみがな '+(on?'ON':'OFF');$('mapReadingToggle').setAttribute('aria-pressed',String(on));$('mapReadingToggle').disabled=$('readingMode').disabled;}
@@ -544,8 +557,7 @@ function syncFullscreenUI(){
  fullscreenButton.setAttribute('aria-label',on?'地図の全画面表示を終了':'地図を全画面表示');
  fullscreenButton.setAttribute('aria-pressed',String(on));
  $('mapScreenTitle').hidden=!on;
- if(on)$('officePopup').hidden=true;
- else renderOfficePopup();
+ renderOfficePopup();
  if(progressive)nationalLabels?.schedule();
 }
 fullscreenButton.addEventListener('click',async()=>{
