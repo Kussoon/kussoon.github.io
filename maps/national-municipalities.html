@@ -368,8 +368,8 @@ function updateSearch(){
    entry.name+(entry.reading?'／'+entry.reading:'')+'（'+entry.code+'）';
   button.addEventListener('click',()=>{
    if(entry.kind==='national-region'){
-    if(progressive&&nationalView){$('placeSearch').value='';host.replaceChildren();void nationalLabels.focus(entry.code).catch(()=>goPref(entry.pref,entry.code));return;}
-    $('placeSearch').value='';host.replaceChildren();
+    if(progressive&&nationalView){$('placeSearch').value='';host.replaceChildren();$('searchResultsShell').hidden=true;void nationalLabels.focus(entry.code).catch(()=>goPref(entry.pref,entry.code));return;}
+    $('placeSearch').value='';host.replaceChildren();$('searchResultsShell').hidden=true;
     void goPref(entry.pref,entry.code);
     return;
    }
@@ -441,6 +441,7 @@ function startQuiz(){
  $('region').value='';$('showNames').checked=false;$('showNames').disabled=true;
  $('readingMode').disabled=true;syncMapReadingToggle();$('placeSearch').value='';$('placeSearch').disabled=true;
  $('searchResults').replaceChildren();
+ $('searchResultsShell').hidden=true;
  $('quizStart').hidden=true;$('quizStop').hidden=false;
  paint();renderQuiz();
  $('status').textContent='クイズ中です。オレンジ色の区域を見て回答してください。';
