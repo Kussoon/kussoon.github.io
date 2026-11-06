@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; R35/R36 are trial-only. Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar. ",
   "rules": {
     "R01": {
       "paths": [
@@ -237,7 +237,7 @@
         "S23"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified"
+      "test_scope": "public_static_only_safari_and_browser_unverified"
     },
     "R14": {
       "paths": [
@@ -268,7 +268,7 @@
         "S13"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified"
+      "test_scope": "public_static_only_safari_and_browser_unverified"
     },
     "R16": {
       "paths": [
@@ -286,7 +286,7 @@
         "S13"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified"
+      "test_scope": "public_static_only_safari_and_browser_unverified"
     },
     "R17": {
       "paths": [
@@ -322,7 +322,7 @@
         "S46"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified",
+      "test_scope": "public_static_only_safari_and_browser_unverified",
       "user_decision": "Support keyboard activation of municipality map targets with Enter/Space and select the first search result with Enter. Confirmed by user 2026-11-06 JST.",
       "implementation_status": "not_implemented_in_public_map"
     },
@@ -340,7 +340,7 @@
         "S49"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified"
+      "test_scope": "public_static_only_safari_and_browser_unverified"
     },
     "R20": {
       "paths": [
@@ -585,7 +585,7 @@
       ],
       "legacy_ids": [],
       "coverage_gap": true,
-      "test_scope": "public_static_added_browser_safari_unverified",
+      "test_scope": "public_static_only_safari_and_browser_unverified",
       "decision": "Adopted in production PR #296: vertical-only handle drag, overflow below map may overlap page content; previous R15 in-map constraint superseded for dragged popup."
     },
     "R36": {
@@ -602,6 +602,30 @@
       "coverage_gap": true,
       "test_scope": "public_static_added_browser_safari_unverified",
       "decision": "Adopted in production PR #296: verified name parts ON/OFF in popup, initial OFF; no guessed readings."
+    },
+    "R37": {
+      "paths": [
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/tests/national-pref-county-contract.test.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "public_static_only_fullscreen_iphone_fallback_unverified",
+      "decision": "Map-only mode suppresses popup; native Fullscreen API where available, fixed viewport on iPhone Safari."
+    },
+    "R38": {
+      "paths": [
+        "maps/national-municipalities.html"
+      ],
+      "tests": [
+        "v2/tests/national-pref-county-contract.test.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "public_static_only_left_scrollbar_safari_unverified",
+      "decision": "Use visible left-side search result rail when scrolling needed, hint placeholder short examples."
     }
   }
 }
