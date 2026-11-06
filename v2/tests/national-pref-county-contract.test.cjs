@@ -189,4 +189,14 @@ assert.deepEqual(Array.from(twoRows({name:'川辺郡猪名川町',fullName:'川�
 for(const asset of ['place-labels.js','established-label-adapter.js','national-progressive-labels.js','administrative-labels.js']){
  assert(html.includes(asset+'?v=307'),'Two-line label code uses fresh cache key for '+asset);
 }
+// R14/R19: return buttons precede the map, without modifying their IDs or handlers.
+const breadcrumbOffset=html.indexOf('id="breadcrumb"');
+const nationOffset=html.indexOf('id="nationBtn"');
+const prefectureOffset=html.indexOf('id="prefBtn"');
+const frameOffset=html.indexOf('id="mapFrame"');
+assert(breadcrumbOffset>=0&&breadcrumbOffset<nationOffset&&nationOffset<prefectureOffset&&prefectureOffset<frameOffset,'Nationwide and prefecture return buttons are above the map');
+assert.equal((html.match(/id="nationBtn"/g)||[]).length,1,'Exactly one nationwide return button');
+assert.equal((html.match(/id="prefBtn"/g)||[]).length,1,'Exactly one prefecture return button');
+assert(!html.includes('都道府県は上の選択欄から指定できます。地図を拡大して市区町村をタップしてください。'),'Redundant navigation instructions removed');
+assert(!html.includes('吹き出しは上部の帯で上下に移動でき、×で閉じられます。'),'Obsolete popup-drag guidance removed');
 console.log('Public nationwide tap and county detail contract: OK');
