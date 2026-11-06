@@ -94,7 +94,7 @@ assert(html.indexOf('市区町村の位置を押すと吹き出しが出ます�
 assert(html.indexOf('2026年版行政区域を使用しています')<html.indexOf('class="page-links bottom-links"'),'Site navigation is at bottom after boundary disclaimer');
 // R13/R14/R19: UI layout and municipality-focused zoom-out recovery.
 assert(/\.search-and-choose\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/.test(html),'Search and region selection appear in two columns');
-assert(/<div class="search-and-choose">[\s\S]*?<div class="search-area">[\s\S]*?<details id="areaSettings"/.test(html),'Both red-circled UI groups are side by side');
+assert(/<div class="search-and-choose">[\s\S]*?<div class="search-area">[\s\S]*?<div id="areaSettings"/.test(html),'Both red-circled UI groups are side by side');
 assert(!html.includes('まず都道府県を選択'),'Outdated municipality prompt is absent');
 assert(!html.includes('id="locatorPanel"')&&!html.includes("drawOverview($('locator')"),'Unneeded national locator widget and render are removed');
 const viewportSource=read('v2/progressive-preview/map-viewport.js');
@@ -117,4 +117,11 @@ viewport.setMinZoom(1);
 assert.equal(viewport.view().w,850,'Restoring original 1x limit clamps the view');
 viewport.reset();
 assert.equal(viewport.view().w,850,'Reset keeps original view');
+// R18/R19 (#302): permanent region controls and no wasted footer gap.
+assert(/<div id="areaSettings" class="region-picker"><h2 class="picker-heading">地域・表示範囲を選んで移動<\/h2>/.test(html),'Region controls stay visible without a collapsible summary');
+assert(!/<details id="areaSettings"/.test(html),'Region controls must not collapse');
+assert(/\.search-and-choose #areaSettings \.picker-heading\{font:inherit;font-weight:700/.test(html),'Picker heading matches search label font');
+assert(!html.includes('読み仮名や5桁コードでも検索できます。同名の自治体は都道府県名で確認してください。'),'Long search helper removed');
+assert(/main\{max-width:960px;margin:auto;padding:16px 12px 8px\}/.test(html),'Main bottom spacing is compact');
+assert(/@media\(max-width:600px\)\{main\{padding:10px 8px 8px\}/.test(html),'Small-screen bottom spacing is compact');
 console.log('Public nationwide tap and county detail contract: OK');
