@@ -26,7 +26,7 @@
   if(!(ratio>0))return {visible:models.map(()=>false),labels};
   const result=models.map(()=>false),placed=labels.slice();
   const factors={sparse:9500,normal:5900,dense:3100};
-  const marginPx={sparse:9,normal:3,dense:0};
+  const marginPx={sparse:9,normal:3,dense:1};
   const tilePx={sparse:150,normal:115,dense:90};
   // Dense and standard modes show every non-overlapping eligible label.
   // A global count ceiling used to leave obvious blank municipal areas.
