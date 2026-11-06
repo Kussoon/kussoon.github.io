@@ -21,7 +21,7 @@ async function focus(page,query){
  const page=app.page;
  try{
   await app.open();
-  await page.goto(page.url().replace('official-2026-nationwide-pilot.html','label-zoom-trial-v319.html'));
+  await page.goto(page.url().replace('official-2026-nationwide-pilot.html','label-zoom-trial-v320.html'));
   await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:30000});
   await page.waitForFunction(()=>document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
   assert.equal(await page.locator('#readingMode').inputValue(),'off','readings stay off initially');
@@ -97,7 +97,7 @@ async function focus(page,query){
    }
   }
   // The baseline link option reproduces the merged zoom overlap allowance.
-  await page.goto(page.url().replace(/label-zoom-trial\.html.*/, 'label-zoom-trial-v319.html?labels=baseline'));
+  await page.goto(page.url().replace(/label-zoom-trial\.html.*/, 'label-zoom-trial-v320.html?labels=baseline'));
   await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:30000});
   await focus(page,'神戸市中央区');
   const baseline=await metrics(page);
