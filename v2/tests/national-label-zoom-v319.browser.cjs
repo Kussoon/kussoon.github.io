@@ -55,8 +55,13 @@ async function focus(page,query){
     // before asserting collisions among ordinary labels at each scale.
     await page.evaluate(()=>{const c=window.KussoonV2ProgressivePreview.controller;c.clear();c.schedule();});
     await page.waitForTimeout(250);
-    // Exercise the public +/- controls, which were the route that exposed
-    // the root-SVG CTM scale error on dense prefecture views.
+    // Reopen the exact province-wide route from the reported reproduction.
+    await page.goto(page.url().replace(/label-zoom-trial-v319\\.html.*/, 'label-zoom-trial-v319.html?pref=28'));
+    await page.waitForFunction(()=>document.querySelector('#breadcrumb')?.textContent.includes('兵庫県')&&document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
+    await page.click('#mapReset');
+    await page.waitForTimeout(500);
+    // Exercise the public +/- controls from the full prefecture view at both
+    // mobile and desktop widths.
     for(const viewport of [{width:390,height:844},{width:1280,height:900}]){
      await page.setViewportSize(viewport);
      await page.waitForTimeout(300);
