@@ -202,6 +202,14 @@ assert(!html.includes('吹き出しは上部の帯で上下に移動でき、×�
 // A region-specific learning page uses the unchanged nationwide renderer.
 assert(/new URLSearchParams\(location\.search\)\.get\('pref'\)/.test(html),'Prefecture deep link accepts pref query parameter');
 assert(/manifest\.entries\.find\(item=>item\.pref===requestedPref\)/.test(html),'Only prefectures present in the live manifest are accepted');
-assert(/if\(matchedPref\)\{paint\(\);void goPref\(requestedPref\);\}/.test(html),'Recognized prefectures open the existing goPref path');
+assert(/else if\(matchedPref\)\{paint\(\);void goPref\(requestedPref\);\}/.test(html),'Recognized prefectures still open the existing goPref path');
 assert(/else\{paint\(\);\$\('status'\)/.test(html),'Unknown query values keep national initial display');
+// Approved national-map study mode: same rendering, only focus/mask the names.
+assert(/new URLSearchParams\(location\.search\)\.get\('studyPref'\)/.test(html),'Study mode accepts explicit studyPref codes');
+assert(/manifest\.entries\.find\(item=>item\.pref===requestedStudyPref\)/.test(html),'Study mode allows only manifest prefectures');
+assert(html.includes("body.study-pref-view #map [data-progressive-labels] [data-national-code]:not("),'Study mode hides only other-prefecture labels after national layout');
+assert(html.includes('const feature=overview.features.find(f=>f.properties.code===requestedStudyPref);'),'Study mode fits actual prefecture geometry');
+assert(html.includes('viewport.setView({x:(minX+maxX-width)/2'),'Study mode focuses viewport without changing projection');
+assert(html.includes("document.body.classList.remove('study-pref-view');"),'Leaving study mode restores normal nationwide labels');
+assert(html.includes('KussoonV2NationalProgressive.create('),'Existing progressive national label engine retained');
 console.log('Public nationwide tap and county detail contract: OK');
