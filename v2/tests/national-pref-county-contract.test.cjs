@@ -166,6 +166,27 @@ assert(/readingPartsFor\(r\.code\)/.test(html),'Tokyo prefix reading is retained
 assert(/return \{\.\.\.r,name:full,labelName:full\}/.test(html),'Default prefecture label models provide full name in legacy and new fields');
 assert(/return \{\.\.\.r,name:full,labelName:full,readingParts:parts/.test(html),'Tokyo ward model includes full name and verified readings');
 for(const asset of ['place-labels.js','established-label-adapter.js','national-progressive-labels.js']){
- assert(html.includes(asset+'?v=306'),'Updated asset gets a new cache key: '+asset);
+ assert(html.includes(asset+'?v=307'),'Updated asset gets a new cache key: '+asset);
+}
+// R05/R07/R08: two-line city/ward (and verified county/town) labels, even readings OFF.
+const placeLabelsSource=read('v2/shared/place-labels.js');
+const adapterText=read('v2/shared/established-label-adapter.js');
+const adminSource=read('v2/progressive-preview/administrative-labels.js');
+assert(/const split=Array\.isArray\(region\.readingParts\)/.test(placeLabelsSource),'Prefecture label renderer recognizes two verified parts');
+assert(/split\?\[\s*\{text:split\[0\]\.name,small:false,y:-9\},\s*\{text:split\[1\]\.name,small:false,y:11\}/.test(placeLabelsSource),'Reading OFF renders city and ward on two rows');
+assert(/split\?\[\s*\{text:split\[0\]\.name,size,y:-9\},\s*\{text:split\[1\]\.name,size,y:11\}/.test(adapterText),'Collision/territory fitting uses both non-reading rows');
+assert(/readingPartsFor\(r\.code\)/.test(html)&&/parts\.map\(p=>p\.name\)\.join\(''\)===full/.test(html),'Prefecture models reuse verified name parts');
+const administrative={};
+new Function('window',adminSource)(administrative);
+const twoRows=administrative.KussoonAdministrativeLabels.rows;
+const wardModel={name:'札幌市中央区',fullName:'札幌市中央区',major:'札幌市',
+ readingParts:[{name:'札幌市',reading:'さっぽろし'},{name:'中央区',reading:'ちゅうおうく'}]};
+assert.deepEqual(Array.from(twoRows(wardModel)),['札幌市','中央区'],'Nationwide city and ward split without duplicated city');
+assert.deepEqual(Array.from(twoRows({...wardModel,readingParts:null})),['札幌市','中央区'],'Cached source fallback does not duplicate city name');
+const tokyoModel={name:'東京都新宿区',fullName:'東京都新宿区',readingParts:[{name:'東京都',reading:'とうきょうと'},{name:'新宿区',reading:'しんじゅくく'}]};
+assert.deepEqual(Array.from(twoRows(tokyoModel)),['東京都','新宿区'],'Tokyo special ward splits into prefecture and ward');
+assert.deepEqual(Array.from(twoRows({name:'川辺郡猪名川町',fullName:'川辺郡猪名川町',county:'川辺郡',readingParts:[{name:'川辺郡',reading:'かわべぐん'},{name:'猪名川町',reading:'いながわちょう'}]})),['川辺郡','猪名川町'],'County and municipality use two lines');
+for(const asset of ['place-labels.js','established-label-adapter.js','national-progressive-labels.js','administrative-labels.js']){
+ assert(html.includes(asset+'?v=307'),'Two-line label code uses fresh cache key for '+asset);
 }
 console.log('Public nationwide tap and county detail contract: OK');

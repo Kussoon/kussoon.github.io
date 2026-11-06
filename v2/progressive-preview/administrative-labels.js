@@ -8,13 +8,20 @@
 const NS='http://www.w3.org/2000/svg';
 function rows(model){
  if(!model||typeof model.name!=='string')return null;
+ // Verified name parts are authoritative for city/ward, county/town,
+ // and Tokyo special ward names. They are also used by reading mode.
+ const parts=model.readingParts;
+ const formal=model.fullName||model.labelName||model.name;
+ if(Array.isArray(parts)&&parts.length===2&&
+    parts.every(p=>p.name)&&parts.map(p=>p.name).join('')===formal)
+  return parts.map(p=>p.name);
  const parent=model.county ||
    (typeof model.major==='string'&&model.major.endsWith('郡')?model.major:null) ||
    (typeof model.major==='string'&&model.major.endsWith('市')&&model.name.endsWith('区')?model.major:null);
  if(!parent)return null;
- // A designated city is a parent of a ward; a county is a parent of a town/village.
- if(parent.endsWith('郡')&&!/[町村]$/.test(model.name))return null;
- return [parent,model.name];
+ const child=model.name.startsWith(parent)?model.name.slice(parent.length):model.name;
+ if(parent.endsWith('郡')&&!/[町村]$/.test(child))return null;
+ return child?[parent,child]:null;
 }
 function widestRowModel(model,size,measure){
  const pair=rows(model);

@@ -204,16 +204,16 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <script src="/v2/common/js/readable-labels.js"></script>
 <script src="/v2/common/js/collision-refinement.js"></script>
 <script src="/v2/common/js/region-fit.js"></script>
-<script src="/v2/shared/established-label-adapter.js?v=306"></script>
-<script src="/v2/shared/place-labels.js?v=306"></script>
+<script src="/v2/shared/established-label-adapter.js?v=307"></script>
+<script src="/v2/shared/place-labels.js?v=307"></script>
 <script src="/v2/shared/reading-bridge.js"></script>
-<script src="/v2/progressive-preview/administrative-labels.js"></script>
+<script src="/v2/progressive-preview/administrative-labels.js?v=307"></script>
 <script src="/v2/progressive-preview/national-readings.js"></script>
 <script src="/v2/national/density-labels.js"></script>
 <script src="/v2/progressive-preview/progressive-geometry.js"></script>
 <script src="/v2/progressive-preview/progressive-geometry-client.js"></script>
 <script src="/v2/progressive-preview/county-overlay.js"></script>
-<script src="/v2/progressive-preview/national-progressive-labels.js?v=306"></script>
+<script src="/v2/progressive-preview/national-progressive-labels.js?v=307"></script>
 <script src="/v2/shared/municipality-quiz.js"></script>
 <script src="/v2/common/js/office-directory.js"></script>
 <script>
@@ -372,12 +372,12 @@ function drawLabels(){
  // dropdown and popup; never substitute short ward names in prefecture view.
  const displayRegions=current.regions.map(r=>{
   const full=nationalLabels?.fullNameFor(r.code)||r.fullName||r.name;
-  // The Tokyo prefix is part of the displayed name and its verified reading
-  // parts; do not mutate the geographic municipality's original source name.
-  if(/^131(0[1-9]|1[0-9]|2[0-3])$/.test(r.code)){
-   const parts=nationalLabels?.readingPartsFor(r.code);
-   if(parts?.length===2)return {...r,name:full,labelName:full,readingParts:parts,reading:parts.map(p=>p.reading).join('')};
-  }
+  // The verified two-part name works for all designated-city wards,
+  // Tokyo special wards and confirmed county/municipality pairs.
+  // Source geography and official municipality codes remain untouched.
+  const parts=nationalLabels?.readingPartsFor(r.code);
+  if(parts?.length===2&&parts.map(p=>p.name).join('')===full)
+   return {...r,name:full,labelName:full,readingParts:parts,reading:parts.map(p=>p.reading).join('')};
   return {...r,name:full,labelName:full};
  });
  let positions=null;
