@@ -47,7 +47,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
     const motion=await page.evaluate(()=>({reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,body:document.body.className,sheet:!![...document.styleSheets].find(x=>x.href?.includes('prefecture-colors.css')),rules:(()=>{const x=[...document.styleSheets].find(x=>x.href?.includes('prefecture-colors.css'));try{return x?.cssRules?.length}catch(e){return e.message}})(),href:[...document.styleSheets].find(x=>x.href?.includes('prefecture-colors.css'))?.href}));
     console.log('S39 PULSE DIAG',JSON.stringify({engine,pref,motion,selected}));
     if(motion.reduced)assert.equal(selected.animation,'none','reduced-motion disables pulse');
-    else assert.equal(selected.animation,'kussoon-selected-area-pulse','only selected path animates');
+    else assert.equal(selected.animation,'kussoon-selected-area-two-tone','only selected path animates');
     assert.equal(await page.locator('#map path.land.chosen').count(),1,'single selected region');
     await page.locator('#region').evaluate(el=>{el.value='';el.dispatchEvent(new Event('change',{bubbles:true}));});
     await page.waitForFunction(()=>document.querySelectorAll('#map path.land.chosen').length===0);
