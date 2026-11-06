@@ -29,4 +29,18 @@ assert.equal(popupHeading('大阪市鶴見区','大阪市',2),'大阪市鶴見�
 assert.equal(popupHeading('鶴見区','大阪市',2),'大阪市鶴見区');
 assert.equal(popupHeading('川辺郡猪名川町','',1),'川辺郡猪名川町');
 assert.equal(popupHeading('神戸市中央区','神戸市',2),'神戸市中央区');
+// R07/R08/R15/R16/R17/R18/R35/R36: production search-first layout and draggable information popup.
+const searchPosition=html.indexOf('<section class="panel" aria-label="地域を探す">');
+const mapPosition=html.indexOf('<section class="panel map-panel"');
+assert(searchPosition>=0&&mapPosition>searchPosition,'Search and region select must appear before map');
+assert(/<link rel="canonical" href="https:\/\/kussoon\.com\/maps\/national-municipalities\.html">/.test(html),'Production canonical URL');
+assert(!/noindex|【試作】|正式版には反映していません/.test(html),'Production page has no trial branding');
+assert(/id="placeSearch"/.test(html)&&/id="areaSettings"/.test(html),'Search and region picker preserved');
+assert(/id="popupReading" class="popup-reading" hidden/.test(html),'Popup has initial-off reading line');
+assert(/syncPopupReading\(code,r\)/.test(html),'Popup reading is synced when opening');
+assert(/\$\('readingMode'\)\.addEventListener\('change',[\s\S]*?syncPopupReading/.test(html),'Readings update with ON/OFF');
+assert(/cursor:ns-resize/.test(html)&&/setPointerCapture\(event\.pointerId\)/.test(html),'Vertical-only popup handle preserved');
+assert(/Math\.max\(minimum,Math\.min\(maximum,desired\)\)/.test(html),'Vertical drag bounded to keep handle visible');
+assert(/\.popup-scroll\{[^\n]*overflow:auto/.test(html),'Popup body retains independent scrolling');
+assert(/id="popupClose"/.test(html),'Popup close control preserved');
 console.log('Public nationwide tap and county detail contract: OK');
