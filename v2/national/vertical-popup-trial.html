@@ -60,7 +60,10 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 .office-popup{position:absolute;left:8px;right:auto;bottom:8px;z-index:5;width:min(350px,calc(100% - 128px));max-height:calc(100% - 16px);box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid #86aac2;border-radius:10px;padding:9px;box-shadow:0 5px 18px #2345}
 .office-popup[hidden]{display:none}
 .popup-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-shrink:0;margin-bottom:4px}
-.popup-head strong{min-width:0;overflow-wrap:anywhere}.popup-close{min-width:44px;min-height:44px;font-size:20px;flex-shrink:0}
+.popup-heading{display:flex;flex-direction:column;min-width:0;line-height:1.35}
+.popup-head strong{min-width:0;overflow-wrap:anywhere}
+.popup-reading{font-size:12px;font-weight:600;color:#315b74;overflow-wrap:anywhere}
+.popup-reading[hidden]{display:none}.popup-close{min-width:44px;min-height:44px;font-size:20px;flex-shrink:0}
 .popup-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;scroll-padding-block:8px}
 .popup-content{padding:0 2px 0}
 .popup-facility{border-bottom:1px solid #ccdbe4;margin:5px 0;padding:4px 0}
@@ -91,7 +94,7 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 <button type="button" id="mapReadingToggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button>
 </div>
 <aside id="officePopup" class="office-popup" aria-label="自治体情報" hidden>
-<div class="popup-head"><strong id="popupName"></strong><button type="button" id="popupClose" class="popup-close" aria-label="吹き出しを閉じる">×</button></div>
+<div class="popup-head"><div class="popup-heading"><strong id="popupName"></strong><span id="popupReading" class="popup-reading" hidden></span></div><button type="button" id="popupClose" class="popup-close" aria-label="吹き出しを閉じる">×</button></div>
 <div class="popup-scroll" id="popupScroll" tabindex="0" aria-label="庁舎情報とリンクをスクロール"><div class="popup-content"><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></div></div>
 </aside>
 </div>
@@ -187,6 +190,16 @@ async function getOffices(code){
  if(!officeCache.has(code))officeCache.set(code,fetch('/v2/data/offices/'+code+'.json?v=6').then(r=>{if(!r.ok)throw Error('office HTTP '+r.status);return r.json();}).then(d=>{if(d.schemaVersion!==2||d.prefecture!==code||!d.regions||!d.offices)throw Error('office schema');return d;}).catch(e=>{console.warn(e);officeCache.delete(code);return null;}));
  return officeCache.get(code);
 }
+// R07/R08: show only source-verified readings; do not derive readings from kanji.
+function syncPopupReading(code,region){
+ const node=$('popupReading');
+ const parts=nationalLabels?.readingPartsFor(code)||region?.readingParts||[];
+ const valid=Array.isArray(parts)&&parts.length>0&&parts.every(p=>p.name&&p.reading);
+ const text=valid?parts.map(p=>p.reading).join(''):'';
+ const show=$('readingMode').value==='on'&&Boolean(text);
+ node.textContent=show?text:'';
+ node.hidden=!show;
+}
 // PR #259: popup height follows content, never a fixed four-button height.
 function renderOfficePopup(){
  const national=!current&&nationalView?nationalLabels?.selection():null,entry=current||national?.entry;
@@ -198,6 +211,7 @@ function renderOfficePopup(){
  // R07/R17: Use the same municipality name as the map label. Do not append the parent city twice.
  const parentName=result.parentRegion?.name||'';
  $('popupName').textContent=parentName&&result.offices.length>1&&!selectedName.startsWith(parentName)?parentName+selectedName:selectedName;
+ syncPopupReading(code,r);
  KussoonOfficeDirectory.render(document,$('popupActions'),result,r.fullName||r.name);
  $('popupNote').textContent=!entry.offices?(officeReady.has(national?.pref||$('pref').value)?'庁舎データを取得できませんでした。':'この地域の庁舎情報は今後追加します。'):(result.offices.length&&result.offices.every(o=>o.status==='verified')?'住所は参考情報です。リンクは別タブで開きます。':'庁舎情報に未確認の項目があります。');
  popup.hidden=false;
@@ -463,7 +477,12 @@ $('quizNext').addEventListener('click',()=>{if(!quizSession)return;quizSession.n
 $('placeSearch').addEventListener('input',updateSearch);
 $('showNames').addEventListener('change',drawLabels);
 function syncMapReadingToggle(){const on=$('readingMode').value==='on';$('mapReadingToggle').textContent='よみがな '+(on?'ON':'OFF');$('mapReadingToggle').setAttribute('aria-pressed',String(on));$('mapReadingToggle').disabled=$('readingMode').disabled;}
-$('readingMode').addEventListener('change',()=>{syncMapReadingToggle();drawLabels();});
+$('readingMode').addEventListener('change',()=>{
+ syncMapReadingToggle();drawLabels();
+ const national=!current&&nationalView?nationalLabels?.selection():null;
+ const entry=current||national?.entry,code=current?$('region').value:national?.code||'';
+ if(entry&&code&&!$('officePopup').hidden)syncPopupReading(code,entry.regions.find(r=>r.code===code));
+});
 $('mapReadingToggle').addEventListener('click',()=>{if($('readingMode').disabled)return;$('readingMode').value=$('readingMode').value==='on'?'off':'on';$('readingMode').dispatchEvent(new Event('change'));});
 $('pref').addEventListener('change',()=>{if(quizSession)stopQuiz();$('placeSearch').value='';goPref($('pref').value);});
 $('region').addEventListener('change',()=>{if(quizSession)return;dismissedPopupCode=null;paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
