@@ -267,6 +267,67 @@ function renderOfficePopup(){
  requestAnimationFrame(syncPopupScrollControls);
 }
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
+// Accessible downward-only pickers. Native select values remain the existing app state.
+function closeChoicePickers(){
+ for(const type of ['pref','region']){
+  $(type+'Choices').hidden=true;
+  $(type+'Trigger').setAttribute('aria-expanded','false');
+ }
+}
+function syncChoicePicker(type){
+ const native=$(type),trigger=$(type+'Trigger'),host=$(type+'Choices');
+ trigger.disabled=native.disabled;
+ const selected=native.options[native.selectedIndex];
+ const fallback=type==='pref'?'都道府県を選ぶ':'まず都道府県を選択';
+ trigger.firstChild.textContent=(native.value&&selected?selected.textContent:fallback)+' ';
+ if(host.hidden)return;
+ buildChoices(type);
+}
+function buildChoices(type){
+ const native=$(type),host=$(type+'Choices');
+ host.replaceChildren();
+ if(native.disabled)return;
+ const options=Array.from(native.options).filter(option=>option.value);
+ for(const option of options){
+  const button=document.createElement('button');
+  button.type='button';
+  button.textContent=option.textContent;
+  button.setAttribute('aria-pressed',String(option.value===native.value));
+  button.addEventListener('click',()=>{
+   const next=option.value;
+   closeChoicePickers();
+   if(native.value===next)return;
+   native.value=next;
+   syncChoicePicker(type);
+   native.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+  host.append(button);
+ }
+}
+for(const type of ['pref','region']){
+ const trigger=$(type+'Trigger'),host=$(type+'Choices');
+ trigger.addEventListener('click',()=>{
+  if(trigger.disabled)return;
+  const open=host.hidden;
+  closeChoicePickers();
+  if(open){
+   buildChoices(type);
+   host.hidden=false;
+   trigger.setAttribute('aria-expanded','true');
+  }
+ });
+ new MutationObserver(()=>syncChoicePicker(type)).observe($(type),{childList:true,attributes:true,attributeFilter:['disabled'],subtree:true});
+}
+document.addEventListener('click',e=>{if(!e.target.closest('#prefPicker,#regionPicker'))closeChoicePickers();});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape')closeChoicePickers();
+});
+function syncChoicePickers(){
+ syncChoicePicker('pref');
+ syncChoicePicker('region');
+}
+
+syncChoicePickers();
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive)nationalLabels?.schedule();}});
 const progressiveStore=progressive?KussoonV2NationalProgressive.createStore({load:fetchPrefEntry,byteCapacity:12*1048576,pinned:()=>nationalView?'':$('pref').value,onEvict:key=>nationalLabels?.releaseGeometry(key)}):null;
 const number=(n)=>n.toLocaleString('ja-JP');
