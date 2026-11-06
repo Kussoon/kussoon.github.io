@@ -78,6 +78,6 @@ const trialHtml = fs.readFileSync(
 );
 assert.match(trialHtml, /name="robots" content="noindex,nofollow"/);
 assert.match(trialHtml, /density-labels-trial\.js/);
-assert.match(trialHtml, /national-progressive-labels-trial\.js/);
+assert.match(trialHtml, /national-progressive-labels-trial-v319\.js/);
 console.log('PASS: no-overlap trial shows ' + shown.length + '/' + trial.models.length +
   ' labels; baseline overlaps ' + baselineOverlaps + ' pairs.');
