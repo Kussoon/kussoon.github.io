@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map.",
   "rules": {
     "R01": {
       "paths": [
@@ -237,7 +237,8 @@
         "S23"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_only_safari_and_browser_unverified"
+      "test_scope": "public_static_layout_only_safari_unverified",
+      "decision": "PR #299: + / - half-width row (plus on left), reset and reading controls below, fullscreen separate at top-right. 14px/13px labels and 22px symbols."
     },
     "R14": {
       "paths": [
@@ -245,13 +246,14 @@
         "v2/progressive-preview/map-viewport.js"
       ],
       "tests": [
-        "v2/tests/pilot-map-ui.browser.cjs"
+        "v2/tests/pilot-map-ui.browser.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S19"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial"
+      "test_scope": "public_static_layout_only_safari_unverified"
     },
     "R15": {
       "paths": [
@@ -614,8 +616,8 @@
       ],
       "legacy_ids": [],
       "coverage_gap": true,
-      "test_scope": "public_static_contract_only_safari_not_verified",
-      "decision": "PR #298 supersedes #297: popup shown at bottom left in fullscreen, not suppressed; native or viewport-filled mode remains."
+      "test_scope": "public_static_layout_only_safari_unverified",
+      "decision": "PR #299: fullscreen button at top-right in both modes, popup retained bottom-left as in #298."
     },
     "R38": {
       "paths": [
