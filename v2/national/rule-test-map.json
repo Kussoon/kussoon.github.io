@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar. ",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes.",
   "rules": {
     "R01": {
       "paths": [
@@ -322,9 +322,10 @@
         "S46"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_only_safari_and_browser_unverified",
+      "test_scope": "public_static_contract_only_safari_not_verified",
       "user_decision": "Support keyboard activation of municipality map targets with Enter/Space and select the first search result with Enter. Confirmed by user 2026-11-06 JST.",
-      "implementation_status": "not_implemented_in_public_map"
+      "implementation_status": "not_implemented_in_public_map",
+      "decision": "PR #298: municipality search results in ascending municipality code order before 35-result cutoff."
     },
     "R19": {
       "paths": [
@@ -340,7 +341,8 @@
         "S49"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_only_safari_and_browser_unverified"
+      "test_scope": "public_static_contract_only_safari_not_verified",
+      "decision": "PR #298: routine diagnostic status hidden, loading/errors visible; comparison link removed; shortened loading notice."
     },
     "R20": {
       "paths": [
@@ -612,8 +614,8 @@
       ],
       "legacy_ids": [],
       "coverage_gap": true,
-      "test_scope": "public_static_only_fullscreen_iphone_fallback_unverified",
-      "decision": "Map-only mode suppresses popup; native Fullscreen API where available, fixed viewport on iPhone Safari."
+      "test_scope": "public_static_contract_only_safari_not_verified",
+      "decision": "PR #298 supersedes #297: popup shown at bottom left in fullscreen, not suppressed; native or viewport-filled mode remains."
     },
     "R38": {
       "paths": [
