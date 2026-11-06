@@ -31,7 +31,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await page.locator('#mapReadingToggle').getAttribute('aria-pressed'),'false');
    await page.locator('#areaSettings').evaluate(el=>{el.open=true;});
    for(const pref of ['04','07','28']){
-    await page.selectOption('#pref',pref);
+    await page.locator('#pref').evaluate((el,value)=>{el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));},pref);
     await page.waitForFunction(code=>(document.querySelector('#status')?.textContent||'').includes('市区町村を選べます')&&document.querySelector('#pref')?.value===code,pref,{timeout:90000});
     await page.waitForFunction(()=>document.querySelector('#map path.land[style*="pref-color"]')!==null,{},{timeout:30000});
     const code=await page.locator('#region option:not([value=""])').first().getAttribute('value');
