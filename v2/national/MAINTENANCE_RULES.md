@@ -1,6 +1,6 @@
 # Kussoon V2 地図開発・確定仕様規則集
 
-初回監査基準: 2026-11-06（日本時間）、main `476a6f91dbb7a95a99bb10caf571c125411ca9d2`（PR #290まで）。**追補: PR #292〜#304のマージ済み変更を反映。#291はこの文書を整備するDraft PRであり、#292以降のPR集計は下記追補で別管理。****このファイルを今後の地図開発で参照する唯一の規則集**とする。既存の[PR #1〜#245照合台帳](../audit/v2-national-pr-ledger-20261104.md)、[S01〜S49の当時の到達状況](../audit/v2-national-current-spec-20261104.md)、[不整合記録](../audit/v2-national-regressions-20261104.md)、[回帰計画](../audit/v2-national-regression-test-plan-20261104.md)は証拠・履歴である。以前のA/B/Cは当時のpilotについての判定であり、現在の公開版へ転記しない。
+初回監査基準: 2026-11-06（日本時間）、main `476a6f91dbb7a95a99bb10caf571c125411ca9d2`（PR #290まで）。**追補: PR #292〜#305のマージ済み変更を反映。#291はこの文書を整備するDraft PRであり、#292以降のPR集計は下記追補で別管理。****このファイルを今後の地図開発で参照する唯一の規則集**とする。既存の[PR #1〜#245照合台帳](../audit/v2-national-pr-ledger-20261104.md)、[S01〜S49の当時の到達状況](../audit/v2-national-current-spec-20261104.md)、[不整合記録](../audit/v2-national-regressions-20261104.md)、[回帰計画](../audit/v2-national-regression-test-plan-20261104.md)は証拠・履歴である。以前のA/B/Cは当時のpilotについての判定であり、現在の公開版へ転記しない。
 
 **適用の優先順位:** ユーザーが実機で承認し、後続のマージ済みPRで明示された最終決定を採る。PR番号だけで判断しない。対象ページを必ず特定する。正式公開版は [`/maps/national-municipalities.html`](../../maps/national-municipalities.html)。`v2/national/map.html`は転送、`official-2026-nationwide-pilot.html`、RC1、独立試作は別経路。**「コード確認」は動作確認済みを意味しない。** 不一致が残る場合、旧仕様を無条件に復活させない。
 
@@ -8,7 +8,7 @@
 
 GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文・マージ状況を分類（#267/#282はPRではない）。既存台帳の #1〜#245 は本文・変更ファイル・取得可能なpatchを照合済みという当時の記録を再利用。今回 #246〜#290 の実在43件を追加分類し、地図関連29件／他コンテンツ14件。従って分類済み288件、未分類0件、地図関連247件（既存218＋今回29）、その他41件。追補43件は取得できた差分も確認し、重点6件（#91/#244/#259/#287/#288/#290）はCSS・JSの決定を個別に照合した。地域6リポジトリは実在59件を一覧分類し、操作・表示仕様に関係する19件の本文と差分を照合した。合計347件を分類（地図仕様関連266件／その他81件、未分類0件）。レビューの全件再調査、承認の実機原本、地域公開ページの全件実操作は未確認。
 
-※ 初回の集計数値（288件／347件／34規則など）はPR #290時点の監査スナップショット。後続の13件（#292〜#304）とR35〜R38は追補で管理し、全履歴の再監査済み件数として上書きしない。
+※ 初回の集計数値（288件／347件／34規則など）はPR #290時点の監査スナップショット。後続の14件（#292〜#305）とR35〜R38は追補で管理し、全履歴の再監査済み件数として上書きしない。
 
 状態欄: **限定確認**=既存の対象限定テスト等／**コード確認**=現行ソースを照合したが公開実操作未確認／**要確認**=採否または実動作不足／**不整合**=根拠のある差異。古いS-IDは既存台帳の仕様番号。以下のR-IDが今後の変更影響を追跡する番号であり、個々の規則は表の1行で管理する。コード・テスト欄の相対名はリポジトリ内の現行ファイル。PRリンクと旧S-IDを[履歴台帳](../audit/v2-national-pr-ledger-20261104.md)と突き合わせる。
 
@@ -30,15 +30,15 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R05 地名の表示対象|全国地名は段階的に描画し、県別詳細では周辺の市区町村名を**常時表示**する（#300）。可視の『周辺の市区町村名を表示』チェック欄は設けない。読み仮名のON/OFFはR08に従う。選択中の名前も表示。**例外:** 場所当てクイズ中は答えの露出を防ぐため地名を隠す従来動作を維持。旧5Cの固定密度を全国公開版へ無条件適用しない。|[#79](https://github.com/Kussoon/kussoon.github.io/pull/79) [#100](https://github.com/Kussoon/kussoon.github.io/pull/100) [#217](https://github.com/Kussoon/kussoon.github.io/pull/217) [#260](https://github.com/Kussoon/kussoon.github.io/pull/260) [#263](https://github.com/Kussoon/kussoon.github.io/pull/263) [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#300](https://github.com/Kussoon/kussoon.github.io/pull/300)|`national-progressive-labels.js`<br>`v2/shared/established-label-adapter.js`|`pilot-label-scope.browser.cjs`<br>`national-2026-rc1.browser.cjs`<br>`v2/tests/national-pref-county-contract.test.cjs`（UIの静的検査）|正式版コード確認／Safari実機未確認|
+|R05 地名の表示対象|全国の地名を段階描画し、県別詳細では周辺市区町村名を常時表示する（場所当てクイズ中は答えの名称を隠す）。**#305:** 県別と全国両方の地図上ラベルは短いsource nameではなく、コード照合された正式な `fullName` を使う。地名の文字幅・衝突調整・区域内収まりも正式名称を計測し、手動座標補正をしない。政令市区と東京都23区はR07に従う。|[#79](https://github.com/Kussoon/kussoon.github.io/pull/79) [#100](https://github.com/Kussoon/kussoon.github.io/pull/100) [#217](https://github.com/Kussoon/kussoon.github.io/pull/217) [#260](https://github.com/Kussoon/kussoon.github.io/pull/260) [#263](https://github.com/Kussoon/kussoon.github.io/pull/263) [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#300](https://github.com/Kussoon/kussoon.github.io/pull/300) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305)|`national-progressive-labels.js`<br>`v2/shared/established-label-adapter.js`|`pilot-label-scope.browser.cjs`<br>`national-2026-rc1.browser.cjs`<br>`v2/tests/national-pref-county-contract.test.cjs`（UIの静的検査）|2026索引による名称検査・構文確認／Safari・Edge実機未確認|
 |R06 位置の根拠|地物内の代表点と連続成分を使い、恣意的な個別座標を増やさない。田尻町の空港島など飛地は検証済み庁舎側を優先する旧5Cの根拠を保持。 **条件・例外:** 旧5Cと現行balanced/段階索引の同等性は未確定。全県品質を自動合格としない。|[#94](https://github.com/Kussoon/kussoon.github.io/pull/94) [#95](https://github.com/Kussoon/kussoon.github.io/pull/95) [#100](https://github.com/Kussoon/kussoon.github.io/pull/100) [#146](https://github.com/Kussoon/kussoon.github.io/pull/146) [#253](https://github.com/Kussoon/kussoon.github.io/pull/253) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261)|`v2/shared/established-label-adapter.js`<br>`v2/progressive-preview/label-index.json`|`compare-2026-labels.browser.cjs`|要確認|
-|R07 区・郡付き名称|地図ラベル・詳細吹き出し見出しは同じ自治体名を用いる。政令市区は「大阪市鶴見区」のように市名＋区名（親市名を後置して重複させない）。郡付き町村は確認済みの郡名＋町村名。**条件・例外:** 郡情報は確認済み2026コード・名称一致922件に限定し、39405等は推測しない。区＋親市の二施設情報自体はR17で維持。|[#214](https://github.com/Kussoon/kussoon.github.io/pull/214)–[#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#292](https://github.com/Kussoon/kussoon.github.io/pull/292) [#293](https://github.com/Kussoon/kussoon.github.io/pull/293)|`county-overlay.js`<br>`national-progressive-labels.js`<br>`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`|`progressive-county-labels.test.cjs`<br>`national-pref-county-contract.test.cjs`（静的＋名称例）|コード確認・試作/公開実機未確認|
+|R07 区・郡付き名称|市区町村の地図上ラベル・検索候補・県内選択欄・吹き出し見出しは、同じ5桁コードに対して同一の正式名称を用いる。**政令市区：札幌市南区・横浜市鶴見区・大阪市北区・神戸市中央区のように『市名＋区名』を必須とし、区名だけに戻さない。東京都23特別区（13101〜13123）：『東京都千代田区』『東京都新宿区』など必ず『東京都＋区名』とする（#305）。** 郡付き町村は確認済みの郡名＋町村名を用い、未確認郡名は推測しない。もとの行政区域geometryと名称は変更せず、表示専用モデルで統一する。親市名を吹き出し末尾に二重追加しない。|[#214](https://github.com/Kussoon/kussoon.github.io/pull/214)–[#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#292](https://github.com/Kussoon/kussoon.github.io/pull/292) [#293](https://github.com/Kussoon/kussoon.github.io/pull/293) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305)|`county-overlay.js`<br>`national-progressive-labels.js`<br>`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`|`progressive-county-labels.test.cjs`<br>`national-pref-county-contract.test.cjs`（静的＋名称例）|2026索引による名称検査・構文確認／Safari・Edge実機未確認|
 
 ## 4. 読み仮名・初期表示
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R08 よみ初期OFF|全国の漢字のみ初期OFFを維持。読みONのときだけ確認済みコード/名称/partsの読みを地図ラベルと**正式版の吹き出し見出し**にも表示し、OFFで即時に消す。欠落は推測しない。#295試作を#296で正式採用。|[#223](https://github.com/Kussoon/kussoon.github.io/pull/223) [#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#295](https://github.com/Kussoon/kussoon.github.io/pull/295) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296)|`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`national-progressive-labels.js`<br>`reading-bridge.js`<br>`maps/national-municipalities.html`|`national-readings.test.cjs`（既知6失敗）<br>試作吹き出しON/OFF/未確認読みのブラウザ回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|正式版採用・コード確認／Safari未検証|
+|R08 よみ初期OFF|よみがなは初期OFF。ONのときだけ確認済みコード・名称・partsの読みを表示し、不明な読みは推測しない。地図ラベルと吹き出し見出しのON/OFFは連動。**#305:** 東京都23区の『東京都』に対応する読み『とうきょうと』を表示専用partsへ追加し、既存の区名の確認済み読みと組み合わせる（例『東京都新宿区／とうきょうとしんじゅくく』）。他の自治体には都名を追加しない。|[#223](https://github.com/Kussoon/kussoon.github.io/pull/223) [#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#295](https://github.com/Kussoon/kussoon.github.io/pull/295) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305)|`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`national-progressive-labels.js`<br>`reading-bridge.js`<br>`maps/national-municipalities.html`|`national-readings.test.cjs`（既知6失敗）<br>試作吹き出しON/OFF/未確認読みのブラウザ回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|2026索引による名称検査・構文確認／Safari・Edge実機未確認|
 
 ## 5. 区域の選択・色分け・点滅
 
@@ -72,7 +72,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R17 二施設・6枠|政令市区は区役所→親市役所を別施設として同じ吹き出し内に表示し、それぞれ3リンク枠を持つ。**見出しは地図ラベルと同じ『市名＋区名』とし、親市名の後置重複を禁止（#293）。** 公式URLがA以外の場合は枠を無効表示するため有効リンクが必ず6個とは限らない。|[#87](https://github.com/Kussoon/kussoon.github.io/pull/87) [#91](https://github.com/Kussoon/kussoon.github.io/pull/91) [#93](https://github.com/Kussoon/kussoon.github.io/pull/93) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290) [#293](https://github.com/Kussoon/kussoon.github.io/pull/293)|`office-directory.js`<br>`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`|`office-directory.test.cjs`<br>`national-pref-county-contract.test.cjs`（見出し）<br>`pilot-ui.browser.cjs`（pilot）|コード確認・表示回帰未実施|
+|R17 二施設・6枠|政令市の区では区役所と親市役所を別施設として表示し、それぞれ公式/Wikipedia/行先の3枠（計6枠）を保持。吹き出し見出しは『市名＋区名』とし親市名を後置重複しない（#293）。**#305:** 県別地図でもラベルを同じ正式名称にし、札幌市・横浜市などの区を短い区名だけに戻さない。東京都23区は政令市区と異なり都名付きで表示するが、存在しない『親市役所』を捏造しない。|[#87](https://github.com/Kussoon/kussoon.github.io/pull/87) [#91](https://github.com/Kussoon/kussoon.github.io/pull/91) [#93](https://github.com/Kussoon/kussoon.github.io/pull/93) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290) [#293](https://github.com/Kussoon/kussoon.github.io/pull/293) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305)|`office-directory.js`<br>`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`|`office-directory.test.cjs`<br>`national-pref-county-contract.test.cjs`（見出し）<br>`pilot-ui.browser.cjs`（pilot）|2026索引による名称検査・構文確認／Safari・Edge実機未確認|
 
 ## 10. 検索・都道府県切替・ナビゲーション
 
@@ -276,3 +276,14 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 ## 2026-11-06 追補：PR #304 検索・地域選択を縦並びに戻す
 
 [#304](https://github.com/Kussoon/kussoon.github.io/pull/304) で、#301の検索・地域選択の横並び2列を**縦並び1列に置換**した。#302の地域選択パネル常時展開、#300の県3列/市区町村下方向、#303の軽量な市区町村索引による先行有効化を維持する。冒頭案内は『吹き出しは上下に移動でき、×で閉じられます。』『区域の点滅は、もう一度押すと止まります。』『地図内のボタンでよみがなが出せます。』の順。該当規則はR11/R18/R19。既存の横並び2列のテスト期待値を縦並びへ更新した。HTML内JavaScript構文と静的/viewportモック契約は確認済み、iPhone Safariでの表示は未確認。
+
+## 2026-11-06 追補：PR #305 政令市区と東京都23区の正式地名ラベル
+
+[#305](https://github.com/Kussoon/kussoon.github.io/pull/305) でR05/R07/R08/R17を更新。旧県別描画は `region.name`（『南区』『北区』）をラベル・衝突計算に使い、全国地名索引の `fullName`（『札幌市南区』『横浜市鶴見区』）と不一致だった。県別描画は同じ5桁コードを持つ全国索引の正式名をラベルと文字幅計算に採用し、**市名を落とさない**。全国段階描画も正式名を使う。通常の行政区域名・座標・ジオメトリは改変しない。
+
+- **政令市の区:** 『札幌市南区』『横浜市鶴見区』『大阪市鶴見区』『神戸市中央区』のように、全国・県別とも市＋区。既存の検証済み読みのpartsは維持。
+- **東京都23区:** コード13101〜13123の23件すべて『東京都＋区名』を正式な表示名とし、読みON時には都名の読みも含む。東京都のその他の市町村や他県の区へ都名を付けない。
+- **郡付き町村:** 既存の検証済み郡名（R07、#292）を維持する。
+- **衝突とフィット:** 短い『南区』で文字幅を見積もらず、実際の長い正式名称を使って配置する。手動の個別座標補正は行わない。
+
+検証: 2026全国地名索引1905件を使った東京都23区全件・札幌・横浜の名称検査と、県別表示経路の静的アサーション、関係JS構文を確認。iPhone Safari・PC Edgeの視覚的収まりと読みは未実機検証。
