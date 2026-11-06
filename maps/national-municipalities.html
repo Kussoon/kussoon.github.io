@@ -372,6 +372,12 @@ function drawLabels(){
  // dropdown and popup; never substitute short ward names in prefecture view.
  const displayRegions=current.regions.map(r=>{
   const full=nationalLabels?.fullNameFor(r.code)||r.fullName||r.name;
+  // The Tokyo prefix is part of the displayed name and its verified reading
+  // parts; do not mutate the geographic municipality's original source name.
+  if(/^131(0[1-9]|1[0-9]|2[0-3])$/.test(r.code)){
+   const parts=nationalLabels?.readingPartsFor(r.code);
+   if(parts?.length===2)return {...r,labelName:full,readingParts:parts,reading:parts.map(p=>p.reading).join('')};
+  }
   return {...r,labelName:full};
  });
  let positions=null;
