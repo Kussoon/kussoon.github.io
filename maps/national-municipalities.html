@@ -768,7 +768,12 @@ $('map').addEventListener('click',e=>{
   if(!m.ok||!o.ok)throw Error('全国データがまだ公開されていません');
   manifest=await m.json();overview=await o.json();
   if(manifest.prefectureCount!==47||manifest.entries.length!==47||overview.features.length!==47)throw Error('47都道府県のデータが揃っていません');
-  paint();$('status').textContent='全国47都道府県の表示準備ができました（'+(performance.now()-start).toFixed(0)+'ms）。';
+  // Share the same production map for prefecture-focused study pages.
+  // Invalid or absent ?pref values retain the established nationwide default.
+  const requestedPref=new URLSearchParams(location.search).get('pref');
+  const matchedPref=manifest.entries.find(item=>item.pref===requestedPref);
+  if(matchedPref){paint();void goPref(requestedPref);}
+  else{paint();$('status').textContent='全国47都道府県の表示準備ができました（'+(performance.now()-start).toFixed(0)+'ms）。';}
  }catch(e){$('status').textContent='初期読み込みエラー：'+e.message;console.error(e);}
 })();
 })();
