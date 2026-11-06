@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide. PR #305 aligns prefecture and nationwide municipality labels with verified full names and Tokyo special ward display prefixes. PR #306 guards formal ward names against cached earlier label renderers. PR #307 harmonizes two-line ward and county map labels without changing formal names in popups/search. PR #308 moves return buttons above map and removes redundant below-map help paragraph.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide. PR #305 aligns prefecture and nationwide municipality labels with verified full names and Tokyo special ward display prefixes. PR #306 guards formal ward names against cached earlier label renderers. PR #307 harmonizes two-line ward and county map labels without changing formal names in popups/search. PR #308 moves return buttons above map and removes redundant below-map help paragraph. PR #309 allows all prefecture study pages to link directly to the one national map engine.",
   "rules": {
     "R01": {
       "paths": [
@@ -55,8 +55,8 @@
         "S43"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_contract_passed_safari_timing_unverified",
-      "decision": "PR #303: lightweight selected-prefecture name index enables municipality picker before heavy detail and office fetch."
+      "test_scope": "prefecture_query_static_verified_safari_visual_unverified",
+      "decision": "PR #303: lightweight selected-prefecture name index enables municipality picker before heavy detail and office fetch. PR #309: use same national map with validated ?pref=XX for prefecture entries; no duplicated per-prefecture map engines."
     },
     "R04": {
       "paths": [
@@ -365,8 +365,8 @@
         "S49"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_contract_verified_safari_visual_unverified",
-      "decision": "PR #308: remove obsolete long map help text beneath map, and move two region-return controls above map."
+      "test_scope": "prefecture_query_static_verified_safari_visual_unverified",
+      "decision": "PR #308: remove obsolete long map help text beneath map, and move two region-return controls above map. PR #309: use same national map with validated ?pref=XX for prefecture entries; no duplicated per-prefecture map engines."
     },
     "R20": {
       "paths": [
