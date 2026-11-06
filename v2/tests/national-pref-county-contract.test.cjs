@@ -43,4 +43,19 @@ assert(/cursor:ns-resize/.test(html)&&/setPointerCapture\(event\.pointerId\)/.te
 assert(/Math\.max\(minimum,Math\.min\(maximum,desired\)\)/.test(html),'Vertical drag bounded to keep handle visible');
 assert(/\.popup-scroll\{[^\n]*overflow:auto/.test(html),'Popup body retains independent scrolling');
 assert(/id="popupClose"/.test(html),'Popup close control preserved');
+// Search / map-only fullscreen / full-card vertical drag: R11/R13/R15/R16/R18/R19/R35.
+assert(/placeholder="例: やま、川、岡"/.test(html),'Search placeholder uses short matching examples');
+assert(/id="searchResultsRail"[^>]*role="scrollbar"/.test(html),'Search results have an accessible left scrollbar');
+assert(/search-results-shell\{position:relative[^\n]*padding-left:18px/.test(html),'Results reserve left gutter for scrollbar');
+assert(/syncSearchScrollRail\(\)/.test(html),'Scrollbar thumb synchronizes with results');
+assert(/市区町村の位置を押すと吹き出しが出ます/.test(html),'Simple map-use instructions');
+assert(/地図内のボタンでよみがなが出せます/.test(html),'Reading-toggle instructions');
+assert(/id="mapFullscreen"/.test(html)&&/fullscreenButton\.addEventListener\('click'/.test(html),'Fullscreen map control exists');
+assert(/if\(document\.body\.classList\.contains\('map-screen-mode'\)\)\{\$\('officePopup'\)\.hidden=true;return;\}/.test(html),'Popup suppressed while map-only mode');
+assert(/body\.map-screen-mode #officePopup[^\n]*display:none!important/.test(html),'Fullscreen popup is never painted');
+assert(/document\.fullscreenEnabled&&mapFrame\.requestFullscreen/.test(html),'Native fullscreen when supported');
+assert(/position:fixed;inset:0;width:100vw;height:100dvh/.test(html),'iPhone uses viewport-sized fallback');
+assert(/const handle=popup;/.test(html),'All noninteractive popup surfaces support vertical drag');
+assert(/event\.target\.closest\('button,a,input,select,textarea/.test(html),'Links and controls keep their normal taps');
+assert(/id="popupScrollDown"/.test(html)&&/syncPopupScrollControls/.test(html),'Overflowing popup has explicit scroll controls');
 console.log('Public nationwide tap and county detail contract: OK');
