@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices.",
   "rules": {
     "R01": {
       "paths": [
@@ -55,8 +55,8 @@
         "S43"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_picker_labels_island_extent_only_safari_unverified",
-      "decision": "PR #300 all nationwide extent includes remote islands by default; prefecture navigation uses 3-column downward custom picker."
+      "test_scope": "public_static_contract_passed_safari_timing_unverified",
+      "decision": "PR #303: lightweight selected-prefecture name index enables municipality picker before heavy detail and office fetch."
     },
     "R04": {
       "paths": [
@@ -64,13 +64,15 @@
         "v2/progressive-preview/national-progressive-labels.js"
       ],
       "tests": [
-        "v2/tests/national-map-move.browser.cjs"
+        "v2/tests/national-map-move.browser.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S20"
       ],
       "coverage_gap": true,
-      "test_scope": "existing_coverage_see_rule"
+      "test_scope": "public_static_contract_passed_safari_timing_unverified",
+      "decision": "PR #303: index-first municipality list, geometry/office loads nonblocking; preserve early selection and guard stale async responses."
     },
     "R05": {
       "paths": [
@@ -315,7 +317,8 @@
     "R18": {
       "paths": [
         "maps/national-municipalities.html",
-        "v2/shared/reading-bridge.js"
+        "v2/shared/reading-bridge.js",
+        "v2/progressive-preview/national-progressive-labels.js"
       ],
       "tests": [
         "v2/tests/nationwide-search.browser.cjs",
@@ -329,10 +332,10 @@
         "S46"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_contract_passed_safari_visual_unverified",
+      "test_scope": "public_static_contract_passed_safari_timing_unverified",
       "user_decision": "Support keyboard activation of municipality map targets with Enter/Space and select the first search result with Enter. Confirmed by user 2026-11-06 JST.",
       "implementation_status": "not_implemented_in_public_map",
-      "decision": "PR #302: permanently open outer region panel with matching search font; native internal downward pickers still expandable. Search helper removed."
+      "decision": "PR #303: 県別市区町村を選ぶ is enabled from lightweight prefecture entries while the detailed map loads."
     },
     "R19": {
       "paths": [
