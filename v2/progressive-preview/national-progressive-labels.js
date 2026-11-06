@@ -17,7 +17,7 @@ function createStore({load,capacity=3,concurrency=2,pinned=()=>'',byteCapacity=I
  function retain(keys){const keep=new Set([...keys,pinned()]);for(let i=queue.length-1;i>=0;i--){const task=queue[i];if(!keep.has(task.key)){queue.splice(i,1);pending.delete(task.key);const error=Error('Obsolete detail request');error.code='cancelled';task.reject(error);}}}
  return Object.freeze({get,retain,peek:key=>cache.get(key),entries:()=>[...cache.entries()],stats:()=>({cached:cache.size,cachedBytes:bytes(),byteCapacity,keys:[...cache.keys()],active,queued:queue.length,peakConcurrent:peak,loads})});
 }
-function models(index,project){return index.entries.map(r=>{const p=project(r.anchor),a=project([r.bounds[0],r.bounds[3]]),b=project([r.bounds[2],r.bounds[1]]);return {...r,id:r.code,prefectureCode:r.pref,readingParts:r.parts,point:p,box:{minX:Math.min(a[0],b[0]),minY:Math.min(a[1],b[1]),maxX:Math.max(a[0],b[0]),maxY:Math.max(a[1],b[1]),w:Math.abs(b[0]-a[0]),h:Math.abs(b[1]-a[1])}};});}
+function models(index,project){return index.entries.map(r=>{const p=project(r.anchor),a=project([r.bounds[0],r.bounds[3]]),b=project([r.bounds[2],r.bounds[1]]);return {...r,name:r.fullName||r.name,id:r.code,prefectureCode:r.pref,readingParts:r.parts,point:p,box:{minX:Math.min(a[0],b[0]),minY:Math.min(a[1],b[1]),maxX:Math.max(a[0],b[0]),maxY:Math.max(a[1],b[1]),w:Math.abs(b[0]-a[0]),h:Math.abs(b[1]-a[1])}};});}
 function plan(ms,{view,width,height,ratio,zoom,readings=false,selected='',measure}){
  const px=fontSize(zoom),size=px/ratio,L=global.KussoonAdministrativeLabels,R=global.KussoonNationalReadings;
  const labels=ms.map(m=>{const [x,y]=m.point,w=measure(m.name,size)+size*.24,h=size*1.2;const p={x,y,width:w,height:h,box:{x1:x-w/2,y1:y-h/2,x2:x+w/2,y2:y+h/2}};return readings&&m.readingParts?.length?R.boxFor(m,p,size,measure):L.boxFor(m,p,size,measure);});
@@ -25,11 +25,24 @@ function plan(ms,{view,width,height,ratio,zoom,readings=false,selected='',measur
  return {...result,size,px};
 }
 function uniqueSegments(arcs,project=null,clip=null){const seen=new Set(),out=[];for(const arc of arcs)for(let i=1;i<arc.length;i++){const a=arc[i-1],b=arc[i],pa=project?project(a):a,pb=project?project(b):b;if(clip&&(Math.max(pa[0],pb[0])<clip.x||Math.min(pa[0],pb[0])>clip.x+clip.w||Math.max(pa[1],pb[1])<clip.y||Math.min(pa[1],pb[1])>clip.y+clip.h))continue;const ka=pa.map(n=>n.toFixed(project?4:9)).join(','),kb=pb.map(n=>n.toFixed(project?4:9)).join(',');if(ka===kb)continue;const k=ka<kb?ka+'|'+kb:kb+'|'+ka;if(seen.has(k))continue;seen.add(k);out.push([a,b]);}return out;}
+function applyDisplayNames(index){
+ // Tokyo's 23 special wards are separate municipalities and not designated-city wards.
+ // Only codes 13101–13123 receive the explicitly requested prefecture prefix.
+ for(const entry of index.entries){
+  if(!/^131(0[1-9]|1[0-9]|2[0-3])$/.test(entry.code)||!entry.name.endsWith('区'))continue;
+  entry.fullName='東京都'+entry.name;
+  if(entry.parts?.length===1&&entry.parts[0].name===entry.name&&entry.parts[0].reading){
+   entry.parts=[{name:'東京都',reading:'とうきょうと'},entry.parts[0]];
+   entry.reading='とうきょうと'+entry.parts[1].reading;
+  }
+ }
+ return index;
+}
 function create({map,viewport,loadIndex,store,loadOffices,overview,project,isActive,onSelection,onStatus,prefName=code=>code,geometryWorkerUrl='../progressive-preview/progressive-geometry.worker.js'}){
  let index=null,ms=[],selected='',selectionEntry=null,selectionSequence=0,generation=0,timer=null,disposed=false,shapeKey=null,shapes=null,labelLayer=null,projection=project,labelNodes=new Map(),prepared=new WeakMap(),activePointers=new Set(),selectionError='',detailError='';
  const timing={labelPasses:0,lastLabelMs:0,firstLabelMs:0,maxLabelMs:0,shapePasses:0,lastShapeMs:0,maxShapeMs:0,indexBytes:0},canvas=document.createElement('canvas'),context=canvas.getContext('2d'),widths=new Map();
  const tag=(n,attrs={})=>{const x=document.createElementNS(NS,n);for(const [k,v] of Object.entries(attrs))x.setAttribute(k,v);return x;};
- const ready=loadIndex().then(d=>{index=validateIndex(d);timing.indexBytes=new TextEncoder().encode(JSON.stringify(d)).length;if(isActive())mount(projection);return index;});
+ const ready=loadIndex().then(d=>{index=applyDisplayNames(validateIndex(d));timing.indexBytes=new TextEncoder().encode(JSON.stringify(d)).length;if(isActive())mount(projection);return index;});
  function frame(){const r=map.getBoundingClientRect(),m=map.getScreenCTM(),inverse=m.inverse();function pt(x,y){const p=map.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(inverse);}const a=pt(r.left+1,r.top+1),b=pt(r.right-1,r.bottom-1);return {view:{x:a.x,y:a.y,w:b.x-a.x,h:b.y-a.y},width:r.width-2,height:r.height-2,ratio:Math.hypot(m.a,m.b),zoom:850/viewport.view().w};}
  function measure(text,size){const px=fontSize(850/viewport.view().w),physical=size*frameRatio,cacheKey=text+'|'+physical.toFixed(4);if(!widths.has(cacheKey)){if(widths.size>=12000)widths.clear();context.font='850 '+physical+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';widths.set(cacheKey,context.measureText(text).width);}return widths.get(cacheKey)/frameRatio;}
  let frameRatio=1,shapePending=false,sceneSequence=0,requestKey='',overviewEntry=null;
