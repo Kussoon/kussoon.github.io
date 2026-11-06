@@ -1,0 +1,44 @@
+name: Work10 shared screen-pixel label candidate
+on:
+  pull_request:
+    paths:
+      - 'v2/national/label-work10/**'
+      - 'maps/national-municipalities.html'
+      - 'v2/shared/**'
+      - 'v2/progressive-preview/**'
+      - 'v2/common/js/**'
+      - '.github/workflows/v2-work10-screen-labels.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps ${{ matrix.engine }}
+        working-directory: v2/tests/browser
+      - run: node v2/national/label-work10/build-preview.cjs --check
+      - run: node v2/national/label-work10/unit.test.cjs
+      - run: node v2/tests/national-pref-county-contract.test.cjs
+      - run: node v2/national/label-work10/browser.test.cjs
+        env:
+          KUSSOON_BROWSER_ENGINE: ${{ matrix.engine }}
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/work10
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: work10-${{ matrix.engine }}
+          path: ${{ runner.temp }}/work10
