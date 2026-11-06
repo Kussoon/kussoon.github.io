@@ -92,11 +92,29 @@ async function focus(page,query){
      const scoped=await metrics(page);
      const expectedPref=pref==='北海道'?'01':'13';
      assert(scoped.codes.length>0&&scoped.codes.every(code=>code.startsWith(expectedPref)),pref+' view excludes labels from other prefectures');
+     if(pref==='東京都'){
+      // Tokyo's prefecture extent includes remote islands, so its 23 wards
+      // occupy a small cluster near the edge of the full-prefecture projection.
+      // Center this browser check on the data-derived ward cluster before zooming.
+      await page.evaluate(()=>{
+       const wards=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>/^13(1\\d{3})$/.test(a.code));
+       if(wards.length<23)throw Error('Tokyo special-ward anchors missing: '+wards.length);
+       const xs=wards.map(a=>a.point[0]),ys=wards.map(a=>a.point[1]);
+       const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+       const w=Math.max(40,(maxX-minX)*8,(maxY-minY)*8*850/700),h=w*700/850;
+       window.KussoonV2ProgressivePreview.viewport.setView({x:(minX+maxX-w)/2,y:(minY+maxY-h)/2,w,h});
+       window.KussoonV2ProgressivePreview.controller.schedule();
+      });
+      await page.waitForTimeout(500);
+      const wardCluster=await metrics(page);
+      assert(wardCluster.count>0&&wardCluster.codes.every(code=>code.startsWith('13')),'Tokyo ward-cluster view renders only Tokyo labels');
+      assert.equal(wardCluster.overlaps,0,'Tokyo ward-cluster labels do not overlap');
+     }
      for(let step=0;step<2;step++){
       await page.click('#mapZoomIn');
       await page.waitForTimeout(300);
       const regional=await metrics(page);
-      assert(regional.count>0,pref+' shared labels are visible: '+JSON.stringify({codes:regional.codes.slice(0,30),inViewAnchors:regional.inViewAnchors,viewBox:regional.viewBox,rootScale:regional.rootScale,zoom:regional.rootScale,selected:await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.selected()),snapshot:await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.snapshot()),view:await page.evaluate(()=>window.KussoonV2ProgressivePreview.viewport.view()),rawAnchors:await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.anchors().slice(0,8).map(a=>({code:a.code,p:a.point})))}));
+      assert(regional.count>0,pref+' shared labels are visible');
       assert(regional.maxFont<=13.1&&regional.maxFont>=6.9,pref+' keeps physical labels within 7–13px: '+regional.maxFont);
       assert.equal(regional.overlaps,0,pref+' keeps labels collision-free after zoom '+(step+1));
      }
