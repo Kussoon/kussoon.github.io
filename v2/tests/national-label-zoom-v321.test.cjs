@@ -78,6 +78,7 @@ const trialHtml = fs.readFileSync(
 );
 assert.match(trialHtml, /name="robots" content="noindex,nofollow"/);
 assert.match(trialHtml, /density-labels-trial\.js/);
-assert.match(trialHtml, /national-progressive-labels-trial-v319\.js/);
+assert.match(trialHtml, /national-progressive-labels-trial-v321\.js/);
+assert.match(labelSource, /if\(prefCode\)ms=ms\.filter\(m=>m\.prefectureCode===prefCode\)/, 'labels are scoped to the active prefecture');
 console.log('PASS: no-overlap trial shows ' + shown.length + '/' + trial.models.length +
   ' labels; baseline overlaps ' + baselineOverlaps + ' pairs.');
