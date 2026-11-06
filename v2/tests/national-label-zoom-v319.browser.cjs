@@ -56,7 +56,7 @@ async function focus(page,query){
     await page.evaluate(()=>{const c=window.KussoonV2ProgressivePreview.controller;c.clear();c.schedule();});
     await page.waitForTimeout(250);
     // Reopen the exact province-wide route from the reported reproduction.
-    await page.goto(page.url().replace(/label-zoom-trial-v319\\.html.*/, 'label-zoom-trial-v319.html?pref=28'));
+    await page.goto(page.url().replace(/label-zoom-trial-v319\.html.*/, 'label-zoom-trial-v319.html?pref=28'));
     await page.waitForFunction(()=>document.querySelector('#breadcrumb')?.textContent.includes('兵庫県')&&document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
     await page.click('#mapReset');
     await page.waitForTimeout(500);
