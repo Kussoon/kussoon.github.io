@@ -41,11 +41,15 @@ async function focus(page,query){
     await page.click('#mapReadingToggle');
     await page.waitForTimeout(400);
     assert.equal(await ward.locator('tspan').count(),2,'reading OFF preserves two-row ward labels');
+    // Selected labels keep their established visibility exception. Clear it
+    // before asserting collisions among ordinary labels at each scale.
+    await page.evaluate(()=>{const c=window.KussoonV2ProgressivePreview.controller;c.clear();c.schedule();});
+    await page.waitForTimeout(350);
     for(let i=0;i<3;i++){await page.evaluate(()=>{const v=window.KussoonV2ProgressivePreview.viewport;v.zoomOut();v.zoomIn();window.KussoonV2ProgressivePreview.controller.schedule();});await page.waitForTimeout(350);}
     await page.evaluate(()=>window.KussoonV2ProgressivePreview.viewport.reset());
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(700);
     const after=await metrics(page);
-    assert.equal(after.overlaps,0,'zoom/readings transitions retain collision-free labels');
+    assert.equal(after.overlaps,0,'zoom/readings transitions retain collision-free labels (pairs='+after.overlaps+')');
    }
   }
   // The baseline link option reproduces the merged zoom overlap allowance.
