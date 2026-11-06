@@ -67,4 +67,11 @@ assert(html.includes('読み込みに時間がかかることがあります。'
 assert(!html.includes('読み込みに時間がかかることがありますが、ご容赦ください。'),'Old loading notice removed');
 assert(/new MutationObserver\(syncPublicStatus\)/.test(html),'Routine map status is hidden without removing error/loading status');
 assert(/読み込み中[\s\S]*読み込みエラー/.test(html),'Loading and error signals remain visible');
+// R13/R14/R37: compact two-button zoom row and top-right fullscreen button.
+assert(/<div class="map-zoom-row" role="group"[^>]*>\s*<button type="button" id="mapZoomIn"[^>]*>＋<\/button>\s*<button type="button" id="mapZoomOut"[^>]*>－<\/button>/.test(html),'Zoom controls are side-by-side, plus on the left');
+assert(/\.map-zoom-row\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/.test(html),'Zoom control width is split evenly');
+assert(/\.map-fullscreen-button\{position:absolute;right:8px;top:8px/.test(html),'Fullscreen control is at top-right');
+assert(/body\.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen\{right:max\(8px,env\(safe-area-inset-right\)\);top:max\(8px,env\(safe-area-inset-top\)\)\}/.test(html),'Fullscreen top-right honors safe-area');
+assert(/\.map-toolbar button\{[^\n]*font-size:14px/.test(html),'Map toolbar labels are larger');
+assert(/@media\(max-width:500px\)\{\.map-toolbar\{width:88px\}\.map-toolbar button\{min-height:44px;font-size:13px\}/.test(html),'Mobile controls remain legible');
 console.log('Public nationwide tap and county detail contract: OK');
