@@ -35,9 +35,6 @@ svg{display:block;width:100%;height:auto;background:#edf6fb;border:1px solid #b7
 .status{background:#e6f2fa;padding:10px;border-radius:8px;font-weight:700;line-height:1.6}
 .status[hidden]{display:none!important}
 small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border-radius:8px;font-size:14px;line-height:1.6}
-.map-locator{margin-top:10px;display:none}.map-locator.show{display:block}
-.map-locator svg{max-width:260px;touch-action:auto}
-.locator-pref{fill:#b8d9ea;stroke:#fff;stroke-width:1}.locator-pref.active{fill:#f5a73a}
 .quiz-panel{display:none}.quiz-panel{border:2px solid #9cc6dd;background:#f7fbff}
 .quiz-action{font:inherit;background:#fff;color:#17435d;border:1px solid #96b5cb;border-radius:8px;padding:9px 12px;min-height:44px;font-weight:700;cursor:pointer}
 .quiz-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
@@ -147,7 +144,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 </div>
 </div>
 <select id="pref" hidden aria-hidden="true" tabindex="-1"><option value="">都道府県を選ぶ</option></select>
-<select id="region" hidden aria-hidden="true" tabindex="-1" disabled><option value="">まず都道府県を選択</option></select>
+<select id="region" hidden aria-hidden="true" tabindex="-1" disabled><option value="">次に市区町村を選択</option></select>
 <select id="nationExtent" hidden aria-hidden="true" tabindex="-1"><option value="all" selected>離島を含む全域</option></select></details>
 </div>
 <input type="checkbox" id="showNames" checked hidden aria-hidden="true">
@@ -285,7 +282,7 @@ function syncChoicePicker(type){
  const native=$(type),trigger=$(type+'Trigger'),host=$(type+'Choices');
  trigger.disabled=native.disabled;
  const selected=native.options[native.selectedIndex];
- const fallback=type==='pref'?'都道府県を選ぶ':'まず都道府県を選択';
+ const fallback=type==='pref'?'都道府県を選ぶ':'次に市区町村を選択';
  trigger.firstChild.textContent=(native.value&&selected?selected.textContent:fallback)+' ';
  if(host.hidden)return;
  buildChoices(type);
@@ -387,7 +384,7 @@ function paint({refocus=true}={}){
   viewport.setMinZoom(1);
   viewport.setContentBounds(null);
   drawOverview($('map'));mode='national';activeProjection=null;
-  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('まず都道府県を選択',''));
+  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('次に市区町村を選択',''));
   $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
   $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
   $('officePopup').hidden=true;
