@@ -588,13 +588,13 @@ async function goPref(code,selectedCode=''){
  const region=$('region');
  region.disabled=true;
  region.replaceChildren(new Option('市区町村名を準備中',''));
- syncChoicePickers();
- $('pref').value=code;$('status').textContent=names[Number(code)]+'の20m地図を読み込み中です…';
+ $('pref').value=code;
+ syncChoicePickers();$('status').textContent=names[Number(code)]+'の20m地図を読み込み中です…';
  // As soon as the already-used nationwide index is ready, enable only this
  // prefecture’s municipality names; the heavy details run independently.
  if(progressive&&nationalLabels){
   void nationalLabels.ready.then(()=>{
-   if(id!==requestId)return;
+   if(id!==requestId||current)return;
    const choices=nationalLabels.prefectureNamesFor(code);
    if(!choices.length)return;
    region.replaceChildren(new Option('次に市区町村を選択',''));
