@@ -11,7 +11,13 @@ h1{font-size:clamp(22px,4vw,30px)}p{line-height:1.7}.panel{background:white;bord
 label{display:grid;gap:6px;font-weight:700}
 .search-area{margin:12px 0;padding:12px;border:1px solid #b9d0e0;border-radius:10px;background:#f7fbff}
 .search-area input{font:inherit;width:100%;min-height:44px;border:1px solid #9fbdd0;border-radius:8px;padding:9px;background:#fff;color:inherit}
-.search-results{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px;max-height:210px;overflow:auto}
+.search-results-shell{position:relative;margin-top:9px;padding-left:18px}
+.search-results{display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px;max-height:210px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:none}
+.search-results::-webkit-scrollbar{display:none}
+.search-results-rail{position:absolute;left:0;top:0;bottom:0;width:12px;border-radius:10px;background:#d6e5ef;border:1px solid #abc4d5;touch-action:none;cursor:pointer}
+.search-results-rail[hidden],.search-results-shell[hidden]{display:none!important}
+.search-results-thumb{position:absolute;left:1px;right:1px;top:1px;min-height:24px;border-radius:9px;background:#356d8d;box-shadow:0 0 0 1px #23516b}
+.search-results button{max-width:100%}
 .search-results button{font:inherit;color:#17435d;background:#fff;border:1px solid #a5c5da;border-radius:8px;min-height:42px;padding:7px 10px;cursor:pointer}
 .search-results button:focus-visible{outline:2px solid #176aaa}
 .label-toggle{display:flex;align-items:center;gap:8px;margin:10px 0;font-weight:600}.label-toggle input{width:20px;height:20px}
@@ -43,16 +49,29 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 @media(max-width:480px){.quiz-choices{grid-template-columns:1fr}}
 @media(max-width:600px){main{padding:10px 8px 36px}.panel{padding:11px}}
 /* One map-first interface for the pilot and its optional diagnostics. */
-main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-size:14px}
+main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-size:14px}.map-guide{margin:8px 0 12px;padding-left:1.55em;color:#355b72;line-height:1.7;font-size:14px}.map-guide li{margin:2px 0}
 .map-panel{padding:8px;position:relative;z-index:10;overflow:visible}
 .map-frame{overflow:visible}
 .office-popup{will-change:transform;transform:translate3d(0,var(--popup-drag-y,0px),0)}
 .popup-head{background:#deebf3;border-radius:7px;padding:4px 6px;min-height:54px;touch-action:none;cursor:ns-resize;user-select:none;-webkit-user-select:none}
+.office-popup{touch-action:none;cursor:ns-resize}
+.office-popup a,.office-popup button{cursor:pointer;touch-action:manipulation}
+.popup-scroll-controls{display:flex;gap:6px;flex-shrink:0;margin:1px 0 5px}
+.popup-scroll-controls[hidden]{display:none}
+.popup-scroll-controls button{flex:1;min-height:32px;border:1px solid #aacbdd;border-radius:6px;background:#edf6fc;color:#24516a;font-size:11px;font-weight:700}
 .popup-head::before{content:"⋮⋮";color:#537890;font-weight:900;margin-right:4px}
 .popup-close{cursor:pointer;touch-action:manipulation}
 .breadcrumb{font-size:14px;font-weight:700;margin:4px 0 8px}
 #map{height:clamp(300px,68vh,700px);height:clamp(300px,68svh,700px)}
 .map-frame{position:relative}
+body.map-screen-mode{overflow:hidden}
+body.map-screen-mode #mapFrame,#mapFrame:fullscreen{position:fixed;inset:0;width:100vw;height:100dvh;margin:0;padding:0;background:#edf6fb;z-index:1000;border-radius:0;overflow:hidden}
+body.map-screen-mode #mapFrame #map,#mapFrame:fullscreen #map{width:100%;height:100%;max-height:none;border-radius:0;border:0}
+body.map-screen-mode #officePopup,#mapFrame:fullscreen #officePopup{display:none!important}
+body.map-screen-mode #mapToolbar,#mapFrame:fullscreen #mapToolbar{right:max(8px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom))}
+#mapFullscreen{background:#e7f4fc}
+.map-screen-title{position:absolute;left:12px;top:max(8px,env(safe-area-inset-top));z-index:8;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.9);color:#163b52;font-size:12px;font-weight:700;pointer-events:none}
+.map-screen-title[hidden]{display:none}
 .map-toolbar{position:absolute;right:8px;bottom:8px;z-index:7;display:flex;flex-direction:column;gap:5px;width:96px}
 .map-toolbar button{width:100%;min-height:42px;padding:5px 3px;white-space:nowrap;font-size:11px;font-weight:800;color:#183951;background:rgba(255,255,255,.96);border:1px solid #96b3c7;border-radius:8px;box-shadow:0 2px 7px #183c5533;touch-action:manipulation}
 .map-toolbar button[aria-pressed="true"]{background:#245879;color:#fff}
@@ -64,7 +83,7 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 .popup-head strong{min-width:0;overflow-wrap:anywhere}
 .popup-reading{font-size:12px;font-weight:600;color:#315b74;overflow-wrap:anywhere}
 .popup-reading[hidden]{display:none}.popup-close{min-width:44px;min-height:44px;font-size:20px;flex-shrink:0}
-.popup-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;scroll-padding-block:8px}
+.popup-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:none;-webkit-overflow-scrolling:touch;scroll-padding-block:8px}
 .popup-content{padding:0 2px 0}
 .popup-facility{border-bottom:1px solid #ccdbe4;margin:5px 0;padding:4px 0}
 .popup-office{font-size:14px;margin:3px 0}.popup-address{font-size:12px;white-space:pre-line;margin:3px 0;overflow-wrap:anywhere}
@@ -79,15 +98,15 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 .progressive-national .prefecture{stroke:none}.prefecture-focus{fill:none;stroke:none;pointer-events:none}.prefecture-focus:focus-visible{stroke:#174b71;stroke-width:2;vector-effect:non-scaling-stroke}.label-toggle[hidden]{display:none}
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
 <h1>全国市区町村マップ 2026</h1>
-<p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。県別の淡い色、地名検索、読み仮名、役所・役場情報に対応しています。</p>
-<p class="intro">地名検索、または地図の拡大・タップで市区町村を調べられます。吹き出しは上部の帯を上下に動かせます。</p>
+<p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。</p>
+<ul class="map-guide"><li>市区町村の位置を押すと吹き出しが出ます。</li><li>地図内のボタンでよみがなが出せます。</li><li>都道府県は下の「地域・表示範囲を選んで移動」で選べます。</li><li>吹き出しは上下に移動でき、×で閉じられます。</li></ul>
 <p class="note"><strong>読み込みに時間がかかることがありますが、ご容赦ください。</strong></p>
 <section class="panel" aria-label="地域を探す">
 <div class="search-area">
 <label for="placeSearch">市区町村を検索</label>
-<input id="placeSearch" type="search" placeholder="例：西宮市、浜松市中央区" autocomplete="off">
+<input id="placeSearch" type="search" placeholder="例: やま、川、岡" autocomplete="off">
 <div id="searchHint"><small>読み仮名や5桁コードでも検索できます。同名の自治体は都道府県名で確認してください。</small></div>
-<div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div>
+<div id="searchResultsShell" class="search-results-shell" hidden><div id="searchResultsRail" class="search-results-rail" role="scrollbar" aria-label="検索候補の縦スクロール" aria-controls="searchResults" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div id="searchResultsThumb" class="search-results-thumb"></div></div><div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div></div>
 </div>
 <label class="label-toggle"><input type="checkbox" id="showNames" checked>周辺の市区町村名を表示（選択中の地名は常に表示）</label>
 <details id="areaSettings" class="region-picker"><summary>地域・表示範囲を選んで移動</summary>
@@ -100,17 +119,17 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 </section>
 <section class="panel map-panel" aria-label="全国と都道府県の地図">
 <p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
-<div class="map-frame" id="mapFrame">
+<div class="map-frame" id="mapFrame"><span class="map-screen-title" id="mapScreenTitle" hidden>地図のみ表示中（吹き出しなし）</span>
 <svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
 <div class="map-toolbar" id="mapToolbar" role="group" aria-label="地図右下の操作">
 <button type="button" id="mapZoomIn" aria-label="地図を拡大">＋ 拡大</button>
 <button type="button" id="mapZoomOut" aria-label="地図を縮小">－ 縮小</button>
-<button type="button" id="mapReset" aria-label="現在の表示単位の初期表示に戻す" title="この地図の表示位置と倍率を戻します。選択は保持します。">全体表示</button>
+<button type="button" id="mapReset" aria-label="現在の表示単位の初期表示に戻す" title="この地図の表示位置と倍率を戻します。選択は保持します。">全体表示</button><button type="button" id="mapFullscreen" aria-label="地図を全画面表示">⛶ 全画面</button>
 <button type="button" id="mapReadingToggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button>
 </div>
 <aside id="officePopup" class="office-popup" aria-label="自治体情報" hidden>
 <div class="popup-head"><div class="popup-heading"><strong id="popupName"></strong><span id="popupReading" class="popup-reading" hidden></span></div><button type="button" id="popupClose" class="popup-close" aria-label="吹き出しを閉じる">×</button></div>
-<div class="popup-scroll" id="popupScroll" tabindex="0" aria-label="庁舎情報とリンクをスクロール"><div class="popup-content"><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></div></div>
+<div class="popup-scroll-controls" id="popupScrollControls" hidden><button type="button" id="popupScrollUp" aria-label="吹き出し本文を上へスクロール">▲ 内容を上へ</button><button type="button" id="popupScrollDown" aria-label="吹き出し本文を下へスクロール">▼ 内容を下へ</button></div><div class="popup-scroll" id="popupScroll" tabindex="0" aria-label="庁舎情報とリンクをスクロール"><div class="popup-content"><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></div></div>
 </aside>
 </div>
 <div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button></div>
@@ -201,6 +220,7 @@ function syncPopupReading(code,region){
 }
 // PR #259: popup height follows content, never a fixed four-button height.
 function renderOfficePopup(){
+ if(document.body.classList.contains('map-screen-mode')){$('officePopup').hidden=true;return;}
  const national=!current&&nationalView?nationalLabels?.selection():null,entry=current||national?.entry;
  const code=current?$('region').value:national?.code||'',popup=$('officePopup');
  if(!entry||!code||quizSession||dismissedPopupCode===code){popup.hidden=true;return;}
@@ -214,6 +234,7 @@ function renderOfficePopup(){
  KussoonOfficeDirectory.render(document,$('popupActions'),result,r.fullName||r.name);
  $('popupNote').textContent=!entry.offices?(officeReady.has(national?.pref||$('pref').value)?'庁舎データを取得できませんでした。':'この地域の庁舎情報は今後追加します。'):(result.offices.length&&result.offices.every(o=>o.status==='verified')?'住所は参考情報です。リンクは別タブで開きます。':'庁舎情報に未確認の項目があります。');
  popup.hidden=false;
+ requestAnimationFrame(syncPopupScrollControls);
 }
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive)nationalLabels?.schedule();}});
@@ -327,9 +348,10 @@ function ensureNationwideSearchIndex(){
  });
 }
 function updateSearch(){
- const host=$('searchResults');host.replaceChildren();
+ const host=$('searchResults');host.replaceChildren();host.scrollTop=0;
+ $('searchResultsShell').hidden=!$('placeSearch').value.trim();
  const query=$('placeSearch').value.trim();
- if(!query)return;
+ if(!query){syncSearchScrollRail();return;}
  let results;
  if(current){
   results=current.regions.filter(r=>KussoonV2PlaceLabels.matches(r,query)).map(r=>({name:r.fullName||r.name,reading:r.reading,code:r.code,kind:'region'}));
@@ -346,8 +368,8 @@ function updateSearch(){
    entry.name+(entry.reading?'／'+entry.reading:'')+'（'+entry.code+'）';
   button.addEventListener('click',()=>{
    if(entry.kind==='national-region'){
-    if(progressive&&nationalView){$('placeSearch').value='';host.replaceChildren();void nationalLabels.focus(entry.code).catch(()=>goPref(entry.pref,entry.code));return;}
-    $('placeSearch').value='';host.replaceChildren();
+    if(progressive&&nationalView){$('placeSearch').value='';host.replaceChildren();$('searchResultsShell').hidden=true;void nationalLabels.focus(entry.code).catch(()=>goPref(entry.pref,entry.code));return;}
+    $('placeSearch').value='';host.replaceChildren();$('searchResultsShell').hidden=true;
     void goPref(entry.pref,entry.code);
     return;
    }
@@ -364,6 +386,7 @@ function updateSearch(){
  }else if(results.length>shown.length){
   const msg=document.createElement('small');msg.textContent='検索結果の先頭35件を表示しています。条件を絞ってください。';host.append(msg);
  }
+ requestAnimationFrame(syncSearchScrollRail);
 }
 function renderQuiz(){
  if(!quizSession)return;
@@ -418,6 +441,7 @@ function startQuiz(){
  $('region').value='';$('showNames').checked=false;$('showNames').disabled=true;
  $('readingMode').disabled=true;syncMapReadingToggle();$('placeSearch').value='';$('placeSearch').disabled=true;
  $('searchResults').replaceChildren();
+ $('searchResultsShell').hidden=true;
  $('quizStart').hidden=true;$('quizStop').hidden=false;
  paint();renderQuiz();
  $('status').textContent='クイズ中です。オレンジ色の区域を見て回答してください。';
@@ -473,6 +497,36 @@ async function goPref(code,selectedCode=''){
 $('quizStart').addEventListener('click',startQuiz);
 $('quizStop').addEventListener('click',stopQuiz);
 $('quizNext').addEventListener('click',()=>{if(!quizSession)return;quizSession.next();if(quizSession.state().question)paint();renderQuiz();});
+// Left rail stays visibly anchored on iPhone Safari, where the native bar fades.
+function syncSearchScrollRail(){
+ const host=$('searchResults'),rail=$('searchResultsRail'),thumb=$('searchResultsThumb');
+ if($('searchResultsShell').hidden)return;
+ const range=Math.max(0,host.scrollHeight-host.clientHeight),visible=host.clientHeight;
+ rail.hidden=range<2||visible<1;
+ if(rail.hidden)return;
+ const track=Math.max(24,rail.clientHeight-2),thumbH=Math.min(track,Math.max(24,track*visible/host.scrollHeight));
+ thumb.style.height=thumbH+'px';
+ thumb.style.transform='translateY('+((track-thumbH)*host.scrollTop/range)+'px)';
+ rail.setAttribute('aria-valuenow',String(Math.round(100*host.scrollTop/range)));
+}
+$('searchResults').addEventListener('scroll',syncSearchScrollRail,{passive:true});
+if(window.ResizeObserver)new ResizeObserver(syncSearchScrollRail).observe($('searchResults'));
+(function(){
+ const rail=$('searchResultsRail'),host=$('searchResults');
+ let drag=null;
+ function seek(clientY){
+  const r=rail.getBoundingClientRect(),range=Math.max(0,host.scrollHeight-host.clientHeight);
+  const thumbHeight=$('searchResultsThumb').getBoundingClientRect().height;
+  host.scrollTop=Math.max(0,Math.min(range,(clientY-r.top-thumbHeight/2)/Math.max(1,r.height-thumbHeight)*range));
+ }
+ rail.addEventListener('pointerdown',e=>{e.preventDefault();drag=e.pointerId;rail.setPointerCapture(e.pointerId);seek(e.clientY);});
+ rail.addEventListener('pointermove',e=>{if(drag===e.pointerId){e.preventDefault();seek(e.clientY);}});
+ for(const type of ['pointerup','pointercancel','lostpointercapture'])rail.addEventListener(type,()=>{drag=null;});
+ rail.addEventListener('keydown',e=>{if(!['ArrowUp','ArrowDown','PageUp','PageDown','Home','End'].includes(e.key))return;e.preventDefault();
+ const step=e.key.startsWith('Page')?host.clientHeight:52;
+ if(e.key==='Home')host.scrollTop=0;else if(e.key==='End')host.scrollTop=host.scrollHeight;else host.scrollTop+=(e.key==='ArrowUp'||e.key==='PageUp'?-step:step);
+ });
+})();
 $('placeSearch').addEventListener('input',updateSearch);
 $('showNames').addEventListener('change',drawLabels);
 function syncMapReadingToggle(){const on=$('readingMode').value==='on';$('mapReadingToggle').textContent='よみがな '+(on?'ON':'OFF');$('mapReadingToggle').setAttribute('aria-pressed',String(on));$('mapReadingToggle').disabled=$('readingMode').disabled;}
@@ -481,6 +535,38 @@ $('readingMode').addEventListener('change',()=>{
  const national=!current&&nationalView?nationalLabels?.selection():null;
  const entry=current||national?.entry,code=current?$('region').value:national?.code||'';
  if(entry&&code&&!$('officePopup').hidden)syncPopupReading(code,entry.regions.find(r=>r.code===code));
+});
+// Use native Fullscreen API where available; iPhone Safari uses fixed viewport layout.
+const mapFrame=$('mapFrame'),fullscreenButton=$('mapFullscreen');
+function syncFullscreenUI(){
+ const on=document.body.classList.contains('map-screen-mode');
+ fullscreenButton.textContent=on?'⤡ 戻る':'⛶ 全画面';
+ fullscreenButton.setAttribute('aria-label',on?'地図の全画面表示を終了':'地図を全画面表示');
+ fullscreenButton.setAttribute('aria-pressed',String(on));
+ $('mapScreenTitle').hidden=!on;
+ if(on)$('officePopup').hidden=true;
+ else renderOfficePopup();
+ if(progressive)nationalLabels?.schedule();
+}
+fullscreenButton.addEventListener('click',async()=>{
+ const on=document.body.classList.contains('map-screen-mode');
+ if(on){
+  document.body.classList.remove('map-screen-mode');syncFullscreenUI();
+  if(document.fullscreenElement)try{await document.exitFullscreen();}catch(e){console.warn(e);}
+  return;
+ }
+ document.body.classList.add('map-screen-mode');syncFullscreenUI();
+ if(document.fullscreenEnabled&&mapFrame.requestFullscreen)try{await mapFrame.requestFullscreen();}catch(e){/* Fixed viewport fallback. */}
+});
+document.addEventListener('fullscreenchange',()=>{
+ if(!document.fullscreenElement&&document.body.classList.contains('map-screen-mode')){
+  document.body.classList.remove('map-screen-mode');syncFullscreenUI();
+ }
+});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&document.body.classList.contains('map-screen-mode')&&!document.fullscreenElement){
+  document.body.classList.remove('map-screen-mode');syncFullscreenUI();
+ }
 });
 $('mapReadingToggle').addEventListener('click',()=>{if($('readingMode').disabled)return;$('readingMode').value=$('readingMode').value==='on'?'off':'on';$('readingMode').dispatchEvent(new Event('change'));});
 $('pref').addEventListener('change',()=>{if(quizSession)stopQuiz();$('placeSearch').value='';goPref($('pref').value);});
@@ -495,6 +581,14 @@ $('mapZoomIn').addEventListener('click',()=>viewport.zoomIn());
 $('mapZoomOut').addEventListener('click',()=>viewport.zoomOut());
 $('mapReset').addEventListener('click',()=>viewport.reset());
 syncMapReadingToggle();
+function syncPopupScrollControls(){
+ const el=$('popupScroll');
+ $('popupScrollControls').hidden=$('officePopup').hidden||el.scrollHeight<=el.clientHeight+2;
+}
+if(window.ResizeObserver)new ResizeObserver(syncPopupScrollControls).observe($('popupScroll'));
+new MutationObserver(()=>requestAnimationFrame(syncPopupScrollControls)).observe($('popupActions'),{childList:true,subtree:true});
+$('popupScrollUp').addEventListener('click',()=>{$('popupScroll').scrollBy({top:-Math.max(110,$('popupScroll').clientHeight*.65),behavior:'smooth'});});
+$('popupScrollDown').addEventListener('click',()=>{$('popupScroll').scrollBy({top:Math.max(110,$('popupScroll').clientHeight*.65),behavior:'smooth'});});
 $('popupClose').addEventListener('click',()=>{dismissedPopupCode=current?$('region').value:nationalLabels?.selected()||'';$('officePopup').hidden=true;});
 $('map').addEventListener('click',e=>{
  if(quizSession)return;
@@ -524,11 +618,11 @@ $('map').addEventListener('click',e=>{
 <script src="/v2/progressive-preview/prefecture-colors.js"></script>
 <script>window.KussoonV2PrefectureColors.attach(document.getElementById('map'));</script>
 <script>
-/* Production: move only the popup, preserving map viewport
- * or document scrolling. Allow the header to remain reachable on-screen. */
+/* Move the popup vertically from any noninteractive portion; map remains unchanged.
+ * Content scrolling remains available through up/down buttons and mouse wheel. */
 (function(){
  const popup=document.getElementById('officePopup');
- const handle=popup.querySelector('.popup-head');
+ const handle=popup;
  const close=document.getElementById('popupClose');
  let offset=0,start=null,shownCode='';
  function setOffset(value){
@@ -546,7 +640,7 @@ $('map').addEventListener('click',e=>{
  }
  new MutationObserver(resetOnSelection).observe(popup,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden']});
  handle.addEventListener('pointerdown',function(event){
-   if(event.target===close||close.contains(event.target)||popup.hidden||event.button>0)return;
+   if(popup.hidden||event.button>0||event.target.closest('button,a,input,select,textarea,[role="button"]'))return;
    event.preventDefault();event.stopPropagation();
    const rect=popup.getBoundingClientRect();
    start={id:event.pointerId,y:event.clientY,offset,baseTop:rect.top-offset};
