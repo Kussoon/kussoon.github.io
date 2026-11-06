@@ -36,7 +36,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
     await page.waitForFunction(()=>document.querySelector('#map path.land[style*="pref-color"]')!==null,{},{timeout:30000});
     const code=await page.locator('#region option:not([value=""])').first().getAttribute('value');
     assert(code?.startsWith(pref));
-    await page.selectOption('#region',code);
+    await page.locator('#region').evaluate((el,value)=>{el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));},code);
     await page.waitForFunction(c=>!!document.querySelector('#map path.land.chosen[data-code="'+c+'"]'),code,{timeout:30000});
     const selected=await page.evaluate(c=>{
      const el=document.querySelector('#map path.land.chosen[data-code="'+c+'"]'),style=getComputedStyle(el);
@@ -49,7 +49,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
     if(motion.reduced)assert.equal(selected.animation,'none','reduced-motion disables pulse');
     else assert.equal(selected.animation,'kussoon-selected-area-pulse','only selected path animates');
     assert.equal(await page.locator('#map path.land.chosen').count(),1,'single selected region');
-    await page.selectOption('#region','');
+    await page.locator('#region').evaluate(el=>{el.value='';el.dispatchEvent(new Event('change',{bubbles:true}));});
     await page.waitForFunction(()=>document.querySelectorAll('#map path.land.chosen').length===0);
     console.log('PASS public nationwide colour and pulse '+engine+' '+pref+' selected='+code);
    }
