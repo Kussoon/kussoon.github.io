@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>トヨタとWaymo、日本で2027年から初期運行へ｜Kussoon週刊第4号</title>
+<meta name="description" content="2026年11月2日〜8日の週刊自動運転・AIニュース。トヨタとWaymoの日本向け計画、Linuxの脆弱性研究、Anthropicの業績、Apollo Worldなどを紹介。">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7"></script>
+<style>
+:root{color-scheme:light;--bg:#f4f7fb;--ink:#1c2b3a;--muted:#556575;--blue:#176caa;--line:#dce5ee;--paper:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.9}
+a{color:var(--blue)}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:white;padding:.5rem}.sitehead{background:#fff;border-bottom:1px solid var(--line)}.sitehead-inner{max-width:990px;margin:auto;padding:15px 20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}.brand{font-weight:750;text-decoration:none;color:#1c3850}.back{font-size:.88rem;text-decoration:none}.container{max-width:900px;margin:auto;padding:26px 18px 50px}.paper{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:clamp(20px,5vw,46px);box-shadow:0 7px 22px #142d4c0b}.issue{display:inline-block;background:#e6f1fa;border-radius:100px;padding:3px 13px;font-size:.82rem;font-weight:700;color:#225e87}h1{font-size:clamp(1.55rem,4vw,2.3rem);line-height:1.48;margin:18px 0 12px;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5;margin:55px 0 20px;padding:0 0 10px;border-bottom:3px solid #cce1ee}h3{font-size:1.18rem;line-height:1.55;margin:30px 0 10px}h4{font-size:1.03rem;margin:22px 0 7px}.meta,.small{color:var(--muted);font-size:.89rem}.intro{font-size:1.045rem;padding:10px 0}.toc{background:#f2f7fb;border:1px solid var(--line);padding:17px 22px;border-radius:12px;margin:22px 0}.toc strong{display:block;margin-bottom:4px}.toc ol{margin:5px 0 0;padding-left:1.4em}.toc a{text-decoration:none}.toc li{padding:3px 0}p{margin:13px 0}.point{border-left:4px solid #80b6d7;padding:9px 15px;background:#f5f9fc;margin:18px 0}.source{font-size:.87rem;margin:14px 0 23px;color:var(--muted)}.news{padding-bottom:15px;border-bottom:1px solid var(--line)}.others h3{font-size:1.04rem;margin:27px 0 6px}.others ul{padding-left:1.3em;margin:6px 0}.others li{margin:5px 0}.note{font-size:.86rem;color:var(--muted);padding-top:20px;border-top:1px solid var(--line);margin-top:45px}footer{padding:22px 0;text-align:center;font-size:.9rem;color:var(--muted)}footer a{text-decoration:none}.top{position:fixed;right:16px;bottom:20px;background:#2375a8;color:#fff;box-shadow:0 2px 12px #253e5550;width:43px;height:43px;display:grid;place-items:center;border-radius:50%;text-decoration:none;font-size:1.3rem}@media(max-width:600px){.container{padding:14px 10px 38px}.paper{border-radius:10px}h2{margin-top:39px}}
+</style>
+<style>
+
+/* Kussoon 読み物・雑学ベースの共通フッター v2: footer内だけに適用 */
+footer.ks-unified-footer {
+  box-sizing:border-box; display:block; clear:both; width:100%; max-width:none;
+  margin:32px 0 0; padding:28px 16px calc(30px + env(safe-area-inset-bottom));
+  background:#f8fafc; border-top:1px solid #dce5eb;
+  color:#40566a; color-scheme:light; font-family:inherit; font-size:14px;
+  line-height:1.75; text-align:left; box-shadow:none;
+}
+footer.ks-unified-footer *, footer.ks-unified-footer *::before, footer.ks-unified-footer *::after { box-sizing:border-box; }
+footer.ks-unified-footer .ksu-inner { max-width:1050px; margin:0 auto; }
+footer.ks-unified-footer .ksu-brand { margin:0 0 3px; font-size:1.06rem; font-weight:750; color:#1c3e56; }
+footer.ks-unified-footer .ksu-lead { margin:0 0 22px; color:#627789; font-size:.87rem; }
+footer.ks-unified-footer .ksu-section { margin:0 0 21px; }
+footer.ks-unified-footer .ksu-label { margin:0 0 8px; color:#354e60; font-size:.87rem; font-weight:700; }
+footer.ks-unified-footer .ksu-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:20px; row-gap:5px; }
+footer.ks-unified-footer .ksu-links a, footer.ks-unified-footer .ksu-links .ksu-current {
+  display:flex; align-items:center; min-width:0; min-height:36px; padding:4px 0;
+  font-size:.88rem; line-height:1.5; overflow-wrap:anywhere;
+}
+footer.ks-unified-footer a { color:#225f89; text-decoration:underline; text-underline-offset:3px; }
+footer.ks-unified-footer a:hover { color:#103c60; text-decoration-thickness:2px; }
+footer.ks-unified-footer a:focus-visible { outline:3px solid #e8a747; outline-offset:3px; border-radius:3px; }
+footer.ks-unified-footer .ksu-current { color:#62717d; font-weight:700; text-decoration:none; }
+footer.ks-unified-footer .ksu-current::before { content:'現在：'; font-size:.75rem; font-weight:400; margin-right:3px; }
+footer.ks-unified-footer .ksu-other { padding-top:17px; border-top:1px solid #e0e7ed; }
+footer.ks-unified-footer .ksu-bottom { border-top:1px solid #e0e7ed; padding-top:17px; margin-top:5px; }
+footer.ks-unified-footer .ksu-home { display:flex; flex-wrap:wrap; gap:4px 22px; margin-bottom:13px; }
+footer.ks-unified-footer .ksu-home a { display:inline-flex; align-items:center; min-height:36px; }
+footer.ks-unified-footer .ksu-top { display:inline-flex; align-items:center; min-height:40px; padding:6px 13px; border:1px solid #c5d4df; border-radius:8px; background:#fff; text-decoration:none; font-weight:700; }
+footer.ks-unified-footer .ksu-info { display:flex; flex-wrap:wrap; gap:0 19px; margin:14px 0 8px; }
+footer.ks-unified-footer .ksu-info a { display:inline-flex; align-items:center; min-height:34px; font-size:.82rem; }
+footer.ks-unified-footer .ksu-copy { margin:8px 0 0; font-size:.77rem; color:#70808b; }
+footer.ks-unified-footer .ksu-version { margin:7px 0 0; font-size:.76rem; color:#70808b; }
+@media(max-width:520px) {
+  footer.ks-unified-footer { padding:24px 16px calc(26px + env(safe-area-inset-bottom)); }
+  footer.ks-unified-footer .ksu-links { grid-template-columns:1fr; row-gap:2px; }
+  footer.ks-unified-footer .ksu-lead { margin-bottom:18px; }
+  footer.ks-unified-footer .ksu-section { margin-bottom:17px; }
+  footer.ks-unified-footer .ksu-info { gap:0 14px; }
+}
+
+</style>
+</head>
+<body id="top"><a class="skip" href="#main">本文へ移動</a>
+<header class="sitehead"><div class="sitehead-inner"><a class="brand" href="/driving/news/">Kussoon 自動運転・AIニュース</a><a class="back" href="/">← Kussoonトップへ</a></div></header>
+<main id="main" class="container"><article class="paper">
+<span class="issue">週刊 第4号 ／ 2026年11月2日（月）〜8日（日）</span>
+<h1>トヨタとWaymo、2027年から日本で自動運転車の初期運行へ　AIの安全性研究も進展</h1>
+<p class="meta">対象：2026年11月2日〜6日のデイリーブリーフィング ／ 週刊第4号</p>
+<p class="intro">今週は、トヨタとWaymoが日本製の電気自動車「bZ4X」を使った自動運転タクシーの初期運行計画を公表。AI分野では、Linuxの脆弱性を大規模に検証したOpenAIの研究成果、Anthropicの売上高と設備負担、画像生成AIの更新が注目された。</p>
+<nav class="toc" aria-label="記事内目次"><strong>この記事の目次</strong><ol><li><a href="#feature">詳報：トヨタとWaymo、日本で2027年に初期運行へ</a></li><li><a href="#linux">OpenAIのAI、Linuxの権限昇格につながる948件の攻撃を実証</a></li><li><a href="#anthropic">Anthropic、四半期売上高169.6億ドル　計算設備の契約負担も巨額</a></li><li><a href="#baidu">Baidu、自動運転AIを仮想道路で訓練する「Apollo World」を発表</a></li><li><a href="#uber">WaymoとUber、2028年から一部都市で独占配車関係を見直し</a></li><li><a href="#images">OpenAI、画像生成・編集モデル「Images 2.6」を発表</a></li><li><a href="#summary">今週を振り返って</a></li></ol></nav>
+<section id="feature"><h2>今週の詳報</h2><h3>トヨタとWaymo、日本製bZ4Xで自動運転タクシー事業を拡大</h3><p class="meta">公式発表：10月30日（金）／11月2日（月）のデイリーブリーフィングで詳報</p>
+<p>トヨタ自動車と米国の自動運転開発企業Waymoは10月30日、自動運転分野での協業を拡大すると発表した。トヨタの電気自動車「bZ4X」にWaymoの自動運転システムを搭載し、2027年から日本で試験・検証を含む初期運行を始める計画だ。</p>
+<h4>生産から自動運転用機器の搭載まで一つの工場で</h4>
+<p>車両は愛知県豊田市のトヨタ高岡工場で生産する。車両本体の組み立てからWaymo向けの自動運転機器の搭載までを同じ工場で実施する。量産車の生産体制と自動運転技術を組み合わせることが狙いだ。</p>
+<h4>乗客向けの装備と海外展開</h4>
+<p>自動開閉ドア、電動バックドア、広い後席空間など、配車サービスでの乗り降りを想定した装備が採用される。日本での初期運行に続き、英国などWaymoのサービス展開地域への導入も計画している。また、個人が所有するトヨタ車への自動運転技術の応用も引き続き検討する。</p>
+<h4>「2027年に完全無人営業開始」とは限らない</h4>
+<p>今回の発表で示された2027年の予定には、試験や安全性の検証が含まれる。<strong>日本で一般利用者向けの完全無人配車サービスが2027年に開始すると確定したわけではない。</strong>実際のサービス開始には、走行区域や運行条件の検証、必要な手続きなどが関わる。</p>
+<p class="source">公式資料：<a href="https://global.toyota/jp/newsroom/corporate/44960910.html" rel="noopener noreferrer" target="_blank">トヨタ自動車公式発表（10月30日・日本語） ↗</a></p></section>
+<section><h2>今週の注目ニュース5選</h2><section class="news-section" id="linux"><h3>OpenAIのAI、Linuxの権限昇格につながる948件の攻撃を実証</h3><p class="meta">発表：11月4日（水）／11月6日（金）のデイリーブリーフィング</p><p>OpenAIはLinuxカーネルを対象に、脆弱性候補の検証から修正案の作成までを自動化する研究結果を公表した。2,308件の候補から1,724件を再現し、そのうち948件について一般ユーザーから管理者権限へ昇格できる攻撃手法を実証した。API費用は約121万ドル。研究は隔離された環境で実施され、修正パッチは開発者側による確認が必要だ。948件すべての修正が完了したという意味ではない。</p><p class="source">出典：<a href="https://openai.com/index/a-thousand-fewer-paths-to-root/" target="_blank" rel="noopener noreferrer">OpenAI公式発表（11月4日） ↗</a></p></section><section class="news-section" id="anthropic"><h3>Anthropic、四半期売上高169.6億ドル　計算設備の契約負担も巨額</h3><p class="meta">書類更新・報道：11月2日（月）／11月3日（火）のデイリーブリーフィング</p><p>Anthropicが株式上場に向けた提出書類を更新した。2026年7〜9月期の売上高は169億6,000万ドルで前四半期比47％増。一方、将来の計算設備の利用などに関する契約上のコミットメントは約9,000億ドルに達した。これは当期に現金を支出した金額ではない。急拡大するAI事業を支える計算設備の確保と、関連する資金調達リスクが焦点となる。</p><p class="source">出典：<a href="https://www.investing.com/news/stock-market-news/anthropics-quarterly-loss-shrinks-revenue-jumps-ahead-of-blockbuster-ipo-4992139" target="_blank" rel="noopener noreferrer">Reuters配信記事（11月2日） ↗</a></p></section><section class="news-section" id="baidu"><h3>Baidu、自動運転AIを仮想道路で訓練する「Apollo World」を発表</h3><p class="meta">発表・報道：11月3日（火）／11月4日（水）のデイリーブリーフィング</p><p>中国Baiduは、自動運転車の訓練用に道路環境を再現するAIシミュレーションシステム「Apollo World」を発表した。カメラやLiDARで捉える情報を仮想的に作り出し、1日当たり最大10万kmの模擬走行データを生成できるとしている。同社のロボタクシー事業「Apollo Go」の訓練にも利用されている。ただし、模擬走行距離をそのまま実際の道路での安全実績とみなすことはできず、実車による検証も引き続き必要だ。</p><p class="source">出典：<a href="https://www.reuters.com/technology/chinas-baidu-launches-ai-model-simulating-road-environment-robotaxis-2026-11-03/" target="_blank" rel="noopener noreferrer">Reuters（11月3日） ↗</a></p></section><section class="news-section" id="uber"><h3>WaymoとUber、2028年から一部都市で独占配車関係を見直し</h3><p class="meta">報道：11月4日（水）／11月5日（木）のデイリーブリーフィング</p><p>Waymoは2028年1月から、米テキサス州オースティンとジョージア州アトランタでUberを通じた独占的な配車方式を見直し、自社アプリから直接Waymo車両を呼べるようにする方針だ。Uberは両社の合意が続く限りUberアプリでもWaymo車両を扱う考えを示した。今回の報道は全都市で提携を直ちに終了するという意味ではない。</p><p class="source">出典：<a href="https://techcrunch.com/2026/11/04/waymo-confirms-its-shaking-up-its-uber-relationship-in-january-2028/" target="_blank" rel="noopener noreferrer">TechCrunch（11月4日） ↗</a></p></section><section class="news-section" id="images"><h3>OpenAI、画像生成・編集モデル「Images 2.6」を発表</h3><p class="meta">発表：11月4日（水）／11月6日（金）のデイリーブリーフィング</p><p>OpenAIは画像の生成・編集に対応する「Images 2.6」を発表した。GIFアニメーション生成、編集前後の人物や物体の一貫性維持、APIでのSVG書き出しなどを強化した。ChatGPT、Codex、APIで提供され、API向けには生成速度を重視するFlareと精細な編集を重視するSunburstが用意されている。</p><p class="source">出典：<a href="https://openai.com/index/introducing-images-2-6/" target="_blank" rel="noopener noreferrer">OpenAI公式発表（11月4日） ↗</a></p></section></section>
+<section id="summary"><h2>今週を振り返って</h2><p>自動運転では、日本向けの車両量産と初期運行の準備、仮想環境での訓練、配車アプリの運営方式といった、サービスの実用化を支える取り組みが進んだ。AI分野では、安全性の検証、計算設備の確保、新しい画像生成機能が注目された。</p></section>
+<p class="note">本記事は2026年11月2日〜6日のデイリーブリーフィングを基に編集した。詳報1件と注目ニュース5件を掲載。重要ニュース以外の見出しには、独立した裏付けが未完了のものがあるため、今回の本文では取り上げていない。計画・報道と実施済みの事実を区別した。AIを編集補助として使用した。</p>
+<p><a href="/driving/news/">← 週刊ニュース一覧へ戻る</a></p></article></main><footer class="ks-unified-footer" aria-label="Kussoon共通フッター">
+<div class="ksu-inner">
+<p class="ksu-brand">Kussoon｜運転・モビリティ</p>
+<p class="ksu-lead">自動運転・AIニュース 週刊第4号（2026年11月2日〜8日）。</p>
+<nav class="ksu-section" aria-label="運転・モビリティの関連ページ">
+<p class="ksu-label">運転・モビリティの関連ページ</p>
+<div class="ksu-links"><a href="/driving/news/">自動運転・AIニュース</a>
+<a href="/driving/news/guide/">自動運転入門</a>
+<a href="/driving/news/japan-timeline/">日本の自動運転・年表</a>
+<a href="/driving/vehicleregistrationplates/region/index.html">全国ナンバープレートマップ</a>
+<a href="/driving/vehicleregistrationplates/number10.html">ナンバー10</a>
+<a href="/nishinomiya/nishinomiya-intersections-map.html">西宮市 交差点マップ</a></div>
+</nav>
+<nav class="ksu-section" aria-label="週刊ニュースの記事"><p class="ksu-label">週刊ニュースの記事</p><div class="ksu-links"><a href="/driving/news/">週刊ニュース一覧</a><a href="/driving/news/20261012.html">第1号（10月12日〜18日）</a><a href="/driving/news/20261019.html">第2号（10月19日〜25日）</a><a href="/driving/news/20261026.html">第3号（10月26日〜11月1日）</a><span class="ksu-current" aria-current="page">第4号（11月2日〜8日）</span></div></nav>
+<nav class="ksu-section ksu-other" aria-label="Kussoonのほかのコンテンツ">
+<p class="ksu-label">Kussoonのほかのコンテンツ</p>
+<div class="ksu-links"><a href="/games/">学ぶ・遊ぶ</a>
+<a href="/local/">地域を調べる</a>
+<a href="/ideas/">工夫・アイデア</a>
+<a href="/reading/">読み物・雑学</a></div>
+</nav>
+<div class="ksu-bottom">
+<nav class="ksu-home" aria-label="サイト上位ページ"><a href="/">Kussoonトップ</a><a href="/driving/">運転・モビリティ トップ</a></nav>
+<a class="ksu-top" href="#">↑ ページ先頭へ戻る</a>
+<nav class="ksu-info" aria-label="サイト共通案内"><a href="/sitemap/">サイトマップ</a><a href="/contact/">お問い合わせ</a><a href="/about/">このサイトについて</a>
+<a href="/privacy/">プライバシー</a>
+<a href="/sources/">データ出典</a>
+<a href="/terms/">利用上の注意</a></nav>
+<p class="ksu-copy">© 2026 Kussoon. All rights reserved.</p>
+
+</div>
+</div>
+</footer><a class="top" href="#top" aria-label="ページの先頭へ">↑</a>
+</body></html>
