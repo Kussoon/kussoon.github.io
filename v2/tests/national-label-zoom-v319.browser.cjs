@@ -56,7 +56,9 @@ async function focus(page,query){
     await page.evaluate(()=>{const c=window.KussoonV2ProgressivePreview.controller;c.clear();c.schedule();});
     await page.waitForTimeout(250);
     // Return to the province-wide view that reproduces the reported issue.
-    await page.click('#prefBtn');
+    await page.click('#nationBtn');
+    await page.click('#prefTrigger');
+    await page.locator('#prefChoices button').filter({hasText:'兵庫県'}).click();
     await page.waitForFunction(()=>document.querySelector('#breadcrumb')?.textContent.includes('兵庫県')&&document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
     await page.click('#mapReset');
     await page.waitForTimeout(500);
