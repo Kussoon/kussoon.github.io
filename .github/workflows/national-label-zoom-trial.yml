@@ -1,0 +1,29 @@
+name: National label zoom trial regression
+on:
+  pull_request:
+    paths:
+      - 'v2/national/label-zoom-trial.html'
+      - 'v2/national/density-labels-trial.js'
+      - 'v2/national/national-progressive-labels-trial.js'
+      - 'v2/tests/national-label-zoom-trial.test.cjs'
+      - 'v2/tests/national-label-zoom-trial.browser.cjs'
+      - '.github/workflows/national-label-zoom-trial.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium
+        working-directory: v2/tests/browser
+      - name: Check scale, overlap, readings and dense regions in browser
+        run: node v2/tests/national-label-zoom-trial.browser.cjs
