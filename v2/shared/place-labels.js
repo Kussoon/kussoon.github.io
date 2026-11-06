@@ -110,7 +110,7 @@ function show(options){
    {text:parts[0].reading,small:true,y:-8},
    {text:parts[1].name,small:false,y:8},
    {text:parts[1].reading,small:true,y:21}
-  ]:[{text:region.name,small:false,y:5}];
+  ]:[{text:region.labelName||region.fullName||region.name,small:false,y:5}];
   if(hasReading&&!parts)rows.push({text:region.reading,small:true,y:19});
   for(const row of rows){
    const t=document.createElementNS(NS,'text');

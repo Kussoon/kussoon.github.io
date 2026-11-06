@@ -43,7 +43,7 @@ function modelFor(region,project){
  const textParts=region.readingParts||[];
  const primary=textParts.length===2
    ?(textParts[0].name.length>=textParts[1].name.length?textParts[0].name:textParts[1].name)
-   :region.name;
+   :(region.labelName||region.fullName||region.name);
  return {d,name:primary,code:region.code,region};
 }
 function textBox(region,size,readings,measure){
@@ -54,7 +54,7 @@ function textBox(region,size,readings,measure){
   {text:parts[0].reading,size:11,y:-8},
   {text:parts[1].name,size,y:8},
   {text:parts[1].reading,size:11,y:21}
- ]:[{text:region.name,size,y:5}];
+ ]:[{text:region.labelName||region.fullName||region.name,size,y:5}];
  if(hasReading&&!parts)rows.push({text:region.reading,size:11,y:19});
  const maxWidth=Math.max(...rows.map(r=>measure(r.text,r.size)),1)+size*.34;
  const top=Math.min(...rows.map(r=>r.y-r.size*.62))-2;
