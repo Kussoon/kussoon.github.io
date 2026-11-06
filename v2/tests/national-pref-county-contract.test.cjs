@@ -199,4 +199,9 @@ assert.equal((html.match(/id="nationBtn"/g)||[]).length,1,'Exactly one nationwid
 assert.equal((html.match(/id="prefBtn"/g)||[]).length,1,'Exactly one prefecture return button');
 assert(!html.includes('都道府県は上の選択欄から指定できます。地図を拡大して市区町村をタップしてください。'),'Redundant navigation instructions removed');
 assert(!html.includes('吹き出しは上部の帯で上下に移動でき、×で閉じられます。'),'Obsolete popup-drag guidance removed');
+// A region-specific learning page uses the unchanged nationwide renderer.
+assert(/new URLSearchParams\(location\.search\)\.get\('pref'\)/.test(html),'Prefecture deep link accepts pref query parameter');
+assert(/manifest\.entries\.find\(item=>item\.pref===requestedPref\)/.test(html),'Only prefectures present in the live manifest are accepted');
+assert(/if\(matchedPref\)\{paint\(\);void goPref\(requestedPref\);\}/.test(html),'Recognized prefectures open the existing goPref path');
+assert(/else\{paint\(\);\$\('status'\)/.test(html),'Unknown query values keep national initial display');
 console.log('Public nationwide tap and county detail contract: OK');
