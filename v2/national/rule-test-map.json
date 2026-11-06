@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide. PR #305 aligns prefecture and nationwide municipality labels with verified full names and Tokyo special ward display prefixes.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide. PR #305 aligns prefecture and nationwide municipality labels with verified full names and Tokyo special ward display prefixes. PR #306 guards formal ward names against cached earlier label renderers.",
   "rules": {
     "R01": {
       "paths": [
@@ -93,8 +93,8 @@
         "S43"
       ],
       "coverage_gap": true,
-      "test_scope": "index_data_name_assertions_and_static_paths_passed_safari_edge_visual_unverified",
-      "decision": "PR #305: prefecture and nationwide visible label widths and placement use full names, never only short ward name."
+      "test_scope": "formal_name_legacy_alias_and_cache_key_static_verified_safari_edge_visual_unverified",
+      "decision": "PR #306: prefecture label display model exposes both name and labelName with the same full name for legacy cached renderers."
     },
     "R06": {
       "paths": [
@@ -133,8 +133,8 @@
         "S25"
       ],
       "coverage_gap": true,
-      "test_scope": "index_data_name_assertions_and_static_paths_passed_safari_edge_visual_unverified",
-      "decision": "PR #305: nationwide and prefecture map labels use full formal municipality name; Tokyo 23 wards prefixed 東京都; all designated city wards keep their city."
+      "test_scope": "formal_name_legacy_alias_and_cache_key_static_verified_safari_edge_visual_unverified",
+      "decision": "PR #306: cache-bust three label scripts and keep old/new display fields aligned, preventing municipality wards reverting to short names."
     },
     "R08": {
       "paths": [
