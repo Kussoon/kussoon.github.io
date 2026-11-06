@@ -166,7 +166,7 @@ assert(/readingPartsFor\(r\.code\)/.test(html),'Tokyo prefix reading is retained
 assert(/return \{\.\.\.r,name:full,labelName:full\}/.test(html),'Default prefecture label models provide full name in legacy and new fields');
 assert(/return \{\.\.\.r,name:full,labelName:full,readingParts:parts/.test(html),'Tokyo ward model includes full name and verified readings');
 for(const asset of ['place-labels.js','established-label-adapter.js','national-progressive-labels.js']){
- assert(html.includes(asset+'?v=306'),'Updated asset gets a new cache key: '+asset);
+ assert(html.includes(asset+'?v=307'),'Updated asset gets a new cache key: '+asset);
 }
 // R05/R07/R08: two-line city/ward (and verified county/town) labels, even readings OFF.
 const placeLabelsSource=read('v2/shared/place-labels.js');
