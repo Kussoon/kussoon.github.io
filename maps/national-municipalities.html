@@ -423,6 +423,7 @@ function paint({refocus=true}={}){
  }
  if(refocus)viewport.reset();
  $('quizStart').disabled=!current||Boolean(quizSession);
+ syncChoicePickers();
  updateSearch();
 }
 function ensureNationwideSearchIndex(){
