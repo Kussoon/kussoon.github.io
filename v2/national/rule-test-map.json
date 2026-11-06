@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only.",
   "rules": {
     "R01": {
       "paths": [
@@ -329,10 +329,10 @@
         "S46"
       ],
       "coverage_gap": true,
-      "test_scope": "static_contract_and_mock_viewport_passed_browser_safari_edge_unverified",
+      "test_scope": "public_static_contract_passed_safari_visual_unverified",
       "user_decision": "Support keyboard activation of municipality map targets with Enter/Space and select the first search result with Enter. Confirmed by user 2026-11-06 JST.",
       "implementation_status": "not_implemented_in_public_map",
-      "decision": "PR #301: prompt becomes 次に市区町村を選択, search and area picker side-by-side; earlier downward picker and code order retained."
+      "decision": "PR #302: permanently open outer region panel with matching search font; native internal downward pickers still expandable. Search helper removed."
     },
     "R19": {
       "paths": [
@@ -348,8 +348,8 @@
         "S49"
       ],
       "coverage_gap": true,
-      "test_scope": "static_contract_and_mock_viewport_passed_browser_safari_edge_unverified",
-      "decision": "PR #301: remove nationwide locator widget and place search + region selection in two columns."
+      "test_scope": "public_static_contract_passed_safari_visual_unverified",
+      "decision": "PR #302: remove search helper, permanently open region panel, reduce main bottom padding to 8px while retaining shared footer and links."
     },
     "R20": {
       "paths": [
