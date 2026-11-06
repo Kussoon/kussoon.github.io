@@ -124,4 +124,16 @@ assert(/\.search-and-choose #areaSettings \.picker-heading\{font:inherit;font-we
 assert(!html.includes('読み仮名や5桁コードでも検索できます。同名の自治体は都道府県名で確認してください。'),'Long search helper removed');
 assert(/main\{max-width:960px;margin:auto;padding:16px 12px 8px\}/.test(html),'Main bottom spacing is compact');
 assert(/@media\(max-width:600px\)\{main\{padding:10px 8px 8px\}/.test(html),'Small-screen bottom spacing is compact');
+// R03/R04/R18: municipality names are a lightweight first-stage picker.
+assert(/prefectureNamesFor:pref=>index\?\.entries\.filter\(r=>r\.pref===pref\)/.test(progressive),'Prefecture name index filters only selected prefecture');
+assert(/void nationalLabels\.ready\.then\(\(\)=>\{[\s\S]*?const choices=nationalLabels\.prefectureNamesFor\(code\)/.test(html),'Picker reads loaded nationwide label index before details');
+assert(/region\.disabled=false;\s*syncChoicePickers\(\)/.test(html),'Municipality dropdown activates at name-index stage');
+const earlyChoices=html.indexOf('void nationalLabels.ready.then(');
+const heavyGeometry=html.indexOf('await progressiveStore.get(code)',earlyChoices);
+assert(earlyChoices>=0&&heavyGeometry>earlyChoices,'Lightweight list starts before 20m geometry loading');
+assert(!/if\(progressive\)entry\.offices=await getOffices\(code\)/.test(html),'Office data no longer blocks municipality choice');
+assert(/void getOffices\(code\)\.then\(offices=>\{[\s\S]*?renderOfficePopup\(\)/.test(html),'Office information updates popup independently');
+assert(/if\(!current\)\{if\(pendingPrefSelection\?\.id===requestId\)pendingPrefSelection\.code=\$\('region'\)\.value;return;\}/.test(html),'Early municipality selections are retained until detail arrives');
+assert(/const wanted=pendingPrefSelection\?\.id===id\?pendingPrefSelection\.code:selectedCode/.test(html),'Loading detail honors selected municipality');
+assert(/if\(id!==requestId\|\|current\)return;\s*const choices=nationalLabels\.prefectureNamesFor/.test(html),'Obsolete or already-complete picker response is ignored');
 console.log('Public nationwide tap and county detail contract: OK');

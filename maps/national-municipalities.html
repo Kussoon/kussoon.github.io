@@ -551,7 +551,7 @@ function startQuiz(){
 }
 function returnNation(){
  if(quizSession)stopQuiz();
- ++requestId;current=null;dismissedPopupCode=null;if(progressive){nationalView=true;nationalLabels?.clear();}$('pref').value='';$('region').value='';
+ ++requestId;pendingPrefSelection=null;current=null;dismissedPopupCode=null;if(progressive){nationalView=true;nationalLabels?.clear();}$('pref').value='';$('region').value='';
  paint();$('status').textContent='全国47都道府県を表示中です。';
 }
 async function fetchPrefEntry(code){
@@ -576,26 +576,61 @@ async function fetchPrefEntry(code){
    if(progressive){const rows=window.KussoonProgressiveLoadTimings||(window.KussoonProgressiveLoadTimings=[]);rows.push({code,headersMs:headersAt-start,bodyMs:bodyAt-headersAt,parseMs:parsedAt-bodyAt,decodeMs:decodedAt-parsedAt,regionsMs:regionsAt-decodedAt,readingsAndBoundsMs:done-regionsAt});if(rows.length>64)rows.shift();}
    return {regions,arcs,offices,box:b,readingStats:attached.stats,ms:done-start,bytes:new TextEncoder().encode(raw).length};
 }
+// The picker uses the lightweight nationwide label index. It must not wait
+// for 20m polygon decoding, all-country reading verification or office URLs.
+let pendingPrefSelection=null;
 async function goPref(code,selectedCode=''){
  if(!code){returnNation();return;}
  if(progressive){nationalView=false;nationalLabels?.pause();}
  const id=++requestId;dismissedPopupCode=null;$('officePopup').hidden=true;
- $('pref').value=code;$('status').textContent=names[Number(code)]+'の20m地図を読み込み中です…';
+ current=null;
+ pendingPrefSelection={id,code:selectedCode};
+ const region=$('region');
+ region.disabled=true;
+ region.replaceChildren(new Option('市区町村名を準備中',''));
+ $('pref').value=code;
+ syncChoicePickers();$('status').textContent=names[Number(code)]+'の20m地図を読み込み中です…';
+ // As soon as the already-used nationwide index is ready, enable only this
+ // prefecture’s municipality names; the heavy details run independently.
+ if(progressive&&nationalLabels){
+  void nationalLabels.ready.then(()=>{
+   if(id!==requestId||current)return;
+   const choices=nationalLabels.prefectureNamesFor(code);
+   if(!choices.length)return;
+   region.replaceChildren(new Option('次に市区町村を選択',''));
+   for(const item of choices)region.append(new Option(
+    item.name+(item.reading?'／'+item.reading:'')+'（'+item.code+'）',item.code));
+   const wanted=pendingPrefSelection?.id===id?pendingPrefSelection.code:'';
+   if(wanted&&choices.some(item=>item.code===wanted))region.value=wanted;
+   region.disabled=false;
+   syncChoicePickers();
+  }).catch(error=>console.warn('先行する市区町村名一覧の取得に失敗しました',error));
+ }
  try{
   let entry=progressive?await progressiveStore.get(code):cache.get(code);
-  if(progressive)entry.offices=await getOffices(code);
   if(!entry){
-   entry=await fetchPrefEntry(code);entry.offices=await getOffices(code);cache.set(code,entry);
+   entry=await fetchPrefEntry(code);cache.set(code,entry);
    // Avoid holding the whole country in memory on iPhone.
    if(cache.size>3){for(const key of cache.keys()){if(key!==code){cache.delete(key);break;}}}
   }
   if(id!==requestId)return;
   current=entry;
-  const region=$('region');region.replaceChildren(new Option('選択なし',''));
+  region.replaceChildren(new Option('次に市区町村を選択',''));
   for(const r of entry.regions)region.append(new Option((nationalLabels?.fullNameFor(r.code)||r.fullName||r.name)+(r.reading?'／'+r.reading:'')+'（'+r.code+'）',r.code));
-  if(selectedCode&&entry.regions.some(r=>r.code===selectedCode))region.value=selectedCode;
-  paint();$('status').textContent=region.value?names[Number(code)]+' ＞ '+(nationalLabels?.fullNameFor(region.value)||entry.regions.find(r=>r.code===region.value)?.fullName||entry.regions.find(r=>r.code===region.value)?.name)+'を中央に表示しています。':names[Number(code)]+'を表示中です。市区町村を選べます。';
- }catch(e){if(id!==requestId)return;current=null;if(progressive)nationalView=true;paint();$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
+  const wanted=pendingPrefSelection?.id===id?pendingPrefSelection.code:selectedCode;
+  if(wanted&&entry.regions.some(r=>r.code===wanted))region.value=wanted;
+  pendingPrefSelection=null;
+  // Office files are not a prerequisite for selecting a municipality.
+  // They are attached when available, and the existing popup is refreshed.
+  entry.offices=null;
+  void getOffices(code).then(offices=>{
+   if(id!==requestId||current!==entry)return;
+   entry.offices=offices;
+   renderOfficePopup();
+  });
+  paint();
+  $('status').textContent=region.value?names[Number(code)]+' ＞ '+(nationalLabels?.fullNameFor(region.value)||entry.regions.find(r=>r.code===region.value)?.fullName||entry.regions.find(r=>r.code===region.value)?.name)+'を中央に表示しています。':names[Number(code)]+'を表示中です。市区町村を選べます。';
+ }catch(e){if(id!==requestId)return;pendingPrefSelection=null;current=null;if(progressive)nationalView=true;paint();$('status').textContent='読み込みエラー：'+e.message;console.error(e);}
 }
 $('quizStart').addEventListener('click',startQuiz);
 $('quizStop').addEventListener('click',stopQuiz);
@@ -682,7 +717,7 @@ document.addEventListener('keydown',e=>{
 });
 $('mapReadingToggle').addEventListener('click',()=>{if($('readingMode').disabled)return;$('readingMode').value=$('readingMode').value==='on'?'off':'on';$('readingMode').dispatchEvent(new Event('change'));});
 $('pref').addEventListener('change',()=>{if(quizSession)stopQuiz();$('placeSearch').value='';goPref($('pref').value);});
-$('region').addEventListener('change',()=>{if(quizSession)return;dismissedPopupCode=null;paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
+$('region').addEventListener('change',()=>{if(quizSession)return;if(!current){if(pendingPrefSelection?.id===requestId)pendingPrefSelection.code=$('region').value;return;}dismissedPopupCode=null;paint();$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
 
 $('nationBtn').addEventListener('click',returnNation);
 $('prefBtn').addEventListener('click',()=>{if(!current)return;$('region').value='';dismissedPopupCode=null;paint();$('status').textContent='都道府県全体を表示しています。';});
