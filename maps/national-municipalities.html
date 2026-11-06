@@ -44,7 +44,13 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 @media(max-width:600px){main{padding:10px 8px 36px}.panel{padding:11px}}
 /* One map-first interface for the pilot and its optional diagnostics. */
 main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-size:14px}
-.map-panel{padding:8px}.breadcrumb{font-size:14px;font-weight:700;margin:4px 0 8px}
+.map-panel{padding:8px;position:relative;z-index:10;overflow:visible}
+.map-frame{overflow:visible}
+.office-popup{will-change:transform;transform:translate3d(0,var(--popup-drag-y,0px),0)}
+.popup-head{background:#deebf3;border-radius:7px;padding:4px 6px;min-height:54px;touch-action:none;cursor:ns-resize;user-select:none;-webkit-user-select:none}
+.popup-head::before{content:"⋮⋮";color:#537890;font-weight:900;margin-right:4px}
+.popup-close{cursor:pointer;touch-action:manipulation}
+.breadcrumb{font-size:14px;font-weight:700;margin:4px 0 8px}
 #map{height:clamp(300px,68vh,700px);height:clamp(300px,68svh,700px)}
 .map-frame{position:relative}
 .map-toolbar{position:absolute;right:8px;bottom:8px;z-index:7;display:flex;flex-direction:column;gap:5px;width:96px}
@@ -54,7 +60,10 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 .office-popup{position:absolute;left:8px;right:auto;bottom:8px;z-index:5;width:min(350px,calc(100% - 128px));max-height:calc(100% - 16px);box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid #86aac2;border-radius:10px;padding:9px;box-shadow:0 5px 18px #2345}
 .office-popup[hidden]{display:none}
 .popup-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-shrink:0;margin-bottom:4px}
-.popup-head strong{min-width:0;overflow-wrap:anywhere}.popup-close{min-width:44px;min-height:44px;font-size:20px;flex-shrink:0}
+.popup-heading{display:flex;flex-direction:column;min-width:0;line-height:1.35}
+.popup-head strong{min-width:0;overflow-wrap:anywhere}
+.popup-reading{font-size:12px;font-weight:600;color:#315b74;overflow-wrap:anywhere}
+.popup-reading[hidden]{display:none}.popup-close{min-width:44px;min-height:44px;font-size:20px;flex-shrink:0}
 .popup-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;scroll-padding-block:8px}
 .popup-content{padding:0 2px 0}
 .popup-facility{border-bottom:1px solid #ccdbe4;margin:5px 0;padding:4px 0}
@@ -71,30 +80,11 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
 <h1>全国市区町村マップ 2026</h1>
 <p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。県別の淡い色、地名検索、読み仮名、役所・役場情報に対応しています。</p>
-<p class="intro">地図をタップして自治体の名前と役所・役場の情報を調べられます。</p>
+<p class="intro">地名検索、または地図の拡大・タップで市区町村を調べられます。吹き出しは上部の帯を上下に動かせます。</p>
 <p class="note"><strong>読み込みに時間がかかることがありますが、ご容赦ください。</strong></p>
-<section class="panel map-panel" aria-label="全国と都道府県の地図">
-<p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
-<div class="map-frame" id="mapFrame">
-<svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
-<div class="map-toolbar" id="mapToolbar" role="group" aria-label="地図右下の操作">
-<button type="button" id="mapZoomIn" aria-label="地図を拡大">＋ 拡大</button>
-<button type="button" id="mapZoomOut" aria-label="地図を縮小">－ 縮小</button>
-<button type="button" id="mapReset" aria-label="現在の表示単位の初期表示に戻す" title="この地図の表示位置と倍率を戻します。選択は保持します。">全体表示</button>
-<button type="button" id="mapReadingToggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button>
-</div>
-<aside id="officePopup" class="office-popup" aria-label="自治体情報" hidden>
-<div class="popup-head"><strong id="popupName"></strong><button type="button" id="popupClose" class="popup-close" aria-label="吹き出しを閉じる">×</button></div>
-<div class="popup-scroll" id="popupScroll" tabindex="0" aria-label="庁舎情報とリンクをスクロール"><div class="popup-content"><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></div></div>
-</aside>
-</div>
-<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button></div>
-<p id="status" class="status" role="status">全国地図を読み込みます。</p>
-<small>県や市区町村をタップして進みます。ピンチ・ドラッグ・右下のボタンで地図を操作できます。</small>
-</section>
 <section class="panel" aria-label="地域を探す">
 <div class="search-area">
-<label for="placeSearch">市区町村・都道府県を検索</label>
+<label for="placeSearch">市区町村を検索</label>
 <input id="placeSearch" type="search" placeholder="例：西宮市、浜松市中央区" autocomplete="off">
 <div id="searchHint"><small>読み仮名や5桁コードでも検索できます。同名の自治体は都道府県名で確認してください。</small></div>
 <div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div>
@@ -107,6 +97,25 @@ main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-siz
 <label>全国地図の表示範囲<select id="nationExtent"><option value="main">全国主要域（北海道〜沖縄）</option><option value="all">遠隔離島を含む全域</option></select></label>
 </div></details>
 <div class="map-locator" id="locatorPanel"><small>全国の中での位置（オレンジ色が選択中の都道府県）</small><svg id="locator" viewBox="0 0 850 700" role="img" aria-label="都道府県の全国位置"></svg></div>
+</section>
+<section class="panel map-panel" aria-label="全国と都道府県の地図">
+<p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
+<div class="map-frame" id="mapFrame">
+<svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
+<div class="map-toolbar" id="mapToolbar" role="group" aria-label="地図右下の操作">
+<button type="button" id="mapZoomIn" aria-label="地図を拡大">＋ 拡大</button>
+<button type="button" id="mapZoomOut" aria-label="地図を縮小">－ 縮小</button>
+<button type="button" id="mapReset" aria-label="現在の表示単位の初期表示に戻す" title="この地図の表示位置と倍率を戻します。選択は保持します。">全体表示</button>
+<button type="button" id="mapReadingToggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button>
+</div>
+<aside id="officePopup" class="office-popup" aria-label="自治体情報" hidden>
+<div class="popup-head"><div class="popup-heading"><strong id="popupName"></strong><span id="popupReading" class="popup-reading" hidden></span></div><button type="button" id="popupClose" class="popup-close" aria-label="吹き出しを閉じる">×</button></div>
+<div class="popup-scroll" id="popupScroll" tabindex="0" aria-label="庁舎情報とリンクをスクロール"><div class="popup-content"><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></div></div>
+</aside>
+</div>
+<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button></div>
+<p id="status" class="status" role="status">全国地図を読み込みます。</p>
+<small>都道府県は上の選択欄から指定できます。地図を拡大して市区町村をタップしてください。ピンチ・ドラッグ・右下のボタンでも操作できます。吹き出しは上部の帯で上下に移動でき、×で閉じられます。</small>
 </section>
 <details id="developerControls" class="panel debug-panel" data-debug hidden><summary>検証用設定</summary>
 <div class="controls"><label>読み仮名の表示<select id="readingMode"><option value="on">漢字＋読み仮名</option><option value="off" selected>漢字のみ</option></select></label></div>
@@ -180,6 +189,16 @@ async function getOffices(code){
  if(!officeCache.has(code))officeCache.set(code,fetch('/v2/data/offices/'+code+'.json?v=6').then(r=>{if(!r.ok)throw Error('office HTTP '+r.status);return r.json();}).then(d=>{if(d.schemaVersion!==2||d.prefecture!==code||!d.regions||!d.offices)throw Error('office schema');return d;}).catch(e=>{console.warn(e);officeCache.delete(code);return null;}));
  return officeCache.get(code);
 }
+// R07/R08: show only source-verified readings; do not derive readings from kanji.
+function syncPopupReading(code,region){
+ const node=$('popupReading');
+ const parts=nationalLabels?.readingPartsFor(code)||region?.readingParts||[];
+ const valid=Array.isArray(parts)&&parts.length>0&&parts.every(p=>p.name&&p.reading);
+ const text=valid?parts.map(p=>p.reading).join(''):'';
+ const show=$('readingMode').value==='on'&&Boolean(text);
+ node.textContent=show?text:'';
+ node.hidden=!show;
+}
 // PR #259: popup height follows content, never a fixed four-button height.
 function renderOfficePopup(){
  const national=!current&&nationalView?nationalLabels?.selection():null,entry=current||national?.entry;
@@ -191,6 +210,7 @@ function renderOfficePopup(){
  // R07/R17: Use the same municipality name as the map label. Do not append the parent city twice.
  const parentName=result.parentRegion?.name||'';
  $('popupName').textContent=parentName&&result.offices.length>1&&!selectedName.startsWith(parentName)?parentName+selectedName:selectedName;
+ syncPopupReading(code,r);
  KussoonOfficeDirectory.render(document,$('popupActions'),result,r.fullName||r.name);
  $('popupNote').textContent=!entry.offices?(officeReady.has(national?.pref||$('pref').value)?'庁舎データを取得できませんでした。':'この地域の庁舎情報は今後追加します。'):(result.offices.length&&result.offices.every(o=>o.status==='verified')?'住所は参考情報です。リンクは別タブで開きます。':'庁舎情報に未確認の項目があります。');
  popup.hidden=false;
@@ -456,7 +476,12 @@ $('quizNext').addEventListener('click',()=>{if(!quizSession)return;quizSession.n
 $('placeSearch').addEventListener('input',updateSearch);
 $('showNames').addEventListener('change',drawLabels);
 function syncMapReadingToggle(){const on=$('readingMode').value==='on';$('mapReadingToggle').textContent='よみがな '+(on?'ON':'OFF');$('mapReadingToggle').setAttribute('aria-pressed',String(on));$('mapReadingToggle').disabled=$('readingMode').disabled;}
-$('readingMode').addEventListener('change',()=>{syncMapReadingToggle();drawLabels();});
+$('readingMode').addEventListener('change',()=>{
+ syncMapReadingToggle();drawLabels();
+ const national=!current&&nationalView?nationalLabels?.selection():null;
+ const entry=current||national?.entry,code=current?$('region').value:national?.code||'';
+ if(entry&&code&&!$('officePopup').hidden)syncPopupReading(code,entry.regions.find(r=>r.code===code));
+});
 $('mapReadingToggle').addEventListener('click',()=>{if($('readingMode').disabled)return;$('readingMode').value=$('readingMode').value==='on'?'off':'on';$('readingMode').dispatchEvent(new Event('change'));});
 $('pref').addEventListener('change',()=>{if(quizSession)stopQuiz();$('placeSearch').value='';goPref($('pref').value);});
 $('region').addEventListener('change',()=>{if(quizSession)return;dismissedPopupCode=null;paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
@@ -498,5 +523,53 @@ $('map').addEventListener('click',e=>{
 </script>
 <script src="/v2/progressive-preview/prefecture-colors.js"></script>
 <script>window.KussoonV2PrefectureColors.attach(document.getElementById('map'));</script>
+<script>
+/* Production: move only the popup, preserving map viewport
+ * or document scrolling. Allow the header to remain reachable on-screen. */
+(function(){
+ const popup=document.getElementById('officePopup');
+ const handle=popup.querySelector('.popup-head');
+ const close=document.getElementById('popupClose');
+ let offset=0,start=null,shownCode='';
+ function setOffset(value){
+   offset=value;
+   popup.style.setProperty('--popup-drag-y',offset+'px');
+ }
+ function key(){
+   const label=document.getElementById('popupName');
+   return label?.textContent||'';
+ }
+ function resetOnSelection(){
+   if(popup.hidden)return;
+   const code=key();
+   if(code!==shownCode){shownCode=code;setOffset(0);}
+ }
+ new MutationObserver(resetOnSelection).observe(popup,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden']});
+ handle.addEventListener('pointerdown',function(event){
+   if(event.target===close||close.contains(event.target)||popup.hidden||event.button>0)return;
+   event.preventDefault();event.stopPropagation();
+   const rect=popup.getBoundingClientRect();
+   start={id:event.pointerId,y:event.clientY,offset,baseTop:rect.top-offset};
+   handle.setPointerCapture(event.pointerId);
+ });
+ handle.addEventListener('pointermove',function(event){
+   if(!start||event.pointerId!==start.id)return;
+   event.preventDefault();event.stopPropagation();
+   const desired=start.offset+(event.clientY-start.y);
+   const minimum=10-start.baseTop;
+   const maximum=window.innerHeight-54-start.baseTop;
+   setOffset(Math.max(minimum,Math.min(maximum,desired)));
+ });
+ function end(event){
+   if(!start||event.pointerId!==start.id)return;
+   event.stopPropagation();
+   start=null;
+ }
+ handle.addEventListener('pointerup',end);
+ handle.addEventListener('pointercancel',end);
+ handle.addEventListener('lostpointercapture',()=>{start=null;});
+ close.addEventListener('pointerdown',event=>event.stopPropagation());
+})();
+</script>
 <script defer src="/common/site-footer.js"></script>
 </body></html>
