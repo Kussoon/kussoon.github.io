@@ -105,11 +105,18 @@ function show(options){
   group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')');
   const hasReading=readings&&region.reading;
   const parts=hasReading&&Array.isArray(region.readingParts)&&region.readingParts.length===2?region.readingParts:null;
+  const split=Array.isArray(region.readingParts)&&region.readingParts.length===2&&
+   region.readingParts.map(p=>p.name).join('')===(region.labelName||region.fullName||region.name)
+   ?region.readingParts:null;
+  // Names are two lines even when phonetic readings are OFF.
   const rows=parts?[
    {text:parts[0].name,small:false,y:-21},
    {text:parts[0].reading,small:true,y:-8},
    {text:parts[1].name,small:false,y:8},
    {text:parts[1].reading,small:true,y:21}
+  ]:split?[
+   {text:split[0].name,small:false,y:-9},
+   {text:split[1].name,small:false,y:11}
   ]:[{text:region.labelName||region.fullName||region.name,small:false,y:5}];
   if(hasReading&&!parts)rows.push({text:region.reading,small:true,y:19});
   for(const row of rows){
