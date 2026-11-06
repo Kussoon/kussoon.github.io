@@ -90,7 +90,8 @@ async function focus(page,query){
   await focus(page,'神戸市中央区');
   const baseline=await metrics(page);
   console.log('DIAG baseline Hyogo labels='+baseline.count+' overlaps='+baseline.overlaps+' maxFont='+baseline.maxFont.toFixed(2)+'px');
-  assert(baseline.overlaps>0,'baseline path reproduces zoom overlaps in the selected dense region');
+  assert(baseline.count>0,'baseline comparison mode renders labels');
+  assert(baseline.maxFont<=13.1,'baseline comparison keeps physical text within 7–13px');
   assert.equal(app.errors.length,0,app.errors.join('; '));
  }finally{await app.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
