@@ -5,8 +5,8 @@
 (function(global){
 'use strict';
 function init(options){
- const {svg,width=850,height=700,minZoom=1,maxZoom:initialMaxZoom=128,onZoomChange}=options||{};
- let maxZoom=initialMaxZoom;
+ const {svg,width=850,height=700,minZoom:initialMinZoom=1,maxZoom:initialMaxZoom=128,onZoomChange}=options||{};
+ let minZoom=initialMinZoom,maxZoom=initialMaxZoom;
  if(!svg)throw Error('SVG map element is required');
  let box={x:0,y:0,w:width,h:height};
  // Bounds are expressed in projected SVG map units, not geographic degrees.
@@ -146,7 +146,7 @@ function init(options){
    throw Error('Invalid projected map bounds');
   contentBounds={minX,minY,maxX,maxY};
  }
- return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,setContentBounds,setView,setMaxZoom(value){if(!Number.isFinite(value)||value<minZoom)throw Error('Invalid maximum zoom');if(value===maxZoom)return;maxZoom=value;setView(view());},destroy(){
+ return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,setContentBounds,setView,setMinZoom(value){if(!Number.isFinite(value)||value<=0||value>maxZoom)throw Error('Invalid minimum zoom');if(value===minZoom)return;minZoom=value;setView(view());},setMaxZoom(value){if(!Number.isFinite(value)||value<minZoom)throw Error('Invalid maximum zoom');if(value===maxZoom)return;maxZoom=value;setView(view());},destroy(){
   svg.removeEventListener('pointerdown',pointerDown);
   svg.removeEventListener('pointermove',pointerMove);
   svg.removeEventListener('pointerup',pointerUp);

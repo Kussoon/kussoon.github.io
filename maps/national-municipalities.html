@@ -35,9 +35,6 @@ svg{display:block;width:100%;height:auto;background:#edf6fb;border:1px solid #b7
 .status{background:#e6f2fa;padding:10px;border-radius:8px;font-weight:700;line-height:1.6}
 .status[hidden]{display:none!important}
 small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border-radius:8px;font-size:14px;line-height:1.6}
-.map-locator{margin-top:10px;display:none}.map-locator.show{display:block}
-.map-locator svg{max-width:260px;touch-action:auto}
-.locator-pref{fill:#b8d9ea;stroke:#fff;stroke-width:1}.locator-pref.active{fill:#f5a73a}
 .quiz-panel{display:none}.quiz-panel{border:2px solid #9cc6dd;background:#f7fbff}
 .quiz-action{font:inherit;background:#fff;color:#17435d;border:1px solid #96b5cb;border-radius:8px;padding:9px 12px;min-height:44px;font-weight:700;cursor:pointer}
 .quiz-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
@@ -112,6 +109,12 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 .municipality-options button{text-align:left;padding-inline:12px}
 .choice-options button[aria-pressed="true"]{background:#d8edf8;border-color:#27749a;font-weight:700}
 .bottom-links{margin-top:18px}
+.search-and-choose{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.search-and-choose .search-area{min-width:0}
+.search-and-choose #areaSettings{min-width:0;margin:12px 0;padding:12px;border:1px solid #b9d0e0;border-radius:10px;background:#f7fbff}
+.search-and-choose #areaSettings summary{font-size:clamp(13px,1.7vw,16px);line-height:1.5;overflow-wrap:anywhere}
+.search-and-choose .choice-trigger{padding-inline:8px}
+@media(max-width:600px){.search-and-choose{gap:7px}.search-and-choose .search-area,.search-and-choose #areaSettings{padding:8px}.search-and-choose .prefecture-options{gap:3px;padding:4px}.search-and-choose .prefecture-options button{font-size:12px;min-height:38px}.search-and-choose .choice-trigger{font-size:13px}}
 [data-debug][hidden]{display:none!important}
 @media(max-width:600px){.office-popup{left:8px;right:108px;width:auto;min-width:0}}
 @media(max-width:500px){.map-toolbar{width:88px}.map-toolbar button{min-height:44px;font-size:13px}.map-fullscreen-button{width:88px;font-size:13px}}
@@ -122,13 +125,13 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <ul class="map-guide"><li>市区町村の位置を押すと吹き出しが出ます。</li><li>吹き出しは上下に移動でき、×で閉じられます。</li><li>地図内のボタンでよみがなが出せます。</li></ul>
 <p class="note"><strong>読み込みに時間がかかることがあります。</strong></p>
 <section class="panel" aria-label="地域を探す">
+<div class="search-and-choose">
 <div class="search-area">
 <label for="placeSearch">市区町村を検索</label>
 <input id="placeSearch" type="search" placeholder="例: やま、川、岡" autocomplete="off">
 <div id="searchHint"><small>読み仮名や5桁コードでも検索できます。同名の自治体は都道府県名で確認してください。</small></div>
 <div id="searchResultsShell" class="search-results-shell" hidden><div id="searchResultsRail" class="search-results-rail" role="scrollbar" aria-label="検索候補の縦スクロール" aria-controls="searchResults" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div id="searchResultsThumb" class="search-results-thumb"></div></div><div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div></div>
 </div>
-<input type="checkbox" id="showNames" checked hidden aria-hidden="true">
 <details id="areaSettings" class="region-picker"><summary>地域・表示範囲を選んで移動</summary>
 <div class="picker-stack">
 <div class="choice-picker" id="prefPicker">
@@ -136,14 +139,15 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <div class="choice-options prefecture-options" id="prefChoices" role="group" aria-label="都道府県の一覧" hidden></div>
 </div>
 <div class="choice-picker" id="regionPicker">
-<button type="button" class="choice-trigger" id="regionTrigger" aria-expanded="false" aria-controls="regionChoices" aria-label="市区町村を選ぶ" disabled>まず都道府県を選択 <span aria-hidden="true">▾</span></button>
+<button type="button" class="choice-trigger" id="regionTrigger" aria-expanded="false" aria-controls="regionChoices" aria-label="市区町村を選ぶ" disabled>次に市区町村を選択 <span aria-hidden="true">▾</span></button>
 <div class="choice-options municipality-options" id="regionChoices" role="group" aria-label="市区町村の一覧" hidden></div>
 </div>
 </div>
 <select id="pref" hidden aria-hidden="true" tabindex="-1"><option value="">都道府県を選ぶ</option></select>
-<select id="region" hidden aria-hidden="true" tabindex="-1" disabled><option value="">まず都道府県を選択</option></select>
+<select id="region" hidden aria-hidden="true" tabindex="-1" disabled><option value="">次に市区町村を選択</option></select>
 <select id="nationExtent" hidden aria-hidden="true" tabindex="-1"><option value="all" selected>離島を含む全域</option></select></details>
-<div class="map-locator" id="locatorPanel"><small>全国の中での位置（オレンジ色が選択中の都道府県）</small><svg id="locator" viewBox="0 0 850 700" role="img" aria-label="都道府県の全国位置"></svg></div>
+</div>
+<input type="checkbox" id="showNames" checked hidden aria-hidden="true">
 </section>
 <section class="panel map-panel" aria-label="全国と都道府県の地図">
 <p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
@@ -278,7 +282,7 @@ function syncChoicePicker(type){
  const native=$(type),trigger=$(type+'Trigger'),host=$(type+'Choices');
  trigger.disabled=native.disabled;
  const selected=native.options[native.selectedIndex];
- const fallback=type==='pref'?'都道府県を選ぶ':'まず都道府県を選択';
+ const fallback=type==='pref'?'都道府県を選ぶ':'次に市区町村を選択';
  trigger.firstChild.textContent=(native.value&&selected?selected.textContent:fallback)+' ';
  if(host.hidden)return;
  buildChoices(type);
@@ -377,9 +381,10 @@ function paint({refocus=true}={}){
  if(!overview)return;
  if(progressive){viewport.setMaxZoom(current?128:768);if(current)nationalLabels?.pause();}
  if(!current){
+  viewport.setMinZoom(1);
   viewport.setContentBounds(null);
-  drawOverview($('map'));$('locatorPanel').classList.remove('show');mode='national';activeProjection=null;
-  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('まず都道府県を選択',''));
+  drawOverview($('map'));mode='national';activeProjection=null;
+  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('次に市区町村を選択',''));
   $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
   $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
   $('officePopup').hidden=true;
@@ -405,9 +410,16 @@ function paint({refocus=true}={}){
    if(chosen){
     const nw=activeProjection([current.box[0],current.box[3]]);
     const se=activeProjection([current.box[2],current.box[1]]);
-    viewport.setContentBounds({minX:Math.min(nw[0],se[0]),minY:Math.min(nw[1],se[1]),
-     maxX:Math.max(nw[0],se[0]),maxY:Math.max(nw[1],se[1])});
-   }else viewport.setContentBounds(null);
+    const minX=Math.min(nw[0],se[0]),minY=Math.min(nw[1],se[1]);
+    const maxX=Math.max(nw[0],se[0]),maxY=Math.max(nw[1],se[1]);
+    viewport.setContentBounds({minX,minY,maxX,maxY});
+    // The selected municipality is projected at 1x. That is NOT the zoom-out
+    // limit: allow shrinking to show the surrounding entire prefecture again.
+    // Reserve 1/4 viewport of margin while staying inside panning bounds.
+    const prefWidth=maxX-minX,prefHeight=maxY-minY;
+    const minZoom=Math.min(1,W/(prefWidth+W*.25),H/(prefHeight+H*.25));
+    viewport.setMinZoom(Math.max(0.000001,minZoom));
+   }else{viewport.setMinZoom(1);viewport.setContentBounds(null);}
   }
   KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.arcs,project:activeProjection,selected,hideTitles:Boolean(quizSession)});
   if(!quizSession)drawLabels();
@@ -417,7 +429,6 @@ function paint({refocus=true}={}){
   const pref=$('pref').value,region=quizSession?' ＞ クイズ中':chosen?' ＞ '+(nationalLabels?.fullNameFor(chosen.code)||chosen.fullName||chosen.name):'';
   $('breadcrumb').textContent='日本全国 ＞ '+names[Number(pref)]+region;
   $('metrics').textContent=names[Number(pref)]+'：'+number(current.regions.length)+'区域、'+(current.bytes/1048576).toFixed(2)+'MB、初回読み込み・解析 '+current.ms.toFixed(0)+'ms';
-  drawOverview($('locator'),pref,true);$('locatorPanel').classList.add('show');
   mode=quizSession?'quiz':chosen?'region':'prefecture';
   renderOfficePopup();
  }
