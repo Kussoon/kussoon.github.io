@@ -23,7 +23,17 @@ async function focus(page,query){
   await app.open();
   await page.goto(page.url().replace('official-2026-nationwide-pilot.html','label-zoom-trial.html'));
   await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:30000});
+  await page.waitForFunction(()=>document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
   assert.equal(await page.locator('#readingMode').inputValue(),'off','readings stay off initially');
+  const mobileOverview=await metrics(page);
+  await page.setViewportSize({width:1280,height:900});
+  await page.waitForTimeout(200);
+  const desktopOverview=await metrics(page);
+  assert(desktopOverview.maxFont<=13.1&&desktopOverview.maxFont>=7,'responsive resize keeps text within 7–13px: '+desktopOverview.maxFont);
+  assert.equal(desktopOverview.overlaps,0,'responsive resize retains collision-free overview labels');
+  await page.setViewportSize({width:390,height:844});
+  await page.waitForTimeout(200);
+  assert(mobileOverview.maxFont<=13.1&&mobileOverview.maxFont>=7);
   for(const [name,query] of [['Hyogo Hanshin/Kobe','神戸市中央区'],['Sapporo','札幌市中央区'],['Tokyo special wards','新宿']]){
    await page.click('#nationBtn');
    await page.waitForTimeout(200);
