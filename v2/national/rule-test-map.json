@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide. PR #305 aligns prefecture and nationwide municipality labels with verified full names and Tokyo special ward display prefixes. PR #306 guards formal ward names against cached earlier label renderers. PR #307 harmonizes two-line ward and county map labels without changing formal names in popups/search.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent. PR #301 added per-focus zoom-out range and side-by-side search/picker; mock tested, Safari/Edge unverified. PR #302 updates search/region UI and bottom spacing; static tests only. PR #303 makes municipality picker index-first independent of per-prefecture geometry and offices. PR #304 replaces two-column search/picker layout with vertical stack and adds blink-stop guide. PR #305 aligns prefecture and nationwide municipality labels with verified full names and Tokyo special ward display prefixes. PR #306 guards formal ward names against cached earlier label renderers. PR #307 harmonizes two-line ward and county map labels without changing formal names in popups/search. PR #308 moves return buttons above map and removes redundant below-map help paragraph.",
   "rules": {
     "R01": {
       "paths": [
@@ -269,8 +269,8 @@
         "S19"
       ],
       "coverage_gap": true,
-      "test_scope": "static_contract_and_mock_viewport_passed_browser_safari_edge_unverified",
-      "decision": "PR #301: reset remains focused 1x; zoom-out may show prefecture before reset; normal/nationwide min zoom stays 1."
+      "test_scope": "public_static_contract_verified_safari_visual_unverified",
+      "decision": "PR #308: separate Japan/prefecture return buttons moved directly above map under breadcrumb, existing IDs/handlers preserved."
     },
     "R15": {
       "paths": [
@@ -365,8 +365,8 @@
         "S49"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_contract_passed_safari_visual_unverified",
-      "decision": "PR #304: map guide adds retap-stops-flashing immediately before reading-toggle instruction; vertically stack search and region controls."
+      "test_scope": "public_static_contract_verified_safari_visual_unverified",
+      "decision": "PR #308: remove obsolete long map help text beneath map, and move two region-return controls above map."
     },
     "R20": {
       "paths": [
