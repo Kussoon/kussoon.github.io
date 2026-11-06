@@ -162,4 +162,10 @@ assert(tokyoWards.every(r=>r.parts?.[0]?.name==='東京都'&&r.parts?.[0]?.readi
 assert(sample.entries.filter(r=>r.parts?.length===2&&r.code.startsWith('01')&&r.name.endsWith('区')).every(r=>r.fullName.startsWith('札幌市')),'All Sapporo wards carry city prefix');
 assert(sample.entries.filter(r=>r.parts?.length===2&&r.code.startsWith('14')&&r.name.endsWith('区')).every(r=>r.fullName.includes('市')),'Kanagawa designated-city wards carry their own city prefix');
 assert(/readingPartsFor\(r\.code\)/.test(html),'Tokyo prefix reading is retained in prefecture details');
+// Full-name rendering must work even if an older drawing library reads .name.
+assert(/return \{\.\.\.r,name:full,labelName:full\}/.test(html),'Default prefecture label models provide full name in legacy and new fields');
+assert(/return \{\.\.\.r,name:full,labelName:full,readingParts:parts/.test(html),'Tokyo ward model includes full name and verified readings');
+for(const asset of ['place-labels.js','established-label-adapter.js','national-progressive-labels.js']){
+ assert(html.includes(asset+'?v=306'),'Updated asset gets a new cache key: '+asset);
+}
 console.log('Public nationwide tap and county detail contract: OK');
