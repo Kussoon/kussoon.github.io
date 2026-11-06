@@ -5,7 +5,7 @@
 <title>全国市区町村マップ 2026｜Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;background:#f0f7fc;color:#183951}
-*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:auto;padding:16px 12px 54px}
+*{box-sizing:border-box}body{margin:0}main{max-width:960px;margin:auto;padding:16px 12px 8px}
 h1{font-size:clamp(22px,4vw,30px)}p{line-height:1.7}.panel{background:white;border:1px solid #bfd5e5;border-radius:12px;padding:14px;margin:12px 0}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 label{display:grid;gap:6px;font-weight:700}
@@ -45,7 +45,7 @@ small{color:#567082;line-height:1.6}.note{background:#fff6e7;padding:11px;border
 .quiz-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .quiz-panel [hidden]{display:none!important}
 @media(max-width:480px){.quiz-choices{grid-template-columns:1fr}}
-@media(max-width:600px){main{padding:10px 8px 36px}.panel{padding:11px}}
+@media(max-width:600px){main{padding:10px 8px 8px}.panel{padding:11px}}
 /* One map-first interface for the pilot and its optional diagnostics. */
 main{max-width:1120px}h1{margin:8px 0}.intro{margin:6px 0;color:#55738a;font-size:14px}.map-guide{margin:8px 0 12px;padding-left:1.55em;color:#355b72;line-height:1.7;font-size:14px}.map-guide li{margin:2px 0}
 .map-panel{padding:8px;position:relative;z-index:10;overflow:visible}
@@ -112,7 +112,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 .search-and-choose{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
 .search-and-choose .search-area{min-width:0}
 .search-and-choose #areaSettings{min-width:0;margin:12px 0;padding:12px;border:1px solid #b9d0e0;border-radius:10px;background:#f7fbff}
-.search-and-choose #areaSettings summary{font-size:clamp(13px,1.7vw,16px);line-height:1.5;overflow-wrap:anywhere}
+.search-and-choose #areaSettings .picker-heading{font:inherit;font-weight:700;line-height:1.5;margin:0 0 6px;overflow-wrap:anywhere}
 .search-and-choose .choice-trigger{padding-inline:8px}
 @media(max-width:600px){.search-and-choose{gap:7px}.search-and-choose .search-area,.search-and-choose #areaSettings{padding:8px}.search-and-choose .prefecture-options{gap:3px;padding:4px}.search-and-choose .prefecture-options button{font-size:12px;min-height:38px}.search-and-choose .choice-trigger{font-size:13px}}
 [data-debug][hidden]{display:none!important}
@@ -129,10 +129,9 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <div class="search-area">
 <label for="placeSearch">市区町村を検索</label>
 <input id="placeSearch" type="search" placeholder="例: やま、川、岡" autocomplete="off">
-<div id="searchHint"><small>読み仮名や5桁コードでも検索できます。同名の自治体は都道府県名で確認してください。</small></div>
 <div id="searchResultsShell" class="search-results-shell" hidden><div id="searchResultsRail" class="search-results-rail" role="scrollbar" aria-label="検索候補の縦スクロール" aria-controls="searchResults" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div id="searchResultsThumb" class="search-results-thumb"></div></div><div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div></div>
 </div>
-<details id="areaSettings" class="region-picker"><summary>地域・表示範囲を選んで移動</summary>
+<div id="areaSettings" class="region-picker"><h2 class="picker-heading">地域・表示範囲を選んで移動</h2>
 <div class="picker-stack">
 <div class="choice-picker" id="prefPicker">
 <button type="button" class="choice-trigger" id="prefTrigger" aria-expanded="false" aria-controls="prefChoices" aria-label="都道府県を選ぶ">都道府県を選ぶ <span aria-hidden="true">▾</span></button>
@@ -145,7 +144,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 </div>
 <select id="pref" hidden aria-hidden="true" tabindex="-1"><option value="">都道府県を選ぶ</option></select>
 <select id="region" hidden aria-hidden="true" tabindex="-1" disabled><option value="">次に市区町村を選択</option></select>
-<select id="nationExtent" hidden aria-hidden="true" tabindex="-1"><option value="all" selected>離島を含む全域</option></select></details>
+<select id="nationExtent" hidden aria-hidden="true" tabindex="-1"><option value="all" selected>離島を含む全域</option></select></div>
 </div>
 <input type="checkbox" id="showNames" checked hidden aria-hidden="true">
 </section>
