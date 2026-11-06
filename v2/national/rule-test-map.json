@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; Do not equate listed tests with passed tests. PR #296 adopted R35/R36 in public; browser/Safari unverified. PR #297 added public R37/R38 for fullscreen and search scrollbar.  PR #298 supersedes fullscreen popup suppression from #297 and sorts search results by codes. PR #299 updates control layout in public nationwide map. PR #300 changes public UI to downward pickers, always-on names and all-island extent.",
   "rules": {
     "R01": {
       "paths": [
@@ -55,7 +55,8 @@
         "S43"
       ],
       "coverage_gap": true,
-      "test_scope": "static_only_public_safari_unverified"
+      "test_scope": "public_static_picker_labels_island_extent_only_safari_unverified",
+      "decision": "PR #300 all nationwide extent includes remote islands by default; prefecture navigation uses 3-column downward custom picker."
     },
     "R04": {
       "paths": [
@@ -74,11 +75,13 @@
     "R05": {
       "paths": [
         "v2/progressive-preview/national-progressive-labels.js",
-        "v2/shared/established-label-adapter.js"
+        "v2/shared/established-label-adapter.js",
+        "maps/national-municipalities.html"
       ],
       "tests": [
         "v2/tests/pilot-label-scope.browser.cjs",
-        "v2/tests/national-2026-rc1.browser.cjs"
+        "v2/tests/national-2026-rc1.browser.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S22",
@@ -86,8 +89,9 @@
         "S41",
         "S43"
       ],
-      "coverage_gap": false,
-      "test_scope": "existing_coverage_see_rule"
+      "coverage_gap": true,
+      "test_scope": "public_static_picker_labels_island_extent_only_safari_unverified",
+      "decision": "PR #300 hide surrounding-names toggle; always display names in ordinary municipality map, except guessing quiz."
     },
     "R06": {
       "paths": [
@@ -324,10 +328,10 @@
         "S46"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_contract_only_safari_not_verified",
+      "test_scope": "public_static_picker_labels_island_extent_only_safari_unverified",
       "user_decision": "Support keyboard activation of municipality map targets with Enter/Space and select the first search result with Enter. Confirmed by user 2026-11-06 JST.",
       "implementation_status": "not_implemented_in_public_map",
-      "decision": "PR #298: municipality search results in ascending municipality code order before 35-result cutoff."
+      "decision": "PR #300 downward 3-column prefecture menu and downward municipality list with synchronized hidden native values; earlier #298 code sort retained."
     },
     "R19": {
       "paths": [
@@ -343,8 +347,8 @@
         "S49"
       ],
       "coverage_gap": true,
-      "test_scope": "public_static_contract_only_safari_not_verified",
-      "decision": "PR #298: routine diagnostic status hidden, loading/errors visible; comparison link removed; shortened loading notice."
+      "test_scope": "public_static_picker_labels_island_extent_only_safari_unverified",
+      "decision": "PR #300 footer links after data disclaimer, guide order, no visible name/extent controls; all islands are shown."
     },
     "R20": {
       "paths": [
