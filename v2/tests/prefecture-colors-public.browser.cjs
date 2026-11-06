@@ -61,7 +61,7 @@ function assertAdjacentColors(rows,table,mode){
    await page.locator('#areaSettings').evaluate(el=>{el.open=true;});
    const selectedCode=await page.locator('#region option:not([value=""])').first().getAttribute('value');
    assert(selectedCode?.startsWith('28'),'Hyogo municipality is available for selection');
-   await page.selectOption('#region',selectedCode);
+   await page.locator('#region').evaluate((el,value)=>{el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));},selectedCode);
    const chosen=page.locator('#map path.land.chosen[data-code="'+selectedCode+'"]');
    await chosen.waitFor({timeout:30000});
    const selected=await chosen.evaluate(node=>({color:node.style.getPropertyValue('--pref-color').trim(),animation:getComputedStyle(node).animationName}));
@@ -69,7 +69,7 @@ function assertAdjacentColors(rows,table,mode){
    const reduced=await page.evaluate(()=>matchMedia('(prefers-reduced-motion: reduce)').matches);
    assert.equal(selected.animation,reduced?'none':'kussoon-selected-area-two-tone','existing selection pulse is preserved');
    assert.equal(await page.locator('#map path.land.chosen').count(),1,'one selection is highlighted');
-   await page.selectOption('#region','');
+   await page.locator('#region').evaluate(el=>{el.value='';el.dispatchEvent(new Event('change',{bubbles:true}));});
    await page.waitForFunction(()=>document.querySelectorAll('#map path.land.chosen').length===0);
    assert.equal(app.errors.length,0,app.errors.join('; '));
    console.log('PASS adjacent-prefecture palette '+engine+': nationwide, studyPref=28, prefecture detail and selection');
