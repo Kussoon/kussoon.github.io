@@ -49,12 +49,17 @@ function modelFor(region,project){
 function textBox(region,size,readings,measure){
  const hasReading=readings&&Boolean(region.reading);
  const parts=hasReading&&region.readingParts?.length===2?region.readingParts:null;
+ const full=region.labelName||region.fullName||region.name;
+ const split=region.readingParts?.length===2&&region.readingParts.map(p=>p.name).join('')===full?region.readingParts:null;
  const rows=parts?[
   {text:parts[0].name,size,y:-21},
   {text:parts[0].reading,size:11,y:-8},
   {text:parts[1].name,size,y:8},
   {text:parts[1].reading,size:11,y:21}
- ]:[{text:region.labelName||region.fullName||region.name,size,y:5}];
+ ]:split?[
+  {text:split[0].name,size,y:-9},
+  {text:split[1].name,size,y:11}
+ ]:[{text:full,size,y:5}];
  if(hasReading&&!parts)rows.push({text:region.reading,size:11,y:19});
  const maxWidth=Math.max(...rows.map(r=>measure(r.text,r.size)),1)+size*.34;
  const top=Math.min(...rows.map(r=>r.y-r.size*.62))-2;
