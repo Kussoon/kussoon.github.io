@@ -561,6 +561,7 @@ function startQuiz(){
  $('status').textContent='クイズ中です。オレンジ色の区域を見て回答してください。';
 }
 function returnNation(){
+ document.body.classList.remove('study-pref-view');
  if(quizSession)stopQuiz();
  ++requestId;pendingPrefSelection=null;current=null;dismissedPopupCode=null;if(progressive){nationalView=true;nationalLabels?.clear();}$('pref').value='';$('region').value='';
  paint();$('status').textContent='全国47都道府県を表示中です。';
@@ -591,6 +592,7 @@ async function fetchPrefEntry(code){
 // for 20m polygon decoding, all-country reading verification or office URLs.
 let pendingPrefSelection=null;
 async function goPref(code,selectedCode=''){
+ document.body.classList.remove('study-pref-view');
  if(!code){returnNation();return;}
  if(progressive){nationalView=false;nationalLabels?.pause();}
  const id=++requestId;dismissedPopupCode=null;$('officePopup').hidden=true;
@@ -772,7 +774,36 @@ $('map').addEventListener('click',e=>{
   // Invalid or absent ?pref values retain the established nationwide default.
   const requestedPref=new URLSearchParams(location.search).get('pref');
   const matchedPref=manifest.entries.find(item=>item.pref===requestedPref);
-  if(matchedPref){paint();void goPref(requestedPref);}
+  // Study mode keeps the formal nationwide map and all 1,905 label candidates.
+  // Only the viewport changes. Other-prefecture names are masked AFTER the
+  // existing national engine makes its normal label placement decisions.
+  const requestedStudyPref=new URLSearchParams(location.search).get('studyPref');
+  const matchedStudyPref=manifest.entries.find(item=>item.pref===requestedStudyPref);
+  if(matchedStudyPref){
+   const style=document.createElement('style');
+   style.dataset.studyPrefMask=requestedStudyPref;
+   style.textContent='body.study-pref-view #map [data-progressive-labels] [data-national-code]:not([data-national-code^="'+requestedStudyPref+'"]){display:none!important}';
+   document.head.append(style);
+   document.body.classList.add('study-pref-view');
+   paint();
+   void nationalLabels.ready.then(()=>{
+    if(!document.body.classList.contains('study-pref-view')||!nationalView||current)return;
+    const feature=overview.features.find(f=>f.properties.code===requestedStudyPref);
+    if(!feature)return;
+    const projection=project(nationBoxes[$('nationExtent').value]);
+    let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+    for(const polygon of polygons(feature.geometry))for(const ring of polygon)for(const pt of ring){
+     const [x,y]=projection(pt);
+     minX=Math.min(minX,x);minY=Math.min(minY,y);
+     maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);
+    }
+    if(!Number.isFinite(minX)||maxX<=minX||maxY<=minY)return;
+    const width=Math.min(W,Math.max((maxX-minX)*1.25,(maxY-minY)*1.25*W/H));
+    viewport.setView({x:(minX+maxX-width)/2,y:(minY+maxY-width*H/W)/2,w:width,h:width*H/W});
+    $('breadcrumb').textContent='日本全国 ＞ '+names[Number(requestedStudyPref)]+'（全国表示・学習用）';
+    $('status').textContent=names[Number(requestedStudyPref)]+'を中心に全国地図を表示中（近隣県の地図は表示、地名は対象県だけ）。';
+   }).catch(error=>{$('status').textContent='学習表示エラー：'+error.message;console.warn(error);});
+  }else if(matchedPref){paint();void goPref(requestedPref);}
   else{paint();$('status').textContent='全国47都道府県の表示準備ができました（'+(performance.now()-start).toFixed(0)+'ms）。';}
  }catch(e){$('status').textContent='初期読み込みエラー：'+e.message;console.error(e);}
 })();
