@@ -7,7 +7,7 @@ function metrics(page){return page.evaluate(()=>{
  const boxes=nodes.map(node=>{const rect=node.getBoundingClientRect();return {x:rect.x,y:rect.y,right:rect.right,bottom:rect.bottom,font:Math.max(+node.getAttribute('font-size'),...Array.from(node.querySelectorAll('tspan'),span=>+span.getAttribute('font-size')||0))*Math.hypot(node.getScreenCTM().a,node.getScreenCTM().b),name:node.getAttribute('aria-label'),rows:node.querySelectorAll('tspan').length};});
  let overlaps=0;
  for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++)if(boxes[i].x<boxes[j].right&&boxes[i].right>boxes[j].x&&boxes[i].y<boxes[j].bottom&&boxes[i].bottom>boxes[j].y)overlaps++;
- const map=document.querySelector('#map'),rect=map.getBoundingClientRect(),matrix=map.getScreenCTM();const anchors=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>{const p=new DOMPoint(a.point[0],a.point[1]).matrixTransform(matrix);return p.x>=rect.left&&p.x<=rect.right&&p.y>=rect.top&&p.y<=rect.bottom;});return {count:nodes.length,overlaps,maxFont:Math.max(0,...boxes.map(x=>x.font)),inViewAnchors:anchors.length,boxes};
+ const map=document.querySelector('#map'),rect=map.getBoundingClientRect(),matrix=map.getScreenCTM();const anchors=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>{const p=new DOMPoint(a.point[0],a.point[1]).matrixTransform(matrix);return p.x>=rect.left&&p.x<=rect.right&&p.y>=rect.top&&p.y<=rect.bottom;});return {count:nodes.length,overlaps,maxFont:Math.max(0,...boxes.map(x=>x.font)),inViewAnchors:anchors.length,mapWidth:rect.width,mapHeight:rect.height,viewBox:map.getAttribute('viewBox'),rootScale:Math.hypot(matrix.a,matrix.b),boxes};
  });}
 async function focus(page,query){
  await page.locator('#placeSearch').fill(query);
@@ -57,15 +57,20 @@ async function focus(page,query){
     await page.waitForTimeout(250);
     // Exercise the public +/- controls, which were the route that exposed
     // the root-SVG CTM scale error on dense prefecture views.
-    for(const [button,name] of [['#mapZoomIn','zoom in'],['#mapZoomOut','zoom out']]){
-     for(let step=0;step<3;step++){
-      await page.click(button);
-      await page.waitForTimeout(300);
-      const zoomed=await metrics(page);
-      assert(zoomed.maxFont<=13.1&&zoomed.maxFont>=7,name+' keeps physical label size within 7–13px: '+zoomed.maxFont);
-      assert.equal(zoomed.overlaps,0,name+' keeps labels collision-free after step '+(step+1));
+    for(const viewport of [{width:390,height:844},{width:1280,height:900}]){
+     await page.setViewportSize(viewport);
+     await page.waitForTimeout(300);
+     for(const [button,name] of [['#mapZoomIn','zoom in'],['#mapZoomOut','zoom out']]){
+      for(let step=0;step<3;step++){
+       await page.click(button);
+       await page.waitForTimeout(300);
+       const zoomed=await metrics(page);
+       assert(zoomed.maxFont<=13.1&&zoomed.maxFont>=7,name+' at '+viewport.width+'px keeps physical label size within 7–13px: '+JSON.stringify({font:zoomed.maxFont,mapWidth:zoomed.mapWidth,mapHeight:zoomed.mapHeight,viewBox:zoomed.viewBox,rootScale:zoomed.rootScale}));
+       assert.equal(zoomed.overlaps,0,name+' at '+viewport.width+'px keeps labels collision-free after step '+(step+1));
+      }
      }
     }
+    await page.setViewportSize({width:390,height:844});
 
     const beforeGesture=await metrics(page);
     const duringGesture=await page.evaluate(()=>{
