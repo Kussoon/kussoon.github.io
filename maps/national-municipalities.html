@@ -150,6 +150,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 </section>
 <section class="panel map-panel" aria-label="全国と都道府県の地図">
 <p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
+<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button></div>
 <div class="map-frame" id="mapFrame"><span class="map-screen-title" id="mapScreenTitle" hidden>全画面表示中</span>
 <svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
 <button type="button" id="mapFullscreen" class="map-fullscreen-button" aria-label="地図を全画面表示">⛶ 全画面</button>
@@ -166,9 +167,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <div class="popup-scroll-controls" id="popupScrollControls" hidden><button type="button" id="popupScrollUp" aria-label="吹き出し本文を上へスクロール">▲ 内容を上へ</button><button type="button" id="popupScrollDown" aria-label="吹き出し本文を下へスクロール">▼ 内容を下へ</button></div><div class="popup-scroll" id="popupScroll" tabindex="0" aria-label="庁舎情報とリンクをスクロール"><div class="popup-content"><div id="popupActions"></div><p id="popupNote" class="popup-note"></p></div></div>
 </aside>
 </div>
-<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button></div>
 <p id="status" class="status" role="status">全国地図を読み込みます。</p>
-<small>都道府県は上の選択欄から指定できます。地図を拡大して市区町村をタップしてください。ピンチ・ドラッグ・右下のボタンでも操作できます。吹き出しは上部の帯で上下に移動でき、×で閉じられます。</small>
 </section>
 <details id="developerControls" class="panel debug-panel" data-debug hidden><summary>検証用設定</summary>
 <div class="controls"><label>読み仮名の表示<select id="readingMode"><option value="on">漢字＋読み仮名</option><option value="off" selected>漢字のみ</option></select></label></div>
