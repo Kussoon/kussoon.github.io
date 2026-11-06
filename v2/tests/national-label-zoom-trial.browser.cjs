@@ -4,7 +4,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
 
 function metrics(page){return page.evaluate(()=>{
  const nodes=[...document.querySelectorAll('#map text[data-national-code]')];
- const boxes=nodes.map(node=>{const rect=node.getBoundingClientRect();return {x:rect.x,y:rect.y,right:rect.right,bottom:rect.bottom,font:+node.getAttribute('font-size')*Math.hypot(node.getScreenCTM().a,node.getScreenCTM().b),name:node.getAttribute('aria-label'),rows:node.querySelectorAll('tspan').length};});
+ const boxes=nodes.map(node=>{const rect=node.getBoundingClientRect();return {x:rect.x,y:rect.y,right:rect.right,bottom:rect.bottom,font:Math.max(+node.getAttribute('font-size'),...Array.from(node.querySelectorAll('tspan'),span=>+span.getAttribute('font-size')||0))*Math.hypot(node.getScreenCTM().a,node.getScreenCTM().b),name:node.getAttribute('aria-label'),rows:node.querySelectorAll('tspan').length};});
  let overlaps=0;
  for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++)if(boxes[i].x<boxes[j].right&&boxes[i].right>boxes[j].x&&boxes[i].y<boxes[j].bottom&&boxes[i].bottom>boxes[j].y)overlaps++;
  const map=document.querySelector('#map'),rect=map.getBoundingClientRect(),matrix=map.getScreenCTM();const anchors=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>{const p=new DOMPoint(a.point[0],a.point[1]).matrixTransform(matrix);return p.x>=rect.left&&p.x<=rect.right&&p.y>=rect.top&&p.y<=rect.bottom;});return {count:nodes.length,overlaps,maxFont:Math.max(0,...boxes.map(x=>x.font)),inViewAnchors:anchors.length,boxes};
@@ -44,7 +44,17 @@ async function focus(page,query){
     // Selected labels keep their established visibility exception. Clear it
     // before asserting collisions among ordinary labels at each scale.
     await page.evaluate(()=>{const c=window.KussoonV2ProgressivePreview.controller;c.clear();c.schedule();});
-    await page.waitForTimeout(350);
+    await page.waitForTimeout(250);
+    const beforeGesture=await metrics(page);
+    const duringGesture=await page.evaluate(()=>{
+     const map=document.querySelector('#map'),viewport=window.KussoonV2ProgressivePreview.viewport;
+     map.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerId:91,pointerType:'touch',clientX:180,clientY:220}));
+     viewport.zoomOut();viewport.zoomOut();viewport.zoomOut();
+     return Math.max(...[...map.querySelectorAll('text[data-national-code]')].map(n=>Math.max(+n.getAttribute('font-size'),...Array.from(n.querySelectorAll('tspan'),t=>+t.getAttribute('font-size')||0))*Math.hypot(n.getScreenCTM().a,n.getScreenCTM().b)));
+    });
+    assert(Math.abs(duringGesture-beforeGesture.maxFont)<.5,'gesture zoom keeps physical text size stable ('+beforeGesture.maxFont+'→'+duringGesture+'px)');
+    await page.evaluate(()=>document.querySelector('#map').dispatchEvent(new PointerEvent('pointerup',{bubbles:true,pointerId:91,pointerType:'touch',clientX:180,clientY:220})));
+    await page.waitForTimeout(300);
     for(let i=0;i<3;i++){await page.evaluate(()=>{const v=window.KussoonV2ProgressivePreview.viewport;v.zoomOut();v.zoomIn();window.KussoonV2ProgressivePreview.controller.schedule();});await page.waitForTimeout(350);}
     await page.evaluate(()=>window.KussoonV2ProgressivePreview.viewport.reset());
     await page.waitForTimeout(700);
