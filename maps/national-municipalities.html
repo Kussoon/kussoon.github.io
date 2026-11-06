@@ -99,6 +99,19 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 .popup-actions span{color:#888;background:#eee}.popup-note{font-size:11px;color:#526b80;margin:6px 0 0}
 .region-picker summary,.debug-panel summary{cursor:pointer;font-weight:700;min-height:36px}
 .region-picker .controls{margin-top:10px}.page-links{font-size:13px;color:#55738a}
+.picker-stack{display:grid;gap:10px;margin-top:10px}
+.choice-picker{min-width:0}
+.choice-trigger{width:100%;min-height:48px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;text-align:left;background:#fff;color:#183951;border:1px solid #9fbdd0;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}
+.choice-trigger:disabled{color:#6d8190;background:#f3f8fb;cursor:default}
+.choice-trigger:focus-visible,.choice-options button:focus-visible{outline:3px solid #e5aa38;outline-offset:2px}
+.choice-options{margin-top:6px;max-height:min(360px,48vh);overflow:auto;overscroll-behavior:contain;padding:8px;gap:6px;border:1px solid #b9d0e0;border-radius:9px;background:#f6fbff;box-shadow:0 3px 8px #183c5517}
+.choice-options[hidden]{display:none!important}
+.prefecture-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.municipality-options{display:grid;grid-template-columns:1fr}
+.choice-options button{font:inherit;color:#17435d;background:white;text-align:center;border:1px solid #a5c5da;border-radius:8px;min-width:0;min-height:43px;padding:7px 3px;overflow-wrap:anywhere;cursor:pointer}
+.municipality-options button{text-align:left;padding-inline:12px}
+.choice-options button[aria-pressed="true"]{background:#d8edf8;border-color:#27749a;font-weight:700}
+.bottom-links{margin-top:18px}
 [data-debug][hidden]{display:none!important}
 @media(max-width:600px){.office-popup{left:8px;right:108px;width:auto;min-width:0}}
 @media(max-width:500px){.map-toolbar{width:88px}.map-toolbar button{min-height:44px;font-size:13px}.map-fullscreen-button{width:88px;font-size:13px}}
@@ -106,7 +119,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
 <h1>全国市区町村マップ 2026</h1>
 <p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。</p>
-<ul class="map-guide"><li>市区町村の位置を押すと吹き出しが出ます。</li><li>地図内のボタンでよみがなが出せます。</li><li>都道府県は下の「地域・表示範囲を選んで移動」で選べます。</li><li>吹き出しは上下に移動でき、×で閉じられます。</li></ul>
+<ul class="map-guide"><li>市区町村の位置を押すと吹き出しが出ます。</li><li>吹き出しは上下に移動でき、×で閉じられます。</li><li>地図内のボタンでよみがなが出せます。</li></ul>
 <p class="note"><strong>読み込みに時間がかかることがあります。</strong></p>
 <section class="panel" aria-label="地域を探す">
 <div class="search-area">
@@ -115,13 +128,21 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <div id="searchHint"><small>読み仮名や5桁コードでも検索できます。同名の自治体は都道府県名で確認してください。</small></div>
 <div id="searchResultsShell" class="search-results-shell" hidden><div id="searchResultsRail" class="search-results-rail" role="scrollbar" aria-label="検索候補の縦スクロール" aria-controls="searchResults" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div id="searchResultsThumb" class="search-results-thumb"></div></div><div class="search-results" id="searchResults" role="group" aria-label="地名検索結果"></div></div>
 </div>
-<label class="label-toggle"><input type="checkbox" id="showNames" checked>周辺の市区町村名を表示（選択中の地名は常に表示）</label>
+<input type="checkbox" id="showNames" checked hidden aria-hidden="true">
 <details id="areaSettings" class="region-picker"><summary>地域・表示範囲を選んで移動</summary>
-<div class="controls">
-<label>都道府県<select id="pref"><option value="">全国47都道府県</option></select></label>
-<label>市区町村<select id="region" disabled><option value="">都道府県を選択してください</option></select></label>
-<label>全国地図の表示範囲<select id="nationExtent"><option value="main">全国主要域（北海道〜沖縄）</option><option value="all">遠隔離島を含む全域</option></select></label>
-</div></details>
+<div class="picker-stack">
+<div class="choice-picker" id="prefPicker">
+<button type="button" class="choice-trigger" id="prefTrigger" aria-expanded="false" aria-controls="prefChoices" aria-label="都道府県を選ぶ">都道府県を選ぶ <span aria-hidden="true">▾</span></button>
+<div class="choice-options prefecture-options" id="prefChoices" role="group" aria-label="都道府県の一覧" hidden></div>
+</div>
+<div class="choice-picker" id="regionPicker">
+<button type="button" class="choice-trigger" id="regionTrigger" aria-expanded="false" aria-controls="regionChoices" aria-label="市区町村を選ぶ" disabled>まず都道府県を選択 <span aria-hidden="true">▾</span></button>
+<div class="choice-options municipality-options" id="regionChoices" role="group" aria-label="市区町村の一覧" hidden></div>
+</div>
+</div>
+<select id="pref" hidden aria-hidden="true" tabindex="-1"><option value="">都道府県を選ぶ</option></select>
+<select id="region" hidden aria-hidden="true" tabindex="-1" disabled><option value="">まず都道府県を選択</option></select>
+<select id="nationExtent" hidden aria-hidden="true" tabindex="-1"><option value="all" selected>離島を含む全域</option></select></details>
 <div class="map-locator" id="locatorPanel"><small>全国の中での位置（オレンジ色が選択中の都道府県）</small><svg id="locator" viewBox="0 0 850 700" role="img" aria-label="都道府県の全国位置"></svg></div>
 </section>
 <section class="panel map-panel" aria-label="全国と都道府県の地図">
@@ -170,8 +191,8 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <h2>読み込み計測</h2><p id="metrics">全国の軽量な輪郭だけを先に読み込みます。</p>
 <div class="note">全国地図はナビゲーション用に簡略化した輪郭です。都道府県を選択すると詳細な20m版に切り替わります。別々に構築した地方間の県境が厳密に一致するかは、全国共通トポロジーの検証を別途行う必要があります。ここでは全国の操作・配信方式を検証します。</div>
 </section>
-<p class="page-links"><a href="/maps/">地図一覧</a> ／ <a href="/local/">地域を調べる</a> ／ <a href="/">Kussoonトップ</a></p>
 <p class="page-links">2026年版行政区域を使用しています。境界線は表示速度を優先して簡略化した部分があり、詳細な境界・離島・飛び地の確認には自治体の公式資料をご利用ください。</p>
+<p class="page-links bottom-links"><a href="/maps/">地図一覧</a> ／ <a href="/local/">地域を調べる</a> ／ <a href="/">Kussoonトップ</a></p>
 
 </main>
 <script src="/v2/progressive-preview/municipality-renderer.js"></script>
@@ -246,6 +267,67 @@ function renderOfficePopup(){
  requestAnimationFrame(syncPopupScrollControls);
 }
 for(let i=1;i<=47;i++){const option=document.createElement('option');option.value=String(i).padStart(2,'0');option.textContent=names[i];$('pref').append(option);}
+// Accessible downward-only pickers. Native select values remain the existing app state.
+function closeChoicePickers(){
+ for(const type of ['pref','region']){
+  $(type+'Choices').hidden=true;
+  $(type+'Trigger').setAttribute('aria-expanded','false');
+ }
+}
+function syncChoicePicker(type){
+ const native=$(type),trigger=$(type+'Trigger'),host=$(type+'Choices');
+ trigger.disabled=native.disabled;
+ const selected=native.options[native.selectedIndex];
+ const fallback=type==='pref'?'都道府県を選ぶ':'まず都道府県を選択';
+ trigger.firstChild.textContent=(native.value&&selected?selected.textContent:fallback)+' ';
+ if(host.hidden)return;
+ buildChoices(type);
+}
+function buildChoices(type){
+ const native=$(type),host=$(type+'Choices');
+ host.replaceChildren();
+ if(native.disabled)return;
+ const options=Array.from(native.options).filter(option=>option.value);
+ for(const option of options){
+  const button=document.createElement('button');
+  button.type='button';
+  button.textContent=option.textContent;
+  button.setAttribute('aria-pressed',String(option.value===native.value));
+  button.addEventListener('click',()=>{
+   const next=option.value;
+   closeChoicePickers();
+   if(native.value===next)return;
+   native.value=next;
+   syncChoicePicker(type);
+   native.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+  host.append(button);
+ }
+}
+for(const type of ['pref','region']){
+ const trigger=$(type+'Trigger'),host=$(type+'Choices');
+ trigger.addEventListener('click',()=>{
+  if(trigger.disabled)return;
+  const open=host.hidden;
+  closeChoicePickers();
+  if(open){
+   buildChoices(type);
+   host.hidden=false;
+   trigger.setAttribute('aria-expanded','true');
+  }
+ });
+ new MutationObserver(()=>syncChoicePicker(type)).observe($(type),{childList:true,attributes:true,attributeFilter:['disabled'],subtree:true});
+}
+document.addEventListener('click',e=>{if(!e.target.closest('#prefPicker,#regionPicker'))closeChoicePickers();});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape')closeChoicePickers();
+});
+function syncChoicePickers(){
+ syncChoicePicker('pref');
+ syncChoicePicker('region');
+}
+
+syncChoicePickers();
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive)nationalLabels?.schedule();}});
 const progressiveStore=progressive?KussoonV2NationalProgressive.createStore({load:fetchPrefEntry,byteCapacity:12*1048576,pinned:()=>nationalView?'':$('pref').value,onEvict:key=>nationalLabels?.releaseGeometry(key)}):null;
 const number=(n)=>n.toLocaleString('ja-JP');
@@ -281,7 +363,7 @@ function bbox(polys){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const
 function drawLabels(){
  if(progressive&&nationalView&&!current){nationalLabels?.schedule();return;}
  if(!current||!activeProjection)return;
- const selected=$('region').value,all=$('showNames').checked,readings=$('readingMode').value==='on';
+ const selected=$('region').value,all=true,readings=$('readingMode').value==='on';
  if(quizSession)return;
  let positions=null;
  try{
@@ -293,11 +375,11 @@ function drawLabels(){
 }
 function paint({refocus=true}={}){
  if(!overview)return;
- if(progressive){viewport.setMaxZoom(current?128:768);if(current)nationalLabels?.pause();document.querySelector('.label-toggle').hidden=!current;}
+ if(progressive){viewport.setMaxZoom(current?128:768);if(current)nationalLabels?.pause();}
  if(!current){
   viewport.setContentBounds(null);
   drawOverview($('map'));$('locatorPanel').classList.remove('show');mode='national';activeProjection=null;
-  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('都道府県を選択してください',''));
+  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('まず都道府県を選択',''));
   $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
   $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
   $('officePopup').hidden=true;
@@ -341,6 +423,7 @@ function paint({refocus=true}={}){
  }
  if(refocus)viewport.reset();
  $('quizStart').disabled=!current||Boolean(quizSession);
+ syncChoicePickers();
  updateSearch();
 }
 function ensureNationwideSearchIndex(){
@@ -434,9 +517,8 @@ function stopQuiz(){
  if(!quizSession)return;
  quizSession=null;dismissedPopupCode=null;
  $('quizPlay').hidden=true;$('quizStop').hidden=true;$('quizStart').hidden=false;
- $('showNames').disabled=false;$('readingMode').disabled=false;syncMapReadingToggle();$('placeSearch').disabled=false;
+ $('readingMode').disabled=false;syncMapReadingToggle();$('placeSearch').disabled=false;
  if(quizBackup){
-  $('showNames').checked=quizBackup.names;
   $('region').value=quizBackup.region;
   quizBackup=null;
  }
@@ -448,8 +530,8 @@ function startQuiz(){
  try{quizSession=KussoonV2MunicipalityQuiz.create(current.regions,{count:10});}
  catch(e){$('status').textContent='クイズ開始不可：'+e.message;return;}
  $('officePopup').hidden=true;
- quizBackup={names:$('showNames').checked,region:$('region').value};
- $('region').value='';$('showNames').checked=false;$('showNames').disabled=true;
+ quizBackup={region:$('region').value};
+ $('region').value='';
  $('readingMode').disabled=true;syncMapReadingToggle();$('placeSearch').value='';$('placeSearch').disabled=true;
  $('searchResults').replaceChildren();
  $('searchResultsShell').hidden=true;
@@ -549,7 +631,7 @@ if(window.ResizeObserver)new ResizeObserver(syncSearchScrollRail).observe($('sea
  syncPublicStatus();
 })();
 $('placeSearch').addEventListener('input',updateSearch);
-$('showNames').addEventListener('change',drawLabels);
+
 function syncMapReadingToggle(){const on=$('readingMode').value==='on';$('mapReadingToggle').textContent='よみがな '+(on?'ON':'OFF');$('mapReadingToggle').setAttribute('aria-pressed',String(on));$('mapReadingToggle').disabled=$('readingMode').disabled;}
 $('readingMode').addEventListener('change',()=>{
  syncMapReadingToggle();drawLabels();
@@ -591,7 +673,7 @@ document.addEventListener('keydown',e=>{
 $('mapReadingToggle').addEventListener('click',()=>{if($('readingMode').disabled)return;$('readingMode').value=$('readingMode').value==='on'?'off':'on';$('readingMode').dispatchEvent(new Event('change'));});
 $('pref').addEventListener('change',()=>{if(quizSession)stopQuiz();$('placeSearch').value='';goPref($('pref').value);});
 $('region').addEventListener('change',()=>{if(quizSession)return;dismissedPopupCode=null;paint();if(current)$('status').textContent=$('region').value?'選択した区域を中央に表示しています。':'都道府県全体を表示しています。';});
-$('nationExtent').addEventListener('change',()=>{if(overview){if(current)drawOverview($('locator'),$('pref').value,true);else paint();}});
+
 $('nationBtn').addEventListener('click',returnNation);
 $('prefBtn').addEventListener('click',()=>{if(!current)return;$('region').value='';dismissedPopupCode=null;paint();$('status').textContent='都道府県全体を表示しています。';});
 $('zoomIn').addEventListener('click',()=>viewport.zoomIn());

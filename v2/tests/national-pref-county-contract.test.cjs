@@ -74,4 +74,21 @@ assert(/\.map-fullscreen-button\{position:absolute;right:8px;top:8px/.test(html)
 assert(/body\.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen\{right:max\(8px,env\(safe-area-inset-right\)\);top:max\(8px,env\(safe-area-inset-top\)\)\}/.test(html),'Fullscreen top-right honors safe-area');
 assert(/\.map-toolbar button\{[^\n]*font-size:14px/.test(html),'Map toolbar labels are larger');
 assert(/@media\(max-width:500px\)\{\.map-toolbar\{width:88px\}\.map-toolbar button\{min-height:44px;font-size:13px\}/.test(html),'Mobile controls remain legible');
+// R05/R18/R19: selection menus, name visibility and island-inclusive extent.
+const prefGrid=html.match(/<div class="choice-options prefecture-options" id="prefChoices"/);
+assert(prefGrid,'Prefectures use custom downward list');
+assert(/\.prefecture-options\{display:grid;grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/.test(html),'Prefectures display in 3 columns');
+assert(/\.choice-options\{margin-top:6px/.test(html),'Both picker lists expand below their trigger');
+assert(/id="prefTrigger"[^>]*>都道府県を選ぶ/.test(html),'No prefecture field heading, use initial prompt');
+assert(/id="regionTrigger"[^>]*disabled>まず都道府県を選択/.test(html),'Municipality prompt waits for prefecture');
+assert(/id="pref" hidden aria-hidden="true"/.test(html)&&/id="region" hidden aria-hidden="true"/.test(html),'Native selects retain internal app values without separate headings');
+assert(/function buildChoices\(type\)/.test(html)&&/native\.dispatchEvent\(new Event\('change',\{bubbles:true\}\)\)/.test(html),'Custom picker selection uses existing navigation handlers');
+assert(/syncChoicePickers\(\);\s*updateSearch\(\);/.test(html),'Picker labels follow changes from map and search');
+assert(/id="showNames" checked hidden aria-hidden="true"/.test(html),'Surrounding-label toggle is hidden but preserved for legacy state');
+assert(/selected=\$\('region'\)\.value,all=true,readings=/.test(html),'Region labels are always shown outside quizzes');
+assert(/id="nationExtent" hidden aria-hidden="true" tabindex="-1"><option value="all" selected>/.test(html),'Full nation extent including remote islands is fixed');
+assert(!html.includes('全国主要域（北海道〜沖縄）'),'Former limited extent is no longer selectable');
+assert(!html.includes('都道府県は下の「地域・表示範囲を選んで移動」で選べます。'),'Redundant introductory instruction removed');
+assert(html.indexOf('市区町村の位置を押すと吹き出しが出ます。')<html.indexOf('吹き出しは上下に移動でき')&&html.indexOf('吹き出しは上下に移動でき')<html.indexOf('地図内のボタンでよみがなが出せます'),'Popup guidance follows selection guidance');
+assert(html.indexOf('2026年版行政区域を使用しています')<html.indexOf('class="page-links bottom-links"'),'Site navigation is at bottom after boundary disclaimer');
 console.log('Public nationwide tap and county detail contract: OK');
