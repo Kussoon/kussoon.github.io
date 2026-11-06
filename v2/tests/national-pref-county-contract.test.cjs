@@ -93,8 +93,8 @@ assert(!html.includes('都道府県は下の「地域・表示範囲を選んで
 assert(html.indexOf('市区町村の位置を押すと吹き出しが出ます。')<html.indexOf('吹き出しは上下に移動でき')&&html.indexOf('吹き出しは上下に移動でき')<html.indexOf('地図内のボタンでよみがなが出せます'),'Popup guidance follows selection guidance');
 assert(html.indexOf('2026年版行政区域を使用しています')<html.indexOf('class="page-links bottom-links"'),'Site navigation is at bottom after boundary disclaimer');
 // R13/R14/R19: UI layout and municipality-focused zoom-out recovery.
-assert(/\.search-and-choose\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/.test(html),'Search and region selection appear in two columns');
-assert(/<div class="search-and-choose">[\s\S]*?<div class="search-area">[\s\S]*?<div id="areaSettings"/.test(html),'Both red-circled UI groups are side by side');
+assert(/\.search-and-choose\{display:grid;grid-template-columns:minmax\(0,1fr\)/.test(html),'Search and region controls are vertically stacked');
+assert(/<div class="search-and-choose">[\s\S]*?<div class="search-area">[\s\S]*?<div id="areaSettings"/.test(html),'Search and region controls remain in the same section');
 assert(!html.includes('まず都道府県を選択'),'Outdated municipality prompt is absent');
 assert(!html.includes('id="locatorPanel"')&&!html.includes("drawOverview($('locator')"),'Unneeded national locator widget and render are removed');
 const viewportSource=read('v2/progressive-preview/map-viewport.js');
@@ -136,4 +136,5 @@ assert(/void getOffices\(code\)\.then\(offices=>\{[\s\S]*?renderOfficePopup\(\)/
 assert(/if\(!current\)\{if\(pendingPrefSelection\?\.id===requestId\)pendingPrefSelection\.code=\$\('region'\)\.value;return;\}/.test(html),'Early municipality selections are retained until detail arrives');
 assert(/const wanted=pendingPrefSelection\?\.id===id\?pendingPrefSelection\.code:selectedCode/.test(html),'Loading detail honors selected municipality');
 assert(/if\(id!==requestId\|\|current\)return;\s*const choices=nationalLabels\.prefectureNamesFor/.test(html),'Obsolete or already-complete picker response is ignored');
+assert(/<li>区域の点滅は、もう一度押すと止まります。<\/li><li>地図内のボタンでよみがなが出せます。<\/li>/.test(html),'Repeated-tap flashing hint appears immediately before reading hint');
 console.log('Public nationwide tap and county detail contract: OK');
