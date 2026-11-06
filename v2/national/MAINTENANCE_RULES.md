@@ -1,100 +1,314 @@
-# Kussoon V2 全国地図：合意済み仕様と再発防止
+# Kussoon V2 地図開発・確定仕様規則集
 
-この文書は、Chat / Work / Codex が後続の修正で過去の成果を壊さないための保守規則です。
-**「一方を直した結果、別のページで過去と同じ不具合が再発する」ことを防ぐ**のが目的です。
-新たな実装やPRの説明だけで、これらの仕様を黙って変更してはいけません。
+初回監査基準: 2026-11-06（日本時間）、main `476a6f91dbb7a95a99bb10caf571c125411ca9d2`（PR #290まで）。**追補: PR #292〜#308のマージ済み変更を反映。#291はこの文書を整備するDraft PRであり、#292以降のPR集計は下記追補で別管理。****このファイルを今後の地図開発で参照する唯一の規則集**とする。既存の[PR #1〜#245照合台帳](../audit/v2-national-pr-ledger-20261104.md)、[S01〜S49の当時の到達状況](../audit/v2-national-current-spec-20261104.md)、[不整合記録](../audit/v2-national-regressions-20261104.md)、[回帰計画](../audit/v2-national-regression-test-plan-20261104.md)は証拠・履歴である。以前のA/B/Cは当時のpilotについての判定であり、現在の公開版へ転記しない。
 
-## 全変更に共通する運用
+**適用の優先順位:** ユーザーが実機で承認し、後続のマージ済みPRで明示された最終決定を採る。PR番号だけで判断しない。対象ページを必ず特定する。正式公開版は [`/maps/national-municipalities.html`](../../maps/national-municipalities.html)。`v2/national/map.html`は転送、`official-2026-nationwide-pilot.html`、RC1、独立試作は別経路。**「コード確認」は動作確認済みを意味しない。** 不一致が残る場合、旧仕様を無条件に復活させない。
 
-1. 最新 `main` と修正対象ページの実際の読み込み元・呼び出し経路を確認する。過去PRのマージだけをもって現在の適用を推定しない。
-2. 対象機能を実装した過去PRと、共通部品、対象外の試作ページを区別する。以前のコードを無条件に戻さない。
-3. 新たな独自実装より、既存の共通エンジンと確定済みの規則を優先する。
-4. 修正箇所だけでなく、同じ機能を持つ全国地図・地域別試作・共有部品の適用範囲を確認し、影響を受けるページの回帰テストを実施する。
-5. テスト合格と公開ブラウザ・実機確認は別物として扱う。確認できていない動作は「未確認」と記録する。
-6. PRには「対象・維持する仕様・テスト結果・対象外・公開検証・残件」を残す。将来の変更が過去の修正を覆さないよう、CIと参照元を更新する。
+## 監査の分母と限界
 
-## 全国地図の確定仕様（2026-11-04時点）
+GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文・マージ状況を分類（#267/#282はPRではない）。既存台帳の #1〜#245 は本文・変更ファイル・取得可能なpatchを照合済みという当時の記録を再利用。今回 #246〜#290 の実在43件を追加分類し、地図関連29件／他コンテンツ14件。従って分類済み288件、未分類0件、地図関連247件（既存218＋今回29）、その他41件。追補43件は取得できた差分も確認し、重点6件（#91/#244/#259/#287/#288/#290）はCSS・JSの決定を個別に照合した。地域6リポジトリは実在59件を一覧分類し、操作・表示仕様に関係する19件の本文と差分を照合した。合計347件を分類（地図仕様関連266件／その他81件、未分類0件）。レビューの全件再調査、承認の実機原本、地域公開ページの全件実操作は未確認。
 
-### 監査基準とページ別の適用状況
+※ 初回の集計数値（288件／347件／34規則など）はPR #290時点の監査スナップショット。後続の17件（#292〜#308）とR35〜R38は追補で管理し、全履歴の再監査済み件数として上書きしない。
 
-2026-11-04監査の正本mainは `c69c970c982724b20d9a327e1fd1c223f356aebd`。
-[監査入口](../audit/v2-national-audit-summary-20261104.md)、[PR #1〜#245照合台帳](../audit/v2-national-pr-ledger-20261104.md)、
-[未反映・回帰疑い](../audit/v2-national-regressions-20261104.md)、[回帰テスト計画](../audit/v2-national-regression-test-plan-20261104.md)を参照する。
-本書を有効規則の正本として再利用し、PR履歴と現在の達成状況は台帳へ分離する。
+状態欄: **限定確認**=既存の対象限定テスト等／**コード確認**=現行ソースを照合したが公開実操作未確認／**要確認**=採否または実動作不足／**不整合**=根拠のある差異。古いS-IDは既存台帳の仕様番号。以下のR-IDが今後の変更影響を追跡する番号であり、個々の規則は表の1行で管理する。コード・テスト欄の相対名はリポジトリ内の現行ファイル。PRリンクと旧S-IDを[履歴台帳](../audit/v2-national-pr-ledger-20261104.md)と突き合わせる。
 
-以下の固定5C・13画面px・768倍は、#100/#217/#224/#225/#228で主に
-`density.html` / `japan.html` 系へ確立した規則である。その系統は2021年版1,902区域を使用する。
-検証対象 `official-2026-nationwide-pilot.html` は2026年版1,905区域を使う別経路であり、
-これらの規則が実装済みという意味ではない。#146のbalanced配置アダプター、SVG単位14/18の文字、
-共通viewport既定128倍との相違を台帳S21〜S26へ記録した。
-2026年版への継承は未反映の疑いとして保持し、ページ別の採用・廃止根拠を確認してから個別PRで決める。
-本監査は相違を理由に本体を変更せず、正常動作や無条件の廃止とも認定しない。
+## 1. 地図データ・行政区域・県境
 
-- よみがな初期 **OFF**。ON/OFF切替があり、不要な初期描画負荷を増やさない。
-- 全国のラベルは画面上で **最大13px**、全国最大拡大倍率 **768**。
-- ラベル位置は固定 **5C**。登録された適切な庁舎点を含む連続区域、ない場合は5Bの最大面積の連続区域に基づき、南北中央の水平最長内部区間の中央に固定。拡大縮小・パン・選択・よみがな切替で動かさない。個別の手動座標調整はしない。
-- 庁舎参照点として確認済みなのは田尻町 **27362** と神戸市中央区 **28110** の2件。全国の庁舎座標が揃っていると仮定しない。
-- 田尻町のラベル基準は関西空港の島ではなく庁舎がある本土側。
-- 区は市名＋区名、町村は郡名＋町村名。読み仮名ONでは各名称に対応する読みを挿入。
-- 吹き出しの×は吹き出しのみ閉じ、選択色と地図位置を保持。同一区域の再タップで選択色のみ解除し、表示範囲は保持。その次のタップで再選択し吹き出しを開く（#81）。県全体・全国へ戻る専用操作とは区別する。2026年版の再タップで県全体へ戻る経路は個別修正で分離し、実ブラウザ回帰テストで保護する（台帳S02、#250マージ済み）。
-- 変更前に現行のHTML・JS・配信データ・キャッシュキーを確認する。
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R01 2026行政区域|全国47県・1,905区域。地図と庁舎1,912件の集合差（北方6・所属未定7・親市20）を用途別に扱い、浜松は現行3区。旧版のコードを混在させない。 **条件・例外:** 公開全国版。法的境界の現況保証ではない。|[#186](https://github.com/Kussoon/kussoon.github.io/pull/186) [#231](https://github.com/Kussoon/kussoon.github.io/pull/231) [#248](https://github.com/Kussoon/kussoon.github.io/pull/248) [#251](https://github.com/Kussoon/kussoon.github.io/pull/251) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284)|`maps/national-municipalities.html`<br>`v2/data/national/2026-common/`|`national-2026-data.test.cjs`|コード確認|
+|R02 県境・市区町村境|塗りpathと境界pathを分け、同じ線分を累積描画しない。選択専用の太線を重ねない。 **条件・例外:** 公開版は共通Topologyが7県、残り40県と全国概要は別経路。局所太線・白隙間はS39として未解決。|[#128](https://github.com/Kussoon/kussoon.github.io/pull/128)–[#131](https://github.com/Kussoon/kussoon.github.io/pull/131) [#187](https://github.com/Kussoon/kussoon.github.io/pull/187) [#268](https://github.com/Kussoon/kussoon.github.io/pull/268) [#277](https://github.com/Kussoon/kussoon.github.io/pull/277) [#279](https://github.com/Kussoon/kussoon.github.io/pull/279) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283)|`v2/progressive-preview/municipality-renderer.js`<br>`progressive-geometry.js`|`test-2026-single-stroke.cjs`<br>`progressive-seam-visual.browser.cjs（比較試験）`|要確認|
 
-## 境界線について確立した方式
+## 2. 描画方式・軽量化・性能
 
-### PR #128–131：市区町村境
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R03 段階描画|全国概要から拡大率に応じて47県・市区町村へ到達可能とし、県pathタップによる県全体選択は行わず県の下向き3列メニューから選ぶ。離島を含む全域表示を維持。**#303:** 県選択後は軽量な全国地名索引から対象県の市区町村名だけを抽出して、詳細TopoJSONや庁舎を待たずに選択欄を先行有効化する。重い地図読込と市区町村一覧の利用を分離する。|[#217](https://github.com/Kussoon/kussoon.github.io/pull/217) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#292](https://github.com/Kussoon/kussoon.github.io/pull/292) [#300](https://github.com/Kussoon/kussoon.github.io/pull/300) [#303](https://github.com/Kussoon/kussoon.github.io/pull/303)|`maps/national-municipalities.html`<br>`v2/progressive-preview/national-progressive-labels.js`|`national-2026-rc1.browser.cjs`（旧）<br>`national-pref-county-contract.test.cjs`（静的、#292）<br>Safari実操作不足<br>`v2/tests/national-pref-county-contract.test.cjs`（先行表示の静的検査）|コード・静的検査／Safari・Edge実機速度未確認|
+|R04 詳細読込|詳細地図は必要な県のみ20m版TopoJSONを読み込み、県キャッシュを制限してWorkerを非同期運用する。**#303:** 市区町村一覧の有効化を地図の取得・JSON解析・arc展開・全国共通読みデータ照合・庁舎JSON取得の完了と連動させない。既存の2026年地名索引を再利用して選択県だけの名称候補を先行表示し、詳細と庁舎は独立して読み込む。地図準備中の市区町村選択はコードを保持し、準備完了時にフォーカス。県切替時は古い非同期応答を破棄し、県詳細が先に完成した場合は後続の軽量索引コールバックで上書きしない。失敗時fallback/メモリ/実機速度は継続検証する。|[#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#263](https://github.com/Kussoon/kussoon.github.io/pull/263)（試作） [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#303](https://github.com/Kussoon/kussoon.github.io/pull/303)|`maps/national-municipalities.html`<br>`v2/progressive-preview/national-progressive-labels.js`<br>`v2/progressive-preview/national-progressive-labels.js`|`national-map-move.browser.cjs（Workerのみ）`<br>`v2/tests/national-pref-county-contract.test.cjs`（先行表示の静的検査）|コード・静的検査／Safari・Edge実機速度未確認|
 
-- 市区町村ポリゴンを塗りだけで描く。境界線は共有TopoJSONアークから**一度だけ**描く。
-- 選択中は塗り色のみ変え、選択専用の輪郭線を重ね描きしない。
-- 共通部品: `v2/shared/municipality-renderer.js`
-- テスト: `v2/shared/test-municipality-renderer.cjs`
+## 3. ラベル配置・地名表示
 
-### PR #187：全国県境
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R05 地名の表示対象|全国・県別とも対象自治体の地名を表示し、クイズ中にのみ解答名を隠す。行政区域コードに照合した正式名称と確定済み二要素（市名/区名・都名/特別区名・郡名/町村名）を利用する。**#307: 地図ラベルは読み仮名OFFでも、2要素が確認できる場合は各要素を上下2段に分ける。**読みONでは各名称と読みを組み合わせた4段。表示・文字幅・衝突/区域収まり判定は同じ段数と高さを使い、手動座標補正は禁止。ラベル用モデルのnameとlabelNameは正式名を維持する。|[#79](https://github.com/Kussoon/kussoon.github.io/pull/79) [#100](https://github.com/Kussoon/kussoon.github.io/pull/100) [#217](https://github.com/Kussoon/kussoon.github.io/pull/217) [#260](https://github.com/Kussoon/kussoon.github.io/pull/260) [#263](https://github.com/Kussoon/kussoon.github.io/pull/263) [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#300](https://github.com/Kussoon/kussoon.github.io/pull/300) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305) [#306](https://github.com/Kussoon/kussoon.github.io/pull/306) [#307](https://github.com/Kussoon/kussoon.github.io/pull/307)|`national-progressive-labels.js`<br>`v2/shared/established-label-adapter.js`|`pilot-label-scope.browser.cjs`<br>`national-2026-rc1.browser.cjs`<br>`v2/tests/national-pref-county-contract.test.cjs`（UIの静的検査）|表示分割・名称・静的契約検査済み／Safari・Edge実機未確認|
+|R06 位置の根拠|地物内の代表点と連続成分を使い、恣意的な個別座標を増やさない。田尻町の空港島など飛地は検証済み庁舎側を優先する旧5Cの根拠を保持。 **条件・例外:** 旧5Cと現行balanced/段階索引の同等性は未確定。全県品質を自動合格としない。|[#94](https://github.com/Kussoon/kussoon.github.io/pull/94) [#95](https://github.com/Kussoon/kussoon.github.io/pull/95) [#100](https://github.com/Kussoon/kussoon.github.io/pull/100) [#146](https://github.com/Kussoon/kussoon.github.io/pull/146) [#253](https://github.com/Kussoon/kussoon.github.io/pull/253) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261)|`v2/shared/established-label-adapter.js`<br>`v2/progressive-preview/label-index.json`|`compare-2026-labels.browser.cjs`|要確認|
+|R07 区・郡付き名称|政令指定都市の区は全国・県別とも『市名／区名』の**2段ラベル**（例:『札幌市』改行『中央区』、横浜市/鶴見区）、東京都特別区は『東京都／区名』（例:東京都/新宿区）を必須とする（#307）。郡付き町村も確認済みの郡名／町村名を2段表示する。検索・県内選択欄・吹き出しの自治体名はコード照合された**連結正式名称**を維持し、表記内容と地図上の段組みのみを区別。よみがなONはR08に従う。旧描画コード向けのname/labelNameは同じ正式名称とし、親市名の二重表示を防ぐ。未確認の郡名/読みは推測しない。|[#214](https://github.com/Kussoon/kussoon.github.io/pull/214)–[#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#292](https://github.com/Kussoon/kussoon.github.io/pull/292) [#293](https://github.com/Kussoon/kussoon.github.io/pull/293) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305) [#306](https://github.com/Kussoon/kussoon.github.io/pull/306) [#307](https://github.com/Kussoon/kussoon.github.io/pull/307)|`county-overlay.js`<br>`national-progressive-labels.js`<br>`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`|`progressive-county-labels.test.cjs`<br>`national-pref-county-contract.test.cjs`（静的＋名称例）|表示分割・名称・静的契約検査済み／Safari・Edge実機未確認|
 
-- 全国47都道府県の2026年N03データを**一度に**Topology化し、共有アークを保ったまま簡略化・県別切出し。
-- 隣接県境22組の共有アーク検証結果: `v2/data/national/2026-common/national-shared-border-pilot/manifest.json`。
-- 生成器: `v2/tools/shared-topology/build.mjs`。
-- **注意**: 現在の `density.html` は2021年版の県別簡略データ（1,902区域）を使用し、2026年版（1,905区域）への正式切替は未完了。PR #187だけで全国地図の二重線問題が解決したと主張しない。
-- 新しい全国地図へ切り替える際は、浜松市の旧7区/新3区、区域コード、庁舎・吹き出し、検索、固定5C、よみがな、軽量化とiPhone操作性能を検証する。
+## 4. 読み仮名・初期表示
 
-## 自動検査と限界
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R08 よみ初期OFF|よみがなは初期OFF。コードと名称が確認済みの読みだけ表示し、欠落や未確認は補わない。**#307:** 市名＋区名、東京都＋特別区名、郡名＋町村名などの検証済み2要素ラベルは、OFF時『名称1／名称2』の2段、ON時『名称1／読み1／名称2／読み2』の4段を共通の地図レンダリング規則とする。吹き出し見出し直下の読みはON/OFFに連動するが見出しはフル正式名称を維持。|[#223](https://github.com/Kussoon/kussoon.github.io/pull/223) [#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#295](https://github.com/Kussoon/kussoon.github.io/pull/295) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305) [#307](https://github.com/Kussoon/kussoon.github.io/pull/307)|`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`national-progressive-labels.js`<br>`reading-bridge.js`<br>`maps/national-municipalities.html`|`national-readings.test.cjs`（既知6失敗）<br>試作吹き出しON/OFF/未確認読みのブラウザ回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|表示分割・名称・静的契約検査済み／Safari・Edge実機未確認|
 
-- `node v2/national/test-density-contract.cjs`: よみがな初期OFF・13px・768・固定5C・既存操作仕様などのソース上の保護。
-- `node v2/national/test-shared-border-contract.cjs`: PR #131/#187の共有境界監査記録と2021/2026の未混在条件を検査。
-- `node v2/shared/test-municipality-renderer.cjs`: 単一描画・選択状態など共通レンダラーの回帰テスト。
-- GitHub Actions: `.github/workflows/v2-national-map-contract.yml`。
-- これらは**静的・部品テスト**であり、県境の見た目や全47都道府県の実ブラウザ性能を保証しない。実地確認が必要。
+## 5. 区域の選択・色分け・点滅
 
-## 作業完了の定義
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R09 県別淡色|全国47県を県別淡色で塗り、選択区域だけを視覚的に強調する。境界pathはアニメーションしない。 **条件・例外:** パレットの隣接県・色覚多様性の全件承認は未記録。西宮/宝塚への移植は別決定。|[#281](https://github.com/Kussoon/kussoon.github.io/pull/281) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284)|`prefecture-colors.js`<br>`prefecture-colors.css`|`prefecture-colors-pulse.browser.cjs（旧試作）`|要確認|
+|R10 選択の最終点滅|公開版だけ白↔元の県別淡色を各0.5秒、step-endで瞬間切替。フェードなし。reduced-motionでは元色で固定。 **条件・例外:** 旧琥珀・元色脈動(#281)、黄赤0.6秒(#286)、黄赤0.5秒(#287)を公開版では置換。試作ページは別。|[#281](https://github.com/Kussoon/kussoon.github.io/pull/281) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#286](https://github.com/Kussoon/kussoon.github.io/pull/286) [#287](https://github.com/Kussoon/kussoon.github.io/pull/287) [#289](https://github.com/Kussoon/kussoon.github.io/pull/289)|`maps/national-municipalities.html`<br>`v2/progressive-preview/prefecture-colors.css`|`national-2026-public.browser.cjs（旧期待値で不整合）`|コード確認/テスト不整合|
 
-対象ページの公開状態が正常で、今回の不具合が解決し、過去の確定仕様への回帰がないことを確認する。比較試作の完成、PRマージ、GitHub Actions合格だけでは公開サイトの完成とはしない。
+## 6. タップ・再タップ・選択解除
 
-## 2026統合版で守る機能別規則
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R11 ×と再タップ|×は吹き出しだけ閉じ、選択と位置は保持。同じ市区町村の再タップで選択を解除して点滅を止め、次回のタップで選択し直せる。#304でこの操作を紹介する『区域の点滅は、もう一度押すと止まります。』を冒頭案内に追加。吹き出しの上下移動、再選択・閉じる操作の確定仕様を維持する。|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#250](https://github.com/Kussoon/kussoon.github.io/pull/250) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#294](https://github.com/Kussoon/kussoon.github.io/pull/294) [#304](https://github.com/Kussoon/kussoon.github.io/pull/304)|`maps/national-municipalities.html`<br>`v2/progressive-preview/national-progressive-labels.js`<br>`v2/national/vertical-popup-trial.html`|`nationwide-retap.browser.cjs`（pilot）<br>上下移動→×→選択変更の回帰未整備|HTML・静的契約確認／Safari実機未確認|
+|R12 空白・他区域|空白タップでは区域選択を解除しない。別区域・検索選択で選択・閉じ状態を更新する。 **#292以降の公開版:** 地図上の都道府県pathは県単独選択のトリガーとしない。市区町村pathまたはラベルは従来どおり選択する。県全体への移動は県ドロップダウンに限定（県全体へ戻る専用ボタン・全国へ戻るボタンは維持）。|[#81](https://github.com/Kussoon/kussoon.github.io/pull/81) [#148](https://github.com/Kussoon/kussoon.github.io/pull/148) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#292](https://github.com/Kussoon/kussoon.github.io/pull/292)|`maps/national-municipalities.html`<br>`v2/progressive-preview/national-progressive-labels.js`|`national-pref-county-contract.test.cjs`（静的）<br>`audit-legacy-behavior.browser.cjs`（旧診断）<br>iPhone Safariでの詳細タップ回帰なし|ユーザー決定・コード確認／Safari未確認|
 
-- 選択／吹き出し: 選択コード、閉じた吹き出し、表示範囲を別の状態として扱う。別区域・検索選択で吹き出しを開き直し、県切替・全国戻りで初期化する。琥珀色は#85以降の仕様で、旧紫色を戻さない。
-- 庁舎／リンク: 通常自治体は3リンク枠。政令市区は区役所→親市役所の順に各3リンク枠、合計6枠。公式サイトは#212によりURL監査Aのみ有効化し、B/C/未判定・不正URLは無効枠とする。6枠が常に6個の有効アンカーとは限らない。経路は各施設の元名・住所を使い、表示名の省略で元台帳を変えない。[既存データ仕様](OFFICES-DATA-SPEC.md)を併用する。
-- 吹き出し配置（S12/S13、今回の明示要件）: ツールバーとの高さ厳密一致を廃止し、リンク下端の可視性・内部スクロールでの3/6枠への到達を優先する。右4ボタンとの非重複、地図内収容、住所サイズを保つ。区と親市は同じカードに入れる。
-- 全体表示（S19）: 現在の全国/県/選択区域フォーカスの初期枠へ戻し、選択解除や県全体への再投影を行わない。専用の全国/県へ戻る操作とは別。
-- 画面構成: 地図を先に置き、検索/折りたたみ地域移動は地図の後。検証用入力とメトリクスは同一pilotの `?debug=1` で表示し、共通エンジンを分岐実装しない。
-- 地図操作: ピンチ・ドラッグ・＋／−はviewBoxを操作する。単純タップとドラッグを区別し、子pathのcapture解除でパンを終了しない。選択フォーカス後は実投影範囲を移動制限に使う。操作中に地理データを再生成しない。#245の部品テスト合格とiPhone実機合格は区別する。
-- 周辺ラベル: 現在ロード済みの県内市区町村名を初期表示し、下部の切替で選択名だけにできる。隣県の一括読込は行わない。既存balanced/collision/fitと区域フォーカスを維持し、S21〜S26の保留を旧方式への全面復帰で解消しない。
-- 読み／名称: 初期OFF。確認済みのコード・名称一致に限り読みを付け、不一致は推測しない。正式市区名・郡付き町村名と各読みの対応を保つ。旧版の読み初期ON、2リンクのみという中間仕様を復活させない。
-- 境界／データ: 2026年N03の元データと共有アークを尊重し、塗りと単一境界を分け、選択輪郭を追加しない。2021／2026を混在させず、浜松市再編、所属未定地、北方領土、親政令市をそれぞれ扱う。単一pathの存在だけで地理的連続性や全県境の一致を保証しない。
-- 全国検索: 名称・読み・5桁コードから該当する現行2026区域へ到達する。候補に県名を付け、同名自治体を混同しない。#204の元スナップショットにある浜松市旧区は共有再編処理で除外し、新3区を名称・読み・コードで検索できるよう個別修正し、全候補を現行コードへ照合する（S31、#251マージ済み）。
-- クイズ: #149で2026統合版のUIを意図的に保留した。共通ロジックとテストを維持し、通常地図との状態分離を保つ。今回UIを復活させない。
+## 7. 拡大・縮小・ドラッグ・スクロール
 
-## 仕様変更を追跡する最小手順
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R13 地図操作|wheel B案・ダブルクリック・±・ピンチ・ドラッグを維持。#299で＋／－は右下半幅の横並び、全体表示・よみがなは下段、全画面は右上。**#301:** 市区町村選択時に当該区域の座標へ再投影した際、1倍固定の縮小下限で止まらないよう、県全体の投影境界に基づく最小倍率を設定する。全国・非選択状態では元の1倍下限へ戻す。閉じる×・再タップ後に縮小できない回帰を禁止。|[#65](https://github.com/Kussoon/kussoon.github.io/pull/65) [#136](https://github.com/Kussoon/kussoon.github.io/pull/136) [#239](https://github.com/Kussoon/kussoon.github.io/pull/239)–[#245](https://github.com/Kussoon/kussoon.github.io/pull/245) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#294](https://github.com/Kussoon/kussoon.github.io/pull/294) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297) [#299](https://github.com/Kussoon/kussoon.github.io/pull/299) [#301](https://github.com/Kussoon/kussoon.github.io/pull/301)|`map-viewport.js`<br>`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`v2/progressive-preview/map-viewport.js`|`nationwide-touch.browser.cjs`（従来）<br>試作タイトルバーのPointer Events/iOS実機回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（新規静的契約、実機未確認）<br>`v2/tests/national-pref-county-contract.test.cjs`（配置静的検査）<br>`v2/tests/national-pref-county-contract.test.cjs`（構文・静的・viewport動作モック）|コード・viewportモック確認／Safari・Edge実機未確認|
+|R14 全体表示|『全体表示』は現在の全国・県・区域フォーカスの初期表示へ戻し、選択解除・県切替と混同しない。右下で＋／－横並びの下に置く。#301の可変最小倍率が選択地域で有効な場合もリセットは初期ビューへ戻し、全国に移動する場合は最小倍率1へ戻す。**#308:** 『日本全国へ戻る』『都道府県全体へ戻る』という別の2ボタンはパンくず見出し直下・地図本体の直前に配置し、順序を維持する。地域選択・選択解除・描画・disabled制御の動作は変更しない。|[#139](https://github.com/Kussoon/kussoon.github.io/pull/139) [#245](https://github.com/Kussoon/kussoon.github.io/pull/245) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#299](https://github.com/Kussoon/kussoon.github.io/pull/299) [#301](https://github.com/Kussoon/kussoon.github.io/pull/301) [#308](https://github.com/Kussoon/kussoon.github.io/pull/308)|`maps/national-municipalities.html#mapReset`<br>`map-viewport.js`<br>`v2/progressive-preview/map-viewport.js`|`pilot-map-ui.browser.cjs`<br>`v2/tests/national-pref-county-contract.test.cjs`（配置静的検査）<br>`v2/tests/national-pref-county-contract.test.cjs`（構文・静的・viewport動作モック）|コード・静的回帰確認／iPhone Safari実機未確認|
 
-各変更PRで、影響するS-ID、対象ページ、実際の読込元・関数、後続変更の根拠、検証種別を台帳へ追記する。
-有効規則を変える場合は「どのS-IDを何に置き換えるか」を明記し、実機承認が記録された仕様はその根拠を残す。
-新しいPRが増えても過去行を削除せず、後続PRと新しい基準SHAで到達状況を更新する。
-静的テストの文字列一致をユーザー操作の保証として扱わない。
+## 8. 自治体情報の吹き出し
 
-## 補完監査後の検証単位（本体修正は別PR）
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R15 可変高さ・下端|単独/二施設とも可変高さ・内部スクロール・3/6リンク到達性を守り、右4ボタンとの高さ一致は禁止。#296の地図外へ上下移動して下部要素へ重なる仕様を維持。#297ではポップアップの非操作要素全体から上下ドラッグできるが、左右には動かさない。リンク/操作ボタンへのタップを妨げない。スクロールとドラッグの競合はR16で保護する。|[#91](https://github.com/Kussoon/kussoon.github.io/pull/91) [#244](https://github.com/Kussoon/kussoon.github.io/pull/244) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#287](https://github.com/Kussoon/kussoon.github.io/pull/287) [#288](https://github.com/Kussoon/kussoon.github.io/pull/288) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290) [#294](https://github.com/Kussoon/kussoon.github.io/pull/294) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297)|`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`v2/tests/national-pref-county-contract.test.cjs`|`pilot-ui.browser.cjs`（旧）<br>公開3/6リンク・試作画面外への可視性のブラウザ回帰不足<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）<br>`v2/tests/national-pref-county-contract.test.cjs`（新規静的契約、実機未確認）|正式版コード確認／iPhone Safari実機未確認|
+|R16 内部スクロール|吹き出し内部は全施設と3/6リンクまで到達できる。#297でリンク/ボタン以外の吹き出し領域を縦ドラッグ可能とし、本文が長い場合は『▲内容を上へ』『▼内容を下へ』を表示して本文をスクロール可能にする。マウスホイールも継続。リンク/×は通常動作。自動スクロール・スマホ実機でのタッチ/スクロールは未確認。|[#91](https://github.com/Kussoon/kussoon.github.io/pull/91) [#93](https://github.com/Kussoon/kussoon.github.io/pull/93) [#243](https://github.com/Kussoon/kussoon.github.io/pull/243) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290) [#294](https://github.com/Kussoon/kussoon.github.io/pull/294) [#295](https://github.com/Kussoon/kussoon.github.io/pull/295) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297)|`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`v2/tests/national-pref-county-contract.test.cjs`|`pilot-ui.browser.cjs`（pilot）<br>試作のタッチ・スクロール回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）<br>`v2/tests/national-pref-county-contract.test.cjs`（新規静的契約、実機未確認）|正式版コード確認／iPhone Safari実機未確認|
 
-段階表示・全国zoom/pan到達・画面内可視帯・空白解除・自治体keyboard・検索Enter・読みの人口網羅・Edge配色・debugメトリクスの範囲を、[正式S41〜S49](../audit/v2-national-current-spec-20261104.md#new-user-behavior-specs)として追跡する。S14/S15の実入力境界は未確認へ戻す。旧版を一律移植する承認ではない。
+## 9. 政令指定都市の区と親市
 
-1. PR列挙数や抽出済み項目の合格数で、総合監査完了を宣言しない。過去の利用者向け操作から「操作前→入力→操作後→zoom/resize/読み切替→復帰」の状態表を作り、仕様の分母の漏れを点検する。
-2. ラベルの生成件数・表示許可・画面内・全文字箱・全区域への到達を分ける。全国の初期投影と県/区域投影の倍率を同じ実縮尺と扱わない。幾何データが異なる場合は地理中心/画面縮尺/viewport/読みを揃え、揃わなかった条件は比較から除外して記録する。
-3. 共通engineの存在/再利用/ゼロ呼出しを利用者動作の合格にしない。固定anchorの再計算を避けることと、ズーム後に可視性/画面文字pxを更新することは両立させて検証する。
-4. 集約CIの対象外テストを定期棚卸しし、失敗を隠さない。旧期待値と実装不具合を後続PRの根拠で区別する。仕様を破る変異を検出できる正/負のテストを提案し、既知の欠落を期待値に固定して合格させない。
-5. コード集合の例外は、その表示/読み欠落の承認ではない。北方6/所属未定7/親市20を用途ごとに分ける。実機・Edge・境界・性能・非同期競合の未検証範囲をAへ含めない。
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R17 二施設・6枠|政令市の区では区役所と親市役所を別施設として表示し、それぞれ公式/Wikipedia/行先の3枠（計6枠）を保持。吹き出し見出しは『市名＋区名』とし親市名を後置重複しない（#293）。**#305:** 県別地図でもラベルを同じ正式名称にし、札幌市・横浜市などの区を短い区名だけに戻さない。東京都23区は政令市区と異なり都名付きで表示するが、存在しない『親市役所』を捏造しない。|[#87](https://github.com/Kussoon/kussoon.github.io/pull/87) [#91](https://github.com/Kussoon/kussoon.github.io/pull/91) [#93](https://github.com/Kussoon/kussoon.github.io/pull/93) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290) [#293](https://github.com/Kussoon/kussoon.github.io/pull/293) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305)|`office-directory.js`<br>`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`|`office-directory.test.cjs`<br>`national-pref-county-contract.test.cjs`（見出し）<br>`pilot-ui.browser.cjs`（pilot）|2026索引による名称検査・構文確認／Safari・Edge実機未確認|
+
+## 10. 検索・都道府県切替・ナビゲーション
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R18 全国検索|全国名前・読み・5桁コード検索、コード順35件、左スクロールバー、短い入力例を維持。都道府県は下向き3列、市区町村は下向き単列で『次に市区町村を選択』から選ぶ。地域選択パネル自体は常時開いている。#303の軽量索引先行有効化を維持。**#304で検索欄と地域選択欄は横並び2列から上下の縦並び1列へ戻す。** 地図操作・県一覧・検索機能・先行読込は変更しない。|[#204](https://github.com/Kussoon/kussoon.github.io/pull/204) [#251](https://github.com/Kussoon/kussoon.github.io/pull/251) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#292](https://github.com/Kussoon/kussoon.github.io/pull/292) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297) [#298](https://github.com/Kussoon/kussoon.github.io/pull/298) [#300](https://github.com/Kussoon/kussoon.github.io/pull/300) [#301](https://github.com/Kussoon/kussoon.github.io/pull/301) [#302](https://github.com/Kussoon/kussoon.github.io/pull/302) [#303](https://github.com/Kussoon/kussoon.github.io/pull/303) [#304](https://github.com/Kussoon/kussoon.github.io/pull/304)|`maps/national-municipalities.html`<br>`reading-bridge.js`|`national-pref-county-contract.test.cjs`（静的）<br>`nationwide-search.browser.cjs`（pilot）<br>公開キーボード/Enter回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（新規静的契約、実機未確認）<br>`v2/tests/national-pref-county-contract.test.cjs`（構文・静的・viewport動作モック）<br>`v2/tests/national-pref-county-contract.test.cjs`（先行表示の静的検査）|HTML・静的契約確認／Safari実機未確認|
+|R19 公開URLと導線|正式公開URL `/maps/national-municipalities.html`、canonicalと共有フッターを保持。検索と地域選択は縦に積み重ね、地域選択パネルは常時表示。冒頭の点滅停止・読み切替案内も維持する。**#308:** 『日本全国へ戻る』『都道府県全体へ戻る』の2ボタンを、地図の見出しと地図本体の間へ移す。地図の下の旧説明文『都道府県は上の選択欄から指定できます。…吹き出しは上部の帯で上下に移動でき、×で閉じられます。』を全文削除する。** 地図本体の表示領域・全画面モード・可変高吹き出し・共通フッター・離島全域・検索は維持する。|[#283](https://github.com/Kussoon/kussoon.github.io/pull/283) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297) [#298](https://github.com/Kussoon/kussoon.github.io/pull/298) [#300](https://github.com/Kussoon/kussoon.github.io/pull/300) [#301](https://github.com/Kussoon/kussoon.github.io/pull/301) [#302](https://github.com/Kussoon/kussoon.github.io/pull/302) [#304](https://github.com/Kussoon/kussoon.github.io/pull/304) [#308](https://github.com/Kussoon/kussoon.github.io/pull/308)|`maps/national-municipalities.html`<br>`v2/national/map.html`<br>`maps/index.html`|`national-map-move.browser.cjs`<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）<br>`v2/tests/national-pref-county-contract.test.cjs`（新規静的契約、実機未確認）<br>`v2/tests/national-pref-county-contract.test.cjs`（構文・静的・viewport動作モック）|コード・静的回帰確認／iPhone Safari実機未確認|
+
+## 11. スマートフォン・タブレット・PC
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R20 画面幅|右4操作とカードを横に分離し、狭幅でも吹き出しの下端とリンク到達性を保つ。 **条件・例外:** 単独と二施設とも同じ可変高。320/375/390pxの旧pilotテストを公開版にも適用すべき。|[#83](https://github.com/Kussoon/kussoon.github.io/pull/83) [#84](https://github.com/Kussoon/kussoon.github.io/pull/84) [#90](https://github.com/Kussoon/kussoon.github.io/pull/90) [#91](https://github.com/Kussoon/kussoon.github.io/pull/91) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290)|`maps/national-municipalities.html @media(max-width:600px)`|`pilot-ui.browser.cjs（旧pilot）`|公開版テスト未整備|
+
+## 12. データ読込・キャッシュ
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R21 読込順とキャッシュ|全国概要・必要県詳細・ラベル索引・庁舎を各実経路で読込む。URL移動後の依存先は絶対パスとする。 **条件・例外:** 通信失敗・旧応答競合・キャッシュ破棄・実機メモリは別判定。|[#114](https://github.com/Kussoon/kussoon.github.io/pull/114) [#187](https://github.com/Kussoon/kussoon.github.io/pull/187) [#245](https://github.com/Kussoon/kussoon.github.io/pull/245) [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285)|`maps/national-municipalities.html`<br>`national-progressive-labels.js`|`national-map-move.browser.cjs`<br>`national-2026-data.test.cjs`|限定確認|
+
+## 13. 公式URL・庁舎情報
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R22 庁舎情報|表示名から『本庁舎』『号館』等は省けるが、住所・元JSON・経路の施設識別は変えない。 **条件・例外:** 単独/複数施設で文字を無理に縮小しない。|[#86](https://github.com/Kussoon/kussoon.github.io/pull/86) [#87](https://github.com/Kussoon/kussoon.github.io/pull/87) [#89](https://github.com/Kussoon/kussoon.github.io/pull/89) [#91](https://github.com/Kussoon/kussoon.github.io/pull/91) [#93](https://github.com/Kussoon/kussoon.github.io/pull/93) [#150](https://github.com/Kussoon/kussoon.github.io/pull/150)–[#212](https://github.com/Kussoon/kussoon.github.io/pull/212)|`v2/common/js/office-directory.js`<br>`v2/data/offices/`|`office-directory.test.cjs`|限定確認|
+|R23 公式リンクA判定|公式サイト枠は監査Aかつ安全なURLだけ有効。B/C/未判定は無効枠。Wikipedia/経路の扱いを別にする。 **条件・例外:** HTTP 200だけではAにならない。台帳更新の時点差を確認。|[#188](https://github.com/Kussoon/kussoon.github.io/pull/188)–[#212](https://github.com/Kussoon/kussoon.github.io/pull/212) [#248](https://github.com/Kussoon/kussoon.github.io/pull/248)|`v2/common/js/office-directory.js`<br>`v2/audit/official-url-nationwide-classification-20261103.json`|`office-directory.test.cjs`<br>`test-office-directory-data.cjs`|限定確認|
+
+## 14. 回帰テスト・公開前検査
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R24 影響規則を先に宣言|変更PRに影響R-IDと旧S-ID、対象ページ、最終優先PR、置換理由、コード経路、検査種別を記し、意図的変更時は両方のテスト期待値を更新する。 **条件・例外:** 静的/部品/ブラウザ/実機を混同しない。試作の合格を本番合格へ転記しない。|[#248](https://github.com/Kussoon/kussoon.github.io/pull/248) [#253](https://github.com/Kussoon/kussoon.github.io/pull/253) [#259](https://github.com/Kussoon/kussoon.github.io/pull/259) [#261](https://github.com/Kussoon/kussoon.github.io/pull/261) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290)|`v2/tests/run-national-contracts.cjs`<br>`.github/workflows/`|`audit-ledger.test.cjs（旧台帳）`|運用規則|
+|R25 公開ページの回帰門|正式URLの選択点滅、3/6リンク可視性、狭幅内部スクロール、再タップ、境界を公開ページで検査する。 **条件・例外:** 移設検査は公開HTMLの変更で起動するが、公開版検証は旧HTMLのパスを参照し、両方とも選択色CSS単独の変更では起動しない。|[#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285) [#289](https://github.com/Kussoon/kussoon.github.io/pull/289) [#290](https://github.com/Kussoon/kussoon.github.io/pull/290)|`v2/tests/national-2026-public.browser.cjs`<br>`.github/workflows/v2-national-2026-public.yml`|`旧pulse期待値を要更新。公開版#290の高さテスト未整備`|不整合|
+
+## 15. その他
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R26 クイズの段階導入|全国2026のクイズUIは意図的に保留。共通ロジックを保持し、通常地図と状態を混ぜない。 **条件・例外:** 西宮など既存クイズの点滅方式の全国への移植は未承認。|[#149](https://github.com/Kussoon/kussoon.github.io/pull/149) [#281](https://github.com/Kussoon/kussoon.github.io/pull/281) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283)|`v2/shared/municipality-quiz.js`<br>`maps/national-municipalities.html`|`test-municipality-quiz.cjs`|コード確認|
+|R27 試作の採否|全国共通Topology生成#270/#272、統合試作#263、7県比較#277/#279は正式47県採用と区別。2026共通境界の全県展開は未決。 **条件・例外:** マージ済み試験ページも公開版採用の根拠ではない。|[#187](https://github.com/Kussoon/kussoon.github.io/pull/187) [#263](https://github.com/Kussoon/kussoon.github.io/pull/263) [#270](https://github.com/Kussoon/kussoon.github.io/pull/270) [#272](https://github.com/Kussoon/kussoon.github.io/pull/272) [#275](https://github.com/Kussoon/kussoon.github.io/pull/275) [#277](https://github.com/Kussoon/kussoon.github.io/pull/277) [#279](https://github.com/Kussoon/kussoon.github.io/pull/279) [#283](https://github.com/Kussoon/kussoon.github.io/pull/283)|`v2/national/shared-seam-test.html`<br>`progressive-shared-test.html`|`shared-seam-preview.browser.cjs`<br>`progressive-shared-seven.browser.cjs`|要確認|
+
+## 地域学習マップへの適用
+
+全国版と同じ操作でも、回答用地図・町名検索・比較試作では優先規則が異なる。以下の公開地域ページは各地域リポジトリで管理する。[地域サイトの既存棚卸し](../docs/inventory.md)と[地域PRの照合結果](../audit/v2-national-pr-ledger-20261104.md#regional-pr-trace)を参照。
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R28 町名検索のホイール|西宮・宝塚・尼崎・芦屋・伊丹の町名検索は初期無効、マウスで地図をクリックして有効、地図外クリックで解除。初回の町域クリックは選択にも使い、ドラッグやピンチを選択と誤認しない。西宮・伊丹の直接選択は後続PRで確定。|[西宮 #21](https://github.com/Kussoon/nishinomiya/pull/21)→[#22](https://github.com/Kussoon/nishinomiya/pull/22)、[宝塚 #7](https://github.com/Kussoon/takarazuka/pull/7)、[尼崎 #9](https://github.com/Kussoon/amagasaki/pull/9)、[芦屋 #9](https://github.com/Kussoon/ashiya/pull/9)、[伊丹 #4](https://github.com/Kussoon/itami/pull/4)→[#5](https://github.com/Kussoon/itami/pull/5)|各地域の `town-search.html`|PR時のChromium確認あり。5市横断の継続自動テストは未確認|コード確認|
+|R29 場所当てと二重回答|西宮・宝塚の対象回答地図では初回クリックで回答とホイール有効化。回答地図のダブルクリック拡大を止め、短時間の同一回答を抑止し、別区域への即時回答は受け付ける。問題ごとに判定をリセット。西宮・甲東は正解後3秒で進行し、PC操作案内は右上の操作を遮らない。|[西宮 #14–#20](https://github.com/Kussoon/nishinomiya/pulls?q=is%3Apr+is%3Amerged)、[宝塚 #5](https://github.com/Kussoon/takarazuka/pull/5)・[#6](https://github.com/Kussoon/takarazuka/pull/6)。回答地図にR13のダブルクリック拡大を一律適用しない。|西宮・宝塚の `community-map-quiz.html` と対象地区の `location-quiz.html`|PR時のChromium確認あり。継続自動テスト未確認|代表コード確認|
+|R30 尼崎の町内境界|町名検索では同じ町の複数サブパスの内部線を通常・選択時とも目立たなくし、異なる町との外周を保持。hover着色はhover可能な精密ポインターに限定し、キーボードのfocus表示を残す。|[尼崎 #10](https://github.com/Kussoon/amagasaki/pull/10)（塚口町選択のみ）→[#11](https://github.com/Kussoon/amagasaki/pull/11)（全町選択とhover）→[#12](https://github.com/Kussoon/amagasaki/pull/12)（通常表示も）|`amagasaki/town-search.html` の `.town` とhover条件。全国版R02の共有境界とは別方式。|PR時のChromium確認あり。継続画像回帰は未確認|コード確認|
+|R31 西宮・宝塚の配置試作|西宮の全域試作は449図形を322町名グループへ結合し、全件を残して局所中央と隣接補正で配置。初期16pxの設定では拡大時18pxまで。鞍掛町／久保町・上ケ原七〜十番町は代表回帰。西宮市の仁川町（丁目を合成した試験例）・一ケ谷町は代表成分の回帰対象。宝塚市の市域ラベルは広域地図で複数水平断面を比較した。|[#36](https://github.com/Kussoon/kussoon.github.io/pull/36)、[#47](https://github.com/Kussoon/kussoon.github.io/pull/47)→[#48](https://github.com/Kussoon/kussoon.github.io/pull/48)→[#49](https://github.com/Kussoon/kussoon.github.io/pull/49)→[#51](https://github.com/Kussoon/kussoon.github.io/pull/51)（#50未マージ）、[#72](https://github.com/Kussoon/kussoon.github.io/pull/72)・[#73](https://github.com/Kussoon/kussoon.github.io/pull/73)（比較）|`v2/nishinomiya/full-map-app.js`、`v2/nishinomiya-four-town-test/pilot.js`、`v2/irregular/`<br>`v2/national/density.html`|`nishinomiya-staggers.test.cjs`、`universal-centers.test.cjs`。全域322件のブラウザ回帰未確認|試作のコード・部品確認。地域公開版への採用は要確認|
+|R32 兵庫県49区域|V2比較では40市町＋神戸9区を全件表示し、学習・ナンバー用途で配置を共有。balancedを初期値にし、西宮市は南寄りの広い領域、洲本・たつの・相生は同じ高さの左右中央を形状から選ぶ。庁舎50地域とは別の母数。|[#37](https://github.com/Kussoon/kussoon.github.io/pull/37)→[#38](https://github.com/Kussoon/kussoon.github.io/pull/38)、[#39](https://github.com/Kussoon/kussoon.github.io/pull/39)・[#40](https://github.com/Kussoon/kussoon.github.io/pull/40)・[#44](https://github.com/Kussoon/kussoon.github.io/pull/44)・[#45](https://github.com/Kussoon/kussoon.github.io/pull/45)|`v2/hyogo/labels.html`・`labels-app.js`。地域公開版の `hyogo/study-all.html` には `LABEL_OFFSET` がある。|`hyogo49-labels.test.cjs`。ブラウザの見た目は別確認|比較ページのコード・部品確認|
+|R33 芦屋59町と読み|読み比較は59町名全件、中心優先、境界またぎと重なりを許容。東芦屋町などの補正は形状から決める。漢字＋読みの初期状態はこの比較の設定。全国公開版にはR08を適用。|[#30](https://github.com/Kussoon/kussoon.github.io/pull/30)→[#31](https://github.com/Kussoon/kussoon.github.io/pull/31)→[#33](https://github.com/Kussoon/kussoon.github.io/pull/33)。[試作記録](../docs/ashiya-reading-trial.md)|`v2/ashiya/readings.html`・`readings-app.js`|`readable-labels.test.cjs`・`universal-centers.test.cjs`|比較ページのコード・部品確認|
+|R34 西宮全域クイズの広幅表示|700px以上でアプリ幅を最大960pxとし、地図の表示サイズ変更時にLeafletを再描画して中心位置を維持。回答欄は読みやすい幅を保つ。この幅は全域場所当ての設定。|[西宮 #15](https://github.com/Kussoon/nishinomiya/pull/15)|西宮の `full-location-quiz.html`|`390/768/1024/1440px` はPR時にChromiumで確認。継続自動テスト未確認|コード確認|
+
+
+## 16. 試作限定の吹き出し操作（正式公開版への採用前）
+
+|ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
+|---|---|---|---|---|---|
+|R35 吹き出し上下ドラッグ試作|正式版の吹き出しは**リンク・ボタンなど操作要素を除く全域**から上下のみドラッグできる（#297）。左右移動禁止、地図下のコンテンツに重なってよい（#296）。×で閉じ、自治体の選択変更で位置初期化。地図自体は移動しない。内容が多い場合の本文送出はR16を適用。iPhone Safariの競合は要実機検証。|[#294](https://github.com/Kussoon/kussoon.github.io/pull/294)（試作実装・ユーザーの操作感は会話で了承） [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297)|`v2/national/vertical-popup-trial.html`<br>`maps/national-municipalities.html`|Pointer Events・上下のみ・再選択・下方重なり・×・Safari実機の専用回帰未整備<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）<br>`v2/tests/national-pref-county-contract.test.cjs`（新規静的契約、実機未確認）|正式版コード確認／iPhone Safari実機未確認|
+|R36 試作吹き出しの読み仮名|**正式版採用（#296）:** よみがなONなら吹き出しの市区町村名直下に小さく検証済みの読みを表示し、OFFで即時非表示。初期OFF。市＋区/郡＋町村に対応する確認済みpartsを利用し、未確認の読みを推測しない。タイトルバーの上下ドラッグ・3/6リンクは保つ。試作 #295 は比較用に残す。|[#295](https://github.com/Kussoon/kussoon.github.io/pull/295)（試作追加・ユーザー了承） [#296](https://github.com/Kussoon/kussoon.github.io/pull/296)|`v2/national/vertical-popup-trial.html`<br>`v2/progressive-preview/national-progressive-labels.js`<br>`maps/national-municipalities.html`|既存`national-readings.test.cjs`は関連データのみ／試作ON/OFF・欠落・iOS実機の回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|正式版採用・静的検査／Safari実機未検証|
+
+
+|R37 地図のみ全画面表示|地図全画面は対応ブラウザーのFullscreen API、iPhone SafariのブラウザーUI内最大表示の両方式を維持。#298により全画面でも市区町村の吹き出しを地図左下に表示し、可変高/上下ドラッグ/×/3・6リンク/読み表示を保つ。**#299:** 全画面の開始・戻るボタンは右下ではなく地図内右上隅。通常表示と全画面表示の両方で右上に置き、safe-areaに配慮する。|[#297](https://github.com/Kussoon/kussoon.github.io/pull/297) [#298](https://github.com/Kussoon/kussoon.github.io/pull/298) [#299](https://github.com/Kussoon/kussoon.github.io/pull/299)|`maps/national-municipalities.html`|`v2/tests/national-pref-county-contract.test.cjs`（静的）<br>実機フルスクリーン/復帰は未確認<br>`v2/tests/national-pref-county-contract.test.cjs`（配置静的検査）|正式版コード確認／iPhone Safari実機未確認|
+|R38 左側スクロール可能な検索候補|正式版#297。候補が多いとき、候補一覧の**左側**に濃いスクロールつまみを表示し、タッチ/マウスで移動できる。候補が収まる場合はバーを非表示にする。iPhone Safariの消える標準スクロールバーに依存しない。キーワード入力例は『例: やま、川、岡』。候補のタップ/検索結果数制約を壊さない。|[#297](https://github.com/Kussoon/kussoon.github.io/pull/297)|`maps/national-municipalities.html`|`v2/tests/national-pref-county-contract.test.cjs`（静的）<br>Safariタッチと候補表示は未確認|本番採用・実機未確認|
+
+## 吹き出し高さの決定履歴（R15・R16）
+
+|PR|当時の判断|後続の位置付け|
+|---|---|---|
+|[#91](https://github.com/Kussoon/kussoon.github.io/pull/91)|西宮で実機承認した省スペースの3ボタン、神戸市中央区など二施設は文字を無理に縮小せず内部スクロール|可読性とリンク到達性を維持|
+|[#244](https://github.com/Kussoon/kussoon.github.io/pull/244)|狭幅で吹き出しを右4ボタンの実測高さへ合わせる|当時の高さ一致|
+|[#259](https://github.com/Kussoon/kussoon.github.io/pull/259)|旧175px制約で6リンクが切れたため、厳密一致を明示的に廃止。可変高・内部スクロール・横方向の非重複|新しい優先決定|
+|[#287](https://github.com/Kussoon/kussoon.github.io/pull/287)|一律のtoolbar高さ上限を再導入|#259に反する回帰。最終仕様ではない|
+|[#288](https://github.com/Kussoon/kussoon.github.io/pull/288)|二施設に例外を付け上限を解除、単独は制限を残す|暫定修正|
+|[#290](https://github.com/Kussoon/kussoon.github.io/pull/290)|単独にも可変高を適用しtoolbar計測とmulti-office高さ例外を除去|**単独・二施設双方の最終決定**|
+
+指定6件はいずれもマージ済み。GitHub上のレビュー投稿は6件とも0件で、#91の西宮実機承認と#259の要件はPR本文の記録を根拠とした。
+
+公開コードの `.office-popup` は `bottom:8px;max-height:calc(100% - 16px)`、`.popup-scroll` は内部スクロール、`.popup-content` は不要な下余白なし。**右4ボタンと高さを一致させる検査を追加してはならない。** 高さではなく地図内・横の非重複・最後のリンクのスクロール到達・×後の選択維持を検査する。現行pilot向け `pilot-ui.browser.cjs` は公開版の#290を直接保護しない。
+
+## 廃止・置換・未採用の扱い
+
+|旧規則・試作|最終判断|
+|---|---|
+|吹き出しの4ボタン高さ厳密一致 #244 / #287|#259、最終#290で廃止。#288の単独施設制限も#290で廃止|
+|旧2リンク、初期読みON、選択専用太枠|各々#89/#93、#223/#226、#129で置換。既存S33〜S35を参照|
+|旧琥珀色、元色のゆっくりした脈動、黄赤0.6秒/0.5秒|公開版のみ#289の白↔県別元色0.5秒に置換。試作のCSS・表示を一律変更しない|
+|旧densityの固定5C・13px・768|2026公開版へ同一仕様として採用済みとは認定しない。S21〜S26の比較・採用理由を先に確認|
+|全国47県の新しい共通Topology生成 #270/#272、pilot opt-in #263、7県比較 #277/#279|#270/#272/#263は未マージ。試験ページのマージは全国本番採用を意味しない。S39は保留|
+|全国2026クイズUI|#149で保留。既存地域クイズの仕様は別管理|
+
+上表の**明示的な廃止・置換は7系統**（高さ一致、2リンク、初期読みON、選択太枠、琥珀選択、脈動、黄赤点滅）。同一系統内の中間PRを追加で数えない。固定5C等と試作は採否未確定であり廃止件数に入れない。
+
+## 発見した不整合と回帰テストの順序
+
+1. **確定したテストとコードの不整合:** [公開ブラウザテスト](../tests/national-2026-public.browser.cjs)と[移動検査](../tests/national-map-move.browser.cjs)は `kussoon-selected-area-pulse` を期待するが、公開CSSは#289の `kussoon-selected-area-two-tone`。旧期待値のまま検査を通したり、新規色へ戻したりせず、#289を正本に公開版の正負テストへ更新する。関連workflow `v2-national-2026-public.yml` のpull_request pathsには現行HTMLとCSSが含まれない。移設検査 `maps-national-move.yml` は現行HTMLを監視するがCSSは監視しない。地図本体・テスト実装は次PR。
+2. **R15/R16/R17/R20:** 公開版を320/375/390/844pxで開き、単独（泉佐野市・西宮市）と二施設（神戸市中央区）の全3/6枠について初期下端、最後の枠の内部スクロール到達、ヒットテスト、右4ボタンの非重複、×後の選択・地図位置を検査。#287相当の `max-height:var(--toolbar-height)` 変異で失敗させる。既存 `pilot-ui.browser.cjs` を公開URL対応に再利用する。
+3. **R10/R11/R12/R14:** 公開URLで白↔元色の時刻差、動きを減らす設定、同一区域の×→再タップ→再選択、空白クリック、全体表示/県切替を別々の状態遷移として検査。旧pilotの `nationwide-retap.browser.cjs` と `pilot-map-ui.browser.cjs` を流用する。
+4. **R02/R06/R09/R18:** 二重線・島・細長い区域・47県隣接の比較、ラベル全件の品質、色覚多様性、検索Enter/キーボードを追加。#267の境界課題は視覚観測とデータの位相を区別する。
+5. **R04/R13/R21:** iPhone Safari/Androidの指操作、ブラウザバー・safe-area、遅い通信時の旧応答、メモリとFPSは実機で別に測る。Playwright WebKitを実機合格と書かない。
+
+### 集計と変更前の照合
+
+- R-IDは34件。地域・用途限定の比較規則と、採否確認の条件を含む。廃止・置換は全国7系統に、尼崎の選択時限定から通常表示への拡張（R30）を加えた8系統。
+- 現行コードとの確認済みの差は、旧S-IDからの差2項目（S45・S46は2026-11-06ユーザー決定で採用確定、公開コードには未実装）。S44空白解除は不採用。検査側にも2系統（点滅の旧期待値、workflow監視範囲）。境界S39は保留。別途、Node v24で既存の読みテスト6件の失敗を再現した。別VMで生成した配列の比較5件と旧データ件数の期待値1件で、[既存回帰計画](../audit/v2-national-regression-test-plan-20261104.md)に記録済み。
+- 回帰検査の未整備・不足を確認した規則は19件（全国13件 R02/R04/R06/R08/R09/R11/R12/R14/R15/R16/R18/R20/R25、地域の継続検査を確認できなかった4件 R28/R29/R30/R34、試験の不足2件 R10/R31）。R10は既存テストが現在の点滅を検証しない。実機だけで評価する性能・可読性はこの数に加えない。
+- [機械照合用の対応表](rule-test-map.json)はR-ID、コード・テストの起点、旧S-ID、確認の粒度を記録する。変更前に対象ファイルと照合し、関連R-IDをPR本文に記入する。依存先やデータだけを変える場合も、対応する入口まで辿る。
+
+変更前に `R-ID・対象ページ・最後に優先するPR・置換理由・コード経路・現在のテスト範囲・新しい正負テスト・実機未確認範囲` をPR本文へ記載する。ルールを変える場合はこの1ファイルを同じPRで更新し、旧決定とユーザー承認根拠を削らず記録する。地図本体の修正と規則集の監査は別PRにする。
+
+## 2026-11-06 追補：PR #292〜#295と正式／試作の区別
+
+- [#292](https://github.com/Kussoon/kussoon.github.io/pull/292)（公開版）: 県全体の選択をドロップダウンに限定。地図県path・県名検索候補で県単独選択を行わない。町村詳細の確認済み郡名は県内セレクトと吹き出しに適用。R03/R07/R12/R18。全国から市区町村に到達できる性質は保持。
+- [#293](https://github.com/Kussoon/kussoon.github.io/pull/293)（公開版）: 詳細見出しは地図ラベルと同じ区名・町村名に統一し、「大阪市鶴見区・大阪市」の重複をなくす。R07/R17。
+- [#294](https://github.com/Kussoon/kussoon.github.io/pull/294)（独立試作）: `/v2/national/vertical-popup-trial.html` を新設。タイトルバーを上下だけ動かし、地図外へはみ出し下部コンテンツと重なってよい。R11/R13/R15/R16と新規R35。正式版は固定吹き出しのまま。
+- [#295](https://github.com/Kussoon/kussoon.github.io/pull/295)（独立試作）: 試作の見出しにON時だけ検証済みの読みを追加し、OFFに連動。R07/R08/R17と新規R36。共通ラベルエンジンへの読み取り専用API追加は正式公開版の表示採用を意味しない。
+
+**明示されたユーザー決定**: 県全体はドロップダウンから選択する。吹き出しの名称は地図ラベルと一致させる。試作の吹き出しは上下移動だけでよく、地図外に出て下部コンテンツを覆ってもよい。よみがなONなら試作の吹き出しにも読みを表示する。試作が好評でも、正式版への移植やR15の全面廃止は別PR・別の採用判断を要する。
+
+**検査上の注意**: `national-pref-county-contract.test.cjs` は静的検査でありブラウザ操作・iPhone Safariを保証しない。公開版の県pathタップ・市区町村タップ・郡名/政令市名/3・6枠、試作の上下ドラッグ・画面外への重なり・本文スクロール・ON/OFF・×・選択変更を正負両方で実機／ブラウザ検証すること。旧pilotのテスト成功を最新公開版・試作の合格に読み替えない。
+
+## 2026-11-06 追補：PR #296での正式版採用
+
+[#296](https://github.com/Kussoon/kussoon.github.io/pull/296) で試作 #294/#295 の上下ドラッグ・読みON/OFF付き吹き出しを正式公開版 `/maps/national-municipalities.html` に採用した。対象R-IDは **R07/R08/R11/R12/R13/R15/R16/R17/R18/R19/R24/R35/R36**。特に次の変更を正本とする。
+
+1. 検索欄（市区町村検索）と地域・表示範囲の選択欄を地図の**上**に配置。DOM ID、全国検索、県選択/表示範囲、周辺ラベル、locatorを維持。
+2. 吹き出しの青いタイトルバーのみ上下ドラッグ。地図外に出て下のページ要素を覆ってよい（ユーザー確認済み）。左右ドラッグは禁止。×と本文内スクロールを独立させる。
+3. 既存の可変高さ・3/6リンクと、その最後までの到達性を保つ。旧R15の地図内制限は**上下に移動した吹き出しについて置換**された。ツールバーとの高さ厳密一致を復活させない。
+4. よみがな初期OFF。ONでは地図の確認済み読みを吹き出し見出し直下にも表示、OFFで消す。未確認読みを生成しない。
+5. 試作のnoindex・試作タイトルは正式公開版へ転記しない。試作ページは比較用に残す。正式版はcanonicalと公開URLを保つ。
+
+**検査と保留:** `national-pref-county-contract.test.cjs` に静的な公開ページ順序・見出し・読み仮名・ドラッグ制約のチェックを追記した。Node・ブラウザ・iPhone Safariでの実行結果は未確認であり、正式採用されたことと実機動作合格は区別する。
+
+## 2026-11-06 追補：PR #297 の検索・吹き出し・全画面
+
+[#297](https://github.com/Kussoon/kussoon.github.io/pull/297) を正式版 `/maps/national-municipalities.html` に適用。
+
+- **検索UI（R18/R38）:** キーワード例を『例: やま、川、岡』に変更。35件上限の検索候補があふれるとき、一覧の左に視認できるスクロールトラックと操作可能なつまみを置く。非スクロール時はバーを隠す。候補一覧の選択を維持。
+- **説明UI（R19）:** 長い文章から箇条書きへ変更。『市区町村の位置を押すと吹き出しが出ます』『地図内のボタンでよみがなが出せます』を明記。
+- **吹き出し（R15/R16/R35）:** タイトルバー限定から、リンク・×・内部の操作ボタン以外の全体を上下ドラッグ可能へ変更。左右は禁止。長文で従来のタッチスクロールと競合するため、本文の上下送出ボタンを追加し、3/6リンク到達性を維持。通常の操作要素はドラッグ開始対象外とする。
+- **全画面（R13/R37）:** 地図右下に全画面切替を追加。iPhone Safariでは本物のFullscreen APIを使えないため、ブラウザーUIの内側で画面いっぱいに表示する。対応環境では標準Fullscreen API。**全画面表示中の吹き出しは常時非表示。** 復帰可能で地図操作・読み切替は維持。
+
+**検証区別:** 公開HTML内スクリプト構文と既存/追加の静的テストアサーションは確認済み。iPhone Safari、タッチ移動、全画面切替、スクロールバーの実動作、3/6リンクの見切れは実機未確認。規則表の列挙テストを実行済みの保証として使用しない。
+
+## 2026-11-06 追補：PR #298 全画面の吹き出し・検索順・表示整理
+
+[#298](https://github.com/Kussoon/kussoon.github.io/pull/298) で、**R37にあった『全画面中は吹き出しを禁止』という#297の仕様を置換**。地図左下に通常と同じ自治体情報吹き出しを表示し、既存の上下移動・読み仮名・3/6リンク・×を維持する。全画面を地図の表示領域として使いつつ、選択情報は表示可能にする。以前の非表示CSSやJS判定を戻してはならない。
+
+- R18: 検索結果は市区町村コードの昇順に**並べ替えてから**35件へ制限する。県コード順、同一県内は自治体コード順。検索候補の表示情報、左側スクロールバー、選択方法は維持。
+- R19: 通常時に出ていた『全国のまま 拡大20.85倍・地名28件』等の診断的なステータスは非表示。ただし読み込み中・エラーの案内は必要なときに表示する。『開発時の比較版』リンクを公開ページから除去（比較版データ・ページは温存）。読み込み注意文を『読み込みに時間がかかることがあります。』に変更。
+- R37: 全画面でも吹き出しを表示し、左下を初期位置とする。必要に応じて上下ドラッグ可能。
+
+**回帰確認:** 既存テストの旧『全画面の吹き出し非表示』期待値は#298で新しい期待値に置換。HTML内のJavaScript構文3件と静的契約アサーションを確認済み。iPhone Safariでの実機・視覚回帰は未確認。
+
+## 2026-11-06 追補：PR #299 地図右側の操作ボタン配置
+
+[#299](https://github.com/Kussoon/kussoon.github.io/pull/299) を正式版へ適用。R13/R14/R37の変更として、右下の拡大縮小は **『＋』『－』のみ、左＋・右－の同幅2列**。その下に『全体表示』『よみがなON/OFF』を配置する。独立した『全画面／戻る』は**地図右上隅**へ配置する。通常表示・全画面表示とも同じ配置意図を維持し、safe-areaを考慮する。ボタンの文字は通常14px、狭い画面13px（ズーム記号22px）。アクセシビリティ用の『地図を拡大／縮小』ラベルは残す。
+
+以前の右下5段構成や拡大縮小の『＋ 拡大』『－ 縮小』という視覚文言は、本番では#299で置換した。全画面中の左下吹き出し（#298）を隠す変更はしない。
+
+検証: 公開HTMLのスクリプト構文と静的契約アサーションは確認済み。iPhone Safari上の画面配置・実機操作は未確認。
+
+## 2026-11-06 追補：PR #300 県・市区町村の選択UIと全国範囲
+
+[#300](https://github.com/Kussoon/kussoon.github.io/pull/300) で正式公開版の地域ナビゲーションと文言を変更。対応R-IDは **R03/R05/R08/R18/R19/R24**。
+
+- 県選択は「都道府県を選ぶ」ボタンを押して**下に**47県を北海道から順に**3列**表示。県名の独立ラベルは不要。従来のnative selectを非表示の状態ソースとして残し、カスタムメニューで変更イベントを発火させる。県全体を地図pathタップで選択する動作は復活させない。
+- 市区町村は「まず都道府県を選択」を初期表示。県読込後に下向きへ開く**1列のスクロール一覧**で選択可能。ブラウザーがnative selectを上向きに展開する挙動を避ける。画面からは独立した『市区町村』の見出しを省く。外側タップ/Escapeで閉じる。
+- 『周辺の市区町村名を表示』を公開画面から削除し、県内の通常表示では常時表示する。場所当てクイズ中は問題の答えを隠す例外を維持する。読みの初期OFFと選択時の操作は別規則R08/R11。
+- 『全国地図の表示範囲』選択を廃止し、全国地図は**離島を含む全域**を固定で表示する。内部の nationExtent=all 値は残し、描画エンジンを壊さない。
+- 冒頭の不要な県選択案内を削り、吹き出しの上下移動の説明は出現の説明に続ける。地図一覧・地域リンク・トップへのリンクはデータ注記の後の最下部へ移す。
+
+**検証:** 公開HTMLのJS構文と新旧の静的契約チェックを確認済み。iPhone Safariでの3列レイアウト・下向き展開・全国の離島表示とズーム・名称表示は実機未確認。旧ブラウザー向けpilotのテスト成功を今回の公開版の動作確認と混同しない。
+
+## 2026-11-06 追補：PR #301 横並びナビ・縮小可能範囲の修正
+
+[#301](https://github.com/Kussoon/kussoon.github.io/pull/301) を正式版へ適用。対応R-ID：**R11/R12/R13/R14/R18/R19/R24**。
+
+- **画面構成（R18/R19）:** 市区町村のキーワード検索欄と地域・表示範囲の選択欄を**横並び2列**に変更。選択メニューは#300の『都道府県3列・市区町村下方向展開』を維持。市区町村の初期案内は『次に市区町村を選択』に変更。
+- **不要な小地図（R19）:** 『全国の中での位置（オレンジ色が選択中の都道府県）』の説明と小日本地図は公開画面から取り除き、描画呼出し・専用スタイルも除去する。全国本体の描画や離島全域設定とは別機能であり、削除の対象ではない。
+- **縮小の下限（R13/R14）:** 市区町村へフォーカスすると従来はその区域の投影枠を1倍の下限に使い、選択後にそれ以上縮小できなかった。`v2/progressive-preview/map-viewport.js` の最小倍率をインスタンスごとに変更できるようにし、**選択時のみ県全体の投影境界から縮小下限を計算**する。全国表示/区域未選択は従来どおり最小倍率1。『全体表示』は以前と同様にリセット、再タップと×の選択保持はR11に従う。
+
+**検証:** HTMLのインラインJS構文、既存・追加の静的アサーション、疑似SVGを用いたviewportの通常倍率→選択時の縮小→1倍への復帰→リセットの動作を確認。iPhone SafariおよびPC Edgeでの実機ズーム・タッチ動作は未確認。共通viewportのほかの地図での使用影響も継続回帰対象とする。
+
+## 2026-11-06 追補：PR #302 検索・地域選択欄とフッター余白
+
+[#302](https://github.com/Kussoon/kussoon.github.io/pull/302) で R18/R19 を更新。①検索欄の長い補足文を削除（検索機能は維持）、②横並びの右側『地域・表示範囲を選んで移動』の外側は**常時開く**構成へ変更し、見出しは左検索ラベルと同じフォント・太さにする（都道府県/市区町村の内側メニューだけは必要時に開く）、③フッター前の空間を縮小するためメインコンテンツ下側paddingを通常54px・狭幅36pxから8pxへ変更。#301の横並び、#300の県3列・市区町村下向き展開と、共有フッター・下部リンクを維持。
+
+検査：インラインJavaScript構文と `v2/tests/national-pref-county-contract.test.cjs` 相当の既存・追加アサーションを確認。iPhone Safari等の表示検査は未実施。
+
+## 2026-11-06 追補：PR #303 市区町村選択欄の先行有効化
+
+[#303](https://github.com/Kussoon/kussoon.github.io/pull/303) で **R03/R04/R18** を更新。旧goPrefは県の20m詳細TopoJSONを取得・全域の読み仮名ソースと照合し、さらに庁舎情報を受け取ってから市区町村の選択一覧を作成していた。北海道ではこの待機が目立った。全47県の20m詳細地図を一括取得していたわけではない。
+
+新仕様は、全国地図用の既存2026年地名索引から選択した県コードのレコードだけを取り出して一覧を先に表示し、有効化する。全国の索引ファイルは新たに二重ダウンロードしない。重い県別地図処理・全件読みソース照合・庁舎JSON取得とは非同期にする。選択欄が先に有効化された時点で市区町村を選んだ場合はその5桁コードを保持し、県別詳細の描画が完了したら該当区域に移動する。素早い県切替で前の県のリストを使わず、県別描画が先に完了した場合も索引側の遅延応答で上書きしない。
+
+既存のR07（郡・市区名）、R08（確認済み読み）、R11/R12（区域選択）、R15〜R17（吹き出し）、R13/R14（ズーム）を維持する。**検証:** 公開HTML/索引JSの構文解析と静的契約アサーションが成功。iPhone Safari・PC Edge上の実測時間やUI操作は未確認。
+
+## 2026-11-06 追補：PR #304 検索・地域選択を縦並びに戻す
+
+[#304](https://github.com/Kussoon/kussoon.github.io/pull/304) で、#301の検索・地域選択の横並び2列を**縦並び1列に置換**した。#302の地域選択パネル常時展開、#300の県3列/市区町村下方向、#303の軽量な市区町村索引による先行有効化を維持する。冒頭案内は『吹き出しは上下に移動でき、×で閉じられます。』『区域の点滅は、もう一度押すと止まります。』『地図内のボタンでよみがなが出せます。』の順。該当規則はR11/R18/R19。既存の横並び2列のテスト期待値を縦並びへ更新した。HTML内JavaScript構文と静的/viewportモック契約は確認済み、iPhone Safariでの表示は未確認。
+
+## 2026-11-06 追補：PR #305 政令市区と東京都23区の正式地名ラベル
+
+[#305](https://github.com/Kussoon/kussoon.github.io/pull/305) でR05/R07/R08/R17を更新。旧県別描画は `region.name`（『南区』『北区』）をラベル・衝突計算に使い、全国地名索引の `fullName`（『札幌市南区』『横浜市鶴見区』）と不一致だった。県別描画は同じ5桁コードを持つ全国索引の正式名をラベルと文字幅計算に採用し、**市名を落とさない**。全国段階描画も正式名を使う。通常の行政区域名・座標・ジオメトリは改変しない。
+
+- **政令市の区:** 『札幌市南区』『横浜市鶴見区』『大阪市鶴見区』『神戸市中央区』のように、全国・県別とも市＋区。既存の検証済み読みのpartsは維持。
+- **東京都23区:** コード13101〜13123の23件すべて『東京都＋区名』を正式な表示名とし、読みON時には都名の読みも含む。東京都のその他の市町村や他県の区へ都名を付けない。
+- **郡付き町村:** 既存の検証済み郡名（R07、#292）を維持する。
+- **衝突とフィット:** 短い『南区』で文字幅を見積もらず、実際の長い正式名称を使って配置する。手動の個別座標補正は行わない。
+
+検証: 2026全国地名索引1905件を使った東京都23区全件・札幌・横浜の名称検査と、県別表示経路の静的アサーション、関係JS構文を確認。iPhone Safari・PC Edgeの視覚的収まりと読みは未実機検証。
+
+## 2026-11-06 追補：PR #306 キャッシュ・旧描画処理による区名短縮の回帰防止
+
+[#306](https://github.com/Kussoon/kussoon.github.io/pull/306) は、#305で政令指定都市の区に『市名＋区名』を指定したあとも、実機の横浜市地図で『鶴見区』『港北区』と表示された報告を受けた修正。原因候補は、ブラウザーが修正前のラベル描画スクリプトをキャッシュしていて、新しい `labelName` を無視して旧 `name` を描画すること。**県別地図の表示専用モデルには、`labelName` と `name` の両方に全国索引の正式表示名を渡す**ことを規則とし、元の行政データや座標を変更しない。`place-labels.js`、`established-label-adapter.js`、`national-progressive-labels.js` の参照URLは修正時にバージョンキーを更新する。全国版/県別版の政令市区、東京都23区、読み・文字幅計算の照合はR05/R07/R08/R17/R24で継続。
+
+確認：2026地名索引を用いた名称の静的アサーション、HTML/JS構文をチェック。実機Safari/Edgeでの表示は未確認なので、キャッシュが唯一の原因とは断定しない。
+
+## 2026-11-06 追補：PR #307 市・区／都・特別区／郡・町村の地図ラベル2段化
+
+[#307](https://github.com/Kussoon/kussoon.github.io/pull/307) で **R05/R07/R08/R17** を確認・更新。都道府県別地図のラベルは、#305/#306により『札幌市中央区』のフル名称1行になっていた。ユーザーが望む全国地図の確定表示は**1行目『札幌市』、2行目『中央区』**。よみがなOFFの県別地図でも、コード照合済み2要素を2段表示する。よみがなONでは名称／読み／名称／読みの4段表示を維持する。
+
+- 都市の区：札幌市／中央区、横浜市／鶴見区、神戸市／中央区など。全国と県別のラベルを統一する。
+- 東京23特別区：東京都／千代田区、東京都／新宿区など。都名を省略しない。
+- 郡のある町村：確認済みの郡名／町村名。未確認値は推測しない。
+- ラベルの分割は**地図内表示のみ**。選択ボタン・検索・吹き出し見出しは『札幌市中央区』など連結した正式名を維持する。
+- ラベル幅・高さ、衝突回避、区域への収まりも実際の2段/4段を前提として計算する。個別の手動座標による調整は追加しない。
+- PR #305/#306で短い区名への逆戻りを防止した `name` / `labelName` の正式名称一致を保持し、全国側は名称2要素を分けるとき市名を重複追加しない。更新したJSの参照には `v=307` を指定する。
+
+検証: 札幌市中央区・東京都新宿区・川辺郡猪名川町の名称行分割、旧キャッシュ由来の親市名重複防止と2段の文字幅計算、HTML/JS構文と公開版の回帰アサーションを確認。iPhone Safari・PC Edgeでの視覚位置や読み仮名の行間は未確認。
+
+## 2026-11-06 追補：PR #308 地図上部への全国・都道府県移動ボタン配置
+
+[#308](https://github.com/Kussoon/kussoon.github.io/pull/308) により **R14/R19** を更新。正式全国地図のパンくず見出し（例『日本全国 ＞ 北海道』）の**すぐ下・地図本体の上**へ『日本全国へ戻る』『都道府県全体へ戻る』の2ボタンを移す。いずれも既存のID、クリック動作、disabled状態を維持し、新しいボタンを複製しない。地図の下に残っていた説明『都道府県は上の選択欄から指定できます。地図を拡大して市区町村をタップしてください。ピンチ・ドラッグ・右下のボタンでも操作できます。吹き出しは上部の帯で上下に移動でき、×で閉じられます。』を**全文削除**。冒頭の別の使い方案内は維持する。
+
+HTML内JavaScriptの構文・公開ページの既存＋追加契約アサーション（位置、ボタンの唯一性、不要説明削除）を確認済み。Safari実機の表示は未確認。
