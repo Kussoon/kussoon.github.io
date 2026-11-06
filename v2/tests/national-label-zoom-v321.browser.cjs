@@ -96,7 +96,7 @@ async function focus(page,query){
       await page.click('#mapZoomIn');
       await page.waitForTimeout(300);
       const regional=await metrics(page);
-      assert(regional.count>0,pref+' shared labels are visible');
+      assert(regional.count>0,pref+' shared labels are visible: '+JSON.stringify({codes:regional.codes.slice(0,30),inViewAnchors:regional.inViewAnchors,viewBox:regional.viewBox,rootScale:regional.rootScale,zoom:regional.rootScale,selected:await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.selected()),snapshot:await page.evaluate(()=>window.KussoonV2ProgressivePreview.controller.snapshot())}));
       assert(regional.maxFont<=13.1&&regional.maxFont>=6.9,pref+' keeps physical labels within 7–13px: '+regional.maxFont);
       assert.equal(regional.overlaps,0,pref+' keeps labels collision-free after zoom '+(step+1));
      }
