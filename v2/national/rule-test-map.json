@@ -1,7 +1,7 @@
 {
   "source": "v2/national/MAINTENANCE_RULES.md",
   "baseline_main": "476a6f91dbb7a95a99bb10caf571c125411ca9d2",
-  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success.",
+  "usage": "Match exact paths and directory prefixes before editing. The Markdown rulebook controls scope; this index does not assert test success. PR #292–#295 post-baseline records included; R35/R36 are trial-only. Do not equate listed tests with passed tests.",
   "rules": {
     "R01": {
       "paths": [
@@ -46,15 +46,16 @@
       ],
       "tests": [
         "v2/tests/national-2026-rc1.browser.cjs",
-        "v2/tests/national-map-move.browser.cjs"
+        "v2/tests/national-map-move.browser.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S41",
         "S42",
         "S43"
       ],
-      "coverage_gap": false,
-      "test_scope": "existing_coverage_see_rule"
+      "coverage_gap": true,
+      "test_scope": "static_only_public_safari_unverified"
     },
     "R04": {
       "paths": [
@@ -109,22 +110,28 @@
     "R07": {
       "paths": [
         "v2/progressive-preview/county-overlay.js",
-        "v2/progressive-preview/administrative-labels.js"
+        "v2/progressive-preview/administrative-labels.js",
+        "maps/national-municipalities.html",
+        "v2/national/vertical-popup-trial.html",
+        "v2/progressive-preview/national-progressive-labels.js"
       ],
       "tests": [
-        "v2/tests/progressive-county-labels.test.cjs"
+        "v2/tests/progressive-county-labels.test.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S24",
         "S25"
       ],
-      "coverage_gap": false,
-      "test_scope": "existing_coverage_see_rule"
+      "coverage_gap": true,
+      "test_scope": "public_static_and_trial_unverified"
     },
     "R08": {
       "paths": [
         "maps/national-municipalities.html",
-        "v2/shared/reading-bridge.js"
+        "v2/shared/reading-bridge.js",
+        "v2/national/vertical-popup-trial.html",
+        "v2/progressive-preview/national-progressive-labels.js"
       ],
       "tests": [
         "v2/tests/nationwide-2026.browser.cjs",
@@ -137,7 +144,7 @@
         "S48"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial"
+      "test_scope": "trial_popup_reading_browser_unverified"
     },
     "R09": {
       "paths": [
@@ -175,7 +182,8 @@
     "R11": {
       "paths": [
         "maps/national-municipalities.html",
-        "v2/progressive-preview/national-progressive-labels.js"
+        "v2/progressive-preview/national-progressive-labels.js",
+        "v2/national/vertical-popup-trial.html"
       ],
       "tests": [
         "v2/tests/nationwide-retap.browser.cjs"
@@ -186,7 +194,7 @@
         "S03"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial"
+      "test_scope": "trial_drag_state_browser_unverified"
     },
     "R12": {
       "paths": [
@@ -194,7 +202,8 @@
         "v2/progressive-preview/national-progressive-labels.js"
       ],
       "tests": [
-        "v2/tests/audit-legacy-behavior.browser.cjs"
+        "v2/tests/audit-legacy-behavior.browser.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S04",
@@ -202,14 +211,15 @@
         "S44"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial",
+      "test_scope": "static_only_public_safari_unverified",
       "legacy_decision": "Do not clear selection on blank map tap. Confirmed by user 2026-11-06 JST."
     },
     "R13": {
       "paths": [
         "v2/progressive-preview/map-viewport.js",
         "maps/national-municipalities.html",
-        "v2/shared/map-viewport.js"
+        "v2/shared/map-viewport.js",
+        "v2/national/vertical-popup-trial.html"
       ],
       "tests": [
         "v2/tests/nationwide-touch.browser.cjs",
@@ -223,8 +233,8 @@
         "S18",
         "S23"
       ],
-      "coverage_gap": false,
-      "test_scope": "existing_coverage_see_rule"
+      "coverage_gap": true,
+      "test_scope": "trial_drag_touch_unverified"
     },
     "R14": {
       "paths": [
@@ -242,7 +252,8 @@
     },
     "R15": {
       "paths": [
-        "maps/national-municipalities.html"
+        "maps/national-municipalities.html",
+        "v2/national/vertical-popup-trial.html"
       ],
       "tests": [
         "v2/tests/pilot-ui.browser.cjs"
@@ -253,12 +264,13 @@
         "S13"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial"
+      "test_scope": "trial_exception_public_policy_unchanged"
     },
     "R16": {
       "paths": [
         "maps/national-municipalities.html",
-        "v2/common/js/office-directory.js"
+        "v2/common/js/office-directory.js",
+        "v2/national/vertical-popup-trial.html"
       ],
       "tests": [
         "v2/tests/pilot-ui.browser.cjs"
@@ -269,22 +281,24 @@
         "S13"
       ],
       "coverage_gap": true,
-      "test_scope": "historical_or_trial"
+      "test_scope": "trial_drag_scroll_browser_unverified"
     },
     "R17": {
       "paths": [
         "v2/common/js/office-directory.js",
-        "maps/national-municipalities.html"
+        "maps/national-municipalities.html",
+        "v2/national/vertical-popup-trial.html"
       ],
       "tests": [
         "v2/tests/office-directory.test.cjs",
-        "v2/tests/pilot-ui.browser.cjs"
+        "v2/tests/pilot-ui.browser.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S08"
       ],
-      "coverage_gap": false,
-      "test_scope": "existing_coverage_see_rule"
+      "coverage_gap": true,
+      "test_scope": "public_static_trial_not_browser_verified"
     },
     "R18": {
       "paths": [
@@ -292,7 +306,8 @@
         "v2/shared/reading-bridge.js"
       ],
       "tests": [
-        "v2/tests/nationwide-search.browser.cjs"
+        "v2/tests/nationwide-search.browser.cjs",
+        "v2/tests/national-pref-county-contract.test.cjs"
       ],
       "legacy_ids": [
         "S18",
@@ -302,7 +317,7 @@
         "S46"
       ],
       "coverage_gap": true,
-      "test_scope": "pilot_only_needs_public_regression",
+      "test_scope": "public_static_keyboard_pending",
       "user_decision": "Support keyboard activation of municipality map targets with Enter/Space and select the first search result with Enter. Confirmed by user 2026-11-06 JST.",
       "implementation_status": "not_implemented_in_public_map"
     },
@@ -551,6 +566,29 @@
           "full-location-quiz.html"
         ]
       }
+    },
+    "R35": {
+      "paths": [
+        "v2/national/vertical-popup-trial.html"
+      ],
+      "tests": [],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "trial_only_pointer_drag_overlay_safari_unverified",
+      "decision": "Vertical title-bar dragging only; overlay may cover below-map content. Public R15 remains unchanged."
+    },
+    "R36": {
+      "paths": [
+        "v2/national/vertical-popup-trial.html",
+        "v2/progressive-preview/national-progressive-labels.js"
+      ],
+      "tests": [
+        "v2/tests/national-readings.test.cjs"
+      ],
+      "legacy_ids": [],
+      "coverage_gap": true,
+      "test_scope": "trial_only_popup_reading_toggle_unverified",
+      "decision": "Verified parts only, ON/OFF instant; initial OFF. Not adopted in public popup."
     }
   }
 }
