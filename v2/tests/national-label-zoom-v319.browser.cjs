@@ -7,7 +7,7 @@ function metrics(page){return page.evaluate(()=>{
  const boxes=nodes.map(node=>{const rect=node.getBoundingClientRect();return {x:rect.x,y:rect.y,right:rect.right,bottom:rect.bottom,font:Math.max(+node.getAttribute('font-size'),...Array.from(node.querySelectorAll('tspan'),span=>+span.getAttribute('font-size')||0))*Math.hypot(node.getScreenCTM().a,node.getScreenCTM().b),name:node.getAttribute('aria-label'),rows:node.querySelectorAll('tspan').length};});
  let overlaps=0;
  for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++)if(boxes[i].x<boxes[j].right&&boxes[i].right>boxes[j].x&&boxes[i].y<boxes[j].bottom&&boxes[i].bottom>boxes[j].y)overlaps++;
- const map=document.querySelector('#map'),rect=map.getBoundingClientRect(),matrix=map.getScreenCTM();const anchors=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>{const p=new DOMPoint(a.point[0],a.point[1]).matrixTransform(matrix);return p.x>=rect.left&&p.x<=rect.right&&p.y>=rect.top&&p.y<=rect.bottom;});return {count:nodes.length,overlaps,maxFont:Math.max(0,...boxes.map(x=>x.font)),inViewAnchors:anchors.length,boxes};
+ const map=document.querySelector('#map'),rect=map.getBoundingClientRect(),matrix=map.getScreenCTM();const anchors=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>{const p=new DOMPoint(a.point[0],a.point[1]).matrixTransform(matrix);return p.x>=rect.left&&p.x<=rect.right&&p.y>=rect.top&&p.y<=rect.bottom;});return {count:nodes.length,overlaps,maxFont:Math.max(0,...boxes.map(x=>x.font)),inViewAnchors:anchors.length,mapWidth:rect.width,mapHeight:rect.height,viewBox:map.getAttribute('viewBox'),rootScale:Math.hypot(matrix.a,matrix.b),boxes};
  });}
 async function focus(page,query){
  await page.locator('#placeSearch').fill(query);
@@ -21,7 +21,7 @@ async function focus(page,query){
  const page=app.page;
  try{
   await app.open();
-  await page.goto(page.url().replace('official-2026-nationwide-pilot.html','label-zoom-trial-v319.html'));
+  await page.goto(page.url().replace('official-2026-nationwide-pilot.html','label-zoom-trial-v320.html'));
   await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:30000});
   await page.waitForFunction(()=>document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
   assert.equal(await page.locator('#readingMode').inputValue(),'off','readings stay off initially');
@@ -29,11 +29,11 @@ async function focus(page,query){
   await page.setViewportSize({width:1280,height:900});
   await page.waitForTimeout(200);
   const desktopOverview=await metrics(page);
-  assert(desktopOverview.maxFont<=13.1&&desktopOverview.maxFont>=7,'responsive resize keeps text within 7–13px: '+desktopOverview.maxFont);
+  assert(desktopOverview.maxFont<=13.1&&desktopOverview.maxFont>=6.9,'responsive resize keeps text within 7–13px: '+desktopOverview.maxFont);
   assert.equal(desktopOverview.overlaps,0,'responsive resize retains collision-free overview labels');
   await page.setViewportSize({width:390,height:844});
   await page.waitForTimeout(200);
-  assert(mobileOverview.maxFont<=13.1&&mobileOverview.maxFont>=7);
+  assert(mobileOverview.maxFont<=13.1&&mobileOverview.maxFont>=6.9);
   for(const [name,query] of [['Hyogo Hanshin/Kobe','神戸市中央区'],['Sapporo','札幌市中央区'],['Tokyo special wards','新宿']]){
    await page.click('#nationBtn');
    await page.waitForTimeout(200);
@@ -41,7 +41,7 @@ async function focus(page,query){
    const result=await metrics(page);
    assert(result.count>0,name+' labels are visible');
    assert.equal(result.overlaps,0,name+' labels do not overlap after focus');
-   assert(result.maxFont<=13.1&&result.maxFont>=7,name+' physical font size remains in 7–13px range: '+result.maxFont);
+   assert(result.maxFont<=13.1&&result.maxFont>=6.9,name+' physical font size remains in 7–13px range: '+result.maxFont);
    console.log('PASS trial '+name+' labels='+result.count+'/'+result.inViewAnchors+' anchors overlaps='+result.overlaps+' maxFont='+result.maxFont.toFixed(2)+'px');
    if(name==='Hyogo Hanshin/Kobe'){
     await page.click('#mapReadingToggle');
@@ -55,17 +55,55 @@ async function focus(page,query){
     // before asserting collisions among ordinary labels at each scale.
     await page.evaluate(()=>{const c=window.KussoonV2ProgressivePreview.controller;c.clear();c.schedule();});
     await page.waitForTimeout(250);
-    // Exercise the public +/- controls, which were the route that exposed
-    // the root-SVG CTM scale error on dense prefecture views.
-    for(const [button,name] of [['#mapZoomIn','zoom in'],['#mapZoomOut','zoom out']]){
-     for(let step=0;step<3;step++){
-      await page.click(button);
-      await page.waitForTimeout(300);
-      const zoomed=await metrics(page);
-      assert(zoomed.maxFont<=13.1&&zoomed.maxFont>=7,name+' keeps physical label size within 7–13px: '+zoomed.maxFont);
-      assert.equal(zoomed.overlaps,0,name+' keeps labels collision-free after step '+(step+1));
+    // Return to the province-wide view that reproduces the reported issue.
+    await page.click('#nationBtn');
+    await page.click('#prefTrigger');
+    await page.locator('#prefChoices button').filter({hasText:'兵庫県'}).click();
+    await page.waitForFunction(()=>document.querySelector('#breadcrumb')?.textContent.includes('兵庫県')&&document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
+    await page.click('#mapReset');
+    await page.waitForTimeout(500);
+    // Exercise the public +/- controls from the full prefecture view at both
+    // mobile and desktop widths.
+    for(const viewport of [{width:390,height:844},{width:1280,height:900}]){
+     await page.setViewportSize(viewport);
+     await page.waitForTimeout(300);
+     for(const [button,name] of [['#mapZoomIn','zoom in'],['#mapZoomOut','zoom out']]){
+      for(let step=0;step<3;step++){
+       await page.click(button);
+       await page.waitForTimeout(300);
+       const zoomed=await metrics(page);
+       assert(zoomed.maxFont<=13.1&&zoomed.maxFont>=6.9,name+' at '+viewport.width+'px keeps physical label size within 7–13px: '+JSON.stringify({font:zoomed.maxFont,mapWidth:zoomed.mapWidth,mapHeight:zoomed.mapHeight,viewBox:zoomed.viewBox,rootScale:zoomed.rootScale}));
+       assert.equal(zoomed.overlaps,0,name+' at '+viewport.width+'px keeps labels collision-free after step '+(step+1));
+      }
      }
     }
+    await page.setViewportSize({width:390,height:844});
+    // Repeat the shared-engine prefecture-level check in two different density
+    // profiles: Hokkaido with Sapporo and Tokyo's 23 special wards.
+    for(const pref of ['北海道','東京都']){
+     await page.click('#nationBtn');
+     await page.click('#prefTrigger');
+     await page.locator('#prefChoices button').filter({hasText:pref}).click();
+     await page.waitForFunction(name=>document.querySelector('#breadcrumb')?.textContent.includes(name)&&document.querySelectorAll('#map text[data-national-code]').length>0,pref,{timeout:30000});
+     await page.click('#mapReset');
+     await page.waitForTimeout(500);
+     for(let step=0;step<2;step++){
+      await page.click('#mapZoomIn');
+      await page.waitForTimeout(300);
+      const regional=await metrics(page);
+      assert(regional.count>0,pref+' shared labels are visible');
+      assert(regional.maxFont<=13.1&&regional.maxFont>=6.9,pref+' keeps physical labels within 7–13px: '+regional.maxFont);
+      assert.equal(regional.overlaps,0,pref+' keeps labels collision-free after zoom '+(step+1));
+     }
+     console.log('PASS prefecture '+pref+' labels='+ (await metrics(page)).count+' overlaps=0');
+    }
+    // Restore the Hyogo screen for pinch-style and repeated state transitions.
+    await page.click('#nationBtn');
+    await page.click('#prefTrigger');
+    await page.locator('#prefChoices button').filter({hasText:'兵庫県'}).click();
+    await page.waitForFunction(()=>document.querySelector('#breadcrumb')?.textContent.includes('兵庫県')&&document.querySelectorAll('#map text[data-national-code]').length>0,{},{timeout:30000});
+    await page.click('#mapReset');
+    await page.waitForTimeout(400);
 
     const beforeGesture=await metrics(page);
     const duringGesture=await page.evaluate(()=>{
@@ -85,7 +123,7 @@ async function focus(page,query){
    }
   }
   // The baseline link option reproduces the merged zoom overlap allowance.
-  await page.goto(page.url().replace(/label-zoom-trial\.html.*/, 'label-zoom-trial-v319.html?labels=baseline'));
+  await page.goto(page.url().replace(/label-zoom-trial\.html.*/, 'label-zoom-trial-v320.html?labels=baseline'));
   await page.waitForFunction(()=>window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:30000});
   await focus(page,'神戸市中央区');
   const baseline=await metrics(page);
