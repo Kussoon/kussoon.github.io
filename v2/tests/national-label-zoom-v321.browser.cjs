@@ -97,7 +97,7 @@ async function focus(page,query){
       // occupy a small cluster near the edge of the full-prefecture projection.
       // Center this browser check on the data-derived ward cluster before zooming.
       await page.evaluate(()=>{
-       const wards=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>/^131\d{3}$/.test(a.code));
+       const wards=window.KussoonV2ProgressivePreview.controller.anchors().filter(a=>/^131\d{2}$/.test(a.code));
        if(wards.length<23)throw Error('Tokyo special-ward anchors missing: '+wards.length);
        const xs=wards.map(a=>a.point[0]),ys=wards.map(a=>a.point[1]);
        const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
