@@ -135,5 +135,5 @@ assert(!/if\(progressive\)entry\.offices=await getOffices\(code\)/.test(html),'O
 assert(/void getOffices\(code\)\.then\(offices=>\{[\s\S]*?renderOfficePopup\(\)/.test(html),'Office information updates popup independently');
 assert(/if\(!current\)\{if\(pendingPrefSelection\?\.id===requestId\)pendingPrefSelection\.code=\$\('region'\)\.value;return;\}/.test(html),'Early municipality selections are retained until detail arrives');
 assert(/const wanted=pendingPrefSelection\?\.id===id\?pendingPrefSelection\.code:selectedCode/.test(html),'Loading detail honors selected municipality');
-assert(/if\(id!==requestId\)return;\s*const choices=nationalLabels\.prefectureNamesFor/.test(html),'Obsolete prefecture picker response is ignored');
+assert(/if\(id!==requestId\|\|current\)return;\s*const choices=nationalLabels\.prefectureNamesFor/.test(html),'Obsolete or already-complete picker response is ignored');
 console.log('Public nationwide tap and county detail contract: OK');
