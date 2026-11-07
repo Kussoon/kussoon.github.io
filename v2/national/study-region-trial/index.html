@@ -120,7 +120,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 @media(max-width:500px){.map-toolbar{width:88px}.map-toolbar button{min-height:44px;font-size:13px}.map-fullscreen-button{width:88px;font-size:13px}}
 .progressive-national .prefecture{stroke:none}.prefecture-focus{fill:none;stroke:none;pointer-events:none}.prefecture-focus:focus-visible{stroke:#174b71;stroke-width:2;vector-effect:non-scaling-stroke}.label-toggle[hidden]{display:none}
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
-<h1>兵庫県10地域学習・全国地図試作</h1><p class="note">全国版と同じ地図・ラベル計算を使用し、選択地域だけにフォーカスします。<a href="/hyogo/v2-study-region.html">兵庫県10地域の全体図へ戻る</a> ／ <a href="/maps/national-municipalities.html?studyPref=28">正式全国版の兵庫県全域へ</a></p>
+<h1>兵庫県10地域学習・全国地図試作</h1><p class="note">全国版と同じ地図・ラベル計算を使用し、選択地域だけにフォーカスします。<a href="/hyogo/v2-study-region.html">兵庫県10地域の全体図へ戻る</a> ／ <a id="regionQuiz1Link" href="/hyogo/v2-quiz1.html">この地域でクイズ1（V2試作）</a> ／ <a href="/maps/national-municipalities.html?studyPref=28">正式全国版の兵庫県全域へ</a></p>
 <p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。</p>
 <ul class="map-guide"><li>市区町村の位置を押すと吹き出しが出ます。</li><li>吹き出しは上下に移動でき、×で閉じられます。</li><li>区域の点滅は、もう一度押すと止まります。</li><li>地図内のボタンでよみがなが出せます。</li></ul>
 <p class="note"><strong>読み込みに時間がかかることがあります。</strong></p>
@@ -787,6 +787,7 @@ $('map').addEventListener('click',e=>{
   // its 1,905 models, font sizes and collision positions exactly unchanged.
   const regionKey=new URLSearchParams(location.search).get('studyRegion');
   const regionModel=window.KussoonHyogoV2Regions?.regions.find(r=>r.key===regionKey);
+  if(regionModel)document.getElementById('regionQuiz1Link').href='/hyogo/v2-quiz1.html?range='+encodeURIComponent(regionModel.key);
   if(regionModel&&requestedStudyPref==='28'){
    const labels=regionModel.codes.map(code=>'[data-national-code="'+code+'"]').join(',');
    const regionStyle=document.createElement('style');
