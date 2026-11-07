@@ -1034,168 +1034,131 @@
       50% { opacity: .78; }
     }
 
-    #cuckoo-scene {
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      width: min(58vw, 420px);
-      height: min(42vh, 300px);
-      transform: translate(-50%, -50%) scale(.9);
-      opacity: 0;
-      transition: opacity .2s ease, transform .2s ease;
+
+    /* 毎正時：木製鳩時計。描画はCSSのみ、外部画像不使用。 */
+    #cuckoo-scene{
+      position:fixed;left:50%;top:50%;width:min(78vw,370px);height:min(68vh,410px);
+      transform:translate(-50%,-50%) scale(.92);opacity:0;
+      transition:opacity .28s ease,transform .28s ease;
+      pointer-events:none;filter:drop-shadow(0 12px 18px rgba(0,0,0,.75));
     }
-
-    #cuckoo-scene.show {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+    #cuckoo-scene.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+    .cuckoo-roof{
+      position:absolute;left:9%;top:4%;width:82%;height:34%;z-index:5;
+      background:linear-gradient(145deg,#d9ad6b 0%,#8e4d2c 24%,#4c251b 72%,#a46c3f 100%);
+      clip-path:polygon(50% 0,100% 88%,96% 100%,50% 23%,4% 100%,0 88%);
+      filter:drop-shadow(0 3px 2px #21110c);
     }
-
-    .cuckoo-house {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 66%;
-      height: 62%;
-      transform: translate(-50%, -42%);
-      background: #3a2b24;
-      border: 3px solid #9b7a5d;
-      border-radius: 8px 8px 16px 16px;
+    .cuckoo-house{
+      position:absolute;left:18%;top:31%;width:64%;height:56%;z-index:2;
+      background:
+        repeating-linear-gradient(0deg,transparent 0 24px,rgba(46,21,13,.24) 25px 27px),
+        linear-gradient(110deg,#b77a45 0%,#88512f 38%,#754027 64%,#a66a3c 100%);
+      border:7px solid #4d291a;border-radius:7px 7px 22px 22px;
+      box-shadow:inset 0 0 0 3px #d5a16a,inset 0 0 24px #37190e,0 8px 0 #301a12;
     }
-
-    .cuckoo-roof {
-      position: absolute;
-      left: 50%;
-      top: 5%;
-      width: 0;
-      height: 0;
-      transform: translateX(-50%);
-      border-left: 120px solid transparent;
-      border-right: 120px solid transparent;
-      border-bottom: 90px solid #5a3d2f;
+    .cuckoo-house::before,.cuckoo-house::after{
+      content:"";position:absolute;top:27%;width:12px;height:66%;
+      background:linear-gradient(90deg,#4f2b1d,#c38a4c,#704025);
+      border-radius:7px;box-shadow:0 0 0 2px #492919;
     }
-
-    .cuckoo-door-frame {
-      position: absolute;
-      left: 50%;
-      top: 20%;
-      width: 34%;
-      height: 42%;
-      transform: translateX(-50%);
-      border: 3px solid #d4b58a;
-      border-radius: 6px;
-      overflow: hidden;
-      background: #111;
+    .cuckoo-house::before{left:5%}.cuckoo-house::after{right:5%}
+    .cuckoo-door-frame{
+      position:absolute;left:50%;top:5%;width:48%;height:39%;z-index:8;
+      transform:translateX(-50%);border:6px solid #dba46c;border-radius:45% 45% 5px 5px / 22% 22% 5px 5px;
+      background:radial-gradient(ellipse at 50% 80%,#33221a,#130c09 80%);
+      box-shadow:0 0 0 4px #502c1c,inset 0 0 16px #000;
+      perspective:400px;
     }
-
-    .cuckoo-door {
-      position: absolute;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      background: #704b36;
-      border: 1px solid #b58c68;
-      transition: transform .35s ease;
+    .cuckoo-door{
+      position:absolute;top:0;width:50%;height:100%;z-index:11;
+      background:repeating-linear-gradient(90deg,#96613c 0 9px,#a97344 10px 14px,#744328 15px 18px);
+      border:2px solid #d9a06a;transition:transform .52s ease;
+      backface-visibility:hidden;
     }
-
-    .cuckoo-door.left { left: 0; }
-    .cuckoo-door.right { right: 0; }
-
-    #cuckoo-scene.animate .cuckoo-door.left { transform: translateX(-105%); }
-    #cuckoo-scene.animate .cuckoo-door.right { transform: translateX(105%); }
-
-    .cuckoo-bird {
-      position: absolute;
-      left: 50%;
-      top: 40%;
-      width: 58px;
-      height: 42px;
-      transform: translate(-50%, -50%) translateY(24px) scale(.6);
-      opacity: 0;
-      transition: transform .5s ease .35s, opacity .3s ease .35s;
+    .cuckoo-door.left{left:0;transform-origin:left center;border-radius:35% 0 0 2px}
+    .cuckoo-door.right{right:0;transform-origin:right center;border-radius:0 35% 2px 0}
+    #cuckoo-scene.animate .cuckoo-door.left{transform:rotateY(-115deg)}
+    #cuckoo-scene.animate .cuckoo-door.right{transform:rotateY(115deg)}
+    .cuckoo-bird{
+      position:absolute;left:50%;top:18%;width:78px;height:104px;z-index:10;
+      transform:translate(-50%,22px) scale(.62);transform-origin:50% 70%;opacity:0;
+      transition:transform .65s cubic-bezier(.2,1.2,.3,1) .55s,opacity .2s ease .55s;
     }
-
-    #cuckoo-scene.animate .cuckoo-bird {
-      transform: translate(-50%, -50%) translateY(-28px) scale(1);
-      opacity: 1;
+    #cuckoo-scene.animate .cuckoo-bird{
+      transform:translate(-50%,0) scale(1);opacity:1;
+      animation:cuckoo-bob .7s ease-in-out 1.2s 3;
     }
-
-    .cuckoo-body {
-      position: absolute;
-      left: 10px;
-      top: 11px;
-      width: 38px;
-      height: 26px;
-      background: #d8d2c5;
-      border-radius: 50% 55% 48% 52%;
+    .cuckoo-body{
+      position:absolute;left:14px;bottom:7px;width:50px;height:68px;
+      border-radius:46% 46% 45% 45%;
+      background:linear-gradient(115deg,#f7f2e6 0%,#d8d1bd 60%,#b5a790 100%);
+      box-shadow:inset -6px -4px 8px #928b79,0 2px 4px #21170d;
     }
-
-    .cuckoo-head {
-      position: absolute;
-      left: 32px;
-      top: 2px;
-      width: 20px;
-      height: 20px;
-      background: #e8e2d7;
-      border-radius: 50%;
+    .cuckoo-body::after{
+      content:"";position:absolute;left:11px;bottom:-7px;width:31px;height:10px;
+      background:#e4a04a;border-radius:60%;box-shadow:0 2px 0 #9e5c21;
     }
-
-    .cuckoo-eye {
-      position: absolute;
-      right: 4px;
-      top: 6px;
-      width: 4px;
-      height: 4px;
-      background: #111;
-      border-radius: 50%;
+    .cuckoo-head{
+      position:absolute;left:13px;top:0;width:52px;height:52px;border-radius:50%;
+      background:radial-gradient(circle at 35% 25%,#fffef8,#e8e0ce 67%,#b0a28b);
+      box-shadow:0 2px 4px #a2947b;
     }
-
-    .cuckoo-beak {
-      position: absolute;
-      right: -10px;
-      top: 7px;
-      width: 0;
-      height: 0;
-      border-top: 4px solid transparent;
-      border-bottom: 4px solid transparent;
-      border-left: 11px solid #e8b84a;
+    .cuckoo-eye{
+      position:absolute;top:17px;left:11px;width:8px;height:9px;border-radius:50%;
+      background:#20201b;box-shadow:22px 0 #20201b,1px -2px 0 2px #f4f1e8,23px -2px 0 2px #f4f1e8;
     }
-
-    .cuckoo-wing {
-      position: absolute;
-      left: 7px;
-      top: 15px;
-      width: 23px;
-      height: 12px;
-      background: #aaa394;
-      border-radius: 55% 45% 60% 40%;
-      transform: rotate(-18deg);
-      transform-origin: right center;
+    .cuckoo-beak{
+      position:absolute;top:28px;left:20px;width:14px;height:15px;
+      background:#f4b442;clip-path:polygon(0 0,100% 0,50% 100%);
+      filter:drop-shadow(0 1px 0 #ae6c19);
     }
-
-    #cuckoo-scene.animate .cuckoo-wing {
-      animation: cuckoo-wing .35s ease-in-out 4 .5s;
+    .cuckoo-wing{
+      position:absolute;left:7px;top:44px;width:25px;height:37px;
+      background:linear-gradient(130deg,#f4ebd8,#afa58d);border-radius:65% 35% 60% 35%;
+      transform:rotate(14deg);transform-origin:80% 15%;
+      box-shadow:43px -3px 0 -2px #b8ad96;
     }
-
-    .cuckoo-perch {
-      position: absolute;
-      left: 50%;
-      top: 61%;
-      width: 36%;
-      height: 7px;
-      transform: translateX(-50%);
-      background: #d1b082;
-      border-radius: 6px;
+    #cuckoo-scene.animate .cuckoo-wing{animation:cuckoo-flap .32s ease-in-out 1s 5}
+    .cuckoo-perch{
+      position:absolute;left:50%;top:45%;width:53%;height:12px;z-index:12;
+      transform:translateX(-50%);
+      background:linear-gradient(#efbf79,#9c5b32 55%,#542f21);
+      border-radius:5px;box-shadow:0 4px 4px #201009;
     }
-
-    @keyframes cuckoo-wing {
-      0%, 100% { transform: rotate(-18deg); }
-      50% { transform: rotate(-48deg); }
+    .cuckoo-dial{
+      position:absolute;left:50%;top:55%;width:32%;aspect-ratio:1;z-index:3;
+      transform:translateX(-50%);border-radius:50%;
+      background:radial-gradient(circle,#fff0c7 58%,#b98447 59% 70%,#5a301d 71%);
+      border:3px solid #3c2417;box-shadow:0 2px 8px #27120b;
+    }
+    .cuckoo-dial::before,.cuckoo-dial::after{
+      content:"";position:absolute;left:50%;top:50%;background:#503123;
+      border-radius:3px;transform-origin:center top;
+    }
+    .cuckoo-dial::before{width:3px;height:28%;transform:rotate(145deg)}
+    .cuckoo-dial::after{width:3px;height:38%;transform:rotate(235deg)}
+    .cuckoo-weight{position:absolute;top:85%;width:8px;height:15%;z-index:1;
+      background:repeating-linear-gradient(#856035 0 7px,#5f431f 8px 11px);
+      border-radius:60% 60% 45% 45%;box-shadow:0 -24px 0 -3px #c8ac84}
+    .cuckoo-weight.left{left:34%}.cuckoo-weight.right{right:34%}
+    @keyframes cuckoo-bob{
+      0%,100%{translate:0 0}50%{translate:0 -5px}
+    }
+    @keyframes cuckoo-flap{
+      0%,100%{rotate:0deg}50%{rotate:-23deg}
+    }
+    @media (orientation:portrait){
+      #cuckoo-scene{width:min(86vw,340px);height:min(53vh,395px)}
+    }
+    @media (max-height:480px){
+      #cuckoo-scene{height:88vh;width:min(66vw,330px)}
     }
 
     @media (orientation: portrait) {
       #sedentary-alert { font-size: min(7vw, 4.8vh); width: 90vw; }
       #quarter-reminder { font-size: min(7vw, 4.8vh); width: 88vw; }
-      #cuckoo-scene { width: min(84vw, 390px); height: min(34vh, 300px); }
+      #cuckoo-scene { width: min(86vw, 340px); height: min(53vh, 395px); }
     }
 
     @keyframes flash {
@@ -1735,8 +1698,6 @@
       <div class="cuckoo-roof"></div>
       <div class="cuckoo-house">
         <div class="cuckoo-door-frame">
-          <div class="cuckoo-door left"></div>
-          <div class="cuckoo-door right"></div>
           <div class="cuckoo-bird">
             <div class="cuckoo-body"></div>
             <div class="cuckoo-head">
@@ -1745,9 +1706,14 @@
             </div>
             <div class="cuckoo-wing"></div>
           </div>
+          <div class="cuckoo-door left"></div>
+          <div class="cuckoo-door right"></div>
         </div>
         <div class="cuckoo-perch"></div>
+        <div class="cuckoo-dial"></div>
       </div>
+      <div class="cuckoo-weight left"></div>
+      <div class="cuckoo-weight right"></div>
     </div>
   </div>
 
