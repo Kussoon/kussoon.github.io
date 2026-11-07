@@ -17,12 +17,7 @@ function escapeHtml(value){
     "'":'&#39;'
   }[ch]));
 }
-const COUNTY_BY_TOWN={
- '豊能町':['豊能郡','とよのぐん'],'能勢町':['豊能郡','とよのぐん'],
- '島本町':['三島郡','みしまぐん'],'忠岡町':['泉北郡','せんぼくぐん'],
- '熊取町':['泉南郡','せんなんぐん'],'田尻町':['泉南郡','せんなんぐん'],'岬町':['泉南郡','せんなんぐん'],
- '太子町':['南河内郡','みなみかわちぐん'],'河南町':['南河内郡','みなみかわちぐん'],'千早赤阪村':['南河内郡','みなみかわちぐん']
-};
+const COUNTY_BY_TOWN=config.countyByTown||{};
 function formatQuestionName(item){
   const county = COUNTY_BY_TOWN[item.name];
   // Keep the official quiz answer/code untouched; only the question's displayed name changes.
