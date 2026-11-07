@@ -17,3 +17,14 @@
 
 参照：全国47都道府県 市区町村記憶ゲーム標準制作マニュアル Ver.1.3（2026-09-22）と現在のV2確定仕様。
 地域区分根拠：https://www.pref.osaka.lg.jp/o040090/toukei/jinkou/jinkou-chuui.html
+
+## 第2段階：大阪府クイズ1・2の共通試作
+
+- [クイズ1](quiz.html?mode=1)：地名から地図の場所を回答。
+- [クイズ2](quiz.html?mode=2)：点滅する区域名を近接する自治体の4択で回答。回答欄は地図の下。
+- 両方とも `/v2/municipalities/shared/regional-quiz.js` の初回正解採点・誤答履歴・未回答除外・再挑戦を使用。
+- UIは `/v2/municipalities/shared/quiz-app.js` と `quiz.css` を共有し、地域データと郡名・よみがなだけを府県設定から読み込む。
+- 地図表示には既存の `municipality-renderer.js` と `map-viewport.js`、2026年版全国TopoJSONを利用。県域全体の地図操作はクイズ出題対象を変更しない。
+- 兵庫県の現行クイズ1/2はこの段階では変更しない。共通エンジンへの移行は実機検証後に別途判断。
+- 既存の全国市区町村マップで指摘された府県全体表示のラベルサイズについては、本PRで地図共通エンジンの表示規則を変更せず、原因と確定規則の照合を次段階の独立項目とする。
+- テスト：`node v2/municipalities/shared/regional-quiz.test.cjs`、`node v2/municipalities/osaka/quiz.contract.test.cjs`、`node v2/municipalities/osaka/regions.contract.test.cjs`。
