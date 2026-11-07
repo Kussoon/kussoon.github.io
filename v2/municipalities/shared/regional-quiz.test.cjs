@@ -1,0 +1,22 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const source=fs.readFileSync(path.join(__dirname,'regional-quiz.js'),'utf8');
+const context={window:{}};vm.runInNewContext(source,context);
+const e=context.window.KussoonV2RegionalQuiz;
+function same(a,b){assert.deepEqual(JSON.parse(JSON.stringify(a)),b);}
+const items=[...Array.from({length:5},(_,i)=>({code:'A'+i,polys:[[[[i,0],[i+.9,0],[i+.9,1],[i,1]]]]}))];
+let s=e.start(items,()=>.9);e.question(s);assert.equal(s.answer,'A0');
+assert.equal(e.answer(s,'A2').correct,false);assert.equal(e.answer(s,'A0').firstTry,false);
+assert.equal(s.correct,0);assert.equal(e.finish(s).missed.length,1);assert.equal(e.finish(s).missed[0].code,'A0');
+e.next(s);assert.equal(e.answer(s,s.answer).firstTry,true);assert.equal(s.correct,1);
+assert.equal(e.finish(s).missed.length,1,'Untouched items never enter missed-only retry');
+const geo=items.map((x,i)=>({properties:{N03_007:x.code},arcs:i===0?[[0]]:[[i-1,i]]}));
+const near=e.proximity(items,geo,{random:()=>.9});
+const opts=near.options(items[2],items.slice(2,4));
+assert.equal(opts.length,4);assert.equal(new Set(opts.map(x=>x.code)).size,4);
+assert(opts.some(x=>x.code==='A3'),'Direct neighboring regional peer is included');
+const small=near.options(items[0],items.slice(0,2));assert(small.some(x=>x.code==='A1'));
+const islandGeo=items.map((x,i)=>({properties:{N03_007:x.code},arcs:[[i*2]]}));
+const iso=e.proximity(items,islandGeo,{random:()=>.9});
+assert.equal(iso.options(items[0],items.slice(0,2)).length,4,'Isolated areas still get four choices');
+console.log('Regional quiz core: PASS');
