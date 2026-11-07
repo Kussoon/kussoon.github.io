@@ -267,7 +267,7 @@ header h1,header .subtitle{position:relative}
 /* 地図右下の開閉式凡例。閉じたときは地図下の固定説明を表示しない。 */
 .mapbox{overflow:visible;z-index:2}
 .map-legend-control{
-  position:absolute;right:12px;bottom:42px;z-index:1100;
+  position:absolute;right:12px;bottom:24px;z-index:1100;
   margin:0;font-size:14px;line-height:1.55;
 }
 .map-legend-control>summary{
@@ -290,7 +290,10 @@ header h1,header .subtitle{position:relative}
   padding:13px 15px;box-shadow:0 7px 25px #0005;
   font-size:.9rem;line-height:1.7;
 }
-.map-legend-content p{margin:0}
+.map-legend-content ul{margin:0;padding-left:1.25em;list-style:disc}
+.map-legend-content li{margin:0;padding:2px 0}
+.map-legend-content li+li{margin-top:6px}
+.map-legend-content strong{font-weight:750}
 @media(prefers-reduced-motion:reduce){.map-legend-control>summary::after{transition:none}}
 </style></head><body>
 <header id="page-top"><h1>阪神間 お菓子マップ</h1><p class="page-release" aria-label="版とデータ更新日"><span>Version 1.0.7</span><span>最終更新日：2026年11月2日（データ更新）</span></p><p class="subtitle">西宮・芦屋・尼崎・宝塚・伊丹の5市を横断して探せます</p></header>
@@ -302,7 +305,7 @@ header h1,header .subtitle{position:relative}
 </section>
 <div class="stats" aria-live="polite"><strong id="display-count"></strong></div>
 <div class="lower">
-<section class="panel mapbox" aria-label="店舗地図"><div class="mapbar"><h2>店舗地図</h2></div><div id="map" role="application" aria-label="Leafletお菓子店地図"></div><div id="sweetPinPanel" class="sweet-pin-panel" hidden aria-label="選択した店舗の吹き出し"></div><div id="facilityPanel" class="facilityPanel" hidden aria-live="polite"></div><details class="map-legend-control"><summary>凡例</summary><div class="map-legend-content"><p>緑の丸：通常掲載。紫の三角：参考候補（理由は店舗詳細へ）。角丸の数字：同じ施設・位置の店舗数。橙の丸数字：近接するピンのまとまり。</p></div></details></section>
+<section class="panel mapbox" aria-label="店舗地図"><div class="mapbar"><h2>店舗地図</h2></div><div id="map" role="application" aria-label="Leafletお菓子店地図"></div><div id="sweetPinPanel" class="sweet-pin-panel" hidden aria-label="選択した店舗の吹き出し"></div><div id="facilityPanel" class="facilityPanel" hidden aria-live="polite"></div><details class="map-legend-control"><summary>凡例</summary><div class="map-legend-content"><ul><li><strong>緑の丸：</strong>通常掲載</li><li><strong>紫の三角：</strong>参考候補（理由は店舗詳細へ）</li><li><strong>角丸の数字：</strong>同じ施設・位置の店舗数</li><li><strong>橙の丸数字：</strong>近接するピンのまとまり</li></ul></div></details></section>
 <section class="stack" id="side"><section class="panel results"><h2>店舗一覧 <span class="muted" id="listcount"></span> <span class="list-order">（市別・店名順：英字／日本語）</span></h2><div id="list" class="resultgrid" aria-live="polite"></div><nav class="pager" aria-label="一覧ページ切替"><button id="prev" type="button">前へ</button><span id="pageinfo"></span><button id="next" type="button">次へ</button></nav></section><section id="detail" class="panel detail" hidden aria-live="polite"></section></section>
 </div>
 </main>
