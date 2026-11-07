@@ -2804,21 +2804,48 @@
         }, 4100);
       }
 
-      function showCuckoo() {
-        cuckooScene.classList.remove("show", "animate");
-        void cuckooScene.offsetWidth;
+      // B案：12時間制の時刻に応じて1〜6回。7〜12時は6回で打ち止め。
+      // 鳩の出入りを1回ずつ繰り返し、次の再生まで扉を閉じる。
+      let cuckooSequenceId = 0;
+      function showCuckoo(now = new Date()) {
+        const hour12 = now.getHours() % 12 || 12;
+        const count = Math.min(hour12, 6);
+        const sequenceId = ++cuckooSequenceId;
+
+        if (cuckooHideTimer !== null) {
+          clearTimeout(cuckooHideTimer);
+          cuckooHideTimer = null;
+        }
+        cuckooScene.classList.remove("animate");
         cuckooScene.classList.add("show");
 
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => cuckooScene.classList.add("animate"));
-        });
+        function play(index) {
+          if (sequenceId !== cuckooSequenceId) return;
+          // 前の動作をリセットして、扉が開く動きを毎回再生する。
+          cuckooScene.classList.remove("animate");
+          void cuckooScene.offsetWidth;
+          requestAnimationFrame(() => {
+            if (sequenceId === cuckooSequenceId) {
+              cuckooScene.classList.add("animate");
+            }
+          });
 
-        if (cuckooHideTimer) clearTimeout(cuckooHideTimer);
-
-        cuckooHideTimer = setTimeout(() => {
-          cuckooScene.classList.remove("animate", "show");
-          cuckooHideTimer = null;
-        }, 6000);
+          // 鳩が出て羽ばたいたあと、いったん扉を閉じる。
+          cuckooHideTimer = setTimeout(() => {
+            if (sequenceId !== cuckooSequenceId) return;
+            cuckooScene.classList.remove("animate");
+            if (index + 1 < count) {
+              cuckooHideTimer = setTimeout(() => play(index + 1), 700);
+            } else {
+              cuckooHideTimer = setTimeout(() => {
+                if (sequenceId !== cuckooSequenceId) return;
+                cuckooScene.classList.remove("show");
+                cuckooHideTimer = null;
+              }, 700);
+            }
+          }, 2200);
+        }
+        play(0);
       }
 
       function updateClockReminders(now) {
@@ -2871,7 +2898,7 @@
 
           if (cuckooKey !== lastCuckooKey) {
             lastCuckooKey = cuckooKey;
-            showCuckoo();
+            showCuckoo(now);
           }
         }
       }
