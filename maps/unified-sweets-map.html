@@ -263,6 +263,35 @@ header h1,header .subtitle{position:relative}
 /* Final visitor-facing display refinements. */
 .page-release span{white-space:normal;overflow-wrap:anywhere}.item .tag{justify-self:start;align-self:start}.detail h2{overflow-wrap:anywhere}
  .pin.ref:not(.multi){background:transparent;border:0;border-radius:0;box-shadow:none;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-bottom:27px solid #823da0;filter:drop-shadow(0 1px 2px #3338)}.tag.reference{color:#823da0}@media(prefers-color-scheme:dark){.tag.reference{color:#d4a5ed}}
+</style><style>
+/* 地図右下の開閉式凡例。閉じたときは地図下の固定説明を表示しない。 */
+.mapbox{overflow:visible;z-index:2}
+.map-legend-control{
+  position:absolute;right:12px;bottom:42px;z-index:1100;
+  margin:0;font-size:14px;line-height:1.55;
+}
+.map-legend-control>summary{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  min-height:44px;padding:9px 14px;list-style:none;cursor:pointer;
+  border:2px solid #bbc9c3;border-radius:8px;
+  background:#fff;color:#17302b;font-weight:750;
+  box-shadow:0 2px 9px #0003;user-select:none;
+}
+.map-legend-control>summary::-webkit-details-marker{display:none}
+.map-legend-control>summary::after{content:"⌄";font-size:17px;line-height:1;transition:transform .16s}
+.map-legend-control[open]>summary::after{transform:rotate(180deg)}
+.map-legend-control>summary:focus-visible{outline:3px solid #147c6a;outline-offset:3px}
+.map-legend-content{
+  position:absolute;top:calc(100% + 6px);right:0;
+  width:min(320px,calc(100vw - 46px));max-height:min(260px,45vh);
+  overflow-y:auto;overscroll-behavior:contain;
+  border:1px solid var(--line);border-radius:10px;
+  background:var(--paper);color:var(--ink);
+  padding:13px 15px;box-shadow:0 7px 25px #0005;
+  font-size:.9rem;line-height:1.7;
+}
+.map-legend-content p{margin:0}
+@media(prefers-reduced-motion:reduce){.map-legend-control>summary::after{transition:none}}
 </style></head><body>
 <header id="page-top"><h1>阪神間 お菓子マップ</h1><p class="page-release" aria-label="版とデータ更新日"><span>Version 1.0.7</span><span>最終更新日：2026年11月2日（データ更新）</span></p><p class="subtitle">西宮・芦屋・尼崎・宝塚・伊丹の5市を横断して探せます</p></header>
 <main class="container stack">
@@ -273,7 +302,7 @@ header h1,header .subtitle{position:relative}
 </section>
 <div class="stats" aria-live="polite"><strong id="display-count"></strong></div>
 <div class="lower">
-<section class="panel mapbox" aria-label="店舗地図"><div class="mapbar"><h2>店舗地図</h2></div><div id="map" role="application" aria-label="Leafletお菓子店地図"></div><div id="sweetPinPanel" class="sweet-pin-panel" hidden aria-label="選択した店舗の吹き出し"></div><div id="facilityPanel" class="facilityPanel" hidden aria-live="polite"></div><div class="mapnote">緑の丸：通常掲載。紫の三角：参考候補（理由は店舗詳細へ）。角丸の数字：同じ施設・位置の店舗数。橙の丸数字：近接するピンのまとまり。</div></section>
+<section class="panel mapbox" aria-label="店舗地図"><div class="mapbar"><h2>店舗地図</h2></div><div id="map" role="application" aria-label="Leafletお菓子店地図"></div><div id="sweetPinPanel" class="sweet-pin-panel" hidden aria-label="選択した店舗の吹き出し"></div><div id="facilityPanel" class="facilityPanel" hidden aria-live="polite"></div><details class="map-legend-control"><summary>凡例</summary><div class="map-legend-content"><p>緑の丸：通常掲載。紫の三角：参考候補（理由は店舗詳細へ）。角丸の数字：同じ施設・位置の店舗数。橙の丸数字：近接するピンのまとまり。</p></div></details></section>
 <section class="stack" id="side"><section class="panel results"><h2>店舗一覧 <span class="muted" id="listcount"></span> <span class="list-order">（市別・店名順：英字／日本語）</span></h2><div id="list" class="resultgrid" aria-live="polite"></div><nav class="pager" aria-label="一覧ページ切替"><button id="prev" type="button">前へ</button><span id="pageinfo"></span><button id="next" type="button">次へ</button></nav></section><section id="detail" class="panel detail" hidden aria-live="polite"></section></section>
 </div>
 </main>
