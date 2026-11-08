@@ -55,7 +55,7 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
    global.KussoonNationalReadings.boxFor(model,base,size,measure):
    global.KussoonAdministrativeLabels.boxFor(model,base,size,measure);
  }
- function cullTransientOverlaps(size,view,gap=0){
+ function cullTransientOverlaps(size,view,gapX=0,gapY=gapX){
   const candidates=[...labelPlans.values()].filter(item=>item.size===size&&item.box&&labelNodes.has(item.model.code));
   const priorities=global.KussoonDensityLabels.priority;
   candidates.sort((a,b)=>
@@ -70,8 +70,8 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
    const node=labelNodes.get(item.model.code);
    const inView=intersectsView(item.box);
    const collides=inView&&placed.some(other=>
-    other.box.x1-gap<item.box.x2&&other.box.x2+gap>item.box.x1&&
-    other.box.y1-gap<item.box.y2&&other.box.y2+gap>item.box.y1);
+    other.box.x1-gapX<item.box.x2&&other.box.x2+gapX>item.box.x1&&
+    other.box.y1-gapY<item.box.y2&&other.box.y2+gapY>item.box.y1);
    node.style.display=collides?'none':'';
    if(collides)hidden++;else if(inView)placed.push(item);
   }
@@ -132,7 +132,7 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
    item.size=size;item.box=label.box;
    updated++;
   }
-  const hidden=cullTransientOverlaps(size,f.view,f.zoom>=2?2/f.ratio:0);
+  const hidden=cullTransientOverlaps(size,f.view,f.zoom>=2?2/f.ratio:0,f.zoom>=2?6/f.ratio:0);
   return {updated,hidden,screenFont:fontSize(f.zoom),zoom:f.zoom};
  }
  function regionBox(polys){let w=Infinity,s=Infinity,e=-Infinity,n=-Infinity;for(const poly of polys)for(const ring of poly)for(const p of ring){w=Math.min(w,p[0]);s=Math.min(s,p[1]);e=Math.max(e,p[0]);n=Math.max(n,p[1]);}return [w,s,e,n];}

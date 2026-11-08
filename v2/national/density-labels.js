@@ -9,8 +9,8 @@
   '33':'33100','34':'34100','35':'35201','36':'36201','37':'37201',
   '38':'38201','39':'39201'
  };
- const overlaps=(a,b,g)=>
-  a.x1-g<b.x2&&a.x2+g>b.x1&&a.y1-g<b.y2&&a.y2+g>b.y1;
+ const overlaps=(a,b,gx,gy=gx)=>
+  a.x1-gx<b.x2&&a.x2+gx>b.x1&&a.y1-gy<b.y2&&a.y2+gy>b.y1;
  function priority(model){
   const code=model.code||'',pref=model.prefectureCode||code.slice(0,2);
   return (code===capitals[pref]?100000:0)+
@@ -37,8 +37,9 @@
   // A global count ceiling used to leave obvious blank municipal areas.
   const limit=density==='sparse'?Math.max(3,Math.ceil(width*height/factors.sparse)):
    Infinity;
-  const zoomSafetyPx=stableAnchors&&zoom>=2?2:0;
-  const gap=((marginPx[density]??4)+zoomSafetyPx)/ratio;
+  const zoomSafetyPx=stableAnchors&&zoom>=2?{x:2,y:6}:{x:0,y:0};
+  const gap=(marginPx[density]??4)/ratio;
+  const gapX=gap+zoomSafetyPx.x/ratio,gapY=gap+zoomSafetyPx.y/ratio;
   const tile=tilePx[density]||115;
   const countX=Math.max(1,Math.ceil(width/tile));
   const countY=Math.max(1,Math.ceil(height/tile));
@@ -91,7 +92,7 @@
    return cy*countX+cx;
   }
   function claim(c,p){
-   if(!inView(p.box)||active.some(a=>overlaps(a.box,p.box,gap)))return false;
+   if(!inView(p.box)||active.some(a=>overlaps(a.box,p.box,gapX,gapY)))return false;
    result[c.i]=true;placed[c.i]=p;
    active.push({box:p.box,cell:cellOf(p)});
    return true;
