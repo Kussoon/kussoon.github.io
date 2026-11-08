@@ -26,8 +26,16 @@ async function inspect(page){
   const clipped=rects.filter(r=>r.right<svgRect.left||r.left>svgRect.right||r.bottom<svgRect.top||r.top>svgRect.bottom).length;
   const transforms=groups.map(g=>g.getAttribute('transform')||'');
   const sizes=[...new Set([...layer.querySelectorAll('text')].map(t=>t.getAttribute('font-size')))].sort((a,b)=>Number(a)-Number(b));
-  return {labelCount:groups.length,overlapPairs,clipped,transforms,sizes};
+  const viewBox=svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  return {labelCount:groups.length,overlapPairs,clipped,transforms,sizes,zoomScale:850/viewBox[2]};
  });
+}
+async function firstTextPixelHeight(page){
+ return page.locator('#map [data-v2-labels] text').first().evaluate(node=>node.getBoundingClientRect().height);
+}
+function assertScreenSizeStaysFixed(result,baseScale,label){
+ const scales=result.transforms.map(t=>Number(t.match(/scale\(([^)]+)\)$/)?.[1]||1));
+ assert(scales.length&&scales.every(scale=>Math.abs(scale*result.zoomScale-baseScale)<.002),label+' label render scale tracks the map zoom');
 }
 
 (async()=>{
@@ -58,6 +66,22 @@ async function inspect(page){
     assert(overview.sizes.includes('14'),item.name+' source font remains unchanged before overview scaling');
     await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-overview.png')});
 
+    await page.locator('#mapReadingToggle').click();
+    await page.waitForFunction(()=>document.querySelector('#readingMode')?.value==='on');
+    const readingHeight=await firstTextPixelHeight(page);
+    const reading=await inspect(page);
+    assertScreenSizeStaysFixed(reading,.78,item.name+' overview with readings');
+    for(let i=0;i<3;i++)await page.locator('#mapZoomIn').click();
+    const zoomedHeight=await firstTextPixelHeight(page),zoomed=await inspect(page);
+    assert(Math.abs(zoomedHeight-readingHeight)<.5,item.name+' reading text remains the same screen size while zooming');
+    assertScreenSizeStaysFixed(zoomed,.78,item.name+' zoomed overview');
+    for(let i=0;i<3;i++)await page.locator('#mapZoomOut').click();
+    await page.locator('#mapReset').click();
+    await page.waitForFunction(()=>document.querySelector('#readingMode')?.value==='on'&&
+      Math.abs(850/Number(document.querySelector('#map').getAttribute('viewBox').split(/\s+/)[2])-1)<.001);
+    await page.locator('#mapReadingToggle').click();
+    await page.waitForFunction(()=>document.querySelector('#readingMode')?.value==='off');
+
     await page.locator('#regionTrigger').click();
     await page.getByRole('button',{name:option,exact:true}).click();
     await page.waitForFunction(code=>document.querySelector('#region')?.value===code&&document.querySelector('#map .chosen[data-code="'+code+'"]'),item.region);
@@ -65,6 +89,12 @@ async function inspect(page){
     assert(selected.transforms.length&&selected.transforms.every(t=>!t.includes('scale(')),item.name+' selection restores 1.00x labels');
     assert(selected.sizes.includes('18'),item.name+' selected municipality retains established 18px label');
     await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-selected.png')});
+    const selectedTextHeight=await firstTextPixelHeight(page);
+    await page.locator('#mapZoomIn').click();
+    const selectedZoomHeight=await firstTextPixelHeight(page),selectedZoom=await inspect(page);
+    assert(Math.abs(selectedZoomHeight-selectedTextHeight)<.5,item.name+' selected labels remain the same screen size while zooming');
+    assertScreenSizeStaysFixed(selectedZoom,1,item.name+' zoomed selection');
+    await page.locator('#mapReset').click();
     console.log('PASS',scenario.name,item.name,JSON.stringify({overview:{labels:overview.labelCount,overlaps:overview.overlapPairs,offscreen:overview.clipped,scale:'0.78'},selected:{labels:selected.labelCount,sizes:selected.sizes,scale:'1.00'}}));
 
     await page.locator('#prefBtn').click();
