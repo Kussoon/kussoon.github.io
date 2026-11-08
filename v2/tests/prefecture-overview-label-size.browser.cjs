@@ -15,15 +15,18 @@ async function inspect(page){
  return page.locator('#map').evaluate(svg=>{
   const layer=svg.querySelector('[data-v2-labels]');
   const groups=[...(layer?.children||[])];
-  const rects=groups.map(group=>group.getBoundingClientRect());
+  const groupRects=groups.map(group=>group.getBoundingClientRect());
+  const texts=groups.flatMap((group,index)=>[...group.querySelectorAll('text')].map(node=>({group:index,rect:node.getBoundingClientRect()})));
   let overlapPairs=0;
-  for(let i=0;i<rects.length;i++)for(let j=i+1;j<rects.length;j++){
-   const w=Math.min(rects[i].right,rects[j].right)-Math.max(rects[i].left,rects[j].left);
-   const h=Math.min(rects[i].bottom,rects[j].bottom)-Math.max(rects[i].top,rects[j].top);
+  for(let i=0;i<texts.length;i++)for(let j=i+1;j<texts.length;j++){
+   if(texts[i].group===texts[j].group)continue;
+   const a=texts[i].rect,b=texts[j].rect;
+   const w=Math.min(a.right,b.right)-Math.max(a.left,b.left);
+   const h=Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top);
    if(w>1&&h>1)overlapPairs++;
   }
   const svgRect=svg.getBoundingClientRect();
-  const clipped=rects.filter(r=>r.right<svgRect.left||r.left>svgRect.right||r.bottom<svgRect.top||r.top>svgRect.bottom).length;
+  const clipped=groupRects.filter(r=>r.right<svgRect.left||r.left>svgRect.right||r.bottom<svgRect.top||r.top>svgRect.bottom).length;
   const transforms=groups.map(g=>g.getAttribute('transform')||'');
   const sizes=[...new Set([...layer.querySelectorAll('text')].map(t=>t.getAttribute('font-size')))].sort((a,b)=>Number(a)-Number(b));
   const matrix=svg.getScreenCTM();
