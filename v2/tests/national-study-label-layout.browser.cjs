@@ -4,11 +4,11 @@ const fs=require('node:fs/promises');
 const path=require('node:path');
 const {start}=require('./helpers/nationwide-browser.cjs');
 const PREFS=[
- {pref:'28',name:'兵庫県'},
- {pref:'27',name:'大阪府'},
- {pref:'26',name:'京都府'},
- {pref:'13',name:'東京都'},
- {pref:'01',name:'北海道'}
+ {pref:'28',name:'兵庫県',denseCode:'28101',denseQuery:'神戸市東灘区'},
+ {pref:'27',name:'大阪府',denseCode:'27127',denseQuery:'大阪市北区'},
+ {pref:'26',name:'京都府',denseCode:'26104',denseQuery:'京都市中京区'},
+ {pref:'13',name:'東京都',denseCode:'13101',denseQuery:'千代田区'},
+ {pref:'01',name:'北海道',denseCode:'01101',denseQuery:'札幌市中央区'}
 ];
 const engine=process.env.KUSSOON_BROWSER_ENGINE||'chromium';
 const mobile=engine==='webkit';
@@ -178,7 +178,19 @@ function assertAnchorsSame(before,after,label){
     assertNoOverlap(cleared,'Hyogo after municipality selection and clear');
    }
    await page.locator('#mapFrame').screenshot({path:path.join(ARTIFACTS,engine+'-'+item.pref+'-study-reset.png')});
-   report.push({browser:engine,pref:item.pref,name:item.name,initial:{labels:before.visible,overlaps:before.overlapPairs,screenFont:[before.screenFontMin,before.screenFontMax],viewBox:before.viewBox},zoom:{labels:afterZoom.visible,overlaps:afterZoom.overlapPairs,screenFont:[afterZoom.screenFontMin,afterZoom.screenFontMax]},reset:{labels:afterReset.visible,viewBox:afterReset.viewBox},readings:item.pref==='28'?'checked':'not toggled'});
+   await page.locator('#placeSearch').fill(item.denseQuery);
+   await page.waitForFunction(query=>[...document.querySelectorAll('#searchResults button')].some(button=>button.textContent.includes(query)),item.denseQuery,{timeout:30000});
+   await page.locator('#searchResults button').filter({hasText:item.denseQuery}).first().click();
+   await page.waitForFunction(code=>document.querySelector('#map').dataset.nationalSelection===code,item.denseCode,{timeout:30000});
+   await page.locator('#popupClose').click();
+   await page.waitForTimeout(230);
+   const dense=await metrics(page,item.pref);
+   assertNoOverlap(dense,item.name+' dense municipality focus '+item.denseQuery);
+   assert(dense.visible>0&&dense.targetOnly&&dense.nonTargetHidden,item.name+' dense focus keeps only target-prefecture labels');
+   assert(Number(dense.viewBox.split(/\\s+/)[2])<Number(initialView.split(/\\s+/)[2]),
+    item.name+' dense focus zooms in from the prefecture-wide view');
+   await page.locator('#mapFrame').screenshot({path:path.join(ARTIFACTS,engine+'-'+item.pref+'-study-dense.png')});
+   report.push({browser:engine,pref:item.pref,name:item.name,initial:{labels:before.visible,overlaps:before.overlapPairs,screenFont:[before.screenFontMin,before.screenFontMax],viewBox:before.viewBox},zoom:{labels:afterZoom.visible,overlaps:afterZoom.overlapPairs,screenFont:[afterZoom.screenFontMin,afterZoom.screenFontMax]},reset:{labels:afterReset.visible,viewBox:afterReset.viewBox},dense:{query:item.denseQuery,labels:dense.visible,overlaps:dense.overlapPairs,viewBox:dense.viewBox},readings:item.pref==='28'?'checked':'not toggled'});
   }
   await page.goto(origin+'/maps/national-municipalities.html?pref=28');
   await page.waitForFunction(()=>document.querySelectorAll('#map [data-v2-labels] > g').length===49,null,{timeout:60000});
