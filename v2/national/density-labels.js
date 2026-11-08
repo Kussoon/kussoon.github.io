@@ -37,7 +37,8 @@
   // A global count ceiling used to leave obvious blank municipal areas.
   const limit=density==='sparse'?Math.max(3,Math.ceil(width*height/factors.sparse)):
    Infinity;
-  const gap=(marginPx[density]??4)/ratio;
+  const zoomSafetyPx=stableAnchors&&zoom>=2?2:0;
+  const gap=((marginPx[density]??4)+zoomSafetyPx)/ratio;
   const tile=tilePx[density]||115;
   const countX=Math.max(1,Math.ceil(width/tile));
   const countY=Math.max(1,Math.ceil(height/tile));

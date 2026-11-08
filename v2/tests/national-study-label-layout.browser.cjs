@@ -21,10 +21,12 @@ async function metrics(page,pref){
   const rectOf=node=>{const r=node.getBoundingClientRect();return {x1:r.left,x2:r.right,y1:r.top,y2:r.bottom,w:r.width,h:r.height};};
   const visible=nodes.filter(node=>{const r=node.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(node).display!=='none';});
   const rects=visible.map(node=>({code:node.getAttribute('data-national-code'),text:node.textContent,rect:rectOf(node)}));
-  let overlapPairs=0;
+  let overlapPairs=0;const overlaps=[];
   for(let i=0;i<rects.length;i++)for(let j=i+1;j<rects.length;j++){
    const a=rects[i].rect,b=rects[j].rect;
-   if(Math.min(a.x2,b.x2)-Math.max(a.x1,b.x1)>1&&Math.min(a.y2,b.y2)-Math.max(a.y1,b.y1)>1)overlapPairs++;
+   const width=Math.min(a.x2,b.x2)-Math.max(a.x1,b.x1);
+   const height=Math.min(a.y2,b.y2)-Math.max(a.y1,b.y1);
+   if(width>1&&height>1){overlapPairs++;overlaps.push({codes:[rects[i].code,rects[j].code],texts:[rects[i].text,rects[j].text],width,height});}
   }
   const vb=svg.viewBox?.baseVal,r=svg.getBoundingClientRect(),matrix=typeof svg.getScreenCTM==='function'?svg.getScreenCTM():null;
   const screenScale=matrix?Math.hypot(matrix.a,matrix.b):Math.min(r.width/(vb?.width||850),r.height/(vb?.height||700));
@@ -42,7 +44,7 @@ async function metrics(page,pref){
    nonTargetNodes:outside.length,
    nonTargetHidden:outside.every(node=>{const b=node.getBoundingClientRect();return b.width===0&&b.height===0;}),
    targetOnly:visibleCodes.every(code=>code.startsWith(pref)),
-   overlapPairs,
+   overlapPairs,overlaps,
    screenScale,
    screenFontMin:sizes.length?Math.min(...sizes):0,
    screenFontMax:sizes.length?Math.max(...sizes):0,
@@ -62,7 +64,7 @@ async function waitForStudy(page,pref){
  },pref,{timeout:60000});
  await page.waitForTimeout(230);
 }
-function assertNoOverlap(state,label){assert.equal(state.overlapPairs,0,label+' has no displayed label overlap');}
+function assertNoOverlap(state,label){assert.equal(state.overlapPairs,0,label+' has no displayed label overlap '+JSON.stringify(state.overlaps));}
 function assertAnchorsSame(before,after,label){
  const a=new Map(before.anchors.map(x=>[x[0],x.slice(1)])),b=new Map(after.anchors.map(x=>[x[0],x.slice(1)]));
  for(const [code,xy] of a){const next=b.get(code);if(!next)continue;
