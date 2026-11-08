@@ -46,21 +46,22 @@ function modelFor(region,project){
    :(region.labelName||region.fullName||region.name);
  return {d,name:primary,code:region.code,region};
 }
-function textBox(region,size,readings,measure){
+function textBox(region,size,readings,measure,overviewScale){
  const hasReading=readings&&Boolean(region.reading);
  const parts=hasReading&&region.readingParts?.length===2?region.readingParts:null;
  const full=region.labelName||region.fullName||region.name;
  const split=region.readingParts?.length===2&&region.readingParts.map(p=>p.name).join('')===full?region.readingParts:null;
  const rows=parts?[
   {text:parts[0].name,size,y:-21},
-  {text:parts[0].reading,size:11,y:-8},
+  {text:parts[0].reading,size:11*overviewScale,y:-8},
   {text:parts[1].name,size,y:8},
-  {text:parts[1].reading,size:11,y:21}
+  {text:parts[1].reading,size:11*overviewScale,y:21}
  ]:split?[
   {text:split[0].name,size,y:-9},
   {text:split[1].name,size,y:11}
  ]:[{text:full,size,y:5}];
- if(hasReading&&!parts)rows.push({text:region.reading,size:11,y:19});
+ if(hasReading&&!parts)rows.push({text:region.reading,size:11*overviewScale,y:19});
+ for(const row of rows)row.y*=overviewScale;
  const maxWidth=Math.max(...rows.map(r=>measure(r.text,r.size)),1)+size*.34;
  const top=Math.min(...rows.map(r=>r.y-r.size*.62))-2;
  const bottom=Math.max(...rows.map(r=>r.y+r.size*.42))+2;
@@ -78,7 +79,8 @@ const measure=(value,size)=>{
  ctx.font='600 '+size+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';
  return ctx.measureText(String(value)).width;
 };
-function layout({regions,project,selected='',all=false,readings=false}){
+function layout({regions,project,selected='',all=false,readings=false,overviewScale=1}){
+ if(!Number.isFinite(overviewScale)||overviewScale<=0||overviewScale>1)throw Error('Invalid overview label scale');
  const visible=all?regions:regions.filter(r=>r.code===selected);
  const seeds=visible.map(r=>modelFor(r,project)).filter(Boolean);
  if(!seeds.length)return new Map();
@@ -86,12 +88,12 @@ function layout({regions,project,selected='',all=false,readings=false}){
  // Reuse the SAME established 2021-era balanced geometric anchor planning.
  // Deliberately do not pin the selected label during territory-fit repair:
  // an initial selected label can be incorrectly close to a border.
- const font=14;
+ const font=14*overviewScale;
  const placed=R.planCenterFirstLabels(models,null,'kanji',font,measure,E,
    {anchor:'balanced',shift:all?'adjacent':'none'});
  const full=placed.map((p,i)=>{
-  const size=seeds[i].code===selected?18:14;
-  const {width,height}=textBox(seeds[i].region,size,readings,measure);
+  const size=(seeds[i].code===selected?18:14)*overviewScale;
+  const {width,height}=textBox(seeds[i].region,size,readings,measure,overviewScale);
   // The actual text rows have a minor Y-offset relative to the anchor.
   // Fit checks use this complete visual text rectangle (including furigana).
   return {...p,width,height,box:{
