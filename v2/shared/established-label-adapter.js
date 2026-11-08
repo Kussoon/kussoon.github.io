@@ -80,7 +80,7 @@ const measure=(value,size)=>{
  return ctx.measureText(String(value)).width;
 };
 function layout({regions,project,selected='',all=false,readings=false,overviewScale=1}){
- if(!Number.isFinite(overviewScale)||overviewScale<=0||overviewScale>1)throw Error('Invalid overview label scale');
+ if(!Number.isFinite(overviewScale)||overviewScale<=0)throw Error('Invalid label layout scale');
  const visible=all?regions:regions.filter(r=>r.code===selected);
  const seeds=visible.map(r=>modelFor(r,project)).filter(Boolean);
  if(!seeds.length)return new Map();
