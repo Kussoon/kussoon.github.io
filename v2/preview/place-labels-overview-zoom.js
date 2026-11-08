@@ -1,0 +1,164 @@
+/* Kussoon V2 — fast and reusable Japanese place labels and name matching.
+ * No assumptions about furigana: callers provide a verified reading when known.
+ */
+(function(global){
+'use strict';
+const NS='http://www.w3.org/2000/svg';
+const normalize=value=>String(value||'').normalize('NFKC').replace(/[\s　]+/g,'').toLocaleLowerCase('ja-JP');
+function matches(record,query){
+ const q=normalize(query);
+ return !q||[record.fullName,record.name,record.reading,record.code].some(s=>normalize(s).includes(q));
+}
+// Use the largest land polygon. Its bounding-box centre alone can land outside
+// a crescent, L-shaped territory or island, so search for a point IN the land.
+// The scan favours central positions and adequate whitespace, without forcing
+// labels wholly inside small / narrow municipalities.
+const anchorCache=new WeakMap();
+function ringContains(point,ring){
+ let inside=false;
+ for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+  const a=ring[i],b=ring[j],intersects=(a[1]>point[1])!==(b[1]>point[1])&&
+    point[0]<(b[0]-a[0])*(point[1]-a[1])/(b[1]-a[1])+a[0];
+  if(intersects)inside=!inside;
+ }
+ return inside;
+}
+function insidePolygon(point,polygon){
+ if(!polygon[0]||!ringContains(point,polygon[0]))return false;
+ for(let i=1;i<polygon.length;i++)if(ringContains(point,polygon[i]))return false;
+ return true;
+}
+function ringArea(ring){
+ let twice=0;
+ for(let i=0;i<ring.length;i++){
+  const a=ring[i],b=ring[(i+1)%ring.length];
+  twice+=a[0]*b[1]-b[0]*a[1];
+ }
+ return Math.abs(twice)/2;
+}
+function minEdgeDistance(point,ring,cos){
+ let best=Infinity;
+ for(let i=0;i<ring.length;i++){
+  const a=ring[i],b=ring[(i+1)%ring.length];
+  const x=(point[0]-a[0])*cos,y=point[1]-a[1];
+  const dx=(b[0]-a[0])*cos,dy=b[1]-a[1],length=dx*dx+dy*dy;
+  const t=length?Math.max(0,Math.min(1,(x*dx+y*dy)/length)):0;
+  const d=Math.hypot(x-t*dx,y-t*dy);
+  if(d<best)best=d;
+ }
+ return best;
+}
+function anchor(polys){
+ if(!Array.isArray(polys)||!polys.length)return null;
+ if(anchorCache.has(polys))return anchorCache.get(polys);
+ let largest=null,area=-1;
+ for(const polygon of polys){
+  const ring=polygon[0]||[];
+  if(ring.length<3)continue;
+  const size=ringArea(ring);
+  if(size>area){largest=polygon;area=size;}
+ }
+ if(!largest)return null;
+ const ring=largest[0];
+ let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+ for(const [x,y] of ring){
+  minX=Math.min(minX,x);maxX=Math.max(maxX,x);
+  minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+ }
+ const center=[(minX+maxX)/2,(minY+maxY)/2];
+ if(!Number.isFinite(center[0])||!Number.isFinite(center[1]))return null;
+ if(insidePolygon(center,largest)){anchorCache.set(polys,center);return center;}
+ const w=maxX-minX,h=maxY-minY,cos=Math.cos(center[1]*Math.PI/180);
+ let best=null,bestScore=-Infinity;
+ // 9×9 grid with inset points; don't hide names just because a municipal
+ // polygon is thin. Positions stay central rather than at the perimeter.
+ for(let ix=0;ix<9;ix++)for(let iy=0;iy<9;iy++){
+  const p=[minX+(ix+.5)/9*w,minY+(iy+.5)/9*h];
+  if(!insidePolygon(p,largest))continue;
+  const clearance=Math.min(...largest.map(r=>minEdgeDistance(p,r,cos)));
+  const centrality=Math.hypot((p[0]-center[0])*cos,p[1]-center[1]);
+  const score=clearance-.18*centrality;
+  if(score>bestScore){best=p;bestScore=score;}
+ }
+ // Even a very thin strip must get a label; use polygon's first valid vertex
+ // rather than put the label blindly into a neighboring municipality.
+ const result=best||ring[0].slice(0,2);
+ anchorCache.set(polys,result);
+ return result;
+}
+function show(options){
+ const {svg,regions,project,selected='',all=false,readings=false,positions=null,overviewScale=1,zoomScale=1}=options||{};
+ if(!svg||!Array.isArray(regions)||typeof project!=='function')throw Error('Invalid label options');
+ if(!Number.isFinite(overviewScale)||overviewScale<=0||overviewScale>1)throw Error('Invalid overview label scale');
+ if(!Number.isFinite(zoomScale)||zoomScale<=0)throw Error('Invalid label zoom scale');
+ const existing=svg.querySelector('[data-v2-labels]');
+ if(existing)existing.remove();
+ const layer=document.createElementNS(NS,'g');
+ layer.setAttribute('data-v2-labels','');
+ layer.setAttribute('pointer-events','none');
+ let count=0;
+ for(const region of regions){
+  if(!all&&region.code!==selected)continue;
+  const pt=positions?.get(region.code)||null;
+  if(!pt&&positions)continue;
+  const [x,y]=pt||project(anchor(region.polys));
+  if(!Number.isFinite(x)||!Number.isFinite(y))continue;
+  const group=document.createElementNS(NS,'g');
+  group.setAttribute('data-label-x',x.toFixed(2));
+  group.setAttribute('data-label-y',y.toFixed(2));
+  group.setAttribute('data-label-base-scale',String(overviewScale));
+  const renderScale=overviewScale/zoomScale;
+  group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(Math.abs(renderScale-1)>1e-9?' scale('+renderScale+')':''));
+  const hasReading=readings&&region.reading;
+  const parts=hasReading&&Array.isArray(region.readingParts)&&region.readingParts.length===2?region.readingParts:null;
+  const split=Array.isArray(region.readingParts)&&region.readingParts.length===2&&
+   region.readingParts.map(p=>p.name).join('')===(region.labelName||region.fullName||region.name)
+   ?region.readingParts:null;
+  // Names are two lines even when phonetic readings are OFF.
+  const rows=parts?[
+   {text:parts[0].name,small:false,y:-21},
+   {text:parts[0].reading,small:true,y:-8},
+   {text:parts[1].name,small:false,y:8},
+   {text:parts[1].reading,small:true,y:21}
+  ]:split?[
+   {text:split[0].name,small:false,y:-9},
+   {text:split[1].name,small:false,y:11}
+  ]:[{text:region.labelName||region.fullName||region.name,small:false,y:5}];
+  if(hasReading&&!parts)rows.push({text:region.reading,small:true,y:19});
+  for(const row of rows){
+   const t=document.createElementNS(NS,'text');
+   t.setAttribute('text-anchor','middle');
+   t.setAttribute('paint-order','stroke');
+   t.setAttribute('stroke','#fff');
+   t.setAttribute('stroke-width',region.code===selected?'4':'3');
+   t.setAttribute('stroke-linejoin','round');
+   t.setAttribute('fill','#173b56');
+   t.setAttribute('font-size',row.small?'11':region.code===selected?'18':'14');
+   t.setAttribute('font-weight',row.small?'600':region.code===selected?'700':'600');
+   t.setAttribute('y',String(row.y));
+   t.textContent=row.text;
+   group.append(t);
+  }
+  layer.append(group);count++;
+ }
+ svg.append(layer);
+ return count;
+}
+function updateZoomScale({svg,zoomScale=1}={}){
+ if(!svg||!Number.isFinite(zoomScale)||zoomScale<=0)throw Error('Invalid label zoom scale');
+ const layer=svg.querySelector('[data-v2-labels]');
+ if(!layer)return 0;
+ let updated=0;
+ for(const group of layer.children){
+  const x=Number(group.getAttribute('data-label-x'));
+  const y=Number(group.getAttribute('data-label-y'));
+  const base=Number(group.getAttribute('data-label-base-scale'));
+  if(![x,y,base].every(Number.isFinite)||base<=0)continue;
+  const scale=base/zoomScale;
+  group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(Math.abs(scale-1)>1e-9?' scale('+scale+')':''));
+  updated++;
+ }
+ return updated;
+}
+global.KussoonV2PlaceLabels=Object.freeze({normalize,matches,anchor,insidePolygon,show,updateZoomScale});
+})(window);
