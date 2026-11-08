@@ -5,9 +5,9 @@ const path=require('node:path');
 const {start}=require('./helpers/nationwide-browser.cjs');
 
 const CASES=[
- {name:'大阪府',pref:'27',region:'27127'},
- {name:'京都府',pref:'26',region:'26109'},
- {name:'兵庫県',pref:'28',region:'28109'}
+ {name:'大阪府',pref:'27',region:'27127',count:72},
+ {name:'京都府',pref:'26',region:'26109',count:36},
+ {name:'兵庫県',pref:'28',region:'28109',count:49}
 ];
 const SHOTS=process.env.KUSSOON_BROWSER_ARTIFACTS||'/tmp/prefecture-overview-label-size';
 
@@ -45,9 +45,11 @@ async function inspect(page){
    for(const item of CASES){
     await page.locator('#prefTrigger').click();
     await page.getByRole('button',{name:item.name,exact:true}).click();
-    await page.waitForFunction(({pref})=>document.querySelector('#pref')?.value===pref&&
+    await page.waitForFunction(({pref,count})=>document.querySelector('#pref')?.value===pref&&
       document.querySelector('#regionTrigger')&&!document.querySelector('#regionTrigger').disabled&&
-      !!document.querySelector('#map [data-v2-labels]'),item);
+      document.querySelectorAll('#region option:not([value=\"\"])').length===count&&
+      document.querySelectorAll('#map [data-v2-labels] > g').length===count&&
+      [...document.querySelectorAll('#map [data-v2-labels] > g')].every(g=>g.getAttribute('transform')?.endsWith('scale(0.78)')),item);
     const option=await page.locator('#region option[value="'+item.region+'"]').textContent();
     assert(option,'test municipality exists for '+item.name+' '+item.region);
     const overview=await inspect(page);
