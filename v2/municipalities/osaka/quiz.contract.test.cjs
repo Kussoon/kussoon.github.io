@@ -24,6 +24,8 @@ assert(app.includes('const result=Core.finish(session)'),'Shared grading is used
 assert(app.includes('const result=Core.answer(session,code)'),'Shared answer handling is used');
 assert(app.includes('proximity.options(item,current)'),'Shared nearby-four-choice logic is used');
 assert(app.includes('window.scrollTo(0,0)'),'Return-to-region scrolls to page top');
+assert(app.includes("'違います。\\nそこは'"),'Quiz1 wrong-answer feedback uses a single newline escape');
+assert(!app.includes("'違います。\\\\nそこは'"),'Quiz1 feedback must not display a literal backslash-n');
 assert(app.includes('question.style.minHeight=question.getBoundingClientRect().height'), 'Result title retains question height');
 assert(app.includes("byId('choices').hidden=true"),'Choices are hidden outside questions');
 assert(app.includes("byId('reset').onclick=()=>fitMap(current)"),'Region fit preserved');
