@@ -17,4 +17,5 @@ assert.equal(osaka.filter(x=>x.reading).length,72,'Reading data complete');
 assert(html.includes('name="robots" content="noindex,follow"'));
 assert(html.includes('fetch(\'./regions.json\')'));
 assert(html.includes('<script defer src="/common/site-footer.js">'));
+assert(config.regions.every(r=>typeof r.reading==='string'&&r.reading.length>0),'Every regional selector has a reading');
 console.log('Osaka V2 region baseline: PASS (72/72 areas, 8 regions)');
