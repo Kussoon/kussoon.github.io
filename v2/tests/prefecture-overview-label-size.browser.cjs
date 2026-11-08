@@ -26,8 +26,8 @@ async function inspect(page){
   const clipped=rects.filter(r=>r.right<svgRect.left||r.left>svgRect.right||r.bottom<svgRect.top||r.top>svgRect.bottom).length;
   const transforms=groups.map(g=>g.getAttribute('transform')||'');
   const sizes=[...new Set([...layer.querySelectorAll('text')].map(t=>t.getAttribute('font-size')))].sort((a,b)=>Number(a)-Number(b));
-  const viewBox=svg.getAttribute('viewBox').split(/\s+/).map(Number);
-  return {labelCount:groups.length,overlapPairs,clipped,transforms,sizes,zoomScale:850/viewBox[2]};
+  const matrix=svg.getScreenCTM();
+  return {labelCount:groups.length,overlapPairs,clipped,transforms,sizes,screenScale:Math.abs(matrix?.a||1)};
  });
 }
 async function firstTextPixelHeight(page){
@@ -35,7 +35,7 @@ async function firstTextPixelHeight(page){
 }
 function assertScreenSizeStaysFixed(result,baseScale,label){
  const scales=result.transforms.map(t=>Number(t.match(/scale\(([^)]+)\)$/)?.[1]||1));
- assert(scales.length&&scales.every(scale=>Math.abs(scale*result.zoomScale-baseScale)<.002),label+' label render scale tracks the map zoom');
+ assert(scales.length&&scales.every(scale=>Math.abs(scale*result.screenScale-baseScale)<.002),label+' label render scale tracks the actual SVG screen scale');
 }
 
 (async()=>{
@@ -56,13 +56,12 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
     await page.waitForFunction(({pref,count})=>document.querySelector('#pref')?.value===pref&&
       document.querySelector('#regionTrigger')&&!document.querySelector('#regionTrigger').disabled&&
       document.querySelectorAll('#region option:not([value=\"\"])').length===count&&
-      document.querySelectorAll('#map [data-v2-labels] > g').length===count&&
-      [...document.querySelectorAll('#map [data-v2-labels] > g')].every(g=>g.getAttribute('transform')?.endsWith('scale(0.78)')),item);
+      document.querySelectorAll('#map [data-v2-labels] > g').length===count,item);
     const option=await page.locator('#region option[value="'+item.region+'"]').textContent();
     assert(option,'test municipality exists for '+item.name+' '+item.region);
     const overview=await inspect(page);
     assert.equal(overview.labelCount,Number(await page.locator('#region option:not([value=""])').count()),item.name+' labels shown in prefecture overview');
-    assert(overview.transforms.length&&overview.transforms.every(t=>t.endsWith('scale(0.78)')),item.name+' overview applies 78% consistently');
+    assertScreenSizeStaysFixed(overview,.78,item.name+' overview');
     assert(overview.sizes.includes('14'),item.name+' source font remains unchanged before overview scaling');
     await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-overview.png')});
 
@@ -87,7 +86,7 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
     await page.getByRole('button',{name:option,exact:true}).click();
     await page.waitForFunction(code=>document.querySelector('#region')?.value===code&&document.querySelector('#map .chosen[data-code="'+code+'"]'),item.region);
     const selected=await inspect(page);
-    assert(selected.transforms.length&&selected.transforms.every(t=>!t.includes('scale(')),item.name+' selection restores 1.00x labels');
+    assertScreenSizeStaysFixed(selected,1,item.name+' selection restores original label size');
     assert(selected.sizes.includes('18'),item.name+' selected municipality retains established 18px label');
     await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-selected.png')});
     const selectedTextHeight=await firstTextPixelHeight(page);
@@ -101,7 +100,8 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
 
     await page.locator('#prefBtn').click();
     await page.waitForFunction(pref=>document.querySelector('#region')?.value===''&&
-      [...document.querySelectorAll('#map [data-v2-labels] > g')].every(g=>g.getAttribute('transform')?.endsWith('scale(0.78)')),item.pref);
+      document.querySelectorAll('#map [data-v2-labels] > g').length>0,item.pref);
+    assertScreenSizeStaysFixed(await inspect(page),.78,item.name+' prefecture return restores compact labels');
    }
    assert.equal(app.errors.length,0,app.errors.join('; '));
   }finally{await app.close();}
