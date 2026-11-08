@@ -39,7 +39,7 @@ function applyDisplayNames(index){
  return index;
 }
 function create({map,viewport,loadIndex,store,loadOffices,overview,project,isActive,onSelection,onStatus,prefName=code=>code,geometryWorkerUrl='../progressive-preview/progressive-geometry.worker.js'}){
- let index=null,ms=[],selected='',selectionEntry=null,selectionSequence=0,generation=0,timer=null,disposed=false,shapeKey=null,shapes=null,labelLayer=null,projection=project,labelNodes=new Map(),prepared=new WeakMap(),activePointers=new Set(),selectionError='',detailError='';
+ let index=null,ms=[],selected='',selectionEntry=null,selectionSequence=0,generation=0,timer=null,disposed=false,shapeKey=null,shapes=null,labelLayer=null,projection=project,labelNodes=new Map(),labelPlans=new Map(),prepared=new WeakMap(),activePointers=new Set(),selectionError='',detailError='';
  const timing={labelPasses:0,lastLabelMs:0,firstLabelMs:0,maxLabelMs:0,shapePasses:0,lastShapeMs:0,maxShapeMs:0,indexBytes:0},canvas=document.createElement('canvas'),context=canvas.getContext('2d'),widths=new Map();
  const tag=(n,attrs={})=>{const x=document.createElementNS(NS,n);for(const [k,v] of Object.entries(attrs))x.setAttribute(k,v);return x;};
  const ready=loadIndex().then(d=>{index=applyDisplayNames(validateIndex(d));timing.indexBytes=new TextEncoder().encode(JSON.stringify(d)).length;if(isActive())mount(projection);return index;});
@@ -47,12 +47,93 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
  function measure(text,size){const px=fontSize(850/viewport.view().w),physical=size*frameRatio,cacheKey=text+'|'+physical.toFixed(4);if(!widths.has(cacheKey)){if(widths.size>=12000)widths.clear();context.font='850 '+physical+'px "Hiragino Sans","Yu Gothic",Meiryo,sans-serif';widths.set(cacheKey,context.measureText(text).width);}return widths.get(cacheKey)/frameRatio;}
  let frameRatio=1,shapePending=false,sceneSequence=0,requestKey='',overviewEntry=null;
  const geometry=global.KussoonProgressiveGeometryClient&&new URLSearchParams(location.search).get('geometry')!=='main'?global.KussoonProgressiveGeometryClient.create({url:geometryWorkerUrl,canWork:()=>!activePointers.size,ownsEntry:(key,entry)=>store.peek(key)===entry}):null;
+ function sizedLabel(model,point,size,readings){
+  const w=measure(model.name,size)+size*.24,h=size*1.2;
+  const base={x:point.x,y:point.y,width:w,height:h,
+   box:{x1:point.x-w/2,y1:point.y-h/2,x2:point.x+w/2,y2:point.y+h/2}};
+  return readings&&model.readingParts?.length?
+   global.KussoonNationalReadings.boxFor(model,base,size,measure):
+   global.KussoonAdministrativeLabels.boxFor(model,base,size,measure);
+ }
+ function cullTransientOverlaps(size,view,gapX=0,gapY=gapX){
+  const candidates=[...labelPlans.values()].filter(item=>item.size===size&&item.box&&labelNodes.has(item.model.code));
+  const priorities=global.KussoonDensityLabels.priority;
+  candidates.sort((a,b)=>
+   (b.model.code===selected?1:0)-(a.model.code===selected?1:0)||
+   (typeof priorities==='function'?priorities(b.model)-priorities(a.model):0)||
+   a.model.code.localeCompare(b.model.code));
+  const placed=[];
+  let hidden=0;
+  const intersectsView=box=>box.x2>=view.x&&box.x1<=view.x+view.w&&
+   box.y2>=view.y&&box.y1<=view.y+view.h;
+  for(const item of candidates){
+   const node=labelNodes.get(item.model.code);
+   const inView=intersectsView(item.box);
+   const collides=inView&&placed.some(other=>
+    other.box.x1-gapX<item.box.x2&&other.box.x2+gapX>item.box.x1&&
+    other.box.y1-gapY<item.box.y2&&other.box.y2+gapY>item.box.y1);
+   node.style.display=collides?'none':'';
+   if(collides)hidden++;else if(inView)placed.push(item);
+  }
+  return hidden;
+ }
  function refreshLabels(){
-  if(!index||!isActive()||!labelLayer||disposed||activePointers.size)return null;const start=performance.now(),f=frame();frameRatio=f.ratio;
-  const readings=document.getElementById('readingMode').value==='on',p=plan(ms,{...f,readings,selected,measure});
+  if(!index||!isActive()||!labelLayer||disposed||activePointers.size)return null;
+  const start=performance.now(),f=frame();frameRatio=f.ratio;
+  const readings=document.getElementById('readingMode').value==='on';
+  const p=plan(ms,{...f,readings,selected,measure});
   const wantedCodes=new Set();let count=0;
-  ms.forEach((model,i)=>{if(!p.visible[i])return;const point=p.labels[i],attributes={'data-national-code':model.code,'data-label-code':model.code,x:point.x,y:point.y,'font-size':p.size.toFixed(6),'font-weight':'850','text-anchor':'middle','dominant-baseline':'central',fill:'#193e58',stroke:'#fff','stroke-width':(p.size*.18).toFixed(6),'stroke-linejoin':'round','paint-order':'stroke'};let t=labelNodes.get(model.code);if(!t){t=tag('text');labelNodes.set(model.code,t);labelLayer.append(t);}wantedCodes.add(model.code);for(const [key,value] of Object.entries(attributes))if(t.getAttribute(key)!==String(value))t.setAttribute(key,value);t.style.cursor='pointer';if(readings&&model.readingParts?.length)global.KussoonNationalReadings.paint(t,model,point.x,point.y,p.size,measure,6);else{global.KussoonAdministrativeLabels.paint(t,model,point.x,p.size,6);}t.setAttribute('aria-label',model.fullName);count++;});
-  for(const [code,node] of labelNodes)if(!wantedCodes.has(code)){node.remove();labelNodes.delete(code);}timing.lastLabelMs=performance.now()-start;if(!timing.labelPasses)timing.firstLabelMs=timing.lastLabelMs;timing.labelPasses++;timing.maxLabelMs=Math.max(timing.maxLabelMs,timing.lastLabelMs);map.dataset.nationalSelection=selected;onStatus?.(selectionError||detailError||'全国のまま 拡大 '+f.zoom.toFixed(2)+'倍・地名 '+count+'件（2026年1905区域）');return {visible:count,px:p.px,ms:timing.lastLabelMs};
+  labelPlans.clear();
+  ms.forEach((model,i)=>{
+   if(!p.visible[i])return;
+   const point=p.labels[i],attributes={'data-national-code':model.code,'data-label-code':model.code,
+    x:point.x,y:point.y,'font-size':p.size.toFixed(6),'font-weight':'850',
+    'text-anchor':'middle','dominant-baseline':'central',fill:'#193e58',stroke:'#fff',
+    'stroke-width':(p.size*.18).toFixed(6),'stroke-linejoin':'round','paint-order':'stroke'};
+   let t=labelNodes.get(model.code);
+   if(!t){t=tag('text');labelNodes.set(model.code,t);labelLayer.append(t);}
+   wantedCodes.add(model.code);
+   for(const [key,value] of Object.entries(attributes))
+    if(t.getAttribute(key)!==String(value))t.setAttribute(key,value);
+   t.style.display='';t.style.cursor='pointer';
+   if(readings&&model.readingParts?.length)
+    global.KussoonNationalReadings.paint(t,model,point.x,point.y,p.size,measure,6);
+   else global.KussoonAdministrativeLabels.paint(t,model,point.x,p.size,6);
+   labelPlans.set(model.code,{model,point:{x:point.x,y:point.y},size:p.size,box:point.box});
+   count++;
+  });
+  for(const [code,node] of labelNodes)if(!wantedCodes.has(code)){
+   node.remove();labelNodes.delete(code);labelPlans.delete(code);
+  }
+  timing.lastLabelMs=performance.now()-start;
+  if(!timing.labelPasses)timing.firstLabelMs=timing.lastLabelMs;
+  timing.labelPasses++;timing.maxLabelMs=Math.max(timing.maxLabelMs,timing.lastLabelMs);
+  map.dataset.nationalSelection=selected;
+  onStatus?.(selectionError||detailError||'全国のまま 拡大 '+f.zoom.toFixed(2)+'倍・地名 '+count+'件（2026年1905区域）');
+  return {visible:count,px:p.px,ms:timing.lastLabelMs};
+ }
+ function syncScreenSize(){
+  if(!index||!isActive()||!labelLayer||disposed)return {updated:0,hidden:0};
+  const f=frame();frameRatio=f.ratio;
+  const readings=document.getElementById('readingMode').value==='on';
+  const size=fontSize(f.zoom)/f.ratio;
+  let updated=0;
+  for(const item of labelPlans.values()){
+   const {model,point}=item,node=labelNodes.get(item.model.code);
+   if(!node)continue;
+   const label=sizedLabel(model,point,size,readings);
+   node.setAttribute('x',point.x);node.setAttribute('y',point.y);
+   node.setAttribute('font-size',size.toFixed(6));
+   node.setAttribute('stroke-width',(size*.18).toFixed(6));
+   if(readings&&model.readingParts?.length)
+    global.KussoonNationalReadings.paint(node,model,point.x,point.y,size,measure,6);
+   else global.KussoonAdministrativeLabels.paint(node,model,point.x,size,6);
+   node.style.display='';
+   item.size=size;item.box=label.box;
+   updated++;
+  }
+  const hidden=cullTransientOverlaps(size,f.view,f.zoom>=2?2/f.ratio:0,f.zoom>=2?6/f.ratio:0);
+  return {updated,hidden,screenFont:fontSize(f.zoom),zoom:f.zoom};
  }
  function regionBox(polys){let w=Infinity,s=Infinity,e=-Infinity,n=-Infinity;for(const poly of polys)for(const ring of poly)for(const p of ring){w=Math.min(w,p[0]);s=Math.min(s,p[1]);e=Math.max(e,p[0]);n=Math.max(n,p[1]);}return [w,s,e,n];}
  function prepare(entry){if(!prepared.has(entry))prepared.set(entry,{arcs:entry.arcs.map(a=>({arc:a,box:regionBox([[a]])})),regions:entry.regions.map(r=>({region:r,polys:r.polys.map(p=>({poly:p,box:regionBox([p])}))}))});return prepared.get(entry);}
@@ -101,14 +182,15 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
   catch(e){if(id===generation&&isActive()){detailError='詳細地図の読み込みに失敗しました。地名は表示できます。操作すると再試行します。';onStatus?.(selectionError||detailError);}}
  }
  function schedule(){if(disposed)return;generation++;clearTimeout(timer);timer=setTimeout(flush,160);}
- function mount(p){projection=p;if(activePointers.size){schedule();return;}if(!index){schedule();return;}ms=models(index,projection);shapeKey=null;requestKey='';sceneSequence++;shapePending=false;overviewEntry={arcs:[],regions:overview().features.map(f=>({code:f.properties.code,name:prefName(f.properties.code),polys:f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates}))};labelNodes.clear();shapes=tag('g',{'data-national-shapes':''});labelLayer=tag('g',{'data-progressive-labels':''});map.replaceChildren(shapes,labelLayer);map.classList.add('progressive-national');const boxes=ms.map(m=>m.box);viewport.setContentBounds({minX:Math.min(...boxes.map(b=>b.minX)),minY:Math.min(...boxes.map(b=>b.minY)),maxX:Math.max(...boxes.map(b=>b.maxX)),maxY:Math.max(...boxes.map(b=>b.maxY))});renderShapesMain();refreshLabels();schedule();}
+ function mount(p){projection=p;if(activePointers.size){schedule();return;}if(!index){schedule();return;}ms=models(index,projection);shapeKey=null;requestKey='';sceneSequence++;shapePending=false;overviewEntry={arcs:[],regions:overview().features.map(f=>({code:f.properties.code,name:prefName(f.properties.code),polys:f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates}))};labelNodes.clear();labelPlans.clear();shapes=tag('g',{'data-national-shapes':''});labelLayer=tag('g',{'data-progressive-labels':''});map.replaceChildren(shapes,labelLayer);map.classList.add('progressive-national');const boxes=ms.map(m=>m.box);viewport.setContentBounds({minX:Math.min(...boxes.map(b=>b.minX)),minY:Math.min(...boxes.map(b=>b.minY)),maxX:Math.max(...boxes.map(b=>b.maxX)),maxY:Math.max(...boxes.map(b=>b.maxY))});renderShapesMain();refreshLabels();schedule();}
  function pause(){generation++;sceneSequence++;shapePending=false;requestKey='';selectionSequence++;selected='';selectionError='';detailError='';selectionEntry=null;clearTimeout(timer);map.classList.remove('progressive-national');}
  async function select(code){await ready;if(!isActive())return;if(!index.entries.some(x=>x.code===code))throw Error('Unknown municipality');selected=selected===code?'':code;selectionError='';selectionEntry=null;const id=++selectionSequence;onSelection?.();refreshLabels();renderShapes();if(!selected)return;try{const entry=await store.get(code.slice(0,2));if(id!==selectionSequence||!isActive()||selected!==code)return;entry.offices=await loadOffices(code.slice(0,2));if(id!==selectionSequence||!isActive()||selected!==code)return;const region=entry.regions.find(r=>r.code===code);if(!region)throw Error('Selected code missing from detail source');const indexed=index.entries.find(r=>r.code===code);if(indexed?.fullName)region.fullName=indexed.fullName;selectionEntry={arcs:[],regions:[region],offices:entry.offices};renderShapes();onSelection?.();}catch(e){if(id===selectionSequence){selectionError='庁舎・詳細地図を取得できませんでした。地名選択は保持しています。';onStatus?.(selectionError);}}}
  async function focus(code){await ready;if(!isActive())return;const m=ms.find(x=>x.code===code);if(!m)throw Error('Unknown municipality');const w=Math.min(850/8,Math.max(850/128,m.box.w*1.6,m.box.h*850/700*1.6));viewport.setView({x:m.point[0]-w/2,y:m.point[1]-w*700/850/2,w,h:w*700/850});if(selected===code){selected='';}await select(code);schedule();}
  function clear(){selected='';selectionError='';detailError='';selectionEntry=null;selectionSequence++;onSelection?.();}
- function press(e){activePointers.add(e.pointerId);}function release(e){if(activePointers.delete(e.pointerId)&&!activePointers.size)schedule();}function blur(){activePointers.clear();schedule();}
- map.addEventListener('pointerdown',press);global.addEventListener('pointerup',release,true);global.addEventListener('pointercancel',release,true);global.addEventListener('blur',blur);global.addEventListener('resize',schedule);
- return Object.freeze({ready,mount,pause,schedule,refreshLabels,select,focus,clear,selected:()=>selected,selection:()=>selectionEntry&&selected?{entry:selectionEntry,code:selected,pref:selected.slice(0,2)}:null,releaseGeometry:key=>geometry?.release(key),prefectureNamesFor:pref=>index?.entries.filter(r=>r.pref===pref).map(r=>({code:r.code,name:r.fullName||r.name,reading:r.reading||''}))||[],fullNameFor:code=>index?.entries.find(r=>r.code===code)?.fullName||null,readingPartsFor:code=>index?.entries.find(r=>r.code===code)?.parts||null,project:p=>projection(p),snapshot:()=>({selected,selectionError,detailError,measureEntries:widths.size,count:index?.count||0,store:store.stats(),...timing,shapePending,scheduled:Boolean(timer),activePointers:activePointers.size,geometry:geometry?.stats()||{backend:'main'}}),anchors:()=>ms.map(m=>({code:m.code,point:m.point.slice(),bounds:m.box})),destroy(){pause();geometry?.destroy();map.removeEventListener('pointerdown',press);global.removeEventListener('pointerup',release,true);global.removeEventListener('pointercancel',release,true);global.removeEventListener('blur',blur);global.removeEventListener('resize',schedule);disposed=true;}});
+ function press(e){activePointers.add(e.pointerId);}function release(e){if(activePointers.delete(e.pointerId)&&!activePointers.size)schedule();}function blur(){activePointers.clear();syncScreenSize();schedule();}
+ function resize(){syncScreenSize();schedule();}
+ map.addEventListener('pointerdown',press);global.addEventListener('pointerup',release,true);global.addEventListener('pointercancel',release,true);global.addEventListener('blur',blur);global.addEventListener('resize',resize);
+ return Object.freeze({ready,mount,pause,schedule,refreshLabels,syncScreenSize,select,focus,clear,selected:()=>selected,selection:()=>selectionEntry&&selected?{entry:selectionEntry,code:selected,pref:selected.slice(0,2)}:null,releaseGeometry:key=>geometry?.release(key),prefectureNamesFor:pref=>index?.entries.filter(r=>r.pref===pref).map(r=>({code:r.code,name:r.fullName||r.name,reading:r.reading||''}))||[],fullNameFor:code=>index?.entries.find(r=>r.code===code)?.fullName||null,readingPartsFor:code=>index?.entries.find(r=>r.code===code)?.parts||null,project:p=>projection(p),snapshot:()=>({selected,selectionError,detailError,measureEntries:widths.size,count:index?.count||0,store:store.stats(),...timing,shapePending,scheduled:Boolean(timer),activePointers:activePointers.size,geometry:geometry?.stats()||{backend:'main'}}),anchors:()=>ms.map(m=>({code:m.code,point:m.point.slice(),bounds:m.box})),destroy(){pause();geometry?.destroy();map.removeEventListener('pointerdown',press);global.removeEventListener('pointerup',release,true);global.removeEventListener('pointercancel',release,true);global.removeEventListener('blur',blur);global.removeEventListener('resize',resize);disposed=true;}});
 }
 global.KussoonV2NationalProgressive=Object.freeze({fontSize,validateIndex,applyDisplayNames,createStore,models,plan,uniqueSegments,create});
 })(window);

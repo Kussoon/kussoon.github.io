@@ -13,6 +13,7 @@ const files=[
  'v2/tests/audit-ledger.test.cjs',
  'v2/tests/office-directory.test.cjs',
  'v2/tests/prefecture-colors.test.cjs',
+ 'v2/tests/national-study-label-layout.test.cjs',
 ];
 for(const file of files){
  const result=spawnSync(process.execPath,[file],{cwd:path.resolve(__dirname,'../..'),stdio:'inherit'});
