@@ -12,7 +12,7 @@ function init(options){
  // A selected municipality can project the rest of its prefecture far outside
  // the initial 850x700 frame, so panning must use the true content extents.
  let contentBounds={minX:0,minY:0,maxX:width,maxY:height};
- let fingers=new Map(), gesture=null, dragged=false, suppressClick=false, wheelArmed=false, zoomTarget=null;
+ let fingers=new Map(), gesture=null, dragged=false, suppressClick=false, wheelArmed=false;
  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
  const view=()=>({x:box.x,y:box.y,w:box.w,h:box.h});
  function emit(){
@@ -51,15 +51,6 @@ function init(options){
   const nextW=clamp(box.w/factor,width/maxZoom,width/minZoom);
   const ratio=nextW/width;
   setView({x:before.x-at.x*ratio,y:before.y-at.y*ratio,w:nextW,h:ratio*height});
- }
- function buttonZoom(factor){
-  const target=typeof zoomTarget==='function'?zoomTarget():zoomTarget;
-  if(!target||!Number.isFinite(target.x)||!Number.isFinite(target.y))return zoom(factor);
-  const nextW=clamp(box.w/factor,width/maxZoom,width/minZoom),ratio=nextW/width;
-  // Study focus can center a point derived from real prefecture geometry.
-  // This prevents button zoom from moving remote-island prefectures to an
-  // empty-ocean bounding-box center; ordinary national zoom stays unchanged.
-  setView({x:target.x-width/2*ratio,y:target.y-height/2*ratio,w:nextW,h:ratio*height});
  }
  function pan(dx,dy,from=box){
   setView({x:from.x-dx/width*from.w,y:from.y-dy/height*from.h,w:from.w,h:from.h});
@@ -154,7 +145,7 @@ function init(options){
    throw Error('Invalid projected map bounds');
   contentBounds={minX,minY,maxX,maxY};
  }
- return Object.freeze({zoomIn:()=>buttonZoom(1.8),zoomOut:()=>buttonZoom(1/1.8),reset,zoom,view,setContentBounds,setZoomTarget(target){zoomTarget=target||null;},destroy(){
+ return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,setContentBounds,destroy(){
   svg.removeEventListener('pointerdown',pointerDown);
   svg.removeEventListener('pointermove',pointerMove);
   svg.removeEventListener('pointerup',pointerUp);
