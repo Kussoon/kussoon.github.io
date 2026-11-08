@@ -20,6 +20,8 @@ assert(html.includes('quiz-app.js')&&html.includes('regional-quiz.js'));
 assert(html.includes('id="prefReset"')&&html.includes('id="reset"'));
 assert(app.includes("mode=query.get('mode')==='1'?1:2"),'Both quizzes run from one script');
 assert(app.includes('session=Core.start(order)'),'Shared scoring is used');
+assert(app.includes('KussoonV2MapViewport.init({svg,width:W,height:H,minZoom:0.25})'),'Initial region frame permits zooming out');
+assert(app.includes('KussoonV2MapViewport.init({svg,width:W,height:frameHeight,minZoom:0.25})'),'Region and prefecture fit reinitialization retains zoom-out support');
 assert(app.includes('const result=Core.finish(session)'),'Shared grading is used');
 assert(app.includes('const result=Core.answer(session,code)'),'Shared answer handling is used');
 assert(app.includes('proximity.options(item,current)'),'Shared nearby-four-choice logic is used');
