@@ -38,4 +38,10 @@ assert(css.includes('animation:hyogoQuiz2Pulse'),'Blinking behavior retained');
 assert(!app.includes('KussoonHyogoV2Regions')&&!app.includes("e.pref==='28'"));
 const scriptBody=app;assert.doesNotThrow(()=>new Function(scriptBody),'Quiz app JavaScript parses');
 assert.doesNotThrow(()=>new Function(core),'Shared core JavaScript parses');
+assert(app.includes("const prefectureSuffix=/[都道府県]$/.test(config.name)?config.name.slice(-1):'県';"),'Prefecture suffix determined from config name');
+assert(app.includes("byId('prefReset').querySelector('span').textContent=prefectureSuffix+'の';"),'Map fit button uses prefecture suffix');
+for(const [name,expected] of [['北海道','道の'],['東京都','都の'],['京都府','府の'],['大阪府','府の'],['兵庫県','県の']]){
+ const value= /[都道府県]$/.test(name)?name.slice(-1):'県';
+ assert.equal(value+'の',expected);
+}
 console.log('Osaka V2 two-mode quiz contracts: PASS');
