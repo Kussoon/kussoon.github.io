@@ -33,7 +33,13 @@ function formatQuestionName(item){
 let selectedRange=regions.some(r=>r.key===wanted)?wanted:regions[0].key;
 byId('mapRegionName').textContent=regions.find(r=>r.key===selectedRange).name;
 function updateRangeButtons(){for(const button of choices.querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.dataset.key===selectedRange));}
-for(const region of regions){const button=document.createElement('button');button.type='button';button.dataset.key=region.key;button.textContent=region.name+'（'+region.codes.length+'区域）';button.addEventListener('click',()=>setRange(region.key));choices.append(button);}updateRangeButtons();
+for(const region of regions){
+ const button=document.createElement('button');button.type='button';button.dataset.key=region.key;
+ const ruby=document.createElement('ruby');ruby.textContent=region.name;
+ if(region.reading){const rt=document.createElement('rt');rt.textContent=region.reading;ruby.append(rt);}
+ button.append(ruby,document.createTextNode('（'+region.codes.length+'区域）'));
+ button.addEventListener('click',()=>setRange(region.key));choices.append(button);
+}updateRangeButtons();
 let all=[],arcs=[],current=[],projection=null,session=null,startedOnce=false,retryOrder=[],proximity=null;
 function scrollToQuestion(){requestAnimationFrame(()=>byId('question').scrollIntoView({behavior:'smooth',block:'start'}));}
 function decodeArcs(t){return t.arcs.map(a=>{let x=0,y=0;return a.map(q=>{if(t.transform){x+=q[0];y+=q[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];}return q;});});}

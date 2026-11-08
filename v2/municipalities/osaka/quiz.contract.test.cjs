@@ -46,4 +46,7 @@ for(const [name,expected] of [['北海道','道の'],['東京都','都の'],['�
  const value= /[都道府県]$/.test(name)?name.slice(-1):'県';
  assert.equal(value+'の',expected);
 }
+assert(app.includes("const ruby=document.createElement('ruby');ruby.textContent=region.name;"),'Regional buttons render ruby');
+assert(app.includes("rt.textContent=region.reading"),'Regional readings rendered as text');
+assert(css.includes('#rangeChoices button rt{font-size:.7em'),'Region selector ruby has explicit styling');
 console.log('Osaka V2 two-mode quiz contracts: PASS');
