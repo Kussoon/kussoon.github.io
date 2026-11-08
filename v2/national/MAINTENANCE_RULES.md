@@ -92,7 +92,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R21 読込順とキャッシュ|全国概要・必要県詳細・ラベル索引・庁舎を各実経路で読込む。URL移動後の依存先は絶対パスとする。 **条件・例外:** 通信失敗・旧応答競合・キャッシュ破棄・実機メモリは別判定。|[#114](https://github.com/Kussoon/kussoon.github.io/pull/114) [#187](https://github.com/Kussoon/kussoon.github.io/pull/187) [#245](https://github.com/Kussoon/kussoon.github.io/pull/245) [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285)|`maps/national-municipalities.html`<br>`national-progressive-labels.js`|`national-map-move.browser.cjs`<br>`national-2026-data.test.cjs`|限定確認|
+|R21 読込順とキャッシュ|全国概要・必要県詳細・ラベル索引・庁舎を各実経路で読込む。URL移動後の依存先は絶対パスとする。変更した描画スクリプトはHTMLから版数付きURLで読み込み、ソースの版数コメントとURLキーの一致を契約テストで確認する。 **条件・例外:** 通信失敗・旧応答競合・キャッシュ破棄・実機メモリは別判定。|[#114](https://github.com/Kussoon/kussoon.github.io/pull/114) [#187](https://github.com/Kussoon/kussoon.github.io/pull/187) [#245](https://github.com/Kussoon/kussoon.github.io/pull/245) [#265](https://github.com/Kussoon/kussoon.github.io/pull/265) [#285](https://github.com/Kussoon/kussoon.github.io/pull/285)|`maps/national-municipalities.html`<br>`national-progressive-labels.js`<br>`density-labels.js`|`national-map-move.browser.cjs`<br>`national-study-label-layout.test.cjs`<br>`national-2026-data.test.cjs`|限定確認|
 
 ## 13. 公式URL・庁舎情報
 
@@ -291,7 +291,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 ## 2026-11-06 追補：PR #306 キャッシュ・旧描画処理による区名短縮の回帰防止
 
-[#306](https://github.com/Kussoon/kussoon.github.io/pull/306) は、#305で政令指定都市の区に『市名＋区名』を指定したあとも、実機の横浜市地図で『鶴見区』『港北区』と表示された報告を受けた修正。原因候補は、ブラウザーが修正前のラベル描画スクリプトをキャッシュしていて、新しい `labelName` を無視して旧 `name` を描画すること。**県別地図の表示専用モデルには、`labelName` と `name` の両方に全国索引の正式表示名を渡す**ことを規則とし、元の行政データや座標を変更しない。`place-labels.js`、`established-label-adapter.js`、`national-progressive-labels.js` の参照URLは修正時にバージョンキーを更新する。全国版/県別版の政令市区、東京都23区、読み・文字幅計算の照合はR05/R07/R08/R17/R24で継続。
+[#306](https://github.com/Kussoon/kussoon.github.io/pull/306) は、#305で政令指定都市の区に『市名＋区名』を指定したあとも、実機の横浜市地図で『鶴見区』『港北区』と表示された報告を受けた修正。原因候補は、ブラウザーが修正前のラベル描画スクリプトをキャッシュしていて、新しい `labelName` を無視して旧 `name` を描画すること。**県別地図の表示専用モデルには、`labelName` と `name` の両方に全国索引の正式表示名を渡す**ことを規則とし、元の行政データや座標を変更しない。`place-labels.js`、`established-label-adapter.js`、`national-progressive-labels.js`、`density-labels.js` の参照URLは修正時にバージョンキーを更新する。全国版/県別版の政令市区、東京都23区、読み・文字幅計算の照合はR05/R07/R08/R17/R24で継続。
 
 確認：2026地名索引を用いた名称の静的アサーション、HTML/JS構文をチェック。実機Safari/Edgeでの表示は未確認なので、キャッシュが唯一の原因とは断定しない。
 
@@ -321,3 +321,10 @@ HTML内JavaScriptの構文・公開ページの既存＋追加契約アサーシ
 ## 2026-11-07 都道府県学習モード：全国地図のフォーカス再利用
 
 兵庫県の試作 [PR #327](https://github.com/Kussoon/kussoon.github.io/pull/327) をユーザー実機で承認。正式版へ `?studyPref=28` の表示を移植し、**全国地図と全国ラベルの自動配置は完全に維持**する。対象県へのフォーカスと、配置後の他県ラベルのCSS非表示だけを追加する。隣接県の地図は表示する。これまでの `?pref=28`（県詳細データモード）を置き換えず、独立した導線で併存。全国学習モードの密度制御で対象県の地名が省略される場合も元の全国版の仕様どおりであり、全地名表示や新規ラベルエンジンを採用したことにはならない。今後47県はコードの置換のみで展開する。試作実機確認と正式版静的テストは別の評価であり、正式版実機結果は未検証。
+
+
+## 2026-11-09 追補：PR #344公開後の密度エンジンのキャッシュ
+
+PR #344のマージ後、公開ページは `national-progressive-labels.js?v=308` を読み込んでいましたが、これと組み合わせる `density-labels.js` のHTML参照には版数キーがありませんでした。公開表示でラベル重なりが再発したため、関連する描画スクリプトも同じ更新単位でキャッシュ更新できるようにします。
+
+`density-labels.js` のソースに版数コメントを置き、HTMLの `?v=` と静的契約テストで一致を検査します。公開版の最終確認では、実際に新しい版数付きURLが読み込まれ、ラベル重なりが解消していることを別途確認します。自動ブラウザー試験と公開CDN経由の確認を同一視しません。

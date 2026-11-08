@@ -1,6 +1,7 @@
 /* Experimental national label visibility: balanced screen coverage.
  * Geometry and administrative records stay untouched.
  */
+// Asset cache version: 308; keep aligned with the script URL in maps/national-municipalities.html.
 (function(global){
  'use strict';
  const capitals={
