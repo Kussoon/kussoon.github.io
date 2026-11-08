@@ -13,7 +13,7 @@ function init(options){
  // A selected municipality can project the rest of its prefecture far outside
  // the initial 850x700 frame, so panning must use the true content extents.
  let contentBounds={minX:0,minY:0,maxX:width,maxY:height};
- let fingers=new Map(), gesture=null, dragged=false, suppressClick=false, wheelArmed=false;
+ let fingers=new Map(), gesture=null, dragged=false, suppressClick=false, wheelArmed=false, zoomTarget=null;
  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
  const view=()=>({x:box.x,y:box.y,w:box.w,h:box.h});
  function emit(){
@@ -53,6 +53,18 @@ function init(options){
   const ratio=nextW/width;
   setView({x:before.x-at.x*ratio,y:before.y-at.y*ratio,w:nextW,h:ratio*height});
  }
+ function buttonZoom(factor){
+  const target=typeof zoomTarget==='function'?zoomTarget():zoomTarget;
+  // The geometry anchor is a one-shot entry aid. Once a button is used, keep
+  // subsequent zooms centered on the user's current viewport position.
+  zoomTarget=null;
+  if(!target||!Number.isFinite(target.x)||!Number.isFinite(target.y))return zoom(factor);
+  const nextW=clamp(box.w/factor,width/maxZoom,width/minZoom),ratio=nextW/width;
+  // Study focus can center a point derived from real prefecture geometry.
+  // This prevents button zoom from moving remote-island prefectures to an
+  // empty-ocean bounding-box center; ordinary national zoom stays unchanged.
+  setView({x:target.x-width/2*ratio,y:target.y-height/2*ratio,w:nextW,h:ratio*height});
+ }
  function pan(dx,dy,from=box){
   setView({x:from.x-dx/width*from.w,y:from.y-dy/height*from.h,w:from.w,h:from.h});
  }
@@ -66,6 +78,8 @@ function init(options){
  }
  function pointerDown(e){
   if(e.pointerType==='mouse'&&e.button!==0)return;
+  // Any direct map interaction supersedes the initial study-focus anchor.
+  zoomTarget=null;
   wheelArmed=true;
   fingers.set(e.pointerId,point(e));
   // Do not capture a simple tap: Safari must deliver its click to the land path.
@@ -111,10 +125,11 @@ function init(options){
  }
  function onWheel(e){
   if(!wheelArmed&&!e.ctrlKey)return;
+  zoomTarget=null;
   if(e.cancelable)e.preventDefault();
   zoom(Math.exp(-e.deltaY*.003),point(e));
  }
- function onDoubleClick(e){if(e.cancelable)e.preventDefault();zoom(2,point(e));suppressClick=true;}
+ function onDoubleClick(e){zoomTarget=null;if(e.cancelable)e.preventDefault();zoom(2,point(e));suppressClick=true;}
  function onClickCapture(e){
   if(!suppressClick)return;
   e.preventDefault();e.stopPropagation();
@@ -146,7 +161,7 @@ function init(options){
    throw Error('Invalid projected map bounds');
   contentBounds={minX,minY,maxX,maxY};
  }
- return Object.freeze({zoomIn:()=>zoom(1.8),zoomOut:()=>zoom(1/1.8),reset,zoom,view,setContentBounds,setView,setMinZoom(value){if(!Number.isFinite(value)||value<=0||value>maxZoom)throw Error('Invalid minimum zoom');if(value===minZoom)return;minZoom=value;setView(view());},setMaxZoom(value){if(!Number.isFinite(value)||value<minZoom)throw Error('Invalid maximum zoom');if(value===maxZoom)return;maxZoom=value;setView(view());},destroy(){
+ return Object.freeze({zoomIn:()=>buttonZoom(1.8),zoomOut:()=>buttonZoom(1/1.8),reset,zoom,view,setContentBounds,setView,setZoomTarget(target){zoomTarget=target||null;},setMinZoom(value){if(!Number.isFinite(value)||value<=0||value>maxZoom)throw Error('Invalid minimum zoom');if(value===minZoom)return;minZoom=value;setView(view());},setMaxZoom(value){if(!Number.isFinite(value)||value<minZoom)throw Error('Invalid maximum zoom');if(value===maxZoom)return;maxZoom=value;setView(view());},destroy(){
   svg.removeEventListener('pointerdown',pointerDown);
   svg.removeEventListener('pointermove',pointerMove);
   svg.removeEventListener('pointerup',pointerUp);

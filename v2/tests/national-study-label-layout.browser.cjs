@@ -29,6 +29,7 @@ async function metrics(page,pref){
    if(width>1&&height>1){overlapPairs++;overlaps.push({codes:[rects[i].code,rects[j].code],texts:[rects[i].text,rects[j].text],width,height});}
   }
   const vb=svg.viewBox?.baseVal,r=svg.getBoundingClientRect(),matrix=typeof svg.getScreenCTM==='function'?svg.getScreenCTM():null;
+  const visibleInFrame=rects.filter(item=>Math.min(item.rect.x2,r.right)-Math.max(item.rect.x1,r.left)>1&&Math.min(item.rect.y2,r.bottom)-Math.max(item.rect.y1,r.top)>1).length;
   const screenScale=matrix?Math.hypot(matrix.a,matrix.b):Math.min(r.width/(vb?.width||850),r.height/(vb?.height||700));
   const sizes=visible.map(node=>Number(node.getAttribute('font-size'))*screenScale).filter(Number.isFinite);
   const outside=nodes.filter(node=>node.getAttribute('data-national-code')?.slice(0,2)!==pref);
@@ -40,6 +41,7 @@ async function metrics(page,pref){
    viewWidth:vb?.width||850,
    totalNodes:nodes.length,
    visible:visible.length,
+   visibleInFrame,
    visibleCodes,
    nonTargetNodes:outside.length,
    nonTargetHidden:outside.every(node=>{const b=node.getBoundingClientRect();return b.width===0&&b.height===0;}),
@@ -116,6 +118,7 @@ function assertAnchorsSame(before,after,label){
    assertAnchorsSame({anchors:before.anchors},afterZoomImmediate,item.name+' synchronous zoom compensation');
    await page.waitForTimeout(230);
    let afterZoom=await metrics(page,item.pref);
+   assert(afterZoom.visibleInFrame>0,item.name+' button zoom keeps projected labels in the SVG frame');
    assertNoOverlap(afterZoom,item.name+' zoomed');
    assertAnchorsSame(before,afterZoom,item.name+' completed zoom layout');
    await page.locator('#mapFrame').screenshot({path:path.join(ARTIFACTS,engine+'-'+item.pref+'-study-zoomed.png')});

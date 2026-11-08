@@ -7,6 +7,7 @@ const root=path.resolve(__dirname,'../..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const source=read('v2/national/density-labels.js');
 const progressive=read('v2/progressive-preview/national-progressive-labels.js');
+const viewport=read('v2/progressive-preview/map-viewport.js');
 const page=read('maps/national-municipalities.html');
 const rules=read('v2/national/MAINTENANCE_RULES.md');
 const context={window:{}};
@@ -35,6 +36,10 @@ assert(progressive.includes('KussoonNationalReadings.paint(node,model,point.x,po
 assert(page.includes('nationalLabels?.syncScreenSize();nationalLabels?.schedule();'),'zoom changes correct glyphs before delayed layout');
 assert(page.includes('studyInitialView={x:'),'study focus stores its initial view for the established full-view control');
 assert(page.includes('viewport.setView({...studyInitialView})'),'full view returns to the focused prefecture');
+assert(page.includes('function projectedAreaCentroid(geometry,projection)'),'study zoom target is derived from projected boundary geometry, not manual prefecture coordinates');
+assert(page.includes('viewport.setZoomTarget(projectedAreaCentroid(feature.geometry,projection))'),'study focus supplies the geometry-derived anchor to the active progressive viewport');
+assert(viewport.includes('function buttonZoom(factor)')&&viewport.includes('setZoomTarget(target)'),'the actual production progressive viewport centers study button zoom on the configured map geometry');
+assert(page.includes('viewport.setZoomTarget(null)'),'leaving study focus restores ordinary shared viewport zoom behavior');
 assert(rules.includes('全国版と同じ現行エンジン・文字サイズ・アンカー・配置を計算'),'studyPref continues to use the nationwide label engine');
 assert(rules.includes('重なる候補を非表示にする'),'the density tradeoff is recorded in the rulebook proposal');
 assert(rules.includes('画面表示の文字幅・段組み差を吸収するため、高倍率では全国共通で横2画面px・縦6画面pxの衝突余白'),'the cross-browser font metric guard is recorded');

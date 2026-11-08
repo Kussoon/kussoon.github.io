@@ -339,6 +339,20 @@ function project(b){
  return p=>[W/2+(p[0]-lon)*cos*s,H/2-(p[1]-lat)*s];
 }
 function polygons(g){return g.type==='Polygon'?[g.coordinates]:g.coordinates;}
+function projectedAreaCentroid(geometry,projection){
+ let total=0,sumX=0,sumY=0;
+ for(const polygon of polygons(geometry))for(let ringIndex=0;ringIndex<polygon.length;ringIndex++){
+  const points=polygon[ringIndex].map(projection);let twiceArea=0,cx=0,cy=0;
+  for(let i=0;i<points.length;i++){
+   const a=points[i],b=points[(i+1)%points.length],cross=a[0]*b[1]-b[0]*a[1];
+   twiceArea+=cross;cx+=(a[0]+b[0])*cross;cy+=(a[1]+b[1])*cross;
+  }
+  if(Math.abs(twiceArea)<1e-9)continue;
+  const area=Math.abs(twiceArea)/2,weight=ringIndex===0?area:-area;
+  total+=weight;sumX+=(cx/(3*twiceArea))*weight;sumY+=(cy/(3*twiceArea))*weight;
+ }
+ return total>1e-9?{x:sumX/total,y:sumY/total}:null;
+}
 function path(polys,p){
  let d='';for(const poly of polys)for(const ring of poly){
   for(let i=0;i<ring.length;i++){const q=p(ring[i]);d+=(i?'L':'M')+q[0].toFixed(2)+','+q[1].toFixed(2);}d+='Z';
@@ -561,7 +575,7 @@ function startQuiz(){
  $('status').textContent='クイズ中です。オレンジ色の区域を見て回答してください。';
 }
 function returnNation(){
- document.body.classList.remove('study-pref-view');studyInitialView=null;
+ document.body.classList.remove('study-pref-view');studyInitialView=null;viewport.setZoomTarget(null);
  if(quizSession)stopQuiz();
  ++requestId;pendingPrefSelection=null;current=null;dismissedPopupCode=null;if(progressive){nationalView=true;nationalLabels?.clear();}$('pref').value='';$('region').value='';
  paint();$('status').textContent='全国47都道府県を表示中です。';
@@ -592,7 +606,7 @@ async function fetchPrefEntry(code){
 // for 20m polygon decoding, all-country reading verification or office URLs.
 let pendingPrefSelection=null;
 async function goPref(code,selectedCode=''){
- document.body.classList.remove('study-pref-view');studyInitialView=null;
+ document.body.classList.remove('study-pref-view');studyInitialView=null;viewport.setZoomTarget(null);
  if(!code){returnNation();return;}
  if(progressive){nationalView=false;nationalLabels?.pause();}
  const id=++requestId;dismissedPopupCode=null;$('officePopup').hidden=true;
@@ -797,6 +811,7 @@ $('map').addEventListener('click',e=>{
     const feature=overview.features.find(f=>f.properties.code===requestedStudyPref);
     if(!feature)return;
     const projection=project(nationBoxes[$('nationExtent').value]);
+    viewport.setZoomTarget(projectedAreaCentroid(feature.geometry,projection));
     let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
     for(const polygon of polygons(feature.geometry))for(const ring of polygon)for(const pt of ring){
      const [x,y]=projection(pt);
