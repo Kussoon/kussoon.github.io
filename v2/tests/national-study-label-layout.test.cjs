@@ -40,4 +40,8 @@ assert(rules.includes('重なる候補を非表示にする'),'the density trade
 assert(rules.includes('画面表示の文字幅・段組み差を吸収するため、高倍率では全国共通で横2画面px・縦6画面pxの衝突余白'),'the cross-browser font metric guard is recorded');
 assert(rules.includes('起動時の対象県フォーカスへ戻す'),'study reset returns to the saved focus rather than the national default');
 assert(rules.includes('160msの配置更新待ちの間も既存アンカーのまま文字サイズ・行間を即時同期して一時巨大化を防ぎ'),'transient zoom behavior is recorded');
+const densityCacheVersion=source.match(/Asset cache version: (\d+)/)?.[1];
+const densityScriptVersion=page.match(/density-labels\.js\?v=(\d+)/)?.[1];
+assert(densityCacheVersion&&densityScriptVersion,'the density renderer has an explicit HTML cache key');
+assert.equal(densityScriptVersion,densityCacheVersion,'the HTML cache key matches the source version');
 console.log('PASS national/studyPref fixed-anchor collision and zoom contracts');
