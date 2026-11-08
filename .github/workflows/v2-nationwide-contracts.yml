@@ -49,6 +49,7 @@ jobs:
           node v2/tests/pilot-ui.browser.cjs
           node v2/tests/pilot-map-ui.browser.cjs
           node v2/tests/pilot-label-scope.browser.cjs
+          node v2/tests/prefecture-overview-label-size.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/kussoon-browser
           KUSSOON_LABEL_REPORT: ${{ runner.temp }}/kussoon-browser/label-comparison.json

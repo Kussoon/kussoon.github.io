@@ -330,7 +330,17 @@ function syncChoicePickers(){
 }
 
 syncChoicePickers();
-const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive)nationalLabels?.schedule();}});
+function mapScreenScale(){
+ const matrix=$('map').getScreenCTM?.();
+ if(matrix&&Number.isFinite(matrix.a)&&Math.abs(matrix.a)>1e-9)return Math.abs(matrix.a);
+ const width=$('map').getBoundingClientRect().width,viewWidth=Number($('map').viewBox.baseVal.width)||W;
+ return width>0?width/viewWidth:1;
+}
+const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';KussoonV2PlaceLabels.updateZoomScale({svg:$('map'),screenScale:mapScreenScale()});if(progressive)nationalLabels?.schedule();}});
+if(window.ResizeObserver)new ResizeObserver(()=>{
+ if(current&&!quizSession)drawLabels();
+ else KussoonV2PlaceLabels.updateZoomScale({svg:$('map'),screenScale:mapScreenScale()});
+}).observe($('map'));
 const progressiveStore=progressive?KussoonV2NationalProgressive.createStore({load:fetchPrefEntry,byteCapacity:12*1048576,pinned:()=>nationalView?'':$('pref').value,onEvict:key=>nationalLabels?.releaseGeometry(key)}):null;
 const number=(n)=>n.toLocaleString('ja-JP');
 function project(b){
@@ -380,15 +390,22 @@ function drawLabels(){
   return {...r,name:full,labelName:full};
  });
  let positions=null;
+ const overviewScale=selected?1:0.78;
+ const screenScale=mapScreenScale();
+ const layoutScale=overviewScale/screenScale;
  try{
-  positions=KussoonV2EstablishedLabelAdapter.layout({regions:displayRegions,project:activeProjection,selected,all,readings});
+  positions=KussoonV2EstablishedLabelAdapter.layout({regions:displayRegions,project:activeProjection,selected,all,readings,overviewScale:layoutScale});
  }catch(error){
   console.warn('従来V2ラベル計算を適用できず、簡易表示に切り替えます',error);
  }
- KussoonV2PlaceLabels.show({svg:$('map'),regions:displayRegions,project:activeProjection,selected,all,readings,positions});
+ // A whole-prefecture frame has many labels. Fit and refine their placement
+ // with the same compact screen size used by the final label rendering.
+  KussoonV2PlaceLabels.show({svg:$('map'),regions:displayRegions,project:activeProjection,selected,all,readings,positions,overviewScale,screenScale});
 }
 function paint({refocus=true}={}){
  if(!overview)return;
+ // Reset before label geometry is measured so layout and rendering read the same SVG screen scale.
+ if(refocus)viewport.reset();
  if(progressive){viewport.setMaxZoom(current?128:768);if(current)nationalLabels?.pause();}
  if(!current){
   viewport.setMinZoom(1);
@@ -442,7 +459,6 @@ function paint({refocus=true}={}){
   mode=quizSession?'quiz':chosen?'region':'prefecture';
   renderOfficePopup();
  }
- if(refocus)viewport.reset();
  $('quizStart').disabled=!current||Boolean(quizSession);
  syncChoicePickers();
  updateSearch();
