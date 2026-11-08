@@ -75,6 +75,7 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
     const zoomedHeight=await firstTextPixelHeight(page),zoomed=await inspect(page);
     assert(Math.abs(zoomedHeight-readingHeight)<.5,item.name+' reading text remains the same screen size while zooming');
     assertScreenSizeStaysFixed(zoomed,.78,item.name+' zoomed overview');
+    await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-overview-zoomed.png')});
     for(let i=0;i<3;i++)await page.locator('#mapZoomOut').click();
     await page.locator('#mapReset').click();
     await page.waitForFunction(()=>document.querySelector('#readingMode')?.value==='on'&&
@@ -94,6 +95,7 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
     const selectedZoomHeight=await firstTextPixelHeight(page),selectedZoom=await inspect(page);
     assert(Math.abs(selectedZoomHeight-selectedTextHeight)<.5,item.name+' selected labels remain the same screen size while zooming');
     assertScreenSizeStaysFixed(selectedZoom,1,item.name+' zoomed selection');
+    await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-selected-zoomed.png')});
     await page.locator('#mapReset').click();
     console.log('PASS',scenario.name,item.name,JSON.stringify({overview:{labels:overview.labelCount,overlaps:overview.overlapPairs,offscreen:overview.clipped,scale:'0.78'},selected:{labels:selected.labelCount,sizes:selected.sizes,scale:'1.00'}}));
 
