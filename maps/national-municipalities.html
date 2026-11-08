@@ -380,14 +380,15 @@ function drawLabels(){
   return {...r,name:full,labelName:full};
  });
  let positions=null;
+ const overviewScale=selected?1:0.78;
  try{
-  positions=KussoonV2EstablishedLabelAdapter.layout({regions:displayRegions,project:activeProjection,selected,all,readings});
+  positions=KussoonV2EstablishedLabelAdapter.layout({regions:displayRegions,project:activeProjection,selected,all,readings,overviewScale});
  }catch(error){
   console.warn('従来V2ラベル計算を適用できず、簡易表示に切り替えます',error);
  }
- // A whole-prefecture frame has many labels. Keep their footprint smaller
-  // without changing established anchors or individual-municipality labels.
-  KussoonV2PlaceLabels.show({svg:$('map'),regions:displayRegions,project:activeProjection,selected,all,readings,positions,overviewScale:selected?1:0.78});
+ // A whole-prefecture frame has many labels. Fit and refine their placement
+ // with the same compact screen size used by the final label rendering.
+  KussoonV2PlaceLabels.show({svg:$('map'),regions:displayRegions,project:activeProjection,selected,all,readings,positions,overviewScale});
 }
 function paint({refocus=true}={}){
  if(!overview)return;
