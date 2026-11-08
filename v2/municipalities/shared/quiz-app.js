@@ -126,7 +126,7 @@ function answer(code,button){
  const result=Core.answer(session,code);if(!result.accepted)return;
  if(!result.correct){
   if(mode===2){button.classList.add('wrong-choice');button.disabled=true;byId('feedback').textContent='違います。';}
-  else {byId('feedback').textContent='違います。\\nそこは'+selected.name+'です。';render();}
+  else {byId('feedback').textContent='違います。\nそこは'+selected.name+'です。';render();}
   byId('next').hidden=true;return;
  }
  if(mode===2){
