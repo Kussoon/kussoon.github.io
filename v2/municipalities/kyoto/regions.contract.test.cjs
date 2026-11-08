@@ -19,4 +19,5 @@ assert.equal(kyoto.filter(x=>x.reading).length,36,'Reading data complete');
 assert(html.includes('name="robots" content="noindex,follow"'));
 assert(html.includes('fetch(\'./regions.json\')'));
 assert(html.includes('<script defer src="/common/site-footer.js">'));
+assert(config.regions.every(r=>typeof r.reading==='string'&&r.reading.length>0),'Every regional selector has a reading');
 console.log('Kyoto V2 region baseline: PASS (36/36 areas, 8 regions)');
