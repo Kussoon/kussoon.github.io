@@ -103,7 +103,7 @@ function layout({regions,project,selected='',all=false,readings=false,overviewSc
  });
  // Keep the tested non-destructive collision pass when all labels are shown.
  const collisions=all&&models.length>1
-  ?C.refine(models,full,font,E,{passes:2,pinned:models.findIndex(m=>m.code===selected)})
+  ?C.refine(models,full,font,E,{passes:3,pinned:models.findIndex(m=>m.code===selected)})
   :{labels:full};
  // Reuse whole-label 5x5 coverage + border-clearance refinement at the
  // CURRENT projection. Unlike a hard-coded x/y adjustment, this works for
