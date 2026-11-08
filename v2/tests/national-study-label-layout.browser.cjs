@@ -139,22 +139,27 @@ function assertAnchorsSame(before,after,label){
     await page.locator('#mapReadingToggle').click();
     await page.waitForTimeout(230);
     await page.locator('#mapFrame').scrollIntoViewIfNeeded();
-    const candidate=await page.locator('#map').evaluate(svg=>{
+    const candidates=await page.locator('#map').evaluate(svg=>{
      const frame=document.querySelector('#mapFrame').getBoundingClientRect();
-     return [...svg.querySelectorAll('[data-progressive-labels] [data-national-code]')].find(node=>{
-      const rect=node.getBoundingClientRect();
-      if(!node.getAttribute('data-national-code')?.startsWith('28')||rect.width<=0||rect.height<=0||
-         rect.left<frame.left||rect.right>frame.right||rect.top<frame.top||rect.bottom>frame.bottom||
-         rect.left<0||rect.right>innerWidth||rect.top<0||rect.bottom>innerHeight)return false;
-      const hit=document.elementFromPoint((rect.left+rect.right)/2,(rect.top+rect.bottom)/2);
-      return hit&&(hit===node||node.contains(hit)||node.contains(hit.closest?.('[data-national-code]')));
-     })?.getAttribute('data-national-code')||'';
+     return [...svg.querySelectorAll('[data-progressive-labels] [data-national-code]')].map(node=>{
+      const rect=node.getBoundingClientRect(),x=(rect.left+rect.right)/2,y=(rect.top+rect.bottom)/2;
+      const hit=document.elementFromPoint(x,y);
+      return {code:node.getAttribute('data-national-code'),left:rect.left,right:rect.right,
+       top:rect.top,bottom:rect.bottom,x,y,
+       inFrame:rect.left>=frame.left&&rect.right<=frame.right&&rect.top>=frame.top&&rect.bottom<=frame.bottom,
+       hitTarget:!!hit&&(hit===node||node.contains(hit)||node.contains(hit.closest?.('[data-national-code]')))};
+     });
     });
-    assert(candidate,'Hyogo has a selectable on-screen label that can receive a real pointer click');
-    const label=page.locator('#map [data-progressive-labels] [data-national-code="'+candidate+'"]');
-    await label.click();
-    await page.waitForFunction(code=>document.querySelector('#map').dataset.nationalSelection===code,candidate);
-    await label.click();
+    const viewport=page.viewportSize();
+    const target=candidates.find(item=>item.code?.startsWith('28')&&item.inFrame&&item.hitTarget&&
+     item.left>=0&&item.right<=viewport.width&&item.top>=0&&item.bottom<=viewport.height);
+    assert(target,'Hyogo has an on-screen label that can receive a real pointer tap');
+    const tap=async()=>mobile?
+     page.touchscreen.tap(target.x,target.y):
+     page.mouse.click(target.x,target.y);
+    await tap();
+    await page.waitForFunction(code=>document.querySelector('#map').dataset.nationalSelection===code,target.code);
+    await tap();
     await page.waitForFunction(()=>!document.querySelector('#map').dataset.nationalSelection);
     const cleared=await metrics(page,item.pref);
     assertNoOverlap(cleared,'Hyogo after municipality selection and clear');
