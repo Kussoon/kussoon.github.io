@@ -7,6 +7,9 @@ let viewport=KussoonV2MapViewport.init({svg,width:W,height:H}),frameHeight=H,pre
 const query=new URLSearchParams(location.search),wanted=query.get('range')||query.get('studyRegion'),mode=query.get('mode')==='1'?1:2;
 byId('pageTitle').textContent=mode===1?'クイズ1：地名から場所を当てる（V2試作）':'クイズ2：光っている場所は？（V2試作）';
 document.title=(mode===1?'クイズ1':'クイズ2')+'｜'+config.name+' V2｜Kussoon';
+const prefectureSuffix=/[都道府県]$/.test(config.name)?config.name.slice(-1):'県';
+byId('prefReset').setAttribute('aria-label',config.name+'全体');
+byId('prefReset').querySelector('span').textContent=prefectureSuffix+'の';
 svg.setAttribute('aria-label',mode===1?'名前から場所を当てる地図':'光っている場所の名前を当てる地図');
 function escapeHtml(value){
   return String(value).replace(/[&<>"']/g, ch => ({
