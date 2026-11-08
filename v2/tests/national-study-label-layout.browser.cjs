@@ -161,7 +161,18 @@ function assertAnchorsSame(before,after,label){
      page.mouse.click(target.x,target.y);
     await tap();
     await page.waitForFunction(code=>document.querySelector('#map').dataset.nationalSelection===code,target.code);
-    await tap();
+    // The selected-area popup can cover the label. Close only the popup (R11
+    // keeps the selection), then tap the same label at its current screen point.
+    await page.locator('#popupClose').click();
+    const selectedTarget=await page.locator('#map').evaluate((svg,code)=>{
+     const node=[...svg.querySelectorAll('[data-progressive-labels] [data-national-code]')].find(n=>n.getAttribute('data-national-code')===code);
+     if(!node)return null;
+     const r=node.getBoundingClientRect(),x=(r.left+r.right)/2,y=(r.top+r.bottom)/2,hit=document.elementFromPoint(x,y);
+     return {x,y,visible:r.width>0&&r.height>0,hitLabel:!!hit&&(hit===node||node.contains(hit)||node.contains(hit.closest?.('[data-national-code]')))};
+    },target.code);
+    assert(selectedTarget?.visible&&selectedTarget.hitLabel,'selected label remains tappable after closing its popup');
+    if(mobile)await page.touchscreen.tap(selectedTarget.x,selectedTarget.y);
+    else await page.mouse.click(selectedTarget.x,selectedTarget.y);
     await page.waitForFunction(()=>!document.querySelector('#map').dataset.nationalSelection);
     const cleared=await metrics(page,item.pref);
     assertNoOverlap(cleared,'Hyogo after municipality selection and clear');
