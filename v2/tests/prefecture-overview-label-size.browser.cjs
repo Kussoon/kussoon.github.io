@@ -85,13 +85,13 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
     for(let i=0;i<3;i++)await page.locator('#mapZoomIn').click();
     const zoomedHeight=await firstTextPixelHeight(page),zoomed=await inspect(page);
     assert(Math.abs(zoomedHeight-readingHeight)<.5,item.name+' reading text remains the same screen size while zooming');
-    assertAnchorsUnchanged(reading,zoomed,item.name+' overview zoom');
     assertScreenSizeStaysFixed(zoomed,.78,item.name+' zoomed overview');
     await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-overview-zoomed.png')});
     for(let i=0;i<3;i++)await page.locator('#mapZoomOut').click();
     await page.locator('#mapReset').click();
     await page.waitForFunction(()=>document.querySelector('#readingMode')?.value==='on'&&
       Math.abs(850/Number(document.querySelector('#map').getAttribute('viewBox').split(/\s+/)[2])-1)<.001);
+    assertAnchorsUnchanged(reading,await inspect(page),item.name+' overview round trip');
     await page.locator('#mapReadingToggle').click();
     await page.waitForFunction(()=>document.querySelector('#readingMode')?.value==='off');
 
