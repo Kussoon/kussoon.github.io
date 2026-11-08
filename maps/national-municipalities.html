@@ -404,6 +404,8 @@ function drawLabels(){
 }
 function paint({refocus=true}={}){
  if(!overview)return;
+ // Reset before label geometry is measured so layout and rendering read the same SVG screen scale.
+ if(refocus)viewport.reset();
  if(progressive){viewport.setMaxZoom(current?128:768);if(current)nationalLabels?.pause();}
  if(!current){
   viewport.setMinZoom(1);
@@ -457,7 +459,6 @@ function paint({refocus=true}={}){
   mode=quizSession?'quiz':chosen?'region':'prefecture';
   renderOfficePopup();
  }
- if(refocus)viewport.reset();
  $('quizStart').disabled=!current||Boolean(quizSession);
  syncChoicePickers();
  updateSearch();
