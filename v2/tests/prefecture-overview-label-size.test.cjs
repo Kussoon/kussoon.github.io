@@ -5,13 +5,20 @@ const source=fs.readFileSync(path.join(root,'v2/shared/place-labels.js'),'utf8')
 const adapter=fs.readFileSync(path.join(root,'v2/shared/established-label-adapter.js'),'utf8');
 const page=fs.readFileSync(path.join(root,'maps/national-municipalities.html'),'utf8');
 const window={};const nodes=[];
-const document={createElementNS:(ns,tag)=>{const attrs={};const node={tag,attrs,textContent:'',children:[],setAttribute(k,v){attrs[k]=v;},append(child){this.children.push(child);},remove(){this.removed=true;}};nodes.push(node);return node;}};
+const document={createElementNS:(ns,tag)=>{const attrs={};const node={tag,attrs,textContent:'',children:[],setAttribute(k,v){attrs[k]=v;},getAttribute(k){return attrs[k]??null;},append(child){this.children.push(child);},remove(){this.removed=true;}};nodes.push(node);return node;}};
 vm.runInNewContext(source,{window,document});
 const labels=window.KussoonV2PlaceLabels;
-function run(overviewScale){const svg={querySelector:()=>null,append:()=>{}};return labels.show({svg,all:true,regions:[{code:'27127',name:'大阪市北区',polys:[[[[0,0],[1,0],[1,1],[0,1]]]]}],project:pt=>[pt[0]*100,pt[1]*100],positions:new Map([['27127',[40,50]]]),overviewScale});}
-assert.equal(run(.78),1);assert(nodes.some(n=>n.tag==='g'&&n.attrs.transform==='translate(40.00 50.00) scale(0.78)'));
-nodes.length=0;assert.equal(run(1),1);assert(nodes.some(n=>n.tag==='g'&&n.attrs.transform==='translate(40.00 50.00)'));
+function run(overviewScale,zoomScale=1){
+ const svg={layer:null,querySelector(){return this.layer;},append(node){this.layer=node;}};
+ const count=labels.show({svg,all:true,regions:[{code:'27127',name:'大阪市北区',polys:[[[[0,0],[1,0],[1,1],[0,1]]]]}],project:pt=>[pt[0]*100,pt[1]*100],positions:new Map([['27127',[40,50]]]),overviewScale,zoomScale});
+ return {svg,count};
+}
+let result=run(.78);assert.equal(result.count,1);assert.equal(result.svg.layer.children[0].attrs.transform,'translate(40.00 50.00) scale(0.78)');
+labels.updateZoomScale({svg:result.svg,zoomScale:2});assert.equal(result.svg.layer.children[0].attrs.transform,'translate(40.00 50.00) scale(0.39)');
+result=run(1);assert.equal(result.svg.layer.children[0].attrs.transform,'translate(40.00 50.00)');
+result=run(.78,2);assert.equal(result.svg.layer.children[0].attrs.transform,'translate(40.00 50.00) scale(0.39)');
 assert.throws(()=>run(0),/Invalid overview label scale/);
+assert.throws(()=>labels.updateZoomScale({svg:result.svg,zoomScale:0}),/Invalid label zoom scale/);
 assert(page.includes('const overviewScale=selected?1:0.78;'),'Full prefecture uses compact labels; individual location uses original size');
 assert(adapter.includes('overviewScale=1'),'The placement adapter accepts the same label scale as drawing');
 assert(adapter.includes('const font=14*overviewScale;'),'Center planning and collision refinement use displayed overview font size');
@@ -19,5 +26,7 @@ assert(adapter.includes("(seeds[i].code===selected?18:14)*overviewScale"),'Selec
 assert(adapter.includes('size:11*overviewScale'),'Furigana dimensions use the displayed overview scale');
 assert(adapter.includes('row.y*=overviewScale'),'Vertical row spacing uses the displayed overview scale');
 assert(page.includes('readings,overviewScale});'),'The exact drawing scale is passed into layout calculations');
+assert(page.includes('zoomScale:W/viewport.view().w'),'Drawing uses the current map zoom scale');
+assert(page.includes('KussoonV2PlaceLabels.updateZoomScale'),'Zoom updates preserve on-screen label size without moving anchors');
 assert(page.includes("KussoonV2EstablishedLabelAdapter.layout"),'Established label positions remain');
 console.log('Prefecture overview compact labels: PASS');
