@@ -385,7 +385,9 @@ function drawLabels(){
  }catch(error){
   console.warn('従来V2ラベル計算を適用できず、簡易表示に切り替えます',error);
  }
- KussoonV2PlaceLabels.show({svg:$('map'),regions:displayRegions,project:activeProjection,selected,all,readings,positions});
+ // A whole-prefecture frame has many labels. Keep their footprint smaller
+  // without changing established anchors or individual-municipality labels.
+  KussoonV2PlaceLabels.show({svg:$('map'),regions:displayRegions,project:activeProjection,selected,all,readings,positions,overviewScale:selected?1:0.78});
 }
 function paint({refocus=true}={}){
  if(!overview)return;
