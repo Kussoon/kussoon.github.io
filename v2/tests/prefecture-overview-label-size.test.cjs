@@ -2,6 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.join(__dirname,'../..');
 const source=fs.readFileSync(path.join(root,'v2/shared/place-labels.js'),'utf8');
+const adapter=fs.readFileSync(path.join(root,'v2/shared/established-label-adapter.js'),'utf8');
 const page=fs.readFileSync(path.join(root,'maps/national-municipalities.html'),'utf8');
 const window={};const nodes=[];
 const document={createElementNS:(ns,tag)=>{const attrs={};const node={tag,attrs,textContent:'',children:[],setAttribute(k,v){attrs[k]=v;},append(child){this.children.push(child);},remove(){this.removed=true;}};nodes.push(node);return node;}};
@@ -11,6 +12,12 @@ function run(overviewScale){const svg={querySelector:()=>null,append:()=>{}};ret
 assert.equal(run(.78),1);assert(nodes.some(n=>n.tag==='g'&&n.attrs.transform==='translate(40.00 50.00) scale(0.78)'));
 nodes.length=0;assert.equal(run(1),1);assert(nodes.some(n=>n.tag==='g'&&n.attrs.transform==='translate(40.00 50.00)'));
 assert.throws(()=>run(0),/Invalid overview label scale/);
-assert(page.includes("overviewScale:selected?1:0.78"),'Full prefecture uses compact labels; individual location uses original size');
+assert(page.includes('const overviewScale=selected?1:0.78;'),'Full prefecture uses compact labels; individual location uses original size');
+assert(adapter.includes('overviewScale=1'),'The placement adapter accepts the same label scale as drawing');
+assert(adapter.includes('const font=14*overviewScale;'),'Center planning and collision refinement use displayed overview font size');
+assert(adapter.includes("(seeds[i].code===selected?18:14)*overviewScale"),'Selected and unselected label bounds use their displayed size');
+assert(adapter.includes('size:11*overviewScale'),'Furigana dimensions use the displayed overview scale');
+assert(adapter.includes('row.y*=overviewScale'),'Vertical row spacing uses the displayed overview scale');
+assert(page.includes('readings,overviewScale});'),'The exact drawing scale is passed into layout calculations');
 assert(page.includes("KussoonV2EstablishedLabelAdapter.layout"),'Established label positions remain');
 console.log('Prefecture overview compact labels: PASS');
