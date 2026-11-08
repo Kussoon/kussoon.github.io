@@ -3,7 +3,7 @@
 const config=await (await fetch(document.documentElement.dataset.regionConfig||'./regions.json')).json(),regions=config.regions,byId=id=>document.getElementById(id),svg=byId('map'),choices=byId('rangeChoices'),status=byId('status');
 const Core=window.KussoonV2RegionalQuiz;if(!Core)throw Error('共通クイズエンジンが読み込めません');
 const W=850,H=700,renderer=KussoonV2MunicipalRenderer;
-let viewport=KussoonV2MapViewport.init({svg,width:W,height:H}),frameHeight=H,prefectureView=false;
+let viewport=KussoonV2MapViewport.init({svg,width:W,height:H,minZoom:0.25}),frameHeight=H,prefectureView=false;
 const query=new URLSearchParams(location.search),wanted=query.get('range')||query.get('studyRegion'),mode=query.get('mode')==='1'?1:2;
 byId('pageTitle').textContent=mode===1?'クイズ1：地名から場所を当てる（V2試作）':'クイズ2：光っている場所は？（V2試作）';
 document.title=(mode===1?'クイズ1':'クイズ2')+'｜'+config.name+' V2｜Kussoon';
@@ -63,7 +63,7 @@ function fitMap(items,isPrefecture=false){
  if(prefectureView!==isPrefecture||frameHeight!==targetHeight){
   viewport.destroy();
   frameHeight=targetHeight;
-  viewport=KussoonV2MapViewport.init({svg,width:W,height:frameHeight});
+  viewport=KussoonV2MapViewport.init({svg,width:W,height:frameHeight,minZoom:0.25});
  }
  prefectureView=isPrefecture;
  projection=project(bounds(items));
