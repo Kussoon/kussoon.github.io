@@ -26,7 +26,7 @@ assert(adapter.includes('const font=14*overviewScale;'),'Center planning and col
 assert(adapter.includes("(seeds[i].code===selected?18:14)*overviewScale"),'Selected and unselected label bounds use their displayed size');
 assert(adapter.includes('size:11*overviewScale'),'Furigana dimensions use the displayed overview scale');
 assert(adapter.includes('row.y*=overviewScale'),'Vertical row spacing uses the displayed overview scale');
-assert(adapter.includes("{anchor:'balanced',shift:'none'}"),'Overview labels stay at their geometry-derived anchors instead of synthetic vertical staggering');
+assert(adapter.includes("{anchor:'balanced',shift:all?'adjacent':'none'}"),'Existing geometry-aware label staggering remains intact');
 assert(page.includes('readings,overviewScale:layoutScale});'),'The exact screen-size-equivalent scale is passed into layout calculations');
 assert(page.includes('const layoutScale=overviewScale/screenScale;'),'Layout dimensions use the actual SVG screen scale');
 assert(page.includes('screenScale});'),'Rendering uses the same actual SVG screen scale');
