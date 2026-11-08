@@ -89,13 +89,8 @@ function layout({regions,project,selected='',all=false,readings=false,overviewSc
  // Deliberately do not pin the selected label during territory-fit repair:
  // an initial selected label can be incorrectly close to a border.
  const font=14*overviewScale;
- // Keep each municipality anchored to its geometry-derived representative
- // point. Automatic vertical staggering reduced overlaps but could move a
- // label by a full font step, making centered labels appear to belong to a
- // neighboring area. Collision/territory checks below remain responsible
- // for constrained, geometry-aware refinements.
  const placed=R.planCenterFirstLabels(models,null,'kanji',font,measure,E,
-   {anchor:'balanced',shift:'none'});
+   {anchor:'balanced',shift:all?'adjacent':'none'});
  const full=placed.map((p,i)=>{
   const size=(seeds[i].code===selected?18:14)*overviewScale;
   const {width,height}=textBox(seeds[i].region,size,readings,measure,overviewScale);
