@@ -87,9 +87,10 @@ function anchor(polys){
  return result;
 }
 function show(options){
- const {svg,regions,project,selected='',all=false,readings=false,positions=null,overviewScale=1}=options||{};
+ const {svg,regions,project,selected='',all=false,readings=false,positions=null,overviewScale=1,zoomScale=1}=options||{};
  if(!svg||!Array.isArray(regions)||typeof project!=='function')throw Error('Invalid label options');
  if(!Number.isFinite(overviewScale)||overviewScale<=0||overviewScale>1)throw Error('Invalid overview label scale');
+ if(!Number.isFinite(zoomScale)||zoomScale<=0)throw Error('Invalid label zoom scale');
  const existing=svg.querySelector('[data-v2-labels]');
  if(existing)existing.remove();
  const layer=document.createElementNS(NS,'g');
@@ -103,7 +104,11 @@ function show(options){
   const [x,y]=pt||project(anchor(region.polys));
   if(!Number.isFinite(x)||!Number.isFinite(y))continue;
   const group=document.createElementNS(NS,'g');
-  group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(overviewScale<1?' scale('+overviewScale+')':''));
+  group.setAttribute('data-label-x',x.toFixed(2));
+  group.setAttribute('data-label-y',y.toFixed(2));
+  group.setAttribute('data-label-base-scale',String(overviewScale));
+  const renderScale=overviewScale/zoomScale;
+  group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(Math.abs(renderScale-1)>1e-9?' scale('+renderScale+')':''));
   const hasReading=readings&&region.reading;
   const parts=hasReading&&Array.isArray(region.readingParts)&&region.readingParts.length===2?region.readingParts:null;
   const split=Array.isArray(region.readingParts)&&region.readingParts.length===2&&
@@ -139,5 +144,21 @@ function show(options){
  svg.append(layer);
  return count;
 }
-global.KussoonV2PlaceLabels=Object.freeze({normalize,matches,anchor,insidePolygon,show});
+function updateZoomScale({svg,zoomScale=1}={}){
+ if(!svg||!Number.isFinite(zoomScale)||zoomScale<=0)throw Error('Invalid label zoom scale');
+ const layer=svg.querySelector('[data-v2-labels]');
+ if(!layer)return 0;
+ let updated=0;
+ for(const group of layer.children){
+  const x=Number(group.getAttribute('data-label-x'));
+  const y=Number(group.getAttribute('data-label-y'));
+  const base=Number(group.getAttribute('data-label-base-scale'));
+  if(![x,y,base].every(Number.isFinite)||base<=0)continue;
+  const scale=base/zoomScale;
+  group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(Math.abs(scale-1)>1e-9?' scale('+scale+')':''));
+  updated++;
+ }
+ return updated;
+}
+global.KussoonV2PlaceLabels=Object.freeze({normalize,matches,anchor,insidePolygon,show,updateZoomScale});
 })(window);
