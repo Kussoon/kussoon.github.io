@@ -82,6 +82,9 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
     await page.locator('#mapReadingToggle').click();
     await page.waitForFunction(()=>document.querySelector('#readingMode')?.value==='off');
 
+    // Selecting a municipality while zoomed must reset before its label layout is measured.
+    await page.locator('#mapZoomIn').click();
+    await page.locator('#mapZoomIn').click();
     await page.locator('#regionTrigger').click();
     await page.getByRole('button',{name:option,exact:true}).click();
     await page.waitForFunction(code=>document.querySelector('#region')?.value===code&&document.querySelector('#map .chosen[data-code="'+code+'"]'),item.region);
