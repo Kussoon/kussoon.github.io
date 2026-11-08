@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 15999)
+Total output lines: 886
+
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="canonical" href="https://kussoon.com/maps/national-municipalities.html">
@@ -199,7 +202,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 
 </main>
 <script src="/v2/progressive-preview/municipality-renderer.js"></script>
-<script src="/v2/national/national-study-pref-zoom-preview-viewport.js"></script>
+<script src="/v2/national/national-study-pref-zoom-preview-viewport.js?v=20261109b"></script>
 <script src="/v2/common/js/label-engine.js"></script>
 <script src="/v2/common/js/readable-labels.js"></script>
 <script src="/v2/common/js/collision-refinement.js"></script>
@@ -333,73 +336,7 @@ function syncChoicePickers(){
 syncChoicePickers();
 const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive){nationalLabels?.syncScreenSize();nationalLabels?.schedule();}}});
 const progressiveStore=progressive?KussoonV2NationalProgressive.createStore({load:fetchPrefEntry,byteCapacity:12*1048576,pinned:()=>nationalView?'':$('pref').value,onEvict:key=>nationalLabels?.releaseGeometry(key)}):null;
-const number=(n)=>n.toLocaleString('ja-JP');
-function project(b){
- const cos=Math.cos(((b[1]+b[3])/2)*Math.PI/180),bw=Math.max((b[2]-b[0])*cos,.04),bh=Math.max(b[3]-b[1],.04);
- const s=Math.min((W-44)/bw,(H-38)/bh),lon=(b[0]+b[2])/2,lat=(b[1]+b[3])/2;
- return p=>[W/2+(p[0]-lon)*cos*s,H/2-(p[1]-lat)*s];
-}
-function polygons(g){return g.type==='Polygon'?[g.coordinates]:g.coordinates;}
-function projectedAreaCentroid(geometry,projection){
- let total=0,sumX=0,sumY=0;
- for(const polygon of polygons(geometry))for(let ringIndex=0;ringIndex<polygon.length;ringIndex++){
-  const points=polygon[ringIndex].map(projection);let twiceArea=0,cx=0,cy=0;
-  for(let i=0;i<points.length;i++){
-   const a=points[i],b=points[(i+1)%points.length],cross=a[0]*b[1]-b[0]*a[1];
-   twiceArea+=cross;cx+=(a[0]+b[0])*cross;cy+=(a[1]+b[1])*cross;
-  }
-  if(Math.abs(twiceArea)<1e-9)continue;
-  const area=Math.abs(twiceArea)/2,weight=ringIndex===0?area:-area;
-  total+=weight;sumX+=(cx/(3*twiceArea))*weight;sumY+=(cy/(3*twiceArea))*weight;
- }
- return total>1e-9?{x:sumX/total,y:sumY/total}:null;
-}
-function path(polys,p){
- let d='';for(const poly of polys)for(const ring of poly){
-  for(let i=0;i<ring.length;i++){const q=p(ring[i]);d+=(i?'L':'M')+q[0].toFixed(2)+','+q[1].toFixed(2);}d+='Z';
- }return d;
-}
-function drawOverview(svg,selected='',locator=false){
- const p=project(nationBoxes[$('nationExtent').value]);svg.replaceChildren();
- const fragment=document.createDocumentFragment();
- for(const feat of overview.features){
-  const code=feat.properties.code,el=document.createElementNS(NS,'path');
-  el.setAttribute('d',path(polygons(feat.geometry),p));
-  el.setAttribute('class',locator?'locator-pref'+(code===selected?' active':''):'prefecture');
-  el.dataset.pref=code;
-  if(!locator){el.setAttribute('aria-label',names[Number(code)]);}
-  const title=document.createElementNS(NS,'title');title.textContent=names[Number(code)];el.append(title);
-  fragment.append(el);
- }
- svg.append(fragment);
-}
-function arcDecode(t){return t.arcs.map(a=>{let x=0,y=0;return a.map(q=>{if(t.transform){x+=q[0];y+=q[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];}return q;});});}
-function ring(ids,arcs){const out=[];for(const id of ids){const arc=arcs[id<0?~id:id],points=id<0?arc.slice().reverse():arc;out.push(...(out.length?points.slice(1):points));}return out;}
-function geo(g,arcs){return g.type==='Polygon'?[g.arcs.map(r=>ring(r,arcs))]:g.type==='MultiPolygon'?g.arcs.map(p=>p.map(r=>ring(r,arcs))):[];}
-function bbox(polys){let a=Infinity,b=Infinity,c=-Infinity,d=-Infinity;for(const p of polys)for(const r of p)for(const pt of r){a=Math.min(a,pt[0]);b=Math.min(b,pt[1]);c=Math.max(c,pt[0]);d=Math.max(d,pt[1]);}return [a,b,c,d];}
-function drawLabels(){
- if(progressive&&nationalView&&!current){nationalLabels?.schedule();return;}
- if(!current||!activeProjection)return;
- const selected=$('region').value,all=true,readings=$('readingMode').value==='on';
- if(quizSession)return;
- // Share the exact municipality display name used by the nationwide label index,
- // dropdown and popup; never substitute short ward names in prefecture view.
- const displayRegions=current.regions.map(r=>{
-  const full=nationalLabels?.fullNameFor(r.code)||r.fullName||r.name;
-  // The verified two-part name works for all designated-city wards,
-  // Tokyo special wards and confirmed county/municipality pairs.
-  // Source geography and official municipality codes remain untouched.
-  const parts=nationalLabels?.readingPartsFor(r.code);
-  if(parts?.length===2&&parts.map(p=>p.name).join('')===full)
-   return {...r,name:full,labelName:full,readingParts:parts,reading:parts.map(p=>p.reading).join('')};
-  return {...r,name:full,labelName:full};
- });
- let positions=null;
- try{
-  positions=KussoonV2EstablishedLabelAdapter.layout({regions:displayRegions,project:activeProjection,selected,all,readings});
- }catch(error){
-  console.warn('従来V2ラベル計算を適用できず、簡易表示に切り替えます',error);
- }
+const number=(n)=>n.toLocaleString('ja-JP'…999 tokens truncated… }
  KussoonV2PlaceLabels.show({svg:$('map'),regions:displayRegions,project:activeProjection,selected,all,readings,positions});
 }
 function paint({refocus=true}={}){
