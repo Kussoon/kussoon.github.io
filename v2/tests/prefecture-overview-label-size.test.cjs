@@ -4,6 +4,7 @@ const root=path.join(__dirname,'../..');
 const source=fs.readFileSync(path.join(root,'v2/shared/place-labels.js'),'utf8');
 const adapter=fs.readFileSync(path.join(root,'v2/shared/established-label-adapter.js'),'utf8');
 const page=fs.readFileSync(path.join(root,'maps/national-municipalities.html'),'utf8');
+const rules=fs.readFileSync(path.join(root,'v2/national/MAINTENANCE_RULES.md'),'utf8');
 const window={};const nodes=[];
 const document={createElementNS:(ns,tag)=>{const attrs={};const node={tag,attrs,textContent:'',children:[],setAttribute(k,v){attrs[k]=v;},getAttribute(k){return attrs[k]??null;},append(child){this.children.push(child);},remove(){this.removed=true;}};nodes.push(node);return node;}};
 vm.runInNewContext(source,{window,document});
@@ -29,4 +30,6 @@ assert(page.includes('readings,overviewScale});'),'The exact drawing scale is pa
 assert(page.includes('zoomScale:W/viewport.view().w'),'Drawing uses the current map zoom scale');
 assert(page.includes('KussoonV2PlaceLabels.updateZoomScale'),'Zoom updates preserve on-screen label size without moving anchors');
 assert(page.includes("KussoonV2EstablishedLabelAdapter.layout"),'Established label positions remain');
+assert(rules.includes('描画倍率は地図ズーム倍率の逆数'),'R05 records screen-stable label size during zoom');
+assert(rules.includes('prefecture-overview-label-size.browser.cjs'),'R05 links the browser regression coverage');
 console.log('Prefecture overview compact labels: PASS');
