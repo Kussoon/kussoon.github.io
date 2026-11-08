@@ -55,6 +55,9 @@ function init(options){
  }
  function buttonZoom(factor){
   const target=typeof zoomTarget==='function'?zoomTarget():zoomTarget;
+  // The geometry anchor is a one-shot entry aid. Once a button is used, keep
+  // subsequent zooms centered on the user's current viewport position.
+  zoomTarget=null;
   if(!target||!Number.isFinite(target.x)||!Number.isFinite(target.y))return zoom(factor);
   const nextW=clamp(box.w/factor,width/maxZoom,width/minZoom),ratio=nextW/width;
   // Study focus can center a point derived from real prefecture geometry.
@@ -75,6 +78,8 @@ function init(options){
  }
  function pointerDown(e){
   if(e.pointerType==='mouse'&&e.button!==0)return;
+  // Any direct map interaction supersedes the initial study-focus anchor.
+  zoomTarget=null;
   wheelArmed=true;
   fingers.set(e.pointerId,point(e));
   // Do not capture a simple tap: Safari must deliver its click to the land path.
@@ -120,10 +125,11 @@ function init(options){
  }
  function onWheel(e){
   if(!wheelArmed&&!e.ctrlKey)return;
+  zoomTarget=null;
   if(e.cancelable)e.preventDefault();
   zoom(Math.exp(-e.deltaY*.003),point(e));
  }
- function onDoubleClick(e){if(e.cancelable)e.preventDefault();zoom(2,point(e));suppressClick=true;}
+ function onDoubleClick(e){zoomTarget=null;if(e.cancelable)e.preventDefault();zoom(2,point(e));suppressClick=true;}
  function onClickCapture(e){
   if(!suppressClick)return;
   e.preventDefault();e.stopPropagation();
