@@ -80,7 +80,7 @@ const measure=(value,size)=>{
  return ctx.measureText(String(value)).width;
 };
 function layout({regions,project,selected='',all=false,readings=false,overviewScale=1}){
- if(!Number.isFinite(overviewScale)||overviewScale<=0||overviewScale>1)throw Error('Invalid overview label scale');
+ if(!Number.isFinite(overviewScale)||overviewScale<=0)throw Error('Invalid label layout scale');
  const visible=all?regions:regions.filter(r=>r.code===selected);
  const seeds=visible.map(r=>modelFor(r,project)).filter(Boolean);
  if(!seeds.length)return new Map();
@@ -103,7 +103,7 @@ function layout({regions,project,selected='',all=false,readings=false,overviewSc
  });
  // Keep the tested non-destructive collision pass when all labels are shown.
  const collisions=all&&models.length>1
-  ?C.refine(models,full,font,E,{passes:2,pinned:models.findIndex(m=>m.code===selected)})
+  ?C.refine(models,full,font,E,{passes:3,pinned:models.findIndex(m=>m.code===selected)})
   :{labels:full};
  // Reuse whole-label 5x5 coverage + border-clearance refinement at the
  // CURRENT projection. Unlike a hard-coded x/y adjustment, this works for
