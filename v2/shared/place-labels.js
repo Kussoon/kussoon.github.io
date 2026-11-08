@@ -87,10 +87,10 @@ function anchor(polys){
  return result;
 }
 function show(options){
- const {svg,regions,project,selected='',all=false,readings=false,positions=null,overviewScale=1,zoomScale=1}=options||{};
+ const {svg,regions,project,selected='',all=false,readings=false,positions=null,overviewScale=1,screenScale=1}=options||{};
  if(!svg||!Array.isArray(regions)||typeof project!=='function')throw Error('Invalid label options');
  if(!Number.isFinite(overviewScale)||overviewScale<=0||overviewScale>1)throw Error('Invalid overview label scale');
- if(!Number.isFinite(zoomScale)||zoomScale<=0)throw Error('Invalid label zoom scale');
+ if(!Number.isFinite(screenScale)||screenScale<=0)throw Error('Invalid label screen scale');
  const existing=svg.querySelector('[data-v2-labels]');
  if(existing)existing.remove();
  const layer=document.createElementNS(NS,'g');
@@ -107,7 +107,7 @@ function show(options){
   group.setAttribute('data-label-x',x.toFixed(2));
   group.setAttribute('data-label-y',y.toFixed(2));
   group.setAttribute('data-label-base-scale',String(overviewScale));
-  const renderScale=overviewScale/zoomScale;
+  const renderScale=overviewScale/screenScale;
   group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(Math.abs(renderScale-1)>1e-9?' scale('+renderScale+')':''));
   const hasReading=readings&&region.reading;
   const parts=hasReading&&Array.isArray(region.readingParts)&&region.readingParts.length===2?region.readingParts:null;
@@ -144,8 +144,8 @@ function show(options){
  svg.append(layer);
  return count;
 }
-function updateZoomScale({svg,zoomScale=1}={}){
- if(!svg||!Number.isFinite(zoomScale)||zoomScale<=0)throw Error('Invalid label zoom scale');
+function updateZoomScale({svg,screenScale=1}={}){
+ if(!svg||!Number.isFinite(screenScale)||screenScale<=0)throw Error('Invalid label screen scale');
  const layer=svg.querySelector('[data-v2-labels]');
  if(!layer)return 0;
  let updated=0;
@@ -154,7 +154,7 @@ function updateZoomScale({svg,zoomScale=1}={}){
   const y=Number(group.getAttribute('data-label-y'));
   const base=Number(group.getAttribute('data-label-base-scale'));
   if(![x,y,base].every(Number.isFinite)||base<=0)continue;
-  const scale=base/zoomScale;
+  const scale=base/screenScale;
   group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(Math.abs(scale-1)>1e-9?' scale('+scale+')':''));
   updated++;
  }
