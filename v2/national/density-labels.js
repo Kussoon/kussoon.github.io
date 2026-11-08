@@ -11,6 +11,11 @@
  };
  const overlaps=(a,b,g)=>
   a.x1-g<b.x2&&a.x2+g>b.x1&&a.y1-g<b.y2&&a.y2+g>b.y1;
+ function priority(model){
+  const code=model.code||'',pref=model.prefectureCode||code.slice(0,2);
+  return (code===capitals[pref]?100000:0)+
+   Math.pow(Math.max(0,(model.box?.w||0)*(model.box?.h||0)),.3);
+ }
  function shift(label,x,y){
   const dx=x-label.x,dy=y-label.y;
   const b=label.box;
@@ -66,8 +71,7 @@
   const candidates=models.map((m,i)=>{
    const p=labels[i];if(!p?.box)return null;
    const code=m.code||'',pref=m.prefectureCode||code.slice(0,2);
-   const priority=(code===capitals[pref]?100000:0)+
-    Math.pow(Math.max(0,(m.box?.w||0)*(m.box?.h||0)),.3);
+   const priorityValue=priority(m);
    const anchors=[p];
    if(!stableAnchors&&Array.isArray(m.polylabel)&&m.polylabel.every(Number.isFinite)){
     const alt=shift(p,m.polylabel[0],m.polylabel[1]);
@@ -78,24 +82,21 @@
     if(anchors.every(a=>Math.hypot(a.x-alt.x,a.y-alt.y)>p.height*.4))
      anchors.push(alt);
    }
-   const projectedExtent=Math.max(m.box?.w||0,m.box?.h||0)*ratio;
-   const allowOverlap=stableAnchors&&zoom>=2&&projectedExtent>=42/Math.sqrt(zoom);
-   return {i,priority,pref,code,selected:m.id===selectedId,anchors,allowOverlap};
+   return {i,priority:priorityValue,pref,code,selected:m.id===selectedId,anchors};
   }).filter(Boolean);
   function cellOf(p){
    const cx=Math.max(0,Math.min(countX-1,Math.floor((p.x-view.x)*ratio/tile)));
    const cy=Math.max(0,Math.min(countY-1,Math.floor((p.y-view.y)*ratio/tile)));
    return cy*countX+cx;
   }
-  function claim(c,p,allowCollision=false){
-   if(!inView(p.box))return false;
-   if(!allowCollision&&active.some(a=>overlaps(a.box,p.box,gap)))return false;
+  function claim(c,p){
+   if(!inView(p.box)||active.some(a=>overlaps(a.box,p.box,gap)))return false;
    result[c.i]=true;placed[c.i]=p;
    active.push({box:p.box,cell:cellOf(p)});
    return true;
   }
   // A selected municipality must survive decluttering even if it overlaps.
-  for(const c of candidates)if(c.selected)claim(c,c.anchors.find(p=>inView(p.box))||c.anchors[0],true);
+  for(const c of candidates)if(c.selected)claim(c,c.anchors.find(p=>inView(p.box))||c.anchors[0]);
   // Choose candidates from under-represented screen cells first.
   const byCell=Array.from({length:countX*countY},()=>[]);
   for(const c of candidates){
@@ -109,7 +110,7 @@
   for(let cellId=0;cellId<byCell.length&&active.length<limit;cellId++){
    for(const {c,p} of byCell[cellId]){
     if(result[c.i])continue;
-    if(claim(c,p)||(c.allowOverlap&&claim(c,p,true)))break;
+    if(claim(c,p))break;
    }
   }
   // Second pass: fill ALL remaining non-overlapping areas, without the
@@ -119,7 +120,7 @@
   for(const c of rest){
    if(active.length>=limit)break;
    for(const p of c.anchors){
-    if(claim(c,p)||(c.allowOverlap&&claim(c,p,true)))break;
+    if(claim(c,p))break;
    }
   }
   return {visible:result,labels:placed};
@@ -177,6 +178,6 @@
   return {visible,labels:movedLabels,moved};
  }
 
- global.KussoonDensityLabels={arrange,fullCompare,select:(models,labels,options)=>
+ global.KussoonDensityLabels={arrange,fullCompare,priority,select:(models,labels,options)=>
   arrange(models,labels,options).visible};
 })(window);

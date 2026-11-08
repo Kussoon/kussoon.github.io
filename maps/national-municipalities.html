@@ -212,7 +212,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <script src="/v2/progressive-preview/progressive-geometry.js"></script>
 <script src="/v2/progressive-preview/progressive-geometry-client.js"></script>
 <script src="/v2/progressive-preview/county-overlay.js"></script>
-<script src="/v2/progressive-preview/national-progressive-labels.js?v=307"></script>
+<script src="/v2/progressive-preview/national-progressive-labels.js?v=308"></script>
 <script src="/v2/shared/municipality-quiz.js"></script>
 <script src="/v2/common/js/office-directory.js"></script>
 <script>
@@ -224,7 +224,7 @@ const sharedTrialPrefectures=new Set(['04','07','27','28','29','43','44']);
 const sharedTrialSource=pref=>sharedTrialPrefectures.has(pref)?'/v2/data/national/2026-shared-preview/'+pref+'.topojson':null;
 window.KussoonV2SharedSeamTrial=Object.freeze({prefectures:[...sharedTrialPrefectures],sourceFor:sharedTrialSource});
 const progressive=true; // RC1 is isolated; production pilot remains untouched.
-let nationalLabels=null,nationalView=true;
+let nationalLabels=null,nationalView=true,studyInitialView=null;
 let readingSourcePromise=null;
 let nationwideSearchIndex=null,nationwideSearchLoading=false,nationwideSearchFailed=false;
 async function getReadingSource(){
@@ -330,7 +330,7 @@ function syncChoicePickers(){
 }
 
 syncChoicePickers();
-const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive)nationalLabels?.schedule();}});
+const viewport=KussoonV2MapViewport.init({svg:$('map'),width:W,height:H,onZoomChange:z=>{$('zoomLevel').textContent=z.toFixed(1)+'倍';if(progressive){nationalLabels?.syncScreenSize();nationalLabels?.schedule();}}});
 const progressiveStore=progressive?KussoonV2NationalProgressive.createStore({load:fetchPrefEntry,byteCapacity:12*1048576,pinned:()=>nationalView?'':$('pref').value,onEvict:key=>nationalLabels?.releaseGeometry(key)}):null;
 const number=(n)=>n.toLocaleString('ja-JP');
 function project(b){
@@ -561,7 +561,7 @@ function startQuiz(){
  $('status').textContent='クイズ中です。オレンジ色の区域を見て回答してください。';
 }
 function returnNation(){
- document.body.classList.remove('study-pref-view');
+ document.body.classList.remove('study-pref-view');studyInitialView=null;
  if(quizSession)stopQuiz();
  ++requestId;pendingPrefSelection=null;current=null;dismissedPopupCode=null;if(progressive){nationalView=true;nationalLabels?.clear();}$('pref').value='';$('region').value='';
  paint();$('status').textContent='全国47都道府県を表示中です。';
@@ -592,7 +592,7 @@ async function fetchPrefEntry(code){
 // for 20m polygon decoding, all-country reading verification or office URLs.
 let pendingPrefSelection=null;
 async function goPref(code,selectedCode=''){
- document.body.classList.remove('study-pref-view');
+ document.body.classList.remove('study-pref-view');studyInitialView=null;
  if(!code){returnNation();return;}
  if(progressive){nationalView=false;nationalLabels?.pause();}
  const id=++requestId;dismissedPopupCode=null;$('officePopup').hidden=true;
@@ -692,7 +692,7 @@ $('placeSearch').addEventListener('input',updateSearch);
 
 function syncMapReadingToggle(){const on=$('readingMode').value==='on';$('mapReadingToggle').textContent='よみがな '+(on?'ON':'OFF');$('mapReadingToggle').setAttribute('aria-pressed',String(on));$('mapReadingToggle').disabled=$('readingMode').disabled;}
 $('readingMode').addEventListener('change',()=>{
- syncMapReadingToggle();drawLabels();
+ syncMapReadingToggle();if(progressive&&nationalView&&!current)nationalLabels?.syncScreenSize();drawLabels();
  const national=!current&&nationalView?nationalLabels?.selection():null;
  const entry=current||national?.entry,code=current?$('region').value:national?.code||'';
  if(entry&&code&&!$('officePopup').hidden)syncPopupReading(code,entry.regions.find(r=>r.code===code));
@@ -706,7 +706,7 @@ function syncFullscreenUI(){
  fullscreenButton.setAttribute('aria-pressed',String(on));
  $('mapScreenTitle').hidden=!on;
  renderOfficePopup();
- if(progressive)nationalLabels?.schedule();
+ if(progressive){nationalLabels?.syncScreenSize();nationalLabels?.schedule();}
 }
 fullscreenButton.addEventListener('click',async()=>{
  const on=document.body.classList.contains('map-screen-mode');
@@ -739,7 +739,13 @@ $('zoomOut').addEventListener('click',()=>viewport.zoomOut());
 $('zoomReset').addEventListener('click',()=>viewport.reset());
 $('mapZoomIn').addEventListener('click',()=>viewport.zoomIn());
 $('mapZoomOut').addEventListener('click',()=>viewport.zoomOut());
-$('mapReset').addEventListener('click',()=>viewport.reset());
+$('mapReset').addEventListener('click',()=>{
+ if(studyInitialView&&document.body.classList.contains('study-pref-view')&&nationalView&&!current){
+  viewport.setView({...studyInitialView});
+  nationalLabels?.syncScreenSize();
+  nationalLabels?.schedule();
+ }else viewport.reset();
+});
 syncMapReadingToggle();
 function syncPopupScrollControls(){
  const el=$('popupScroll');
@@ -799,7 +805,8 @@ $('map').addEventListener('click',e=>{
     }
     if(!Number.isFinite(minX)||maxX<=minX||maxY<=minY)return;
     const width=Math.min(W,Math.max((maxX-minX)*1.25,(maxY-minY)*1.25*W/H));
-    viewport.setView({x:(minX+maxX-width)/2,y:(minY+maxY-width*H/W)/2,w:width,h:width*H/W});
+    studyInitialView={x:(minX+maxX-width)/2,y:(minY+maxY-width*H/W)/2,w:width,h:width*H/W};
+    viewport.setView({...studyInitialView});
     $('breadcrumb').textContent='日本全国 ＞ '+names[Number(requestedStudyPref)]+'（全国表示・学習用）';
     $('status').textContent=names[Number(requestedStudyPref)]+'を中心に全国地図を表示中（近隣県の地図は表示、地名は対象県だけ）。';
    }).catch(error=>{$('status').textContent='学習表示エラー：'+error.message;console.warn(error);});
