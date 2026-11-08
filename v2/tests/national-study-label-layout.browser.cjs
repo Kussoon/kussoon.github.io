@@ -187,7 +187,7 @@ function assertAnchorsSame(before,after,label){
    const dense=await metrics(page,item.pref);
    assertNoOverlap(dense,item.name+' dense municipality focus '+item.denseQuery);
    assert(dense.visible>0&&dense.targetOnly&&dense.nonTargetHidden,item.name+' dense focus keeps only target-prefecture labels');
-   assert(Number(dense.viewBox.split(/\s+/)[2])<Number(initialView.split(/\\s+/)[2]),
+   assert(Number(dense.viewBox.split(/\s+/)[2])<Number(initialView.split(/\s+/)[2]),
     item.name+' dense focus zooms in from the prefecture-wide view');
    await page.locator('#mapFrame').screenshot({path:path.join(ARTIFACTS,engine+'-'+item.pref+'-study-dense.png')});
    report.push({browser:engine,pref:item.pref,name:item.name,initial:{labels:before.visible,overlaps:before.overlapPairs,screenFont:[before.screenFontMin,before.screenFontMax],viewBox:before.viewBox},zoom:{labels:afterZoom.visible,overlaps:afterZoom.overlapPairs,screenFont:[afterZoom.screenFontMin,afterZoom.screenFontMax]},reset:{labels:afterReset.visible,viewBox:afterReset.viewBox},dense:{query:item.denseQuery,labels:dense.visible,overlaps:dense.overlapPairs,viewBox:dense.viewBox},readings:item.pref==='28'?'checked':'not toggled'});
