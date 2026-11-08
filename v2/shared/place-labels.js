@@ -87,8 +87,9 @@ function anchor(polys){
  return result;
 }
 function show(options){
- const {svg,regions,project,selected='',all=false,readings=false,positions=null}=options||{};
+ const {svg,regions,project,selected='',all=false,readings=false,positions=null,overviewScale=1}=options||{};
  if(!svg||!Array.isArray(regions)||typeof project!=='function')throw Error('Invalid label options');
+ if(!Number.isFinite(overviewScale)||overviewScale<=0||overviewScale>1)throw Error('Invalid overview label scale');
  const existing=svg.querySelector('[data-v2-labels]');
  if(existing)existing.remove();
  const layer=document.createElementNS(NS,'g');
@@ -102,7 +103,7 @@ function show(options){
   const [x,y]=pt||project(anchor(region.polys));
   if(!Number.isFinite(x)||!Number.isFinite(y))continue;
   const group=document.createElementNS(NS,'g');
-  group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')');
+  group.setAttribute('transform','translate('+x.toFixed(2)+' '+y.toFixed(2)+')'+(overviewScale<1?' scale('+overviewScale+')':''));
   const hasReading=readings&&region.reading;
   const parts=hasReading&&Array.isArray(region.readingParts)&&region.readingParts.length===2?region.readingParts:null;
   const split=Array.isArray(region.readingParts)&&region.readingParts.length===2&&
