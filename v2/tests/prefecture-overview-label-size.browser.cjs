@@ -28,10 +28,19 @@ async function inspect(page){
   const svgRect=svg.getBoundingClientRect();
   const clipped=groupRects.filter(r=>r.right<svgRect.left||r.left>svgRect.right||r.bottom<svgRect.top||r.top>svgRect.bottom).length;
   const transforms=groups.map(g=>g.getAttribute('transform')||'');
+  const anchors=groups.map(g=>[Number(g.getAttribute('data-label-x')),Number(g.getAttribute('data-label-y'))]);
   const sizes=[...new Set([...layer.querySelectorAll('text')].map(t=>t.getAttribute('font-size')))].sort((a,b)=>Number(a)-Number(b));
   const matrix=svg.getScreenCTM();
-  return {labelCount:groups.length,overlapPairs,clipped,transforms,sizes,screenScale:Math.abs(matrix?.a||1)};
+  return {labelCount:groups.length,overlapPairs,clipped,transforms,anchors,sizes,screenScale:Math.abs(matrix?.a||1)};
  });
+}
+function assertAnchorsUnchanged(before,after,label){
+ assert.equal(before.anchors.length,after.anchors.length,label+' keeps every label anchor');
+ for(let i=0;i<before.anchors.length;i++){
+  assert(Math.abs(before.anchors[i][0]-after.anchors[i][0])<.01&&
+    Math.abs(before.anchors[i][1]-after.anchors[i][1])<.01,
+    label+' does not move label '+i+' when only the view scale changes');
+ }
 }
 async function firstTextPixelHeight(page){
  return page.locator('#map [data-v2-labels] text').first().evaluate(node=>node.getBoundingClientRect().height);
@@ -76,6 +85,7 @@ function assertScreenSizeStaysFixed(result,baseScale,label){
     for(let i=0;i<3;i++)await page.locator('#mapZoomIn').click();
     const zoomedHeight=await firstTextPixelHeight(page),zoomed=await inspect(page);
     assert(Math.abs(zoomedHeight-readingHeight)<.5,item.name+' reading text remains the same screen size while zooming');
+    assertAnchorsUnchanged(reading,zoomed,item.name+' overview zoom');
     assertScreenSizeStaysFixed(zoomed,.78,item.name+' zoomed overview');
     await page.locator('#map').screenshot({path:path.join(SHOTS,scenario.name+'-'+item.pref+'-overview-zoomed.png')});
     for(let i=0;i<3;i++)await page.locator('#mapZoomOut').click();
