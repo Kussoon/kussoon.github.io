@@ -41,7 +41,7 @@ async function inspect(page){
   try{
    await app.open();
    await page.goto(page.url().replace('/v2/national/official-2026-nationwide-pilot.html','/maps/national-municipalities.html'));
-   await page.waitForFunction(()=>window.KussoonV2PlaceLabels&&window.KussoonV2EstablishedLabelAdapter&&document.querySelector('#prefChoices button'));
+   await page.waitForFunction(()=>window.KussoonV2PlaceLabels&&window.KussoonV2EstablishedLabelAdapter&&document.querySelector('#prefTrigger')&&document.querySelector('#map .prefecture'));
    for(const item of CASES){
     await page.locator('#prefTrigger').click();
     await page.getByRole('button',{name:item.name,exact:true}).click();
