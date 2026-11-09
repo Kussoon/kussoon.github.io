@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "32",
+  "name": "島根県",
+  "asOf": "2026-11-09",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.shimane.lg.jp/medical/kenko/iryo/shimaneno_iryo/hokenniryoukeikaku/ishikakuho.html",
+  "countySource": "https://www.pref.shimane.lg.jp/infra/road/keikaku/doro_bosai/kinkyudoro.data/r7keikakusho.pdf",
+  "expectedAreaCount": 19,
+  "regions": [
+    {
+      "key": "matsue",
+      "name": "松江",
+      "reading": "まつえ",
+      "codes": [
+        "32201",
+        "32206"
+      ]
+    },
+    {
+      "key": "unnan",
+      "name": "雲南",
+      "reading": "うんなん",
+      "codes": [
+        "32209",
+        "32343",
+        "32386"
+      ]
+    },
+    {
+      "key": "izumo",
+      "name": "出雲",
+      "reading": "いずも",
+      "codes": [
+        "32203"
+      ]
+    },
+    {
+      "key": "oda",
+      "name": "大田",
+      "reading": "おおだ",
+      "codes": [
+        "32205",
+        "32441",
+        "32448",
+        "32449"
+      ]
+    },
+    {
+      "key": "hamada",
+      "name": "浜田",
+      "reading": "はまだ",
+      "codes": [
+        "32202",
+        "32207"
+      ]
+    },
+    {
+      "key": "masuda",
+      "name": "益田",
+      "reading": "ますだ",
+      "codes": [
+        "32204",
+        "32501",
+        "32505"
+      ]
+    },
+    {
+      "key": "oki",
+      "name": "隠岐",
+      "reading": "おき",
+      "codes": [
+        "32525",
+        "32526",
+        "32527",
+        "32528"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "奥出雲町": [
+      "仁多郡",
+      "にたぐん"
+    ],
+    "飯南町": [
+      "飯石郡",
+      "いいしぐん"
+    ],
+    "川本町": [
+      "邑智郡",
+      "おおちぐん"
+    ],
+    "美郷町": [
+      "邑智郡",
+      "おおちぐん"
+    ],
+    "邑南町": [
+      "邑智郡",
+      "おおちぐん"
+    ],
+    "津和野町": [
+      "鹿足郡",
+      "かのあしぐん"
+    ],
+    "吉賀町": [
+      "鹿足郡",
+      "かのあしぐん"
+    ],
+    "海士町": [
+      "隠岐郡",
+      "おきぐん"
+    ],
+    "西ノ島町": [
+      "隠岐郡",
+      "おきぐん"
+    ],
+    "知夫村": [
+      "隠岐郡",
+      "おきぐん"
+    ],
+    "隠岐の島町": [
+      "隠岐郡",
+      "おきぐん"
+    ]
+  }
+}
