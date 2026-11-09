@@ -1,0 +1,32 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'../../..');
+const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'regions.json'),'utf8'));
+const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/label-index.json'),'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
+const page=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+const quiz=fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8');
+const app=fs.readFileSync(path.join(root,'v2/municipalities/shared/quiz-app.js'),'utf8');
+assert.equal(cfg.prefecture,'29');
+assert.equal(cfg.name,'奈良県');
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[8,7,8,4,12]);
+const codes=cfg.regions.flatMap(r=>r.codes),nara=idx.entries.filter(e=>e.pref==='29');
+assert.equal(codes.length,39);assert.equal(new Set(codes).size,39);
+assert.deepEqual([...codes].sort(),nara.map(e=>e.code).sort());
+assert.equal(manifest.entries.find(e=>e.pref==='29').regions,39);
+for(const r of cfg.regions)assert.ok(/^[ぁ-ゖー]+$/.test(r.reading),r.key);
+const towns=nara.filter(e=>!e.name.endsWith('市'));
+assert.equal(towns.length,27);assert.equal(Object.keys(cfg.countyByTown).length,27);
+for(const town of towns){
+ const county=cfg.countyByTown[town.name];
+ assert.ok(county&&county[0].endsWith('郡')&&/^[ぁ-ゖー]+$/.test(county[1]),town.name);
+}
+assert(page.includes("cfg.countyByTown[item.name]"),'Region list shows county');
+assert(page.includes('id="regions"')&&page.includes('id="items"'));
+assert(page.includes('quiz.html?mode=1')&&page.includes('quiz.html?mode=2'));
+assert(quiz.includes('data-region-config="./regions.json"'));
+assert(quiz.includes('regional-quiz.js')&&quiz.includes('quiz-app.js'));
+assert(quiz.includes('id="prefReset"')&&quiz.includes('id="retryMissed"'));
+assert(app.includes('const COUNTY_BY_TOWN=config.countyByTown||{}'));
+assert(app.includes("mode=query.get('mode')==='1'?1:2"));
+console.log('Nara 39 municipalities, five regions, county readings and both quiz modes: PASS');

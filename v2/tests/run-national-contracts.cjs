@@ -10,6 +10,7 @@ const files=[
  'v2/national/test-density-contract.cjs','v2/national/test-shared-border-contract.cjs',
  'v2/common/js/test-office-directory-data.cjs','v2/tools/shared-topology/test-national-navigation.mjs',
  'v2/tests/national-2026-data.test.cjs',
+ 'v2/municipalities/nara/quiz.contract.test.cjs',
  'v2/tests/audit-ledger.test.cjs',
  'v2/tests/office-directory.test.cjs',
  'v2/tests/prefecture-colors.test.cjs',
