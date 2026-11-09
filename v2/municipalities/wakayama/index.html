@@ -34,7 +34,7 @@ try{
  if(!cr.ok||!ir.ok)throw Error('地域データを読み込めません');
  const cfg=await cr.json(),idx=await ir.json(),wakayama=idx.entries.filter(e=>e.pref==='30'&&!cfg.excludedAreaCodes.includes(e.code)),byCode=new Map(wakayama.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(wakayama.length!==30||idx.count!==3005||cfg.expectedAreaCount!==30||cfg.regions.length!==7||codes.length!==30||
+ if(wakayama.length!==30||idx.count!==1905||cfg.expectedAreaCount!==30||cfg.regions.length!==7||codes.length!==30||
     new Set(codes).size!==30||codes.some(c=>!byCode.has(c)))throw Error('和歌山県30市町村の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
