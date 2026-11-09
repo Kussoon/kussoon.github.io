@@ -1,0 +1,17 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'../../..');
+const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'regions.json'),'utf8'));
+const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/label-index.json'),'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
+const areas=idx.entries.filter(e=>e.pref==='45'),codes=cfg.regions.flatMap(r=>r.codes);
+assert.equal(cfg.expectedAreaCount,26);assert.equal(manifest.entries.find(e=>e.pref==='45').regions,26);
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[9,10,2,5]);
+assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());
+assert.equal(new Set(codes).size,26);
+const towns=areas.filter(e=>!e.name.endsWith('市'));
+assert.equal(towns.length,17);assert.deepEqual(Object.keys(cfg.countyByTown).sort(),towns.map(e=>e.name).sort());
+for(const t of towns)assert(/^[ぁ-ゖー]+$/.test(cfg.countyByTown[t.name][1]),t.name);
+assert(fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes("key:'all',name:'全域'"));
+assert(fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8').includes('quiz-app.js?v=20261110-all-areas'));
+console.log('Miyazaki 26 areas, 4 blocks, county names and all-area quiz: PASS');
