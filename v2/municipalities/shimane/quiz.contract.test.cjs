@@ -15,9 +15,9 @@ assert.equal(cfg.expectedAreaCount,19);
 assert.equal(idx.count,1905);
 assert.equal(manifest.entries.find(e=>e.pref==='32').regions,19);
 assert.equal(municipalities.length,19);
-assert.deepEqual(cfg.regions.map(r=>r.name),['松江','雲南','出雲','大田','浜田','益田','隠岐']);
-assert.deepEqual(cfg.regions.map(r=>r.codes.length),[2,3,1,4,2,3,4]);
-assert.deepEqual(cfg.regions.map(r=>r.reading),['まつえ','うんなん','いずも','おおだ','はまだ','ますだ','おき']);
+assert.deepEqual(cfg.regions.map(r=>r.name),['出雲','石見','隠岐']);
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[6,9,4]);
+assert.deepEqual(cfg.regions.map(r=>r.reading),['いずも','いわみ','おき']);
 assert.equal(codes.length,19);assert.equal(new Set(codes).size,19);
 assert.deepEqual([...codes].sort(),municipalities.map(e=>e.code).sort(),'All 19 municipalities covered exactly once');
 assert(municipalities.every(e=>/^[ぁ-ゖー]+$/.test(e.reading)),'All municipality readings are present');
@@ -29,7 +29,7 @@ for(const town of towns){
  const county=cfg.countyByTown[town.name];
  assert(county&&county[0].endsWith('郡')&&/^[ぁ-ゖー]+$/.test(county[1]),town.name+' requires county name and reading');
 }
-assert.equal(cfg.regionSource,'https://www.pref.shimane.lg.jp/medical/kenko/iryo/shimaneno_iryo/hokenniryoukeikaku/ishikakuho.html');
+assert.equal(cfg.regionSource,'https://www.mhlw.go.jp/content/12300000/001490416.pdf');
 assert.equal(cfg.countySource,'https://www.pref.shimane.lg.jp/infra/road/keikaku/doro_bosai/kinkyudoro.data/r7keikakusho.pdf');
 assert(page.includes("cfg.countyByTown[item.name]"),'Municipality list includes county');
 assert(page.includes("ruby.append(make('rt',region.reading))"),'Region selector shows readings');
@@ -44,17 +44,25 @@ assert(app.includes('minZoom:0.25'),'Zoom-out remains available');
 assert(app.includes('const COUNTY_BY_TOWN=config.countyByTown||{}'),'County name formatting inherited');
 assert(app.includes("mode=query.get('mode')==='1'?1:2"),'Modes retained');
 assert(core.includes('proximity')&&core.includes('wrongCodes'),'Shared quiz scoring and 4-choice logic intact');
-// Izumo is a one-city area: mode 2 must still show four distinct choices
-// from all municipalities, without inventing an additional area.
+// Each learning region has at least four municipalities, so the map quiz
+// and four-choice quiz both have meaningful within-region alternatives.
+assert(cfg.regions.every(r=>r.codes.length>=4),'Every region has at least four possible answers');
+assert.deepEqual(cfg.regions.find(r=>r.key==='izumo').codes.sort(),
+ ['32201','32203','32206','32209','32343','32386']);
+assert.deepEqual(cfg.regions.find(r=>r.key==='iwami').codes.sort(),
+ ['32202','32204','32205','32207','32441','32448','32449','32501','32505']);
 const runtime={};
 require('node:vm').runInNewContext(core,{window:runtime});
 const all=municipalities.map(x=>({code:x.code,polys:[[[[Number(x.code)/100000,35],[Number(x.code)/100000+.01,35],[Number(x.code)/100000,35.01]]]]}));
-const izumo=all.find(x=>x.code==='32203');
 const geometries=all.map(x=>({properties:{N03_007:x.code},arcs:[]}));
 const picker=runtime.KussoonV2RegionalQuiz.proximity(all,geometries,{random:()=>.25});
-const options=picker.options(izumo,[izumo]);
-assert.equal(options.length,4,'Single-city Izumo region supports four choices');
-assert.equal(new Set(options.map(x=>x.code)).size,4,'Four choices are unique');
-assert(options.some(x=>x.code===izumo.code),'Correct answer is present');
+for(const region of cfg.regions){
+ const current=all.filter(x=>region.codes.includes(x.code));
+ const correct=current[0];
+ const options=picker.options(correct,current);
+ assert.equal(options.length,4,region.name+' quiz 2 shows four choices');
+ assert.equal(new Set(options.map(x=>x.code)).size,4,region.name+' quiz 2 options are unique');
+ assert(options.some(x=>x.code===correct.code),region.name+' quiz 2 contains the right choice');
+}
 assert.deepEqual(cfg.regions.find(r=>r.key==='oki').codes.sort(),['32525','32526','32527','32528']);
-console.log('Shimane V2: 19 municipalities, seven official regions, 11 counties, single-city Izumo and Oki islands, both quizzes: PASS');
+console.log('Shimane V2: 19 municipalities, seven official regions, 11 counties, Izumo/Iwami/Oki 3-region quizzes, both quizzes: PASS');
