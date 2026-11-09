@@ -17,6 +17,7 @@ const files=[
  'v2/municipalities/kyoto/regions.contract.test.cjs',
  'v2/municipalities/kyoto/quiz.contract.test.cjs',
  'v2/municipalities/wakayama/quiz.contract.test.cjs',
+ 'v2/municipalities/tottori/quiz.contract.test.cjs',
  'v2/tests/kinki-six-prefectures-shared-audit.test.cjs',
  'v2/tests/audit-ledger.test.cjs',
  'v2/tests/office-directory.test.cjs',
