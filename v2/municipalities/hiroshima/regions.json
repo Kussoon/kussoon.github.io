@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "34",
+  "name": "広島県",
+  "asOf": "2026-11-09",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.hiroshima.lg.jp/uploaded/attachment/633233.pdf",
+  "countySource": "https://www.j-lis.go.jp/spd/code-address/chuugoku/cms_15514184.html",
+  "expectedAreaCount": 30,
+  "regions": [
+    {
+      "key": "hiroshima",
+      "name": "広島",
+      "reading": "ひろしま",
+      "codes": [
+        "34101",
+        "34102",
+        "34103",
+        "34104",
+        "34105",
+        "34106",
+        "34107",
+        "34108",
+        "34302",
+        "34304",
+        "34307",
+        "34309"
+      ]
+    },
+    {
+      "key": "hiroshima-west",
+      "name": "広島西",
+      "reading": "ひろしまにし",
+      "codes": [
+        "34211",
+        "34213"
+      ]
+    },
+    {
+      "key": "kure",
+      "name": "呉",
+      "reading": "くれ",
+      "codes": [
+        "34202",
+        "34215"
+      ]
+    },
+    {
+      "key": "geihoku",
+      "name": "芸北",
+      "reading": "げいほく",
+      "codes": [
+        "34214",
+        "34368",
+        "34369"
+      ]
+    },
+    {
+      "key": "hiroshima-central",
+      "name": "広島中央",
+      "reading": "ひろしまちゅうおう",
+      "codes": [
+        "34203",
+        "34212",
+        "34431"
+      ]
+    },
+    {
+      "key": "bisan",
+      "name": "尾三",
+      "reading": "びさん",
+      "codes": [
+        "34204",
+        "34205",
+        "34462"
+      ]
+    },
+    {
+      "key": "fukuyama-fuchu",
+      "name": "福山・府中",
+      "reading": "ふくやま・ふちゅう",
+      "codes": [
+        "34207",
+        "34208",
+        "34545"
+      ]
+    },
+    {
+      "key": "bihoku",
+      "name": "備北",
+      "reading": "びほく",
+      "codes": [
+        "34209",
+        "34210"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "府中町": [
+      "安芸郡",
+      "あきぐん"
+    ],
+    "海田町": [
+      "安芸郡",
+      "あきぐん"
+    ],
+    "熊野町": [
+      "安芸郡",
+      "あきぐん"
+    ],
+    "坂町": [
+      "安芸郡",
+      "あきぐん"
+    ],
+    "安芸太田町": [
+      "山県郡",
+      "やまがたぐん"
+    ],
+    "北広島町": [
+      "山県郡",
+      "やまがたぐん"
+    ],
+    "大崎上島町": [
+      "豊田郡",
+      "とよたぐん"
+    ],
+    "世羅町": [
+      "世羅郡",
+      "せらぐん"
+    ],
+    "神石高原町": [
+      "神石郡",
+      "じんせきぐん"
+    ]
+  }
+}
