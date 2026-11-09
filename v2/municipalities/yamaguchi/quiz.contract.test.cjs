@@ -32,6 +32,8 @@ assert.equal(cfg.countySource,'https://www.j-lis.go.jp/spd/code-address/chuugoku
 assert(page.includes("cfg.countyByTown[item.name]"),'List includes county text');
 assert(page.includes("ruby.append(make('rt',region.reading))"),'Regional selector ruby');
 assert(page.includes('quiz.html?mode=1')&&page.includes('quiz.html?mode=2'),'Both quizzes linked');
+assert(page.includes("key:'all',name:'全域'")&&page.includes('new Set(codes)'), 'Overview offers 19-area full prefecture selection');
+assert(quiz.includes('quiz-app.js?v=20261110-all-areas'), 'Quiz loads versioned shared script');
 assert(page.includes('idx.count!==1905')&&page.includes('cfg.regions.length!==4'),'2026 and region count runtime checks');
 assert(page.includes('new Set(codes).size!==19'),'Runtime checks unique count against 19 rather than copied prefecture count');
 assert(quiz.includes('data-region-config="./regions.json"'),'Standard region data');
