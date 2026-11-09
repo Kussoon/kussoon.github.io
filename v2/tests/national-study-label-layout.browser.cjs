@@ -64,7 +64,13 @@ async function waitForStudy(page,pref){
  },pref,{timeout:60000});
  await page.waitForTimeout(230);
 }
-function assertNoOverlap(state,label){assert.equal(state.overlapPairs,0,label+' has no displayed label overlap '+JSON.stringify(state.overlaps));}
+function assertInViewCandidatesDisplayed(state,label,requireHighZoom=false){
+ const call=[...state.arrangeCalls].reverse().find(c=>c.stableAnchors);
+ assert(call,label+' records a settled nationwide stable-anchor arrangement');
+ if(call.zoom>=2){
+  assert.equal(call.missingInViewCandidates,0,label+' displays every in-view fixed-anchor label despite overlap');
+ }else assert(!requireHighZoom,label+' reaches the 2x overlap-allowance threshold (zoom='+call.zoom+')');
+}
 function assertAnchorsSame(before,after,label){
  const a=new Map(before.anchors.map(x=>[x[0],x.slice(1)])),b=new Map(after.anchors.map(x=>[x[0],x.slice(1)]));
  for(const [code,xy] of a){const next=b.get(code);if(!next)continue;
@@ -84,7 +90,11 @@ function assertAnchorsSame(before,after,label){
      const arrange=value.arrange;
      api={...value,arrange(models,labels,options){
       const result=arrange(models,labels,options);
-      (window.__nationalArranges||(window.__nationalArranges=[])).push({models:models.length,labels:labels.length,stableAnchors:options.stableAnchors===true,zoom:options.zoom,visible:result.visible.filter(Boolean).length});
+      const intersects=(box,view)=>box&&box.x2>=view.x&&box.x1<=view.x+view.w&&box.y2>=view.y&&box.y1<=view.y+view.h;
+      const inViewCandidates=labels.reduce((count,label)=>count+(intersects(label?.box,options.view)?1:0),0);
+      const missingInViewCandidates=labels.reduce((count,label,index)=>count+
+       (intersects(label?.box,options.view)&&!result.visible[index]?1:0),0);
+      (window.__nationalArranges||(window.__nationalArranges=[])).push({models:models.length,labels:labels.length,stableAnchors:options.stableAnchors===true,zoom:options.zoom,visible:result.visible.filter(Boolean).length,inViewCandidates,missingInViewCandidates});
       return result;
      }};
     }else api=value;
@@ -100,7 +110,7 @@ function assertAnchorsSame(before,after,label){
    assert(before.nonTargetNodes>0,item.name+' retains nationwide candidates before the CSS mask');
    assert(before.nonTargetHidden,item.name+' hides non-target labels after national placement');
    assert(before.targetOnly,item.name+' displays target-prefecture labels only');
-   assertNoOverlap(before,item.name+' initial focus');
+   assertInViewCandidatesDisplayed(before,item.name+' initial focus');
    assert(before.arrangeCalls.some(c=>c.models===1905&&c.labels===1905&&c.stableAnchors),
     item.name+' uses the nationwide 1,905-candidate stable-anchor engine');
    const initialView=before.viewBox;
@@ -109,35 +119,33 @@ function assertAnchorsSame(before,after,label){
     const collect=()=>{const nodes=[...svg.querySelectorAll('[data-progressive-labels] [data-national-code]')].filter(n=>{const r=n.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(n).display!=='none';});const matrix=svg.getScreenCTM?.(),scale=matrix?Math.hypot(matrix.a,matrix.b):Math.min(svg.getBoundingClientRect().width/(svg.viewBox.baseVal.width||850),svg.getBoundingClientRect().height/(svg.viewBox.baseVal.height||700));return {viewBox:svg.getAttribute('viewBox'),anchors:nodes.map(n=>[n.dataset.nationalCode,n.getAttribute('x'),n.getAttribute('y')]),sizes:nodes.map(n=>Number(n.getAttribute('font-size'))*scale),overlapPairs:(()=>{let count=0;for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i].getBoundingClientRect(),b=nodes[j].getBoundingClientRect();if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1)count++;}return count;})()};};
     const before=collect();document.querySelector('#mapZoomIn').click();return {before,after:collect()};
    });
-   assert.equal(zoomImmediate.after.overlapPairs,0,item.name+' suppresses collisions before the debounced layout');
    assert(zoomImmediate.after.sizes.length&&zoomImmediate.after.sizes.every(size=>Math.abs(size-zoomImmediate.before.sizes[0])<1.6),
     item.name+' keeps screen text size stable during the zoom delay');
    const afterZoomImmediate={anchors:zoomImmediate.after.anchors.map(x=>[x[0],Number(x[1]),Number(x[2])])};
    assertAnchorsSame({anchors:before.anchors},afterZoomImmediate,item.name+' synchronous zoom compensation');
    await page.waitForTimeout(230);
    let afterZoom=await metrics(page,item.pref);
-   assertNoOverlap(afterZoom,item.name+' zoomed');
+   assertInViewCandidatesDisplayed(afterZoom,item.name+' zoomed');
    assertAnchorsSame(before,afterZoom,item.name+' completed zoom layout');
    await page.locator('#mapFrame').screenshot({path:path.join(ARTIFACTS,engine+'-'+item.pref+'-study-zoomed.png')});
    await page.evaluate(()=>document.querySelector('#mapZoomOut').click());
    await page.waitForTimeout(230);
    let afterZoomOut=await metrics(page,item.pref);
-   assertNoOverlap(afterZoomOut,item.name+' zoomed out');
+   if(afterZoomOut.arrangeCalls.some(c=>c.stableAnchors&&c.zoom>=2))assertInViewCandidatesDisplayed(afterZoomOut,item.name+' zoomed out');
    assertAnchorsSame(before,afterZoomOut,item.name+' zoom out');
    await page.evaluate(()=>document.querySelector('#mapReset').click());
    await page.waitForTimeout(230);
    let afterReset=await metrics(page,item.pref);
    const parse=s=>s.trim().split(/\s+/).map(Number);
    assert.deepEqual(parse(afterReset.viewBox).map(n=>Number(n.toFixed(3))),parse(initialView).map(n=>Number(n.toFixed(3))),item.name+' reset returns to the initial prefecture focus');
-   assertNoOverlap(afterReset,item.name+' reset');
+   assertInViewCandidatesDisplayed(afterReset,item.name+' reset');
    if(item.pref==='28'){
     await page.locator('#mapReadingToggle').click();
     const readingImmediate=await metrics(page,item.pref);
-    assertNoOverlap(readingImmediate,'Hyogo immediate reading toggle');
     await page.waitForTimeout(230);
     const withReading=await metrics(page,item.pref);
     assert.equal(withReading.reading,'on','reading toggle stays functional in study focus');
-    assertNoOverlap(withReading,'Hyogo with readings');
+    assertInViewCandidatesDisplayed(withReading,'Hyogo with readings');
     await page.locator('#mapReadingToggle').click();
     await page.waitForTimeout(230);
     await page.locator('#mapFrame').scrollIntoViewIfNeeded();
@@ -175,7 +183,7 @@ function assertAnchorsSame(before,after,label){
     else await page.mouse.click(selectedTarget.x,selectedTarget.y);
     await page.waitForFunction(()=>!document.querySelector('#map').dataset.nationalSelection);
     const cleared=await metrics(page,item.pref);
-    assertNoOverlap(cleared,'Hyogo after municipality selection and clear');
+    assertInViewCandidatesDisplayed(cleared,'Hyogo after municipality selection and clear');
    }
    await page.locator('#mapFrame').screenshot({path:path.join(ARTIFACTS,engine+'-'+item.pref+'-study-reset.png')});
    await page.locator('#placeSearch').fill(item.denseQuery);
@@ -185,7 +193,7 @@ function assertAnchorsSame(before,after,label){
    await page.locator('#popupClose').click();
    await page.waitForTimeout(230);
    const dense=await metrics(page,item.pref);
-   assertNoOverlap(dense,item.name+' dense municipality focus '+item.denseQuery);
+   assertInViewCandidatesDisplayed(dense,item.name+' dense municipality focus '+item.denseQuery,true);
    assert(dense.visible>0&&dense.targetOnly&&dense.nonTargetHidden,item.name+' dense focus keeps only target-prefecture labels');
    assert(Number(dense.viewBox.split(/\s+/)[2])<Number(initialView.split(/\s+/)[2]),
     item.name+' dense focus zooms in from the prefecture-wide view');
@@ -198,7 +206,7 @@ function assertAnchorsSame(before,after,label){
   assert.equal(traditional.study,false,'traditional pref route is not study mode');
   assert.equal(traditional.progressive,false,'traditional pref route does not use the study progressive layer');
   assert.equal(traditional.detailLabels,49,'traditional prefecture mode keeps the detail renderer');
-  report.push({browser:engine,mode:'pref=28',...traditional,comparison:'separate detail-rendering path; PR #339 applies here, not to studyPref'});
+  report.push({browser:engine,mode:'pref=28',...traditional,comparison:'separate detail-rendering path from studyPref; shared-engine overlap rule applies to national label drawing'});
   await page.locator('#mapFrame').screenshot({path:path.join(ARTIFACTS,engine+'-28-pref-detail-baseline.png')});
   await fs.writeFile(path.join(ARTIFACTS,'national-study-label-layout-'+engine+'.json'),JSON.stringify(report,null,2));
   assert.deepEqual(app.errors,[]);

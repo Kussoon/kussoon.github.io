@@ -1,7 +1,5 @@
-/* Experimental national label visibility: balanced screen coverage.
- * Geometry and administrative records stay untouched.
- */
-// Asset cache version: 308; keep aligned with the script URL in maps/national-municipalities.html.
+/* National label visibility uses fixed nationwide anchors at every zoom level. */
+// Asset cache version: 309; keep aligned with the script URL in maps/national-municipalities.html.
 (function(global){
  'use strict';
  const capitals={
@@ -34,13 +32,13 @@
   const factors={sparse:9500,normal:5900,dense:3100};
   const marginPx={sparse:9,normal:3,dense:0};
   const tilePx={sparse:150,normal:115,dense:90};
-  // Dense and standard modes show every non-overlapping eligible label.
-  // A global count ceiling used to leave obvious blank municipal areas.
-  const limit=density==='sparse'?Math.max(3,Math.ceil(width*height/factors.sparse)):
-   Infinity;
-  const zoomSafetyPx=stableAnchors&&zoom>=2?{x:2,y:6}:{x:0,y:0};
+  // At high zoom, every fixed national anchor whose label box is in view is shown.
+  // Overlap is accepted there; density and collision limits remain at lower zoom.
+  const allowVisibleOverlap=stableAnchors&&zoom>=2;
+  const limit=allowVisibleOverlap?Infinity:
+   density==='sparse'?Math.max(3,Math.ceil(width*height/factors.sparse)):Infinity;
   const gap=(marginPx[density]??4)/ratio;
-  const gapX=gap+zoomSafetyPx.x/ratio,gapY=gap+zoomSafetyPx.y/ratio;
+  const gapX=gap,gapY=gap;
   const tile=tilePx[density]||115;
   const countX=Math.max(1,Math.ceil(width/tile));
   const countY=Math.max(1,Math.ceil(height/tile));
@@ -92,14 +90,14 @@
    const cy=Math.max(0,Math.min(countY-1,Math.floor((p.y-view.y)*ratio/tile)));
    return cy*countX+cx;
   }
-  function claim(c,p){
-   if(!inView(p.box)||active.some(a=>overlaps(a.box,p.box,gapX,gapY)))return false;
+  function claim(c,p,allowOverlap=false){
+   if(!inView(p.box)||(!allowOverlap&&active.some(a=>overlaps(a.box,p.box,gapX,gapY))))return false;
    result[c.i]=true;placed[c.i]=p;
    active.push({box:p.box,cell:cellOf(p)});
    return true;
   }
   // A selected municipality must survive decluttering even if it overlaps.
-  for(const c of candidates)if(c.selected)claim(c,c.anchors.find(p=>inView(p.box))||c.anchors[0]);
+  for(const c of candidates)if(c.selected)claim(c,c.anchors.find(p=>inView(p.box))||c.anchors[0],allowVisibleOverlap);
   // Choose candidates from under-represented screen cells first.
   const byCell=Array.from({length:countX*countY},()=>[]);
   for(const c of candidates){
@@ -113,7 +111,7 @@
   for(let cellId=0;cellId<byCell.length&&active.length<limit;cellId++){
    for(const {c,p} of byCell[cellId]){
     if(result[c.i])continue;
-    if(claim(c,p))break;
+    if(claim(c,p)||allowVisibleOverlap&&claim(c,p,true))break;
    }
   }
   // Second pass: fill ALL remaining non-overlapping areas, without the
@@ -123,7 +121,7 @@
   for(const c of rest){
    if(active.length>=limit)break;
    for(const p of c.anchors){
-    if(claim(c,p))break;
+    if(claim(c,p)||allowVisibleOverlap&&claim(c,p,true))break;
    }
   }
   return {visible:result,labels:placed};
