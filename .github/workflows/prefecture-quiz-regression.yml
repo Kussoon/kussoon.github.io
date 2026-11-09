@@ -1,0 +1,29 @@
+name: V2 prefecture quiz regression
+on:
+  pull_request:
+    paths:
+      - 'v2/municipalities/**'
+      - 'v2/tests/prefecture-study-region-policy.test.cjs'
+      - '.github/workflows/prefecture-quiz-regression.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/municipalities/**'
+      - 'v2/tests/prefecture-study-region-policy.test.cjs'
+      - '.github/workflows/prefecture-quiz-regression.yml'
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run prefecture quiz contracts
+        run: |
+          set -e
+          for test in v2/municipalities/*/quiz.contract.test.cjs; do
+            echo "Running $test"
+            node "$test"
+          done
+          node v2/tests/prefecture-study-region-policy.test.cjs
