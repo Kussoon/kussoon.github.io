@@ -35,7 +35,7 @@ try{
  const cfg=await cr.json(),idx=await ir.json(),yamaguchi=idx.entries.filter(e=>e.pref==='35'),byCode=new Map(yamaguchi.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
  if(yamaguchi.length!==19||idx.count!==1905||cfg.expectedAreaCount!==19||cfg.regions.length!==4||codes.length!==19||
-    new Set(codes).size!==30||codes.some(c=>!byCode.has(c)))throw Error('山口県19区域の照合に失敗しました');
+    new Set(codes).size!==19||codes.some(c=>!byCode.has(c)))throw Error('山口県19区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
   for(const button of box.children)button.setAttribute('aria-pressed',String(button.dataset.key===region.key));
