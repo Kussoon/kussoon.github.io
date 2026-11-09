@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "41",
+  "name": "佐賀県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.saga.lg.jp/kiji00334385/3_34385_26_201621155858.pdf",
+  "countySource": "https://www.pref.saga.lg.jp/kiji0034791/index.html",
+  "expectedAreaCount": 20,
+  "regions": [
+    {
+      "key": "chubu",
+      "name": "中部",
+      "reading": "ちゅうぶ",
+      "codes": [
+        "41201",
+        "41204",
+        "41208",
+        "41210",
+        "41327"
+      ]
+    },
+    {
+      "key": "tobu",
+      "name": "東部",
+      "reading": "とうぶ",
+      "codes": [
+        "41203",
+        "41341",
+        "41345",
+        "41346"
+      ]
+    },
+    {
+      "key": "hokubu",
+      "name": "北部",
+      "reading": "ほくぶ",
+      "codes": [
+        "41202",
+        "41387"
+      ]
+    },
+    {
+      "key": "seibu",
+      "name": "西部",
+      "reading": "せいぶ",
+      "codes": [
+        "41205",
+        "41401"
+      ]
+    },
+    {
+      "key": "nanbu",
+      "name": "南部",
+      "reading": "なんぶ",
+      "codes": [
+        "41206",
+        "41207",
+        "41209",
+        "41423",
+        "41424",
+        "41425",
+        "41441"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "吉野ヶ里町": [
+      "神埼郡",
+      "かんざきぐん"
+    ],
+    "基山町": [
+      "三養基郡",
+      "みやきぐん"
+    ],
+    "上峰町": [
+      "三養基郡",
+      "みやきぐん"
+    ],
+    "みやき町": [
+      "三養基郡",
+      "みやきぐん"
+    ],
+    "玄海町": [
+      "東松浦郡",
+      "ひがしまつうらぐん"
+    ],
+    "有田町": [
+      "西松浦郡",
+      "にしまつうらぐん"
+    ],
+    "大町町": [
+      "杵島郡",
+      "きしまぐん"
+    ],
+    "江北町": [
+      "杵島郡",
+      "きしまぐん"
+    ],
+    "白石町": [
+      "杵島郡",
+      "きしまぐん"
+    ],
+    "太良町": [
+      "藤津郡",
+      "ふじつぐん"
+    ]
+  }
+}
