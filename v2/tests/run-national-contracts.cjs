@@ -23,6 +23,7 @@ const files=[
  'v2/municipalities/hiroshima/quiz.contract.test.cjs',
  'v2/municipalities/yamaguchi/quiz.contract.test.cjs',
  'v2/municipalities/hyogo/quiz.contract.test.cjs',
+ 'v2/municipalities/tokushima/quiz.contract.test.cjs',
  'v2/tests/prefecture-all-areas-quiz.test.cjs',
  'v2/tests/kinki-six-prefectures-shared-audit.test.cjs',
  'v2/tests/prefecture-study-region-policy.test.cjs',
