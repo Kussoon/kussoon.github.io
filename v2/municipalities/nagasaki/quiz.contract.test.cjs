@@ -6,8 +6,11 @@ const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/labe
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
 const areas=idx.entries.filter(e=>e.pref==='42'),codes=cfg.regions.flatMap(r=>r.codes);
 assert.equal(cfg.expectedAreaCount,21);assert.equal(manifest.entries.find(e=>e.pref==='42').regions,21);
-assert.deepEqual(cfg.regions.map(r=>r.codes.length),[4,5,3,5,2,1,1]);
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[4,5,3,5,2,2]);
+assert(cfg.regions.every(r=>r.codes.length>=2),'No singleton quiz scope');
+assert(cfg.regionPolicyNote&&cfg.regionPolicyNote.includes('学習用'),'Learning-region modification documented');
 assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());
+assert.deepEqual(cfg.regions.find(r=>r.key==='iki-tsushima').codes,['42210','42209']);
 assert.equal(new Set(codes).size,21);
 const towns=areas.filter(e=>e.name.endsWith('町'));
 assert.equal(towns.length,8);
@@ -15,4 +18,4 @@ assert.deepEqual(Object.keys(cfg.countyByTown).sort(),towns.map(e=>e.name).sort(
 for(const t of towns)assert(/^[ぁ-ゖー]+$/.test(cfg.countyByTown[t.name][1]),t.name);
 assert(fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes("key:'all',name:'全域'"));
 assert(fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8').includes('quiz-app.js?v=20261110-all-areas'));
-console.log('Nagasaki 21 areas, seven regions and whole-prefecture quizzes: PASS');
+console.log('Nagasaki 21 areas, six regions and whole-prefecture quizzes: PASS');

@@ -6,12 +6,16 @@ const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/labe
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
 const areas=idx.entries.filter(e=>e.pref==='44'),codes=cfg.regions.flatMap(r=>r.codes);
 assert.equal(cfg.expectedAreaCount,18);assert.equal(manifest.entries.find(e=>e.pref==='44').regions,18);
-assert.deepEqual(cfg.regions.map(r=>r.codes.length),[3,5,4,2,3,1]);
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[3,5,5,2,3]);
+assert(cfg.regions.every(r=>r.codes.length>=2),'No singleton quiz scope');
+assert(cfg.regionPolicyNote&&cfg.regionPolicyNote.includes('学習用'),'Learning-region modification documented');
 assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());
+assert.deepEqual(cfg.regions.find(r=>r.key==='central-south').codes,['44201','44206','44207','44213','44205']);
+assert(fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes('new Set(codes).size!==18'),'Runtime unique code guard is 18');
 assert.equal(new Set(codes).size,18);
 const towns=areas.filter(e=>!e.name.endsWith('市'));
 assert.equal(towns.length,4);assert.deepEqual(Object.keys(cfg.countyByTown).sort(),towns.map(e=>e.name).sort());
 for(const t of towns)assert(/^[ぁ-ゖー]+$/.test(cfg.countyByTown[t.name][1]),t.name);
 assert(fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes("key:'all',name:'全域'"));
 assert(fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8').includes('quiz-app.js?v=20261110-all-areas'));
-console.log('Oita 18 areas, 6 regions, county names and all-area quiz: PASS');
+console.log('Oita 18 areas, 5 regions, county names and all-area quiz: PASS');

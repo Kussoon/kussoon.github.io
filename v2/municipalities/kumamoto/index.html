@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,follow"><title>熊本県V2・11地域と市町村名｜Kussoon</title>
+<meta name="robots" content="noindex,follow"><title>熊本県V2・10地域と市町村名｜Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#193b51;background:#f0f7fc}*{box-sizing:border-box}
 body{margin:0}main{max-width:960px;margin:auto;padding:20px 14px 52px}h1{font-size:clamp(1.5rem,4vw,2.2rem)}
@@ -17,15 +17,15 @@ button[aria-pressed="true"]{background:#d9ecf7;border:2px solid #34799d}
 .item ruby{font-size:1.05rem;font-weight:650}rt{font-size:.65em}a{color:#155a7c}small{color:#476249}
 </style></head><body><main>
 <p><a href="/v2/">← V2試験トップへ戻る</a></p>
-<h1>熊本県V2・11地域と市町村名</h1>
-<p>地域を選ぶと、含まれる市町村名を一覧で確認できます。熊本県公式資料の11地域を、クイズの出題範囲に使います。熊本市の5区を含む全49区域を出題します。「全域」を選ぶと49区域すべてを表示します。</p>
+<h1>熊本県V2・10地域と市町村名</h1>
+<p>地域を選ぶと、含まれる市町村名を一覧で確認できます。熊本県公式資料の11地域を基本に、山鹿と菊池を統合した学習用10地域を、クイズの出題範囲に使います。熊本市の5区を含む全49区域を出題します。「全域」を選ぶと49区域すべてを表示します。</p>
 <section class="panel"><h2>地域を選択</h2><div id="regions" class="regions" aria-label="熊本県の地域を選択"></div>
 <h3 id="selection">読み込み中…</h3><div id="items" class="items" aria-live="polite"></div>
 <p id="status" role="status"></p></section>
 <section class="panel"><h2>熊本県V2のクイズ（検証版）</h2>
 <p><a href="./quiz.html?mode=1">クイズ1：地名から場所を当てる</a></p>
 <p><a href="./quiz.html?mode=2">クイズ2：光っている場所は？</a></p></section>
-<p><small>地域区分：<a href="https://web.pref.kumamoto.lg.jp/area/">熊本県：県内の11地域</a> ／ 郡名：<a href="https://github.com/Kussoon/kumamoto/blob/main/v2-regions.js">熊本県：市町村の郡名</a></small></p>
+<p><small>地域区分：<a href="https://www.pref.kumamoto.jp/uploaded/life/252767_760429_misc.pdf">熊本県公式：11地域（クイズ用に統合）</a> ／ 郡名：<a href="https://www.pref.kumamoto.jp/soshiki/1/51179.html">熊本県：市町村の郡名</a></small></p>
 </main><script>
 (async function(){'use strict';
 const box=document.getElementById('regions'),list=document.getElementById('items'),heading=document.getElementById('selection'),status=document.getElementById('status');
@@ -34,7 +34,7 @@ try{
  if(!cr.ok||!ir.ok)throw Error('地域データを読み込めません');
  const cfg=await cr.json(),idx=await ir.json(),kumamoto=idx.entries.filter(e=>e.pref==='43'),byCode=new Map(kumamoto.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(kumamoto.length!==49||idx.count!==1905||cfg.expectedAreaCount!==49||cfg.regions.length!==11||codes.length!==49||
+ if(kumamoto.length!==49||idx.count!==1905||cfg.expectedAreaCount!==49||cfg.regions.length!==10||codes.length!==49||
     new Set(codes).size!==49||codes.some(c=>!byCode.has(c)))throw Error('熊本県49区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
@@ -55,7 +55,7 @@ try{
   count.className='count';button.append(ruby,count);
   button.dataset.key=region.key;button.type='button';button.setAttribute('aria-pressed','false');button.onclick=()=>select(region);box.append(button);
  }
- select(cfg.regions[0]);status.textContent='2026年版49区域・11地域のコード照合：合格';
+ select(cfg.regions[0]);status.textContent='2026年版49区域・10地域のコード照合：合格';
 }catch(error){heading.textContent='読み込みエラー';status.textContent=error.message;console.error(error);}
 })();
 </script><script defer src="/common/site-footer.js"></script></body></html>

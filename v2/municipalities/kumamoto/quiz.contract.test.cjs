@@ -6,8 +6,11 @@ const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/labe
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
 const areas=idx.entries.filter(e=>e.pref==='43'),codes=cfg.regions.flatMap(r=>r.codes);
 assert.equal(cfg.expectedAreaCount,49);assert.equal(manifest.entries.find(e=>e.pref==='43').regions,49);
-assert.deepEqual(cfg.regions.map(r=>r.codes.length),[5,6,1,4,7,5,3,2,3,10,3]);
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[5,6,5,7,5,3,2,3,10,3]);
+assert(cfg.regions.every(r=>r.codes.length>=2),'No singleton quiz scope');
+assert(cfg.regionPolicyNote&&cfg.regionPolicyNote.includes('学習用'),'Learning-region modification documented');
 assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());
+assert.deepEqual(cfg.regions.find(r=>r.key==='yamaga-kikuchi').codes,['43208','43210','43216','43403','43404']);
 assert.equal(new Set(codes).size,49);
 const wards=areas.filter(e=>e.fullName.startsWith('熊本市')&&e.name.endsWith('区'));
 assert.equal(wards.length,5);assert(wards.every(e=>cfg.regions[0].codes.includes(e.code)));
@@ -16,4 +19,4 @@ assert.equal(towns.length,31);assert.deepEqual(Object.keys(cfg.countyByTown).sor
 for(const t of towns)assert(/^[ぁ-ゖー]+$/.test(cfg.countyByTown[t.name][1]),t.name);
 assert(fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes("key:'all',name:'全域'"));
 assert(fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8').includes('quiz-app.js?v=20261110-all-areas'));
-console.log('Kumamoto 49 areas, 11 regions, five Kumamoto wards and all-area quiz: PASS');
+console.log('Kumamoto 49 areas, 10 regions, five Kumamoto wards and all-area quiz: PASS');
