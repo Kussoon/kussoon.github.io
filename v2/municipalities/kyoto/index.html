@@ -9,6 +9,9 @@ p{line-height:1.7}.panel{background:white;border:1px solid #bdd2df;border-radius
 .regions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}@media(min-width:680px){.regions{grid-template-columns:repeat(4,minmax(0,1fr))}}
 button{border:1px solid #97b7ca;border-radius:12px;min-height:48px;padding:8px 6px;background:#fff;color:inherit;font:inherit;font-weight:650}
 button[aria-pressed="true"]{background:#d9ecf7;border:2px solid #34799d}
+.regions button ruby{ruby-position:over;white-space:nowrap}
+.regions button rt{font-size:.65em;font-weight:700;letter-spacing:.02em}
+.regions button .count{white-space:nowrap}
 .items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
 @media(min-width:680px){.items{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .item{padding:10px 6px;border-radius:9px;background:#eef6fa;text-align:center;overflow-wrap:anywhere}
@@ -47,7 +50,12 @@ try{
    tile.append(ruby);list.append(tile);
   }
  }
- for(const r of cfg.regions){const b=make('button',r.name+'（'+r.codes.length+'）');b.dataset.key=r.key;b.type='button';b.setAttribute('aria-pressed','false');b.onclick=()=>select(r);box.append(b);}
+ for(const r of cfg.regions){
+  const b=make('button',''),ruby=make('ruby',r.name),count=make('span','（'+r.codes.length+'）');
+  if(r.reading)ruby.append(make('rt',r.reading));
+  count.className='count';b.append(ruby,count);
+  b.dataset.key=r.key;b.type='button';b.setAttribute('aria-pressed','false');b.onclick=()=>select(r);box.append(b);
+ }
  select(cfg.regions[0]);status.textContent='2026年版36区域・8地域のコード照合：合格';
 }catch(e){heading.textContent='読み込みエラー';status.textContent=e.message;console.error(e);}
 })();
