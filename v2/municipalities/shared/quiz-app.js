@@ -1,6 +1,6 @@
 // Shared V2 municipality quiz UI: Osaka pilot, two modes, one runtime.
 (async()=>{'use strict';
-const config=await (await fetch(document.documentElement.dataset.regionConfig||'./regions.json')).json(),regions=config.regions,byId=id=>document.getElementById(id),svg=byId('map'),choices=byId('rangeChoices'),status=byId('status');
+const config=await (await fetch(document.documentElement.dataset.regionConfig||'./regions.json')).json(),regions=[...config.regions,{key:'all',name:'全域',reading:'ぜんいき',codes:[...new Set(config.regions.flatMap(region=>region.codes))]}],byId=id=>document.getElementById(id),svg=byId('map'),choices=byId('rangeChoices'),status=byId('status');
 const Core=window.KussoonV2RegionalQuiz;if(!Core)throw Error('共通クイズエンジンが読み込めません');
 const W=850,H=700,renderer=KussoonV2MunicipalRenderer;
 let viewport=KussoonV2MapViewport.init({svg,width:W,height:H,minZoom:0.25}),frameHeight=H,prefectureView=false;
@@ -76,7 +76,7 @@ function fitMap(items,isPrefecture=false){
  viewport.reset();
  render();
 }
-function focus(){const region=regions.find(x=>x.key===selectedRange);byId('mapRegionName').textContent=region.name;current=all.filter(r=>region.codes.includes(r.code));if(!current.length)return;fitMap(current);status.textContent='';status.hidden=true;}
+function focus(){const region=regions.find(x=>x.key===selectedRange);byId('mapRegionName').textContent=region.name;current=all.filter(r=>region.codes.includes(r.code));if(!current.length)return;fitMap(current,selectedRange==='all');status.textContent='';status.hidden=true;}
 function setRange(key){if(!regions.some(r=>r.key===key))return;selectedRange=key;updateRangeButtons();session=null;retryOrder=[];byId('question').style.minHeight='';byId('question').textContent='';byId('question').hidden=true;byId('feedback').textContent='';byId('answerArea').hidden=true;byId('choices').hidden=true;byId('next').hidden=true;byId('start').disabled=!all.length;byId('start').hidden=false;byId('replayArea').hidden=true;byId('quit').hidden=true;if(all.length)focus();
  // Before the first quiz, keep the start button available. Later region taps start a new regional quiz.
  if(startedOnce&&all.length){start();}else{
@@ -169,7 +169,7 @@ function returnToRegions(){
 }
 byId('start').onclick=start;byId('replay').onclick=start;byId('retryMissed').onclick=()=>start(retryOrder);byId('quit').onclick=finishQuiz;byId('returnRegions').onclick=returnToRegions;byId('next').onclick=()=>{if(!session)return;Core.next(session);show();};
 
-byId('plus').onclick=()=>viewport.zoomIn();byId('minus').onclick=()=>viewport.zoomOut();byId('reset').onclick=()=>fitMap(current);byId('prefReset').onclick=()=>fitMap(all,true);
+byId('plus').onclick=()=>viewport.zoomIn();byId('minus').onclick=()=>viewport.zoomOut();byId('reset').onclick=()=>fitMap(current,selectedRange==='all');byId('prefReset').onclick=()=>fitMap(all,true);
 try{
  const [manifestRes,indexRes]=await Promise.all([fetch('/v2/data/national/2026-common/national-2026-pilot/manifest.json'),fetch('/v2/progressive-preview/label-index.json')]);
  if(!manifestRes.ok||!indexRes.ok)throw Error('全国データ索引の読み込みに失敗');
