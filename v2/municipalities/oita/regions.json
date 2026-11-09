@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "44",
+  "name": "大分県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.oita.jp/uploaded/life/1004239_1020343_misc.pdf",
+  "countySource": "https://www.zck.or.jp/soshiki/2/4031.html",
+  "expectedAreaCount": 18,
+  "regions": [
+    {
+      "key": "north",
+      "name": "北部",
+      "reading": "ほくぶ",
+      "codes": [
+        "44203",
+        "44209",
+        "44211"
+      ]
+    },
+    {
+      "key": "east",
+      "name": "東部",
+      "reading": "とうぶ",
+      "codes": [
+        "44202",
+        "44210",
+        "44214",
+        "44322",
+        "44341"
+      ]
+    },
+    {
+      "key": "central",
+      "name": "中部",
+      "reading": "ちゅうぶ",
+      "codes": [
+        "44201",
+        "44206",
+        "44207",
+        "44213"
+      ]
+    },
+    {
+      "key": "hohi",
+      "name": "豊肥",
+      "reading": "ほうひ",
+      "codes": [
+        "44208",
+        "44212"
+      ]
+    },
+    {
+      "key": "west",
+      "name": "西部",
+      "reading": "せいぶ",
+      "codes": [
+        "44204",
+        "44461",
+        "44462"
+      ]
+    },
+    {
+      "key": "south",
+      "name": "南部",
+      "reading": "なんぶ",
+      "codes": [
+        "44205"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "姫島村": [
+      "東国東郡",
+      "ひがしくにさきぐん"
+    ],
+    "日出町": [
+      "速見郡",
+      "はやみぐん"
+    ],
+    "九重町": [
+      "玖珠郡",
+      "くすぐん"
+    ],
+    "玖珠町": [
+      "玖珠郡",
+      "くすぐん"
+    ]
+  }
+}
