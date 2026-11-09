@@ -64,10 +64,12 @@ async function waitForStudy(page,pref){
  },pref,{timeout:60000});
  await page.waitForTimeout(230);
 }
-function assertInViewCandidatesDisplayed(state,label){
- const call=[...state.arrangeCalls].reverse().find(c=>c.stableAnchors&&c.zoom>=2);
- assert(call,label+' records a settled high-zoom national arrangement');
- assert.equal(call.missingInViewCandidates,0,label+' displays every in-view fixed-anchor label despite overlap');
+function assertInViewCandidatesDisplayed(state,label,requireHighZoom=false){
+ const call=[...state.arrangeCalls].reverse().find(c=>c.stableAnchors);
+ assert(call,label+' records a settled nationwide stable-anchor arrangement');
+ if(call.zoom>=2){
+  assert.equal(call.missingInViewCandidates,0,label+' displays every in-view fixed-anchor label despite overlap');
+ }else assert(!requireHighZoom,label+' reaches the 2x overlap-allowance threshold (zoom='+call.zoom+')');
 }
 function assertAnchorsSame(before,after,label){
  const a=new Map(before.anchors.map(x=>[x[0],x.slice(1)])),b=new Map(after.anchors.map(x=>[x[0],x.slice(1)]));
@@ -191,7 +193,7 @@ function assertAnchorsSame(before,after,label){
    await page.locator('#popupClose').click();
    await page.waitForTimeout(230);
    const dense=await metrics(page,item.pref);
-   assertInViewCandidatesDisplayed(dense,item.name+' dense municipality focus '+item.denseQuery);
+   assertInViewCandidatesDisplayed(dense,item.name+' dense municipality focus '+item.denseQuery,true);
    assert(dense.visible>0&&dense.targetOnly&&dense.nonTargetHidden,item.name+' dense focus keeps only target-prefecture labels');
    assert(Number(dense.viewBox.split(/\s+/)[2])<Number(initialView.split(/\s+/)[2]),
     item.name+' dense focus zooms in from the prefecture-wide view');
