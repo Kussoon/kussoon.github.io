@@ -28,6 +28,7 @@ const files=[
  'v2/municipalities/saga/quiz.contract.test.cjs',
  'v2/municipalities/tokushima/quiz.contract.test.cjs',
  'v2/municipalities/kagawa/quiz.contract.test.cjs',
+ 'v2/municipalities/ehime/quiz.contract.test.cjs',
  'v2/tests/prefecture-all-areas-quiz.test.cjs',
  'v2/tests/kinki-six-prefectures-shared-audit.test.cjs',
  'v2/tests/prefecture-study-region-policy.test.cjs',

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "38",
+  "name": "愛媛県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.ehime.jp/page/14990.html",
+  "countySource": "https://www.j-lis.go.jp/spd/code-address/shikoku/cms_15914186.html",
+  "expectedAreaCount": 20,
+  "regions": [
+    {
+      "key": "toyo",
+      "name": "東予",
+      "reading": "とうよ",
+      "codes": [
+        "38202",
+        "38205",
+        "38206",
+        "38213",
+        "38356"
+      ]
+    },
+    {
+      "key": "chuyo",
+      "name": "中予",
+      "reading": "ちゅうよ",
+      "codes": [
+        "38201",
+        "38210",
+        "38215",
+        "38386",
+        "38401",
+        "38402"
+      ]
+    },
+    {
+      "key": "nanyo",
+      "name": "南予",
+      "reading": "なんよ",
+      "codes": [
+        "38203",
+        "38204",
+        "38207",
+        "38214",
+        "38422",
+        "38442",
+        "38484",
+        "38488",
+        "38506"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "上島町": [
+      "越智郡",
+      "おちぐん"
+    ],
+    "久万高原町": [
+      "上浮穴郡",
+      "かみうけなぐん"
+    ],
+    "松前町": [
+      "伊予郡",
+      "いよぐん"
+    ],
+    "砥部町": [
+      "伊予郡",
+      "いよぐん"
+    ],
+    "内子町": [
+      "喜多郡",
+      "きたぐん"
+    ],
+    "伊方町": [
+      "西宇和郡",
+      "にしうわぐん"
+    ],
+    "松野町": [
+      "北宇和郡",
+      "きたうわぐん"
+    ],
+    "鬼北町": [
+      "北宇和郡",
+      "きたうわぐん"
+    ],
+    "愛南町": [
+      "南宇和郡",
+      "みなみうわぐん"
+    ]
+  }
+}

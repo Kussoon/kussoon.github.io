@@ -9,7 +9,7 @@ assert(script.includes("fitMap(current,selectedRange==='all')"),'Prefecture-wide
 assert(script.includes("regions.some(r=>r.key===wanted)?wanted:regions[0].key"),'Existing first-region default and URL-driven choice stay intact');
 assert(script.includes("session=Core.start(order)"),'Questions use the selected region, including full prefecture');
 assert(script.includes("proximity.options(item,current)"),'Four choices refer to selected set');
-const targets=['kagawa','tokushima','hyogo','nara','shiga','osaka','kyoto','wakayama','tottori','shimane','okayama','hiroshima','yamaguchi'];
+const targets=['ehime','kagawa','tokushima','hyogo','nara','shiga','osaka','kyoto','wakayama','tottori','shimane','okayama','hiroshima','yamaguchi'];
 for(const pref of targets){
  const config=JSON.parse(fs.readFileSync(path.join(root,'v2/municipalities',pref,'regions.json'),'utf8'));
  const codes=config.regions.flatMap(region=>region.codes);
