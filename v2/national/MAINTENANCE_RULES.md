@@ -333,3 +333,9 @@ PR #344のマージ後、公開ページは `national-progressive-labels.js?v=30
 ## 2026-11-09 追補：拡大時は表示範囲内の固定アンカー候補を表示
 
 比較試作 [PR #352](https://github.com/Kussoon/kussoon.github.io/pull/352) をユーザーがiPhone Safariで確認し、承認。拡大率2倍以上では、全国地図の既存固定アンカーを使い、ラベル枠が現在の表示範囲と交差する候補を周辺ラベルとの重なりを許容して表示する。区域の投影サイズによる条件は設けず、表示範囲外は除外する。全国版とstudyPrefの共通エンジンで同じ判定を行う。従来のpref=XX詳細表示には適用しない。拡大率2倍未満では既存の密度・衝突抑制を維持する。これは #344/#345の全倍率衝突抑制規則、#220/#221の区域サイズ条件付き例外を拡大時表示について置き換える決定であり、各PRの他の仕様には影響しない。自動回帰では2倍境界、部分的に画面内へ入ったラベル、完全な画面外、固定アンカー、studyPrefの全国共通計算を検査する。
+
+## 2026-11-09 追補：R39 地域選択のふりがな（3府県実機承認）
+
+**R39 地域選択のふりがな:** 兵庫県・大阪府・京都府のV2地域選択ボタンは、地域名の上に、確認済みの `reading` を `ruby/rt` で表示する。区域数を表示するボタンではその区域数を維持する。地域名と読みの対応は各府県の地域設定を正本とし、表示のために区域区分・コード・出題・採点・地図ラベル配置を変更しない。兵庫県10地域、大阪府8地域、京都府8地域に適用し、今後の府県展開でも同じ規則を使う。欠けた読みを推測で補わない。名称・読み・ボタン配置を変更する場合は、従来表示との比較を行い、ユーザーへ提案してから採用する。全国地図の市区町村ラベルとその拡大時表示はR05/R13の確定仕様を維持する。
+
+根拠: 兵庫県 [PR #46](https://github.com/Kussoon/hyogo/pull/46)、大阪府 [PR #338](https://github.com/Kussoon/kussoon.github.io/pull/338)・[PR #357](https://github.com/Kussoon/kussoon.github.io/pull/357)、京都府 [PR #338](https://github.com/Kussoon/kussoon.github.io/pull/338)・[PR #356](https://github.com/Kussoon/kussoon.github.io/pull/356)、大阪府・京都府の地域選択ページの読みをユーザーが確認。兵庫県の地域学習ページへの適用は別途実機確認が必要。対象: `/hyogo/v2-quiz1.html`・`/hyogo/v2-quiz2.html`・`/hyogo/v2-study-region.html`、`v2/municipalities/{osaka,kyoto}/index.html`・`quiz.html`。自動確認: `v2/municipalities/region-reading.contract.test.cjs`（大阪・京都の地域設定とトップ／共通クイズUI）、兵庫県の別リポジトリの専用契約。iPhone Safariの全組合せ実機試験は各県展開時にも必要。
