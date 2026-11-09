@@ -20,6 +20,7 @@ const files=[
  'v2/municipalities/tottori/quiz.contract.test.cjs',
  'v2/municipalities/shimane/quiz.contract.test.cjs',
  'v2/tests/kinki-six-prefectures-shared-audit.test.cjs',
+ 'v2/tests/prefecture-study-region-policy.test.cjs',
  'v2/tests/audit-ledger.test.cjs',
  'v2/tests/office-directory.test.cjs',
  'v2/tests/prefecture-colors.test.cjs',
