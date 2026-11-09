@@ -1,0 +1,30 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'../../..');
+const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'regions.json'),'utf8'));
+const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/label-index.json'),'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
+const topo=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/kyushu-prefecture-20m/40.topojson'),'utf8'));
+const areas=idx.entries.filter(e=>e.pref==='40'&&!cfg.excludedAreaCodes.includes(e.code));
+const codes=cfg.regions.flatMap(r=>r.codes);
+assert.equal(cfg.expectedAreaCount,72);
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[19,26,15,12]);
+assert.equal(manifest.entries.find(e=>e.pref==='40').regions,73);
+assert.deepEqual(cfg.excludedAreaCodes,['40000']);
+assert.equal(topo.objects.municipalities.geometries.length,73);
+assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());
+assert.equal(new Set(codes).size,72);
+for(const [city,key] of [['北九州市','kitakyushu'],['福岡市','fukuoka']]){
+ const wards=areas.filter(e=>e.fullName.startsWith(city)&&e.name.endsWith('区'));
+ assert.equal(wards.length,7,city);
+ assert(wards.every(e=>cfg.regions.find(r=>r.key===key).codes.includes(e.code)));
+}
+const towns=areas.filter(e=>!e.name.endsWith('市')&&!e.name.endsWith('区'));
+assert.equal(towns.length,31);
+assert.deepEqual(Object.keys(cfg.countyByTown).sort(),towns.map(e=>e.name).sort());
+for(const town of towns)assert(/^[ぁ-ゖー]+$/.test(cfg.countyByTown[town.name][1]),town.name);
+const page=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');
+const quiz=fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8');
+assert(page.includes("key:'all',name:'全域'"));
+assert(quiz.includes('quiz-app.js?v=20261110-all-areas'));
+console.log('Fukuoka 72 areas, 14 wards, four regions and whole prefecture: PASS');
