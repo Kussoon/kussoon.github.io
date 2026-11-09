@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'../../..');
+const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'regions.json'),'utf8'));
+const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/label-index.json'),'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
+const areas=idx.entries.filter(e=>e.pref==='15'),codes=cfg.regions.flatMap(r=>r.codes);
+assert.equal(cfg.prefecture,'15');assert.equal(cfg.expectedAreaCount,37);assert.equal(manifest.entries.find(e=>e.pref==='15').regions,37);
+assert.equal(areas.length,37);assert.equal(cfg.regions.length,5);assert.deepEqual(cfg.regions.map(r=>r.codes.length),[6,11,11,5,4]);
+assert(cfg.regions.every(r=>r.codes.length>=2),'No one-area quiz region');assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());assert.equal(new Set(codes).size,37);
+assert(cfg.regions.every(r=>r.name&&/^[ぁ-ゖー]+$/.test(r.reading)));
+const wards=areas.filter(e=>e.fullName.startsWith('新潟市')&&e.name.endsWith('区'));assert.equal(wards.length,8);assert(wards.every(e=>cfg.regions.find(r=>r.key==='niigata').codes.includes(e.code)));
+const towns=areas.filter(e=>e.name.endsWith('町')||e.name.endsWith('村'));assert.equal(towns.length,10);assert.deepEqual(Object.keys(cfg.countyByTown).sort(),towns.map(e=>e.name).sort());
+for(const town of towns)assert(/^[ぁ-ゖー]+$/.test(cfg.countyByTown[town.name][1]),town.name);
+assert(cfg.regionSource.startsWith('https://www.pref.niigata.lg.jp/'));assert(cfg.countySource.startsWith('https://www.pref.niigata.lg.jp/'));
+const page=fs.readFileSync(path.join(__dirname,'index.html'),'utf8'),quiz=fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8');
+assert(page.includes("key:'all',name:'全域'"));assert(page.includes('全37区域'));assert(quiz.includes('regional-quiz.js'));assert(quiz.includes('quiz-app.js'));
+console.log('Niigata 37 areas, eight wards, five regions and whole-prefecture mode: PASS');
