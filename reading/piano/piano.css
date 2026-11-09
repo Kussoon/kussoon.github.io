@@ -109,3 +109,4 @@ figure[data-figure="hofmann"] img, figure[data-figure="steinway"] img {
   margin-inline: auto;
   object-fit: contain;
 }
+.diagram > svg + .flow, .diagram > .compare + .flow { margin-top: 12px; }
