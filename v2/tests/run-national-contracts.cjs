@@ -29,6 +29,7 @@ const files=[
  'v2/municipalities/oita/quiz.contract.test.cjs',
  'v2/municipalities/miyazaki/quiz.contract.test.cjs',
  'v2/municipalities/kagoshima/quiz.contract.test.cjs',
+ 'v2/municipalities/okinawa/quiz.contract.test.cjs',
  'v2/municipalities/saga/quiz.contract.test.cjs',
  'v2/municipalities/tokushima/quiz.contract.test.cjs',
  'v2/municipalities/kagawa/quiz.contract.test.cjs',
