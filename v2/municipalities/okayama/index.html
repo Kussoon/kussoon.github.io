@@ -34,12 +34,12 @@ try{
  if(!cr.ok||!ir.ok)throw Error('地域データを読み込めません');
  const cfg=await cr.json(),idx=await ir.json(),okayama=idx.entries.filter(e=>e.pref==='33'),byCode=new Map(okayama.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(okayama.length!==30||idx.count!==3005||cfg.expectedAreaCount!==30||cfg.regions.length!==3||codes.length!==30||
+ if(okayama.length!==30||idx.count!==1905||cfg.expectedAreaCount!==30||cfg.regions.length!==3||codes.length!==30||
     new Set(codes).size!==30||codes.some(c=>!byCode.has(c)))throw Error('岡山県30区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
   for(const button of box.children)button.setAttribute('aria-pressed',String(button.dataset.key===region.key));
-  heading.textContent=region.name+'：'+region.codes.length+'市町村';list.replaceChildren();
+  heading.textContent=region.name+'：'+region.codes.length+'区域';list.replaceChildren();
   for(const code of region.codes){
    const item=byCode.get(code),county=cfg.countyByTown[item.name],tile=make('div','');tile.className='item';
    const ruby=document.createElement('ruby');
