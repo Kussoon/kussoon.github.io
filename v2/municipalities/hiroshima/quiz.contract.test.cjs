@@ -20,10 +20,10 @@ assert.deepEqual(cfg.regions.map(r=>r.reading),['ひろしま','ひろしまに�
 assert.equal(codes.length,30);assert.equal(new Set(codes).size,30);
 assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort(),'All 30 administrative quiz areas covered once');
 assert(areas.every(e=>/^[ぁ-ゖー]+$/.test(e.reading)),'All area readings are available');
-const wards=areas.filter(e=>e.fullName.startsWith('岡山市')&&e.name.endsWith('区'));
+const wards=areas.filter(e=>e.fullName.startsWith('広島市')&&e.name.endsWith('区'));
 assert.equal(wards.length,8,'Eight Hiroshima wards are distinct quiz areas');
-assert.deepEqual(cfg.regions.find(r=>r.key==='hiroshima').codes.filter(c=>wards.some(e=>e.code===c)).sort(),wards.map(e=>e.code).sort(),'Eight Hiroshima wards belong to Bizen');
-assert(wards.every(e=>e.fullName.startsWith('岡山市')),'Ward names contain their parent city');
+assert.deepEqual(cfg.regions.find(r=>r.key==='hiroshima').codes.filter(c=>wards.some(e=>e.code===c)).sort(),wards.map(e=>e.code).sort(),'Eight Hiroshima wards belong to Hiroshima');
+assert(wards.every(e=>e.fullName.startsWith('広島市')),'Ward names contain their parent city');
 const towns=areas.filter(e=>!e.name.endsWith('市')&&!e.name.endsWith('区'));
 assert.equal(towns.length,9);assert.equal(Object.keys(cfg.countyByTown).length,9);
 assert.equal(new Set(Object.values(cfg.countyByTown).map(row=>row[0])).size,5);
@@ -31,7 +31,7 @@ for(const t of towns){
  const county=cfg.countyByTown[t.name];
  assert(county&&county[0].endsWith('郡')&&/^[ぁ-ゖー]+$/.test(county[1]),'Missing county and reading: '+t.name);
 }
-assert.equal(cfg.regionSource,'https://www.pref.hiroshima.jp/uploaded/life/771490_7152944_misc.pdf');
+assert.equal(cfg.regionSource,'https://www.pref.hiroshima.lg.jp/uploaded/attachment/633233.pdf');
 assert.equal(cfg.countySource,'https://www.j-lis.go.jp/spd/code-address/chuugoku/cms_15514184.html');
 assert(page.includes("cfg.countyByTown[item.name]"),'List includes county text');
 assert(page.includes("ruby.append(make('rt',region.reading))"),'Regional selector ruby');
