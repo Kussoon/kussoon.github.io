@@ -61,10 +61,10 @@ function render(){
 }
 function fitMap(items,isPrefecture=false){
  if(!items.length)return;
- // Preserve the established region framing; use the visible map's real aspect
- // ratio only for prefecture-wide display, with no space reserved for controls.
+ // Fit both region and prefecture views to the same visible map frame.
+ // This prevents regional views from keeping the old fixed-height letterboxing.
  const rect=svg.getBoundingClientRect();
- const targetHeight=isPrefecture&&rect.width>0&&rect.height>0
+ const targetHeight=rect.width>0&&rect.height>0
   ?Math.max(1,Math.round(W*rect.height/rect.width)):H;
  if(prefectureView!==isPrefecture||frameHeight!==targetHeight){
   viewport.destroy();
