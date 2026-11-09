@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "42",
+  "name": "長崎県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.nagasaki.jp/shared/uploads/2024/08/1724305262.pdf",
+  "countySource": "https://www.pref.nagasaki.jp/pages/page-31.html",
+  "expectedAreaCount": 21,
+  "regions": [
+    {
+      "key": "nagasaki",
+      "name": "長崎・西彼",
+      "reading": "ながさきせいひ",
+      "codes": [
+        "42201",
+        "42307",
+        "42308",
+        "42212"
+      ]
+    },
+    {
+      "key": "kenou",
+      "name": "県央",
+      "reading": "けんおう",
+      "codes": [
+        "42204",
+        "42205",
+        "42321",
+        "42322",
+        "42323"
+      ]
+    },
+    {
+      "key": "shimabara",
+      "name": "島原半島",
+      "reading": "しまばらはんとう",
+      "codes": [
+        "42203",
+        "42213",
+        "42214"
+      ]
+    },
+    {
+      "key": "kenhoku",
+      "name": "県北",
+      "reading": "けんほく",
+      "codes": [
+        "42202",
+        "42207",
+        "42208",
+        "42391",
+        "42383"
+      ]
+    },
+    {
+      "key": "goto",
+      "name": "五島",
+      "reading": "ごとう",
+      "codes": [
+        "42211",
+        "42411"
+      ]
+    },
+    {
+      "key": "iki",
+      "name": "壱岐",
+      "reading": "いき",
+      "codes": [
+        "42210"
+      ]
+    },
+    {
+      "key": "tsushima",
+      "name": "対馬",
+      "reading": "つしま",
+      "codes": [
+        "42209"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "長与町": [
+      "西彼杵郡",
+      "にしそのぎぐん"
+    ],
+    "時津町": [
+      "西彼杵郡",
+      "にしそのぎぐん"
+    ],
+    "東彼杵町": [
+      "東彼杵郡",
+      "ひがしそのぎぐん"
+    ],
+    "川棚町": [
+      "東彼杵郡",
+      "ひがしそのぎぐん"
+    ],
+    "波佐見町": [
+      "東彼杵郡",
+      "ひがしそのぎぐん"
+    ],
+    "小値賀町": [
+      "北松浦郡",
+      "きたまつうらぐん"
+    ],
+    "佐々町": [
+      "北松浦郡",
+      "きたまつうらぐん"
+    ],
+    "新上五島町": [
+      "南松浦郡",
+      "みなみまつうらぐん"
+    ]
+  }
+}
