@@ -5,62 +5,34 @@
   "asOf": "2026-11-09",
   "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
   "indexSource": "/v2/progressive-preview/label-index.json",
-  "regionSource": "https://www.pref.shimane.lg.jp/medical/kenko/iryo/shimaneno_iryo/hokenniryoukeikaku/ishikakuho.html",
+  "regionSource": "https://www.mhlw.go.jp/content/12300000/001490416.pdf",
   "countySource": "https://www.pref.shimane.lg.jp/infra/road/keikaku/doro_bosai/kinkyudoro.data/r7keikakusho.pdf",
   "expectedAreaCount": 19,
   "regions": [
-    {
-      "key": "matsue",
-      "name": "松江",
-      "reading": "まつえ",
-      "codes": [
-        "32201",
-        "32206"
-      ]
-    },
-    {
-      "key": "unnan",
-      "name": "雲南",
-      "reading": "うんなん",
-      "codes": [
-        "32209",
-        "32343",
-        "32386"
-      ]
-    },
     {
       "key": "izumo",
       "name": "出雲",
       "reading": "いずも",
       "codes": [
+        "32201",
+        "32206",
+        "32209",
+        "32343",
+        "32386",
         "32203"
       ]
     },
     {
-      "key": "oda",
-      "name": "大田",
-      "reading": "おおだ",
+      "key": "iwami",
+      "name": "石見",
+      "reading": "いわみ",
       "codes": [
         "32205",
         "32441",
         "32448",
-        "32449"
-      ]
-    },
-    {
-      "key": "hamada",
-      "name": "浜田",
-      "reading": "はまだ",
-      "codes": [
+        "32449",
         "32202",
-        "32207"
-      ]
-    },
-    {
-      "key": "masuda",
-      "name": "益田",
-      "reading": "ますだ",
-      "codes": [
+        "32207",
         "32204",
         "32501",
         "32505"
