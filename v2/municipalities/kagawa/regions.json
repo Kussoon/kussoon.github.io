@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "37",
+  "name": "香川県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.jma.go.jp/jma/kishou/know/yougo_hp/shichoson_ichiran.html",
+  "countySource": "https://www.j-lis.go.jp/spd/code-address/shikoku/cms_15814186.html",
+  "expectedAreaCount": 17,
+  "regions": [
+    {
+      "key": "shodo",
+      "name": "小豆",
+      "reading": "しょうず",
+      "codes": [
+        "37322",
+        "37324"
+      ]
+    },
+    {
+      "key": "tosan",
+      "name": "東讃",
+      "reading": "とうさん",
+      "codes": [
+        "37206",
+        "37207",
+        "37341"
+      ]
+    },
+    {
+      "key": "takamatsu",
+      "name": "高松地域",
+      "reading": "たかまつちいき",
+      "codes": [
+        "37201",
+        "37364"
+      ]
+    },
+    {
+      "key": "chusan",
+      "name": "中讃",
+      "reading": "ちゅうさん",
+      "codes": [
+        "37202",
+        "37203",
+        "37204",
+        "37386",
+        "37387",
+        "37403",
+        "37404",
+        "37406"
+      ]
+    },
+    {
+      "key": "seisan",
+      "name": "西讃",
+      "reading": "せいさん",
+      "codes": [
+        "37205",
+        "37208"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "土庄町": [
+      "小豆郡",
+      "しょうずぐん"
+    ],
+    "小豆島町": [
+      "小豆郡",
+      "しょうずぐん"
+    ],
+    "三木町": [
+      "木田郡",
+      "きたぐん"
+    ],
+    "直島町": [
+      "香川郡",
+      "かがわぐん"
+    ],
+    "宇多津町": [
+      "綾歌郡",
+      "あやうたぐん"
+    ],
+    "綾川町": [
+      "綾歌郡",
+      "あやうたぐん"
+    ],
+    "琴平町": [
+      "仲多度郡",
+      "なかたどぐん"
+    ],
+    "多度津町": [
+      "仲多度郡",
+      "なかたどぐん"
+    ],
+    "まんのう町": [
+      "仲多度郡",
+      "なかたどぐん"
+    ]
+  }
+}
