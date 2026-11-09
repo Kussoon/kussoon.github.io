@@ -9,7 +9,7 @@ assert(script.includes("fitMap(current,selectedRange==='all')"),'Prefecture-wide
 assert(script.includes("regions.some(r=>r.key===wanted)?wanted:regions[0].key"),'Existing first-region default and URL-driven choice stay intact');
 assert(script.includes("session=Core.start(order)"),'Questions use the selected region, including full prefecture');
 assert(script.includes("proximity.options(item,current)"),'Four choices refer to selected set');
-const targets=['kochi','ehime','kagawa','tokushima','hyogo','nara','shiga','osaka','kyoto','wakayama','tottori','shimane','okayama','hiroshima','yamaguchi'];
+const targets=['fukuoka','saga','nagasaki','kumamoto','oita','miyazaki','kagoshima','okinawa','kochi','ehime','kagawa','tokushima','hyogo','nara','shiga','osaka','kyoto','wakayama','tottori','shimane','okayama','hiroshima','yamaguchi'];
 for(const pref of targets){
  const config=JSON.parse(fs.readFileSync(path.join(root,'v2/municipalities',pref,'regions.json'),'utf8'));
  const codes=config.regions.flatMap(region=>region.codes);
@@ -17,5 +17,6 @@ for(const pref of targets){
  assert.equal(all.length,config.expectedAreaCount,pref+' whole-prefecture quiz must include every area');
  assert(codes.length===all.length,pref+' no code duplication');
  assert(config.regions.every(region=>region.key!=='all'),pref+' synthetic selection must not pollute source data');
+ assert(config.regions.every(region=>region.codes.length>=2),pref+' single-area regional quiz is not useful');
 }
 console.log('All-prefecture quiz shared option: 10 pref configs and UI contracts PASS');
