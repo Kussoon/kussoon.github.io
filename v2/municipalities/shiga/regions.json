@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "25",
+  "name": "滋賀県",
+  "asOf": "2026-11-09",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.shiga.lg.jp/bh00/7737.html",
+  "countySource": "https://www.e-stat.go.jp/municipalities/cities/areacode?page=59",
+  "expectedAreaCount": 19,
+  "regions": [
+    {
+      "key": "otsu-kosei",
+      "name": "大津・湖西",
+      "reading": "おおつこせい",
+      "codes": [
+        "25201",
+        "25212"
+      ]
+    },
+    {
+      "key": "konan",
+      "name": "湖南",
+      "reading": "こなん",
+      "codes": [
+        "25206",
+        "25207",
+        "25208",
+        "25210"
+      ]
+    },
+    {
+      "key": "koka",
+      "name": "甲賀",
+      "reading": "こうか",
+      "codes": [
+        "25209",
+        "25211"
+      ]
+    },
+    {
+      "key": "higashiomi",
+      "name": "東近江",
+      "reading": "ひがしおうみ",
+      "codes": [
+        "25204",
+        "25213",
+        "25383",
+        "25384"
+      ]
+    },
+    {
+      "key": "koto",
+      "name": "湖東",
+      "reading": "ことう",
+      "codes": [
+        "25202",
+        "25425",
+        "25441",
+        "25442",
+        "25443"
+      ]
+    },
+    {
+      "key": "kohoku",
+      "name": "湖北",
+      "reading": "こほく",
+      "codes": [
+        "25203",
+        "25214"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "日野町": [
+      "蒲生郡",
+      "がもうぐん"
+    ],
+    "竜王町": [
+      "蒲生郡",
+      "がもうぐん"
+    ],
+    "愛荘町": [
+      "愛知郡",
+      "えちぐん"
+    ],
+    "豊郷町": [
+      "犬上郡",
+      "いぬかみぐん"
+    ],
+    "甲良町": [
+      "犬上郡",
+      "いぬかみぐん"
+    ],
+    "多賀町": [
+      "犬上郡",
+      "いぬかみぐん"
+    ]
+  }
+}
