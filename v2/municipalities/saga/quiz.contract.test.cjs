@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'../../..');
+const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'regions.json'),'utf8'));
+const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/label-index.json'),'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
+const areas=idx.entries.filter(e=>e.pref==='41'),codes=cfg.regions.flatMap(r=>r.codes);
+assert.equal(cfg.expectedAreaCount,20);assert.equal(manifest.entries.find(e=>e.pref==='41').regions,20);
+assert.deepEqual(cfg.regions.map(r=>r.codes.length),[5,4,2,2,7]);
+assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());
+assert.equal(new Set(codes).size,20);
+const towns=areas.filter(e=>e.name.endsWith('町'));
+assert.equal(towns.length,10);
+assert.deepEqual(Object.keys(cfg.countyByTown).sort(),towns.map(e=>e.name).sort());
+for(const t of towns)assert(/^[ぁ-ゖー]+$/.test(cfg.countyByTown[t.name][1]));
+assert(fs.readFileSync(path.join(__dirname,'index.html'),'utf8').includes("key:'all',name:'全域'"));
+assert(fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8').includes('quiz-app.js?v=20261110-all-areas'));
+console.log('Saga 20 areas, five regions and whole-prefecture quizzes: PASS');
