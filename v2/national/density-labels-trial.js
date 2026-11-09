@@ -82,7 +82,8 @@
    // Trial comparison: keep existing priority and candidate anchors, but do not admit overlapping labels.
    // The labels=baseline query reproduces the current zoom-dependent overlap allowance.
    const baseline=new URLSearchParams(global.location.search).get('labels')==='baseline';
-   const allowOverlap=baseline&&stableAnchors&&zoom>=2&&projectedExtent>=42/Math.sqrt(zoom);
+   const visibleOverlap=new URLSearchParams(global.location.search).get('labels')==='visible-overlap';
+   const allowOverlap=stableAnchors&&zoom>=2&&(visibleOverlap||(baseline&&projectedExtent>=42/Math.sqrt(zoom)));
    return {i,priority,pref,code,selected:m.id===selectedId,anchors,allowOverlap};
   }).filter(Boolean);
   function cellOf(p){
