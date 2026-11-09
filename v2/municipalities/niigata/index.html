@@ -35,7 +35,7 @@ try{
  const cfg=await cr.json(),idx=await ir.json(),niigata=idx.entries.filter(e=>e.pref==='15'),byCode=new Map(niigata.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
  if(niigata.length!==37||idx.count!==1905||cfg.expectedAreaCount!==37||cfg.regions.length!==5||codes.length!==37||
-    new Set(codes).size!==72||codes.some(c=>!byCode.has(c)))throw Error('新潟県37区域の照合に失敗しました');
+    new Set(codes).size!==37||codes.some(c=>!byCode.has(c)))throw Error('新潟県37区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
   for(const button of box.children)button.setAttribute('aria-pressed',String(button.dataset.key===region.key));
