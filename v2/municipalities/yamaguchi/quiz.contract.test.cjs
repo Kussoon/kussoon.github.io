@@ -33,6 +33,7 @@ assert(page.includes("cfg.countyByTown[item.name]"),'List includes county text')
 assert(page.includes("ruby.append(make('rt',region.reading))"),'Regional selector ruby');
 assert(page.includes('quiz.html?mode=1')&&page.includes('quiz.html?mode=2'),'Both quizzes linked');
 assert(page.includes('idx.count!==1905')&&page.includes('cfg.regions.length!==4'),'2026 and region count runtime checks');
+assert(page.includes('new Set(codes).size!==19'),'Runtime checks unique count against 19 rather than copied prefecture count');
 assert(quiz.includes('data-region-config="./regions.json"'),'Standard region data');
 assert(quiz.includes('regional-quiz.js')&&quiz.includes('quiz-app.js'),'Shared quiz runtime');
 assert(quiz.includes('id="prefReset"')&&quiz.includes('id="retryMissed"'),'Two fit levels and missed question retry');
