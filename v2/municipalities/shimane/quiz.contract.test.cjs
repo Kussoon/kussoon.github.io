@@ -65,4 +65,4 @@ for(const region of cfg.regions){
  assert(options.some(x=>x.code===correct.code),region.name+' quiz 2 contains the right choice');
 }
 assert.deepEqual(cfg.regions.find(r=>r.key==='oki').codes.sort(),['32525','32526','32527','32528']);
-console.log('Shimane V2: 19 municipalities, seven official regions, 11 counties, Izumo/Iwami/Oki 3-region quizzes, both quizzes: PASS');
+console.log('Shimane V2: 19 municipalities, three historic regions, 11 county mappings, Izumo/Iwami/Oki 3-region quizzes, both quizzes: PASS');
