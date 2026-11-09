@@ -177,7 +177,14 @@ try{
  if(!entry||idx.count!==1905)throw Error('全国索引の構成が不正');
  const res=await fetch('/v2/data/national/2026-common/'+entry.source);if(!res.ok)throw Error('2026年データの読み込みに失敗');
  const topo=await res.json(),index=new Map(idx.entries.filter(x=>x.pref===config.prefecture).map(x=>[x.code,x]));
- const shapes=topo.objects.municipalities.geometries;arcs=decodeArcs(topo);
+ // A prefecture can include a non-municipal administrative placeholder
+ // (e.g. Wakayama's 30000 "所属未定地"). Exclude only explicit codes
+ // declared in the prefecture configuration, without changing source data.
+ const excluded=new Set(config.excludedAreaCodes||[]);
+ const rawShapes=topo.objects.municipalities.geometries;
+ if([...excluded].some(code=>!rawShapes.some(g=>String(g.properties.N03_007)===code)||!index.has(code)))
+  throw Error('除外区域コードが2026年版と一致しません');
+ const shapes=rawShapes.filter(g=>!excluded.has(String(g.properties.N03_007)));arcs=decodeArcs(topo);
 
  all=shapes.map(g=>{
   const code=String(g.properties.N03_007),indexed=index.get(code);
