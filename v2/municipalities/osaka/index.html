@@ -44,9 +44,9 @@ try{
   heading.textContent=r.name+'：'+r.codes.length+'区域';
   list.replaceChildren();
   for(const code of r.codes){
-   const e=byCode.get(code),tile=make('div','');tile.className='item';
-   const ruby=document.createElement('ruby');ruby.append(make('span',e.fullName||e.name));
-   if(e.reading){const rt=make('rt',e.reading);ruby.append(rt);}
+   const e=byCode.get(code),county=cfg.countyByTown[e.name],tile=make('div','');tile.className='item';
+   const ruby=document.createElement('ruby');ruby.append(make('span',(county?county[0]:'')+(e.fullName||e.name)));
+   if(e.reading){const rt=make('rt',(county?county[1]:'')+e.reading);ruby.append(rt);}
    tile.append(ruby);list.append(tile);
   }
  }
