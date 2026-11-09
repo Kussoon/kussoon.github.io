@@ -1,35 +1,42 @@
-# ピアノの不思議と歴史｜公開前の実装計画（Draft）
+# ピアノの不思議と歴史｜公開前チェック
 
-## 状態
-このブランチは公開前の作業用です。**正式公開禁止・mainへのマージ禁止**。
-連載の本文は別途校閲済み全8章原稿から、章単位で**全文を省略せず**移植します。
-本文と校閲済み資料の勝手な書き換え・要約は行いません。
+掲載予定は `/reading/piano/`。目次と全8章はそれぞれ独立したHTMLです。Draft PR #360で確認します。
 
-## 予定ページ
-- `/reading/piano/index.html` — 連載目次
-- `/reading/piano/chapter-1.html` — ピアノは誰が発明したのか？
-- `/reading/piano/chapter-2.html` — ピアノはどのように進化したのか？
-- `/reading/piano/chapter-3.html` — ピアノの中はどうなっている？
-- `/reading/piano/chapter-4.html` — ヤマハとカワイ、二つのメーカーの物語
-- `/reading/piano/chapter-5.html` — 世界のピアノメーカーと名器
-- `/reading/piano/chapter-6.html` — なぜピアノの鍵盤は88個なのか？
-- `/reading/piano/chapter-7.html` — 調律師の仕事と現代のピアノ
-- `/reading/piano/chapter-8.html` — 440Hzと442Hz、何が違うのか？
+## 本文
 
-## 公開前の実装・確認事項
-- [ ] 校閲済み完成原稿を全章そのまま移植する。表や参照リンクも保全
-- [ ] 既存 `/reading/` の配色、ダークモード、モバイル幅、共通フッター、Umami規則を確認して適用
-- [ ] 全8章目次・前後の章・本文内参照リンクを接続。リンク切れを確認
-- [ ] 図版は別途追加：第1章はMetの1720年製楽器、第2章・第6章はMetの1868年製Steinwayを候補とする
-- [ ] Public Domain/Open Accessの作品写真は**各画像の権利表示・クレジット・作品との一致**を確認して使用
-- [ ] メーカー写真は許諾または利用条件が確認されるまで掲載しない
-- [ ] 第3章のエスケープメントは「駆動からの解放→打弦→離脱」を正確に区別する
-- [ ] 第6章の88鍵の成立・鍵盤配色、第4章の河合小市年代、第8章の440/442Hzの限定表現を維持
-- [ ] iPhone SafariとAndroid、PCの実機で表示確認（横はみ出し・読みやすさ・表のスクロール）
-- [ ] 章末の外部参照リンクを検査
-- [ ] ユーザー確認後に限り、正式ページに登録しmainへマージ
+- 校閲済みの `Kussoon-Piano-Final-Manuscript.md` と `Kussoon-Piano-Editorial-Record.md` の保存版を照合しました。
+- 全8章の本文、見出し、表8点、参考資料リンク（重複を除いて75件）を維持しました。本文の誤記修正・事実関係の変更はありません。
+- 章内目次、前後の章、連載目次、Kussoon共通7リンクを追加しました。
+- Umamiは既存の `/reading/` と同じ設定です。対象ドメインをKussoonに限定し、クエリとハッシュを送信しません。
 
-## 付記
-2026-11-09時点のローカル試作HTMLは全8章とCSS、図版の**仮置き箇所**まで整備済み。
-ローカルZIPの内容は、このPRへまだアップロードしていません。このPR単独では完成ページを表示できません。
-これは後続の実装内容を確認・固定するための第一段階のDraft PRです。
+## 図版
+
+| 章 | 写真・図解 |
+| --- | --- |
+| 1 | 1720年製クリストフォリ、初期エスケープメントの動作 |
+| 2 | 1790年ごろのホフマン製フォルテピアノ、現代のグランドとの比較、発展年表 |
+| 3 | グランドのアクションと反復、弦・駒・響板、グランドの3本のペダル |
+| 4 | 山葉寅楠・山葉直吉・河合小市のつながり、ヤマハとカワイの年表、浜松の技術者と産業 |
+| 5 | 主要6社とファツィオリの比較、ブリュートナーのアリコート |
+| 6 | 1868年製88鍵スタインウェイ、88・92・97・108鍵の音域、昔と今の鍵盤配色 |
+| 7 | 調律の資料写真と作業手順、消音と自動演奏の仕組み |
+| 8 | 440 Hzと442 Hzの波形、うなりの包絡線、12平均律、ストレッチ調律 |
+
+### 写真の出典と利用条件
+
+| 同梱画像 | 資料 | 利用条件 |
+| --- | --- | --- |
+| `images/cristofori-1720.jpg` | [The Metropolitan Museum of Art 89.4.1219](https://www.metmuseum.org/art/collection/search/501788) | Public Domain、[The Met Open Access（CC0）](https://www.metmuseum.org/hubs/open-access) |
+| `images/hofmann-1790.jpg` | [The Metropolitan Museum of Art 1984.34](https://www.metmuseum.org/art/collection/search/503677) | Public Domain、The Met Open Access（CC0） |
+| `images/steinway-1868.jpg` | [The Metropolitan Museum of Art 1985.407](https://www.metmuseum.org/art/collection/search/503267) | Public Domain、The Met Open Access（CC0） |
+| `images/tuning-archives-nz.jpg` | [Archives New Zealand、R21010282（Wikimedia Commons）](https://commons.wikimedia.org/wiki/File:Piano_Tuning.jpg) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)、改変なし |
+
+写真は4点とも配信元のJPEGを同梱しました。図解20点はKussoon制作です。技術図は、動きや関係を示す概念図として掲載しています。
+
+## 公開前の確認事項
+
+- [x] 全8章の本文・表・参考資料リンクと、HTMLへの移植結果を照合
+- [x] 全章の目次・章間リンク・章内アンカー、写真ファイルと代替テキストを検査
+- [ ] iPhone Safari、Android、PCの実機で表示と操作を最終確認
+- [ ] 章末の外部参照リンク全件の現行到達性を確認
+- [ ] 読者確認後に正式公開を判断
