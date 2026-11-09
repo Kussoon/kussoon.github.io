@@ -24,7 +24,7 @@ assert(quizCss.includes('#rangeChoices button rt{font-size:.7em'),'Ruby selector
 assert(quizRuntime.includes('minZoom:0.25'),'Minus/pinch must shrink below first fit');
 assert(quizRuntime.includes("const prefectureSuffix=/[都道府県]$/"),'Prefecture suffix must be automatic');
 assert(quizRuntime.includes('const excluded=new Set(config.excludedAreaCodes||[])'),'Non-municipality exclusions opt-in only');
-assert(quizRuntime.includes("byId('reset').onclick=()=>fitMap(current)"),'Region reset retained');
+assert(quizRuntime.includes("byId('reset').onclick=()=>fitMap(current,selectedRange==='all')"),'Region reset retained with prefecture fit when 全域 is selected');
 assert(quizRuntime.includes("byId('prefReset').onclick=()=>fitMap(all,true)"),'Prefecture reset retained');
 assert(quizRuntime.includes("rt.textContent=region.reading"),'Every region button renders ruby');
 assert(quizRuntime.includes('const result=Core.answer(session,code)'),'Shared scoring retained');
