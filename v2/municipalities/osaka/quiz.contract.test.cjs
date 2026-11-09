@@ -30,7 +30,7 @@ assert(app.includes("'違います。\\nそこは'"),'Quiz1 wrong-answer feedbac
 assert(!app.includes("'違います。\\\\nそこは'"),'Quiz1 feedback must not display a literal backslash-n');
 assert(app.includes('question.style.minHeight=question.getBoundingClientRect().height'), 'Result title retains question height');
 assert(app.includes("byId('choices').hidden=true"),'Choices are hidden outside questions');
-assert(app.includes("byId('reset').onclick=()=>fitMap(current)"),'Region fit preserved');
+assert(app.includes("byId('reset').onclick=()=>fitMap(current,selectedRange==='all')"),'Region fit preserved, with prefecture fit for the all-areas selection');
 assert(app.includes("byId('prefReset').onclick=()=>fitMap(all,true)"),'Prefecture fit preserved');
 assert(app.includes("e.pref===config.prefecture")&&app.includes("x.pref===config.prefecture"),'Prefecture configuration controls data');
 assert(app.includes("const COUNTY_BY_TOWN=config.countyByTown||{}"),'Counties are data, not prefecture-specific code');
