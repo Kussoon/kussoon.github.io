@@ -41,13 +41,13 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert(row.headingAfterGrip&&row.notOverFold&&row.notOverClose,'390px title and controls do not overlap');
    assert(row.foldSize[0]>=44&&row.foldSize[1]>=44&&row.closeSize[0]>=44&&row.closeSize[1]>=44,'collapse and close targets are at least 44px');
 
-   const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top-e.offsetParent.getBoundingClientRect().top);
    await fold.focus();await fold.press('Enter');
    await child().waitForFunction(()=>document.querySelector('#popupBody').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
-   const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top-e.offsetParent.getBoundingClientRect().top);
-   assert(Math.abs(topBefore-topCollapsed)<2,'collapse preserves the popup top edge');
+   const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   const collapsedBounds=await popup.evaluate(e=>({popup:e.getBoundingClientRect(),area:e.offsetParent.getBoundingClientRect()}));
+   assert(Math.abs(collapsedBounds.area.bottom-collapsedBounds.popup.bottom-8)<3,'first collapse docks the popup at the map bottom');
    let box=await grip.boundingBox();
    await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();
    await page.mouse.move(box.x+box.width/2,box.y+box.height/2+70,{steps:4});await page.mouse.up();
