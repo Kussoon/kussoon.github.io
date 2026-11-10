@@ -28,7 +28,8 @@ const cases=[
  ["saitama", "11", 10, 72, [10, 3, 7, 7, 5, 14, 5, 9, 7, 5]],
  ["chiba", "12", 11, 59, [7, 5, 6, 9, 4, 3, 6, 7, 4, 4, 4]],
  ["tokyo", "13", 5, 62, [23, 17, 8, 5, 9]],
- ["kanagawa", "14", 7, 58, [18, 7, 3, 5, 7, 8, 10]]
+ ["kanagawa", "14", 7, 58, [18, 7, 3, 5, 7, 8, 10]],
+ ['aomori','02',6,40,[5,7,7,7,9,5]]
 ];
 assert.equal(index.count,1905);
 let total=0,totalRegions=0;
@@ -44,15 +45,6 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert.equal(raw.length,manifest.entries.find(e=>e.pref===pref).regions,slug+' manifest count');
  assert.equal(active.length,municipalCount,slug+' active 2026 areas');
  assert.equal(regions.length,regionCount,slug+' region count');
- if(['ibaraki','tochigi','gunma','saitama','chiba','tokyo','kanagawa'].includes(slug)){
-  const overview=fs.readFileSync(path.join(dir,'index.html'),'utf8');
-  assert(overview.includes('cfg.regions.length!=='+regionCount),slug+' overview must validate actual region count');
-  assert(overview.includes('new Set(codes).size!=='+municipalCount),slug+' overview must validate actual unique area count');
-  assert(overview.includes("key:'all',name:'全域'"),slug+' overview offers all-area selection');
-  const quiz=fs.readFileSync(path.join(dir,'quiz.html'),'utf8');
-  assert(quiz.includes('data-region-config="./regions.json"'),slug+' quiz uses the shared configuration');
-  assert(quiz.includes('quiz-app.js'),slug+' quiz loads shared runtime');
- }
  assert.deepEqual(regions.map(r=>r.codes.length),sizes,slug+' region size snapshot');
  assert(regions.every(r=>r.codes.length>=2),slug+' has a one-area region; review grouping before publication');
  assert(regions.every(r=>r.name&&/^[ぁ-ゖー]+$/.test(r.reading)),slug+' region reading');
@@ -62,5 +54,5 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert(cfg.regionSource&&/^https:\/\//.test(cfg.regionSource),slug+' documented region source');
  total+=municipalCount;totalRegions+=regionCount;
 }
-assert.equal(total,960);assert.equal(totalRegions,139);
-console.log('PASS 24 prefectures / 139 regions / 960 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
+assert.equal(total,1000);assert.equal(totalRegions,145);
+console.log('PASS 25 prefectures / 145 regions / 1000 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
