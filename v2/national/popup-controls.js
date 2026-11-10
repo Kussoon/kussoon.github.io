@@ -69,8 +69,11 @@ function moveToTop(targetTop){
  if(Math.abs(clampedTop-rect.top)>.5)setCorrection(correction+clampedTop-rect.top);
 }
 function snapCollapsedToBottom(){
- const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
- moveToTop(area.bottom-8-popup.getBoundingClientRect().height);
+ // The popup is already positioned at bottom:8px in the map frame.
+ // Cancel the existing drag translation instead of measuring offsetParent:
+ // iPhone Safari can report a different offset parent during collapse.
+ const drag=parseFloat(popup.style.getPropertyValue('--popup-drag-y'))||0;
+ setCorrection(-drag);
 }
 fold.addEventListener('click',()=>{
  if(!collapsed){
