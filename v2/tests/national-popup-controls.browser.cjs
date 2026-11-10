@@ -125,8 +125,17 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await page.locator('a[href="/maps/national-municipalities.html"]').count(),1,'official page link is available');
    await page.goto(origin+'/maps/national-municipalities.html');
    await page.locator('#map .prefecture').first().waitFor({timeout:90000});
-   await page.waitForSelector('#popupCollapse',{timeout:60000});
+   // The popup is hidden until a municipality is selected. Verify the actual
+   // default-page interaction instead of waiting for a hidden button to show.
+   await page.locator('#popupCollapse').waitFor({state:'attached',timeout:60000});
+   await app.pref('28');
+   await app.select('28204');
+   await page.locator('#popupCollapse').waitFor({state:'visible',timeout:60000});
    assert.equal(await page.locator('#popupBody').getAttribute('hidden'),null,'formal page enables the improved popup controls by default');
+   await page.locator('#popupCollapse').click();
+   assert.equal(await page.locator('#popupBody').isVisible(),false,'formal page can collapse municipality details');
+   await page.locator('#popupCollapse').click();
+   assert.equal(await page.locator('#popupBody').isVisible(),true,'formal page restores municipality details');
    assert.deepEqual(app.errors,[]);
    console.log('PASS popup-controls '+engine+': phone-width collision, title grip and noninteractive body drag, collapse/reopen, selection, links, fullscreen, zoom and boundary contracts');
   }finally{await app.close();}
