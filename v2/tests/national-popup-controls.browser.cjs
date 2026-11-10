@@ -57,11 +57,17 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await frame.getByRole('button',{name:'吹き出し本文を展開'}).click();
    await frame.locator('#popupBody:not([hidden])').waitFor();
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
-   const content=frame.locator('#popupNote');
-   const bodyBox=await content.boundingBox();
+   const bodyPoint=await child().evaluate(()=>{
+    const r=document.querySelector('#popupScroll').getBoundingClientRect();
+    for(let y=r.top+4;y<r.bottom-4;y+=8)for(let x=r.left+4;x<r.right-4;x+=8){
+     const target=document.elementFromPoint(x,y);
+     if(target&&!target.closest('button,a,input,select,textarea,[role="button"]'))return{x,y};
+    }
+    throw Error('no noninteractive body drag point found');
+   });
    const bodyTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
-   await page.mouse.move(bodyBox.x+Math.min(30,bodyBox.width/2),bodyBox.y+Math.min(20,bodyBox.height/2));await page.mouse.down();
-   await page.mouse.move(bodyBox.x+Math.min(30,bodyBox.width/2),bodyBox.y+Math.min(20,bodyBox.height/2)+45,{steps:4});await page.mouse.up();
+   await page.mouse.move(bodyPoint.x,bodyPoint.y);await page.mouse.down();
+   await page.mouse.move(bodyPoint.x,bodyPoint.y+45,{steps:4});await page.mouse.up();
    assert((await popup.evaluate(e=>e.getBoundingClientRect().top))>bodyTop+25,'noninteractive popup body still drags vertically');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'true');
    assert.equal(await popup.evaluate(e=>e.getBoundingClientRect().left),leftAfterCollapsedDrag,'popup remains horizontally fixed');
