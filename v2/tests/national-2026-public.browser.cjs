@@ -9,7 +9,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   try{
    await app.open();
    await page.goto(page.url().replace('/v2/national/official-2026-nationwide-pilot.html','/maps/national-municipalities.html'));
-   await page.waitForFunction(()=>window.KussoonV2PrefectureColors&&window.KussoonV2ProgressivePreview?.controller.snapshot().count===1905,{},{timeout:90000});
+public browser insertion
    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/maps/national-municipalities.html');
    assert.equal(await page.locator('meta[name="robots"]').count(),0,'public map should be indexable');
    const publicLinks=await page.evaluate(async()=>{
