@@ -68,3 +68,17 @@
 長野県は県公式の10広域、愛知県は県公式の市町村一覧にある名古屋・尾張・海部・知多・西三河・東三河の6区分を用いる。静岡県は県の地域資料に基づく6区分で、静岡市3区・浜松市3区を出題区域に展開した。
 
 追加後の検査対象は17県、93地域、605区域。兵庫県49区域は独立リポジトリの契約テストで別途確認する。中部地方の今回対象8県は44地域、319区域。
+
+### 関東地方7都県の追加（2026-11-10）
+
+県公式の地域区分を2026年版の市区町村・政令市区に展開した。東京は特別区部を一つの地域とし、多摩を北部・西部・南部、島しょを一地域とした。千葉・東京の「所属未定地」は自治体区域ではないため、地域・クイズの対象から除外する。埼玉県東秩父村は川越比企に一度だけ含める。
+
+- 茨城県：5地域、44出題区域。地域内区域数 6・9・5・14・10。出典：https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/tokeisyo/haya2025/shihaya.html
+- 栃木県：3地域、25出題区域。地域内区域数 6・7・12。出典：https://www.pref.tochigi.lg.jp/h03/koukyokotsu-koyogigai/220420_koukyokotsu-kyogikai_top.html
+- 群馬県：5地域、35出題区域。地域内区域数 6・9・6・5・9。出典：https://gunmagurashi.pref.gunma.jp/cities/
+- 埼玉県：10地域、72出題区域。地域内区域数 10・3・7・7・5・14・5・9・7・5。出典：https://www.pref.saitama.lg.jp/documents/211727/04-03_chiiki.pdf
+- 千葉県：11地域、59出題区域。地域内区域数 7・5・6・9・4・3・6・7・4・4・4。出典：https://www.pref.chiba.lg.jp/toukei/toukeidata/nenreibetsu/r07/documents/2025tyuui.pdf
+- 東京都：5地域、62出題区域。地域内区域数 23・17・8・5・9。出典：https://www.bousai.metro.tokyo.lg.jp/_res/projects/default_project/_page_/001/020/657/202203.pdf
+- 神奈川県：7地域、58出題区域。地域内区域数 18・7・3・5・7・8・10。出典：https://www.pref.kanagawa.jp/docs/bc2/002/open/chiiki.html
+
+関東地方の計7都県、46地域、355出題区域を追加し、契約検査対象は兵庫県の別リポジトリを除き24府県、139地域、960区域となる。

@@ -1,0 +1,16 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'../../..'),cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'regions.json'),'utf8'));
+const idx=JSON.parse(fs.readFileSync(path.join(root,'v2/progressive-preview/label-index.json'),'utf8'));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'v2/data/national/2026-common/national-2026-pilot/manifest.json'),'utf8'));
+const excluded=[],areas=idx.entries.filter(e=>e.pref==='08'&&!excluded.includes(e.code)),raw=idx.entries.filter(e=>e.pref==='08'),codes=cfg.regions.flatMap(r=>r.codes);
+assert.equal(cfg.prefecture,'08');assert.equal(cfg.expectedAreaCount,44);assert.equal(manifest.entries.find(e=>e.pref==='08').regions,raw.length);
+assert.equal(areas.length,44);assert.equal(cfg.regions.length,5);assert.deepEqual(cfg.regions.map(r=>r.codes.length),[6, 9, 5, 14, 10]);
+assert(cfg.regions.every(r=>r.codes.length>=2));assert.deepEqual([...codes].sort(),areas.map(e=>e.code).sort());assert.equal(new Set(codes).size,44);
+assert(cfg.regions.every(r=>r.name&&/^[ぁ-ゖー]+$/.test(r.reading)));
+assert.deepEqual(Object.keys(cfg.countyByTown).sort(),areas.filter(e=>/町$|村$/.test(e.name)&&![].includes(e.name)).map(e=>e.name).sort());
+for(const [town,county] of Object.entries(cfg.countyByTown))assert(/^[ぁ-ゖー]+$/.test(county[1]),town);
+assert.equal(areas.filter(e=>e.name.endsWith('区')).length,0);assert.deepEqual(cfg.excludedAreaCodes||[],excluded);
+const page=fs.readFileSync(path.join(__dirname,'index.html'),'utf8'),quiz=fs.readFileSync(path.join(__dirname,'quiz.html'),'utf8');
+assert(page.includes("key:'all',name:'全域'"));assert(page.includes('全44区域'));assert(quiz.includes('regional-quiz.js'));assert(quiz.includes('quiz-app.js'));
+console.log('茨城県 44 areas / 5 regions: PASS');
