@@ -11,6 +11,10 @@ on:
       - 'v2/progressive-preview/prefecture-colors.js'
       - 'v2/tests/prefecture-colors-public.browser.cjs'
       - 'v2/tests/fixtures/prefecture-adjacencies.cjs'
+      - 'v2/municipalities/shared/quiz.css'
+      - 'v2/municipalities/shared/boundary-accessibility.contract.test.cjs'
+      - 'v2/national/MAINTENANCE_RULES.md'
+      - 'v2/tests/run-national-contracts.cjs'
 permissions:
   contents: read
 jobs:
@@ -28,6 +32,8 @@ jobs:
         working-directory: v2/tests/browser
       - run: npx playwright install --with-deps chromium webkit
         working-directory: v2/tests/browser
+      - name: Verify approved municipality boundary contrast contract
+        run: node v2/municipalities/shared/boundary-accessibility.contract.test.cjs
       - name: Validate nationwide public page and home/local links in Chromium and WebKit
         run: node v2/tests/national-2026-public.browser.cjs
       - name: Verify fixed adjacent-prefecture colors in all public modes
