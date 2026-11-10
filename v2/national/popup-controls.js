@@ -1,5 +1,6 @@
 (function(){
 'use strict';
+if(new URLSearchParams(location.search).get('popupControlsCurrent')==='1')return;
 if(window.KussoonPopupControlsReady)return;
 const popup=document.getElementById('officePopup');
 const head=popup?.querySelector('.popup-head');
