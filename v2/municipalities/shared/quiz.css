@@ -37,7 +37,7 @@ button:disabled{opacity:.45}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:
 #retryMissed{font-size:clamp(10px,3vw,16px)!important}
 #retryMissed span,#replay span,#returnRegions{white-space:nowrap}
 #quit{position:absolute;left:10px;bottom:12px;z-index:2;min-height:44px;background:#fffffff0;box-shadow:0 2px 8px #1b455a22;pointer-events:auto}
-#map{display:block;width:100%;height:clamp(430px,70svh,740px);border:1px solid #bdd1dd;border-radius:12px;background:#eaf3f9;touch-action:none;user-select:none}
+#map{display:block;width:100%;height:clamp(430px,70svh,740px);border:1px solid #bdd1dd;border-radius:12px;background:#d8ebf7;touch-action:none;user-select:none}
 .map-frame{position:relative}
 #mapTopBar{position:absolute;z-index:3;top:10px;left:10px;right:10px;display:flex;align-items:center;gap:8px;pointer-events:none}
 .map-area-name{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:8px 12px;border:1px solid #bed3df;border-radius:11px;background:#fffffff0;color:#193a51;box-shadow:0 2px 9px #173c5526;font-weight:850;line-height:1.35;pointer-events:none}
@@ -47,6 +47,6 @@ button:disabled{opacity:.45}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:
 .map-controls button{width:50px;min-width:50px;box-shadow:0 2px 8px #1b455a22}
 .map-controls .fit-button{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;gap:2px;padding:7px 2px;font-size:clamp(12px,3.1vw,16px)}
 .map-controls .fit-button span{display:block;white-space:nowrap}
-.land{fill:#d9dea5;stroke:none;cursor:default}.land.outside{fill:#cbd7db;cursor:default}.land.correct{fill:#8ed6a7}.land.wrong{fill:#f0aaa0}.borders{fill:none;stroke:white;stroke-width:1.2;vector-effect:non-scaling-stroke;pointer-events:none}
+.land{fill:#f2f0dd;stroke:none;cursor:default}.land.outside{fill:#d5dee2;cursor:default}.land.correct{fill:#8ed6a7}.land.wrong{fill:#f0aaa0}.borders{fill:none;stroke:white;stroke-width:1.2;vector-effect:non-scaling-stroke;pointer-events:none}.coastlines{fill:none;stroke:#486574;stroke-width:2.4;vector-effect:non-scaling-stroke;stroke-linejoin:round;pointer-events:none}
 .note{font-size:13px;color:#486679;line-height:1.7}
 
