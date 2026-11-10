@@ -34,7 +34,7 @@ try{
  if(!cr.ok||!ir.ok)throw Error('地域データを読み込めません');
  const cfg=await cr.json(),idx=await ir.json(),prefArea=idx.entries.filter(e=>e.pref==='11'),byCode=new Map(prefArea.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(prefArea.length!==72||idx.count!==1905||cfg.expectedAreaCount!==72||cfg.regions.length!==5||codes.length!==72||
+ if(prefArea.length!==72||idx.count!==1905||cfg.expectedAreaCount!==72||cfg.regions.length!==10||codes.length!==72||
     new Set(codes).size!==72||codes.some(c=>!byCode.has(c)))throw Error('埼玉県72区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
