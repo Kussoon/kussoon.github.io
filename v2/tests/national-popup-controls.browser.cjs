@@ -99,6 +99,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await frame.locator('#popupBody:not([hidden])').waitFor();
    assert(await frame.locator('#popupName').textContent().then(x=>x.includes('東北町')),'county sample loads its official municipality name');
    await page.getByRole('button',{name:/東京都新宿区/}).click();
+   await child().waitForFunction(()=>document.querySelector('#popupName').textContent.includes('新宿区')&&!document.querySelector('#officePopup').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),true,'Tokyo ward selection displays the body');
    assert(await frame.locator('#popupName').textContent().then(x=>x.includes('新宿区')));
 
