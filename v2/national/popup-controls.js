@@ -87,6 +87,16 @@ new MutationObserver(()=>{
   setCorrection(0);
  }
 }).observe(name,{subtree:true,childList:true,characterData:true});
+const map=document.querySelector('#map');
+let previousCode=map?.querySelector('.chosen[data-code]')?.getAttribute('data-code')||'';
+if(map)new MutationObserver(()=>{
+ const code=map.querySelector('.chosen[data-code]')?.getAttribute('data-code')||'';
+ if(code&&code!==previousCode){
+  previousCode=code;
+  if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
+  setCorrection(0);
+ }
+}).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
 syncFoldControl();
 window.KussoonPopupControlsReady=true;
 })();
