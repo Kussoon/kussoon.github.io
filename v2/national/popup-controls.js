@@ -1,5 +1,6 @@
 (function(){
 'use strict';
+if(new URLSearchParams(location.search).get('popupControlsCurrent')==='1')return;
 if(window.KussoonPopupControlsReady)return;
 const popup=document.getElementById('officePopup');
 const head=popup?.querySelector('.popup-head');
@@ -49,7 +50,7 @@ head.replaceChildren(grip,heading,fold,close);
 popup.append(body);
 close.classList.add('popup-control');
 
-let collapsed=false,previousName='';
+let collapsed=false,previousName='',expandedTop=null;
 function syncFoldControl(){
  fold.textContent=collapsed?'⌄':'−';
  fold.setAttribute('aria-expanded',String(!collapsed));
@@ -57,24 +58,34 @@ function syncFoldControl(){
  fold.title=collapsed?'本文を展開':'本文を折り畳む';
 }
 function setCorrection(value){popup.style.setProperty('--popup-collapse-y',value+'px');}
-function keepTop(anchorTop){
+function moveToTop(targetTop){
  let correction=parseFloat(popup.style.getPropertyValue('--popup-collapse-y'))||0;
- let rect=popup.getBoundingClientRect();
- correction+=anchorTop-rect.top;
+ correction+=targetTop-popup.getBoundingClientRect().top;
  setCorrection(correction);
- rect=popup.getBoundingClientRect();
  const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
- let nudge=0;
- if(rect.top<area.top+8)nudge=area.top+8-rect.top;
- else if(rect.bottom>area.bottom-8)nudge=area.bottom-8-rect.bottom;
- if(nudge){correction+=nudge;setCorrection(correction);}
+ const rect=popup.getBoundingClientRect();
+ const minTop=area.top+8,maxTop=Math.max(minTop,area.bottom-8-rect.height);
+ const clampedTop=Math.max(minTop,Math.min(maxTop,rect.top));
+ if(Math.abs(clampedTop-rect.top)>.5)setCorrection(correction+clampedTop-rect.top);
+}
+function snapCollapsedToBottom(){
+ const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
+ moveToTop(area.bottom-8-popup.getBoundingClientRect().height);
 }
 fold.addEventListener('click',()=>{
- const top=popup.getBoundingClientRect().top;
- collapsed=!collapsed;
- body.hidden=collapsed;
- syncFoldControl();
- keepTop(top);
+ if(!collapsed){
+  expandedTop=popup.getBoundingClientRect().top;
+  collapsed=true;
+  body.hidden=true;
+  syncFoldControl();
+  snapCollapsedToBottom();
+ }else{
+  collapsed=false;
+  body.hidden=false;
+  syncFoldControl();
+  if(expandedTop!==null)moveToTop(expandedTop);
+  expandedTop=null;
+ }
 });
 fold.addEventListener('pointerdown',event=>event.stopPropagation());
 close.addEventListener('pointerdown',event=>event.stopPropagation());
@@ -85,6 +96,7 @@ new MutationObserver(()=>{
   previousName=value;
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
+  expandedTop=null;
  }
 }).observe(name,{subtree:true,childList:true,characterData:true});
 const map=document.querySelector('#map');
@@ -95,6 +107,7 @@ if(map)new MutationObserver(()=>{
   previousCode=code;
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
+  expandedTop=null;
  }
 }).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
 syncFoldControl();
