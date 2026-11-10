@@ -68,9 +68,20 @@ function focusBounds(polys, options={}){
  return [centerLon-lonSpan/2,centerLat-latSpan/2,centerLon+lonSpan/2,centerLat+latSpan/2];
 }
 
+function partitionArcs(geometries,arcs){
+ const uses=new Uint8Array(arcs.length);
+ for(const geometry of geometries){
+  const seen=new Set();
+  (function visit(value){if(typeof value==='number')seen.add(value<0?~value:value);else if(Array.isArray(value))for(const item of value)visit(item);})(geometry.arcs);
+  for(const id of seen)if(id>=0&&id<uses.length&&uses[id]<2)uses[id]++;
+ }
+ const shared=[],outer=[];
+ for(let i=0;i<uses.length;i++){if(uses[i]===1)outer.push(arcs[i]);else if(uses[i]>1)shared.push(arcs[i]);}
+ return {shared,outer};
+}
 function element(name){return document.createElementNS(NS,name);}
 function render(options){
- const {map,regions,arcs,project,selected='',landClass='land',chosenClass='chosen',borderClass='borders',hideTitles=false}=options;
+ const {map,regions,arcs,coastArcs=[],project,selected='',landClass='land',chosenClass='chosen',borderClass='borders',hideTitles=false}=options;
  if(!map||!Array.isArray(regions)||!Array.isArray(arcs)||typeof project!=='function')throw Error('Invalid Kussoon V2 map arguments');
  const fragment=document.createDocumentFragment();
  for(const region of regions){
@@ -86,8 +97,9 @@ function render(options){
  borders.setAttribute('class',borderClass);
  borders.setAttribute('pointer-events','none');
  fragment.append(borders);
+ if(coastArcs.length){const coast=element('path');coast.setAttribute('d',pathFromArcs(coastArcs,project));coast.setAttribute('class','coastlines');coast.setAttribute('pointer-events','none');fragment.append(coast);}
  map.replaceChildren(fragment);
  return regions.length;
 }
-global.KussoonV2MunicipalRenderer=Object.freeze({render,pathFromArcs,pathFromPolygons,focusBounds});
+global.KussoonV2MunicipalRenderer=Object.freeze({render,pathFromArcs,pathFromPolygons,focusBounds,partitionArcs});
 })(window);
