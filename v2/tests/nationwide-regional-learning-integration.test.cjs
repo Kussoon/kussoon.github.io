@@ -39,7 +39,11 @@ for(const {pref,slug,regions,areas} of entries){
   allCodes.add(e.code);
   if(/[町村]$/.test(e.name)){
    const county=cfg.countyByCode?.[e.code]||cfg.countyByTown?.[e.name];
-   assert(county&&county[0]&&/^[ぁ-ゖー]+$/.test(county[1]),slug+' missing readable county for '+e.code);
+   // Tokyo island municipalities (Oshima, Miyake, Hachijo, Ogasawara, etc.)
+   // have no county; requiring one would fabricate an administrative unit.
+   const tokyoIslands=pref==='13'&&Number(e.code)>=13360;
+   if(tokyoIslands)assert(!county,slug+' island municipality must not invent a county: '+e.code);
+   else assert(county&&county[0]&&/^[ぁ-ゖー]+$/.test(county[1]),slug+' missing readable county for '+e.code);
   }
  }
  for(const code of excluded)assert(expected.some(e=>e.code===code),slug+' excluded code not in 2026 index: '+code);
