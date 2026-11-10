@@ -31,15 +31,14 @@
 | 和歌山県 | 海草、那賀、伊都、有田、日高、西牟婁、東牟婁の7地域 | 3・2・4・4・7・4・6 | **維持** | [県公式の7振興局](https://www.pref.wakayama.lg.jp/prefg/070900/kankeikikan/shinkoukyoku.html) |
 | 鳥取県 | 東部、中部、西部の3地域 | 5・5・9 | **維持** | [気象庁の鳥取県地域](https://www.jma.go.jp/jma/kishou/know/yougo_hp/shichoson_ichiran.html)と県公式資料 |
 | 島根県 | 出雲、石見、隠岐の3地域 | 6・9・4 | **維持（2026-11-09 #368で7医療圏→3地方へ修正済み）** | [出雲市作成の3地方図・厚生労働省公開](https://www.mhlw.go.jp/content/12300000/001490416.pdf) |
-
-| 石川県 | 4地域 | 4・5・6・4 | **採用** | [県公式地域資料](https://www.pref.ishikawa.lg.jp/shimachi.html) |
-| 福井県 | 4地域 | 4・2・5・6 | **採用** | [県公式地域資料](https://www.pref.fukui.lg.jp/doc/seiki/vision2019/top_d/fil/201014vision_3.pdf) |
-| 山梨県 | 4地域 | 7・3・5・12 | **採用** | [県公式地域資料](https://www.pref.yamanashi.jp/iju/local-map/index.html) |
-| 長野県 | 10地域 | 11・4・6・8・14・6・8・5・9・6 | **採用** | [県公式地域資料](https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/) |
-| 岐阜県 | 5地域 | 9・11・13・5・4 | **採用** | [県公式地域資料](https://www.pref.gifu.lg.jp/page/6058.html) |
-| 静岡県 | 6地域 | 14・6・3・6・6・4 | **採用** | [県公式地域資料](https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/050/979/r6.pdf) |
-| 愛知県 | 6地域 | 16・18・7・10・10・8 | **採用** | [県公式地域資料](https://www.pref.aichi.jp/site/userguide/link-citytown.html) |
-| 三重県 | 5地域 | 10・5・7・2・5 | **採用** | [県公式地域資料](https://www.pref.mie.lg.jp/DATABOX/000223611_00012.htm) |
+| 石川県 | 能登北部 4・能登中部 5・石川中央 6・南加賀 4 | 4・5・6・4 | **採用** | [県公式地域資料](https://www.pref.ishikawa.lg.jp/shimachi.html) |
+| 福井県 | 福井坂井 4・奥越 2・丹南 5・嶺南 6 | 4・2・5・6 | **採用** | [県公式地域資料](https://www.pref.fukui.lg.jp/doc/seiki/vision2019/top_d/fil/201014vision_3.pdf) |
+| 山梨県 | 中北 7・峡東 3・峡南 5・富士・東部 12 | 7・3・5・12 | **採用** | [県公式地域資料](https://www.pref.yamanashi.jp/iju/local-map/index.html) |
+| 長野県 | 佐久 11・上田 4・諏訪 6・上伊那 8・南信州 14・木曽 6・松本 8・北アルプス 5・長野 9・北信 6 | 11・4・6・8・14・6・8・5・9・6 | **採用** | [県公式地域資料](https://www.pref.nagano.lg.jp/shichoson/kensei/shichoson/gappei/gappei/mejiiko/ichiran/) |
+| 岐阜県 | 岐阜 9・西濃 11・中濃 13・東濃 5・飛騨 4 | 9・11・13・5・4 | **採用** | [県公式地域資料](https://www.pref.gifu.lg.jp/page/6058.html) |
+| 静岡県 | 伊豆 14・富士 6・駿河 3・西駿河・奥大井 6・中東遠 6・西北遠 4 | 14・6・3・6・6・4 | **採用** | [県公式地域資料](https://www.pref.shizuoka.jp/_res/projects/default_project/_page_/001/050/979/r6.pdf) |
+| 愛知県 | 名古屋 16・尾張 18・海部 7・知多 10・西三河 10・東三河 8 | 16・18・7・10・10・8 | **採用** | [県公式地域資料](https://www.pref.aichi.jp/site/userguide/link-citytown.html) |
+| 三重県 | 北勢 10・中南勢 5・伊勢志摩 7・伊賀 2・東紀州 5 | 10・5・7・2・5 | **採用** | [県公式地域資料](https://www.pref.mie.lg.jp/DATABOX/000223611_00012.htm) |
 
 合計 **18府県、103地域、654出題区域**。全地域2区域以上。
 
