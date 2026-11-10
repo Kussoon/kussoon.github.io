@@ -55,6 +55,7 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
   assert(overview.includes('cfg.regions.length!=='+regionCount),slug+' overview validates region count');
   assert(overview.includes('codes.length!=='+municipalCount),slug+' overview validates area count');
   assert(overview.includes("key:'all',name:'全域'"),slug+' overview offers all-area selection');
+  assert(overview.includes(cfg.regionSource)&&overview.includes(cfg.countySource),slug+' overview links to documented sources');
   const quiz=fs.readFileSync(path.join(dir,'quiz.html'),'utf8');
   assert(quiz.includes('data-region-config="./regions.json"')&&quiz.includes('quiz-app.js'),slug+' quiz uses shared configuration and runtime');
  }
