@@ -104,6 +104,14 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await child().waitForFunction(()=>document.querySelector('#popupName').textContent.includes('新宿区')&&!document.querySelector('#officePopup').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),true,'Tokyo ward selection displays the body');
    assert(await frame.locator('#popupName').textContent().then(x=>x.includes('新宿区')));
+   // R08/R36: popup readings follow the map's OFF-by-default toggle,
+   // including while using the improved collapsible title bar.
+   assert.equal(await frame.locator('#popupReading').isVisible(),false,'popup reading initially follows OFF');
+   await frame.locator('#mapReadingToggle').click();
+   await frame.locator('#popupReading:visible').waitFor();
+   assert((await frame.locator('#popupReading').textContent()).length>0,'verified popup reading visible in ON mode');
+   await frame.locator('#mapReadingToggle').click();
+   assert.equal(await frame.locator('#popupReading').isVisible(),false,'popup reading hides again in OFF mode');
 
    const prefectureShapes=await frame.locator('#map .prefecture').count();
    const beforeZoom=await frame.locator('#map').getAttribute('viewBox');
