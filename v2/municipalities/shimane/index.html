@@ -48,7 +48,7 @@ try{
    tile.append(ruby);list.append(tile);
   }
  }
- for(const region of cfg.regions){
+ for(const region of [...cfg.regions,{key:'all',name:'全域',reading:'ぜんいき',codes:[...new Set(codes)]}]){
   const button=make('button',''),ruby=make('ruby',region.name),count=make('span','（'+region.codes.length+'）');
   if(region.reading)ruby.append(make('rt',region.reading));
   count.className='count';button.append(ruby,count);
