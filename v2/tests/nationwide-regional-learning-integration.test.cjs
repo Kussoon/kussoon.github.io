@@ -33,7 +33,7 @@ for(const {pref,slug,regions,areas} of entries){
  assert.equal(new Set(codes).size,areas,slug+' duplicate region code');
  assert.deepEqual([...codes].sort(),active.map(e=>e.code).sort(),slug+' complete 2026 code coverage');
  assert(cfg.regions.every(r=>r.codes.length>=2),slug+' single-area regional quiz forbidden');
- assert(cfg.regions.every(r=>r.name&&/^[ぁ-ゖー]+$/.test(r.reading)),slug+' region name/reading');
+ assert(cfg.regions.every(r=>r.name&&/^[ぁ-ゖー・]+$/.test(r.reading)),slug+' region name/reading');
  for(const e of active){
   assert(!allCodes.has(e.code),slug+' code duplicated across prefectures: '+e.code);
   allCodes.add(e.code);
