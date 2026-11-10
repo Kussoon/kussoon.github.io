@@ -34,7 +34,8 @@ const cases=[
  ['miyagi','04',6,39,[9,18,5,2,3,2]],
  ['akita','05',3,25,[9,9,7]],
  ['yamagata','06',4,35,[14,8,8,5]],
- ['fukushima','07',6,59,[8,12,9,13,4,13]]
+ ['fukushima','07',6,59,[8,12,9,13,4,13]],
+ ['hokkaido','01',14,194,[24,17,20,11,7,11,7,23,8,10,18,19,8,11]]
 ];
 assert.equal(index.count,1905);
 let total=0,totalRegions=0;
@@ -50,7 +51,7 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert.equal(raw.length,manifest.entries.find(e=>e.pref===pref).regions,slug+' manifest count');
  assert.equal(active.length,municipalCount,slug+' active 2026 areas');
  assert.equal(regions.length,regionCount,slug+' region count');
- if(['aomori','iwate','miyagi','akita','yamagata','fukushima'].includes(slug)){
+ if(['aomori','iwate','miyagi','akita','yamagata','fukushima','hokkaido'].includes(slug)){
   const overview=fs.readFileSync(path.join(dir,'index.html'),'utf8');
   assert(overview.includes('cfg.regions.length!=='+regionCount),slug+' overview validates region count');
   assert(overview.includes('codes.length!=='+municipalCount),slug+' overview validates area count');
@@ -68,5 +69,5 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert(cfg.regionSource&&/^https:\/\//.test(cfg.regionSource),slug+' documented region source');
  total+=municipalCount;totalRegions+=regionCount;
 }
-assert.equal(total,1191);assert.equal(totalRegions,168);
-console.log('PASS 30 prefectures / 168 regions / 1191 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
+assert.equal(total,1385);assert.equal(totalRegions,182);
+console.log('PASS 31 prefectures / 182 regions / 1385 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
