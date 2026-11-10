@@ -41,12 +41,12 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert(row.headingAfterGrip&&row.notOverFold&&row.notOverClose,'390px title and controls do not overlap');
    assert(row.foldSize[0]>=44&&row.foldSize[1]>=44&&row.closeSize[0]>=44&&row.closeSize[1]>=44,'collapse and close targets are at least 44px');
 
-   const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top-e.offsetParent.getBoundingClientRect().top);
    await fold.click();
    await child().waitForFunction(()=>document.querySelector('#popupBody').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
-   const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top-e.offsetParent.getBoundingClientRect().top);
    assert(Math.abs(topBefore-topCollapsed)<2,'collapse preserves the popup top edge');
    let box=await grip.boundingBox();
    await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();
