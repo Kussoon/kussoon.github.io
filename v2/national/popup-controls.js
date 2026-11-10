@@ -50,7 +50,7 @@ head.replaceChildren(grip,heading,fold,close);
 popup.append(body);
 close.classList.add('popup-control');
 
-let collapsed=false,previousName='',expandedTop=null,firstCollapsePending=true;
+let collapsed=false,previousName='',collapsedTop=null,firstCollapsePending=true;
 function syncFoldControl(){
  fold.textContent=collapsed?'⌄':'−';
  fold.setAttribute('aria-expanded',String(!collapsed));
@@ -64,9 +64,9 @@ function moveToTop(targetTop){
  setCorrection(correction);
  const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
  const rect=popup.getBoundingClientRect();
- const minTop=area.top+8,maxTop=Math.max(minTop,area.bottom-8-rect.height);
- const clampedTop=Math.max(minTop,Math.min(maxTop,rect.top));
- if(Math.abs(clampedTop-rect.top)>.5)setCorrection(correction+clampedTop-rect.top);
+ const minTop=area.top+8;
+ // Keep the title at its anchor and let expanded content extend below the map.
+ if(rect.top<minTop)setCorrection(correction+minTop-rect.top);
 }
 function snapCollapsedToBottom(){
  // The popup is already positioned at bottom:8px in the map frame.
@@ -77,25 +77,26 @@ function snapCollapsedToBottom(){
 }
 fold.addEventListener('click',()=>{
  if(!collapsed){
-  expandedTop=popup.getBoundingClientRect().top;
+  const topBeforeCollapse=popup.getBoundingClientRect().top;
   collapsed=true;
   body.hidden=true;
   syncFoldControl();
   if(firstCollapsePending){
-   // Only the first fold for this municipality jumps to the map bottom.
+   // The first fold for this municipality docks the title at the map bottom.
    snapCollapsedToBottom();
    firstCollapsePending=false;
   }else{
-   // Later folds retract upward from the current title-bar position.
-   // Never force a second downward jump.
-   moveToTop(expandedTop);
+   // Later folds retract upward while keeping the title in place.
+   moveToTop(topBeforeCollapse);
   }
+  // The next expansion grows downward from the title's current position.
+  collapsedTop=popup.getBoundingClientRect().top;
  }else{
   collapsed=false;
   body.hidden=false;
   syncFoldControl();
-  if(expandedTop!==null)moveToTop(expandedTop);
-  expandedTop=null;
+  if(collapsedTop!==null)moveToTop(collapsedTop);
+  collapsedTop=null;
  }
 });
 fold.addEventListener('pointerdown',event=>event.stopPropagation());
@@ -107,7 +108,7 @@ new MutationObserver(()=>{
   previousName=value;
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
-  expandedTop=null;
+  collapsedTop=null;
   firstCollapsePending=true;
  }
 }).observe(name,{subtree:true,childList:true,characterData:true});
@@ -119,7 +120,7 @@ if(map)new MutationObserver(()=>{
   previousCode=code;
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
-  expandedTop=null;
+  collapsedTop=null;
   firstCollapsePending=true;
  }
 }).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
