@@ -247,7 +247,7 @@ function syncPopupReading(code,region){
  const parts=nationalLabels?.readingPartsFor(code)||region?.readingParts||[];
  const valid=Array.isArray(parts)&&parts.length>0&&parts.every(p=>p.name&&p.reading);
  const text=valid?parts.map(p=>p.reading).join(''):'';
- const show=Boolean(text)&&($('readingMode').value==='on'||new URLSearchParams(location.search).get('popupControlsTrial')==='1');
+ const show=$('readingMode').value==='on'&&Boolean(text);
  node.textContent=show?text:'';
  node.hidden=!show;
 }
