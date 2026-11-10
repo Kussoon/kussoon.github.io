@@ -6,6 +6,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   const app=await start({engine,contextOptions:{viewport:{width:390,height:844}}});
   const page=app.page;
   try{
+   await app.open();
    const origin=new URL(page.url()).origin;
    await page.goto(origin+'/v2/national/popup-controls-trial.html');
    const frame=page.frameLocator('#mapPreview');
@@ -56,6 +57,12 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await frame.getByRole('button',{name:'吹き出し本文を展開'}).click();
    await frame.locator('#popupBody:not([hidden])').waitFor();
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
+   const content=frame.locator('#popupContent');
+   const bodyBox=await content.boundingBox();
+   const bodyTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   await page.mouse.move(bodyBox.x+Math.min(30,bodyBox.width/2),bodyBox.y+Math.min(20,bodyBox.height/2));await page.mouse.down();
+   await page.mouse.move(bodyBox.x+Math.min(30,bodyBox.width/2),bodyBox.y+Math.min(20,bodyBox.height/2)+45,{steps:4});await page.mouse.up();
+   assert((await popup.evaluate(e=>e.getBoundingClientRect().top))>bodyTop+25,'noninteractive popup body still drags vertically');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'true');
    assert.equal(await popup.evaluate(e=>e.getBoundingClientRect().left),leftAfterCollapsedDrag,'popup remains horizontally fixed');
 
@@ -103,7 +110,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await frame.locator('#popupCollapse').count(),0,'comparison can return to the unchanged current popup');
    assert.equal(await page.locator('a[href="/maps/national-municipalities.html"]').count(),1,'official page link is available');
    assert.deepEqual(app.errors,[]);
-   console.log('PASS popup-controls '+engine+': phone-width collision, touch-handle and body drag, collapse/reopen, selection, links, fullscreen, zoom and boundary contracts');
+   console.log('PASS popup-controls '+engine+': phone-width collision, title grip and noninteractive body drag, collapse/reopen, selection, links, fullscreen, zoom and boundary contracts');
   }finally{await app.close();}
  }
 })().catch(error=>{console.error(error);process.exitCode=1;});
