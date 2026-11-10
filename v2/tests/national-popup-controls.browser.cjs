@@ -41,21 +41,22 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert(row.headingAfterGrip&&row.notOverFold&&row.notOverClose,'390px title and controls do not overlap');
    assert(row.foldSize[0]>=44&&row.foldSize[1]>=44&&row.closeSize[0]>=44&&row.closeSize[1]>=44,'collapse and close targets are at least 44px');
 
-   const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top-e.offsetParent.getBoundingClientRect().top);
+   const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top);
    await fold.focus();await fold.press('Enter');
    await child().waitForFunction(()=>document.querySelector('#popupBody').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
-   const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top-e.offsetParent.getBoundingClientRect().top);
-   assert(Math.abs(topBefore-topCollapsed)<2,'collapse preserves the popup top edge');
+   const collapsed=await popup.evaluate(e=>({rect:e.getBoundingClientRect().toJSON(),area:(e.offsetParent||e.parentElement).getBoundingClientRect().toJSON()}));
+   assert(Math.abs(collapsed.area.bottom-collapsed.rect.bottom-8)<3,'collapse automatically docks the popup at map bottom');
    let box=await grip.boundingBox();
    await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();
-   await page.mouse.move(box.x+box.width/2,box.y+box.height/2+70,{steps:4});await page.mouse.up();
+   await page.mouse.move(box.x+box.width/2,box.y+box.height/2-70,{steps:4});await page.mouse.up();
    const collapsedDragTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
-   assert(collapsedDragTop>topCollapsed+40,'collapsed popup still drags vertically');
+   assert(collapsedDragTop<collapsed.rect.top-40,'collapsed popup can still drag upward after docking');
    const leftAfterCollapsedDrag=await popup.evaluate(e=>e.getBoundingClientRect().left);
    await frame.locator('#popupCollapse').focus();await frame.locator('#popupCollapse').press('Space');
    await frame.locator('#popupBody:not([hidden])').waitFor();
+   assert(Math.abs((await popup.evaluate(e=>e.getBoundingClientRect().top))-topBefore)<3,'reopen restores the expanded position');
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
    const bodyPoint=await child().evaluate(()=>{
     const r=document.querySelector('#popupScroll').getBoundingClientRect();
