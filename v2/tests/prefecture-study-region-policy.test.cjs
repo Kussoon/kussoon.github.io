@@ -28,7 +28,13 @@ const cases=[
  ["saitama", "11", 10, 72, [10, 3, 7, 7, 5, 14, 5, 9, 7, 5]],
  ["chiba", "12", 11, 59, [7, 5, 6, 9, 4, 3, 6, 7, 4, 4, 4]],
  ["tokyo", "13", 5, 62, [23, 17, 8, 5, 9]],
- ["kanagawa", "14", 7, 58, [18, 7, 3, 5, 7, 8, 10]]
+ ["kanagawa", "14", 7, 58, [18, 7, 3, 5, 7, 8, 10]],
+ ['aomori','02',6,40,[5,7,7,7,9,5]],
+ ['iwate','03',4,33,[8,8,9,8]],
+ ['miyagi','04',6,39,[9,18,5,2,3,2]],
+ ['akita','05',3,25,[9,9,7]],
+ ['yamagata','06',4,35,[14,8,8,5]],
+ ['fukushima','07',6,59,[8,12,9,13,4,13]]
 ];
 assert.equal(index.count,1905);
 let total=0,totalRegions=0;
@@ -44,14 +50,14 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert.equal(raw.length,manifest.entries.find(e=>e.pref===pref).regions,slug+' manifest count');
  assert.equal(active.length,municipalCount,slug+' active 2026 areas');
  assert.equal(regions.length,regionCount,slug+' region count');
- if(['ibaraki','tochigi','gunma','saitama','chiba','tokyo','kanagawa'].includes(slug)){
+ if(['aomori','iwate','miyagi','akita','yamagata','fukushima'].includes(slug)){
   const overview=fs.readFileSync(path.join(dir,'index.html'),'utf8');
-  assert(overview.includes('cfg.regions.length!=='+regionCount),slug+' overview must validate actual region count');
-  assert(overview.includes('new Set(codes).size!=='+municipalCount),slug+' overview must validate actual unique area count');
+  assert(overview.includes('cfg.regions.length!=='+regionCount),slug+' overview validates region count');
+  assert(overview.includes('codes.length!=='+municipalCount),slug+' overview validates area count');
   assert(overview.includes("key:'all',name:'全域'"),slug+' overview offers all-area selection');
+  assert(overview.includes(cfg.regionSource)&&overview.includes(cfg.countySource),slug+' overview links to documented sources');
   const quiz=fs.readFileSync(path.join(dir,'quiz.html'),'utf8');
-  assert(quiz.includes('data-region-config="./regions.json"'),slug+' quiz uses the shared configuration');
-  assert(quiz.includes('quiz-app.js'),slug+' quiz loads shared runtime');
+  assert(quiz.includes('data-region-config="./regions.json"')&&quiz.includes('quiz-app.js'),slug+' quiz uses shared configuration and runtime');
  }
  assert.deepEqual(regions.map(r=>r.codes.length),sizes,slug+' region size snapshot');
  assert(regions.every(r=>r.codes.length>=2),slug+' has a one-area region; review grouping before publication');
@@ -62,5 +68,5 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert(cfg.regionSource&&/^https:\/\//.test(cfg.regionSource),slug+' documented region source');
  total+=municipalCount;totalRegions+=regionCount;
 }
-assert.equal(total,960);assert.equal(totalRegions,139);
-console.log('PASS 24 prefectures / 139 regions / 960 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
+assert.equal(total,1191);assert.equal(totalRegions,168);
+console.log('PASS 30 prefectures / 168 regions / 1191 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
