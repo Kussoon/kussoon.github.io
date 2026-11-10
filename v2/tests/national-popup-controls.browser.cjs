@@ -119,10 +119,14 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await page.getByRole('button',{name:'現行表示'}).click();
    await page.waitForFunction(()=>{
     const f=document.getElementById('mapPreview');
-    try{return f.contentWindow.location.pathname==='/maps/national-municipalities.html'&&f.contentWindow.location.search==='';}catch{return false;}
+    try{return f.contentWindow.location.pathname==='/maps/national-municipalities.html'&&f.contentWindow.location.search==='?popupControlsCurrent=1';}catch{return false;}
    });
    assert.equal(await frame.locator('#popupCollapse').count(),0,'comparison can return to the unchanged current popup');
    assert.equal(await page.locator('a[href="/maps/national-municipalities.html"]').count(),1,'official page link is available');
+   await page.goto(origin+'/maps/national-municipalities.html');
+   await page.locator('#map .prefecture').first().waitFor({timeout:90000});
+   await page.waitForSelector('#popupCollapse',{timeout:60000});
+   assert.equal(await page.locator('#popupBody').getAttribute('hidden'),null,'formal page enables the improved popup controls by default');
    assert.deepEqual(app.errors,[]);
    console.log('PASS popup-controls '+engine+': phone-width collision, title grip and noninteractive body drag, collapse/reopen, selection, links, fullscreen, zoom and boundary contracts');
   }finally{await app.close();}
