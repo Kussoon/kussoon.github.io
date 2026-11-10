@@ -3,7 +3,7 @@ const {spawnSync}=require('node:child_process');
 const path=require('node:path');
 const files=[
  'v2/shared/test-map-viewport.cjs','v2/shared/test-map-viewport-touch-pan.cjs',
- 'v2/shared/test-municipality-renderer.cjs','v2/shared/test-place-labels.cjs',
+ 'v2/shared/test-municipality-renderer.cjs','v2/municipalities/shared/boundary-accessibility.contract.test.cjs','v2/shared/test-place-labels.cjs',
  'v2/shared/test-municipality-quiz.cjs','v2/shared/test-established-label-adapter.cjs',
  'v2/shared/test-reading-bridge.cjs','v2/national/test-2026-single-stroke.cjs',
  'v2/national/test-2026-overview-focus-toolbar.cjs','v2/national/test-2026-mobile-popup.cjs',
