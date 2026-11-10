@@ -43,7 +43,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
 
    const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top);
    await fold.click();
-   await frame.locator('#popupBody[hidden]').waitFor();
+   await child().waitForFunction(()=>document.querySelector('#popupBody').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
    const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top);
@@ -84,7 +84,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
 
    await frame.getByRole('button',{name:'吹き出し本文を折り畳む'}).click();
    await frame.getByRole('button',{name:'吹き出しを閉じる'}).click();
-   await frame.locator('#officePopup[hidden]').waitFor();
+   await child().waitForFunction(()=>document.querySelector('#officePopup').hidden);
    assert.equal(await frame.locator('#map .chosen[data-code="28110"]').count(),1,'closing popup retains selected map region');
 
    await page.getByRole('button',{name:/上北郡東北町/}).click();
