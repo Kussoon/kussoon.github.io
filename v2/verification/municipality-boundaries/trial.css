@@ -1,0 +1,16 @@
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:#193a51;background:#f0f7fc}*{box-sizing:border-box}
+body{margin:0}main{max-width:1100px;margin:auto;padding:16px 12px 40px}h1{font-size:clamp(23px,5vw,32px)}p,li{line-height:1.65}
+a{color:#255677}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px;background:#fff;border:1px solid #bfd5e5;border-radius:12px}
+.toolbar label{font-weight:750}.toolbar select,button{font:inherit;min-height:44px;padding:8px 12px;border:1px solid #9bb7cb;border-radius:9px;background:#fff;color:#163a55;font-weight:700}
+.toolbar select{flex:1 1 240px;max-width:500px}.zoom-controls{display:flex;gap:6px;margin-left:auto}.zoom-controls button{min-width:46px}.zoom-controls #reset{font-size:14px}
+#status{min-height:1.6em;font-weight:700;color:#355e75}.comparison{display:grid;grid-template-columns:1fr;gap:14px}
+.map-card{padding:10px;background:#fff;border:1px solid #bed3df;border-radius:12px;box-shadow:0 2px 8px #193a5110}
+.map-card h2{font-size:18px;margin:0 0 6px}.map-card p{margin:4px 0 8px;color:#496679;font-size:13px}
+.map-card svg{display:block;width:100%;height:clamp(380px,70svh,700px);background:#d8ebf7;border:1px solid #bbcfda;border-radius:8px;touch-action:none;user-select:none}
+.land{fill:#f2f0dd;stroke:none}.land.outside{fill:#d5dee2}
+.borders,.coastlines{fill:none;pointer-events:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.borders{stroke:#fff;stroke-width:1.2}.candidate .borders{stroke:#657b84;stroke-width:1.1}
+.coastlines{stroke:#486574;stroke-width:2.4}
+.notes{margin-top:16px;padding:14px 16px;background:#fff;border:1px solid #bfd5e5;border-radius:12px}.notes h2{margin-top:0;font-size:19px}
+.notes p{margin:8px 0}.notes ul{padding-left:1.4em}
+@media(min-width:860px){.comparison{grid-template-columns:repeat(2,minmax(0,1fr))}.map-card h2{min-height:1.5em}}
