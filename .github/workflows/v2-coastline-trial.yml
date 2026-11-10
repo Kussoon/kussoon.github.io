@@ -1,0 +1,43 @@
+name: V2 coastline accessibility trial contract
+on:
+  pull_request:
+    paths:
+      - 'v2/verification/coastline-accessibility/**'
+      - '.github/workflows/v2-coastline-trial.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/verification/coastline-accessibility/**'
+      - '.github/workflows/v2-coastline-trial.yml'
+jobs:
+  trial-contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify isolated styles, topology arc partition and source data
+        run: |
+          node --check v2/verification/coastline-accessibility/trial.js
+          node --check v2/verification/coastline-accessibility/contract.test.cjs
+          node --check v2/verification/coastline-accessibility/browser.test.cjs
+          node v2/verification/coastline-accessibility/contract.test.cjs
+      - name: Install browser test dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - name: Install Chromium and WebKit
+        run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Compare all representative areas in Chromium and WebKit
+        run: |
+          KUSSOON_BROWSER_ENGINE=chromium node v2/verification/coastline-accessibility/browser.test.cjs
+          KUSSOON_BROWSER_ENGINE=webkit node v2/verification/coastline-accessibility/browser.test.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/coastline-trial
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v2-coastline-trial-screenshots
+          path: ${{ runner.temp }}/coastline-trial
+          if-no-files-found: ignore

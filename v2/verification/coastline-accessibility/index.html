@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>海岸線・陸地輪郭 比較試作｜Kussoon V2</title>
+<link rel="stylesheet" href="./trial.css">
+</head>
+<body>
+<main>
+<p><a href="/maps/national-municipalities.html">← 全国市区町村マップへ</a></p>
+<h1>海岸線・陸地輪郭の比較試作</h1>
+<p>同じ2026年版行政区域データ・同じ縮尺で、現行表示と改善候補を比較します。地図をドラッグまたは拡大縮小すると両方が一緒に動きます。配色・線の強さは試作です。</p>
+<section class="toolbar" aria-label="比較する地域と地図操作">
+<label for="place">地域</label><select id="place"></select>
+<div class="zoom-controls"><button id="zoomIn" type="button" aria-label="地図を拡大">＋</button><button id="zoomOut" type="button" aria-label="地図を縮小">－</button><button id="reset" type="button">表示を戻す</button></div>
+</section>
+<p id="status" role="status" aria-live="polite">地図データを読み込みます…</p>
+<div class="comparison" id="comparison" aria-busy="true"></div>
+<section class="notes">
+<h2>比較する設定</h2>
+<div class="legend"><span class="swatch sea"></span>海　<span class="swatch land"></span>出題範囲の陸地　<span class="swatch outside"></span>隣接地域</div>
+<p><strong>現行：</strong>海 #eaf3f9、陸地 #d9dea5、隣接地域 #cbd7db、共有境界は白 1.2px。</p>
+<p><strong>改善候補：</strong>海 #d8ebf7、陸地 #f2f0dd、隣接地域 #d5dee2。改善候補Aは1区域だけが使う弧を濃色 2.4px、区域間の共有弧を白 1.1pxで描きます。候補Bは同じ外周の強調に加え、内部境界も濃色 1.1pxにします。1区域だけが使う弧は海岸線の候補ですが、県外との接合線も含む場合があるため、代表地域で目視確認します。個別区域へのstrokeや同じ弧の重複登録は行いません。</p>
+<p id="contrast"></p>
+<p>行政区域の形状、クイズの正誤・点滅、県色、ラベル、吹き出しはこの試作では変更しません。R02（境界を共有トポロジーから一度だけ描く）を維持します。SVGの線幅はズームに追随しない設定です。</p>
+</section>
+<p class="footer"><a href="/maps/national-municipalities.html">全国市区町村マップ</a> ／ <a href="/v2/">V2試験トップ</a></p>
+</main>
+<script src="/v2/progressive-preview/municipality-renderer.js" defer></script>
+<script src="./trial.js" defer></script>
+</body></html>
