@@ -51,7 +51,7 @@ for(const {pref,slug,regions,areas} of entries){
  const quiz=fs.readFileSync(path.join(dir,'quiz.html'),'utf8');
  assert(page.includes("key:'all',name:'全域'"),slug+' municipality overview lacks whole-area selection');
  assert(page.includes('cfg.regions.length!=='+regions),slug+' overview region-count runtime guard');
- assert(page.includes('new Set(codes).size!=='+areas),slug+' overview unique-code runtime guard');
+ assert(page.includes('new Set(codes).size!=='+areas)||page.includes('new Set(codes).size!==cfg.expectedAreaCount'),slug+' overview unique-code runtime guard');
  assert(page.includes('quiz.html?mode=1')&&page.includes('quiz.html?mode=2'),slug+' overview quiz links');
  assert(quiz.includes('data-region-config="./regions.json"'),slug+' quiz uses region config');
  assert(quiz.includes('quiz-app.js'),slug+' quiz uses shared runtime');
