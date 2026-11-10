@@ -22,10 +22,10 @@ function escapeHtml(value){
 }
 const COUNTY_BY_TOWN=config.countyByTown||{};
 function formatQuestionName(item){
-  const county = COUNTY_BY_TOWN[item.name];
+  const county = config.countyByCode?.[item.code] || COUNTY_BY_TOWN[item.name];
   // Keep the official quiz answer/code untouched; only the question's displayed name changes.
   const name = county ? county[0] + item.name : item.name;
-  const townReading = item.reading || '';
+  const townReading = item.reading || config.readingByCode?.[item.code] || '';
   const reading = county ? county[1] + townReading : townReading;
   if(!reading) return escapeHtml(name);
   return `<ruby>${escapeHtml(name)}<rt>${escapeHtml(reading)}</rt></ruby>`;
