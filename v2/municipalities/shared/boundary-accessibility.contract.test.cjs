@@ -18,7 +18,7 @@ assert(renderer.includes("borders.setAttribute('pointer-events','none')"),'bound
 assert(renderer.includes('fragment.append(borders)')&&renderer.split('fragment.append(borders)').length===2,'boundary path must be appended once');
 assert(renderer.includes("setAttribute('class','coastlines')"),'coastline layer stays independent');
 assert(quiz.includes('stroke:none'),'municipality polygons remain fill-only');
-const r02=rules.split('\\n').find(line=>line.startsWith('|R02'));assert(r02?.includes('#657b84')&&r02.includes('#486574'),'R02 must record approved style and separate coastline');
+const r02=rules.split('\n').find(line=>line.startsWith('|R02'));assert(r02?.includes('#657b84')&&r02.includes('#486574'),'R02 must record approved style and separate coastline');
 function luminance(hex){const c=hex.match(/[a-f0-9]{2}/gi).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2];}
 function contrast(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
 for(const fill of ['#f2f0dd','#d5dee2','#d8ebf7'])assert(contrast('#657b84',fill)>=3,'neutral map contrast target against '+fill);
