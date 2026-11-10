@@ -36,7 +36,7 @@ try{
  const cfg=await cr.json(),idx=await ir.json();
  const osaka=idx.entries.filter(e=>e.pref==='26'),byCode=new Map(osaka.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(osaka.length!==36||idx.count!==1905||cfg.expectedAreaCount!==36||codes.length!==36||
+ if(osaka.length!==36||idx.count!==1905||cfg.expectedAreaCount!==36||cfg.regions.length!==8||codes.length!==36||
     new Set(codes).size!==36||codes.some(c=>!byCode.has(c)))throw Error('京都府36区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(r){
