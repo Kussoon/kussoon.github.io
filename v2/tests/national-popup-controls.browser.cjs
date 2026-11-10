@@ -104,14 +104,22 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await child().waitForFunction(()=>document.querySelector('#popupName').textContent.includes('新宿区')&&!document.querySelector('#officePopup').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),true,'Tokyo ward selection displays the body');
    assert(await frame.locator('#popupName').textContent().then(x=>x.includes('新宿区')));
-   // R08/R36: popup readings follow the map's OFF-by-default toggle,
-   // including while using the improved collapsible title bar.
-   assert.equal(await frame.locator('#popupReading').isVisible(),false,'popup reading initially follows OFF');
-   await frame.locator('#mapReadingToggle').click();
+   // User-approved revision to R08/R36: map readings remain OFF by default,
+   // but verified popup-title readings must always stay visible in trial mode.
+   assert((await frame.locator('#mapReadingToggle').textContent()).includes('OFF'),'map labels initially have readings OFF');
    await frame.locator('#popupReading:visible').waitFor();
-   assert((await frame.locator('#popupReading').textContent()).length>0,'verified popup reading visible in ON mode');
+   const verifiedReading=await frame.locator('#popupReading').textContent();
+   assert(verifiedReading&&verifiedReading.trim().length>0,'popup title shows verified reading with map readings OFF');
    await frame.locator('#mapReadingToggle').click();
-   assert.equal(await frame.locator('#popupReading').isVisible(),false,'popup reading hides again in OFF mode');
+   assert((await frame.locator('#mapReadingToggle').textContent()).includes('ON'),'map reading toggle still works');
+   assert.equal(await frame.locator('#popupReading').textContent(),verifiedReading,'popup title reading persists with map ON');
+   await frame.locator('#mapReadingToggle').click();
+   assert((await frame.locator('#mapReadingToggle').textContent()).includes('OFF'),'map reading toggle returns to OFF');
+   assert.equal(await frame.locator('#popupReading').textContent(),verifiedReading,'popup title reading remains visible with map OFF');
+   assert.equal(await frame.locator('#popupReading').isVisible(),true,'popup reading stays visible');
+   await frame.locator('#popupCollapse').click();
+   assert.equal(await frame.locator('#popupReading').isVisible(),true,'reading remains visible in collapsed title bar');
+   await frame.locator('#popupCollapse').click();
 
    const prefectureShapes=await frame.locator('#map .prefecture').count();
    const beforeZoom=await frame.locator('#map').getAttribute('viewBox');
