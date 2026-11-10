@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "16",
+  "name": "富山県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.toyama.jp/documents/50869/honbun.pdf",
+  "countySource": "https://www.pref.toyama.jp/documents/18401/shichosonrenrakusaki.pdf",
+  "expectedAreaCount": 15,
+  "regions": [
+    {
+      "key": "niikawa",
+      "name": "新川",
+      "reading": "にいかわ",
+      "codes": [
+        "16204",
+        "16207",
+        "16342",
+        "16343"
+      ]
+    },
+    {
+      "key": "toyama",
+      "name": "富山",
+      "reading": "とやま",
+      "codes": [
+        "16201",
+        "16206",
+        "16321",
+        "16322",
+        "16323"
+      ]
+    },
+    {
+      "key": "takaoka-imizu",
+      "name": "高岡・射水",
+      "reading": "たかおかいみず",
+      "codes": [
+        "16202",
+        "16205",
+        "16209",
+        "16211"
+      ]
+    },
+    {
+      "key": "tonami",
+      "name": "砺波",
+      "reading": "となみ",
+      "codes": [
+        "16208",
+        "16210"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "舟橋村": [
+      "中新川郡",
+      "なかにいかわぐん"
+    ],
+    "上市町": [
+      "中新川郡",
+      "なかにいかわぐん"
+    ],
+    "立山町": [
+      "中新川郡",
+      "なかにいかわぐん"
+    ],
+    "入善町": [
+      "下新川郡",
+      "しもにいかわぐん"
+    ],
+    "朝日町": [
+      "下新川郡",
+      "しもにいかわぐん"
+    ]
+  }
+}
