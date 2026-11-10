@@ -81,6 +81,21 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
  * High-contrast opaque navy also remains readable in native iOS fullscreen fallback. */
 body.map-screen-mode .map-screen-title,#mapFrame:fullscreen .map-screen-title{background:#153d57;color:#fff;border:2px solid #fff;box-shadow:0 2px 9px rgba(9,39,58,.46);padding:7px 11px;font-size:13px}
 body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{background:#153d57;color:#fff;border:2px solid #fff;box-shadow:0 2px 9px rgba(9,39,58,.46);font-size:14px;font-weight:800}
+/* Fullscreen-only 1-second pulse: 0.75s navy lit, 0.25s pale unlit.
+ * Both controls share one animation, applied simultaneously as fullscreen starts.
+ * Text remains legible in both phases, rather than blinking the entire control. */
+@keyframes kussoon-fullscreen-controls-pulse{
+  0%,74.999%{background-color:#153d57;color:#fff;border-color:#fff}
+  75%,100%{background-color:#f7fbff;color:#153d57;border-color:#153d57}
+}
+body.map-screen-mode .map-screen-title,#mapFrame:fullscreen .map-screen-title,
+body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{
+ animation:kussoon-fullscreen-controls-pulse 1s steps(1,end) infinite;
+}
+@media(prefers-reduced-motion:reduce){
+ body.map-screen-mode .map-screen-title,#mapFrame:fullscreen .map-screen-title,
+ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{animation:none}
+}
 .map-toolbar button{width:100%;min-height:44px;padding:5px 3px;white-space:nowrap;font-size:14px;font-weight:800;color:#183951;background:rgba(255,255,255,.96);border:1px solid #96b3c7;border-radius:8px;box-shadow:0 2px 7px #183c5533;touch-action:manipulation}
 .map-toolbar button[aria-pressed="true"]{background:#245879;color:#fff}
 .map-toolbar button:focus-visible{outline:3px solid #e5aa38;outline-offset:1px}
