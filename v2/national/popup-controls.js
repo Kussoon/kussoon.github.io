@@ -63,9 +63,10 @@ function keepTop(anchorTop){
  correction+=anchorTop-rect.top;
  setCorrection(correction);
  rect=popup.getBoundingClientRect();
+ const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
  let nudge=0;
- if(rect.top<8)nudge=8-rect.top;
- if(rect.bottom>window.innerHeight-8)nudge=window.innerHeight-8-rect.bottom;
+ if(rect.top<area.top+8)nudge=area.top+8-rect.top;
+ else if(rect.bottom>area.bottom-8)nudge=area.bottom-8-rect.bottom;
  if(nudge){correction+=nudge;setCorrection(correction);}
 }
 fold.addEventListener('click',()=>{
