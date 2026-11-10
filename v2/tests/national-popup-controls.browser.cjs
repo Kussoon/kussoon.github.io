@@ -57,7 +57,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await frame.getByRole('button',{name:'吹き出し本文を展開'}).click();
    await frame.locator('#popupBody:not([hidden])').waitFor();
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
-   const content=frame.locator('#popupContent');
+   const content=frame.locator('#popupNote');
    const bodyBox=await content.boundingBox();
    const bodyTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
    await page.mouse.move(bodyBox.x+Math.min(30,bodyBox.width/2),bodyBox.y+Math.min(20,bodyBox.height/2));await page.mouse.down();
