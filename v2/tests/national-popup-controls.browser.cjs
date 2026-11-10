@@ -59,6 +59,17 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await frame.locator('#popupBody:not([hidden])').waitFor();
    assert(Math.abs((await popup.evaluate(e=>e.getBoundingClientRect().top-(e.offsetParent||e.parentElement).getBoundingClientRect().top))-topBefore)<3,'reopen restores the expanded position relative to the map');
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
+   // Only the FIRST fold docks at the bottom. Subsequent folds collapse
+   // upward around the title's current position; expansion grows downward.
+   const secondExpandedTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   await frame.locator('#popupCollapse').click();
+   assert.equal(await frame.locator('#popupBody').isVisible(),false,'second fold hides body');
+   const secondCollapsedTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   assert(Math.abs(secondCollapsedTop-secondExpandedTop)<3,'second fold keeps title at top, retracting upward instead of redocking');
+   await frame.locator('#popupCollapse').click();
+   assert.equal(await frame.locator('#popupBody').isVisible(),true,'second expand restores content below title');
+   const thirdExpandedTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   assert(Math.abs(thirdExpandedTop-secondCollapsedTop)<3,'second expansion extends down from stationary title');
    const bodyPoint=await child().evaluate(()=>{
     const r=document.querySelector('#popupScroll').getBoundingClientRect();
     for(let y=r.top+4;y<r.bottom-4;y+=8)for(let x=r.left+4;x<r.right-4;x+=8){
