@@ -44,6 +44,15 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert.equal(raw.length,manifest.entries.find(e=>e.pref===pref).regions,slug+' manifest count');
  assert.equal(active.length,municipalCount,slug+' active 2026 areas');
  assert.equal(regions.length,regionCount,slug+' region count');
+ if(['ibaraki','tochigi','gunma','saitama','chiba','tokyo','kanagawa'].includes(slug)){
+  const overview=fs.readFileSync(path.join(dir,'index.html'),'utf8');
+  assert(overview.includes('cfg.regions.length!=='+regionCount),slug+' overview must validate actual region count');
+  assert(overview.includes('new Set(codes).size!=='+municipalCount),slug+' overview must validate actual unique area count');
+  assert(overview.includes("key:'all',name:'全域'"),slug+' overview offers all-area selection');
+  const quiz=fs.readFileSync(path.join(dir,'quiz.html'),'utf8');
+  assert(quiz.includes('data-region-config="./regions.json"'),slug+' quiz uses the shared configuration');
+  assert(quiz.includes('quiz-app.js'),slug+' quiz loads shared runtime');
+ }
  assert.deepEqual(regions.map(r=>r.codes.length),sizes,slug+' region size snapshot');
  assert(regions.every(r=>r.codes.length>=2),slug+' has a one-area region; review grouping before publication');
  assert(regions.every(r=>r.name&&/^[ぁ-ゖー]+$/.test(r.reading)),slug+' region reading');
