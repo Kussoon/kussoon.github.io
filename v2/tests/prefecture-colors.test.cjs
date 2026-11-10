@@ -61,4 +61,10 @@ assert(page.includes('body.map-screen-mode .map-screen-title,#mapFrame:fullscree
  'Fullscreen status has solid high-contrast navy background');
 assert(page.includes('body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{background:#153d57;color:#fff'),
  'Fullscreen return control has solid high-contrast navy background');
+assert(page.includes('@keyframes kussoon-fullscreen-controls-pulse')&&page.includes('0%,74.999%')&&page.includes('75%,100%'),
+ 'Fullscreen controls alternate 0.75s lit and 0.25s unlit');
+assert(page.includes('animation:kussoon-fullscreen-controls-pulse 1s steps(1,end) infinite'),
+ 'Fullscreen status and return share the same continuous 1-second pulse');
+assert(page.includes('@media(prefers-reduced-motion:reduce)')&&page.includes('#mapFullscreen{animation:none}'),
+ 'Reduced motion disables fullscreen pulse');
 console.log('PASS fixed prefecture palette: 47 perceptually separated assignments, 8 colours, '+pairs.length+' adjacent pairs');
