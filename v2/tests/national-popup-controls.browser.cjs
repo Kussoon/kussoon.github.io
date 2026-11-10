@@ -10,7 +10,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    const origin=new URL(page.url()).origin;
    await page.goto(origin+'/v2/national/popup-controls-trial.html');
    const frame=page.frameLocator('#mapPreview');
-   const child=()=>page.frames().find(item=>item.url().includes('/maps/national-municipalities.html'));
+   const child=()=>page.frames().find(item=>item.url().includes('/v2/national/popup-controls-map-preview.html'));
    await frame.locator('#map .prefecture').first().waitFor({timeout:90000});
    await frame.locator('#map path.prefecture[style*="pref-color"]').first().waitFor({timeout:60000});
    await page.waitForFunction(()=>document.querySelector('#mapPreview')?.dataset.trialReady==='true',{},{timeout:60000});
