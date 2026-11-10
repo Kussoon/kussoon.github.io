@@ -70,15 +70,21 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   await page.click('#mapFullscreen');
   assert(await page.locator('body.map-screen-mode').count(),'fullscreen mode enabled');
   const controls=await page.evaluate(()=>{
-   const read=id=>{const st=getComputedStyle(document.getElementById(id));return {background:st.backgroundColor,color:st.color,border:st.borderTopWidth,visible:getComputedStyle(document.getElementById(id)).display!=='none'};};
+   const read=id=>{const st=getComputedStyle(document.getElementById(id));return {background:st.backgroundColor,color:st.color,border:st.borderTopWidth,visible:st.display!=='none',animation:st.animationName,duration:st.animationDuration};};
    return {title:read('mapScreenTitle'),button:read('mapFullscreen')};
   });
   for(const control of [controls.title,controls.button]){
-   assert.equal(control.background,'rgb(21, 61, 87)');
-   assert.equal(control.color,'rgb(255, 255, 255)');
+   assert.equal(control.animation,'kussoon-fullscreen-controls-pulse');
+   assert.equal(control.duration,'1s');
    assert.equal(control.border,'2px');
    assert(control.visible);
+   assert([ 'rgb(21, 61, 87)','rgb(247, 251, 255)' ].includes(control.background),'pulse remains visible in either phase');
   }
+  assert.equal(controls.title.background,controls.button.background,'fullscreen status and return pulse together');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  const motionless=await page.locator('#mapFullscreen').evaluate(n=>getComputedStyle(n).animationName);
+  assert.equal(motionless,'none','reduced motion stops the continuous fullscreen pulse');
+  await page.emulateMedia({reducedMotion:'no-preference'});
   await page.click('#mapFullscreen');
   assert.equal(await page.locator('body.map-screen-mode').count(),0,'return button exits fullscreen');
   assert.deepEqual(app.errors,[]);
