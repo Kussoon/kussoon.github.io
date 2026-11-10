@@ -3,7 +3,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'../../..'),read=file=>fs.readFileSync(path.join(root,file),'utf8');
 const html=read('v2/verification/municipality-boundaries/index.html'),css=read('v2/verification/municipality-boundaries/trial.css'),js=read('v2/verification/municipality-boundaries/trial.js'),renderer=read('v2/progressive-preview/municipality-renderer.js'),rules=read('v2/national/MAINTENANCE_RULES.md');
-assert(html.includes('内部境界線だけを比較'),'page must describe a single-variable comparison');
+assert(html.includes('従来の白線')&&html.includes('内部境界線'),'page must describe comparison of old and accepted boundary styles');
 assert(html.includes('青灰色の内部境界は正式版へ採用済みです'),'page must identify accepted style');
 assert(html.includes('municipality-renderer.js')&&js.includes('renderer.render('),'trial must reuse shared renderer');
 assert(rules.includes('|R02 県境・市区町村境|'),'R02 must exist and be applied');
