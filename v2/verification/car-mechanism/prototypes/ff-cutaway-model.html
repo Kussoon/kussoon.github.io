@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Kussoon｜FF車の内部をプラモデルのように見る</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color-scheme:light dark;--bg:#f5f8fc;--surface:#fff;--ink:#183248;--muted:#536e81;--line:#c8d8e3;--light:#eaf3f9;--blue:#1679af;--orange:#e67b14}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1923;--surface:#192b39;--ink:#eff6fc;--muted:#bfd0db;--line:#425969;--light:#263d4d;--blue:#187fb9;--orange:#ffad4b}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.7}main{max-width:1200px;margin:auto;padding:18px 13px 72px}h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.36;margin:6px 0 12px}h2{font-size:clamp(1.19rem,3vw,1.5rem);line-height:1.4;margin:0 0 10px}p{margin:8px 0 14px}.muted,small{color:var(--muted)}.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(12px,2vw,23px);margin:16px 0}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}button{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:10px 15px;font:inherit;color:var(--ink);cursor:pointer;min-height:45px}button.sel,button.mainbtn{background:var(--blue);color:white;border-color:var(--blue)}button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}.zoomrow{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-bottom:6px}.scroll{width:100%;overflow-x:auto;overflow-y:hidden;border-radius:14px;background:var(--light);border:1px solid var(--line);-webkit-overflow-scrolling:touch}.largefig{display:block;width:1150px;height:auto;transition:width .15s ease}.scroll.fitted .largefig{width:100%;min-width:0}.scroll.zoomed .largefig{width:1570px}.guide{font-size:.86rem;color:var(--muted)}.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.steps button{padding:9px 4px;font-weight:650;line-height:1.35;font-size:clamp(.75rem,1.7vw,.96rem);white-space:normal}.infobox{background:var(--light);border-left:5px solid var(--orange);border-radius:0 11px 11px 0;padding:13px 16px;margin:13px 0 4px;min-height:108px}.infobox strong{font-size:1.14rem}.infobox p{margin:5px 0 0}.parts{transition:opacity .2s ease,filter .2s ease}.dim{opacity:.30}.focus{filter:drop-shadow(0 0 9px #ffab3d)}.path{stroke:#f3982b;stroke-width:12;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14 15;animation:move 1.15s linear infinite}.path.dim{opacity:.17}.paused .path{animation-play-state:paused}@keyframes move{to{stroke-dashoffset:-58}}.outline{fill:none;stroke:#88a5b9;stroke-width:5;stroke-linejoin:round}.callout{fill:var(--surface);stroke:var(--line);stroke-width:2}.lab{fill:var(--ink);font-size:23px;font-weight:760}.labsmall{fill:var(--muted);font-size:18px}.cap{fill:var(--ink);font-size:18px;font-weight:620}.sectiongrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.mini{width:100%;height:auto;display:block}.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:.9rem;margin:12px 0;color:var(--muted)}.swatch{display:inline-block;width:15px;height:15px;border-radius:4px;vertical-align:-2px;margin-right:5px}.note{font-size:.88rem;color:var(--muted)}footer{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin-top:27px}
+@media(max-width:720px){.steps{grid-template-columns:repeat(2,1fr)}.sectiongrid{grid-template-columns:1fr}.largefig{width:1050px}.scroll.zoomed .largefig{width:1440px}.scroll.fitted .largefig{min-width:0}.lab{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.path{animation:none!important}.largefig{transition:none}}
+</style></head><body><main>
+<small>Kussoon｜運転・モビリティ｜制作検討用・立体模式図 第1版</small>
+<h1>車の中を、プラモデルのようにのぞいてみる</h1>
+<p class="muted">一般的なFF車（前輪駆動車）を例に、エンジンから左右の前輪までのつながりを、<strong>部品を少し引き離した立体模式図</strong>でたどります。部品名は大きく、力の流れはオレンジ色で表示します。</p>
+<section class="panel"><h2>① エンジンから前輪までを、大きな図で見る</h2>
+<div class="toolbar"><button id="play" class="mainbtn" aria-pressed="true">⏸ 一時停止</button><button id="next">次へ →</button><button id="all">経路を全部表示</button></div>
+<div class="zoomrow"><button id="zoom" aria-label="図をさらに拡大">＋ 拡大</button><button id="fit">全体</button></div>
+<div id="scroll" class="scroll" tabindex="0" aria-label="横にスクロールして見る立体模式図">
+<svg class="largefig" viewBox="0 0 1150 680" role="img" aria-label="部品を引き離したFF車の立体模式図。中央奥に横置きエンジンと変速機、中央手前にデファレンシャル、左右にドライブシャフトと駆動輪がある。オレンジ色の線は力の伝達経路を示す。">
+<defs>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a0bfd2"/><stop offset=".5" stop-color="#608aa4"/><stop offset="1" stop-color="#315a73"/></linearGradient>
+<linearGradient id="case" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5d4a2"/><stop offset="1" stop-color="#c38d51"/></linearGradient>
+<linearGradient id="rubber" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#506d7f"/><stop offset="1" stop-color="#253d4e"/></linearGradient>
+<marker id="arrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#f3982b"/></marker>
+</defs>
+<!-- faint car shell establishes front orientation -->
+<text x="575" y="38" text-anchor="middle" class="lab">車の前側（前輪の駆動部分）</text>
+<path d="M125 115 Q130 68 206 67 H946 Q1022 67 1025 115 V555 Q1025 620 946 620 H205 Q125 620 125 555Z" fill="#99b6c7" fill-opacity=".075" stroke="#8ca8b9" stroke-opacity=".55" stroke-width="5" stroke-dasharray="14 11"/>
+<text x="575" y="651" text-anchor="middle" class="labsmall">透視している車体の一部分を想定した説明用の配置</text>
+<!-- output wheels, one at each side of front axle; tires in perspective -->
+<g id="part4" class="parts">
+<g transform="translate(153 428)"><ellipse cx="30" cy="52" rx="33" ry="100" fill="url(#rubber)" stroke="#142d3d" stroke-width="6"/><ellipse cx="30" cy="52" rx="13" ry="65" fill="#9dbbc9" stroke="#e5f1f8" stroke-width="4"/><path d="M27 -1 L33 105 M18 50 H42" stroke="#e9f5fc" stroke-width="5"/><text x="27" y="185" text-anchor="middle" class="cap">左前輪</text></g>
+<g transform="translate(939 428)"><ellipse cx="30" cy="52" rx="33" ry="100" fill="url(#rubber)" stroke="#142d3d" stroke-width="6"/><ellipse cx="30" cy="52" rx="13" ry="65" fill="#9dbbc9" stroke="#e5f1f8" stroke-width="4"/><path d="M27 -1 L33 105 M18 50 H42" stroke="#e9f5fc" stroke-width="5"/><text x="27" y="185" text-anchor="middle" class="cap">右前輪</text></g>
+<path d="M212 486 L365 463 M784 463 L940 486" stroke="#789aaf" stroke-width="23" stroke-linecap="round"/><path d="M212 486 L365 463 M784 463 L940 486" stroke="#d2e4ee" stroke-width="7" stroke-linecap="round"/><circle cx="213" cy="486" r="16" fill="#c1d5e1" stroke="#527b96" stroke-width="5"/><circle cx="938" cy="486" r="16" fill="#c1d5e1" stroke="#527b96" stroke-width="5"/>
+</g>
+<!-- engine three dimensional block -->
+<g id="part0" class="parts">
+<polygon points="350,161 425,121 625,121 553,163" fill="#cce1ed" stroke="#487a97" stroke-width="5"/>
+<polygon points="553,163 625,121 625,309 553,346" fill="#507992" stroke="#315b74" stroke-width="5"/>
+<rect x="350" y="161" width="203" height="185" rx="15" fill="url(#metal)" stroke="#315b74" stroke-width="5"/>
+<g fill="#dae9f2" stroke="#4b7896" stroke-width="4"><rect x="366" y="132" width="38" height="32" rx="7"/><rect x="413" y="132" width="38" height="32" rx="7"/><rect x="460" y="132" width="38" height="32" rx="7"/><rect x="507" y="132" width="38" height="32" rx="7"/></g>
+<g stroke="#cce2ee" stroke-width="7" opacity=".8"><path d="M379 185 V322 M419 185 V322 M459 185 V322 M499 185 V322"/></g>
+<text x="450" y="244" text-anchor="middle" class="lab" style="fill:#fff;paint-order:stroke;stroke:#35596f;stroke-width:5px">エンジン</text><text x="450" y="276" text-anchor="middle" class="cap" style="fill:#fff">回転を作る</text>
+</g>
+<!-- connection compact visible block -->
+<g id="part1" class="parts">
+<polygon points="578,222 617,201 670,201 631,223" fill="#f5d7a9" stroke="#ad7740" stroke-width="4"/><polygon points="631,223 670,201 670,342 631,364" fill="#b17b46" stroke="#9b622f" stroke-width="4"/>
+<rect x="578" y="223" width="53" height="141" rx="9" fill="url(#case)" stroke="#a77434" stroke-width="4"/><text x="604" y="267" text-anchor="middle" class="cap" style="font-size:18px">接続</text><text x="604" y="293" text-anchor="middle" class="cap" style="font-size:18px">装置</text>
+</g>
+<!-- transmission -->
+<g id="part2" class="parts">
+<polygon points="685,187 740,156 838,156 782,187" fill="#f6d6aa" stroke="#af7d40" stroke-width="5"/><polygon points="782,187 838,156 838,346 782,381" fill="#b48149" stroke="#9c6731" stroke-width="5"/><rect x="685" y="187" width="97" height="194" rx="13" fill="url(#case)" stroke="#a97735" stroke-width="5"/>
+<circle cx="734" cy="272" r="35" fill="#f7e5c7" stroke="#b98b52" stroke-width="5"/><circle cx="734" cy="272" r="12" fill="#a47339"/>
+<text x="734" y="335" text-anchor="middle" class="lab">変速機</text>
+</g>
+<!-- differential physically near gearbox but pulled out forward for clarity -->
+<g id="part3" class="parts">
+<path d="M710 390 L655 435" stroke="#8da9b8" stroke-width="9" stroke-dasharray="10 10"/>
+<polygon points="476,430 530,400 655,400 600,430" fill="#f4d39b" stroke="#a97838" stroke-width="5"/><polygon points="600,430 655,400 655,521 600,552" fill="#aa773e" stroke="#9d662b" stroke-width="5"/>
+<rect x="476" y="430" width="124" height="122" rx="42" fill="url(#case)" stroke="#a8793d" stroke-width="5"/><circle cx="540" cy="493" r="40" fill="#fbe2af" stroke="#9f6c31" stroke-width="5"/><path d="M510 493 H570 M540 463 V523" stroke="#a77936" stroke-width="10" stroke-linecap="round"/>
+<text x="540" y="586" text-anchor="middle" class="lab">デフ</text><text x="540" y="609" text-anchor="middle" class="labsmall">左右へ分ける</text>
+</g>
+<!-- force routes deliberately conceptual overlay -->
+<g id="paths"><path id="path0" class="path" d="M514 305 L587 305" marker-end="url(#arrow)"/><path id="path1" class="path" d="M632 304 L691 304" marker-end="url(#arrow)"/><path id="path2" class="path" d="M745 385 Q720 417 626 468" marker-end="url(#arrow)"/><path id="path3" class="path" d="M480 500 L230 488 M603 500 L917 488" marker-end="url(#arrow)"/></g>
+<!-- labels external -->
+<rect x="328" y="73" width="244" height="40" rx="10" class="callout"/><text x="450" y="100" text-anchor="middle" class="cap">① 燃焼で回転を作る</text>
+<rect x="660" y="94" width="215" height="41" rx="10" class="callout"/><text x="767" y="121" text-anchor="middle" class="cap">③ 回転を調整する</text>
+<rect x="325" y="568" width="150" height="39" rx="10" class="callout"/><text x="400" y="595" text-anchor="middle" class="cap">⑤ 前輪を回す</text>
+</svg></div>
+<p class="guide">スマートフォンでは図を<strong>左右にスワイプ</strong>できます。右上の「全体」を押すと画面幅に収めますが、文字が小さくなるため、通常は拡大表示をおすすめします。</p>
+<div class="legend"><span><i class="swatch" style="background:#5c8ca9"></i>エンジン</span><span><i class="swatch" style="background:#edc38a"></i>接続装置・変速機・デフ</span><span><i class="swatch" style="background:#e67b14"></i>オレンジ：回転を伝える経路</span></div>
+<div class="steps" id="steps"></div><div class="infobox" aria-live="polite"><strong id="heading"></strong><p id="desc"></p></div>
+<p class="note">※これは<strong>構造理解用の立体模式図</strong>で、実物のエンジン・変速機の内部断面ではありません。各装置を見やすく引き離しており、位置・形・配管・歯車の噛み合い・シャフトの接続角度を忠実に再現したものではありません。一般的な横置きFF車では、変速機とデファレンシャルが一体に収まることが多く、実際の動力はもっと近接した部品を通ります。オレンジの線は回転力の伝達順を説明する記号で、エネルギーが光として流れる意味ではありません。</p>
+</section>
+<section class="panel"><h2>② この図と、実際の車体の位置関係</h2><div class="sectiongrid"><div><svg class="mini" viewBox="0 0 510 350" role="img" aria-label="上から見たFF車。エンジン・変速機・デフが前方に集まり、左右の前輪に駆動力が伝わる"><rect x="114" y="37" width="280" height="280" rx="75" fill="#86a6ba" fill-opacity=".13" stroke="#7f9dad" stroke-width="4"/><rect x="88" y="75" width="32" height="79" rx="10" fill="#3c5d70"/><rect x="388" y="75" width="32" height="79" rx="10" fill="#3c5d70"/><rect x="88" y="220" width="32" height="70" rx="10" fill="#3c5d70"/><rect x="388" y="220" width="32" height="70" rx="10" fill="#3c5d70"/><rect x="140" y="77" width="122" height="63" rx="12" fill="#6999b5" stroke="#315a76" stroke-width="3"/><text x="201" y="114" fill="white" text-anchor="middle" font-size="22" font-weight="700">エンジン</text><rect x="266" y="77" width="66" height="63" rx="11" fill="#edc58d" stroke="#ac7939" stroke-width="3"/><text x="299" y="105" text-anchor="middle" fill="#63431f" font-size="18" font-weight="700">変速</text><text x="299" y="127" text-anchor="middle" fill="#63431f" font-size="18" font-weight="700">機</text><circle cx="299" cy="159" r="25" fill="#e8bc7f" stroke="#ad7535" stroke-width="3"/><text x="299" y="167" text-anchor="middle" fill="#5f3d19" font-size="17" font-weight="700">デフ</text><path d="M275 159 L118 113 M324 159 L388 113" stroke="#ed962d" stroke-width="10" stroke-linecap="round"/><path d="M232 160 H275" stroke="#ed962d" stroke-width="9" stroke-dasharray="9 7"/><text x="252" y="20" text-anchor="middle" fill="var(--ink)" font-size="20" font-weight="700">前 ↑</text><text x="251" y="339" text-anchor="middle" fill="var(--muted)" font-size="17">後輪は駆動されない</text></svg></div><div><p>こちらは、車体を<strong>真上から見た配置図</strong>です。前輪を駆動するFF車では、動力を生み出す装置と前輪へ伝える装置が、車の前方に集まっています。</p><p>上の立体模式図は、実車では近接している部品をあえて離して見せたものです。「車内のどこにあるか」はこちら、「それぞれが何をするか」は大きな立体模式図で確認できます。</p></div></div></section>
+<section class="panel"><h2>次に作る「本物のプラモデル断面風」図解</h2><p>この試作では部品の外形と接続の順序を見せました。正式版では、エンジンの<strong>シリンダー、ピストン、コンロッド、クランクシャフト</strong>、変速機内の<strong>歯車</strong>、デフ内の<strong>差動歯車</strong>を、部分的に切り開いて見せる図へ発展させます。</p><p>その際には、実車の内部構造と概念的な説明図を混同しないように、断面の根拠を確認してから各部品の位置関係を制作します。</p></section>
+<footer>Kussoon｜検証用プロトタイプ。共通フッター・Umami・本編との統合は未実施です。</footer>
+</main><script>
+(()=>{'use strict';const $=s=>document.getElementById(s);let step=0,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,timer=null,showAll=false;
+const entries=[['① エンジン','燃焼でピストンが動き、クランクシャフトに回転が生まれます。'],['② 接続装置','クラッチやトルクコンバーターなどがエンジンの回転を変速機へ伝えます。'],['③ 変速機','ギア比を変えて、回転数と回す力（トルク）の組み合わせを調整します。'],['④ デファレンシャル','変速機から来た回転を左右へ分配し、カーブで必要な左右の回転差を許します。'],['⑤ 左右の前輪','左右のドライブシャフトを通って前輪が回り、タイヤと路面の摩擦によって車を前へ進めます。']];
+function draw(){for(let i=0;i<5;i++){$('part'+i).classList.toggle('dim',!showAll&&i!==step);$('part'+i).classList.toggle('focus',!showAll&&i===step)}for(let i=0;i<4;i++){$('path'+i).classList.toggle('dim',!showAll&&i!==Math.max(0,step-1));} $('heading').textContent=showAll?'力の道筋を通して見る':entries[step][0];$('desc').textContent=showAll?'エンジンで作られた回転が、接続装置、変速機、デファレンシャル、左右のドライブシャフトを経て前輪へ届きます。各部品は実際には同時に働きます。':entries[step][1]; $('steps').innerHTML=''; entries.forEach((e,i)=>{const b=document.createElement('button');b.textContent=e[0];b.className=(!showAll&&i===step)?'sel':'';b.setAttribute('aria-pressed',String(!showAll&&i===step));b.onclick=()=>{showAll=false;step=i;draw();reset()};$('steps').appendChild(b)});$('all').classList.toggle('sel',showAll);$('all').setAttribute('aria-pressed',String(showAll));$('play').textContent=playing?'⏸ 一時停止':'▶ 再生';document.querySelector('.panel').classList.toggle('paused',!playing)}
+function reset(){clearInterval(timer);if(playing)timer=setInterval(()=>{showAll=false;step=(step+1)%5;draw()},2800)}
+$('play').onclick=()=>{playing=!playing;draw();reset()};$('next').onclick=()=>{showAll=false;step=(step+1)%5;draw();reset()};$('all').onclick=()=>{showAll=!showAll;draw();reset()};$('zoom').onclick=()=>{$('scroll').classList.remove('fitted');$('scroll').classList.add('zoomed')};$('fit').onclick=()=>{$('scroll').classList.remove('zoomed');$('scroll').classList.add('fitted')}; draw();reset();
+})();
+</script></body></html>
