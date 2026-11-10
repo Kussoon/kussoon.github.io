@@ -50,7 +50,7 @@ head.replaceChildren(grip,heading,fold,close);
 popup.append(body);
 close.classList.add('popup-control');
 
-let collapsed=false,previousName='',expandedTop=null;
+let collapsed=false,previousName='',expandedTop=null,firstCollapsePending=true;
 function syncFoldControl(){
  fold.textContent=collapsed?'⌄':'−';
  fold.setAttribute('aria-expanded',String(!collapsed));
@@ -81,7 +81,15 @@ fold.addEventListener('click',()=>{
   collapsed=true;
   body.hidden=true;
   syncFoldControl();
-  snapCollapsedToBottom();
+  if(firstCollapsePending){
+   // Only the first fold for this municipality jumps to the map bottom.
+   snapCollapsedToBottom();
+   firstCollapsePending=false;
+  }else{
+   // Later folds retract upward from the current title-bar position.
+   // Never force a second downward jump.
+   moveToTop(expandedTop);
+  }
  }else{
   collapsed=false;
   body.hidden=false;
@@ -100,6 +108,7 @@ new MutationObserver(()=>{
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
   expandedTop=null;
+  firstCollapsePending=true;
  }
 }).observe(name,{subtree:true,childList:true,characterData:true});
 const map=document.querySelector('#map');
@@ -111,6 +120,7 @@ if(map)new MutationObserver(()=>{
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
   expandedTop=null;
+  firstCollapsePending=true;
  }
 }).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
 syncFoldControl();
