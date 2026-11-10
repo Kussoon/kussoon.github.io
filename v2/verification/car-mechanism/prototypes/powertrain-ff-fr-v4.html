@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Kussoon｜エンジンからタイヤへ・動力伝達のしくみ</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color-scheme:light dark;--bg:#f7f9fc;--card:#fff;--text:#192c3e;--muted:#566a7c;--line:#d8e2ea;--blue:#1678b5;--orange:#c46b17;--pale:#e7f2fa;--road:#d2dce4}
+@media(prefers-color-scheme:dark){:root{--bg:#101b25;--card:#192734;--text:#eaf3fa;--muted:#b5c7d5;--line:#394c5a;--pale:#203b4d;--road:#425464}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);line-height:1.65}main{max-width:1100px;margin:auto;padding:20px 14px 60px}h1{font-size:clamp(1.55rem,4vw,2.4rem);line-height:1.45;margin:.4em 0}h2{font-size:1.23rem;margin:0 0 .45em}p{margin:.45em 0 1em}.eyebrow{font-size:.77rem;color:var(--muted);letter-spacing:.04em}.lead{color:var(--muted)}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:16px 0;box-shadow:0 2px 12px #00000008}.toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:space-between;margin:12px 0}.buttons{display:flex;gap:7px;flex-wrap:wrap}button,select{font:inherit;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 12px;cursor:pointer;min-height:42px}button[aria-pressed=true],button.primary{background:var(--blue);color:white;border-color:var(--blue)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #f6a83c;outline-offset:3px}.note{color:var(--muted);font-size:.85rem}.stage{font-weight:700;font-size:1.07rem}.diagram{width:100%;height:auto;display:block;max-height:570px}.car{stroke:#7a93a7;stroke-width:3;fill:#95aabb;fill-opacity:.085}.glass{stroke:#7897ae;fill:#9cb7c8;fill-opacity:.10;stroke-width:2}.wheel{fill:#2e4658;stroke:#152d3d;stroke-width:3}.rim{stroke:#c6dce9;fill:#688ca3;stroke-width:2}.part{fill:#d7e9f4;stroke:#467f9b;stroke-width:2}.part.gold{fill:#f5dfb7;stroke:#b88639}.part.gray{fill:#c8d3dd;stroke:#718496}.shaft{stroke:#a3b8c8;stroke-width:13;stroke-linecap:round;fill:none}.power{stroke:#e39a38;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;fill:none;filter:drop-shadow(0 0 2px #ffa62e)}.power.active{stroke:#f08b1c;stroke-width:11;stroke-dasharray:15 15;animation:flow .8s linear infinite}.hide{display:none}.inactive{opacity:.23}.lab{font-size:21px;font-weight:700;fill:var(--text);paint-order:stroke;stroke:var(--card);stroke-width:5px;stroke-linejoin:round}.sub{font-size:16px;fill:var(--muted);paint-order:stroke;stroke:var(--card);stroke-width:4px}.rotator{transform-box:fill-box;transform-origin:center;animation:spin 2s linear infinite}.paused .rotator,.paused .power.active{animation-play-state:paused}.slow .rotator{animation-duration:4s}.fast .rotator{animation-duration:.9s}.slow .power.active{animation-duration:1.6s}.fast .power.active{animation-duration:.4s}@keyframes spin{to{transform:rotate(360deg)}}@keyframes flow{to{stroke-dashoffset:-30}}.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.step{padding:8px 3px;min-height:54px;font-size:.77rem;line-height:1.4}.step.current{background:var(--pale);border-color:var(--blue);color:var(--text);font-weight:700}.step.current:focus{outline:2px solid var(--blue)}.info{border-left:4px solid var(--orange);background:var(--pale);padding:12px 14px;border-radius:0 10px 10px 0;min-height:102px;margin-top:12px}.info p{margin:4px 0}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.tag{border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:.8rem}.legend{display:flex;gap:13px;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:8px 0}.dot{display:inline-block;width:13px;height:13px;border-radius:50%;margin-right:5px;vertical-align:middle;background:var(--orange)}.dot.gray{background:#9aacba}.foot{border-top:1px solid var(--line);padding-top:14px;margin-top:28px;color:var(--muted);font-size:.82rem}input[type=range]{accent-color:var(--blue);width:180px;max-width:100%}@media(max-width:580px){.panel{padding:11px}.steps{grid-template-columns:repeat(3,minmax(0,1fr))}.lab{font-size:24px}.sub{font-size:18px}.toolbar{justify-content:flex-start}.diagram{min-height:250px}.labelrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}}@media(prefers-reduced-motion:reduce){.rotator,.power.active{animation:none!important}}
+
+/* v3: large, legible detail panel independent of the car overview */
+.zoomPanel{margin:18px 0 24px;padding:clamp(14px,3vw,26px);border:2px solid var(--blue);border-radius:18px;background:var(--pale)}
+.zoomPanel h2{font-size:clamp(1.3rem,3.3vw,1.9rem);margin:0 0 6px}
+.zoomHelp{font-size:clamp(.94rem,2.2vw,1.08rem);color:var(--muted);margin:0 0 18px}
+.zoomFlow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:stretch;position:relative}
+.zoomBlock{background:var(--card);border:3px solid var(--line);border-radius:15px;padding:22px 8px 20px;text-align:center;position:relative;display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:165px;transition:border-color .15s,background-color .15s}
+.zoomBlock.current{border-color:var(--orange);box-shadow:0 0 0 3px color-mix(in srgb,var(--orange) 18%,transparent)}
+.zoomNumber{font-size:1.05rem;color:var(--muted);font-weight:700}
+.zoomName{font-size:clamp(1.18rem,2.1vw,1.65rem);font-weight:800;line-height:1.35;overflow-wrap:anywhere}
+.zoomSub{font-size:clamp(.92rem,1.5vw,1.02rem);color:var(--muted);line-height:1.4}
+.zoomBlock:not(:last-child)::after{content:'➜';position:absolute;z-index:2;color:#dd7916;font-weight:900;font-size:33px;right:-23px;top:50%;transform:translateY(-50%);text-shadow:0 0 4px var(--card)}
+.axleBox{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:18px;padding:12px}
+.axleTitle{font-size:clamp(1.05rem,2.5vw,1.3rem);font-weight:800;margin:0 0 4px}
+.axleSvg{width:100%;height:auto;max-height:230px;display:block}
+.axleSvg text{font-family:inherit;fill:var(--text);font-size:24px;font-weight:750}
+.axleSvg .axleOrange{fill:none;stroke:#e07c15;stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+.overviewTitle{font-size:1.08rem;font-weight:800;margin:16px 0 0}
+@media(max-width:740px){.zoomFlow{grid-template-columns:1fr;gap:14px}.zoomBlock{min-height:90px;padding:12px 14px;gap:3px}.zoomBlock:not(:last-child)::after{content:'▼';right:50%;top:auto;bottom:-24px;transform:translateX(50%);font-size:20px}.zoomName{font-size:clamp(1.5rem,6vw,2rem)}.zoomSub{font-size:1rem}.zoomPanel{padding:14px}.axleSvg text{font-size:28px}}
+
+/* 車体図はスマホでは大きな実寸にして、図の内側だけを横スクロール */
+.diagramHeader{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:24px}
+.diagramHeader .overviewTitle{margin:0;font-size:1.15rem;font-weight:750}
+.diagramBtns{display:flex;gap:6px}.diagramBtns button[aria-pressed=true]{background:var(--blue);color:white;border-color:var(--blue)}
+.diagramHint{font-size:.92rem;color:var(--muted);margin:8px 0 10px}
+.diagramScroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px;background:var(--card);scrollbar-width:thin}
+.diagramScroll .diagram{width:1120px;max-width:none;max-height:none;height:auto;min-height:0}
+.diagramScroll.fit .diagram{width:100%;min-width:0}
+@media(min-width:1050px){.diagramScroll .diagram{width:100%}}
+@media(max-width:580px){.diagramScroll .diagram{width:1120px;min-height:0}.diagramScroll.fit .diagram{width:100%}}
+</style></head><body><main>
+<div class="eyebrow">Kussoon｜運転・モビリティ｜動く図解・試作第2弾</div>
+<h1>エンジンの力は、どこを通ってタイヤへ届く？</h1>
+<p class="lead">ガソリン車のエンジンが作った回転を、実際に車輪へ届ける道筋をたどります。最初は一般的なFF（前輪駆動）車。FR（後輪駆動）車との違いも切り替えて確認できます。</p>
+<section class="panel" aria-label="動力伝達アニメーション">
+<div class="toolbar"><div class="buttons" role="group" aria-label="駆動方式"><button id="ff" aria-pressed="true">FF・前輪駆動</button><button id="fr" aria-pressed="false">FR・後輪駆動</button></div><div class="buttons"><button class="primary" id="play">⏸ 一時停止</button><button id="next">次へ →</button><select id="speed" aria-label="再生速度"><option value="slow">ゆっくり</option><option value="normal" selected>標準速度</option><option value="fast">速く</option></select></div></div>
+<div class="legend"><span><i class="dot"></i>明るい線：いま注目する力の経路</span><span><i class="dot gray"></i>灰色の線：軸・シャフト</span></div>
+<section class="zoomPanel" aria-label="動力伝達の大きな拡大図">
+<h2 id="zoomHeading">FF車｜前方の駆動装置を大きく見る</h2>
+<p class="zoomHelp">オレンジの矢印が回転の伝わる方向です。下の「1〜5」のボタンと連動して、いま説明している部品を強調します。</p>
+<div class="zoomFlow" id="zoomFlow" aria-label="エンジンから車輪までの拡大した流れ"></div>
+<div class="axleBox"><p class="axleTitle" id="axleTitle">デフから左右の前輪へ</p>
+<svg class="axleSvg" viewBox="0 0 780 200" role="img" aria-label="デファレンシャルから左右の駆動輪へ、シャフトが伸びる様子">
+<rect x="30" y="50" width="100" height="95" rx="14" fill="#547c98"/><rect x="650" y="50" width="100" height="95" rx="14" fill="#547c98"/>
+<text x="80" y="108" text-anchor="middle" fill="#fff" style="fill:#fff">左輪</text><text x="700" y="108" text-anchor="middle" fill="#fff" style="fill:#fff">右輪</text>
+<path class="axleOrange" d="M390 100 H140 M390 100 H640"/>
+<path class="axleOrange" d="M156 85 L138 100 L156 115 M624 85 L642 100 L624 115"/>
+<circle cx="390" cy="100" r="62" fill="#f5dfb7" stroke="#c78327" stroke-width="5"/>
+<text x="390" y="107" text-anchor="middle" style="fill:#55370e">デフ</text>
+<text id="axleLabel" x="390" y="190" text-anchor="middle" font-size="20" style="font-size:20px;font-weight:500">左右のドライブシャフトが回転を伝える</text>
+</svg></div></section>
+<div class="diagramHeader"><p class="overviewTitle">車体と駆動装置を大きく見る</p><div class="diagramBtns"><button type="button" id="diagramZoomOut" aria-pressed="false">全体</button><button type="button" id="diagramZoomIn" aria-pressed="true">拡大</button></div></div>
+<p class="diagramHint">拡大表示中は図を左右にスワイプして確認できます。車体全体を確認するには「全体」を押してください。</p>
+<div class="diagramScroll" id="diagramScroll" tabindex="0" role="region" aria-label="横スクロールできる自動車の拡大図">
+<svg class="diagram" viewBox="0 0 960 540" role="img" aria-label="車体の上から見た、エンジンから前輪または後輪へ至る動力伝達経路の模式図">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6Z" fill="#e39a38"/></marker></defs>
+<text x="72" y="43" class="sub">前 ←</text><text x="815" y="43" class="sub">→ 後</text>
+<path class="car" d="M125 188 Q125 85 236 85 H735 Q844 85 844 189 V353 Q844 455 735 455 H236 Q125 455 125 354 Z"/>
+<path class="glass" d="M488 119 L718 119 Q779 119 798 184 V356 Q780 422 718 422 H488 Q466 270 488 119 Z"/>
+<g id="wheels">
+<g transform="translate(229 119)"><rect class="wheel" x="-41" y="-39" width="82" height="28" rx="7"/><g class="rotator" transform="translate(0 -25)"><circle class="rim" r="12"/><path d="M-10 0 H10 M0 -10 V10" stroke="#e6f2fa" stroke-width="3"/></g></g>
+<g transform="translate(229 421)"><rect class="wheel" x="-41" y="11" width="82" height="28" rx="7"/><g class="rotator" transform="translate(0 25)"><circle class="rim" r="12"/><path d="M-10 0 H10 M0 -10 V10" stroke="#e6f2fa" stroke-width="3"/></g></g>
+<g transform="translate(736 119)"><rect class="wheel" x="-41" y="-39" width="82" height="28" rx="7"/><g class="rotator" transform="translate(0 -25)"><circle class="rim" r="12"/><path d="M-10 0 H10 M0 -10 V10" stroke="#e6f2fa" stroke-width="3"/></g></g>
+<g transform="translate(736 421)"><rect class="wheel" x="-41" y="11" width="82" height="28" rx="7"/><g class="rotator" transform="translate(0 25)"><circle class="rim" r="12"/><path d="M-10 0 H10 M0 -10 V10" stroke="#e6f2fa" stroke-width="3"/></g></g>
+</g>
+<g id="diagramFF">
+<g id="ffPowertrain">
+<path class="shaft" d="M229 147 V209 M229 331 V393"/><path class="shaft" d="M475 270 H502"/>
+<rect class="part" x="360" y="197" rx="13" width="135" height="146"/><text x="427" y="257" text-anchor="middle" class="lab">エンジン</text><text x="427" y="287" text-anchor="middle" class="sub">回転を作る</text>
+<rect class="part gold" x="307" y="222" rx="10" width="50" height="96"/><text x="332" y="260" text-anchor="middle" class="sub">接続</text><text x="332" y="281" text-anchor="middle" class="sub">装置</text>
+<rect class="part gold" x="256" y="222" rx="10" width="49" height="96"/><text x="280" y="258" text-anchor="middle" class="sub">変</text><text x="280" y="286" text-anchor="middle" class="sub">速</text>
+<circle class="part gold" cx="229" cy="270" r="41"/><text x="229" y="276" text-anchor="middle" class="lab">デフ</text>
+<path class="shaft" d="M229 147 V229 M229 311 V393"/>
+<path id="f0" class="power" d="M424 270 H359"/><path id="f1" class="power" d="M359 270 H309"/><path id="f2" class="power" d="M309 270 H264"/><path id="f3" class="power" d="M264 270 H229"/><path id="f4" class="power" d="M229 270 V149 M229 270 V391"/>
+</g>
+<text x="512" y="238" class="sub">横置きエンジンの概念図</text><text x="512" y="301" class="sub">前輪だけが駆動輪</text>
+</g>
+<g id="diagramFR" class="hide">
+<rect class="part" x="267" y="215" rx="13" width="142" height="110"/><text x="338" y="261" text-anchor="middle" class="lab">エンジン</text><text x="338" y="287" text-anchor="middle" class="sub">縦置き</text>
+<rect class="part gold" x="410" y="229" rx="9" width="59" height="83"/><text x="440" y="260" text-anchor="middle" class="sub">接続</text><text x="440" y="284" text-anchor="middle" class="sub">装置</text>
+<rect class="part gold" x="472" y="229" rx="9" width="75" height="83"/><text x="510" y="258" text-anchor="middle" class="sub">変速機</text>
+<path class="shaft" d="M547 270 H692"/><circle class="part gold" cx="735" cy="270" r="42"/><text x="735" y="277" class="lab" text-anchor="middle">デフ</text>
+<path class="shaft" d="M735 147 V228 M735 312 V393"/>
+<path id="r0" class="power" d="M339 270 H409"/><path id="r1" class="power" d="M410 270 H469"/><path id="r2" class="power" d="M470 270 H547"/><path id="r3" class="power" d="M547 270 H693"/><path id="r4" class="power" d="M735 270 V149 M735 270 V391"/>
+<text x="595" y="228" class="sub">プロペラシャフト</text>
+</g>
+<text x="480" y="505" text-anchor="middle" class="sub">車体上方からの模式図（実際の配置・寸法は異なります）</text>
+</svg>
+</div>
+<div class="steps" id="steps" aria-label="各工程を選択"></div>
+<div class="info" aria-live="polite"><div class="stage" id="stageTitle"></div><p id="stageDescription"></p></div>
+<p class="note">※ オレンジの光が燃料・電気・物体として車内を移動するわけではありません。回転によって力が順に伝わる「経路」を強調しています。実際には接続された部品は同時に回転し、ここでの5段階は理解のための区切りです。</p>
+</section>
+<section class="panel"><h2>同じところ・違うところ</h2><p><strong>FF車：</strong>エンジンの回転が、変速機、デファレンシャル、左右のドライブシャフトを通って<strong>前輪</strong>へ。一般的には車体前部に主要な駆動装置が集まります。</p><p><strong>FR車：</strong>エンジンの回転が変速機から長い<strong>プロペラシャフト</strong>で後方へ送られ、後輪付近のデファレンシャルを経て<strong>後輪</strong>へ伝わります。</p><p>デファレンシャルは、カーブで左右の駆動輪の回転数が違ってもよいようにする装置です。次の図解では、この部分を拡大して動かします。</p></section>
+<section class="panel"><h2>この図の読み方</h2><p>「エンジン」は回転を生み出す装置。「接続装置」はクラッチやトルクコンバーターなど。「変速機」は回転の速さと回す力を調整する装置。「デフ」は回転を左右に配る装置。最後のドライブシャフトが駆動輪へ回転を届けます。</p><p class="note">FF車の実物ではエンジン・変速機・デファレンシャルが密接に組み込まれ、図のような一列配置とは限りません。車輪の描画は車体上方からの模式表現です。FF・FR以外の4WDやハイブリッド車は対象外です。</p></section>
+<footer class="foot">Kussoon｜制作検討用プロトタイプ。正式掲載用の記事・共通フッター・アクセス解析は未統合です。</footer>
+</main>
+<script>
+(()=>{'use strict';
+const data={ff:[['エンジン','燃焼でピストンが動き、クランクシャフトが回転します。ここが力の出発点です。'],['接続装置','クラッチやトルクコンバーターなどを介して、エンジンの回転を変速機へ伝えます。'],['変速機','ギア比などを変えて、回転の速さとタイヤを回す力を調整します。'],['デファレンシャル','変速機からの回転が、左右の駆動輪へ分かれる部分です。'],['前輪へ','左右のドライブシャフトが回転を前輪に伝えます。前輪が路面を後ろへ押し、車が前進します。']],fr:[['エンジン','燃焼でピストンが動き、クランクシャフトが回転します。'],['接続装置','クラッチやトルクコンバーターなどを介して、回転を変速機へ伝えます。'],['変速機','回転の速さと力を走行状況に合わせて調整します。'],['プロペラシャフト','変速機から車体後部のデファレンシャルへ、長い回転軸で回転を伝えます。'],['後輪へ','後部のデファレンシャルが左右の車輪に回転を配り、ドライブシャフトなどを通じて後輪を駆動します。']]};
+let mode='ff',step=0,playing=!window.matchMedia('(prefers-reduced-motion: reduce)').matches,timer;const root=document.querySelector('.panel'),steps=document.getElementById('steps'),play=document.getElementById('play');
+const zoomFlow=document.getElementById('zoomFlow');
+const diagramScroll=document.getElementById('diagramScroll');
+const diagramZoomIn=document.getElementById('diagramZoomIn');
+const diagramZoomOut=document.getElementById('diagramZoomOut');
+function setDiagramFit(fit){diagramScroll.classList.toggle('fit',fit);diagramZoomOut.setAttribute('aria-pressed',String(fit));diagramZoomIn.setAttribute('aria-pressed',String(!fit));if(fit)diagramScroll.scrollLeft=0;}
+diagramZoomOut.addEventListener('click',()=>setDiagramFit(true));
+diagramZoomIn.addEventListener('click',()=>setDiagramFit(false));
+
+const descriptions={ff:['ピストンから軸へ','回転をつなぐ','回転数と力を調整','左右に分ける','左右の前輪を回す'],fr:['ピストンから軸へ','回転をつなぐ','回転数と力を調整','後方へ回転を運ぶ','左右の後輪を回す']};
+function drawZoom(){
+ document.getElementById('zoomHeading').textContent=mode==='ff'?'FF車｜前方の駆動装置を大きく見る':'FR車｜後輪までの経路を大きく見る';
+ document.getElementById('axleTitle').textContent=mode==='ff'?'デフから左右の前輪へ':'デフから左右の後輪へ';
+ zoomFlow.replaceChildren();
+ data[mode].forEach((entry,i)=>{const el=document.createElement('div');el.className='zoomBlock'+(i===step?' current':'');
+ const n=document.createElement('div');n.className='zoomNumber';n.textContent='STEP '+(i+1);
+ const t=document.createElement('div');t.className='zoomName';t.textContent=entry[0];
+ const d=document.createElement('div');d.className='zoomSub';d.textContent=descriptions[mode][i];
+ el.append(n,t,d);zoomFlow.append(el)});
+}
+function draw(){drawZoom();document.getElementById('diagramFF').classList.toggle('hide',mode!=='ff');document.getElementById('diagramFR').classList.toggle('hide',mode!=='fr');document.getElementById('ff').setAttribute('aria-pressed',String(mode==='ff'));document.getElementById('fr').setAttribute('aria-pressed',String(mode==='fr'));steps.innerHTML='';data[mode].forEach((entry,i)=>{let b=document.createElement('button');b.className='step'+(i===step?' current':'');b.textContent=(i+1)+'. '+entry[0];b.setAttribute('aria-current',i===step?'step':'false');b.onclick=()=>{step=i;draw();restart();};steps.appendChild(b)});document.getElementById('stageTitle').textContent=(step+1)+'｜'+data[mode][step][0];document.getElementById('stageDescription').textContent=data[mode][step][1];for(let i=0;i<5;i++){let el=document.getElementById((mode==='ff'?'f':'r')+i);el.classList.toggle('active',i===step);el.classList.toggle('inactive',i!==step)}root.classList.toggle('paused',!playing);play.textContent=playing?'⏸ 一時停止':'▶ 再生';}
+function restart(){clearInterval(timer);if(playing){const ms={slow:3300,normal:2200,fast:1200}[document.getElementById('speed').value];timer=setInterval(()=>{step=(step+1)%5;draw()},ms)}}
+document.getElementById('ff').onclick=()=>{mode='ff';step=0;diagramScroll.scrollLeft=0;draw();restart()};document.getElementById('fr').onclick=()=>{mode='fr';step=0;diagramScroll.scrollLeft=0;draw();restart()};play.onclick=()=>{playing=!playing;draw();restart()};document.getElementById('next').onclick=()=>{step=(step+1)%5;draw();restart()};document.getElementById('speed').onchange=e=>{root.classList.remove('slow','fast');if(e.target.value!=='normal')root.classList.add(e.target.value);restart()};if(!playing){document.getElementById('speed').value='slow'}draw();restart();
+})();
+</script></body></html>
