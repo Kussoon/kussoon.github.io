@@ -8,6 +8,7 @@ const base='/maps/national-municipalities.html';
 let mode='trial',loadId=0;
 function setMode(value){
  mode=value;
+ delete frame.dataset.trialReady;
  current.setAttribute('aria-pressed',String(value==='current'));
  trial.setAttribute('aria-pressed',String(value==='trial'));
  note.textContent=value==='trial'

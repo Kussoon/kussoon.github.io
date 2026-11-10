@@ -16,7 +16,7 @@ p{margin:4px 0 10px;line-height:1.6}
 button{min-height:44px;padding:8px 12px;border:1px solid #9db8c7;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
 button[aria-pressed=true]{background:#245c78;color:#fff;border-color:#245c78}
 button:focus-visible,a:focus-visible{outline:3px solid #e0a933;outline-offset:2px}
-.sample-row button{font-size:14px}
+.sample-row button{font-size:14px}.button-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;border:1px solid #9db8c7;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-weight:700;text-decoration:none}
 .note{font-size:13px;color:#405f70}
 .frame-shell{margin-top:8px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:6px}
 iframe{display:block;width:100%;height:min(780px,calc(100dvh - 195px));min-height:560px;border:0;border-radius:8px;background:#edf6fb}
@@ -30,7 +30,7 @@ iframe{display:block;width:100%;height:min(780px,calc(100dvh - 195px));min-heigh
 <div class="mode-row" role="group" aria-label="吹き出し表示方式">
 <button id="currentMode" type="button" aria-pressed="false">現行表示</button>
 <button id="trialMode" type="button" aria-pressed="true">試作表示</button>
-<a href="/maps/national-municipalities.html" target="_blank" rel="noopener"><button type="button">正式ページを別タブで開く</button></a>
+<a class="button-link" href="/maps/national-municipalities.html" target="_blank" rel="noopener">正式ページを別タブで開く</a>
 </div>
 <p class="note" id="modeNote">試作表示では、タイトル左の点をつかんで上下移動できます。右の山形ボタンで本文を折り畳み、×で閉じます。折り畳み中に別の自治体を選ぶと、その情報を見られるよう展開します。</p>
 <div class="sample-row" role="group" aria-label="確認用自治体">

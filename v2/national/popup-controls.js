@@ -12,7 +12,8 @@ if(!popup||!head||!heading||!close||!scroll)throw Error('自治体情報の吹�
 const style=document.createElement('style');
 style.textContent=`
 .office-popup{transform:translate3d(0,calc(var(--popup-drag-y,0px) + var(--popup-collapse-y,0px)),0)!important}
-.popup-head{display:flex;align-items:stretch;gap:4px;padding:4px;background:#dceaf2;border:1px solid #b5cad7}
+.popup-head{display:flex;justify-content:flex-start;align-items:stretch;gap:4px;padding:4px;background:#dceaf2;border:1px solid #b5cad7}
+.popup-head::before{content:none!important;display:none!important}
 .popup-grip{flex:0 0 28px;width:28px;min-height:44px;display:grid;grid-template-columns:repeat(2,4px);grid-auto-rows:4px;gap:4px;place-content:center;border-radius:6px;color:#214f68;cursor:ns-resize}
 .popup-grip i{display:block;width:4px;height:4px;border-radius:50%;background:#214f68}
 .popup-heading{flex:1 1 auto;min-width:0;align-self:center;padding:2px 0}

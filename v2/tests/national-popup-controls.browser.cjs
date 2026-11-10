@@ -6,11 +6,8 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   const app=await start({engine,contextOptions:{viewport:{width:390,height:844}}});
   const page=app.page;
   try{
-   await page.goto('http://127.0.0.1:'+new URL(page.url()||'http://127.0.0.1').port+'/v2/national/popup-controls-trial.html').catch(()=>{});
-   // start() owns the local server; navigate from its already opened same-origin page.
-   if(!page.url().includes('/v2/national/popup-controls-trial.html')){
-    await page.goto(page.url().replace('/v2/national/official-2026-nationwide-pilot.html','/v2/national/popup-controls-trial.html'));
-   }
+   const origin=new URL(page.url()).origin;
+   await page.goto(origin+'/v2/national/popup-controls-trial.html');
    const frame=page.frameLocator('#mapPreview');
    await frame.locator('#map .prefecture').first().waitFor({timeout:90000});
    await frame.locator('#map path.prefecture[style*="pref-color"]').first().waitFor({timeout:60000});
@@ -45,7 +42,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top);
    await fold.click();
    await frame.locator('#popupBody[hidden]').waitFor();
-   assert.equal(await frame.locator('#popupScroll a').count(),0,'collapsed body is hidden');
+   assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
    const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top);
    assert(Math.abs(topBefore-topCollapsed)<2,'collapse preserves the popup top edge');
@@ -89,7 +86,9 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await frame.locator('#popupBody').isVisible(),true,'Tokyo ward selection displays the body');
    assert(await frame.locator('#popupName').textContent().then(x=>x.includes('新宿区')));
 
+   const beforeZoom=await frame.locator('#map').getAttribute('viewBox');
    await frame.getByRole('button',{name:'地図を拡大'}).click();
+   assert.notEqual(await frame.locator('#map').getAttribute('viewBox'),beforeZoom,'map zoom remains operable');
    await frame.locator('#mapFrame').evaluate(()=>document.body.classList.add('map-screen-mode'));
    assert.equal(await frame.locator('#officePopup').isVisible(),true,'popup remains visible in fullscreen mode');
    await frame.locator('#mapFullscreen').click();
