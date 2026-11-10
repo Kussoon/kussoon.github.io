@@ -1,0 +1,44 @@
+name: V2 nationwide popup controls trial
+on:
+  pull_request:
+    paths:
+      - 'v2/national/popup-controls.js'
+      - 'v2/national/popup-controls-trial.html'
+      - 'v2/national/popup-controls-trial.js'
+      - 'v2/tests/national-popup-controls.browser.cjs'
+      - '.github/workflows/v2-2026-popup-controls.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'v2/national/popup-controls.js'
+      - 'v2/national/popup-controls-trial.html'
+      - 'v2/national/popup-controls-trial.js'
+      - 'v2/tests/national-popup-controls.browser.cjs'
+      - '.github/workflows/v2-2026-popup-controls.yml'
+permissions:
+  contents: read
+jobs:
+  popup-controls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Test current and trial popup controls at 390px
+        run: node v2/tests/national-popup-controls.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/popup-controls-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v2-popup-controls-browser-evidence
+          path: ${{ runner.temp }}/popup-controls-evidence
+          if-no-files-found: ignore
