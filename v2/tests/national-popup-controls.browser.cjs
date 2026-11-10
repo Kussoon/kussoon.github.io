@@ -65,6 +65,8 @@ const {start}=require('./helpers/nationwide-browser.cjs');
     }
     throw Error('no noninteractive body drag point found');
    });
+   const frameBox=await page.locator('#mapPreview').boundingBox();
+   bodyPoint.x+=frameBox.x;bodyPoint.y+=frameBox.y;
    const bodyTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
    await page.mouse.move(bodyPoint.x,bodyPoint.y);await page.mouse.down();
    await page.mouse.move(bodyPoint.x,bodyPoint.y+45,{steps:4});await page.mouse.up();
