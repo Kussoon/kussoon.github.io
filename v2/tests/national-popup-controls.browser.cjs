@@ -128,8 +128,13 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    // The popup is hidden until a municipality is selected. Verify the actual
    // default-page interaction instead of waiting for a hidden button to show.
    await page.locator('#popupCollapse').waitFor({state:'attached',timeout:60000});
-   await app.pref('28');
-   await app.select('28204');
+   // The public map's native selects are visually hidden in the modern
+   // region-picker UI. The existing comparison test drives their change events.
+   await page.locator('#pref').evaluate(el=>{el.value='28';el.dispatchEvent(new Event('change',{bubbles:true}));});
+   await page.waitForFunction(()=>Array.from(document.querySelector('#region').options).some(o=>o.value==='28204'));
+   await page.locator('#region').evaluate(el=>{el.value='28204';el.dispatchEvent(new Event('change',{bubbles:true}));});
+   await page.locator('#map .chosen[data-code="28204"]').waitFor({timeout:60000});
+   await page.locator('#officePopup:not([hidden])').waitFor({timeout:60000});
    await page.locator('#popupCollapse').waitFor({state:'visible',timeout:60000});
    assert.equal(await page.locator('#popupBody').getAttribute('hidden'),null,'formal page enables the improved popup controls by default');
    await page.locator('#popupCollapse').click();
