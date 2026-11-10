@@ -15,7 +15,7 @@ function setMode(value){
   ?'試作表示では、タイトル左の点をつかんで上下移動できます。右の山形ボタンで本文を折り畳み、×で閉じます。折り畳み中に別の自治体を選ぶと、その情報を見られるよう展開します。'
   :'現行表示です。地図や選択状態は試作表示と共通です。試作表示に切り替えると、新しい操作部品が使えます。';
  const id=++loadId;
- frame.src=base+(value==='trial'?'?popupControlsTrial=1':'');
+ frame.src=base+(value==='trial'?'?popupControlsTrial=1&readingTrial=20261111':'');
  frame.onload=()=>{if(id===loadId&&value==='trial')injectTrialScript();};
 }
 function injectTrialScript(){
