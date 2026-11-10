@@ -57,7 +57,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    const leftAfterCollapsedDrag=await popup.evaluate(e=>e.getBoundingClientRect().left);
    await frame.locator('#popupCollapse').focus();await frame.locator('#popupCollapse').press('Space');
    await frame.locator('#popupBody:not([hidden])').waitFor();
-   assert(Math.abs((await popup.evaluate(e=>e.getBoundingClientRect().top-(e.offsetParent||e.parentElement).getBoundingClientRect().top))-topBefore)<3,'reopen restores the expanded position relative to the map');
+   assert(Math.abs((await popup.evaluate(e=>e.getBoundingClientRect().top))-collapsedDragTop)<3,'first expansion grows downward from the dragged collapsed title position');
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
    // Only the FIRST fold docks at the bottom. Subsequent folds collapse
    // upward around the title's current position; expansion grows downward.
