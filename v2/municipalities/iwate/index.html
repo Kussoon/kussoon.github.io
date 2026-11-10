@@ -32,10 +32,10 @@ const box=document.getElementById('regions'),list=document.getElementById('items
 try{
  const [cr,ir]=await Promise.all([fetch('./regions.json'),fetch('/v2/progressive-preview/label-index.json')]);
  if(!cr.ok||!ir.ok)throw Error('地域データを読み込めません');
- const cfg=await cr.json(),idx=await ir.json(),iwate=idx.entries.filter(e=>e.pref==='03'),byCode=new Map(iwate.map(e=>[e.code,e]));
+ const cfg=await cr.json(),idx=await ir.json(),prefAreas=idx.entries.filter(e=>e.pref==='03'),byCode=new Map(prefAreas.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(iwate.length!==40||idx.count!==1905||cfg.expectedAreaCount!==40||cfg.regions.length!==5||codes.length!==40||
-    new Set(codes).size!==40||codes.some(c=>!byCode.has(c)))throw Error('岩手県33区域の照合に失敗しました');
+ if(prefAreas.length!==33||idx.count!==1905||cfg.expectedAreaCount!==33||cfg.regions.length!==4||codes.length!==33||
+    new Set(codes).size!==33||codes.some(c=>!byCode.has(c)))throw Error('岩手県33区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
   for(const button of box.children)button.setAttribute('aria-pressed',String(button.dataset.key===region.key));

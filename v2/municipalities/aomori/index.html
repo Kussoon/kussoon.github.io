@@ -17,7 +17,7 @@ button[aria-pressed="true"]{background:#d9ecf7;border:2px solid #34799d}
 .item ruby{font-size:1.05rem;font-weight:650}rt{font-size:.65em}a{color:#155a7c}small{color:#476272}
 </style></head><body><main>
 <p><a href="/v2/">← V2試験トップへ戻る</a></p>
-<h1>青森県V2・5地域と市町村名</h1>
+<h1>青森県V2・6地域と市町村名</h1>
 <p>地域を選ぶと、含まれる市町村名を一覧で確認できます。青森県の地域区分に基づく6地域・全40区域を出題します。「全域」を選ぶと40区域すべてを表示します。</p>
 <section class="panel"><h2>地域を選択</h2><div id="regions" class="regions" aria-label="青森県の地域を選択"></div>
 <h3 id="selection">読み込み中…</h3><div id="items" class="items" aria-live="polite"></div>
@@ -32,9 +32,9 @@ const box=document.getElementById('regions'),list=document.getElementById('items
 try{
  const [cr,ir]=await Promise.all([fetch('./regions.json'),fetch('/v2/progressive-preview/label-index.json')]);
  if(!cr.ok||!ir.ok)throw Error('地域データを読み込めません');
- const cfg=await cr.json(),idx=await ir.json(),aomori=idx.entries.filter(e=>e.pref==='02'),byCode=new Map(aomori.map(e=>[e.code,e]));
+ const cfg=await cr.json(),idx=await ir.json(),prefAreas=idx.entries.filter(e=>e.pref==='02'),byCode=new Map(prefAreas.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(aomori.length!==40||idx.count!==1905||cfg.expectedAreaCount!==40||cfg.regions.length!==5||codes.length!==40||
+ if(prefAreas.length!==40||idx.count!==1905||cfg.expectedAreaCount!==40||cfg.regions.length!==6||codes.length!==40||
     new Set(codes).size!==40||codes.some(c=>!byCode.has(c)))throw Error('青森県40区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
@@ -55,7 +55,7 @@ try{
   count.className='count';button.append(ruby,count);
   button.dataset.key=region.key;button.type='button';button.setAttribute('aria-pressed','false');button.onclick=()=>select(region);box.append(button);
  }
- select(cfg.regions[0]);status.textContent='2026年版40区域・5地域のコード照合：合格';
+ select(cfg.regions[0]);status.textContent='2026年版40区域・6地域のコード照合：合格';
 }catch(error){heading.textContent='読み込みエラー';status.textContent=error.message;console.error(error);}
 })();
 </script><script defer src="/common/site-footer.js"></script></body></html>
