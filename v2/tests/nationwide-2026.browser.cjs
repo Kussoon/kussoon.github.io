@@ -81,6 +81,9 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await page.locator('#items .item').count(),areaCount,slug+' whole-prefecture list has every municipality area');
    assert.equal(await page.locator('#selection').textContent(),'全域：'+areaCount+(['kyoto','osaka','okayama','hiroshima'].includes(slug)?'区域':'市町村'),slug+' whole-area selection heading');
   }
+  // Preserve a full-page 390px preview of the national directory in CI artifacts.
+  await page.goto(new URL('/v2/municipalities/index.html',page.url()).href);
+  assert.equal(await page.locator('li.prefecture').count(),47);
   assert.deepEqual(app.errors,[]);
   console.log('PASS real Chromium: S01/S04/S07/S08/S12/S13/S14-S18/S27/S30/S32/S36/S38 (desktop + 390px; not iPhone Safari)');
  }finally{await app.close();}
