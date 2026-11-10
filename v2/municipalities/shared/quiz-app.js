@@ -40,7 +40,7 @@ for(const region of regions){
  button.append(ruby,document.createTextNode('（'+region.codes.length+'区域）'));
  button.addEventListener('click',()=>setRange(region.key));choices.append(button);
 }updateRangeButtons();
-let all=[],arcs=[],current=[],projection=null,session=null,startedOnce=false,retryOrder=[],proximity=null;
+let all=[],arcs=[],borderArcs=[],coastArcs=[],current=[],projection=null,session=null,startedOnce=false,retryOrder=[],proximity=null;
 function scrollToQuestion(){requestAnimationFrame(()=>byId('question').scrollIntoView({behavior:'smooth',block:'start'}));}
 function decodeArcs(t){return t.arcs.map(a=>{let x=0,y=0;return a.map(q=>{if(t.transform){x+=q[0];y+=q[1];return [x*t.transform.scale[0]+t.transform.translate[0],y*t.transform.scale[1]+t.transform.translate[1]];}return q;});});}
 function points(ids,a){const out=[];for(const id of ids){const part=id<0?a[~id].slice().reverse():a[id];out.push(...(out.length?part.slice(1):part));}return out;}
@@ -48,7 +48,7 @@ function polys(g,a){return g.type==='Polygon'?[g.arcs.map(ids=>points(ids,a))]:g
 function bounds(items){let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;for(const r of items)for(const poly of r.polys)for(const ring of poly)for(const [x,y] of ring){minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);}return [minX,minY,maxX,maxY];}
 function project(box){const cos=Math.cos((box[1]+box[3])*Math.PI/360),bw=Math.max((box[2]-box[0])*cos,.04),bh=Math.max(box[3]-box[1],.04),scale=Math.min((W-60)/bw,(frameHeight-60)/bh),lon=(box[0]+box[2])/2,lat=(box[1]+box[3])/2;return p=>[W/2+(p[0]-lon)*cos*scale,frameHeight/2-(p[1]-lat)*scale];}
 function render(){
- renderer.render({map:svg,regions:all,arcs,project:projection,hideTitles:true});
+ renderer.render({map:svg,regions:all,arcs:borderArcs,coastArcs,project:projection,hideTitles:true});
  const active=new Set(current.map(x=>x.code));
  for(const shape of svg.querySelectorAll('path.land')){const code=shape.dataset.code;shape.classList.toggle('outside',!active.has(code));shape.querySelector('title')?.remove();shape.setAttribute('aria-label',active.has(code)?'出題範囲内の区域':'出題範囲外');}
  if(session){
@@ -184,7 +184,7 @@ try{
  const rawShapes=topo.objects.municipalities.geometries;
  if([...excluded].some(code=>!rawShapes.some(g=>String(g.properties.N03_007)===code)||!index.has(code)))
   throw Error('除外区域コードが2026年版と一致しません');
- const shapes=rawShapes.filter(g=>!excluded.has(String(g.properties.N03_007)));arcs=decodeArcs(topo);
+ const shapes=rawShapes.filter(g=>!excluded.has(String(g.properties.N03_007)));arcs=decodeArcs(topo);const arcGroups=renderer.partitionArcs(shapes,arcs);borderArcs=arcGroups.shared;coastArcs=arcGroups.outer;
 
  all=shapes.map(g=>{
   const code=String(g.properties.N03_007),indexed=index.get(code);
