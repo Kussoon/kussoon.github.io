@@ -42,7 +42,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert(row.foldSize[0]>=44&&row.foldSize[1]>=44&&row.closeSize[0]>=44&&row.closeSize[1]>=44,'collapse and close targets are at least 44px');
 
    const topBefore=await popup.evaluate(e=>e.getBoundingClientRect().top-e.offsetParent.getBoundingClientRect().top);
-   await fold.click();
+   await fold.focus();await fold.press('Enter');
    await child().waitForFunction(()=>document.querySelector('#popupBody').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
@@ -54,7 +54,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    const collapsedDragTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
    assert(collapsedDragTop>topCollapsed+40,'collapsed popup still drags vertically');
    const leftAfterCollapsedDrag=await popup.evaluate(e=>e.getBoundingClientRect().left);
-   await frame.getByRole('button',{name:'吹き出し本文を展開'}).click();
+   await frame.locator('#popupCollapse').focus();await frame.locator('#popupCollapse').press('Space');
    await frame.locator('#popupBody:not([hidden])').waitFor();
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
    const bodyPoint=await child().evaluate(()=>{
@@ -91,7 +91,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await frame.locator('#popupActions a').count(),6,'all links remain reachable after internal scroll');
 
    await frame.getByRole('button',{name:'吹き出し本文を折り畳む'}).click();
-   await frame.getByRole('button',{name:'吹き出しを閉じる'}).click();
+   await frame.getByRole('button',{name:'吹き出しを閉じる'}).focus();await frame.getByRole('button',{name:'吹き出しを閉じる'}).press('Enter');
    await child().waitForFunction(()=>document.querySelector('#officePopup').hidden);
    assert.equal(await frame.locator('#map .chosen[data-code="28110"]').count(),1,'closing popup retains selected map region');
 
