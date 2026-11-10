@@ -35,7 +35,7 @@ try{
  const cfg=await cr.json(),idx=await ir.json(),kagoshima=idx.entries.filter(e=>e.pref==='46'&&!((cfg.excludedAreaCodes||[]).includes(e.code))),byCode=new Map(kagoshima.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
  if(kagoshima.length!==43||idx.count!==1905||cfg.expectedAreaCount!==43||cfg.regions.length!==7||codes.length!==43||
-    new Set(codes).size!==49||codes.some(c=>!byCode.has(c)))throw Error('鹿児島県43区域の照合に失敗しました');
+    new Set(codes).size!==cfg.expectedAreaCount||codes.some(c=>!byCode.has(c)))throw Error('鹿児島県43区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(region){
   for(const button of box.children)button.setAttribute('aria-pressed',String(button.dataset.key===region.key));
