@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "18",
+  "name": "福井県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.fukui.lg.jp/doc/seiki/vision2019/top_d/fil/201014vision_3.pdf",
+  "countySource": "https://www.pref.fukui.lg.jp/doc/dx-suishin/link.html",
+  "expectedAreaCount": 17,
+  "regions": [
+    {
+      "key": "fukui-sakai",
+      "name": "福井坂井",
+      "reading": "ふくいさかい",
+      "codes": [
+        "18201",
+        "18208",
+        "18210",
+        "18322"
+      ]
+    },
+    {
+      "key": "okuetsu",
+      "name": "奥越",
+      "reading": "おくえつ",
+      "codes": [
+        "18205",
+        "18206"
+      ]
+    },
+    {
+      "key": "tannan",
+      "name": "丹南",
+      "reading": "たんなん",
+      "codes": [
+        "18207",
+        "18209",
+        "18382",
+        "18404",
+        "18423"
+      ]
+    },
+    {
+      "key": "reinan",
+      "name": "嶺南",
+      "reading": "れいなん",
+      "codes": [
+        "18202",
+        "18204",
+        "18442",
+        "18481",
+        "18483",
+        "18501"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "永平寺町": [
+      "吉田郡",
+      "よしだぐん"
+    ],
+    "池田町": [
+      "今立郡",
+      "いまだてぐん"
+    ],
+    "南越前町": [
+      "南条郡",
+      "なんじょうぐん"
+    ],
+    "越前町": [
+      "丹生郡",
+      "にゅうぐん"
+    ],
+    "美浜町": [
+      "三方郡",
+      "みかたぐん"
+    ],
+    "高浜町": [
+      "大飯郡",
+      "おおいぐん"
+    ],
+    "おおい町": [
+      "大飯郡",
+      "おおいぐん"
+    ],
+    "若狭町": [
+      "三方上中郡",
+      "みかたかみなかぐん"
+    ]
+  }
+}

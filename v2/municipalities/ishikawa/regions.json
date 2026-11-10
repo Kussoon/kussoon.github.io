@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "17",
+  "name": "石川県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.ishikawa.lg.jp/shimachi.html",
+  "countySource": "https://www.pref.ishikawa.lg.jp/sichousien/kennaiichiran2.html",
+  "expectedAreaCount": 19,
+  "regions": [
+    {
+      "key": "noto-hokubu",
+      "name": "能登北部",
+      "reading": "のとほくぶ",
+      "codes": [
+        "17204",
+        "17205",
+        "17461",
+        "17463"
+      ]
+    },
+    {
+      "key": "noto-chubu",
+      "name": "能登中部",
+      "reading": "のとちゅうぶ",
+      "codes": [
+        "17202",
+        "17207",
+        "17384",
+        "17386",
+        "17407"
+      ]
+    },
+    {
+      "key": "ishikawa-chuo",
+      "name": "石川中央",
+      "reading": "いしかわちゅうおう",
+      "codes": [
+        "17201",
+        "17209",
+        "17210",
+        "17212",
+        "17361",
+        "17365"
+      ]
+    },
+    {
+      "key": "minami-kaga",
+      "name": "南加賀",
+      "reading": "みなみかが",
+      "codes": [
+        "17203",
+        "17206",
+        "17211",
+        "17324"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "川北町": [
+      "石川郡",
+      "いしかわぐん"
+    ],
+    "津幡町": [
+      "河北郡",
+      "かほくぐん"
+    ],
+    "内灘町": [
+      "河北郡",
+      "かほくぐん"
+    ],
+    "志賀町": [
+      "羽咋郡",
+      "はくいぐん"
+    ],
+    "宝達志水町": [
+      "羽咋郡",
+      "はくいぐん"
+    ],
+    "中能登町": [
+      "鹿島郡",
+      "かしまぐん"
+    ],
+    "穴水町": [
+      "鳳珠郡",
+      "ほうすぐん"
+    ],
+    "能登町": [
+      "鳳珠郡",
+      "ほうすぐん"
+    ]
+  }
+}
