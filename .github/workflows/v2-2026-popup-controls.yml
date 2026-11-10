@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'v2/national/popup-controls.js'
+      - 'maps/national-municipalities.html'
       - 'v2/national/popup-controls-trial.html'
       - 'v2/national/popup-controls-trial.js'
       - 'v2/tests/national-popup-controls.browser.cjs'
