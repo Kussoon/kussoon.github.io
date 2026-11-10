@@ -12,7 +12,7 @@ assert(css.includes('.land{fill:#f2f0dd;stroke:none}')&&css.includes('.land.outs
 assert(css.includes('.borders{stroke:#fff;stroke-width:1.2}')&&css.includes('.candidate .borders{stroke:#657b84;stroke-width:1.1}'),'only candidate shared-boundary style may differ');
 assert(css.includes('.coastlines{stroke:#486574;stroke-width:2.4}'),'coastline style must remain unchanged');
 assert(css.includes('vector-effect:non-scaling-stroke'),'line widths must not scale with zoom');
-assert(js.includes("BASE='/v2/data/national/2026-common/'")&&js.includes('n>1)shared.push')&&js.includes('n===1)outer.push'),'trial must classify shared and outer arcs exclusively');
+assert(js.includes('if(usage[i]>1)shared.push(arcs[i])')&&js.includes('else if(usage[i]===1)outer.push(arcs[i])'),'trial must classify shared and outer arcs exclusively');
 assert(js.includes("'01'")&&js.includes("'13'")&&js.includes("'28'")&&js.includes("'34'")&&js.includes("'37'")&&js.includes("'42'")&&js.includes("'46'")&&js.includes("'47'"),'representative prefectures missing');
 assert(js.includes("for(const svg of [$('mapCurrent'),$('mapCandidate')])")&&js.includes('syncView()'),'both maps must render together and share viewport');
 assert(js.includes("ratio('#657b84',fill)")&&js.includes("ratio('#ffffff','#f2f0dd')"),'contrast ratios must be recorded');
