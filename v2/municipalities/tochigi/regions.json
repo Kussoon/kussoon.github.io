@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "prefecture": "09",
+  "name": "栃木県",
+  "asOf": "2026-11-10",
+  "dataSource": "/v2/data/national/2026-common/national-2026-pilot/manifest.json",
+  "indexSource": "/v2/progressive-preview/label-index.json",
+  "regionSource": "https://www.pref.tochigi.lg.jp/h03/koukyokotsu-koyogigai/220420_koukyokotsu-kyogikai_top.html",
+  "countySource": "https://www.pref.tochigi.lg.jp/h03/koukyokotsu-koyogigai/220420_koukyokotsu-kyogikai_top.html",
+  "expectedAreaCount": 25,
+  "regions": [
+    {
+      "key": "r1",
+      "name": "県北",
+      "reading": "けんほく",
+      "codes": [
+        "09206",
+        "09210",
+        "09211",
+        "09213",
+        "09384",
+        "09407"
+      ]
+    },
+    {
+      "key": "r2",
+      "name": "県央",
+      "reading": "けんおう",
+      "codes": [
+        "09201",
+        "09205",
+        "09214",
+        "09215",
+        "09301",
+        "09386",
+        "09411"
+      ]
+    },
+    {
+      "key": "r3",
+      "name": "県南",
+      "reading": "けんなん",
+      "codes": [
+        "09202",
+        "09203",
+        "09204",
+        "09209",
+        "09208",
+        "09216",
+        "09342",
+        "09343",
+        "09344",
+        "09345",
+        "09361",
+        "09364"
+      ]
+    }
+  ],
+  "countyByTown": {
+    "上三川町": [
+      "河内郡",
+      "かわちぐん"
+    ],
+    "益子町": [
+      "芳賀郡",
+      "はがぐん"
+    ],
+    "茂木町": [
+      "芳賀郡",
+      "はがぐん"
+    ],
+    "市貝町": [
+      "芳賀郡",
+      "はがぐん"
+    ],
+    "芳賀町": [
+      "芳賀郡",
+      "はがぐん"
+    ],
+    "壬生町": [
+      "下都賀郡",
+      "しもつがぐん"
+    ],
+    "野木町": [
+      "下都賀郡",
+      "しもつがぐん"
+    ],
+    "塩谷町": [
+      "塩谷郡",
+      "しおやぐん"
+    ],
+    "高根沢町": [
+      "塩谷郡",
+      "しおやぐん"
+    ],
+    "那須町": [
+      "那須郡",
+      "なすぐん"
+    ],
+    "那珂川町": [
+      "那須郡",
+      "なすぐん"
+    ]
+  }
+}

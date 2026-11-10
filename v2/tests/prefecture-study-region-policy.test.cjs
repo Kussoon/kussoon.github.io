@@ -21,7 +21,14 @@ const cases=[
  ['gifu','21',5,42,[9,11,13,5,4]],
  ['shizuoka','22',6,39,[14,6,3,6,6,4]],
  ['aichi','23',6,69,[16,18,7,10,10,8]],
- ['mie','24',5,29,[10,5,7,2,5]]
+ ['mie','24',5,29,[10,5,7,2,5]],
+ ["ibaraki", "08", 5, 44, [6, 9, 5, 14, 10]],
+ ["tochigi", "09", 3, 25, [6, 7, 12]],
+ ["gunma", "10", 5, 35, [6, 9, 6, 5, 9]],
+ ["saitama", "11", 10, 72, [10, 3, 7, 7, 5, 14, 5, 9, 7, 5]],
+ ["chiba", "12", 11, 59, [7, 5, 6, 9, 4, 3, 6, 7, 4, 4, 4]],
+ ["tokyo", "13", 5, 62, [23, 17, 8, 5, 9]],
+ ["kanagawa", "14", 7, 58, [18, 7, 3, 5, 7, 8, 10]]
 ];
 assert.equal(index.count,1905);
 let total=0,totalRegions=0;
@@ -46,5 +53,5 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert(cfg.regionSource&&/^https:\/\//.test(cfg.regionSource),slug+' documented region source');
  total+=municipalCount;totalRegions+=regionCount;
 }
-assert.equal(total,605);assert.equal(totalRegions,93);
-console.log('PASS 17 prefectures / 93 regions / 605 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
+assert.equal(total,960);assert.equal(totalRegions,139);
+console.log('PASS 24 prefectures / 139 regions / 960 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
