@@ -25,6 +25,24 @@ function plan(ms,{view,width,height,ratio,zoom,readings=false,selected='',measur
  return {...result,size,px};
 }
 function uniqueSegments(arcs,project=null,clip=null){const seen=new Set(),out=[];for(const arc of arcs)for(let i=1;i<arc.length;i++){const a=arc[i-1],b=arc[i],pa=project?project(a):a,pb=project?project(b):b;if(clip&&(Math.max(pa[0],pb[0])<clip.x||Math.min(pa[0],pb[0])>clip.x+clip.w||Math.max(pa[1],pb[1])<clip.y||Math.min(pa[1],pb[1])>clip.y+clip.h))continue;const ka=pa.map(n=>n.toFixed(project?4:9)).join(','),kb=pb.map(n=>n.toFixed(project?4:9)).join(',');if(ka===kb)continue;const k=ka<kb?ka+'|'+kb:kb+'|'+ka;if(seen.has(k))continue;seen.add(k);out.push([a,b]);}return out;}
+function classifySegments(arcs,project=null,clip=null){
+ const records=new Map();
+ for(const source of arcs){
+  const item=Array.isArray(source)?{arc:source,kind:'infer'}:source,arc=item.arc;
+  for(let i=1;i<arc.length;i++){
+   const a=arc[i-1],b=arc[i],pa=project?project(a):a,pb=project?project(b):b;
+   if(clip&&(Math.max(pa[0],pb[0])<clip.x||Math.min(pa[0],pb[0])>clip.x+clip.w||Math.max(pa[1],pb[1])<clip.y||Math.min(pa[1],pb[1])>clip.y+clip.h))continue;
+   const ka=pa.map(n=>n.toFixed(project?4:9)).join(','),kb=pb.map(n=>n.toFixed(project?4:9)).join(',');
+   if(ka===kb)continue;
+   const key=ka<kb?ka+'|'+kb:kb+'|'+ka,record=records.get(key);
+   if(record){record.count++;if(item.kind==='shared')record.shared=true;}
+   else records.set(key,{segment:[a,b],count:1,shared:item.kind==='shared'});
+  }
+ }
+ const shared=[],outer=[];
+ for(const record of records.values())(record.shared||record.count>1?shared:outer).push(record.segment);
+ return {shared,outer};
+}
 function applyDisplayNames(index){
  // Tokyo's 23 special wards are separate municipalities and not designated-city wards.
  // Only codes 13101–13123 receive the explicitly requested prefecture prefix.
@@ -136,19 +154,19 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
   return {updated,hidden,screenFont:fontSize(f.zoom),zoom:f.zoom};
  }
  function regionBox(polys){let w=Infinity,s=Infinity,e=-Infinity,n=-Infinity;for(const poly of polys)for(const ring of poly)for(const p of ring){w=Math.min(w,p[0]);s=Math.min(s,p[1]);e=Math.max(e,p[0]);n=Math.max(n,p[1]);}return [w,s,e,n];}
- function prepare(entry){if(!prepared.has(entry))prepared.set(entry,{arcs:entry.arcs.map(a=>({arc:a,box:regionBox([[a]])})),regions:entry.regions.map(r=>({region:r,polys:r.polys.map(p=>({poly:p,box:regionBox([p])}))}))});return prepared.get(entry);}
+ function prepare(entry){if(!prepared.has(entry)){const coast=new Set(entry.coastArcs||[]);prepared.set(entry,{arcs:entry.arcs.map(a=>({arc:a,kind:coast.has(a)?'outer':'shared',box:regionBox([[a]])})),regions:entry.regions.map(r=>({region:r,polys:r.polys.map(p=>({poly:p,box:regionBox([p])}))}))});}return prepared.get(entry);}
  function renderShapesMain(){
   if(!index||!isActive()||!shapes)return;if(activePointers.size){schedule();return;}const f=frame(),v={x:f.view.x-f.view.w*.5,y:f.view.y-f.view.h*.5,w:f.view.w*2,h:f.view.h*2};
   const overlaps=b=>{const a=projection([b[0],b[3]]),z=projection([b[2],b[1]]);return z[0]>=v.x&&a[0]<=v.x+v.w&&z[1]>=v.y&&a[1]<=v.y+v.h;};
   const entries=f.zoom>=8?store.entries().filter(([,e])=>overlaps(e.box)):[],key=entries.map(([code])=>code).sort().join(',')+'|'+[v.x,v.y,v.w,v.h].map(n=>n.toFixed(3)).join(',')+'|'+(selectionEntry?selected:'');
   if(key===shapeKey){for(const n of shapes.querySelectorAll('.land'))n.classList.toggle('chosen',n.dataset.code===selected);return;}
   shapeKey=key;const shapeStart=performance.now(),fragment=document.createDocumentFragment(),arcs=[],loaded=new Set(entries.map(([code])=>code)),R=global.KussoonV2MunicipalRenderer;
-  for(const feat of overview().features){const code=feat.properties.code,detail=loaded.has(code),polys=feat.geometry.type==='Polygon'?[feat.geometry.coordinates]:feat.geometry.coordinates;const p=tag('path',{d:R.pathFromPolygons(polys,projection,4),class:detail?'prefecture-focus':'prefecture','data-pref':code,'aria-label':prefName(code)});p.append(tag('title'));p.firstChild.textContent=prefName(code);fragment.append(p);if(!detail)for(const poly of polys)arcs.push(...poly);}
+  for(const feat of overview().features){const code=feat.properties.code,detail=loaded.has(code),polys=feat.geometry.type==='Polygon'?[feat.geometry.coordinates]:feat.geometry.coordinates;const p=tag('path',{d:R.pathFromPolygons(polys,projection,4),class:detail?'prefecture-focus':'prefecture','data-pref':code,'aria-label':prefName(code)});p.append(tag('title'));p.firstChild.textContent=prefName(code);fragment.append(p);if(!detail)for(const poly of polys)arcs.push(...poly.map(ring=>({arc:ring,kind:'infer'})));}
   let chosenDrawn=false;
   const land=(r,polys)=>{if(!polys.length)return;const p=tag('path',{d:R.pathFromPolygons(polys,projection,4),class:'land'+(r.code===selected?' chosen':''),'data-code':r.code,'data-national-code':r.code});p.append(tag('title'));p.firstChild.textContent=r.fullName||r.name;fragment.append(p);if(r.code===selected)chosenDrawn=true;};
-  for(const [,entry] of entries){const data=prepare(entry);for(const a of data.arcs)if(overlaps(a.box))arcs.push(a.arc);for(const x of data.regions)land(x.region,x.polys.filter(p=>overlaps(p.box)).map(p=>p.poly));}
+  for(const [,entry] of entries){const data=prepare(entry);for(const a of data.arcs)if(overlaps(a.box))arcs.push(a);for(const x of data.regions)land(x.region,x.polys.filter(p=>overlaps(p.box)).map(p=>p.poly));}
   if(!chosenDrawn&&selectionEntry){const r=selectionEntry.regions[0];land(r,r.polys.filter(p=>overlaps(regionBox([p]))));}
-  const generatedAt=performance.now(),segments=uniqueSegments(arcs,projection,v),dedupAt=performance.now(),border=tag('path',{d:R.pathFromArcs(segments,projection,4),class:'borders','pointer-events':'none'}),pathsAt=performance.now();fragment.append(border);shapes.replaceChildren(fragment);timing.shapePhases={prepareAndFillsMs:generatedAt-shapeStart,dedupMs:dedupAt-generatedAt,borderPathMs:pathsAt-dedupAt,domCommitMs:performance.now()-pathsAt,segments:segments.length};timing.shapePasses++;timing.lastShapeMs=performance.now()-shapeStart;timing.maxShapeMs=Math.max(timing.maxShapeMs,timing.lastShapeMs);
+  const generatedAt=performance.now(),partition=classifySegments(arcs,projection,v),dedupAt=performance.now(),border=tag('path',{d:R.pathFromArcs(partition.shared,projection,4),class:'borders','pointer-events':'none'}),coast=tag('path',{d:R.pathFromArcs(partition.outer,projection,4),class:'coastlines','pointer-events':'none'}),pathsAt=performance.now();fragment.append(border,coast);shapes.replaceChildren(fragment);timing.shapePhases={prepareAndFillsMs:generatedAt-shapeStart,dedupMs:dedupAt-generatedAt,borderPathMs:pathsAt-dedupAt,domCommitMs:performance.now()-pathsAt,segments:partition.shared.length,coastSegments:partition.outer.length};timing.shapePasses++;timing.lastShapeMs=performance.now()-shapeStart;timing.maxShapeMs=Math.max(timing.maxShapeMs,timing.lastShapeMs);
  }
  async function renderShapes(){
   if(!geometry?.available()){renderShapesMain();return;}
@@ -167,7 +185,7 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
    const fragment=document.createDocumentFragment(),domStart=performance.now();let sliceStart=domStart,maxSlice=0;
    for(const item of scene.paths){const county=item.kind!=='land',node=tag('path',{d:item.d,class:item.kind+(item.kind==='land'&&item.code===selected?' chosen':''),...(county?{'data-pref':item.code,'aria-label':prefName(item.code)}:{'data-code':item.code,'data-national-code':item.code})});node.append(tag('title'));node.firstChild.textContent=county?prefName(item.code):item.name;fragment.append(node);
     if(performance.now()-sliceStart>=4){maxSlice=Math.max(maxSlice,performance.now()-sliceStart);await new Promise(r=>setTimeout(r,0));sliceStart=performance.now();if(id!==sceneSequence||version!==generation||activePointers.size)return;}}
-   fragment.append(tag('path',{d:scene.border,class:'borders','pointer-events':'none'}));maxSlice=Math.max(maxSlice,performance.now()-sliceStart);
+   fragment.append(tag('path',{d:scene.border,class:'borders','pointer-events':'none'}),tag('path',{d:scene.coast,class:'coastlines','pointer-events':'none'}));maxSlice=Math.max(maxSlice,performance.now()-sliceStart);
    if(id!==sceneSequence||version!==generation||layer!==shapes||activePointers.size||!isActive())return;
    const commitAt=performance.now();shapes.replaceChildren(fragment);shapeKey=key;timing.shapePasses++;timing.lastShapeMs=performance.now()-domStart;timing.maxShapeMs=Math.max(timing.maxShapeMs,timing.lastShapeMs);timing.shapePhases={backend:'worker',wallMs:performance.now()-start,worker:scene.metrics,domCommitMs:performance.now()-commitAt,domMaxSliceMs:maxSlice};
   }catch(e){if(id===sceneSequence&&version===generation&&isActive()&&!activePointers.size){if(!geometry.available())renderShapesMain();else{requestKey='';schedule();}}}
@@ -192,5 +210,5 @@ function create({map,viewport,loadIndex,store,loadOffices,overview,project,isAct
  map.addEventListener('pointerdown',press);global.addEventListener('pointerup',release,true);global.addEventListener('pointercancel',release,true);global.addEventListener('blur',blur);global.addEventListener('resize',resize);
  return Object.freeze({ready,mount,pause,schedule,refreshLabels,syncScreenSize,select,focus,clear,selected:()=>selected,selection:()=>selectionEntry&&selected?{entry:selectionEntry,code:selected,pref:selected.slice(0,2)}:null,releaseGeometry:key=>geometry?.release(key),prefectureNamesFor:pref=>index?.entries.filter(r=>r.pref===pref).map(r=>({code:r.code,name:r.fullName||r.name,reading:r.reading||''}))||[],fullNameFor:code=>index?.entries.find(r=>r.code===code)?.fullName||null,readingPartsFor:code=>index?.entries.find(r=>r.code===code)?.parts||null,project:p=>projection(p),snapshot:()=>({selected,selectionError,detailError,measureEntries:widths.size,count:index?.count||0,store:store.stats(),...timing,shapePending,scheduled:Boolean(timer),activePointers:activePointers.size,geometry:geometry?.stats()||{backend:'main'}}),anchors:()=>ms.map(m=>({code:m.code,point:m.point.slice(),bounds:m.box})),destroy(){pause();geometry?.destroy();map.removeEventListener('pointerdown',press);global.removeEventListener('pointerup',release,true);global.removeEventListener('pointercancel',release,true);global.removeEventListener('blur',blur);global.removeEventListener('resize',resize);disposed=true;}});
 }
-global.KussoonV2NationalProgressive=Object.freeze({fontSize,validateIndex,applyDisplayNames,createStore,models,plan,uniqueSegments,create});
+global.KussoonV2NationalProgressive=Object.freeze({fontSize,validateIndex,applyDisplayNames,createStore,models,plan,uniqueSegments,classifySegments,create});
 })(window);

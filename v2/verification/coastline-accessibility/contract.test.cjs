@@ -27,10 +27,14 @@ for(const pref of expected){
  assert(single>0&&shared>0,`both outer and shared arcs must exist for ${pref}: outer=${single}, shared=${shared}`);
  assert.equal(single+shared,count.size,'each topological arc must be assigned to exactly one line class');
 }
-assert(read('v2/municipalities/shared/quiz.css').includes('#eaf3f9'),'production quiz colors must remain unchanged');
-assert(read('maps/national-municipalities.html').includes('KussoonV2MunicipalRenderer.render({map:'),'production nationwide renderer must remain unchanged');
+const renderer=read('v2/progressive-preview/municipality-renderer.js'),quizCss=read('v2/municipalities/shared/quiz.css'),national=read('maps/national-municipalities.html');
+assert(renderer.includes('partitionArcs')&&renderer.includes("setAttribute('class','coastlines')"),'shared renderer must separate exterior arcs');
+assert(quizCss.includes('background:#d8ebf7')&&quizCss.includes('.land{fill:#f2f0dd')&&quizCss.includes('.land.outside{fill:#d5dee2'),'quiz palette must use candidate A');
+assert(quizCss.includes('.land.correct{fill:#8ed6a7}')&&quizCss.includes('.land.wrong{fill:#f0aaa0}')&&quizCss.includes('0%,49%{fill:#ffcd52}50%,100%{fill:#d9dea5}'),'quiz answer and pulse colors must remain unchanged');
+assert(national.includes('coastArcs:current.coastArcs||[]')&&national.includes('KussoonV2MunicipalRenderer.partitionArcs(items,arcs)'),'official map must split arcs before drawing');
+assert(read('v2/progressive-preview/progressive-geometry.js').includes('coastArcFlags'),'worker geometry must preserve the coast/internal classification');
 function luminance(hex){const c=hex.match(/[a-f0-9]{2}/gi).map(x=>parseInt(x,16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2];}
 function contrast(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
 assert(contrast('#486574','#d8ebf7')>=3&&contrast('#486574','#f2f0dd')>=3,'dark outline should meet 3:1 against adjacent fills');
 assert(contrast('#d8ebf7','#f2f0dd')<3,'page must disclose that fill colors alone are not a sufficient boundary cue');
-console.log('PASS: independent trial styles, unchanged polygon strokes, mutually exclusive TopoJSON arc groups, 8 representative prefectures, production paths untouched.');
+console.log('PASS: comparison page, candidate A arc split, retained answer colors, non-scaling strokes, and 8 representative TopoJSON datasets.');
