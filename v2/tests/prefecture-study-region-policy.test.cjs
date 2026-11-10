@@ -12,7 +12,8 @@ const cases=[
  ['wakayama','30',7,30,[3,2,4,4,7,4,6]],
  ['tottori','31',3,19,[5,5,9]],
  ['shimane','32',3,19,[6,9,4]],
- ['niigata','15',5,37,[6,11,11,5,4]]
+ ['niigata','15',5,37,[6,11,11,5,4]],
+ ['toyama','16',4,15,[4,5,4,2]]
 ];
 assert.equal(index.count,1905);
 let total=0,totalRegions=0;
@@ -37,5 +38,5 @@ for(const [slug,pref,regionCount,municipalCount,sizes] of cases){
  assert(cfg.regionSource&&/^https:\/\//.test(cfg.regionSource),slug+' documented region source');
  total+=municipalCount;totalRegions+=regionCount;
 }
-assert.equal(total,271);assert.equal(totalRegions,45);
-console.log('PASS 8 prefectures / 45 regions / 271 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
+assert.equal(total,286);assert.equal(totalRegions,49);
+console.log('PASS 9 prefectures / 49 regions / 286 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.');
