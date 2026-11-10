@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Kussoon｜デファレンシャルのしくみ・上から見た改訂版</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color-scheme:light dark;--bg:#f5f8fc;--card:#fff;--ink:#173043;--muted:#546b7d;--edge:#cfdae4;--blue:#137ab0;--orange:#d77a17;--soft:#e8f2f8;--line:#8fa7b8;--wheel:#395468;--wheel2:#234053}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1a24;--card:#192a37;--ink:#eef5fb;--muted:#b6c7d5;--edge:#3d5262;--blue:#1b89c7;--orange:#ffad52;--soft:#203746;--line:#9db1bf;--wheel:#4b677a;--wheel2:#223746}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7}main{max-width:1120px;margin:auto;padding:22px 14px 70px}small{color:var(--muted)}h1{font-size:clamp(1.65rem,4vw,2.55rem);line-height:1.35;margin:8px 0}h2{font-size:clamp(1.15rem,3vw,1.45rem);margin:0 0 8px}p{margin:8px 0 14px}.lead{color:var(--muted)}.panel{background:var(--card);border:1px solid var(--edge);border-radius:18px;padding:clamp(12px,3vw,22px);margin:18px 0}.toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center}button,select{font:inherit;min-height:46px;border:1px solid var(--edge);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 14px;cursor:pointer}button.selected,button.primary{background:var(--blue);border-color:var(--blue);color:white}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--orange);outline-offset:3px}.controls{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-top:14px}.controls label{font-weight:700}.controls input{width:100%;accent-color:var(--blue);height:32px}.scale{display:flex;justify-content:space-between;color:var(--muted);font-size:.85rem}.viz{width:100%;display:block;height:auto}.vizwrap{overflow:auto;border-radius:14px;background:var(--soft);padding:8px;margin-top:12px}.statgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.stat{background:var(--soft);padding:12px;border-radius:12px;text-align:center}.stat strong{display:block;font-size:clamp(1.2rem,4vw,1.95rem);font-variant-numeric:tabular-nums;line-height:1.3}.stat span{font-size:.86rem;color:var(--muted)}.note{font-size:.87rem;color:var(--muted)}.explain{border-left:4px solid var(--orange);background:var(--soft);padding:12px 15px;border-radius:0 12px 12px 0}.label{fill:var(--ink);font-size:24px;font-weight:750}.sub{fill:var(--muted);font-size:17px}.value{fill:var(--ink);font-size:30px;font-weight:800}.carline{stroke:#91a5b5;stroke-width:4;fill:#90a4b4;fill-opacity:.10}.glass{stroke:#8ca4b7;stroke-width:3;fill:#9fb7c6;fill-opacity:.08}.axle{stroke:var(--line);stroke-width:18;stroke-linecap:round}.wheel{fill:var(--wheel);stroke:var(--wheel2);stroke-width:5}.wheel-hub{fill:#aac6d5;stroke:#e7f4fa;stroke-width:3}.hubmark{stroke:#f7fbff;stroke-width:7;stroke-linecap:round}.diff{fill:#eec987;stroke:#ab7a34;stroke-width:5}.flow{stroke:var(--orange);stroke-width:11;stroke-linecap:round;fill:none;stroke-dasharray:14 12}.path{stroke:#9ab0bf;stroke-width:6;fill:none;stroke-dasharray:15 14}.markertext{fill:#633a08;font-size:20px;font-weight:700}.badge{fill:var(--card);stroke:var(--edge);stroke-width:2}.tiny{font-size:.82rem;color:var(--muted)}footer{margin-top:28px;border-top:1px solid var(--edge);padding-top:12px;color:var(--muted);font-size:.85rem}@media(max-width:620px){.controls{grid-template-columns:1fr}.statgrid{gap:7px}.stat{padding:10px 6px}.label{font-size:27px}.sub{font-size:18px}.value{font-size:33px}}
+</style></head><body><main>
+<header><small>Kussoon｜運転・モビリティ｜動く図解・試作第3弾 改訂版 v3</small><h1>デファレンシャルは、左右の車輪をどう回している？</h1><p class="lead">今回は、<strong>車体を上から見下ろした図</strong>で説明します。左車輪と右車輪が車体のどちら側にあるのか、そしてカーブでどちらが内輪・外輪になるのかを、より直感的に分かるようにしました。</p></header>
+<section class="panel"><h2>① 上から見たとき、左右の車輪はどう回る？</h2>
+<div class="toolbar"><button class="selected" id="straight" aria-pressed="true">直進</button><button id="left" aria-pressed="false">左カーブ</button><button id="right" aria-pressed="false">右カーブ</button><button class="primary" id="play">⏸ 一時停止</button><select id="speed" aria-label="アニメーション速度"><option value="0.6">ゆっくり</option><option value="1" selected>標準速度</option><option value="1.7">速く</option></select></div>
+<div class="controls"><label for="bend">カーブの強さ（左右の差）<input id="bend" type="range" min="0" max="70" value="40" step="5"></label><output id="bendText">直進：左右同じ回転数</output></div><div class="scale"><span>ゆるやか</span><span>急なカーブ</span></div>
+<div class="vizwrap"><svg class="viz" viewBox="0 0 1040 620" role="img" aria-label="車体を上から見た図。左右の車輪とデファレンシャル、カーブでの内輪と外輪、回転差を表示">
+<defs><marker id="arrHead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6Z" fill="#d77a17"/></marker></defs>
+<text x="520" y="45" text-anchor="middle" class="label">車体を上から見た図（前方 ↑）</text>
+<path id="outerPath" class="path" d="M135 520 Q120 300 210 125 Q520 25 830 125 Q920 300 905 520"/>
+<path id="innerPath" class="path" d="M245 520 Q230 322 295 185 Q520 110 745 185 Q810 322 795 520"/>
+<text id="outerLabel" x="844" y="115" class="sub">外側の軌跡</text>
+<text id="innerLabel" x="735" y="198" class="sub">内側の軌跡</text>
+<path class="carline" d="M270 535 Q255 352 312 180 Q520 105 728 180 Q785 352 770 535"/>
+<path class="glass" d="M395 470 Q375 320 410 215 Q520 173 630 215 Q665 320 645 470"/>
+
+<g id="leftWheelGroup" transform="translate(345 355)">
+  <rect class="wheel" x="-42" y="-120" width="84" height="240" rx="26"/>
+  <rect class="wheel-hub" x="-18" y="-72" width="36" height="144" rx="16"/>
+  <path class="hubmark" d="M0 -48 V48 M-12 -24 H12 M-10 24 H10"/>
+  <path id="leftFlow" class="flow" d="M0 96 V-96" marker-end="url(#arrHead)"/>
+  <text x="-115" y="-138" class="label" text-anchor="start">左車輪</text>
+  <text x="-115" y="-103" class="sub" text-anchor="start" id="leftRole">直進時</text>
+  <text x="-115" y="-60" class="value" text-anchor="start" id="leftWheelText">100</text>
+  <text x="-115" y="-28" class="sub" text-anchor="start">相対回転数</text>
+</g>
+
+<g id="rightWheelGroup" transform="translate(695 355)">
+  <rect class="wheel" x="-42" y="-120" width="84" height="240" rx="26"/>
+  <rect class="wheel-hub" x="-18" y="-72" width="36" height="144" rx="16"/>
+  <path class="hubmark" d="M0 -48 V48 M-12 -24 H12 M-10 24 H10"/>
+  <path id="rightFlow" class="flow" d="M0 96 V-96" marker-end="url(#arrHead)"/>
+  <text x="115" y="-138" class="label" text-anchor="end">右車輪</text>
+  <text x="115" y="-103" class="sub" text-anchor="end" id="rightRole">直進時</text>
+  <text x="115" y="-60" class="value" text-anchor="end" id="rightWheelText">100</text>
+  <text x="115" y="-28" class="sub" text-anchor="end">相対回転数</text>
+</g>
+
+<path class="axle" d="M388 355 H455 M585 355 H652"/>
+<g transform="translate(520 355)">
+  <circle class="diff" r="72"/>
+  <circle cx="0" cy="0" r="45" fill="#dfab61" stroke="#9a6525" stroke-width="4"/>
+  <path id="diffCross" d="M-30 0 H30 M0 -30 V30" stroke="#85501d" stroke-width="11" stroke-linecap="round"/>
+  <text y="94" text-anchor="middle" class="label">デフ</text>
+</g>
+
+<g id="turnBadge" transform="translate(520 120)">
+  <rect class="badge" x="-112" y="-26" width="224" height="52" rx="18"/>
+  <text id="turnLabel" text-anchor="middle" y="8" class="label">直進：左右同じ</text>
+</g>
+
+<text x="520" y="585" text-anchor="middle" class="sub">オレンジの矢印は、タイヤが前へ進もうとする向きと「回転の速さの違い」を強調した模式表現です。</text>
+</svg></div>
+<div class="statgrid"><div class="stat"><span>左車輪</span><strong id="leftRate">100</strong><span>相対回転数</span></div><div class="stat"><span>デフのケース</span><strong>100</strong><span>基準回転数</span></div><div class="stat"><span>右車輪</span><strong id="rightRate">100</strong><span>相対回転数</span></div></div>
+<p class="note">数値は説明用の相対値です。直進を 100・100 とし、旋回時も左右の平均が 100 になるモデルで示しています。一般的なオープンデフを想定しています。</p>
+<p class="explain" id="description" aria-live="polite">直進するときは、左車輪も右車輪もほぼ同じ距離を進むので、同じ速さで回ります。デフは左右へ同じ回転数を伝えれば足ります。</p>
+</section>
+
+<section class="panel"><h2>② デフの内部では何が起きている？</h2><p>エンジン側から来た回転で、デフのケース（外側）が回ります。ケースの中には、左右の車軸につながる歯車と、その差を吸収するための小歯車があります。</p>
+<div class="vizwrap"><svg class="viz" viewBox="0 0 980 360" role="img" aria-label="デフ内部の概念図。左右のサイドギアと中央の小歯車を表示">
+<rect x="255" y="42" width="470" height="265" rx="112" fill="#b4cad9" fill-opacity=".12" stroke="#6b8ba3" stroke-width="6" stroke-dasharray="14 8"/>
+<path class="axle" d="M105 174 H355 M625 174 H875"/>
+<g id="leftInternal" transform="translate(385 174)"><circle r="53" fill="#c8dae7" stroke="#5a7d96" stroke-width="5"/><path d="M-38 0 H38 M0 -38 V38 M-27 -27 L27 27 M27 -27 L-27 27" stroke="#4d748b" stroke-width="8"/></g>
+<g id="rightInternal" transform="translate(595 174)"><circle r="53" fill="#c8dae7" stroke="#5a7d96" stroke-width="5"/><path d="M-38 0 H38 M0 -38 V38 M-27 -27 L27 27 M27 -27 L-27 27" stroke="#4d748b" stroke-width="8"/></g>
+<g id="spiderInternal" transform="translate(490 174)"><circle r="38" fill="#eec987" stroke="#ab7a34" stroke-width="5"/><path d="M-28 0 H28 M0 -28 V28" stroke="#8f6022" stroke-width="8"/></g>
+<text x="167" y="132" text-anchor="middle" class="label">左サイドギア</text><text x="812" y="132" text-anchor="middle" class="label">右サイドギア</text><text x="490" y="88" text-anchor="middle" class="label">小歯車</text><text id="gearDetail" x="490" y="332" text-anchor="middle" class="sub">直進：小歯車は左右の回転差を作らない</text>
+</svg></div>
+<p class="note">これは内部構造の関係を示す概念図です。実物の歯車は立体的に組み合わされています。ここでは「左右の差をどう許容するか」を理解するために簡略化しています。</p>
+</section>
+
+<section class="panel"><h2>今回の図で見てほしいポイント</h2><ul><li><strong>直進：</strong> 左右の車輪は同じ速さ。</li><li><strong>左カーブ：</strong> <strong>右車輪が外輪</strong>になり、右が速く、左が遅い。</li><li><strong>右カーブ：</strong> <strong>左車輪が外輪</strong>になり、左が速く、右が遅い。</li></ul><p class="explain"><strong>大切なポイント：</strong> デフは、エンジンから来た回転を左右へ伝えながら、カーブで必要になる「左右の回転数の違い」を吸収する装置です。</p></section>
+<footer>Kussoon｜運転・モビリティ／制作検討用。記事本文・共通フッター・Umamiは統合前です。</footer>
+</main>
+<script>
+(()=>{'use strict';
+let mode='straight', degree=40, playing=!matchMedia('(prefers-reduced-motion: reduce)').matches, speed=1, last=0, phaseL=0, phaseR=0, phaseDiff=0;
+const $=id=>document.getElementById(id);
+const ids=['straight','left','right'];
+function calcRates(){const d=mode==='straight'?0:degree; const left=100 + (mode==='right'? d : mode==='left'? -d : 0); const right=200-left; return {left,right,d};}
+function updateText(){const {left,right,d}=calcRates(); $('leftRate').textContent=left; $('rightRate').textContent=right; $('leftWheelText').textContent=left; $('rightWheelText').textContent=right;
+  let turn='直進：左右同じ', desc='直進するときは、左車輪も右車輪もほぼ同じ距離を進むので、同じ速さで回ります。デフは左右へ同じ回転数を伝えれば足ります。', leftRole='左右同じ', rightRole='左右同じ', gear='直進：小歯車は左右の回転差を作らない';
+  if(mode==='left'){turn='左カーブ：右車輪が外輪'; desc='左へ曲がると、右車輪が外側の大きな円を通り、左車輪より長い距離を進みます。そこで右車輪は速く、左車輪は遅く回ります。'; leftRole='内輪（遅い）'; rightRole='外輪（速い）'; gear='左カーブ：小歯車が働き、右を速く・左を遅く回せる';}
+  if(mode==='right'){turn='右カーブ：左車輪が外輪'; desc='右へ曲がると、左車輪が外側の大きな円を通り、右車輪より長い距離を進みます。そこで左車輪は速く、右車輪は遅く回ります。'; leftRole='外輪（速い）'; rightRole='内輪（遅い）'; gear='右カーブ：小歯車が働き、左を速く・右を遅く回せる';}
+  $('turnLabel').textContent=turn; $('description').textContent=desc; $('leftRole').textContent=leftRole; $('rightRole').textContent=rightRole; $('gearDetail').textContent=gear; $('bendText').textContent = mode==='straight' ? '直進：左右同じ回転数' : `回転差：${2*d}（相対値）`;
+  ids.forEach(id=>{$(id).classList.toggle('selected', mode===id); $(id).setAttribute('aria-pressed', String(mode===id));}); $('bend').disabled=(mode==='straight');
+  // Labels and paths swapping
+  const outerLabel=$('outerLabel'), innerLabel=$('innerLabel');
+  if(mode==='left'){outerLabel.setAttribute('x','844'); outerLabel.setAttribute('y','115'); innerLabel.setAttribute('x','735'); innerLabel.setAttribute('y','198');}
+  else if(mode==='right'){outerLabel.setAttribute('x','200'); outerLabel.setAttribute('y','115'); innerLabel.setAttribute('x','300'); innerLabel.setAttribute('y','198');}
+  else {outerLabel.setAttribute('x','844'); outerLabel.setAttribute('y','115'); innerLabel.setAttribute('x','735'); innerLabel.setAttribute('y','198');}
+}
+ids.forEach(id=>$(id).addEventListener('click',()=>{mode=id; updateText();})); $('bend').addEventListener('input',e=>{degree=Number(e.target.value); updateText();}); $('speed').addEventListener('change',e=>{speed=Number(e.target.value)}); $('play').addEventListener('click',()=>{playing=!playing; $('play').textContent=playing?'⏸ 一時停止':'▶ 再生';});
+function frame(t){const dt=Math.min((t-last)/1000||0,0.05); last=t; const {left,right}=calcRates(); if(playing){phaseL+=dt*left*0.42*speed; phaseR+=dt*right*0.42*speed; phaseDiff+=dt*65*speed; $('leftFlow').style.strokeDashoffset = String(-phaseL); $('rightFlow').style.strokeDashoffset = String(-phaseR); $('diffCross').setAttribute('transform',`rotate(${phaseDiff} 0 0)`); $('leftInternal').setAttribute('transform',`translate(385 174) rotate(${phaseL*0.9})`); $('rightInternal').setAttribute('transform',`translate(595 174) rotate(${phaseR*0.9})`); $('spiderInternal').setAttribute('transform',`translate(490 174) rotate(${(phaseR-phaseL)*0.55})`);} requestAnimationFrame(frame);} updateText(); requestAnimationFrame(frame);
+})();
+</script>
+</body></html>
