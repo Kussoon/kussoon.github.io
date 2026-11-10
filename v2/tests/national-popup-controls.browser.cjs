@@ -117,6 +117,10 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await frame.locator('#map .chosen').count(),1,'one selected municipality remains after view controls');
 
    await page.getByRole('button',{name:'現行表示'}).click();
+   await page.waitForFunction(()=>{
+    const f=document.getElementById('mapPreview');
+    try{return f.contentWindow.location.pathname==='/maps/national-municipalities.html'&&f.contentWindow.location.search==='';}catch{return false;}
+   });
    assert.equal(await frame.locator('#popupCollapse').count(),0,'comparison can return to the unchanged current popup');
    assert.equal(await page.locator('a[href="/maps/national-municipalities.html"]').count(),1,'official page link is available');
    assert.deepEqual(app.errors,[]);
