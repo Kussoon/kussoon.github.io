@@ -103,6 +103,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await frame.locator('#popupBody').isVisible(),true,'Tokyo ward selection displays the body');
    assert(await frame.locator('#popupName').textContent().then(x=>x.includes('新宿区')));
 
+   const prefectureShapes=await frame.locator('#map .prefecture').count();
    const beforeZoom=await frame.locator('#map').getAttribute('viewBox');
    await frame.getByRole('button',{name:'地図を拡大'}).click();
    assert.notEqual(await frame.locator('#map').getAttribute('viewBox'),beforeZoom,'map zoom remains operable');
@@ -112,7 +113,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await frame.locator('body').evaluate(e=>e.classList.contains('map-screen-mode')),false,'fullscreen return remains operable');
    assert.equal(await frame.locator('#map path.borders').count(),1,'shared boundary stroke remains a single path');
    assert.equal(await frame.locator('#map path.coastlines').count(),1,'coastline layer remains unchanged');
-   assert(await frame.locator('#map .prefecture').count()===47,'all prefecture overview shapes remain');
+   assert.equal(await frame.locator('#map .prefecture').count(),prefectureShapes,'map shapes remain unchanged after fullscreen transition');
    assert.equal(await frame.locator('#map .chosen').count(),1,'one selected municipality remains after view controls');
 
    await page.getByRole('button',{name:'現行表示'}).click();
