@@ -38,7 +38,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R08 よみ初期OFF|よみがなは初期OFF。コードと名称が確認済みの読みだけ表示し、欠落や未確認は補わない。**#307:** 市名＋区名、東京都＋特別区名、郡名＋町村名などの検証済み2要素ラベルは、OFF時『名称1／名称2』の2段、ON時『名称1／読み1／名称2／読み2』の4段を共通の地図レンダリング規則とする。吹き出し見出し直下の読みはON/OFFに連動するが見出しはフル正式名称を維持。|[#223](https://github.com/Kussoon/kussoon.github.io/pull/223) [#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#295](https://github.com/Kussoon/kussoon.github.io/pull/295) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305) [#307](https://github.com/Kussoon/kussoon.github.io/pull/307)|`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`national-progressive-labels.js`<br>`reading-bridge.js`<br>`maps/national-municipalities.html`|`national-readings.test.cjs`（既知6失敗）<br>試作吹き出しON/OFF/未確認読みのブラウザ回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|表示分割・名称・静的契約検査済み／Safari・Edge実機未確認|
+|R08 よみ初期OFF|よみがなは初期OFF。コードと名称が確認済みの読みだけ表示し、欠落や未確認は補わない。**#307:** 市名＋区名、東京都＋特別区名、郡名＋町村名などの検証済み2要素ラベルは、OFF時『名称1／名称2』の2段、ON時『名称1／読み1／名称2／読み2』の4段を共通の地図レンダリング規則とする。吹き出し見出し直下の確認済み読みは地図内よみがなON/OFFとは独立して常時表示し、見出しはフル正式名称を維持（2026-11-11 ユーザー指定）。地図ラベルの読みは従来どおり初期OFF・切替式。|[#223](https://github.com/Kussoon/kussoon.github.io/pull/223) [#226](https://github.com/Kussoon/kussoon.github.io/pull/226) [#266](https://github.com/Kussoon/kussoon.github.io/pull/266) [#284](https://github.com/Kussoon/kussoon.github.io/pull/284) [#295](https://github.com/Kussoon/kussoon.github.io/pull/295) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#305](https://github.com/Kussoon/kussoon.github.io/pull/305) [#307](https://github.com/Kussoon/kussoon.github.io/pull/307)|`maps/national-municipalities.html`<br>`v2/national/vertical-popup-trial.html`<br>`national-progressive-labels.js`<br>`reading-bridge.js`<br>`maps/national-municipalities.html`|`national-readings.test.cjs`（既知6失敗）<br>試作吹き出しON/OFF/未確認読みのブラウザ回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|表示分割・名称・静的契約検査済み／Safari・Edge実機未確認|
 
 ## 5. 区域の選択・色分け・点滅
 
@@ -135,7 +135,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
 |R35 吹き出し上下ドラッグ試作|正式版の吹き出しは**リンク・ボタンなど操作要素を除く全域**から上下のみドラッグできる（#297）。左右移動禁止、地図下のコンテンツに重なってよい（#296）。×で閉じ、自治体の選択変更で位置初期化。地図自体は移動しない。内容が多い場合の本文送出はR16を適用。iPhone Safariの競合は要実機検証。|[#294](https://github.com/Kussoon/kussoon.github.io/pull/294)（試作実装・ユーザーの操作感は会話で了承） [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297)|`v2/national/vertical-popup-trial.html`<br>`maps/national-municipalities.html`|Pointer Events・上下のみ・再選択・下方重なり・×・Safari実機の専用回帰未整備<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）<br>`v2/tests/national-pref-county-contract.test.cjs`（新規静的契約、実機未確認）|正式版コード確認／iPhone Safari実機未確認|
-|R36 試作吹き出しの読み仮名|**正式版採用（#296）:** よみがなONなら吹き出しの市区町村名直下に小さく検証済みの読みを表示し、OFFで即時非表示。初期OFF。市＋区/郡＋町村に対応する確認済みpartsを利用し、未確認の読みを推測しない。タイトルバーの上下ドラッグ・3/6リンクは保つ。試作 #295 は比較用に残す。|[#295](https://github.com/Kussoon/kussoon.github.io/pull/295)（試作追加・ユーザー了承） [#296](https://github.com/Kussoon/kussoon.github.io/pull/296)|`v2/national/vertical-popup-trial.html`<br>`v2/progressive-preview/national-progressive-labels.js`<br>`maps/national-municipalities.html`|既存`national-readings.test.cjs`は関連データのみ／試作ON/OFF・欠落・iOS実機の回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|正式版採用・静的検査／Safari実機未検証|
+|R36 試作吹き出しの読み仮名|**正式版採用（#296）:** 【2026-11-11仕様変更】吹き出しの市区町村名直下には検証済みの読みを地図ラベルのON/OFFに関係なく常時表示する。地図内ラベルのみ初期OFF・ボタン切替。市＋区/郡＋町村に対応する確認済みpartsを利用し、未確認の読みを推測しない。タイトルバーの上下ドラッグ・3/6リンクは保つ。試作 #295 は比較用に残す。|[#295](https://github.com/Kussoon/kussoon.github.io/pull/295)（試作追加・ユーザー了承） [#296](https://github.com/Kussoon/kussoon.github.io/pull/296)|`v2/national/vertical-popup-trial.html`<br>`v2/progressive-preview/national-progressive-labels.js`<br>`maps/national-municipalities.html`|既存`national-readings.test.cjs`は関連データのみ／試作ON/OFF・欠落・iOS実機の回帰なし<br>`v2/tests/national-pref-county-contract.test.cjs`（公開の静的契約）|正式版採用・静的検査／Safari実機未検証|
 
 
 |R37 地図のみ全画面表示|地図全画面は対応ブラウザーのFullscreen API、iPhone SafariのブラウザーUI内最大表示の両方式を維持。#298により全画面でも市区町村の吹き出しを地図左下に表示し、可変高/上下ドラッグ/×/3・6リンク/読み表示を保つ。**#299:** 全画面の開始・戻るボタンは右下ではなく地図内右上隅。通常表示と全画面表示の両方で右上に置き、safe-areaに配慮する。|[#297](https://github.com/Kussoon/kussoon.github.io/pull/297) [#298](https://github.com/Kussoon/kussoon.github.io/pull/298) [#299](https://github.com/Kussoon/kussoon.github.io/pull/299)|`maps/national-municipalities.html`|`v2/tests/national-pref-county-contract.test.cjs`（静的）<br>実機フルスクリーン/復帰は未確認<br>`v2/tests/national-pref-county-contract.test.cjs`（配置静的検査）|正式版コード確認／iPhone Safari実機未確認|
@@ -204,7 +204,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 1. 検索欄（市区町村検索）と地域・表示範囲の選択欄を地図の**上**に配置。DOM ID、全国検索、県選択/表示範囲、周辺ラベル、locatorを維持。
 2. 吹き出しの青いタイトルバーのみ上下ドラッグ。地図外に出て下のページ要素を覆ってよい（ユーザー確認済み）。左右ドラッグは禁止。×と本文内スクロールを独立させる。
 3. 既存の可変高さ・3/6リンクと、その最後までの到達性を保つ。旧R15の地図内制限は**上下に移動した吹き出しについて置換**された。ツールバーとの高さ厳密一致を復活させない。
-4. よみがな初期OFF。ONでは地図の確認済み読みを吹き出し見出し直下にも表示、OFFで消す。未確認読みを生成しない。
+4. 【2026-11-11更新】地図ラベルのよみがなは初期OFF・ボタン切替を維持。吹き出し見出し直下の検証済みの読みだけは常時表示し、未確認読みを生成しない。
 5. 試作のnoindex・試作タイトルは正式公開版へ転記しない。試作ページは比較用に残す。正式版はcanonicalと公開URLを保つ。
 
 **検査と保留:** `national-pref-county-contract.test.cjs` に静的な公開ページ順序・見出し・読み仮名・ドラッグ制約のチェックを追記した。Node・ブラウザ・iPhone Safariでの実行結果は未確認であり、正式採用されたことと実機動作合格は区別する。
@@ -339,3 +339,7 @@ PR #344のマージ後、公開ページは `national-progressive-labels.js?v=30
 **R39 地域選択のふりがな:** 兵庫県・大阪府・京都府のV2地域選択ボタンは、地域名の上に、確認済みの `reading` を `ruby/rt` で表示する。区域数を表示するボタンではその区域数を維持する。地域名と読みの対応は各府県の地域設定を正本とし、表示のために区域区分・コード・出題・採点・地図ラベル配置を変更しない。兵庫県10地域、大阪府8地域、京都府8地域に適用し、今後の府県展開でも同じ規則を使う。欠けた読みを推測で補わない。名称・読み・ボタン配置を変更する場合は、従来表示との比較を行い、ユーザーへ提案してから採用する。全国地図の市区町村ラベルとその拡大時表示はR05/R13の確定仕様を維持する。
 
 根拠: 兵庫県 [PR #46](https://github.com/Kussoon/hyogo/pull/46)、大阪府 [PR #338](https://github.com/Kussoon/kussoon.github.io/pull/338)・[PR #357](https://github.com/Kussoon/kussoon.github.io/pull/357)、京都府 [PR #338](https://github.com/Kussoon/kussoon.github.io/pull/338)・[PR #356](https://github.com/Kussoon/kussoon.github.io/pull/356)、大阪府・京都府の地域選択ページの読みをユーザーが確認。兵庫県の地域学習ページへの適用は別途実機確認が必要。対象: `/hyogo/v2-quiz1.html`・`/hyogo/v2-quiz2.html`・`/hyogo/v2-study-region.html`、`v2/municipalities/{osaka,kyoto}/index.html`・`quiz.html`。自動確認: `v2/municipalities/region-reading.contract.test.cjs`（大阪・京都の地域設定とトップ／共通クイズUI）、兵庫県の別リポジトリの専用契約。iPhone Safariの全組合せ実機試験は各県展開時にも必要。
+
+## 2026-11-11 追補：吹き出しの読み常時表示（R08・R36）
+
+ユーザーのiPhone実機確認により、吹き出しの折り畳み下端寄せは採用候補として承認。さらに吹き出しの自治体タイトル部分は検証済みの読みを常時表示することを確定。地図内ラベルの読みは従来どおり初期OFF・ボタンでON/OFF。欠落や未確認の読みは推測しない。PR #409で回帰検査を追加し、比較試作に反映する。正式版への採用は別途確認後に判断する。
