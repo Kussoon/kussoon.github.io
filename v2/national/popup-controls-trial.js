@@ -24,7 +24,7 @@ function injectTrialScript(){
   if(!doc||doc.getElementById('popupControlsTrialScript'))return;
   const s=doc.createElement('script');
   s.id='popupControlsTrialScript';
-  s.src='/v2/national/popup-controls.js?v=20261110-trial1';
+  s.src='/v2/national/popup-controls.js?v=20261111-bottom-dock';
   s.onload=()=>{frame.dataset.trialReady='true';};
   s.onerror=()=>{note.textContent='試作操作スクリプトを読み込めませんでした。ページを再読み込みしてください。';};
   doc.head.append(s);
