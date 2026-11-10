@@ -9,16 +9,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   try{
    await app.open();
    await page.goto(page.url().replace('/v2/national/official-2026-nationwide-pilot.html','/maps/national-municipalities.html'));
-   const boundaryLayers=await page.evaluate(()=>{
-    const svg=document.querySelector('#map');
-    const border=svg.querySelector('path.borders'),coast=svg.querySelector('path.coastlines');
-    const cs=el=>el&&getComputedStyle(el);
-    return {borderCount:svg.querySelectorAll('path.borders').length,coastCount:svg.querySelectorAll('path.coastlines').length,
-      borderStroke:cs(border)?.stroke,borderWidth:cs(border)?.strokeWidth,borderVector:cs(border)?.vectorEffect,
-      coastStroke:cs(coast)?.stroke,coastWidth:cs(coast)?.strokeWidth,
-      fillStrokeCount:[...svg.querySelectorAll('path.land')].filter(el=>cs(el).stroke!=='none').length};
-   });
-   assert.deepEqual(boundaryLayers,{borderCount:1,coastCount:1,borderStroke:'rgb(101, 123, 132)',borderWidth:'1.1px',borderVector:'non-scaling-stroke',coastStroke:'rgb(72, 101, 116)',coastWidth:'2.4px',fillStrokeCount:0},'public map keeps one independent candidate shared-border path and unchanged coastline');
+
    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://kussoon.com/maps/national-municipalities.html');
    assert.equal(await page.locator('meta[name="robots"]').count(),0,'public map should be indexable');
    const publicLinks=await page.evaluate(async()=>{
@@ -47,6 +38,18 @@ const {start}=require('./helpers/nationwide-browser.cjs');
     assert(code?.startsWith(pref));
     await page.locator('#region').evaluate((el,value)=>{el.value=value;el.dispatchEvent(new Event('change',{bubbles:true}));},code);
     await page.waitForFunction(c=>!!document.querySelector('#map path.land.chosen[data-code="'+c+'"]'),code,{timeout:30000});
+    if(pref==='04'){
+    const boundaryLayers=await page.evaluate(()=>{
+     const svg=document.querySelector('#map');
+     const border=svg.querySelector('path.borders'),coast=svg.querySelector('path.coastlines');
+     const cs=el=>el&&getComputedStyle(el);
+     return {borderCount:svg.querySelectorAll('path.borders').length,coastCount:svg.querySelectorAll('path.coastlines').length,
+       borderStroke:cs(border)?.stroke,borderWidth:cs(border)?.strokeWidth,borderVector:cs(border)?.vectorEffect,
+       coastStroke:cs(coast)?.stroke,coastWidth:cs(coast)?.strokeWidth,
+       fillStrokeCount:[...svg.querySelectorAll('path.land')].filter(el=>cs(el).stroke!=='none').length};
+    });
+    assert.deepEqual(boundaryLayers,{borderCount:1,coastCount:1,borderStroke:'rgb(101, 123, 132)',borderWidth:'1.1px',borderVector:'non-scaling-stroke',coastStroke:'rgb(72, 101, 116)',coastWidth:'2.4px',fillStrokeCount:0},'public map keeps one independent candidate shared-border path and unchanged coastline');
+    }
     const selected=await page.evaluate(c=>{
      const el=document.querySelector('#map path.land.chosen[data-code="'+c+'"]'),style=getComputedStyle(el);
      return {color:style.fill,animation:style.animationName,property:el.style.getPropertyValue('--pref-color'),
