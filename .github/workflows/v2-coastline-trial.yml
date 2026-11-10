@@ -3,11 +3,25 @@ on:
   pull_request:
     paths:
       - 'v2/verification/coastline-accessibility/**'
+      - 'v2/progressive-preview/municipality-renderer.js'
+      - 'v2/progressive-preview/national-progressive-labels.js'
+      - 'v2/progressive-preview/progressive-geometry.js'
+      - 'v2/municipalities/shared/quiz-app.js'
+      - 'v2/municipalities/shared/quiz.css'
+      - 'maps/national-municipalities.html'
+      - 'v2/tests/coastline-partition.test.cjs'
       - '.github/workflows/v2-coastline-trial.yml'
   push:
     branches: [main]
     paths:
       - 'v2/verification/coastline-accessibility/**'
+      - 'v2/progressive-preview/municipality-renderer.js'
+      - 'v2/progressive-preview/national-progressive-labels.js'
+      - 'v2/progressive-preview/progressive-geometry.js'
+      - 'v2/municipalities/shared/quiz-app.js'
+      - 'v2/municipalities/shared/quiz.css'
+      - 'maps/national-municipalities.html'
+      - 'v2/tests/coastline-partition.test.cjs'
       - '.github/workflows/v2-coastline-trial.yml'
 jobs:
   trial-contract:
@@ -22,6 +36,13 @@ jobs:
           node --check v2/verification/coastline-accessibility/trial.js
           node --check v2/verification/coastline-accessibility/contract.test.cjs
           node --check v2/verification/coastline-accessibility/browser.test.cjs
+          node --check v2/verification/coastline-accessibility/production.browser.cjs
+          node --check v2/tests/coastline-partition.test.cjs
+          node --check v2/progressive-preview/municipality-renderer.js
+          node --check v2/progressive-preview/national-progressive-labels.js
+          node --check v2/progressive-preview/progressive-geometry.js
+          node --check v2/municipalities/shared/quiz-app.js
+          node v2/tests/coastline-partition.test.cjs
           node v2/verification/coastline-accessibility/contract.test.cjs
       - name: Install browser test dependencies
         run: npm ci --no-audit --no-fund
@@ -32,7 +53,9 @@ jobs:
       - name: Compare all representative areas in Chromium and WebKit
         run: |
           KUSSOON_BROWSER_ENGINE=chromium node v2/verification/coastline-accessibility/browser.test.cjs
+          KUSSOON_BROWSER_ENGINE=chromium node v2/verification/coastline-accessibility/production.browser.cjs
           KUSSOON_BROWSER_ENGINE=webkit node v2/verification/coastline-accessibility/browser.test.cjs
+          KUSSOON_BROWSER_ENGINE=webkit node v2/verification/coastline-accessibility/production.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/coastline-trial
       - uses: actions/upload-artifact@v4
