@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "approved_master": {
+    "version": "1.4.4",
+    "adoption_status": "approved_on_release_merge",
+    "approved_date": "2026-11-11",
+    "data_date": "2026-11-11",
+    "path": "masters/five-city-master-v1.4.4-20261111.xlsx",
+    "sha256": "8c9d737c68490daf9535df4464877e83d5823dba9ce3e55c4609bb151cb3f2f4",
+    "git_blob_sha": "9a593c2bf023f849fc65bcd6b7994caa4202357b",
+    "source_candidate_pr": 414,
+    "source_candidate_path": "data/bread/masters/five-city-master-v1.4.4-candidate-20261111.xlsx",
+    "byte_identical_to_source_candidate": true,
+    "record_count": 263,
+    "public_count": 262,
+    "listing_counts": {
+      "通常掲載": 245,
+      "参考候補": 17,
+      "閉店履歴": 1
+    },
+    "worksheets": [
+      "概要",
+      "5市店舗マスター",
+      "伊丹33件監査",
+      "除外5件",
+      "更新・検収",
+      "変更履歴",
+      "閉店履歴",
+      "新規掲載保留候補",
+      "未解決事項",
+      "備考原文・公開文校閲履歴",
+      "公開表示文・校閲履歴"
+    ],
+    "adopted_coordinate_changes": [
+      17,
+      97,
+      107,
+      111,
+      112,
+      113,
+      114,
+      207,
+      209
+    ],
+    "coordinate_precision_note": "施設代表点・概略位置を含み、店舗入口を実測した座標ではありません"
+  },
+  "current_working_master": {
+    "version": "1.4.4",
+    "path": "masters/five-city-master-v1.4.4-20261111.xlsx",
+    "sha256": "8c9d737c68490daf9535df4464877e83d5823dba9ce3e55c4609bb151cb3f2f4",
+    "adoption_status": "approved_on_release_merge",
+    "record_count": 263
+  },
+  "review_csv": {
+    "path": "views/five-city-master-v1.4.4-20261111.csv",
+    "sha256": "2bb6dc73fd7eac2af71b80ff4823182b9a12134aed67d9534a8883a51ed63af7",
+    "git_blob_sha": "1ebce2947308f91975f55c5821677bdb0f9ee91d",
+    "purpose": "read-only view; not an Excel master replacement"
+  },
+  "html_release": {
+    "version": "1.3.13",
+    "path": "maps/unified-bread-map.html",
+    "data_date": "2026-11-11",
+    "source_pr": 421,
+    "source_html_blob_sha": "a27dea16d7ecf1a8de4bafbfccf55e44200484bc",
+    "preview_path": "v2/verification/bread-integration/20261111/index.html",
+    "preview_pr": 420,
+    "source_integration_pr": 418,
+    "release_atomically_with_master": true
+  },
+  "evidence_prs": {
+    "baseline_audit": 410,
+    "ikari_four": 412,
+    "secondary_research": 413,
+    "nine_store_candidate": 414,
+    "cluster_fix": 415,
+    "integration": 418,
+    "iphone_preview": 420,
+    "production_html_proposal": 421
+  },
+  "note": "This manifest is staged in a draft PR, not approved in live main until that PR is merged. The source workbook's original candidate label in its history is preserved for provenance. Its formal release status is defined here on merge, not by renaming or modifying workbook internals."
+}

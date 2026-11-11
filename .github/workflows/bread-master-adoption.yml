@@ -1,0 +1,20 @@
+name: Bread official master and HTML release candidate
+on:
+  pull_request:
+    paths:
+      - 'data/bread/**'
+      - 'maps/unified-bread-map.html'
+      - 'v2/tests/verify-approved-bread-master.py'
+      - '.github/workflows/bread-master-adoption.yml'
+permissions:
+  contents: read
+jobs:
+  verify-atomic-release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Verify official workbook byte identity, all 263 Excel/HTML/CSV rows and release delta
+        run: python3 v2/tests/verify-approved-bread-master.py
