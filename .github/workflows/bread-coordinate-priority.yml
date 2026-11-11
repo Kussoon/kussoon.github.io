@@ -1,0 +1,36 @@
+name: Bread coordinate secondary priority research
+on:
+  pull_request:
+    paths:
+      - 'v2/verification/bread-coordinate-audit/20261111-secondary-priority/**'
+      - 'v2/tests/verify-priority-coordinate-research.py'
+      - 'v2/tests/priority-coordinate-research.browser.cjs'
+      - '.github/workflows/bread-coordinate-priority.yml'
+permissions:
+  contents: read
+jobs:
+  twelve-stores:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 v2/tests/verify-priority-coordinate-research.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - run: node v2/tests/priority-coordinate-research.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/priority-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bread-coordinate-secondary-priority-browser
+          path: ${{ runner.temp }}/priority-browser
+          retention-days: 14
+          if-no-files-found: warn
