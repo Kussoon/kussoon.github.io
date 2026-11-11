@@ -119,3 +119,14 @@
 - Draft HTMLの不要な横スクロールCSSを除去済み。全8章・縦表示6グループ・HTML表0個・アンカー不一致0件・`noindex,nofollow` の静的チェックは成立。
 - `.github/workflows/autonomous-bus-subsidies-layout.yml` をDraftに追加。変更時に `tests/check_autonomous_bus_subsidies_layout.py` を起動するよう設計。ただし初回確認時点で該当ブランチのGitHub Actions実行履歴が取得できないため、**CIテスト実行成功とは記録しない**。ワークフローがPR上で認識されるかと結果を別途確認。
 - GitHub ActionsのV2用既存ワークフローは本件で編集していない。正式公開のためのmainマージやサイトナビ追加は承認を受けていないため未実施。
+
+## 2026-11-11 第2章・海外事例の「その後」確認
+- オランダParkShuttle：Transdevの現行運行案内で、専用走路・第三世代6台・平日6～21時・1日約1,850人と記載。運行案内が現在もあるが、当日の各便の稼働は未検証。 https://www.transdev.nl/en/our-routes/travel-areas/parkshuttle-rivium
+- スイスSion：PostBusの「Completed PostBus projects」でSionとUvrierを完了扱い。SAAMは2015～2021のプロジェクト完了、シオンで約54,000人の輸送と記載。継続運行と誤記しない。 https://www.postauto.ch/en/about-us-and-news/innovation/automated-driving / https://www.saam.swiss/projects/smartshuttle/
+- 深圳AlphaBus（2017）：深圳バスグループ2026-01-19記事で試験累計約8,000km。初期実証から2024年前海、2025羅湖への発展経緯。ただし同一車両・同一路線の連続運行ではない。 https://en.szbus.com.cn/news_details/74.html
+- 深圳前海：2026-01-19時点でB996～B999の4路線、利用者40,000人超、運行200日超を事業者が公表。2024年開始時に安全要員が各車に乗車した記録。2026-11-11当日の稼働状態までは未確認。 https://en.szbus.com.cn/news_details/74.html / https://www.sz.gov.cn/en_szgov/news/infocus/gba/qianhai/news/content/post_11531747.html
+- 深圳羅湖B888：1元有料で事業者が利用方法・時間を案内。2025-09の羅湖区公式記事に安全要員1人が同乗と記載。「レベル4対応」「運転者の不在」と「安全要員不在」を混同しない。 https://en.szbus.com.cn/news_details/69.html / https://www.szlh.gov.cn/English/news/content/post_12360676.html
+- ベルリンBVG NoWeL4：BVGドイツ語公式ページでは2026年内部テストグループ段階、車内安全運転者・管制監視あり、2027年から認可段階。一般向け恒常無人営業運行と呼ばない。 https://www.bvg.de/de/unternehmen/nachhaltige-mobilitaet/mobilitaet-der-zukunft/nowel4
+- パリ・メトロ14号線：RATP公式の現行路線案内で完全自動運転の営業継続が確認できるが、鉄道であり公道の自動運転バスには含めない。 https://www.bonjour-ratp.fr/en/lignes-metro/ligne-14/
+- 海外の公表情報は更新日が異なる。確認できない2026年11月11日の全便稼働や、運賃収入・営業採算を推定しない。
+- 原稿第2章とV2検証版の双方に上記追記を反映。正式公開はまだ行わない。
