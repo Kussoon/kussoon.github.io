@@ -1,0 +1,57 @@
+{
+  "records": 263,
+  "public": 262,
+  "counts": {
+    "通常掲載": 245,
+    "参考候補": 17,
+    "閉店履歴": 1
+  },
+  "sheets": 11,
+  "excel_new_coordinate_pairs": 5,
+  "html_cumulative_coordinate_pairs": 9,
+  "unchanged_other_coordinates": 254,
+  "all263_coordinates_and_keys_match": true,
+  "other_excel_parts_byte_preserved": true,
+  "existing_history_rows_preserved": 40,
+  "new_history_rows": 5,
+  "browser_and_iphone_safari": "Chromium/WebKit単独表示4条件は合格。iPhone Safari実機は未検証。連続検索の別課題あり。",
+  "files": {
+    "five-city-master-v1.4.4-candidate-20261111.xlsx": "8c9d737c68490daf9535df4464877e83d5823dba9ce3e55c4609bb151cb3f2f4",
+    "unified-bread-map-v1.3.13-verification-20261111.html": "96d9cf9696fac36253e2bb43cb05c88827294a75ae37c06db883255746bf1e9b"
+  },
+  "browser_validation": {
+    "tested_commit": "0fa4e68a9f8ee5136ae3d21b8cf982fa812a56c4",
+    "run_url": "https://github.com/Kussoon/kussoon.github.io/actions/runs/42966304497",
+    "result": "success",
+    "conditions": [
+      {
+        "engine": "chromium",
+        "width": 1440,
+        "result": "passed",
+        "pin_coordinate_assertions": 9
+      },
+      {
+        "engine": "chromium",
+        "width": 390,
+        "result": "passed",
+        "pin_coordinate_assertions": 9
+      },
+      {
+        "engine": "webkit",
+        "width": 1440,
+        "result": "passed",
+        "pin_coordinate_assertions": 9
+      },
+      {
+        "engine": "webkit",
+        "width": 390,
+        "result": "passed",
+        "pin_coordinate_assertions": 9
+      }
+    ],
+    "isolated_store_navigation": true,
+    "map_tiles": "blocked for test",
+    "iPhone_Safari_device": "未検証",
+    "rapid_search_issue": "KNOWN-ISSUES.md"
+  }
+}
