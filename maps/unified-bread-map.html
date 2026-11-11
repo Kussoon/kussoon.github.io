@@ -1165,8 +1165,11 @@ function renderMap(){
     const marker=markerFor(arr);
     // A numbered facility pin is a single fixed geographical place, not a proximity cluster.
     // Keep it outside MarkerClusterGroup to prevent cluster zoom/spiderfy from closing its popup.
-    if(arr.length>1){marker.options.pane='breadFacilityPane';facilityPins.addLayer(marker)}
-    else clusters.addLayer(marker);
+    if(arr.length>1 || groups.size===1){
+      // A single visible location never needs clustering. Keep it outside the
+      // cluster group's zoom/move lifecycle during rapid search changes.
+      marker.options.pane='breadFacilityPane';facilityPins.addLayer(marker);
+    }else clusters.addLayer(marker);
     points.push([arr[0].latitude,arr[0].longitude]);
   }
   return points;
@@ -1210,7 +1213,13 @@ new BreadsSizeControl().addTo(map);
  // v0.1.22: prevent Safari's document scroll while gestures originate in the map.
  // Use passive:false; do not attach to the popup list or the document.
  $('map').addEventListener('touchmove',function(e){if(e.cancelable)e.preventDefault()},{passive:false});
- L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);clusters=typeof L.markerClusterGroup==='function'?L.markerClusterGroup({maxClusterRadius:36,showCoverageOnHover:false,spiderfyOnMaxZoom:true}):L.layerGroup();if(typeof L.markerClusterGroup!=='function')document.querySelector('.mapnote').append(document.createTextNode(' 近接クラスタを読み込めませんでした。各地点を個別表示しています。'));
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);const clusterLoaded=typeof L.markerClusterGroup==='function';
+clusters=clusterLoaded?L.markerClusterGroup({maxClusterRadius:36,showCoverageOnHover:false,spiderfyOnMaxZoom:true,animate:false}):L.layerGroup();
+if(!clusterLoaded){
+  // .mapnote did not exist in the original DOM; create it rather than dereferencing null.
+  const note=safeText('p','近接クラスタを読み込めませんでした。各地点を個別表示しています。','mapnote');
+  note.setAttribute('role','status');$('map').before(note);
+}
 map.createPane('breadFacilityPane');map.getPane('breadFacilityPane').style.zIndex='650';
 facilityPins=L.layerGroup();
 map.addLayer(clusters);map.addLayer(facilityPins);
