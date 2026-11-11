@@ -4,11 +4,12 @@ const{start}=require('./helpers/nationwide-browser.cjs');const out=process.env.K
 (async()=>{for(const engine of['chromium','webkit'])for(const width of[1440,390]){
  const app=await start({engine,contextOptions:{viewport:{width,height:1000}}}),{page}=app;let errors=[];page.on('pageerror',e=>errors.push(e.message));
  try{
- const base=await page.evaluate(()=>location.origin).catch(()=>null); // page starts blank; derive local origin after a local navigation below.
+ const cluster=await fs.readFile(process.env.KUSSOON_CLUSTER_FIXTURE,'utf8');
+ await page.route('https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js',route=>route.fulfill({status:200,contentType:'application/javascript',body:cluster}));
  // The helper supplies a page but its open() targets a different map. Open a local path using the server origin from its first request.
  await app.open();const origin=new URL(page.url()).origin;
  await page.goto(origin+'/v2/verification/bread-coordinate-audit/20261111-ikari-fix/unified-bread-map-v1.3.12-verification-20261111.html',{waitUntil:'domcontentloaded'});
- await page.waitForFunction(()=>window.__breadCheck);let state=await page.evaluate(()=>window.__breadCheck());assert.equal(state.records,263);assert.equal(state.shown.length,262);assert.equal(state.normal,245);assert.equal(state.reference,17);assert(!state.shown.includes(135));
+ await page.waitForFunction(()=>window.__breadCheck).catch(e=>{throw Error(e.message+' startup errors='+JSON.stringify(errors))});assert.equal(await page.evaluate(()=>typeof L.markerClusterGroup),'function');let state=await page.evaluate(()=>window.__breadCheck());assert.equal(state.records,263);assert.equal(state.shown.length,262);assert.equal(state.normal,245);assert.equal(state.reference,17);assert(!state.shown.includes(135));
  const coords={111:[34.7610821,135.3296146],112:[34.7491001,135.3264789],113:[34.756458,135.3574459],114:[34.7241557,135.3640379]};
  const data=await page.locator('#bread-data').textContent();for(const[no,pt]of Object.entries(coords)){let x=JSON.parse(data).find(x=>x['No.']===+no);assert.deepEqual([x['緯度'],x['経度']],pt)}
  await page.fill('#search','いかり甲子園');await page.waitForFunction(()=>window.__breadCheck().shown.length===1);assert.deepEqual((await page.evaluate(()=>window.__breadCheck())).shown,[114]);

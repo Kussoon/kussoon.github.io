@@ -26,9 +26,14 @@ jobs:
         working-directory: v2/tests/browser
       - run: npx playwright install --with-deps chromium webkit
         working-directory: v2/tests/browser
+      - name: Fetch the production cluster library for deterministic browser delivery
+        run: |
+          curl -fsSL --retry 3 --max-time 30 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js' -o "$RUNNER_TEMP/leaflet.markercluster.js"
+          echo "1e4e1d22972a3926f48598e0caf14e3fe7049835d428a344fed4f9e3665b3508  $RUNNER_TEMP/leaflet.markercluster.js" | sha256sum -c -
       - run: node v2/tests/ikari-coordinate-fix.browser.cjs
         env:
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/ikari-browser
+          KUSSOON_CLUSTER_FIXTURE: ${{ runner.temp }}/leaflet.markercluster.js
       - uses: actions/upload-artifact@v4
         if: always()
         with:
