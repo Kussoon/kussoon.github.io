@@ -90,7 +90,6 @@ fold.addEventListener('click',()=>{
    moveToTop(topBeforeCollapse);
   }
   // The next expansion grows downward from the title's current position.
-  collapsedTop=popup.getBoundingClientRect().top;
  }else{
   const topBeforeExpand=popup.getBoundingClientRect().top;
   collapsed=false;
