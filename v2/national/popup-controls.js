@@ -12,7 +12,7 @@ if(!popup||!head||!heading||!close||!scroll)throw Error('自治体情報の吹�
 
 const style=document.createElement('style');
 style.textContent=`
-.office-popup{transform:translate3d(0,calc(var(--popup-drag-y,0px) + var(--popup-collapse-y,0px)),0)!important}
+.office-popup{transform:translate3d(0,calc(var(--popup-drag-y,0px) + var(--popup-collapse-y,0px)),0)!important;max-height:calc(100vh - 24px);max-height:calc(100svh - 24px)}
 .popup-head{display:flex;justify-content:flex-start;align-items:stretch;gap:4px;padding:4px;background:#dceaf2;border:1px solid #b5cad7}
 .popup-head::before{content:none!important;display:none!important}
 .popup-grip{flex:0 0 28px;width:28px;min-height:44px;display:grid;grid-template-columns:repeat(2,4px);grid-auto-rows:4px;gap:4px;place-content:center;border-radius:6px;color:#214f68;cursor:ns-resize}
@@ -23,6 +23,7 @@ style.textContent=`
 .popup-head .popup-control:focus-visible{outline:3px solid #d59b21;outline-offset:2px}
 .popup-body{display:flex;flex:1 1 auto;flex-direction:column;min-height:0;overflow:hidden}
 .popup-body[hidden]{display:none!important}
+body.map-screen-mode #officePopup,#mapFrame:fullscreen #officePopup{max-height:calc(100% - 16px)}
 `;
 document.head.append(style);
 const grip=document.createElement('span');
@@ -50,7 +51,7 @@ head.replaceChildren(grip,heading,fold,close);
 popup.append(body);
 close.classList.add('popup-control');
 
-let collapsed=false,previousName='',firstCollapsePending=true;
+let collapsed=false,previousName='';
 function syncFoldControl(){
  fold.textContent=collapsed?'⌄':'−';
  fold.setAttribute('aria-expanded',String(!collapsed));
@@ -65,15 +66,22 @@ function moveToTop(targetTop){
  const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
  const rect=popup.getBoundingClientRect();
  const minTop=area.top+8;
- // Keep the title at its anchor and let expanded content extend below the map.
  if(rect.top<minTop)setCorrection(correction+minTop-rect.top);
 }
-function snapCollapsedToBottom(){
- // The popup is already positioned at bottom:8px in the map frame.
- // Cancel the existing drag translation instead of measuring offsetParent:
- // iPhone Safari can report a different offset parent during collapse.
- const drag=parseFloat(popup.style.getPropertyValue('--popup-drag-y'))||0;
- setCorrection(-drag);
+function alignTitleAtMapBottom(){
+ if(popup.hidden||document.body.classList.contains('map-screen-mode')||document.fullscreenElement)return;
+ const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
+ const headerRect=head.getBoundingClientRect();
+ const targetBottom=area.bottom-8;
+ const correction=parseFloat(popup.style.getPropertyValue('--popup-collapse-y'))||0;
+ setCorrection(correction+targetBottom-headerRect.bottom);
+}
+function resetForMunicipality(){
+ collapsed=false;
+ body.hidden=false;
+ syncFoldControl();
+ setCorrection(0);
+ requestAnimationFrame(()=>requestAnimationFrame(alignTitleAtMapBottom));
 }
 fold.addEventListener('click',()=>{
  if(!collapsed){
@@ -81,21 +89,14 @@ fold.addEventListener('click',()=>{
   collapsed=true;
   body.hidden=true;
   syncFoldControl();
-  if(firstCollapsePending){
-   // The first fold for this municipality docks the title at the map bottom.
-   snapCollapsedToBottom();
-   firstCollapsePending=false;
-  }else{
-   // Later folds retract upward while keeping the title in place.
-   moveToTop(topBeforeCollapse);
-  }
-  // The next expansion grows downward from the title's current position.
+  // Keep the title fixed while the body always retracts upward.
+  moveToTop(topBeforeCollapse);
  }else{
   const topBeforeExpand=popup.getBoundingClientRect().top;
   collapsed=false;
   body.hidden=false;
   syncFoldControl();
-  // Use the title's current position so dragging while collapsed is preserved.
+  // Keep the title fixed while the body always expands downward.
   moveToTop(topBeforeExpand);
  }
 });
@@ -106,9 +107,7 @@ new MutationObserver(()=>{
  const value=name.textContent.trim();
  if(value&&value!==previousName){
   previousName=value;
-  if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
-  setCorrection(0);
-  firstCollapsePending=true;
+  resetForMunicipality();
  }
 }).observe(name,{subtree:true,childList:true,characterData:true});
 const map=document.querySelector('#map');
@@ -117,9 +116,7 @@ if(map)new MutationObserver(()=>{
  const code=map.querySelector('.chosen[data-code]')?.getAttribute('data-code')||'';
  if(code&&code!==previousCode){
   previousCode=code;
-  if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
-  setCorrection(0);
-  firstCollapsePending=true;
+  resetForMunicipality();
  }
 }).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
 syncFoldControl();
