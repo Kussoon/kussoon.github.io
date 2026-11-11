@@ -247,7 +247,7 @@ function syncPopupReading(code,region){
  const parts=nationalLabels?.readingPartsFor(code)||region?.readingParts||[];
  const valid=Array.isArray(parts)&&parts.length>0&&parts.every(p=>p.name&&p.reading);
  const text=valid?parts.map(p=>p.reading).join(''):'';
- const show=$('readingMode').value==='on'&&Boolean(text);
+ const show=Boolean(text);
  node.textContent=show?text:'';
  node.hidden=!show;
 }
@@ -866,5 +866,6 @@ $('map').addEventListener('click',e=>{
  close.addEventListener('pointerdown',event=>event.stopPropagation());
 })();
 </script>
+<script defer src="/v2/national/popup-controls.js?v=20261112-popup-controls-formal1"></script>
 <script defer src="/common/site-footer.js"></script>
 </body></html>

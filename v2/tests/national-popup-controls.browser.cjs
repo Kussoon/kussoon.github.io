@@ -10,7 +10,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    const origin=new URL(page.url()).origin;
    await page.goto(origin+'/v2/national/popup-controls-trial.html');
    const frame=page.frameLocator('#mapPreview');
-   const child=()=>page.frames().find(item=>item.url().includes('/maps/national-municipalities.html'));
+   const child=()=>page.frames().find(item=>item.url().includes('/v2/national/popup-controls-map-preview.html'));
    await frame.locator('#map .prefecture').first().waitFor({timeout:90000});
    await frame.locator('#map path.prefecture[style*="pref-color"]').first().waitFor({timeout:60000});
    await page.waitForFunction(()=>document.querySelector('#mapPreview')?.dataset.trialReady==='true',{},{timeout:60000});
@@ -45,18 +45,30 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await child().waitForFunction(()=>document.querySelector('#popupBody').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
-   const topCollapsed=await popup.evaluate(e=>e.getBoundingClientRect().top);
-   const collapsedBounds=await popup.evaluate(e=>({popup:e.getBoundingClientRect(),area:e.offsetParent.getBoundingClientRect()}));
-   assert(Math.abs(collapsedBounds.area.bottom-collapsedBounds.popup.bottom-8)<3,'first collapse docks the popup at the map bottom');
+   const collapsed=await popup.evaluate(e=>({rect:e.getBoundingClientRect().toJSON(),area:(e.offsetParent||e.parentElement).getBoundingClientRect().toJSON()}));
+   assert(Math.abs(collapsed.area.bottom-collapsed.rect.bottom-8)<3,'collapse automatically docks the popup at map bottom');
+   await grip.scrollIntoViewIfNeeded();
    let box=await grip.boundingBox();
    await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();
-   await page.mouse.move(box.x+box.width/2,box.y+box.height/2+70,{steps:4});await page.mouse.up();
+   await page.mouse.move(box.x+box.width/2,box.y+box.height/2-70,{steps:4});await page.mouse.up();
    const collapsedDragTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
-   assert(collapsedDragTop>topCollapsed+40,'collapsed popup still drags vertically');
+   assert(collapsedDragTop<collapsed.rect.top-40,`collapsed popup can still drag upward after docking: before=${collapsed.rect.top} after=${collapsedDragTop}, box=${JSON.stringify(box)}`);
    const leftAfterCollapsedDrag=await popup.evaluate(e=>e.getBoundingClientRect().left);
    await frame.locator('#popupCollapse').focus();await frame.locator('#popupCollapse').press('Space');
    await frame.locator('#popupBody:not([hidden])').waitFor();
+   assert(Math.abs((await popup.evaluate(e=>e.getBoundingClientRect().top))-collapsedDragTop)<3,'first expansion grows downward from the dragged collapsed title position');
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
+   // Only the FIRST fold docks at the bottom. Subsequent folds collapse
+   // upward around the title's current position; expansion grows downward.
+   const secondExpandedTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   await frame.locator('#popupCollapse').click();
+   assert.equal(await frame.locator('#popupBody').isVisible(),false,'second fold hides body');
+   const secondCollapsedTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   assert(Math.abs(secondCollapsedTop-secondExpandedTop)<3,'second fold keeps title at top, retracting upward instead of redocking');
+   await frame.locator('#popupCollapse').click();
+   assert.equal(await frame.locator('#popupBody').isVisible(),true,'second expand restores content below title');
+   const thirdExpandedTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   assert(Math.abs(thirdExpandedTop-secondCollapsedTop)<3,'second expansion extends down from stationary title');
    const bodyPoint=await child().evaluate(()=>{
     const r=document.querySelector('#popupScroll').getBoundingClientRect();
     for(let y=r.top+4;y<r.bottom-4;y+=8)for(let x=r.left+4;x<r.right-4;x+=8){
@@ -102,6 +114,22 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await child().waitForFunction(()=>document.querySelector('#popupName').textContent.includes('新宿区')&&!document.querySelector('#officePopup').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),true,'Tokyo ward selection displays the body');
    assert(await frame.locator('#popupName').textContent().then(x=>x.includes('新宿区')));
+   // User-approved revision to R08/R36: map readings remain OFF by default,
+   // but verified popup-title readings must always stay visible in trial mode.
+   assert((await frame.locator('#mapReadingToggle').textContent()).includes('OFF'),'map labels initially have readings OFF');
+   await frame.locator('#popupReading:visible').waitFor();
+   const verifiedReading=await frame.locator('#popupReading').textContent();
+   assert(verifiedReading&&verifiedReading.trim().length>0,'popup title shows verified reading with map readings OFF');
+   await frame.locator('#mapReadingToggle').click();
+   assert((await frame.locator('#mapReadingToggle').textContent()).includes('ON'),'map reading toggle still works');
+   assert.equal(await frame.locator('#popupReading').textContent(),verifiedReading,'popup title reading persists with map ON');
+   await frame.locator('#mapReadingToggle').click();
+   assert((await frame.locator('#mapReadingToggle').textContent()).includes('OFF'),'map reading toggle returns to OFF');
+   assert.equal(await frame.locator('#popupReading').textContent(),verifiedReading,'popup title reading remains visible with map OFF');
+   assert.equal(await frame.locator('#popupReading').isVisible(),true,'popup reading stays visible');
+   await frame.locator('#popupCollapse').click();
+   assert.equal(await frame.locator('#popupReading').isVisible(),true,'reading remains visible in collapsed title bar');
+   await frame.locator('#popupCollapse').click();
 
    const prefectureShapes=await frame.locator('#map .prefecture').count();
    const beforeZoom=await frame.locator('#map').getAttribute('viewBox');
@@ -119,10 +147,28 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await page.getByRole('button',{name:'現行表示'}).click();
    await page.waitForFunction(()=>{
     const f=document.getElementById('mapPreview');
-    try{return f.contentWindow.location.pathname==='/maps/national-municipalities.html'&&f.contentWindow.location.search==='';}catch{return false;}
+    try{return f.contentWindow.location.pathname==='/maps/national-municipalities.html'&&f.contentWindow.location.search==='?popupControlsCurrent=1';}catch{return false;}
    });
    assert.equal(await frame.locator('#popupCollapse').count(),0,'comparison can return to the unchanged current popup');
    assert.equal(await page.locator('a[href="/maps/national-municipalities.html"]').count(),1,'official page link is available');
+   await page.goto(origin+'/maps/national-municipalities.html');
+   await page.locator('#map .prefecture').first().waitFor({timeout:90000});
+   // The popup is hidden until a municipality is selected. Verify the actual
+   // default-page interaction instead of waiting for a hidden button to show.
+   await page.locator('#popupCollapse').waitFor({state:'attached',timeout:60000});
+   // The public map's native selects are visually hidden in the modern
+   // region-picker UI. The existing comparison test drives their change events.
+   await page.locator('#pref').evaluate(el=>{el.value='28';el.dispatchEvent(new Event('change',{bubbles:true}));});
+   await page.waitForFunction(()=>Array.from(document.querySelector('#region').options).some(o=>o.value==='28204'));
+   await page.locator('#region').evaluate(el=>{el.value='28204';el.dispatchEvent(new Event('change',{bubbles:true}));});
+   await page.locator('#map .chosen[data-code="28204"]').waitFor({timeout:60000});
+   await page.locator('#officePopup:not([hidden])').waitFor({timeout:60000});
+   await page.locator('#popupCollapse').waitFor({state:'visible',timeout:60000});
+   assert.equal(await page.locator('#popupBody').getAttribute('hidden'),null,'formal page enables the improved popup controls by default');
+   await page.locator('#popupCollapse').click();
+   assert.equal(await page.locator('#popupBody').isVisible(),false,'formal page can collapse municipality details');
+   await page.locator('#popupCollapse').click();
+   assert.equal(await page.locator('#popupBody').isVisible(),true,'formal page restores municipality details');
    assert.deepEqual(app.errors,[]);
    console.log('PASS popup-controls '+engine+': phone-width collision, title grip and noninteractive body drag, collapse/reopen, selection, links, fullscreen, zoom and boundary contracts');
   }finally{await app.close();}
