@@ -63,3 +63,25 @@
 - 正式版が掲載される `driving/autonomous-bus-subsidies/` はDraftに保存中。mainには移動していない。
 - 正式公開時のカード追加予定位置は `driving/index.html` の自動運転・AIニュースカードの直後。
 - 依然として外部リンクの網羅的点検・PCでの表示確認・最終公開承認が残る。本文公開やmainのナビ更新は承認後に行う。
+
+## 2026-11-11 公開前・外部リンク監査（追加）
+
+**監査対象：** Draft PR #411の `driving/autonomous-bus-subsidies/index.html`。本文の章数8、縦並びカード6組、表要素0件、内部アンカーのリンク先欠落0件。Draftでは `noindex,nofollow` のまま、canonicalは正式公開予定の `https://kussoon.com/driving/autonomous-bus-subsidies/` に設定。
+
+**対応した資料リンク（3箇所）：**
+1. 2017年12月の中国・深圳「AlphaBus」実証には、2024年の別路線の紹介ページが誤って付けられていた。2018年に当時の実証日を記録した深圳市南山区政府の公式回答に差し替え： https://www.szns.gov.cn/xxgk/jyhtabljggk/sjjyhtabljggk/content/post_8512945.html
+2. 佐賀市2026年10月21日会見のPDFは検証環境から直接開けなかったため、同じ内容が本文掲載されている公式会見ページへ差し替え： https://www.city.saga.lg.jp/shisei/shichonoheya/3/4/8741.html
+3. 神戸新交通の会社ページは検証環境の取得が502/タイムアウトとなった。開業日（1981年2月5日）と無人運転を記録している神戸市のFAQ・市立図書館ページに差し替え： https://faq.city.kobe.lg.jp/faq/show/1373?site_domain=default / https://www.city.kobe.lg.jp/a09222/kosodate/lifelong/toshokan/bunkodayori/back/hon_52.html
+
+**検証結果の読み方：** 主な国交省・財務省・自治体・海外交通事業者・会計検査院の公式ページは閲覧できた。METIの一部URLは本文直接アクセス時403だが検索結果では正式記事が確認できるため、404/リンク切れとは断定しない。PDFについても一部は閲覧可能、一部は取得側のエラーとなった。全外部URLのSafari実機タップ試験を完了したわけではない。アクセスできない＝必ずリンク切れ、とは扱わない。
+
+**正式公開チェック：**
+- [x] 本文側の目次アンカー整合性、6つの縦型比較、0個の表要素
+- [x] 公開URLを見据えたcanonicalの指定を確認
+- [x] 2017年深圳・佐賀市・神戸新交通の3出典を調整
+- [ ] 公開承認が出た後に限り、`noindex,nofollow` の解除と「公開前の草稿」等の文言の整理
+- [ ] 公開承認が出た後に限り、正式HTML・11月記録をmainへ反映し、`driving/index.html` にカード追加
+- [ ] PC実機表示および主要PDFリンクの利用者側ブラウザー試験
+- [ ] GitHub Pages公開後の正式URL・更新日・リンク動作の再確認
+
+現時点で正式版のmain配置やナビゲーション変更は行わない。
