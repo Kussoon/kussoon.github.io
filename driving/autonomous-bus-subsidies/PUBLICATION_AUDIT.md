@@ -106,3 +106,10 @@
 - この実行環境はKussoon.comへの直接HTTPアクセス/DNS解決ができず、実サイトのChromiumスクリーンショットを取得できない。**PC実画面確認を完了扱いにしない。**
 - GitHub PagesのV2試作版（`/v2/autonomous-bus-subsidies/no-scroll-check.html`）について、mainへの追加コミットに対応したデプロイ成功の記録あり。ユーザーは縦表示版をiPhoneで確認済み。
 - 正式版の公開承認前なので、mainの`/driving/autonomous-bus-subsidies/`とナビゲーションは編集しない。
+
+## 2026-11-11 追加：旧スタイル除去と再発防止
+- Draft本文のCSSから約2,696文字の旧テーブル用・レスポンシブ切替用スタイルを除去。表示本体の縦並びカードCSSは保持。
+- 8章、縦カード6組、HTML表0件、目次アンカーの静的検査を維持。
+- `tests/check_autonomous_bus_subsidies_layout.py` をDraftに追加し、今後の修正で横スクロール表が再混入しないようチェックできるようにした（既存CIには未接続）。
+- kussoon.comのHTMLをこの実行環境から直接取得・PC描画することはできなかった。PC実画面検証は未完了。
+- V2側の公開済みHTMLは変更していない。正式公開には別途承認が必要。
