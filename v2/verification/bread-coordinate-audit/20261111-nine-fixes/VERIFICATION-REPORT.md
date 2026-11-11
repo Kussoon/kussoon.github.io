@@ -28,7 +28,15 @@
 
 ## ブラウザー検証
 
-ActionsでChromium・WebKit × 1440px・390pxの4条件を実施予定です。結果は実行後に追記します。
+[Actions実行結果](https://github.com/Kussoon/kussoon.github.io/actions/runs/42966304497)で、Chromium 141・WebKit 26 × 1440px・390pxの4条件すべてに合格しました。検証対象コミットは `0fa4e68a9f8ee5136ae3d21b8cf982fa812a56c4` です。
+
+- 初期件数・SAILOR除外、店舗検索、市別・種別絞り込み、ピン→詳細、詳細→地図、一覧選択、参考候補の紫三角、拡大縮小・全体表示を検査。
+- 9店舗は各店舗を独立して開き、画面に接続されたLeafletマーカーの実座標が指定値と一致することを4条件、計36回確認しました。これは施設・入口の現地測量の確認ではありません。
+- ChromiumのPC幅、WebKitのスマートフォン幅の保存画面を視認。住所全文・詳細・ボタン・フッターの表示を確認しました。4条件の画像は `screenshots/` に保存。
+- HTML全体の静的差分でフッターとUmami設定の保持を確認。解析サーバーへの実送信は試験していません。
+- **連続検索の試験では別の表示課題を検出しています。** 各店舗の単独表示の合格と区別し、診断画面と失敗した実行結果を `KNOWN-ISSUES.md` に保存しました。原因は未特定であり、今回の座標限定修正ではロジックを変更していません。
+
+報告書・validation.json・診断資料の追記後も、HTML・Excelのファイルハッシュは生成時の値のままです。最新のチェック状況は[PR #414のChecks](https://github.com/Kussoon/kussoon.github.io/pull/414/checks)を参照してください。
 
 試験では外部MarkerCluster 1.5.3の正規ファイルを取得し、SHA256 `1e4e1d22972a3926f48598e0caf14e3fe7049835d428a344fed4f9e3665b3508` を確認してブラウザーへ供給します。これはテスト環境だけの安定供給で、検証版HTMLの読込処理を修正するものではありません。
 
@@ -36,5 +44,15 @@ ActionsでChromium・WebKit × 1440px・390pxの4条件を実施予定です。�
 
 - iPhone Safari実機、現地、入口・売場の実測位置は未検証。座標の根拠はPR #410・#413の調査資料を参照しています。今回、地図・建物外形を新しく全件再調査したものではありません。
 - 外部地図タイル・解析サーバーへの実通信はブラウザー試験で抑止するため、背景地図の実配信とUmamiへの到達は試験対象外です。
-- 外部MarkerClusterライブラリの取得失敗時に初期化が停止する既存課題は未修正。今回の座標修正に混ぜず、独立した課題として保持します。
-- 公開・マージの可否はユーザー確認後に別途判断。現段階は検証候補です。
+- 以前報告された外部MarkerCluster読込失敗時の課題は、今回の座標修正に混ぜず、独立課題として保持します。今回の基準mainには既にtypeof判定によるL.layerGroupへの代替処理があります。その処理もそのまま保全し、今回は失敗経路を再検証していないため、課題解決済みとは扱いません。
+- 短時間の連続検索試験ではNo.111のピンが表示されない状態を検出。原因未特定で、単独表示試験とは区別します。[別課題と診断画面](KNOWN-ISSUES.md)を保存しました。
+- 位置修正候補としてのデータ検査は合格ですが、表示課題の採否・再確認を含め、正式公開の可否はユーザー確認後に別途判断。現段階は検証候補です。
+
+## 保存先
+
+新ドラフトPR：[PR #414](https://github.com/Kussoon/kussoon.github.io/pull/414)。ブランチは `fix/bread-nine-coordinates-20261111`。
+
+- HTML・差分CSV・validation.json・本報告書：`v2/verification/bread-coordinate-audit/20261111-nine-fixes/`
+- Excel：`data/bread/masters/five-city-master-v1.4.4-candidate-20261111.xlsx`
+- 比較CSV：`data/bread/views/five-city-master-v1.4.4-candidate-20261111.csv`
+- 検査：`v2/tests/verify-nine-coordinate-fix.py`、`v2/tests/nine-coordinate-fix.browser.cjs`、`.github/workflows/nine-coordinate-fix.yml`
