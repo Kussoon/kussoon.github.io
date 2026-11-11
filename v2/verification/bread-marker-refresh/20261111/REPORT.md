@@ -13,7 +13,7 @@
 - No.111への切替後、検索結果は `[111]`、ズーム16、クラスタ内のマーカーは1件、描画用featureGroupは0件、マーカーのDOMとmap所属はなし。例外は発生しない。
 - 初回検索で地図を広域から16へ更新すると、Leaflet本体の `{animate:false}` とは独立にMarkerClusterのズーム処理が開始する（`_inZoomAnimation=1`）。
 - `renderMap()`はその間もclearLayers/addLayerを行い、`fitVisible()`は同一ズームで中心を即時変更する。MarkerCluster 1.5.3の `_moveEnd()` はアニメーション中にreturnするため、`_currentShownBounds`が前の場所のままになる。No.111はその古い範囲外なのでaddLayer時も描画対象にならない。
-- 300ms後にアニメーションが終了しても、省略された移動は再実行されない。1秒待機後も内部1件/描画0件。さらに地図を1ピクセル動かすと内部座標を変えずに表示が復旧した。フィルター漏れ・座標欠損・店舗データの不整合ではない。
+- 300ms後にアニメーションが終了しても、省略された移動は再実行されない。1秒待機後も内部1件/描画0件。追加の[31秒待機試験](diagnostics/main-31s-before.log)でも復旧せず、古いクラスタ範囲ではNo.111が範囲外、実際の地図範囲では範囲内であることを確認した。さらに地図を1ピクセル動かすと内部座標を変えずに表示が復旧した。フィルター漏れ・座標欠損・店舗データの不整合ではない。
 - クラスタ設定の `animate:false` だけを変更した比較では、同じ順序を3回繰り返して内部1件/描画1件を維持した。[比較ログ](diagnostics/animation-disabled.log)。
 
 読込失敗もmainで再現した。typeof判定とL.layerGroupへの切替は存在するが、案内文を追記する `.mapnote` 要素は存在しない。`Cannot read properties of null (reading 'append')` により、facilityPins作成・mapへのlayer追加・初回updateに到達しない。
@@ -54,6 +54,9 @@ Chromium/WebKit × 1440/390px × 正常読込/JS読込失敗の8条件。正常�
 ### ローカル実行記録
 
 - 修正前main：回帰テストがNo.111で失敗。shown=[111] / clusterCount=1 / rendered=0 / markers=[]。
-- 修正後：Chromium（システム版）×1440/390px×正常/読込失敗の4条件すべてPASS。
+- 修正後：Chromium（システム版）×1440/390px×正常/読込失敗の4条件すべてPASS。[通常読込の画面](diagnostics/main-after.png)・[フォールバック画面](diagnostics/fallback-after.png)も視認。
 - `git diff --check`、JavaScript構文検査、bread-dataバイト一致：PASS。
-- WebKitとPR #414一時統合版の結果は検証完了後に追記する。
+- PR #414一時統合版：Chromium×1440/390px×正常/読込失敗の4条件すべてPASS。[統合版結果](diagnostics/integration-after-chromium.json)。9店舗の座標を保持したまま連続検索を検証。
+- [GitHub Actions](https://github.com/Kussoon/kussoon.github.io/actions/runs/42978519455)：Chromium/WebKit×1440/390px×正常/読込失敗の8条件すべてPASS。試験対象コミット `b824bd5400426a33d266a5ef959c024004fc92b0`。後続コミットは証拠・報告書のみで、製品HTML・テスト・workflowの変更なし。各画像・results.jsonはActions artifactにも14日間保存。
+- [既存V2回帰チェック](https://github.com/Kussoon/kussoon.github.io/actions/runs/42978519562)も成功。
+- 新規ドラフトPR：[\#415](https://github.com/Kussoon/kussoon.github.io/pull/415)。mainおよび参照4PRのhead SHAが開始時と同じであることを確認した。
