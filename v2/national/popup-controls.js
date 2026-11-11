@@ -81,7 +81,9 @@ function resetForMunicipality(){
  body.hidden=false;
  syncFoldControl();
  setCorrection(0);
- requestAnimationFrame(()=>requestAnimationFrame(alignTitleAtMapBottom));
+ // Mutation observers run before paint, so place the title immediately when the popup is visible.
+ alignTitleAtMapBottom();
+ requestAnimationFrame(alignTitleAtMapBottom);
 }
 fold.addEventListener('click',()=>{
  if(!collapsed){

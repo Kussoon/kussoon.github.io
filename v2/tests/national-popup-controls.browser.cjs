@@ -46,7 +46,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
     const head=document.querySelector('.popup-head').getBoundingClientRect(),body=document.querySelector('#popupBody').getBoundingClientRect();
     return {area:area.toJSON(),head:head.toJSON(),body:body.toJSON()};
    });
-   assert(Math.abs(initialAnchor.area.bottom-8-initialAnchor.head.bottom)<3,'initial title row sits at the lower edge inside the map');
+   assert(Math.abs(initialAnchor.area.bottom-8-initialAnchor.head.bottom)<3,'initial title row sits at the lower edge inside the map: '+JSON.stringify(initialAnchor));
    assert(initialAnchor.head.top>=initialAnchor.area.top&&initialAnchor.head.bottom<=initialAnchor.area.bottom,'the title row is contained in the map');
    assert(initialAnchor.body.top>=initialAnchor.area.bottom-14&&initialAnchor.body.bottom>initialAnchor.area.bottom+40,'popup details continue below the map');
    const initialTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
