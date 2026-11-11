@@ -81,9 +81,8 @@ function resetForMunicipality(){
  body.hidden=false;
  syncFoldControl();
  setCorrection(0);
- // Mutation observers run before paint, so place the title immediately when the popup is visible.
- alignTitleAtMapBottom();
- requestAnimationFrame(alignTitleAtMapBottom);
+ // Mutation observers run before paint, so place the title immediately when it is visible.
+ if(!popup.hidden)alignTitleAtMapBottom();
 }
 fold.addEventListener('click',()=>{
  if(!collapsed){
@@ -122,5 +121,7 @@ if(map)new MutationObserver(()=>{
  }
 }).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
 syncFoldControl();
+new MutationObserver(()=>{if(!popup.hidden)alignTitleAtMapBottom();})
+ .observe(popup,{attributes:true,attributeFilter:['hidden']});
 window.KussoonPopupControlsReady=true;
 })();

@@ -55,7 +55,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
    const collapsed=await popup.evaluate(e=>({rect:e.getBoundingClientRect().toJSON(),area:(e.offsetParent||e.parentElement).getBoundingClientRect().toJSON()}));
-   assert(Math.abs(collapsed.rect.top-initialTop)<3,'the first fold keeps the title stationary and retracts content upward');
+   assert(Math.abs(collapsed.rect.top-initialTop)<3,'the first fold keeps the title stationary and retracts content upward: before='+initialTop+' after='+collapsed.rect.top+' head='+JSON.stringify(initialAnchor.head));
    await grip.scrollIntoViewIfNeeded();
    let box=await grip.boundingBox();
    await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();
