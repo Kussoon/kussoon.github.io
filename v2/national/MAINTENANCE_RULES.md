@@ -134,7 +134,7 @@ GitHubのPR一覧で #1〜#290 の**実在288件**を列挙し、件名・本文
 
 |ID・名称|現在有効な規則／適用条件・例外|根拠・最終決定|現行コード|自動テスト・不足|状態|
 |---|---|---|---|---|---|
-|R35 吹き出し操作|**正式版:** リンク・ボタンなど操作要素を除く全域から上下のみドラッグできる。左右移動は禁止し、吹き出しは地図下のコンテンツに重なってよい。自治体ごとの初回折り畳みは地図下端へ寄せる。以後の展開はタイトル位置を保って本文を下へ広げ、折り畳みはタイトル位置を保って本文を上へ畳む。×で閉じ、自治体選択変更で位置と開閉サイクルを初期化し、地図自体は移動しない。リンク到達性・可変高・内部スクロールはR16を維持。|[#409](https://github.com/Kussoon/kussoon.github.io/pull/409)（比較試作を2026-11-12ユーザー確認・正式採用） [#294](https://github.com/Kussoon/kussoon.github.io/pull/294) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297)|`v2/national/popup-controls.js`<br>`maps/national-municipalities.html`|`v2/tests/national-popup-controls.browser.cjs`（Chromium・WebKit、390px）|正式採用／公開後のSafari実機確認は別途|
+|R35 吹き出し操作|**正式版:** リンク・ボタンなど操作要素を除く全域から上下のみドラッグできる。左右移動は禁止し、吹き出しは地図下のコンテンツに重なってよい。自治体選択時の初期表示ではタイトル（自治体名・確認済み読み・操作ボタン）のみが地図内下端に収まる位置へ置き、本文は地図下方へ表示する。展開はタイトル位置を固定して本文を下へ広げ、折り畳みはタイトル位置を固定して本文を上へ畳む。初回/以後の差を設けず同じ開閉方向を守る。×で閉じ、自治体選択変更で位置と開閉サイクルを初期化し、地図自体は移動しない。リンク到達性・可変高・内部スクロールはR16を維持。|[#423](https://github.com/Kussoon/kussoon.github.io/pull/423)（2026-11-12初期位置・開閉方向の更新） [#409](https://github.com/Kussoon/kussoon.github.io/pull/409)（比較試作を2026-11-12ユーザー確認・正式採用） [#294](https://github.com/Kussoon/kussoon.github.io/pull/294) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296) [#297](https://github.com/Kussoon/kussoon.github.io/pull/297)|`v2/national/popup-controls.js`<br>`maps/national-municipalities.html`|`v2/tests/national-popup-controls.browser.cjs`（Chromium・WebKit、390px）|正式採用／公開後のSafari実機確認は別途|
 
 |R36 吹き出しの読み仮名|吹き出しタイトル直下には確認済みの自治体読みを常時表示し、地図内ラベルの読みON/OFFから独立させる。地図内ラベルは初期OFF・切替式。市＋区／郡＋町村の確認済みpartsを使い、未確認の読みは推測しない。折り畳み中もタイトルと読みは表示し続ける。|[#409](https://github.com/Kussoon/kussoon.github.io/pull/409)（比較試作を2026-11-12ユーザー確認・正式採用） [#295](https://github.com/Kussoon/kussoon.github.io/pull/295) [#296](https://github.com/Kussoon/kussoon.github.io/pull/296)|`maps/national-municipalities.html`<br>`v2/national/popup-controls.js`|`v2/tests/national-popup-controls.browser.cjs`（OFF/ON・折り畳み状態）|正式採用／確認済み読みのみ|
 
@@ -344,4 +344,4 @@ PR #344のマージ後、公開ページは `national-progressive-labels.js?v=30
 
 ## 2026-11-12 追補：PR #409 吹き出し操作の正式採用
 
-ユーザーが比較試作を確認し、正式採用を承認。初回折り畳みの下端寄せ、以後の下方展開・上方折り畳み、自治体名タイトルの確認済み読み常時表示を全国正式版へ反映する。地図内ラベルのよみがな切替、ドラッグ・内部スクロール・リンク・地図操作など他の確定仕様を維持する。自動回帰テストはChromium／WebKitの390px環境で実施し、公開版ではiPhone Safari実機確認を別途行う。
+2026-11-12ユーザー指示により吹き出しの初期位置・開閉方向を更新。自治体名タイトル（確認済み読み・操作部を含む）を地図下端に置き、本文は地図下方へ表示。開閉時はタイトル位置を固定し、展開は下方・折り畳みは上方に統一する。自治体名の確認済み読み常時表示、地図内ラベルのよみがな切替、ドラッグ・内部スクロール・リンク・地図操作など他の確定仕様を維持する。

@@ -41,12 +41,22 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    assert(row.headingAfterGrip&&row.notOverFold&&row.notOverClose,'390px title and controls do not overlap');
    assert(row.foldSize[0]>=44&&row.foldSize[1]>=44&&row.closeSize[0]>=44&&row.closeSize[1]>=44,'collapse and close targets are at least 44px');
 
-   await fold.focus();await fold.press('Enter');
+   const initialAnchor=await child().evaluate(()=>{
+    const p=document.querySelector('#officePopup'),area=(p.offsetParent||p.parentElement).getBoundingClientRect();
+    const head=document.querySelector('.popup-head').getBoundingClientRect(),body=document.querySelector('#popupBody').getBoundingClientRect();
+    return {area:area.toJSON(),head:head.toJSON(),body:body.toJSON()};
+   });
+   assert(Math.abs(initialAnchor.area.bottom-8-initialAnchor.head.bottom)<7,'initial title row sits at the lower edge inside the map: '+JSON.stringify(initialAnchor));
+   assert(initialAnchor.head.top>=initialAnchor.area.top&&initialAnchor.head.bottom<=initialAnchor.area.bottom,'the title row is contained in the map');
+   assert(initialAnchor.body.top>=initialAnchor.area.bottom-14&&initialAnchor.body.bottom>initialAnchor.area.bottom+40,'popup details continue below the map');
+   await fold.focus();
+   const initialTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
+   await fold.press('Enter');
    await child().waitForFunction(()=>document.querySelector('#popupBody').hidden);
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'collapsed body is hidden');
    assert.equal(await frame.locator('#popupCollapse').getAttribute('aria-expanded'),'false');
    const collapsed=await popup.evaluate(e=>({rect:e.getBoundingClientRect().toJSON(),area:(e.offsetParent||e.parentElement).getBoundingClientRect().toJSON()}));
-   assert(Math.abs(collapsed.area.bottom-collapsed.rect.bottom-8)<3,'collapse automatically docks the popup at map bottom');
+   assert(Math.abs(collapsed.rect.top-initialTop)<3,'the first fold keeps the title stationary and retracts content upward: before='+initialTop+' after='+collapsed.rect.top+' head='+JSON.stringify(initialAnchor.head));
    await grip.scrollIntoViewIfNeeded();
    let box=await grip.boundingBox();
    await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();
@@ -58,8 +68,7 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await frame.locator('#popupBody:not([hidden])').waitFor();
    assert(Math.abs((await popup.evaluate(e=>e.getBoundingClientRect().top))-collapsedDragTop)<3,'first expansion grows downward from the dragged collapsed title position');
    assert.equal(await frame.locator('#popupActions a').count(),3,'reopened body restores the links');
-   // Only the FIRST fold docks at the bottom. Subsequent folds collapse
-   // upward around the title's current position; expansion grows downward.
+   // Every fold keeps the title fixed and retracts content upward; every expansion grows downward.
    const secondExpandedTop=await popup.evaluate(e=>e.getBoundingClientRect().top);
    await frame.locator('#popupCollapse').click();
    assert.equal(await frame.locator('#popupBody').isVisible(),false,'second fold hides body');
@@ -165,10 +174,21 @@ const {start}=require('./helpers/nationwide-browser.cjs');
    await page.locator('#officePopup:not([hidden])').waitFor({timeout:60000});
    await page.locator('#popupCollapse').waitFor({state:'visible',timeout:60000});
    assert.equal(await page.locator('#popupBody').getAttribute('hidden'),null,'formal page enables the improved popup controls by default');
-   await page.locator('#popupCollapse').click();
+   const formalAnchor=await page.evaluate(()=>{
+    const p=document.querySelector('#officePopup'),area=(p.offsetParent||p.parentElement).getBoundingClientRect();
+    const head=document.querySelector('.popup-head').getBoundingClientRect(),body=document.querySelector('#popupBody').getBoundingClientRect();
+    return {area:area.toJSON(),head:head.toJSON(),body:body.toJSON()};
+   });
+   assert(Math.abs(formalAnchor.area.bottom-8-formalAnchor.head.bottom)<7,'formal popup title row sits at the lower map edge');
+   assert(formalAnchor.body.top>=formalAnchor.area.bottom-14,'formal popup details begin below the map');
+   await page.locator('#popupCollapse').focus();
+   const formalTitleTop=await page.locator('#officePopup').evaluate(e=>e.getBoundingClientRect().top);
+   await page.locator('#popupCollapse').press('Enter');
    assert.equal(await page.locator('#popupBody').isVisible(),false,'formal page can collapse municipality details');
-   await page.locator('#popupCollapse').click();
+   assert(Math.abs(await page.locator('#officePopup').evaluate(e=>e.getBoundingClientRect().top)-formalTitleTop)<3,'formal fold keeps title stationary and folds content upward');
+   await page.locator('#popupCollapse').press('Enter');
    assert.equal(await page.locator('#popupBody').isVisible(),true,'formal page restores municipality details');
+   assert(Math.abs(await page.locator('#officePopup').evaluate(e=>e.getBoundingClientRect().top)-formalTitleTop)<3,'formal expansion grows downward from the title');
    assert.deepEqual(app.errors,[]);
    console.log('PASS popup-controls '+engine+': phone-width collision, title grip and noninteractive body drag, collapse/reopen, selection, links, fullscreen, zoom and boundary contracts');
   }finally{await app.close();}
