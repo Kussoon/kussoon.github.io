@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="自動運転バスに使われる国の補助金、車両費、運行収入、採算性、事業継続を、国土交通省と財務省の公的資料から調べます。">
+<meta name="robots" content="noindex,nofollow">
+
+<title>自動運転バスと補助金の実態｜Kussoon</title>
+<style>
+:root{color-scheme:light;--ink:#243448;--muted:#5c6e7f;--line:#dbe3e9;--accent:#176a70;--bg:#f5f8fa}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.9;color:var(--ink)}
+a{color:#126675;text-underline-offset:3px;overflow-wrap:anywhere}a:focus-visible{outline:3px solid #e8a747;outline-offset:3px}
+header{background:#fff;border-bottom:1px solid var(--line)}.header-inner,.wrap{width:min(900px,calc(100% - 32px));margin:auto}.header-inner{padding:14px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{color:var(--ink);font-weight:800;text-decoration:none}.back{font-size:.82rem}
+.wrap{padding:22px 0 56px}.article,.toc{background:#fff;border:1px solid var(--line);border-radius:14px}.article{padding:clamp(20px,5vw,46px)}
+h1,h2,h3{line-height:1.48}h1{font-size:clamp(1.65rem,4.3vw,2.25rem);margin:.1em 0 .5em}h2{font-size:clamp(1.2rem,3vw,1.45rem);margin:2.1em 0 .8em;padding-bottom:10px;border-bottom:2px solid #cce0e2}h3{font-size:1.07rem;margin:1.7em 0 .5em}.eyebrow{color:var(--accent);font-weight:700;font-size:.9rem}.subtitle{font-weight:700;color:#4d6072;font-size:1.06rem}.meta{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin:20px 0}.lead{font-size:1.05rem}.toc{padding:15px 22px;margin:20px 0}.toc ol{margin:5px 0;padding-left:1.5rem}.toc li{margin:3px 0}.note{background:#f0f7f6;border-left:4px solid var(--accent);padding:14px 17px;border-radius:7px;margin:18px 0}.notice{font-size:.88rem;color:var(--muted)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;min-width:560px;font-size:.91rem}th,td{border-bottom:1px solid var(--line);padding:11px 12px;text-align:left;vertical-align:top}th{background:#edf4f5;font-weight:800}tr:last-child td{border-bottom:0}.source{font-size:.83rem;color:var(--muted);margin:8px 0 22px}ul{padding-left:1.4rem}li{margin:7px 0}.status{display:inline-block;font-weight:700;background:#fff2d9;border:1px solid #ecd298;border-radius:6px;padding:2px 9px;font-size:.84rem}.footer{max-width:1050px;margin:20px auto 0;padding:25px 16px calc(25px + env(safe-area-inset-bottom));background:#f8fafc;border-top:1px solid #dce5eb;color:#40566a;font-size:.87rem}.footer-inner{max-width:900px;margin:auto}.footer nav{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 19px}.footer a{color:#225f89}.footer small{color:#70808b}.skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:10}@media(max-width:550px){.wrap{width:calc(100% - 22px);padding-top:15px}.header-inner{width:calc(100% - 22px)}.article{border-radius:10px}.toc{padding:14px 17px}table{font-size:.85rem}}
+.scroll-hint{display:none;font-size:.79rem;color:var(--muted);margin:14px 0 6px;font-weight:700}
+@media(max-width:600px){.scroll-hint{display:block}.table-scroll{overscroll-behavior-x:contain}.table-scroll:focus-visible{outline:3px solid #e8a747;outline-offset:3px}}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){if(payload&&typeof payload==='object'){for(const key of ['url','referrer']){if(typeof payload[key]==='string')payload[key]=payload[key].split(/[?#]/)[0];}}return payload;};</script>
+<script data-before-send="kussoonUmamiBeforeSend" data-domains="kussoon.com,www.kussoon.com" data-exclude-hash="true" data-exclude-search="true" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" defer src="https://cloud.umami.is/script.js"></script>
+</head>
+<body id="top"><a class="skip" href="#main">本文へ移動</a>
+<header><div class="header-inner"><a class="brand" href="/">Kussoon</a><a class="back" href="/driving/">← 運転・モビリティへ</a></div></header>
+<main class="wrap" id="main"><div class="note" role="note"><strong>V2検証版：</strong>これは公開前の表示確認用ページです。記事の内容は確認・修正中であり、正式記事ではありません。</div><article class="article">
+<p class="eyebrow">公的資料から調べる｜V2検証版</p>
+<h1>自動運転バスと補助金の実態</h1>
+<p class="subtitle">国の支援はいくら？ 採算は取れる？ 公的資料から調べる</p>
+<p class="lead">日本各地で自動運転バスの実証運行が進んでいます。しかし、車両やシステムの導入には多額の費用がかかります。国はいくら支援し、実際にどのような成果が得られているのでしょうか。国土交通省と財務省の公表資料を中心に、確認できた事実と分からない点を分けて紹介します。</p>
+<p class="meta">調査基準日：<time datetime="2026-11-11">2026年11月11日</time> ／ 最終確認日：2026年11月11日 ／ 原稿更新日：2026年11月11日<br>公開状況：<span class="status">公開前の草稿</span></p>
+<div class="note"><strong>数字の読み方：</strong>国の「予算額」、個別事業への「交付決定額」、実際に使われた「支出額」は別の数字です。また、実証運行とレベル4の営業運行も同じではありません。以下では混同しないよう区別します。</div>
+<nav class="toc" aria-label="記事の目次"><strong>目次</strong><ol>
+<li><a href="#why">なぜ補助金が必要なのか</a></li><li><a href="#support">国はいくら支援しているのか</a></li><li><a href="#profit">実際に採算は取れているのか</a></li><li><a href="#audit">財務省・会計検査院の評価</a></li><li><a href="#latest">最新の調査結果</a></li><li><a href="#history">過去の更新履歴</a></li></ol></nav>
+<section id="why"><h2>第1章　自動運転バスは、なぜ補助金が必要なのか</h2>
+<p>自動運転バスには、一般のバス車両に加えて、自動運転システム、周囲を認識するセンサー、運行ルートの調査や安全性の検証などが必要です。国土交通省の自動運転社会実装推進事業は、地方公共団体などがレベル4の移動サービスを実現するための<strong>初期投資</strong>を支援しています。</p>
+<p>ただし、初期投資を補助しても、その後の保守・運行・遠隔監視などの費用がなくなるわけではありません。補助金終了後の負担がどうなるかが、事業継続を考えるうえで重要です。</p>
+<p class="source">出典：<a href="https://www.mlit.go.jp/report/press/jidosha07_hh_000553.html">国土交通省・2026年度事業の公募開始（2026年3月27日）</a></p>
+</section>
+<section id="support"><h2>第2章　国はいくら支援しているのか</h2>
+<p>2026年度の公募では、重点支援事業と一般支援事業の補助率はともに4/5（80％）です。ただし、すべての費用が無条件に8割補助されるのではなく、対象経費や上限額などの条件があります。</p>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
+<div class="table-scroll" role="region" aria-label="2026年度補助制度の一覧" tabindex="0"><table><thead><tr><th scope="col">区分</th><th scope="col">補助率</th><th scope="col">補助上限</th><th scope="col">対象の概要</th></tr></thead><tbody>
+<tr><th scope="row">重点支援</th><td>4/5</td><td>4億円</td><td>他地域への展開が期待される先駆的な事業</td></tr>
+<tr><th scope="row">一般支援</th><td>4/5</td><td>2億円</td><td>早期のレベル4実装が見込まれる事業</td></tr>
+<tr><th scope="row">省人化支援</th><td>2/5</td><td>2,000万円</td><td>レベル4実装済みの事業で、省人化向上の課題解決に取り組む事業</td></tr>
+</tbody></table></div>
+<p class="source">出典：<a href="https://www.mlit.go.jp/report/press/jidosha07_hh_000553.html">国土交通省・2026年度公募案内</a></p>
+<p>2025年度は67事業（重点13、一般54）、2026年度は37事業（重点5、一般32）について交付決定が公表されています。これは各年度の<strong>交付決定事業数</strong>であり、レベル4運行が実際に始まった件数や、支払済みの補助金額ではありません。</p>
+<p class="source">出典：<a href="https://www.mlit.go.jp/report/press/jidosha07_hh_000545.html">国土交通省・2025年度公募結果（2025年7月18日）</a>／<a href="https://www.mlit.go.jp/report/press/jidosha07_hh_000569.html">2026年度公募結果（2026年8月21日）</a></p>
+</section>
+<section id="profit"><h2>第3章　実際に採算は取れているのか</h2>
+<p>財務省の2025年度予算執行調査では、2022～2024年度の事業を対象に107先を調査し、106先が回答しました。調査対象には172の実証ルートが含まれます。</p>
+<h3>車両費と事業費</h3>
+<p>中型・大型の自動運転バスを購入したルートでは、<strong>1台当たり事業費は平均約1億5,000万円</strong>、うち<strong>車両費は平均約1億1,000万円</strong>でした。これは対象ルートの平均であり、全国すべての車両の販売価格ではありません。</p>
+<h3>平均事業費の内訳</h3>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
+<div class="table-scroll" role="region" aria-label="中型・大型自動運転バスを購入した場合の事業費内訳" tabindex="0"><table><thead><tr><th scope="col">費目</th><th scope="col">1台当たり平均</th></tr></thead><tbody>
+<tr><th scope="row">車両費</th><td>1億600万円</td></tr><tr><th scope="row">システム・設備費</th><td>2,300万円</td></tr><tr><th scope="row">その他</th><td>2,000万円</td></tr><tr><th scope="row">合計</th><td>1億4,900万円（約1.5億円）</td></tr>
+</tbody></table></div>
+<p>財務省が比較対象として示した一般的な路線バスの車両価格は1台約2,000万～3,000万円です。ただし、この差額がそのまま補助金額や赤字額になるわけではありません。また、車両費には導入条件の違いがあるため、自治体別に比較する際は車両の大きさや装備も確認します。</p>
+<p class="source">出典：<a href="https://www.mof.go.jp/policy/budget/topics/budget_execution_audit/fy2025/sy0706/0706_all.pdf#page=83">財務省・総括調査票 3/3、図3</a></p>
+<h3>自治体の実例：鳥取市の2025年度実証運行</h3>
+<p>鳥取市が2026年3月31日に公開した報告書によると、2025年12月12～17日の6日間に、自動運転バスを一般向けに無料で運行しました。運行は1日7便で、使用車両はティアフォー製の小型EVバス「Minibus1.0」。ドライバーと保安員が同乗し、状況に応じて手動介入を行いました。一般試乗後のアンケートは345票（回収率83.7％）でした。</p>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="鳥取市の自動運転実証結果と確認できない項目"><table><thead><tr><th scope="col">調査項目</th><th scope="col">鳥取市・2025年度</th></tr></thead><tbody>
+<tr><th scope="row">一般向け運行</th><td>2025年12月12～17日、6日間・1日7便</td></tr>
+<tr><th scope="row">運賃</th><td>無料（有料運行の収入実績ではない）</td></tr>
+<tr><th scope="row">乗務員</th><td>ドライバー・保安員が同乗</td></tr>
+<tr><th scope="row">試乗者アンケート</th><td>345票（回収率83.7％）※乗客総数と混同しない</td></tr>
+<tr><th scope="row">補助金の交付額・実支出額</th><td>この公開報告書からは確認できない</td></tr>
+<tr><th scope="row">年間運行費・実運賃収入</th><td>実証期間の報告からは通年収支を確認できない</td></tr>
+<tr><th scope="row">無人化による人件費削減実績</th><td>ドライバー同乗のため、この実証では確認できない</td></tr>
+</tbody></table></div>
+<p>技術面ではルート見直しなどで自動走行率の改善が報告されましたが、路上駐車や複雑な車線変更などが残る課題として挙げられました。<strong>運行実証の成果と、補助金終了後の事業採算性は別の評価項目</strong>です。</p>
+<p class="source">出典：<a href="https://www.city.tottori.lg.jp/page/38721.html">鳥取市・成果報告公開ページ（2026年3月31日）</a>／<a href="https://www.city.tottori.lg.jp/uploaded/attachment/45803.pdf">「令和7年度自動運転バス実証実験の実証結果報告」（PDF）5～7、12、58ページ</a></p>
+<h3>ほかの自治体の実例：有料運行・車両費・利用者数</h3>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="自治体別の公表実績比較"><table><thead><tr><th scope="col">自治体・対象年度</th><th scope="col">確認できた実績</th><th scope="col">収支についての注意</th></tr></thead><tbody>
+<tr><th scope="row">兵庫県三田市・2024年度</th><td>中型バス、33日間、有料（大人210円～）、利用者1,415人、1便平均約7人、自動走行割合96％</td><td>運賃の設定は確認できるが、実際の運賃収入総額・運行費総額はこの公表ページから確認できない。</td></tr>
+<tr><th scope="row">滋賀県・彦根市での2025年度実証</th><td>2026年2月2～16日の15日間に一般運行。無料、290便、利用者1,819人、1便平均6.27人、自動走行割合83.7％</td><td>無料実証のため運賃収入による採算を示すデータではない。レベル2で実施。</td></tr>
+<tr><th scope="row">佐賀県佐賀市・2026年度計画（10月21日時点）</th><td>小型EVバス1台（19席）の調達予算約1億円、別途実証費用約4,600万円。車両購入の国の補助率4/5。11月14日から39日間の有料実証を予定（10月21日会見時点）。運賃は通常の路線バスと同額で、バスセンター～サンライズパーク間は180円の予定。</td><td>いずれも会見時点の予算・計画であり、実支出額・実際の国庫補助金受領額・乗客収入ではない。</td></tr>
+</tbody></table></div>
+<p>三田市は有料運行の実利用者数を公表しており、佐賀市は車両調達費用と実証費用を区別して説明しています。一方、運賃が設定されていても、<strong>運賃収入の総額と年間の運行経費が揃わなければ、採算が取れているとは判断できません。</strong>自治体や年度で車両規模・運行日数・実証条件が異なるため、人数や費用の単純な順位付けも避けます。</p>
+<p class="source">出典：<a href="https://www.city.sanda.lg.jp/soshiki/35/gyomu/doro_kotsu/kanenndojidouunntenn/34648.html">三田市「令和6年度自動運転バス実証実験結果」</a>／<a href="https://www.pref.shiga.lg.jp/ra00/press-release/24139.html">滋賀県「令和7年度実証運行結果」（2026年4月30日）</a>／<a href="https://www.city.saga.lg.jp/material/files/group/1/kisyakaiken_kaikenroku1021.pdf">佐賀市「2026年10月21日市長記者会見録」PDF 8～9ページ</a></p>
+<h3>継続運行の費用：茨城県境町の2024年度決算資料</h3>
+<p>2020年11月から無料の自動運転バスを定常運行してきた境町は、2025年12月・2026年1月号の町広報で「令和6年度境町の財政」を公表しています。掲載額は<strong>自動運転バス運行事業が1億839万円</strong>、別枠の<strong>自動運転バス運行体制強化事業が1億2,000万円</strong>です。前者の財源表示は国費50％・一般財源50％、後者は国費100％です。</p>
+<p>これは町の決算広報に掲載された<strong>事業費</strong>です。前者の金額をそのまま車両1台の維持費や運転士の人件費だけと解釈することはできません。また、強化事業を通常運行費に加算して「年間運行コスト」と呼ぶのも適切ではありません。町の案内では乗車料金は無料です。ただし、2026年11月11日に確認した町の公式運行案内は、車両メンテナンスのため自動運転バスの運行を休止し、普通車（ハイエース等）で代替運行していると表示しています。運行開始からの継続的な取り組みと、自動運転車両が現在運行中かどうかは区別する必要があります。</p>
+<p>別の自治体である山梨県甲州市の議会視察報告によれば、境町の2020年4月～2025年3月の準備を含めた5年間の運用費は約5.2億円と説明されています。ただしこれは視察報告による集計で、個別年度の決算額の合計を当記事で独立検算したものではありません。</p>
+<p class="source">出典：<a href="https://www.town.ibaraki-sakai.lg.jp/data/doc/1769040591_doc_15_0.pdf">境町「広報さかい」2025年12月・2026年1月号、令和6年度決算紹介（PDF）</a>／<a href="https://www.town.ibaraki-sakai.lg.jp/mobile/page/page002440.html">境町・運行案内</a>／<a href="https://www.city.koshu.yamanashi.jp/docs/2025091700019/file_contents/R07tuika3.pdf">甲州市議会・境町視察研修報告書（PDF）</a></p>
+<h3>予算と実績を混同しない：埼玉県和光市の計画変更</h3>
+<p>和光市が2025年8月に示した「2025年度以降の事業計画（案）」は、2026年度の歳出を6,800万円、歳入を5,588万円、市負担額を1,212万円と見込んでいました。歳入の内訳には運賃収入320万円、県補助金624万円、国庫補助金4,644万円が含まれます。これらは計画上の見込額であり、実際の受領額や収入額ではありません。また、バス購入費9,680万円は2025年度に計上する案でした。</p>
+<p>しかし、<strong>2025年12月18日に市議会で車両購入議案が否決され、購入契約は不成立となり、2025年度の実証走行も中止</strong>されました。和光市は2026年8月時点で、財源、事業規模、時期などを改めて精査し見直していると説明しています。このため、2025年8月の計画額を2026年度の確定予算や支出済み額としては掲載できません。</p>
+<p class="source">出典：<a href="https://www.city.wako.lg.jp/_res/projects/default_project/_page_/001/012/795/zigyoukeikakuann.pdf">和光市・事業計画（案）3ページ</a>／<a href="https://www.city.wako.lg.jp/machizukuri/kotsu/1010340/1010047/1012795.html">和光市・契約不成立のお知らせ（2026年6月3日更新）</a>／<a href="https://www.city.wako.lg.jp/machizukuri/kotsu/1010340/1010047/1013962.html">和光市・事業見直しの説明</a></p>
+<h3>参考：年間ランニングコストの試算</h3>
+<p>大阪府のFAQでは、経済産業省による試算として、人件費・運用費等のランニングコストを年間2,154万円と紹介しています。<strong>特定自治体で支出が確定した決算額ではありません。</strong>車両数や運行日数・サービス水準などが異なる境町の数字との直接比較はできません。</p>
+<p class="source">出典：<a href="https://www.pref.osaka.lg.jp/faq/o130050/faq_000019.html">大阪府・南河内地域における自動運転バスの運行コストに関するFAQ</a></p>
+<h3>2024年度の財源内訳</h3>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
+<div class="table-scroll" role="region" aria-label="財源の内訳" tabindex="0"><table><thead><tr><th scope="col">財源</th><th scope="col">構成比</th></tr></thead><tbody>
+<tr><td>国費補助</td><td>88％</td></tr><tr><td>自治体等負担</td><td>10％</td></tr><tr><td>地方費補助</td><td>1％</td></tr><tr><td>運行収入等</td><td>1％</td></tr>
+</tbody></table></div>
+<p>財務省は、実証段階で9割以上の自治体等が無料運行しており、運行収入等がわずかであるとしています。この財源構成は<strong>調査対象事業の2024年度の内訳</strong>で、全国すべての実運行事業の収支を表すものではありません。</p>
+<h3>実装・継続の見通し</h3>
+<p>2024年度に実証を行ったルートなどについて、既存の有人路線を置き換える予定は「未定」が87ルート、「置き換える」が27ルート、「置き換えない」が7ルート、「自動運転の実装予定なし」が10ルートでした。</p>
+<p>また、実装後の費用について「運行収入等のみで対応」は5先、「運行収入および自治体等予算で実施」は19先、国・県の支援等を想定する自治体等は12先でした。各区分が回答全体の何割に当たるかを計算する際は、設問ごとの対象数の確認が必要です。</p>
+<div class="note"><strong>自治体別の比較：</strong>国土交通省は2025年度の自治体別成果報告書を公開していますが、圧縮ファイル内の個別数値はこの初回原稿では未検証です。利用者数・運賃収入・年間運行費・自治体負担額・省人化効果については、<strong>公表資料の個別確認待ち</strong>としています。数字を推測して掲載することはしません。</div>
+<p class="source">出典：<a href="https://www.mof.go.jp/policy/budget/topics/budget_execution_audit/fy2025/sy0706/0706_all.pdf#page=83">財務省「2025年度予算執行調査（23）自動運転社会実装推進事業」全3ページ</a>／<a href="https://www.mlit.go.jp/jidosha/jidosha_fr7_000095.html">国土交通省・2025年度成果報告書公開ページ</a></p>
+</section>
+<section id="audit"><h2>第4章　財務省・会計検査院はどう評価しているのか</h2>
+<h3>財務省の予算執行調査</h3>
+<p>財務省の予算執行調査は、会計検査院による不適切支出の認定ではありません。事業の効率性や効果を検討する行政上の調査です。</p><p>財務省は、車両費が高く、省人化による労務費削減を考慮しても採算性に課題があると指摘しています。また、レベル4実装までの中間目標を決め、達成状況を国と自治体等が評価・公表する仕組みなどを提言しました。</p>
+<h3>財務省の指摘は制度にどう反映されたか</h3>
+<p>財務省が2026年1月に公表した「2026年度予算案への反映状況」では、2025年度の事業実績報告書から、自治体等が技術面・経営面の計画達成状況を自己評価する様式に変更したことが示されています。国土交通省も自己評価を再評価し、2026年度の事業者選考に活用する方針です。</p>
+<p>また、2026年度以降は、自治体等がレベル4実装計画を公表し、目標未達成の場合は補助金の一部返還を求める仕組みを導入するとしています。有人路線の置き換えを基本的な採択条件とし、車両の価格低減、<strong>1人で複数台を遠隔監視する「1対N」運行</strong>などを重視すると説明しています。これは改善策の制度化についての記述であり、運行費削減の成果が実証済みであることを示すものではありません。</p>
+<p class="source">出典：<a href="https://www.mof.go.jp/policy/budget/topics/budget_execution_audit/fy2025/hanei/0801all.pdf">財務省「2026年度予算案への反映状況」23ページ</a>／<a href="https://www.mlit.go.jp/jidosha/content/001976722.pdf">国土交通省「2026年度自動運転社会実装推進事業概要（案）」</a></p>
+<h3>会計検査院の検査結果：別事業の基金も確認</h3>
+<p>会計検査院の2025年12月公表「国庫補助金等により設置造成された基金の状況に関する会計検査の結果」に、総務省の「自動運転の社会実装に向けたデジタルインフラ整備事業」が掲載されています。別図表4の基金番号1022には、<strong>2023年度末時点の基金保有額204億円</strong>（国庫補助金等相当額も204億円）と記載されています。</p>
+<p><strong>この204億円は基金に残る保有額であり、特定の自動運転バス事業への支出額ではありません。</strong>車両導入の国土交通省補助事業とは所管・制度が異なるため、この記事の自治体別補助金額や年間運行費に加算しません。なお、基金全体を対象とする会計検査と、個別の自動運転バス補助金に対する不適切支出の認定は別です。</p>
+<p>国土交通省の「自動運転社会実装推進事業」を直接対象にした会計検査院の個別指摘については、今回の検索範囲では特定できていません。これは問題があった、またはなかったことを意味しません。</p>
+<p class="source">出典：<a href="https://report.jbaudit.go.jp/org/r07/YOUSEI1/2025-r07-Y1105-0.htm">会計検査院・2025年12月の基金検査報告 別図表4、基金番号1022</a>／<a href="https://report.jbaudit.go.jp/org/r07/YOUSEI1/2025-r07-Y1136-0.htm">同・別図表6（基金への交付額）</a>／<a href="https://www.mof.go.jp/policy/budget/topics/budget_execution_audit/fy2025/sy0706/0706_all.pdf#page=83">財務省・予算執行調査</a></p>
+</section>
+<section id="latest"><h2>第5章　最新の調査結果</h2>
+<h3>2026年11月11日確認分</h3>
+<p>国土交通省の自動運転社会実装推進事業と別に、道路局は2026年3月、先行的事業化地域のうち5地域と連携して、路車協調システムや走行空間整備の実証を行うと公表しています。車両側への補助と道路側の支援は事業が異なるため、自治体別の総公費を調べる際は重複計上を避ける必要があります。</p>
+<p class="source">出典：<a href="https://www.mlit.go.jp/road/ITS/j-html/automatic-driving-social-result_r8.html">国土交通省道路局・2026年3月6日公表</a></p>
+<ul><li>2026年度の国土交通省事業では、重点支援5事業、一般支援32事業の計37事業に交付決定（2026年8月21日公表）。これは実際の支出額や稼働数ではありません。</li>
+<li>2026年度の補助制度は、重点4億円、一般2億円、省人化2,000万円を上限とする枠組み。</li>
+<li>財務省の2025年度予算執行調査を確認。対象事業における費用・財源・実装計画の課題を整理。</li></ul>
+<p class="notice">予算資料に記載される「20,905百万円の内数」（2025年度）および「20,560百万円の内数」（2026年度予算案）は、より広い費目の一部であり、この自動運転事業に同額が配分されたことを意味しません。事業単独の予算・実支出として扱いません。</p>
+<p class="notice">本節の「最新」は最終確認日までに確認できた資料を意味します。新たな事実がない場合、更新履歴を無理に増やしません。</p>
+</section>
+<section id="history"><h2>第6章　過去の更新履歴</h2>
+<p>2026年11月11日：初回原稿作成（公開前）。初回公開が確定した月から、重要な更新や訂正を月別バックナンバーに保存します。</p>
+<p>正式公開後は「最終確認日」と「本文最終更新日」を区別して管理します。過去の数値に訂正が生じた場合は、変更内容・変更日・根拠資料を記録します。</p>
+</section>
+<p class="notice">公開前照合状況：2026年11月11日時点で国土交通省の2025年度・2026年度の採択結果、三田市・滋賀県・和光市・大阪府の公式ページ、境町の決算広報原本を再確認しました。鳥取市の報告書も公開元を確認済みです。財務省の総括調査票は財務省公式一括PDFの該当3ページで照合済みです。その他の資料で未確認の部分は監査台帳に明記しています。鳥取市の実証期間・アンケート回答数と佐賀市の会見録にある車両調達・実証費用・運賃は、原本の図表・記述に照合しました。ブラウザーでの実機表示確認は未実施です。</p><p class="notice">注：本記事は公表された一次資料を基にしています。予算額、交付決定額、支出額、実証実験、営業運行の区別に注意し、未確認の自治体別収支を断定していません。道路設備や通信インフラ等の別事業による支援は個別に確認し、重複計上を避けます。</p>
+</article></main>
+<footer class="footer"><div class="footer-inner"><strong>Kussoon｜ないものは、作ってみる。</strong>
+<nav aria-label="関連ページ"><a href="/driving/">運転・モビリティ</a><a href="/driving/news/">自動運転・AIニュース</a><a href="/driving/news/guide/">自動運転入門</a><a href="/driving/news/japan-timeline/">日本の自動運転年表</a><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a></nav>
+<nav aria-label="サイト共通案内"><a href="/">Kussoonトップ</a><a href="/sitemap/">サイトマップ</a><a href="/about/">このサイトについて</a><a href="/contact/">お問い合わせ</a><a href="/privacy/">プライバシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav>
+<p><a href="#top">ページの先頭へ戻る</a></p><small>© 2026 Kussoon. All rights reserved.</small></div></footer>
+</body></html>
