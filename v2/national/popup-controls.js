@@ -50,7 +50,7 @@ head.replaceChildren(grip,heading,fold,close);
 popup.append(body);
 close.classList.add('popup-control');
 
-let collapsed=false,previousName='',collapsedTop=null,firstCollapsePending=true;
+let collapsed=false,previousName='',firstCollapsePending=true;
 function syncFoldControl(){
  fold.textContent=collapsed?'⌄':'−';
  fold.setAttribute('aria-expanded',String(!collapsed));
@@ -90,13 +90,13 @@ fold.addEventListener('click',()=>{
    moveToTop(topBeforeCollapse);
   }
   // The next expansion grows downward from the title's current position.
-  collapsedTop=popup.getBoundingClientRect().top;
  }else{
+  const topBeforeExpand=popup.getBoundingClientRect().top;
   collapsed=false;
   body.hidden=false;
   syncFoldControl();
-  if(collapsedTop!==null)moveToTop(collapsedTop);
-  collapsedTop=null;
+  // Use the title's current position so dragging while collapsed is preserved.
+  moveToTop(topBeforeExpand);
  }
 });
 fold.addEventListener('pointerdown',event=>event.stopPropagation());
@@ -108,7 +108,6 @@ new MutationObserver(()=>{
   previousName=value;
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
-  collapsedTop=null;
   firstCollapsePending=true;
  }
 }).observe(name,{subtree:true,childList:true,characterData:true});
@@ -120,7 +119,6 @@ if(map)new MutationObserver(()=>{
   previousCode=code;
   if(collapsed){collapsed=false;body.hidden=false;syncFoldControl();}
   setCorrection(0);
-  collapsedTop=null;
   firstCollapsePending=true;
  }
 }).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
