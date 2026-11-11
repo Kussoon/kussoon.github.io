@@ -9,6 +9,15 @@ Draft PR：#411
 
 外部のGitHub HTMLプレビューサービスを使う場合は、公開リポジトリのHTMLを外部サービスが取得する可能性があることと、そのサービスが正しく動くことを確認してください。相対パスのリンクはプレビューサービス上で動かない場合があります。外部プレビューによる結果を正式サイト上の動作保証とみなさないでください。
 
+## 画面確認用・外部HTMLプレビュー（暫定）
+GitHub HTML Preview の公式説明に従ったURL（ブラウザー上での実表示成功は未確認）：
+https://htmlpreview.github.io/?https://github.com/Kussoon/kussoon.github.io/blob/draft/autonomous-bus-subsidies-20261111/driving/autonomous-bus-subsidies/index.html
+
+- 公開リポジトリのHTMLを第三者のCORSプロキシ経由で読み込むサービスです。機密情報を含めず、サービス内で個人情報を入力しないでください。
+- HTMLプレビューが成功しても、Kussoon正式ホスト上の動作やGitHub Pagesのビルドを検証したことにはなりません。
+- 正式サイトの相対パスを持つ「戻る」「フッター」などのリンクが、外部プレビューで正しく機能しない可能性があります。
+- プレビューできない場合はGitHubのHTMLソース閲覧に戻り、不具合の症状を記録してください。mainに反映する必要はありません。
+
 ## iPhone Safari確認項目
 - [ ] タイトル・副題・日付が画面からはみ出さない
 - [ ] 目次の6リンクが正しい章に移動する
