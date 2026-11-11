@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "approved_master": null,
+  "current_working_master": {
+    "version": "1.4.2",
+    "adoption_status": "candidate_not_promoted",
+    "data_date": "2026-11-02",
+    "registered_date": "2026-11-11",
+    "path": "masters/five-city-master-v1.4.2-candidate-20261102.xlsx",
+    "sha256": "1bda0dc8ce7cd840cb0faeb5444b8d982f007be57fa9d232264b9577543db4ae",
+    "record_count": 263,
+    "listing_counts": {
+      "通常掲載": 245,
+      "参考候補": 17,
+      "閉店履歴": 1
+    },
+    "worksheets": [
+      "概要",
+      "5市店舗マスター",
+      "伊丹33件監査",
+      "除外5件",
+      "更新・検収",
+      "変更履歴",
+      "閉店履歴",
+      "新規掲載保留候補",
+      "未解決事項",
+      "備考原文・公開文校閲履歴",
+      "公開表示文・校閲履歴"
+    ],
+    "source_filename": "five-city-master-v1.4.2-candidate-20261102(1)(2).xlsx",
+    "pending_coordinate_changes": [
+      111,
+      112,
+      113,
+      114
+    ],
+    "review_csv": {
+      "path": "views/five-city-master-v1.4.2-candidate-20261102.csv",
+      "sha256": "fb53769f5c412501be241a4de9e3b934097e05ba697f8442adb242b89977da52",
+      "purpose": "read-only cached-value view of 5市店舗マスター; not a master replacement"
+    }
+  }
+}
