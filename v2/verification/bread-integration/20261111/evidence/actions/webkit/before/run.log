@@ -1,0 +1,10 @@
+AssertionError [ERR_ASSERTION]: webkit-1440-cluster missing pin No.111 {"shown":[111],"zoom":16,"animation":1,"clusterCount":1,"rendered":0,"markers":[]}
+    at check (/home/runner/work/kussoon.github.io/kussoon.github.io/v2/tests/bread-marker-refresh.browser.cjs:29:117)
+    at async /home/runner/work/kussoon.github.io/kussoon.github.io/v2/tests/bread-marker-refresh.browser.cjs:34:58 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

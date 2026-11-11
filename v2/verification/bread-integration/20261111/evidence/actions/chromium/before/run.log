@@ -1,0 +1,13 @@
+AssertionError [ERR_ASSERTION]: chromium-1440-cluster missing pin No.111 {"shown":[111],"zoom":16,"animation":1,"clusterCount":1,"rendered":0,"markers":[]}
+    at check (/home/runner/work/kussoon.github.io/kussoon.github.io/v2/tests/bread-marker-refresh.browser.cjs:29:117)
+    at runNextTicks (node:internal/process/task_queues:64:5)
+    at process.processImmediate (node:internal/timers:452:9)
+    at process.callbackTrampoline (node:internal/async_hooks:130:17)
+    at async /home/runner/work/kussoon.github.io/kussoon.github.io/v2/tests/bread-marker-refresh.browser.cjs:34:58 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

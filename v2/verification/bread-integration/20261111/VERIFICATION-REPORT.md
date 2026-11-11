@@ -35,10 +35,31 @@ PR #414のHTML v1.3.13を保管したまま、別ファイル `unified-bread-map
 
 MarkerCluster 1.5.3は正規配布元から取得しSHA256 `1e4e1d22972a3926f48598e0caf14e3fe7049835d428a344fed4f9e3665b3508` を照合して配信。背景タイル・外部CSS・解析通信は遮断する。製品HTMLにテスト用APIは追加しない。
 
-実行結果は検証完了後に下へ追記する。ローカルWebKitは起動を試したが共有ライブラリ不足（libgtk-4等）のため実行不可。WebKitはGitHub Actions Ubuntuで検証する。
+実行結果は下に記録する。ローカルWebKitは起動を試したが共有ライブラリ不足（libgtk-4等）のため実行不可。WebKitはGitHub Actions Ubuntuで検証する。
 
 ## 残る検証範囲
 
 iPhone Safari実機、実ネットワーク上の背景地図・外部CSS/CDN・Umami計測の到達確認、航空写真・現地・店舗入口の実測は対象外。施設代表点・概略点を入口確定点へ変更しない。No.97の概略精度、No.209の営業実態未確定、Excel候補の正式採用保留を維持する。
 
 既存PR #410/#412/#413/#414/#415は変更せず、最終検収はChatで行う。マージ・正式公開は別途判断する。
+
+## 最終実行結果
+
+試験対象コミット：`5cfd357dc6d70d21d58ace5309f5fa8a8a2a3841`。以下のActionsはともに成功。
+
+- [専用統合検証Actions](https://github.com/Kussoon/kussoon.github.io/actions/runs/43024811395)：Chromium・WebKitの両ジョブ成功。両エンジンで修正前の #414にNo.111ピン消失を再現（pageerrorなし、検索結果・クラスタ内部に1件、描画0件）。統合版は8条件すべてPASS、各条件54チェックポイント・合計432を保存。
+- [既存V2回帰Actions](https://github.com/Kussoon/kussoon.github.io/actions/runs/43024811319)：data-and-components / real-browserともに成功。既存49コマンド・郡表示テストと、既存ブラウザー群・WebKitレイアウト試験を再実行。
+- #415修正後HTMLの既存回帰も同一の未変更テストで8条件すべてPASS（さらに432チェックポイント）。元PR・本番HTMLは編集していない。
+
+| エンジン | 幅 | 統合・正常 | 統合・読込失敗 | #415既存回帰・正常 | #415既存回帰・読込失敗 |
+| --- | --- | --- | --- | --- | --- |
+| Chromium | 1440px | PASS | PASS | PASS | PASS |
+| Chromium | 390px | PASS | PASS | PASS | PASS |
+| WebKit | 1440px | PASS | PASS | PASS | PASS |
+| WebKit | 390px | PASS | PASS | PASS | PASS |
+
+ローカルChromiumでも修正前の消失を再現し、統合版4条件・#415既存回帰4条件すべてPASS。ローカルWebKitの起動不可はActionsの成功と区別し、起動ログを保管。統合HTML内のJavaScript構文検査も成功。HTMLには #414から引き継いだ末尾空白3行を保持しており、取得した生ログにも元の空白を保持した。それらを除く追加テキストはgit diff --checkを通過した。
+
+`browser-results.csv` / `browser-results.json` に全条件一覧、`evidence/actions/` にActionsから取得した修正前後のresults.json・ログ・画像、およびworkflow結果のスナップショットを保管。Actions artifactは14日保存だが、このブランチにコミットした証拠は期限に依存しない。`main-comparison.csv` は許可したHTML差分とmainの別作業の扱いを記録する。
+
+最終照合でもmainと既存5PRのheadは開始時と一致（`evidence/source-heads-final.json`）。新規ドラフトPRは [#418](https://github.com/Kussoon/kussoon.github.io/pull/418)。検証後の追加コミットは報告書・差分表・取得済み証拠だけであり、HTML・Excel・テスト・workflowは試験対象コミットから変更していない。資料追加だけのためCI再実行は省略する。

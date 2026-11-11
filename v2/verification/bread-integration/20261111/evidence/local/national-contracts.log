@@ -1,0 +1,90 @@
+PASS SVG viewport buttons, zoom anchors, finger drag, pinch, wheel, reset and JS syntax
+PASS touch early capture and long distance pan
+PASS tap remains native
+PASS mouse threshold unchanged
+PASS Safari implicit SVG-child capture loss does not terminate drag
+PASS genuine SVG capture loss still cancels gesture
+PASS focused map pans beyond original viewBox in both directions; overview limits retained
+PASS selected municipality centering, small islands, scattered remote islands
+PASS tokai-four uses shared V2 renderer
+PASS kyushu-prefecture uses shared V2 renderer
+PASS kyushu-okinawa-eight uses shared V2 renderer
+PASS common municipal boundary rendered once and selected fill only
+PASS: adopted #657b84/1.1px shared borders, independent #486574/2.4px coastlines, no polygon strokes, fixed quiz feedback, WCAG neutral target and fixed-prefecture palette contrast.
+PASS Japanese name search and land-centered labels for concave boundaries, islands and holes
+PASS official municipality quiz 10 distinct regions, four unique full-name choices, score and lifecycle
+PASS original V2 engine with real 2026 polygon 01 01102 position 378.74,316.04 clearance 62.92
+PASS original V2 engine with real 2026 polygon 22 22205 position 359.66,333.72 clearance 83.06
+PASS established V2 shared placement: geometry-driven / no per-municipality coordinates
+PASS existing CC0 reading catalog, strict matching and no guessed readings
+PASS shared current-ward search/reading reorganization without source mutation
+PASS: 2026 rendering uses 2 fill-only polygons + exactly 1 border SVG path, selection rerender replaces DOM, constant screen-width stroke, no comparison overlay.
+PASS: touch-focus border does not scale with zoom; keyboard focus remains thin; four working in-map controls; off-default; existing detailed renderer retained.
+PASS mobile popup keeps right controls clear and scrolls both offices without toolbar-height clipping.
+PASS V2 national contracts: reading OFF, compact labels, zoom 768, fixed 5C, office points, single local strokes
+PASS PR #131/#187 border contracts: 47 prefectures, 22 exact shared seams, 1905 experimental 2026 regions; production remains 2021/1902
+PASS municipality office registry: 47 prefectures, 1912 regions, 1912 offices (1912 verified)
+01:189 02:40 03:33 04:40 05:25 06:35 07:59 08:44 09:25 10:35 11:73 12:60 13:62 14:61 15:38 16:15 17:19 18:17 19:27 20:77 21:42 22:41 23:70 24:29 25:19 26:37 27:74 28:50 29:39 30:30 31:19 32:19 33:31 34:31 35:19 36:24 37:17 38:20 39:34 40:74 41:20 42:21 43:50 44:18 45:26 46:43 47:41
+PASS actual nationwide page: national overview, 47 controls, small-prefecture data, combined-prefecture slice, municipality selection, national return
+PASS S09/S11/S28/S38-S40: 47 real 2026 assets, 1905 unique map codes, 1912 offices/URL audit records, explicit exceptions and negative controls
+Nara 39 municipalities, five regions, county readings and both quiz modes: PASS
+Shiga 19 municipalities, six regions, county readings and both quiz modes: PASS
+Osaka V2 region baseline: PASS (72/72 areas, 8 regions)
+Osaka V2 two-mode quiz contracts: PASS
+Kyoto V2 region baseline: PASS (36/36 areas, 8 regions)
+Kyoto V2 two-mode quiz contracts: PASS
+Wakayama 30/30 municipalities, seven official regions, 21 counties, modes 1/2: PASS
+Tottori V2: 19 municipalities, 3 regions, 15 county mappings and both quiz modes: PASS
+Shimane V2: 19 municipalities, three historic regions, 11 county mappings, Izumo/Iwami/Oki 3-region quizzes, both quizzes: PASS
+Okayama V2: Bizen/Bitchu/Mimasaka 10+10+10 areas, four wards, 12 counties, both quiz modes PASS
+Hiroshima V2: 8 regions 12+2+2+3+3+3+3+2 areas, eight wards, 9 towns, both quiz modes PASS
+Yamaguchi V2: 8 regions 12+2+2+3+3+3+3+2 areas, eight wards, 9 towns, both quiz modes PASS
+Hyogo V2: 10 preserved regions, 49 codes, 9 Kobe wards, 12 towns, full-prefecture and both quiz modes PASS
+Fukuoka 72 areas, 14 wards, four regions and whole prefecture: PASS
+Nagasaki 21 areas, six regions and whole-prefecture quizzes: PASS
+Kumamoto 49 areas, 10 regions, five Kumamoto wards and all-area quiz: PASS
+Oita 18 areas, 5 regions, county names and all-area quiz: PASS
+Miyazaki 26 areas, 4 blocks, county names and all-area quiz: PASS
+Kagoshima 43 municipalities, seven official regions and all-area quiz: PASS
+Okinawa 41 municipalities, five official regions and all-area quiz: PASS
+Saga 20 areas, five regions and whole-prefecture quizzes: PASS
+Tokushima V2 PASS: East15 South5 West4, 24 areas, 16 town/village county labels, all-area mode
+Kagawa V2 PASS: five regions 2+3+2+8+2, 17 areas, nine towns, all-area and quiz 1/2
+Ehime V2 PASS: Toyo 5, Chuyo 6, Nanyo 9, 20 areas, 9 towns 7 counties, both quiz modes and all-area
+Kochi V2 PASS: six regions 9+4+4+6+5+6, 34 areas, 23 towns 6 counties, both quiz modes and all-area
+All-prefecture quiz shared option: 10 pref configs and UI contracts PASS
+Kinki V2 five-prefecture shared quiz audit: PASS (196 municipalities, all readings/counties/quiz controls)
+PASS 31 prefectures / 182 regions / 1385 units: no one-area region, unique 2026 codes. Hyogo 10/49 checked separately.
+PASS formal ledger: 49 unique specifications, all 30 legacy mappings, 245 PR records and document links
+✔ Hyogo covers exactly 41 municipalities and 9 valid Kobe wards (4.630437ms)
+✔ verified facilities have complete official evidence, postal codes, addresses and safe URLs (1.957493ms)
+✔ initial six regions retain pilot records and use distinct ward/city destinations (0.548472ms)
+✔ regional links match confirmed Wikipedia articles and official top pages (0.98252ms)
+✔ unknown regions and partial wards never invent destinations (0.857686ms)
+✔ all 50 facilities are verified, including the official Taka confirmation (0.269584ms)
+✔ regional cards render three actions per facility and distinct ward/city destinations (2.182679ms)
+✔ only URL audit A with a safe URL becomes an official link, including ward/city independence (5.838941ms)
+✔ display removes building suffixes without modifying stored names or route destinations (2.636204ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31.745699
+PASS fixed prefecture palette: 47 assignments, 8 colours, 88 adjacent pairs
+✔ below 2x, fixed labels retain the collision rule (17.459459ms)
+✔ at 2x, all in-view fixed labels display despite overlap and sparse caps (0.740742ms)
+✔ a partly visible label displays while a fully offscreen label stays hidden (1.12219ms)
+✔ overlap allowance applies only to stable nationwide anchors (0.857207ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 31.199581
+PASS national/studyPref fixed-anchor collision and zoom contracts
+PASS all 49 national contract commands

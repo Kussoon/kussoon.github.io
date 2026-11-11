@@ -1,0 +1,60 @@
+[
+  {
+    "name": "before",
+    "engine": "chromium",
+    "status": "EXPECTED_FAILURE_CONFIRMED",
+    "conditions": [
+      {
+        "label": "chromium-1440-cluster",
+        "status": "FAIL",
+        "message": "chromium-1440-cluster missing pin No.111 {\"shown\":[111],\"zoom\":16,\"animation\":1,\"clusterCount\":1,\"rendered\":0,\"markers\":[]}"
+      }
+    ]
+  },
+  {
+    "name": "after",
+    "engine": "chromium",
+    "status": "PASS",
+    "conditions": [
+      {
+        "label": "chromium-1440-cluster",
+        "status": "PASS"
+      },
+      {
+        "label": "chromium-1440-fallback",
+        "status": "PASS"
+      },
+      {
+        "label": "chromium-390-cluster",
+        "status": "PASS"
+      },
+      {
+        "label": "chromium-390-fallback",
+        "status": "PASS"
+      }
+    ]
+  },
+  {
+    "name": "pr415-regression",
+    "engine": "chromium",
+    "status": "PASS",
+    "conditions": [
+      {
+        "label": "chromium-1440-cluster",
+        "status": "PASS"
+      },
+      {
+        "label": "chromium-1440-fallback",
+        "status": "PASS"
+      },
+      {
+        "label": "chromium-390-cluster",
+        "status": "PASS"
+      },
+      {
+        "label": "chromium-390-fallback",
+        "status": "PASS"
+      }
+    ]
+  }
+]

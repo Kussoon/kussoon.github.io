@@ -1,0 +1,128 @@
+[
+  {
+    "engine": "chromium",
+    "target": "before",
+    "condition": "chromium-1440-cluster",
+    "result": "EXPECTED_FAILURE_CONFIRMED",
+    "checkpoints": 12
+  },
+  {
+    "engine": "chromium",
+    "target": "after",
+    "condition": "chromium-1440-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "chromium",
+    "target": "after",
+    "condition": "chromium-1440-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "chromium",
+    "target": "after",
+    "condition": "chromium-390-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "chromium",
+    "target": "after",
+    "condition": "chromium-390-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "chromium",
+    "target": "pr415-regression",
+    "condition": "chromium-1440-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "chromium",
+    "target": "pr415-regression",
+    "condition": "chromium-1440-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "chromium",
+    "target": "pr415-regression",
+    "condition": "chromium-390-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "chromium",
+    "target": "pr415-regression",
+    "condition": "chromium-390-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "before",
+    "condition": "webkit-1440-cluster",
+    "result": "EXPECTED_FAILURE_CONFIRMED",
+    "checkpoints": 12
+  },
+  {
+    "engine": "webkit",
+    "target": "after",
+    "condition": "webkit-1440-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "after",
+    "condition": "webkit-1440-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "after",
+    "condition": "webkit-390-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "after",
+    "condition": "webkit-390-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "pr415-regression",
+    "condition": "webkit-1440-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "pr415-regression",
+    "condition": "webkit-1440-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "pr415-regression",
+    "condition": "webkit-390-cluster",
+    "result": "PASS",
+    "checkpoints": 54
+  },
+  {
+    "engine": "webkit",
+    "target": "pr415-regression",
+    "condition": "webkit-390-fallback",
+    "result": "PASS",
+    "checkpoints": 54
+  }
+]
