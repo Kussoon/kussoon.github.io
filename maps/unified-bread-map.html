@@ -1210,7 +1210,10 @@ new BreadsSizeControl().addTo(map);
  // v0.1.22: prevent Safari's document scroll while gestures originate in the map.
  // Use passive:false; do not attach to the popup list or the document.
  $('map').addEventListener('touchmove',function(e){if(e.cancelable)e.preventDefault()},{passive:false});
- L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);clusters=typeof L.markerClusterGroup==='function'?L.markerClusterGroup({maxClusterRadius:36,showCoverageOnHover:false,spiderfyOnMaxZoom:true}):L.layerGroup();if(typeof L.markerClusterGroup!=='function')document.querySelector('.mapnote').append(document.createTextNode(' 近接クラスタを読み込めませんでした。各地点を個別表示しています。'));
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+// Search refits are synchronous; cluster animations can skip a subsequent moveend.
+clusters=typeof L.markerClusterGroup==='function'?L.markerClusterGroup({animate:false,maxClusterRadius:36,showCoverageOnHover:false,spiderfyOnMaxZoom:true}):L.layerGroup();
+if(typeof L.markerClusterGroup!=='function')$('map').parentElement.append(safeText('p','近接クラスタを読み込めませんでした。各地点を個別表示しています。','mapnote'));
 map.createPane('breadFacilityPane');map.getPane('breadFacilityPane').style.zIndex='650';
 facilityPins=L.layerGroup();
 map.addLayer(clusters);map.addLayer(facilityPins);
