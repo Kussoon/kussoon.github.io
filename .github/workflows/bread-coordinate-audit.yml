@@ -1,0 +1,39 @@
+name: Bread coordinate audit verification
+on:
+  pull_request:
+    paths:
+      - 'v2/verification/bread-coordinate-audit/**'
+      - 'v2/tests/bread-coordinate-audit.browser.cjs'
+      - 'v2/tests/browser/package*.json'
+      - '.github/workflows/bread-coordinate-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit-and-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - name: Verify downloadable audit artifact checksums
+        working-directory: v2/verification/bread-coordinate-audit/20261111/reports
+        run: sha256sum -c SHA256SUMS
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Check 263 records and desktop/mobile controls in Chromium and WebKit
+        run: node v2/tests/bread-coordinate-audit.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/bread-coordinate-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bread-coordinate-audit-browser-results
+          path: ${{ runner.temp }}/bread-coordinate-browser
+          retention-days: 14
+          if-no-files-found: warn
