@@ -1,0 +1,40 @@
+name: Bread map pin stability regression
+on:
+  pull_request:
+    paths:
+      - 'maps/unified-bread-map.html'
+      - 'v2/tests/bread-pin-stability.browser.cjs'
+      - '.github/workflows/bread-pin-stability.yml'
+permissions:
+  contents: read
+jobs:
+  pin-stability:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Load and verify the exact production MarkerCluster 1.5.3 library
+        run: |
+          curl -fsSL --retry 3 --max-time 30 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js' -o "$RUNNER_TEMP/leaflet.markercluster.js"
+          echo "1e4e1d22972a3926f48598e0caf14e3fe7049835d428a344fed4f9e3665b3508  $RUNNER_TEMP/leaflet.markercluster.js" | sha256sum -c -
+      - name: Rapid search and CDN failure regression (Chromium/WebKit)
+        run: node v2/tests/bread-pin-stability.browser.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/bread-pin-stability
+          KUSSOON_CLUSTER_FIXTURE: ${{ runner.temp }}/leaflet.markercluster.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bread-pin-stability-browser
+          path: ${{ runner.temp }}/bread-pin-stability
+          retention-days: 14
+          if-no-files-found: warn
