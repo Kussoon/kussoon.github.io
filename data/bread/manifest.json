@@ -2,12 +2,12 @@
   "schema_version": 1,
   "approved_master": null,
   "current_working_master": {
-    "version": "1.4.2",
+    "version": "1.4.3",
     "adoption_status": "candidate_not_promoted",
-    "data_date": "2026-11-02",
+    "data_date": "2026-11-11",
     "registered_date": "2026-11-11",
-    "path": "masters/five-city-master-v1.4.2-candidate-20261102.xlsx",
-    "sha256": "1bda0dc8ce7cd840cb0faeb5444b8d982f007be57fa9d232264b9577543db4ae",
+    "path": "masters/five-city-master-v1.4.3-candidate-20261111.xlsx",
+    "sha256": "15f7d9a7ebfbe78e91e111adf2efda0b43f0a51374c186fcb3e65f7d3303cde2",
     "record_count": 263,
     "listing_counts": {
       "通常掲載": 245,
@@ -27,17 +27,24 @@
       "備考原文・公開文校閲履歴",
       "公開表示文・校閲履歴"
     ],
-    "source_filename": "five-city-master-v1.4.2-candidate-20261102(1)(2).xlsx",
-    "pending_coordinate_changes": [
+    "source_filename": "five-city-master-v1.4.2-candidate-20261102.xlsx",
+    "pending_coordinate_changes": [],
+    "review_csv": {
+      "path": "views/five-city-master-v1.4.3-candidate-20261111.csv",
+      "sha256": "13d2f5c0cefb0baf2c8497ea54c384c4f64c478898308be22365481d9fb2294a",
+      "purpose": "read-only view; not a master replacement"
+    },
+    "candidate_applied_coordinate_changes": [
       111,
       112,
       113,
       114
     ],
-    "review_csv": {
-      "path": "views/five-city-master-v1.4.2-candidate-20261102.csv",
-      "sha256": "fb53769f5c412501be241a4de9e3b934097e05ba697f8442adb242b89977da52",
-      "purpose": "read-only cached-value view of 5市店舗マスター; not a master replacement"
-    }
+    "pending_publication_coordinate_changes": [
+      111,
+      112,
+      113,
+      114
+    ]
   }
 }
