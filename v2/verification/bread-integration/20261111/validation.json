@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "sources": {
+    "main": "69514bd6ff889c0051801c9c92a22a33104913ac",
+    "pr410": "46df0db2526f6a67438b9842555cfad88716d1b4",
+    "pr412": "d335309a9ec012e31b30244bcb887b5f4ee80879",
+    "pr413": "ca2b288bb64cc6305d29ca739127081d591be51e",
+    "pr414": "194daae272ddaab3bf9f31df568a0d1ff6d0a6b8",
+    "pr415": "6e2577f22e9e7b88625cdffe7fa46c379fd9a498"
+  },
+  "managed": 263,
+  "public": 262,
+  "normal": 245,
+  "reference": 17,
+  "closed_history": 1,
+  "coordinate_changes": [
+    17,
+    97,
+    107,
+    111,
+    112,
+    113,
+    114,
+    207,
+    209
+  ],
+  "unchanged_coordinates": 254,
+  "all_noncoordinate_record_fields_unchanged": true,
+  "pr414_bread_data_byte_identical": true,
+  "excel_keys_and_coordinates_matched": 263,
+  "all_shared_excel_fields_matched": 263,
+  "excel_byte_identical_to_pr414": true,
+  "excel_sheets": 11,
+  "html_exact_pr415_patch_only": true,
+  "production_html_unchanged": true,
+  "pr415_regression_byte_identical": true,
+  "hashes": {
+    "integrated_html": "80f655eb20b0d7e2540656fc08ada6432d8d371a458ef6de84a86d1fbbe2fd1b",
+    "excel_candidate": "8c9d737c68490daf9535df4464877e83d5823dba9ce3e55c4609bb151cb3f2f4",
+    "regression_test": "8b7751757aa513b96e5eab50727f3f9e11e09b4f4b8ff19d47ce195a27946d68"
+  }
+}
