@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'v2/verification/bread-coordinate-audit/**'
+      - 'data/bread/**'
+      - 'v2/tests/verify-bread-master.py'
       - 'v2/tests/bread-coordinate-audit.browser.cjs'
       - 'v2/tests/browser/package*.json'
       - '.github/workflows/bread-coordinate-audit.yml'
@@ -19,6 +21,8 @@ jobs:
           node-version: '22'
           cache: npm
           cache-dependency-path: v2/tests/browser/package-lock.json
+      - name: Verify preserved Excel master and review CSV
+        run: python3 v2/tests/verify-bread-master.py
       - name: Verify downloadable audit artifact checksums
         working-directory: v2/verification/bread-coordinate-audit/20261111/reports
         run: sha256sum -c SHA256SUMS
@@ -37,3 +41,4 @@ jobs:
           path: ${{ runner.temp }}/bread-coordinate-browser
           retention-days: 14
           if-no-files-found: warn
+
