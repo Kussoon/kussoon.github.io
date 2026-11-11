@@ -1,0 +1,33 @@
+name: Autonomous bus subsidies article layout checks
+
+on:
+  push:
+    branches:
+      - draft/autonomous-bus-subsidies-20261111
+    paths:
+      - 'driving/autonomous-bus-subsidies/**'
+      - 'tests/check_autonomous_bus_subsidies_layout.py'
+      - '.github/workflows/autonomous-bus-subsidies-layout.yml'
+  pull_request:
+    paths:
+      - 'driving/autonomous-bus-subsidies/**'
+      - 'tests/check_autonomous_bus_subsidies_layout.py'
+      - '.github/workflows/autonomous-bus-subsidies-layout.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check article layout and draft state
+        run: python3 tests/check_autonomous_bus_subsidies_layout.py
