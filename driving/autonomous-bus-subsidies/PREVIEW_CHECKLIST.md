@@ -43,3 +43,9 @@ Draft PR：#411
 - 他の記事や地図の共通CSSを不用意に流用して横スクロール表へ戻さない。
 - CSS変更後は原稿・V2版それぞれのソースについて `<table>` の不在と `vertical-records` 6組を自動検査する。
 - 出典と事実関係については `PUBLICATION_AUDIT.md` を参照し、未確認の数字を断定しない。
+
+## 2026-11-11 追加：表示の回帰防止テスト
+- [x] 正式原稿Draftから不要な旧テーブル用CSSを除去（`.table-scroll`、`.readable-mobile-cards` など）。V2採用版そのものは変更していない。
+- [x] `tests/check_autonomous_bus_subsidies_layout.py` を新設。全8章・縦カード6組・HTML表0件・目次リンク・Draftのnoindexを検査する。
+- [ ] テストをGitHub Actionsの定期的なチェックに組み込む場合は、既存CIへの影響を検討してから行う（現状は手動起動用）。
+- [ ] PCの実画面スクリーンショットは未取得。PCでの合格判定は出さない。
