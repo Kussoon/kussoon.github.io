@@ -14,6 +14,8 @@ a{color:#126675;text-underline-offset:3px;overflow-wrap:anywhere}a:focus-visible
 header{background:#fff;border-bottom:1px solid var(--line)}.header-inner,.wrap{width:min(900px,calc(100% - 32px));margin:auto}.header-inner{padding:14px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{color:var(--ink);font-weight:800;text-decoration:none}.back{font-size:.82rem}
 .wrap{padding:22px 0 56px}.article,.toc{background:#fff;border:1px solid var(--line);border-radius:14px}.article{padding:clamp(20px,5vw,46px)}
 h1,h2,h3{line-height:1.48}h1{font-size:clamp(1.65rem,4.3vw,2.25rem);margin:.1em 0 .5em}h2{font-size:clamp(1.2rem,3vw,1.45rem);margin:2.1em 0 .8em;padding-bottom:10px;border-bottom:2px solid #cce0e2}h3{font-size:1.07rem;margin:1.7em 0 .5em}.eyebrow{color:var(--accent);font-weight:700;font-size:.9rem}.subtitle{font-weight:700;color:#4d6072;font-size:1.06rem}.meta{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin:20px 0}.lead{font-size:1.05rem}.toc{padding:15px 22px;margin:20px 0}.toc ol{margin:5px 0;padding-left:1.5rem}.toc li{margin:3px 0}.note{background:#f0f7f6;border-left:4px solid var(--accent);padding:14px 17px;border-radius:7px;margin:18px 0}.notice{font-size:.88rem;color:var(--muted)}.table-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;min-width:560px;font-size:.91rem}th,td{border-bottom:1px solid var(--line);padding:11px 12px;text-align:left;vertical-align:top}th{background:#edf4f5;font-weight:800}tr:last-child td{border-bottom:0}.source{font-size:.83rem;color:var(--muted);margin:8px 0 22px}ul{padding-left:1.4rem}li{margin:7px 0}.status{display:inline-block;font-weight:700;background:#fff2d9;border:1px solid #ecd298;border-radius:6px;padding:2px 9px;font-size:.84rem}.footer{max-width:1050px;margin:20px auto 0;padding:25px 16px calc(25px + env(safe-area-inset-bottom));background:#f8fafc;border-top:1px solid #dce5eb;color:#40566a;font-size:.87rem}.footer-inner{max-width:900px;margin:auto}.footer nav{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 19px}.footer a{color:#225f89}.footer small{color:#70808b}.skip{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:10}@media(max-width:550px){.wrap{width:calc(100% - 22px);padding-top:15px}.header-inner{width:calc(100% - 22px)}.article{border-radius:10px}.toc{padding:14px 17px}table{font-size:.85rem}}
+.scroll-hint{display:none;font-size:.79rem;color:var(--muted);margin:14px 0 6px;font-weight:700}
+@media(max-width:600px){.scroll-hint{display:block}.table-scroll{overscroll-behavior-x:contain}.table-scroll:focus-visible{outline:3px solid #e8a747;outline-offset:3px}}
 </style>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(payload&&typeof payload==='object'){for(const key of ['url','referrer']){if(typeof payload[key]==='string')payload[key]=payload[key].split(/[?#]/)[0];}}return payload;};</script>
 <script data-before-send="kussoonUmamiBeforeSend" data-domains="kussoon.com,www.kussoon.com" data-exclude-hash="true" data-exclude-search="true" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" defer src="https://cloud.umami.is/script.js"></script>
@@ -36,6 +38,7 @@ h1,h2,h3{line-height:1.48}h1{font-size:clamp(1.65rem,4.3vw,2.25rem);margin:.1em 
 </section>
 <section id="support"><h2>第2章　国はいくら支援しているのか</h2>
 <p>2026年度の公募では、重点支援事業と一般支援事業の補助率はともに4/5（80％）です。ただし、すべての費用が無条件に8割補助されるのではなく、対象経費や上限額などの条件があります。</p>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
 <div class="table-scroll" role="region" aria-label="2026年度補助制度の一覧" tabindex="0"><table><thead><tr><th scope="col">区分</th><th scope="col">補助率</th><th scope="col">補助上限</th><th scope="col">対象の概要</th></tr></thead><tbody>
 <tr><th scope="row">重点支援</th><td>4/5</td><td>4億円</td><td>他地域への展開が期待される先駆的な事業</td></tr>
 <tr><th scope="row">一般支援</th><td>4/5</td><td>2億円</td><td>早期のレベル4実装が見込まれる事業</td></tr>
@@ -50,6 +53,7 @@ h1,h2,h3{line-height:1.48}h1{font-size:clamp(1.65rem,4.3vw,2.25rem);margin:.1em 
 <h3>車両費と事業費</h3>
 <p>中型・大型の自動運転バスを購入したルートでは、<strong>1台当たり事業費は平均約1億5,000万円</strong>、うち<strong>車両費は平均約1億1,000万円</strong>でした。これは対象ルートの平均であり、全国すべての車両の販売価格ではありません。</p>
 <h3>平均事業費の内訳</h3>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
 <div class="table-scroll" role="region" aria-label="中型・大型自動運転バスを購入した場合の事業費内訳" tabindex="0"><table><thead><tr><th scope="col">費目</th><th scope="col">1台当たり平均</th></tr></thead><tbody>
 <tr><th scope="row">車両費</th><td>1億600万円</td></tr><tr><th scope="row">システム・設備費</th><td>2,300万円</td></tr><tr><th scope="row">その他</th><td>2,000万円</td></tr><tr><th scope="row">合計</th><td>1億4,900万円（約1.5億円）</td></tr>
 </tbody></table></div>
@@ -57,6 +61,7 @@ h1,h2,h3{line-height:1.48}h1{font-size:clamp(1.65rem,4.3vw,2.25rem);margin:.1em 
 <p class="source">出典：<a href="https://www.mof.go.jp/policy/budget/topics/budget_execution_audit/fy2025/sy0706/0706_all.pdf#page=83">財務省・総括調査票 3/3、図3</a></p>
 <h3>自治体の実例：鳥取市の2025年度実証運行</h3>
 <p>鳥取市が2026年3月31日に公開した報告書によると、2025年12月12～17日の6日間に、自動運転バスを一般向けに無料で運行しました。運行は1日7便で、使用車両はティアフォー製の小型EVバス「Minibus1.0」。ドライバーと保安員が同乗し、状況に応じて手動介入を行いました。一般試乗後のアンケートは345票（回収率83.7％）でした。</p>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="鳥取市の自動運転実証結果と確認できない項目"><table><thead><tr><th scope="col">調査項目</th><th scope="col">鳥取市・2025年度</th></tr></thead><tbody>
 <tr><th scope="row">一般向け運行</th><td>2025年12月12～17日、6日間・1日7便</td></tr>
 <tr><th scope="row">運賃</th><td>無料（有料運行の収入実績ではない）</td></tr>
@@ -69,6 +74,7 @@ h1,h2,h3{line-height:1.48}h1{font-size:clamp(1.65rem,4.3vw,2.25rem);margin:.1em 
 <p>技術面ではルート見直しなどで自動走行率の改善が報告されましたが、路上駐車や複雑な車線変更などが残る課題として挙げられました。<strong>運行実証の成果と、補助金終了後の事業採算性は別の評価項目</strong>です。</p>
 <p class="source">出典：<a href="https://www.city.tottori.lg.jp/page/38721.html">鳥取市・成果報告公開ページ（2026年3月31日）</a>／<a href="https://www.city.tottori.lg.jp/uploaded/attachment/45803.pdf">「令和7年度自動運転バス実証実験の実証結果報告」（PDF）5～7、12、58ページ</a></p>
 <h3>ほかの自治体の実例：有料運行・車両費・利用者数</h3>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="自治体別の公表実績比較"><table><thead><tr><th scope="col">自治体・対象年度</th><th scope="col">確認できた実績</th><th scope="col">収支についての注意</th></tr></thead><tbody>
 <tr><th scope="row">兵庫県三田市・2024年度</th><td>中型バス、33日間、有料（大人210円～）、利用者1,415人、1便平均約7人、自動走行割合96％</td><td>運賃の設定は確認できるが、実際の運賃収入総額・運行費総額はこの公表ページから確認できない。</td></tr>
 <tr><th scope="row">滋賀県・彦根市での2025年度実証</th><td>2026年2月2～16日の15日間に一般運行。無料、290便、利用者1,819人、1便平均6.27人、自動走行割合83.7％</td><td>無料実証のため運賃収入による採算を示すデータではない。レベル2で実施。</td></tr>
@@ -89,6 +95,7 @@ h1,h2,h3{line-height:1.48}h1{font-size:clamp(1.65rem,4.3vw,2.25rem);margin:.1em 
 <p>大阪府のFAQでは、経済産業省による試算として、人件費・運用費等のランニングコストを年間2,154万円と紹介しています。<strong>特定自治体で支出が確定した決算額ではありません。</strong>車両数や運行日数・サービス水準などが異なる境町の数字との直接比較はできません。</p>
 <p class="source">出典：<a href="https://www.pref.osaka.lg.jp/faq/o130050/faq_000019.html">大阪府・南河内地域における自動運転バスの運行コストに関するFAQ</a></p>
 <h3>2024年度の財源内訳</h3>
+<p class="scroll-hint">表は左右にスクロールしてご覧いただけます。</p>
 <div class="table-scroll" role="region" aria-label="財源の内訳" tabindex="0"><table><thead><tr><th scope="col">財源</th><th scope="col">構成比</th></tr></thead><tbody>
 <tr><td>国費補助</td><td>88％</td></tr><tr><td>自治体等負担</td><td>10％</td></tr><tr><td>地方費補助</td><td>1％</td></tr><tr><td>運行収入等</td><td>1％</td></tr>
 </tbody></table></div>
