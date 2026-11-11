@@ -113,3 +113,9 @@
 - `tests/check_autonomous_bus_subsidies_layout.py` をDraftに追加し、今後の修正で横スクロール表が再混入しないようチェックできるようにした（既存CIには未接続）。
 - kussoon.comのHTMLをこの実行環境から直接取得・PC描画することはできなかった。PC実画面検証は未完了。
 - V2側の公開済みHTMLは変更していない。正式公開には別途承認が必要。
+
+## 2026-11-11 PC描画と自動テストの再調査
+- 検証環境にはChromiumとPlaywrightがあるが、`kussoon.com` と `raw.githubusercontent.com` のDNS解決ができず、サイトの実ページを取得してPCスクリーンショットを撮影することはできなかった。**PCブラウザー実表示は未確認**。
+- Draft HTMLの不要な横スクロールCSSを除去済み。全8章・縦表示6グループ・HTML表0個・アンカー不一致0件・`noindex,nofollow` の静的チェックは成立。
+- `.github/workflows/autonomous-bus-subsidies-layout.yml` をDraftに追加。変更時に `tests/check_autonomous_bus_subsidies_layout.py` を起動するよう設計。ただし初回確認時点で該当ブランチのGitHub Actions実行履歴が取得できないため、**CIテスト実行成功とは記録しない**。ワークフローがPR上で認識されるかと結果を別途確認。
+- GitHub ActionsのV2用既存ワークフローは本件で編集していない。正式公開のためのmainマージやサイトナビ追加は承認を受けていないため未実施。
