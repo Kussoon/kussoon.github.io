@@ -41,10 +41,32 @@ jobs:
         env:
           KUSSOON_SWEETS_FIXTURES: ${{ runner.temp }}/sweets-fixtures
           KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/sweets-browser
+      - name: Assemble final review package
+        if: always()
+        run: |
+          set -e
+          package="$RUNNER_TEMP/sweets-s2-final-package"
+          mkdir -p "$package/data/sweets/masters" "$package/data/sweets/views" "$package/maps" "$package/v2/verification/sweets-s2-coordinate-audit/20261112-final/browser-evidence"
+          cp data/sweets/masters/kussoon-sweets-common-master-v0.4.1-candidate-20261102.xlsx "$package/data/sweets/masters/"
+          cp data/sweets/masters/kussoon-sweets-common-master-v0.4.2-s2-candidate-20261112.xlsx "$package/data/sweets/masters/"
+          cp data/sweets/views/kussoon-sweets-master-v0.4.2-s2-510stores-20261112.csv "$package/data/sweets/views/"
+          cp maps/audits/sweets-s2-verified-24-coordinate-diff-20261112.csv "$package/maps/"
+          cp v2/verification/sweets-s2-coordinate-audit/20261112-final/{VERIFICATION-REPORT.md,PUBLICATION-CHECKLIST.md,SURVEY-HANDOFF.md,validation.json,s2-applied-24-diff.csv,s2-final-106-decisions.csv,master-510-synced.csv,unified-sweets-map-s2-verification-20261112.html} "$package/v2/verification/sweets-s2-coordinate-audit/20261112-final/"
+          cp "$RUNNER_TEMP/sweets-browser/browser-results.json" "$package/v2/verification/sweets-s2-coordinate-audit/20261112-final/browser-evidence/" 2>/dev/null || true
+          cp "$RUNNER_TEMP/sweets-browser/"*.png "$package/v2/verification/sweets-s2-coordinate-audit/20261112-final/browser-evidence/" 2>/dev/null || true
+          cd "$RUNNER_TEMP"
+          zip -qr sweets-s2-final-deliverables.zip sweets-s2-final-package
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: sweets-s2-browser-verification
           path: ${{ runner.temp }}/sweets-browser
           if-no-files-found: warn
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sweets-s2-final-deliverables
+          path: ${{ runner.temp }}/sweets-s2-final-deliverables.zip
+          if-no-files-found: error
           retention-days: 14
