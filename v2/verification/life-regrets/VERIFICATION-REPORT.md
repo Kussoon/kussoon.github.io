@@ -277,3 +277,36 @@
 **評価：ローカル再現版のChromium補助検証は8/8条件合格。ただしGitHubの正本HTMLと本番配信を直接動作検証したことにはならない。正式公開可否は引き続き保留。**
 
 この工程でサイトのHTML、main、公開URL、PR状態は変更していない。記録更新のみ。
+
+
+## 第11次・公開中V2の直接確認と公開候補準備（2026-11-12）
+
+### 現行状態
+- PR #416：Open・Draft・未マージ。head 8cc0bfaceb9923b2cdc1ee288d1a177156fed074。mainとの比較は19件ahead／14件behind、merge base 90a4cb224705b66d49d7d2d5ffd5ad9521babaeb。履歴を変える操作はしていない。
+- main head（確認時）：f37d4a2b5c8dfb4ba4efa1399706fc4dcda38b5d。
+- mainとPR #416の対象HTML blob SHAは cd0459d8c0ab2c057201a695777a310f2540e959 で一致。
+- 公開V2 URL https://kussoon.com/v2/verification/life-regrets/ をCloud Chromiumで確認。タイトル、副題、序章、10セクション、8表、noindex,nofollow、共通フッター7リンクを確認。
+
+### 直接確認した操作
+- Chromium 1363×936、ライトモード。ページ横はみ出しなし。
+- 目次開閉、第4章へのアンカージャンプ、年代グラフの「貯蓄」切替（7年代の棒と値表示）、一番上への復帰、フッター表示中の固定ボタン非表示を確認。
+- 直接のライブ確認はデスクトップライトに限る。指定8条件・WebKit・iPhone Safari・キーボード操作・JavaScript無効・印刷を現ページで確認済みとはしない。
+- 既存のローカル再現版Chromium補助試験は8条件合格との記録を引き継ぐ。ただしGitHub正本HTMLや配信統合の直接試験とは区別する。
+- ブラウザログで記録されたエラーは拡張機能のメタデータ送信に関するもので、記事スクリプトの例外とは確認できず。包括的なJSエラーログ試験は未完了。
+
+### 外部出典リンク
+- HTML上の外部リンク13件を一覧化し、ページ到達と内容照合を分けた確認表を作成。
+- 9件は公開ページ／PDFに直接到達、PubMedの2件は公式記録の検索結果で識別、第一ライフ資産運用経済研究所とDOI resolverは取得ツールで403。403はアクセス制限の可能性があるためリンク切れ扱いにしない。
+- PRESIDENTランキングと生命保険文化センター主要数値は先行一次照合記録を引継ぎ、今回のURL点検のみで全数値を再照合したとはしない。
+
+### 公開候補
+- 現行mainを基点に別ブランチ draft/life-regrets-public-candidate-20261112 を作成。
+- 候補HTML reading/life-regrets/index.html は検証表示・注意枠を除き、title／description／canonical／robots、既存ルールに沿うUmami設定を整えた。承認済みの本文・章構成・8表・グラフ、CSS／JavaScript、共通フッターは保持。
+- 読み物トップのリンクも同じ候補ブランチに追加。mainおよび公開サイトは変更していない。候補HTMLはまだ配信されず、ブラウザ統合試験は未実施。
+
+### 残作業・判定
+- WebKitの各幅・テーマ、iPhone Safari実機、正本HTMLのChromium8条件、キーボード、JavaScript無効、印刷、候補HTMLの配信統合試験が未完了。
+- 1440pxダークの画像は未作成。既存参考画像はローカル再現版の390pxライト／ダークと1440pxライト。
+- DLRI／DOIの取得制限項目の通常ブラウザ再確認と、各資料の記述箇所単位の最終確認が残る。
+- **総合評価：条件付き完了。正式公開可能とは判定しない。** PR #416はDraftのまま、公開候補PRもDraftで保存する。
+- 詳細報告：候補PR内の v2/verification/life-regrets/FINAL-BROWSER-AUDIT.md、SOURCE-LINK-AUDIT.md、PUBLICATION-CHECKLIST.md。
