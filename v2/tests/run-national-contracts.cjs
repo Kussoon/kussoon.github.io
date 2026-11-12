@@ -36,6 +36,7 @@ const files=[
  'v2/municipalities/ehime/quiz.contract.test.cjs',
  'v2/municipalities/kochi/quiz.contract.test.cjs',
  'v2/tests/prefecture-all-areas-quiz.test.cjs',
+ 'v2/tests/nationwide-regional-learning-integration.test.cjs',
  'v2/tests/kinki-six-prefectures-shared-audit.test.cjs',
  'v2/tests/prefecture-study-region-policy.test.cjs',
  'v2/tests/audit-ledger.test.cjs',

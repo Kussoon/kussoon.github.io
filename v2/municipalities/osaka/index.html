@@ -36,7 +36,7 @@ try{
  const cfg=await cr.json(),idx=await ir.json();
  const osaka=idx.entries.filter(e=>e.pref==='27'),byCode=new Map(osaka.map(e=>[e.code,e]));
  const codes=cfg.regions.flatMap(r=>r.codes);
- if(osaka.length!==72||idx.count!==1905||cfg.expectedAreaCount!==72||codes.length!==72||
+ if(osaka.length!==72||idx.count!==1905||cfg.expectedAreaCount!==72||cfg.regions.length!==8||codes.length!==72||
     new Set(codes).size!==72||codes.some(c=>!byCode.has(c)))throw Error('大阪府72区域の照合に失敗しました');
  const make=(tag,content)=>{const el=document.createElement(tag);el.textContent=content;return el;};
  function select(r){
@@ -50,7 +50,7 @@ try{
    tile.append(ruby);list.append(tile);
   }
  }
- for(const r of cfg.regions){
+ for(const r of [...cfg.regions,{key:'all',name:'全域',reading:'ぜんいき',codes:[...new Set(codes)]}]){
   const b=make('button',''),ruby=make('ruby',r.name),count=make('span','（'+r.codes.length+'）');
   if(r.reading)ruby.append(make('rt',r.reading));
   count.className='count';b.append(ruby,count);

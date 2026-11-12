@@ -63,6 +63,27 @@ const {start}=require('./helpers/nationwide-browser.cjs');
   await page.click('#nationBtn');await page.fill('#placeSearch','西宮市');
   const result=page.locator('#searchResults button').filter({hasText:'西宮市'});await result.waitFor();assert((await result.textContent()).includes('兵庫県'));
   await result.click();await page.locator('#map .chosen[data-code="28204"]').waitFor();assert(await page.locator('#officePopup').isVisible());
+  // Nationwide regional-learning directory: exercise the new actual page in
+  // Chromium, rather than relying only on HTML string-based contracts.
+  await page.goto(new URL('/v2/municipalities/index.html',page.url()).href);
+  assert.equal(await page.locator('li.prefecture').count(),47,'47 prefectures have visible directory entries');
+  assert.equal(await page.locator('section[id^="region-"]').count(),8,'Eight regional navigation groups');
+  assert.equal(await page.locator('li.prefecture .links a').count(),141,'Each prefecture has overview + two quiz links');
+  await page.setViewportSize({width:390,height:844});
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2),'Regional directory fits 390px iPhone viewport');
+  // Older prefecture overviews previously lacked the All-area option.
+  for(const [slug,regionCount,areaCount] of [['shiga',6,19],['kyoto',8,36],['osaka',8,72],['nara',5,39],['wakayama',7,30],['tottori',3,19],['shimane',3,19],['okayama',3,30],['hiroshima',8,30]]){
+   await page.goto(new URL('/v2/municipalities/'+slug+'/index.html',page.url()).href);
+   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('照合：合格'));
+   const buttons=page.locator('#regions button');
+   assert.equal(await buttons.count(),regionCount+1,slug+' overview has all-area option');
+   await buttons.last().click();
+   assert.equal(await page.locator('#items .item').count(),areaCount,slug+' whole-prefecture list has every municipality area');
+   assert.equal(await page.locator('#selection').textContent(),'全域：'+areaCount+(['kyoto','osaka','okayama','hiroshima'].includes(slug)?'区域':'市町村'),slug+' whole-area selection heading');
+  }
+  // Preserve a full-page 390px preview of the national directory in CI artifacts.
+  await page.goto(new URL('/v2/municipalities/index.html',page.url()).href);
+  assert.equal(await page.locator('li.prefecture').count(),47);
   assert.deepEqual(app.errors,[]);
   console.log('PASS real Chromium: S01/S04/S07/S08/S12/S13/S14-S18/S27/S30/S32/S36/S38 (desktop + 390px; not iPhone Safari)');
  }finally{await app.close();}
