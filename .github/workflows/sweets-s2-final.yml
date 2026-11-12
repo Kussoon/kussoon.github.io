@@ -1,0 +1,50 @@
+name: Sweets S2 final integration verification
+on:
+  pull_request:
+    paths:
+      - 'maps/unified-sweets-map.html'
+      - 'data/sweets/**'
+      - 'v2/verification/sweets-s2-coordinate-audit/**'
+      - 'v2/tests/sweets-s2-final.browser.cjs'
+      - 'v2/tests/verify-sweets-s2-final.py'
+      - '.github/workflows/sweets-s2-final.yml'
+permissions:
+  contents: read
+jobs:
+  sweets-s2-four-conditions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify preserved workbook and all records
+        run: python3 v2/tests/verify-sweets-s2-final.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Retrieve the original external map libraries and styles
+        run: |
+          mkdir -p "$RUNNER_TEMP/sweets-fixtures"
+          curl -fsSL --retry 3 --max-time 40 https://unpkg.com/leaflet@1.9.4/dist/leaflet.js -o "$RUNNER_TEMP/sweets-fixtures/leaflet.js"
+          echo "$(openssl dgst -sha256 -binary "$RUNNER_TEMP/sweets-fixtures/leaflet.js" | openssl base64 -A)" | grep -Fx '20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='
+          curl -fsSL --retry 3 --max-time 40 https://unpkg.com/leaflet@1.9.4/dist/leaflet.css -o "$RUNNER_TEMP/sweets-fixtures/leaflet.css"
+          curl -fsSL --retry 3 --max-time 40 https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js -o "$RUNNER_TEMP/sweets-fixtures/cluster.js"
+          echo "1e4e1d22972a3926f48598e0caf14e3fe7049835d428a344fed4f9e3665b3508  $RUNNER_TEMP/sweets-fixtures/cluster.js" | sha256sum -c -
+          curl -fsSL --retry 3 --max-time 40 https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css -o "$RUNNER_TEMP/sweets-fixtures/MarkerCluster.css"
+          curl -fsSL --retry 3 --max-time 40 https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css -o "$RUNNER_TEMP/sweets-fixtures/MarkerCluster.Default.css"
+      - run: node v2/tests/sweets-s2-final.browser.cjs
+        env:
+          KUSSOON_SWEETS_FIXTURES: ${{ runner.temp }}/sweets-fixtures
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/sweets-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sweets-s2-browser-verification
+          path: ${{ runner.temp }}/sweets-browser
+          if-no-files-found: warn
+          retention-days: 14
