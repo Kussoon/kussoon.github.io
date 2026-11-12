@@ -1,0 +1,43 @@
+name: Bread marker refresh regression
+on:
+  pull_request:
+    paths:
+      - 'maps/unified-bread-map.html'
+      - 'v2/tests/bread-marker-refresh.browser.cjs'
+      - '.github/workflows/bread-marker-refresh.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps ${{ matrix.engine }}
+        working-directory: v2/tests/browser
+      - name: Fetch and verify production MarkerCluster fixture
+        run: |
+          curl -fsSL --retry 3 --max-time 30 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js' -o "$RUNNER_TEMP/leaflet.markercluster.js"
+          echo "1e4e1d22972a3926f48598e0caf14e3fe7049835d428a344fed4f9e3665b3508  $RUNNER_TEMP/leaflet.markercluster.js" | sha256sum -c -
+      - run: node v2/tests/bread-marker-refresh.browser.cjs
+        env:
+          KUSSOON_BROWSER_ENGINES: ${{ matrix.engine }}
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/bread-markers
+          KUSSOON_CLUSTER_FIXTURE: ${{ runner.temp }}/leaflet.markercluster.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bread-markers-${{ matrix.engine }}
+          path: ${{ runner.temp }}/bread-markers
+          retention-days: 14
