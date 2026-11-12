@@ -1,0 +1,110 @@
+name: V2 common 2026 lightness benchmark (no public file writes)
+on:
+  pull_request:
+    paths:
+      - 'v2/tools/shared-topology/compare-lightweight.cjs'
+      - '.github/workflows/v2-national-simplification-benchmark.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  national-simplification-benchmark:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Set up GDAL and pinned topology packages
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gdal-bin
+          npm install --no-audit --no-fund
+        working-directory: v2/tools/shared-topology
+      - name: Verify synthetic shared arc fixtures
+        run: |
+          node --check v2/tools/shared-topology/compare-lightweight.cjs
+          cd v2/tools/shared-topology && npm test
+      - name: Download official 2026 N03 source and build a single nationwide input
+        run: python3 v2/tools/shared-topology/prepare-2026-national.py "$RUNNER_TEMP/n03"
+      - name: Measure unsimplified nationwide source as the ring-defect baseline
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+          KUSSOON_COLLECT_ONLY: '1'
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep100" --quantization 1000000 --keep 1 --expect-prefectures 47
+          node validate.mjs --dir "$RUNNER_TEMP/keep100"
+          node compare-lightweight.cjs "$RUNNER_TEMP/keep100" "$RUNNER_TEMP/keep100-report.json"
+      - name: Measure 0.02 baseline with the same geometry tests
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+          KUSSOON_COLLECT_ONLY: '1'
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep020" --quantization 1000000 --keep 0.02 --expect-prefectures 47 --protect-rings
+          node validate.mjs --dir "$RUNNER_TEMP/keep020"
+          node compare-lightweight.cjs "$RUNNER_TEMP/keep020" "$RUNNER_TEMP/keep020-report.json"
+      - name: Build 0.005 (0.5 percent) national simplification
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+          KUSSOON_COLLECT_ONLY: '1'
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep005" --quantization 1000000 --keep 0.005 --expect-prefectures 47 --protect-rings
+          node validate.mjs --dir "$RUNNER_TEMP/keep005"
+          node compare-lightweight.cjs "$RUNNER_TEMP/keep005" "$RUNNER_TEMP/keep005-report.json"
+      - name: Build 0.002 (0.2 percent) national simplification
+        working-directory: v2/tools/shared-topology
+        env:
+          NODE_OPTIONS: --max-old-space-size=12288
+          KUSSOON_COLLECT_ONLY: '1'
+        run: |
+          node build.mjs --input "$RUNNER_TEMP/n03/national-2026.geojson" --output "$RUNNER_TEMP/keep002" --quantization 1000000 --keep 0.002 --expect-prefectures 47 --protect-rings
+          node validate.mjs --dir "$RUNNER_TEMP/keep002"
+          node compare-lightweight.cjs "$RUNNER_TEMP/keep002" "$RUNNER_TEMP/keep002-report.json"
+      - name: Summarize all three measurements and enforce the shape/size gate
+        run: |
+          python3 - <<'PY'
+          import json,os,sys
+          root=os.environ['RUNNER_TEMP']
+          names=['keep100','keep020','keep005','keep002']
+          reports={n:json.load(open(root+'/'+n+'-report.json')) for n in names}
+          print('S39 STRICT CANDIDATE REVIEW')
+          for n,r in reports.items():
+              print(n, 'MiB=',r['totalMiB'],'regions=',r['regions'],'rings=',r['rings'],'holes=',r['holes'],
+                    'degenerate=',r['totalDegenerateRings'],'discontinuous=',r['totalDiscontinuousRings'],
+                    'sharedPairs=',r['sharedPairs'])
+          baseline=reports['keep100']
+          issues=[]
+          for n in ['keep020','keep005','keep002']:
+              r=reports[n]
+              if r['regions']!=1905 or r['sharedPairs']<22: issues.append(n+': code or shared arc regression')
+              if r['totalDegenerateRings']>baseline['totalDegenerateRings'] or r['totalDiscontinuousRings']>baseline['totalDiscontinuousRings']: issues.append(n+': rings worsened from unsimplified source')
+              if r['rings']<baseline['rings'] or r['holes']<baseline['holes']: issues.append(n+': lost rings or holes relative to baseline')
+              if r['totalMiB']>=baseline['totalMiB']*.98: issues.append(n+': no material reduction in bytes')
+          if baseline['totalDegenerateRings']:
+              print('BASELINE WARNING: raw source has degenerate rings; preservation is not equivalent to approval for publication.')
+          if issues:
+              for reason in issues: print('REJECT:',reason)
+              sys.exit(1)
+          print('PASS relative ring/size gate only; raw defects, morphology and real-device acceptance remain open')
+          PY
+      - name: Confirm published data and scripts remain unchanged
+        run: git diff --exit-code -- v2/data v2/national v2/shared
+      - name: Archive reports only (not unreviewed geo datasets)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: s39-national-2026-keep-comparison-report
+          path: |
+            ${{ runner.temp }}/keep100-report.json
+            ${{ runner.temp }}/keep020-report.json
+            ${{ runner.temp }}/keep005-report.json
+            ${{ runner.temp }}/keep002-report.json
+          retention-days: 14
+          if-no-files-found: ignore
