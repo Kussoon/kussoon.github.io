@@ -1,0 +1,51 @@
+{
+  "master_records": 510,
+  "html_records": 429,
+  "common_ids": 429,
+  "sheets_preserved": [
+    "店舗マスター",
+    "地域管理",
+    "根拠資料",
+    "変更履歴",
+    "判定ルール",
+    "集計・検証",
+    "リンク監査_20261022",
+    "管理ガイド_v0.3",
+    "v0.3更新差分",
+    "公開表示校閲履歴"
+  ],
+  "adopted_unique_stores": 24,
+  "adopted_by_city": {
+    "尼崎市": 1,
+    "宝塚市": 14,
+    "伊丹市": 9
+  },
+  "s2_records": 106,
+  "pending_evidence": 1,
+  "held_no_coordinate_change": 81,
+  "unplanned_store_attribute_changes": 0,
+  "html_master_attribute_mismatches": [],
+  "intentional_location_accuracy_updates": 24,
+  "evidence_rows_appended": 48,
+  "history_rows_appended": 24,
+  "unchanged_archive_members": 21,
+  "changed_members": [
+    "xl/styles.xml",
+    "xl/tables/table3.xml",
+    "xl/tables/table4.xml",
+    "xl/tables/table5.xml",
+    "xl/worksheets/sheet1.xml",
+    "xl/worksheets/sheet3.xml",
+    "xl/worksheets/sheet4.xml",
+    "xl/worksheets/sheet5.xml"
+  ],
+  "formula_and_old_cell_styles_preserved": true,
+  "date_normalization": "ISO timestamps and numeric Excel serial values compared by calendar date; original cells retained",
+  "sha256": {
+    "kussoon-sweets-common-master-v0.4.2-s2-candidate-20261112.xlsx": "985d6864aa30f6528dd11505c328aefb8077abc264ba196b4f140f327672a1ab",
+    "unified-sweets-map-s2-verification-20261112.html": "556f82461b0a10c6228f73f3beccca29e3f6acc007773f35f794cfb1c9a75100",
+    "s2-applied-24-diff.csv": "e65a966da0cf5c32560319b0bda2153fe963d82af9ec49b5cff3a9c9eb17a756",
+    "s2-final-106-decisions.csv": "eeb27f0059ff728bf29a5858b51a4e0d4828fdc4fd2c01e3d29dc3ac4ec1e40c",
+    "master-510-synced.csv": "eadcb3bccad8e7ebdb041ffffff8523adfa984c023a49b1ffa0b7e5f7561596b"
+  }
+}

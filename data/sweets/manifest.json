@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "approved_master": null,
+  "current_working_master": {
+    "version": "0.4.2-s2",
+    "adoption_status": "verification_candidate_not_approved",
+    "path": "masters/kussoon-sweets-common-master-v0.4.2-s2-candidate-20261112.xlsx",
+    "sha256": "985d6864aa30f6528dd11505c328aefb8077abc264ba196b4f140f327672a1ab",
+    "source_version": "0.4.1-candidate-20261102",
+    "record_count": 510,
+    "public_html_records": 429,
+    "sheets": 10,
+    "applied_coordinate_stores": 24,
+    "pending_evidence_stores": 1,
+    "held_stores": 81
+  },
+  "evidence": "../../v2/verification/sweets-s2-coordinate-audit/20261112-final/"
+}
