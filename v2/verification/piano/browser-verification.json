@@ -1,0 +1,21 @@
+{
+  "browsers": [
+    {
+      "browser": "chromium",
+      "available": true,
+      "pages_checked": 108,
+      "interactions": [
+        "action: strike, rebound, release, early release",
+        "keyboard: 88 keys, names/frequencies, reverse colors, sound, stop, arrow navigation",
+        "pitch: single/both playback, switching, volume, moving cursor, stop, 10-second timeout, reduced motion",
+        "audio unavailable: explanatory message"
+      ]
+    },
+    {
+      "browser": "webkit",
+      "available": false,
+      "reason": "WebKit 26.5 installed; launch blocked by missing shared libraries: libgtk-4.so.1, libgraphene-1.0.so.0, libharfbuzz-icu.so.0, libmanette-0.2.so.0, libhyphen.so.0, libGLESv2.so.2."
+    }
+  ],
+  "errors": []
+}
