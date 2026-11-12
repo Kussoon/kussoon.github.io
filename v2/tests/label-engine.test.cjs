@@ -187,19 +187,30 @@ test('out-of-view labels do not count as labels hidden by collisions',()=>{
   assert.ok(layout.eligible.filter(Boolean).length<59);
 });
 
-test('adaptive two-line variants retain every original character',()=>{
-  for(const name of ['東芦屋町','打出小槌町','六麓荘町']){
-    const variants=E.lineVariants(name,true);
-    assert.equal(variants[0].join(''),name);
-    assert.ok(variants.length>=2);
+test('conservative line splits rely on corroborated regional name stems',()=>{
+  const {models}=E.buildModels(raw.features);
+  const stems=E.deriveNameStems(models);
+  assert.ok(stems.has('打出'),'打出町 establishes 打出 as a stem');
+  assert.ok(stems.has('奥池'),'奥池町 establishes 奥池 as a stem');
+  assert.ok(stems.has('三条'),'三条町 establishes 三条 as a stem');
+  for(const m of models){
+    const variants=E.lineVariants(m.name,true,stems);
+    assert.equal(variants[0].join(''),m.name);
     for(const v of variants){
       assert.ok(v.length<=2);
-      assert.equal(v.join(''),name);
+      assert.equal(v.join(''),m.name);
+      if(v.length===2){
+        assert.ok(Array.from(v[0]).length>=2 && Array.from(v[1]).length>=2);
+        assert.ok(!/^[ヶケがノの・]/u.test(v[1]));
+      }
     }
   }
-  assert.ok(!E.lineVariants('東芦屋町',true).some(v=>v.join('/')==='東芦/屋町'));
-  assert.ok(E.lineVariants('打出小槌町',true).some(v=>v.join('/')==='打出/小槌町'));
-  assert.ok(E.lineVariants('六麓荘町',true).some(v=>v.join('/')==='六麓荘/町'));
+  assert.deepEqual(JSON.stringify(E.lineVariants('東芦屋町',true,stems)),JSON.stringify([['東芦屋町']]));
+  assert.deepEqual(JSON.stringify(E.lineVariants('六麓荘町',true,stems)),JSON.stringify([['六麓荘町']]));
+  assert.deepEqual(JSON.stringify(E.lineVariants('朝日ヶ丘町',true,stems)),JSON.stringify([['朝日ヶ丘町']]));
+  assert.ok(E.lineVariants('打出小槌町',true,stems).some(v=>v.join('/')==='打出/小槌町'));
+  assert.ok(E.lineVariants('三条南町',true,stems).some(v=>v.join('/')==='三条/南町'));
+  assert.ok(E.lineVariants('奥池南町',true,stems).some(v=>v.join('/')==='奥池/南町'));
 });
 
 test('adaptive layouts improve fit where possible without altering town shapes',()=>{
@@ -249,5 +260,31 @@ test('adaptive variable-height collision boxes preserve selection and collision 
         assert.equal(E.evaluateLabelLayouts(models,layouts,shown).collisions,0);
       }
     }
+  }
+});
+
+test('shrink-only mode keeps exactly the baseline anchors and never wraps',()=>{
+  const {models}=E.buildModels(raw.features);
+  const measure=(name,size)=>Array.from(name).length*size;
+  for(const width of [320,390,700]){
+    const fontSize=E.screenPixelsToSvgUnits(16,1000,width);
+    const widths=models.map(m=>measure(m.name,fontSize));
+    const anchors=E.choosePositions(models,widths,fontSize,'avoid');
+    const fixed=E.planAdaptiveLabels(models,anchors,fontSize,measure,{
+      wrap:false,shrink:true,fixedPosition:true
+    });
+    assert.equal(fixed.length,59);
+    for(let i=0;i<models.length;i++){
+      assert.equal(fixed[i].x,anchors[i][0],models[i].name+' x coordinate');
+      assert.equal(fixed[i].y,anchors[i][1],models[i].name+' y coordinate');
+      assert.equal(fixed[i].wrapped,false);
+      assert.equal(fixed[i].lines.join(''),models[i].name);
+      assert.ok(fixed[i].fontSize>=fontSize*.875-1e-8);
+    }
+    const old=E.planAdaptiveLabels(models,anchors,fontSize,measure,{
+      wrap:false,shrink:false,fixedPosition:true
+    });
+    assert.ok(E.evaluateLabelLayouts(models,fixed).wholeOutside<=
+      E.evaluateLabelLayouts(models,old).wholeOutside);
   }
 });
