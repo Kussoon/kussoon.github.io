@@ -119,9 +119,15 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 @media(max-width:600px){.office-popup{left:8px;right:108px;width:auto;min-width:0}}
 @media(max-width:500px){.map-toolbar{width:88px}.map-toolbar button{min-height:44px;font-size:13px}.map-fullscreen-button{width:88px;font-size:13px}}
 .progressive-national .prefecture{stroke:none}.prefecture-focus{fill:none;stroke:none;pointer-events:none}.prefecture-focus:focus-visible{stroke:#174b71;stroke-width:2;vector-effect:non-scaling-stroke}.label-toggle[hidden]{display:none}
+/* Illustrated banner only: existing map, search and quiz UI remain unchanged. */
+.national-title-banner{margin:0 0 10px}
+.national-title-banner img{display:block;width:100%;max-width:960px;height:auto;margin:0 auto;border-radius:12px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
-<h1>全国市区町村マップ 2026</h1>
-<p class="intro">全国47都道府県・1,905区域を、拡大しながら調べられる市区町村マップです。</p>
+<header class="national-title-banner" aria-label="全国市区町村マップのご案内">
+<h1 class="sr-only">全国市区町村マップ 2026</h1>
+<img src="/maps/assets/national-municipalities-title-20261113.webp" alt="全国の市区町村を地図で探して、名前や場所を学べます。" width="800" height="400" decoding="async" fetchpriority="high">
+</header>
 <ul class="map-guide"><li>市区町村の位置を押すと吹き出しが出ます。</li><li>吹き出しは上下に移動でき、×で閉じられます。</li><li>区域の点滅は、もう一度押すと止まります。</li><li>地図内のボタンでよみがなが出せます。</li></ul>
 <p class="note"><strong>読み込みに時間がかかることがあります。</strong></p>
 <section class="panel" aria-label="地域を探す">
