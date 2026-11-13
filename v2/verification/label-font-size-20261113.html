@@ -130,9 +130,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 .map-font-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
 .map-font-row button{min-width:0;padding:5px 0!important;white-space:nowrap;font-size:12px!important}
 #mapFontReset{font-size:12px!important;min-height:36px!important}
-/* Individual CSS scale composes with the SVG label transforms; no recalculation of anchors, density or viewBox. */
-#map [data-progressive-labels] > text[data-national-code],
-#map [data-v2-labels] > g {scale:var(--preview-label-scale,1);transform-origin:center;transform-box:fill-box}
+/* Safari-compatible test: font magnification is performed via native SVG transform attributes, not CSS scale. */
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
 <header class="national-title-banner" aria-label="全国市区町村マップのご案内">
 <h1 class="sr-only">全国市区町村マップ 2026</h1>
@@ -891,7 +889,8 @@ $('map').addEventListener('click',e=>{
 <script defer src="/v2/national/popup-controls.js?v=20261113-fullscreen-chevron-up1"></script>
 <script defer src="/common/site-footer.js"></script>
 <script>
-/* Trial-only label scaling. Do not change density engine or any site-wide settings. */
+/* Trial only: SVG-native transforms work on Safari and preserve all geographic anchors.
+   No density, label layout, map zoom or production code is altered. */
 (()=>{'use strict';
 const map=document.getElementById('map');
 const smaller=document.getElementById('mapFontSmaller');
@@ -899,13 +898,52 @@ const larger=document.getElementById('mapFontLarger');
 const reset=document.getElementById('mapFontReset');
 const percent=document.getElementById('mapFontPercent');
 const steps=[75,100,125,150,175,200];
-let current=1;
+let current=1,scheduled=false;
+const originalTransforms=new WeakMap();
+function adjustLabels(){
+ scheduled=false;
+ const factor=steps[current]/100;
+ // Nationwide text elements use explicit x/y anchors. Scale about that anchor,
+ // not about an SVG bounding box (which WebKit may fail to paint).
+ for(const text of map.querySelectorAll('[data-progressive-labels] > text[data-national-code]')){
+  if(!originalTransforms.has(text))originalTransforms.set(text,text.getAttribute('transform'));
+  const original=originalTransforms.get(text);
+  if(factor===1){
+   if(original===null)text.removeAttribute('transform');else text.setAttribute('transform',original);
+   continue;
+  }
+  const x=Number(text.getAttribute('x')),y=Number(text.getAttribute('y'));
+  if(!Number.isFinite(x)||!Number.isFinite(y))continue;
+  text.setAttribute('transform',(original?original+' ':'')+
+    'translate('+x+' '+y+') scale('+factor+') translate('+(-x)+' '+(-y)+')');
+ }
+ // Prefecture-detail labels are groups already translated to the fixed anchor.
+ for(const group of map.querySelectorAll('[data-v2-labels] > g')){
+  if(!originalTransforms.has(group))originalTransforms.set(group,group.getAttribute('transform'));
+  const original=originalTransforms.get(group);
+  if(factor===1){
+   if(original===null)group.removeAttribute('transform');else group.setAttribute('transform',original);
+  }else group.setAttribute('transform',(original?original+' ':'')+'scale('+factor+')');
+ }
+}
+function schedule(){
+ if(scheduled)return;
+ scheduled=true;
+ requestAnimationFrame(adjustLabels);
+}
+// The national label engine reuses text nodes while redrawing. Re-apply the
+// chosen factor when a new label appears or its geographic position changes.
+new MutationObserver(records=>{
+ if(current===1)return;
+ if(records.some(record=>record.type==='childList'||
+   (record.type==='attributes'&&record.target.matches?.('text[data-national-code]'))))schedule();
+}).observe(map,{childList:true,subtree:true,attributes:true,attributeFilter:['x','y']});
 function update(){
- map.style.setProperty('--preview-label-scale',String(steps[current]/100));
  percent.textContent=steps[current]+'%';
  smaller.disabled=current===0;
  larger.disabled=current===steps.length-1;
  reset.setAttribute('aria-label','地図の地名文字：現在'+steps[current]+'%。押すと100%に戻します');
+ schedule();
 }
 smaller.addEventListener('click',()=>{if(current>0){current--;update();}});
 larger.addEventListener('click',()=>{if(current<steps.length-1){current++;update();}});
