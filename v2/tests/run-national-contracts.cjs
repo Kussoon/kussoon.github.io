@@ -39,7 +39,7 @@ const files=[
  'v2/tests/kinki-six-prefectures-shared-audit.test.cjs',
  'v2/tests/prefecture-study-region-policy.test.cjs',
  'v2/tests/audit-ledger.test.cjs',
- 'v2/tests/office-directory.test.cjs',
+ 'v2/tests/office-directory.test.cjs','v2/tests/wikipedia-links-national.test.cjs',
  'v2/tests/prefecture-colors.test.cjs',
  'v2/tests/national-density-overlap.test.cjs',
  'v2/tests/national-study-label-layout.test.cjs',
