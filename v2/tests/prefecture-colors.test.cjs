@@ -37,4 +37,11 @@ assert.equal(degreeSum/2,pairs.length,'pair list represents the symmetric adjace
 assert.equal(pairs.length,88,'complete adjacent-boundary pair list');
 for(const neighbor of ['26','27','31','33'])
  assert.notEqual(colors.color('28'),colors.color(neighbor),'Hyogo differs from adjacent '+neighbor);
+// User-approved 2026-11-13 B arrangement. Maintain these comparison anchors.
+assert.equal(colors.color('28'),'#f1d5a5','Hyogo retains its approved golden beige');
+assert.equal(colors.color('16'),'#bee0c1','Toyama matches approved B arrangement');
+assert.equal(colors.color('18'),'#f1c2c2','Fukui matches approved B arrangement');
+assert.equal(colors.color('09'),'#c9cfed','Tochigi matches approved B arrangement');
+assert.equal(colors.color('10'),'#d9dea5','Gunma matches approved B arrangement');
+assert.notEqual(colors.color('16'),colors.color('18'),'Toyama and Fukui are different');
 console.log('PASS fixed prefecture palette: 47 assignments, 8 colours, '+pairs.length+' adjacent pairs');
