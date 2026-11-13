@@ -796,7 +796,20 @@ $('popupScrollDown').addEventListener('click',()=>{$('popupScroll').scrollBy({to
 $('popupClose').addEventListener('click',()=>{dismissedPopupCode=current?$('region').value:nationalLabels?.selected()||'';$('officePopup').hidden=true;});
 $('map').addEventListener('click',e=>{
  if(quizSession)return;
- if(progressive&&nationalView&&!current){const label=e.target.closest('[data-national-code]');if(label){void nationalLabels.select(label.dataset.nationalCode);return;}}
+ if(progressive&&nationalView&&!current){
+  const tapped=e.target.closest('[data-national-code]');
+  if(tapped){
+   // Keep the previously approved B comparison behavior: when the text of a
+   // neighboring municipality overlaps the touched polygon, choose the land.
+   const landAtPoint=Number.isFinite(e.clientX)&&Number.isFinite(e.clientY)
+    ?document.elementsFromPoint(e.clientX,e.clientY).find(node=>
+      node.matches?.('path.land[data-national-code]')&&node.closest('[data-national-shapes]'))
+    :null;
+   const actualCode=landAtPoint?.dataset.nationalCode||tapped.dataset.nationalCode;
+   void nationalLabels.select(actualCode);
+   return;
+  }
+ }
  const target=e.target.closest('[data-pref],[data-code]');if(!target)return;
  // Prefecture-only navigation is restricted to the #pref dropdown.
  if(target.dataset.pref)return;
