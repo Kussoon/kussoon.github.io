@@ -123,6 +123,26 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 .national-title-banner{margin:0 0 10px}
 .national-title-banner img{display:block;width:100%;max-width:960px;height:auto;margin:0 auto;border-radius:12px}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.map-font-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+.map-font-row button{min-width:0;padding:5px 0!important;white-space:nowrap;font-size:12px!important}
+#mapFontReset{font-size:12px!important;min-height:36px!important}
+/* Uniform map-control dimensions; right controls and fullscreen button match. */
+#mapFullscreen,
+#mapToolbar button{
+ box-sizing:border-box;
+ height:44px;
+ min-height:44px!important;
+ max-height:44px;
+ padding:0 3px!important;
+ border:1px solid #96b3c7;
+ border-radius:8px;
+ background:#fff;
+ color:#183951;
+ box-shadow:0 2px 7px #183c5533;
+ line-height:1.1;
+}
+#mapToolbar button[aria-pressed="true"]{background:#fff;color:#183951}
+
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
 <header class="national-title-banner" aria-label="全国市区町村マップのご案内">
 <h1 class="sr-only">全国市区町村マップ 2026</h1>
@@ -156,7 +176,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 </section>
 <section class="panel map-panel" aria-label="全国と都道府県の地図">
 <p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
-<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button></div>
+<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled hidden>都道府県全体へ戻る</button></div>
 <div class="map-frame" id="mapFrame"><span class="map-screen-title" id="mapScreenTitle" hidden>全画面表示中</span>
 <svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
 <button type="button" id="mapFullscreen" class="map-fullscreen-button" aria-label="地図を全画面表示">⛶ 全画面</button>
@@ -165,6 +185,11 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <button type="button" id="mapZoomIn" aria-label="地図を拡大">＋</button>
 <button type="button" id="mapZoomOut" aria-label="地図を縮小">－</button>
 </div>
+<div class="map-font-row" role="group" aria-label="地図内ラベルの文字サイズを変更">
+<button type="button" id="mapFontSmaller" aria-label="地図の地名文字を小さくする">文字 −</button>
+<button type="button" id="mapFontLarger" aria-label="地図の地名文字を大きくする">文字 ＋</button>
+</div>
+<button type="button" id="mapFontReset" aria-label="地図の地名文字を標準サイズに戻す">文字 <span id="mapFontPercent">100%</span></button>
 <button type="button" id="mapReset" aria-label="現在の表示単位の初期表示に戻す" title="この地図の表示位置と倍率を戻します。選択は保持します。">全体表示</button>
 <button type="button" id="mapReadingToggle" aria-label="読み仮名の表示を切り替え" aria-pressed="false">よみがな OFF</button>
 </div>
@@ -400,7 +425,7 @@ function paint({refocus=true}={}){
   viewport.setMinZoom(1);
   viewport.setContentBounds(null);
   drawOverview($('map'));mode='national';activeProjection=null;
-  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('次に市区町村を選択',''));
+  $('prefBtn').disabled=true;$('prefBtn').hidden=true;$('region').disabled=true;$('region').replaceChildren(new Option('次に市区町村を選択',''));
   $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
   $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
   $('officePopup').hidden=true;
@@ -439,7 +464,7 @@ function paint({refocus=true}={}){
   }
   KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.sharedArcs||current.arcs,coastArcs:current.coastArcs||[],project:activeProjection,selected,hideTitles:Boolean(quizSession)});
   if(!quizSession)drawLabels();
-  $('prefBtn').disabled=Boolean(quizSession);$('region').disabled=Boolean(quizSession);
+  $('prefBtn').disabled=Boolean(quizSession);$('prefBtn').hidden=false;$('region').disabled=Boolean(quizSession);
   const cover=current.readingStats;
   $('readingCoverage').textContent='読み仮名：'+cover.matched+'／'+cover.total+'区域で名称・コード照合済み（未収録 '+cover.missing+'、名称不一致 '+cover.mismatched+'）。未確認の読みは表示しません。';
   const pref=$('pref').value,region=quizSession?' ＞ クイズ中':chosen?' ＞ '+(nationalLabels?.fullNameFor(chosen.code)||chosen.fullName||chosen.name):'';
@@ -764,7 +789,20 @@ $('popupScrollDown').addEventListener('click',()=>{$('popupScroll').scrollBy({to
 $('popupClose').addEventListener('click',()=>{dismissedPopupCode=current?$('region').value:nationalLabels?.selected()||'';$('officePopup').hidden=true;});
 $('map').addEventListener('click',e=>{
  if(quizSession)return;
- if(progressive&&nationalView&&!current){const label=e.target.closest('[data-national-code]');if(label){void nationalLabels.select(label.dataset.nationalCode);return;}}
+ if(progressive&&nationalView&&!current){
+  const tapped=e.target.closest('[data-national-code]');
+  if(tapped){
+   // Keep the previously approved B comparison behavior: when the text of a
+   // neighboring municipality overlaps the touched polygon, choose the land.
+   const landAtPoint=Number.isFinite(e.clientX)&&Number.isFinite(e.clientY)
+    ?document.elementsFromPoint(e.clientX,e.clientY).find(node=>
+      node.matches?.('path.land[data-national-code]')&&node.closest('[data-national-shapes]'))
+    :null;
+   const actualCode=landAtPoint?.dataset.nationalCode||tapped.dataset.nationalCode;
+   void nationalLabels.select(actualCode);
+   return;
+  }
+ }
  const target=e.target.closest('[data-pref],[data-code]');if(!target)return;
  // Prefecture-only navigation is restricted to the #pref dropdown.
  if(target.dataset.pref)return;
@@ -874,4 +912,67 @@ $('map').addEventListener('click',e=>{
 </script>
 <script defer src="/v2/national/popup-controls.js?v=20261113-fullscreen-chevron-up1"></script>
 <script defer src="/common/site-footer.js"></script>
+<script>
+/* Font size controls: SVG-native transforms support Safari and preserve geographic anchors.
+   No density, label layout or map zoom is altered. */
+(()=>{'use strict';
+const map=document.getElementById('map');
+const smaller=document.getElementById('mapFontSmaller');
+const larger=document.getElementById('mapFontLarger');
+const reset=document.getElementById('mapFontReset');
+const percent=document.getElementById('mapFontPercent');
+const steps=[75,100,125,150,175,200];
+let current=1,scheduled=false;
+const originalTransforms=new WeakMap();
+function adjustLabels(){
+ scheduled=false;
+ const factor=steps[current]/100;
+ // Nationwide text elements use explicit x/y anchors. Scale about that anchor,
+ // not about an SVG bounding box (which WebKit may fail to paint).
+ for(const text of map.querySelectorAll('[data-progressive-labels] > text[data-national-code]')){
+  if(!originalTransforms.has(text))originalTransforms.set(text,text.getAttribute('transform'));
+  const original=originalTransforms.get(text);
+  if(factor===1){
+   if(original===null)text.removeAttribute('transform');else text.setAttribute('transform',original);
+   continue;
+  }
+  const x=Number(text.getAttribute('x')),y=Number(text.getAttribute('y'));
+  if(!Number.isFinite(x)||!Number.isFinite(y))continue;
+  text.setAttribute('transform',(original?original+' ':'')+
+    'translate('+x+' '+y+') scale('+factor+') translate('+(-x)+' '+(-y)+')');
+ }
+ // Prefecture-detail labels are groups already translated to the fixed anchor.
+ for(const group of map.querySelectorAll('[data-v2-labels] > g')){
+  if(!originalTransforms.has(group))originalTransforms.set(group,group.getAttribute('transform'));
+  const original=originalTransforms.get(group);
+  if(factor===1){
+   if(original===null)group.removeAttribute('transform');else group.setAttribute('transform',original);
+  }else group.setAttribute('transform',(original?original+' ':'')+'scale('+factor+')');
+ }
+}
+function schedule(){
+ if(scheduled)return;
+ scheduled=true;
+ requestAnimationFrame(adjustLabels);
+}
+// The national label engine reuses text nodes while redrawing. Re-apply the
+// chosen factor when a new label appears or its geographic position changes.
+new MutationObserver(records=>{
+ if(current===1)return;
+ if(records.some(record=>record.type==='childList'||
+   (record.type==='attributes'&&record.target.matches?.('text[data-national-code]'))))schedule();
+}).observe(map,{childList:true,subtree:true,attributes:true,attributeFilter:['x','y']});
+function update(){
+ percent.textContent=steps[current]+'%';
+ smaller.disabled=current===0;
+ larger.disabled=current===steps.length-1;
+ reset.setAttribute('aria-label','地図の地名文字：現在'+steps[current]+'%。押すと100%に戻します');
+ schedule();
+}
+smaller.addEventListener('click',()=>{if(current>0){current--;update();}});
+larger.addEventListener('click',()=>{if(current<steps.length-1){current++;update();}});
+reset.addEventListener('click',()=>{current=1;update();});
+update();
+})();
+</script>
 </body></html>
