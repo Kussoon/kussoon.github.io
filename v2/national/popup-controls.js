@@ -68,6 +68,18 @@ function moveToTop(targetTop){
  const minTop=area.top+8;
  if(rect.top<minTop)setCorrection(correction+minTop-rect.top);
 }
+function isMapFullscreen(){
+ return document.body.classList.contains('map-screen-mode')||Boolean(document.fullscreenElement);
+}
+// In fullscreen only, both the compact header and the expanded panel stay
+// anchored at the bottom of the map: collapse moves downward, expansion upward.
+function alignPopupBottom(){
+ if(popup.hidden)return;
+ const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
+ const correction=parseFloat(popup.style.getPropertyValue('--popup-collapse-y'))||0;
+ const targetBottom=area.bottom-8;
+ setCorrection(correction+targetBottom-popup.getBoundingClientRect().bottom);
+}
 function alignTitleAtMapBottom(){
  if(popup.hidden||document.body.classList.contains('map-screen-mode')||document.fullscreenElement)return;
  const area=(popup.offsetParent||popup.parentElement).getBoundingClientRect();
@@ -85,20 +97,25 @@ function resetForMunicipality(){
  if(!popup.hidden)alignTitleAtMapBottom();
 }
 fold.addEventListener('click',()=>{
+ const fullscreen=isMapFullscreen();
  if(!collapsed){
   const topBeforeCollapse=popup.getBoundingClientRect().top;
   collapsed=true;
   body.hidden=true;
   syncFoldControl();
-  // Keep the title fixed while the body always retracts upward.
-  moveToTop(topBeforeCollapse);
+  // Normal view: retain the approved fixed-top, upward-folding behavior.
+  // Fullscreen: keep the compact title at the map's bottom edge.
+  if(fullscreen)alignPopupBottom();
+  else moveToTop(topBeforeCollapse);
  }else{
   const topBeforeExpand=popup.getBoundingClientRect().top;
   collapsed=false;
   body.hidden=false;
   syncFoldControl();
-  // Keep the title fixed while the body always expands downward.
-  moveToTop(topBeforeExpand);
+  // Normal view: expand downward from the title as before.
+  // Fullscreen: expand upward from the map's bottom edge.
+  if(fullscreen)alignPopupBottom();
+  else moveToTop(topBeforeExpand);
  }
 });
 fold.addEventListener('pointerdown',event=>event.stopPropagation());
