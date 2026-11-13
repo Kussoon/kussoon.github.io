@@ -130,6 +130,24 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 .map-font-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
 .map-font-row button{min-width:0;padding:5px 0!important;white-space:nowrap;font-size:12px!important}
 #mapFontReset{font-size:12px!important;min-height:36px!important}
+/* Uniform map-control dimensions in the V2 font-size trial.
+   Keep pressed-state semantics but use the same visual palette and height. */
+#mapFullscreen,
+#mapToolbar button{
+ box-sizing:border-box;
+ height:44px;
+ min-height:44px!important;
+ max-height:44px;
+ padding:0 3px!important;
+ border:1px solid #96b3c7;
+ border-radius:8px;
+ background:#fff;
+ color:#183951;
+ box-shadow:0 2px 7px #183c5533;
+ line-height:1.1;
+}
+#mapToolbar button[aria-pressed="true"]{background:#fff;color:#183951}
+
 /* Safari-compatible test: font magnification is performed via native SVG transform attributes, not CSS scale. */
 </style><link rel="stylesheet" href="/v2/progressive-preview/prefecture-colors.css?v=289"></head><body class="colored-national two-tone-selection"><main>
 <header class="national-title-banner" aria-label="全国市区町村マップのご案内">
