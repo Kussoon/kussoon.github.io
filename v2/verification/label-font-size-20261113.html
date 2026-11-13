@@ -165,7 +165,7 @@ body.map-screen-mode #mapFullscreen,#mapFrame:fullscreen #mapFullscreen{right:ma
 <div class="font-preview-note" role="note"><strong>地図ラベルの文字サイズ 比較試作</strong><span>文字だけを75〜200%に変更できます。自治体ラベルの配置と地図の倍率は変更しません。文字同士の重なりは許容します。</span><a href="/maps/national-municipalities.html">正式版に戻る</a></div>
 <section class="panel map-panel" aria-label="全国と都道府県の地図">
 <p id="breadcrumb" class="breadcrumb" aria-live="polite">日本全国</p>
-<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled>都道府県全体へ戻る</button></div>
+<div class="nav"><button type="button" id="nationBtn">日本全国へ戻る</button><button type="button" id="prefBtn" disabled hidden>都道府県全体へ戻る</button></div>
 <div class="map-frame" id="mapFrame"><span class="map-screen-title" id="mapScreenTitle" hidden>全画面表示中</span>
 <svg id="map" viewBox="0 0 850 700" role="img" aria-label="全国と都道府県の行政区域地図"></svg>
 <button type="button" id="mapFullscreen" class="map-fullscreen-button" aria-label="地図を全画面表示">⛶ 全画面</button>
@@ -414,7 +414,7 @@ function paint({refocus=true}={}){
   viewport.setMinZoom(1);
   viewport.setContentBounds(null);
   drawOverview($('map'));mode='national';activeProjection=null;
-  $('prefBtn').disabled=true;$('region').disabled=true;$('region').replaceChildren(new Option('次に市区町村を選択',''));
+  $('prefBtn').disabled=true;$('prefBtn').hidden=true;$('region').disabled=true;$('region').replaceChildren(new Option('次に市区町村を選択',''));
   $('readingCoverage').textContent='都道府県を選択すると読み仮名の収録状況が表示されます。';
   $('breadcrumb').textContent='日本全国';$('metrics').textContent='全国の軽量な輪郭（47都道府県）。詳細データは未読み込み。';
   $('officePopup').hidden=true;
@@ -453,7 +453,7 @@ function paint({refocus=true}={}){
   }
   KussoonV2MunicipalRenderer.render({map:$('map'),regions:current.regions,arcs:current.sharedArcs||current.arcs,coastArcs:current.coastArcs||[],project:activeProjection,selected,hideTitles:Boolean(quizSession)});
   if(!quizSession)drawLabels();
-  $('prefBtn').disabled=Boolean(quizSession);$('region').disabled=Boolean(quizSession);
+  $('prefBtn').disabled=Boolean(quizSession);$('prefBtn').hidden=false;$('region').disabled=Boolean(quizSession);
   const cover=current.readingStats;
   $('readingCoverage').textContent='読み仮名：'+cover.matched+'／'+cover.total+'区域で名称・コード照合済み（未収録 '+cover.missing+'、名称不一致 '+cover.mismatched+'）。未確認の読みは表示しません。';
   const pref=$('pref').value,region=quizSession?' ＞ クイズ中':chosen?' ＞ '+(nationalLabels?.fullNameFor(chosen.code)||chosen.fullName||chosen.name):'';
