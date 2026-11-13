@@ -53,7 +53,7 @@ close.classList.add('popup-control');
 
 let collapsed=false,previousName='';
 function syncFoldControl(){
- fold.textContent=collapsed?'⌄':'−';
+ fold.textContent=collapsed?(isMapFullscreen()?'⌃':'⌄'):'−';
  fold.setAttribute('aria-expanded',String(!collapsed));
  fold.setAttribute('aria-label',collapsed?'吹き出し本文を展開':'吹き出し本文を折り畳む');
  fold.title=collapsed?'本文を展開':'本文を折り畳む';
@@ -138,6 +138,9 @@ if(map)new MutationObserver(()=>{
  }
 }).observe(map,{subtree:true,attributes:true,attributeFilter:['class']});
 syncFoldControl();
+// The chevron reflects the current layout even if fullscreen is toggled while folded.
+new MutationObserver(syncFoldControl).observe(document.body,{attributes:true,attributeFilter:['class']});
+document.addEventListener('fullscreenchange',syncFoldControl);
 new MutationObserver(()=>{if(!popup.hidden)alignTitleAtMapBottom();})
  .observe(popup,{attributes:true,attributeFilter:['hidden']});
 window.KussoonPopupControlsReady=true;
