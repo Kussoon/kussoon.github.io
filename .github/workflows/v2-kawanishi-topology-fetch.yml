@@ -30,10 +30,13 @@ jobs:
           t=json.loads(p.read_text(encoding='utf-8'))
           assert t['type']=='Topology', 'TopoJSON required'
           assert 'transform' in t and 'arcs' in t
-          entries=[g for obj in t['objects'].values() for g in obj.get('geometries',[])]
+          entries=t['objects'].get('town',{}).get('geometries',[])
           print('Geometry count',len(entries),'bytes',p.stat().st_size)
-          assert len(entries)==182, f'Expected 182, got {len(entries)}'
+          assert len(entries)==191, f'Expected 191 town polygons, got {len(entries)}'
           assert all((g.get('properties') or {}).get('S_NAME') for g in entries), 'Missing S_NAME'
+          ids=[(g.get('properties') or {}).get('R2KAxx_ID') for g in entries]
+          assert all(x is not None for x in ids) and len(ids)==len(set(ids)), 'Missing or duplicate R2KAxx_ID'
+          print('Distinct S_NAME candidates',len({g['properties']['S_NAME'] for g in entries}))
           assert p.stat().st_size<12_000_000, 'Unexpectedly large dataset'
           PY
       - uses: actions/upload-artifact@v4
