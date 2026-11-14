@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>西宮市321町名 V2比較試作｜Kussoon</title><meta name="robots" content="noindex,follow">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f8fc;color:#19384e;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+main{max-width:1050px;margin:auto;padding:12px}h1{font-size:clamp(21px,4vw,30px);margin:10px 0}.notice{font-size:13px;line-height:1.6}
+a{color:#185e87} .top{display:flex;gap:12px;flex-wrap:wrap}.status{font-size:14px;padding:9px;background:white;border-radius:7px;margin:8px 0}
+.search{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}.search input{font:inherit;padding:10px;min-width:0;flex:1;border:1px solid #88afca;border-radius:7px}
+#matches{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0;max-height:118px;overflow:auto}
+#matches button{padding:6px 9px;border:1px solid #abc9db;background:white;border-radius:6px}
+.frame{position:relative;border:2px solid #fff;border-radius:9px;overflow:hidden;background:#e6f3fa}
+#map{height:clamp(430px,65svh,740px);background:#e6f3fa}
+.toolbar{position:absolute;right:8px;bottom:8px;z-index:600;display:flex;flex-direction:column;gap:5px;width:102px}
+.toolbar button,.full{min-height:40px;border:1px solid #92b6cc;border-radius:7px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
+.toolbar .zoom{display:grid;grid-template-columns:1fr 1fr;gap:5px}.full{position:absolute;top:8px;right:8px;z-index:600;padding:0 12px}
+.town-label{border:0!important;background:#ffffffdc!important;color:#1c3c56!important;padding:1px 2px!important;border-radius:3px!important;box-shadow:0 1px 2px #0004!important;font-weight:800!important;line-height:1.1!important;white-space:nowrap!important;pointer-events:none!important;font-size:var(--town-font,8px)!important;text-align:center!important}
+.town-label:before{display:none!important}.town-label .reading{display:block;font-size:.78em;font-weight:600}
+.town-label[hidden]{display:none!important}
+body.map-full{overflow:hidden}body.map-full .frame{position:fixed;inset:0;z-index:10000;border:0;border-radius:0}body.map-full #map{height:100dvh;width:100%}
+button:focus-visible,input:focus-visible{outline:3px solid #dd9a31;outline-offset:2px}
+.footer{font-size:12px;line-height:1.6;color:#576f7d}
+</style>
+</head><body><main>
+<nav class="top"><a href="/nishinomiya/">西宮市トップ</a><a href="/nishinomiya/all-area-labeled.html">現行の町名全域図</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
+<h1>西宮市 町名地図｜V2比較試作</h1>
+<p class="notice">正式版は変更していません。既存TopoJSON・26コミュニティの対象判定・丁目統合を使う自動ラベル比較試作です。クイズと全国V2の描画エンジン統合は次の段階です。</p>
+<div class="search"><input id="search" type="search" aria-label="町名を検索" placeholder="町名・よみがなを検索 ※最大35件表示" autocomplete="off"></div>
+<div id="matches" aria-label="検索候補"></div>
+<div class="status" id="status" role="status">町域データを読み込んでいます。</div>
+<section class="frame" id="frame" aria-label="西宮市町名地図">
+<div id="map"></div><button class="full" id="fullscreen" type="button">全画面</button>
+<div class="toolbar" aria-label="地図操作">
+<div class="zoom"><button id="zoomIn" type="button">＋</button><button id="zoomOut" type="button">－</button></div>
+<div class="zoom"><button id="smaller" type="button">文字 −</button><button id="larger" type="button">文字 ＋</button></div>
+<button id="size" type="button">文字 100%</button>
+<button id="reset" type="button">市の全体</button>
+<button id="reading" type="button" aria-pressed="false">よみがな OFF</button>
+</div></section>
+<p class="footer">町域：CODH「国勢調査町丁・字等別境界データセット」／e-Stat 令和2年国勢調査（CC BY 4.0）。コミュニティ分類は既存西宮市サイトの独自整理を継承。町を押すと選択・点滅し、同じ町を再度押すと停止します。<br>このページは比較用であり、西宮市の公式地図ではありません。</p>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+(()=>{'use strict';
+const READINGS={"芦原町":"あしはらちょう","神祇官町":"じんぎかんちょう","森下町":"もりしたちょう","神明町":"しんめいちょう","西福町":"さいふくちょう","中殿町":"なかどのちょう","津田町":"つだちょう","津門川町":"つとがわちょう","津門住江町":"つとすみえちょう","今津水波町":"いまずみずなみちょう","甲子園高潮町":"こうしえんたかしおちょう","甲子園洲鳥町":"こうしえんすどりちょう","甲子園網引町":"こうしえんあびきちょう","今津久寿川町":"いまずくすがわちょう","今津社前町":"いまずしゃぜんちょう","今津大東町":"いまずおおひがしちょう","今津二葉町":"いまずふたばちょう","今津出在家町":"いまずでざいけちょう","今津港町":"いまずみなとちょう","今津巽町":"いまずたつみちょう","今津西浜町":"いまずにしはまちょう","今津真砂町":"いまずまさごちょう","一ケ谷町":"いちがやちょう","仁川町":"にがわちょう","仁川百合野町":"にがわゆりのちょう","仁川五ケ山町":"にがわごかやまちょう","上ケ原一番町":"うえがはらいちばんちょう","上ケ原二番町":"うえがはらにばんちょう","上ケ原三番町":"うえがはらさんばんちょう","上ケ原四番町":"うえがはらよんばんちょう","上ケ原五番町":"うえがはらごばんちょう","上ケ原六番町":"うえがはらろくばんちょう","上ケ原七番町":"うえがはらななばんちょう","上ケ原八番町":"うえがはらはちばんちょう","上ケ原九番町":"うえがはらきゅうばんちょう","上ケ原十番町":"うえがはらじゅうばんちょう","上ケ原山田町":"うえがはらやまだちょう","上ケ原山手町":"うえがはらやまてちょう","上甲東園":"かみこうとうえん","岡田山":"おかだやま","深津町":"ふかずちょう","高畑町":"たかはたちょう","田代町":"たしろちょう","大屋町":"おおやちょう","中島町":"なかじまちょう","瓦林町":"かわらばやしちょう","天道町":"てんどうちょう","松山町":"まつやまちょう","松並町":"まつなみちょう","熊野町":"くまのちょう","二見町":"ふたみちょう","甲子園口北町":"こうしえんぐちきたまち","獅子ケ口町":"ししがぐちちょう","神原":"かんばら","奥畑":"おくはた","北名次町":"きたなつぎちょう","名次町":"なつぎちょう","結善町":"けつぜんちょう","堤町":"つつみちょう","上之町":"かみのちょう","日野町":"ひのちょう","荒木町":"あらきちょう","大森町":"おおもりちょう","薬師町":"やくしちょう","伏原町":"ふしはらちょう","高木東町":"たかぎひがしまち","高木西町":"たかぎにしまち","長田町":"ながたちょう","北口町":"きたぐちちょう","甲風園":"こうふうえん","林田町":"はやしだちょう","野間町":"のまちょう","越水":"こしみず","湯元町":"ゆのもとちょう","鷲林寺字剣谷":"じゅうりんじあざけんだに","鷲林寺":"じゅうりんじ","鷲林寺町":"じゅうりんじちょう","柏堂町":"かやんどうちょう","北山町":"きたやまちょう","苦楽園一番町":"くらくえんいちばんちょう","苦楽園二番町":"くらくえんにばんちょう","苦楽園三番町":"くらくえんさんばんちょう","苦楽園四番町":"くらくえんよんばんちょう","苦楽園五番町":"くらくえんごばんちょう","苦楽園六番町":"くらくえんろくばんちょう","鷲林寺南町":"じゅうりんじみなみまち","柏堂西町":"かやんどうにしまち","剣谷町":"けんだにちょう","甲子園口":"こうしえんぐち","戸崎町":"とざきちょう","甲東園":"こうとうえん","松籟荘":"しょうらいそう","神呪町":"かんのうちょう","門戸東町":"もんどひがしまち","門戸西町":"もんどにしまち","門戸岡田町":"もんどおかだちょう","門戸荘":"もんどそう","一里山町":"いちりやまちょう","段上町":"だんじょうちょう","上大市":"かみおおいち","下大市東町":"しもおおいちひがしまち","下大市西町":"しもおおいちにしまち","樋ノ口町":"ひのくちちょう","大島町":"おおしまちょう","若山町":"わかやまちょう","門前町":"もんぜんちょう","田近野町":"たじかのちょう","松下町":"まつしたちょう","屋敷町":"やしきちょう","弓場町":"ゆばちょう","川西町":"かわにしちょう","中浜町":"なかはまちょう","堀切町":"ほりきりちょう","上葭原町":"かみよしはらちょう","中葭原町":"なかよしはらちょう","下葭原町":"しもよしはらちょう","大浜町":"おおはまちょう","川東町":"かわひがしちょう","川添町":"かわぞえちょう","甲陽園目神山町":"こうようえんめがみやまちょう","甲陽園東山町":"こうようえんひがしやまちょう","甲陽園山王町":"こうようえんさんのうちょう","甲陽園西山町":"こうようえんにしやまちょう","甲陽園若江町":"こうようえんわかえちょう","甲陽園本庄町":"こうようえんほんじょうちょう","甲陽園日之出町":"こうようえんひのでちょう","新甲陽町":"しんこうようちょう","神園町":"かみぞのちょう","五月ケ丘":"さつきがおか","六軒町":"ろっけんちょう","甲山町":"かぶとやまちょう","久出ケ谷町":"くでがやちょう","南越木岩町":"みなみこしきいわちょう","松ケ丘町":"まつがおかちょう","松生町":"まつおいちょう","松風町":"まつかぜちょう","桜町":"さくらまち","樋之池町":"ひのいけちょう","毘沙門町":"びしゃもんちょう","深谷町":"ふかたにちょう","甑岩町":"こしきいわちょう","石刎町":"いしばねちょう","美作町":"みさくちょう","老松町":"おいまつちょう","菊谷町":"きくたにちょう","西平町":"にしひらちょう","角石町":"すみいしちょう","豊楽町":"ほうらくちょう","大谷町":"おおたにちょう","御茶家所町":"おちゃやしょちょう","木津山町":"きずやまちょう","松園町":"まつぞのちょう","殿山町":"とのやまちょう","相生町":"あいおいちょう","羽衣町":"はごろもちょう","郷免町":"ごうめんちょう","雲井町":"くもいちょう","霞町":"かすみちょう","高塚町":"たかつかちょう","大社町":"たいしゃちょう","柳本町":"やなぎもとちょう","室川町":"むろかわちょう","神垣町":"かみがきちょう","越水町":"こしみずちょう","城山":"しろやま","桜谷町":"さくらだにちょう","西田町":"にしだちょう","満池谷町":"まんちだにちょう","清水町":"しみずちょう","南郷町":"なんごうちょう","若松町":"わかまつちょう","大井手町":"おおいでちょう","今津山中町":"いまずやまなかちょう","今津曙町":"いまずあけぼのちょう","津門仁辺町":"つとにべちょう","津門呉羽町":"つとくれはちょう","津門大塚町":"つとおおつかちょう","津門大箇町":"つとおおごちょう","津門宝津町":"つとほうずちょう","津門稲荷町":"つといなりちょう","津門綾羽町":"つとあやはちょう","津門西口町":"つとにしぐちちょう","津門飯田町":"つといいでんちょう","塩瀬町名塩":"しおせちょうなじお","清瀬台":"きよせだい","名塩木之元":"なじおこのもと","名塩南台":"なじおみなみだい","名塩山荘":"なじおさんそう","名塩ガーデン":"なじおがーでん","名塩平成台":"なじおへいせいだい","名塩新町":"なじおしんまち","東山台":"ひがしやまだい","国見台":"くにみだい","名塩":"なじお","名塩茶園町":"なじおちゃえんちょう","名塩さくら台":"なじおさくらだい","名塩東久保":"なじおとうくぼ","名塩赤坂":"なじおあかさか","名塩美山":"なじおみやま","塩瀬町生瀬":"しおせちょうなまぜ","宝生ケ丘":"ほうしょうがおか","生瀬東町":"なまぜひがしまち","生瀬武庫川町":"なまぜむこがわちょう","生瀬町":"なまぜちょう","生瀬高台":"なまぜたかだい","花の峯":"はなのみね","青葉台":"あおばだい","小曽根町":"こそねちょう","小松北町":"こまつきたまち","小松東町":"こまつひがしまち","小松町":"こまつちょう","小松西町":"こまつにしまち","小松南町":"こまつみなみまち","若草町":"わかくさちょう","花園町":"はなぞのちょう","学文殿町":"がくぶんでんちょう","里中町":"さとなかちょう","上鳴尾町":"あげなるおちょう","甲子園一番町":"こうしえんいちばんちょう","甲子園二番町":"こうしえんにばんちょう","甲子園三番町":"こうしえんさんばんちょう","甲子園四番町":"こうしえんよんばんちょう","甲子園五番町":"こうしえんごばんちょう","甲子園六番町":"こうしえんろくばんちょう","甲子園七番町":"こうしえんななばんちょう","甲子園八番町":"こうしえんはちばんちょう","甲子園九番町":"こうしえんきゅうばんちょう","武庫川町":"むこがわちょう","池開町":"いけびらきちょう","東鳴尾町":"ひがしなるおちょう","笠屋町":"かさやちょう","上田東町":"うえだひがしまち","上田中町":"うえだなかまち","上田西町":"うえだにしまち","高須町":"たかすちょう","鳴尾町":"なるおちょう","古川町":"ふるかわちょう","枝川町":"えだがわちょう","甲子園町":"こうしえんちょう","南甲子園":"みなみこうしえん","浜甲子園":"はまこうしえん","甲子園浜":"こうしえんはま","鳴尾浜":"なるおはま","西宮浜":"にしのみやはま","神楽町":"かぐらちょう","産所町":"さんしょちょう","宮西町":"みやにしちょう","市庭町":"いちにわちょう","社家町":"しゃけちょう","宮前町":"みやまえちょう","荒戎町":"あらえびすちょう","建石町":"たていしちょう","前浜町":"まえはまちょう","泉町":"いずみちょう","西波止町":"にしはとちょう","和上町":"わじょうちょう","六湛寺町":"ろくたんじちょう","今在家町":"いまざいけちょう","田中町":"たなかちょう","馬場町":"ばばちょう","戸田町":"とだちょう","本町":"ほんまち","久保町":"くぼちょう","鞍掛町":"くらかけちょう","浜脇町":"はまわきちょう","浜町":"はまちょう","甲子園春風町":"こうしえんはるかぜちょう","今津野田町":"いまずのだちょう","今津上野町":"いまずうえのちょう","甲子園浜田町":"こうしえんはまだちょう","甲子園砂田町":"こうしえんすなだちょう","甲子園六石町":"こうしえんろっこくちょう","甲子園浦風町":"こうしえんうらかぜちょう","甲子園三保町":"こうしえんみほちょう","上甲子園":"かみこうしえん","平木町":"ひらきちょう","青木町":"あおきちょう","南昭和町":"みなみしょうわちょう","両度町":"りょうどちょう","高松町":"たかまつちょう","愛宕山":"あたごやま","高座町":"たかくらちょう","北昭和町":"きたしょうわちょう","丸橋町":"まるはしちょう","能登町":"のとちょう","大畑町":"おおはたちょう","河原町":"かわはらちょう","広田町":"ひろたちょう","中屋町":"なかやちょう","中須佐町":"なかすさちょう","中前田町":"なかまえだちょう","櫨塚町":"はぜつかちょう","城ケ堀町":"じょうがぼりちょう","江上町":"えがみちょう","末広町":"すえひろちょう","分銅町":"ぶんどうちょう","常磐町":"ときわちょう","平松町":"ひらまつちょう","寿町":"ことぶきちょう","千歳町":"ちとせちょう","安井町":"やすいちょう","すみれ台":"すみれだい","北六甲台":"きたろっこうだい","山口町上山口":"やまぐちちょうかみやまぐち","山口町下山口":"やまぐちちょうしもやまぐち","山口町中野":"やまぐちちょうなかの","山口町名来":"やまぐちちょうならい","山口町船坂":"やまぐちちょうふなさか","山口町金仙寺":"やまぐちちょうきんせんじ","山口町阪神流通センター":"やまぐちちょうはんしんりゅうつうせんたー","山口町香花園":"やまぐちちょうこうかえん","池田町":"いけだちょう","松原町":"まつばらちょう","染殿町":"そめどのちょう","用海町":"ようがいちょう","石在町":"いしざいちょう","東町":"ひがしまち","浜松原町":"はままつばらちょう","東浜町":"ひがしはまちょう","朝凪町":"あさなぎちょう","与古道町":"よこみちちょう"}, LABEL_OFFSETS={"鷲林寺字剣谷":[-7,0],"剣谷町":[-3,0],"苦楽園三番町":[-3,0],"上大市":[0,16],"川西町":[0,-12],"六軒町":[-7,0],"神園町":[7,0],"甲陽園山王町":[-7,6],"甲陽園目神山町":[0,7],"毘沙門町":[0,2],"満池谷町":[0,11],"今津山中町":[0,10],"青葉台":[-4,0],"甲子園三保町":[-7,0]}, MULTI_LABELS={"塩瀬町名塩":[[34.844983,135.29825],[34.8213,135.292587]],"山口町上山口":[[34.8245,135.2450],[34.814562,135.241245]]}, EXTRA_LABELS={"山口町下山口":[[34.830141,135.262235]]};
+const $=id=>document.getElementById(id), map=L.map('map',{zoomControl:false,attributionControl:false,minZoom:9,maxZoom:19,zoomSnap:.1,scrollWheelZoom:false});
+let allLayer,allBounds,items=[],selected=null,blinkTimer=null,blinkOn=false,readingOn=false,fontPct=100,initialZoom=0;
+const normal={color:'#ffffff',weight:1.05,fillColor:'#76b7db',fillOpacity:.82},highlight={color:'#9a5500',weight:2.4,fillColor:'#ffd14c',fillOpacity:.98};
+const groupedName=s=>String(s||'').replace(/[一二三四五六七八九十百]+丁目$/,'');
+const rawName=g=>g.properties?.S_NAME||g.properties?.s_name||g.properties?.MOJI||'町名不明';
+function labelHTML(name){const span=document.createElement('span');span.textContent=name;const reading=READINGS[name];if(reading&&readingOn){const small=document.createElement('small');small.className='reading';small.textContent=reading;span.appendChild(small)}return span.outerHTML}
+function refreshLabels(){for(const it of items){for(const marker of it.labels)marker.setContent(labelHTML(it.name))}}
+function fontScale(){const factor=Math.min(2,Math.max(.75,Math.pow(1.18,map.getZoom()-initialZoom)*fontPct/100));$('map').style.setProperty('--town-font',(8*factor).toFixed(2)+'px')}
+function endBlink(){if(blinkTimer)clearInterval(blinkTimer);blinkTimer=null;if(selected)selected.layer.setStyle(normal);selected=null}
+function choose(it,zoom){if(selected===it){endBlink();$('status').textContent=it.name+' の点滅を停止しました。';return}
+endBlink();selected=it;blinkOn=true;it.layer.setStyle(highlight);if(zoom)map.fitBounds(it.layer.getBounds(),{padding:[50,50],maxZoom:15,animate:false});
+$('status').textContent=it.name+(READINGS[it.name]?'（'+READINGS[it.name]+'）':'')+' を選択中です。';
+blinkTimer=setInterval(()=>{if(!selected)return;blinkOn=!blinkOn;it.layer.setStyle(blinkOn?highlight:normal)},500)}
+function candidateList(){const query=$('search').value.trim();$('matches').replaceChildren();if(!query)return;
+const results=items.filter(it=>it.name.includes(query)||(READINGS[it.name]||'').includes(query)).slice(0,35);
+for(const it of results){const b=document.createElement('button');b.type='button';b.textContent=it.name;b.addEventListener('click',()=>choose(it,true));$('matches').appendChild(b)}}
+function makeTooltip(layer,name,at,offset){let t=L.tooltip({permanent:true,direction:'center',interactive:false,className:'town-label',offset:L.point(...offset)});if(at)t.setLatLng(at).setContent(labelHTML(name)).addTo(map);else layer.bindTooltip(t);if(!at)t=layer.getTooltip();t.setContent(labelHTML(name));return t}
+Promise.all([fetch('/nishinomiya/data/nishinomiya-towns.topojson').then(r=>{if(!r.ok)throw Error('町域データ');return r.json()}),fetch('/nishinomiya/data/community-town-map.json').then(r=>{if(!r.ok)throw Error('コミュニティデータ');return r.json()})])
+.then(([topology,mapping])=>{
+const obj=topology.objects.town||topology.objects[Object.keys(topology.objects)[0]], valid=new Set(mapping.communities||[]);
+const geometries=(obj.geometries||[]).filter(g=>rawName(g)==='岡田山'||valid.has(mapping.towns?.[rawName(g)]?.community));
+const grouped=new Map();for(const g of geometries){const name=groupedName(rawName(g));if(!grouped.has(name))grouped.set(name,[]);grouped.get(name).push(g)}
+const features=[...grouped].map(([name,members])=>{const feature=topojson.merge(topology,members);feature.properties={S_NAME:name};return feature});
+allLayer=L.geoJSON({type:'FeatureCollection',features},{style:normal,onEachFeature(f,layer)=>{
+const name=f.properties.S_NAME,it={name,layer,labels:[]};items.push(it);layer.on('click',()=>choose(it,false));
+const multiple=MULTI_LABELS[name];if(multiple){for(const pos of multiple)it.labels.push(makeTooltip(layer,name,pos,[0,0]))}
+else{it.labels.push(makeTooltip(layer,name,null,LABEL_OFFSETS[name]||[0,0]));for(const pos of EXTRA_LABELS[name]||[])it.labels.push(makeTooltip(layer,name,pos,[0,0]))}
+}}).addTo(map);
+allBounds=allLayer.getBounds();map.fitBounds(allBounds,{padding:[10,10],animate:false});initialZoom=map.getZoom();fontScale();
+$('status').textContent='比較試作：'+items.length+'町名を描画しました。町名を押すと点滅します。'+(items.length!==321?' ※想定321町名と差があります。':'');
+}).catch(e=>{$('status').textContent='データの読み込みに失敗しました：'+e.message;console.error(e)});
+map.on('zoomend',fontScale);
+$('zoomIn').onclick=()=>map.zoomIn(1);$('zoomOut').onclick=()=>map.zoomOut(1);
+$('reset').onclick=()=>{if(allBounds)map.fitBounds(allBounds,{padding:[10,10],animate:false})};
+$('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);$('size').textContent='文字 '+fontPct+'%';fontScale()};
+$('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);$('size').textContent='文字 '+fontPct+'%';fontScale()};
+$('size').onclick=()=>{fontPct=100;$('size').textContent='文字 100%';fontScale()};
+$('reading').onclick=()=>{readingOn=!readingOn;$('reading').textContent='よみがな '+(readingOn?'ON':'OFF');$('reading').setAttribute('aria-pressed',String(readingOn));refreshLabels()};
+$('search').addEventListener('input',candidateList);
+$('fullscreen').onclick=()=>{document.body.classList.toggle('map-full');$('fullscreen').textContent=document.body.classList.contains('map-full')?'戻る':'全画面';setTimeout(()=>map.invalidateSize({animate:false}),50)};
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('#map'))map.scrollWheelZoom.disable()});
+map.on('click',()=>map.scrollWheelZoom.enable());
+})();
+</script><script defer src="/common/site-footer.js"></script></body></html>
