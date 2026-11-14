@@ -10,6 +10,8 @@ on:
       - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - 'v2/geography/**'
+      - 'v2/docs/geography-five-city-standard.md'
+      - 'v2/docs/geography-hierarchy-pilot.md'
       - '.github/workflows/nishinomiya-town-v2-regression.yml'
   pull_request:
     paths:
@@ -21,6 +23,8 @@ on:
       - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - 'v2/geography/**'
+      - 'v2/docs/geography-five-city-standard.md'
+      - 'v2/docs/geography-hierarchy-pilot.md'
 permissions:
   contents: read
 jobs:

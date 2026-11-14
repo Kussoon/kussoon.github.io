@@ -28,7 +28,22 @@ for(const n of config.nodes){
 assert.deepEqual(map.get("world").children,["jp"]);
 assert.deepEqual(map.get("jp").children,["jp-hyogo"]);
 const cities=config.nodes.filter(n=>n.kind==="municipality");
-assert.equal(cities.length,5,"第1段階は5市");
+assert.equal(cities.length,5,"5市の構造を維持");
+assert.equal(config.nodes.length,8,"世界・日本・兵庫県・5市の計8ノード");
+assert.equal(config.version,"0.6.0","現行5市標準のバージョンが変更されました。標準仕様書とテストを更新してください");
+const expected=new Map([["jp-hyogo-nishinomiya",321],["jp-hyogo-takarazuka",125],["jp-hyogo-amagasaki",140],["jp-hyogo-itami",76],["jp-hyogo-ashiya",59]]);
+assert.equal(expected.size,cities.length);
+assert.equal(cities.reduce((total,city)=>total+city.townData?.expectedCount,0),721,"阪神間5市の721町名に変更が生じました");
+const seenModes=new Set();
+for(const city of cities){
+ assert.equal(city.townData.expectedCount,expected.get(city.id),"町名数に変更が生じました: "+city.name);
+ assert.ok(city.townData.focusUrl&&city.townData.focusParam,"地図リンク欠落: "+city.name);
+ assert.ok(city.townData.focusUrl.startsWith("/")&&!city.townData.focusUrl.startsWith("//"),"不正な地図リンク: "+city.name);
+ const mode=city.townData.focusMode||"focus";
+ assert.ok(["focus","search","bridge"].includes(mode),"未定義の接続方式: "+city.name);
+ seenModes.add(mode);
+}
+assert.deepEqual([...seenModes].sort(),["bridge","focus","search"],"既存3種の地図連携方式の回帰");
 for(const city of cities){
  assert.equal(city.parentId,"jp-hyogo");
  assert.ok(city.groups.includes("hanshinkan"));
@@ -154,6 +169,7 @@ assert.ok(bridge.includes('doc.querySelector(\'#townSearch\')'),"既存尼崎市
 assert.ok(bridge.includes('name="robots" content="noindex,follow"'));
 const bridgeScript=bridge.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];assert.ok(bridgeScript);new vm.Script(bridgeScript);
 assert.ok(html.includes("conf.sourceKind==='town-info-array'"),"町名台帳形式アダプターがありません");
+assert.ok(read("v2/docs/geography-five-city-standard.md").includes("721町名"),"現行正本仕様書がありません");
 assert.ok(html.includes('name="robots" content="noindex,follow"'));
 assert.ok(html.includes('src="/common/site-footer.js"'));
 assert.ok(html.includes('cloud.umami.is/script.js'));
@@ -162,5 +178,6 @@ assert.ok(html.includes("#town:")&&html.includes("#towns:"));
 assert.ok(!html.includes("location.replace("),"既存公開URLを変更してはいけません");
 const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];
 assert.ok(inline,"ナビゲーションJSがありません");new vm.Script(inline,{filename:"hierarchy-pilot.js"});
-console.log("PASS: 世界→日本→兵庫県→5市、親子・ID・循環・読み仮名・リンク");
+console.log("PASS: 世界→日本→兵庫県→5市、8ノード、3連携方式、標準721町名を固定");
+console.log("PASS: 親子・ID・循環・読み仮名・リンク・5市原本照合");
 console.log("PASS: 西宮市321・宝塚市125・尼崎市140・伊丹市76・芦屋市59町名／例外照合");
