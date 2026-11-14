@@ -67,7 +67,7 @@ const obj=topology.objects.town||topology.objects[Object.keys(topology.objects)[
 const geometries=(obj.geometries||[]).filter(g=>rawName(g)==='岡田山'||valid.has(mapping.towns?.[rawName(g)]?.community));
 const grouped=new Map();for(const g of geometries){const name=groupedName(rawName(g));if(!grouped.has(name))grouped.set(name,[]);grouped.get(name).push(g)}
 const features=[...grouped].map(([name,members])=>{const feature=topojson.merge(topology,members);feature.properties={S_NAME:name};return feature});
-allLayer=L.geoJSON({type:'FeatureCollection',features},{style:normal,onEachFeature(f,layer)=>{
+allLayer=L.geoJSON({type:'FeatureCollection',features},{style:normal,onEachFeature:(f,layer)=>{
 const name=f.properties.S_NAME,it={name,layer,labels:[]};items.push(it);layer.on('click',()=>choose(it,false));
 const multiple=MULTI_LABELS[name];if(multiple){for(const pos of multiple)it.labels.push(makeTooltip(layer,name,pos,[0,0]))}
 else{it.labels.push(makeTooltip(layer,name,null,LABEL_OFFSETS[name]||[0,0]));for(const pos of EXTRA_LABELS[name]||[])it.labels.push(makeTooltip(layer,name,pos,[0,0]))}
