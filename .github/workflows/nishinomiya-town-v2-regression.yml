@@ -5,6 +5,7 @@ on:
       - 'v2/nishinomiya-town-study-c.html'
       - 'v2/nishinomiya-town-comparison-b.html'
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
+      - 'v2/data/nishinomiya-uekoto-community.topojson'
       - 'scripts/audit-nishinomiya-town-v2.cjs'
       - '.github/workflows/nishinomiya-town-v2-regression.yml'
   pull_request:
@@ -12,6 +13,7 @@ on:
       - 'v2/nishinomiya-town-study-c.html'
       - 'v2/nishinomiya-town-comparison-b.html'
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
+      - 'v2/data/nishinomiya-uekoto-community.topojson'
       - 'scripts/audit-nishinomiya-town-v2.cjs'
 permissions:
   contents: read
