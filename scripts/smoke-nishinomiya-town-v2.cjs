@@ -29,6 +29,14 @@ async function basicFlow(browserType,title,viewport,columns){
   assert.equal(await page.locator("#communityOptions").evaluate(node=>getComputedStyle(node).gridTemplateColumns.split(" ").length),columns);
   const allReadings=await page.locator("#communityOptions button[data-community]:not([data-community='']) .community-reading").allTextContents();
   await page.screenshot({path:path.join(screenshotDir,columns===4?"mobile-regions.png":"desktop-regions.png"),fullPage:true});
+  const pickerLayout=await page.locator("#communityOptions").evaluate(panel=>({
+    bodyWidth:document.documentElement.clientWidth,
+    bodyScrollWidth:document.documentElement.scrollWidth,
+    columns:getComputedStyle(panel).gridTemplateColumns.split(" ").length,
+    buttonCount:panel.querySelectorAll("button").length
+  }));
+  assert.ok(pickerLayout.bodyScrollWidth<=pickerLayout.bodyWidth+2,
+    "region picker creates horizontal page overflow: "+JSON.stringify(pickerLayout));
   assert.equal(allReadings.length,26);assert.ok(allReadings.every(t=>t.trim()));
   await page.locator("#communityOptions button[data-community='上ヶ原']").click();
   await page.waitForFunction(()=>document.querySelector("#communityCount").textContent.includes("18町名"));
