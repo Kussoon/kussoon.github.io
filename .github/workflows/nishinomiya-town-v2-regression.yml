@@ -11,6 +11,8 @@ on:
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - 'scripts/audit-geography-ui.cjs'
       - 'scripts/smoke-geography-ui-comparison.cjs'
+      - 'scripts/smoke-region-top-template.cjs'
+      - 'v2/region-top/**'
       - 'v2/geography/**'
       - 'v2/docs/geography-five-city-standard.md'
       - 'v2/docs/geography-hierarchy-pilot.md'
@@ -26,6 +28,8 @@ on:
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - 'scripts/audit-geography-ui.cjs'
       - 'scripts/smoke-geography-ui-comparison.cjs'
+      - 'scripts/smoke-region-top-template.cjs'
+      - 'v2/region-top/**'
       - 'v2/geography/**'
       - 'v2/docs/geography-five-city-standard.md'
       - 'v2/docs/geography-hierarchy-pilot.md'
@@ -82,6 +86,8 @@ jobs:
         run: node site/v2/geography/test-hierarchy.cjs site nishinomiya takarazuka amagasaki itami ashiya
       - name: Verify A/B changes only touch requested UI
         run: node site/v2/geography/test-ui-comparison.cjs site
+      - name: Verify data-driven regional tops and original sources
+        run: node site/v2/region-top/test-template.cjs site
 
   browser-smoke:
     runs-on: ubuntu-latest
@@ -153,6 +159,16 @@ jobs:
         run: GEOGRAPHY_AUDIT_DIR=geography-ui-audit node site/scripts/audit-geography-ui.cjs
       - name: Compare reading sizes and breadcrumb accessibility across five cities
         run: GEOGRAPHY_AB_SCREENSHOTS=geography-ab-screenshots node site/scripts/smoke-geography-ui-comparison.cjs
+      - name: Browser-check the regional top template at four viewport sizes
+        run: REGION_TOP_SCREENSHOTS=region-top-screenshots node site/scripts/smoke-region-top-template.cjs
+      - name: Save regional top pilot screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-region-top-pilot-screenshots
+          path: region-top-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Upload A/B comparison screenshots
         if: always()
         uses: actions/upload-artifact@v4
