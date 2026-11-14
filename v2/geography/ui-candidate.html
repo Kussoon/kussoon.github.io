@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="世界から日本、兵庫県、市町村、町名までをたどるKussoon V2地域階層ナビゲーションの試作です。">
+<title>比較案B｜世界から町へ｜Kussoon V2</title>
+<style>
+:root{color-scheme:light;--ink:#17374a;--muted:#456174;--line:#b6cfdf;--navy:#205d80;--bg:#f2f8fc}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.6}
+main{max-width:980px;margin:auto;padding:16px 14px 42px}
+h1{font-size:clamp(23px,5vw,32px);margin:8px 0}
+h2{font-size:19px;margin:6px 0 10px}
+p{margin:9px 0}
+a{color:#165b84}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #c27906;outline-offset:3px}
+.top-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin:4px 0 16px}
+.pilot{font-size:13px;color:#405f75}
+.panel{border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px;margin:14px 0}
+.breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px;margin:14px 0;line-height:2}
+.breadcrumb a,.breadcrumb strong{padding:2px 5px}
+.breadcrumb span[aria-hidden]{color:#738b9b}
+.heading{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.reading{font-weight:500;font-size:.8em;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.card-link{display:flex;min-width:0;min-height:73px;flex-direction:column;justify-content:center;gap:2px;border:1px solid #9ec0d4;border-radius:10px;padding:10px 12px;background:#fafcfe;text-decoration:none;color:var(--ink)}
+.card-link:hover{background:#e5f2f9}
+.card-link strong{font-size:18px;overflow-wrap:anywhere}
+.card-link .reading{font-size:13px}
+.link-row{display:flex;flex-wrap:wrap;gap:7px 14px;margin-top:12px}
+.meta{font-size:13px;color:var(--muted)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+input[type=search]{font:inherit;padding:9px 12px;border:1px solid #8eafc2;border-radius:9px;min-height:44px;max-width:100%;width:340px}
+.town-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}
+.town-grid a{display:flex;flex-direction:column;justify-content:center;text-align:center;min-height:60px;overflow-wrap:anywhere;padding:7px 4px;border:1px solid #b5cbd9;border-radius:8px;background:#fff;text-decoration:none;color:var(--ink)}
+.town-grid .reading{font-size:13px}
+.notice{font-size:13px;color:#704c07;border:1px solid #d8c294;background:#fff9e7;border-radius:8px;padding:10px 12px}
+[hidden]{display:none!important}
+@media(max-width:620px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.town-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.panel{padding:12px}.card-link strong{font-size:16px}}
+</style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true"></script>
+</head>
+<body>
+<main>
+<nav class="top-links" aria-label="関連ページ"><a href="/v2/">V2試験トップ</a><a href="/maps/national-municipalities.html">全国市区町村マップ</a><a href="/">Kussoonトップ</a></nav>
+<h1>世界から町へ</h1>
+<p class="pilot">比較案B（読み仮名13px・現在地の音声案内）｜<a href="/v2/geography/ui-comparison.html">A/B比較ページに戻る</a>｜検索エンジン登録対象外</p>
+<p>「世界 → 日本 → 都道府県 → 市区町村 → 町名」を順にたどる操作を検証します。現在は日本・兵庫県・阪神間5市だけを試験収録しています。</p>
+<nav id="breadcrumbs" class="breadcrumb" aria-label="現在地"></nav>
+<section class="panel" aria-live="polite">
+ <div class="heading"><h2 id="placeName">読み込み中…</h2><span id="placeReading" class="reading"></span></div>
+ <p id="intro" class="meta"></p>
+ <div id="links" class="link-row"></div>
+ <div id="childSection" hidden><h2 id="childHeading">下の地域</h2><div id="children" class="cards"></div></div>
+ <div id="townStage" hidden><div id="townTools"></div><div id="towns" class="town-grid"></div><p id="townCount" class="meta" role="status" aria-live="polite"></p></div>
+</section>
+<p class="notice">このページは地域の階層とリンクを検証する試作です。行政区域の網羅版ではありません。既存ページや公開URLは移動・変更していません。西宮市はC版で町域を拡大表示、宝塚市は既存検索へ引き継ぎ、尼崎市・伊丹市・芦屋市は既存地図を試作画面内で表示・選択します。伊丹市の面を持たない2町名、芦屋市の南浜町の離れた区域も元の地図のまま扱います。</p>
+<p class="meta">行政上の親子関係と、阪神間・県内の地域・市のコミュニティなどの学習グループは別に管理します。町域データと読み仮名は元のデータを参照し、この試作に大量複製しません。</p>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+let nodes=new Map(),townCache=new Map(),generation=0;
+const label=n=>n.name+'（'+n.reading+'）';
+function link(href,text,className){const a=document.createElement('a');a.href=href;a.textContent=text;if(className)a.className=className;return a}
+function text(parent,value,tag='span',className=''){const x=document.createElement(tag);x.textContent=value;if(className)x.className=className;parent.append(x);return x}
+function areaLink(node){
+ const a=link('#'+node.id,'','card-link');
+ text(a,node.name,'strong');
+ text(a,node.reading,'span','reading');
+ return a;
+}
+function route(){
+ const raw=decodeURIComponent(location.hash.slice(1)||'world');
+ if(raw.startsWith('town:')){const i=raw.indexOf(':',5);if(i>0)return {type:'town',id:raw.slice(5,i),town:raw.slice(i+1)}}
+ if(raw.startsWith('towns:'))return {type:'towns',id:raw.slice(6)};
+ return {type:'node',id:raw};
+}
+function ancestors(node){
+ const out=[],seen=new Set();let cur=node;
+ while(cur&&!seen.has(cur.id)){out.unshift(cur);seen.add(cur.id);cur=nodes.get(cur.parentId)}
+ return out;
+}
+function breadcrumb(node,stage,town){
+ const list=$('breadcrumbs');list.replaceChildren();const seq=ancestors(node);
+ const current=(name)=>{const el=text(list,name,'strong');el.setAttribute('aria-current','page')};
+ const sep=()=>text(list,'›','span').setAttribute('aria-hidden','true');
+ seq.forEach((n,i)=>{if(i)sep();if(stage==='node'&&i===seq.length-1)current(n.name);else list.append(link('#'+n.id,n.name))});
+ if(stage!=='node'){sep();if(town)list.append(link('#towns:'+node.id,'町名'));else current('町名')}
+ if(town){sep();current(town)}
+}
+function externalLinks(node){
+ const box=$('links');box.replaceChildren();
+ for(const x of node.links||[])box.append(link(x.url,x.label));
+}
+function heading(name,reading,description){
+ $('placeName').textContent=name;$('placeReading').textContent=reading?'（'+reading+'）':'';
+ $('intro').textContent=description||'';
+}
+function clearView(){
+ $('childSection').hidden=true;$('townStage').hidden=true;$('children').replaceChildren();$('towns').replaceChildren();$('townTools').replaceChildren();$('townCount').textContent='';
+}
+function renderNode(node){
+ breadcrumb(node,'node');heading(node.name,node.reading,node.kind==='world'?'世界の入口です。試作では日本から先を接続しています。':node.kind==='country'?'日本から、試験収録済みの兵庫県へ進めます。':'');
+ externalLinks(node);clearView();
+ const children=(node.children||[]).map(id=>nodes.get(id)).filter(Boolean);
+ if(children.length){$('childSection').hidden=false;$('childHeading').textContent=node.kind==='country'?'都道府県を選ぶ':node.kind==='prefecture'?'市区町村を選ぶ':'次の地域を選ぶ';for(const child of children)$('children').append(areaLink(child))}
+ if(node.kind==='municipality'){
+  $('childSection').hidden=false;$('childHeading').textContent='町名・町域へ';
+  const a=link('#towns:'+node.id,'','card-link');text(a,'町名・町域を探す','strong');text(a,node.townData?'町名と読み仮名の一覧':'既存の町名ページへ案内','span','reading');$('children').append(a);
+  $('intro').textContent=node.townData?'この市の町名データを読み込んで確認できます。':'町名の共通データ接続は未着手です。既存の町名検索ページをご利用ください。';
+ }
+}
+async function getTowns(node){
+ if(townCache.has(node.id))return townCache.get(node.id);
+ const conf=node.townData;if(!conf)return null;
+ const fetchJson=async url=>{const r=await fetch(url);if(!r.ok)throw Error(url+' の取得失敗');return r.json()};
+ let towns;
+ if(conf.sourceKind==='town-list-json'){
+  const data=await fetchJson(conf.listUrl);
+  if(!Array.isArray(data.towns)||data.count!==conf.expectedCount)throw Error('町名索引の形式または件数が一致しません');
+  towns=data.towns.map(t=>({name:t.name,reading:t.reading}));
+ }else if(conf.sourceKind==='town-info-array'){
+  const data=await fetchJson(conf.infoUrl);
+  if(!Array.isArray(data.towns))throw Error('町名台帳の形式が一致しません');
+  towns=data.towns.map(t=>({name:t.name,reading:t.reading}));
+ }else{
+  const [topology,readings]=await Promise.all([conf.topologyUrl,conf.readingsUrl].map(fetchJson));
+  const geom=topology.objects?.[conf.objectKey]?.geometries;
+  if(!Array.isArray(geom))throw Error('町域の形式が一致しません');
+  towns=geom.map(g=>{const name=g.properties?.[conf.nameKey];return {name,reading:readings[name]}});
+ }
+ if(towns.length!==conf.expectedCount||new Set(towns.map(t=>t.name)).size!==towns.length)throw Error('町名の件数・重複に問題があります');
+ for(const town of towns)if(typeof town.name!=='string'||!town.name||typeof town.reading!=='string'||!town.reading)throw Error('町名または読み仮名が不足しています');
+ towns.sort((a,b)=>a.name.localeCompare(b.name,'ja'));townCache.set(node.id,towns);return towns;
+}
+function drawTowns(node,items,query){
+ const normalized=query.trim().toLocaleLowerCase('ja');
+ const found=items.filter(t=>!normalized||t.name.toLocaleLowerCase('ja').includes(normalized)||t.reading.includes(normalized));
+ const showing=found.slice(0,35);$('towns').replaceChildren();
+ for(const t of showing){
+  const a=link('#town:'+node.id+':'+encodeURIComponent(t.name),'');
+  text(a,t.name,'strong');text(a,t.reading,'span','reading');$('towns').append(a);
+ }
+ $('townCount').textContent=found.length+'町名に一致。'+showing.length+'件表示（最大35件）。全体は'+items.length+'町名。';
+}
+async function renderTowns(node,token){
+ breadcrumb(node,'towns');heading(node.name+'の町名',node.reading,node.townData?'この市の既存町域データと読み仮名を参照しています。':'この市の町名データの共通化はこれからです。');
+ externalLinks(node);clearView();$('townStage').hidden=false;
+ if(!node.townData){$('townCount').textContent='この試作では町名をまだ収録していません。上の既存ページから学習できます。';return}
+ $('townCount').textContent='町名データを読み込み中です…';
+ try{
+  const items=await getTowns(node);if(token!==generation)return;
+  const tools=$('townTools');const wrapper=document.createElement('div');wrapper.className='tools';
+  const lbl=text(wrapper,'町名を検索','label');lbl.htmlFor='townFilter';
+  const filter=document.createElement('input');filter.id='townFilter';filter.type='search';filter.placeholder=node.id==='jp-hyogo-nishinomiya'?'例：上甲東園、こうとう ※最大35件表示':node.id==='jp-hyogo-amagasaki'?'例：上食満、かみけま ※最大35件表示':node.id==='jp-hyogo-itami'?'例：東桑津、ひがしくわづ ※最大35件表示':node.id==='jp-hyogo-ashiya'?'例：南浜町、みなみはまちょう ※最大35件表示':'例：すみれガ丘、すみれ ※最大35件表示';filter.autocomplete='off';
+  wrapper.append(filter);tools.append(wrapper);
+  filter.addEventListener('input',()=>drawTowns(node,items,filter.value));drawTowns(node,items,'');
+ }catch(e){if(token===generation)$('townCount').textContent='町名を読み込めませんでした。既存の町名ページからご確認ください。'}
+}
+async function renderTown(node,name,token){
+ breadcrumb(node,'towns',name);heading(name,'',node.townData?.focusMode==='search'?'選んだ町名を既存の町名検索へ引き継ぎます。':'選んだ町名を町域学習C版の地図で確認できます。');externalLinks(node);clearView();$('townStage').hidden=false;
+ const back=link('#towns:'+node.id,'← 町名一覧に戻る');$('townTools').append(back);
+ try{const towns=await getTowns(node);if(token!==generation)return;const town=towns.find(x=>x.name===name);if(!town){$('townCount').textContent='指定した町名は現在のデータにありません。';return}$('placeReading').textContent='（'+town.reading+'）';const conf=node.townData,mode=conf.focusMode||'focus';
+ $('townCount').textContent=mode==='search'?'既存の宝塚市町名検索を開きます。候補が複数の場合は該当町名を選択してください。':mode==='bridge'?node.name+'の従来地図を変更せず、試作用の画面で該当町名を選択します。':'この町の地図を開くと、町域を拡大・点滅表示できます。';
+ if(conf.focusUrl&&conf.focusParam){
+  const url=conf.focusUrl+'?'+encodeURIComponent(conf.focusParam)+'='+encodeURIComponent(town.name);
+  const title=mode==='search'?'既存地図で「'+town.name+'」を検索する':'地図で「'+town.name+'」の場所を見る';
+  const a=link(url,title,'card-link');
+  const caption=document.createElement('span');caption.className='reading';
+  caption.textContent=mode==='search'?'宝塚市の既存町名検索を開きます。候補が1件なら自動選択します。':mode==='bridge'?node.name+'の既存町名検索を試作画面内に表示して、町名を選択します。':'西宮市C版の地図で表示。町名クイズにも進めます。';
+  a.append(caption);$('townTools').append(a)
+ }}
+ catch(e){if(token===generation)$('townCount').textContent='町名データを読み込めませんでした。'}
+}
+async function render(){
+ const token=++generation;const state=route();const node=nodes.get(state.id)||nodes.get('world');if(!node)return;
+ if(state.type==='towns'&&node.kind==='municipality')await renderTowns(node,token);
+ else if(state.type==='town'&&node.kind==='municipality')await renderTown(node,state.town,token);
+ else renderNode(node);
+}
+async function start(){
+ try{const r=await fetch('/v2/geography/data/hierarchy.json');if(!r.ok)throw Error('階層データが見つかりません');const data=await r.json();nodes=new Map(data.nodes.map(n=>[n.id,n]));if(nodes.size!==data.nodes.length||!nodes.has('world'))throw Error('階層データが不正です');window.addEventListener('hashchange',render);render()}
+ catch(e){heading('階層データを読み込めませんでした','','V2試験トップや全国地図からご利用ください。')}
+}
+start();
+})();
+</script>
+<script defer src="/common/site-footer.js"></script>
+</body>
+</html>
