@@ -46,8 +46,7 @@ function decode(top){
 }
 function setup(data){
  areas=decode(data);if(areas.length<100)throw Error('川西市の区域データとしては少なすぎます');
- let pts=areas.flatMap(a=>a.polys.flatMap(p=>p.flat()));let xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);
- const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);
+ let pts=areas.flatMap(a=>a.polys.flatMap(p=>p.flat()));let minx=Infinity,maxx=-Infinity,miny=Infinity,maxy=-Infinity;for(const [x,y] of pts){if(x<minx)minx=x;if(x>maxx)maxx=x;if(y<miny)miny=y;if(y>maxy)maxy=y}
  // equirectangular adjustment for geographic longitudes at Hyogo latitude
  const k=Math.cos(34.85*Math.PI/180),w=(maxx-minx)*k,h=maxy-miny;const pad=.05;
  const X=x=>(x-minx)*k/w*900+50,Y=y=>(maxy-y)/h*550+50;
@@ -55,7 +54,7 @@ function setup(data){
  areas.forEach((a,i)=>{
   const d=a.polys.map(poly=>poly.map(ring=>ring.map(([x,y],j)=>(j?'L':'M')+X(x).toFixed(2)+','+Y(y).toFixed(2)).join('')+'Z').join('')).join('');
   const el=node('path',{d,class:'region','data-index':i,'fill-rule':'evenodd'},S);el.addEventListener('click',()=>select(i));
-  const coords=a.polys[0]?.[0]||[];if(coords.length){let x=coords.reduce((s,p)=>s+X(p[0]),0)/coords.length,y=coords.reduce((s,p)=>s+Y(p[1]),0)/coords.length;a.center=[x,y]}
+  const coords=a.polys[0]?.[0]||[];if(coords.length){let sx=0,sy=0;for(const p of coords){sx+=X(p[0]);sy+=Y(p[1])}a.center=[sx/coords.length,sy/coords.length]}
   if(a.name&&a.center){a.label=node('text',{x:a.center[0],y:a.center[1],class:'label'},L);a.label.textContent=a.name}
   a.el=el;
  });
