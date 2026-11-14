@@ -1,0 +1,17 @@
+name: V2 town candidate importer tests
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-town-candidates.cjs'
+      - 'scripts/build-town-candidates.test.cjs'
+      - '.github/workflows/v2-town-candidate-importer.yml'
+  workflow_dispatch:
+jobs:
+  verify-importer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/build-town-candidates.test.cjs
