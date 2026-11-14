@@ -35,7 +35,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #c279
 input[type=search]{font:inherit;padding:9px 12px;border:1px solid #8eafc2;border-radius:9px;min-height:44px;max-width:100%;width:340px}
 .town-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}
 .town-grid a{display:flex;flex-direction:column;justify-content:center;text-align:center;min-height:60px;overflow-wrap:anywhere;padding:7px 4px;border:1px solid #b5cbd9;border-radius:8px;background:#fff;text-decoration:none;color:var(--ink)}
-.town-grid .reading{font-size:11px}
+.town-grid .reading{font-size:13px}
 .notice{font-size:13px;color:#704c07;border:1px solid #d8c294;background:#fff9e7;border-radius:8px;padding:10px 12px}
 [hidden]{display:none!important}
 @media(max-width:620px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.town-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.panel{padding:12px}.card-link strong{font-size:16px}}
@@ -46,7 +46,7 @@ input[type=search]{font:inherit;padding:9px 12px;border:1px solid #8eafc2;border
 <main>
 <nav class="top-links" aria-label="関連ページ"><a href="/v2/">V2試験トップ</a><a href="/maps/national-municipalities.html">全国市区町村マップ</a><a href="/">Kussoonトップ</a></nav>
 <h1>世界から町へ</h1>
-<p class="pilot">Kussoon 地域階層ナビゲーション｜V2比較試作・検索エンジン登録対象外</p>
+<p class="pilot">Kussoon 地域階層ナビゲーション｜B案正式採用（読み仮名13px・現在地の音声案内）｜検索エンジン登録対象外</p>
 <p>「世界 → 日本 → 都道府県 → 市区町村 → 町名」を順にたどる操作を検証します。現在は日本・兵庫県・阪神間5市だけを試験収録しています。</p>
 <nav id="breadcrumbs" class="breadcrumb" aria-label="現在地"></nav>
 <section class="panel" aria-live="polite">
@@ -85,9 +85,11 @@ function ancestors(node){
 }
 function breadcrumb(node,stage,town){
  const list=$('breadcrumbs');list.replaceChildren();const seq=ancestors(node);
- seq.forEach((n,i)=>{if(i)text(list,'›','span').setAttribute('aria-hidden','true');list.append(link('#'+n.id,n.name))});
- if(stage!=='node'){text(list,'›','span').setAttribute('aria-hidden','true');list.append(link('#towns:'+node.id,'町名'))}
- if(town){text(list,'›','span').setAttribute('aria-hidden','true');text(list,town,'strong')}
+ const current=(name)=>{const el=text(list,name,'strong');el.setAttribute('aria-current','page')};
+ const sep=()=>text(list,'›','span').setAttribute('aria-hidden','true');
+ seq.forEach((n,i)=>{if(i)sep();if(stage==='node'&&i===seq.length-1)current(n.name);else list.append(link('#'+n.id,n.name))});
+ if(stage!=='node'){sep();if(town)list.append(link('#towns:'+node.id,'町名'));else current('町名')}
+ if(town){sep();current(town)}
 }
 function externalLinks(node){
  const box=$('links');box.replaceChildren();
