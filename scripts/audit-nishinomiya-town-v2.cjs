@@ -33,7 +33,9 @@ const splitParts=special.objects.town.geometries;
 assert.equal(splitParts.length,6);
 assert.equal(splitParts.filter(g=>g.properties.community==="上ヶ原").length,4);
 assert.equal(splitParts.filter(g=>g.properties.community==="甲東").length,2);
-for(const g of splitParts){assert.equal(m.towns[g.properties.S_NAME].community,g.properties.community);const originalGeometry=orig.objects.town.geometries.find(x=>x.properties.S_NAME===g.properties.S_NAME);assert.ok(originalGeometry,"元の丁目が存在しません");}
+for(const g of splitParts){assert.equal(m.towns[g.properties.S_NAME].community,g.properties.community);const originalGeometry=orig.objects.town.geometries.find(x=>x.properties.S_NAME===g.properties.S_NAME);assert.ok(originalGeometry,"元の丁目が存在しません");
+ const asArcs=(geometry,arcData)=>{const output=[];const walk=v=>Array.isArray(v)?v.forEach(walk):output.push(JSON.stringify((v<0?[...arcData[~v]].reverse():arcData[v])));walk(geometry.arcs);return output.sort()};
+ assert.deepEqual(asArcs(g,special.arcs),asArcs(originalGeometry,orig.arcs),"元町丁の境界座標を保持: "+g.properties.S_NAME);}
 for(const g of splitParts){const visit=v=>Array.isArray(v)?v.forEach(visit):assert.ok(Number.isInteger(v)&&special.arcs[v<0?~v:v],"分割アーク参照");visit(g.arcs)}
 assert.ok(js.includes("initRegionalShapes(subtopology)"),"分割データが未使用");
 assert.ok(js.includes("regionLayers?.[communityChoice]"),"地域ごとに図形を切替していません");
