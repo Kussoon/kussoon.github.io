@@ -197,6 +197,35 @@ async function itamiFlow(browserType,title,viewport){
   console.log("PASS "+title+": Itami 76 towns > two text-only towns > old SVG text-anchor focused > return");
  }finally{await browser.close()}
 }
+async function ashiyaFlow(browserType,title,viewport){
+ const browser=await browserType.launch({headless:true});
+ const page=await browser.newPage({viewport,deviceScaleFactor:2,hasTouch:viewport.width<620,isMobile:viewport.width<620});
+ const errors=[];page.on("pageerror",e=>errors.push(e.message));
+ try{
+  await page.goto(base+"/v2/geography/#jp-hyogo-ashiya",{waitUntil:"domcontentloaded"});
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="芦屋市");
+  await page.locator('a[href="#towns:jp-hyogo-ashiya"]').last().click();
+  await page.locator("#townFilter").waitFor();
+  await page.locator("#townFilter").fill("南浜町");
+  await page.waitForFunction(()=>document.querySelector("#towns a")?.textContent.includes("南浜町"));
+  assert.equal(await page.locator("#towns a").count(),1);
+  await page.locator("#towns a").click();
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="南浜町");
+  assert.match(await page.locator("#placeReading").textContent(),/みなみはまちょう/);
+  const focus=page.locator('a[href*="/v2/geography/ashiya-focus.html?town="]');
+  assert.equal(await focus.count(),1);
+  await focus.click();
+  await page.waitForFunction(()=>document.querySelector("#bridgeStatus")?.textContent.includes("芦屋市の既存地図で拡大・点滅表示"));
+  const frame=page.frameLocator("#legacyMap");
+  assert.equal(await frame.locator("#selectedName").textContent(),"南浜町");
+  assert.match(await frame.locator("#status").textContent(),/南浜町を地図に表示/);
+  assert.equal(await frame.locator(".town.selected").count(),1);
+  await page.locator("#backTown").click();
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="南浜町");
+  assert.deepEqual(errors,[],"browser errors in Ashiya flow");
+  console.log("PASS "+title+": Ashiya 59 towns > 南浜町 > unchanged SVG selection > hierarchy return");
+ }finally{await browser.close()}
+}
 (async()=>{
  await basicFlow(chromium,"Chromium desktop",{width:1280,height:820},5);
  await basicFlow(webkit,"WebKit mobile viewport",{width:390,height:844},4);
@@ -208,4 +237,6 @@ async function itamiFlow(browserType,title,viewport){
  await amagasakiFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
  await itamiFlow(chromium,"Chromium desktop",{width:1280,height:820});
  await itamiFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
+ await ashiyaFlow(chromium,"Chromium desktop",{width:1280,height:820});
+ await ashiyaFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
 })().catch(e=>{console.error(e);process.exitCode=1});
