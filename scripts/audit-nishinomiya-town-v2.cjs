@@ -43,7 +43,7 @@ const items=names.map((name,i)=>({name,layer:{getBounds:()=>({getCenter:()=>({la
 const map={distance:(a,b)=>Math.hypot(a.lat-b.lat,a.lng-b.lng)},adjacency=new Map(),shuffleQuiz=x=>x;
 let checks=0;
 for(const g of groups){const set=new Set(g.names),scopeItems=()=>items.filter(it=>set.has(it.name));
- const candidate=new Function("items","scopeItems","adjacency","communityByTown","map","shuffleQuiz",fnSource+";return choiceCandidates")(items,scopeItems,adjacency,assigned,map,shuffleQuiz);
+ const candidate=new Function("items","scopeItems","adjacency","communityByTown","map","shuffleQuiz","communityChoice",fnSource+";return choiceCandidates")(items,scopeItems,adjacency,assigned,map,shuffleQuiz,g.co);
  for(const name of g.names){if(name==="岡田山"&&(g.co==="上ヶ原"||g.co==="広田"))continue;const opts=candidate(name);assert.equal(opts.length,4,g.co+":"+name);assert.equal(new Set(opts).size,4);assert.ok(opts.includes(name));checks++}
 }
 for(const token of ["quizWrongPlaces.has(it.name)","quizWrongPlaces.add(it.name)","button.classList.add('quiz-wrong')","startQuiz(quizLastMode,[...quizWrong])","finishQuiz(true)","quizTownName(name)","communityChoice?'区域全体':'市の全体'"])assert.ok(js.includes(token),token);
