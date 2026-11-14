@@ -33,7 +33,7 @@ body.town-quiz-mode .town-label{display:none!important}
 <nav class="top"><a href="/nishinomiya/">西宮市トップ</a><a href="/nishinomiya/all-area-labeled.html">現行の町名全域図</a><a href="/v2/nishinomiya-town-comparison-b.html">確定済みB版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市 町名地図｜地域学習C版 <span class="updated-at">更新：2026/11/14 12:16（JST）</span></h1>
 <p class="notice">高速化B版を基に、26コミュニティ選択・クイズ1・2を追加した比較C版です。B版・正式版は変更していません。</p>
-<section class="learning" aria-label="26コミュニティ選択と町名クイズ"><div class="learnrow"><label for="communitySelect">学習範囲</label><select id="communitySelect" disabled><option value="">西宮市全域（321町名）</option></select><span id="communityCount" role="status">準備中</span></div><div class="learnrow" id="studyMenu"><button type="button" id="quizOne" disabled>クイズ1｜町名→場所</button><button type="button" id="quizTwo" disabled>クイズ2｜点滅→4択</button></div><section id="quizPanel" hidden aria-label="町名クイズ"><p id="quizProgress"></p><p id="quizQuestion"></p><div id="quizChoices"></div><p id="quizFeedback" aria-live="polite"></p><div class="learnrow quiz-actions"><button type="button" id="quizQuit">ここでやめる</button><button type="button" id="quizNext" hidden>次の問題へ</button><button type="button" id="quizReveal" hidden>答えを見る</button></div></section><section id="quizResults" hidden aria-label="クイズ結果"><p id="quizResult"></p><div class="learnrow"><button type="button" id="quizRetryWrong">間違えた問題を復習</button><button type="button" id="quizRetryAll">最初からもう一度</button><button type="button" id="quizBack">地域選択に戻る</button></div></section></section>
+<section class="learning" aria-label="26コミュニティ選択と町名クイズ"><div class="learnrow"><label for="communitySelect">学習範囲</label><select id="communitySelect" disabled><option value="">西宮市全域（321町名）</option></select><span id="communityCount" role="status">準備中</span></div><div class="learnrow" id="studyMenu"><button type="button" id="quizOne" disabled>クイズ1｜町名→場所</button><button type="button" id="quizTwo" disabled>クイズ2｜点滅→4択</button></div><section id="quizPanel" hidden aria-label="町名クイズ"><p id="quizProgress"></p><p id="quizQuestion"></p><div id="quizChoices"></div><p id="quizFeedback" aria-live="polite"></p><div class="learnrow quiz-actions"><button type="button" id="quizQuit">ここでやめる</button><button type="button" id="quizNext" hidden>次の問題へ</button><button type="button" id="quizReveal" hidden>答えを見る</button></div></section><section id="quizResults" hidden aria-label="クイズ結果"><p id="quizResult"></p><div class="learnrow"><button type="button" id="quizRetryWrong">間違えた問題をもう一度</button><button type="button" id="quizRetryAll">最初からもう一度</button><button type="button" id="quizBack">地域選択に戻る</button></div></section></section>
 <div class="status" id="status" role="status">町域データを読み込んでいます。</div>
 <section class="frame" id="frame" aria-label="西宮市町名地図">
 <div id="map"></div><button class="full" id="fullscreen" type="button">全画面</button>
@@ -112,13 +112,22 @@ function quizMapAnswer(it){if(quizMode!==1||quizLocked)return;const target=quizO
 function quizChoiceAnswer(name,button){if(quizMode!==2||quizLocked||button.disabled)return;const target=quizOrder[quizIndex];if(name!==target){quizScore=Math.max(0,quizScore-1);quizWrong.add(target);button.disabled=true;button.classList.add('quiz-wrong');$('quizFeedback').textContent='違います。もう一度選んでください。';$('quizProgress').textContent=(quizIndex+1)+' / '+quizOrder.length+'問　得点 '+quizScore;return}quizCorrect(items.find(x=>x.name===name));button.classList.add('quiz-correct');for(const b of $('quizChoices').children)b.disabled=true}
 function quizCorrect(it){quizLocked=true;clearQuizBlink();it.layer.setStyle(highlight);$('quizFeedback').textContent='正解です！ '+it.name;$('quizReveal').hidden=true;$('quizNext').hidden=false;$('quizProgress').textContent=(quizIndex+1)+' / '+quizOrder.length+'問　得点 '+quizScore}
 function quizReveal(){if(quizLocked)return;quizScore=Math.max(0,quizScore-1);const name=quizOrder[quizIndex];quizWrong.add(name);quizCorrect(items.find(x=>x.name===name));$('quizFeedback').textContent='答えは「'+name+'」です。'}
-function finishQuiz(){resetQuiz();quizMode=0;document.body.classList.remove('town-quiz-mode');$('quizPanel').hidden=true;$('quizResults').hidden=false;$('quizResult').textContent=quizOrder.length+'問中 '+quizScore+'点（復習対象 '+quizWrong.size+'町名）';$('quizRetryWrong').hidden=!quizWrong.size}
+function finishQuiz(quitEarly=false){
+ const answered=quizIndex+(quizLocked?1:0);
+ resetQuiz();quizMode=0;document.body.classList.remove('town-quiz-mode');
+ $('quizPanel').hidden=true;$('quizResults').hidden=false;
+ $('quizResult').textContent=quitEarly
+  ?'途中終了：'+answered+' / '+quizOrder.length+'問終了（間違えた問題 '+quizWrong.size+'件）'
+  :quizOrder.length+'問中 '+quizScore+'点（間違えた問題 '+quizWrong.size+'件）';
+ $('quizRetryWrong').hidden=false;
+ $('quizRetryWrong').disabled=quizWrong.size===0;
+}
 $('communitySelect').onchange=()=>{communityChoice=$('communitySelect').value;showRegion()};
 $('quizOne').onclick=()=>startQuiz(1);
 $('quizTwo').onclick=()=>startQuiz(2);
 $('quizReveal').onclick=quizReveal;
 $('quizNext').onclick=()=>{quizIndex++;loadQuizQuestion()};
-$('quizQuit').onclick=()=>stopQuiz(true);
+$('quizQuit').onclick=()=>finishQuiz(true);
 $('quizRetryWrong').onclick=()=>startQuiz(quizLastMode,[...quizWrong]);
 $('quizRetryAll').onclick=()=>startQuiz(quizLastMode);
 $('quizBack').onclick=()=>stopQuiz(true);
