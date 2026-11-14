@@ -4,9 +4,12 @@
 "use strict";
 const {chromium,webkit}=require("playwright");
 const assert=require("node:assert/strict");
+const fs=require("node:fs"),path=require("node:path");
+const screenshotDir=path.resolve(process.env.SMOKE_SCREENSHOTS||"site-smoke-screenshots");
+fs.mkdirSync(screenshotDir,{recursive:true});
 const base=process.argv[2]||"http://127.0.0.1:8765";
 const URL=base+"/v2/nishinomiya-town-study-c.html";
-const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+
 async function chooseRegion(page,name){
  const menu=page.locator("#communitySelect");
  await menu.click();
@@ -20,16 +23,18 @@ async function basicFlow(browserType,title,viewport,columns){
  page.on("pageerror",error=>errors.push(error.message));
  try{
   await page.goto(URL,{waitUntil:"domcontentloaded",timeout:40000});
-  await page.waitForFunction(()=>document.querySelector("#communityCount")?.textContent.includes("321"),{timeout:40000});
+  await page.waitForFunction(()=>document.querySelector("#communityCount")?.textContent.includes("321"),null,{timeout:40000});
   assert.equal(await page.locator("#communityOptions button").count(),27);
   await page.locator("#communitySelect").click();
   assert.equal(await page.locator("#communityOptions").evaluate(node=>getComputedStyle(node).gridTemplateColumns.split(" ").length),columns);
   const allReadings=await page.locator("#communityOptions button[data-community]:not([data-community='']) .community-reading").allTextContents();
+  await page.screenshot({path:path.join(screenshotDir,columns===4?"mobile-regions.png":"desktop-regions.png"),fullPage:true});
   assert.equal(allReadings.length,26);assert.ok(allReadings.every(t=>t.trim()));
   await page.locator("#communityOptions button[data-community='上ヶ原']").click();
   await page.waitForFunction(()=>document.querySelector("#communityCount").textContent.includes("18町名"));
   assert.match(await page.locator("#communitySelected").textContent(),/うえがはら/);
   assert.match(await page.locator("#regionBoundaryNote").textContent(),/岡田山/);
+  await page.screenshot({path:path.join(screenshotDir,columns===4?"mobile-uegahara.png":"desktop-uegahara.png"),fullPage:true});
   const polygon=page.locator("#map path.leaflet-interactive").first();
   await polygon.waitFor();
   const bounds=await polygon.boundingBox();
@@ -55,6 +60,7 @@ async function basicFlow(browserType,title,viewport,columns){
   assert.match(await page.locator("#regionBoundaryNote").textContent(),/1〜3番/);
   const purple=page.locator('#map path[fill="#ad91d4"]');
   assert.ok(await purple.count()>0,"Okadayama purple geometry missing in Hirota");
+  await page.screenshot({path:path.join(screenshotDir,columns===4?"mobile-hirota.png":"desktop-hirota.png"),fullPage:true});
   await page.locator("#fullscreen").click();
   assert.ok(await page.locator("body").evaluate(node=>node.classList.contains("map-full")));
   await page.locator("#fullscreen").click();
