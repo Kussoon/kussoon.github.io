@@ -36,6 +36,12 @@ for(const city of cities){
 }
 const west=map.get("jp-hyogo-nishinomiya"),source=west.townData;
 assert.ok(source&&source.expectedCount===321);
+assert.equal(source.focusUrl,"/v2/nishinomiya-town-study-c.html");
+assert.equal(source.focusParam,"town");
+assert.ok(html.includes("conf.focusUrl")&&html.includes("encodeURIComponent(town.name)"),"町名からC版へ直接移動するリンクがありません");
+const townMapPage=read("v2/nishinomiya-town-study-c.html");
+assert.ok(townMapPage.includes("new URLSearchParams(location.search).get('town')"),"C版の町名指定がありません");
+assert.ok(townMapPage.includes("if(found){$('hierarchyReturn')"),"無効な町名で地図が壊れない処理がありません");
 const topo=JSON.parse(read(source.topologyUrl.replace(/^\//,"")));
 const names=topo.objects[source.objectKey].geometries.map(g=>g.properties[source.nameKey]);
 assert.equal(names.length,321);assert.equal(new Set(names).size,321);
