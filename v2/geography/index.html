@@ -56,7 +56,7 @@ input[type=search]{font:inherit;padding:9px 12px;border:1px solid #8eafc2;border
  <div id="childSection" hidden><h2 id="childHeading">下の地域</h2><div id="children" class="cards"></div></div>
  <div id="townStage" hidden><div id="townTools"></div><div id="towns" class="town-grid"></div><p id="townCount" class="meta" role="status" aria-live="polite"></p></div>
 </section>
-<p class="notice">このページは地域の階層とリンクを検証する試作です。行政区域の網羅版ではありません。既存ページや公開URLは移動・変更していません。町名一覧の選択は現在地の確認用で、地図上の町域への自動ズームは今後の検討対象です。</p>
+<p class="notice">このページは地域の階層とリンクを検証する試作です。行政区域の網羅版ではありません。既存ページや公開URLは移動・変更していません。西宮市では町名を選ぶと、C版の地図で該当町域を拡大表示できます。ほかの市の町名連携はこれからです。</p>
 <p class="meta">行政上の親子関係と、阪神間・県内の地域・市のコミュニティなどの学習グループは別に管理します。町域データと読み仮名は元のデータを参照し、この試作に大量複製しません。</p>
 </main>
 <script>
@@ -146,9 +146,9 @@ async function renderTowns(node,token){
  }catch(e){if(token===generation)$('townCount').textContent='町名を読み込めませんでした。既存の町名ページからご確認ください。'}
 }
 async function renderTown(node,name,token){
- breadcrumb(node,'towns',name);heading(name,'','町名の位置は既存の町名地図・学習ページで確認できます。');externalLinks(node);clearView();$('townStage').hidden=false;
+ breadcrumb(node,'towns',name);heading(name,'','選んだ町名を、現在の町域学習C版の地図で確認できます。');externalLinks(node);clearView();$('townStage').hidden=false;
  const back=link('#towns:'+node.id,'← 町名一覧に戻る');$('townTools').append(back);
- try{const towns=await getTowns(node);if(token!==generation)return;const town=towns.find(x=>x.name===name);if(!town){$('townCount').textContent='指定した町名は現在のデータにありません。';return}$('placeReading').textContent='（'+town.reading+'）';$('townCount').textContent='町名と読み仮名を確認しました。地図への個別フォーカスは未実装です。'}
+ try{const towns=await getTowns(node);if(token!==generation)return;const town=towns.find(x=>x.name===name);if(!town){$('townCount').textContent='指定した町名は現在のデータにありません。';return}$('placeReading').textContent='（'+town.reading+'）';$('townCount').textContent='この町の地図を開くと、町域を拡大・点滅表示できます。';const conf=node.townData;if(conf.focusUrl&&conf.focusParam){const url=conf.focusUrl+'?'+encodeURIComponent(conf.focusParam)+'='+encodeURIComponent(town.name);const a=link(url,'地図で「'+town.name+'」の場所を見る','card-link');const caption=document.createElement('span');caption.className='reading';caption.textContent='西宮市C版の地図で表示。町名クイズにも進めます。';a.append(caption);$('townTools').append(a)}}
  catch(e){if(token===generation)$('townCount').textContent='町名データを読み込めませんでした。'}
 }
 async function render(){

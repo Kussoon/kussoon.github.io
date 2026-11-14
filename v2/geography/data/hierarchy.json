@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "pilot",
   "scope": "world > Japan > Hyogo > five Hanshinkan cities",
   "source": "v2/docs/design.md",
@@ -87,7 +87,9 @@
         "readingsUrl": "/nishinomiya/data/maniac-readings.json",
         "objectKey": "town",
         "nameKey": "S_NAME",
-        "expectedCount": 321
+        "expectedCount": 321,
+        "focusUrl": "/v2/nishinomiya-town-study-c.html",
+        "focusParam": "town"
       }
     },
     {

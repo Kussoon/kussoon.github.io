@@ -9,6 +9,7 @@ on:
       - 'scripts/audit-nishinomiya-town-v2.cjs'
       - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
+      - 'v2/geography/**'
       - '.github/workflows/nishinomiya-town-v2-regression.yml'
   pull_request:
     paths:
@@ -19,6 +20,7 @@ on:
       - 'scripts/audit-nishinomiya-town-v2.cjs'
       - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
+      - 'v2/geography/**'
 permissions:
   contents: read
 jobs:
@@ -44,6 +46,8 @@ jobs:
         run: node site/scripts/audit-nishinomiya-town-v2.cjs site nishinomiya
       - name: Check C-page update timestamp on HTML changes
         run: cd site && node scripts/check-nishinomiya-town-v2-timestamp.cjs
+      - name: Verify geography hierarchy and Nishinomiya town drilldown
+        run: node site/v2/geography/test-hierarchy.cjs site nishinomiya
 
   browser-smoke:
     runs-on: ubuntu-latest
@@ -63,6 +67,7 @@ jobs:
         run: |
           mkdir -p site/nishinomiya/data
           cp nishinomiya/data/community-town-map.json site/nishinomiya/data/community-town-map.json
+          cp nishinomiya/data/maniac-readings.json site/nishinomiya/data/maniac-readings.json
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
