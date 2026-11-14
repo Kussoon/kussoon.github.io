@@ -1,4 +1,5 @@
 name: Kawanishi 2020 topology fetch for comparison pilot
+# Runs on this PR branch to retrieve and verify the licensed source dataset.
 on:
   push:
     branches:
