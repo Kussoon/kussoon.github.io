@@ -56,7 +56,7 @@ input[type=search]{font:inherit;padding:9px 12px;border:1px solid #8eafc2;border
  <div id="childSection" hidden><h2 id="childHeading">下の地域</h2><div id="children" class="cards"></div></div>
  <div id="townStage" hidden><div id="townTools"></div><div id="towns" class="town-grid"></div><p id="townCount" class="meta" role="status" aria-live="polite"></p></div>
 </section>
-<p class="notice">このページは地域の階層とリンクを検証する試作です。行政区域の網羅版ではありません。既存ページや公開URLは移動・変更していません。西宮市はC版で町域を拡大表示、宝塚市は検索語を引き継ぎ、尼崎市・伊丹市は既存地図を試作画面内で表示・選択します。伊丹市では面を持たない2町名も表示します。芦屋市の町名連携はこれからです。</p>
+<p class="notice">このページは地域の階層とリンクを検証する試作です。行政区域の網羅版ではありません。既存ページや公開URLは移動・変更していません。西宮市はC版で町域を拡大表示、宝塚市は既存検索へ引き継ぎ、尼崎市・伊丹市・芦屋市は既存地図を試作画面内で表示・選択します。伊丹市の面を持たない2町名、芦屋市の南浜町の離れた区域も元の地図のまま扱います。</p>
 <p class="meta">行政上の親子関係と、阪神間・県内の地域・市のコミュニティなどの学習グループは別に管理します。町域データと読み仮名は元のデータを参照し、この試作に大量複製しません。</p>
 </main>
 <script>
@@ -153,7 +153,7 @@ async function renderTowns(node,token){
   const items=await getTowns(node);if(token!==generation)return;
   const tools=$('townTools');const wrapper=document.createElement('div');wrapper.className='tools';
   const lbl=text(wrapper,'町名を検索','label');lbl.htmlFor='townFilter';
-  const filter=document.createElement('input');filter.id='townFilter';filter.type='search';filter.placeholder=node.id==='jp-hyogo-nishinomiya'?'例：上甲東園、こうとう ※最大35件表示':node.id==='jp-hyogo-amagasaki'?'例：上食満、かみけま ※最大35件表示':node.id==='jp-hyogo-itami'?'例：東桑津、ひがしくわづ ※最大35件表示':'例：すみれガ丘、すみれ ※最大35件表示';filter.autocomplete='off';
+  const filter=document.createElement('input');filter.id='townFilter';filter.type='search';filter.placeholder=node.id==='jp-hyogo-nishinomiya'?'例：上甲東園、こうとう ※最大35件表示':node.id==='jp-hyogo-amagasaki'?'例：上食満、かみけま ※最大35件表示':node.id==='jp-hyogo-itami'?'例：東桑津、ひがしくわづ ※最大35件表示':node.id==='jp-hyogo-ashiya'?'例：南浜町、みなみはまちょう ※最大35件表示':'例：すみれガ丘、すみれ ※最大35件表示';filter.autocomplete='off';
   wrapper.append(filter);tools.append(wrapper);
   filter.addEventListener('input',()=>drawTowns(node,items,filter.value));drawTowns(node,items,'');
  }catch(e){if(token===generation)$('townCount').textContent='町名を読み込めませんでした。既存の町名ページからご確認ください。'}
