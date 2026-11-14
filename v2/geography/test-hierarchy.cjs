@@ -2,7 +2,7 @@
 // Usage: node v2/geography/test-hierarchy.cjs [site-root] [nishinomiya-repo-root]
 "use strict";
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict"),vm=require("node:vm");
-const root=path.resolve(process.argv[2]||"."),nishinomiya=path.resolve(process.argv[3]||"../nishinomiya"),takarazuka=path.resolve(process.argv[4]||"../takarazuka");
+const root=path.resolve(process.argv[2]||"."),nishinomiya=path.resolve(process.argv[3]||"../nishinomiya"),takarazuka=path.resolve(process.argv[4]||"../takarazuka"),amagasaki=path.resolve(process.argv[5]||"../amagasaki");
 const read=(file)=>fs.readFileSync(path.join(root,file),"utf8");
 const config=JSON.parse(read("v2/geography/data/hierarchy.json"));
 const html=read("v2/geography/index.html");
@@ -72,6 +72,33 @@ if(fs.existsSync(infoPath)&&fs.existsSync(topoPath)){
  const search=fs.readFileSync(path.join(takarazuka,"town-search.html"),"utf8");
  assert.ok(search.includes("new URLSearchParams(location.search).get('q')"),"既存宝塚市検索で?qが未対応");
 }else console.log("NOTE: 宝塚市元リポジトリ未配置。125町名の照合は省略");
+const amaga=map.get("jp-hyogo-amagasaki")?.townData;
+assert.ok(amaga&&amaga.sourceKind==="town-list-json"&&amaga.expectedCount===140);
+assert.equal(amaga.focusUrl,"/v2/geography/amagasaki-focus.html");
+assert.equal(amaga.focusParam,"town");
+assert.equal(amaga.focusMode,"bridge");
+const generated=JSON.parse(read(amaga.listUrl.replace(/^\//,"")));
+assert.equal(generated.count,140);assert.equal(generated.towns.length,140);
+assert.equal(new Set(generated.towns.map(t=>t.name)).size,140);
+assert.ok(generated.towns.every(t=>t.name&&t.reading),"尼崎市の町名・読み仮名欠落");
+assert.ok(generated.towns.some(t=>t.name==="上食満"&&t.reading==="かみけま"),"上食満を維持");
+const oldAmagaPath=path.join(amagasaki,"town-search.html");
+if(fs.existsSync(oldAmagaPath)){
+ const oldPage=fs.readFileSync(oldAmagaPath,"utf8");
+ const start=oldPage.indexOf("const data="),end=oldPage.indexOf("],byName=",start);
+ assert.ok(start>=0&&end>=0,"尼崎市の既存町名データの抽出不可");
+ const original=JSON.parse(oldPage.slice(start+"const data=".length,end+1));
+ assert.deepEqual(generated.towns,original,"尼崎市140町の軽量データが元ページと不一致");
+ const shapes=[...oldPage.matchAll(/<path class="town" data-name="([^"]+)"/g)].map(m=>m[1]);
+ assert.equal(shapes.length,140,"尼崎市の地図面数が変化");
+ assert.deepEqual(shapes.slice().sort(),original.map(t=>t.name).sort(),"尼崎市の町名と地図面が不一致");
+}else console.log("NOTE: 尼崎市元リポジトリ未配置。原本との突合省略");
+assert.ok(html.includes("conf.sourceKind==='town-list-json'"),"尼崎市の軽量町名アダプター欠落");
+const bridge=read("v2/geography/amagasaki-focus.html");
+assert.ok(bridge.includes('src="/amagasaki/town-search.html"'),"既存尼崎市地図が読まれません");
+assert.ok(bridge.includes('doc.querySelector(\'#townSearch\')'),"既存尼崎市検索への連携がありません");
+assert.ok(bridge.includes('name="robots" content="noindex,follow"'));
+const bridgeScript=bridge.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];assert.ok(bridgeScript);new vm.Script(bridgeScript);
 assert.ok(html.includes("conf.sourceKind==='town-info-array'"),"町名台帳形式アダプターがありません");
 assert.ok(html.includes('name="robots" content="noindex,follow"'));
 assert.ok(html.includes('src="/common/site-footer.js"'));
@@ -82,4 +109,4 @@ assert.ok(!html.includes("location.replace("),"既存公開URLを変更しては
 const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];
 assert.ok(inline,"ナビゲーションJSがありません");new vm.Script(inline,{filename:"hierarchy-pilot.js"});
 console.log("PASS: 世界→日本→兵庫県→5市、親子・ID・循環・読み仮名・リンク");
-console.log("PASS: 西宮市321町名、宝塚市125町名と旧版検索引継ぎ、検索35件、JS構文");
+console.log("PASS: 西宮市321町名、宝塚市125町名、尼崎市140町名の旧版ソース照合と地図連携");
