@@ -82,7 +82,38 @@ async function basicFlow(browserType,title,viewport,columns){
   console.log("PASS "+title+": regions, readings, 4/5 columns, zoom, quiz 1/2, retry, Okadayama, fullscreen");
  }finally{await browser.close()}
 }
+async function hierarchyFlow(browserType,title,viewport){
+ const browser=await browserType.launch({headless:true});
+ const page=await browser.newPage({viewport,deviceScaleFactor:2,hasTouch:viewport.width<620,isMobile:viewport.width<620});
+ const errors=[];page.on("pageerror",e=>errors.push(e.message));
+ try{
+  await page.goto(base+"/v2/geography/",{waitUntil:"domcontentloaded"});
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="世界");
+  await page.locator('a[href="#jp"]').click();
+  await page.locator('a[href="#jp-hyogo"]').click();
+  await page.locator('a[href="#jp-hyogo-nishinomiya"]').last().click();
+  await page.locator('a[href="#towns:jp-hyogo-nishinomiya"]').last().click();
+  await page.locator("#townFilter").waitFor();
+  await page.locator("#townFilter").fill("岡田山");
+  assert.equal(await page.locator("#towns a").count(),1);
+  await page.locator("#towns a").click();
+  assert.equal(await page.locator("#placeName").textContent(),"岡田山");
+  assert.match(await page.locator("#placeReading").textContent(),/おかだやま/);
+  const focus=page.locator('a[href*="nishinomiya-town-study-c.html?town="]');
+  assert.equal(await focus.count(),1);
+  await focus.click();
+  await page.waitForFunction(()=>document.querySelector("#status")?.textContent.includes("階層ナビゲーションから"));
+  assert.match(await page.locator("#status").textContent(),/岡田山/);
+  assert.ok((await page.locator("#hierarchyReturn").getAttribute("href")).includes("town:jp-hyogo-nishinomiya"));
+  await page.locator("#hierarchyReturn").click();
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="岡田山");
+  assert.deepEqual(errors,[],"browser errors in hierarchy flow");
+  console.log("PASS "+title+": world > Japan > Hyogo > Nishinomiya > Okadayama > focused C map > return");
+ }finally{await browser.close()}
+}
 (async()=>{
  await basicFlow(chromium,"Chromium desktop",{width:1280,height:820},5);
  await basicFlow(webkit,"WebKit mobile viewport",{width:390,height:844},4);
+ await hierarchyFlow(chromium,"Chromium desktop",{width:1280,height:820});
+ await hierarchyFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
 })().catch(e=>{console.error(e);process.exitCode=1});
