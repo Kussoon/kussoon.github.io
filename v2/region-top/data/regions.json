@@ -1,0 +1,237 @@
+{
+  "version": "0.1.0",
+  "scope": "V2 region-top comparison pilot. Not exhaustive Hyogo municipalities.",
+  "source": "Linked features are grounded in existing Kussoon page navigation; additional cities are future placeholders.",
+  "regions": [
+    {
+      "id": "jp-hyogo",
+      "name": "兵庫県",
+      "reading": "ひょうごけん",
+      "kind": "prefecture",
+      "status": "existing",
+      "existingTop": "/hyogo/",
+      "parent": null,
+      "description": "兵庫県の市区町村を地図で確認し、地域別学習やクイズに進めます。",
+      "features": [
+        {
+          "label": "県の全域地図",
+          "description": "全国共通V2の兵庫県表示",
+          "url": "/maps/national-municipalities.html?studyPref=28"
+        },
+        {
+          "label": "地域別学習",
+          "description": "兵庫県の地域を選んで学習",
+          "url": "/hyogo/study-region.html"
+        },
+        {
+          "label": "クイズ1",
+          "description": "市区町村の位置を当てる",
+          "url": "/hyogo/quiz1.html"
+        },
+        {
+          "label": "クイズ2",
+          "description": "地図で示された市区町村名を答える",
+          "url": "/hyogo/quiz2.html"
+        },
+        {
+          "label": "名産品の学習",
+          "description": "兵庫県の名産品を地図で覚える",
+          "url": "/hyogo/meisan/"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-nishinomiya",
+      "name": "西宮市",
+      "reading": "にしのみやし",
+      "kind": "municipality",
+      "status": "existing",
+      "existingTop": "/nishinomiya/",
+      "parent": "jp-hyogo",
+      "geographyId": "jp-hyogo-nishinomiya",
+      "townCount": 321,
+      "description": "町名・26コミュニティの学習に加え、お店・交通・神社などの地域情報もあります。",
+      "features": [
+        {
+          "label": "町名入り全域図",
+          "description": "西宮市全域の町名を地図で確認",
+          "url": "/nishinomiya/all-area-labeled.html"
+        },
+        {
+          "label": "町名を検索",
+          "description": "町名・読み仮名・郵便番号で位置を探す",
+          "url": "/nishinomiya/town-search.html"
+        },
+        {
+          "label": "町名から場所を当てる",
+          "description": "全域の位置を地図で回答するクイズ",
+          "url": "/nishinomiya/full-location-quiz.html"
+        },
+        {
+          "label": "地域別学習",
+          "description": "26コミュニティから地域を選ぶ",
+          "url": "/nishinomiya/community-select.html"
+        },
+        {
+          "label": "お菓子マップ",
+          "description": "市内の和菓子・洋菓子店",
+          "url": "/nishinomiya/sweets/"
+        },
+        {
+          "label": "神社・寺院マップ",
+          "description": "市内の神社と寺院",
+          "url": "/nishinomiya/jisha/"
+        },
+        {
+          "label": "交差点看板マップ",
+          "description": "市内の交差点看板",
+          "url": "/nishinomiya/nishinomiya-intersections-map.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-takarazuka",
+      "name": "宝塚市",
+      "reading": "たからづかし",
+      "kind": "municipality",
+      "status": "existing",
+      "existingTop": "/takarazuka/",
+      "parent": "jp-hyogo",
+      "geographyId": "jp-hyogo-takarazuka",
+      "townCount": 125,
+      "description": "町名入り全域図、地域ごとの学習、町名クイズが利用できます。",
+      "features": [
+        {
+          "label": "町名入り全域図",
+          "description": "宝塚市内の町名を地図で確認",
+          "url": "/takarazuka/all-area-labeled.html"
+        },
+        {
+          "label": "町名検索",
+          "description": "町名や読み仮名で地図を探す",
+          "url": "/takarazuka/town-search.html"
+        },
+        {
+          "label": "地域別学習",
+          "description": "地域を選んで町名を覚える",
+          "url": "/takarazuka/community-select.html"
+        },
+        {
+          "label": "町名クイズ",
+          "description": "地図上で町名の位置を回答",
+          "url": "/takarazuka/full-location-quiz.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-amagasaki",
+      "name": "尼崎市",
+      "reading": "あまがさきし",
+      "kind": "municipality",
+      "status": "existing",
+      "existingTop": "/amagasaki/",
+      "parent": "jp-hyogo",
+      "geographyId": "jp-hyogo-amagasaki",
+      "townCount": 140,
+      "description": "町名入り全域図と町名検索を中心に利用できます。",
+      "features": [
+        {
+          "label": "町名入り全域図",
+          "description": "尼崎市の町名を地図で確認",
+          "url": "/amagasaki/all-area-labeled.html"
+        },
+        {
+          "label": "町名検索",
+          "description": "漢字・読み仮名で位置を確認",
+          "url": "/amagasaki/town-search.html"
+        },
+        {
+          "label": "阪神間パン屋マップ",
+          "description": "5市共通のパン屋マップ",
+          "url": "/maps/unified-bread-map.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-itami",
+      "name": "伊丹市",
+      "reading": "いたみし",
+      "kind": "municipality",
+      "status": "existing",
+      "existingTop": "/itami/",
+      "parent": "jp-hyogo",
+      "geographyId": "jp-hyogo-itami",
+      "townCount": 76,
+      "description": "町名入り全域図と町名検索が利用できます。",
+      "features": [
+        {
+          "label": "町名入り全域図",
+          "description": "伊丹市の町名を地図で確認",
+          "url": "/itami/all-area-labeled.html"
+        },
+        {
+          "label": "町名検索",
+          "description": "漢字・読み仮名で位置を確認",
+          "url": "/itami/town-search.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-ashiya",
+      "name": "芦屋市",
+      "reading": "あしやし",
+      "kind": "municipality",
+      "status": "existing",
+      "existingTop": "/ashiya/",
+      "parent": "jp-hyogo",
+      "geographyId": "jp-hyogo-ashiya",
+      "townCount": 59,
+      "description": "町名入り全域図と町名検索が利用できます。",
+      "features": [
+        {
+          "label": "町名入り全域図",
+          "description": "芦屋市の町名を地図で確認",
+          "url": "/ashiya/all-area-labeled.html"
+        },
+        {
+          "label": "町名検索",
+          "description": "漢字・読み仮名で位置を確認",
+          "url": "/ashiya/town-search.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-kawanishi",
+      "name": "川西市",
+      "reading": "かわにしし",
+      "kind": "municipality",
+      "status": "planned",
+      "existingTop": null,
+      "parent": "jp-hyogo",
+      "description": "町名データと地図を接続する前の共通トップ試作です。",
+      "features": []
+    },
+    {
+      "id": "jp-hyogo-sanda",
+      "name": "三田市",
+      "reading": "さんだし",
+      "kind": "municipality",
+      "status": "planned",
+      "existingTop": null,
+      "parent": "jp-hyogo",
+      "description": "町名データと地図を接続する前の共通トップ試作です。",
+      "features": []
+    },
+    {
+      "id": "jp-hyogo-inagawa",
+      "name": "猪名川町",
+      "reading": "いながわちょう",
+      "kind": "municipality",
+      "status": "planned",
+      "existingTop": null,
+      "parent": "jp-hyogo",
+      "description": "町名データと地図を接続する前の共通トップ試作です。",
+      "features": []
+    }
+  ]
+}
