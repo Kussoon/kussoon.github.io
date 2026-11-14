@@ -97,6 +97,7 @@ async function hierarchyFlow(browserType,title,viewport){
   await page.locator("#townFilter").fill("岡田山");
   assert.equal(await page.locator("#towns a").count(),1);
   await page.locator("#towns a").click();
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="岡田山");
   assert.equal(await page.locator("#placeName").textContent(),"岡田山");
   assert.match(await page.locator("#placeReading").textContent(),/おかだやま/);
   const focus=page.locator('a[href*="nishinomiya-town-study-c.html?town="]');
