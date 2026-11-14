@@ -147,3 +147,18 @@ C版に対する構造監査は合格。ブラウザーCIの完走とiPhone Safa
 ### 正式採用判定
 
 データ・JS構文・回帰監査は合格。ただしGitHub Actionsの実行結果と実ブラウザー・iPhone Safari検証を確認できていないため、**C版の正式公開・B版への上書きはまだ行わない**。
+
+
+## 2026-11-14 16:26 JST 追補：実ブラウザーCI成功とスクリーンショット確認
+
+- 検証用 PR #438：https://github.com/Kussoon/kussoon.github.io/pull/438
+- Actions run #25：https://github.com/Kussoon/kussoon.github.io/actions/runs/43571005263
+- `verify-town-map`：**success**（構造・読み仮名・出題・更新日時）
+- `browser-smoke`：**success**。ログで `PASS Chromium desktop` と `PASS WebKit mobile viewport` を確認
+- GitHub Actions成果物 `nishinomiya-v2-c-browser-screenshots` を取得。PCと390pxのモバイル相当画面の6枚（区域一覧・上ヶ原・広田）を目視確認
+- モバイル画面では4列の地域一覧と全26区域の読み仮名、地域表示時の岡田山の薄紫、注意書きが表示されていることを確認。PC画面も5列と地図描画を確認
+- 画面横方向のオーバーフローを検査するテストを追加し、PR #438を検査成功後にmainへマージ
+- **未確認**：iPhone実機Safariのタッチ操作（WebKit Linux上のモバイルエミュレーションとは異なる）。従って正式ページへの置換はまだ行わない
+- **更新時刻**：今回の本体C版は変更していないため、表示日時 `2026/11/14 16:15（JST）` を据え置く
+
+ここまでの「CI未確認」という以前の記録は過去の時点の報告であり、最新状態は上記の**CI成功**が優先。
