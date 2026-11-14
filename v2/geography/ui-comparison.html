@@ -29,7 +29,7 @@ p{margin:7px 0 12px}a{color:#145d85}a:focus-visible,button:focus-visible,select:
 <body><main>
 <nav><a href="/v2/">V2試験トップ</a> ／ <a href="/v2/geography/">現行の地域階層</a></nav>
 <h1>「世界から町へ」UI比較試作</h1>
-<p>変更するのは、町名カードの<strong>読み仮名サイズ</strong>と、パンくずの<strong>現在地の読み上げ指定</strong>の2点です。現行版の画面・URL・地図は変更していません。</p>
+<p>B案の正式採用後も、以前のA案と比較できるよう残した記録ページです。変更箇所は町名カードの<strong>読み仮名サイズ</strong>とパンくずの<strong>現在地の読み上げ指定</strong>の2点です。</p>
 <div class="choices">
  <label for="targetCity">比較する市：</label>
  <select id="targetCity">
@@ -41,21 +41,21 @@ p{margin:7px 0 12px}a{color:#145d85}a:focus-visible,button:focus-visible,select:
  </select>
 </div>
 <div class="choices mobile-switch" role="group" aria-label="スマートフォンの比較画面切替">
- <button type="button" id="showA" aria-pressed="true">A：現行版</button>
- <button type="button" id="showB" aria-pressed="false">B：改善案</button>
+ <button type="button" id="showA" aria-pressed="true">A：旧版</button>
+ <button type="button" id="showB" aria-pressed="false">B：正式版</button>
 </div>
 <div class="panels">
  <section id="panelA" class="panel" aria-label="A 現行版">
-  <header><div><h2>A：現行版</h2><div class="small">読み仮名11px・現在地の読み上げ指定なし</div></div><a id="linkA" href="/v2/geography/#towns:jp-hyogo-nishinomiya">Aを全画面で開く</a></header>
-  <iframe id="frameA" title="A：現行の町名一覧" src="/v2/geography/#towns:jp-hyogo-nishinomiya"></iframe>
+  <header><div><h2>A：旧版（保存）</h2><div class="small">読み仮名11px・現在地の読み上げ指定なし</div></div><a id="linkA" href="/v2/geography/ui-before-b.html#towns:jp-hyogo-nishinomiya">Aを全画面で開く</a></header>
+  <iframe id="frameA" title="A：旧版の町名一覧" src="/v2/geography/ui-before-b.html#towns:jp-hyogo-nishinomiya"></iframe>
  </section>
  <section id="panelB" class="panel" aria-label="B 改善案">
-  <header><div><h2>B：改善案</h2><div class="small">読み仮名13px・パンくずに現在地の指定あり</div></div><a id="linkB" href="/v2/geography/ui-candidate.html#towns:jp-hyogo-nishinomiya">Bを全画面で開く</a></header>
-  <iframe id="frameB" title="B：改善した町名一覧" src="/v2/geography/ui-candidate.html#towns:jp-hyogo-nishinomiya"></iframe>
+  <header><div><h2>B：正式採用版</h2><div class="small">読み仮名13px・パンくずに現在地の指定あり</div></div><a id="linkB" href="/v2/geography/#towns:jp-hyogo-nishinomiya">Bを全画面で開く</a></header>
+  <iframe id="frameB" title="B：正式採用した町名一覧" src="/v2/geography/#towns:jp-hyogo-nishinomiya"></iframe>
  </section>
 </div>
 <p class="note">PCでは左右を、スマートフォンではA/Bのボタンで切り替えて比較できます。市の選択を変えると両方の画面が同じ町名一覧に切り替わります。各画面内の検索・スクロール・ページ遷移は独立しています。</p>
-<p class="note">「現在地」の違いは主にスクリーンリーダーなどで認識される情報です。文字の大きさとカードの収まりは画面上で、現在地の読み上げはVoiceOverでご確認いただけます。これは比較用の試作で、正式採用前です。</p>
+<p class="note">「現在地」の違いは主にスクリーンリーダーなどで認識される情報です。文字の大きさとカードの収まりは画面上で、現在地の読み上げはVoiceOverでご確認いただけます。B案は正式採用済みです。A案は比較用の保存版です。</p>
 </main>
 <script>
 (()=>{
@@ -63,7 +63,7 @@ p{margin:7px 0 12px}a{color:#145d85}a:focus-visible,button:focus-visible,select:
 const city=document.getElementById('targetCity'),a=document.getElementById('frameA'),b=document.getElementById('frameB');
 const linkA=document.getElementById('linkA'),linkB=document.getElementById('linkB');
 const panelA=document.getElementById('panelA'),panelB=document.getElementById('panelB'),btnA=document.getElementById('showA'),btnB=document.getElementById('showB');
-function selectedUrl(candidate){return (candidate?'/v2/geography/ui-candidate.html':'/v2/geography/')+'#towns:'+city.value}
+function selectedUrl(candidate){return (candidate?'/v2/geography/':'/v2/geography/ui-before-b.html')+'#towns:'+city.value}
 function refresh(){const x=selectedUrl(false),y=selectedUrl(true);a.src=x;b.src=y;linkA.href=x;linkB.href=y}
 function show(choice){const small=matchMedia('(max-width:700px)').matches;panelA.hidden=small&&choice==='B';panelB.hidden=small&&choice==='A';btnA.setAttribute('aria-pressed',choice==='A'?'true':'false');btnB.setAttribute('aria-pressed',choice==='B'?'true':'false')}
 city.addEventListener('change',refresh);

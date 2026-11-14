@@ -20,7 +20,7 @@ async function testSize(x){
   for(const [id,city,town,reading] of cities){
    const original="#towns:"+id;
    const checks=[];
-   for(const [label,url,readingPx,aria] of [["A","/v2/geography/",11,false],["B","/v2/geography/ui-candidate.html",13,true]]){
+   for(const [label,url,readingPx,aria] of [["A","/v2/geography/ui-before-b.html",11,false],["B","/v2/geography/",13,true]]){
     await page.goto(base+url+original,{waitUntil:"domcontentloaded",timeout:45000});
     await page.locator("#townFilter").waitFor();
     const v=await page.evaluate(()=>{

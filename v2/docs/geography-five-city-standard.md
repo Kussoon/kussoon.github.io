@@ -81,3 +81,11 @@
 - `v2/docs/geography-hierarchy-pilot.md` は追補の履歴として保存し、本書と矛盾する過去の状態説明を現行仕様と誤認しない。
 
 **検査実績の初期値：PR #439〜#444（2026-11-14）による5市接続。規則は本書の作成PRで自動検査に登録する。**
+
+## 8. 2026-11-14 共通UIのB案正式採用（PR #448）
+
+- 利用者の比較確認・明示的な採用指示に基づき、`/v2/geography/` の町名カード読み仮名を **11pxから13px** に変更。
+- パンくずは現在地（世界・国・県・市・町名一覧・町名詳細）の末尾を `aria-current="page"` で示し、それ以前の階層リンクは維持。現在地の表示は1箇所だけとする。
+- 比較のための旧A版は `/v2/geography/ui-before-b.html` に保存。比較案Bは `/v2/geography/ui-candidate.html` に保持し、`/v2/geography/ui-comparison.html` から旧Aと採用済みBを比較可能にする。
+- Bの採用は**5市の共通階層UIだけ**。各市の元地図、クイズ、町名・読み仮名データ、町名検索上限35件、全国V2、正式URLは変更しない。
+- `v2/geography/test-ui-comparison.cjs` と `scripts/smoke-geography-ui-comparison.cjs` は「旧A保存版 vs 現行B」を検査する。UI変更は必ずこの契約と従来の5市・全国回帰を守る。

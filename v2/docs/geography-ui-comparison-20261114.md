@@ -1,3 +1,5 @@
+> **正式採用：2026-11-14、B案を採用しました。** 現行画面は `/v2/geography/`（13px・aria-currentあり）、比較用の旧Aは `/v2/geography/ui-before-b.html`（11px・aria-currentなし）です。以下はA/B試作当時の比較設計の記録であり、「採用前」という記述は歴史的なものです。
+
 # Kussoon「世界から町へ」｜UI A/B比較試作（2026-11-14）
 
 ## 目的
