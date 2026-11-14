@@ -12,8 +12,9 @@ button,input{font:inherit;min-height:42px;border-radius:7px;border:1px solid #94
 button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #cc8900}
 input{width:min(100%,270px)}#mapWrap{border:1px solid #a9c5d5;border-radius:12px;position:relative;overflow:hidden;background:#eaf5fb;touch-action:none}
 #map{width:100%;height:min(67vh,650px);min-height:360px;display:block;touch-action:none}
-.map-controls{position:absolute;right:12px;bottom:12px;z-index:5;display:flex;flex-direction:column;gap:6px;width:96px}
-.map-controls button{min-height:42px;background:#fff;color:#163750;font-weight:700;box-shadow:0 1px 4px #56778966}
+.map-controls{position:absolute;right:8px;bottom:8px;z-index:5;display:flex;flex-direction:column;gap:5px;width:108px}
+.map-controls button{min-height:40px;background:#fff;color:#163750;font-weight:700;box-shadow:0 1px 4px #56778966;border:1px solid #94b3c5;border-radius:7px;font-size:13px}
+.map-controls .zoom{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .region{stroke:#375f79;stroke-width:0.75;fill:#f6d28b;vector-effect:non-scaling-stroke;cursor:pointer}
 .region:nth-child(2n){fill:#f5dfa7}.region.active{fill:#ff9b61;stroke:#a74619;stroke-width:2}
 .label{font-size:10px;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:#fff;stroke-width:2.6;stroke-linejoin:round;fill:#15354a;pointer-events:none}.label-reading{font-size:7px;stroke-width:2.1}
@@ -27,7 +28,7 @@ input{width:min(100%,270px)}#mapWrap{border:1px solid #a9c5d5;border-radius:12px
 <p class="warning">未検証の2020年国勢調査境界を表示する技術試作です。現行住所の正確な境界を保証しません。読み仮名はデジタル庁アドレス・ベース・レジストリとの照合後に追加します。既存の全国V2や町名検索とは独立しており、正式公開ページではありません。</p>
 <div class="tools"><label for="search">地名検索</label><input id="search" type="search" placeholder="例：中央町、小花 ※最大35件表示"><label><input id="labels" type="checkbox" checked>町名表示</label><label><input id="readings" type="checkbox">読み仮名</label></div>
 <div id="matches" aria-label="検索候補"></div>
-<div id="mapWrap"><svg id="map" viewBox="0 0 1000 650" role="img" aria-label="川西市の2020年町丁・字境界図"><g id="shapes"></g><g id="names"></g></svg><div class="map-controls" aria-label="地図操作"><button id="plus" type="button" aria-label="拡大">＋</button><button id="minus" type="button" aria-label="縮小">−</button><button id="reset" type="button">市全体</button></div></div>
+<div id="mapWrap"><svg id="map" viewBox="0 0 1000 650" role="img" aria-label="川西市の2020年町丁・字境界図"><g id="shapes"></g><g id="names"></g></svg><div class="map-controls" aria-label="地図操作"><div class="zoom"><button id="plus" type="button" aria-label="拡大">＋</button><button id="minus" type="button" aria-label="縮小">−</button></div><div class="zoom"><button id="smaller" type="button">文字 −</button><button id="larger" type="button">文字 ＋</button></div><button id="size" type="button">文字 100%</button><button id="reset" type="button">市全体</button></div></div>
 <p id="status" role="status">地図を読み込み中です…</p><p id="selected" aria-live="polite">区域を選ぶと名称を表示します。</p>
 <p class="note">境界出典：『国勢調査町丁・字等別境界データセット』（CODH作成）「令和2年国勢調査町丁・字等別境界データ」（e-Stat）を加工 doi:10.20676/00000450 ／ CC BY 4.0。読み仮名出典：デジタル庁アドレス・ベース・レジストリ（2026-06-23公開分。全国Q地図の町字一覧表示を参照）。統計区画数と町名数は異なります。表示名が同一の複数ポリゴンは検索結果でまとめ、地図形状は別区画のまま保持しています。2020年統計境界は現行の住所境界・住居表示区域と一致するとは限りません。読み仮名は180/182候補で照合済み、2件は未照合です。地図の移動：ドラッグ、拡大縮小：ボタンまたはマウスホイール。</p>
 </main><script>
@@ -1326,7 +1327,7 @@ const EMBEDDED_KANA={
 }
 ;
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',svg=$('map'),S=$('shapes'),L=$('names');let readingByName={};
-let areas=[],allBox=[0,0,1000,650],box=[0,0,1000,650],chosen=null,drag=null,suppressClick=false;
+let areas=[],allBox=[0,0,1000,650],box=[0,0,1000,650],chosen=null,drag=null,suppressClick=false,fontPct=100;
 function node(tag,attrs,root){let e=document.createElementNS(NS,tag);for(let [k,v] of Object.entries(attrs))e.setAttribute(k,v);root.appendChild(e);return e}
 function decode(top){
  if(top.type!=='Topology'||!top.objects||!top.arcs)throw Error('TopoJSON の構造が想定外です');
@@ -1360,17 +1361,17 @@ function setup(data){
  });
  allBox=[0,0,1000,650];reset();$('status').textContent='町名候補 '+areas.length+'件／統計ポリゴン 191件を表示中（地名・境界は2020年基準）。';
 }
-function view(){svg.setAttribute('viewBox',box.join(' '));L.style.display=$('labels').checked?'':'none';const pxPerUnit=svg.getBoundingClientRect().width/box[2],fontPx=innerWidth<550?9:10;L.querySelectorAll('.label').forEach(x=>x.style.fontSize=(fontPx/pxPerUnit)+'px');L.querySelectorAll('.label-reading').forEach(x=>{x.style.fontSize=(fontPx*.72/pxPerUnit)+'px';x.style.display=$('readings').checked?'':'none'})}
+function view(){svg.setAttribute('viewBox',box.join(' '));L.style.display=$('labels').checked?'':'none';const pxPerUnit=svg.getBoundingClientRect().width/box[2],fontPx=(innerWidth<550?10:11)*fontPct/100;L.querySelectorAll('.label').forEach(x=>x.style.fontSize=(fontPx/pxPerUnit)+'px');L.querySelectorAll('.label-reading').forEach(x=>{x.style.fontSize=(fontPx*.72/pxPerUnit)+'px';x.style.display=$('readings').checked?'':'none'})}
 function reset(){box=allBox.slice();view()}
 function zoom(f,cx=box[0]+box[2]/2,cy=box[1]+box[3]/2){const nw=Math.min(1000,Math.max(8,box[2]*f)),nh=nw*650/1000;box=[cx-nw/2,cy-nh/2,nw,nh];view()}
 function select(i){if(chosen!==null)areas[chosen]?.el.classList.remove('active');chosen=i;const a=areas[i];a.el.classList.add('active');$('selected').textContent='選択：'+(a.name||'名称未記載')+(a.reading?'（よみ：'+a.reading.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96))+'）':'（読み仮名は未照合）')+'（統計ポリゴン '+a.ids.length+'件）';if(a.bounds){const [x1,y1,x2,y2]=a.bounds,pad=24,w=Math.max(90,x2-x1+pad*2),h=Math.max(70,y2-y1+pad*2),scale=Math.min(1,900/w,550/h);box=[(x1+x2)/2-450/scale,(y1+y2)/2-275/scale,900/scale,550/scale];view()}}
 function search(){const q=$('search').value.trim(),found=q?areas.map((a,i)=>({...a,i})).filter(a=>a.name.includes(q)||a.reading.includes(q)):[];const root=$('matches');root.replaceChildren();for(const a of found.slice(0,35)){const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>select(a.i));root.appendChild(b)}$('status').textContent=q?found.length+'町名一致、'+Math.min(35,found.length)+'件表示（最大35件）':areas.length+'町名候補・191統計ポリゴン（2020年基準）。'}
-$('plus').onclick=()=>zoom(.7);$('minus').onclick=()=>zoom(1.4);$('reset').onclick=reset;$('labels').onchange=view;$('readings').onchange=view;$('search').oninput=search;
+$('plus').onclick=()=>zoom(.7);$('minus').onclick=()=>zoom(1.4);$('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);$('size').textContent='文字 '+fontPct+'%';view()};$('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);$('size').textContent='文字 '+fontPct+'%';view()};$('size').onclick=()=>{fontPct=100;$('size').textContent='文字 100%';view()};$('reset').onclick=reset;$('labels').onchange=view;$('readings').onchange=view;$('search').oninput=search;
 svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY>0?1.16:.86)},{passive:false});
 svg.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,b:box.slice()};svg.setPointerCapture(e.pointerId)});
 svg.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>4)suppressClick=true;const r=svg.getBoundingClientRect();box=[drag.b[0]-dx*drag.b[2]/r.width,drag.b[1]-dy*drag.b[3]/r.height,drag.b[2],drag.b[3]];view()});
 svg.addEventListener('pointerup',()=>{drag=null});svg.addEventListener('pointercancel',()=>{drag=null});
-function start(){try{readingByName=Object.fromEntries(EMBEDDED_KANA.entries.filter(x=>x.matchStatus==='matched').map(x=>[x.name,x.reading]));setup(EMBEDDED_TOPO)}catch(e){$('status').textContent='内蔵の境界データを読み込めませんでした。';console.error(e)}}
+function start(){try{readingByName=Object.fromEntries(EMBEDDED_KANA.entries.filter(x=>x.matchStatus==='matched').map(x=>[x.name,x.reading]));setup(EMBEDDED_TOPO);const requested=new URLSearchParams(location.search).get('town');if(requested){const i=areas.findIndex(a=>a.name===requested);if(i>=0)select(i);else $('status').textContent='指定された町名は見つかりません。市全体を表示しています。'}}catch(e){$('status').textContent='内蔵の境界データを読み込めませんでした。';console.error(e)}}
 start();
 })();
 </script></body></html>
