@@ -22,6 +22,7 @@ button:focus-visible,input:focus-visible{outline:3px solid #dd9a31;outline-offse
 .footer{font-size:12px;line-height:1.6;color:#576f7d}
 
 /* C版: 地域選択とクイズの追加。地図・ラベルの既定CSSはB版を継承。 */
+body.town-quiz-mode .town-label{display:none!important}
 .learning{border:1px solid #adc9da;border-radius:10px;background:#fff;padding:12px;margin:10px 0}
 .learnrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0}.learnrow label{font-weight:750}
 .learning select,.learning button{font:inherit;min-height:42px;border:1px solid #9bbacd;border-radius:7px;padding:6px 10px;background:#fff;color:#19384e}
@@ -68,8 +69,8 @@ function choose(it,zoom){if(quizMode){if(quizMode===1)quizMapAnswer(it);return}i
 endBlink();selected=it;blinkOn=true;it.layer.setStyle(highlight);if(zoom)map.fitBounds(it.layer.getBounds(),{padding:[50,50],maxZoom:15,animate:false});
 $('status').textContent=it.name+(READINGS[it.name]?'（'+READINGS[it.name]+'）':'')+' を選択中です。';
 blinkTimer=setInterval(()=>{if(!selected)return;blinkOn=!blinkOn;it.layer.setStyle(blinkOn?highlight:normal)},500)}
-function candidateList(){const query=$('search').value.trim();$('matches').replaceChildren();if(!query)return;
-const results=items.filter(it=>it.name.includes(query)||(READINGS[it.name]||'').includes(query)).slice(0,35);
+function candidateList(){const query=$('search').value.trim();$('matches').replaceChildren();if(!query||quizMode)return;
+const results=scopeItems().filter(it=>it.name.includes(query)||(READINGS[it.name]||'').includes(query)).slice(0,35);
 for(const it of results){const b=document.createElement('button');b.type='button';b.textContent=it.name;b.addEventListener('click',()=>choose(it,true));$('matches').appendChild(b)}}
 function makeTooltip(layer,name,at,offset){let t=L.tooltip({permanent:true,direction:'center',interactive:false,className:'town-label',offset:L.point(...offset)});if(at)t.setLatLng(at).setContent(labelHTML(name)).addTo(map);else layer.bindTooltip(t);if(!at)t=layer.getTooltip();t.setContent(labelHTML(name));return t}
 
@@ -88,13 +89,27 @@ function initStudyData(topology,mapping){
 function inCommunity(name,co){return communityByTown.get(name)===co||(name==='岡田山'&&co==='広田')}
 function scopeItems(){return communityChoice?items.filter(it=>inCommunity(it.name,communityChoice)):[...items]}
 function regionBounds(its){const bounds=L.latLngBounds([]);for(const it of its)bounds.extend(it.layer.getBounds());return bounds}
-function showRegion(){stopQuiz(false);const its=scopeItems();if(its.length)map.fitBounds(regionBounds(its),{padding:[22,22],animate:false});$('communityCount').textContent=communityChoice?(communityChoice+'：'+its.length+'町名'):'市全域：'+items.length+'町名'}
+/* 地域以外の町域とラベルを地図レイヤーから外す。ラベル位置・縮尺計算はB版のまま。 */
+function syncRegionLayers(){
+ const visible=new Set(scopeItems());
+ for(const it of items){
+  const show=visible.has(it), attached=allLayer.hasLayer(it.layer);
+  if(show&&!attached)allLayer.addLayer(it.layer);
+  else if(!show&&attached)allLayer.removeLayer(it.layer);
+  for(const marker of it.labels){
+   if(it.layer.getTooltip()===marker)continue; // boundTooltip は町域レイヤーと連動
+   if(show&&!map.hasLayer(marker))marker.addTo(map);
+   else if(!show&&map.hasLayer(marker))map.removeLayer(marker);
+  }
+ }
+}
+function showRegion(){stopQuiz(false);endBlink();syncRegionLayers();const its=scopeItems();if(its.length)map.fitBounds(regionBounds(its),{padding:[22,22],animate:false});$('communityCount').textContent=communityChoice?(communityChoice+'：'+its.length+'町名'):'市全域：'+items.length+'町名';candidateList()}
 function readyStudy(){const sel=$('communitySelect');for(const co of communities){const opt=document.createElement('option');opt.value=co;opt.textContent=co;sel.appendChild(opt)}sel.disabled=false;for(const id of ['studyView','quizOne','quizTwo'])$(id).disabled=false;showRegion()}
 function clearQuizBlink(){if(quizTimer!==null)clearInterval(quizTimer);quizTimer=null;if(selected){selected.layer.setStyle(normal);selected=null}quizBlink=false}
-function stopQuiz(back){clearQuizBlink();quizMode=0;quizLocked=false;$('quizPanel').hidden=true;$('quizResults').hidden=true;if(back)showRegion()}
+function stopQuiz(back){endBlink();clearQuizBlink();quizMode=0;quizLocked=false;document.body.classList.remove('town-quiz-mode');$('quizPanel').hidden=true;$('quizResults').hidden=true;if(back)showRegion()}
 function resetQuiz(){clearQuizBlink();for(const it of items)it.layer.setStyle(normal);$('quizChoices').replaceChildren();$('quizNext').hidden=true;$('quizReveal').hidden=true;$('quizFeedback').textContent=''}
-function startQuiz(mode,forcedNames){stopQuiz(false);quizMode=mode;quizLastMode=mode;quizScope=communityChoice;const pool=forcedNames?.length?forcedNames:scopeItems().map(it=>it.name);quizOrder=shuffleQuiz(pool);quizOriginalOrder=pool.slice();quizIndex=0;quizScore=quizOrder.length;quizWrong=new Set();$('quizResults').hidden=true;$('quizPanel').hidden=false;loadQuizQuestion()}
-function choiceCandidates(target){const it=items.find(x=>x.name===target);const others=items.filter(x=>x.name!==target);const pool=new Set(),order=[];const add=arr=>{for(const x of arr){if(!pool.has(x.name)&&x.name!==target){pool.add(x.name);order.push(x.name)}}};const distance=x=>map.distance(it.layer.getBounds().getCenter(),x.layer.getBounds().getCenter());const rank=a=>[...a].sort((a,b)=>distance(a)-distance(b));const direct=others.filter(x=>adjacency.get(target)?.has(x.name));add(rank(direct.filter(x=>communityByTown.get(x.name)===communityByTown.get(target))));add(rank(direct));add(rank(others.filter(x=>communityByTown.get(x.name)===communityByTown.get(target))));add(rank(others));return shuffleQuiz([target,...order.slice(0,3)])}
+function startQuiz(mode,forcedNames){stopQuiz(false);syncRegionLayers();quizMode=mode;document.body.classList.add('town-quiz-mode');quizLastMode=mode;quizScope=communityChoice;const pool=forcedNames?.length?forcedNames:scopeItems().map(it=>it.name);quizOrder=shuffleQuiz(pool);quizOriginalOrder=pool.slice();quizIndex=0;quizScore=quizOrder.length;quizWrong=new Set();$('quizResults').hidden=true;$('quizPanel').hidden=false;loadQuizQuestion()}
+function choiceCandidates(target){const it=items.find(x=>x.name===target);const others=scopeItems().filter(x=>x.name!==target);const pool=new Set(),order=[];const add=arr=>{for(const x of arr){if(!pool.has(x.name)&&x.name!==target){pool.add(x.name);order.push(x.name)}}};const distance=x=>map.distance(it.layer.getBounds().getCenter(),x.layer.getBounds().getCenter());const rank=a=>[...a].sort((a,b)=>distance(a)-distance(b));const direct=others.filter(x=>adjacency.get(target)?.has(x.name));add(rank(direct.filter(x=>communityByTown.get(x.name)===communityByTown.get(target))));add(rank(direct));add(rank(others.filter(x=>communityByTown.get(x.name)===communityByTown.get(target))));add(rank(others));return shuffleQuiz([target,...order.slice(0,3)])}
 function loadQuizQuestion(){if(quizIndex>=quizOrder.length){finishQuiz();return}quizLocked=false;resetQuiz();const target=quizOrder[quizIndex],it=items.find(x=>x.name===target);$('quizProgress').textContent=(quizIndex+1)+' / '+quizOrder.length+'問　得点 '+quizScore;
 const bounds=communityChoice?regionBounds(scopeItems()):allBounds;if(bounds)map.fitBounds(bounds,{padding:[12,12],animate:false});
 if(quizMode===1){$('quizQuestion').textContent='「'+target+'」の場所を地図で押してください。';$('quizFeedback').textContent='地図の町域をタップして回答してください。';$('quizReveal').hidden=false;}
@@ -105,7 +120,7 @@ function quizMapAnswer(it){if(quizMode!==1||quizLocked)return;const target=quizO
 function quizChoiceAnswer(name,button){if(quizMode!==2||quizLocked||button.disabled)return;const target=quizOrder[quizIndex];if(name!==target){quizScore=Math.max(0,quizScore-1);quizWrong.add(target);button.disabled=true;$('quizFeedback').textContent='違います。もう一度選んでください。';return}quizCorrect(items.find(x=>x.name===name));for(const b of $('quizChoices').children)b.disabled=true}
 function quizCorrect(it){quizLocked=true;clearQuizBlink();it.layer.setStyle(highlight);$('quizFeedback').textContent='正解です！ '+it.name;$('quizReveal').hidden=true;$('quizNext').hidden=false;$('quizProgress').textContent=(quizIndex+1)+' / '+quizOrder.length+'問　得点 '+quizScore}
 function quizReveal(){if(quizLocked)return;quizScore=Math.max(0,quizScore-1);const name=quizOrder[quizIndex];quizWrong.add(name);quizCorrect(items.find(x=>x.name===name));$('quizFeedback').textContent='答えは「'+name+'」です。'}
-function finishQuiz(){resetQuiz();quizMode=0;$('quizPanel').hidden=true;$('quizResults').hidden=false;$('quizResult').textContent=quizOrder.length+'問中 '+quizScore+'点（復習対象 '+quizWrong.size+'町名）';$('quizRetryWrong').hidden=!quizWrong.size}
+function finishQuiz(){resetQuiz();quizMode=0;document.body.classList.remove('town-quiz-mode');$('quizPanel').hidden=true;$('quizResults').hidden=false;$('quizResult').textContent=quizOrder.length+'問中 '+quizScore+'点（復習対象 '+quizWrong.size+'町名）';$('quizRetryWrong').hidden=!quizWrong.size}
 $('communitySelect').onchange=()=>{communityChoice=$('communitySelect').value;showRegion()};
 $('studyView').onclick=showRegion;
 $('quizOne').onclick=()=>startQuiz(1);
@@ -126,11 +141,11 @@ const multiple=MULTI_LABELS[name];if(multiple){for(const pos of multiple)it.labe
 else{it.labels.push(makeTooltip(layer,name,null,LABEL_OFFSETS[name]||[0,0]));for(const pos of EXTRA_LABELS[name]||[])it.labels.push(makeTooltip(layer,name,pos,[0,0]))}
 }}).addTo(map);
 allBounds=allLayer.getBounds();map.fitBounds(allBounds,{padding:[10,10],animate:false});initialZoom=map.getZoom();fontScale();readyStudy();
-$('status').textContent='高速化B版：'+items.length+'町名、初回表示 '+Math.round(performance.now()-bootStart)+'ms。町名を押すと点滅します。'+(items.length!==321?' ※想定321町名と差があります。':'');
+$('status').textContent='地域学習C版：'+items.length+'町名、初回表示 '+Math.round(performance.now()-bootStart)+'ms。町名を押すと点滅します。'+(items.length!==321?' ※想定321町名と差があります。':'');
 }).catch(e=>{$('status').textContent='データの読み込みに失敗しました：'+e.message;console.error(e)});
 map.on('zoomend',fontScale);
 $('zoomIn').onclick=()=>map.zoomIn(1);$('zoomOut').onclick=()=>map.zoomOut(1);
-$('reset').onclick=()=>{if(allBounds)map.fitBounds(allBounds,{padding:[10,10],animate:false})};
+$('reset').onclick=()=>{communityChoice='';$('communitySelect').value='';showRegion();if(allBounds)map.fitBounds(allBounds,{padding:[10,10],animate:false})};
 $('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);$('size').textContent='文字 '+fontPct+'%';fontScale()};
 $('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);$('size').textContent='文字 '+fontPct+'%';fontScale()};
 $('size').onclick=()=>{fontPct=100;$('size').textContent='文字 100%';fontScale()};
