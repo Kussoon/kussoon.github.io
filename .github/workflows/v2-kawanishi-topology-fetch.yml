@@ -29,7 +29,7 @@ jobs:
           p=pathlib.Path('v2/data/towns/kawanishi-2020.topojson')
           t=json.loads(p.read_text(encoding='utf-8'))
           assert t['type']=='Topology', 'TopoJSON required'
-          assert 'transform' in t and 'arcs' in t
+          assert 'arcs' in t and 'bbox' in t
           entries=t['objects'].get('town',{}).get('geometries',[])
           print('Geometry count',len(entries),'bytes',p.stat().st_size)
           assert len(entries)==191, f'Expected 191 town polygons, got {len(entries)}'

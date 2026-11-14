@@ -1,6 +1,6 @@
 <!doctype html><html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,follow">
+<meta name="robots" content="noindex,follow"><base href="../">
 <title>川西市 町丁・字マップ｜独立比較試作｜Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#163750;background:#f2f8fc}
@@ -14,38 +14,44 @@ input{width:min(100%,270px)}#mapWrap{border:1px solid #a9c5d5;border-radius:12px
 #map{width:100%;height:min(67vh,650px);min-height:360px;display:block;touch-action:none}
 .region{stroke:#375f79;stroke-width:0.75;fill:#f6d28b;vector-effect:non-scaling-stroke;cursor:pointer}
 .region:nth-child(2n){fill:#f5dfa7}.region.active{fill:#ff9b61;stroke:#a74619;stroke-width:2}
-.label{font-size:10px;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:#fff;stroke-width:2.6;stroke-linejoin:round;fill:#15354a;pointer-events:none}
+.label{font-size:10px;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:#fff;stroke-width:2.6;stroke-linejoin:round;fill:#15354a;pointer-events:none}.label-reading{font-size:7px;stroke-width:2.1}
 #status,#selected{font-size:14px;margin:8px 0;min-height:1.5em}.warning{border:1px solid #d8c390;background:#fff7df;padding:10px;border-radius:8px}
 #matches{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
 #matches button{font-size:13px;min-height:38px;padding:6px 9px}.off{display:none}
-@media(max-width:550px){#map{height:60vh;min-height:320px}.label{font-size:9px}}
+@media(max-width:550px){#map{height:60vh;min-height:320px}.label{font-size:9px}.label-reading{font-size:6px}}
 </style></head><body><main>
-<nav class="nav"><a href="/v2/region-top/?region=jp-hyogo-kawanishi">川西市の試作トップ</a><a href="/v2/geography/">世界から町へ</a><a href="/maps/national-municipalities.html?studyPref=28">全国V2</a></nav>
+<nav class="nav"><a href="region-top/?region=jp-hyogo-kawanishi">川西市の試作トップ</a><a href="geography/">世界から町へ</a><a href="../maps/national-municipalities.html?studyPref=28">全国V2</a></nav>
 <h1>川西市 町丁・字マップ（比較試作）</h1>
-<p class="warning">未検証の2020年国勢調査境界を表示する技術試作です。現行住所の正確な境界・読み仮名を保証しません。既存の全国V2や町名検索とは独立しており、正式公開ページではありません。</p>
-<div class="tools"><label for="search">地名検索</label><input id="search" type="search" placeholder="例：中央町、小花 ※最大35件表示"><button id="plus" type="button">＋</button><button id="minus" type="button">−</button><button id="reset" type="button">市全体</button><label><input id="labels" type="checkbox" checked>町名表示</label></div>
+<p class="warning">未検証の2020年国勢調査境界を表示する技術試作です。現行住所の正確な境界を保証しません。読み仮名はデジタル庁アドレス・ベース・レジストリとの照合後に追加します。既存の全国V2や町名検索とは独立しており、正式公開ページではありません。</p>
+<div class="tools"><label for="search">地名検索</label><input id="search" type="search" placeholder="例：中央町、小花 ※最大35件表示"><button id="plus" type="button">＋</button><button id="minus" type="button">−</button><button id="reset" type="button">市全体</button><label><input id="labels" type="checkbox" checked>町名表示</label><label><input id="readings" type="checkbox">読み仮名</label></div>
 <div id="matches" aria-label="検索候補"></div>
 <div id="mapWrap"><svg id="map" viewBox="0 0 1000 650" role="img" aria-label="川西市の2020年町丁・字境界図"><g id="shapes"></g><g id="names"></g></svg></div>
 <p id="status" role="status">地図を読み込み中です…</p><p id="selected" aria-live="polite">区域を選ぶと名称を表示します。</p>
-<p class="note">出典：『国勢調査町丁・字等別境界データセット』（CODH作成）「令和2年国勢調査町丁・字等別境界データ」（e-Stat）を加工 doi:10.20676/00000450 ／ CC BY 4.0。町名の読み仮名は未接続です。地図の移動：ドラッグ、拡大縮小：ボタンまたはマウスホイール。</p>
+<p class="note">境界出典：『国勢調査町丁・字等別境界データセット』（CODH作成）「令和2年国勢調査町丁・字等別境界データ」（e-Stat）を加工 doi:10.20676/00000450 ／ CC BY 4.0。読み仮名出典：デジタル庁アドレス・ベース・レジストリ（2026-06-23公開分。全国Q地図の町字一覧表示を参照）。統計区画数と町名数は異なります。表示名が同一の複数ポリゴンは検索結果でまとめ、地図形状は別区画のまま保持しています。2020年統計境界は現行の住所境界・住居表示区域と一致するとは限りません。読み仮名は180/182候補で照合済み、2件は未照合です。地図の移動：ドラッグ、拡大縮小：ボタンまたはマウスホイール。</p>
 </main><script>
 (()=>{'use strict';
-const srcs=['/v2/data/towns/kawanishi-2020.topojson','https://geoshape.ex.nii.ac.jp/ka/topojson/2020/28/r2ka28217.topojson'];
-const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',svg=$('map'),S=$('shapes'),L=$('names');
-let areas=[],allBox=[0,0,1000,650],box=[0,0,1000,650],chosen=null,drag=null;
+const srcs=['data/towns/kawanishi-2020.topojson'];
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',svg=$('map'),S=$('shapes'),L=$('names');let readingByName={};
+let areas=[],allBox=[0,0,1000,650],box=[0,0,1000,650],chosen=null,drag=null,suppressClick=false;
 function node(tag,attrs,root){let e=document.createElementNS(NS,tag);for(let [k,v] of Object.entries(attrs))e.setAttribute(k,v);root.appendChild(e);return e}
 function decode(top){
- if(top.type!=='Topology'||!top.transform||!top.objects||!top.arcs)throw Error('TopoJSON の構造が想定外です');
- const t=top.transform, arcs=top.arcs.map(arc=>{let x=0,y=0;return arc.map(pt=>{x+=pt[0];y+=pt[1];return [x*t.scale[0]+t.translate[0],y*t.scale[1]+t.translate[1]]})});
+ if(top.type!=='Topology'||!top.objects||!top.arcs)throw Error('TopoJSON の構造が想定外です');
+ const layer=top.objects.town;if(!layer||!Array.isArray(layer.geometries))throw Error('町丁統計区画レイヤーがありません');
+ const arcs=top.transform?top.arcs.map(arc=>{let x=0,y=0;return arc.map(pt=>{x+=pt[0];y+=pt[1];return [x*top.transform.scale[0]+top.transform.translate[0],y*top.transform.scale[1]+top.transform.translate[1]]})}):top.arcs.map(arc=>arc.map(pt=>pt.slice()));
  const polygons=geo=>geo.type==='Polygon'?[geo.arcs]:geo.type==='MultiPolygon'?geo.arcs:[];
- const join=index=>{const a=arcs[index<0?~index:index];return index<0?a.slice().reverse():a};
- const entries=Object.values(top.objects).flatMap(o=>o.geometries||[]);
- return entries.map((g,i)=>{const p=g.properties||{};const name=p.S_NAME||p.MOJI||p.NAME||p.name||'',id=p.KEY_CODE||g.id||String(i);
- const polys=polygons(g).map(poly=>poly.map(ring=>ring.flatMap((n,j)=>{const v=join(n);return j?v.slice(1):v})));
- return {name:String(name),id:String(id),polys};}).filter(a=>a.polys.length);
+ const join=index=>{const a=arcs[index<0?~index:index];if(!a)throw Error('境界アーク参照が不正です');return index<0?a.slice().reverse():a};
+ const grouped=new Map();
+ for(const g of layer.geometries){const p=g.properties||{},name=String(p.S_NAME||'').trim(),id=String(p.R2KAxx_ID??'').trim();
+  if(!name||!id)throw Error('町名または統計ポリゴンIDがありません');
+  const polys=polygons(g).map(poly=>poly.map(ring=>ring.flatMap((n,j)=>{const v=join(n);return j?v.slice(1):v})));
+  if(!polys.length)throw Error('ポリゴン境界がありません: '+name);
+  if(!grouped.has(name))grouped.set(name,{name,ids:[],polys:[]});
+  const area=grouped.get(name);area.ids.push(id);area.polys.push(...polys);
+ }
+ return [...grouped.values()];
 }
 function setup(data){
- areas=decode(data);if(areas.length<100)throw Error('川西市の区域データとしては少なすぎます');
+ areas=decode(data);if(areas.length!==182||areas.reduce((n,a)=>n+a.ids.length,0)!==191)throw Error('川西市の検証済み件数と一致しません');
  let pts=areas.flatMap(a=>a.polys.flatMap(p=>p.flat()));let minx=Infinity,maxx=-Infinity,miny=Infinity,maxy=-Infinity;for(const [x,y] of pts){if(x<minx)minx=x;if(x>maxx)maxx=x;if(y<miny)miny=y;if(y>maxy)maxy=y}
  // equirectangular adjustment for geographic longitudes at Hyogo latitude
  const k=Math.cos(34.85*Math.PI/180),w=(maxx-minx)*k,h=maxy-miny;const pad=.05;
@@ -53,24 +59,24 @@ function setup(data){
  S.replaceChildren();L.replaceChildren();
  areas.forEach((a,i)=>{
   const d=a.polys.map(poly=>poly.map(ring=>ring.map(([x,y],j)=>(j?'L':'M')+X(x).toFixed(2)+','+Y(y).toFixed(2)).join('')+'Z').join('')).join('');
-  const el=node('path',{d,class:'region','data-index':i,'fill-rule':'evenodd'},S);el.addEventListener('click',()=>select(i));
-  const coords=a.polys[0]?.[0]||[];if(coords.length){let sx=0,sy=0;for(const p of coords){sx+=X(p[0]);sy+=Y(p[1])}a.center=[sx/coords.length,sy/coords.length]}
-  if(a.name&&a.center){a.label=node('text',{x:a.center[0],y:a.center[1],class:'label'},L);a.label.textContent=a.name}
+  const el=node('path',{d,class:'region','data-index':i,'fill-rule':'evenodd'},S);el.addEventListener('click',()=>{if(suppressClick){suppressClick=false;return}select(i)});
+  const coords=a.polys.flatMap(poly=>poly[0]||[]);if(coords.length){let sx=0,sy=0;for(const p of coords){sx+=X(p[0]);sy+=Y(p[1])}a.center=[sx/coords.length,sy/coords.length];a.bounds=[Math.min(...coords.map(p=>X(p[0]))),Math.min(...coords.map(p=>Y(p[1]))),Math.max(...coords.map(p=>X(p[0]))),Math.max(...coords.map(p=>Y(p[1])))];a.reading=readingByName[a.name]||''}
+  if(a.name&&a.center){a.label=node('text',{x:a.center[0],y:a.center[1],class:'label'},L);let top=node('tspan',{x:a.center[0],dy:a.reading?'-3':'0'},a.label);top.textContent=a.name;if(a.reading){let kana=node('tspan',{x:a.center[0],dy:'11',class:'label-reading'},a.label);kana.textContent=a.reading.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96))}}
   a.el=el;
  });
- allBox=[0,0,1000,650];reset();$('status').textContent=areas.length+'統計区画を表示しています（地名・境界は2020年基準、未照合）。';
+ allBox=[0,0,1000,650];reset();$('status').textContent='町名候補 '+areas.length+'件／統計ポリゴン 191件を表示中（地名・境界は2020年基準）。';
 }
-function view(){svg.setAttribute('viewBox',box.join(' '));L.style.display=$('labels').checked?'':'none'}
+function view(){svg.setAttribute('viewBox',box.join(' '));L.style.display=$('labels').checked?'':'none';const pxPerUnit=svg.getBoundingClientRect().width/box[2],fontPx=innerWidth<550?9:10;L.querySelectorAll('.label').forEach(x=>x.style.fontSize=(fontPx/pxPerUnit)+'px');L.querySelectorAll('.label-reading').forEach(x=>{x.style.fontSize=(fontPx*.72/pxPerUnit)+'px';x.style.display=$('readings').checked?'':'none'})}
 function reset(){box=allBox.slice();view()}
 function zoom(f,cx=box[0]+box[2]/2,cy=box[1]+box[3]/2){const nw=Math.min(1000,Math.max(8,box[2]*f)),nh=nw*650/1000;box=[cx-nw/2,cy-nh/2,nw,nh];view()}
-function select(i){if(chosen!==null)areas[chosen]?.el.classList.remove('active');chosen=i;const a=areas[i];a.el.classList.add('active');$('selected').textContent='選択：'+(a.name||'名称未記載')+'（統計区画ID：'+a.id+'）';if(a.center){box=[a.center[0]-125,a.center[1]-81.25,250,162.5];view()}}
-function search(){const q=$('search').value.trim(),found=q?areas.map((a,i)=>({...a,i})).filter(a=>a.name.includes(q)):[];const root=$('matches');root.replaceChildren();for(const a of found.slice(0,35)){const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>select(a.i));root.appendChild(b)}$('status').textContent=q?found.length+'区画一致、'+Math.min(35,found.length)+'件表示（最大35件）':areas.length+'統計区画を表示しています（2020年基準）。'}
-$('plus').onclick=()=>zoom(.7);$('minus').onclick=()=>zoom(1.4);$('reset').onclick=reset;$('labels').onchange=view;$('search').oninput=search;
+function select(i){if(chosen!==null)areas[chosen]?.el.classList.remove('active');chosen=i;const a=areas[i];a.el.classList.add('active');$('selected').textContent='選択：'+(a.name||'名称未記載')+(a.reading?'（よみ：'+a.reading.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96))+'）':'（読み仮名は未照合）')+'（統計ポリゴン '+a.ids.length+'件）';if(a.bounds){const [x1,y1,x2,y2]=a.bounds,pad=24,w=Math.max(90,x2-x1+pad*2),h=Math.max(70,y2-y1+pad*2),scale=Math.min(1,900/w,550/h);box=[(x1+x2)/2-450/scale,(y1+y2)/2-275/scale,900/scale,550/scale];view()}}
+function search(){const q=$('search').value.trim(),found=q?areas.map((a,i)=>({...a,i})).filter(a=>a.name.includes(q)||a.reading.includes(q)):[];const root=$('matches');root.replaceChildren();for(const a of found.slice(0,35)){const b=document.createElement('button');b.textContent=a.name;b.addEventListener('click',()=>select(a.i));root.appendChild(b)}$('status').textContent=q?found.length+'町名一致、'+Math.min(35,found.length)+'件表示（最大35件）':areas.length+'町名候補・191統計ポリゴン（2020年基準）。'}
+$('plus').onclick=()=>zoom(.7);$('minus').onclick=()=>zoom(1.4);$('reset').onclick=reset;$('labels').onchange=view;$('readings').onchange=view;$('search').oninput=search;
 svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY>0?1.16:.86)},{passive:false});
 svg.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,b:box.slice()};svg.setPointerCapture(e.pointerId)});
-svg.addEventListener('pointermove',e=>{if(!drag)return;const r=svg.getBoundingClientRect();box=[drag.b[0]-(e.clientX-drag.x)*drag.b[2]/r.width,drag.b[1]-(e.clientY-drag.y)*drag.b[3]/r.height,drag.b[2],drag.b[3]];view()});
-svg.addEventListener('pointerup',()=>{drag=null});
-async function start(){const errors=[];for(const u of srcs){try{const r=await fetch(u);if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();setup(data);return}catch(e){errors.push(u+': '+e.message)}}$('status').textContent='境界データを取得できませんでした。正式な地図ではありません。ローカル配置が必要です。';console.error(errors.join('\n'))}
+svg.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>4)suppressClick=true;const r=svg.getBoundingClientRect();box=[drag.b[0]-dx*drag.b[2]/r.width,drag.b[1]-dy*drag.b[3]/r.height,drag.b[2],drag.b[3]];view()});
+svg.addEventListener('pointerup',()=>{drag=null});svg.addEventListener('pointercancel',()=>{drag=null});
+async function start(){try{const [topRes,kanaRes]=await Promise.all(srcs.map(u=>fetch(u)).concat([fetch('data/towns/kawanishi-readings-abr-20260623.json')]));if(!topRes.ok||!kanaRes.ok)throw Error('HTTP '+topRes.status+'/'+kanaRes.status);const data=await topRes.json(),kana=await kanaRes.json();readingByName=Object.fromEntries(kana.entries.filter(x=>x.matchStatus==='matched').map(x=>[x.name,x.reading]));setup(data)}catch(e){$('status').textContent='同梱の境界または読み仮名データを読み込めませんでした。';console.error(e)}}
 start();
 })();
-</script><script defer src="/common/site-footer.js"></script></body></html>
+</script><script defer src="../common/site-footer.js"></script></body></html>
