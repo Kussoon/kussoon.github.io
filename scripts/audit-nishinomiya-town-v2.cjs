@@ -40,13 +40,20 @@ for(const g of splitParts){const visit=v=>Array.isArray(v)?v.forEach(visit):asse
 assert.ok(js.includes("initRegionalShapes(subtopology)"),"分割データが未使用");
 assert.ok(js.includes("regionLayers?.[communityChoice]"),"地域ごとに図形を切替していません");
 assert.ok(js.includes("it.name==='岡田山'"),"岡田山の未分割状態が未処理");
+assert.ok(js.includes("communityBaseStyle(it)")&&js.includes("okadaCommunity"),"岡田山の専用表示色がありません");
+assert.ok(js.includes("okadaExplanation()"),"岡田山の注記がありません");
+assert.ok(js.includes("1〜3番")&&js.includes("4〜7番"),"旧版の番地区分を説明していません");
+assert.ok(!js.includes("communityChoice&&it.name==='岡田山'))return"),"岡田山をクイズから除外しています");
+assert.ok(!js.includes("scopeItems().filter(it=>!(communityChoice&&it.name==='岡田山'))"),"地域別クイズから岡田山を除外しています");
+assert.ok(!js.includes("quizMode!==1||quizLocked||(communityChoice&&it.name==='岡田山')"),"クイズ1で岡田山を除外しています");
+assert.ok(groups.find(g=>g.co==="上ヶ原").names.includes("岡田山")&&groups.find(g=>g.co==="広田").names.includes("岡田山"),"両地域の岡田山がありません");
 const fnSource=js.match(/function choiceCandidates\(target\)\{[^\n]+\}/)?.[0];assert.ok(fnSource);
 const items=names.map((name,i)=>({name,layer:{getBounds:()=>({getCenter:()=>({lat:Math.floor(i/20),lng:i%20})})}}));
 const map={distance:(a,b)=>Math.hypot(a.lat-b.lat,a.lng-b.lng)},adjacency=new Map(),shuffleQuiz=x=>x;
 let checks=0;
 for(const g of groups){const set=new Set(g.names),scopeItems=()=>items.filter(it=>set.has(it.name));
  const candidate=new Function("items","scopeItems","adjacency","communityByTown","map","shuffleQuiz","communityChoice",fnSource+";return choiceCandidates")(items,scopeItems,adjacency,assigned,map,shuffleQuiz,g.co);
- for(const name of g.names){if(name==="岡田山"&&(g.co==="上ヶ原"||g.co==="広田"))continue;const opts=candidate(name);assert.equal(opts.length,4,g.co+":"+name);assert.equal(new Set(opts).size,4);assert.ok(opts.includes(name));checks++}
+ for(const name of g.names){const opts=candidate(name);assert.equal(opts.length,4,g.co+":"+name);assert.equal(new Set(opts).size,4);assert.ok(opts.includes(name));checks++}
 }
 for(const token of ["quizWrongPlaces.has(it.name)","quizWrongPlaces.add(it.name)","button.classList.add('quiz-wrong')","startQuiz(quizLastMode,[...quizWrong])","finishQuiz(true)","quizTownName(name)","communityChoice?'区域全体':'市の全体'"])assert.ok(js.includes(token),token);
 assert.ok(c.includes("body.town-quiz-mode #reading{display:none!important}"));
@@ -63,4 +70,5 @@ assert.ok(c.includes('id="communityOptions"')&&js.includes("closeCommunityOption
 console.log("PASS 321町名 / 26地域 / 読み仮名 / アーク参照 / B版ラベルCSS");
 console.log("PASS "+checks+"地域別出題（4択・正解・重複なし）、主要クイズ動作の構造検査");
 console.log("PASS 上甲東園の上ヶ原4丁目分・甲東2丁目分の境界を元データで照合");
-console.log("REVIEW 岡田山は番地別境界がないため参考表示、地域別クイズ出題を保留。Safari実機テストは未実施");
+console.log("PASS 岡田山は上ヶ原・広田の両方で町全体を出題し、旧版の番地区分を説明");
+console.log("REVIEW 岡田山の実際の番地別境界は未確定。Safari実機テストは未実施");
