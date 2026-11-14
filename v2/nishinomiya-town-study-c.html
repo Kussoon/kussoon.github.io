@@ -21,8 +21,13 @@ button:focus-visible,input:focus-visible{outline:3px solid #dd9a31;outline-offse
 /* C版: 地域選択とクイズの追加。地図・ラベルの既定CSSはB版を継承。 */
 body.town-quiz-mode .town-label{display:none!important}body.town-quiz-mode #reading{display:none!important}
 .boundary-note{font-size:13px;color:#704700;background:#fff8e5;border:1px solid #e3c883;border-radius:7px;padding:8px 10px;line-height:1.5}.learning{border:1px solid #adc9da;border-radius:10px;background:#fff;padding:12px;margin:10px 0}
-.learnrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0}.learnrow label{font-weight:750}
+.learnrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0}.learnrow label,.scope-label{font-weight:750}
 .learning select,.learning button{font:inherit;min-height:42px;border:1px solid #9bbacd;border-radius:7px;padding:6px 10px;background:#fff;color:#19384e}
+.community-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:8px 0 12px;padding:10px;border:1px solid #b7cbd7;border-radius:8px;background:#f0f7fb}
+.community-options button{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;min-width:0;min-height:58px;padding:5px 3px;text-align:center}
+.community-options .community-reading{font-size:11px;font-weight:500;line-height:1.2;overflow-wrap:anywhere}
+#communitySelect{display:inline-flex;align-items:center;justify-content:space-between;gap:9px;max-width:100%;text-align:left}
+@media(max-width:600px){.community-options{grid-template-columns:repeat(4,minmax(0,1fr));padding:6px;gap:5px}.community-options button{min-height:59px;padding:5px 1px;font-size:14px}.community-options .community-reading{font-size:10px}}
 .learning button.active{background:#225877;color:#fff}.learning button:disabled{opacity:.5}.learning [hidden]{display:none!important}
 #quizChoices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0}
 #quizChoices button{white-space:normal;overflow-wrap:anywhere;min-height:48px}#quizChoices button:disabled{opacity:1}#quizChoices button.quiz-wrong{background:#e15454;color:#fff;border-color:#bd3030}#quizChoices button.quiz-correct{background:#238f55;color:#fff;border-color:#16723e}
@@ -31,9 +36,9 @@ body.town-quiz-mode .town-label{display:none!important}body.town-quiz-mode #read
 </style>
 </head><body><main>
 <nav class="top"><a href="/nishinomiya/">西宮市トップ</a><a href="/nishinomiya/all-area-labeled.html">現行の町名全域図</a><a href="/v2/nishinomiya-town-comparison-b.html">確定済みB版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
-<h1>西宮市 町名地図｜地域学習C版 <span class="updated-at">更新：2026/11/14 15:36（JST）</span></h1>
+<h1>西宮市 町名地図｜地域学習C版 <span class="updated-at">更新：2026/11/14 15:45（JST）</span></h1>
 <p class="notice">高速化B版を基に、26コミュニティ選択・クイズ1・2を追加した比較C版です。B版・正式版は変更していません。</p>
-<section class="learning" aria-label="26コミュニティ選択と町名クイズ"><div class="learnrow"><label for="communitySelect">学習範囲</label><select id="communitySelect" disabled><option value="">西宮市全域（321町名）</option></select><span id="communityCount" role="status">準備中</span></div><p id="regionBoundaryNote" class="boundary-note" hidden></p><div class="learnrow" id="studyMenu"><button type="button" id="quizOne" disabled>クイズ1｜町名→場所</button><button type="button" id="quizTwo" disabled>クイズ2｜点滅→4択</button></div><section id="quizPanel" hidden aria-label="町名クイズ"><p id="quizProgress"></p><p id="quizQuestion"></p><div id="quizChoices"></div><div class="learnrow quiz-actions"><button type="button" id="quizQuit">ここでやめる</button><button type="button" id="quizNext" hidden>次の問題へ</button><button type="button" id="quizReveal" hidden>答えを見る</button></div></section><section id="quizResults" hidden aria-label="クイズ結果"><p id="quizResult"></p><div class="learnrow"><button type="button" id="quizRetryWrong">間違えた問題をもう一度</button><button type="button" id="quizRetryAll">最初からもう一度</button><button type="button" id="quizBack">地域選択に戻る</button></div></section></section>
+<section class="learning" aria-label="26コミュニティ選択と町名クイズ"><div class="learnrow"><span class="scope-label" id="communityLabel">学習範囲</span><button type="button" id="communitySelect" aria-labelledby="communityLabel communitySelected" aria-expanded="false" aria-controls="communityOptions" disabled><span id="communitySelected">西宮市全域（321町名）</span><span aria-hidden="true"> ▾</span></button><span id="communityCount" role="status">準備中</span></div><div id="communityOptions" class="community-options" aria-label="学習範囲の一覧" hidden></div><p id="regionBoundaryNote" class="boundary-note" hidden></p><div class="learnrow" id="studyMenu"><button type="button" id="quizOne" disabled>クイズ1｜町名→場所</button><button type="button" id="quizTwo" disabled>クイズ2｜点滅→4択</button></div><section id="quizPanel" hidden aria-label="町名クイズ"><p id="quizProgress"></p><p id="quizQuestion"></p><div id="quizChoices"></div><div class="learnrow quiz-actions"><button type="button" id="quizQuit">ここでやめる</button><button type="button" id="quizNext" hidden>次の問題へ</button><button type="button" id="quizReveal" hidden>答えを見る</button></div></section><section id="quizResults" hidden aria-label="クイズ結果"><p id="quizResult"></p><div class="learnrow"><button type="button" id="quizRetryWrong">間違えた問題をもう一度</button><button type="button" id="quizRetryAll">最初からもう一度</button><button type="button" id="quizBack">地域選択に戻る</button></div></section></section>
 <div class="status" id="status" role="status">町域データを読み込んでいます。</div>
 <section class="frame" id="frame" aria-label="西宮市町名地図">
 <div id="map"></div><div id="quizFeedback" class="map-quiz-feedback" role="status" aria-live="polite"></div><button class="full" id="fullscreen" type="button">全画面</button>
@@ -68,6 +73,8 @@ blinkTimer=setInterval(()=>{if(!selected)return;blinkOn=!blinkOn;it.layer.setSty
 function makeTooltip(layer,name,at,offset){let t=L.tooltip({permanent:true,direction:'center',interactive:false,className:'town-label',offset:L.point(...offset)});if(at)t.setLatLng(at).setContent(labelHTML(name)).addTo(map);else layer.bindTooltip(t);if(!at)t=layer.getTooltip();t.setContent(labelHTML(name));return t}
 
 /* Community and quiz adapters: all map label placement is inherited unchanged from B. */
+const COMMUNITY_READINGS={'上ヶ原':'うえがはら','今津':'いまず','北口':'きたぐち','名塩':'なじお','夙川':'しゅくがわ','大社':'たいしゃ','安井':'やすい','山口':'やまぐち','平木':'ひらき','広田':'ひろた','春風':'はるかぜ','津門':'つと','浜脇':'はまわき','瓦木':'かわらぎ','生瀬':'なまぜ','用海':'ようがい','甲子園口':'こうしえんぐち','甲東':'こうとう','甲陽':'こうよう','神原':'かんばら','芦原':'あしはら','苦楽園':'くらくえん','西宮浜':'にしのみやはま','越木岩':'こしきいわ','香櫨園':'こうろえん','鳴尾':'なるお'};
+function regionLabel(name){return name+'（'+COMMUNITY_READINGS[name]+'）'}
 let communities=[],communityByTown=new Map(),communityChoice='',quizMode=0,quizOrder=[],quizIndex=0,quizScore=0,quizWrong=new Set(),quizLocked=false,quizTimer=null,quizBlink=false,quizLastMode=0,quizOriginalOrder=[],quizScope=null,adjacency=new Map(),quizWrongPlaces=new Set();
 function shuffleQuiz(input){const a=[...input];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function initStudyData(topology,mapping){
@@ -126,8 +133,21 @@ function syncRegionLayers(){
   }
  }
 }
-function showRegion(){stopQuiz(false);endBlink();syncRegionLayers();specialBoundaryNote();$('reset').textContent=communityChoice?'区域全体':'市の全体';const its=scopeItems();if(its.length)map.fitBounds(regionBounds(its),{padding:[22,22],animate:false});$('communityCount').textContent=communityChoice?(communityChoice+'：'+its.length+'町名'):'市全域：'+items.length+'町名'}
-function readyStudy(){const sel=$('communitySelect');for(const co of communities){const opt=document.createElement('option');opt.value=co;opt.textContent=co;sel.appendChild(opt)}sel.disabled=false;for(const id of ['quizOne','quizTwo'])$(id).disabled=false;showRegion()}
+function showRegion(){stopQuiz(false);endBlink();syncRegionLayers();specialBoundaryNote();$('reset').textContent=communityChoice?'区域全体':'市の全体';const its=scopeItems();if(its.length)map.fitBounds(regionBounds(its),{padding:[22,22],animate:false});$('communityCount').textContent=communityChoice?(regionLabel(communityChoice)+'：'+its.length+'町名'):'市全域：'+items.length+'町名';$('communitySelected').textContent=communityChoice?regionLabel(communityChoice):'西宮市全域（321町名）';for(const button of $('communityOptions').querySelectorAll('button')){const selected=button.dataset.community===communityChoice;button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected))}}
+function closeCommunityOptions(){ $('communityOptions').hidden=true;$('communitySelect').setAttribute('aria-expanded','false') }
+function readyStudy(){
+ if(communities.length!==26||communities.some(co=>!COMMUNITY_READINGS[co]))throw Error('26地域の読み仮名が不足しています');
+ const menu=$('communityOptions');
+ for(const co of ['',...communities]){
+  const button=document.createElement('button');button.type='button';button.dataset.community=co;
+  if(co){const name=document.createElement('strong');name.textContent=co;const reading=document.createElement('small');reading.className='community-reading';reading.textContent=COMMUNITY_READINGS[co];button.append(name,reading)}
+  else button.textContent='西宮市全域';
+  button.addEventListener('click',()=>{communityChoice=co;closeCommunityOptions();showRegion();$('communitySelect').focus()});
+  menu.appendChild(button);
+ }
+ $('communitySelect').disabled=false;
+ for(const id of ['quizOne','quizTwo'])$(id).disabled=false;showRegion();
+}
 function clearQuizBlink(){if(quizTimer!==null)clearInterval(quizTimer);quizTimer=null;if(selected){selected.layer.setStyle(normal);selected=null}quizBlink=false}
 function stopQuiz(back){endBlink();clearQuizBlink();quizMode=0;quizLocked=false;document.body.classList.remove('town-quiz-mode');$('quizPanel').hidden=true;$('quizResults').hidden=true;if(back)showRegion()}
 function resetQuiz(){clearQuizBlink();quizWrongPlaces.clear();for(const it of items)it.layer.setStyle(communityChoice&&it.name==='岡田山'?unsplitReference:normal);$('quizChoices').replaceChildren();$('quizNext').hidden=true;$('quizReveal').hidden=true;$('quizFeedback').textContent=''}
@@ -153,7 +173,9 @@ function finishQuiz(quitEarly=false){
  $('quizRetryWrong').hidden=false;
  $('quizRetryWrong').disabled=quizWrong.size===0;
 }
-$('communitySelect').onchange=()=>{communityChoice=$('communitySelect').value;showRegion()};
+$('communitySelect').onclick=()=>{const panel=$('communityOptions');panel.hidden=!panel.hidden;$('communitySelect').setAttribute('aria-expanded',String(!panel.hidden))};
+document.addEventListener('pointerdown',e=>{if(!$('communityOptions').hidden&&!e.target.closest('#communityOptions')&&!e.target.closest('#communitySelect'))closeCommunityOptions()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('communityOptions').hidden){closeCommunityOptions();$('communitySelect').focus()}});
 $('quizOne').onclick=()=>startQuiz(1);
 $('quizTwo').onclick=()=>startQuiz(2);
 $('quizReveal').onclick=quizReveal;
