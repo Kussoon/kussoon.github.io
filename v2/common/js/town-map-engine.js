@@ -6,19 +6,30 @@
 const NS='http://www.w3.org/2000/svg';
 function decode(top){
   if(top.type!=='Topology'||!top.objects?.town||!Array.isArray(top.arcs)) throw Error('Invalid town TopoJSON');
-  const arcs=top.arcs.map(a=>{let x=0,y=0;return a.map(p=>{x+=p[0];y+=p[1];return [x,y];});});
   const tr=top.transform;
-  if(tr) for(const a of arcs) for(const p of a){p[0]=p[0]*tr.scale[0]+tr.translate[0];p[1]=p[1]*tr.scale[1]+tr.translate[1];}
-  const arc=(i)=>{const a=arcs[i<0?~i:i];return i<0?a.slice().reverse().map(p=>p.slice()):a.map(p=>p.slice());};
-  const rings=g=>g.arcs.flatMap(r=>{let out=[];for(const i of r){const part=arc(i);out=out.concat(out.length?part.slice(1):part);}return out;});
-  const geoms=top.objects.town.geometries.map(g=>({rings:g.type==='Polygon'?g.arcs.map(r=>rings({arcs:[r]})):g.arcs.flatMap(r=>rings({arcs:[r]})),props:g.properties||{}}));
-  const all=geoms.flatMap(g=>g.rings.flat());const xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+  const delta=!!(tr&&Array.isArray(tr.scale)&&Array.isArray(tr.translate));
+  const arcs=top.arcs.map(source=>{let x=0,y=0;return source.map(point=>{
+    if(delta){x+=point[0];y+=point[1];return [x*tr.scale[0]+tr.translate[0],y*tr.scale[1]+tr.translate[1]];}
+    // CODH's Kawanishi file has no transform: coordinates are already absolute lon/lat.
+    return [point[0],point[1]];
+  });});
+  const arc=(i)=>{if(!Number.isInteger(i))throw Error('Invalid arc index');const a=arcs[i<0?~i:i];if(!a)throw Error('Arc index out of range');return i<0?a.slice().reverse().map(p=>p.slice()):a.map(p=>p.slice());};
+  const joinRing=indices=>{let out=[];for(const i of indices){const part=arc(i);out=out.concat(out.length?part.slice(1):part);}return out;};
+  const geometryRings=g=>{
+    if(g.type==='Polygon')return g.arcs.map(joinRing);
+    if(g.type==='MultiPolygon')return g.arcs.flatMap(polygon=>polygon.map(joinRing));
+    throw Error('Unsupported town geometry '+g.type);
+  };
+  const geoms=top.objects.town.geometries.map((g,i)=>({rings:geometryRings(g),props:g.properties||{},type:g.type,index:i}));
+  const all=geoms.flatMap(g=>g.rings.flat());
+  if(!all.length)throw Error('Town geometry is empty');
+  const xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
   const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
   const sx=930/(maxX-minX),sy=570/(maxY-minY),s=Math.min(sx,sy),ox=(1000-(maxX-minX)*s)/2,oy=(650-(maxY-minY)*s)/2;
   const project=p=>[(p[0]-minX)*s+ox,650-((p[1]-minY)*s+oy)];
   const path=rings=>rings.map(r=>r.map((p,i)=>`${i?'L':'M'}${project(p)[0].toFixed(3)},${project(p)[1].toFixed(3)}`).join(' ')+'Z').join(' ');
-  const features=geoms.map((g,i)=>({id:String(g.props.R2KAxx_ID||g.props.KEY_CODE||i),name:String(g.props.S_NAME||''),d:path(g.rings),rings:g.rings.map(r=>r.map(project))}));
-  return {features,projectedBounds:{minX:0,minY:0,maxX:1000,maxY:650}};
+  const features=geoms.map((g,i)=>({id:String(g.props.R2KAxx_ID||g.props.KEY_CODE||i),name:String(g.props.S_NAME||''),d:path(g.rings),rings:g.rings.map(r=>r.map(project)),geometryType:g.type}));
+  return {features,sourceBounds:{minX,minY,maxX,maxY},projectedBounds:{minX:0,minY:0,maxX:1000,maxY:650},deltaEncoded:delta};
 }
 function kanaMap(kana){
  const m=new Map((kana.entries||[]).filter(x=>x.name&&x.reading).map(x=>[x.name,KussoonReadableLabels.normalizeReading(String(x.reading).replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)))]));
@@ -45,5 +56,5 @@ function create({svg,topo,kana,controls}){
  const town=new URLSearchParams(location.search).get('town');if(town&&areas.some(a=>a.name===town))select(town,true);renderLabels();search('');
  return {areas,features:data.features,viewport};
 }
-global.KussoonV2TownMap=Object.freeze({create});
+global.KussoonV2TownMap=Object.freeze({decode,create});
 })(window);
