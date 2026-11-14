@@ -14,7 +14,7 @@ a{color:#185e87} .top{display:flex;gap:12px;flex-wrap:wrap}.status{font-size:14p
 .toolbar{position:absolute;right:8px;bottom:8px;z-index:600;display:flex;flex-direction:column;gap:5px;width:102px}
 .toolbar button,.full{min-height:40px;border:1px solid #92b6cc;border-radius:7px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
 .toolbar .zoom{display:grid;grid-template-columns:1fr 1fr;gap:5px}.full{position:absolute;top:8px;right:8px;z-index:600;padding:0 12px}
-.town-label{border:0!important;background:#ffffffdc!important;color:#1c3c56!important;padding:1px 2px!important;border-radius:3px!important;box-shadow:0 1px 2px #0004!important;font-weight:800!important;line-height:1.1!important;white-space:nowrap!important;pointer-events:none!important;font-size:var(--town-font,8px)!important;text-align:center!important}
+.town-label{border:0!important;background:transparent!important;color:#193e58!important;padding:1px 2px!important;border-radius:0!important;box-shadow:none!important;font-weight:800!important;line-height:1.1!important;white-space:nowrap!important;pointer-events:none!important;font-size:var(--town-font,8px)!important;text-align:center!important;paint-order:stroke fill;-webkit-text-stroke:.18em #fff}
 .town-label:before{display:none!important}.town-label .reading{display:block;font-size:.78em;font-weight:600}
 .town-label[hidden]{display:none!important}
 body.map-full{overflow:hidden}body.map-full .frame{position:fixed;inset:0;z-index:10000;border:0;border-radius:0}body.map-full #map{height:100dvh;width:100%}
