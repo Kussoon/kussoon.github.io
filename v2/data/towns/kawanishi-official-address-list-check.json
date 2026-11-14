@@ -1,0 +1,417 @@
+{
+  "municipalityCode": "28217",
+  "source": "川西市 住居表示実施区域一覧表",
+  "sourceUrl": "https://www.city.kawanishi.hyogo.jp/_res/projects/default_project/_page_/001/016/978/zyuukyohyouzizissikuikiichirannhyou.pdf",
+  "checkedAt": "2026-11-15",
+  "scope": "PDFに掲載される住居表示実施区域のみ。川西市の全町字一覧ではない。",
+  "matchingMethod": "CODH S_NAMEとの表記照合。丁目の漢数字と全角数字を正規化。名称一致のみを確認し、境界形状一致は確認していない。",
+  "officialNameCount": 101,
+  "matchesCODH": 101,
+  "partialImplementationCount": 3,
+  "entries": [
+    {
+      "name": "鴬の森町",
+      "partialImplementation": false
+    },
+    {
+      "name": "滝山町",
+      "partialImplementation": false
+    },
+    {
+      "name": "東畦野山手1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "小戸1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "多田院1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東畦野山手2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "小戸2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "多田院2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東久代1丁目",
+      "partialImplementation": true
+    },
+    {
+      "name": "小戸3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "多田院多田所町",
+      "partialImplementation": false
+    },
+    {
+      "name": "東久代2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "小花1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "多田院西1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東多田1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "小花2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "多田院西2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東多田2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "多田桜木1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東多田3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "霞ヶ丘1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "多田桜木2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "日高町",
+      "partialImplementation": false
+    },
+    {
+      "name": "霞ヶ丘2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "中央町",
+      "partialImplementation": false
+    },
+    {
+      "name": "一庫1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "加茂1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "鼓が滝1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "一庫2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "加茂2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "鼓が滝2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "一庫3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "加茂3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "鼓が滝3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "平野1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "加茂4丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "出在家町",
+      "partialImplementation": false
+    },
+    {
+      "name": "平野2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "加茂5丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "寺畑1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "平野3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "加茂6丁目",
+      "partialImplementation": true
+    },
+    {
+      "name": "寺畑2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "絹延町",
+      "partialImplementation": false
+    },
+    {
+      "name": "松が丘町",
+      "partialImplementation": false
+    },
+    {
+      "name": "長尾町",
+      "partialImplementation": false
+    },
+    {
+      "name": "丸の内町",
+      "partialImplementation": false
+    },
+    {
+      "name": "久代1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "西畦野1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "満願寺町",
+      "partialImplementation": false
+    },
+    {
+      "name": "久代2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "西畦野2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "美園町",
+      "partialImplementation": false
+    },
+    {
+      "name": "久代3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "西多田1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "緑が丘1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "久代4丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "西多田2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "緑が丘2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "久代5丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "南花屋敷1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "久代6丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "萩原1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "南花屋敷2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "下財町",
+      "partialImplementation": false
+    },
+    {
+      "name": "萩原2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "南花屋敷3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "萩原3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "南花屋敷4丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "栄町",
+      "partialImplementation": false
+    },
+    {
+      "name": "花屋敷1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "見野1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "栄根1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "花屋敷2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "見野2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "栄根2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "花屋敷山手町",
+      "partialImplementation": false
+    },
+    {
+      "name": "見野3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "笹部1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "火打1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "笹部2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "火打2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "矢問1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "笹部3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東畦野1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "矢問2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "下加茂1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東畦野2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "矢問3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "下加茂2丁目",
+      "partialImplementation": true
+    },
+    {
+      "name": "東畦野3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "矢問東町",
+      "partialImplementation": false
+    },
+    {
+      "name": "新田1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東畦野4丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "山下町",
+      "partialImplementation": false
+    },
+    {
+      "name": "新田2丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東畦野5丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "山原1丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "新田3丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "東畦野6丁目",
+      "partialImplementation": false
+    },
+    {
+      "name": "山原2丁目",
+      "partialImplementation": false
+    }
+  ]
+}

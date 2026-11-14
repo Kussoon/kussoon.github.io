@@ -1,0 +1,31 @@
+name: V2 town candidate importer tests
+on:
+  pull_request:
+    paths:
+      - 'scripts/build-town-candidates.cjs'
+      - 'scripts/build-town-candidates.test.cjs'
+      - 'scripts/audit-kawanishi-town-source.cjs'
+      - 'v2/data/towns/kawanishi-*'
+      - 'v2/kawanishi-town-pilot/index.html'
+      - '.github/workflows/v2-town-candidate-importer.yml'
+  workflow_dispatch:
+jobs:
+  verify-importer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/build-town-candidates.test.cjs
+      - run: node scripts/audit-kawanishi-town-source.cjs
+      - name: Verify pilot page syntax
+        run: |
+          node - <<'JS'
+          const fs=require('node:fs');
+          const s=fs.readFileSync('v2/kawanishi-town-pilot/index.html','utf8');
+          const js=s.match(/<script>([\s\S]*?)<\/script>/)?.[1];
+          if(!js)throw Error('inline app script missing');
+          new Function(js);
+          console.log('PASS: pilot script syntax');
+          JS
