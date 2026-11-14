@@ -21,7 +21,7 @@ function decode(top){
   return {features,projectedBounds:{minX:0,minY:0,maxX:1000,maxY:650}};
 }
 function kanaMap(kana){
- const m=new Map((kana.entries||[]).filter(x=>x.name&&x.reading).map(x=>[x.name,String(x.reading).replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96))]));
+ const m=new Map((kana.entries||[]).filter(x=>x.name&&x.reading).map(x=>[x.name,KussoonReadableLabels.normalizeReading(String(x.reading).replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96)))]));
  return m;
 }
 function create({svg,topo,kana,controls}){
