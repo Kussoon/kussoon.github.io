@@ -38,6 +38,12 @@ jobs:
           repository: Kussoon/nishinomiya
           path: nishinomiya
           persist-credentials: false
+      - name: Checkout original Takarazuka town sources
+        uses: actions/checkout@v4
+        with:
+          repository: Kussoon/takarazuka
+          path: takarazuka
+          persist-credentials: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -46,8 +52,8 @@ jobs:
         run: node site/scripts/audit-nishinomiya-town-v2.cjs site nishinomiya
       - name: Check C-page update timestamp on HTML changes
         run: cd site && node scripts/check-nishinomiya-town-v2-timestamp.cjs
-      - name: Verify geography hierarchy and Nishinomiya town drilldown
-        run: node site/v2/geography/test-hierarchy.cjs site nishinomiya
+      - name: Verify geography hierarchy and city town adapters
+        run: node site/v2/geography/test-hierarchy.cjs site nishinomiya takarazuka
 
   browser-smoke:
     runs-on: ubuntu-latest
@@ -63,11 +69,20 @@ jobs:
           repository: Kussoon/nishinomiya
           path: nishinomiya
           persist-credentials: false
+      - name: Checkout Takarazuka town information and search
+        uses: actions/checkout@v4
+        with:
+          repository: Kussoon/takarazuka
+          path: takarazuka
+          persist-credentials: false
       - name: Setup local community data
         run: |
           mkdir -p site/nishinomiya/data
           cp nishinomiya/data/community-town-map.json site/nishinomiya/data/community-town-map.json
           cp nishinomiya/data/maniac-readings.json site/nishinomiya/data/maniac-readings.json
+          mkdir -p site/takarazuka/data
+          cp takarazuka/data/takarazuka-town-info.json site/takarazuka/data/takarazuka-town-info.json
+          cp takarazuka/town-search.html site/takarazuka/town-search.html
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:

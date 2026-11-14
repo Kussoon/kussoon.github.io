@@ -2,7 +2,7 @@
 // Usage: node v2/geography/test-hierarchy.cjs [site-root] [nishinomiya-repo-root]
 "use strict";
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict"),vm=require("node:vm");
-const root=path.resolve(process.argv[2]||"."),nishinomiya=path.resolve(process.argv[3]||"../nishinomiya");
+const root=path.resolve(process.argv[2]||"."),nishinomiya=path.resolve(process.argv[3]||"../nishinomiya"),takarazuka=path.resolve(process.argv[4]||"../takarazuka");
 const read=(file)=>fs.readFileSync(path.join(root,file),"utf8");
 const config=JSON.parse(read("v2/geography/data/hierarchy.json"));
 const html=read("v2/geography/index.html");
@@ -50,6 +50,29 @@ if(fs.existsSync(readingFile)){
  const readings=JSON.parse(fs.readFileSync(readingFile,"utf8"));
  for(const name of names)assert.ok(readings[name],"町の読み仮名がありません: "+name);
 }else console.log("NOTE: 元の西宮市リポジトリ未配置。町名読みデータとの突合は省略");
+const takaNode=map.get("jp-hyogo-takarazuka"),takaSource=takaNode.townData;
+assert.ok(takaSource&&takaSource.sourceKind==="town-info-array"&&takaSource.expectedCount===125);
+assert.equal(takaSource.infoUrl,"/takarazuka/data/takarazuka-town-info.json");
+assert.equal(takaSource.focusUrl,"/takarazuka/town-search.html");
+assert.equal(takaSource.focusParam,"q");
+assert.equal(takaSource.focusMode,"search");
+const infoPath=path.join(takarazuka,"data/takarazuka-town-info.json");
+const topoPath=path.join(takarazuka,"data/takarazuka-towns.topojson");
+if(fs.existsSync(infoPath)&&fs.existsSync(topoPath)){
+ const info=JSON.parse(fs.readFileSync(infoPath,"utf8")).towns;
+ const rawTopo=JSON.parse(fs.readFileSync(topoPath,"utf8"));
+ const normalize=s=>s.replace(/[一二三四五六七八九十百]+丁目$/,"");
+ const rawNames=[...new Set(rawTopo.objects.town.geometries.map(g=>normalize(g.properties.S_NAME)))];
+ const normalizedRaw=rawNames.map(s=>s==="布売自由ガ丘"?"売布自由ガ丘":s);
+ assert.equal(rawTopo.objects.town.geometries.length,398,"宝塚市の元図形数");
+ assert.equal(info.length,125,"宝塚市の町名台帳件数");
+ assert.equal(new Set(info.map(t=>t.name)).size,125,"宝塚市の町名重複");
+ assert.ok(info.every(t=>t.name&&t.reading),"宝塚市の読み仮名欠落");
+ assert.deepEqual(normalizedRaw.sort(),info.map(t=>t.name).sort(),"宝塚市の町名と元TopoJSONが不一致");
+ const search=fs.readFileSync(path.join(takarazuka,"town-search.html"),"utf8");
+ assert.ok(search.includes("new URLSearchParams(location.search).get('q')"),"既存宝塚市検索で?qが未対応");
+}else console.log("NOTE: 宝塚市元リポジトリ未配置。125町名の照合は省略");
+assert.ok(html.includes("conf.sourceKind==='town-info-array'"),"町名台帳形式アダプターがありません");
 assert.ok(html.includes('name="robots" content="noindex,follow"'));
 assert.ok(html.includes('src="/common/site-footer.js"'));
 assert.ok(html.includes('cloud.umami.is/script.js'));
@@ -59,4 +82,4 @@ assert.ok(!html.includes("location.replace("),"既存公開URLを変更しては
 const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];
 assert.ok(inline,"ナビゲーションJSがありません");new vm.Script(inline,{filename:"hierarchy-pilot.js"});
 console.log("PASS: 世界→日本→兵庫県→5市、親子・ID・循環・読み仮名・リンク");
-console.log("PASS: 西宮市321町名データ、試作属性、検索35件、JS構文");
+console.log("PASS: 西宮市321町名、宝塚市125町名と旧版検索引継ぎ、検索35件、JS構文");
