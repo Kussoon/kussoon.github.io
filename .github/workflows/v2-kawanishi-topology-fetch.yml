@@ -1,0 +1,51 @@
+name: Kawanishi 2020 topology fetch for comparison pilot
+on:
+  push:
+    branches:
+      - research/town-data-kawanishi-sanda-inagawa-20261114
+    paths:
+      - '.github/workflows/v2-kawanishi-topology-fetch.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  source-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Fetch CODH source locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p v2/data/towns
+          curl --fail --location --retry 3 --connect-timeout 20 --max-time 180 \
+            'https://geoshape.ex.nii.ac.jp/ka/topojson/2020/28/r2ka28217.topojson' \
+            -o v2/data/towns/kawanishi-2020.topojson
+          python3 - <<'PY'
+          import json, pathlib
+          p=pathlib.Path('v2/data/towns/kawanishi-2020.topojson')
+          t=json.loads(p.read_text(encoding='utf-8'))
+          assert t['type']=='Topology', 'TopoJSON required'
+          assert 'transform' in t and 'arcs' in t
+          entries=[g for obj in t['objects'].values() for g in obj.get('geometries',[])]
+          print('Geometry count',len(entries),'bytes',p.stat().st_size)
+          assert len(entries)==182, f'Expected 182, got {len(entries)}'
+          assert all((g.get('properties') or {}).get('S_NAME') for g in entries), 'Missing S_NAME'
+          assert p.stat().st_size<12_000_000, 'Unexpectedly large dataset'
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kawanishi-source-2020
+          path: v2/data/towns/kawanishi-2020.topojson
+      - name: Commit verified source into the comparison branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add v2/data/towns/kawanishi-2020.topojson
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'data(v2): add verified CODH Kawanishi 2020 town topology'
+          git push
