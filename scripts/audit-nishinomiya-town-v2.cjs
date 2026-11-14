@@ -50,7 +50,7 @@ for(const g of groups){const set=new Set(g.names),scopeItems=()=>items.filter(it
 }
 for(const token of ["quizWrongPlaces.has(it.name)","quizWrongPlaces.add(it.name)","button.classList.add('quiz-wrong')","startQuiz(quizLastMode,[...quizWrong])","finishQuiz(true)","quizTownName(name)","communityChoice?'区域全体':'市の全体'"])assert.ok(js.includes(token),token);
 assert.ok(c.includes("body.town-quiz-mode #reading{display:none!important}"));
-const regionsMatch=js.match(/const COMMUNITY_READINGS=(\\{[^\\n]+?\\});/);
+const regionsMatch=js.match(/const COMMUNITY_READINGS=(\{[^\n]+?\});/);
 assert.ok(regionsMatch,"区域名の読み仮名辞書がありません");
 const communityReadings=JSON.parse(JSON.stringify((new Function("return "+regionsMatch[1]))()));
 assert.equal(Object.keys(communityReadings).length,26,"区域名の読み仮名は26件です");
