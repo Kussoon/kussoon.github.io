@@ -56,7 +56,7 @@ input[type=search]{font:inherit;padding:9px 12px;border:1px solid #8eafc2;border
  <div id="childSection" hidden><h2 id="childHeading">下の地域</h2><div id="children" class="cards"></div></div>
  <div id="townStage" hidden><div id="townTools"></div><div id="towns" class="town-grid"></div><p id="townCount" class="meta" role="status" aria-live="polite"></p></div>
 </section>
-<p class="notice">このページは地域の階層とリンクを検証する試作です。行政区域の網羅版ではありません。既存ページや公開URLは移動・変更していません。西宮市では町名を選ぶと、C版の地図で該当町域を拡大表示できます。ほかの市の町名連携はこれからです。</p>
+<p class="notice">このページは地域の階層とリンクを検証する試作です。行政区域の網羅版ではありません。既存ページや公開URLは移動・変更していません。西宮市はC版で町域を拡大表示できます。宝塚市は既存町名検索に検索語を引き継ぎます。ほかの3市の町名連携はこれからです。</p>
 <p class="meta">行政上の親子関係と、阪神間・県内の地域・市のコミュニティなどの学習グループは別に管理します。町域データと読み仮名は元のデータを参照し、この試作に大量複製しません。</p>
 </main>
 <script>
@@ -114,11 +114,20 @@ function renderNode(node){
 async function getTowns(node){
  if(townCache.has(node.id))return townCache.get(node.id);
  const conf=node.townData;if(!conf)return null;
- const [topology,readings]=await Promise.all([conf.topologyUrl,conf.readingsUrl].map(async url=>{const r=await fetch(url);if(!r.ok)throw Error(url+' の取得失敗');return r.json()}));
- const geom=topology.objects?.[conf.objectKey]?.geometries;
- if(!Array.isArray(geom))throw Error('町域の形式が一致しません');
- const names=geom.map(g=>g.properties?.[conf.nameKey]);if(names.length!==conf.expectedCount||new Set(names).size!==names.length)throw Error('町名の件数・重複に問題があります');
- const towns=names.map(name=>{if(!readings[name])throw Error('読み仮名なし: '+name);return {name,reading:readings[name]}});
+ const fetchJson=async url=>{const r=await fetch(url);if(!r.ok)throw Error(url+' の取得失敗');return r.json()};
+ let towns;
+ if(conf.sourceKind==='town-info-array'){
+  const data=await fetchJson(conf.infoUrl);
+  if(!Array.isArray(data.towns))throw Error('町名台帳の形式が一致しません');
+  towns=data.towns.map(t=>({name:t.name,reading:t.reading}));
+ }else{
+  const [topology,readings]=await Promise.all([conf.topologyUrl,conf.readingsUrl].map(fetchJson));
+  const geom=topology.objects?.[conf.objectKey]?.geometries;
+  if(!Array.isArray(geom))throw Error('町域の形式が一致しません');
+  towns=geom.map(g=>{const name=g.properties?.[conf.nameKey];return {name,reading:readings[name]}});
+ }
+ if(towns.length!==conf.expectedCount||new Set(towns.map(t=>t.name)).size!==towns.length)throw Error('町名の件数・重複に問題があります');
+ for(const town of towns)if(typeof town.name!=='string'||!town.name||typeof town.reading!=='string'||!town.reading)throw Error('町名または読み仮名が不足しています');
  towns.sort((a,b)=>a.name.localeCompare(b.name,'ja'));townCache.set(node.id,towns);return towns;
 }
 function drawTowns(node,items,query){
@@ -140,15 +149,15 @@ async function renderTowns(node,token){
   const items=await getTowns(node);if(token!==generation)return;
   const tools=$('townTools');const wrapper=document.createElement('div');wrapper.className='tools';
   const lbl=text(wrapper,'町名を検索','label');lbl.htmlFor='townFilter';
-  const filter=document.createElement('input');filter.id='townFilter';filter.type='search';filter.placeholder='例：上甲東園、こうとう ※最大35件表示';filter.autocomplete='off';
+  const filter=document.createElement('input');filter.id='townFilter';filter.type='search';filter.placeholder=node.id==='jp-hyogo-nishinomiya'?'例：上甲東園、こうとう ※最大35件表示':'例：すみれガ丘、すみれ ※最大35件表示';filter.autocomplete='off';
   wrapper.append(filter);tools.append(wrapper);
   filter.addEventListener('input',()=>drawTowns(node,items,filter.value));drawTowns(node,items,'');
  }catch(e){if(token===generation)$('townCount').textContent='町名を読み込めませんでした。既存の町名ページからご確認ください。'}
 }
 async function renderTown(node,name,token){
- breadcrumb(node,'towns',name);heading(name,'','選んだ町名を、現在の町域学習C版の地図で確認できます。');externalLinks(node);clearView();$('townStage').hidden=false;
+ breadcrumb(node,'towns',name);heading(name,'',node.townData?.focusMode==='search'?'選んだ町名を既存の町名検索へ引き継ぎます。':'選んだ町名を町域学習C版の地図で確認できます。');externalLinks(node);clearView();$('townStage').hidden=false;
  const back=link('#towns:'+node.id,'← 町名一覧に戻る');$('townTools').append(back);
- try{const towns=await getTowns(node);if(token!==generation)return;const town=towns.find(x=>x.name===name);if(!town){$('townCount').textContent='指定した町名は現在のデータにありません。';return}$('placeReading').textContent='（'+town.reading+'）';$('townCount').textContent='この町の地図を開くと、町域を拡大・点滅表示できます。';const conf=node.townData;if(conf.focusUrl&&conf.focusParam){const url=conf.focusUrl+'?'+encodeURIComponent(conf.focusParam)+'='+encodeURIComponent(town.name);const a=link(url,'地図で「'+town.name+'」の場所を見る','card-link');const caption=document.createElement('span');caption.className='reading';caption.textContent='西宮市C版の地図で表示。町名クイズにも進めます。';a.append(caption);$('townTools').append(a)}}
+ try{const towns=await getTowns(node);if(token!==generation)return;const town=towns.find(x=>x.name===name);if(!town){$('townCount').textContent='指定した町名は現在のデータにありません。';return}$('placeReading').textContent='（'+town.reading+'）';const conf=node.townData;const searchMode=conf.focusMode==='search';$('townCount').textContent=searchMode?'既存の宝塚市町名検索を開きます。候補が複数の場合は該当町名を選択してください。':'この町の地図を開くと、町域を拡大・点滅表示できます。';if(conf.focusUrl&&conf.focusParam){const url=conf.focusUrl+'?'+encodeURIComponent(conf.focusParam)+'='+encodeURIComponent(town.name);const a=link(url,searchMode?'既存地図で「'+town.name+'」を検索する':'地図で「'+town.name+'」の場所を見る','card-link');const caption=document.createElement('span');caption.className='reading';caption.textContent=searchMode?'宝塚市の既存町名検索を開きます。検索結果は該当候補が1件なら自動選択されます。':'西宮市C版の地図で表示。町名クイズにも進めます。';a.append(caption);$('townTools').append(a)}}
  catch(e){if(token===generation)$('townCount').textContent='町名データを読み込めませんでした。'}
 }
 async function render(){
