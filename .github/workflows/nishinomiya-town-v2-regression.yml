@@ -76,4 +76,12 @@ jobs:
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 --directory site &
           sleep 2
-          node site/scripts/smoke-nishinomiya-town-v2.cjs
+          SMOKE_SCREENSHOTS=site-smoke-screenshots node site/scripts/smoke-nishinomiya-town-v2.cjs
+      - name: Save desktop and mobile screenshot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nishinomiya-v2-c-browser-screenshots
+          path: site-smoke-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
