@@ -7,6 +7,7 @@ on:
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
       - 'scripts/audit-nishinomiya-town-v2.cjs'
+      - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - '.github/workflows/nishinomiya-town-v2-regression.yml'
   pull_request:
     paths:
@@ -15,6 +16,7 @@ on:
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
       - 'scripts/audit-nishinomiya-town-v2.cjs'
+      - 'scripts/smoke-nishinomiya-town-v2.cjs'
 permissions:
   contents: read
 jobs:
@@ -37,3 +39,35 @@ jobs:
           node-version: '20'
       - name: Audit town geometry, readings, community coverage, and quiz options
         run: node site/scripts/audit-nishinomiya-town-v2.cjs site nishinomiya
+
+  browser-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Kussoon site
+        uses: actions/checkout@v4
+        with:
+          path: site
+      - name: Checkout Nishinomiya community mapping
+        uses: actions/checkout@v4
+        with:
+          repository: Kussoon/nishinomiya
+          path: nishinomiya
+          persist-credentials: false
+      - name: Setup local community data
+        run: |
+          mkdir -p site/nishinomiya/data
+          cp nishinomiya/data/community-town-map.json site/nishinomiya/data/community-town-map.json
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install browser testing tools
+        run: |
+          npm install --no-save --prefix site playwright
+          cd site
+          npx playwright install --with-deps chromium webkit
+      - name: Start local site and run Chromium/WebKit smoke tests
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory site &
+          sleep 2
+          node site/scripts/smoke-nishinomiya-town-v2.cjs
