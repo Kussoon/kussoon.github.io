@@ -50,6 +50,16 @@ for(const g of groups){const set=new Set(g.names),scopeItems=()=>items.filter(it
 }
 for(const token of ["quizWrongPlaces.has(it.name)","quizWrongPlaces.add(it.name)","button.classList.add('quiz-wrong')","startQuiz(quizLastMode,[...quizWrong])","finishQuiz(true)","quizTownName(name)","communityChoice?'区域全体':'市の全体'"])assert.ok(js.includes(token),token);
 assert.ok(c.includes("body.town-quiz-mode #reading{display:none!important}"));
+const regionsMatch=js.match(/const COMMUNITY_READINGS=(\\{[^\\n]+?\\});/);
+assert.ok(regionsMatch,"区域名の読み仮名辞書がありません");
+const communityReadings=JSON.parse(JSON.stringify((new Function("return "+regionsMatch[1]))()));
+assert.equal(Object.keys(communityReadings).length,26,"区域名の読み仮名は26件です");
+for(const co of m.communities)assert.ok(communityReadings[co]&&communityReadings[co].length,"区域のよみがな欠落: "+co);
+assert.ok(c.includes("grid-template-columns:repeat(5,minmax(0,1fr))"),"通常画面の5列がありません");
+assert.ok(c.includes("grid-template-columns:repeat(4,minmax(0,1fr))"),"小画面の4列がありません");
+assert.ok(js.includes("regionLabel(communityChoice)"),"区域選択後の読み仮名がありません");
+assert.ok(c.includes('id="communityOptions"')&&js.includes("closeCommunityOptions()"),"区域一覧の開閉がありません");
+
 console.log("PASS 321町名 / 26地域 / 読み仮名 / アーク参照 / B版ラベルCSS");
 console.log("PASS "+checks+"地域別出題（4択・正解・重複なし）、主要クイズ動作の構造検査");
 console.log("PASS 上甲東園の上ヶ原4丁目分・甲東2丁目分の境界を元データで照合");
