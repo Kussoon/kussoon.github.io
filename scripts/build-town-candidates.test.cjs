@@ -13,6 +13,6 @@ assert.equal(result.status,'unverified-statistical-areas');
 assert.equal(result.errors.length,0);
 assert.ok(fromRaw('28217',{type:'FeatureCollection',features:[feature('X','')]}).errors.length>0);
 assert.ok(fromRaw('28217',{type:'FeatureCollection',features:[feature('X','A'),feature('X','B')]}).errors.some(s=>s.includes('重複')));
-assert.equal(fromRaw('28301',{type:'Topology',objects:{area:{geometries:[{id:'X',type:'Polygon',properties:{S_NAME:'大字候補'},arcs:[[0]]}]}},arcs:[]}).statisticalAreaCount,1);
+assert.equal(fromRaw('28301',{type:'Topology',objects:{town:{geometries:[{properties:{R2KAxx_ID:7011,S_NAME:'大字候補'},type:'Polygon',arcs:[[0]]}]},city:{geometries:[{id:'217',type:'MultiPolygon',properties:{CITY_NAME:'猪名川町'},arcs:[]}] }},arcs:[]}).statisticalAreaCount,1);
 assert.throws(()=>fromRaw('00000',input),/対象外/);
 console.log('PASS: candidate import rejects malformed inputs, preserves district IDs, flags duplicate names, leaves readings unverified');
