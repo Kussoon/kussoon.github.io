@@ -34,7 +34,8 @@ function create({svg,topo,kana,controls}){
  const models=KussoonLabelEngine.buildModels(labelFeatures).models;
  const index=new Map(models.map((m,i)=>[data.features[i].id,{model:m,feature:data.features[i]}]));
  let selected='',font=16,visible=true,showReading=false;
- const viewport=KussoonV2MapViewport.init({svg,width:1000,height:650,minZoom:1,maxZoom:24,onZoomChange:renderLabels});
+ let viewport;
+ viewport=KussoonV2MapViewport.init({svg,width:1000,height:650,minZoom:1,maxZoom:24,onZoomChange:()=>{if(viewport)renderLabels();}});
  viewport.setContentBounds(data.projectedBounds);
  const measure=(text,size)=>{const c=measure.canvas||(measure.canvas=document.createElement('canvas')),x=c.getContext('2d');x.font=`700 ${size}px sans-serif`;return x.measureText(text).width;};
  function renderLabels(){labelLayer.replaceChildren();if(!visible)return;const zoom=1000/viewport.view().w,size=Math.max(10,Math.min(26,font*Math.pow(zoom,.4)/Math.pow(zoom,1)));const plans=KussoonLabelEngine.planAdaptiveLabels(models,models.map(m=>m.polylabel),size,measure,{wrap:true,shrink:false});for(let i=0;i<plans.length;i++){const f=labelFeatures[i],a=areas.find(x=>x.name===f.name),p=plans[i],t=document.createElementNS(NS,'text');t.setAttribute('x',p.x);t.setAttribute('y',p.y);t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');t.classList.add('label');t.dataset.town=f.name;t.textContent=f.name;if(showReading&&a?.reading){const s=document.createElementNS(NS,'tspan');s.classList.add('reading');s.setAttribute('x',p.x);s.setAttribute('dy','1.2em');s.textContent=a.reading;t.append(s);}t.addEventListener('click',()=>select(f.name,true));labelLayer.append(t);}}
