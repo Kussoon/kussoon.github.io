@@ -80,12 +80,13 @@ function initStudyData(topology,mapping){
  communities=[...(mapping.communities||[])];const counts=new Map();
  for(const [raw,info] of Object.entries(mapping.towns||{})){const name=groupedName(raw);if(!counts.has(name))counts.set(name,new Map());const bucket=counts.get(name),co=info.community;bucket.set(co,(bucket.get(co)||0)+1)}
  for(const [name,bucket] of counts){const ranked=[...bucket].filter(([co])=>communities.includes(co)).sort((a,b)=>b[1]-a[1]);if(ranked.length)communityByTown.set(name,ranked[0][0])}
- communityByTown.set('岡田山','上ヶ原'); // 西宮市既存の特例町名。学習対象の表示を優先する暫定分類
+ communityByTown.set('岡田山','上ヶ原'); // 通常の代表区分。地域選択時には広田も対象とする
  const owners=new Map();
  for(const g of topology.objects.town.geometries){const name=g.properties.S_NAME;const visit=arcs=>{for(const id of arcs){if(Array.isArray(id)){visit(id);continue}const i=id<0?~id:id;if(!owners.has(i))owners.set(i,new Set());owners.get(i).add(name)}};visit(g.arcs)}
  for(const set of owners.values())for(const a of set){if(!adjacency.has(a))adjacency.set(a,new Set());for(const b of set)if(a!==b)adjacency.get(a).add(b)}
 }
-function scopeItems(){return communityChoice?items.filter(it=>communityByTown.get(it.name)===communityChoice):[...items]}
+function inCommunity(name,co){return communityByTown.get(name)===co||(name==='岡田山'&&co==='広田')}
+function scopeItems(){return communityChoice?items.filter(it=>inCommunity(it.name,communityChoice)):[...items]}
 function regionBounds(its){const bounds=L.latLngBounds([]);for(const it of its)bounds.extend(it.layer.getBounds());return bounds}
 function showRegion(){stopQuiz(false);const its=scopeItems();if(its.length)map.fitBounds(regionBounds(its),{padding:[22,22],animate:false});$('communityCount').textContent=communityChoice?(communityChoice+'：'+its.length+'町名'):'市全域：'+items.length+'町名'}
 function readyStudy(){const sel=$('communitySelect');for(const co of communities){const opt=document.createElement('option');opt.value=co;opt.textContent=co;sel.appendChild(opt)}sel.disabled=false;for(const id of ['studyView','quizOne','quizTwo'])$(id).disabled=false;showRegion()}
