@@ -1,0 +1,178 @@
+{
+  "version": "0.1.0",
+  "status": "pilot",
+  "scope": "world > Japan > Hyogo > five Hanshinkan cities",
+  "source": "v2/docs/design.md",
+  "nodes": [
+    {
+      "id": "world",
+      "name": "世界",
+      "reading": "せかい",
+      "kind": "world",
+      "parentId": null,
+      "children": [
+        "jp"
+      ],
+      "groups": [],
+      "links": []
+    },
+    {
+      "id": "jp",
+      "name": "日本",
+      "reading": "にほん",
+      "kind": "country",
+      "parentId": "world",
+      "children": [
+        "jp-hyogo"
+      ],
+      "groups": [],
+      "links": [
+        {
+          "label": "全国市区町村マップ",
+          "url": "/maps/national-municipalities.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo",
+      "name": "兵庫県",
+      "reading": "ひょうごけん",
+      "kind": "prefecture",
+      "parentId": "jp",
+      "children": [
+        "jp-hyogo-nishinomiya",
+        "jp-hyogo-takarazuka",
+        "jp-hyogo-amagasaki",
+        "jp-hyogo-itami",
+        "jp-hyogo-ashiya"
+      ],
+      "groups": [],
+      "links": [
+        {
+          "label": "兵庫県の地域学習V2",
+          "url": "/v2/municipalities/hyogo/"
+        },
+        {
+          "label": "兵庫県の既存ページ",
+          "url": "/hyogo/"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-nishinomiya",
+      "name": "西宮市",
+      "reading": "にしのみやし",
+      "kind": "municipality",
+      "parentId": "jp-hyogo",
+      "children": [],
+      "groups": [
+        "hanshinkan"
+      ],
+      "links": [
+        {
+          "label": "西宮市の既存ページ",
+          "url": "/nishinomiya/"
+        },
+        {
+          "label": "町名検索（既存）",
+          "url": "/nishinomiya/town-search.html"
+        },
+        {
+          "label": "町域学習C版（試験）",
+          "url": "/v2/nishinomiya-town-study-c.html"
+        }
+      ],
+      "townData": {
+        "topologyUrl": "/v2/data/nishinomiya-town-v2-premerged.topojson",
+        "readingsUrl": "/nishinomiya/data/maniac-readings.json",
+        "objectKey": "town",
+        "nameKey": "S_NAME",
+        "expectedCount": 321
+      }
+    },
+    {
+      "id": "jp-hyogo-takarazuka",
+      "name": "宝塚市",
+      "reading": "たからづかし",
+      "kind": "municipality",
+      "parentId": "jp-hyogo",
+      "children": [],
+      "groups": [
+        "hanshinkan"
+      ],
+      "links": [
+        {
+          "label": "宝塚市の既存ページ",
+          "url": "/takarazuka/"
+        },
+        {
+          "label": "町名検索（既存）",
+          "url": "/takarazuka/town-search.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-amagasaki",
+      "name": "尼崎市",
+      "reading": "あまがさきし",
+      "kind": "municipality",
+      "parentId": "jp-hyogo",
+      "children": [],
+      "groups": [
+        "hanshinkan"
+      ],
+      "links": [
+        {
+          "label": "尼崎市の既存ページ",
+          "url": "/amagasaki/"
+        },
+        {
+          "label": "町名検索（既存）",
+          "url": "/amagasaki/town-search.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-itami",
+      "name": "伊丹市",
+      "reading": "いたみし",
+      "kind": "municipality",
+      "parentId": "jp-hyogo",
+      "children": [],
+      "groups": [
+        "hanshinkan"
+      ],
+      "links": [
+        {
+          "label": "伊丹市の既存ページ",
+          "url": "/itami/"
+        },
+        {
+          "label": "町名検索（既存）",
+          "url": "/itami/town-search.html"
+        }
+      ]
+    },
+    {
+      "id": "jp-hyogo-ashiya",
+      "name": "芦屋市",
+      "reading": "あしやし",
+      "kind": "municipality",
+      "parentId": "jp-hyogo",
+      "children": [],
+      "groups": [
+        "hanshinkan"
+      ],
+      "links": [
+        {
+          "label": "芦屋市の既存ページ",
+          "url": "/ashiya/"
+        },
+        {
+          "label": "町名検索（既存）",
+          "url": "/ashiya/town-search.html"
+        }
+      ]
+    }
+  ]
+}
