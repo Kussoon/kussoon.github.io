@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<title>地域トップ共通テンプレート｜V2比較試作｜Kussoon</title>
+<meta name="description" content="Kussoon地域トップの共通化を検討する比較試作。既存の正式な地域トップページは変更しません。">
+<style>
+:root{color-scheme:light;--bg:#f2f8fc;--text:#193a50;--muted:#456477;--line:#b4cddd;--accent:#215c7d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.65}
+main{max-width:1090px;margin:auto;padding:18px 14px 40px}
+h1{font-size:clamp(23px,4vw,30px);margin:6px 0}h2{font-size:20px;margin:0 0 8px}
+p{margin:6px 0 12px}a{color:#145e85}a:focus-visible,button:focus-visible{outline:3px solid #c48615;outline-offset:3px}
+.topnav,.breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:14px}
+.breadcrumbs{padding:10px 0}
+.breadcrumbs [aria-current=page]{font-weight:750}
+.note{background:#fff9e8;border:1px solid #dec390;border-radius:9px;padding:10px 12px;font-size:14px}
+.shell{display:grid;grid-template-columns:minmax(0,215px) minmax(0,1fr);gap:16px;margin-top:14px}
+aside,.panel{border:1px solid var(--line);border-radius:12px;background:#fff;padding:15px;min-width:0}
+.citynav{display:grid;gap:6px}
+.citynav a{padding:9px 11px;min-height:44px;border-radius:8px;border:1px solid #c6d9e5;text-decoration:none;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:7px}
+.citynav a[aria-current=page]{background:#dcecf5;border-color:#779fba;font-weight:750}
+.citynav small{font-size:11px;color:var(--muted)}
+.heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}.reading{font-size:14px;color:var(--muted)}
+.meta{font-size:14px;color:var(--muted)}
+.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.action{display:flex;min-width:0;flex-direction:column;justify-content:center;gap:3px;padding:12px;border:1px solid #a6c4d5;background:#fafcfe;border-radius:9px;min-height:74px;color:var(--text);text-decoration:none}
+.action strong{font-size:16px;overflow-wrap:anywhere}.action small{font-size:13px;color:var(--muted)}
+.action:hover,.citynav a:hover{background:#e8f4fa}
+.section{margin-top:20px}.section h2{font-size:18px}
+.compare{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.compare a{padding:9px 12px;background:#e9f4f9;border:1px solid #9cbdcf;border-radius:8px;min-height:44px;display:inline-flex;align-items:center;font-weight:650;text-decoration:none}
+.status{color:#624905;background:#fff9e8;border:1px solid #e0cc99;padding:10px;border-radius:9px}
+[hidden]{display:none!important}
+@media(max-width:670px){.shell{grid-template-columns:minmax(0,1fr)}.citynav{grid-template-columns:repeat(3,minmax(0,1fr))}.citynav a{font-size:14px;padding:8px;justify-content:center;text-align:center;flex-direction:column}.actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:350px){.actions{grid-template-columns:minmax(0,1fr)}.citynav{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body><main>
+<nav class="topnav" aria-label="上位のリンク"><a href="/">Kussoonトップ</a><a href="/local/">地域を調べる</a><a href="/v2/geography/">世界から町へ</a><a href="/v2/">V2試験トップ</a></nav>
+<h1>地域トップ共通テンプレート</h1>
+<p class="note">比較試作です。既存の県・市町村トップページや、町名地図の公開URLは変更していません。新しい市町村の町名地図は、実際に接続できるまで「未接続」と表示します。</p>
+<div class="shell">
+ <aside>
+  <h2>地域を選ぶ</h2>
+  <nav class="citynav" id="regionMenu" aria-label="比較する地域一覧"></nav>
+ </aside>
+ <section class="panel" aria-live="off">
+  <nav id="breadcrumbs" class="breadcrumbs" aria-label="地域の階層"></nav>
+  <div class="heading"><h2 id="regionName">読み込み中…</h2><span id="regionReading" class="reading"></span></div>
+  <p id="regionDescription" class="meta"></p>
+  <div id="comparison" class="compare"></div>
+  <div id="townSection" class="section" hidden>
+   <h2>町名から探す</h2>
+   <p class="meta" id="townDescription"></p>
+   <div id="townLinks" class="actions"></div>
+  </div>
+  <div class="section">
+   <h2>この地域で利用できる機能</h2>
+   <div id="featureList" class="actions"></div>
+   <p id="featureStatus" class="status" hidden></p>
+  </div>
+ </section>
+</div>
+<p class="meta">現行の西宮市トップと、共通テンプレートの西宮市トップを比較して、機能の抜け・情報の探しやすさ・管理負担を確認するための試作です。町名・境界の元データやクイズの動作には手を加えていません。</p>
+</main>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const link=(url,label,cls)=>{const a=document.createElement('a');a.href=url;a.textContent=label;if(cls)a.className=cls;return a};
+const text=(parent,content,tag='span',cls='')=>{const el=document.createElement(tag);el.textContent=content;if(cls)el.className=cls;parent.append(el);return el};
+let regions=[],byId=new Map();
+function route(){return new URLSearchParams(location.search).get('region')||'jp-hyogo-nishinomiya'}
+function rowUrl(id){return '/v2/region-top/?region='+encodeURIComponent(id)}
+function card(root,url,label,subtitle){
+ const a=link(url,'','action');text(a,label,'strong');if(subtitle)text(a,subtitle,'small');root.append(a)
+}
+function crumb(name,url){const a=url?link(url,name):text($('breadcrumbs'),name,'strong');if(!url)a.setAttribute('aria-current','page');else $('breadcrumbs').append(a)}
+function render(id){
+ const region=byId.get(id)||byId.get('jp-hyogo-nishinomiya');if(!region)return;
+ document.title=region.name+'｜地域トップ共通テンプレート（比較試作）｜Kussoon';
+ $('regionName').textContent=region.name;$('regionReading').textContent='（'+region.reading+'）';$('regionDescription').textContent=region.description;
+ const menu=$('regionMenu');menu.replaceChildren();
+ for(const r of regions){
+  const a=link(rowUrl(r.id),'');text(a,r.name);if(r.status!=='existing')text(a,'準備中','small');
+  if(r.id===region.id)a.setAttribute('aria-current','page');
+  menu.append(a)
+ }
+ const breadcrumbs=$('breadcrumbs');breadcrumbs.replaceChildren();
+ crumb('世界','/v2/geography/#world');text(breadcrumbs,'›','span').setAttribute('aria-hidden','true');
+ crumb('日本','/v2/geography/#jp');text(breadcrumbs,'›','span').setAttribute('aria-hidden','true');
+ if(region.kind==='prefecture')crumb('兵庫県');
+ else{crumb('兵庫県',rowUrl('jp-hyogo'));text(breadcrumbs,'›','span').setAttribute('aria-hidden','true');crumb(region.name)}
+ const comparison=$('comparison');comparison.replaceChildren();
+ if(region.existingTop){
+  comparison.append(link(region.existingTop,'既存の'+region.name+'トップと比較する'));
+  comparison.append(link('/local/','地域を調べるへ'));
+ }else{
+  text(comparison,'従来の地域トップはまだありません。','span','meta');
+ }
+ const town=$('townSection');town.hidden=region.kind!=='municipality';
+ $('townLinks').replaceChildren();$('townDescription').textContent='';
+ if(region.kind==='municipality'){
+  if(region.geographyId&&Number.isInteger(region.townCount)){
+   $('townDescription').textContent=region.townCount+'町名（既存の学習用索引）を共通階層から検索できます。';
+   card($('townLinks'),'/v2/geography/#towns:'+region.geographyId,'町名一覧から探す','読み仮名付き・最大35件表示');
+  }else{
+   $('townDescription').textContent='町名データ・町名地図は未接続です。今後の整備後にリンクを追加します。';
+  }
+ }
+ const features=$('featureList');features.replaceChildren();
+ const status=$('featureStatus');
+ status.hidden=region.features.length>0;
+ status.textContent=region.features.length?'':'この地域の町名地図やクイズは未接続です。実装・検証された機能だけをここに掲載します。';
+ for(const f of region.features)card(features,f.url,f.label,f.description);
+}
+async function start(){
+ try{
+  const resp=await fetch('/v2/region-top/data/regions.json');if(!resp.ok)throw Error('データを取得できません');
+  const source=await resp.json();regions=source.regions;byId=new Map(regions.map(r=>[r.id,r]));
+  if(regions.length!==byId.size||!byId.has('jp-hyogo-nishinomiya'))throw Error('地域IDに問題があります');
+  render(route());window.addEventListener('popstate',()=>render(route()));
+ }catch(e){$('regionName').textContent='地域データを読み込めませんでした';$('regionDescription').textContent='既存の地域トップをご利用ください。'}
+}
+start();
+})();
+</script>
+<script defer src="/common/site-footer.js"></script>
+</body></html>
