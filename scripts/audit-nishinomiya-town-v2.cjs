@@ -57,6 +57,7 @@ for(const g of groups){const set=new Set(g.names),scopeItems=()=>items.filter(it
 }
 for(const token of ["quizWrongPlaces.has(it.name)","quizWrongPlaces.add(it.name)","button.classList.add('quiz-wrong')","startQuiz(quizLastMode,[...quizWrong])","finishQuiz(true)","quizTownName(name)","communityChoice?'区域全体':'市の全体'"])assert.ok(js.includes(token),token);
 assert.ok(c.includes("body.town-quiz-mode #reading{display:none!important}"));
+assert.ok(js.includes("allBounds=allLayer.getBounds();map.fitBounds(allBounds,{padding:[22,22],animate:false});initialZoom=map.getZoom();"),"初期表示とラベル倍率の基準が22pxで統一されていません");
 assert.ok(js.includes("if(quizIndex===0){const bounds=communityChoice?regionBounds(scopeItems()):allBounds;if(bounds)map.fitBounds(bounds,{padding:[22,22],animate:false});}"),"クイズ開始で全域表示の余白が変わります");
 assert.ok(js.includes("else if(allBounds)map.fitBounds(allBounds,{padding:[22,22],animate:false})"),"市全体ボタンと学習時の余白が違います");
 assert.ok(js.includes("map.fitBounds(regionBounds(its),{padding:[22,22],animate:false})"),"地域表示の余白が違います");
