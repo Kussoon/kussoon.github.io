@@ -52,6 +52,15 @@
 - GitHub ActionsではJSON報告書とスクリーンショットを `geography-five-city-ui-audit` として14日保存する。
 - ブラウザーでの地図連携とクイズの完全な回帰は従来の `scripts/smoke-nishinomiya-town-v2.cjs` も継続実施する。
 
+## 4.1 GitHub Actions 実測結果（PR #446）
+
+- GitHub Actions: `Nishinomiya town V2 regression` の `browser-smoke` に含む新しいUI監査にて、320px・390px WebKit、および768px・1280px Chromiumの4画面幅で**5市ずつ計20経路に合格**。
+- 各経路で世界→日本→兵庫県→市→町名検索→町選択→一覧へ戻る→兵庫県へ戻る、検索入力と読み仮名を確認。追加のキーボード入力チェックも合格。
+- 水平のページはみ出しは、今回測定した地域選択・町名一覧・町詳細について**0件**。高優先度として分類したレイアウト問題は**0件**。
+- 低リスクではないが操作を妨げない改善候補は、5市×4画面幅で繰り返し発見した**11px読み仮名**と**パンくずの`aria-current`欠落**の2類型。`AUDIT SUMMARY`は`high:0, medium:44`（44は同じ指摘の重複記録を含む。44種類の問題ではない）。
+- 自動テスト出力：GitHub Actions `geography-five-city-ui-audit` アーティファクトにJSONとスクリーンショットを14日間保存。
+- この計測は画面幅のエミュレーションであり、iPhone Safari実機の詳細監査やVoiceOver動作を証明するものではない。
+
 ## 5. 未検証・保留事項
 
 - iPhone Safari実機の詳細な5市全件操作・VoiceOver・200％ズーム検査。
