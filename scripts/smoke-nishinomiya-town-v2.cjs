@@ -136,6 +136,34 @@ async function takarazukaFlow(browserType,title,viewport){
   console.log("PASS "+title+": Takarazuka 125-town reading list > unique town > existing q-search auto-focus");
  }finally{await browser.close()}
 }
+async function amagasakiFlow(browserType,title,viewport){
+ const browser=await browserType.launch({headless:true});
+ const page=await browser.newPage({viewport,deviceScaleFactor:2,hasTouch:viewport.width<620,isMobile:viewport.width<620});
+ const errors=[];page.on("pageerror",e=>errors.push(e.message));
+ try{
+  await page.goto(base+"/v2/geography/#jp-hyogo-amagasaki",{waitUntil:"domcontentloaded"});
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="尼崎市");
+  await page.locator('a[href="#towns:jp-hyogo-amagasaki"]').last().click();
+  await page.locator("#townFilter").waitFor();
+  await page.locator("#townFilter").fill("かみけま");
+  await page.waitForFunction(()=>document.querySelector("#towns a")?.textContent.includes("上食満"));
+  assert.equal(await page.locator("#towns a").count(),1);
+  await page.locator("#towns a").click();
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="上食満");
+  assert.match(await page.locator("#placeReading").textContent(),/かみけま/);
+  const focus=page.locator('a[href*="/v2/geography/amagasaki-focus.html?town="]');
+  assert.equal(await focus.count(),1);
+  await focus.click();
+  await page.waitForFunction(()=>document.querySelector("#bridgeStatus")?.textContent.includes("元の地図で拡大・点滅表示"));
+  const frame=page.frameLocator("#legacyMap");
+  assert.equal(await frame.locator("#selectedName").textContent(),"上食満");
+  assert.match(await frame.locator("#status").textContent(),/上食満を地図に表示/);
+  await page.locator("#backTown").click();
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="上食満");
+  assert.deepEqual(errors,[],"browser errors in Amagasaki flow");
+  console.log("PASS "+title+": Amagasaki 140-town list > 上食満 > unchanged legacy SVG selected > hierarchy return");
+ }finally{await browser.close()}
+}
 (async()=>{
  await basicFlow(chromium,"Chromium desktop",{width:1280,height:820},5);
  await basicFlow(webkit,"WebKit mobile viewport",{width:390,height:844},4);
@@ -143,4 +171,6 @@ async function takarazukaFlow(browserType,title,viewport){
  await hierarchyFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
  await takarazukaFlow(chromium,"Chromium desktop",{width:1280,height:820});
  await takarazukaFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
+ await amagasakiFlow(chromium,"Chromium desktop",{width:1280,height:820});
+ await amagasakiFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
 })().catch(e=>{console.error(e);process.exitCode=1});
