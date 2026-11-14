@@ -2,7 +2,7 @@
 // Usage: node v2/geography/test-hierarchy.cjs [site-root] [nishinomiya-repo-root]
 "use strict";
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict"),vm=require("node:vm");
-const root=path.resolve(process.argv[2]||"."),nishinomiya=path.resolve(process.argv[3]||"../nishinomiya"),takarazuka=path.resolve(process.argv[4]||"../takarazuka"),amagasaki=path.resolve(process.argv[5]||"../amagasaki");
+const root=path.resolve(process.argv[2]||"."),nishinomiya=path.resolve(process.argv[3]||"../nishinomiya"),takarazuka=path.resolve(process.argv[4]||"../takarazuka"),amagasaki=path.resolve(process.argv[5]||"../amagasaki"),itami=path.resolve(process.argv[6]||"../itami");
 const read=(file)=>fs.readFileSync(path.join(root,file),"utf8");
 const config=JSON.parse(read("v2/geography/data/hierarchy.json"));
 const html=read("v2/geography/index.html");
@@ -93,6 +93,32 @@ if(fs.existsSync(oldAmagaPath)){
  assert.equal(shapes.length,140,"尼崎市の地図面数が変化");
  assert.deepEqual(shapes.slice().sort(),original.map(t=>t.name).sort(),"尼崎市の町名と地図面が不一致");
 }else console.log("NOTE: 尼崎市元リポジトリ未配置。原本との突合省略");
+const itamiNode=map.get("jp-hyogo-itami")?.townData;
+assert.ok(itamiNode&&itamiNode.sourceKind==="town-list-json"&&itamiNode.expectedCount===76);
+assert.equal(itamiNode.focusUrl,"/v2/geography/itami-focus.html");
+assert.equal(itamiNode.focusMode,"bridge");
+const itamiIndex=JSON.parse(read(itamiNode.listUrl.replace(/^\//,"")));
+assert.equal(itamiIndex.count,76);assert.equal(itamiIndex.towns.length,76);
+assert.equal(new Set(itamiIndex.towns.map(t=>t.name)).size,76);
+assert.ok(itamiIndex.towns.every(t=>t.name&&t.reading));
+const itamiOldPath=path.join(itami,"town-search.html");
+if(fs.existsSync(itamiOldPath)){
+ const old=fs.readFileSync(itamiOldPath,"utf8");
+ const match=old.match(/const SEARCH_INDEX=(\[[\s\S]*?\]);\s*\n\s*const input=/);
+ assert.ok(match,"伊丹市の町名原本の抽出不可");
+ assert.deepEqual(itamiIndex.towns,JSON.parse(match[1]),"伊丹市76町名の原本との不一致");
+ const polygons=[...old.matchAll(/<path class="town" data-name="([^"]+)"/g)].map(m=>m[1]);
+ const labels=[...old.matchAll(/<text\b[^>]*data-name="([^"]+)"/g)].map(m=>m[1]);
+ assert.equal(polygons.length,74);
+ assert.equal(labels.length,76);
+ assert.deepEqual(itamiIndex.towns.filter(t=>!polygons.includes(t.name)).map(t=>t.name).sort(),["小阪田","東桑津"].sort());
+ assert.ok(["小阪田","東桑津"].every(name=>labels.includes(name)),"文字アンカーを持たない町名");
+}else console.log("NOTE: 伊丹市元リポジトリ未配置。原本との突合省略");
+const itamiBridge=read("v2/geography/itami-focus.html");
+assert.ok(itamiBridge.includes('src="/itami/town-search.html"'));
+assert.ok(itamiBridge.includes("text[data-name]"));
+const bridgeInline=itamiBridge.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];
+assert.ok(bridgeInline);new vm.Script(bridgeInline);
 assert.ok(html.includes("conf.sourceKind==='town-list-json'"),"尼崎市の軽量町名アダプター欠落");
 const bridge=read("v2/geography/amagasaki-focus.html");
 assert.ok(bridge.includes('src="/amagasaki/town-search.html"'),"既存尼崎市地図が読まれません");
@@ -109,4 +135,4 @@ assert.ok(!html.includes("location.replace("),"既存公開URLを変更しては
 const inline=html.match(/<script>\s*([\s\S]*?)<\/script>/)?.[1];
 assert.ok(inline,"ナビゲーションJSがありません");new vm.Script(inline,{filename:"hierarchy-pilot.js"});
 console.log("PASS: 世界→日本→兵庫県→5市、親子・ID・循環・読み仮名・リンク");
-console.log("PASS: 西宮市321町名、宝塚市125町名、尼崎市140町名の旧版ソース照合と地図連携");
+console.log("PASS: 西宮市321・宝塚市125・尼崎市140・伊丹市76町名／例外2件の照合");

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<title>伊丹市の町名を地図で探す｜V2地域階層連携</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2f8fc;color:#17384e;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif}
+main{max-width:1100px;margin:auto;padding:12px}h1{font-size:clamp(21px,4vw,29px);margin:8px 0}.links{display:flex;flex-wrap:wrap;gap:10px 18px;margin:10px 0}
+a{color:#175d85}a:focus-visible{outline:3px solid #b57511;outline-offset:3px}
+.notice{font-size:14px;line-height:1.6;margin:8px 0;background:#fff;border:1px solid #b7cfdf;border-radius:9px;padding:10px}
+iframe{display:block;border:1px solid #8faec2;border-radius:8px;width:100%;height:clamp(580px,83svh,930px);background:#fff}
+</style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true"></script>
+</head><body>
+<main>
+<nav class="links" aria-label="地域階層"><a id="backTown" href="/v2/geography/#jp-hyogo-itami">← 伊丹市の階層へ戻る</a><a href="/itami/town-search.html">従来の町名検索を直接開く</a></nav>
+<h1>伊丹市｜町名を地図で確認</h1>
+<p class="notice" id="bridgeStatus" role="status">地図を読み込んでいます。</p>
+<iframe id="legacyMap" title="伊丹市の既存町名検索地図" src="/itami/town-search.html" loading="eager"></iframe>
+<p class="notice">町域の面がない「東桑津」「小阪田」は元の地図の文字アンカーで位置を示します。元の地図は変更していません。自動選択できない場合は地図内の検索窓をご利用ください。</p>
+</main>
+<script>
+(()=>{
+'use strict';
+const params=new URLSearchParams(location.search),town=params.get('town')||'';
+const status=document.getElementById('bridgeStatus'),frame=document.getElementById('legacyMap'),back=document.getElementById('backTown');
+const valid=town.length>0&&town.length<=100&&!/[<>]/.test(town);
+if(valid)back.href='/v2/geography/#town:jp-hyogo-itami:'+encodeURIComponent(town);
+frame.addEventListener('load',()=>{
+ if(!valid){status.textContent='伊丹市の町名検索を表示しています。';return}
+ try{
+  const doc=frame.contentDocument;
+  if(!doc||!doc.querySelector('#townSearch'))throw Error('町名検索の読み込みが未完了');
+  const input=doc.querySelector('#townSearch');
+  input.value=town;input.dispatchEvent(new Event('input',{bubbles:true}));
+  const candidate=[...doc.querySelectorAll('#results button.candidate')].find(b=>b.textContent.startsWith(town+'（'));
+  if(!candidate)throw Error('指定した町名の候補が見つかりません');
+  candidate.click();
+  if(doc.querySelector('#selectedName')?.textContent!==town)throw Error('町名が選択されませんでした');
+  const hasPolygon=!!doc.querySelector('.town[data-name="'+town+'"]');
+  const hasLabel=!![...doc.querySelectorAll('text[data-name]')].find(t=>t.dataset.name===town);
+  status.textContent='「'+town+'」を元の地図で選択しました。'+(!hasPolygon&&hasLabel?'この町はポリゴンがなく、文字アンカーで場所を示しています。':'地図上の町域を拡大表示しています。');
+ }catch(e){
+  status.textContent='「'+town+'」を自動選択できませんでした。地図の検索窓から選択してください。';
+ }
+});
+})();
+</script>
+<script defer src="/common/site-footer.js"></script>
+</body></html>

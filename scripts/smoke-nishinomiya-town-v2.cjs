@@ -164,6 +164,39 @@ async function amagasakiFlow(browserType,title,viewport){
   console.log("PASS "+title+": Amagasaki 140-town list > 上食満 > unchanged legacy SVG selected > hierarchy return");
  }finally{await browser.close()}
 }
+async function itamiFlow(browserType,title,viewport){
+ const browser=await browserType.launch({headless:true});
+ const page=await browser.newPage({viewport,deviceScaleFactor:2,hasTouch:viewport.width<620,isMobile:viewport.width<620});
+ const errors=[];page.on("pageerror",e=>errors.push(e.message));
+ try{
+  await page.goto(base+"/v2/geography/#jp-hyogo-itami",{waitUntil:"domcontentloaded"});
+  await page.waitForFunction(()=>document.querySelector("#placeName")?.textContent==="伊丹市");
+  await page.locator('a[href="#towns:jp-hyogo-itami"]').last().click();
+  await page.locator("#townFilter").waitFor();
+  for(const [town,reading] of [["東桑津","ひがしくわづ"],["小阪田","おさかでん"]]){
+   await page.locator("#townFilter").fill(town);
+   await page.waitForFunction(name=>document.querySelector("#towns a")?.textContent.includes(name),town);
+   assert.equal(await page.locator("#towns a").count(),1);
+   await page.locator("#towns a").click();
+   await page.waitForFunction(name=>document.querySelector("#placeName")?.textContent===name,town);
+   assert.match(await page.locator("#placeReading").textContent(),new RegExp(reading));
+   const focus=page.locator('a[href*="/v2/geography/itami-focus.html?town="]');
+   assert.equal(await focus.count(),1);
+   await focus.click();
+   await page.waitForFunction(name=>document.querySelector("#bridgeStatus")?.textContent.includes(name)&&document.querySelector("#bridgeStatus")?.textContent.includes("文字アンカー"),town);
+   const frame=page.frameLocator("#legacyMap");
+   assert.equal(await frame.locator("#selectedName").textContent(),town);
+   assert.equal(await frame.locator('.town.selected').count(),0);
+   assert.equal(await frame.locator('text[data-name].selected').count(),1);
+   await page.locator("#backTown").click();
+   await page.waitForFunction(name=>document.querySelector("#placeName")?.textContent===name,town);
+   await page.locator('a[href="#towns:jp-hyogo-itami"]').last().click();
+   await page.locator("#townFilter").waitFor();
+  }
+  assert.deepEqual(errors,[],"browser errors in Itami flow");
+  console.log("PASS "+title+": Itami 76 towns > two text-only towns > old SVG text-anchor focused > return");
+ }finally{await browser.close()}
+}
 (async()=>{
  await basicFlow(chromium,"Chromium desktop",{width:1280,height:820},5);
  await basicFlow(webkit,"WebKit mobile viewport",{width:390,height:844},4);
@@ -173,4 +206,6 @@ async function amagasakiFlow(browserType,title,viewport){
  await takarazukaFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
  await amagasakiFlow(chromium,"Chromium desktop",{width:1280,height:820});
  await amagasakiFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
+ await itamiFlow(chromium,"Chromium desktop",{width:1280,height:820});
+ await itamiFlow(webkit,"WebKit mobile viewport",{width:390,height:844});
 })().catch(e=>{console.error(e);process.exitCode=1});
