@@ -12,6 +12,8 @@ button,input{font:inherit;min-height:42px;border-radius:7px;border:1px solid #94
 button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #cc8900}
 input{width:min(100%,270px)}#mapWrap{border:1px solid #a9c5d5;border-radius:12px;position:relative;overflow:hidden;background:#eaf5fb;touch-action:none}
 #map{width:100%;height:min(67vh,650px);min-height:360px;display:block;touch-action:none}
+.map-controls{position:absolute;right:12px;bottom:12px;z-index:5;display:flex;flex-direction:column;gap:6px;width:96px}
+.map-controls button{min-height:42px;background:#fff;color:#163750;font-weight:700;box-shadow:0 1px 4px #56778966}
 .region{stroke:#375f79;stroke-width:0.75;fill:#f6d28b;vector-effect:non-scaling-stroke;cursor:pointer}
 .region:nth-child(2n){fill:#f5dfa7}.region.active{fill:#ff9b61;stroke:#a74619;stroke-width:2}
 .label{font-size:10px;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:#fff;stroke-width:2.6;stroke-linejoin:round;fill:#15354a;pointer-events:none}.label-reading{font-size:7px;stroke-width:2.1}
@@ -23,9 +25,9 @@ input{width:min(100%,270px)}#mapWrap{border:1px solid #a9c5d5;border-radius:12px
 <nav class="nav"><a href="https://kussoon.com/v2/region-top/?region=jp-hyogo-kawanishi">川西市の試作トップ</a><a href="https://kussoon.com/v2/geography/">世界から町へ</a><a href="https://kussoon.com/maps/national-municipalities.html?studyPref=28">全国V2</a></nav>
 <h1>川西市 町丁・字マップ（比較試作）</h1>
 <p class="warning">未検証の2020年国勢調査境界を表示する技術試作です。現行住所の正確な境界を保証しません。読み仮名はデジタル庁アドレス・ベース・レジストリとの照合後に追加します。既存の全国V2や町名検索とは独立しており、正式公開ページではありません。</p>
-<div class="tools"><label for="search">地名検索</label><input id="search" type="search" placeholder="例：中央町、小花 ※最大35件表示"><button id="plus" type="button">＋</button><button id="minus" type="button">−</button><button id="reset" type="button">市全体</button><label><input id="labels" type="checkbox" checked>町名表示</label><label><input id="readings" type="checkbox">読み仮名</label></div>
+<div class="tools"><label for="search">地名検索</label><input id="search" type="search" placeholder="例：中央町、小花 ※最大35件表示"><label><input id="labels" type="checkbox" checked>町名表示</label><label><input id="readings" type="checkbox">読み仮名</label></div>
 <div id="matches" aria-label="検索候補"></div>
-<div id="mapWrap"><svg id="map" viewBox="0 0 1000 650" role="img" aria-label="川西市の2020年町丁・字境界図"><g id="shapes"></g><g id="names"></g></svg></div>
+<div id="mapWrap"><svg id="map" viewBox="0 0 1000 650" role="img" aria-label="川西市の2020年町丁・字境界図"><g id="shapes"></g><g id="names"></g></svg><div class="map-controls" aria-label="地図操作"><button id="plus" type="button" aria-label="拡大">＋</button><button id="minus" type="button" aria-label="縮小">−</button><button id="reset" type="button">市全体</button></div></div>
 <p id="status" role="status">地図を読み込み中です…</p><p id="selected" aria-live="polite">区域を選ぶと名称を表示します。</p>
 <p class="note">境界出典：『国勢調査町丁・字等別境界データセット』（CODH作成）「令和2年国勢調査町丁・字等別境界データ」（e-Stat）を加工 doi:10.20676/00000450 ／ CC BY 4.0。読み仮名出典：デジタル庁アドレス・ベース・レジストリ（2026-06-23公開分。全国Q地図の町字一覧表示を参照）。統計区画数と町名数は異なります。表示名が同一の複数ポリゴンは検索結果でまとめ、地図形状は別区画のまま保持しています。2020年統計境界は現行の住所境界・住居表示区域と一致するとは限りません。読み仮名は180/182候補で照合済み、2件は未照合です。地図の移動：ドラッグ、拡大縮小：ボタンまたはマウスホイール。</p>
 </main><script>
