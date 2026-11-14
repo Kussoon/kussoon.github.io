@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "status": "pilot",
   "scope": "world > Japan > Hyogo > five Hanshinkan cities",
   "source": "v2/docs/design.md",
@@ -169,7 +169,15 @@
           "label": "町名検索（既存）",
           "url": "/itami/town-search.html"
         }
-      ]
+      ],
+      "townData": {
+        "sourceKind": "town-list-json",
+        "listUrl": "/v2/geography/data/itami-towns.json",
+        "expectedCount": 76,
+        "focusUrl": "/v2/geography/itami-focus.html",
+        "focusParam": "town",
+        "focusMode": "bridge"
+      }
     },
     {
       "id": "jp-hyogo-ashiya",
