@@ -36,7 +36,7 @@ body.town-quiz-mode .town-label{display:none!important}body.town-quiz-mode #read
 </style>
 </head><body><main>
 <nav class="top"><a href="/nishinomiya/">西宮市トップ</a><a href="/nishinomiya/all-area-labeled.html">現行の町名全域図</a><a href="/v2/nishinomiya-town-comparison-b.html">確定済みB版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
-<h1>西宮市 町名地図｜地域学習C版 <span class="updated-at">更新：2026/11/14 16:11（JST）</span></h1>
+<h1>西宮市 町名地図｜地域学習C版 <span class="updated-at">更新：2026/11/14 16:15（JST）</span></h1>
 <p class="notice">高速化B版を基に、26コミュニティ選択・クイズ1・2を追加した比較C版です。B版・正式版は変更していません。</p>
 <section class="learning" aria-label="26コミュニティ選択と町名クイズ"><div class="learnrow"><span class="scope-label" id="communityLabel">学習範囲</span><button type="button" id="communitySelect" aria-labelledby="communityLabel communitySelected" aria-expanded="false" aria-controls="communityOptions" disabled><span id="communitySelected">西宮市全域（321町名）</span><span aria-hidden="true"> ▾</span></button><span id="communityCount" role="status">準備中</span></div><div id="communityOptions" class="community-options" aria-label="学習範囲の一覧" hidden></div><p id="regionBoundaryNote" class="boundary-note" hidden></p><div class="learnrow" id="studyMenu"><button type="button" id="quizOne" disabled>クイズ1｜町名→場所</button><button type="button" id="quizTwo" disabled>クイズ2｜点滅→4択</button></div><section id="quizPanel" hidden aria-label="町名クイズ"><p id="quizProgress"></p><p id="quizQuestion"></p><div id="quizChoices"></div><div class="learnrow quiz-actions"><button type="button" id="quizQuit">ここでやめる</button><button type="button" id="quizNext" hidden>次の問題へ</button><button type="button" id="quizReveal" hidden>答えを見る</button></div></section><section id="quizResults" hidden aria-label="クイズ結果"><p id="quizResult"></p><div class="learnrow"><button type="button" id="quizRetryWrong">間違えた問題をもう一度</button><button type="button" id="quizRetryAll">最初からもう一度</button><button type="button" id="quizBack">地域選択に戻る</button></div></section></section>
 <div class="status" id="status" role="status">町域データを読み込んでいます。</div>
@@ -195,7 +195,7 @@ const name=f.properties.S_NAME,it={name,layer,labels:[]};items.push(it);layer.on
 const multiple=MULTI_LABELS[name];if(multiple){for(const pos of multiple)it.labels.push(makeTooltip(layer,name,pos,[0,0]))}
 else{it.labels.push(makeTooltip(layer,name,null,LABEL_OFFSETS[name]||[0,0]));for(const pos of EXTRA_LABELS[name]||[])it.labels.push(makeTooltip(layer,name,pos,[0,0]))}
 }}).addTo(map);
-allBounds=allLayer.getBounds();map.fitBounds(allBounds,{padding:[10,10],animate:false});initialZoom=map.getZoom();fontScale();initRegionalShapes(subtopology);readyStudy();
+allBounds=allLayer.getBounds();map.fitBounds(allBounds,{padding:[22,22],animate:false});initialZoom=map.getZoom();fontScale();initRegionalShapes(subtopology);readyStudy();
 $('status').textContent='地域学習C版：'+items.length+'町名、初回表示 '+Math.round(performance.now()-bootStart)+'ms。町名を押すと点滅します。'+(items.length!==321?' ※想定321町名と差があります。':'');
 }).catch(e=>{$('status').textContent='データの読み込みに失敗しました：'+e.message;console.error(e)});
 map.on('zoomend',fontScale);
