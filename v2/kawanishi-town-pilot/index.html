@@ -1,6 +1,6 @@
 <!doctype html><html lang="ja"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,follow"><base href="../">
+<meta name="robots" content="noindex,follow">
 <title>川西市 町丁・字マップ｜独立比較試作｜Kussoon</title>
 <style>
 :root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",Meiryo,sans-serif;color:#163750;background:#f2f8fc}
@@ -20,7 +20,7 @@ input{width:min(100%,270px)}#mapWrap{border:1px solid #a9c5d5;border-radius:12px
 #matches button{font-size:13px;min-height:38px;padding:6px 9px}.off{display:none}
 @media(max-width:550px){#map{height:60vh;min-height:320px}.label{font-size:9px}.label-reading{font-size:6px}}
 </style></head><body><main>
-<nav class="nav"><a href="region-top/?region=jp-hyogo-kawanishi">川西市の試作トップ</a><a href="geography/">世界から町へ</a><a href="../maps/national-municipalities.html?studyPref=28">全国V2</a></nav>
+<nav class="nav"><a href="https://kussoon.com/v2/region-top/?region=jp-hyogo-kawanishi">川西市の試作トップ</a><a href="https://kussoon.com/v2/geography/">世界から町へ</a><a href="https://kussoon.com/maps/national-municipalities.html?studyPref=28">全国V2</a></nav>
 <h1>川西市 町丁・字マップ（比較試作）</h1>
 <p class="warning">未検証の2020年国勢調査境界を表示する技術試作です。現行住所の正確な境界を保証しません。読み仮名はデジタル庁アドレス・ベース・レジストリとの照合後に追加します。既存の全国V2や町名検索とは独立しており、正式公開ページではありません。</p>
 <div class="tools"><label for="search">地名検索</label><input id="search" type="search" placeholder="例：中央町、小花 ※最大35件表示"><button id="plus" type="button">＋</button><button id="minus" type="button">−</button><button id="reset" type="button">市全体</button><label><input id="labels" type="checkbox" checked>町名表示</label><label><input id="readings" type="checkbox">読み仮名</label></div>
@@ -30,7 +30,7 @@ input{width:min(100%,270px)}#mapWrap{border:1px solid #a9c5d5;border-radius:12px
 <p class="note">境界出典：『国勢調査町丁・字等別境界データセット』（CODH作成）「令和2年国勢調査町丁・字等別境界データ」（e-Stat）を加工 doi:10.20676/00000450 ／ CC BY 4.0。読み仮名出典：デジタル庁アドレス・ベース・レジストリ（2026-06-23公開分。全国Q地図の町字一覧表示を参照）。統計区画数と町名数は異なります。表示名が同一の複数ポリゴンは検索結果でまとめ、地図形状は別区画のまま保持しています。2020年統計境界は現行の住所境界・住居表示区域と一致するとは限りません。読み仮名は180/182候補で照合済み、2件は未照合です。地図の移動：ドラッグ、拡大縮小：ボタンまたはマウスホイール。</p>
 </main><script>
 (()=>{'use strict';
-const srcs=['data/towns/kawanishi-2020.topojson'];
+const srcs=['https://raw.githubusercontent.com/Kussoon/kussoon.github.io/research/town-data-kawanishi-sanda-inagawa-20261114/v2/data/towns/kawanishi-2020.topojson'];
 const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',svg=$('map'),S=$('shapes'),L=$('names');let readingByName={};
 let areas=[],allBox=[0,0,1000,650],box=[0,0,1000,650],chosen=null,drag=null,suppressClick=false;
 function node(tag,attrs,root){let e=document.createElementNS(NS,tag);for(let [k,v] of Object.entries(attrs))e.setAttribute(k,v);root.appendChild(e);return e}
@@ -76,7 +76,7 @@ svg.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY>0?1.16:.86)},{
 svg.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,b:box.slice()};svg.setPointerCapture(e.pointerId)});
 svg.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>4)suppressClick=true;const r=svg.getBoundingClientRect();box=[drag.b[0]-dx*drag.b[2]/r.width,drag.b[1]-dy*drag.b[3]/r.height,drag.b[2],drag.b[3]];view()});
 svg.addEventListener('pointerup',()=>{drag=null});svg.addEventListener('pointercancel',()=>{drag=null});
-async function start(){try{const [topRes,kanaRes]=await Promise.all(srcs.map(u=>fetch(u)).concat([fetch('data/towns/kawanishi-readings-abr-20260623.json')]));if(!topRes.ok||!kanaRes.ok)throw Error('HTTP '+topRes.status+'/'+kanaRes.status);const data=await topRes.json(),kana=await kanaRes.json();readingByName=Object.fromEntries(kana.entries.filter(x=>x.matchStatus==='matched').map(x=>[x.name,x.reading]));setup(data)}catch(e){$('status').textContent='同梱の境界または読み仮名データを読み込めませんでした。';console.error(e)}}
+async function start(){try{const [topRes,kanaRes]=await Promise.all(srcs.map(u=>fetch(u)).concat([fetch('https://raw.githubusercontent.com/Kussoon/kussoon.github.io/research/town-data-kawanishi-sanda-inagawa-20261114/v2/data/towns/kawanishi-readings-abr-20260623.json')]));if(!topRes.ok||!kanaRes.ok)throw Error('HTTP '+topRes.status+'/'+kanaRes.status);const data=await topRes.json(),kana=await kanaRes.json();readingByName=Object.fromEntries(kana.entries.filter(x=>x.matchStatus==='matched').map(x=>[x.name,x.reading]));setup(data)}catch(e){$('status').textContent='同梱の境界または読み仮名データを読み込めませんでした。';console.error(e)}}
 start();
 })();
 </script><script defer src="../common/site-footer.js"></script></body></html>
