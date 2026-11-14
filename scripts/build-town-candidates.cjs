@@ -11,8 +11,11 @@ function extract(input){
  if(input?.type==='FeatureCollection'&&Array.isArray(input.features))
   return input.features.map((f,i)=>({id:String(f.id??f.properties?.KEY_CODE??f.properties?.KEYCODE??f.properties?.S_AREA??i),properties:f.properties||{},geometry:f.geometry}));
  if(input?.type==='Topology'&&input.objects&&typeof input.objects==='object'){
-  const all=Object.entries(input.objects).flatMap(([key,obj])=>(obj.geometries||[]).map((g,i)=>({
-   id:String(g.id??g.properties?.KEY_CODE??g.properties?.KEYCODE??g.properties?.S_AREA??i),
+  // CODH TopoJSON can contain both a town layer and a city outline. Prefer the
+  // town layer so municipal outlines are never treated as searchable town areas.
+  const layers=input.objects.town ? [['town',input.objects.town]] : Object.entries(input.objects);
+  const all=layers.flatMap(([key,obj])=>(obj.geometries||[]).map((g,i)=>({
+   id:String(g.id??g.properties?.R2KAxx_ID??g.properties?.R2KA_ID??g.properties?.KEY_CODE??g.properties?.KEYCODE??g.properties?.S_AREA??i),
    properties:g.properties||{},geometry:{type:g.type,arcs:g.arcs},objectKey:key
   })));
   if(!all.length)fail('Topologyにgeometriesがありません');return all;
@@ -25,7 +28,7 @@ function fromRaw(code,input){
  for(const [i,row] of rows.entries()){
   const p=row.properties;
   const name=String(p.S_NAME??p.SNAME??p.MOJI??p.NAME??p.name??'').trim();
-  const id=String(p.KEY_CODE??p.KEYCODE??p.S_AREA??row.id).trim();
+  const id=String(p.R2KAxx_ID??p.R2KA_ID??p.KEY_CODE??p.KEYCODE??p.S_AREA??row.id).trim();
   if(!id)errors.push('行'+(i+1)+': 区画IDが空です');
   if(idSet.has(id))errors.push('行'+(i+1)+': 区画ID重複 '+id);idSet.add(id);
   if(!name)errors.push('行'+(i+1)+': 地名が空です');
