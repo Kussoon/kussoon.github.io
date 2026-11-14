@@ -10,6 +10,7 @@ on:
       - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - 'scripts/audit-geography-ui.cjs'
+      - 'scripts/smoke-geography-ui-comparison.cjs'
       - 'v2/geography/**'
       - 'v2/docs/geography-five-city-standard.md'
       - 'v2/docs/geography-hierarchy-pilot.md'
@@ -24,6 +25,7 @@ on:
       - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - 'scripts/audit-geography-ui.cjs'
+      - 'scripts/smoke-geography-ui-comparison.cjs'
       - 'v2/geography/**'
       - 'v2/docs/geography-five-city-standard.md'
       - 'v2/docs/geography-hierarchy-pilot.md'
@@ -78,6 +80,8 @@ jobs:
         run: cd site && node scripts/check-nishinomiya-town-v2-timestamp.cjs
       - name: Verify geography hierarchy and city town adapters
         run: node site/v2/geography/test-hierarchy.cjs site nishinomiya takarazuka amagasaki itami ashiya
+      - name: Verify A/B changes only touch requested UI
+        run: node site/v2/geography/test-ui-comparison.cjs site
 
   browser-smoke:
     runs-on: ubuntu-latest
@@ -147,6 +151,16 @@ jobs:
           SMOKE_SCREENSHOTS=site-smoke-screenshots node site/scripts/smoke-nishinomiya-town-v2.cjs
       - name: Audit five-city geography usability at phone, tablet, desktop widths
         run: GEOGRAPHY_AUDIT_DIR=geography-ui-audit node site/scripts/audit-geography-ui.cjs
+      - name: Compare reading sizes and breadcrumb accessibility across five cities
+        run: GEOGRAPHY_AB_SCREENSHOTS=geography-ab-screenshots node site/scripts/smoke-geography-ui-comparison.cjs
+      - name: Upload A/B comparison screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geography-ui-ab-comparison
+          path: geography-ab-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Upload five-city usability audit evidence
         if: always()
         uses: actions/upload-artifact@v4
