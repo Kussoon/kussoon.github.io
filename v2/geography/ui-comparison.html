@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,follow">
+<title>世界から町へ｜UI比較試作 A/B｜Kussoon V2</title>
+<style>
+:root{color-scheme:light;--line:#a8c5d6;--ink:#17374a}
+*{box-sizing:border-box}body{margin:0;background:#f2f8fc;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.6}
+main{max-width:1400px;margin:auto;padding:16px 12px 40px}h1{font-size:clamp(22px,4vw,30px);margin:4px 0}h2{font-size:18px;margin:0}
+p{margin:7px 0 12px}a{color:#145d85}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #b87b0e;outline-offset:3px}
+.choices{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
+.choices label{font-weight:700}.choices select,.choices button{font:inherit;min-height:44px;border:1px solid #789bb2;border-radius:9px;padding:7px 12px;background:#fff;color:var(--ink)}
+.choices button[aria-pressed="true"]{background:#215d80;color:#fff}
+.panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px;min-width:0;padding:10px}
+.panel header{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;align-items:baseline;margin-bottom:8px}
+.panel iframe{display:block;width:100%;height:min(72vh,800px);min-height:520px;border:1px solid #afc8d8;border-radius:8px;background:#fff}
+.small{font-size:13px;color:#465f70}
+.note{margin-top:14px;font-size:14px}
+.mobile-switch{display:none}
+@media(max-width:700px){
+ .panels{display:block}.mobile-switch{display:flex}.panel iframe{height:74svh;min-height:440px}
+ .panel[hidden]{display:none}.panel{margin-bottom:12px}
+}
+</style>
+</head>
+<body><main>
+<nav><a href="/v2/">V2試験トップ</a> ／ <a href="/v2/geography/">現行の地域階層</a></nav>
+<h1>「世界から町へ」UI比較試作</h1>
+<p>変更するのは、町名カードの<strong>読み仮名サイズ</strong>と、パンくずの<strong>現在地の読み上げ指定</strong>の2点です。現行版の画面・URL・地図は変更していません。</p>
+<div class="choices">
+ <label for="targetCity">比較する市：</label>
+ <select id="targetCity">
+  <option value="jp-hyogo-nishinomiya">西宮市</option>
+  <option value="jp-hyogo-takarazuka">宝塚市</option>
+  <option value="jp-hyogo-amagasaki">尼崎市</option>
+  <option value="jp-hyogo-itami">伊丹市</option>
+  <option value="jp-hyogo-ashiya">芦屋市</option>
+ </select>
+</div>
+<div class="choices mobile-switch" role="group" aria-label="スマートフォンの比較画面切替">
+ <button type="button" id="showA" aria-pressed="true">A：現行版</button>
+ <button type="button" id="showB" aria-pressed="false">B：改善案</button>
+</div>
+<div class="panels">
+ <section id="panelA" class="panel" aria-label="A 現行版">
+  <header><div><h2>A：現行版</h2><div class="small">読み仮名11px・現在地の読み上げ指定なし</div></div><a id="linkA" href="/v2/geography/#towns:jp-hyogo-nishinomiya">Aを全画面で開く</a></header>
+  <iframe id="frameA" title="A：現行の町名一覧" src="/v2/geography/#towns:jp-hyogo-nishinomiya"></iframe>
+ </section>
+ <section id="panelB" class="panel" aria-label="B 改善案">
+  <header><div><h2>B：改善案</h2><div class="small">読み仮名13px・パンくずに現在地の指定あり</div></div><a id="linkB" href="/v2/geography/ui-candidate.html#towns:jp-hyogo-nishinomiya">Bを全画面で開く</a></header>
+  <iframe id="frameB" title="B：改善した町名一覧" src="/v2/geography/ui-candidate.html#towns:jp-hyogo-nishinomiya"></iframe>
+ </section>
+</div>
+<p class="note">PCでは左右を、スマートフォンではA/Bのボタンで切り替えて比較できます。市の選択を変えると両方の画面が同じ町名一覧に切り替わります。各画面内の検索・スクロール・ページ遷移は独立しています。</p>
+<p class="note">「現在地」の違いは主にスクリーンリーダーなどで認識される情報です。文字の大きさとカードの収まりは画面上で、現在地の読み上げはVoiceOverでご確認いただけます。これは比較用の試作で、正式採用前です。</p>
+</main>
+<script>
+(()=>{
+'use strict';
+const city=document.getElementById('targetCity'),a=document.getElementById('frameA'),b=document.getElementById('frameB');
+const linkA=document.getElementById('linkA'),linkB=document.getElementById('linkB');
+const panelA=document.getElementById('panelA'),panelB=document.getElementById('panelB'),btnA=document.getElementById('showA'),btnB=document.getElementById('showB');
+function selectedUrl(candidate){return (candidate?'/v2/geography/ui-candidate.html':'/v2/geography/')+'#towns:'+city.value}
+function refresh(){const x=selectedUrl(false),y=selectedUrl(true);a.src=x;b.src=y;linkA.href=x;linkB.href=y}
+function show(choice){const small=matchMedia('(max-width:700px)').matches;panelA.hidden=small&&choice==='B';panelB.hidden=small&&choice==='A';btnA.setAttribute('aria-pressed',choice==='A'?'true':'false');btnB.setAttribute('aria-pressed',choice==='B'?'true':'false')}
+city.addEventListener('change',refresh);
+btnA.addEventListener('click',()=>show('A'));btnB.addEventListener('click',()=>show('B'));
+matchMedia('(max-width:700px)').addEventListener('change',()=>show(btnB.getAttribute('aria-pressed')==='true'?'B':'A'));
+show('A');
+})();
+</script>
+<script defer src="/common/site-footer.js"></script>
+</body></html>
