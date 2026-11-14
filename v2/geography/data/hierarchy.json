@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "status": "pilot",
   "scope": "world > Japan > Hyogo > five Hanshinkan cities",
   "source": "v2/docs/design.md",
@@ -111,7 +111,15 @@
           "label": "町名検索（既存）",
           "url": "/takarazuka/town-search.html"
         }
-      ]
+      ],
+      "townData": {
+        "sourceKind": "town-info-array",
+        "infoUrl": "/takarazuka/data/takarazuka-town-info.json",
+        "expectedCount": 125,
+        "focusUrl": "/takarazuka/town-search.html",
+        "focusParam": "q",
+        "focusMode": "search"
+      }
     },
     {
       "id": "jp-hyogo-amagasaki",
