@@ -44,6 +44,12 @@ jobs:
           repository: Kussoon/takarazuka
           path: takarazuka
           persist-credentials: false
+      - name: Checkout original Amagasaki town source
+        uses: actions/checkout@v4
+        with:
+          repository: Kussoon/amagasaki
+          path: amagasaki
+          persist-credentials: false
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -53,7 +59,7 @@ jobs:
       - name: Check C-page update timestamp on HTML changes
         run: cd site && node scripts/check-nishinomiya-town-v2-timestamp.cjs
       - name: Verify geography hierarchy and city town adapters
-        run: node site/v2/geography/test-hierarchy.cjs site nishinomiya takarazuka
+        run: node site/v2/geography/test-hierarchy.cjs site nishinomiya takarazuka amagasaki
 
   browser-smoke:
     runs-on: ubuntu-latest
@@ -75,6 +81,12 @@ jobs:
           repository: Kussoon/takarazuka
           path: takarazuka
           persist-credentials: false
+      - name: Checkout Amagasaki legacy SVG town search
+        uses: actions/checkout@v4
+        with:
+          repository: Kussoon/amagasaki
+          path: amagasaki
+          persist-credentials: false
       - name: Setup local community data
         run: |
           mkdir -p site/nishinomiya/data
@@ -83,6 +95,8 @@ jobs:
           mkdir -p site/takarazuka/data
           cp takarazuka/data/takarazuka-town-info.json site/takarazuka/data/takarazuka-town-info.json
           cp takarazuka/town-search.html site/takarazuka/town-search.html
+          mkdir -p site/amagasaki
+          cp amagasaki/town-search.html site/amagasaki/town-search.html
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
