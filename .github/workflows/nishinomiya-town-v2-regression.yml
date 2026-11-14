@@ -7,6 +7,7 @@ on:
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
       - 'scripts/audit-nishinomiya-town-v2.cjs'
+      - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
       - '.github/workflows/nishinomiya-town-v2-regression.yml'
   pull_request:
@@ -16,6 +17,7 @@ on:
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
       - 'scripts/audit-nishinomiya-town-v2.cjs'
+      - 'scripts/check-nishinomiya-town-v2-timestamp.cjs'
       - 'scripts/smoke-nishinomiya-town-v2.cjs'
 permissions:
   contents: read
@@ -27,6 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: site
+          fetch-depth: 2
       - name: Checkout original Nishinomiya data and quiz sources
         uses: actions/checkout@v4
         with:
@@ -39,6 +42,8 @@ jobs:
           node-version: '20'
       - name: Audit town geometry, readings, community coverage, and quiz options
         run: node site/scripts/audit-nishinomiya-town-v2.cjs site nishinomiya
+      - name: Check C-page update timestamp on HTML changes
+        run: cd site && node scripts/check-nishinomiya-town-v2-timestamp.cjs
 
   browser-smoke:
     runs-on: ubuntu-latest
@@ -47,6 +52,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: site
+          fetch-depth: 2
       - name: Checkout Nishinomiya community mapping
         uses: actions/checkout@v4
         with:
