@@ -15,7 +15,7 @@ async function run(type,name,width,height,columns){
   await page.goto(base+'/v2/nishinomiya-town-svg-c-render-pilot.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:60000});
   const updated=await page.locator('#updatedAt').textContent();
-  assert.match(updated,/更新：\\d{4}\\/\\d{2}\\/\\d{2} \\d{2}:\\d{2}:\\d{2}（JST）/);
+  assert.match(updated,/更新：\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}（JST）/);
   await page.locator('#communityToggle').click();
   const buttons=page.locator('#communityOptions button');
   assert.equal(await buttons.count(),27,'all area and 26 communities');
