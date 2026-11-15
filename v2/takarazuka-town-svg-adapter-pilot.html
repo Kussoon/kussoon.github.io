@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><title>宝塚市125町名｜SVG共通エンジン適用比較試作｜Kussoon</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f2f8fb;color:#19384e;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+main{max-width:1000px;margin:auto;padding:12px}h1{font-size:clamp(21px,4vw,30px);margin:9px 0 3px}p{line-height:1.6}a{color:#195d80}
+nav{display:flex;gap:15px;flex-wrap:wrap;margin:7px 0 12px}.updated-at{display:block;color:#537186;font-size:13px;margin-bottom:12px}
+.notice{background:#fff9e9;border:1px solid #d8b668;border-radius:10px;padding:11px 13px;font-size:14px}
+.control{margin:12px 0;background:white;border:1px solid #a5c5d6;border-radius:12px;padding:12px}
+button,input{font:inherit}button{background:white;color:#1a3c52;border:2px solid #90b9cb;border-radius:10px;min-height:45px;padding:8px 14px;font-weight:700;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #f69e2e;outline-offset:2px}
+button:hover{background:#e5f3fa}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+label{display:block;font-weight:750;margin-bottom:5px}input{width:100%;padding:10px;min-height:45px;border:2px solid #a5c5d6;border-radius:9px}
+#results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;max-height:230px;overflow:auto;margin-top:9px}
+#results button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;overflow-wrap:anywhere}
+#results small{font-size:13px;font-weight:500;color:#506f7b}
+#results button.active{background:#2d6c8a;color:white}#results button.active small{color:white}
+#selection{min-height:39px;color:#1b5266;font-weight:750;padding:7px 0}
+#status{min-height:24px;font-size:13px;color:#516e80}
+#frame{background:#e4f2f9;border:2px solid #fff;border-radius:11px;overflow:hidden;position:relative;touch-action:none}
+#map{width:100%;height:min(68svh,800px);min-height:390px;display:block;touch-action:none;cursor:grab}#map:active{cursor:grabbing}
+.town{fill:#78b6d8;stroke:#fff;stroke-width:1.1;vector-effect:non-scaling-stroke;cursor:pointer}
+.town.selected{fill:#ffcc45;stroke:#e8a92e;stroke-width:2.3}.town.dim{fill:#78b6d8;stroke:#fff;stroke-width:1.1}
+#map:focus{outline:none}.hint{font-size:13px;color:#587282}
+@media(max-width:360px){#results{grid-template-columns:1fr}button{padding:8px 9px}}
+</style></head><body><main>
+<nav><a href="/takarazuka/">宝塚市トップ</a><a href="/takarazuka/town-search.html">既存の宝塚市町名検索</a><a href="/v2/nishinomiya-town-svg-core-pilot.html">西宮市SVG第3段階</a><a href="/v2/geography/">地域の階層</a></nav>
+<h1>宝塚市125町名｜SVG共通エンジン適用試作</h1>
+<!-- 更新時には下記を実際の改訂時刻（JST・秒まで）に合わせること。 -->
+<time class="updated-at" datetime="2026-11-15T21:40:23+09:00">更新：2026/11/15 21:40:23（JST）</time>
+<p class="notice"><strong>比較試作・未採用です。</strong> 宝塚市の元のSVG町域形状と町名台帳を変更せず、共通アダプター経由で125町名を読み込みます。今回確認するのは形状・読み・町の選択と拡大です。<strong>町名ラベルの自動配置、20地域の選択、クイズは未移植</strong>です。元の完成済み地図の代わりにはしません。</p>
+<div class="control">
+ <div id="status" role="status">町域データを読み込んでいます。</div>
+ <div id="selection" aria-live="polite">町域を選択すると、町名と読み仮名を表示します。</div>
+ <div class="actions"><button id="plus">＋</button><button id="minus">−</button><button id="reset">市の全体</button><button id="fullscreen">全画面</button></div>
+ <label for="search">町名検索（漢字・読み仮名）</label><input id="search" type="search" autocomplete="off" placeholder="町名・読みの一部を入力">
+ <div class="hint">候補は最大35件表示します。町名を押すとその位置へ移動して点滅します。</div>
+ <div id="results" aria-label="町名候補"></div>
+</div>
+<div id="frame"><svg id="map" viewBox="0 0 1000 1700" role="group" aria-label="宝塚市の125町域"><g id="world"><g id="towns"></g></g></svg></div>
+<p class="hint">出典：Kussoon/takarazukaの既存SVG町域図および町名台帳。町域形状は独自生成せず元データのパスを使用します。元サイトの内容が更新されると、この試作にも反映されます。</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="/v2/common/js/town-svg-viewport.js"></script>
+<script src="/v2/common/js/town-svg-core.js"></script>
+<script src="/v2/common/js/town-svg-source-adapter.js"></script>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const svg=d3.select('#map'),world=d3.select('#world'),paths=d3.select('#towns');
+let towns=[],byName=new Map(),zoom,selected='',timer=null,bright=true,transform=d3.zoomIdentity;
+const W=1000,H=1700,collator=new Intl.Collator('ja',{usage:'sort',sensitivity:'base'});
+const norm=s=>String(s||'').normalize('NFKC').toLocaleLowerCase('ja').replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-96));
+function flashClear(){if(timer!==null)clearInterval(timer);timer=null;selected='';paths.selectAll('path').classed('selected',false).classed('dim',false)}
+function flash(name){
+ flashClear();selected=name;bright=true;
+ const repaint=()=>paths.selectAll('path').classed('selected',d=>d.name===name).classed('dim',d=>d.name===name&&!bright);
+ repaint();timer=setInterval(()=>{bright=!bright;repaint()},500);
+ const town=byName.get(name);$('selection').textContent=name+'（'+town.reading+'）';
+ for(const button of $('results').querySelectorAll('button'))button.classList.toggle('active',button.dataset.name===name);
+}
+function focus(name){
+ const path=$('towns').querySelectorAll('path');
+ const element=[...path].find(n=>n.dataset.name===name);
+ if(!element)return false;
+ const b=element.getBBox();
+ const fit=KussoonTownSvgViewport.fitBounds([[b.x,b.y],[b.x+b.width,b.y+b.height]],W,H,180,.7,45);
+ if(!fit)return false;
+ svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));
+ flash(name);return true;
+}
+function renderResults(text){
+ const raw=norm(text);
+ const filtered=raw?towns.filter(t=>norm(t.name).includes(raw)||norm(t.reading).includes(raw)):towns;
+ filtered.sort((a,b)=>collator.compare(a.reading,b.reading)||collator.compare(a.name,b.name));
+ const parent=$('results');parent.replaceChildren();
+ for(const town of filtered.slice(0,35)){
+  const button=document.createElement('button');button.type='button';button.dataset.name=town.name;
+  const name=document.createElement('strong');name.textContent=town.name;
+  const reading=document.createElement('small');reading.textContent=town.reading;
+  button.append(name,reading);button.onclick=()=>focus(town.name);
+  parent.append(button);
+ }
+}
+$('search').oninput=e=>renderResults(e.target.value);
+$('plus').onclick=()=>KussoonTownSvgCore.zoomBy(svg,zoom,2,150);
+$('minus').onclick=()=>KussoonTownSvgCore.zoomBy(svg,zoom,.5,150);
+$('reset').onclick=()=>{flashClear();svg.call(zoom.transform,d3.zoomIdentity);$('selection').textContent='宝塚市全域を表示しています。'};
+$('fullscreen').onclick=()=>{const frame=$('frame');if(!document.fullscreenElement){frame.requestFullscreen?.()}else document.exitFullscreen?.()};
+svg.on('click',()=>{if(selected)flashClear()});
+zoom=KussoonTownSvgCore.attachZoom(svg,d3,e=>{transform=e.transform;world.attr('transform',transform.toString())},.7,45);
+KussoonTownSvgSourceAdapter.loadSvgTownSource({
+ htmlPath:'/takarazuka/town-search.html',
+ infoPath:'/takarazuka/data/takarazuka-town-info.json',
+ expectedCount:125
+}).then(data=>{
+ towns=data.towns;byName=new Map(towns.map(t=>[t.name,t]));
+ svg.attr('viewBox',data.viewBox);
+ paths.selectAll('path.town').data(towns,d=>d.name).join('path')
+  .attr('class','town').attr('data-name',d=>d.name).attr('d',d=>d.d)
+  .attr('aria-label',d=>d.name+'（'+d.reading+'）')
+  .on('click',(event,d)=>{event.stopPropagation();flash(d.name)});
+ renderResults('');$('status').textContent='宝塚市の125町域・読み仮名を照合して読み込みました。';
+ const town=new URLSearchParams(location.search).get('town');
+ if(town){if(!focus(town))$('status').textContent='指定町名は見つかりません。125町名を読み込みました。'}
+}).catch(e=>{$('status').textContent='読み込み失敗：'+e.message;console.error(e)});
+})();
+</script></body></html>
