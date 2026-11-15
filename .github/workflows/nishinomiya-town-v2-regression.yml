@@ -7,6 +7,7 @@ on:
       - 'v2/nishinomiya-town-svg-common-ui-pilot.html'
       - 'v2/nishinomiya-town-svg-viewport-pilot.html'
       - 'v2/common/js/town-svg-viewport.js'
+      - 'scripts/audit-town-svg-viewport-phase2.cjs'
       - 'v2/common/js/town-svg-common-ui.js'
       - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
       - 'scripts/smoke-nishinomiya-svg-c-pilot.cjs'
@@ -32,6 +33,7 @@ on:
       - 'v2/nishinomiya-town-svg-common-ui-pilot.html'
       - 'v2/nishinomiya-town-svg-viewport-pilot.html'
       - 'v2/common/js/town-svg-viewport.js'
+      - 'scripts/audit-town-svg-viewport-phase2.cjs'
       - 'v2/common/js/town-svg-common-ui.js'
       - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
       - 'scripts/smoke-nishinomiya-svg-c-pilot.cjs'
@@ -98,6 +100,8 @@ jobs:
         run: node site/scripts/audit-nishinomiya-town-v2.cjs site nishinomiya
       - name: Guard SVG comparison against C-baseline readings, offsets, and quiz UI
         run: node site/scripts/audit-nishinomiya-svg-c-pilot.cjs
+      - name: Check shared SVG viewport numerical parity
+        run: node site/scripts/audit-town-svg-viewport-phase2.cjs
       - name: Check C-page update timestamp on HTML changes
         run: cd site && node scripts/check-nishinomiya-town-v2-timestamp.cjs
       - name: Verify geography hierarchy and city town adapters
