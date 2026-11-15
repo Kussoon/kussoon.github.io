@@ -1,0 +1,46 @@
+name: Nishinomiya unified town-map pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/data/town-maps/28204.json'
+      - 'v2/town-map/nishinomiya-comparison/**'
+      - 'v2/tests/nishinomiya-unified-town*'
+      - '.github/workflows/v2-nishinomiya-unified-town.yml'
+  push:
+    paths:
+      - 'v2/data/town-maps/28204.json'
+      - 'v2/town-map/nishinomiya-comparison/**'
+      - 'v2/tests/nishinomiya-unified-town*'
+      - '.github/workflows/v2-nishinomiya-unified-town.yml'
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node v2/tests/nishinomiya-unified-town-data.test.cjs
+  browser:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright test library
+        run: npm install --no-save playwright@1.58.2
+      - name: Inspect common SVG town-map on desktop and WebKit
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/nishinomiya-http.log 2>&1 &
+          node v2/tests/nishinomiya-unified-town.browser.cjs
+      - name: Upload screenshots and findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nishinomiya-unified-town-evidence
+          path: nishinomiya-unified-evidence/
+          if-no-files-found: warn
+          retention-days: 14
