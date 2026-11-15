@@ -1,6 +1,6 @@
 # Kussoon V2 町名マップ｜全国展開マスター仕様書（更新中）
 
-**草案 v0.8／更新開始：2026-11-15／最初の完成対象：川西市（自治体コード28217）**
+**草案 v0.9／更新開始：2026-11-15／最初の完成対象：川西市（自治体コード28217）**
 
 ## 最上位の設計目的
 
@@ -19,8 +19,9 @@
 5. [LEGACY_FUNCTION_MATRIX.md](LEGACY_FUNCTION_MATRIX.md) — 第2次コード対照：T01〜T14、5市の地図方式、川西の機能不足、6市目のテスト改訂
 6. [MAINTENANCE_RULES_APPLICABILITY.md](MAINTENANCE_RULES_APPLICABILITY.md) — 第3次監査：正本R01〜R38と町名への適用境界、特にR05とR28〜R34
 7. [COMPARISON_PLAN_KAWANISHI.md](COMPARISON_PLAN_KAWANISHI.md) — 川西市A/B比較試作#467の評価基準・ブラウザ証拠・採用保留
-8. [REGRESSION_CHECKLIST.md](REGRESSION_CHECKLIST.md) — データ・画面・端末・URL・既存5市の回帰検証
-9. [cases/28217-kawanishi.md](cases/28217-kawanishi.md) — 川西市の固有情報・失敗事例・完成状況。次の自治体はcasesに1ファイルを追加
+8. [COMPARISON_PLAN_NISHINOMIYA.md](COMPARISON_PLAN_NISHINOMIYA.md) — 西宮市321町名を共通SVG版に移すPR #468と、B/Cの機能を守る採用条件
+9. [REGRESSION_CHECKLIST.md](REGRESSION_CHECKLIST.md) — データ・画面・端末・URL・既存5市の回帰検証
+10. [cases/28217-kawanishi.md](cases/28217-kawanishi.md) — 川西市の固有情報・失敗事例・完成状況。次の自治体はcasesに1ファイルを追加
 
 **更新ルール：** 新たな決定をしたときはまず台帳の判定と根拠・影響範囲を更新し、必要に応じてワークフロー／データ契約／テスト／ケース記録を更新する。本文を巨大な時系列日誌にはしない。PRの説明欄は目次と未完了の概要に限定する。
 
