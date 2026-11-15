@@ -62,59 +62,35 @@ function create({svg,topo,kana,controls}){
    const plans=KussoonLabelEngine.planAdaptiveLabels(
      models,models.map(m=>m.polylabel),size,measure,{wrap:true,shrink:false}
    );
-   // The background, multi-line name and optional reading must all participate
-   // in collision detection; a text-only box understates the label footprint.
-   const labelBoxes=plans.map((p,i)=>{
-     const area=areas[i],reading=showReading&&area?.reading?area.reading:'';
-     const paddingX=size*.25,paddingY=size*.18,lineHeight=p.fontSize*1.16;
-     const readingSize=p.fontSize*.7;
-     const width=Math.max(p.width,reading?measure(reading,readingSize):0)+2*paddingX;
-     const height=p.lines.length*lineHeight+(reading?readingSize*1.3:0)+2*paddingY;
-     return {x1:p.x-width/2,x2:p.x+width/2,y1:p.y-height/2,y2:p.y+height/2,
-       width,height,paddingX,paddingY,lineHeight,readingSize,reading};
-   });
    const selectedIndex=labelFeatures.findIndex(f=>f.name===selected);
    const layout=KussoonLabelEngine.selectPriorityLabels(
-     models,plans.map(p=>[p.x,p.y]),labelBoxes.map(b=>b.width),size,view,
-     {strategy:'density',pinned:selectedIndex>=0?selectedIndex:null,boxes:labelBoxes}
+     models,plans.map(p=>[p.x,p.y]),plans.map(p=>p.width),size,view,
+     {strategy:'density',pinned:selectedIndex>=0?selectedIndex:null,boxes:plans.map(p=>p.box)}
    );
    for(let i=0;i<plans.length;i++){
      if(!layout.shown[i])continue;
-     const f=labelFeatures[i],p=plans[i],box=labelBoxes[i];
-     const group=document.createElementNS(NS,'g');
-     group.classList.add('town-label');
-     group.dataset.town=f.name;
-     const bg=document.createElementNS(NS,'rect');
-     bg.classList.add('town-label-bg');
-     bg.setAttribute('x',box.x1.toFixed(3));
-     bg.setAttribute('y',box.y1.toFixed(3));
-     bg.setAttribute('width',box.width.toFixed(3));
-     bg.setAttribute('height',box.height.toFixed(3));
-     bg.setAttribute('rx',(size*.22).toFixed(3));
-     group.append(bg);
+     const f=labelFeatures[i],a=areas.find(x=>x.name===f.name),p=plans[i];
      const t=document.createElementNS(NS,'text');
+     const lines=p.lines||[f.name],lineHeight=p.fontSize*1.16;
      t.setAttribute('x',p.x);
-     t.setAttribute('y',(box.y1+box.paddingY+p.fontSize*.58).toFixed(3));
+     t.setAttribute('y',p.y-(lines.length-1)*lineHeight/2);
      t.setAttribute('text-anchor','middle');
      t.setAttribute('dominant-baseline','middle');
      t.setAttribute('font-size',p.fontSize.toFixed(3));
-     t.classList.add('label');
-     const lines=p.lines||[f.name];
+     t.classList.add('label');t.dataset.town=f.name;
      for(let j=0;j<lines.length;j++){
        const span=document.createElementNS(NS,'tspan');
        span.setAttribute('x',p.x);
-       if(j)span.setAttribute('dy',box.lineHeight.toFixed(3));
+       if(j)span.setAttribute('dy',lineHeight.toFixed(3));
        span.textContent=lines[j];t.append(span);
      }
-     if(box.reading){
+     if(showReading&&a?.reading){
        const s=document.createElementNS(NS,'tspan');
        s.classList.add('reading');s.setAttribute('x',p.x);
-       s.setAttribute('dy',(box.lineHeight*.9).toFixed(3));
-       s.textContent=box.reading;t.append(s);
+       s.setAttribute('dy','1.2em');s.textContent=a.reading;t.append(s);
      }
-     group.append(t);
-     group.addEventListener('click',()=>select(f.name,true));
-     labelLayer.append(group);
+     t.addEventListener('click',()=>select(f.name,true));
+     labelLayer.append(t);
    }
  }
 
