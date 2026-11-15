@@ -52,6 +52,9 @@ assert.match(page,/\.label\{[^}]*stroke:#fff/);
 assert.doesNotMatch(page,/\.town-label-bg/);
 assert.doesNotMatch(engine,/town-label-bg/);
 assert.match(engine,/t\.setAttribute\('stroke-width',\(p\.fontSize\*\.16\)/);
+// At 2x and higher, established V2 policy keeps in-view labels despite collisions.
+assert.match(engine,/const layout=zoom>=2/);
+assert.match(engine,/r\.x2>=view\.x&&r\.x1<=view\.x\+view\.w/);
 // Pilot data: independent source shapes count must remain unchanged.
 const data=JSON.parse(fs.readFileSync(path.join(root,'data/town-maps/28217.json'),'utf8'));
 assert.equal(data.topo.objects.town.geometries.length,191);
