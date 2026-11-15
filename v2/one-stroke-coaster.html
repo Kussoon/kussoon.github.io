@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 試作</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 試作版4</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;background:#132b42;color:white}
 main{height:100dvh;display:flex;flex-direction:column}header{padding:9px 13px;background:#102338;display:flex;align-items:center;justify-content:space-between;gap:8px}h1{font-size:17px;margin:0}#state{font-size:12px;color:#91f0cf}#area{flex:1;position:relative;min-height:0}canvas{display:block;width:100%;height:100%;touch-action:none;background:#d6effa}#hint{position:absolute;top:10px;left:10px;background:#102338c9;padding:7px 10px;border-radius:10px;font-size:13px;pointer-events:none}#hint[hidden]{display:none}nav{display:flex;gap:9px;background:#102338;padding:9px 10px calc(9px + env(safe-area-inset-bottom))}button{border:0;border-radius:9px;padding:12px;min-height:46px;font-size:15px;font-weight:bold;background:#e2ebf2;color:#132b42}#go{background:#53e3b3;flex:1}button:disabled{opacity:.4}button[hidden]{display:none}small{font-size:10px;color:#b4c8d6;display:block;text-align:center;background:#102338;padding-bottom:4px}
 </style></head>
-<body><main><header><h1>🎢 一筆書きコースター</h1><span id="state">指で線を描いてください</span></header><div id="area"><canvas id="canvas"></canvas><div id="hint">画面に一筆書きでコースを描いてください</div></div><nav><button id="clear">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><small>試作版 2026-11-15｜広告・外部ライブラリなし／物理計算は簡易表現</small></main>
+<body><main><header><h1>🎢 一筆書きコースター</h1><span id="state">指で線を描いてください</span></header><div id="area"><canvas id="canvas"></canvas><div id="hint">画面に一筆書きでコースを描いてください</div></div><nav><button id="clear">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><small>試作版 2026-11-15｜近景・車体と両手・勾配に応じた加減速／広告なし</small></main>
 <script>
 (()=>{
 "use strict";
 const c=document.getElementById("canvas"),g=c.getContext("2d"),go=document.getElementById("go"),clear=document.getElementById("clear"),pause=document.getElementById("pause"),hint=document.getElementById("hint"),state=document.getElementById("state");
-let W=0,H=0,path=[],drawing=false,mode="edit",distance=0,progress=0,stopped=false,last=0,course=[],total=0;
+let W=0,H=0,path=[],drawing=false,mode="edit",distance=0,progress=0,stopped=false,last=0,course=[],total=0,speed=9;
 const cap=(v,a,b)=>Math.max(a,Math.min(b,v));
 function resize(){const r=c.getBoundingClientRect();W=r.width;H=r.height;const d=Math.min(2,devicePixelRatio||1);c.width=Math.max(1,Math.round(W*d));c.height=Math.max(1,Math.round(H*d));g.setTransform(d,0,0,d,0,0);if(mode==="edit")paint();}
 addEventListener("resize",resize);
@@ -29,22 +29,67 @@ if(window.PointerEvent){
 function paint(){g.fillStyle="#d6effa";g.fillRect(0,0,W,H);g.strokeStyle="#badce9";g.lineWidth=1;for(let x=0;x<W;x+=36){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke()}for(let y=0;y<H;y+=36){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()}
  if(!path.length)return;g.lineJoin="round";g.lineCap="round";g.beginPath();path.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.strokeStyle="#1c4966";g.lineWidth=13;g.stroke();g.strokeStyle="#ff8558";g.lineWidth=7;g.stroke();
  for(let i of [0,path.length-1]){g.beginPath();g.arc(path[i].x,path[i].y,7,0,Math.PI*2);g.fillStyle=i===0?"#1bad85":"#c94f45";g.fill();}}
-function build(){course=[];total=0;for(let i=0;i<path.length;i++){const p=path[i];if(i)total+=Math.max(.05,Math.hypot(p.x-path[i-1].x,p.y-path[i-1].y)*.12);course.push({x:(p.x-W/2)*.08,y:(H-p.y)*.09+3,z:total})}}
+function build(){
+ const pts=[];const cat=(a,b,c,d,t)=>.5*(2*b+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);
+ for(let i=0;i<path.length-1;i++){const a=path[Math.max(0,i-1)],b=path[i],c=path[i+1],d=path[Math.min(path.length-1,i+2)],steps=Math.max(3,Math.ceil(Math.hypot(c.x-b.x,c.y-b.y)/3));
+ for(let j=0;j<steps;j++){let t=j/steps;pts.push({x:cat(a.x,b.x,c.x,d.x,t),y:cat(a.y,b.y,c.y,d.y,t)})}}
+ pts.push(path[path.length-1]);course=[];total=0;for(let i=0;i<pts.length;i++){if(i)total+=Math.max(.02,Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y)*.12);course.push({x:(pts[i].x-W/2)*.08,y:(H-pts[i].y)*.09+3,z:total})}
+ speed=9;
+}
 function at(z){z=cap(z,0,total);let i=1;while(i<course.length-1&&course[i].z<z)i++;const a=course[i-1],b=course[i],f=cap((z-a.z)/(b.z-a.z||1),0,1);return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f,z};}
 function view(){let p=at(progress),ahead=at(Math.min(total,progress+3)),dx=ahead.x-p.x,dy=ahead.y-p.y,dz=ahead.z-p.z,mag=Math.hypot(dx,dy,dz)||1;let forward={x:dx/mag,y:dy/mag,z:dz/mag};let right={x:forward.z,y:0,z:-forward.x},rm=Math.hypot(right.x,right.z)||1;right.x/=rm;right.z/=rm;let up={x:-forward.y*right.z,y:forward.z*right.x-forward.x*right.z,z:forward.y*right.x};return{p:{x:p.x,y:p.y+1,z:p.z},forward,right,up}}
 function project(p,v){let d={x:p.x-v.p.x,y:p.y-v.p.y,z:p.z-v.p.z},z=d.x*v.forward.x+d.y*v.forward.y+d.z*v.forward.z;if(z<.2)return null;let x=d.x*v.right.x+d.z*v.right.z,y=d.x*v.up.x+d.y*v.up.y+d.z*v.up.z,s=Math.min(W,H)*.87/z;return{x:W/2+x*s,y:H*.56-y*s,z}}
 function line(a,b,v,col,w){let p=project(a,v),q=project(b,v);if(!p||!q)return;g.strokeStyle=col;g.lineWidth=cap(w*25/Math.min(p.z,q.z),.6,w*4);g.beginPath();g.moveTo(p.x,p.y);g.lineTo(q.x,q.y);g.stroke()}
-function drawRide(){let sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,"#74bfe7");sky.addColorStop(.74,"#d6f6ff");sky.addColorStop(1,"#80bc95");g.fillStyle=sky;g.fillRect(0,0,W,H);g.fillStyle="#77af83";g.fillRect(0,H*.8,W,H*.2);
- const v=view();for(let i=course.length-1;i>0;i--){let a=course[i-1],b=course[i];if(a.z<progress-2||b.z>progress+120)continue;let tx=b.x-a.x,tz=b.z-a.z,n=Math.hypot(tx,tz)||1,ox=tz/n*.48,oz=-tx/n*.48;
- line({x:a.x-ox,y:a.y,z:a.z-oz},{x:b.x-ox,y:b.y,z:b.z-oz},v,"#29465b",2.8);
- line({x:a.x+ox,y:a.y,z:a.z+oz},{x:b.x+ox,y:b.y,z:b.z+oz},v,"#29465b",2.8);
- if(i%3===0)line({x:a.x-ox,y:a.y,z:a.z-oz},{x:a.x+ox,y:a.y,z:a.z+oz},v,"#f58c57",1.6);
- if(i%7===0)line(a,{x:a.x,y:0,z:a.z},v,"#7b9396",.7);}
- g.fillStyle="#102338d8";g.fillRect(0,0,W,39);g.fillStyle="white";g.font="bold 15px sans-serif";g.fillText("走行 "+Math.round(100*progress/total)+"%",13,25);
- if(progress>=total){stopped=true;state.textContent="ゴール！";pause.textContent="もう一度乗る";hint.hidden=false;hint.textContent="ゴール！ もう一度乗れます";}}
+function scenery(v){
+ // 近くの木立。地図でなく走行座標に固定してパースを反映
+ let start=Math.max(0,Math.floor((progress-4)/5)),end=Math.ceil(Math.min(total+10,progress+65)/5);
+ for(let i=end;i>=start;i--){let z=i*5,p=at(Math.min(z,total));
+ for(const side of [-1,1]){let x=p.x+side*(3+(i%3)*1.6),base=project({x,y:0,z},v),top=project({x,y:3.5+(i%3)*.6,z},v);
+ if(!base||!top)continue;let r=cap(Math.abs(base.y-top.y)*.29,3,120);
+ g.strokeStyle="#7a5a45";g.lineWidth=cap(r*.21,1,11);g.beginPath();g.moveTo(base.x,base.y);g.lineTo(top.x,top.y);g.stroke();
+ g.fillStyle=["#39885c","#51956c","#277b5c"][(i+(side>0?1:0))%3];
+ for(let q=-1;q<=1;q++){g.beginPath();g.ellipse(top.x+q*r*.43,top.y+(q%2)*r*.1,r*.78,r*.87,0,0,Math.PI*2);g.fill()}
+ }}
+}
+function cockpit(){
+ // 車体・左右の腕・前のグリップを常に画面下に固定
+ let u=cap(Math.min(W/420,H/610),.57,1.45);g.save();g.translate(W/2,H+4);g.scale(u,u);
+ for(let side of [-1,1]){g.save();g.scale(side,1);g.fillStyle="#244055";g.strokeStyle="#142b3c";g.lineWidth=5;g.beginPath();g.moveTo(170,-140);g.lineTo(238,-156);g.lineTo(238,15);g.lineTo(155,15);g.closePath();g.fill();g.stroke();g.restore()}
+ let grad=g.createLinearGradient(0,-155,0,15);grad.addColorStop(0,"#8aa9bd");grad.addColorStop(1,"#23415b");g.fillStyle=grad;g.strokeStyle="#172d41";g.lineWidth=5;g.beginPath();g.moveTo(-160,12);g.lineTo(-150,-105);g.quadraticCurveTo(0,-166,150,-105);g.lineTo(160,12);g.closePath();g.fill();g.stroke();
+ g.strokeStyle="#abbac7";g.lineWidth=4;g.beginPath();g.moveTo(-144,-110);g.quadraticCurveTo(0,-145,144,-110);g.stroke();
+ g.strokeStyle="#172636";g.lineWidth=23;g.lineCap="round";g.beginPath();g.moveTo(-154,-22);g.lineTo(-145,-99);g.moveTo(154,-22);g.lineTo(145,-99);g.stroke();
+ g.strokeStyle="#bdc9d1";g.lineWidth=15;g.beginPath();g.moveTo(-154,-22);g.lineTo(-145,-99);g.moveTo(154,-22);g.lineTo(145,-99);g.stroke();
+ g.strokeStyle="#111f2b";g.lineWidth=34;g.beginPath();g.moveTo(-149,-108);g.lineTo(149,-108);g.stroke();g.strokeStyle="#4c545c";g.lineWidth=27;g.beginPath();g.moveTo(-149,-111);g.lineTo(149,-111);g.stroke();
+ g.strokeStyle="#c6d3da";g.lineWidth=3;g.beginPath();g.moveTo(-146,-123);g.lineTo(146,-123);g.stroke();
+ g.fillStyle="#9aafbd";g.strokeStyle="#1b3545";g.lineWidth=4;g.fillRect(-20,-124,40,73);g.strokeRect(-20,-124,40,73);
+ for(let side of [-1,1]){g.save();g.scale(side,1);
+ g.strokeStyle="#172f40";g.lineWidth=61;g.beginPath();g.moveTo(147,44);g.quadraticCurveTo(122,-8,112,-70);g.stroke();
+ g.strokeStyle="#35586c";g.lineWidth=52;g.beginPath();g.moveTo(147,44);g.quadraticCurveTo(122,-8,112,-70);g.stroke();
+ g.fillStyle="#efc39e";g.strokeStyle="#9a674d";g.lineWidth=2.5;g.beginPath();g.moveTo(92,-73);g.quadraticCurveTo(79,-95,79,-115);g.quadraticCurveTo(82,-142,103,-143);g.quadraticCurveTo(141,-141,143,-117);g.lineTo(136,-84);g.quadraticCurveTo(128,-60,108,-58);g.closePath();g.fill();g.stroke();
+ g.lineWidth=1.7;for(let j=0;j<4;j++){g.beginPath();g.moveTo(86+j*12,-128);g.quadraticCurveTo(93+j*11,-118,91+j*10,-107);g.stroke()}g.restore()}
+ g.restore();
+}
+function drawRide(){
+ const v=view();let sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,"#70bdeb");sky.addColorStop(1,"#c8efff");g.fillStyle=sky;g.fillRect(0,0,W,H);
+ let horizon=cap(H*(.58+v.forward.y*1.3),-H*.5,H*1.5);g.fillStyle="#8ec59c";g.fillRect(0,horizon,W,H-horizon);scenery(v);
+ for(let i=course.length-1;i>0;i--){let a=course[i-1],b=course[i];if(a.z<progress-2||b.z>progress+120)continue;let tx=b.x-a.x,tz=b.z-a.z,n=Math.hypot(tx,tz)||1,ox=tz/n*.48,oz=-tx/n*.48;
+ line({x:a.x-ox,y:a.y,z:a.z-oz},{x:b.x-ox,y:b.y,z:b.z-oz},v,"#29465b",2.2);
+ line({x:a.x+ox,y:a.y,z:a.z+oz},{x:b.x+ox,y:b.y,z:b.z+oz},v,"#29465b",2.2);
+ if(i%3===0)line({x:a.x-ox,y:a.y,z:a.z-oz},{x:a.x+ox,y:a.y,z:a.z+oz},v,"#f58c57",1.3);
+ if(i%9===0)line(a,{x:a.x,y:0,z:a.z},v,"#7b9396",.7);}
+ cockpit();
+ g.fillStyle="#102338d8";g.fillRect(0,0,W,39);g.fillStyle="white";g.font="bold 15px sans-serif";g.textAlign="left";g.fillText("走行 "+Math.round(100*progress/total)+"%",13,25);g.textAlign="right";g.fillText("ゲーム速度 "+Math.round(speed*5)+" km/h",W-12,25);g.textAlign="left";
+ if(progress>=total){stopped=true;state.textContent="ゴール！";pause.textContent="もう一度乗る";hint.hidden=false;hint.textContent="ゴール！ もう一度乗れます"}}
+
 go.onclick=()=>{build();if(course.length<2)return;mode="ride";progress=0;stopped=false;go.hidden=true;pause.hidden=false;pause.textContent="一時停止";state.textContent="乗車中";hint.hidden=true;drawRide()};
 pause.onclick=()=>{if(progress>=total){progress=0;stopped=false;hint.hidden=true;pause.textContent="一時停止"}else{stopped=!stopped;pause.textContent=stopped?"再開":"一時停止"}};
 clear.onclick=()=>{mode="edit";path=[];course=[];distance=0;drawing=false;go.hidden=false;go.disabled=true;pause.hidden=true;hint.hidden=false;hint.textContent="画面に一筆書きでコースを描いてください";state.textContent="指で線を描いてください";paint()};
-function loop(t){let dt=Math.min(.05,(t-last)/1000||0);last=t;if(mode==="ride"){if(!stopped)progress=Math.min(total,progress+dt*12);drawRide()}requestAnimationFrame(loop)}resize();requestAnimationFrame(loop);
+function loop(t){let dt=Math.min(.05,(t-last)/1000||0);last=t;if(mode==="ride"){if(!stopped){
+ const a=at(progress),b=at(Math.min(total,progress+1)),grade=(b.y-a.y)/Math.max(.1,b.z-a.z);
+ speed=cap(speed+(-22*grade-.06*speed+.35)*dt,2.2,34);
+ progress=Math.min(total,progress+dt*speed);
+ }drawRide()}requestAnimationFrame(loop)}
+
+resize();requestAnimationFrame(loop);
 })();
 </script></body></html>
