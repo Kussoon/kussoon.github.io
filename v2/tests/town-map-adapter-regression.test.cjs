@@ -46,6 +46,12 @@ assert.equal(labelEngine.screenPixelsToSvgUnits(16,100,400),4);
 assert.match(engine,/const lines=p\.lines\|\|\[f\.name\]/);
 assert.match(engine,/for\(let j=0;j<lines\.length;j\+\+\)/);
 assert.match(engine,/screenPixelsToSvgUnits\(font,view\.w,renderedMapWidth\(\)\)/);
+// White text outline only, not a white background label rectangle.
+const page=fs.readFileSync(path.join(root,'town-map/index.html'),'utf8');
+assert.match(page,/\.label\{[^}]*stroke:#fff/);
+assert.doesNotMatch(page,/\.town-label-bg/);
+assert.doesNotMatch(engine,/town-label-bg/);
+assert.match(engine,/t\.setAttribute\('stroke-width',\(p\.fontSize\*\.16\)/);
 // Pilot data: independent source shapes count must remain unchanged.
 const data=JSON.parse(fs.readFileSync(path.join(root,'data/town-maps/28217.json'),'utf8'));
 assert.equal(data.topo.objects.town.geometries.length,191);
