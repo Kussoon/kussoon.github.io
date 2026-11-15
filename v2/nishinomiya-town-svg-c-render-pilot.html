@@ -50,7 +50,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <nav class="nav"><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市 V2 C版｜SVG描画比較試作</h1>
 <!-- 更新時は下の日時を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-15T18:48:37+09:00">更新：2026/11/15 18:48:37（JST）</time>
+<time class="updated-at" id="updatedAt" datetime="2026-11-15T19:13:22+09:00">更新：2026/11/15 19:13:22（JST）</time>
 <p class="notice"><strong>未採用の技術試作です。</strong> 正式C版は変更していません。現在は321町名の町域形状・通常ラベル・読み・サイズ・町域選択を検証する第1段階です。ラベル基準点は、従来のSVG幾何中心とC版Leafletの多角形中心に近い計算を切り替えて比較できます。<strong>どちらも正式C版と同じ位置になる保証はありません</strong>。26地域選択を比較試作として追加しました。クイズ1・2も比較試作として追加しました。比較結果に基づく採用判断までは正式公開しません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
 <section class="study" aria-label="26コミュニティ学習範囲"><div class="study-row"><strong>学習範囲</strong><button type="button" id="communityToggle" aria-expanded="false" aria-controls="communityOptions" disabled>西宮市全域（321町名） ▾</button><span id="communityCount">準備中</span></div>
@@ -451,6 +451,8 @@ function quizReveal(){
 }
 function finishQuiz(quitEarly=false){
  const answered=quizIndex+(quizLocked?1:0);
+ // Preserve the question active at the moment "ここでやめる" is pressed.
+ const quitTown=quitEarly?quizOrder[quizIndex]:null;
  resetQuestion();quizMode=0;document.body.classList.remove('town-quiz-mode');
  $('quizPanel').hidden=true;$('quizResults').hidden=false;
  $('quizResult').textContent=quitEarly
@@ -459,6 +461,12 @@ function finishQuiz(quitEarly=false){
  // Full marks: there is no missed question to retry; hide this action entirely.
  $('quizRetryWrong').hidden=quizWrong.size===0;
  $('quizRetryWrong').disabled=quizWrong.size===0;
+ // Labels are visible again. Flash only the interrupted question's town;
+ // normal map selection can stop the flash, and restarting a quiz cleans it up.
+ if(quitTown&&activeFeatures().some(f=>f.properties.S_NAME===quitTown)){
+  choose(quitTown);
+  $('status').textContent='中断した問題：「'+townLabel(quitTown)+'」を黄色く点滅表示しています。';
+ }
 }
 $('quizOne').onclick=()=>startQuiz(1);
 $('quizTwo').onclick=()=>startQuiz(2);
