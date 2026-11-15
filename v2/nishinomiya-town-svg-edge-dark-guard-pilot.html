@@ -52,8 +52,8 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <nav class="nav"><a href="/v2/nishinomiya-town-svg-core-pilot.html">変更前（第3段階）と比較する</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市V2 SVG｜Edge自動ダーク化抑制・比較試作</h1>
 <!-- 更新時は下の日時を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-15T21:09:00+09:00">更新：2026/11/15 21:09:00（JST）</time>
-<p class="notice"><strong>Edgeの自動ダーク化による町名ラベルの低コントラストを検証する未採用の比較試作です。地図の色・ラベル・機能は第3段階と同じ設定のままです。</strong> 地域選択の五十音順とクイズ2の選択肢を共通UI部品に切り出し、前版と見た目・操作が一致するか比較します。 正式C版は変更していません。現在は321町名の町域形状・通常ラベル・読み・サイズ・町域選択を検証する第1段階です。ラベル基準点は、従来のSVG幾何中心とC版Leafletの多角形中心に近い計算を切り替えて比較できます。<strong>どちらも正式C版と同じ位置になる保証はありません</strong>。26地域選択を比較試作として追加しました。クイズ1・2も比較試作として追加しました。比較結果に基づく採用判断までは正式公開しません。</p>
+<time class="updated-at" id="updatedAt" datetime="2026-11-15T21:24:43+09:00">更新：2026/11/15 21:24:43（JST）</time>
+<p class="notice"><strong>Edgeの自動ダーク化による町名ラベルの低コントラストを検証する未採用の比較試作です。地図の色・ラベル・機能は第3段階と同じ設定のままです。<strong>検証結果：2026/11/15のiPhone版Edge録画では、背景やボタンの暗色化が残りました。現状の対策だけでは解消していません。</strong></strong> 地域選択の五十音順とクイズ2の選択肢を共通UI部品に切り出し、前版と見た目・操作が一致するか比較します。 正式C版は変更していません。現在は321町名の町域形状・通常ラベル・読み・サイズ・町域選択を検証する第1段階です。ラベル基準点は、従来のSVG幾何中心とC版Leafletの多角形中心に近い計算を切り替えて比較できます。<strong>どちらも正式C版と同じ位置になる保証はありません</strong>。26地域選択を比較試作として追加しました。クイズ1・2も比較試作として追加しました。比較結果に基づく採用判断までは正式公開しません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
 <section class="study" aria-label="26コミュニティ学習範囲"><div class="study-row"><strong>学習範囲</strong><button type="button" id="communityToggle" aria-expanded="false" aria-controls="communityOptions" disabled>西宮市全域（321町名） ▾</button><span id="communityCount">準備中</span></div>
 <div id="communityOptions" class="community-options" hidden></div>
