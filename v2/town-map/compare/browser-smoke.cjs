@@ -23,7 +23,7 @@ await page.locator('#reset').click();const reset=await capture('reset');assert.e
 await page.goto(base+'/v2/town-map/compare/?code=28217&labelMode='+variant+'&town='+encodeURIComponent('中央町'),{waitUntil:'domcontentloaded',timeout:45000});
 await page.waitForFunction(()=>document.querySelectorAll('path.region.active').length>0&&document.querySelector('#selected')?.textContent?.includes('中央町'),null,{timeout:45000});
 const deepLink=await capture('town-direct-link');
-assert.match(deepLink.view,/^[-.\\d ]+$/);
+assert.ok(deepLink.view.split(/\s+/).map(Number).every(Number.isFinite),'direct link viewBox must be numeric');
 assert.deepEqual(errors,[],'page runtime errors: '+JSON.stringify(errors));
 results.push({browser:c.name,width:c.width,variant,initial,zoom,reading,reset,deepLink});await page.close();
 }}finally{await browser.close();}}
