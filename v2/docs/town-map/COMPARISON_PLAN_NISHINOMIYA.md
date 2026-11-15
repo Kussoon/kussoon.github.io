@@ -29,3 +29,9 @@
 ## 合格の基準
 
 **同じ共通形式で表示できること（機械合格）と、既存B/C版の成果を継承したこと（機能・視覚合格）は別。** 前者はPR #468の検査で確認。後者は今後の比較・改善と利用者承認が必要。西宮市で共通化が実証できれば川西市、三田市、猪名川町への標準適用を検討する。
+
+## 試作ページ反映（2026-11-15）
+- PR #468は**比較専用の西宮市共通版・JSON・テストのみ**をmainにsquashマージ。コミット `08229a8dbcb4bbf78485d963017de89f1924c787`。
+- GitHub main上の `v2/data/town-maps/28204.json` と `v2/town-map/nishinomiya-comparison/index.html` の存在を確認。
+- 比較入口：`https://kussoon.com/v2/town-map/nishinomiya-comparison/`。共通版：`https://kussoon.com/v2/town-map/?code=28204`。GitHub Pagesでの配信反映とiPhone実機は別途要確認。
+- 専用CI（GitHub Actions run `43677685482`）はデータ静的テストとChromium/WebKit表示操作が成功。旧B/C版の表示同等性・クイズ継承は未合格、旧版はそのまま保持。
