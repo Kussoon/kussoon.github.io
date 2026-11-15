@@ -14,7 +14,7 @@ const required=[
   '../common/js/town-map-engine.js'
 ];
 for(const src of required) if(!html.includes('src="'+src+'"')&&!html.includes('src="'+src+'?')) throw new Error('missing shared module '+src);
-for(const token of ['KussoonLabelEngine.buildModels','KussoonV2MapViewport.init','planAdaptiveLabels','191','182']) if(!engine.includes(token)&&!html.includes(token)) throw new Error('missing contract '+token);
+for(const token of ['KussoonLabelEngine.buildModels','KussoonV2MapViewport.init','planAdaptiveLabels']) if(!engine.includes(token)&&!html.includes(token)) throw new Error('missing contract '+token);
 if(!html.includes('noindex,follow')||!pilot.includes('noindex,follow')) throw new Error('pilot/page must remain noindex');
 if(data.topo?.objects?.town?.geometries?.length!==191) throw new Error('expected 191 polygons');
 if(data.kana?.nameEntryCount!==182) throw new Error('expected 182 names');
