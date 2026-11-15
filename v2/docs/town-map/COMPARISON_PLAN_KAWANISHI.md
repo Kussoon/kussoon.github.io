@@ -3,7 +3,7 @@
 起案：2026-11-15。**ユーザーによる採用判断は未実施。** 既存の全国V2・5市・正式URLは変更しない。
 
 ## 独立試作の所在
-- Draft PR [#467](https://github.com/Kussoon/kussoon.github.io/pull/467)：`v2/town-map/compare/index.html` と専用JS、静的契約、Chromium/WebKit画面検査
+- 比較試作PR [#467](https://github.com/Kussoon/kussoon.github.io/pull/467)：`v2/town-map/compare/index.html` と専用JS、静的契約、Chromium/WebKit画面検査
 - 比較A案：現行川西の初期16px、低倍率の密度衝突抑制、2倍以上では重なり許容。**あくまで現行再現**
 - 比較B案：仮の初期12px、折返しと小幅縮小可、倍率によらず密度衝突抑制。**あくまで未承認候補**
 - 元の191統計区画・182表示名・読み・検索・地図操作・投影形状は双方とも共通。
@@ -34,3 +34,8 @@
 - 町名URL `?town=...` の自動選択・ズームについて、**現行エンジンの `create()` 末尾に実装がある**。以前の第2次文書の未実装記載は訂正済み。ブラウザと階層往復で確認する。
 - R28のホイール初期OFF／内外クリック切替、タップ・ドラッグ・ピンチ誤操作回避の実ブラウザ検査
 - 正式採用前の利用者実機確認と、マスター手順書・回帰CI更新。
+## 試作ページの公開（2026-11-15）
+- PR #467 は **比較専用ファイルだけを main に squash merge**（`3a28b08b5b540fa22d613655b1905aeb7983efad`）。これによりGitHub Pagesの反映対象となった。
+- 比較A：`https://kussoon.com/v2/town-map/compare/?code=28217&labelMode=A`
+- 比較B：`https://kussoon.com/v2/town-map/compare/?code=28217&labelMode=B`
+- GitHub main 上の比較ページの存在を確認。**本番URLへのHTTP 200・配信タイミングは別検証**。iPhone Safari実機受入や、A/Bいずれかの正式採用を意味しない。
