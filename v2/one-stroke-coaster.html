@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 試作版4</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 試作版5</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;background:#132b42;color:white}
 main{height:100dvh;display:flex;flex-direction:column}header{padding:9px 13px;background:#102338;display:flex;align-items:center;justify-content:space-between;gap:8px}h1{font-size:17px;margin:0}#state{font-size:12px;color:#91f0cf}#area{flex:1;position:relative;min-height:0}canvas{display:block;width:100%;height:100%;touch-action:none;background:#d6effa}#hint{position:absolute;top:10px;left:10px;background:#102338c9;padding:7px 10px;border-radius:10px;font-size:13px;pointer-events:none}#hint[hidden]{display:none}nav{display:flex;gap:9px;background:#102338;padding:9px 10px calc(9px + env(safe-area-inset-bottom))}button{border:0;border-radius:9px;padding:12px;min-height:46px;font-size:15px;font-weight:bold;background:#e2ebf2;color:#132b42}#go{background:#53e3b3;flex:1}button:disabled{opacity:.4}button[hidden]{display:none}small{font-size:10px;color:#b4c8d6;display:block;text-align:center;background:#102338;padding-bottom:4px}
 </style></head>
-<body><main><header><h1>🎢 一筆書きコースター</h1><span id="state">指で線を描いてください</span></header><div id="area"><canvas id="canvas"></canvas><div id="hint">画面に一筆書きでコースを描いてください</div></div><nav><button id="clear">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><small>試作版 2026-11-15｜近景・車体と両手・勾配に応じた加減速／広告なし</small></main>
+<body><main><header><h1>🎢 一筆書きコースター</h1><span id="state">指で線を描いてください</span></header><div id="area"><canvas id="canvas"></canvas><div id="hint">画面に一筆書きでコースを描いてください</div></div><nav><button id="clear">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><small>試作版 2026-11-15｜多彩な景色・滑らかレール・緩やかな下り加速／広告なし</small></main>
 <script>
 (()=>{
 "use strict";
@@ -30,26 +30,87 @@ function paint(){g.fillStyle="#d6effa";g.fillRect(0,0,W,H);g.strokeStyle="#badce
  if(!path.length)return;g.lineJoin="round";g.lineCap="round";g.beginPath();path.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.strokeStyle="#1c4966";g.lineWidth=13;g.stroke();g.strokeStyle="#ff8558";g.lineWidth=7;g.stroke();
  for(let i of [0,path.length-1]){g.beginPath();g.arc(path[i].x,path[i].y,7,0,Math.PI*2);g.fillStyle=i===0?"#1bad85":"#c94f45";g.fill();}}
 function build(){
- const pts=[];const cat=(a,b,c,d,t)=>.5*(2*b+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);
- for(let i=0;i<path.length-1;i++){const a=path[Math.max(0,i-1)],b=path[i],c=path[i+1],d=path[Math.min(path.length-1,i+2)],steps=Math.max(3,Math.ceil(Math.hypot(c.x-b.x,c.y-b.y)/3));
- for(let j=0;j<steps;j++){let t=j/steps;pts.push({x:cat(a.x,b.x,c.x,d.x,t),y:cat(a.y,b.y,c.y,d.y,t)})}}
- pts.push(path[path.length-1]);course=[];total=0;for(let i=0;i<pts.length;i++){if(i)total+=Math.max(.02,Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y)*.12);course.push({x:(pts[i].x-W/2)*.08,y:(H-pts[i].y)*.09+3,z:total})}
+ // 指の小刻みな揺れを低周波平滑化してから曲線補間する（原線は編集画面に保持）
+ const filtered=path.map((p,i)=>{
+   let sx=0,sy=0,sw=0;for(let j=Math.max(0,i-7);j<=Math.min(path.length-1,i+7);j++){
+     let weight=8-Math.abs(j-i);sx+=path[j].x*weight;sy+=path[j].y*weight;sw+=weight;
+   }return{x:sx/sw,y:sy/sw};
+ });
+ filtered[0]={...path[0]};filtered[filtered.length-1]={...path[path.length-1]};
+ const pts=[],cat=(a,b,c,d,t)=>.5*(2*b+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);
+ for(let i=0;i<filtered.length-1;i++){
+   const a=filtered[Math.max(0,i-1)],b=filtered[i],c=filtered[i+1],d=filtered[Math.min(filtered.length-1,i+2)];
+   const steps=Math.max(3,Math.ceil(Math.hypot(c.x-b.x,c.y-b.y)/2.3));
+   for(let j=0;j<steps;j++){const t=j/steps;pts.push({x:cat(a.x,b.x,c.x,d.x,t),y:cat(a.y,b.y,c.y,d.y,t)})}
+ }
+ pts.push(filtered[filtered.length-1]);course=[];total=0;
+ for(let i=0;i<pts.length;i++){if(i)total+=Math.max(.02,Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y)*.12);course.push({x:(pts[i].x-W/2)*.08,y:(H-pts[i].y)*.09+3,z:total})}
  speed=9;
 }
 function at(z){z=cap(z,0,total);let i=1;while(i<course.length-1&&course[i].z<z)i++;const a=course[i-1],b=course[i],f=cap((z-a.z)/(b.z-a.z||1),0,1);return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f,z};}
-function view(){let p=at(progress),ahead=at(Math.min(total,progress+3)),dx=ahead.x-p.x,dy=ahead.y-p.y,dz=ahead.z-p.z,mag=Math.hypot(dx,dy,dz)||1;let forward={x:dx/mag,y:dy/mag,z:dz/mag};let right={x:forward.z,y:0,z:-forward.x},rm=Math.hypot(right.x,right.z)||1;right.x/=rm;right.z/=rm;let up={x:-forward.y*right.z,y:forward.z*right.x-forward.x*right.z,z:forward.y*right.x};return{p:{x:p.x,y:p.y+1,z:p.z},forward,right,up}}
+function view(){
+ const p=at(progress);
+ // 視点の上下左右も幅広い距離から求めて急な向きの変化を低減
+ const ahead=at(Math.min(total,progress+4)),behind=at(Math.max(0,progress-4));
+ let dx=ahead.x-behind.x,dy=ahead.y-behind.y,dz=ahead.z-behind.z,mag=Math.hypot(dx,dy,dz)||1;
+ let forward={x:dx/mag,y:dy/mag,z:dz/mag};
+ let right={x:forward.z,y:0,z:-forward.x},rm=Math.hypot(right.x,right.z)||1;
+ right.x/=rm;right.z/=rm;
+ let up={x:-forward.y*right.z,y:forward.z*right.x-forward.x*right.z,z:forward.y*right.x};
+ return{p:{x:p.x,y:p.y+1,z:p.z},forward,right,up};
+}
 function project(p,v){let d={x:p.x-v.p.x,y:p.y-v.p.y,z:p.z-v.p.z},z=d.x*v.forward.x+d.y*v.forward.y+d.z*v.forward.z;if(z<.2)return null;let x=d.x*v.right.x+d.z*v.right.z,y=d.x*v.up.x+d.y*v.up.y+d.z*v.up.z,s=Math.min(W,H)*.87/z;return{x:W/2+x*s,y:H*.56-y*s,z}}
 function line(a,b,v,col,w){let p=project(a,v),q=project(b,v);if(!p||!q)return;g.strokeStyle=col;g.lineWidth=cap(w*25/Math.min(p.z,q.z),.6,w*4);g.beginPath();g.moveTo(p.x,p.y);g.lineTo(q.x,q.y);g.stroke()}
+function drawShape(v,points,color,stroke){
+ const pp=points.map(p=>project(p,v));if(pp.some(p=>!p))return;
+ g.beginPath();pp.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fillStyle=color;g.fill();
+ if(stroke){g.strokeStyle=stroke;g.lineWidth=1.2;g.stroke()}
+}
+function landmark(v,x,z,type,seed){
+ const p=project({x,y:0,z},v),q=project({x,y:6,z},v);if(!p||!q||p.z>110)return;
+ const unit=cap(Math.abs(p.y-q.y)/6,.25,75),cx=p.x,cy=p.y;
+ if(type==="sea"){
+   g.fillStyle="#3cabc9";const top=project({x:x-6,y:.1,z},v),bottom=project({x:x+6,y:.1,z},v);
+   if(top&&bottom){g.beginPath();g.moveTo(top.x,top.y);g.lineTo(bottom.x,bottom.y);g.lineTo(bottom.x,Math.min(H*2,bottom.y+unit*4));g.lineTo(top.x,Math.min(H*2,top.y+unit*4));g.fill()}
+   g.strokeStyle="#d3f7ff";g.lineWidth=cap(unit*.13,1,3);for(let k=0;k<4;k++){let y=cy-k*unit*.45;g.beginPath();g.moveTo(cx-4*unit,y);g.lineTo(cx+4*unit,y);g.stroke()}
+ }else if(type==="desert"){
+   g.fillStyle="#d8ae68";g.beginPath();g.ellipse(cx,cy+unit*.6,unit*5,unit*1.5,-.1,0,Math.PI*2);g.fill();
+   g.strokeStyle="#468c57";g.lineWidth=cap(unit*.25,1,9);g.beginPath();g.moveTo(cx,cy);g.lineTo(cx,cy-unit*2.2);g.moveTo(cx,cy-unit);g.lineTo(cx-unit,cy-unit*1.2);g.lineTo(cx-unit,cy-unit*1.7);g.moveTo(cx,cy-unit*1.5);g.lineTo(cx+unit,cy-unit*1.7);g.lineTo(cx+unit,cy-unit*2.1);g.stroke();
+ }else if(type==="tower"){
+   g.strokeStyle="#666e86";g.lineWidth=cap(unit*.4,1,9);g.beginPath();g.moveTo(cx,cy);g.lineTo(cx,cy-unit*7.5);g.stroke();
+   g.fillStyle="#d7e4eb";g.fillRect(cx-unit*1.35,cy-unit*5.5,unit*2.7,unit*.6);
+   g.fillStyle="#d64d45";g.fillRect(cx-unit*.2,cy-unit*7.8,unit*.4,unit*.65);
+ }else if(type==="castle"){
+   g.fillStyle="#e8e5d9";g.fillRect(cx-unit*2.4,cy-unit*3.6,unit*4.8,unit*3.6);
+   g.fillRect(cx-unit*.8,cy-unit*5.5,unit*1.6,unit*2);
+   for(const dx of [-2.1,2.1])g.fillRect(cx+dx*unit-unit*.65,cy-unit*5,unit*1.3,unit*4);
+   g.fillStyle="#364961";
+   for(const dx of [-2.1,0,2.1]){g.beginPath();g.moveTo(cx+dx*unit-unit*.95,cy-unit*(dx===0?5.5:5));g.lineTo(cx+dx*unit,cy-unit*(dx===0?7:6.2));g.lineTo(cx+dx*unit+unit*.95,cy-unit*(dx===0?5.5:5));g.fill()}
+ }else if(type==="city"){
+   for(let k=-2;k<=2;k++){const h=(3+(Math.abs(seed+k*7)%5))*.75*unit;g.fillStyle=["#7a91a6","#adb7b8","#72889f"][Math.abs(k+seed)%3];g.fillRect(cx+k*unit*1.18,cy-h,unit*.96,h);g.fillStyle="#dfebcf";for(let j=1;j<4;j++)g.fillRect(cx+k*unit*1.18+unit*.27,cy-h+j*h/4,unit*.2,unit*.12)}
+ }else{
+   g.strokeStyle="#75573f";g.lineWidth=cap(unit*.45,1,12);g.beginPath();g.moveTo(cx,cy);g.lineTo(cx,cy-unit*3.3);g.stroke();
+   g.fillStyle=["#39885c","#51956c","#277b5c"][seed%3];
+   for(const dx of [-1,0,1]){g.beginPath();g.ellipse(cx+dx*unit*.9,cy-unit*(3.4+(dx===0?.7:0)),unit*1.35,unit*1.45,0,0,Math.PI*2);g.fill()}
+ }
+}
 function scenery(v){
- // 近くの木立。地図でなく走行座標に固定してパースを反映
- let start=Math.max(0,Math.floor((progress-4)/5)),end=Math.ceil(Math.min(total+10,progress+65)/5);
- for(let i=end;i>=start;i--){let z=i*5,p=at(Math.min(z,total));
- for(const side of [-1,1]){let x=p.x+side*(3+(i%3)*1.6),base=project({x,y:0,z},v),top=project({x,y:3.5+(i%3)*.6,z},v);
- if(!base||!top)continue;let r=cap(Math.abs(base.y-top.y)*.29,3,120);
- g.strokeStyle="#7a5a45";g.lineWidth=cap(r*.21,1,11);g.beginPath();g.moveTo(base.x,base.y);g.lineTo(top.x,top.y);g.stroke();
- g.fillStyle=["#39885c","#51956c","#277b5c"][(i+(side>0?1:0))%3];
- for(let q=-1;q<=1;q++){g.beginPath();g.ellipse(top.x+q*r*.43,top.y+(q%2)*r*.1,r*.78,r*.87,0,0,Math.PI*2);g.fill()}
- }}
+ // 走行ルートの区間ごとに「森→街→海→城→砂漠→塔」を配置
+ const types=["forest","city","sea","castle","desert","tower"],period=Math.max(16,total/6);
+ const start=Math.max(0,Math.floor((progress-7)/5)),end=Math.ceil(Math.min(total+5,progress+70)/5);
+ for(let i=end;i>=start;i--){
+   const z=i*5;if(z>total+5)continue;const p=at(Math.min(total,z)),section=Math.min(5,Math.floor(z/period)),type=types[section];
+   for(const side of [-1,1]){
+     let x=p.x+side*(type==="sea"?5:4+(i%3)*1.5);
+     if(type==="sea"&&side<0){landmark(v,x,z,"sea",i);continue}
+     if(type==="desert"){if(i%2===0)landmark(v,x,z,"desert",i);continue}
+     if(type==="forest"){landmark(v,x,z,"forest",i);continue}
+     if(type==="city"){if(i%2===0)landmark(v,x,z,"city",i);continue}
+     if(type==="castle"){if(i%5===0)landmark(v,x,z,"castle",i);else landmark(v,x,z,"forest",i);continue}
+     if(type==="tower"){if(i%6===0)landmark(v,x,z,"tower",i);else if(i%2===0)landmark(v,x,z,"city",i);continue}
+     if(i%2===0)landmark(v,x,z,"forest",i);
+   }
+ }
 }
 function cockpit(){
  // 車体・左右の腕・前のグリップを常に画面下に固定
@@ -72,8 +133,8 @@ function cockpit(){
 function drawRide(){
  const v=view();let sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,"#70bdeb");sky.addColorStop(1,"#c8efff");g.fillStyle=sky;g.fillRect(0,0,W,H);
  let horizon=cap(H*(.58+v.forward.y*1.3),-H*.5,H*1.5);g.fillStyle="#8ec59c";g.fillRect(0,horizon,W,H-horizon);scenery(v);
- for(let i=course.length-1;i>0;i--){let a=course[i-1],b=course[i];if(a.z<progress-2||b.z>progress+120)continue;let tx=b.x-a.x,tz=b.z-a.z,n=Math.hypot(tx,tz)||1,ox=tz/n*.48,oz=-tx/n*.48;
- line({x:a.x-ox,y:a.y,z:a.z-oz},{x:b.x-ox,y:b.y,z:b.z-oz},v,"#29465b",2.2);
+ for(let i=course.length-1;i>0;i--){let a=course[i-1],b=course[i];if(a.z<progress-2||b.z>progress+120)continue;let tx=b.x-a.x,tz=b.z-a.z,n=Math.hypot(tx,tz)||1,ox=tz/n*.55,oz=-tx/n*.55;
+ line({x:a.x-ox,y:a.y,z:a.z-oz},{x:b.x-ox,y:b.y,z:b.z-oz},v,"#29465b",2.8);
  line({x:a.x+ox,y:a.y,z:a.z+oz},{x:b.x+ox,y:b.y,z:b.z+oz},v,"#29465b",2.2);
  if(i%3===0)line({x:a.x-ox,y:a.y,z:a.z-oz},{x:a.x+ox,y:a.y,z:a.z+oz},v,"#f58c57",1.3);
  if(i%9===0)line(a,{x:a.x,y:0,z:a.z},v,"#7b9396",.7);}
@@ -86,7 +147,7 @@ pause.onclick=()=>{if(progress>=total){progress=0;stopped=false;hint.hidden=true
 clear.onclick=()=>{mode="edit";path=[];course=[];distance=0;drawing=false;go.hidden=false;go.disabled=true;pause.hidden=true;hint.hidden=false;hint.textContent="画面に一筆書きでコースを描いてください";state.textContent="指で線を描いてください";paint()};
 function loop(t){let dt=Math.min(.05,(t-last)/1000||0);last=t;if(mode==="ride"){if(!stopped){
  const a=at(progress),b=at(Math.min(total,progress+1)),grade=(b.y-a.y)/Math.max(.1,b.z-a.z);
- speed=cap(speed+(-22*grade-.06*speed+.35)*dt,2.2,34);
+ speed=cap(speed+((grade<0?-11:-22)*grade-.06*speed+.35)*dt,2.2,34);
  progress=Math.min(total,progress+dt*speed);
  }drawRide()}requestAnimationFrame(loop)}
 
