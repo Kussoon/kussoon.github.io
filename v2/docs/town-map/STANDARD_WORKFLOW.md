@@ -26,7 +26,7 @@
 - `v2/nishinomiya-town-comparison-b.html`（#436）と `v2/nishinomiya-town-study-c.html`（#437）：西宮市の町域・ラベル・点滅・地域学習・クイズの継承候補。これらの実装は全国V2のラベル処理とは別である。
 - `Kussoon/nishinomiya`・`takarazuka`・`amagasaki`・`itami`・`ashiya` の各現行 `town-search.html`：異なるデータ・表示形態・例外を持つ。無条件で一つの実装に置き換えない。
 - PR #465 の `v2/docs/town-map/LEGACY_INHERITANCE_AUDIT_20261115.md`：第1次継承監査（Draft）。**未完了の監査を完了と見なさない**。
-- `MAINTENANCE_RULES.md` の現行正本所在地と各規則IDは、実ファイル確認まで未確定。適用根拠のない『全国ルール』を町名マップに強制しない。
+- `v2/national/MAINTENANCE_RULES.md` を現行mainで確認。**町名への採用区分は `MAINTENANCE_RULES_APPLICABILITY.md` の第3次監査に記録。** 町名に適用しない全国専用R05等を「未継承」として無条件適用しない。
 
 ## 実装上の原則
 - データ：`v2/data/town-maps/<自治体コード>.json`
