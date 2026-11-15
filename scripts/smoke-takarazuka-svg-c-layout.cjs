@@ -18,6 +18,27 @@ async function run(browserType,width,height){
   assert.ok(pairPositions.textMinus<pairPositions.textPlus,'text + must be on the right of text -');
   assert.equal(await page.locator('#areas path.town').count(),125,'all source paths');
   assert.equal(await page.locator('#labels g.label').count(),125,'all 125 town labels');
+  // 鹿塩: two large, separated pieces are one original SVG path and one quiz town.
+  const shikashio=await page.evaluate(()=>{
+   const p=[...document.querySelectorAll('#areas path.town')].find(x=>x.getAttribute('data-name')==='鹿塩');
+   const label=[...document.querySelectorAll('#labels g.label')].find(x=>x.__data__?.name==='鹿塩');
+   const anchor=label?.__data__?.anchor||[];
+   const point=document.querySelector('#map').createSVGPoint();
+   point.x=anchor[0];point.y=anchor[1];
+   return {paths:[...document.querySelectorAll('#areas path.town')].filter(x=>x.getAttribute('data-name')==='鹿塩').length,
+    subpaths:(p?.getAttribute('d')?.match(/M/g)||[]).length,
+    labelCount:[...document.querySelectorAll('#labels g.label')].filter(x=>x.__data__?.name==='鹿塩').length,
+    anchor,inside:p?.isPointInFill(point)};
+  });
+  assert.equal(shikashio.paths,1,'鹿塩 must stay a single selectable town path');
+  assert.ok(shikashio.subpaths>=2,'鹿塩 contains separate component shapes');
+  assert.equal(shikashio.labelCount,1,'鹿塩 remains one label in current pilot');
+  assert.ok(shikashio.anchor[0]>455&&shikashio.anchor[0]<522,'鹿塩 label must anchor in western component');
+  assert.equal(shikashio.inside,true,'鹿塩 label must sit in the actual SVG fill');
+  await page.locator('#areas path.town[data-name="鹿塩"]').dispatchEvent('click');
+  assert.match(await page.locator('#status').textContent(),/鹿塩.*選択中/,'鹿塩 path selects both components by the same town name');
+  await page.locator('#areas path.town[data-name="鹿塩"]').dispatchEvent('click');
+  assert.match(await page.locator('#status').textContent(),/鹿塩.*停止/,'tapping selected 鹿塩 again stops blink');
   const root=page.locator('#communityOptions');
   await page.locator('#communityToggle').click();
   assert.equal(await root.locator('button').count(),21,'all area + 20 communities');
