@@ -135,6 +135,10 @@ function buildAdjacency(topology){
 function initCommunityData(mapping,subtopology){
  communityNames=[...(mapping.communities||[])];
  if(communityNames.length!==26||communityNames.some(co=>!COMMUNITY_READINGS[co]))throw Error('26コミュニティのデータまたは読みが不正です');
+ // Nationwide display contract: sort confirmed Japanese readings, keep all-area first.
+ // The source community array and town-to-community assignments remain unchanged.
+ const kanaCollator=new Intl.Collator('ja',{usage:'sort',sensitivity:'base',numeric:false});
+ communityNames.sort((a,b)=>kanaCollator.compare(COMMUNITY_READINGS[a],COMMUNITY_READINGS[b])||kanaCollator.compare(a,b));
  const counts=new Map();
  for(const [raw,info] of Object.entries(mapping.towns||{})){
   const name=groupedName(raw),co=info.community;

@@ -40,4 +40,18 @@ for(const [selector,label] of [
  [/noindex,nofollow/,'pilot remains noindex']
  ])requireMatch(svg,selector,label);
 requireMatch(base,/C-BASELINE 1\.0/,'formal baseline document');
+const rule=fs.readFileSync(path.join(root,'v2/docs/town-map/TOWN_COMMUNITY_ORDER_01.md'),'utf8');
+requireMatch(rule,/TOWN-COMMUNITY-ORDER-01/,'nationwide community sorting rule');
+requireMatch(svg,/communityNames\.sort\(\(a,b\)=>kanaCollator\.compare\(COMMUNITY_READINGS\[a\],COMMUNITY_READINGS\[b\]\)/,'kana sorting implemented');
+requireMatch(svg,/for\(const co of \['',\.\.\.communityNames\]\)/,'all-area button first');
+const matchReadings=svg.match(/const COMMUNITY_READINGS=(\{[^;]+\});/);
+assert.ok(matchReadings,'community readings present');
+const readings=JSON.parse(matchReadings[1].replaceAll("'",'"'));
+assert.equal(Object.keys(readings).length,26,'26 confirmed readings');
+const comparator=new Intl.Collator('ja',{usage:'sort',sensitivity:'base',numeric:false});
+const ordered=Object.keys(readings).sort((a,b)=>comparator.compare(readings[a],readings[b])||comparator.compare(a,b));
+assert.equal(new Set(ordered).size,26,'unique communities');
+for(let i=1;i<ordered.length;i++)assert.ok(comparator.compare(readings[ordered[i-1]],readings[ordered[i]])<=0,'readings sorted');
+assert.equal(ordered[0],'芦原','first community');
+assert.equal(ordered[ordered.length-1],'用海','last community');
 console.log('Nishinomiya SVG pilot static regression checks passed.');
