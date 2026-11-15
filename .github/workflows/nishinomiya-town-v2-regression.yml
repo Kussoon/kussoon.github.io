@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - 'v2/nishinomiya-town-study-c.html'
+      - 'v2/nishinomiya-town-svg-c-render-pilot.html'
+      - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
       - 'v2/nishinomiya-town-comparison-b.html'
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
@@ -20,6 +22,8 @@ on:
   pull_request:
     paths:
       - 'v2/nishinomiya-town-study-c.html'
+      - 'v2/nishinomiya-town-svg-c-render-pilot.html'
+      - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
       - 'v2/nishinomiya-town-comparison-b.html'
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
@@ -80,6 +84,8 @@ jobs:
           node-version: '20'
       - name: Audit town geometry, readings, community coverage, and quiz options
         run: node site/scripts/audit-nishinomiya-town-v2.cjs site nishinomiya
+      - name: Guard SVG comparison against C-baseline readings, offsets, and quiz UI
+        run: node site/scripts/audit-nishinomiya-svg-c-pilot.cjs
       - name: Check C-page update timestamp on HTML changes
         run: cd site && node scripts/check-nishinomiya-town-v2-timestamp.cjs
       - name: Verify geography hierarchy and city town adapters

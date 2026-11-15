@@ -44,7 +44,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 .small{font-size:13px;color:#526f81}
 </style></head>
 <body><main>
-<nav class="nav"><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
+<nav class="nav"><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市 V2 C版｜SVG描画比較試作</h1>
 <p class="notice"><strong>未採用の技術試作です。</strong> 正式C版は変更していません。現在は321町名の町域形状・通常ラベル・読み・サイズ・町域選択を検証する第1段階です。ラベル基準点は、従来のSVG幾何中心とC版Leafletの多角形中心に近い計算を切り替えて比較できます。<strong>どちらも正式C版と同じ位置になる保証はありません</strong>。26地域選択を比較試作として追加しました。クイズ1・2も比較試作として追加しました。比較結果に基づく採用判断までは正式公開しません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
@@ -274,6 +274,19 @@ $('anchorMode').onclick=()=>{
   ?'C版の多角形中心計算を参考にしたラベル位置です（比較試作・未採用）。'
   :'初期SVGのラベル位置です（比較試作・未採用）。';
 };
+function focusTown(name){
+ const town=features.find(f=>f.properties.S_NAME===name);
+ if(!town)return false;
+ // Keep the geographic projection stable, and zoom the SVG view to the selected town.
+ const bounds=path.bounds(town);
+ if(bounds.some(p=>p.some(v=>!Number.isFinite(v))))return false;
+ const w=Math.max(1,bounds[1][0]-bounds[0][0]),h=Math.max(1,bounds[1][1]-bounds[0][1]);
+ const scale=Math.min(40,Math.max(.6,Math.min((baseWidth-100)/w,(baseHeight-100)/h)));
+ const center=[(bounds[0][0]+bounds[1][0])/2,(bounds[0][1]+bounds[1][1])/2];
+ svg.call(zoom.transform,d3.zoomIdentity.translate(baseWidth/2-center[0]*scale,baseHeight/2-center[1]*scale).scale(scale));
+ choose(name);
+ return true;
+}
 function changeZoom(factor){svg.transition().duration(150).call(zoom.scaleBy,factor)}
 $('zoomIn').onclick=()=>changeZoom(2);$('zoomOut').onclick=()=>changeZoom(.5);
 $('reset').onclick=reset;
@@ -451,6 +464,13 @@ Promise.all([
  if(features.length!==321)throw Error('町名数が321ではありません: '+features.length);
  draw();initCommunityData(mapping,subtopology);
  $('status').textContent='SVG描画：321町名・26コミュニティ読み込み完了（比較試作・未採用）。町を押すと点滅します。';
+ const linkedTown=new URLSearchParams(location.search).get('town');
+ if(linkedTown){
+  if(features.some(f=>f.properties.S_NAME===linkedTown)){
+   $('hierarchyReturn').href='/v2/geography/#town:jp-hyogo-nishinomiya:'+encodeURIComponent(linkedTown);
+   if(focusTown(linkedTown))$('status').textContent='階層ナビゲーションから「'+townLabel(linkedTown)+'」を表示しています。地図を押すと点滅を操作できます。';
+  }else $('status').textContent='指定された町名は見つかりません。西宮市全域を表示しています。';
+ }
  new ResizeObserver(()=>{const [w,h]=size();if(w!==baseWidth||h!==baseHeight){draw();reset()}}).observe($('map'));
 }).catch(e=>{$('status').textContent='読み込み失敗：'+e.message;console.error(e)});
 })();
