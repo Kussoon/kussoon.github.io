@@ -40,7 +40,10 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 @media(max-width:400px){.quiz-choices{grid-template-columns:1fr}}
 .labels{pointer-events:none}.town-label{font-weight:800;fill:#193e58;stroke:#fff;stroke-width:.18em;paint-order:stroke fill;text-anchor:middle;dominant-baseline:middle}.town-reading{font-weight:600}
 .controls{position:absolute;right:8px;bottom:8px;display:flex;flex-direction:column;gap:5px;width:102px;z-index:3}
-.controls .pair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.controls .pair button{white-space:normal;line-height:1.25}.controls #smaller span,.controls #larger span{display:block}button{border:1px solid #92b6cc;border-radius:7px;min-height:40px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
+.controls .pair{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+/* UI-PAIR-ORDER-01: map enlargement left; text enlargement right. */
+.controls #zoomIn,.controls #smaller{grid-column:1;grid-row:1}
+.controls #zoomOut,.controls #larger{grid-column:2;grid-row:1}.controls .pair button{white-space:normal;line-height:1.25}.controls #smaller span,.controls #larger span{display:block}button{border:1px solid #92b6cc;border-radius:7px;min-height:40px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
 .full{position:absolute;right:8px;top:8px;z-index:3;padding:0 12px}
 .fullscreen{overflow:hidden}.fullscreen .frame{position:fixed;inset:0;border:0;border-radius:0;z-index:10000}.fullscreen svg{height:100dvh;width:100vw}
 [hidden]{display:none!important}button:focus-visible{outline:3px solid #dd9a31;outline-offset:2px}
@@ -50,7 +53,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <nav class="nav"><a href="/v2/takarazuka-town-svg-adapter-pilot.html">前の宝塚市試作</a><a href="/takarazuka/">宝塚市トップ</a><a href="/takarazuka/town-search.html">元の宝塚市SVG</a><a href="/v2/nishinomiya-town-svg-core-pilot.html">西宮市V2</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>宝塚市V2｜町名SVG Cレイアウト比較試作</h1>
 <!-- 更新時には下記を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-15T22:02:59+09:00">更新：2026/11/15 22:02:59（JST）</time>
+<time class="updated-at" id="updatedAt" datetime="2026-11-15T22:24:49+09:00">更新：2026/11/15 22:24:49（JST）</time>
 <p class="notice"><strong>比較試作・未採用です。</strong> 添付例の西宮市V2と同じ地域選択・クイズ1・2・地図操作の画面構成を、宝塚市125町名に適用しました。町域形状と町名読みは既存の宝塚市データを再利用します。<strong>町名ラベルの基準点はまだ仮配置で、手動オフセット調整は未実施です。</strong> また、20地域のうち町名台帳で読みが確認できない地域は「読み確認中」と表示し、五十音順の推測並べ替えは行っていません。正式な西宮市C版と既存の宝塚市ページは変更していません。</p>
 <p class="small">町域形状・読み：Kussoon/takarazuka の元SVGおよび町名台帳。操作・見た目の比較基準：西宮市V2 Cレイアウト。</p>
 <section class="study" aria-label="20地域学習範囲"><div class="study-row"><strong>学習範囲</strong><button id="communityToggle" type="button" aria-expanded="false" aria-controls="communityOptions" disabled>宝塚市全域（125町名） ▾</button><span id="communityCount">準備中</span></div>
