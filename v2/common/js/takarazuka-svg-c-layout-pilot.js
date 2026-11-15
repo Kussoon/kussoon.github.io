@@ -42,9 +42,23 @@ function fontPixels(){
  const ratio=Math.max(.75,Math.min(2,Math.pow(1.18,Math.log2(Math.max(.1,transform.k/baseScale)))));
  return 9.5*ratio*fontPct/100;
 }
+// 鹿塩は元SVGでは一つの町の複合パス（離れた主要2区画と微小な輪郭）である。
+// 全パーツの外接矩形中心は町域外に来るため、面積が最大の西側区画内に
+// ラベル基準点を置く。元の町域パスは分割せず、選択・点滅・クイズ判定を一体に保つ。
+const multipartLabelAnchors=Object.freeze({'鹿塩':[493.6,1556.6]});
 function labelAnchor(t){
  // Unapproved candidate position: SVG bbox center; try a nearby fill point if necessary.
  const b=t.bbox,p=t.pathEl,cx=b.x+b.width/2,cy=b.y+b.height/2;
+ const special=multipartLabelAnchors[t.name];
+ if(special&&typeof p.isPointInFill==='function'){
+  const point=svg.node().createSVGPoint();
+  // Keep any fallback inside the western component of this multipart town.
+  for(const [x,y] of [special,[493,1556],[498,1555],[505,1553],[490,1565],[500,1560]]){
+   point.x=x;point.y=y;
+   if(p.isPointInFill(point))return [x,y];
+  }
+ }
+
  if(typeof p.isPointInFill!=='function')return [cx,cy];
  try{
   const point=svg.node().createSVGPoint();
