@@ -13,6 +13,9 @@ on:
       - 'v2/takarazuka-town-svg-multipart-label-pilot.html'
       - 'v2/takarazuka-town-svg-auto-label-pilot.html'
       - 'v2/takarazuka-town-svg-auto-density-pilot.html'
+      - 'v2/takarazuka-town-svg-early-label-pilot.html'
+      - 'v2/common/js/takarazuka-svg-early-label-pilot.js'
+      - 'scripts/smoke-takarazuka-svg-early-label.cjs'
       - 'v2/common/js/takarazuka-svg-auto-density-pilot.js'
       - 'scripts/smoke-takarazuka-svg-auto-density.cjs'
       - 'v2/common/js/takarazuka-svg-auto-label-pilot.js'
@@ -58,6 +61,9 @@ on:
       - 'v2/takarazuka-town-svg-multipart-label-pilot.html'
       - 'v2/takarazuka-town-svg-auto-label-pilot.html'
       - 'v2/takarazuka-town-svg-auto-density-pilot.html'
+      - 'v2/takarazuka-town-svg-early-label-pilot.html'
+      - 'v2/common/js/takarazuka-svg-early-label-pilot.js'
+      - 'scripts/smoke-takarazuka-svg-early-label.cjs'
       - 'v2/common/js/takarazuka-svg-auto-density-pilot.js'
       - 'scripts/smoke-takarazuka-svg-auto-density.cjs'
       - 'v2/common/js/takarazuka-svg-auto-label-pilot.js'
@@ -267,6 +273,8 @@ jobs:
         run: node site/scripts/smoke-takarazuka-svg-auto-label.cjs
       - name: Browser-check Takarazuka automatic label screen-space density
         run: node site/scripts/smoke-takarazuka-svg-auto-density.cjs
+      - name: Browser-check early labels with overlap permitted
+        run: node site/scripts/smoke-takarazuka-svg-early-label.cjs
       - name: Upload Takarazuka C-layout preview screenshots
         if: always()
         uses: actions/upload-artifact@v4
