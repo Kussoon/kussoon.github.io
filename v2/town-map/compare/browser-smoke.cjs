@@ -20,8 +20,12 @@ await page.locator('#plus').click();await page.locator('#plus').click();
 const zoom=await capture('zoom');assert.notEqual(zoom.view,initial.view);
 await page.locator('#readings').check();const reading=await capture('reading-on');
 await page.locator('#reset').click();const reset=await capture('reset');assert.equal(reset.view,initial.view);
+await page.goto(base+'/v2/town-map/compare/?code=28217&labelMode='+variant+'&town='+encodeURIComponent('中央町'),{waitUntil:'domcontentloaded',timeout:45000});
+await page.waitForFunction(()=>document.querySelectorAll('path.region.active').length>0&&document.querySelector('#selected')?.textContent?.includes('中央町'),null,{timeout:45000});
+const deepLink=await capture('town-direct-link');
+assert.match(deepLink.view,/^[-.\\d ]+$/);
 assert.deepEqual(errors,[],'page runtime errors: '+JSON.stringify(errors));
-results.push({browser:c.name,width:c.width,variant,initial,zoom,reading,reset});await page.close();
+results.push({browser:c.name,width:c.width,variant,initial,zoom,reading,reset,deepLink});await page.close();
 }}finally{await browser.close();}}
 fs.writeFileSync(path.join(dest,'report.json'),JSON.stringify({results},null,2)+'\n');
 console.log('Kawanishi A/B browser trial PASS (not Safari device acceptance): '+results.length+' scenarios');
