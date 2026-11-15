@@ -27,7 +27,10 @@ body.town-quiz-mode #reading{display:none}
 .quiz-panel{margin-top:9px;border-top:1px solid #d5e0e9;padding-top:9px}
 .quiz-question{font-size:18px;font-weight:750}
 .quiz-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0}
-.quiz-choices button{white-space:normal;overflow-wrap:anywhere;min-height:48px;padding:6px}
+.quiz-choices button{white-space:normal;overflow-wrap:anywhere;word-break:normal;min-height:64px;height:auto;padding:8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1.35}
+.quiz-choices .choice-name,.quiz-choices .choice-reading{display:block;max-width:100%;min-width:0;overflow-wrap:anywhere;text-align:center}
+.quiz-choices .choice-name{font-weight:750}
+.quiz-choices .choice-reading{font-size:.88em;font-weight:500}
 .quiz-choices button.quiz-wrong{background:#e15454;color:white;border-color:#bd3030}
 .quiz-choices button.quiz-correct{background:#238f55;color:white;border-color:#16723e}
 .quiz-choices button:disabled{opacity:1}
@@ -386,7 +389,10 @@ function loadQuizQuestion(){
   $('quizQuestion').textContent='黄色く点滅する町名を選んでください。';
   for(const name of choiceCandidates(target)){
    const button=document.createElement('button');
-   button.type='button';button.textContent=townLabel(name);
+   button.type='button';
+   const town=document.createElement('span');town.className='choice-name';town.textContent=name;
+   const reading=document.createElement('span');reading.className='choice-reading';reading.textContent=READINGS[name]||'読み未登録';
+   button.append(town,reading);
    button.onclick=()=>quizChoiceAnswer(name,button);
    $('quizChoices').append(button);
   }

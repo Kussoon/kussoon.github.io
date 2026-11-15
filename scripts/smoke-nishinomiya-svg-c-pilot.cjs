@@ -36,6 +36,18 @@ async function run(type,name,width,height,columns){
   await page.locator('#quizNext').click();
   assert.equal(await page.locator('#quizRetryWrong').isVisible(),true,'retry when missed');
   await page.locator('#quizBack').click();
+  await page.locator('#quizTwo').click();
+  assert.equal(await page.locator('#quizChoices button').count(),4);
+  const choiceLayout=await page.locator('#quizChoices button').evaluateAll(nodes=>nodes.map(node=>{
+   const parts=[...node.querySelectorAll('.choice-name,.choice-reading')];
+   return {parts:parts.length,name:parts[0]?.textContent,reading:parts[1]?.textContent,
+    vertical:parts.length===2&&parts[1].getBoundingClientRect().top>=parts[0].getBoundingClientRect().bottom,
+    fits:node.scrollHeight<=node.clientHeight+1};
+  }));
+  assert.ok(choiceLayout.every(v=>v.parts===2&&v.name&&v.reading&&v.vertical&&v.fits),
+   'quiz choices must show separate readable lines without clipping: '+JSON.stringify(choiceLayout));
+  await page.locator('#quizQuit').click();
+  await page.locator('#quizBack').click();
   await page.locator('#quizOne').click();
   await page.locator('#areas path.town').click();
   assert.equal(await page.locator('#quizNext').textContent(),'結果発表');
