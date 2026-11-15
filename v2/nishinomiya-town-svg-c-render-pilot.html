@@ -444,6 +444,8 @@ function finishQuiz(quitEarly=false){
  $('quizResult').textContent=quitEarly
   ?'途中終了：'+answered+' / '+quizOrder.length+'問終了（間違えた問題 '+quizWrong.size+'件）'
   :quizOrder.length+'問中 '+quizScore+'点（間違えた問題 '+quizWrong.size+'件）';
+ // Full marks: there is no missed question to retry; hide this action entirely.
+ $('quizRetryWrong').hidden=quizWrong.size===0;
  $('quizRetryWrong').disabled=quizWrong.size===0;
 }
 $('quizOne').onclick=()=>startQuiz(1);
