@@ -10,6 +10,9 @@ on:
       - 'v2/nishinomiya-town-svg-edge-dark-guard-pilot.html'
       - 'v2/takarazuka-town-svg-adapter-pilot.html'
       - 'v2/takarazuka-town-svg-c-layout-pilot.html'
+      - 'v2/takarazuka-town-svg-multipart-label-pilot.html'
+      - 'v2/common/js/takarazuka-svg-multipart-label-pilot.js'
+      - 'scripts/smoke-takarazuka-svg-multipart-label.cjs'
       - 'v2/common/js/takarazuka-svg-c-layout-pilot.js'
       - 'scripts/smoke-takarazuka-svg-c-layout.cjs'
       - 'v2/common/js/town-svg-source-adapter.js'
@@ -45,6 +48,9 @@ on:
       - 'v2/nishinomiya-town-svg-edge-dark-guard-pilot.html'
       - 'v2/takarazuka-town-svg-adapter-pilot.html'
       - 'v2/takarazuka-town-svg-c-layout-pilot.html'
+      - 'v2/takarazuka-town-svg-multipart-label-pilot.html'
+      - 'v2/common/js/takarazuka-svg-multipart-label-pilot.js'
+      - 'scripts/smoke-takarazuka-svg-multipart-label.cjs'
       - 'v2/common/js/takarazuka-svg-c-layout-pilot.js'
       - 'scripts/smoke-takarazuka-svg-c-layout.cjs'
       - 'v2/common/js/town-svg-source-adapter.js'
@@ -241,6 +247,8 @@ jobs:
           retention-days: 14
       - name: Browser-check Takarazuka 125-town C-layout and two quizzes
         run: node site/scripts/smoke-takarazuka-svg-c-layout.cjs
+      - name: Browser-check isolated Takarazuka multipart-label comparison
+        run: node site/scripts/smoke-takarazuka-svg-multipart-label.cjs
       - name: Upload Takarazuka C-layout preview screenshots
         if: always()
         uses: actions/upload-artifact@v4
