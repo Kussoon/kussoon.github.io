@@ -1,6 +1,6 @@
 # Kussoon V2 町名マップ｜全国展開マスター仕様書（更新中）
 
-**草案 v0.9／更新開始：2026-11-15／最初の完成対象：川西市（自治体コード28217）**
+**草案 v1.0／更新開始：2026-11-15／最初の完成対象：川西市（自治体コード28217）**
 
 ## 最上位の設計目的
 
@@ -19,7 +19,7 @@
 5. [LEGACY_FUNCTION_MATRIX.md](LEGACY_FUNCTION_MATRIX.md) — 第2次コード対照：T01〜T14、5市の地図方式、川西の機能不足、6市目のテスト改訂
 6. [MAINTENANCE_RULES_APPLICABILITY.md](MAINTENANCE_RULES_APPLICABILITY.md) — 第3次監査：正本R01〜R38と町名への適用境界、特にR05とR28〜R34
 7. [COMPARISON_PLAN_KAWANISHI.md](COMPARISON_PLAN_KAWANISHI.md) — 川西市A/B比較試作#467の評価基準・ブラウザ証拠・採用保留
-8. [COMPARISON_PLAN_NISHINOMIYA.md](COMPARISON_PLAN_NISHINOMIYA.md) — 西宮市321町名を共通SVG版に移すPR #468と、B/Cの機能を守る採用条件
+8. [COMPARISON_PLAN_NISHINOMIYA.md](COMPARISON_PLAN_NISHINOMIYA.md) — **不採用の記録**：#468の共通SVG試作は表示品質不合格、#469で撤去。西宮B/C版を正本として維持
 9. [REGRESSION_CHECKLIST.md](REGRESSION_CHECKLIST.md) — データ・画面・端末・URL・既存5市の回帰検証
 10. [cases/28217-kawanishi.md](cases/28217-kawanishi.md) — 川西市の固有情報・失敗事例・完成状況。次の自治体はcasesに1ファイルを追加
 
@@ -29,7 +29,7 @@
 
 - **すべての自治体の町名マップで、同じデータ契約・共通エンジン・操作仕様・回帰テストを採用することを目指す。** 既存のLeaflet版と独立SVG版は、ただちに置き換えず比較基準として保存する。
 - 「同じ形式」とはHTML・JS・検索・地図操作・読み・町域選択・データ形式・テスト・階層接続を共通化することで、見た目と既存機能を犠牲にすることではない。自治体ごとの境界、読み、公式名称、特例など**データに属する差分**は許容する。
-- 先行検証として[PR #468](https://github.com/Kussoon/kussoon.github.io/pull/468)で、**西宮市の既存B版321町域・321読みを変更せず**川西市と同じ共通SVGアダプターに接続する。旧B/C版は保護し、描画・選択・点滅・クイズを実ブラウザで比較してから移行採否を決める。
+- **不採用：** PR #468の西宮市321町名共通SVG試作は、実画面でラベル品質が既存B版に及ばず、利用者判断により破棄。PR #469で追加した5ファイルをmainから撤去。既存西宮B/C版を表示品質の基準とする。
 - 川西市を基準とするだけでなく、既存西宮市での機能維持を**共通エンジンの適合試験**とする。SVGで同等品質・操作・負荷が実現できない場合は、描画方式も再評価する。
 
 ## 完成の定義
