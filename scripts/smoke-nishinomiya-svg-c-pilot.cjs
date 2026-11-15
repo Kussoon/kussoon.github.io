@@ -18,7 +18,11 @@ async function run(type,name,width,height,columns){
    const x=id=>document.getElementById(id).getBoundingClientRect().left;
    return {mapPlus:x('zoomIn'),mapMinus:x('zoomOut'),textMinus:x('smaller'),textPlus:x('larger')};
   });
-  assert.ok(pairPositions.mapPlus<pairPositions.mapMinus,'map + must be on the left of -');
+  if((process.env.SVG_PILOT_PATH||'').includes('nishinomiya-town-svg-core-pilot.html')){
+   assert.ok(pairPositions.mapMinus<pairPositions.mapPlus,'phase 3 map - must be on the left of +');
+  }else{
+   assert.ok(pairPositions.mapPlus<pairPositions.mapMinus,'unmodified earlier SVG pilots retain + left');
+  }
   assert.ok(pairPositions.textMinus<pairPositions.textPlus,'text + must be on the right of text -');
   const updated=await page.locator('#updatedAt').textContent();
   assert.match(updated,/更新：\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}（JST）/);

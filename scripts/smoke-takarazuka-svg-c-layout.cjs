@@ -14,7 +14,7 @@ async function run(browserType,width,height){
    const x=id=>document.getElementById(id).getBoundingClientRect().left;
    return {mapPlus:x('zoomIn'),mapMinus:x('zoomOut'),textMinus:x('smaller'),textPlus:x('larger')};
   });
-  assert.ok(pairPositions.mapPlus<pairPositions.mapMinus,'map + must be on the left of -');
+  assert.ok(pairPositions.mapMinus<pairPositions.mapPlus,'map - must be on the left of +');
   assert.ok(pairPositions.textMinus<pairPositions.textPlus,'text + must be on the right of text -');
   assert.equal(await page.locator('#areas path.town').count(),125,'all source paths');
   assert.equal(await page.locator('#labels g.label').count(),125,'all 125 town labels');
