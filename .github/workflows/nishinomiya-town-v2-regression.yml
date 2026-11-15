@@ -8,6 +8,9 @@ on:
       - 'v2/nishinomiya-town-svg-viewport-pilot.html'
       - 'v2/nishinomiya-town-svg-core-pilot.html'
       - 'v2/nishinomiya-town-svg-edge-dark-guard-pilot.html'
+      - 'v2/takarazuka-town-svg-adapter-pilot.html'
+      - 'v2/common/js/town-svg-source-adapter.js'
+      - 'scripts/smoke-takarazuka-svg-adapter.cjs'
       - 'v2/common/js/town-svg-core.js'
       - 'v2/common/js/town-svg-viewport.js'
       - 'scripts/audit-town-svg-viewport-phase2.cjs'
@@ -37,6 +40,9 @@ on:
       - 'v2/nishinomiya-town-svg-viewport-pilot.html'
       - 'v2/nishinomiya-town-svg-core-pilot.html'
       - 'v2/nishinomiya-town-svg-edge-dark-guard-pilot.html'
+      - 'v2/takarazuka-town-svg-adapter-pilot.html'
+      - 'v2/common/js/town-svg-source-adapter.js'
+      - 'scripts/smoke-takarazuka-svg-adapter.cjs'
       - 'v2/common/js/town-svg-core.js'
       - 'v2/common/js/town-svg-viewport.js'
       - 'scripts/audit-town-svg-viewport-phase2.cjs'
@@ -225,6 +231,16 @@ jobs:
         with:
           name: nishinomiya-svg-shared-ui-screenshots
           path: svg-town-common-ui-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Browser-check Takarazuka 125-town SVG adapter
+        run: node site/scripts/smoke-takarazuka-svg-adapter.cjs
+      - name: Upload Takarazuka SVG adapter screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: takarazuka-svg-adapter-comparison
+          path: takarazuka-svg-adapter-screenshots/
           if-no-files-found: warn
           retention-days: 14
       - name: Upload SVG pilot comparison screenshots
