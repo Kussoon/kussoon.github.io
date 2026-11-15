@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 試作</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;background:#132b42;color:white}
+main{height:100dvh;display:flex;flex-direction:column}header{padding:9px 13px;background:#102338;display:flex;align-items:center;justify-content:space-between;gap:8px}h1{font-size:17px;margin:0}#state{font-size:12px;color:#91f0cf}#area{flex:1;position:relative;min-height:0}canvas{display:block;width:100%;height:100%;touch-action:none;background:#d6effa}#hint{position:absolute;top:10px;left:10px;background:#102338c9;padding:7px 10px;border-radius:10px;font-size:13px;pointer-events:none}#hint[hidden]{display:none}nav{display:flex;gap:9px;background:#102338;padding:9px 10px calc(9px + env(safe-area-inset-bottom))}button{border:0;border-radius:9px;padding:12px;min-height:46px;font-size:15px;font-weight:bold;background:#e2ebf2;color:#132b42}#go{background:#53e3b3;flex:1}button:disabled{opacity:.4}button[hidden]{display:none}small{font-size:10px;color:#b4c8d6;display:block;text-align:center;background:#102338;padding-bottom:4px}
+</style></head>
+<body><main><header><h1>🎢 一筆書きコースター</h1><span id="state">指で線を描いてください</span></header><div id="area"><canvas id="canvas"></canvas><div id="hint">画面に一筆書きでコースを描いてください</div></div><nav><button id="clear">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><small>試作版 2026-11-15｜広告・外部ライブラリなし／物理計算は簡易表現</small></main>
+<script>
+(()=>{
+"use strict";
+const c=document.getElementById("canvas"),g=c.getContext("2d"),go=document.getElementById("go"),clear=document.getElementById("clear"),pause=document.getElementById("pause"),hint=document.getElementById("hint"),state=document.getElementById("state");
+let W=0,H=0,path=[],drawing=false,mode="edit",distance=0,progress=0,stopped=false,last=0,course=[],total=0;
+const cap=(v,a,b)=>Math.max(a,Math.min(b,v));
+function resize(){const r=c.getBoundingClientRect();W=r.width;H=r.height;const d=Math.min(2,devicePixelRatio||1);c.width=Math.max(1,Math.round(W*d));c.height=Math.max(1,Math.round(H*d));g.setTransform(d,0,0,d,0,0);if(mode==="edit")paint();}
+addEventListener("resize",resize);
+function point(x,y){const r=c.getBoundingClientRect();return{x:cap(x-r.left,0,W),y:cap(y-r.top,0,H)}}
+function down(x,y){if(mode!=="edit")return;drawing=true;path=[point(x,y)];distance=0;go.disabled=true;hint.hidden=true;state.textContent="描画中";paint();}
+function move(x,y){if(!drawing)return;const p=point(x,y),q=path[path.length-1],len=Math.hypot(p.x-q.x,p.y-q.y);if(len>2){path.push(p);distance+=len;go.disabled=distance<100;state.textContent="線の長さ "+Math.round(distance);paint();}}
+function up(){if(!drawing)return;drawing=false;state.textContent=distance>=100?"コースができました":"もう少し長く描いてください";}
+if(window.PointerEvent){
+ c.addEventListener("pointerdown",e=>{e.preventDefault();try{c.setPointerCapture(e.pointerId)}catch(_){}down(e.clientX,e.clientY)});
+ c.addEventListener("pointermove",e=>{if(drawing){e.preventDefault();move(e.clientX,e.clientY)}});
+ c.addEventListener("pointerup",up);c.addEventListener("pointercancel",up);
+}else{
+ c.addEventListener("touchstart",e=>{e.preventDefault();const t=e.changedTouches[0];down(t.clientX,t.clientY)},{passive:false});
+ c.addEventListener("touchmove",e=>{e.preventDefault();const t=e.changedTouches[0];move(t.clientX,t.clientY)},{passive:false});
+ c.addEventListener("touchend",up);c.addEventListener("mousedown",e=>down(e.clientX,e.clientY));addEventListener("mousemove",e=>move(e.clientX,e.clientY));addEventListener("mouseup",up);
+}
+function paint(){g.fillStyle="#d6effa";g.fillRect(0,0,W,H);g.strokeStyle="#badce9";g.lineWidth=1;for(let x=0;x<W;x+=36){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke()}for(let y=0;y<H;y+=36){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()}
+ if(!path.length)return;g.lineJoin="round";g.lineCap="round";g.beginPath();path.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.strokeStyle="#1c4966";g.lineWidth=13;g.stroke();g.strokeStyle="#ff8558";g.lineWidth=7;g.stroke();
+ for(let i of [0,path.length-1]){g.beginPath();g.arc(path[i].x,path[i].y,7,0,Math.PI*2);g.fillStyle=i===0?"#1bad85":"#c94f45";g.fill();}}
+function build(){course=[];total=0;for(let i=0;i<path.length;i++){const p=path[i];if(i)total+=Math.max(.05,Math.hypot(p.x-path[i-1].x,p.y-path[i-1].y)*.12);course.push({x:(p.x-W/2)*.08,y:(H-p.y)*.09+3,z:total})}}
+function at(z){z=cap(z,0,total);let i=1;while(i<course.length-1&&course[i].z<z)i++;const a=course[i-1],b=course[i],f=cap((z-a.z)/(b.z-a.z||1),0,1);return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f,z};}
+function view(){let p=at(progress),ahead=at(Math.min(total,progress+3)),dx=ahead.x-p.x,dy=ahead.y-p.y,dz=ahead.z-p.z,mag=Math.hypot(dx,dy,dz)||1;let forward={x:dx/mag,y:dy/mag,z:dz/mag};let right={x:forward.z,y:0,z:-forward.x},rm=Math.hypot(right.x,right.z)||1;right.x/=rm;right.z/=rm;let up={x:-forward.y*right.z,y:forward.z*right.x-forward.x*right.z,z:forward.y*right.x};return{p:{x:p.x,y:p.y+1,z:p.z},forward,right,up}}
+function project(p,v){let d={x:p.x-v.p.x,y:p.y-v.p.y,z:p.z-v.p.z},z=d.x*v.forward.x+d.y*v.forward.y+d.z*v.forward.z;if(z<.2)return null;let x=d.x*v.right.x+d.z*v.right.z,y=d.x*v.up.x+d.y*v.up.y+d.z*v.up.z,s=Math.min(W,H)*.87/z;return{x:W/2+x*s,y:H*.56-y*s,z}}
+function line(a,b,v,col,w){let p=project(a,v),q=project(b,v);if(!p||!q)return;g.strokeStyle=col;g.lineWidth=cap(w*25/Math.min(p.z,q.z),.6,w*4);g.beginPath();g.moveTo(p.x,p.y);g.lineTo(q.x,q.y);g.stroke()}
+function drawRide(){let sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,"#74bfe7");sky.addColorStop(.74,"#d6f6ff");sky.addColorStop(1,"#80bc95");g.fillStyle=sky;g.fillRect(0,0,W,H);g.fillStyle="#77af83";g.fillRect(0,H*.8,W,H*.2);
+ const v=view();for(let i=course.length-1;i>0;i--){let a=course[i-1],b=course[i];if(a.z<progress-2||b.z>progress+120)continue;let tx=b.x-a.x,tz=b.z-a.z,n=Math.hypot(tx,tz)||1,ox=tz/n*.48,oz=-tx/n*.48;
+ line({x:a.x-ox,y:a.y,z:a.z-oz},{x:b.x-ox,y:b.y,z:b.z-oz},v,"#29465b",2.8);
+ line({x:a.x+ox,y:a.y,z:a.z+oz},{x:b.x+ox,y:b.y,z:b.z+oz},v,"#29465b",2.8);
+ if(i%3===0)line({x:a.x-ox,y:a.y,z:a.z-oz},{x:a.x+ox,y:a.y,z:a.z+oz},v,"#f58c57",1.6);
+ if(i%7===0)line(a,{x:a.x,y:0,z:a.z},v,"#7b9396",.7);}
+ g.fillStyle="#102338d8";g.fillRect(0,0,W,39);g.fillStyle="white";g.font="bold 15px sans-serif";g.fillText("走行 "+Math.round(100*progress/total)+"%",13,25);
+ if(progress>=total){stopped=true;state.textContent="ゴール！";pause.textContent="もう一度乗る";hint.hidden=false;hint.textContent="ゴール！ もう一度乗れます";}}
+go.onclick=()=>{build();if(course.length<2)return;mode="ride";progress=0;stopped=false;go.hidden=true;pause.hidden=false;pause.textContent="一時停止";state.textContent="乗車中";hint.hidden=true;drawRide()};
+pause.onclick=()=>{if(progress>=total){progress=0;stopped=false;hint.hidden=true;pause.textContent="一時停止"}else{stopped=!stopped;pause.textContent=stopped?"再開":"一時停止"}};
+clear.onclick=()=>{mode="edit";path=[];course=[];distance=0;drawing=false;go.hidden=false;go.disabled=true;pause.hidden=true;hint.hidden=false;hint.textContent="画面に一筆書きでコースを描いてください";state.textContent="指で線を描いてください";paint()};
+function loop(t){let dt=Math.min(.05,(t-last)/1000||0);last=t;if(mode==="ride"){if(!stopped)progress=Math.min(total,progress+dt*12);drawRide()}requestAnimationFrame(loop)}resize();requestAnimationFrame(loop);
+})();
+</script></body></html>
