@@ -14,6 +14,12 @@ async function run(type,name,width,height,columns){
  try{
   await page.goto(base+(process.env.SVG_PILOT_PATH||'/v2/nishinomiya-town-svg-c-render-pilot.html'),{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:60000});
+  const pairPositions=await page.evaluate(()=>{
+   const x=id=>document.getElementById(id).getBoundingClientRect().left;
+   return {mapPlus:x('zoomIn'),mapMinus:x('zoomOut'),textMinus:x('smaller'),textPlus:x('larger')};
+  });
+  assert.ok(pairPositions.mapPlus<pairPositions.mapMinus,'map + must be on the left of -');
+  assert.ok(pairPositions.textMinus<pairPositions.textPlus,'text + must be on the right of text -');
   const updated=await page.locator('#updatedAt').textContent();
   assert.match(updated,/更新：\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}（JST）/);
   await page.locator('#communityToggle').click();
