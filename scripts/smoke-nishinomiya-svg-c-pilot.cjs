@@ -61,7 +61,7 @@ async function run(type,name,width,height,columns){
   const initial=await flashing.evaluate(el=>el.classList.contains('selected')&&!el.classList.contains('dim'));
   await page.waitForFunction(before=>{
    const el=document.querySelector('#areas path.town');
-   return el&&el.classList.contains('selected')&&!el.classList.contains('dim')!==before;
+   return el&&(el.classList.contains('selected')&&!el.classList.contains('dim'))!==before;
   },initial,{timeout:2500});
   await page.locator('#quizBack').click();
   await page.locator('#quizOne').click();
