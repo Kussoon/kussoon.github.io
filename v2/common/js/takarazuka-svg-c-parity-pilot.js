@@ -8,6 +8,10 @@ const $=id=>document.getElementById(id);
 const svg=d3.select('#map'),world=d3.select('#world'),areas=d3.select('#areas'),labels=d3.select('#labels');
 const kana=new Intl.Collator('ja',{usage:'sort',sensitivity:'base',numeric:false});
 const normalize=s=>String(s||'').normalize('NFKC').toLocaleLowerCase('ja').replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60));
+// Verified district names and readings. Official municipal school kana and area names are
+// the primary source; 宝小（ほうしょう） also checked against local school nickname sources.
+// Source notes: v2/docs/town-map/TAKARAZUKA_20_REGION_READINGS_20261116.md.
+const VERIFIED_COMMUNITY_READINGS=Object.freeze({"すみれガ丘":"すみれがおか","長尾台":"ながおだい","逆瀬台":"さかせだい","小浜":"こはま","西谷":"にしたに","中山台":"なかやまだい","長尾":"ながお","売布":"めふ","宝塚第一":"たからづかだいいち","良元":"りょうげん","末成":"すえなり","仁川":"にがわ","末広":"すえひろ","光明":"こうみょう","西山":"にしやま","高司":"たかつかさ","安倉":"あくら","宝小":"ほうしょう","美座":"みざ","山本山手":"やまもとやまて"});
 let towns=[],byName=new Map(),communityNames=[],communityReadings={},communityChoice='',adjacency=new Map();
 let zoom,transform=d3.zoomIdentity,mapW=390,mapH=600,baseScale=1;
 let selected='',blinkTimer=null,blinkOn=false,readingOn=false,fontPct=100,anchorMode='svg';
@@ -355,9 +359,10 @@ KussoonTownSvgSourceAdapter.loadSvgTownSource({
  towns=data.towns;byName=new Map(towns.map(t=>[t.name,t]));buildAdjacency();
  const vb=data.viewBox.split(/[ ,]+/).map(Number);sourceArea=(vb[2]||1000)*(vb[3]||1700);
  communityNames=[...new Set(towns.flatMap(t=>t.communities))];
- // Only verified data may provide region readings.
- for(const c of communityNames){const t=byName.get(c);if(t)communityReadings[c]=t.reading}
- if(communityNames.length!==20)throw Error('20地域の登録数に不整合があります: '+communityNames.length);
+ // Only source-confirmed readings may be used for the full 20-region kana sorting.
+ if(communityNames.length!==20||communityNames.some(c=>!VERIFIED_COMMUNITY_READINGS[c]))
+  throw Error('宝塚市の20地域と読み仮名台帳が一致しません');
+ for(const c of communityNames)communityReadings[c]=VERIFIED_COMMUNITY_READINGS[c];
  areas.selectAll('path.town').data(towns,t=>t.name).join('path').attr('class','town').attr('d',t=>t.d);
  for(const t of towns){
   t.pathEl=[...areas.selectAll('path.town').nodes()].find(n=>n.__data__?.name===t.name);
