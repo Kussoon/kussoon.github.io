@@ -37,7 +37,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 @media(max-width:400px){.quiz-choices{grid-template-columns:1fr}}
 .labels{pointer-events:none}.town-label{font-weight:800;fill:#193e58;stroke:#fff;stroke-width:.18em;paint-order:stroke fill;text-anchor:middle;dominant-baseline:middle}.town-reading{font-weight:600}
 .controls{position:absolute;right:8px;bottom:8px;display:flex;flex-direction:column;gap:5px;width:102px;z-index:3}
-.controls .pair{display:grid;grid-template-columns:1fr 1fr;gap:5px}button{border:1px solid #92b6cc;border-radius:7px;min-height:40px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
+.controls .pair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.controls .pair button{white-space:normal;line-height:1.25}.controls #smaller span,.controls #larger span{display:block}button{border:1px solid #92b6cc;border-radius:7px;min-height:40px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
 .full{position:absolute;right:8px;top:8px;z-index:3;padding:0 12px}
 .fullscreen{overflow:hidden}.fullscreen .frame{position:fixed;inset:0;border:0;border-radius:0;z-index:10000}.fullscreen svg{height:100dvh;width:100vw}
 [hidden]{display:none!important}button:focus-visible{outline:3px solid #dd9a31;outline-offset:2px}
@@ -74,7 +74,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <div class="pair"><button id="zoomIn" type="button">＋</button><button id="zoomOut" type="button">−</button></div>
 <button id="reset" type="button">市の全体</button>
 <button id="anchorMode" type="button" aria-pressed="false" title="ラベル基準点の比較">配置：現行SVG</button>
-<div class="pair"><button id="smaller" type="button">文字−</button><button id="larger" type="button">文字＋</button></div>
+<div class="pair"><button id="smaller" type="button"><span>文字</span><span>−</span></button><button id="larger" type="button"><span>文字</span><span>＋</span></button></div>
 <button id="size" type="button">文字 100%</button><button id="reading" type="button" aria-pressed="false">よみがな OFF</button>
 </div></section>
 <p class="small">比較ポイント：①全域のラベル位置（「配置」ボタンで現行SVGとC版の多角形中心計算を切替） ②密集部の重なり ③塩瀬町名塩・山口町上山口の複数表示 ④拡大時の文字サイズ ⑤よみがなON/OFF。地図をドラッグ・ピンチで操作できます。</p>
@@ -333,6 +333,7 @@ function stopQuiz(returnToMap){
 function resetQuestion(){
  stopQuizBlink();quizWrongPlaces.clear();
  $('quizChoices').replaceChildren();$('quizNext').hidden=true;
+ $('quizNext').textContent='次の問題へ';
  $('quizReveal').hidden=true;$('quizFeedback').textContent='';
 }
 function scopeNames(){return activeFeatures().map(f=>f.properties.S_NAME)}
@@ -426,6 +427,7 @@ function quizCorrect(name){
  quizLocked=true;stopQuizBlink();highlightQuizTown(name,true);
  $('quizFeedback').textContent='正解です！ '+townLabel(name)+(name==='岡田山'&&communityChoice?' '+okadaExplanation():'');
  $('quizReveal').hidden=true;$('quizNext').hidden=false;
+ $('quizNext').textContent=quizIndex===quizOrder.length-1?'結果発表':'次の問題へ';
  scoreLabel();
 }
 function quizReveal(){
