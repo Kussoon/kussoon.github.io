@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
-const root=path.resolve(__dirname,'../../..');
+const root=path.resolve(__dirname,'..');
 const src=fs.readFileSync(path.join(root,'data/town-maps/28204.json'),'utf8');
 const data=JSON.parse(src),raw=JSON.parse(fs.readFileSync(path.join(root,'data/nishinomiya-town-v2-premerged.topojson'),'utf8'));
 assert.equal(data.schemaVersion,1);assert.equal(data.municipalityCode,'28204');assert.equal(data.boundaryYear,2020);
