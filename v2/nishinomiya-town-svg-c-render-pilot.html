@@ -3,7 +3,7 @@
 <meta name="robots" content="noindex,nofollow"><title>西宮市 V2 C版 SVG描画比較試作（採用前）｜Kussoon</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f3f8fc;color:#19384e;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-main{max-width:1050px;margin:auto;padding:12px}h1{font-size:clamp(20px,4vw,29px);margin:10px 0}p{line-height:1.55}a{color:#185e87}
+main{max-width:1050px;margin:auto;padding:12px}h1{font-size:clamp(20px,4vw,29px);margin:10px 0 3px}.updated-at{display:block;font-size:13px;font-weight:500;color:#526f81;margin:0 0 10px}p{line-height:1.55}a{color:#185e87}
 .notice{background:#fff6da;border:1px solid #c39c43;border-radius:8px;padding:10px;font-size:14px}.nav{display:flex;flex-wrap:wrap;gap:12px;padding:6px 0}
 .status{font-size:14px;background:#fff;padding:9px;border-radius:7px;margin:8px 0}
 .frame{position:relative;overflow:hidden;border-radius:9px;border:2px solid white;background:#e6f3fa;touch-action:none}
@@ -27,10 +27,10 @@ body.town-quiz-mode #reading{display:none}
 .quiz-panel{margin-top:9px;border-top:1px solid #d5e0e9;padding-top:9px}
 .quiz-question{font-size:18px;font-weight:750}
 .quiz-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0}
-.quiz-choices button{white-space:normal;overflow-wrap:anywhere;word-break:normal;min-height:64px;height:auto;padding:8px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1.35}
+.quiz-choices button{white-space:normal;overflow-wrap:anywhere;word-break:normal;min-height:72px;height:auto;padding:10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1.35}
 .quiz-choices .choice-name,.quiz-choices .choice-reading{display:block;max-width:100%;min-width:0;overflow-wrap:anywhere;text-align:center}
-.quiz-choices .choice-name{font-weight:750}
-.quiz-choices .choice-reading{font-size:.88em;font-weight:500}
+.quiz-choices .choice-name{font-size:17px;font-weight:750}
+.quiz-choices .choice-reading{font-size:15px;font-weight:500}
 .quiz-choices button.quiz-wrong{background:#e15454;color:white;border-color:#bd3030}
 .quiz-choices button.quiz-correct{background:#238f55;color:white;border-color:#16723e}
 .quiz-choices button:disabled{opacity:1}
@@ -49,6 +49,8 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <body><main>
 <nav class="nav"><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市 V2 C版｜SVG描画比較試作</h1>
+<!-- 更新時は下の日時を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
+<time class="updated-at" id="updatedAt" datetime="2026-11-15T18:48:37+09:00">更新：2026/11/15 18:48:37（JST）</time>
 <p class="notice"><strong>未採用の技術試作です。</strong> 正式C版は変更していません。現在は321町名の町域形状・通常ラベル・読み・サイズ・町域選択を検証する第1段階です。ラベル基準点は、従来のSVG幾何中心とC版Leafletの多角形中心に近い計算を切り替えて比較できます。<strong>どちらも正式C版と同じ位置になる保証はありません</strong>。26地域選択を比較試作として追加しました。クイズ1・2も比較試作として追加しました。比較結果に基づく採用判断までは正式公開しません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
 <section class="study" aria-label="26コミュニティ学習範囲"><div class="study-row"><strong>学習範囲</strong><button type="button" id="communityToggle" aria-expanded="false" aria-controls="communityOptions" disabled>西宮市全域（321町名） ▾</button><span id="communityCount">準備中</span></div>
