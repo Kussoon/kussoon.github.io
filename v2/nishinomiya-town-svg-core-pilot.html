@@ -40,7 +40,10 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 @media(max-width:400px){.quiz-choices{grid-template-columns:1fr}}
 .labels{pointer-events:none}.town-label{font-weight:800;fill:#193e58;stroke:#fff;stroke-width:.18em;paint-order:stroke fill;text-anchor:middle;dominant-baseline:middle}.town-reading{font-weight:600}
 .controls{position:absolute;right:8px;bottom:8px;display:flex;flex-direction:column;gap:5px;width:102px;z-index:3}
-.controls .pair{display:grid;grid-template-columns:1fr 1fr;gap:5px}.controls .pair button{white-space:normal;line-height:1.25}.controls #smaller span,.controls #larger span{display:block}button{border:1px solid #92b6cc;border-radius:7px;min-height:40px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
+.controls .pair{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+/* UI-PAIR-ORDER-01: map enlargement left; text enlargement right. */
+.controls #zoomIn,.controls #smaller{grid-column:1;grid-row:1}
+.controls #zoomOut,.controls #larger{grid-column:2;grid-row:1}.controls .pair button{white-space:normal;line-height:1.25}.controls #smaller span,.controls #larger span{display:block}button{border:1px solid #92b6cc;border-radius:7px;min-height:40px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
 .full{position:absolute;right:8px;top:8px;z-index:3;padding:0 12px}
 .fullscreen{overflow:hidden}.fullscreen .frame{position:fixed;inset:0;border:0;border-radius:0;z-index:10000}.fullscreen svg{height:100dvh;width:100vw}
 [hidden]{display:none!important}button:focus-visible{outline:3px solid #dd9a31;outline-offset:2px}
@@ -50,7 +53,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <nav class="nav"><a href="/v2/nishinomiya-town-svg-viewport-pilot.html">第2段階の比較試作へ戻る</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市V2 SVG共通読込・操作 第3段階</h1>
 <!-- 更新時は下の日時を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-15T20:37:34+09:00">更新：2026/11/15 20:37:34（JST）</time>
+<time class="updated-at" id="updatedAt" datetime="2026-11-15T22:24:49+09:00">更新：2026/11/15 22:24:49（JST）</time>
 <p class="notice"><strong>共通エンジン移行 第3段階・未採用の独立比較試作です。町域データ読み込みとD3ズームのイベント接続を共通化しました。</strong> 地域選択の五十音順とクイズ2の選択肢を共通UI部品に切り出し、前版と見た目・操作が一致するか比較します。 正式C版は変更していません。現在は321町名の町域形状・通常ラベル・読み・サイズ・町域選択を検証する第1段階です。ラベル基準点は、従来のSVG幾何中心とC版Leafletの多角形中心に近い計算を切り替えて比較できます。<strong>どちらも正式C版と同じ位置になる保証はありません</strong>。26地域選択を比較試作として追加しました。クイズ1・2も比較試作として追加しました。比較結果に基づく採用判断までは正式公開しません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
 <section class="study" aria-label="26コミュニティ学習範囲"><div class="study-row"><strong>学習範囲</strong><button type="button" id="communityToggle" aria-expanded="false" aria-controls="communityOptions" disabled>西宮市全域（321町名） ▾</button><span id="communityCount">準備中</span></div>

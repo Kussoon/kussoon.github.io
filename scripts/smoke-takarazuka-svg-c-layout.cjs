@@ -10,6 +10,12 @@ async function run(browserType,width,height){
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base+'/v2/takarazuka-town-svg-c-layout-pilot.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.querySelector('#status')?.textContent.includes('125町名'),null,{timeout:60000});
+  const pairPositions=await page.evaluate(()=>{
+   const x=id=>document.getElementById(id).getBoundingClientRect().left;
+   return {mapPlus:x('zoomIn'),mapMinus:x('zoomOut'),textMinus:x('smaller'),textPlus:x('larger')};
+  });
+  assert.ok(pairPositions.mapPlus<pairPositions.mapMinus,'map + must be on the left of -');
+  assert.ok(pairPositions.textMinus<pairPositions.textPlus,'text + must be on the right of text -');
   assert.equal(await page.locator('#areas path.town').count(),125,'all source paths');
   assert.equal(await page.locator('#labels g.label').count(),125,'all 125 town labels');
   const root=page.locator('#communityOptions');
