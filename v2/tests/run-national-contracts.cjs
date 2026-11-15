@@ -43,6 +43,8 @@ const files=[
  'v2/tests/prefecture-colors.test.cjs',
  'v2/tests/national-density-overlap.test.cjs',
  'v2/tests/national-study-label-layout.test.cjs',
+ 'v2/tests/kawanishi-town-map-contract.test.cjs',
+ 'v2/tests/town-map-adapter-regression.test.cjs',
 ];
 for(const file of files){
  const result=spawnSync(process.execPath,[file],{cwd:path.resolve(__dirname,'../..'),stdio:'inherit'});
