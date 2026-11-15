@@ -18,6 +18,13 @@ async function run(type,width,height){
   await page.locator('#communityCount').click();
   assert.equal(await page.evaluate(()=>d3.select('#map').on('wheel.zoom')===undefined),true,'wheel disarmed outside');
   await page.locator('#communityToggle').click();
+  const regions=await page.evaluate(()=>[...document.querySelectorAll('#communityOptions button[data-community]')]
+   .filter(el=>el.dataset.community)
+   .map(el=>({name:el.dataset.community,reading:el.querySelector('small')?.textContent})));
+  assert.equal(regions.length,20,'all Takarazuka communities');
+  assert.ok(regions.every(x=>x.reading&&x.reading!=='読み確認中'),'confirmed readings for all regions');
+  const collator=new Intl.Collator('ja',{sensitivity:'base'});
+  assert.deepEqual(regions.map(x=>x.name),[...regions].sort((a,b)=>collator.compare(a.reading,b.reading)||collator.compare(a.name,b.name)).map(x=>x.name),'kana-order region list');
   await page.keyboard.press('Escape');
   assert.equal(await page.locator('#communityOptions').isHidden(),true);
   await page.locator('#quizTwo').click();
