@@ -77,6 +77,8 @@ function create({svg,topo,kana,controls}){
      t.setAttribute('text-anchor','middle');
      t.setAttribute('dominant-baseline','middle');
      t.setAttribute('font-size',p.fontSize.toFixed(3));
+     // SVG user-unit stroke tracks font size, keeping a ~2.5px outline on zoom.
+     t.setAttribute('stroke-width',(p.fontSize*.16).toFixed(3));
      t.classList.add('label');t.dataset.town=f.name;
      for(let j=0;j<lines.length;j++){
        const span=document.createElementNS(NS,'tspan');
@@ -87,6 +89,7 @@ function create({svg,topo,kana,controls}){
      if(showReading&&a?.reading){
        const s=document.createElementNS(NS,'tspan');
        s.classList.add('reading');s.setAttribute('x',p.x);
+       s.setAttribute('stroke-width',(p.fontSize*.11).toFixed(3));
        s.setAttribute('dy','1.2em');s.textContent=a.reading;t.append(s);
      }
      t.addEventListener('click',()=>select(f.name,true));
