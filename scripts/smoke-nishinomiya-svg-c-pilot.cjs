@@ -12,7 +12,7 @@ async function run(type,name,width,height,columns){
  const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:2,isMobile:width<=390,hasTouch:width<=390});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  try{
-  await page.goto(base+'/v2/nishinomiya-town-svg-c-render-pilot.html',{waitUntil:'domcontentloaded',timeout:60000});
+  await page.goto(base+(process.env.SVG_PILOT_PATH||'/v2/nishinomiya-town-svg-c-render-pilot.html'),{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:60000});
   const updated=await page.locator('#updatedAt').textContent();
   assert.match(updated,/更新：\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}（JST）/);

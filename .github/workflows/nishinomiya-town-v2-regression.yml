@@ -4,6 +4,8 @@ on:
     paths:
       - 'v2/nishinomiya-town-study-c.html'
       - 'v2/nishinomiya-town-svg-c-render-pilot.html'
+      - 'v2/nishinomiya-town-svg-common-ui-pilot.html'
+      - 'v2/common/js/town-svg-common-ui.js'
       - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
       - 'scripts/smoke-nishinomiya-svg-c-pilot.cjs'
       - 'v2/docs/town-map/TOWN_COMMUNITY_ORDER_01.md'
@@ -25,6 +27,8 @@ on:
     paths:
       - 'v2/nishinomiya-town-study-c.html'
       - 'v2/nishinomiya-town-svg-c-render-pilot.html'
+      - 'v2/nishinomiya-town-svg-common-ui-pilot.html'
+      - 'v2/common/js/town-svg-common-ui.js'
       - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
       - 'scripts/smoke-nishinomiya-svg-c-pilot.cjs'
       - 'v2/docs/town-map/TOWN_COMMUNITY_ORDER_01.md'
@@ -167,6 +171,16 @@ jobs:
           SMOKE_SCREENSHOTS=site-smoke-screenshots node site/scripts/smoke-nishinomiya-town-v2.cjs
       - name: Browser-check SVG pilot sorting, quiz completion and responsive UI
         run: SVG_SMOKE_SCREENSHOTS=svg-town-smoke-screenshots node site/scripts/smoke-nishinomiya-svg-c-pilot.cjs
+      - name: Browser-check SVG shared-UI pilot against same contract
+        run: SVG_PILOT_PATH=/v2/nishinomiya-town-svg-common-ui-pilot.html SVG_SMOKE_SCREENSHOTS=svg-town-common-ui-screenshots node site/scripts/smoke-nishinomiya-svg-c-pilot.cjs
+      - name: Upload shared-UI pilot screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nishinomiya-svg-shared-ui-screenshots
+          path: svg-town-common-ui-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Upload SVG pilot comparison screenshots
         if: always()
         uses: actions/upload-artifact@v4
