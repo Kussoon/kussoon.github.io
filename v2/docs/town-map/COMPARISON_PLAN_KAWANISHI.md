@@ -20,6 +20,7 @@
 - 最初のブラウザ実行はGitHubホストUbuntu 26.04とPlaywrightの依存インストール不整合で失敗。地図の成否ではない。
 - Playwright公式Ubuntu Nobleコンテナに変更した再実行で、Chromium 1280px・WebKit 390px、A/Bの初期・拡大・読みON・リセットのブラウザ操作に PASS。run ID `43675847885`。画面PNG・件数JSONはGitHub Actions artifactに保存。
 - **このPASSは閲覧性の人間による承認、iPhone Safari実機確認、正式版採用を意味しない**。
+- 追加した「中央町」直接リンクのブラウザ検査は、初回にテスト用正規表現の誤記で停止。判定を数値ビュー検査へ修正後、専用CI run `43676198606` の静的・Chromium/WebKit実画面検査はPASS。実装済み `select(town,true)` の自動選択もブラウザで確認できた。
 
 ## 明示的な採用保留点
 - B案の12pxは、iPhone画面で文字が小さすぎないか未判定。
