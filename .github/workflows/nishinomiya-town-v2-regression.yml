@@ -7,6 +7,7 @@ on:
       - 'v2/nishinomiya-town-svg-common-ui-pilot.html'
       - 'v2/nishinomiya-town-svg-viewport-pilot.html'
       - 'v2/nishinomiya-town-svg-core-pilot.html'
+      - 'v2/nishinomiya-town-svg-edge-dark-guard-pilot.html'
       - 'v2/common/js/town-svg-core.js'
       - 'v2/common/js/town-svg-viewport.js'
       - 'scripts/audit-town-svg-viewport-phase2.cjs'
@@ -35,6 +36,7 @@ on:
       - 'v2/nishinomiya-town-svg-common-ui-pilot.html'
       - 'v2/nishinomiya-town-svg-viewport-pilot.html'
       - 'v2/nishinomiya-town-svg-core-pilot.html'
+      - 'v2/nishinomiya-town-svg-edge-dark-guard-pilot.html'
       - 'v2/common/js/town-svg-core.js'
       - 'v2/common/js/town-svg-viewport.js'
       - 'scripts/audit-town-svg-viewport-phase2.cjs'
@@ -189,6 +191,18 @@ jobs:
         run: SVG_PILOT_PATH=/v2/nishinomiya-town-svg-viewport-pilot.html SVG_SMOKE_SCREENSHOTS=svg-town-viewport-screenshots node site/scripts/smoke-nishinomiya-svg-c-pilot.cjs
       - name: Browser-check SVG data and events phase 3 pilot
         run: SVG_PILOT_PATH=/v2/nishinomiya-town-svg-core-pilot.html SVG_SMOKE_SCREENSHOTS=svg-town-core-screenshots node site/scripts/smoke-nishinomiya-svg-c-pilot.cjs
+      - name: Browser-check isolated Edge auto-dark guard pilot
+        run: SVG_PILOT_PATH=/v2/nishinomiya-town-svg-edge-dark-guard-pilot.html SVG_SMOKE_SCREENSHOTS=svg-town-edge-dark-screenshots node site/scripts/smoke-nishinomiya-svg-c-pilot.cjs
+      - name: Capture forced-dark Chromium map comparison
+        run: node site/scripts/smoke-town-svg-forced-dark.cjs
+      - name: Upload Edge auto-dark comparison screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nishinomiya-svg-edge-dark-comparison
+          path: svg-town-edge-dark-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Upload phase 3 SVG comparison screenshots
         if: always()
         uses: actions/upload-artifact@v4
