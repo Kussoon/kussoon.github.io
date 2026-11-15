@@ -1,0 +1,19 @@
+name: Kawanishi town label A-B trial contracts
+on:
+  pull_request:
+    paths:
+      - 'v2/town-map/compare/**'
+      - '.github/workflows/v2-kawanishi-label-ab.yml'
+  push:
+    paths:
+      - 'v2/town-map/compare/**'
+      - '.github/workflows/v2-kawanishi-label-ab.yml'
+jobs:
+  static-trial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node v2/town-map/compare/contract.test.cjs
