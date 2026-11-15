@@ -56,8 +56,13 @@ function updateLabelSize(){
  labels.selectAll('g.label').attr('transform',d=>{
   const p=d.point;return 'translate('+(p[0]+d.offset[0]/transform.k)+','+(p[1]+d.offset[1]/transform.k)+') scale('+(1/transform.k)+')';
  });
- labels.selectAll('text').attr('font-size',fs);
- labels.selectAll('tspan.town-reading').attr('font-size',fs*.78);
+ // Use explicit pixel offsets for the two lines. SVG tspan dy in em can
+ // retain stale layout metrics after font-size changes during zoom.
+ labels.selectAll('text.town-label').attr('font-size',fs);
+ labels.selectAll('text.town-label').selectAll('tspan.town-name')
+  .attr('y',readingOn?(-.48*fs):0).attr('dy',null);
+ labels.selectAll('text.town-label').selectAll('tspan.town-reading')
+  .attr('font-size',fs*.78).attr('y',.54*fs).attr('dy',null);
 }
 function refreshLabels(){
  const data=features.flatMap(f=>labelPositions(f).filter(x=>x.point.every(Number.isFinite)).map((p,i)=>({...p,name:f.properties.S_NAME,id:f.properties.S_NAME+':'+i})));
@@ -65,8 +70,8 @@ function refreshLabels(){
  g.each(function(d){
   const el=d3.select(this);el.selectAll('*').remove();
   const t=el.append('text').attr('class','town-label');
-  t.append('tspan').attr('x',0).attr('dy',readingOn?'-.35em':'0').text(d.name);
-  if(readingOn && READINGS[d.name])t.append('tspan').attr('class','town-reading').attr('x',0).attr('dy','1.12em').text(READINGS[d.name]);
+  t.append('tspan').attr('class','town-name').attr('x',0).text(d.name);
+  if(readingOn && READINGS[d.name])t.append('tspan').attr('class','town-reading').attr('x',0).text(READINGS[d.name]);
  });
  updateLabelSize();
 }
