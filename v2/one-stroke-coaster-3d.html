@@ -1,6 +1,6 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 3D比較試作</title><style>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 3D比較試作 v2</title><style>
 *{box-sizing:border-box}body{margin:0;background:#102438;color:white;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif}main{height:100dvh;display:flex;flex-direction:column}header{padding:10px 12px;background:#102438;display:flex;align-items:center;justify-content:space-between;gap:10px}h1{margin:0;font-size:17px}.status{font-size:12px;color:#77ebc1}#stage{position:relative;min-height:0;flex:1}canvas{display:block;width:100%;height:100%;touch-action:none;background:#c8e5f5}.hint{position:absolute;top:12px;left:12px;border-radius:9px;padding:8px 11px;background:#102438d0;font-size:13px;pointer-events:none}.hint[hidden]{display:none}nav{display:flex;gap:8px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#102438}button{border:0;border-radius:9px;min-height:48px;padding:11px;font-weight:700;font-size:15px;background:#e9f0f4;color:#102438}#go{flex:1;background:#5ce2b7}button:disabled{opacity:.45}button[hidden]{display:none}footer{background:#102438;text-align:center;color:#b4c9dc;font-size:10px;padding-bottom:4px}
-</style></head><body><main><header><h1>🎢 一筆書きコースター <small style="font-size:11px">3D比較試作</small></h1><span class="status" id="status">指で線を描いてください</span></header><section id="stage"><canvas id="canvas" aria-label="指で一筆書きする描画エリア"></canvas><div id="hint" class="hint">指でなぞってコースを描いてください</div></section><nav><button id="reset">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><footer>広告・外部ライブラリなし｜試作：3D空間のレール・景色・バンクを統一</footer></main><script>
+</style></head><body><main><header><h1>🎢 一筆書きコースター <small style="font-size:11px">3D比較試作 v2</small></h1><span class="status" id="status">指で線を描いてください</span></header><section id="stage"><canvas id="canvas" aria-label="指で一筆書きする描画エリア"></canvas><div id="hint" class="hint">指でなぞってコースを描いてください</div></section><nav><button id="reset">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><footer>広告・外部ライブラリなし｜上り一定速度・下り加速25％・レール追加平滑化</footer></main><script>
 (()=>{
 "use strict";
 const C=document.getElementById("canvas"),ctx=C.getContext("2d",{alpha:false}),go=document.getElementById("go"),pause=document.getElementById("pause"),reset=document.getElementById("reset"),hint=document.getElementById("hint"),status=document.getElementById("status");
@@ -40,10 +40,21 @@ function makeTrack(){
   const n=Math.max(2,Math.ceil(Math.hypot(c.x-b.x,c.y-b.y)/3));
   for(let j=0;j<n;j++){let t=j/n;pts.push({x:cat(a.x,b.x,c.x,d.x,t),y:cat(a.y,b.y,c.y,d.y,t)})}
  }pts.push(smoothed[smoothed.length-1]);
+ // Cubic interpolation is followed by two light low-pass passes to remove
+ // remaining small kinks, retaining both endpoints and the overall silhouette.
+ let refined=pts;
+ for(let pass=0;pass<2;pass++){
+  const prev=refined;
+  refined=prev.map((p,i)=>{
+   if(i===0||i===prev.length-1)return p;
+   const a=prev[Math.max(0,i-2)],b=prev[i-1],d=prev[i+1],e=prev[Math.min(prev.length-1,i+2)];
+   return {x:(a.x+4*b.x+6*p.x+4*d.x+e.x)/16,y:(a.y+4*b.y+6*p.y+4*d.y+e.y)/16};
+  });
+ }
  track=[];finish=0;
- for(let i=0;i<pts.length;i++){
-  if(i)finish+=Math.max(.02,Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y)*.12);
-  track.push({x:(pts[i].x-W*.5)*.08,y:3+(H-pts[i].y)*.095,z:finish})
+ for(let i=0;i<refined.length;i++){
+  if(i)finish+=Math.max(.02,Math.hypot(refined[i].x-refined[i-1].x,refined[i].y-refined[i-1].y)*.12);
+  track.push({x:(refined[i].x-W*.5)*.08,y:3+(H-refined[i].y)*.095,z:finish})
  }
  // Ground and nearby scenery share the same 3D world.
  objects=[];const kinds=["forest","city","coast","castle","desert","tower"];
@@ -67,7 +78,8 @@ function sample(z){
 function geometry(z){
  const p=sample(z),before=sample(Math.max(0,z-3.2)),after=sample(Math.min(finish,z+3.2));
  const dir=norm(sub(after,before)),right=norm(V(dir.z,0,-dir.x));
- const far=sample(Math.min(finish,z+5)),near=sample(Math.max(0,z-5));
+ // Wide symmetric curvature window suppresses abrupt banking at sample boundaries.
+ const near=sample(Math.max(0,z-6)),far=sample(Math.min(finish,z+6));
  const bend=(far.x-2*p.x+near.x)/Math.max(1,(far.z-near.z)*.5);
  const bank=clamp(-bend*2,-.43,.43);
  const across=add(scale(right,.63),V(0,bank,0));
@@ -138,8 +150,8 @@ function landscape(c){
 function trackDraw(c){
  // Draw distant pieces first, each piece in shared 3D world coordinates.
  const end=Math.min(finish,ridePos+125);
- for(let z=end;z>Math.max(0,ridePos-1.5);z-=.9){
-  const a=geometry(Math.max(0,z-.9)),b=geometry(z);
+ for(let z=end;z>Math.max(0,ridePos-1.5);z-=.65){
+  const a=geometry(Math.max(0,z-.65)),b=geometry(z);
   segment(a.left,b.left,c,"#1d3348",2.6);
   segment(a.rightRail,b.rightRail,c,"#1d3348",2.6);
   segment(add(a.left,V(0,.08,0)),add(b.left,V(0,.08,0)),c,"#e2f5fa",.7);
@@ -182,7 +194,7 @@ function render(){
 go.onclick=()=>{if(raw.length<2)return;makeTrack();if(finish<1)return;ridePos=0;speed=9;paused=false;mode="ride";go.hidden=true;pause.hidden=false;pause.textContent="一時停止";hint.hidden=true;status.textContent="乗車中";render()};
 pause.onclick=()=>{if(ridePos>=finish){ridePos=0;speed=9;paused=false;hint.hidden=true;status.textContent="乗車中";pause.textContent="一時停止"}else{paused=!paused;pause.textContent=paused?"▶ 再開":"一時停止";status.textContent=paused?"一時停止中":"乗車中"}};
 reset.onclick=()=>{raw=[];track=[];objects=[];length=0;drawing=false;mode="edit";go.hidden=false;go.disabled=true;pause.hidden=true;hint.hidden=false;hint.textContent="指でなぞってコースを描いてください";status.textContent="指で線を描いてください";editor()};
-function loop(t){const dt=clamp((t-last)/1000||0,0,.05);last=t;if(mode==="ride"){if(!paused){const a=sample(ridePos),b=sample(Math.min(finish,ridePos+1));const grade=(b.y-a.y)/Math.max(.1,b.z-a.z);speed=clamp(speed+((grade<0?-11:-22)*grade-.06*speed+.35)*dt,2.2,34);ridePos=Math.min(finish,ridePos+speed*dt)}render()}requestAnimationFrame(loop)}
+function loop(t){const dt=clamp((t-last)/1000||0,0,.05);last=t;if(mode==="ride"){if(!paused){const a=sample(ridePos),b=sample(Math.min(finish,ridePos+1));const grade=(b.y-a.y)/Math.max(.1,b.z-a.z);if(grade<0)speed=clamp(speed+(-2.75*grade)*dt,2.2,34);ridePos=Math.min(finish,ridePos+speed*dt)}render()}requestAnimationFrame(loop)}
 size();requestAnimationFrame(loop);
 })();
 </script></body></html>
