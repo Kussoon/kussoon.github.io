@@ -14,6 +14,8 @@ async function run(type,name,width,height,columns){
  try{
   await page.goto(base+'/v2/nishinomiya-town-svg-c-render-pilot.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:60000});
+  const updated=await page.locator('#updatedAt').textContent();
+  assert.match(updated,/更新：\\d{4}\\/\\d{2}\\/\\d{2} \\d{2}:\\d{2}:\\d{2}（JST）/);
   await page.locator('#communityToggle').click();
   const buttons=page.locator('#communityOptions button');
   assert.equal(await buttons.count(),27,'all area and 26 communities');
@@ -44,6 +46,11 @@ async function run(type,name,width,height,columns){
     vertical:parts.length===2&&parts[1].getBoundingClientRect().top>=parts[0].getBoundingClientRect().bottom,
     fits:node.scrollHeight<=node.clientHeight+1};
   }));
+  const textSizes=await page.locator('#quizChoices button').first().evaluate(el=>({
+   town:parseFloat(getComputedStyle(el.querySelector('.choice-name')).fontSize),
+   reading:parseFloat(getComputedStyle(el.querySelector('.choice-reading')).fontSize)
+  }));
+  assert.ok(textSizes.town>=17&&textSizes.reading>=15,'quiz 2 choice text must be enlarged');
   assert.ok(choiceLayout.every(v=>v.parts===2&&v.name&&v.reading&&v.vertical&&v.fits),
    'quiz choices must show separate readable lines without clipping: '+JSON.stringify(choiceLayout));
   await page.locator('#quizQuit').click();
