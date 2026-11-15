@@ -5,6 +5,8 @@ on:
       - 'v2/nishinomiya-town-study-c.html'
       - 'v2/nishinomiya-town-svg-c-render-pilot.html'
       - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
+      - 'scripts/smoke-nishinomiya-svg-c-pilot.cjs'
+      - 'v2/docs/town-map/TOWN_COMMUNITY_ORDER_01.md'
       - 'v2/nishinomiya-town-comparison-b.html'
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
@@ -24,6 +26,8 @@ on:
       - 'v2/nishinomiya-town-study-c.html'
       - 'v2/nishinomiya-town-svg-c-render-pilot.html'
       - 'scripts/audit-nishinomiya-svg-c-pilot.cjs'
+      - 'scripts/smoke-nishinomiya-svg-c-pilot.cjs'
+      - 'v2/docs/town-map/TOWN_COMMUNITY_ORDER_01.md'
       - 'v2/nishinomiya-town-comparison-b.html'
       - 'v2/data/nishinomiya-town-v2-premerged.topojson'
       - 'v2/data/nishinomiya-uekoto-community.topojson'
@@ -161,6 +165,16 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 --directory site &
           sleep 2
           SMOKE_SCREENSHOTS=site-smoke-screenshots node site/scripts/smoke-nishinomiya-town-v2.cjs
+      - name: Browser-check SVG pilot sorting, quiz completion and responsive UI
+        run: SVG_SMOKE_SCREENSHOTS=svg-town-smoke-screenshots node site/scripts/smoke-nishinomiya-svg-c-pilot.cjs
+      - name: Upload SVG pilot comparison screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nishinomiya-svg-pilot-smoke-screenshots
+          path: svg-town-smoke-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
       - name: Audit five-city geography usability at phone, tablet, desktop widths
         run: GEOGRAPHY_AUDIT_DIR=geography-ui-audit node site/scripts/audit-geography-ui.cjs
       - name: Compare reading sizes and breadcrumb accessibility across five cities
