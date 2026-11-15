@@ -54,6 +54,20 @@ async function run(type,name,width,height,columns){
   assert.ok(choiceLayout.every(v=>v.parts===2&&v.name&&v.reading&&v.vertical&&v.fits),
    'quiz choices must show separate readable lines without clipping: '+JSON.stringify(choiceLayout));
   await page.locator('#quizQuit').click();
+  assert.equal(await page.locator('body.town-quiz-mode').count(),0,'town labels restored after stopping quiz 2');
+  assert.equal(await page.locator('#labels g.label').count(),1,'only selected community label restored');
+  assert.match(await page.locator('#status').textContent(),/中断した問題：.*西宮浜/);
+  const flashing=page.locator('#areas path.town');
+  const initial=await flashing.evaluate(el=>el.classList.contains('selected')&&!el.classList.contains('dim'));
+  await page.waitForFunction(before=>{
+   const el=document.querySelector('#areas path.town');
+   return el&&el.classList.contains('selected')&&!el.classList.contains('dim')!==before;
+  },initial,{timeout:2500});
+  await page.locator('#quizBack').click();
+  await page.locator('#quizOne').click();
+  await page.locator('#quizQuit').click();
+  assert.match(await page.locator('#status').textContent(),/中断した問題：.*西宮浜/);
+  assert.equal(await page.locator('#labels g.label').count(),1);
   await page.locator('#quizBack').click();
   await page.locator('#quizOne').click();
   await page.locator('#areas path.town').click();
