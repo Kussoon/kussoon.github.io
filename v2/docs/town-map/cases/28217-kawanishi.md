@@ -59,3 +59,9 @@
 - `kawanishi-town-map-contract.test.cjs` の旧独立試作と現行共通ページを混同した判定を修正。専用回帰テストを全国既存CIに組み込んだ。
 - 変更範囲：共通町名アダプター、比較試作HTML、テスト。正式全国V2と既存5市の正式コードは変更なし。
 - 2026-11-15のCIでデータ・部品テストと全国V2公開ページのブラウザテストは成功。町名マップ自体の実画面・iPhone Safari実機受入は引き続き未完了（最新の検証結果により更新）。
+
+### PR #464 の統合と検証結果（2026-11-15）
+- PR #464 は commit `7255c66ed33e76ae6cf747ca4861a6997351c827` で main に squash merge 済み。
+- GitHub Actions「V2 2026 regression contracts」データ・部品テスト **成功**、全国版の実ブラウザ回帰テスト **成功**。
+- GitHub Actions「V2 nationwide 2026 public release validation」**成功**。
+- 比較試作ページ `/v2/town-map/?code=28217` の直接実ブラウザ画面検査および利用者の iPhone Safari 受入は引き続き未確認。上記のブラウザCI成功は全国版の検査であり、川西市試作ページの視覚確認を代替しない。
