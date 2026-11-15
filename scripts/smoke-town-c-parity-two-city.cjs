@@ -15,7 +15,7 @@ async function run(type,width,height){
   assert.equal(await page.evaluate(()=>d3.select('#map').on('wheel.zoom')===undefined),true,'wheel off until click');
   await page.locator('#map').click({position:{x:12,y:12}});
   assert.equal(await page.evaluate(()=>typeof d3.select('#map').on('wheel.zoom')==='function'),true,'wheel armed after click');
-  await page.locator('#studyMenu').click({position:{x:10,y:5}});
+  await page.locator('#communityCount').click();
   assert.equal(await page.evaluate(()=>d3.select('#map').on('wheel.zoom')===undefined),true,'wheel disarmed outside');
   await page.locator('#communityToggle').click();
   await page.keyboard.press('Escape');
@@ -25,8 +25,6 @@ async function run(type,width,height){
   assert.equal(await page.locator('#quizChoices .choice-name').count(),4);
   assert.equal(await page.locator('#quizChoices .choice-reading').count(),4);
   const current=await page.locator('#quizProgress').textContent(),initial=Number(current.match(/得点 (\d+)/)?.[1]);
-  const wrong=page.locator('#quizChoices button').filter({hasNotText:undefined});
-  const targetText=await page.locator('#quizChoices button').allTextContents();
   // Determine answer by the selected SVG polygon with the quiz blink class.
   const target=await page.evaluate(()=>[...document.querySelectorAll('#areas path.town')].find(el=>el.classList.contains('selected'))?.getAttribute('data-name'));
   const buttons=page.locator('#quizChoices button');
