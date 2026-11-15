@@ -63,10 +63,19 @@ function create({svg,topo,kana,controls}){
      models,models.map(m=>m.polylabel),size,measure,{wrap:true,shrink:false}
    );
    const selectedIndex=labelFeatures.findIndex(f=>f.name===selected);
-   const layout=KussoonLabelEngine.selectPriorityLabels(
-     models,plans.map(p=>[p.x,p.y]),plans.map(p=>p.width),size,view,
-     {strategy:'density',pinned:selectedIndex>=0?selectedIndex:null,boxes:plans.map(p=>p.box)}
-   );
+   const zoom=1000/view.w;
+   const layout=zoom>=2
+     ? {shown:plans.map((p,i)=>{
+         const r=p.box;
+         // At >=2x preserve the established V2 rule: overlapping labels
+         // remain visible as long as any part of their rectangle is in view.
+         return i===selectedIndex || (r.x2>=view.x&&r.x1<=view.x+view.w&&
+           r.y2>=view.y&&r.y1<=view.y+view.h);
+       })}
+     : KussoonLabelEngine.selectPriorityLabels(
+         models,plans.map(p=>[p.x,p.y]),plans.map(p=>p.width),size,view,
+         {strategy:'density',pinned:selectedIndex>=0?selectedIndex:null,boxes:plans.map(p=>p.box)}
+       );
    for(let i=0;i<plans.length;i++){
      if(!layout.shown[i])continue;
      const f=labelFeatures[i],a=areas.find(x=>x.name===f.name),p=plans[i];
