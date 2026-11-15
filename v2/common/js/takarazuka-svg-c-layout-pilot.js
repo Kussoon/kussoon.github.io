@@ -35,7 +35,7 @@ function visibleBounds(items){
 function fit(items,padding=44){
  const bounds=visibleBounds(items);if(!bounds)return;
  const fit=KussoonTownSvgViewport.fitBounds(bounds,mapW,mapH,padding,.15,50);
- if(fit){svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));baseScale=fit.scale}
+ if(fit){baseScale=fit.scale;svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale))}
 }
 function reset(){stopBlink();fit(active())}
 function fontPixels(){
