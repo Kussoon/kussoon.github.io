@@ -1,0 +1,43 @@
+name: Kawanishi town label A-B trial contracts
+on:
+  pull_request:
+    paths:
+      - 'v2/town-map/compare/**'
+      - '.github/workflows/v2-kawanishi-label-ab.yml'
+  push:
+    paths:
+      - 'v2/town-map/compare/**'
+      - '.github/workflows/v2-kawanishi-label-ab.yml'
+jobs:
+  static-trial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node v2/town-map/compare/contract.test.cjs
+  visual-trial:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test dependencies
+        run: |
+          npm install --no-save playwright@1.58.2
+      - name: Capture A/B evidence on local HTTP server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory . >/tmp/kawanishi-ab-http.log 2>&1 &
+          node v2/town-map/compare/browser-smoke.cjs
+      - name: Upload A/B screenshots and counts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kawanishi-ab-visual-evidence
+          path: kawanishi-ab-evidence/
+          if-no-files-found: warn
+          retention-days: 14
