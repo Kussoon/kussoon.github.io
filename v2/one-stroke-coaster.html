@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 試作版5</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 試作版6</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;background:#132b42;color:white}
 main{height:100dvh;display:flex;flex-direction:column}header{padding:9px 13px;background:#102338;display:flex;align-items:center;justify-content:space-between;gap:8px}h1{font-size:17px;margin:0}#state{font-size:12px;color:#91f0cf}#area{flex:1;position:relative;min-height:0}canvas{display:block;width:100%;height:100%;touch-action:none;background:#d6effa}#hint{position:absolute;top:10px;left:10px;background:#102338c9;padding:7px 10px;border-radius:10px;font-size:13px;pointer-events:none}#hint[hidden]{display:none}nav{display:flex;gap:9px;background:#102338;padding:9px 10px calc(9px + env(safe-area-inset-bottom))}button{border:0;border-radius:9px;padding:12px;min-height:46px;font-size:15px;font-weight:bold;background:#e2ebf2;color:#132b42}#go{background:#53e3b3;flex:1}button:disabled{opacity:.4}button[hidden]{display:none}small{font-size:10px;color:#b4c8d6;display:block;text-align:center;background:#102338;padding-bottom:4px}
 </style></head>
-<body><main><header><h1>🎢 一筆書きコースター</h1><span id="state">指で線を描いてください</span></header><div id="area"><canvas id="canvas"></canvas><div id="hint">画面に一筆書きでコースを描いてください</div></div><nav><button id="clear">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><small>試作版 2026-11-15｜多彩な景色・滑らかレール・緩やかな下り加速／広告なし</small></main>
+<body><main><header><h1>🎢 一筆書きコースター</h1><span id="state">指で線を描いてください</span></header><div id="area"><canvas id="canvas"></canvas><div id="hint">画面に一筆書きでコースを描いてください</div></div><nav><button id="clear">描き直す</button><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><small>試作版 2026-11-15｜カーブのバンク・上り坂の透過ガイド・地面に接した景色／広告なし</small></main>
 <script>
 (()=>{
 "use strict";
@@ -60,7 +60,33 @@ function view(){
  return{p:{x:p.x,y:p.y+1,z:p.z},forward,right,up};
 }
 function project(p,v){let d={x:p.x-v.p.x,y:p.y-v.p.y,z:p.z-v.p.z},z=d.x*v.forward.x+d.y*v.forward.y+d.z*v.forward.z;if(z<.2)return null;let x=d.x*v.right.x+d.z*v.right.z,y=d.x*v.up.x+d.y*v.up.y+d.z*v.up.z,s=Math.min(W,H)*.87/z;return{x:W/2+x*s,y:H*.56-y*s,z}}
-function line(a,b,v,col,w){let p=project(a,v),q=project(b,v);if(!p||!q)return;g.strokeStyle=col;g.lineWidth=cap(w*25/Math.min(p.z,q.z),.6,w*4);g.beginPath();g.moveTo(p.x,p.y);g.lineTo(q.x,q.y);g.stroke()}
+function line(a,b,v,col,w,alpha=1,dashed=false){
+ const p=project(a,v),q=project(b,v);if(!p||!q)return;
+ g.save();g.globalAlpha=alpha;g.strokeStyle=col;g.lineWidth=cap(w*25/Math.min(p.z,q.z),.6,w*4);g.lineCap="round";
+ if(dashed)g.setLineDash([7,5]);
+ g.beginPath();g.moveTo(p.x,p.y);g.lineTo(q.x,q.y);g.stroke();g.restore();
+}
+function railSection(z){
+ const p=at(z),prev=at(Math.max(0,z-2.2)),next=at(Math.min(total,z+2.2));
+ const tx=next.x-prev.x,tz=next.z-prev.z,n=Math.hypot(tx,tz)||1;
+ const ox=tz/n*.55,oz=-tx/n*.55;
+ // 進行方向に対する曲率を使って左右の高低差を作る
+ const near=at(Math.max(0,z-4)),far=at(Math.min(total,z+4));
+ const curvature=(far.x-2*p.x+near.x)/Math.max(1,(far.z-near.z)*.5);
+ const bank=cap(-curvature*2.1,-.48,.48);
+ return{left:{x:p.x-ox,y:p.y+bank,z:p.z-oz},right:{x:p.x+ox,y:p.y-bank,z:p.z+oz},center:p};
+}
+function projectionGuideView(v){
+ // 上り坂のときだけカメラの仰角を少し抑え、遠方レールを半透明で見せる
+ const pitch=v.forward.y;
+ if(pitch<.14)return v;
+ const a=cap(pitch,.14,.56),hx=v.forward.x,hz=v.forward.z;
+ const h=Math.hypot(hx,hz)||1,scale=Math.sqrt(1-a*a);
+ const forward={x:hx/h*scale,y:a,z:hz/h*scale};
+ const right=v.right;
+ const up={x:-forward.y*right.z,y:forward.z*right.x-forward.x*right.z,z:forward.y*right.x};
+ return{...v,forward,up};
+}
 function drawShape(v,points,color,stroke){
  const pp=points.map(p=>project(p,v));if(pp.some(p=>!p))return;
  g.beginPath();pp.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fillStyle=color;g.fill();
@@ -94,6 +120,12 @@ function landmark(v,x,z,type,seed){
    for(const dx of [-1,0,1]){g.beginPath();g.ellipse(cx+dx*unit*.9,cy-unit*(3.4+(dx===0?.7:0)),unit*1.35,unit*1.45,0,0,Math.PI*2);g.fill()}
  }
 }
+function grounded(v,x,z){
+ // 地面との接地点が地平線より下に描けない木は表示しない
+ const foot=project({x,y:0,z},v);
+ const horizon=cap(H*(.58+v.forward.y*1.3),-H*.5,H*1.5);
+ return !!foot&&foot.y>=Math.max(0,horizon-5)&&foot.y<=H*1.7;
+}
 function scenery(v){
  // 走行ルートの区間ごとに「森→街→海→城→砂漠→塔」を配置
  const types=["forest","city","sea","castle","desert","tower"],period=Math.max(16,total/6);
@@ -104,11 +136,11 @@ function scenery(v){
      let x=p.x+side*(type==="sea"?5:4+(i%3)*1.5);
      if(type==="sea"&&side<0){landmark(v,x,z,"sea",i);continue}
      if(type==="desert"){if(i%2===0)landmark(v,x,z,"desert",i);continue}
-     if(type==="forest"){landmark(v,x,z,"forest",i);continue}
+     if(type==="forest"){if(grounded(v,x,z))landmark(v,x,z,"forest",i);continue}
      if(type==="city"){if(i%2===0)landmark(v,x,z,"city",i);continue}
-     if(type==="castle"){if(i%5===0)landmark(v,x,z,"castle",i);else landmark(v,x,z,"forest",i);continue}
+     if(type==="castle"){if(i%5===0)landmark(v,x,z,"castle",i);else if(grounded(v,x,z))landmark(v,x,z,"forest",i);continue}
      if(type==="tower"){if(i%6===0)landmark(v,x,z,"tower",i);else if(i%2===0)landmark(v,x,z,"city",i);continue}
-     if(i%2===0)landmark(v,x,z,"forest",i);
+     if(i%2===0&&grounded(v,x,z))landmark(v,x,z,"forest",i);
    }
  }
 }
@@ -133,11 +165,26 @@ function cockpit(){
 function drawRide(){
  const v=view();let sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,"#70bdeb");sky.addColorStop(1,"#c8efff");g.fillStyle=sky;g.fillRect(0,0,W,H);
  let horizon=cap(H*(.58+v.forward.y*1.3),-H*.5,H*1.5);g.fillStyle="#8ec59c";g.fillRect(0,horizon,W,H-horizon);scenery(v);
- for(let i=course.length-1;i>0;i--){let a=course[i-1],b=course[i];if(a.z<progress-2||b.z>progress+120)continue;let tx=b.x-a.x,tz=b.z-a.z,n=Math.hypot(tx,tz)||1,ox=tz/n*.55,oz=-tx/n*.55;
- line({x:a.x-ox,y:a.y,z:a.z-oz},{x:b.x-ox,y:b.y,z:b.z-oz},v,"#29465b",2.8);
- line({x:a.x+ox,y:a.y,z:a.z+oz},{x:b.x+ox,y:b.y,z:b.z+oz},v,"#29465b",2.2);
- if(i%3===0)line({x:a.x-ox,y:a.y,z:a.z-oz},{x:a.x+ox,y:a.y,z:a.z+oz},v,"#f58c57",1.3);
- if(i%9===0)line(a,{x:a.x,y:0,z:a.z},v,"#7b9396",.7);}
+ // 上り坂では通常レールの描画に加えて、進路確認用の半透明ガイドを表示
+ if(v.forward.y>.14){
+   const gv=projectionGuideView(v);
+   for(let z=Math.min(total,progress+52);z>progress+2;z-=1.8){
+     const near=railSection(z-1.8),far=railSection(z);
+     line(near.left,far.left,gv,"#e8fbff",1.55,.42,true);
+     line(near.right,far.right,gv,"#e8fbff",1.55,.42,true);
+   }
+ }
+ let first=0;
+ for(let i=course.length-1;i>0;i--){
+   const a=course[i-1],b=course[i];
+   if(a.z<progress-2||b.z>progress+120)continue;
+   const ra=railSection(a.z),rb=railSection(b.z);
+   line(ra.left,rb.left,v,"#29465b",2.8);
+   line(ra.right,rb.right,v,"#29465b",2.8);
+   if(i%3===0)line(ra.left,ra.right,v,"#f58c57",1.6);
+   if(i%9===0)line(ra.center,{x:ra.center.x,y:0,z:ra.center.z},v,"#7b9396",.7);
+ }
+
  cockpit();
  g.fillStyle="#102338d8";g.fillRect(0,0,W,39);g.fillStyle="white";g.font="bold 15px sans-serif";g.textAlign="left";g.fillText("走行 "+Math.round(100*progress/total)+"%",13,25);g.textAlign="right";g.fillText("ゲーム速度 "+Math.round(speed*5)+" km/h",W-12,25);g.textAlign="left";
  if(progress>=total){stopped=true;state.textContent="ゴール！";pause.textContent="もう一度乗る";hint.hidden=false;hint.textContent="ゴール！ もう一度乗れます"}}
