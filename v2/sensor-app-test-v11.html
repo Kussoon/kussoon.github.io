@@ -225,7 +225,23 @@ function renderComparison(){
  cardBox.append(cards);
  const wrap=make('div','tablewrap'),table=make('table'),head=make('thead'),trh=make('tr');
  ['時刻','場所','動作'].forEach(v=>trh.append(make('th','',v)));head.append(trh);table.append(head);
- const body=make('tbody'),pairMap=new Map(doorPairs().map(p=>[p.name+'|'+p.closed,p]));
+ const comparisonPairs=[];
+ for(const name of ['冷蔵庫','玄関ドア']){
+  const records=events.filter(e=>e.name===name).sort((a,b)=>a.time.localeCompare(b.time));
+  let pending=null;
+  for(let i=0;i<records.length;){
+   let j=i+1;while(j<records.length&&records[j].time===records[i].time)j++;
+   if(j-i>1){pending=null;i=j;continue}
+   const e=records[i];
+   if(e.action==='オープン')pending=e;
+   else if(e.action==='クローズ'){
+    if(pending&&seconds(e.time)>seconds(pending.time))comparisonPairs.push({name,opened:pending.time,closed:e.time});
+    pending=null;
+   }
+   i=j;
+  }
+ }
+ const body=make('tbody'),pairMap=new Map(comparisonPairs.map(p=>[p.name+'|'+p.closed,p]));
  for(const e of sample){
   const row=make('tr');[e.time,e.name,e.action].forEach(v=>row.append(make('td','',v)));body.append(row);
   if(e.action==='クローズ'){
