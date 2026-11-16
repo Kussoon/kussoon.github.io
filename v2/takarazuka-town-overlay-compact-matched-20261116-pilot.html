@@ -57,14 +57,14 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 .controls #larger,.controls #smaller{min-height:37px}
 .controls>button{white-space:pre-line;line-height:1.05;overflow-wrap:normal;word-break:keep-all}
 .controls #size,.controls #reading{min-height:43px}
-.full{width:var(--compact-full-width,43px);min-height:25px;padding:2px 1px;white-space:nowrap;text-align:center}
+.full{width:49px;min-height:27px;padding:1px;white-space:normal;text-align:center}
 .controls #labelMode,.controls #anchorMode{display:none!important}
 </style>
 </head><body><main>
 <nav class="nav"><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-takarazuka">世界から町へ（試作）</a><a href="/v2/takarazuka-town-svg-adapter-pilot.html">前の宝塚市試作</a><a href="/takarazuka/">宝塚市トップ</a><a href="/takarazuka/town-search.html">元の宝塚市SVG</a><a href="/v2/nishinomiya-town-svg-core-pilot.html">西宮市V2</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>宝塚市V2｜全幅地図・地図内コンパクトボタン比較試作</h1>
 <!-- 更新時には下記を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-16">更新：2026/11/16（西宮市と操作ボタン統一比較版）</time>
+<time class="updated-at" id="updatedAt" datetime="2026-11-16T12:12:49+09:00">更新：2026/11/16 12:12:49（JST）</time>
 <p class="notice"><strong>独立比較試作・未採用です。</strong> 西宮市C版との仕様統一・宝塚市125町名の全自動ラベル・重なり許容・飛び地・クイズは維持しました。地図を幅いっぱいに戻し、「全画面」は地図内右上、その他の操作ボタンは地図内右下に重ねています。地図＋・−、文字＋・−の4ボタンは49px幅を維持して＋を上、−を下に配置、その他も49px幅に統一。「文字／100／％」「よみ／がな／OFF」は中央揃えで3行表示です。正式ページや以前の比較版は変更していません。</p>
 <p class="small">町域形状・読み：Kussoon/takarazuka の元SVGおよび町名台帳。操作・見た目の比較基準：西宮市V2 Cレイアウト。</p>
 <section class="study" aria-label="20地域学習範囲"><div class="study-row"><strong>学習範囲</strong><button id="communityToggle" type="button" aria-expanded="false" aria-controls="communityOptions" disabled>宝塚市全域（125町名） ▾</button><span id="communityCount">準備中</span></div>
@@ -119,8 +119,7 @@ OFF</button>
  const f=getComputedStyle(btn);ctx.font=[f.fontStyle,f.fontVariant,f.fontWeight,f.fontSize,f.fontFamily].join(' ');
  const widest=Math.max(...['文字','よみ','がな','OFF','ON','100','全体','配置','自動','仮','＋','－','−'].map(v=>ctx.measureText(v).width));
  root.style.setProperty('--compact-width',Math.min(49,Math.max(30,Math.ceil(widest+6)))+'px');
- const full=document.getElementById('fullscreen');
- if(full){const ff=getComputedStyle(full);ctx.font=[ff.fontStyle,ff.fontVariant,ff.fontWeight,ff.fontSize,ff.fontFamily].join(' ');full.style.setProperty('--compact-full-width',Math.ceil(Math.max(ctx.measureText('全画面').width,ctx.measureText('戻る').width)+6)+'px');}
+
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
