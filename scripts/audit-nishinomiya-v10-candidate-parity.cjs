@@ -13,7 +13,14 @@ async function snapshot(page,scope){
  return page.evaluate(scope=>{
   const audit=window.__nishinomiyaCandidateAudit;
   const names=audit.names();if(names.length!==321)throw Error('321 town names missing');
-  const original=Math.random,results=[];
+  const original=Math.random,originalCentroid=d3.geoCentroid,results=[];
+  // Memoize an identical centroid for each immutable GeoJSON feature during
+  // this audit only. V9 otherwise recalculates it millions of times.
+  const centroidCache=new WeakMap();
+  d3.geoCentroid=function(feature){
+   if(centroidCache.has(feature))return centroidCache.get(feature);
+   const center=originalCentroid(feature);centroidCache.set(feature,center);return center;
+  };
   try{
    for(let index=0;index<names.length;index++){
     let seed=(index+1)*2654435761>>>0;
@@ -23,7 +30,7 @@ async function snapshot(page,scope){
      throw Error('Invalid four-choice candidate '+names[index]);
     results.push({town:names[index],answers:got});
    }
-  }finally{Math.random=original}
+  }finally{Math.random=original;d3.geoCentroid=originalCentroid}
   return {scope,results};
  },scope);
 }
