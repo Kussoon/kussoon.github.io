@@ -53,7 +53,7 @@ const out=path.resolve('svg-master-v5-acceptance');fs.mkdirSync(out,{recursive:t
    assert.match(await feedback.innerText(),/違います/);
    assert.notEqual(await feedback.evaluate(el=>getComputedStyle(el).display),'none','feedback shown after wrong answer');
    const before=await page.locator('#quizProgress').innerText();
-   await buttons.nth(wrongIndex).click();
+   await buttons.nth(wrongIndex).evaluate(el=>el.click()); // DOM click on disabled input must be a no-op
    assert.equal(await page.locator('#quizProgress').innerText(),before,'wrong disabled answer cannot alter score');
    const rightIndex=txt.findIndex(v=>v.includes(target));assert(rightIndex>=0);
    await buttons.nth(rightIndex).click();
