@@ -69,6 +69,7 @@ async function runCase(c){
   }
   let a=await state('whole-default');
   assert.equal(a.total,324,'321 town labels plus 3 additional placements');
+  assert.deepEqual(Object.entries(a.counts).filter(([n,c])=>c>1).map(([n,c])=>[n,c]).sort(),[['塩瀬町名塩',2],['山口町上山口',2],['山口町下山口',2]].sort(),'3 expected extra label placements');
   assert.equal(a.readings,0);
   assert.equal(await page.locator('#areas path.town').count(),321);
   await capture(page,c.name+'-whole');
