@@ -57,9 +57,24 @@ async function run(conf){
   await page.locator('#fullscreen').click();await page.waitForTimeout(250);
   s=await snapshot('fullscreen-reading125');
   assert(s.fullscreen&&s.reading===324&&Math.abs(s.font-10)<.01);
+  // Fullscreen covers the community chooser, which lives OUTSIDE the map.
+  // Verify the state can be left safely; choose the region in normal mode,
+  // then re-enter fullscreen to test persistence instead of clicking through
+  // the fullscreen SVG overlay.
+  assert.equal(await page.locator('#communityToggle').evaluate(el=>{
+   const top=document.elementFromPoint(el.getBoundingClientRect().left+el.getBoundingClientRect().width/2,
+    el.getBoundingClientRect().top+el.getBoundingClientRect().height/2);
+   return top===el||el.contains(top);
+  }),false,'fullscreen covers the external region chooser');
+  await page.locator('#fullscreen').click();await page.waitForTimeout(250);
+  s=await snapshot('fullscreen-exit-before-region-selection');
+  assert(!s.fullscreen);assert.equal(s.paths,321);assert.equal(s.reading,324);
   await region(page,'西宮浜');
-  s=await snapshot('region-switch-while-fullscreen');
-  assert.equal(s.paths,1);assert.equal(s.labels,1);assert(s.fullscreen);assert.equal(s.reading,1);
+  s=await snapshot('region-switch-in-normal-mode');
+  assert.equal(s.paths,1);assert.equal(s.labels,1);assert(!s.fullscreen);assert.equal(s.reading,1);
+  await page.locator('#fullscreen').click();await page.waitForTimeout(250);
+  s=await snapshot('fullscreen-region-preserved');
+  assert(s.fullscreen);assert.equal(s.paths,1);assert.equal(s.reading,1);
   await page.locator('#fullscreen').click();await page.waitForTimeout(250);
   s=await snapshot('fullscreen-exit-region-preserved');
   assert(!s.fullscreen);assert.equal(s.paths,1);assert.equal(s.reading,1);
