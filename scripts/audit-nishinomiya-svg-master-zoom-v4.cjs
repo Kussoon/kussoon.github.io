@@ -4,12 +4,14 @@
 const {chromium}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const out=path.resolve(process.env.SVG_ZOOM_OUTPUT||'svg-master-v4-zoom-report');
+const viewportWidth=Number(process.env.SVG_ZOOM_WIDTH||1280),viewportHeight=Number(process.env.SVG_ZOOM_HEIGHT||800);
+if(!(viewportWidth>=320&&viewportHeight>=500))throw Error('Invalid viewport dimensions');
 fs.mkdirSync(out,{recursive:true});
 const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
 (async()=>{
  const browser=await chromium.launch({headless:true});
  try{
-  const page=await browser.newPage({viewport:{width:1280,height:800}});
+  const page=await browser.newPage({viewport:{width:viewportWidth,height:viewportHeight}});
   await page.goto(base+'/v2/nishinomiya-town-svg-master-v4-20261116-pilot.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:60000});
   await page.addScriptTag({url:'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'});
@@ -52,9 +54,9 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
     topScale:scale.slice(0,20),topFont:font.slice(0,20),rows};
   });
   assert.equal(report.towns,321);
-  fs.writeFileSync(path.join(out,'zoom-font-321.json'),JSON.stringify(report,null,2));
+  fs.writeFileSync(path.join(out,'zoom-font-321-'+viewportWidth+'.json'),JSON.stringify(report,null,2));
   assert(report.scaleRatio.min>=.94&&report.scaleRatio.max<=1.06,'V4 zoom ratio deviates more than 6% from C baseline');
   assert(report.font.maxDiff<=.2,'V4 label font diff greater than .2px');
-  console.log('C_vs_SVG_ZOOM_FONT '+JSON.stringify({initialC:report.initialC,scaleRatio:report.scaleRatio,font:report.font,topScale:report.topScale.slice(0,8),topFont:report.topFont.slice(0,8)}));
+  console.log('C_vs_SVG_ZOOM_FONT '+JSON.stringify({viewportWidth,initialC:report.initialC,scaleRatio:report.scaleRatio,font:report.font,topScale:report.topScale.slice(0,8),topFont:report.topFont.slice(0,8)}));
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
