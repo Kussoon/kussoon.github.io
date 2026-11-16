@@ -1,0 +1,37 @@
+name: Nishinomiya SVG 321 Label Anchor Audit
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v2-20261116-pilot.html'
+      - 'scripts/audit-nishinomiya-svg-master-anchors.cjs'
+      - '.github/workflows/nishinomiya-svg-master-anchors.yml'
+  workflow_dispatch:
+
+jobs:
+  anchor-report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium browser runner
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Fetch 26-community mapping for C baseline page
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Run 321-label geometry comparison
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-svg-master-anchors.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-svg-321-label-anchor-report
+          path: svg-master-v2-geometry/
+          if-no-files-found: ignore
