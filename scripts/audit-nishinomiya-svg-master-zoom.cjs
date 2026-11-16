@@ -32,7 +32,7 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
     const cZoom=cMap.getZoom(),cScale=Math.pow(2,cZoom-initialC);
     const bb=geoPath.bounds(f);
     const fit=KussoonTownSvgViewport.fitBounds(bb,w,h,100,.6,40);
-    assert(fit&&Number.isFinite(fit.scale),'invalid SVG fit '+f.properties.S_NAME);
+    if(!fit||!Number.isFinite(fit.scale))throw Error('invalid SVG fit '+f.properties.S_NAME);
     const sScale=fit.scale;
     const cFont=8*maxClip(Math.pow(1.18,cZoom-initialC));
     const sFont=8*maxClip(Math.pow(1.18,Math.log2(sScale)));
