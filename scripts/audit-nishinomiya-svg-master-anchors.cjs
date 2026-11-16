@@ -25,6 +25,19 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
    scratch.style.cssText='position:absolute;left:-3000px;top:0;width:1000px;height:700px';
    document.body.appendChild(scratch);
    const lmap=L.map(scratch,{zoomControl:false,attributionControl:false}).setView([34.76,135.34],12);
+   const firstRingCenter=feature=>{
+    const g=feature.geometry;
+    const ring=g.type==='Polygon'?g.coordinates[0]:g.type==='MultiPolygon'?g.coordinates[0][0]:null;
+    if(!ring||ring.length<3)return d3Path.centroid(feature);
+    const points=ring.map(x=>projection(x));
+    let a=0,cx=0,cy=0;
+    for(let i=0,j=points.length-1;i<points.length;j=i++){
+     const p=points[j],q=points[i],cross=p[0]*q[1]-q[0]*p[1];
+     a+=cross;cx+=(p[0]+q[0])*cross;cy+=(p[1]+q[1])*cross;
+    }
+    if(Math.abs(a)<1e-10)return points[0];
+    return [cx/(3*a),cy/(3*a)];
+   };
    const diffs=[];
    for(const f of features){
     const geo=L.geoJSON(f).addTo(lmap);
@@ -32,10 +45,11 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
     if(!layer||typeof layer.getCenter!=='function')throw Error('No C center for '+f.properties.S_NAME);
     const ll=layer.getCenter();
     const pointC=projection([ll.lng,ll.lat]);
-    const pointSVG=d3Path.centroid(f);
-    if([...pointC,...pointSVG].some(v=>!Number.isFinite(v)))throw Error('Nonfinite label: '+f.properties.S_NAME);
+    const pointSVG=d3Path.centroid(f),pointCStyle=firstRingCenter(f);
+    if([...pointC,...pointSVG,...pointCStyle].some(v=>!Number.isFinite(v)))throw Error('Nonfinite label: '+f.properties.S_NAME);
     const dx=pointSVG[0]-pointC[0],dy=pointSVG[1]-pointC[1];
-    diffs.push({town:f.properties.S_NAME,dx:+dx.toFixed(3),dy:+dy.toFixed(3),px:+Math.hypot(dx,dy).toFixed(3)});
+    diffs.push({town:f.properties.S_NAME,dx:+dx.toFixed(3),dy:+dy.toFixed(3),
+      px:+Math.hypot(dx,dy).toFixed(3),cStylePx:+Math.hypot(pointCStyle[0]-pointC[0],pointCStyle[1]-pointC[1]).toFixed(3)});
     lmap.removeLayer(geo);
    }
    lmap.remove();scratch.remove();
@@ -45,11 +59,13 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
       gt15:diffs.filter(v=>v.px>15).length,gt30:diffs.filter(v=>v.px>30).length},
     maximumPx:ordered[0]?.px,
     meanPx:+(diffs.reduce((t,v)=>t+v.px,0)/diffs.length).toFixed(3),
+    cStyleMaxPx:+Math.max(...diffs.map(v=>v.cStylePx)).toFixed(3),
+    cStyleMeanPx:+(diffs.reduce((t,v)=>t+v.cStylePx,0)/diffs.length).toFixed(3),
     top25:ordered.slice(0,25),rows:diffs};
   });
   assert.equal(report.towns,321);
   fs.writeFileSync(path.join(out,'anchors-c-vs-svg.json'),JSON.stringify(report,null,2));
-  console.log('C_vs_SVG_ANCHOR_REPORT '+JSON.stringify({towns:report.towns,counts:report.counts,max:report.maximumPx,mean:report.meanPx,top10:report.top25.slice(0,10)}));
+  console.log('C_vs_SVG_ANCHOR_REPORT '+JSON.stringify({towns:report.towns,counts:report.counts,max:report.maximumPx,mean:report.meanPx,cStyleMax:report.cStyleMaxPx,cStyleMean:report.cStyleMeanPx,top10:report.top25.slice(0,10)}));
   await page.screenshot({path:path.join(out,'master-v2-default-svg.png'),fullPage:true});
   await page.evaluate(()=>document.getElementById('anchorMode').click());
   await page.screenshot({path:path.join(out,'master-v2-leaflet-like-mode.png'),fullPage:true});
