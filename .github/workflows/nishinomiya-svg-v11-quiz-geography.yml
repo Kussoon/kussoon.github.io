@@ -1,0 +1,49 @@
+name: Nishinomiya SVG V11 Shared Quiz Geography
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-quiz-geography.js'
+      - 'v2/nishinomiya-town-svg-master-v11-20261117-pilot.html'
+      - 'scripts/*v11*'
+      - 'scripts/test-town-svg-quiz-geography.cjs'
+      - '.github/workflows/nishinomiya-svg-v11-quiz-geography.yml'
+  workflow_dispatch:
+jobs:
+  geography:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya region data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Shared geography unit contract
+        run: node scripts/test-town-svg-quiz-geography.cjs
+      - name: Compare V10/V11 candidate ordering and layout
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-v11-candidate-parity.cjs
+          node scripts/smoke-nishinomiya-svg-v11-geography-parity.cjs
+      - name: Audit 321 quiz 1 and quiz 2 problems
+        run: node scripts/audit-nishinomiya-v11-321-quiz-contract.cjs
+      - name: Audit mixed state transitions
+        run: node scripts/smoke-nishinomiya-v11-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v11-geography-evidence
+          path: |
+            nishinomiya-v11-candidate-parity/
+            nishinomiya-v11-quiz-parity/
+            nishinomiya-v11-321-quiz-contract/
+            nishinomiya-v11-state-matrix/
+          if-no-files-found: ignore
