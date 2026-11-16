@@ -1,0 +1,36 @@
+name: Nishinomiya SVG V6 State Matrix
+on:
+  pull_request:
+    paths:
+      - 'scripts/smoke-nishinomiya-v6-state-matrix.cjs'
+      - '.github/workflows/nishinomiya-v6-state-matrix.yml'
+      - 'v2/nishinomiya-town-svg-master-v6-20261117-pilot.html'
+  workflow_dispatch:
+jobs:
+  state-matrix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Get community mapping
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Run combinations across three viewports
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-v6-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-svg-v6-state-matrix
+          path: nishinomiya-v6-state-matrix/
+          if-no-files-found: ignore
