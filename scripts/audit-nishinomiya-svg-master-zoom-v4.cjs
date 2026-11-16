@@ -28,6 +28,7 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
    const initialC=cMap.getZoom();
    const maxClip=(x)=>Math.min(2,Math.max(.75,x));
    const rows=[];
+   let rawC=null,computedCInitial=null;
    for(const f of features){
     const layer=L.geoJSON(f).getLayers()[0];const bounds=layer.getBounds();
     cMap.fitBounds(bounds,{padding:[50,50],maxZoom:15,animate:false});
@@ -47,8 +48,8 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
     const mercatorY=lat=>Math.log(Math.tan(Math.PI/4+Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/360));
     const geographicWidth=256*(extent[2]-extent[0])/360;
     const geographicHeight=256*(mercatorY(extent[3])-mercatorY(extent[1]))/(2*Math.PI);
-    const rawC=Math.log2(Math.min((w-44)/geographicWidth,(h-44)/geographicHeight));
-    const computedCInitial=Math.max(9,Math.min(19,Math.floor((rawC+1e-9)*10)/10));
+    rawC=Math.log2(Math.min((w-44)/geographicWidth,(h-44)/geographicHeight));
+    computedCInitial=Math.max(9,Math.min(19,Math.floor((rawC+1e-9)*10)/10));
     const sScale=Math.min(fit.scale,40,Math.pow(2,15-computedCInitial));
     const cFont=8*maxClip(Math.pow(1.18,cZoom-initialC));
     const sFont=8*maxClip(Math.pow(1.18,Math.log2(sScale)));
