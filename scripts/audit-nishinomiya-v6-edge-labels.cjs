@@ -64,6 +64,9 @@ async function runCase(c){
    assert.deepEqual(result.missing,[],tag+' missing names');
    assert.deepEqual(result.extras,[],tag+' extra names');
    assert.equal(result.nonfinite.length,0,tag+' invalid label');
+   if(['zoom-plus','zoom-plus-twice','zoom-after-minus'].includes(tag)){
+    assert.equal(result.edgeShifted,0,'user zoom must never pin labels to viewport edges');
+   }
    if(!['zoom-plus','zoom-plus-twice','zoom-after-minus'].includes(tag)){
     assert.deepEqual(result.clipped,[],tag+' contains clipped fitted-view labels');
    }
