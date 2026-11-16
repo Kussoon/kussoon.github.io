@@ -1,0 +1,26 @@
+name: Town SVG Data Contract Phase 4
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-data-contract.js'
+      - 'scripts/test-town-svg-data-contract.cjs'
+      - '.github/workflows/town-svg-data-contract-phase4.yml'
+      - 'v2/docs/town-map/TOWN_SVG_DATA_CONTRACT_PHASE4.md'
+  workflow_dispatch:
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install TopoJSON fixture converter
+        run: npm install --no-save topojson-client@3.1.0
+      - name: Retrieve original Nishinomiya mapping
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Verify all data contracts
+        run: node scripts/test-town-svg-data-contract.cjs
