@@ -21,7 +21,7 @@ const engines=[{name:'chromium-1280',driver:chromium,width:1280,height:800},
     const original=await response.text();
     const marker='KussoonTownSvgCore.loadTownData({';
     if(original.split(marker).length!==2)throw Error('Unexpected quiz initialization marker');
-    const instrumentation='window.__nishinomiyaQuizAudit=Object.freeze({names:()=>features.map(f=>f.properties.S_NAME),startQuiz,quizMapAnswer,stopQuiz,quizReveal});\\n';
+    const instrumentation='window.__nishinomiyaQuizAudit=Object.freeze({names:()=>features.map(f=>f.properties.S_NAME),startQuiz,quizMapAnswer,stopQuiz,quizReveal});'+String.fromCharCode(10);
     const body=original.replace(marker,instrumentation+marker);
     await route.fulfill({response,body,headers:{...response.headers(),'content-type':'text/html; charset=utf-8'}});
    });
