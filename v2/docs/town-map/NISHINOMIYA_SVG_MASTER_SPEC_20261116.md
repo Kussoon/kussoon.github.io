@@ -434,3 +434,17 @@
 **関連CIの既知の問題**：別ワークフロー `V2 2026 regression contracts` の `data-and-components` は、以前から参照している `v2/tests/kawanishi-town-map-contract.test.cjs` が存在しないため `MODULE_NOT_FOUND` で失敗している。今回追加した第10比較版の4択候補専用CIは成功しているが、サイト全体のCIがすべて合格したとの主張はしない。
 
 **利用者受入と残件**：自動検査の合格だけで実際のiPhone Safariでのタッチ・ラベル視認性まで保証するものではない。今後の共通化を続けても、西宮市の第9・第10比較版の出題と表示に劣化がないことを要求する。
+
+## 27. 第11比較版：隣接・距離計算の共通化（2026-11-17）
+
+**対象**：PR #537（main統合済み）、独立比較ページ `v2/nishinomiya-town-svg-master-v11-20261117-pilot.html`、共通モジュール `v2/common/js/town-svg-quiz-geography.js`。
+
+**共通化した範囲**：TopoJSONの共有アークに同じ町名が現れる場合に町名どうしの隣接Mapを構築する処理、GeoJSONのD3地理的中心点から候補までの球面距離を算出する処理。自治体ごとにオブジェクト名、町名プロパティ、TopoJSON、GeoJSON、D3関数を渡す。町名の共有アークによる隣接判定を変えず、単なる頂点接触を新たな隣接とは扱わない。同じ町名をもつ複数図形・飛び地は一つの町名のまま扱う。
+
+**保持した条件**：第10版の隣接優先順・主所属地域・学習範囲・選択候補のシャッフル・地図描画・324ラベル・読み・黄色点滅・クイズ1/2採点・岡田山等の固有の表示を変更しない。正式Leaflet C版、第10比較版、他市は未変更。
+
+**検査結果：専用CI PASS**。GitHub Actions [run 43982369571](https://github.com/Kussoon/kussoon.github.io/actions/runs/43982369571)。第10版と第11版の321町名×4範囲＝1,284条件の4択候補と順序は、Chromium 1280pxとWebKit 390pxの両方で一致。5画面状態の町域・ラベル・ボタン表記はChromium 1280px／WebKit 390px／320pxで一致。第11版のクイズ1・2全321問をChromiumとWebKitでそれぞれ合格。全画面・地域切替・クイズ中断など15段階の操作回帰も3環境で合格。
+
+**別ワークフローの既知の失敗**：同PRの `V2 2026 regression contracts` の `data-and-components` は、以前から存在しない `v2/tests/kawanishi-town-map-contract.test.cjs` を呼び出すため `MODULE_NOT_FOUND`。別ジョブ `real-browser` は合格。サイト全体のCIすべてが合格したと扱ってはならない。
+
+**正式採用の判定**：PRのmain統合は新比較ページと共通部品の保存を意味する。町名マップ正式C版からの置換・iPhone SafariとPC実機での最終受入・ラベルの最終視認性評価は未実施。利用者による実機承認まで正式C版を残す。
