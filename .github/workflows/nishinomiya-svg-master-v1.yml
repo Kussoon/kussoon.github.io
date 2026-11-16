@@ -7,6 +7,7 @@ on:
       - 'v2/tests/nishinomiya-svg-master-contract-20261116.test.cjs'
       - 'v2/docs/town-map/NISHINOMIYA_SVG_MASTER_SPEC_20261116.md'
       - 'scripts/smoke-nishinomiya-svg-master-v1.cjs'
+      - 'scripts/audit-nishinomiya-svg-master-data.cjs'
       - '.github/workflows/nishinomiya-svg-master-v1.yml'
   workflow_dispatch:
 
@@ -32,6 +33,7 @@ jobs:
           mkdir -p nishinomiya/data
           curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
           test -s nishinomiya/data/community-town-map.json
+          node scripts/audit-nishinomiya-svg-master-data.cjs
       - name: Launch local static server and run browser smoke
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 &
