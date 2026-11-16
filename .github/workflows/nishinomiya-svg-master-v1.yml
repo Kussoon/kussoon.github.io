@@ -4,6 +4,8 @@ on:
     paths:
       - 'v2/nishinomiya-town-svg-master-v1-20261116-pilot.html'
       - 'v2/tests/nishinomiya-svg-master-v1-20261116.test.cjs'
+      - 'v2/tests/nishinomiya-svg-master-contract-20261116.test.cjs'
+      - 'v2/docs/town-map/NISHINOMIYA_SVG_MASTER_SPEC_20261116.md'
       - 'scripts/smoke-nishinomiya-svg-master-v1.cjs'
       - '.github/workflows/nishinomiya-svg-master-v1.yml'
   workflow_dispatch:
