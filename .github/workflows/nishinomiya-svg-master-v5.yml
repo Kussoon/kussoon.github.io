@@ -1,0 +1,36 @@
+name: Nishinomiya SVG V5 26-Region Quiz Acceptance
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v5-20261116-pilot.html'
+      - 'scripts/smoke-nishinomiya-svg-master-v5-acceptance.cjs'
+      - '.github/workflows/nishinomiya-svg-master-v5.yml'
+  workflow_dispatch:
+jobs:
+  acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Fetch city community mapping
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Execute full region + quiz flow
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-svg-master-v5-acceptance.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-svg-v5-acceptance
+          path: svg-master-v5-acceptance/
+          if-no-files-found: ignore
