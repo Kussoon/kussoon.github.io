@@ -91,8 +91,19 @@ function render(){
  if(mode==='compact'){
   // Build pairs from all original door events, not the filtered table.
   // IDs are stable when the user changes filters or sort order.
-  const allPairs=doorPairs().filter(p=>p.opened&&p.closed)
-    .sort((a,b)=>a.opened.localeCompare(b.opened)||a.name.localeCompare(b.name));
+  const allPairs=[];
+  for(const name of ['冷蔵庫','玄関ドア']){
+    let opened=null;
+    const sequence=events.filter(e=>e.name===name).sort((a,b)=>a.time.localeCompare(b.time));
+    for(const evt of sequence){
+      if(evt.action==='オープン')opened=evt.time;
+      else if(evt.action==='クローズ'){
+        if(opened!==null)allPairs.push({name,opened,closed:evt.time});
+        opened=null;
+      }
+    }
+  }
+  allPairs.sort((a,b)=>a.opened.localeCompare(b.opened)||a.name.localeCompare(b.name));
   const pairs=allPairs.map((p,i)=>({...p,pairId:i+1}));
   const eventPair=new Map();
   for(const p of pairs){
