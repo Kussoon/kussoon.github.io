@@ -4,6 +4,8 @@ on:
     paths:
       - 'v2/nishinomiya-town-svg-master-v3-20261116-pilot.html'
       - 'scripts/audit-nishinomiya-svg-master-zoom.cjs'
+      - 'scripts/audit-nishinomiya-svg-master-zoom-v4.cjs'
+      - 'v2/nishinomiya-town-svg-master-v4-20261116-pilot.html'
       - 'scripts/smoke-nishinomiya-svg-master-v1.cjs'
       - '.github/workflows/nishinomiya-svg-master-v3.yml'
   workflow_dispatch:
@@ -30,9 +32,10 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 &
           sleep 3
           node scripts/audit-nishinomiya-svg-master-zoom.cjs
+          node scripts/audit-nishinomiya-svg-master-zoom-v4.cjs
       - name: Browser smoke V3
         env:
-          SVG_MASTER_PILOT_PATH: /v2/nishinomiya-town-svg-master-v3-20261116-pilot.html
+          SVG_MASTER_PILOT_PATH: /v2/nishinomiya-town-svg-master-v4-20261116-pilot.html
         run: |
           python3 -m http.server 8766 --bind 127.0.0.1 &
           sleep 3
@@ -43,5 +46,6 @@ jobs:
           name: nishinomiya-svg-master-v3-zoom-audit
           path: |
             svg-master-v3-zoom-report/
+            svg-master-v4-zoom-report/
             svg-master-v1-screenshots/
           if-no-files-found: ignore
