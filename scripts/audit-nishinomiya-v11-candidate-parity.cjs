@@ -6,7 +6,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const base=process.env.NISHINOMIYA_TEST_BASE||'http://127.0.0.1:8765';
 const out=path.resolve('nishinomiya-v11-candidate-parity');fs.mkdirSync(out,{recursive:true});
 const versions={
- V10:'/v2/nishinomiya-town-svg-master-v9-20261117-pilot.html',
+ V10:'/v2/nishinomiya-town-svg-master-v10-20261117-pilot.html',
  V11:'/v2/nishinomiya-town-svg-master-v11-20261117-pilot.html'
 };
 async function snapshot(page,scope){
