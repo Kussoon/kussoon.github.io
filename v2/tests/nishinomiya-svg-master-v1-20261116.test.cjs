@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const read=p=>fs.readFileSync(path.join(__dirname,'..',p),'utf8');
+const base=read('nishinomiya-town-svg-compact-controls-20261116-pilot.html');
+const pilot=read('nishinomiya-town-svg-master-v1-20261116-pilot.html');
+const c=read('nishinomiya-town-study-c.html');
+function dictionaries(s){const m=s.match(/READINGS=(\{[^;]+\}), LABEL_OFFSETS=(\{[^;]+\}), MULTI_LABELS=(\{[^;]+\}), EXTRA_LABELS=(\{[^;]+\});/);assert(m);return m.slice(1).map(JSON.parse);}
+assert.deepEqual(dictionaries(pilot),dictionaries(base));
+assert.deepEqual(dictionaries(pilot),dictionaries(c));
+assert.equal(Object.keys(dictionaries(pilot)[0]).length,321);
+assert.equal(Object.keys(dictionaries(pilot)[1]).length,14);
+const quiz=s=>s.slice(s.indexOf('function shuffleQuiz('),s.indexOf('KussoonTownSvgCore.loadTownData'));
+assert.equal(quiz(pilot),quiz(base),'quiz implementations must remain unchanged in this pilot');
+assert.match(pilot,/let wheelArmed=false/);
+assert.match(pilot,/addEventListener\('click',\(\)=>\{wheelArmed=true\},true\)/);
+assert.match(pilot,/document\.addEventListener\('pointerdown',event=>\{\s*if\(!svg\.node\(\)\.contains\(event\.target\)\)wheelArmed=false;/);
+assert.match(pilot,/zoom\.filter\(event=>\(event\.type!=='wheel'\|\|wheelArmed\)/);
+assert.match(pilot,/svg\.call\(zoom\);\s*svg\.on\('click'/);
+assert(!pilot.includes('「配置」ボタンで現行SVGとC版の多角形中心計算を切替'));
+assert(pilot.includes('noindex,nofollow'));
+assert(pilot.includes("},topojson,'town',321"));
+assert(pilot.includes("communityNames.length!==26"));
+assert(pilot.includes('id="anchorMode"')&&pilot.includes('hidden tabindex="-1" aria-hidden="true"'));
+assert(pilot.includes('文字\n100\n％'));
+const ids=['zoomIn','zoomOut','larger','smaller','size','reset','reading','fullscreen'];
+for(const id of ids)assert(pilot.includes('id="'+id+'"'));
+for(const s of pilot.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))new vm.Script(s[1]);
+console.log('PASS: master V1 source, gesture guards, untouched quiz & data, script syntax');

@@ -8,7 +8,13 @@ const spec=read('docs/town-map/NISHINOMIYA_SVG_MASTER_SPEC_20261116.md');
 const c=read('nishinomiya-town-study-c.html');
 const svg=read('nishinomiya-town-svg-compact-controls-20261116-pilot.html');
 const core=read('common/js/town-svg-core.js');
-function dict(file,key){const m=file.match(new RegExp('\\b'+key+'=(\\{[^;]+\\})[;,]'));assert(m,'Missing '+key);return JSON.parse(m[1]);}
+function dict(file,key){
+ const m=file.match(/READINGS=(\{[^;]+\}), LABEL_OFFSETS=(\{[^;]+\}), MULTI_LABELS=(\{[^;]+\}), EXTRA_LABELS=(\{[^;]+\});/);
+ assert(m,'Missing C/SVG label dictionary group');
+ const index={READINGS:1,LABEL_OFFSETS:2,MULTI_LABELS:3,EXTRA_LABELS:4}[key];
+ assert(index,'Unknown dictionary: '+key);
+ return JSON.parse(m[index]);
+}
 for(const key of ['READINGS','LABEL_OFFSETS','MULTI_LABELS','EXTRA_LABELS']){
  assert.deepEqual(dict(svg,key),dict(c,key),'C/SVG '+key+' mismatch');
 }

@@ -161,3 +161,18 @@
 - [PR #470](https://github.com/Kussoon/kussoon.github.io/pull/470)／[PR #471](https://github.com/Kussoon/kussoon.github.io/pull/471)／[PR #476](https://github.com/Kussoon/kussoon.github.io/pull/476)／[PR #479](https://github.com/Kussoon/kussoon.github.io/pull/479)／[PR #507](https://github.com/Kussoon/kussoon.github.io/pull/507)／[PR #515](https://github.com/Kussoon/kussoon.github.io/pull/515)
 
 **変更履歴**：2026-11-16 初版。文書と受入ゲートのみ作成。正式ページとSVG比較版の描画コードは不変更。
+
+
+## 11. 2026-11-16 第1段階検証ログ：ホイール・ダブルクリック・データ
+
+**検証対象は新しい独立比較版** `v2/nishinomiya-town-svg-master-v1-20261116-pilot.html`。旧PR #515と正式C版は一切変更しない。
+
+- **GAP-01 / N-GESTURE-04：比較版で修正実装**。地図内クリックまで wheel を受け付けず、クリック後に有効、地図外 pointerdown で無効。町域の click.stopPropagation を考慮してキャプチャで有効化。共有 `town-svg-core.js` は変更しない。
+- **GAP-02 / N-GESTURE-05：比較版で修正実装**。D3の通常のダブルクリック拡大を再接続。
+- **GAP-05 / N-UI-06：比較版の古い説明文を修正**。非表示の配置切替ボタンを操作案内しない。
+- **V01 / 地理データの追加確認**：`v2/data/nishinomiya-town-v2-premerged.topojson` は321図形・321固有名・参照アーク正常。元の `Kussoon/nishinomiya/data/community-town-map.json` は26地域・436元地名レコードで、全321町名は少なくとも1つの学習地域に対応。別の管理用1件「重要湾口尼崎，西宮，芦屋港」は321町名図形に含めない。上甲東園の地域用6図形（上ヶ原4＋甲東2）を確認。
+- **GitHub Actions 検査記録**：[run 43857038426](https://github.com/Kussoon/kussoon.github.io/actions/runs/43857038426)。静的契約・完全データ台帳照合・Chromium PC（1280px）・モバイルWebKit 390px/320px **すべてPASS**。ただしWebKitのモバイルモードはマウスホイールイベントを注入できないため、**ホイールB案とダブルクリックはPC Chromiumだけで操作検証**、モバイルWebKitはタッチズームボタン・地域・クイズ等を検証した。
+- **比較画像**：同Actions実行の `nishinomiya-svg-master-v1-screenshots` 成果物に各画面幅のスクリーンショットを保存。**C版とSVGの全町ラベル画面差分は未実施**。
+- **未解決・完成とはしない**：GAP-03（321町名の基準点）、GAP-04（文字倍率）、GAP-07（町名直リンクのフォーカス）、その他全機能・実機ゲート。利用者のPC/iPhoneでの最終受入はまだ依頼しない。
+
+**次回の判断**：PR #517の統合後も初回検査合格は版固有の事実であり、後続変更で同一検査を再実施する。数値表示・画面の違いを確認してから次のPRに着手する。
