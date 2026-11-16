@@ -1,0 +1,41 @@
+name: Nishinomiya SVG V6 vs Leaflet C Visual Reference
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-v6-vs-leaflet-c-visual.cjs'
+      - 'scripts/smoke-nishinomiya-svg-v6-deep-acceptance.cjs'
+      - '.github/workflows/nishinomiya-svg-v6-vs-c-visual.yml'
+  workflow_dispatch:
+jobs:
+  visual-reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Get Nishinomiya town region source
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Capture C and SVG side-by-side evidence
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-v6-vs-leaflet-c-visual.cjs
+          node scripts/smoke-nishinomiya-svg-v6-deep-acceptance.cjs
+          NISHINOMIYA_WEBKIT=1 NISHINOMIYA_DEEP_SHOTS=nishinomiya-svg-v6-webkit-deep-shots node scripts/smoke-nishinomiya-svg-v6-deep-acceptance.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v6-vs-c-visual-evidence
+          path: |
+            nishinomiya-c-svg-visual-comparison/
+            nishinomiya-svg-v6-deep-shots/
+            nishinomiya-svg-v6-webkit-deep-shots/
+          if-no-files-found: ignore
