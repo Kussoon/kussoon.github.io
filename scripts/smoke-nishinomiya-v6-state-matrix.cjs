@@ -80,7 +80,8 @@ async function run(conf){
   assert(!s.fullscreen);assert.equal(s.paths,1);assert.equal(s.reading,1);
   await page.locator('#quizTwo').click();
   s=await snapshot('quiz2-start');
-  assert.equal(s.labels,1);assert.equal(s.reading,0);assert(!s.panel);
+  assert.equal(s.labels,1);assert.equal(s.reading,1);assert(!s.panel);
+  assert.equal(await page.locator('#labels').evaluate(el=>getComputedStyle(el).display),'none','quiz must hide, not delete, town labels');
   assert.equal(await page.locator('#quizChoices button').count(),4);
   await page.locator('#quizQuit').click();
   s=await snapshot('quiz2-quit');
