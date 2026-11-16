@@ -5,6 +5,7 @@ on:
       - 'v2/nishinomiya-town-svg-master-v3-20261116-pilot.html'
       - 'scripts/audit-nishinomiya-svg-master-zoom.cjs'
       - 'scripts/audit-nishinomiya-svg-master-zoom-v4.cjs'
+      - 'scripts/audit-nishinomiya-svg-master-v4-contract.cjs'
       - 'v2/nishinomiya-town-svg-master-v4-20261116-pilot.html'
       - 'scripts/smoke-nishinomiya-svg-master-v1.cjs'
       - '.github/workflows/nishinomiya-svg-master-v3.yml'
@@ -18,6 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: V4 source contract before browser download
+        run: node scripts/audit-nishinomiya-svg-master-v4-contract.cjs
       - name: Install Playwright browsers
         run: |
           npm install --no-save playwright@1.56.1
