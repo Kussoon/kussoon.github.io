@@ -13,7 +13,13 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
  try{
   const page=await browser.newPage({viewport:{width:viewportWidth,height:viewportHeight}});
   await page.goto(base+'/v2/nishinomiya-town-svg-master-v4-20261116-pilot.html',{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:60000});
+  const errors=[];page.on('pageerror',err=>errors.push(err.message));
+  try{
+   await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:12000});
+  }catch(e){
+   console.error('V4_LOAD_DIAGNOSTIC',JSON.stringify({errors,status:await page.locator('#status').textContent().catch(()=>null),count:await page.locator('#communityCount').textContent().catch(()=>null)}));
+   throw e;
+  }
   await page.addScriptTag({url:'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'});
   const report=await page.evaluate(async()=>{
    const raw=await(await fetch('/v2/data/nishinomiya-town-v2-premerged.topojson')).json();
