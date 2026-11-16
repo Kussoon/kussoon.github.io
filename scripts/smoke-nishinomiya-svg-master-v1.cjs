@@ -37,17 +37,25 @@ async function run(c){
   const scale=()=>page.evaluate(()=>window.d3.zoomTransform(document.getElementById('map')).k);
   const k0=await scale();
   const x=bounds.map.x+bounds.map.w*.48,y=bounds.map.y+bounds.map.h*.52;
-  await page.mouse.move(x,y);
-  await page.mouse.wheel(0,-450);await sleep(400);
-  assert(Math.abs(await scale()-k0)<.001,'wheel initially disarmed');
-  await page.mouse.click(x,y);
-  await page.mouse.wheel(0,-450);await sleep(400);
-  const k1=await scale();assert(k1>k0*1.02,'wheel armed after map click');
-  await page.locator('h1').click();
-  await page.mouse.move(x,y);await page.mouse.wheel(0,-450);await sleep(400);
-  assert(Math.abs(await scale()-k1)<.001,'wheel disarmed after outside pointerdown');
-  await page.mouse.dblclick(x,y);await sleep(450);
-  assert(await scale()>k1*1.1,'double-click must zoom in');
+  if(c.width>390){
+   // Browser drivers cannot inject a mouse wheel into mobile WebKit.
+   // Wheel B and double-click are desktop gesture contracts; mobile uses touch/button.
+   await page.mouse.move(x,y);
+   await page.mouse.wheel(0,-450);await sleep(400);
+   assert(Math.abs(await scale()-k0)<.001,'wheel initially disarmed');
+   await page.mouse.click(x,y);
+   await page.mouse.wheel(0,-450);await sleep(400);
+   const k1=await scale();assert(k1>k0*1.02,'wheel armed after map click');
+   await page.locator('h1').click();
+   await page.mouse.move(x,y);await page.mouse.wheel(0,-450);await sleep(400);
+   assert(Math.abs(await scale()-k1)<.001,'wheel disarmed after outside pointerdown');
+   await page.mouse.dblclick(x,y);await sleep(450);
+   assert(await scale()>k1*1.1,'double-click must zoom in');
+  }else{
+   await page.locator('#zoomIn').tap();await sleep(350);
+   assert(await scale()>k0*1.05,'mobile zoom + button works');
+   await page.locator('#zoomOut').tap();await sleep(350);
+  }
   await page.locator('#reset').click();await sleep(300);
   await page.locator('#reading').click();assert.match(await page.locator('#reading').innerText(),/ON/);
   assert(await page.locator('#labels text.town-label').count()>=321,'labels retained');
