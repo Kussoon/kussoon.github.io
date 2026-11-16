@@ -1,0 +1,36 @@
+name: Nishinomiya SVG V5 All 321 Labels
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-v5-321-labels.cjs'
+      - '.github/workflows/nishinomiya-v5-label-audit.yml'
+      - 'v2/nishinomiya-town-svg-master-v5-20261116-pilot.html'
+  workflow_dispatch:
+jobs:
+  label-full-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya region source
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Audit labels and 26 regions across three screens
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-v5-321-labels.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-321-label-visual-report
+          path: svg-v5-label-audit/
+          if-no-files-found: ignore
