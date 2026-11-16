@@ -229,7 +229,7 @@ function showCommunity(){
 $('communityToggle').onclick=()=>{const x=$('communityOptions');x.hidden=!x.hidden;$('communityToggle').setAttribute('aria-expanded',String(!x.hidden))};
 document.addEventListener('pointerdown',e=>{if(!e.target.closest('#communityOptions')&&!e.target.closest('#communityToggle')){$('communityOptions').hidden=true;$('communityToggle').setAttribute('aria-expanded','false')}});
 
-function fontPixels(){return 8*Math.min(2,Math.max(.75,Math.pow(1.18,Math.log2(transform.k/initialK)+directLinkFontOffset))))*fontPct/100}
+function fontPixels(){return 8*Math.min(2,Math.max(.75,Math.pow(1.18,Math.log2(transform.k/initialK)+directLinkFontOffset)))*fontPct/100}
 function labelPositions(f){
  const name=f.properties.S_NAME, multi=MULTI_LABELS[name],extra=EXTRA_LABELS[name]||[];
  if(multi)return multi.map(x=>({point:projection([x[1],x[0]]),offset:[0,0]}));
