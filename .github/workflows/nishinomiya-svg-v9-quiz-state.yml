@@ -1,0 +1,49 @@
+name: Nishinomiya SVG V9 Shared Quiz State
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-quiz-state.js'
+      - 'v2/nishinomiya-town-svg-master-v9-20261117-pilot.html'
+      - 'scripts/test-town-svg-quiz-state.cjs'
+      - 'scripts/smoke-nishinomiya-svg-v9-quiz-parity.cjs'
+      - 'scripts/audit-nishinomiya-v9-321-quiz-contract.cjs'
+      - 'scripts/smoke-nishinomiya-v9-state-matrix.cjs'
+      - '.github/workflows/nishinomiya-svg-v9-quiz-state.yml'
+  workflow_dispatch:
+jobs:
+  quiz-state:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browsers
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya region data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Pure quiz state contract
+        run: node scripts/test-town-svg-quiz-state.cjs
+      - name: V8 to V9 rendered layout parity
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-svg-v9-quiz-parity.cjs
+      - name: V9 quiz 1 and 2 on every town
+        run: node scripts/audit-nishinomiya-v9-321-quiz-contract.cjs
+      - name: V9 15-step UI state sequence
+        run: node scripts/smoke-nishinomiya-v9-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-svg-v9-quiz-parity-evidence
+          path: |
+            nishinomiya-v9-quiz-parity/
+            nishinomiya-v9-321-quiz-contract/
+            nishinomiya-v9-state-matrix/
+          if-no-files-found: ignore
