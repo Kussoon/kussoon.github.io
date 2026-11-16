@@ -14,12 +14,25 @@ const engines=[{name:'chromium-1280',driver:chromium,width:1280,height:800},
    const page=await browser.newPage({viewport:{width:cfg.width,height:cfg.height},
      isMobile:cfg.width<600,hasTouch:cfg.width<600});
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
+   // Test-only exposure of functions already scoped inside the production
+   // IIFE. Do not alter the shipped HTML file or the quiz implementation.
+   await page.route('**/v2/nishinomiya-town-svg-master-v6-20261117-pilot.html',async route=>{
+    const response=await route.fetch();
+    const original=await response.text();
+    const marker='KussoonTownSvgCore.loadTownData({';
+    if(original.split(marker).length!==2)throw Error('Unexpected quiz initialization marker');
+    const instrumentation='window.__nishinomiyaQuizAudit=Object.freeze({names:()=>features.map(f=>f.properties.S_NAME),startQuiz,quizMapAnswer,stopQuiz,quizReveal});\\n';
+    const body=original.replace(marker,instrumentation+marker);
+    await route.fulfill({response,body,headers:{...response.headers(),'content-type':'text/html; charset=utf-8'}});
+   });
    await page.goto(base+'/v2/nishinomiya-town-svg-master-v6-20261117-pilot.html',
     {waitUntil:'domcontentloaded',timeout:60000});
    await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),
     null,{timeout:60000});
    const report=await page.evaluate(()=>{
-    const names=features.map(f=>f.properties.S_NAME);
+    const {names:getNames,startQuiz,quizMapAnswer,stopQuiz,quizReveal}=window.__nishinomiyaQuizAudit||{};
+    if(!getNames)throw Error('Missing test-only instrumentation');
+    const names=getNames();
     if(names.length!==321||new Set(names).size!==321)throw Error('Nonunique 321 town names');
     const $=id=>document.getElementById(id);
     const result={checked:[],quizzes:{quiz1:0,quiz2:0},failures:[],special:[]};
