@@ -85,7 +85,7 @@ async function run(c){
   assert.equal(await page.locator('#quizChoices button').count(),4);
   await page.screenshot({path:path.join(root,c.name+'.png'),fullPage:true});
   assert.deepEqual(errors,[],'browser console page errors');
-  console.log('PASS '+c.name+' 321 shapes, controls, wheel B, double click, fullscreen, 26 regions, both quizzes');
+  console.log('PASS '+c.name+' 321 shapes, controls, '+(c.width>390?'desktop wheel B + double-click':'mobile touch/button zoom')+', fullscreen, 26 regions, both quizzes');
  }finally{await browser.close()}
 }
 (async()=>{for(const c of cases)await run(c)})().catch(e=>{console.error(e);process.exitCode=1});
