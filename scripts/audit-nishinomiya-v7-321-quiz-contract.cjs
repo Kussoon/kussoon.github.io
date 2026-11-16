@@ -19,7 +19,7 @@ const engines=[{name:'chromium-1280',driver:chromium,width:1280,height:800},
    await page.route('**/v2/nishinomiya-town-svg-master-v7-20261117-pilot.html',async route=>{
     const response=await route.fetch();
     const original=await response.text();
-    const marker='KussoonTownSvgCore.loadTownData({';
+    const marker='KussoonTownSvgDataContract.load({';
     if(original.split(marker).length!==2)throw Error('Unexpected quiz initialization marker');
     const instrumentation='window.__nishinomiyaQuizAudit=Object.freeze({names:()=>features.map(f=>f.properties.S_NAME),startQuiz,quizMapAnswer,stopQuiz,quizReveal});'+String.fromCharCode(10);
     const body=original.replace(marker,instrumentation+marker);
