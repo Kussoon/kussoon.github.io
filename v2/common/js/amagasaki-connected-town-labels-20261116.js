@@ -6,7 +6,10 @@
 (function(root){'use strict';
 function components(d,auto){
  const rings=auto.parse(d);
- const valid=rings.map((r,i)=>({...r,index:i})).filter(r=>r.area>0);
+ const positive=rings.filter(r=>r.area>0);
+ // Some source polygons consist solely of reverse-winding contours.
+ // In that case treat the largest exterior contour as the filled region.
+ const valid=(positive.length?positive:rings).map((r,i)=>({...r,index:i}));
  if(!valid.length)throw Error('町域の正面積がありません');
  const parent=valid.map((_,i)=>i);
  const find=i=>parent[i]===i?i:(parent[i]=find(parent[i]));
