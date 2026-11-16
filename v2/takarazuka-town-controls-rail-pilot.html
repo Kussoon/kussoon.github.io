@@ -7,7 +7,7 @@ main{max-width:1050px;margin:auto;padding:12px}h1{font-size:clamp(20px,4vw,29px)
 .notice{background:#fff6da;border:1px solid #c39c43;border-radius:8px;padding:10px;font-size:14px}.nav{display:flex;flex-wrap:wrap;gap:12px;padding:6px 0}
 .status{font-size:14px;background:#fff;padding:9px;border-radius:7px;margin:8px 0}
 .frame{position:relative;overflow:hidden;border-radius:9px;border:2px solid white;background:#e6f3fa;touch-action:none}
-svg{width:calc(100% - 84px);height:clamp(430px,65svh,740px);display:block;touch-action:none;cursor:grab}.frame{background:linear-gradient(to right,#e6f3fa calc(100% - 84px),#f3f8fc calc(100% - 84px))}svg:active{cursor:grabbing}
+svg{width:calc(100% - 78px);height:clamp(430px,65svh,740px);display:block;touch-action:none;cursor:grab}.frame{background:linear-gradient(to right,#e6f3fa calc(100% - 78px),#f3f8fc calc(100% - 78px))}svg:active{cursor:grabbing}
 .town{fill:#76b7db;fill-opacity:.82;stroke:white;stroke-width:1.05;vector-effect:non-scaling-stroke;cursor:pointer}
 .town.selected{fill:#ffd14c;fill-opacity:.98}
 .town.okada{fill:#ad91d4;fill-opacity:.92}.town.selected.okada{fill:#ffd14c;fill-opacity:.98}.town.selected.dim.okada{fill:#ad91d4;fill-opacity:.92}
@@ -39,12 +39,12 @@ body.town-quiz-mode #reading{display:none}
 body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 @media(max-width:400px){.quiz-choices{grid-template-columns:1fr}}
 .labels{pointer-events:none}.town-label{font-weight:800;fill:#193e58;stroke:#fff;stroke-width:.18em;paint-order:stroke fill;text-anchor:middle;dominant-baseline:middle}.town-reading{font-weight:600}
-.controls{position:absolute;right:6px;bottom:8px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:70px;max-height:calc(100% - 66px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding:1px;z-index:3}
+.controls{position:absolute;right:6px;bottom:8px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:64px;max-height:calc(100% - 66px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;padding:1px;z-index:3}
 .controls .pair{display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:100%}.controls .pair button{width:49px;min-width:49px;min-height:40px}.controls>button{width:100%;min-height:48px;white-space:pre-line;line-height:1.2;padding:4px 2px}.controls #reading{white-space:pre-line}
 /* UI-PAIR-ORDER-01: minus left and plus right, for both map and text. */
 .controls #zoomOut,.controls #smaller{order:0}.controls #zoomIn,.controls #larger{order:1}.controls .pair button{white-space:normal;line-height:1.25}.controls #smaller span,.controls #larger span{display:block}button{border:1px solid #92b6cc;border-radius:7px;min-height:40px;background:#fff;color:#16384e;font-weight:700;font-size:13px}
-.full{position:absolute;right:6px;top:8px;z-index:3;width:70px;padding:0 2px;min-height:40px}
-.fullscreen{overflow:hidden}.fullscreen .frame{position:fixed;inset:0;border:0;border-radius:0;z-index:10000}.fullscreen svg{height:100dvh;width:calc(100% - 84px)}
+.full{position:absolute;right:6px;top:8px;z-index:3;width:64px;padding:0 2px;min-height:40px}
+.fullscreen{overflow:hidden}.fullscreen .frame{position:fixed;inset:0;border:0;border-radius:0;z-index:10000}.fullscreen svg{height:100dvh;width:calc(100% - 78px)}
 [hidden]{display:none!important}button:focus-visible{outline:3px solid #dd9a31;outline-offset:2px}
 .small{font-size:13px;color:#526f81}
 </style>
@@ -53,7 +53,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <h1>宝塚市V2｜地図操作ボタン幅の比較試作</h1>
 <!-- 更新時には下記を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
 <time class="updated-at" id="updatedAt" datetime="2026-11-16T09:08:00+09:00">更新：2026/11/16 09:08:00（JST）</time>
-<p class="notice"><strong>独立比較試作・未採用です。</strong> 西宮市C版との仕様統一・宝塚市125町名の全自動ラベル・重なり許容・飛び地・クイズは維持しました。右側に幅84pxの操作専用領域を設け、地図をボタンの下に描画しないようにしています。地図＋・−、文字＋・−の4ボタンは従来の約49px幅を維持した縦配置、そのほかは70px幅に統一。「文字100%」「区域全体」「よみがなOFF」は2行表示です。正式ページや以前の比較版は変更していません。</p>
+<p class="notice"><strong>独立比較試作・未採用です。</strong> 西宮市C版との仕様統一・宝塚市125町名の全自動ラベル・重なり許容・飛び地・クイズは維持しました。右側に幅78pxの操作専用領域を設け、地図をボタンの下に描画しないようにしています。地図＋・−、文字＋・−の4ボタンは従来の約49px幅を維持した縦配置、そのほかは64px幅に統一。「文字100%」「区域全体」「よみがなOFF」は2行表示です。正式ページや以前の比較版は変更していません。</p>
 <p class="small">町域形状・読み：Kussoon/takarazuka の元SVGおよび町名台帳。操作・見た目の比較基準：西宮市V2 Cレイアウト。</p>
 <section class="study" aria-label="20地域学習範囲"><div class="study-row"><strong>学習範囲</strong><button id="communityToggle" type="button" aria-expanded="false" aria-controls="communityOptions" disabled>宝塚市全域（125町名） ▾</button><span id="communityCount">準備中</span></div>
 <div id="communityOptions" class="community-options" hidden></div>
