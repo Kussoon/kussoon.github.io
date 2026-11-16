@@ -33,6 +33,8 @@ jobs:
           sleep 3
           node scripts/audit-nishinomiya-svg-master-zoom.cjs
           node scripts/audit-nishinomiya-svg-master-zoom-v4.cjs
+          SVG_ZOOM_WIDTH=390 SVG_ZOOM_HEIGHT=844 node scripts/audit-nishinomiya-svg-master-zoom-v4.cjs
+          SVG_ZOOM_WIDTH=320 SVG_ZOOM_HEIGHT=668 node scripts/audit-nishinomiya-svg-master-zoom-v4.cjs
       - name: Browser smoke V3
         env:
           SVG_MASTER_PILOT_PATH: /v2/nishinomiya-town-svg-master-v4-20261116-pilot.html
