@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'scripts/audit-nishinomiya-v6-vs-leaflet-c-visual.cjs'
+      - 'scripts/smoke-nishinomiya-svg-v6-deep-acceptance.cjs'
       - '.github/workflows/nishinomiya-svg-v6-vs-c-visual.yml'
   workflow_dispatch:
 jobs:
@@ -27,9 +28,14 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 &
           sleep 3
           node scripts/audit-nishinomiya-v6-vs-leaflet-c-visual.cjs
+          node scripts/smoke-nishinomiya-svg-v6-deep-acceptance.cjs
+          NISHINOMIYA_WEBKIT=1 NISHINOMIYA_DEEP_SHOTS=nishinomiya-svg-v6-webkit-deep-shots node scripts/smoke-nishinomiya-svg-v6-deep-acceptance.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: nishinomiya-v6-vs-c-visual-evidence
-          path: nishinomiya-c-svg-visual-comparison/
+          path: |
+            nishinomiya-c-svg-visual-comparison/
+            nishinomiya-svg-v6-deep-shots/
+            nishinomiya-svg-v6-webkit-deep-shots/
           if-no-files-found: ignore
