@@ -55,8 +55,9 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
   });
   assert.equal(report.towns,321);
   fs.writeFileSync(path.join(out,'zoom-font-321-'+viewportWidth+'.json'),JSON.stringify(report,null,2));
+  console.log('C_vs_SVG_ZOOM_FONT '+JSON.stringify({viewportWidth,initialC:report.initialC,scaleRatio:report.scaleRatio,font:report.font,topScale:report.topScale.slice(0,8),topFont:report.topFont.slice(0,8)}));
   assert(report.scaleRatio.min>=.94&&report.scaleRatio.max<=1.06,'V4 zoom ratio deviates more than 6% from C baseline');
   assert(report.font.maxDiff<=.2,'V4 label font diff greater than .2px');
-  console.log('C_vs_SVG_ZOOM_FONT '+JSON.stringify({viewportWidth,initialC:report.initialC,scaleRatio:report.scaleRatio,font:report.font,topScale:report.topScale.slice(0,8),topFont:report.topFont.slice(0,8)}));
+
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
