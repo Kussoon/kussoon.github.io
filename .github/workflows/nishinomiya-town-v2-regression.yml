@@ -19,6 +19,9 @@ on:
       - 'v2/takarazuka-town-controls-rail-pilot.html'
       - 'v2/nishinomiya-town-controls-narrow-pilot.html'
       - 'v2/takarazuka-town-controls-narrow-pilot.html'
+      - 'v2/nishinomiya-town-overlay-compact-pilot.html'
+      - 'v2/takarazuka-town-overlay-compact-pilot.html'
+      - 'scripts/smoke-town-overlay-compact.cjs'
       - 'v2/common/js/takarazuka-svg-controls-narrow-pilot.js'
       - 'scripts/smoke-town-controls-narrow.cjs'
       - 'v2/common/js/takarazuka-svg-controls-rail-pilot.js'
@@ -79,6 +82,9 @@ on:
       - 'v2/takarazuka-town-controls-rail-pilot.html'
       - 'v2/nishinomiya-town-controls-narrow-pilot.html'
       - 'v2/takarazuka-town-controls-narrow-pilot.html'
+      - 'v2/nishinomiya-town-overlay-compact-pilot.html'
+      - 'v2/takarazuka-town-overlay-compact-pilot.html'
+      - 'scripts/smoke-town-overlay-compact.cjs'
       - 'v2/common/js/takarazuka-svg-controls-narrow-pilot.js'
       - 'scripts/smoke-town-controls-narrow.cjs'
       - 'v2/common/js/takarazuka-svg-controls-rail-pilot.js'
@@ -305,6 +311,8 @@ jobs:
         run: node site/scripts/smoke-town-controls-rail.cjs
       - name: Browser-check 49px narrow town map controls and three-line labels
         run: node site/scripts/smoke-town-controls-narrow.cjs
+      - name: Browser-check full-width town maps with compact overlaid plus-first buttons
+        run: node site/scripts/smoke-town-overlay-compact.cjs
       - name: Upload Takarazuka C-layout preview screenshots
         if: always()
         uses: actions/upload-artifact@v4
