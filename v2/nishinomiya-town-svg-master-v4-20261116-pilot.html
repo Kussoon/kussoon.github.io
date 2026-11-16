@@ -333,7 +333,24 @@ function focusTown(name){
  // uses world circumference 2*PI*projection.scale().
  const fit=KussoonTownSvgViewport.fitBounds(bounds,baseWidth,baseHeight,100,.6,40);
  if(!fit)return false;
- const cInitialRaw=Math.log2(projection.scale()*(2*Math.PI)/256);
+ // Leaflet C computes the initial map zoom from the extreme geographic
+ // coordinates (not from D3's fitted path scale). Use exactly that envelope;
+ // the D3 projection scale may differ by ~0.1 zoom on narrow screens.
+ const extent=[Infinity,Infinity,-Infinity,-Infinity];
+ const visit=coords=>{
+  if(!Array.isArray(coords))return;
+  if(typeof coords[0]==='number'){
+   extent[0]=Math.min(extent[0],coords[0]);extent[1]=Math.min(extent[1],coords[1]);
+   extent[2]=Math.max(extent[2],coords[0]);extent[3]=Math.max(extent[3],coords[1]);
+  }else for(const item of coords)visit(item);
+ };
+ for(const shape of features)visit(shape.geometry.coordinates);
+ const mercatorY=lat=>Math.log(Math.tan(Math.PI/4+Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/360));
+ const geographicWidth=256*(extent[2]-extent[0])/360;
+ const geographicHeight=256*(mercatorY(extent[3])-mercatorY(extent[1]))/(2*Math.PI);
+ const cInitialRaw=Math.log2(Math.min(
+  Math.max(1,baseWidth-44)/Math.max(1e-9,geographicWidth),
+  Math.max(1,baseHeight-44)/Math.max(1e-9,geographicHeight)));
  const cInitialZoom=Math.max(9,Math.min(19,Math.floor((cInitialRaw+1e-9)*10)/10));
  const cRelativeMax=Math.pow(2,15-cInitialZoom);
  const targetScale=Math.min(fit.scale,40,cRelativeMax);
