@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f4f7fa">
+<title>V2 検証｜センサー履歴の改善試作 第8段階｜Kussoon</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7fa;color:#203040;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}main{max-width:860px;margin:auto;padding:16px 12px 60px}h1{font-size:clamp(22px,5vw,30px);margin:8px 0}h2{font-size:18px;margin:0 0 10px}.small{font-size:12px;color:#5b6976}.lead{margin:0 0 16px;color:#536271}.panel{background:white;border:1px solid #dce3eb;border-radius:15px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #192a3a0a}.tag{display:inline-block;background:#e8eff6;color:#315371;padding:3px 8px;border-radius:9px;font-size:12px;font-weight:700}.tabs{display:flex;gap:8px;margin:14px 0}.tabs button{flex:1}.tabs{flex-wrap:wrap}.tabs button{flex:1 1 125px}.open-duration td{background:#eaf6f1!important;color:#206349;font-size:12px;font-weight:750;padding-top:5px;padding-bottom:5px}.open-duration td:first-child{text-align:left;white-space:nowrap}.open-duration td:nth-child(2){text-align:left}.paired th,.paired td{white-space:nowrap}.duration{font-variant-numeric:tabular-nums}.pill{display:inline-block;background:#e8f4ec;color:#226342;border-radius:20px;padding:1px 7px;font-size:12px}.metricline{font-size:13px;font-weight:700;color:#315371;margin:0 0 9px}button,select,input{font:inherit}button{min-height:42px;cursor:pointer;border:1px solid #acbfd0;border-radius:9px;padding:8px 12px;background:white;color:#284862;font-weight:700}button[aria-pressed="true"],button.primary{background:#195a90;border-color:#195a90;color:white}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #e0a13c;outline-offset:2px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:end}.field{display:flex;flex-direction:column;gap:3px;font-size:12px;color:#506170}.field select,.field input{border:1px solid #adbdca;border-radius:8px;padding:8px;min-height:42px;background:#fff;color:#203040}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}th{font-size:12px;background:#edf3f7;color:#476174}th,td{padding:8px 7px;border-bottom:1px solid #e4eaf0;white-space:nowrap}td:first-child{font-variant-numeric:tabular-nums}tr:nth-child(even) td{background:#f9fbfc}.legacy{display:grid;gap:12px}.legacyitem{padding:18px;background:#f9fbfc;border:1px solid #e2e8ef;border-radius:12px;min-height:144px}.legacyitem strong{display:block;margin-bottom:12px}.legacyitem p{margin:4px 0 18px}.status{min-height:20px;color:#265b40;margin-top:7px}.foot{font-size:12px;color:#65717c;line-height:1.7}.metric{font-size:13px;color:#465b69}.metric strong{color:#183d5e} .hidden{display:none!important}@media(max-width:430px){main{padding:12px 9px 44px}.panel{padding:12px}.field{flex:1 1 135px}.toolbar button{flex:1}th,td{padding:8px 5px;font-size:13px}}
+.pair-tag{display:inline-block;margin-left:5px;padding:1px 5px;border-radius:6px;background:#dcefe9;color:#195d49;font-weight:750;font-size:11px;vertical-align:middle;white-space:nowrap}.paired-event td{background:#f1f9f6!important}.open-duration td{background:#e7f4ee!important;padding:6px 5px!important;text-align:center!important}.duration-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 9px;color:#175d45;font-size:12px;font-weight:750}.duration-inner .duration-main{font-size:13px}.duration-inner .duration-detail{font-weight:550;font-size:11px;color:#376f5e}.pair-summary{display:block;text-align:center}.pair-summary .pair-time{display:block;font-size:11px;font-weight:500}@media(max-width:430px){.duration-inner{gap:2px 6px}.pair-tag{margin-left:3px;padding:0 3px;font-size:10px}}</style></head><body><main>
+<a href="/ideas/" class="small">← Kussoon｜工夫・アイデア</a>
+<h1>センサー履歴の改善試作</h1>
+<p class="lead">第8段階｜通常の履歴に記録欠落・同時刻の開閉・人感検知の割り込みを混ぜた実用的な比較試作です。</p>
+<p class="tag">非公式・架空のデモ記録（実機接続なし）</p>
+<section class="panel"><h2>表示方法を比較</h2><div class="tabs" role="group" aria-label="表示モード">
+<button id="compactBtn" aria-pressed="true">シンプル表示</button><button id="normalBtn" aria-pressed="false">カード表示（比較用）</button><button id="pairBtn" aria-pressed="false">開閉ペア</button></div>
+<p class="small">カード表示は現行アプリの情報量・余白の特徴を参考にした再現イメージであり、公式画面の完全な複製ではありません。</p></section>
+<section class="panel" id="filters"><h2>記録の絞り込み</h2><div class="toolbar">
+<label class="field">センサー<select id="sensor"><option value="all">すべて（6台）</option><option>和室</option><option>リビング</option><option>でんわ台</option><option>ベッド下</option><option>冷蔵庫</option><option>玄関ドア</option></select></label>
+<label class="field">動作<select id="kind"><option value="all">すべて</option><option>検知</option><option>オープン</option><option>クローズ</option></select></label>
+<label class="field">日付<input type="date" id="date" value="2026-11-16"></label>
+<label class="field">並び順<select id="order"><option value="desc">新しい順</option><option value="asc">古い順</option></select></label><button id="reset">条件を戻す</button></div>
+<p class="small" id="count"></p><p class="small">通常記録に片方だけの開閉・同時刻の開閉・人感検知の割り込みを混在させています。成立した開閉だけクローズ直後に開放時間を表示し、欠落・同時刻は推測しません。コピー・CSVには元のイベントのみを出力します。</p><p class="small" id="pairHelp" hidden>開閉ペア表示はドアセンサーのみが対象です。動作フィルタはペア全体の判定には適用しません。出力は元のイベント記録を維持します。</p></section>
+<section class="panel"><div class="toolbar" style="justify-content:space-between;align-items:center"><h2 style="margin:0">通知・記録一覧</h2><div class="toolbar"><button id="copy">表示中をコピー</button><button class="primary" id="csv">CSV保存</button></div></div>
+<p class="status" id="status" role="status" aria-live="polite"></p><div id="result"></div>
+</section>
+<section class="panel"><h2>通知文を短くする例</h2><p class="small">標準的な長い通知文 → シンプル通知（提案）</p>
+<table><thead><tr><th>説明的な通知</th><th>シンプル通知</th></tr></thead><tbody>
+<tr><td style="white-space:normal">人感センサー検出通知<br>でんわ台 動きを検知しました</td><td>でんわ台 検知</td></tr>
+<tr><td style="white-space:normal">「オープン」通知<br>冷蔵庫が開かれました。ご確認ください。</td><td>冷蔵庫 オープン</td></tr>
+</tbody></table></section>
+<section class="panel"><h2>改善提案のポイント</h2><p>標準表示を残しつつ、頻繁に記録を確認する利用者には、情報密度の高い一覧を選べるようにする案です。コピーとCSV保存を可能にし、画面を何枚も撮影する負担を減らします。</p>
+<p class="metric">シンプル表示では、同じセンサーのオープン→クローズが成立した場合に、クローズ行の下へ開放時間を表示します。間に別センサーの検知があっても時系列は変えません。開閉ペア表示も引き続き比較できます。実際のログで片方が欠けている場合や同時刻で順序が不明な場合は開放時間を推定しません。記録の欠落がある場合、見かけ上連続する開閉でも実際の対応は保証できません。</p><p class="metric">このデモは <strong>架空の6台・31件</strong>を収録しています。通常記録の中に例外ケースを混ぜています。出力されるのもデモデータのみです。デバイスからの履歴取得・7日以上の保存・通知設定の変更は行いません。</p></section>
+<p class="foot">Kussoonによる独立した改善提案です。Edison Smart公式アプリではなく、メーカーによる提供・承認を意味しません。名前・日時・内容は説明用に作成した架空の情報です。</p></main>
+<script>
+'use strict';
+const names=['和室','リビング','でんわ台','ベッド下','冷蔵庫','玄関ドア'];
+// Fictional demonstration events. Every door opening has a later closing.
+const raw=[
+['19:05:04','冷蔵庫','オープン'], // クローズ欠落
+['18:26:17','リビング','検知'],['18:04:52','和室','検知'],['17:59:26','でんわ台','検知'],
+['17:42:11','リビング','検知'],['17:18:29','冷蔵庫','クローズ'],
+['17:18:20','リビング','検知'], // 開閉中の他センサー検知
+['17:18:12','冷蔵庫','オープン'],
+['17:17:23','玄関ドア','クローズ'],['17:16:44','玄関ドア','オープン'],
+['16:53:53','ベッド下','検知'],['16:48:22','でんわ台','検知'],['16:25:09','リビング','検知'],
+['16:03:15','和室','検知'],['15:58:25','和室','検知'],['15:52:43','リビング','検知'],
+['15:25:06','でんわ台','検知'],['15:11:35','ベッド下','検知'],
+['14:49:00','冷蔵庫','クローズ'],['14:48:09','冷蔵庫','オープン'],
+['14:31:22','でんわ台','検知'],['14:02:11','リビング','検知'],
+['13:43:06','冷蔵庫','クローズ'],['13:42:55','冷蔵庫','オープン'],
+['13:15:16','玄関ドア','クローズ'],['13:14:50','玄関ドア','オープン'],
+['12:54:09','和室','検知'],['12:32:41','ベッド下','検知'],
+['11:30:00','冷蔵庫','クローズ'],['11:30:00','冷蔵庫','オープン'], // 同時刻・順序不明
+['11:10:11','玄関ドア','クローズ'] // オープン欠落
+];
+const events=raw.map(([time,name,action])=>({date:'2026-11-16',time,name,action}));
+const byId=id=>document.getElementById(id);
+let mode='compact';
+function make(tag,cls,txt){const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n}
+function sortByTime(a,b){const d=a.time.localeCompare(b.time);return byId('order').value==='asc'?d:-d}
+function filtered(){return events.filter(e=>(byId('sensor').value==='all'||e.name===byId('sensor').value)&&(byId('kind').value==='all'||e.action===byId('kind').value)&&e.date===byId('date').value).sort(sortByTime)}
+function seconds(t){const [h,m,s]=t.split(':').map(Number);return h*3600+m*60+s}
+function duration(n){return n>=60?Math.floor(n/60)+'分'+String(n%60).padStart(2,'0')+'秒':n+'秒'}
+function doorPairs(){
+ // Conservative pairing within each sensor. An identical timestamp is
+ // ambiguous regardless of the order in which the app supplies records.
+ const pairs=[];
+ for(const name of ['冷蔵庫','玄関ドア']){
+   const records=events.filter(e=>e.name===name&&e.date===byId('date').value)
+      .sort((a,b)=>a.time.localeCompare(b.time));
+   let pending=null;
+   for(let i=0;i<records.length;){
+     let j=i+1;
+     while(j<records.length&&records[j].time===records[i].time)j++;
+     if(j-i>1){
+       // Multiple events in the same second: no ordering assumption.
+       pending=null;
+       i=j;continue;
+     }
+     const e=records[i];
+     if(e.action==='オープン'){
+       // A second OPEN invalidates the unmatched previous OPEN.
+       pending=e;
+     }else if(e.action==='クローズ'){
+       if(pending&&seconds(e.time)>seconds(pending.time)){
+         pairs.push({name,opened:pending.time,closed:e.time});
+       }
+       pending=null;
+     }
+     i=j;
+   }
+ }
+ return pairs.filter(p=>byId('sensor').value==='all'||p.name===byId('sensor').value)
+   .sort((a,b)=>byId('order').value==='asc'?a.closed.localeCompare(b.closed):b.closed.localeCompare(a.closed));
+}
+function tableView(headers,records,cls=''){
+ const wrap=make('div','tablewrap'),table=make('table',cls),head=make('thead'),r=make('tr');
+ headers.forEach(x=>r.append(make('th','',x)));head.append(r);table.append(head);
+ const body=make('tbody');records.forEach(row=>{const tr=make('tr');row.forEach(cell=>tr.append(make('td','',String(cell))));body.append(tr)});
+ table.append(body);wrap.append(table);return wrap;
+}
+function render(){
+ const data=filtered(),box=byId('result');box.replaceChildren();
+ for(const [id,value] of [['compactBtn','compact'],['normalBtn','normal'],['pairBtn','pair']])byId(id).setAttribute('aria-pressed',String(mode===value));
+ byId('pairHelp').hidden=mode!=='pair';byId('status').textContent='';
+ if(mode==='pair'){
+  const pairs=doorPairs();
+  byId('count').textContent='表示：'+pairs.length+'組の成立した開閉記録 / サンプル31件（元データ）';
+  box.append(make('p','metricline','成立した組のみ：オープン → クローズ'));
+  if(!pairs.length){box.append(make('p','small','該当するドアの開閉記録がありません。'));return}
+  box.append(tableView(['場所','オープン','クローズ','開放時間'],pairs.map(p=>[p.name,p.opened||'記録なし',p.closed||'記録なし',p.opened&&p.closed?duration(Math.max(0,seconds(p.closed)-seconds(p.opened))):'計算不可']),'paired'));
+  return;
+ }
+ byId('count').textContent='表示：'+data.length+'件 / サンプル31件';
+ if(!data.length){box.append(make('p','small','該当する記録がありません。'));return}
+ if(mode==='compact'){
+  const visiblePairs=doorPairs();
+  const closeMap=new Map(visiblePairs.map(p=>[p.name+'|'+p.closed,p]));
+  const wrap=make('div','tablewrap'),table=make('table'),head=make('thead'),header=make('tr');
+  ['時刻','場所','動作'].forEach(t=>header.append(make('th','',t)));
+  head.append(header);table.append(head);const body=make('tbody');
+  for(const e of data){
+    const tr=make('tr');
+    [e.time,e.name,e.action].forEach(v=>tr.append(make('td','',v)));
+    body.append(tr);
+    if(e.action!=='クローズ')continue;
+    const pair=closeMap.get(e.name+'|'+e.time);
+    if(!pair)continue;
+    // When filtering for 'クローズ' alone, a duration can still be derived
+    // from the complete underlying event log, but not an invented event.
+    const extra=make('tr','open-duration'),cell=make('td',''),label=make('div','duration-inner');
+    cell.colSpan=3;
+    label.append(make('span','duration-main','開放時間 '+duration(seconds(pair.closed)-seconds(pair.opened))));
+    cell.append(label);extra.append(cell);body.append(extra);
+  }
+  table.append(body);wrap.append(table);box.append(wrap);
+ }
+ else {
+  const list=make('div','legacy');
+  data.forEach(e=>{const card=make('article','legacyitem');
+   card.append(make('strong','',e.action==='検知'?'人感センサー検出通知':'「'+e.action+'」通知'));
+   card.append(make('p','',e.action==='検知'?e.name+' 動きを検知しました':e.name+' '+(e.action==='オープン'?'が開かれました。ご確認ください。':'が閉じられました。')));
+   card.append(make('span','small',e.date+' '+e.time));list.append(card);
+  });box.append(list);
+ }
+}
+function exportText(){const rows=mode==='pair'?
+ ['日付,センサー,オープン,クローズ,開放秒数',...doorPairs().map(p=>[byId('date').value,p.name,p.opened||'',p.closed||'',p.opened&&p.closed?seconds(p.closed)-seconds(p.opened):''].join(','))]:
+ ['日付,時刻,センサー,動作',...filtered().map(e=>[e.date,e.time,e.name,e.action].join(','))];
+ return rows.join('\r\n');
+}
+byId('compactBtn').onclick=()=>{mode='compact';render()};
+byId('normalBtn').onclick=()=>{mode='normal';render()};
+byId('pairBtn').onclick=()=>{mode='pair';render()};
+['sensor','kind','date','order'].forEach(id=>byId(id).onchange=render);
+byId('reset').onclick=()=>{byId('sensor').value='all';byId('kind').value='all';byId('date').value='2026-11-16';byId('order').value='desc';render()};
+byId('copy').onclick=async()=>{try{await navigator.clipboard.writeText(exportText());byId('status').textContent='表示中の記録をコピーしました。'}catch(e){byId('status').textContent='自動コピーできませんでした。CSV保存をお試しください。'}};
+byId('csv').onclick=()=>{const blob=new Blob(['\ufeff',exportText()],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='sensor-demo-'+(mode==='pair'?'pairs-':'')+byId('date').value+'.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);byId('status').textContent='表示中の記録のCSV保存を開始しました。'};
+render();
+</script></body></html>
