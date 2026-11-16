@@ -1,0 +1,273 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Kussoon｜一筆書きコースター 3D比較試作 v19</title><style>
+*{box-sizing:border-box}body{margin:0;background:#102438;color:white;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif}main{height:100dvh;display:flex;flex-direction:column}header{padding:10px 12px;background:#102438;display:flex;align-items:center;justify-content:space-between;gap:10px}h1{margin:0;font-size:17px}.status{font-size:12px;color:#77ebc1}#stage{position:relative;min-height:0;flex:1}canvas{display:block;width:100%;height:100%;touch-action:none;background:#c8e5f5}.hint{position:absolute;top:12px;left:12px;border-radius:9px;padding:8px 11px;background:#102438d0;font-size:13px;pointer-events:none}.hint[hidden]{display:none}nav{display:flex;gap:8px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#102438}button{border:0;border-radius:9px;min-height:48px;padding:11px;font-weight:700;font-size:15px;background:#e9f0f4;color:#102438}#go{flex:1;background:#5ce2b7}#loopMinus,#loopPlus{font-size:16px;padding:8px 10px;background:#d6e6ee}#loopCount{font-size:11px;white-space:nowrap;text-align:center;min-width:55px}#loopControls{display:none!important;align-items:center;gap:4px}button:disabled{opacity:.45}button[hidden]{display:none}footer{background:#102438;text-align:center;color:#b4c9dc;font-size:10px;padding-bottom:4px}
+</style></head><body><main><header><h1>🎢 一筆書きコースター <small style="font-size:11px">3D比較試作 v19</small></h1><span class="status" id="status">指で線を描いてください</span></header><section id="stage"><canvas id="canvas" aria-label="指で一筆書きする描画エリア"></canvas><div id="hint" class="hint">指でなぞってコースを描いてください</div></section><nav><button id="reset">描き直す</button><div id="loopControls"><button id="loopMinus" aria-label="指定ループを1回減らす">−</button><span id="loopCount">ループ 自動</span><button id="loopPlus" aria-label="指定ループを1回増やす">＋</button></div><button id="go" disabled>▶ コースに乗る</button><button id="pause" hidden>一時停止</button></nav><footer>広告・外部ライブラリなし｜手描き線を維持・上り坂の停止防止</footer></main><script>
+(()=>{
+"use strict";
+const C=document.getElementById("canvas"),ctx=C.getContext("2d",{alpha:false}),go=document.getElementById("go"),pause=document.getElementById("pause"),reset=document.getElementById("reset"),loopControls=document.getElementById("loopControls"),loopCount=document.getElementById("loopCount"),loopMinus=document.getElementById("loopMinus"),loopPlus=document.getElementById("loopPlus"),hint=document.getElementById("hint"),status=document.getElementById("status");
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),mix=(a,b,t)=>a+(b-a)*t,V=(x=0,y=0,z=0)=>({x,y,z}),add=(a,b)=>V(a.x+b.x,a.y+b.y,a.z+b.z),sub=(a,b)=>V(a.x-b.x,a.y-b.y,a.z-b.z),scale=(a,k)=>V(a.x*k,a.y*k,a.z*k),dot=(a,b)=>a.x*b.x+a.y*b.y+a.z*b.z,cross=(a,b)=>V(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x),norm=a=>scale(a,1/(Math.hypot(a.x,a.y,a.z)||1));
+let W=1,H=1,D=1,raw=[],drawing=false,mode="edit",length=0,track=[],finish=0,ridePos=0,speed=9,paused=false,last=0,ground=[],objects=[],camera=null;
+let countdown=0,startFlash=0,launchElapsed=0,loopZones=[],loopWarning="",manualLoops=0;
+function size(){const r=C.getBoundingClientRect();W=Math.max(1,r.width);H=Math.max(1,r.height);D=Math.min(2,devicePixelRatio||1);C.width=Math.round(W*D);C.height=Math.round(H*D);ctx.setTransform(D,0,0,D,0,0);if(mode==="edit")editor()}
+addEventListener("resize",size);
+function screenPoint(x,y){const b=C.getBoundingClientRect();return{x:clamp(x-b.left,0,W),y:clamp(y-b.top,0,H)}}
+function begin(x,y){if(mode!=="edit")return;raw=[screenPoint(x,y)];length=0;drawing=true;hint.hidden=true;go.disabled=true;status.textContent="描画中";editor()}
+function move(x,y){if(!drawing)return;const p=screenPoint(x,y),q=raw[raw.length-1],d=Math.hypot(p.x-q.x,p.y-q.y);if(d>2){raw.push(p);length+=d;go.disabled=length<110;editor()}}
+function end(){drawing=false;if(mode==="edit")status.textContent=length>=110?"コースができました":"もう少し長く描いてください"}
+if(window.PointerEvent){
+ C.addEventListener("pointerdown",e=>{e.preventDefault();try{C.setPointerCapture(e.pointerId)}catch(_){}begin(e.clientX,e.clientY)});
+ C.addEventListener("pointermove",e=>{if(drawing){e.preventDefault();move(e.clientX,e.clientY)}});
+ C.addEventListener("pointerup",end);C.addEventListener("pointercancel",end)
+}else{
+ C.addEventListener("touchstart",e=>{e.preventDefault();const t=e.changedTouches[0];begin(t.clientX,t.clientY)},{passive:false});
+ C.addEventListener("touchmove",e=>{e.preventDefault();const t=e.changedTouches[0];move(t.clientX,t.clientY)},{passive:false});
+ C.addEventListener("touchend",end);C.addEventListener("mousedown",e=>begin(e.clientX,e.clientY));addEventListener("mousemove",e=>move(e.clientX,e.clientY));addEventListener("mouseup",end)
+}
+function editor(){
+ ctx.fillStyle="#d7eff9";ctx.fillRect(0,0,W,H);ctx.strokeStyle="#b9dce9";ctx.lineWidth=1;
+ for(let x=0;x<W;x+=36){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+ for(let y=0;y<H;y+=36){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+ if(!raw.length)return;
+ ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();raw.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.lineWidth=13;ctx.strokeStyle="#26485d";ctx.stroke();ctx.lineWidth=7;ctx.strokeStyle="#ed7453";ctx.stroke();
+ for(const [p,color] of [[raw[0],"#19a88a"],[raw[raw.length-1],"#d45f4f"]]){ctx.beginPath();ctx.arc(p.x,p.y,7,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
+}
+const cat=(a,b,c,d,t)=>.5*(2*b+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t);
+function makeTrack(){
+ // v19: each finger point is a rail centreline point in the vertical Y/Z
+ // plane. Horizontal pixels = world Z, vertical pixels = world Y.
+ // Route-progress s is cumulative STROKE length and always increases;
+ // world Z is intentionally allowed to reverse within a hand-drawn loop.
+ track=[];finish=0;loopZones=[];loopWarning="手描き線をそのまま線路に変換";
+ const ratio=.105;
+ for(let i=0;i<raw.length;i++){
+  const p=raw[i];
+  if(i)finish+=Math.max(.00001,Math.hypot(p.x-raw[i-1].x,p.y-raw[i-1].y)*ratio);
+  track.push({x:0,y:3+(H-p.y)*ratio,z:(p.x-W*.5)*ratio,s:finish});
+ }
+ // The loop count is deliberately NOT needed to generate a route.
+ // Do not impose any circle, aspect-ratio or loop-count constraints.
+ objects=[];const kinds=["forest","city","coast","castle","desert","tower"],section=Math.max(22,finish/6);
+ for(let z=8,i=0;z<finish+18;z+=7,i++){
+  const p=sample(Math.min(finish,z)),kind=kinds[Math.min(5,Math.floor(z/section))];
+  for(const side of [-1,1]){
+   if(kind==="coast"&&side<0)continue;
+   if(kind==="desert"&&i%2)continue;
+   objects.push({x:side*(6+(i%3)*2),z:p.z,kind:kind==="castle"&&i%4?"forest":kind==="tower"&&i%5?"city":kind,seed:i+Math.max(0,side)});
+  }
+ }
+}
+function sample(z){
+ z=clamp(z,0,finish);let lo=0,hi=track.length-1;
+ while(lo+1<hi){const m=(lo+hi)>>1;if(track[m].s<z)lo=m;else hi=m}
+ const a=track[lo],b=track[hi],t=clamp((z-a.s)/(b.s-a.s||1),0,1);
+ // No spline overshoot: interpolated points stay ON the user's stroke.
+ return V(0,mix(a.y,b.y,t),mix(a.z,b.z,t));
+}
+function geometry(z){
+ const p=sample(z),before=sample(Math.max(0,z-.22)),after=sample(Math.min(finish,z+.22));
+ const dir=norm(sub(after,before));
+ // Constant transverse axis: both rails are exactly symmetric in X.
+ const right=V(1,0,0),across=scale(right,.63);
+ return{p,dir,right,bank:0,across,left:sub(p,across),rightRail:add(p,across)}
+}
+function cam(){
+ const geo=geometry(ridePos),before=sample(Math.max(0,ridePos-.5)),after=sample(Math.min(finish,ridePos+.5));
+ let forward=norm(sub(after,before));
+ if(Math.hypot(forward.x,forward.y,forward.z)<.01)forward=V(0,0,1);
+ const right=V(1,0,0),up=norm(cross(forward,right));
+ return{pos:add(geo.p,scale(up,1.12)),forward,right,up,roll:0};
+}
+function coords(p,c){let d=sub(p,c.pos);return{x:dot(d,c.right),y:dot(d,c.up),z:dot(d,c.forward)}}
+function proj(p,c){const v=coords(p,c);if(v.z<.08)return null;const f=Math.min(W,H)*1.03;return{x:W*.5+v.x*f/v.z,y:H*.54-v.y*f/v.z,z:v.z}}
+function segment(a,b,c,color,width=2,alpha=1){
+ // Near-plane clipping preserves rails on sharp crests and descents.
+ let A=coords(a,c),B=coords(b,c),near=.13;
+ if(A.z<near&&B.z<near)return;
+ if(A.z<near||B.z<near){const t=(near-A.z)/(B.z-A.z),cut={x:mix(A.x,B.x,t),y:mix(A.y,B.y,t),z:near};if(A.z<near)A=cut;else B=cut}
+ const f=Math.min(W,H)*1.03;
+ const ax=W*.5+A.x*f/A.z,ay=H*.54-A.y*f/A.z,bx=W*.5+B.x*f/B.z,by=H*.54-B.y*f/B.z;
+ ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=clamp(width*16/Math.max(.5,Math.min(A.z,B.z)),.6,width*2.6);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();ctx.restore();
+}
+function poly(pts,c,fill,alpha=1){
+ const p=pts.map(x=>proj(x,c));if(p.some(x=>!x))return;
+ ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle=fill;ctx.beginPath();p.forEach((x,i)=>i?ctx.lineTo(x.x,x.y):ctx.moveTo(x.x,x.y));ctx.closePath();ctx.fill();ctx.restore();
+}
+function box(pos,w,h,d,c,color){
+ const x=pos.x,y=pos.y,z=pos.z;
+ const A=V(x-w/2,y,z-d/2),B=V(x+w/2,y,z-d/2),C=V(x+w/2,y,z+d/2),D=V(x-w/2,y,z+d/2);
+ const E=add(A,V(0,h,0)),F=add(B,V(0,h,0)),G=add(C,V(0,h,0)),I=add(D,V(0,h,0));
+ poly([A,B,F,E],c,color);poly([B,C,G,F],c,"#72889b");poly([E,F,G,I],c,"#d7e1e4")
+}
+function tree(c,foot,seed){
+ // Branches and foliage use world coordinates, not screen-facing circles.
+ const h=3.5+(seed%4)*.55;
+ segment(foot,add(foot,V(0,h*.72,0)),c,"#72523f",1.2);
+ const center=add(foot,V(0,h*.73,0)),r=1.4+(seed%3)*.17;
+ const low=["#2b7b52","#357f58","#478c62"][seed%3],light=["#64a878","#6aad77","#71b98a"][seed%3];
+ const top=add(center,V(0,r*.95,0)),bottom=add(center,V(0,-r*.55,0));
+ const corners=[V(-r*.82,0,0),V(0,0,-r*.82),V(r*.82,0,0),V(0,0,r*.82)].map(d=>add(center,d));
+ for(let i=0;i<4;i++){poly([corners[i],corners[(i+1)%4],top],c,i%2?low:light);poly([corners[(i+1)%4],corners[i],bottom],c,low)}
+}
+function landscape(c){
+ const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,"#69b9e9");sky.addColorStop(1,"#d2f4ff");ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+ // Sky checkerboard: alternating blues echo the green ground tiles.
+ // Shift and roll gently with the rider camera instead of remaining fixed on the display.
+ ctx.save();
+ ctx.translate(W/2,H/2);
+ ctx.rotate(-c.roll);
+ const tile=56,extent=Math.hypot(W,H)*.8+tile*3;
+ const offsetX=((Math.atan2(c.forward.x,c.forward.z)*65)%tile+tile)%tile;
+ const offsetY=((c.forward.y*130)%tile+tile)%tile;
+ for(let row=-Math.ceil(extent/tile)-1;row<=Math.ceil(extent/tile)+1;row++){
+  for(let col=-Math.ceil(extent/tile)-1;col<=Math.ceil(extent/tile)+1;col++){
+   if((row+col)&1){ctx.fillStyle="rgba(255,255,255,.22)";}
+   else{ctx.fillStyle="rgba(20,113,183,.13)";}
+   ctx.fillRect(col*tile-extent%tile+offsetX,row*tile-extent%tile+offsetY,tile+.5,tile+.5);
+  }
+ }
+ ctx.restore();
+ // World-space terrain tiles and scenery stay aligned with the moving/rolling camera.
+ const p=sample(ridePos),centerX=p.x;
+ for(let z=Math.ceil((c.pos.z+115)/10)*10;z>=Math.floor((c.pos.z-13)/10)*10;z-=10){
+  for(let x=Math.floor((centerX-55)/10)*10;x<centerX+55;x+=10){
+   const coastal=(ridePos>finish*.30&&ridePos<finish*.5&&x<centerX-5),desert=ridePos>finish*.65&&ridePos<finish*.82;
+   const tile=coastal?"#4cacc6":desert?"#dab977":((Math.floor(x/10)+Math.floor(z/10))%2?"#79b886":"#87c893");
+   poly([V(x,0,z),V(x+10,0,z),V(x+10,0,z+10),V(x,0,z+10)],c,tile);
+  }
+ }
+ for(let i=objects.length-1;i>=0;i--){
+  const o=objects[i];if(o.z<c.pos.z-20||o.z>c.pos.z+110)continue;
+  const foot=V(o.x,0,o.z);
+  if(o.kind==="forest"){tree(c,foot,o.seed)}
+  else if(o.kind==="city"){
+   for(let j=-1;j<=1;j++)box(V(o.x+j*2.4,0,o.z),2.1,3+(j+2+o.seed)%5,2.6,c,"#8fa5b6");
+  }else if(o.kind==="castle"){
+   box(foot,5,4.5,4,c,"#ebe6d6");box(V(o.x-2.2,0,o.z),1.6,7,1.6,c,"#e5e2d6");box(V(o.x+2.2,0,o.z),1.6,7,1.6,c,"#e5e2d6");
+   poly([V(o.x-3.1,7,o.z-1),V(o.x-1.3,7,o.z-1),V(o.x-2.2,9,o.z-1)],c,"#48627a");
+  }else if(o.kind==="tower"){
+   segment(foot,add(foot,V(0,12,0)),c,"#59697c",2);box(V(o.x,8,o.z),3,1,3,c,"#cfdadf");
+  }else if(o.kind==="desert"){
+   box(V(o.x,0,o.z),5,.6,6,c,"#d5ac69");segment(foot,add(foot,V(0,2.8,0)),c,"#4b986c",2.2);
+  }
+ }
+}
+function trackDraw(c){
+ const end=Math.min(finish,ridePos+115),begin=Math.max(0,ridePos-1.5);
+ // Unified 3D banked rails and smooth crosspieces (matched to camera banking).
+ for(let z=end;z>begin;z-=.32){
+  const a=geometry(Math.max(begin,z-.32)),b=geometry(z);
+  for(const side of ["left","rightRail"]){
+   segment(a[side],b[side],c,"#1c3041",4.2);
+   segment(add(a[side],V(0,.065,0)),add(b[side],V(0,.065,0)),c,"#c3dce6",1.25);
+  }
+ }
+ for(let z=Math.ceil(ridePos/2.1)*2.1;z<end;z+=2.1){
+  const a=geometry(z);
+  segment(a.left,a.rightRail,c,"#17191b",1.95);
+ }
+ // Frame posts keep rail heights in true world-space (not screenspace).
+ for(let z=Math.ceil(ridePos/9)*9;z<end;z+=9){
+  const a=geometry(z);segment(a.p,V(a.p.x,0,a.p.z),c,"#c8cdd3",1.85);
+ }
+ for(let z=Math.min(end,ridePos+70);z>ridePos+17;z-=1.6){
+  const a=geometry(z-1.6),b=geometry(z);
+  segment(a.left,b.left,c,"#efffff",.8,.13);segment(a.rightRail,b.rightRail,c,"#efffff",.8,.13);
+ }
+}
+function cockpit(){
+ // Always fixed relative to rider: scenery/horizon bank, cabin doesn't drift off screen.
+ const u=clamp(Math.min(W/420,H/610),.55,1.45);
+ ctx.save();ctx.translate(W/2,H+5);ctx.scale(u,u);
+ for(const side of [-1,1]){ctx.save();ctx.scale(side,1);ctx.fillStyle="#304f66";ctx.strokeStyle="#152d40";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(160,0);ctx.lineTo(170,-96);ctx.lineTo(226,-105);ctx.lineTo(226,0);ctx.fill();ctx.stroke();ctx.restore()}
+ const grad=ctx.createLinearGradient(0,-145,0,12);grad.addColorStop(0,"#8ca9bf");grad.addColorStop(1,"#1e3a53");ctx.fillStyle=grad;ctx.strokeStyle="#183146";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(-160,10);ctx.lineTo(-147,-100);ctx.quadraticCurveTo(0,-108,147,-100);ctx.lineTo(160,10);ctx.fill();ctx.stroke();
+ ctx.lineCap="round";ctx.strokeStyle="#cbd5df";ctx.lineWidth=18;ctx.beginPath();ctx.moveTo(-149,-100);ctx.lineTo(149,-100);ctx.stroke();
+ ctx.strokeStyle="#263340";ctx.lineWidth=32;ctx.beginPath();ctx.moveTo(-149,-109);ctx.lineTo(149,-109);ctx.stroke();
+ ctx.strokeStyle="#555e68";ctx.lineWidth=25;ctx.beginPath();ctx.moveTo(-149,-111);ctx.lineTo(149,-111);ctx.stroke();
+ ctx.fillStyle="#b3c4cd";ctx.fillRect(-16,-120,32,70);ctx.strokeStyle="#273e50";ctx.strokeRect(-16,-120,32,70);
+ for(const side of [-1,1]){ctx.save();ctx.scale(side,1);
+  ctx.translate(110,-88);ctx.scale(.5,.5);ctx.translate(-110,88);
+  ctx.strokeStyle="#284c63";ctx.lineWidth=55;ctx.beginPath();ctx.moveTo(148,40);ctx.quadraticCurveTo(115,-15,112,-69);ctx.stroke();
+  ctx.fillStyle="#ecc098";ctx.strokeStyle="#ac7d65";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(95,-75);ctx.quadraticCurveTo(77,-94,82,-123);ctx.quadraticCurveTo(88,-149,117,-141);ctx.quadraticCurveTo(145,-134,140,-110);ctx.lineTo(133,-80);ctx.quadraticCurveTo(123,-60,103,-64);ctx.closePath();ctx.fill();ctx.stroke();
+  for(let j=0;j<4;j++){ctx.beginPath();ctx.moveTo(91+j*11,-127);ctx.lineTo(92+j*11,-108);ctx.stroke()}ctx.restore()}
+ ctx.restore();
+}
+function courseMiniMap(){
+ if(!track.length||finish<=0)return;
+ const mw=Math.min(190,Math.max(120,W*.30)),mh=Math.min(128,Math.max(90,H*.31)),x=9,y=47;
+ let minZ=Infinity,maxZ=-Infinity,minY=Infinity,maxY=-Infinity;
+ for(const p of track){minZ=Math.min(minZ,p.z);maxZ=Math.max(maxZ,p.z);minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y)}
+ const sx=(mw-24)/Math.max(1,maxZ-minZ),sy=(mh-39)/Math.max(1,maxY-minY);
+ const xx=p=>x+12+(p.z-minZ)*sx,yy=p=>y+mh-12-(p.y-minY)*sy;
+ ctx.save();ctx.fillStyle="rgba(16,36,56,.85)";ctx.fillRect(x,y,mw,mh);
+ ctx.strokeStyle="#b4dce8";ctx.lineWidth=1;ctx.strokeRect(x+.5,y+.5,mw-1,mh-1);
+ ctx.font="bold 11px sans-serif";ctx.textAlign="left";ctx.fillStyle="#fff";ctx.fillText("コース全体・現在位置",x+8,y+15);
+ ctx.beginPath();for(let i=0;i<track.length;i++){const p=track[i];if(!i)ctx.moveTo(xx(p),yy(p));else ctx.lineTo(xx(p),yy(p))}
+ ctx.lineWidth=2;ctx.strokeStyle="#70e3e4";ctx.stroke();
+ const p=sample(ridePos);ctx.beginPath();ctx.arc(xx(p),yy(p),5,0,Math.PI*2);
+ ctx.fillStyle="#ffe36b";ctx.fill();ctx.strokeStyle="#111";ctx.lineWidth=1.4;ctx.stroke();ctx.restore();
+}
+function overlay(text){
+ ctx.save();const fs=Math.round(clamp(Math.min(W,H)*.21,48,105));
+ ctx.textAlign="center";ctx.textBaseline="middle";
+ ctx.font="900 "+(text.length>3?Math.round(fs*.63):fs)+"px -apple-system,sans-serif";
+ ctx.lineWidth=clamp(fs*.13,5,14);ctx.strokeStyle="rgba(16,36,56,.82)";
+ ctx.strokeText(text,W/2,H*.43);
+ ctx.fillStyle="#fff8b9";ctx.fillText(text,W/2,H*.43);
+ ctx.restore();
+}
+function render(){
+ camera=cam();landscape(camera);trackDraw(camera);cockpit();courseMiniMap();
+ ctx.fillStyle="#102438db";ctx.fillRect(0,0,W,40);ctx.fillStyle="#fff";ctx.font="bold 14px sans-serif";ctx.textAlign="left";ctx.fillText("走行 "+Math.round(100*ridePos/finish)+"%",12,25);ctx.textAlign="right";ctx.fillText("ゲーム速度（目安） "+Math.round(speed*5)+" km/h",W-12,25);ctx.textAlign="left";
+ if(mode==="countdown")overlay(String(Math.max(1,Math.ceil(countdown))));
+ else if(startFlash>0)overlay("スタート！");
+ if(ridePos>=finish&&mode!=="countdown"){paused=true;status.textContent="ゴール！";hint.hidden=true;pause.textContent="もう一度乗る";overlay("ゴール！")}
+}
+function updateLoopControls(){
+ loopCount.textContent="手描き線を維持";
+ loopMinus.disabled=manualLoops===0;
+ if(mode==="edit")status.textContent=manualLoops===0?"描いた円を自動認識":"縦ループを"+manualLoops+"回指定";
+}
+loopPlus.onclick=()=>{if(mode!=="edit")return;manualLoops++;updateLoopControls()};
+loopMinus.onclick=()=>{if(mode!=="edit")return;manualLoops=Math.max(0,manualLoops-1);updateLoopControls()};
+go.onclick=()=>{if(raw.length<2)return;makeTrack();if(finish<1)return;ridePos=0;speed=0;launchElapsed=0;paused=false;countdown=3;startFlash=0;mode="countdown";go.hidden=true;pause.hidden=true;loopControls.hidden=true;hint.hidden=true;status.textContent=loopWarning;render()};
+pause.onclick=()=>{if(ridePos>=finish){ridePos=0;speed=0;launchElapsed=0;paused=false;countdown=3;startFlash=0;mode="countdown";pause.hidden=true;hint.hidden=true;status.textContent="スタート準備中";pause.textContent="一時停止"}else{paused=!paused;pause.textContent=paused?"▶ 再開":"一時停止";status.textContent=paused?"一時停止中":"乗車中"}};
+reset.onclick=()=>{raw=[];track=[];objects=[];loopZones=[];countdown=0;startFlash=0;launchElapsed=0;speed=0;length=0;drawing=false;mode="edit";go.hidden=false;go.disabled=true;pause.hidden=true;loopControls.hidden=false;manualLoops=0;updateLoopControls();hint.hidden=false;hint.textContent="指でなぞってコースを描いてください";status.textContent="指で線を描いてください";editor()};
+function loop(t){
+ const dt=clamp((t-last)/1000||0,0,.05);last=t;
+ if(mode==="countdown"){
+  countdown=Math.max(0,countdown-dt);
+  if(countdown<=0){mode="ride";startFlash=1.05;pause.hidden=false;status.textContent="乗車中・手描きコース";}
+  render();
+ }else if(mode==="ride"){
+  if(!paused){
+   if(startFlash>0)startFlash=Math.max(0,startFlash-dt);
+   // Launch always starts at zero and linearly reaches displayed 45 km/h
+   // after exactly 3 seconds of active riding time, regardless of slope.
+   if(launchElapsed<3){
+    launchElapsed=Math.min(3,launchElapsed+dt);
+    speed=9*(launchElapsed/3);
+   }else{
+    const a=sample(ridePos),b=sample(Math.min(finish,ridePos+1));
+    // The slope uses actual 3D displacement, also inside vertical loops.
+    const ds=Math.max(.15,Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z));
+    const slope=clamp((b.y-a.y)/ds,-1,1);
+    // Prevent an uphill deadlock once launch is complete.
+    const minimumRunningSpeed=2.5; // game display: 12.5 km/h
+    if(slope<0){
+     const maxSpeed=18; // 90 km/h game speed limit
+     const easing=Math.max(0,1-(speed/maxSpeed)**2);
+     speed=clamp(speed+(-6.375*slope)*easing*dt,minimumRunningSpeed,maxSpeed);
+    }else if(slope>0){
+     speed=clamp(speed-1.59375*slope*dt,minimumRunningSpeed,18);
+    }else{
+     speed=clamp(speed,minimumRunningSpeed,18);
+    }
+   }
+   ridePos=Math.min(finish,ridePos+speed*dt);
+  }
+  render();
+ }
+ requestAnimationFrame(loop);
+}
+updateLoopControls();size();requestAnimationFrame(loop);
+})();
+</script></body></html>
