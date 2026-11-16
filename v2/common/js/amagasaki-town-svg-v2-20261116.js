@@ -370,6 +370,16 @@ fetch('/v2/data/amagasaki-town-svg-v2-20261116.json',{cache:'no-store'})
   t.legacyAnchor=labelAnchor(t);
   const filled=coords=>verifiedCandidate(t,coords)!==null;
   t.autoCandidates=KussoonAutoTownLabels.candidates(t.d,filled,sourceArea);
+  // Some valid 2020 SVG rings use the reverse winding direction.
+  // For these, inspect the actual SVG fill in a deterministic grid; no named-town overrides.
+  if(!t.autoCandidates.length){
+   const b=t.bbox,positions=[];
+   positions.push([b.x+b.width/2,b.y+b.height/2]);
+   for(let y=1;y<=15;y++)for(let x=1;x<=15;x++)
+    positions.push([b.x+b.width*x/16,b.y+b.height*y/16]);
+   const found=positions.find(filled);
+   if(found)t.autoCandidates=[{point:found,area:b.width*b.height,bbox:b}];
+  }
   if(!t.autoCandidates.length)throw Error('自動候補点なし：'+t.name);
   t.anchor=t.autoCandidates[0].point;
  }
