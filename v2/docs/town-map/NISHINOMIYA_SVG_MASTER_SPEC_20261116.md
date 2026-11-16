@@ -323,4 +323,4 @@
 
 自動検査 `scripts/smoke-nishinomiya-v6-state-matrix.cjs`、GitHub Actions `nishinomiya-v6-state-matrix.yml`（PR #530）を追加。対象環境はChromium 1280px、WebKit 390px・320px。初期全域→読みON/文字125%→全画面→通常画面→西宮浜地域→全画面再入・終了→クイズ2中断→地域へ戻る→クイズ1の答え表示と復習→山口地域→地図ズーム→地域全体→文字・読みリセット→市全体という連続経路を追跡する。
 
-**合格の範囲**：個別の静的検査が通っても、連続遷移テストが通らなければ「総合合格」とは記載しない。現時点では専用CIの再検証結果を待つ。全画面中に地図外の地域選択ボタンを押す動作は、画面構造上できないため試験から除外し、仕様確認事項として管理する。
+**検査結果：PASS**。GitHub Actions [run 43957031321](https://github.com/Kussoon/kussoon.github.io/actions/runs/43957031321) および [run 43957053662](https://github.com/Kussoon/kussoon.github.io/actions/runs/43957053662)。Chromium 1280px、WebKit 390px・320pxの各環境で **15段階の連続状態遷移**が合格し、市全体321町名への復帰を確認。クイズ中のよみがなはDOMから削除するのではなくCSSで非表示にする方式であるため、検査は実際のdisplayプロパティで判定した。**全画面中に地図外の地域選択ボタンを押す動作**は画面構造上できないため、試験の対象外として仕様確認事項に残す。自動検査PASSは手元iPhone SafariとPC実機の利用者受入、321町すべてのクイズ採点経路、最終的なラベルの視覚品質承認を意味しない。
