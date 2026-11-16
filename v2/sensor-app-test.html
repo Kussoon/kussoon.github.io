@@ -27,19 +27,31 @@
 <tr><td style="white-space:normal">「オープン」通知<br>冷蔵庫が開かれました。ご確認ください。</td><td>冷蔵庫 オープン</td></tr>
 </tbody></table></section>
 <section class="panel"><h2>改善提案のポイント</h2><p>標準表示を残しつつ、頻繁に記録を確認する利用者には、情報密度の高い一覧を選べるようにする案です。コピーとCSV保存を可能にし、画面を何枚も撮影する負担を減らします。</p>
-<p class="metric">このデモは <strong>架空の6台・24件</strong>を収録しています。出力されるのもデモデータのみです。デバイスからの履歴取得・7日以上の保存・通知設定の変更は行いません。</p></section>
+<p class="metric">このデモは <strong>架空の6台・26件</strong>を収録しています。出力されるのもデモデータのみです。デバイスからの履歴取得・7日以上の保存・通知設定の変更は行いません。</p></section>
 <p class="foot">Kussoonによる独立した改善提案です。Edison Smart公式アプリではなく、メーカーによる提供・承認を意味しません。名前・日時・内容は説明用に作成した架空の情報です。</p></main>
 <script>
 'use strict';
 const names=['和室','リビング','でんわ台','ベッド下','冷蔵庫','玄関ドア'];
-const times=['18:26:17','18:04:52','17:59:26','17:42:11','17:18:29','17:18:12','17:17:23','17:16:44','16:53:53','16:48:22','16:25:09','16:03:15','15:58:25','15:52:43','15:25:06','15:11:35','14:48:09','14:31:22','14:02:11','13:43:06','13:42:55','13:14:50','12:54:09','12:32:41'];
-const devices=[1,0,2,1,4,4,5,5,3,2,1,0,0,1,2,3,4,2,1,4,4,5,0,3];
-const events=times.map((time,i)=>({date:'2026-11-16',time,name:names[devices[i]],action:devices[i]<4?'検知':(i===4||i===7||i===20?'クローズ':'オープン')}));
+// Fictional demonstration events. Every door opening has a later closing.
+const raw=[
+['18:26:17','リビング','検知'],['18:04:52','和室','検知'],['17:59:26','でんわ台','検知'],
+['17:42:11','リビング','検知'],['17:18:29','冷蔵庫','クローズ'],['17:18:12','冷蔵庫','オープン'],
+['17:17:23','玄関ドア','クローズ'],['17:16:44','玄関ドア','オープン'],
+['16:53:53','ベッド下','検知'],['16:48:22','でんわ台','検知'],['16:25:09','リビング','検知'],
+['16:03:15','和室','検知'],['15:58:25','和室','検知'],['15:52:43','リビング','検知'],
+['15:25:06','でんわ台','検知'],['15:11:35','ベッド下','検知'],
+['14:49:00','冷蔵庫','クローズ'],['14:48:09','冷蔵庫','オープン'],
+['14:31:22','でんわ台','検知'],['14:02:11','リビング','検知'],
+['13:43:06','冷蔵庫','クローズ'],['13:42:55','冷蔵庫','オープン'],
+['13:15:16','玄関ドア','クローズ'],['13:14:50','玄関ドア','オープン'],
+['12:54:09','和室','検知'],['12:32:41','ベッド下','検知']
+];
+const events=raw.map(([time,name,action])=>({date:'2026-11-16',time,name,action}));
 const byId=id=>document.getElementById(id);
 let mode='compact';
 function filtered(){return events.filter(e=>(byId('sensor').value==='all'||e.name===byId('sensor').value)&&(byId('kind').value==='all'||e.action===byId('kind').value)&&e.date===byId('date').value)}
 function make(tag,cls,txt){const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n}
-function render(){const data=filtered(),box=byId('result');box.replaceChildren();byId('count').textContent='表示：'+data.length+'件 / サンプル24件';byId('compactBtn').setAttribute('aria-pressed',String(mode==='compact'));byId('normalBtn').setAttribute('aria-pressed',String(mode==='normal'));
+function render(){const data=filtered(),box=byId('result');box.replaceChildren();byId('count').textContent='表示：'+data.length+'件 / サンプル26件';byId('compactBtn').setAttribute('aria-pressed',String(mode==='compact'));byId('normalBtn').setAttribute('aria-pressed',String(mode==='normal'));
 if(!data.length){box.append(make('p','small','該当する記録がありません。'));return}
 if(mode==='compact'){const wrap=make('div','tablewrap'),table=make('table'),head=make('thead'),r=make('tr');['時刻','場所','動作'].forEach(t=>r.append(make('th','',t)));head.append(r);table.append(head);const body=make('tbody');data.forEach(e=>{const tr=make('tr');[e.time,e.name,e.action].forEach(t=>tr.append(make('td','',t)));body.append(tr)});table.append(body);wrap.append(table);box.append(wrap)}
 else{const list=make('div','legacy');data.forEach(e=>{const card=make('article','legacyitem');card.append(make('strong','',e.action==='検知'?'人感センサー検出通知':'「'+e.action+'」通知'));card.append(make('p','',e.action==='検知'?e.name+' 動きを検知しました':e.name+' '+(e.action==='オープン'?'が開かれました。ご確認ください。':'が閉じられました。')));card.append(make('span','small',e.date+' '+e.time));list.append(card)});box.append(list)}
