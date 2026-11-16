@@ -45,7 +45,7 @@ async function run(engine,width,height,pageName){
     const targets=['#size','#reading','#reset','#fullscreen'];
     return targets.map(id=>{
       const el=document.querySelector(id),styles=getComputedStyle(el);
-      const texts=el.textContent.split('\\n').filter(Boolean);
+      const texts=el.textContent.split(String.fromCharCode(10)).filter(Boolean);
       const canvas=document.createElement('canvas');
       const ctx=canvas.getContext('2d');
       ctx.font=styles.font;
