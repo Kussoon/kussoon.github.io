@@ -3,6 +3,35 @@
 :root{--bg:#f3f5f8;--surface:#fff;--text:#182236;--muted:#586679;--border:#d5dce7;--accent:#254e82;--accentText:#fff;--good:#126b4f;--bad:#ad3e48;--soft:#edf2f8;--shadow:0 12px 32px #162b4014;color-scheme:light dark}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.55}button,select{font:inherit}button{cursor:pointer;border-radius:12px;min-height:48px;padding:10px 18px;border:1px solid var(--border);font-weight:700;background:var(--surface);color:var(--text)}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #da9c36;outline-offset:2px}.primary{background:var(--accent);color:var(--accentText);border-color:var(--accent)}.yes{background:var(--good);color:white;border-color:var(--good)}.no{background:var(--bad);color:white;border-color:var(--bad)}.ghost{background:transparent}.hidden{display:none!important}.container{max-width:740px;padding:26px 18px 84px;margin:auto}.eyebrow{letter-spacing:.08em;text-transform:uppercase;font-size:.76rem;font-weight:800;color:var(--muted)}header{margin-bottom:24px}h1{font-size:clamp(1.7rem,5vw,2.5rem);letter-spacing:.02em;margin:8px 0}h2{margin:0 0 12px;font-size:1.22rem}p{margin:.6em 0}.intro,.disclaimer{color:var(--muted);font-size:.94rem}.panel{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:20px;padding:clamp(20px,4.5vw,32px);margin-top:16px}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}label{display:flex;align-items:center;gap:7px;padding:13px;border:1px solid var(--border);border-radius:12px;cursor:pointer}input[type=radio]{accent-color:var(--accent);width:17px;height:17px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.buttons button{flex:1}.small{font-size:.84rem;color:var(--muted)}.stat{font-size:.9rem;font-variant-numeric:tabular-nums}.progress{height:9px;background:var(--soft);border-radius:50px;overflow:hidden;margin:12px 0 24px}.bar{height:100%;background:var(--accent);width:0%;transition:width .25s}.question{font-weight:700;font-size:.95rem;text-align:center;margin:12px 0}.name{font-size:clamp(4rem,17vw,7.2rem);font-weight:800;letter-spacing:.1em;line-height:1.45;text-align:center;margin:16px 0 24px;overflow-wrap:anywhere}.answer{background:var(--soft);border-radius:14px;padding:20px;text-align:center}.reading{font-size:clamp(1.25rem,4vw,2rem);font-weight:800;overflow-wrap:anywhere;margin:4px 0 8px}.source{font-size:.85rem;margin-top:12px}.source a{color:var(--accent);text-underline-offset:3px}.label-pill{display:inline-block;background:var(--soft);border-radius:50px;padding:5px 12px;font-size:.78rem;font-weight:800}.result{font-size:3rem;font-weight:800;font-variant-numeric:tabular-nums;text-align:center;margin:14px 0}.record{padding:12px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:88px 1fr;gap:12px}.record:last-child{border-bottom:0}.record b{font-size:1.15rem}.record .small{overflow-wrap:anywhere}.note{border-left:3px solid var(--accent);padding-left:12px;margin-top:18px}.foot{font-size:.78rem;color:var(--muted);margin-top:24px}.subhead{margin-top:20px}.backtop{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));right:14px;border-radius:32px;min-height:43px;padding:7px 13px;font-size:.8rem;background:var(--surface);box-shadow:var(--shadow);z-index:5}
 @media(max-width:500px){.container{padding:17px 12px 82px}.panel{border-radius:16px;padding:18px}.buttons{flex-direction:column}.buttons button{width:100%}.options{grid-template-columns:1fr}.record{grid-template-columns:72px 1fr}.name{letter-spacing:.04em}}
+/* 小型iPhoneでも解答後の自己採点ボタンを画面内に収める */
+body.quiz-active header,body.quiz-active .foot,body.quiz-active .backtop{display:none}
+body.quiz-active .container{padding-top:6px;padding-bottom:10px}
+body.quiz-active #quiz{margin-top:0;padding:12px 14px;border-radius:14px;box-shadow:none}
+body.quiz-active #quiz .row{gap:5px}
+body.quiz-active #quiz .label-pill{padding:3px 8px;font-size:.72rem}
+body.quiz-active #quiz .progress{height:6px;margin:7px 0 9px}
+body.quiz-active #quiz .question{font-size:.86rem;margin:7px 0}
+body.quiz-active #quiz .name{font-size:clamp(2.7rem,12vw,4.3rem);letter-spacing:.025em;line-height:1.18;margin:7px 0 10px}
+body.quiz-active #quiz .answer{padding:9px 10px;border-radius:10px}
+body.quiz-active #quiz .reading{font-size:clamp(1.1rem,4.2vw,1.5rem);line-height:1.32;margin:2px 0}
+body.quiz-active #quiz .source{margin-top:5px;font-size:.79rem}
+body.quiz-active #quiz .small{font-size:.76rem;line-height:1.38}
+body.quiz-active #quiz .buttons{margin-top:9px;gap:7px}
+body.quiz-active #quiz .buttons button{min-height:43px;padding:7px 10px}
+body.quiz-active #quitBtn{min-height:38px!important;font-size:.82rem}
+@media(max-width:500px){
+body.quiz-active #quiz .buttons{flex-direction:column}
+body.quiz-active #quiz .name{font-size:clamp(2.55rem,11vw,3.4rem)}
+}
+@media(max-height:700px){
+body.quiz-active #quiz{padding:9px 12px}
+body.quiz-active #quiz .progress{margin:5px 0 7px}
+body.quiz-active #quiz .name{font-size:clamp(2.4rem,10vw,3rem);margin:3px 0 7px}
+body.quiz-active #quiz .answer{padding:7px 9px}
+body.quiz-active #quiz .question{margin:5px 0}
+body.quiz-active #quiz .buttons{margin-top:7px;gap:5px}
+body.quiz-active #quiz .buttons button{min-height:40px;padding:5px 9px}
+}
 @media(prefers-color-scheme:dark){:root{--bg:#171b22;--surface:#252b35;--text:#f0f3f8;--muted:#bbc7d6;--border:#4b5666;--accent:#a3c9fc;--accentText:#152238;--good:#19775c;--bad:#a7414f;--soft:#343e4d;--shadow:0 12px 32px #0004}.source a{color:#b9d8ff}}
 </style></head><body><main class="container"><header><div class="eyebrow">Kussoon / 検証版 v1.0 preview</div><h1>難読名前クイズ</h1><p class="intro">この名前、読めますか？ 頭の中で答えてから読み方を開き、自分で採点するクイズです。</p></header>
 <section id="start" class="panel"><h2>クイズをはじめる</h2><p>登録された198件からランダムに20問を出題します。名前の読み方に正解は一つとは限りません。</p><div class="subhead"><b>出題範囲</b></div><div class="options"><label><input type="radio" name="pool" value="all" checked>全198件から出題</label><label><input type="radio" name="pool" value="rare">希少名42件から出題</label></div><div class="small">※「希少名」は第5次追加分を示し、難易度を保証する分類ではありません。</div><div class="buttons"><button class="primary" id="startBtn">20問に挑戦する</button><button id="resumeBtn" class="hidden">前回の続きから再開</button></div><p class="disclaimer">回答は入力せず、自己採点で記録します。途中経過はこのブラウザ内に保存されます（閲覧環境によって保存できない場合があります）。</p></section>
@@ -22,7 +51,7 @@ function clear(){try{localStorage.removeItem(KEY)}catch(e){}}
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function start(mode){const pool=BANK.filter(n=>mode!=='rare'||n.rare);state={mode,ids:shuffle(pool).slice(0,20).map(n=>n.id),answers:[],revealed:false};save();renderQuiz()}
 function current(){return BANK.find(n=>n.id===state.ids[state.answers.length])}
-function setMain(which){['start','quiz','finish'].forEach(id=>show(id,id===which));window.scrollTo({top:0,behavior:'instant'})}
+function setMain(which){document.body.classList.toggle('quiz-active',which==='quiz');['start','quiz','finish'].forEach(id=>show(id,id===which));window.scrollTo({top:0,behavior:'instant'})}
 function renderQuiz(){if(!state||state.answers.length>=20){renderResults();return}setMain('quiz');const q=current(),position=state.answers.length;$('modeText').textContent=state.mode==='rare'?'希少名42件から':'全198件から';$('progressText').textContent=`第${position+1}問 / 20問`;$('progressBar').style.width=`${position/20*100}%`;$('questionName').textContent=q.kanji;$('answerReading').textContent=q.reading;const wrap=$('sourceWrap');wrap.textContent='';if(/^https:\/\//.test(q.source)){const a=document.createElement('a');a.href=q.source;a.target='_blank';a.rel='noopener noreferrer';a.textContent='出典ページを確認 ↗';wrap.appendChild(a)}show('before',!state.revealed);show('after',state.revealed)}
 function grade(correct){if(!state||!state.revealed||state.answers.length>=20)return;state.answers.push({id:current().id,correct:!!correct});state.revealed=false;save();if(state.answers.length===20){renderResults();clear()}else renderQuiz()}
 function renderResults(){if(!state)return;setMain('finish');const good=state.answers.filter(a=>a.correct).length;$('score').textContent=`${good*5} / 100点`;$('summary').textContent=`正解 ${good}問　・　不正解 ${20-good}問`;$('review').classList.add('hidden');$('reviewList').textContent='';show('reviewBtn',good!==20)}
