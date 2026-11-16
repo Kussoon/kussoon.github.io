@@ -40,7 +40,7 @@ function makeTrack(){
  const ratio=.105;
  for(let i=0;i<raw.length;i++){
   const p=raw[i];
-  if(i)finish+=Math.hypot(p.x-raw[i-1].x,p.y-raw[i-1].y)*ratio;
+  if(i)finish+=Math.max(.00001,Math.hypot(p.x-raw[i-1].x,p.y-raw[i-1].y)*ratio);
   track.push({x:0,y:3+(H-p.y)*ratio,z:(p.x-W*.5)*ratio,s:finish});
  }
  // The loop count is deliberately NOT needed to generate a route.
