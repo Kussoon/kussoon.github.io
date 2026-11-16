@@ -157,7 +157,7 @@ function activeFeatures(){return communityChoice?features.filter(f=>inCommunity(
 function buildAdjacency(topology){
  quizGeography=KussoonTownSvgQuizGeography.create({
   topology,features,objectName:'town',nameProperty:'S_NAME',
-  geoCentroid:d3.geoCentroid,geoDistance:d3.geoDistance
+  geoCentroid:feature=>d3.geoCentroid(feature),geoDistance:(a,b)=>d3.geoDistance(a,b)
  });
  adjacency=quizGeography.adjacency;
 }
