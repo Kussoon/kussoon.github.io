@@ -21,6 +21,9 @@ on:
       - 'v2/takarazuka-town-controls-narrow-pilot.html'
       - 'v2/nishinomiya-town-overlay-compact-pilot.html'
       - 'v2/takarazuka-town-overlay-compact-pilot.html'
+      - 'v2/nishinomiya-town-overlay-bottom-pilot.html'
+      - 'v2/takarazuka-town-overlay-bottom-pilot.html'
+      - 'scripts/smoke-town-overlay-bottom.cjs'
       - 'scripts/smoke-town-overlay-compact.cjs'
       - 'v2/common/js/takarazuka-svg-controls-narrow-pilot.js'
       - 'scripts/smoke-town-controls-narrow.cjs'
@@ -84,6 +87,9 @@ on:
       - 'v2/takarazuka-town-controls-narrow-pilot.html'
       - 'v2/nishinomiya-town-overlay-compact-pilot.html'
       - 'v2/takarazuka-town-overlay-compact-pilot.html'
+      - 'v2/nishinomiya-town-overlay-bottom-pilot.html'
+      - 'v2/takarazuka-town-overlay-bottom-pilot.html'
+      - 'scripts/smoke-town-overlay-bottom.cjs'
       - 'scripts/smoke-town-overlay-compact.cjs'
       - 'v2/common/js/takarazuka-svg-controls-narrow-pilot.js'
       - 'scripts/smoke-town-controls-narrow.cjs'
@@ -313,6 +319,8 @@ jobs:
         run: node site/scripts/smoke-town-controls-narrow.cjs
       - name: Browser-check full-width town maps with compact overlaid plus-first buttons
         run: node site/scripts/smoke-town-overlay-compact.cjs
+      - name: Browser-check top-right fullscreen and bottom-right controls in both town maps
+        run: node site/scripts/smoke-town-overlay-bottom.cjs
       - name: Upload Takarazuka C-layout preview screenshots
         if: always()
         uses: actions/upload-artifact@v4
