@@ -1,0 +1,42 @@
+name: Nishinomiya SVG V7 Loader Parity
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v7-20261117-pilot.html'
+      - 'scripts/smoke-nishinomiya-svg-v7-loader-parity.cjs'
+      - 'scripts/audit-nishinomiya-v7-321-quiz-contract.cjs'
+      - '.github/workflows/nishinomiya-svg-v7-loader-parity.yml'
+  workflow_dispatch:
+jobs:
+  parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Fetch original community mapping
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare V6 and V7 DOM geometry and map view
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-svg-v7-loader-parity.cjs
+      - name: Test all 321 quiz names and grading on V7
+        run: |
+          node scripts/audit-nishinomiya-v7-321-quiz-contract.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v7-v6-loader-parity-evidence
+          path: |
+            nishinomiya-v7-loader-parity/
+            nishinomiya-v7-321-quiz-contract/
+          if-no-files-found: ignore
