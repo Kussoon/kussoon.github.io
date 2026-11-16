@@ -7,7 +7,7 @@ const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(process.env.SVG_MASTER_SCREENSHOTS||'svg-master-v1-screenshots');
 fs.mkdirSync(root,{recursive:true});
 const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
-const pathName='/v2/nishinomiya-town-svg-master-v1-20261116-pilot.html';
+const pathName=process.env.SVG_MASTER_PILOT_PATH||'/v2/nishinomiya-town-svg-master-v1-20261116-pilot.html';
 const cases=[
  {name:'chromium-pc',browser:chromium,width:1280,height:800},
  {name:'webkit-mobile-390',browser:webkit,width:390,height:844},

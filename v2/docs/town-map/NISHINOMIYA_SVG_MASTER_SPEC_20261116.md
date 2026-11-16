@@ -196,3 +196,15 @@
 **判断：** C方式は**全321件のLeafletの代表点と最大0.046px以内**で数値一致することを確認。次の独立比較版では、承認されたC版の表示品質に近づけるため、`anchorMode='leaflet'` を初期値とする設計が合理的。ただし、これは**幾何座標の比較合格**であり、表示文字幅・全体図・拡大時のUIの視覚一致は引き続き検証する。新比較版へ移す前に既存版のSVG基準点は残す。
 
 **証跡：** GitHub Actions [run 43858803036](https://github.com/Kussoon/kussoon.github.io/actions/runs/43858803036) のJSON `anchors-c-vs-svg.json`、C版／現SVG／C方式SVGの3枚のスクリーンショット。**本検査結果はGAP-03の数値比較部分のみの解消**で、V02全項目の合格を意味しない。
+
+## 13. 2026-11-16 第3段階：町名直リンクのズーム・ラベル文字倍率
+
+**比較版**：`v2/nishinomiya-town-svg-master-v4-20261116-pilot.html`。正式C版・PR #515のSVG比較版・旧V1/V2/V3比較版は変更しない。
+
+- `GAP-03`：初期ラベル基準点をC版の `Polygon.getCenter()` と最大0.046px以内に一致するSVG側 `leafletLikeCenter()` に変更（第3比較版より）。元のSVG基準点方式は比較用に残す。
+- `GAP-07`：Leafletを読み込まず、TopoJSONの町域座標とメルカトル投影の縮尺からC版 `fitBounds({padding:[50,50],maxZoom:15,zoomSnap:.1})` に相当する町名直リンク倍率を計算する。市の全域を先に取得して初期ズームを確定する。
+- `GAP-04`：通常時の基準8px表示は変えず、直リンク時にはC版の「対象ズーム－全域初期ズーム」に基づく文字倍率を使用する。
+- **証跡**：GitHub Actions [run 43890259829](https://github.com/Kussoon/kussoon.github.io/actions/runs/43890259829) は **PASS**。町域321件×画面幅1280/390/320pxの地図倍率の比率は全件1.000、文字サイズ差は監査の丸め精度（0.001px）で全件0。PC Chromium・モバイルWebKit 390/320pxの地図・基本クイズ・全画面などのスモークもPASS。
+- **監査の範囲**：この「一致」は上記の数値計算についてであり、全321町名のすべての表示状態でラベルの視覚品質が同一であることを意味しない。全幅・地域選択・全画面・拡大中の座標更新、例外町域、クイズの全採点ケース、iPhone Safari実機の最終受入は継続。
+
+**注意**：別系統の `V2 2026 regression contracts` が `v2/tests/kawanishi-town-map-contract.test.cjs` 不在で失敗した既存の問題は、西宮専用テスト合格とは区別して管理する。全国側テストの失敗を西宮実装の合格と誤認しない。

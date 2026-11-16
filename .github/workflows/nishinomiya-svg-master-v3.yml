@@ -1,0 +1,56 @@
+name: Nishinomiya SVG Master V3 Zoom and Full Regression
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v3-20261116-pilot.html'
+      - 'scripts/audit-nishinomiya-svg-master-zoom.cjs'
+      - 'scripts/audit-nishinomiya-svg-master-zoom-v4.cjs'
+      - 'scripts/audit-nishinomiya-svg-master-v4-contract.cjs'
+      - 'v2/nishinomiya-town-svg-master-v4-20261116-pilot.html'
+      - 'scripts/smoke-nishinomiya-svg-master-v1.cjs'
+      - '.github/workflows/nishinomiya-svg-master-v3.yml'
+  workflow_dispatch:
+jobs:
+  zoom-and-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: V4 source contract before browser download
+        run: node scripts/audit-nishinomiya-svg-master-v4-contract.cjs
+      - name: Install Playwright browsers
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Fetch city community dataset
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+          node scripts/audit-nishinomiya-svg-master-data.cjs
+      - name: Compare 321 town zoom and font
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-svg-master-zoom.cjs
+          node scripts/audit-nishinomiya-svg-master-zoom-v4.cjs
+          SVG_ZOOM_WIDTH=390 SVG_ZOOM_HEIGHT=844 node scripts/audit-nishinomiya-svg-master-zoom-v4.cjs
+          SVG_ZOOM_WIDTH=320 SVG_ZOOM_HEIGHT=668 node scripts/audit-nishinomiya-svg-master-zoom-v4.cjs
+      - name: Browser smoke V3
+        env:
+          SVG_MASTER_PILOT_PATH: /v2/nishinomiya-town-svg-master-v4-20261116-pilot.html
+        run: |
+          python3 -m http.server 8766 --bind 127.0.0.1 &
+          sleep 3
+          SVG_MASTER_URL=http://127.0.0.1:8766 node scripts/smoke-nishinomiya-svg-master-v1.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-svg-master-v3-zoom-audit
+          path: |
+            svg-master-v3-zoom-report/
+            svg-master-v4-zoom-report/
+            svg-master-v1-screenshots/
+          if-no-files-found: ignore
