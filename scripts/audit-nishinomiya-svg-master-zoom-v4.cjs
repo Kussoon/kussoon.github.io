@@ -44,17 +44,18 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
       extent[2]=Math.max(extent[2],coords[0]);extent[3]=Math.max(extent[3],coords[1]);
      }else for(const item of coords)visit(item);
     };
-    for(const f of features)visit(f.geometry.coordinates);
+    visit(f.geometry.coordinates);
     const mercatorY=lat=>Math.log(Math.tan(Math.PI/4+Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/360));
     const geographicWidth=256*(extent[2]-extent[0])/360;
     const geographicHeight=256*(mercatorY(extent[3])-mercatorY(extent[1]))/(2*Math.PI);
-    rawC=Math.log2(Math.min((w-44)/geographicWidth,(h-44)/geographicHeight));
-    computedCInitial=Math.max(9,Math.min(19,Math.floor((rawC+1e-9)*10)/10));
-    const sScale=Math.min(fit.scale,40,Math.pow(2,15-computedCInitial));
+    rawC=Math.log2(Math.min((w-100)/geographicWidth,(h-100)/geographicHeight));
+    const cTargetFromGeography=Math.max(9,Math.min(15,Math.floor((rawC+1e-9)*10)/10));
+    computedCInitial=cTargetFromGeography;
+    const sScale=Math.min(40,(256/(2*Math.PI))*Math.pow(2,cTargetFromGeography)/proj.scale());
     const cFont=8*maxClip(Math.pow(1.18,cZoom-initialC));
     const sFont=8*maxClip(Math.pow(1.18,Math.log2(sScale)));
     rows.push({town:f.properties.S_NAME,cZoom,sScale:+sScale.toFixed(3),cScale:+cScale.toFixed(3),
-      scaleRatio:+(sScale/cScale).toFixed(3),cFont:+cFont.toFixed(3),sFont:+sFont.toFixed(3),
+      scaleRatio:+(sScale*proj.scale()/((256/(2*Math.PI))*Math.pow(2,cZoom))).toFixed(3),cFont:+cFont.toFixed(3),sFont:+sFont.toFixed(3),
       fontDiff:+Math.abs(sFont-cFont).toFixed(3)});
    }
    cMap.remove();host.remove();
@@ -69,7 +70,7 @@ const base=process.env.SVG_MASTER_URL||'http://127.0.0.1:8765';
   assert.equal(report.towns,321);
   fs.writeFileSync(path.join(out,'zoom-font-321-'+viewportWidth+'.json'),JSON.stringify(report,null,2));
   console.log('C_vs_SVG_ZOOM_FONT '+JSON.stringify({viewportWidth,initialC:report.initialC,computedCInitial:report.computedCInitial,scaleRatio:report.scaleRatio,font:report.font,topScale:report.topScale.slice(0,8),topFont:report.topFont.slice(0,8)}));
-  assert(report.scaleRatio.min>=.94&&report.scaleRatio.max<=1.06,'V4 zoom ratio deviates more than 6% from C baseline');
+  assert(report.scaleRatio.min>=.99&&report.scaleRatio.max<=1.01,'V4 geographic rendered zoom differs by more than 1% from C baseline');
   assert(report.font.maxDiff<=.2,'V4 label font diff greater than .2px');
 
  }finally{await browser.close()}
