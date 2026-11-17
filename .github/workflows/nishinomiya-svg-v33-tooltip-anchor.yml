@@ -1,0 +1,33 @@
+name: Nishinomiya SVG V33 tooltip-anchor diagnostic
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-v33-tooltip-anchor.cjs'
+      - '.github/workflows/nishinomiya-svg-v33-tooltip-anchor.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Inspect tooltip anchors and SVG label baseline
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-v33-tooltip-anchor.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v33-tooltip-anchor
+          path: nishinomiya-v33-tooltip-anchor/
+          if-no-files-found: error
