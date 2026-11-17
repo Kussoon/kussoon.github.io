@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const file=path.resolve(__dirname,'../v2/nishinomiya-town-svg-master-v15-20261117-pilot.html');
+const html=fs.readFileSync(file,'utf8');
+assert.match(html,/<title>西宮市V2 SVG｜第15比較版・共通エンジン総合確認｜Kussoon<\/title>/);
+assert.match(html,/<h1>西宮市V2 SVG｜第15比較版・共通エンジン総合確認<\/h1>/);
+assert.match(html,/<strong>西宮市町名マップのSVG第15比較版（正式版への置換前）です。<\/strong>/);
+assert.match(html,/<meta name="robots" content="noindex,nofollow">/);
+assert.match(html,/href="\/v2\/nishinomiya-town-study-c.html"/);
+assert.match(html,/href="\/v2\/nishinomiya-town-svg-master-v14-20261117-pilot.html"/);
+const beforeScript=html.slice(0,html.indexOf('<script src='));
+assert.doesNotMatch(beforeScript,/第7比較版|第10比較版|第9比較版/);
+assert.match(html,/KussoonTownSvgGestures.install\(/);
+assert.match(html,/KussoonTownSvgRender.render\(/);
+assert.match(html,/KussoonTownSvgQuizChoices.select\(/);
+console.log('PASS V15 page title, notice, navigation and preserved engine bindings');
