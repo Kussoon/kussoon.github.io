@@ -228,7 +228,8 @@ function makeTrack(){
  }
  // Optional lateral view. Preserve the approved v39 vertical centreline.
  if(sideRaw.length>=2){
-  let lateral=Array.from({length:Math.max(80,Math.ceil(finish/.4))},(_,i,n)=>lateralAt(i/(n-1)));
+  const lateralCount=Math.max(80,Math.ceil(finish/.4));
+  let lateral=Array.from({length:lateralCount},(_,i)=>lateralAt(i/(lateralCount-1)));
   for(let pass=0;pass<40;pass++){
    const prev=lateral;lateral=prev.map((v,i)=>i===0||i===prev.length-1?v:(prev[i-1]+2*v+prev[i+1])*.25);
   }
