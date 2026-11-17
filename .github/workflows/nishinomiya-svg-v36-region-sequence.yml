@@ -1,0 +1,33 @@
+name: Nishinomiya SVG V36 all-region sequence audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-v36-region-sequence.cjs'
+      - '.github/workflows/nishinomiya-svg-v36-region-sequence.yml'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Inspect all 26 region transitions for label mismatch
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-v36-region-sequence.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v36-sequence
+          path: nishinomiya-v36-region-sequence/
+          if-no-files-found: error
