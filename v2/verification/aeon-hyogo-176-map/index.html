@@ -9,8 +9,8 @@
 .brand-history-launch{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,3.5vw,32px);max-width:900px;margin:0 auto 32px}
 .brand-history-launch h2{margin-top:0}.history-launch-form{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .history-launch-form label{font-weight:700}.history-launch-form select{flex:1 1 230px;min-width:0;max-width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--paper)}
-.history-launch-form a{background:#195b99;color:#fff;text-decoration:none;padding:10px 17px;border-radius:9px;font-weight:700;white-space:nowrap}
-@media(max-width:480px){.history-launch-form label{width:100%}.history-launch-form select,.history-launch-form a{width:100%;text-align:center}}
+.history-launch-form button{background:#195b99;color:#fff;text-decoration:none;padding:10px 17px;border-radius:9px;font-weight:700;white-space:nowrap;border:0;cursor:pointer;touch-action:manipulation}.history-launch-form button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:480px){.history-launch-form label{width:100%}.history-launch-form select,.history-launch-form button{width:100%;text-align:center}}
 </style></head><body><main id="top"><article>
 <div class="eyebrow">KUSSOON / 読み物・雑学 / 検証版</div>
 <h1>イオンなのに、なぜ名前が違う？</h1>
@@ -42,11 +42,11 @@
 <select id="historyBrand" aria-label="歴史を読むスーパーの名前">
 <option value="jusco">ジャスコ（JUSCO）</option><option value="nichii">ニチイ・マイカル・サティ</option><option value="daiei">ダイエー</option><option value="gourmet">グルメシティ</option><option value="maxvalu">マックスバリュ</option><option value="koyo">KOHYO（光洋）</option><option value="marunaka">マルナカ・山陽マルナカ</option><option value="big">ザ・ビッグ</option><option value="aeon">イオン・イオンスタイル</option>
 </select>
-<a id="openHistory" href="history.html#jusco" target="_blank" rel="noopener noreferrer" aria-label="選択したスーパーの歴史を別のタブで読む">歴史を読む ↗</a>
+<button id="openHistory" type="button" aria-label="選択したスーパーの歴史を開く">歴史を読む ↗</button>
 </div>
-<p class="sub">新しいタブで開きます。176店舗の地図・一覧はそのまま残ります。</p>
+<p class="sub">新しいタブで開きます。開けない場合は同じタブに移動します。<a href="history.html">全テーマの歴史解説を直接開く</a></p>
 </section>
-<script>(function(){const s=document.getElementById('historyBrand'),a=document.getElementById('openHistory');s.addEventListener('change',()=>{a.href='history.html#'+encodeURIComponent(s.value)});})();</script><section class="map-section" id="store-map" aria-labelledby="map-title">
+<script>(function(){const s=document.getElementById('historyBrand'),b=document.getElementById('openHistory');if(!s||!b)return;b.addEventListener('click',function(){const url=new URL('history.html#'+encodeURIComponent(s.value),window.location.href).href;const opened=window.open(url,'_blank');if(opened){try{opened.opener=null}catch(e){}}else{window.location.assign(url)}});})();</script><section class="map-section" id="store-map" aria-labelledby="map-title">
 <h2 id="map-title">兵庫県内 イオングループ176店舗マップ</h2>
 <p class="map-intro">運営会社ごとに色と文字・形を変えています。検索条件は地図と店舗一覧で共通です。位置確認日：2026年11月17日。</p>
 <div class="company-key" aria-label="運営会社別の表示"><span><i class="operator-symbol operator-fuji" aria-hidden="true">F</i>フジ 92店</span><span><i class="operator-symbol operator-daiei" aria-hidden="true">D</i>ダイエー 53店</span><span><i class="operator-symbol operator-retail" aria-hidden="true">R</i>イオンリテール 31店</span></div>
