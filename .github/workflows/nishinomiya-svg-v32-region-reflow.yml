@@ -1,0 +1,41 @@
+name: Nishinomiya SVG V32 region button reflow correction
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v32-20261117-pilot.html'
+      - 'scripts/*v32*'
+      - '.github/workflows/nishinomiya-svg-v32-region-reflow.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Download community-town membership
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare Leaflet C versus V32 on 32 states
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v32-glyph-metrics.cjs
+      - name: Save measured position differences first
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v32-glyph-geometry
+          path: nishinomiya-c-v32-glyph-metrics/
+          if-no-files-found: error
+      - name: Exhaustive quiz1 and quiz2 for all towns
+        run: node scripts/audit-nishinomiya-v32-321-quiz-contract.cjs
+      - name: UI state transitions for mobile and desktop
+        run: node scripts/smoke-nishinomiya-v32-state-matrix.cjs
