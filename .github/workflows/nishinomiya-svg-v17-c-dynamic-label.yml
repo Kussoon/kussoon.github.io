@@ -1,0 +1,43 @@
+name: Nishinomiya SVG V17 Dynamic Label C Comparison
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v17-20261117-pilot.html'
+      - 'scripts/*v17*'
+      - '.github/workflows/nishinomiya-svg-v17-c-dynamic-label.yml'
+  workflow_dispatch:
+jobs:
+  comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve community data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare C/V17 in all 26 regions and reading/font states
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v17-comprehensive.cjs
+      - name: Audit quizzes 1 and 2 across 321 towns
+        run: node scripts/audit-nishinomiya-v17-321-quiz-contract.cjs
+      - name: Audit 15-step UI state matrix
+        run: node scripts/smoke-nishinomiya-v17-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v17-c-dynamic-label-evidence
+          path: |
+            nishinomiya-c-v17-comprehensive/
+            nishinomiya-v17-321-quiz-contract/
+            nishinomiya-v17-state-matrix/
+          if-no-files-found: ignore
