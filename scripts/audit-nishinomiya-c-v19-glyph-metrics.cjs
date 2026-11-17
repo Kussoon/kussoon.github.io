@@ -77,7 +77,7 @@ async function load(browser,config,type,query=''){
   isMobile:config.w<600,hasTouch:config.w<600});
  const errs=[];page.on('pageerror',e=>errs.push(e.message));
  if(type==='C'){
-  await page.route('**'+urls.C,async route=>{
+  await page.route('**'+urls.C+'*',async route=>{
    const response=await route.fetch(),html=await response.text();
    const marker="Promise.all([fetch('/v2/data/nishinomiya-town-v2-premerged.topojson')";
    assert.equal(html.split(marker).length,2,'C insertion marker');
