@@ -5,9 +5,9 @@ const {chromium,webkit}=require('playwright');
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const out=path.resolve('nishinomiya-c-v38-glyph-metrics');fs.mkdirSync(out,{recursive:true});
 const base=process.env.NISHINOMIYA_TEST_BASE||'http://127.0.0.1:8765';
-const urls={C:'/v2/nishinomiya-town-study-c.html',SVG:'/v2/nishinomiya-town-svg-master-v38-20261117-pilot.html'};
+const urls={C:'/v2/nishinomiya-town-study-c.html',SVG:'/v2/nishinomiya-town-svg-master-v34-20261117-pilot.html'};
 // Ref guard: never accidentally audit a previous pilot under a new version.
-assert.equal(urls.SVG,'/v2/nishinomiya-town-svg-master-v38-20261117-pilot.html','V38 audit target URL');
+assert.equal(urls.SVG,'/v2/nishinomiya-town-svg-master-v34-20261117-pilot.html','V38 audit target URL');
 const cases=[{name:'pc-1280',driver:chromium,w:1280,h:800},{name:'webkit-390',driver:webkit,w:390,h:844},{name:'webkit-320',driver:webkit,w:320,h:668}];
 const quantile=(arr,q)=>{if(!arr.length)return null;const a=[...arr].sort((x,y)=>x-y),z=q*(a.length-1),lo=Math.floor(z),hi=Math.ceil(z);return +(a[lo]+(a[hi]-a[lo])*(z-lo)).toFixed(3)};
 async function ready(page,type){await page.waitForFunction(type==='C'
@@ -115,7 +115,7 @@ async function load(browser,config,type,query=''){
    const response=await route.fetch(),html=await response.text();
    const marker="Promise.all([fetch('/v2/data/nishinomiya-town-v2-premerged.topojson')";
    assert.equal(html.split(marker).length,2,'C insertion marker');
-   const hook="window.__townActiveLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.map(t=>t.getElement())).filter(Boolean));\\nwindow.__townActiveMapLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.filter(t=>map.hasLayer(t)).map(t=>t.getElement())).filter(Boolean));\\n";
+   const hook="window.__townActiveLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.map(t=>t.getElement())).filter(Boolean));\nwindow.__townActiveMapLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.filter(t=>map.hasLayer(t)).map(t=>t.getElement())).filter(Boolean));\n";
    await route.fulfill({response,body:html.replace(marker,hook+marker),
     headers:{...response.headers(),'content-type':'text/html; charset=utf-8'}});
   });
