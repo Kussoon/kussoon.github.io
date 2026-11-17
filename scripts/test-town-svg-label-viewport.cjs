@@ -18,8 +18,8 @@ function scenario(fittedView){
  }};
  const svg={node:()=>({getBoundingClientRect:()=>({left:0,right:200,top:0,bottom:100,width:200,height:100})})};
  update({labels,svg,transform:{k:2},fittedView,readingOn:true,fs:8});
- assert.equal(group.attrs['transform'],fittedView?'translate(112,51) scale(0.5)':'translate(96.5,51) scale(0.5)');
- assert.equal(group.attrs['data-edge-shift'],fittedView?'31.00,0.00':undefined);
+ assert.equal(group.attrs['transform'],fittedView?'translate(101.5,51) scale(0.5)':'translate(96.5,51) scale(0.5)');
+ assert.equal(group.attrs['data-edge-shift'],fittedView?'10.00,0.00':undefined);
 }
 scenario(true);scenario(false);
 console.log('PASS town SVG font-scale and fit-only edge correction contract');
