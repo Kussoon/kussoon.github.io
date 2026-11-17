@@ -115,7 +115,9 @@ async function load(browser,config,type,query=''){
    const response=await route.fetch(),html=await response.text();
    const marker="Promise.all([fetch('/v2/data/nishinomiya-town-v2-premerged.topojson')";
    assert.equal(html.split(marker).length,2,'C insertion marker');
-   const hook="window.__townActiveLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.map(t=>t.getElement())).filter(Boolean));\nwindow.__townActiveMapLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.filter(t=>map.hasLayer(t)).map(t=>t.getElement())).filter(Boolean));\n";
+   const hook=`window.__townActiveLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.map(t=>t.getElement())).filter(Boolean));
+window.__townActiveMapLabelElements=()=>new Set(scopeItems().flatMap(it=>it.labels.filter(t=>map.hasLayer(t)).map(t=>t.getElement())).filter(Boolean));
+`;
    await route.fulfill({response,body:html.replace(marker,hook+marker),
     headers:{...response.headers(),'content-type':'text/html; charset=utf-8'}});
   });
