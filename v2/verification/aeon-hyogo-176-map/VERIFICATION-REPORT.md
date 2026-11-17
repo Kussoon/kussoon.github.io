@@ -21,7 +21,16 @@
 
 ## ブラウザー検証
 
-Chromium／WebKitの自動検証を実行予定。実行結果はこの欄を更新する。
+Chromium／WebKitのPlaywright自動検証を完了。5画面サイズ×2配色×2エンジン＝20条件すべてPASS。
+
+- 画面サイズ：360×640、375×667（iPhone SE3相当のCSS画面）、390×844、768×1024、1440×1000。
+- 全176件の地図・表・カード、3社92/53/31件、12屋号、複合絞り込み、0件表示、検索結果への範囲調整を確認。
+- ピンからの店舗詳細、公式・Google場所・経路リンクの生成、詳細末尾の表示、凡例開閉、全体表示、クラスタ拡大を確認。
+- 全条件でページの横スクロールなし、JavaScript例外なし。ライト／ダークを双方撮影。
+- 実行コード：verify.cjs。結果：[GitHub Actions run 44017491310](https://github.com/Kussoon/kussoon.github.io/actions/runs/44017491310)。スクリーンショット20枚とresults.jsonを成果物として保存（14日保持）。
+- 既存の別機能向けV2 regression workflowは、未変更の `v2/tests/kawanishi-town-map-contract.test.cjs` が存在しないためdata-and-componentsが失敗。この地図専用検証は全件成功。今回の範囲外のファイルは変更していない。
+
+公式URLの文字列は正本176件との一致を全件確認。外部リンク先の常時応答や経路検索の実走精度までは保証する検証ではない。
 
 ## 未検証・既知の制約
 
