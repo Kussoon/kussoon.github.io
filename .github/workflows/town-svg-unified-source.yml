@@ -6,6 +6,7 @@ on:
       - 'v2/takarazuka-town-svg-unified-source-20261118-pilot.html'
       - 'v2/common/js/town-map-unified-source-takarazuka-20261118-pilot.js'
       - 'scripts/test-town-svg-unified-source-unit.cjs'
+      - 'scripts/test-town-svg-unified-source-125-lossless.cjs'
       - 'scripts/test-town-svg-unified-source-browser.cjs'
       - 'scripts/audit-takarazuka-unified-source-125-regions.cjs'
       - 'scripts/test-takarazuka-unified-source-exceptions.cjs'
@@ -20,6 +21,12 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/test-town-svg-unified-source-unit.cjs
+      - name: Fetch original SVG and metadata for complete lossless audit
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - run: node scripts/test-town-svg-unified-source-125-lossless.cjs
   browser:
     runs-on: ubuntu-24.04
     timeout-minutes: 28
