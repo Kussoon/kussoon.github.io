@@ -6,7 +6,7 @@ on:
       - 'v2/common/js/town-map-unified-quiz-takarazuka-20261118-pilot.js'
       - 'scripts/test-town-map-unified-quiz-contract.cjs'
       - 'scripts/test-takarazuka-ssot-unified-quiz-exceptions.cjs'
-      - 'scripts/audit-takarazuka-ssot-125-quiz-regions.cjs'
+      - 'scripts/audit-takarazuka-unified-quiz-125-regions.cjs'
       - '.github/workflows/town-map-unified-quiz-state.yml'
   workflow_dispatch:
 jobs:
