@@ -1,0 +1,36 @@
+name: Nishinomiya C vs V19 Visible Glyph Audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-c-v19-glyph-metrics.cjs'
+      - '.github/workflows/nishinomiya-c-v19-glyph-metrics.yml'
+  workflow_dispatch:
+jobs:
+  glyph-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Fetch data and pinned V19 Draft comparison page
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/kussoon.github.io/49bc465882a072192fbb9215b7ca7d6b95d406cf/v2/nishinomiya-town-svg-master-v19-20261117-pilot.html -o v2/nishinomiya-town-svg-master-v19-20261117-pilot.html
+      - name: Audit rendered town glyph centres in all states and 26 regions
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v19-glyph-metrics.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-c-v19-visible-glyph-evidence
+          path: nishinomiya-c-v19-glyph-metrics/
+          if-no-files-found: ignore
