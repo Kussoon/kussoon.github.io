@@ -33,3 +33,7 @@ V38ブランチで起動した共通検査 [run 44049432611](https://github.com/
 失敗箇所は `v2/tests/run-national-contracts.cjs` の `v2/tests/kawanishi-town-map-contract.test.cjs` 実行で、`MODULE_NOT_FOUND`。ファイルはmainにもV38ブランチにも存在しない。さらに、後続の `v2/tests/town-map-adapter-regression.test.cjs` は存在するが、そこから読む `v2/common/js/town-map-engine.js`、`v2/town-map/index.html`、`v2/data/town-maps/28217.json` は現時点のmainとV38ブランチに見つからない。このため、単に呼出し行を削除したり空のテストを追加するだけでは正しい復旧にはならない。
 
 この回帰失敗は、V34のLeaflet C対SVG表示一致検査（V38 PASS）や町名クイズ機能試験（V34 PASS）とは別の、**全国/川西市関連テストと関連実装の参照先不整合**である。自動検査を意図的にスキップして緑にすることはせず、別途構成/ブランチ監査で正しい元ファイルを回復した後に全体検査を再実行する。全体検査が合格するまで無条件の正式公開判断はしない。
+
+## 共通回帰の切り分けと復旧候補
+
+V2共通回帰の不整合を、正式版に触れない別のDraft PR #584で修正（廃止済み川西市プロトタイプのテスト登録参照2件を整理）。そのPRで実行された [run 44050397200](https://github.com/Kussoon/kussoon.github.io/actions/runs/44050397200) では、`data-and-components` と `real-browser` の**両ジョブPASS**、WebKit相当の全国地図回帰も成功した。ただしPR #584はV38とは別のブランチであり、mainには未統合である。V38はC対SVG V34表示の厳格検査PASS、機能試験はV34本体の既存runでPASS。これらを合わせて自動確認工程は良好。ただしユーザー実機確認と必要な比較版の安全な公開導線を整える工程は未実施。
