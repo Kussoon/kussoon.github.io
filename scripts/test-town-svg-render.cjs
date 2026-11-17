@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {render,frame}=require('../v2/common/js/town-svg-render.js');
+const features=[{properties:{S_NAME:'A'}},{properties:{S_NAME:'B'}}];
+const callbacks=[];let data,cls;
+const areas={selectAll(){return {data(items,key){data=items;assert.equal(key(items[0]),'A');return this},join(){return this},attr(){return this},classed(k,fn){cls=fn(features[1]);return this},on(k,fn){callbacks.push(fn);return this}}}};
+render({areas,features,path:()=>'',isSpecial:d=>d.properties.S_NAME==='B',onSelect:name=>callbacks.push(name)});
+assert.equal(cls,true);assert.equal(data.length,2);
+const event={stopPropagation(){this.stopped=true}};callbacks[0](event,features[0]);assert.equal(event.stopped,true);assert.equal(callbacks[1],'A');
+let box,extent,transformed=false;
+const svg={attr(k,v){box=[k,v];return this}},world={attr(k,v){transformed=k==='transform'&&v==='T';return this}};
+const projection={fitExtent(e,fc){extent=e;assert.equal(fc.features.length,2);return this}};
+const d3={geoMercator:()=>projection,geoPath:p=>{assert.equal(p,projection);return 'path'}};
+const f=frame({svg,world,d3,features,width:390,height:800,padding:22,transform:{toString:()=> 'T'}});
+assert.deepEqual(box,['viewBox','0 0 390 800']);
+assert.deepEqual(extent,[[22,22],[368,778]]);
+assert.equal(f.path,'path');f.applyWorld();assert.equal(transformed,true);
+console.log('PASS generic town polygon binding, click routing and fitted projection');
