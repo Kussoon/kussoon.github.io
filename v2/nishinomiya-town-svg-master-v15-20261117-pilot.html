@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><title>西宮市V2 SVG｜4択候補共通化 第10比較版｜Kussoon</title>
+<meta name="robots" content="noindex,nofollow"><title>西宮市V2 SVG｜第15比較版・共通エンジン総合確認｜Kussoon</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f3f8fc;color:#19384e;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
 main{max-width:1050px;margin:auto;padding:12px}h1{font-size:clamp(20px,4vw,29px);margin:10px 0 3px}.updated-at{display:block;font-size:13px;font-weight:500;color:#526f81;margin:0 0 10px}p{line-height:1.55}a{color:#185e87}
@@ -69,11 +69,11 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
  min-height:27px;padding:1px;white-space:normal;font-size:13px;line-height:1.05;text-align:center}
 </style></head>
 <body><main>
-<nav class="nav"><a href="/v2/nishinomiya-town-svg-viewport-pilot.html">第2段階の比較試作へ戻る</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
-<h1>西宮市V2 SVG｜新共通データ読込 第7比較版</h1>
-<!-- 更新時は下の日時を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
+<nav class="nav"><a href="/v2/nishinomiya-town-svg-master-v14-20261117-pilot.html">第14比較版を見る</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
+<h1>西宮市V2 SVG｜第15比較版・共通エンジン総合確認</h1>
+<!-- 比較版の説明更新日は次のtime要素に記録。地図ロジックは変更しない。 -->
 <time class="updated-at" id="updatedAt" datetime="2026-11-17">更新：2026/11/17（JST）</time>
-<p class="notice"><strong>4択候補の優先順序を共通化する第10比較版（未採用）です。</strong> PR #515の画面・ボタン・321町名・26地域・クイズを保護し、ホイールB案・ダブルクリック拡大・クイズ開始時の空の回答表示枠を調整しました。全321町のC版ラベル基準点に0.05px以内で一致する計算を初期採用しています。さらに町名直リンクの地図縮尺と文字倍率はPC（1280px）・モバイル相当（390px・320px）の数値比較で一致しました。ただし、全町名の実際の文字表示、拡大・クイズの詳細動作、iPhone Safari実機での総合合格は未確認です。第9比較版の描画・採点・地図操作を維持し、クイズ2の4択候補を選ぶ優先順序だけを共通部品に分離しました。ドラッグ中・拡大中はラベルの端への貼り付きを行いません。元のPR #515と正式Leaflet C版は変更していません。</p>
+<p class="notice"><strong>西宮市町名マップのSVG第15比較版（正式版への置換前）です。</strong> 321町名・324ラベル・26コミュニティを維持し、データ読込、地域所属、クイズ、ラベル生成・倍率・端補正、町域描画・投影、ホイール・タッチ等の基本操作を共通モジュールへ段階的に分離しました。第14版との表示・4択候補・全町名採点の自動検査には合格しています。ただし、正式Leaflet C版との最新版の直接画面比較、実際のiPhone SafariとPCでの最終確認は未完了です。地図のドラッグ・拡大中にラベルを画面端へ貼り付ける補正は行いません。正式C版・以前の比較版・他市の正式ページは変更していません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
 <section class="study" aria-label="26コミュニティ学習範囲"><div class="study-row"><strong>学習範囲</strong><button type="button" id="communityToggle" aria-expanded="false" aria-controls="communityOptions" disabled>西宮市全域（321町名） ▾</button><span id="communityCount">準備中</span></div>
 <div id="communityOptions" class="community-options" hidden></div>
