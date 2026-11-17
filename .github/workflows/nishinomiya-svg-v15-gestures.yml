@@ -1,0 +1,49 @@
+name: Nishinomiya SVG V15 Shared Gestures
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-gestures.js'
+      - 'v2/nishinomiya-town-svg-master-v15-20261117-pilot.html'
+      - 'scripts/*v15*'
+      - 'scripts/test-town-svg-gestures.cjs'
+      - '.github/workflows/nishinomiya-svg-v15-gestures.yml'
+  workflow_dispatch:
+jobs:
+  gestures:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya region data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Shared gestures unit contract
+        run: node scripts/test-town-svg-gestures.cjs
+      - name: Compare V14/V15 map display and quiz choices
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-svg-v15-gestures-parity.cjs
+          node scripts/audit-nishinomiya-v15-candidate-parity.cjs
+      - name: Audit quiz 1 and 2 for all 321 towns
+        run: node scripts/audit-nishinomiya-v15-321-quiz-contract.cjs
+      - name: Audit mixed state transitions
+        run: node scripts/smoke-nishinomiya-v15-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v15-gestures-evidence
+          path: |
+            nishinomiya-v15-candidate-parity/
+            nishinomiya-v15-quiz-parity/
+            nishinomiya-v15-321-quiz-contract/
+            nishinomiya-v15-state-matrix/
+          if-no-files-found: ignore
