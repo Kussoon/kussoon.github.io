@@ -1,0 +1,35 @@
+name: Nishinomiya Leaflet C vs SVG V15 Direct Visual Audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-c-v15-direct-visual.cjs'
+      - '.github/workflows/nishinomiya-c-v15-direct-visual.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya region data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Capture C vs V15 maps and measure 324 label rectangles
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v15-direct-visual.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-c-v15-direct-visual-evidence
+          path: nishinomiya-c-v15-direct-visual/
+          if-no-files-found: ignore
