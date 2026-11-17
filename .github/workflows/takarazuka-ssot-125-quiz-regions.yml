@@ -1,0 +1,35 @@
+name: Takarazuka SSOT exhaustive 125-town quiz and region audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-takarazuka-ssot-125-quiz-regions.cjs'
+      - '.github/workflows/takarazuka-ssot-125-quiz-regions.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Download original Takarazuka shape source and town registry
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Check 125 town labels, 20 regions and all quiz questions
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-takarazuka-ssot-125-quiz-regions.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: takarazuka-ssot-125-quiz-region-results
+          path: takarazuka-ssot-125-audit/
+          if-no-files-found: warn
