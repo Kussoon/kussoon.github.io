@@ -49,7 +49,7 @@ function compare(stage,A,B){
  }
  const groups=new Map();
  for(const x of B.rows){if(!groups.has(x.name))groups.set(x.name,[]);groups.get(x.name).push(x)}
- const diff=[];
+ const diff=[],readingDiff=[];
  for(const c of A.rows){
   const rest=groups.get(c.name)||[];
   if(!rest.length)continue;
