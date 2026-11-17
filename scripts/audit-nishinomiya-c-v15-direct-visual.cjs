@@ -113,10 +113,28 @@ async function chooseRegion(page,type,name){
    }
    byTown.push(...local);
   }
+  // Estimate a global similarity transform C -> SVG to distinguish
+  // map scale/translation differences from town-specific anchor differences.
+  const mean=values=>values.reduce((a,b)=>a+b,0)/values.length;
+  const cmx=mean(byTown.map(x=>x.c[0])),cmy=mean(byTown.map(x=>x.c[1]));
+  const smx=mean(byTown.map(x=>x.svg[0])),smy=mean(byTown.map(x=>x.svg[1]));
+  let numerator=0,denominator=0;
+  for(const x of byTown){
+   numerator+=(x.c[0]-cmx)*(x.svg[0]-smx)+(x.c[1]-cmy)*(x.svg[1]-smy);
+   denominator+=(x.c[0]-cmx)**2+(x.c[1]-cmy)**2;
+  }
+  const scale=numerator/denominator,translateX=smx-scale*cmx,translateY=smy-scale*cmy;
+  const residuals=byTown.map(x=>Math.hypot(x.svg[0]-(scale*x.c[0]+translateX),
+    x.svg[1]-(scale*x.c[1]+translateY)));
+  const affineDiagnosis={scale:+scale.toFixed(7),translation:[+translateX.toFixed(3),+translateY.toFixed(3)],
+   residualPx:{median:quantile(residuals,.5),p95:quantile(residuals,.95),max:quantile(residuals,1),
+     above1:residuals.filter(x=>x>1).length,above5:residuals.filter(x=>x>5).length},
+   meanDelta:[+(smx-cmx).toFixed(3),+(smy-cmy).toFixed(3)]};
   byTown.sort((x,y)=>y.distance-x.distance);
   const comparison={screen:c.name,C:{labels:a.labels,unique:a.unique,visible:a.visible,font:a.fontRange,map:a.map},
    SVG:{labels:b.labels,unique:b.unique,visible:b.visible,font:b.fontRange,map:b.map},
    mapSizeEqual:JSON.stringify(a.map)===JSON.stringify(b.map),
+   globalTransformDiagnosis:affineDiagnosis,
    centerDistancesPx:{min:quantile(deltas,0),median:quantile(deltas,.5),p90:quantile(deltas,.9),
      p95:quantile(deltas,.95),max:quantile(deltas,1),
      above1:deltas.filter(v=>v>1).length,above5:deltas.filter(v=>v>5).length,
