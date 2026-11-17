@@ -1,0 +1,34 @@
+name: Aeon Hyogo map Chromium and WebKit verification
+on:
+  pull_request:
+    paths:
+      - 'v2/verification/aeon-hyogo-176-map/**'
+      - '.github/workflows/verify-aeon-map.yml'
+permissions:
+  contents: read
+jobs:
+  browsers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --no-audit --no-fund
+        working-directory: v2/tests/browser
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: v2/tests/browser
+      - name: Verify map, linked directory, small screens and dark mode
+        run: node v2/verification/aeon-hyogo-176-map/verify.cjs
+        env:
+          KUSSOON_BROWSER_ARTIFACTS: ${{ runner.temp }}/aeon-map-browser
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aeon-hyogo-map-browser-verification
+          path: ${{ runner.temp }}/aeon-map-browser
+          retention-days: 14
+          if-no-files-found: ignore
