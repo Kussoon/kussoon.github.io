@@ -1,0 +1,49 @@
+name: Nishinomiya SVG V12 Shared Town Labels
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-labels.js'
+      - 'v2/nishinomiya-town-svg-master-v12-20261117-pilot.html'
+      - 'scripts/*v12*'
+      - 'scripts/test-town-svg-labels.cjs'
+      - '.github/workflows/nishinomiya-svg-v12-labels.yml'
+  workflow_dispatch:
+jobs:
+  labels:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya region data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Shared label placement unit contract
+        run: node scripts/test-town-svg-labels.cjs
+      - name: Compare V11/V12 label geometry, layout and quiz choices
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-svg-v12-labels-parity.cjs
+          node scripts/audit-nishinomiya-v12-candidate-parity.cjs
+      - name: Audit 321 quiz 1 and quiz 2 problems
+        run: node scripts/audit-nishinomiya-v12-321-quiz-contract.cjs
+      - name: Audit mixed state transitions
+        run: node scripts/smoke-nishinomiya-v12-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v12-label-evidence
+          path: |
+            nishinomiya-v12-candidate-parity/
+            nishinomiya-v12-quiz-parity/
+            nishinomiya-v12-321-quiz-contract/
+            nishinomiya-v12-state-matrix/
+          if-no-files-found: ignore
