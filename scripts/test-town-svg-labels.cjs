@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {positions,makeData}=require('../v2/common/js/town-svg-labels.js');
+const project=coord=>coord;
+const features=[{properties:{S_NAME:'islands'}},{properties:{S_NAME:'single'}},{properties:{S_NAME:'extra'}}];
+const cfg={projection:project,projectedAt:f=>[0,1],multiLabels:{islands:[[34,135],[35,136]]},extraLabels:{extra:[[36,137]]},labelOffsets:{single:[-7,2]}};
+assert.deepEqual(positions(features[0],cfg),[{point:[135,34],offset:[0,0]},{point:[136,35],offset:[0,0]}]);
+assert.deepEqual(positions(features[1],cfg),[{point:[0,1],offset:[-7,2]}]);
+assert.deepEqual(positions(features[2],cfg),[{point:[0,1],offset:[0,0]},{point:[137,36],offset:[0,0]}]);
+const data=makeData(features,f=>positions(f,cfg));
+assert.equal(data.length,5);
+assert.deepEqual(data.map(x=>x.id),['islands:0','islands:1','single:0','extra:0','extra:1']);
+assert.deepEqual(makeData(features,()=>[{point:[NaN,1],offset:[0,0]}]),[]);
+console.log('PASS town SVG label positions, exceptions, multi-label and invalid point filtering');
