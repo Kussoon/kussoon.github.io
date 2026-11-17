@@ -9,7 +9,7 @@ const urls={C:'/v2/nishinomiya-town-study-c.html',SVG:'/v2/nishinomiya-town-svg-
 const cases=[{name:'pc-1280',driver:chromium,w:1280,h:800},{name:'webkit-390',driver:webkit,w:390,h:844},{name:'webkit-320',driver:webkit,w:320,h:668}];
 const quantile=(arr,q)=>{if(!arr.length)return null;const a=[...arr].sort((x,y)=>x-y),z=q*(a.length-1),lo=Math.floor(z),hi=Math.ceil(z);return +(a[lo]+(a[hi]-a[lo])*(z-lo)).toFixed(3)};
 async function ready(page,type){await page.waitForFunction(type==='C'
- ?()=>document.querySelector('#status')?.textContent.includes('321町名')
+ ?()=>document.querySelector('#communityCount')?.textContent.includes('321町名')
  :()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),null,{timeout:60000})}
 async function snap(page,type){
  return page.evaluate(type=>{
