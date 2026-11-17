@@ -1,0 +1,43 @@
+name: Nishinomiya SVG V19 Region Fit C Comparison
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v19-20261117-pilot.html'
+      - 'scripts/*v19*'
+      - '.github/workflows/nishinomiya-svg-v19-c-region-fit.yml'
+  workflow_dispatch:
+jobs:
+  comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve community data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare Leaflet C versus V19 across 26 regions
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v19-comprehensive.cjs
+      - name: Audit 321 town quiz questions for both modes
+        run: node scripts/audit-nishinomiya-v19-321-quiz-contract.cjs
+      - name: Audit 15 UI transitions across PC and WebKit
+        run: node scripts/smoke-nishinomiya-v19-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v19-c-region-fit-evidence
+          path: |
+            nishinomiya-c-v19-comprehensive/
+            nishinomiya-v19-321-quiz-contract/
+            nishinomiya-v19-state-matrix/
+          if-no-files-found: ignore
