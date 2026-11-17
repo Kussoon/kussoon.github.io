@@ -476,3 +476,17 @@
 **別ワークフローの既知の失敗**：`V2 2026 regression contracts` の `data-and-components` は従来から不在の `v2/tests/kawanishi-town-map-contract.test.cjs` の参照により `MODULE_NOT_FOUND`。同ワークフローの `real-browser` は合格。専用CI合格をもってサイト全体の全CIが合格したとは判断しない。
 
 **最終受入は未実施**：main統合は独立比較ページと共通部品の保存であり、正式Leaflet C版への置換ではない。実際のiPhone Safari・PCでの操作感、ラベル視認性、読み表示、地域切替の確認は利用者の最終受入ゲートとして残す。
+
+## 30. 第14比較版：町域SVG描画・投影処理の共通化（2026-11-17）
+
+**対象**：PR #543（main統合済み）、独立比較ページ `v2/nishinomiya-town-svg-master-v14-20261117-pilot.html`、共通モジュール `v2/common/js/town-svg-render.js`。
+
+**共通化した範囲**：町域GeoJSON FeatureからSVGパスをデータ結合する処理、画面寸法に基づくメルカトル図法への投影、SVG viewBoxと地図変形の適用、町域クリックイベントの転送。自治体側から町名プロパティ、Feature、地理投影ライブラリ、例外スタイル判定、クリック時の処理を渡す。
+
+**表示を変えないための条件**：投影余白22px、従来の町域データと描画順、D3の地理パス生成、選択時のイベント伝搬停止、岡田山の特殊スタイル設定、クイズ中のタップ処理は第13比較版と同一。既存のズーム補助関数 `town-svg-core.js` と画面調整関数 `town-svg-viewport.js` は再利用し、ホイール有効化・ダブルクリック・ドラッグ等の操作規則は今回変更しない。
+
+**検査結果：専用CI PASS**。GitHub Actions [run 44005243573](https://github.com/Kussoon/kussoon.github.io/actions/runs/44005243573)。描画・投影の単体検査が合格。第13版／第14版の町域321件・ラベル324件・26地域および全市の選択・5表示状態を、Chromium 1280px／WebKit 390px・320pxの3環境で比較して一致。クイズ2候補は全321町名×4範囲＝各1,284条件の候補名と順序がChromium／WebKitで一致。第14版クイズ1・2はそれぞれ321問すべて合格（Chromium／WebKit）。全画面、地域選択、クイズ中断・復習など15段階の状態遷移も3環境で合格。
+
+**他のCIとの切り分け**：別の `V2 2026 regression contracts` の `data-and-components` は以前から存在しない `v2/tests/kawanishi-town-map-contract.test.cjs` により `MODULE_NOT_FOUND`。同ワークフローの `real-browser` は成功。サイト全体のCIがすべて合格したという意味ではない。
+
+**正式化と受入**：main統合は第14比較ページと共通モジュールの保存であり、正式Leaflet C版の置換ではない。iPhone SafariおよびPCでの利用者実機確認、特にラベルの視認性・ズーム・地図のタップ・全画面・地域切替・クイズの操作感が残る。実機受入までC版を保持する。
