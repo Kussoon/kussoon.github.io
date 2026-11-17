@@ -22,7 +22,12 @@ async function analyze(page,scope,stage){
    const range=document.createRange();
    if(child)range.selectNodeContents(child);
    const g=child?range.getBoundingClientRect():el.getBoundingClientRect();
-   const shown=el.dataset.visible==='true'&&getComputedStyle(el).display!=='none'&&g.width>0&&g.height>0;
+   // Takarazuka sets data-visible, while the adopted Nishinomiya V34
+   // does not. Derive Nishinomiya visibility from actual DOM/CSS, not a
+   // marker that was never part of its contract.
+   const shown=(scope==='nishinomiya'||el.dataset.visible==='true')&&
+    getComputedStyle(el).display!=='none'&&getComputedStyle(text).display!=='none'&&
+    g.width>0&&g.height>0;
    const clipped=shown&&(g.left<m.left||g.top<m.top||g.right>m.right||g.bottom>m.bottom);
    const intersects=shown&&g.right>m.left&&g.left<m.right&&g.bottom>m.top&&g.top<m.bottom;
    return {name:el.__data__?.name||child?.textContent||'',secondary:!!el.__data__?.secondary,shown,clipped,intersects,
@@ -75,6 +80,7 @@ async function run([screen,engine,width,height]){
      console.log('TOWN_SSOT_LABEL_DIAG '+JSON.stringify({screen,...o}));
     }
     await snap('whole-initial');
+    assert.equal(states.at(-1).counts.uniqueShown,scope==='takarazuka'?125:321,'initial towns must be visible');
     await page.locator('#zoomIn').click();await page.waitForTimeout(350);await snap('whole-zoom-plus');
     await page.locator('#reset').click();await page.waitForTimeout(250);await snap('whole-reset');
     await page.locator('#reading').click();await page.waitForTimeout(150);await snap('reading-on');
