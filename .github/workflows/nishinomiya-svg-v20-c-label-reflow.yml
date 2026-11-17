@@ -1,0 +1,43 @@
+name: Nishinomiya SVG V20 C Label Reflow Comparison
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v20-20261117-pilot.html'
+      - 'scripts/*v20*'
+      - '.github/workflows/nishinomiya-svg-v20-c-label-reflow.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya community data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare C versus V20 actual glyph positions in all states
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v20-glyph-metrics.cjs
+      - name: Audit all 321 towns in quiz 1 and quiz 2
+        run: node scripts/audit-nishinomiya-v20-321-quiz-contract.cjs
+      - name: Audit 15 UI state changes
+        run: node scripts/smoke-nishinomiya-v20-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v20-reflow-evidence
+          path: |
+            nishinomiya-c-v20-glyph-metrics/
+            nishinomiya-v20-321-quiz-contract/
+            nishinomiya-v20-state-matrix/
+          if-no-files-found: ignore
