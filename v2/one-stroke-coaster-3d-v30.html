@@ -90,11 +90,11 @@ function makeTrack(){
     turn+=Math.atan2(v1.x*v2.y-v1.y*v2.x,v1.x*v2.x+v1.y*v2.y);
    }
    if(Math.abs(turn)>7.3)break;
-   if(Math.abs(turn)<5.55||j-i<26)continue;
+   if(Math.abs(turn)<4.6||j-i<26)continue;
    const w=maxX-minX,h=maxY-minY,d=Math.max(w,h);
    if(d<26||d>190||Math.min(w,h)<18)continue;
    const close=Math.hypot(b.x-knots[i].x,b.y-knots[i].y);
-   if(close>Math.max(12,d*.25)||arc/d<2.3||arc/d>5.6)continue;
+   if(close>Math.max(12,d*.25)||arc/d<1.7||arc/d>5.6)continue;
    const score=Math.abs(Math.abs(turn)-2*Math.PI)+close/d;
    if(!candidate||score<candidate.score)candidate={end:j,score,cx:(minX+maxX)*.5,cy:(minY+maxY)*.5,r:(w+h)*.25,sign:Math.sign(turn)};
   }
