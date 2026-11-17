@@ -1,0 +1,35 @@
+name: Town map master specification guard
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town*.html'
+      - 'v2/common/js/town-svg-*.js'
+      - 'v2/data/nishinomiya-*.topojson'
+      - 'v2/docs/town-map/TOWN_MAP_MASTER_SPEC.md'
+      - 'scripts/test-town-map-master-spec.cjs'
+      - 'AGENTS.md'
+      - '.github/workflows/town-map-master-spec.yml'
+  workflow_dispatch:
+jobs:
+  town-map-spec:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate frozen master spec and adopted V34 invariants
+        run: node scripts/test-town-map-master-spec.cjs
+      - name: Require spec acknowledgement for town-map pull requests
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          if ! printf '%s' "$PR_BODY" | grep -Fq 'Town-map spec: TOWNMAP-SSOT-001'; then
+            echo 'PR body must include Town-map spec: TOWNMAP-SSOT-001' >&2
+            exit 1
+          fi
+          if ! printf '%s' "$PR_BODY" | grep -Eq 'R-TOWN-[0-9][0-9]'; then
+            echo 'PR body must identify an affected R-TOWN rule' >&2
+            exit 1
+          fi
