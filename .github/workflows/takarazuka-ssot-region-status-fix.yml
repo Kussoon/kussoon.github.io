@@ -1,0 +1,40 @@
+name: Takarazuka region return status fix comparison
+on:
+  pull_request:
+    paths:
+      - 'v2/takarazuka-town-svg-ssot-region-status-20261118-pilot.html'
+      - 'v2/common/js/takarazuka-svg-ssot-region-status-20261118-pilot.js'
+      - 'scripts/test-takarazuka-ssot-region-status-fix.cjs'
+      - '.github/workflows/takarazuka-ssot-region-status-fix.yml'
+  workflow_dispatch:
+jobs:
+  quiz-matrix:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Download Takarazuka original town data
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Verify fixed quiz, interruptions, retries and area-selection messages
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/test-takarazuka-ssot-region-status-fix.cjs
+      - name: Exhaustive Takarazuka 125-town quiz and 20-region regression
+        run: |
+          node scripts/audit-takarazuka-ssot-125-quiz-regions.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: takarazuka-region-status-comparison
+          path: takarazuka-ssot-quiz-exceptions/
+          if-no-files-found: warn
