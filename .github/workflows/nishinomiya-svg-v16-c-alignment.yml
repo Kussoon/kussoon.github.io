@@ -1,0 +1,43 @@
+name: Nishinomiya SVG V16 C Baseline Visual Match
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-master-v16-20261117-pilot.html'
+      - 'scripts/*v16*'
+      - '.github/workflows/nishinomiya-svg-v16-c-alignment.yml'
+  workflow_dispatch:
+jobs:
+  c-comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve Nishinomiya region data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare C baseline with V16 rendered map and 324 labels
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v16-direct-visual.cjs
+      - name: Verify V16 quiz 1 and quiz 2 in all 321 towns
+        run: node scripts/audit-nishinomiya-v16-321-quiz-contract.cjs
+      - name: Verify V16 15-step UI state matrix
+        run: node scripts/smoke-nishinomiya-v16-state-matrix.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v16-vs-c-evidence
+          path: |
+            nishinomiya-c-v16-direct-visual/
+            nishinomiya-v16-321-quiz-contract/
+            nishinomiya-v16-state-matrix/
+          if-no-files-found: ignore
