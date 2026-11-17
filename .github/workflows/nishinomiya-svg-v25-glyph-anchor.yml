@@ -27,6 +27,16 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 &
           sleep 3
           node scripts/audit-nishinomiya-c-v25-glyph-metrics.cjs
+      # Make geometry evidence available immediately, even while the exhaustive
+      # quiz jobs run for several minutes. This prevents a successful geometry
+      # measurement from being inaccessible due to slow later steps.
+      - name: Upload C versus V25 geometry evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v25-geometry-evidence
+          path: nishinomiya-c-v25-glyph-metrics/
+          if-no-files-found: error
       - name: 321 town names quiz1 and quiz2
         run: node scripts/audit-nishinomiya-v25-321-quiz-contract.cjs
       - name: UI state matrix
