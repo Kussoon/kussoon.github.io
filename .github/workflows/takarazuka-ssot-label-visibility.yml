@@ -1,0 +1,36 @@
+name: Takarazuka SSOT label visibility and controls audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-takarazuka-ssot-label-visibility.cjs'
+      - '.github/workflows/takarazuka-ssot-label-visibility.yml'
+  workflow_dispatch:
+jobs:
+  label-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Download source pages and town registries
+        run: |
+          mkdir -p takarazuka/data nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Report real-screen label clipping and overlap in both cities
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-takarazuka-ssot-label-visibility.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: takarazuka-ssot-visibility-evidence
+          path: takarazuka-ssot-visibility-evidence/
+          if-no-files-found: warn
