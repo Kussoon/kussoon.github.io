@@ -55,6 +55,10 @@ async function run([screen,engine,width,height]){
     await page.evaluate(n=>window.__townAuditParts.quizOne(n),name);
     const before=await page.evaluate(()=>window.__townAuditParts.quiz());
     assert.equal(before.order.length,1);assert.equal(before.order[0],name);
+    // Starting quiz1 expands the panel above the SVG and can push the map
+    // out of the physical viewport. Scroll first, then reproject the click
+    // point using the current SVG screen transform.
+    await page.locator('#map').scrollIntoViewIfNeeded();
     const pos=await page.evaluate(p=>window.__townAuditParts.focus(p.name,p.index),{name,index});
     // focus resets only selection blinking; quiz state must stay in quiz1.
     assert.equal(pos.hitName,name,'quiz hit target '+name);
