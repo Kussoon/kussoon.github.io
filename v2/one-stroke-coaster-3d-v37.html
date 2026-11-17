@@ -187,7 +187,7 @@ function makeTrack(){
  // them past the finish, so the goal view does not turn into empty grassland.
  let minWorldZ=Infinity,maxWorldZ=-Infinity;
  for(const point of track){minWorldZ=Math.min(minWorldZ,point.z);maxWorldZ=Math.max(maxWorldZ,point.z);}
- for(let row=0,z=Math.floor((minWorldZ-75)/9)*9;z<=maxWorldZ+200;z+=9,row++){
+ for(let row=0,z=Math.floor((minWorldZ-200)/9)*9;z<=maxWorldZ+200;z+=9,row++){
   const district=Math.floor(row/9)%6;
   for(const side of [-1,1]){
    for(let lane=0;lane<4;lane++){
