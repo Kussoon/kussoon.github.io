@@ -41,10 +41,14 @@ async function run([screen,engine,width,height]){
   });
   await page.goto(origin+mapUrl,{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('125'),null,{timeout:60000});
+  await page.waitForTimeout(150);
   const records=[];
   for(const name of towns){
    const count=await page.evaluate(n=>window.__townAuditParts.count(n),name);
    for(let index=0;index<count;index++){
+    // Result screens and the initial page both place the SVG below other UI.
+    // Always scroll before mapping an SVG-space point to viewport pixels.
+    await page.locator('#map').scrollIntoViewIfNeeded();
     const {x,y,filled,hitName}=await page.evaluate(p=>window.__townAuditParts.focus(p.name,p.index),{name,index});
     assert.equal(filled,true,name+' component not in fill '+index);
     assert.equal(hitName,name,name+' real hit test map path '+index);
