@@ -13,10 +13,15 @@ const labelHook={
  C:`window.__townLabelSnapshot=()=>{
   const root=document.querySelector('#map').getBoundingClientRect();
   return items.filter(it=>['北口町','甲陽園日之出町','山口町下山口','山口町阪神流通センター'].includes(it.name))
-   .flatMap(it=>it.labels.map(t=>{const b=t.getElement()?.getBoundingClientRect();
+   .flatMap(it=>it.labels.map(t=>{const el=t.getElement(),b=el?.getBoundingClientRect();
+    const node=el?.querySelector('span')?.firstChild;
+    const range=node&&document.createRange();
+    if(range)range.selectNodeContents(node);
+    const gr=range?.getBoundingClientRect();
     const a=t.getLatLng(),q=map.latLngToContainerPoint(a);
     return {name:it.name,attached:map.hasLayer(t),anchor:[q.x,q.y],
       label:b?[b.left-root.left,b.top-root.top,b.width,b.height]:null,
+      glyph:gr?[gr.left-root.left,gr.top-root.top,gr.width,gr.height]:null,
       font:getComputedStyle(t.getElement()||root).fontSize};
    }));
  };`,
@@ -24,9 +29,10 @@ const labelHook={
   const root=svg.node().getBoundingClientRect();
   return labels.selectAll('g.label').nodes()
    .filter(n=>['北口町','甲陽園日之出町','山口町下山口','山口町阪神流通センター'].includes(n.__data__?.name))
-   .map(n=>{const d=n.__data__,b=n.querySelector('text.town-label')?.getBoundingClientRect();
+   .map(n=>{const d=n.__data__,b=n.querySelector('text.town-label')?.getBoundingClientRect(),gr=n.querySelector('tspan.town-name')?.getBoundingClientRect();
     return {name:d.name,anchor:[d.point[0]*transform.k+transform.x+d.offset[0],d.point[1]*transform.k+transform.y+d.offset[1]],
       label:b?[b.left-root.left,b.top-root.top,b.width,b.height]:null,
+      glyph:gr?[gr.left-root.left,gr.top-root.top,gr.width,gr.height]:null,
       cache:cBaselineLabelShifts.get(d.id),font:fontPixels() };
    });
  };`
