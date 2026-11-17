@@ -448,3 +448,17 @@
 **別ワークフローの既知の失敗**：同PRの `V2 2026 regression contracts` の `data-and-components` は、以前から存在しない `v2/tests/kawanishi-town-map-contract.test.cjs` を呼び出すため `MODULE_NOT_FOUND`。別ジョブ `real-browser` は合格。サイト全体のCIすべてが合格したと扱ってはならない。
 
 **正式採用の判定**：PRのmain統合は新比較ページと共通部品の保存を意味する。町名マップ正式C版からの置換・iPhone SafariとPC実機での最終受入・ラベルの最終視認性評価は未実施。利用者による実機承認まで正式C版を残す。
+
+## 28. 第12比較版：町名ラベル位置・SVG生成の共通化（2026-11-17）
+
+**対象**：PR #539（main統合済み）、独立比較ページ `v2/nishinomiya-town-svg-master-v12-20261117-pilot.html`、共通モジュール `v2/common/js/town-svg-labels.js`。
+
+**共通化した範囲**：各町名の基準ラベル位置・手動オフセット・複数位置・追加位置から表示用データを生成する処理と、町名および任意の読み仮名をSVG `text/tspan` 要素として組み立てる処理。町名プロパティ、地理投影、位置決定関数、町名別調整・複数位置・読みは自治体側から受け取る。西宮固有の地名は共通部品に埋め込まない。
+
+**保持した条件**：2026-11-14 Leaflet C版から継承した基準点や各町名の位置修正・読み・複数ラベルの設定は不変更。SVGの町域描画、地理投影、拡大縮小に伴うラベル文字サイズ、枠端補正、クイズ1・2の採点と4択候補、点滅、地域別の特別処理は第11比較版から変更しない。
+
+**検査結果：専用CI PASS**。GitHub Actions [run 43984642726](https://github.com/Kussoon/kussoon.github.io/actions/runs/43984642726)。ラベル位置と例外の単体検査合格。第11版／第12版の5状態で町域321件、ラベル324件、地域26件と全市の選択肢、描画属性をChromium 1280px・WebKit 390px／320pxで比較して一致。321町×4学習範囲＝各1,284件の4択候補と順序はChromium・WebKitで一致。第12版のクイズ1・2はChromium・WebKitで各321問すべて合格。全画面や地域変更等の15段階の操作も3環境で合格。
+
+**別ワークフローの既知の失敗**：`V2 2026 regression contracts` の `data-and-components` は、従前から欠落している `v2/tests/kawanishi-town-map-contract.test.cjs` の参照により `MODULE_NOT_FOUND`。今回の第12版専用CIは成功したがサイト全体のCIが全件合格したとは判断しない。
+
+**正式化ゲート**：main統合は比較版と共通部品の保存であり、正式Leaflet C版の置換ではない。残件はiPhone SafariとPCの実機確認、ラベルの実視認性と操作感の最終評価。これらの利用者受入まではC版を保持する。
