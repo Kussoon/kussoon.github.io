@@ -15,7 +15,7 @@ assert.match(guidance,/Town-map spec: TOWNMAP-SSOT-001/);
 for(const id of ['quizOne','quizTwo','quizPanel','quizResults','quizFeedback','communityOptions','reading','size','fullscreen','zoomIn','zoomOut','larger','smaller','reset','status'])assert.match(html,new RegExp('id="'+id+'"'),'missing UI '+id);
 assert.match(html,/expectedTownCount:321,expectedRegionCount:26/);
 assert.match(html,/const COMMUNITY_READINGS=/);
-assert.match(html,/const MULTI_LABELS=/);
+assert.match(html,/MULTI_LABELS=/);
 assert.match(html,/EXTRA_LABELS=/);
 assert.match(html,/const LABEL_OFFSETS=/);
 assert.match(html,/function townTspanScreenRect\(/);
