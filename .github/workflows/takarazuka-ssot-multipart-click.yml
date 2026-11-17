@@ -1,0 +1,35 @@
+name: Takarazuka SSOT multipart click regression
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-takarazuka-ssot-multipart-click.cjs'
+      - '.github/workflows/takarazuka-ssot-multipart-click.yml'
+  workflow_dispatch:
+jobs:
+  geometry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Fetch original Takarazuka source
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Verify each geographic component by real pointer clicks
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-takarazuka-ssot-multipart-click.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: takarazuka-multipart-clicks
+          path: takarazuka-ssot-multipart-click-results/
+          if-no-files-found: warn
