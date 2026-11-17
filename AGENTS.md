@@ -2,7 +2,7 @@
 
 ## Town maps (Kussoon / SVG)
 
-**MANDATORY before reading or changing any town-map code, UI, quiz, label, source data or tests:**
+**MANDATORY before reading or changing any town-map code, UI, quiz, label, source data or tests:**\n**R-TOWN-00: ONE nationwide normative specification, no city-specific specifications or separate behavior rules. Municipality differences are input data only. When a new structural case is found, generalize the shared engine and update the single master specification, never add municipality-specific branches.**
 1. Read the full authoritative specification: `v2/docs/town-map/TOWN_MAP_MASTER_SPEC.md` (ID `TOWNMAP-SSOT-001`).
 2. Check current `main`, existing accepted implementations, relevant older PRs and regression tests for the same issue. Do **not** discard previously accepted changes by copying an older pilot or recreating the app.
 3. In the PR description include the exact marker `Town-map spec: TOWNMAP-SSOT-001`, impacted `R-TOWN-` rules, prior fixes checked, intentional differences, and test evidence.
