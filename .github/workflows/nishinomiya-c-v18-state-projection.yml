@@ -1,0 +1,38 @@
+name: Nishinomiya C vs V18 State Projection Diagnosis
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-c-v18-state-projection.cjs'
+      - '.github/workflows/nishinomiya-c-v18-state-projection.yml'
+  workflow_dispatch:
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve community data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Retrieve unmerged V18 comparison page (pinned PR commit)
+        run: |
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/kussoon.github.io/4b2d4c67022b4bc8f291222a6771b612e5ead23f/v2/nishinomiya-town-svg-master-v18-20261117-pilot.html -o v2/nishinomiya-town-svg-master-v18-20261117-pilot.html
+      - name: Probe C/V18 state-dependent map projections
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v18-state-projection.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-c-v18-state-projection
+          path: nishinomiya-c-v18-state-projection/
+          if-no-files-found: ignore
