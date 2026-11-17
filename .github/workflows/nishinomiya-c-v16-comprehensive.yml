@@ -1,0 +1,35 @@
+name: Nishinomiya C vs V16 Comprehensive Display Gate
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-c-v16-comprehensive.cjs'
+      - '.github/workflows/nishinomiya-c-v16-comprehensive.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Retrieve community data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare all 26 regions and multi-state display with C
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-nishinomiya-c-v16-comprehensive.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-c-v16-comprehensive-evidence
+          path: nishinomiya-c-v16-comprehensive/
+          if-no-files-found: ignore
