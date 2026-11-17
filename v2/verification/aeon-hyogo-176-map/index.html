@@ -5,7 +5,13 @@
 @media(max-width:850px){.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.field:first-child{grid-column:1/-1}.reset{align-self:end}.desktop-table th:nth-child(6){width:23%}}
 @media(max-width:680px){main{width:100%;margin:0 auto 75px}article,.directory{border-radius:0;border-left:0;border-right:0}article{padding:24px 16px 35px;margin-bottom:15px}.directory{padding:22px 12px}.summary-table{font-size:.8rem}.summary-table th,.summary-table td{padding:8px 4px}.desktop-table{display:none}.cards{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}.store-card{min-width:0;border:1px solid var(--line);border-radius:11px;padding:14px;background:var(--paper)}.store-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.store-id{font-size:.76rem;color:var(--muted)}.store-name{font-size:1.07rem;font-weight:750;line-height:1.5;margin:7px 0 10px;overflow-wrap:anywhere}.store-meta{display:grid;grid-template-columns:84px minmax(0,1fr);gap:5px 10px;line-height:1.58;font-size:.86rem}.store-meta dt{color:var(--muted)}.store-meta dd{margin:0;overflow-wrap:anywhere;min-width:0}.store-actions{margin:12px 0 0}.controls{gap:8px}.stats{gap:6px}.stat{font-size:.79rem;padding:6px 8px}.stat b{font-size:1rem}}
 @media(max-width:360px){.store-meta{grid-template-columns:74px minmax(0,1fr);gap:6px}.controls{grid-template-columns:minmax(0,1fr)}.field:first-child{grid-column:auto}.reset{width:100%}}@media print{body{background:white;color:black}main{width:100%}.controls,.backtop{display:none}.desktop-table{display:table}.cards{display:none}.directory,article{box-shadow:none;border:0}}
-</style><link rel="stylesheet" href="vendor/leaflet.css"><link rel="stylesheet" href="vendor/MarkerCluster.css"><link rel="stylesheet" href="map.css"></head><body><main id="top"><article>
+</style><link rel="stylesheet" href="vendor/leaflet.css"><link rel="stylesheet" href="vendor/MarkerCluster.css"><link rel="stylesheet" href="map.css"><style>
+.brand-history-launch{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,3.5vw,32px);max-width:900px;margin:0 auto 32px}
+.brand-history-launch h2{margin-top:0}.history-launch-form{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.history-launch-form label{font-weight:700}.history-launch-form select{flex:1 1 230px;min-width:0;max-width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--paper)}
+.history-launch-form a{background:#195b99;color:#fff;text-decoration:none;padding:10px 17px;border-radius:9px;font-weight:700;white-space:nowrap}
+@media(max-width:480px){.history-launch-form label{width:100%}.history-launch-form select,.history-launch-form a{width:100%;text-align:center}}
+</style></head><body><main id="top"><article>
 <div class="eyebrow">KUSSOON / 読み物・雑学 / 検証版</div>
 <h1>イオンなのに、なぜ名前が違う？</h1>
 <p class="lead"><strong>ダイエー、グルメシティ、マックスバリュ、KOHYO、マルナカ……同じグループなのに、屋号がいくつも残る理由。</strong></p><p class="sub">調査基準日：2026年11月15日</p>
@@ -29,7 +35,18 @@
 <h2>おわりに｜看板は、会社の歴史を映している</h2>
 <p>これほど多くの店名があるのは、商品や価格帯の違いだけが理由ではありません。異なる歴史を持つスーパーが同じグループになり、会社の統合と店舗ブランドの整理が、それぞれ別の速度で進んできた結果でもあるのです。</p><p><strong>「同じイオンなのに、なぜ名前が違う？」その答えは、「会社は一緒になっても、店の名前は必ずしも一緒にならないから」なのです。</strong></p>
 <p class="sub">以下に、今回調査した兵庫県内176店舗の一覧を掲載します。</p>
-</article><section class="map-section" id="store-map" aria-labelledby="map-title">
+</article><section class="brand-history-launch" aria-labelledby="history-launch-title">
+<h2 id="history-launch-title">昔のスーパーの名前を調べる</h2>
+<p>ダイエーやマルナカだけでなく、ジャスコ、ニチイ、サティはどうなった？ 歴史を知りたい名前を選ぶと、別のページで解説を読めます。</p>
+<div class="history-launch-form"><label for="historyBrand">名前を選ぶ</label>
+<select id="historyBrand" aria-label="歴史を読むスーパーの名前">
+<option value="jusco">ジャスコ（JUSCO）</option><option value="nichii">ニチイ・マイカル・サティ</option><option value="daiei">ダイエー</option><option value="gourmet">グルメシティ</option><option value="maxvalu">マックスバリュ</option><option value="koyo">KOHYO（光洋）</option><option value="marunaka">マルナカ・山陽マルナカ</option><option value="big">ザ・ビッグ</option><option value="aeon">イオン・イオンスタイル</option>
+</select>
+<a id="openHistory" href="history.html#jusco" target="_blank" rel="noopener noreferrer" aria-label="選択したスーパーの歴史を別のタブで読む">歴史を読む ↗</a>
+</div>
+<p class="sub">新しいタブで開きます。176店舗の地図・一覧はそのまま残ります。</p>
+</section>
+<script>(function(){const s=document.getElementById('historyBrand'),a=document.getElementById('openHistory');s.addEventListener('change',()=>{a.href='history.html#'+encodeURIComponent(s.value)});})();</script><section class="map-section" id="store-map" aria-labelledby="map-title">
 <h2 id="map-title">兵庫県内 イオングループ176店舗マップ</h2>
 <p class="map-intro">運営会社ごとに色と文字・形を変えています。検索条件は地図と店舗一覧で共通です。位置確認日：2026年11月17日。</p>
 <div class="company-key" aria-label="運営会社別の表示"><span><i class="operator-symbol operator-fuji" aria-hidden="true">F</i>フジ 92店</span><span><i class="operator-symbol operator-daiei" aria-hidden="true">D</i>ダイエー 53店</span><span><i class="operator-symbol operator-retail" aria-hidden="true">R</i>イオンリテール 31店</span></div>
