@@ -1,0 +1,35 @@
+name: Takarazuka SSOT quiz exception matrix audit
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-takarazuka-ssot-quiz-exceptions.cjs'
+      - '.github/workflows/takarazuka-ssot-quiz-exceptions.yml'
+  workflow_dispatch:
+jobs:
+  quiz-exceptions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Fetch source-town registry
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Verify wrong answers and quiz state transitions
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-takarazuka-ssot-quiz-exceptions.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: takarazuka-quiz-exceptions
+          path: takarazuka-ssot-quiz-exceptions/
+          if-no-files-found: warn
