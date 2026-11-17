@@ -1,0 +1,32 @@
+name: Takarazuka SVG SSOT audit and isolated quiz test
+on:
+  pull_request:
+    paths:
+      - 'v2/takarazuka-town-svg-ssot-quiz-crossover-20261118-pilot.html'
+      - 'v2/common/js/takarazuka-svg-ssot-quiz-crossover-20261118-pilot.js'
+      - 'scripts/audit-takarazuka-ssot-quiz-crossover.cjs'
+      - '.github/workflows/takarazuka-ssot-quiz-crossover.yml'
+  workflow_dispatch:
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright engines
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Load original Takarazuka map and data, without editing them
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Compare the existing defect against isolated SSOT pilot
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/audit-takarazuka-ssot-quiz-crossover.cjs
