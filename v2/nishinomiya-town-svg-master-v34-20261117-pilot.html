@@ -514,6 +514,9 @@ function syncQuizFromSession(){
 }
 function startQuiz(mode,forcedNames){
  stopQuiz(false);stopBlink();
+ // Status belongs to map navigation, not a new quiz session.
+ // In particular clear the interrupted-town message left by finishQuiz(true).
+ $('status').textContent='クイズ'+mode+'を実施中です。';
  const pool=forcedNames?.length?forcedNames:scopeNames();
  if(!pool.length)return;
  quizSession=KussoonTownSvgQuizState.begin(mode,pool,shuffleQuiz);
