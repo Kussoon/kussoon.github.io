@@ -330,7 +330,7 @@ function makeTrack(){
  const usable=lateralDistance[lateralDistance.length-1];
  // v52: prominent horizontal bends are generated even if the player
  // draws only smooth hills. Sharp corners may add additional hairpins.
- const amplitude=usable<8?0:Math.min(24,Math.max(8,usable*.43));
+ const amplitude=usable<8?0:Math.min(30,Math.max(11,usable*.58));
  let fingerprint=0;
  for(let j=0;j<raw.length;j+=Math.max(1,Math.floor(raw.length/24))){
   fingerprint=(Math.imul(fingerprint,33)+Math.round(raw[j].x*3+raw[j].y*5))|0;
