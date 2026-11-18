@@ -100,12 +100,38 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
  .map-right-rail .controls{gap:3px}
  .map-right-rail .controls #size,.map-right-rail .controls #reading{min-height:45px}
 }
+/* 2026-11-19: gray slider thumb, doubled rail and unified right-edge alignment. */
+.map-right-rail{justify-items:end}
+.map-right-rail .controls{align-items:flex-end}
+.map-right-rail .controls .pair{align-items:flex-end}
+.map-right-rail .map-zoom-slider{align-self:stretch;justify-self:end}
+.map-right-rail .map-zoom-slider input{
+ appearance:none;-webkit-appearance:none;
+ background:transparent;accent-color:#777;cursor:pointer;
+}
+/* Width 12px replaces the browser's approximately 6px vertical track. */
+.map-right-rail .map-zoom-slider input::-webkit-slider-runnable-track{
+ background:#aeb4bb;border-radius:7px;width:12px;border:0;
+}
+.map-right-rail .map-zoom-slider input::-webkit-slider-thumb{
+ -webkit-appearance:none;appearance:none;
+ width:25px;height:34px;border-radius:14px;
+ background:#b8bec4;border:1px solid #7e8890;
+ box-shadow:0 1px 3px #34444c44;
+}
+.map-right-rail .map-zoom-slider input::-moz-range-track{
+ background:#aeb4bb;border-radius:7px;width:12px;border:0;
+}
+.map-right-rail .map-zoom-slider input::-moz-range-thumb{
+ width:25px;height:34px;border-radius:14px;
+ background:#b8bec4;border:1px solid #7e8890;
+}
 </style>
 </head><body><main>
 <nav class="nav"><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-takarazuka">世界から町へ（試作）</a><a href="/v2/takarazuka-town-svg-adapter-pilot.html">前の宝塚市試作</a><a href="/takarazuka/">宝塚市トップ</a><a href="/takarazuka/town-search.html">元の宝塚市SVG</a><a href="/v2/nishinomiya-town-svg-core-pilot.html">西宮市V2</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>宝塚市V2｜全画面と文字ボタンの間に縦ズームスライダー</h1>
 <!-- 更新時には下記を実際の改訂時刻（JST・秒まで）に必ず更新すること。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-19T00:25:00+09:00">更新：2026/11/19 00:25:00（JST）</time>
+<time class="updated-at" id="updatedAt" datetime="2026-11-19T00:35:00+09:00">更新：2026/11/19 00:35:00（JST）</time>
 <p class="notice"><strong>独立比較試作・未採用です。</strong> ご要望に合わせ、地図の「＋／−」ボタンを削除しました。右端の上から「全画面」→「＋／縦スライダー／−」→「文字＋」以下のボタンを一直線に配置しています。スライダー最上端が最大拡大、最下端が最小縮小です。町名・地域・クイズ・ピンチ・ドラッグ・ホイール操作は以前の比較版から変えていません。<a href="/v2/takarazuka-town-svg-zoom-slider-20261118-pilot.html">以前のスライダー比較版</a>も残しています。</p>
 <p class="small">町域形状・読み：Kussoon/takarazuka の元SVGおよび町名台帳。操作・見た目の比較基準：西宮市V2 Cレイアウト。</p>
 <section class="study" aria-label="20地域学習範囲"><div class="study-row"><strong>学習範囲</strong><button id="communityToggle" type="button" aria-expanded="false" aria-controls="communityOptions" disabled>宝塚市全域（125町名） ▾</button><span id="communityCount">準備中</span></div>
