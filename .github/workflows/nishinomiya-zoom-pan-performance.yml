@@ -1,0 +1,35 @@
+name: Nishinomiya slider performance regression
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-single-rail-20261119-pilot.html'
+      - 'scripts/test-nishinomiya-zoom-pan-performance-20261119.cjs'
+      - '.github/workflows/nishinomiya-zoom-pan-performance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Fetch Nishinomiya mapping (read-only)
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Verify continuous slider does not block on 324 label geometry reads
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/test-nishinomiya-zoom-pan-performance-20261119.cjs
