@@ -45,7 +45,7 @@ async function run(engine,name,width,height){
     labels:document.querySelectorAll('#labels g.label').length,k:d3.zoomTransform(document.querySelector('#map')).k}));
   assert.equal(after.count,initial.count+1,name+' must reflow exactly once after gesture settles');
   assert.equal(after.labels,324);
-  await page.locator('#reset').click();
+  await page.locator('#zoomSlider').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}))});
   await page.waitForTimeout(270);
   const final=await page.evaluate(()=>({count:window.__labelMeasureCount,labels:document.querySelectorAll('#labels g.label').length}));
   assert.equal(final.labels,324);
