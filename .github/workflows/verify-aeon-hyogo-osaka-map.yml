@@ -13,7 +13,10 @@ permissions:
 jobs:
   browsers:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 15
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+      options: --ipc=host
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,8 +25,6 @@ jobs:
           cache: npm
           cache-dependency-path: v2/tests/browser/package-lock.json
       - run: npm ci --no-audit --no-fund
-        working-directory: v2/tests/browser
-      - run: npx playwright install --with-deps chromium webkit
         working-directory: v2/tests/browser
       - name: Verify 318 stores, filters, coordinates and responsive layouts
         run: node v2/verification/aeon-hyogo-osaka-map/verify.cjs
