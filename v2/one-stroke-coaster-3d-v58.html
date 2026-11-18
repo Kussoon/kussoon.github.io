@@ -427,24 +427,30 @@ function makeTrack(){
   const loop=verticalLoops.some(v=>mid>=v.a&&mid<=v.b);
   const rollover=verticalRolls.some(v=>mid>=v.a&&mid<=v.b);
   const yaw=headingAt(mid);
-  if(loop||rollover){
-   // Preserve signed forward/back displacement on full vertical circles
-   // AND tall backward rollovers from the player's original drawing.
-   const loopZone=loop?verticalLoops.find(v=>mid>=v.a&&mid<=v.b):
-     verticalRolls.find(v=>mid>=v.a&&mid<=v.b);
-   const fixedYaw=headingAt(loopZone.a);
+  if(loop){
+   // Preserve closed vertical loops exactly as approved.
+   const zone=verticalLoops.find(v=>mid>=v.a&&mid<=v.b);
+   const fixedYaw=headingAt(zone.a);
    const dz=p.z-previous.z;
    px+=dz*Math.sin(fixedYaw);pz+=dz*Math.cos(fixedYaw);
    track[j].heading=fixedYaw;
   }else{
    const h0=headingAt(previous.s),h1=headingAt(p.s);
-   const delta=Math.abs(h1-h0);
-   const ds=p.s-previous.s;
-   // Guaranteed yaw-rate bound: radius >=12 game-world units with
-   // a 30% margin on every generated horizontal curve step.
+   const delta=Math.abs(h1-h0),ds=p.s-previous.s;
    const horizontalDistance=Math.max(ds*1.35,worldRadiusMin*delta*1.30);
-   px+=horizontalDistance*Math.sin(yaw);
-   pz+=horizontalDistance*Math.cos(yaw);
+   let shiftX=horizontalDistance*Math.sin(yaw),shiftZ=horizontalDistance*Math.cos(yaw);
+   if(rollover){
+    // Smoothly enter and leave the signed backward movement. Blending
+    // prevents a hard kink at the boundary of a detected open rollover.
+    const zone=verticalRolls.find(v=>mid>=v.a&&mid<=v.b);
+    const ease=t=>{t=clamp(t,0,1);return t*t*t*(10-15*t+6*t*t);};
+    const feather=Math.min(3,(zone.b-zone.a)*.22);
+    const weight=ease((mid-zone.a)/feather)*ease((zone.b-mid)/feather);
+    const fixedYaw=headingAt(zone.a),dz=p.z-previous.z;
+    shiftX=mix(shiftX,dz*Math.sin(fixedYaw),weight);
+    shiftZ=mix(shiftZ,dz*Math.cos(fixedYaw),weight);
+   }
+   px+=shiftX;pz+=shiftZ;
    track[j].heading=h1;
   }
   track[j].x=px;track[j].z=pz;
