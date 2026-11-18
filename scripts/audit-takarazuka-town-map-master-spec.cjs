@@ -72,6 +72,7 @@ async function run(driver,name,width,height){
   assert.equal(s.paths,125,name+' must render 125 town paths');
   assert.equal(s.menuCount,20,name+' must expose 20 regions');
   assert(s.labels>=125,name+' must render one or more labels for every town');
+  assert(s.candidates>125,name+' must retain detached/multipart label candidates');
   assert.equal(s.readings,0,name+' readings must start OFF');
 
   const initialScale=s.scale;
