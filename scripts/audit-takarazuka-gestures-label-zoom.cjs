@@ -98,8 +98,8 @@ async function test(name,engine,width,height){
     await ev('touchEnd',x+96,y+60);
     await page.waitForTimeout(160);
     const after=await state(page);
-    const trace=await page.evaluate(()=>window.__townAuditTouchTrace);
-    console.log('TOUCH_TRACE '+JSON.stringify({browser:name,trace,before:{x:pre.x,y:pre.y,k:pre.k},after:{x:after.x,y:after.y,k:after.k}}));
+    const diag=await page.evaluate(()=>({trace:window.__townAuditTouchTrace,maxTouchPoints:navigator.maxTouchPoints,ontouchstart:'ontouchstart' in document.querySelector('#map'),hasD3TouchStart:typeof window.d3.select('#map').on('touchstart.zoom')==='function',hasD3TouchMove:typeof window.d3.select('#map').on('touchmove.zoom')==='function',touchAction:getComputedStyle(document.querySelector('#map')).touchAction}));
+    console.log('TOUCH_TRACE '+JSON.stringify({browser:name,diag,before:{x:pre.x,y:pre.y,k:pre.k},after:{x:after.x,y:after.y,k:after.k}}));
     touchPan=Math.hypot(after.x-pre.x,after.y-pre.y)>10;
    }
   }
