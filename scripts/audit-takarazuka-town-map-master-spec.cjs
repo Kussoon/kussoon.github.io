@@ -42,7 +42,7 @@ async function snapshot(page){
   labels:[...document.querySelectorAll('#labels g.label')].filter(el=>el.dataset.visible==='true').length,
   candidates:document.querySelectorAll('#labels g.label').length,
   readings:[...document.querySelectorAll('#labels .town-reading')]
-   .filter(el=>getComputedStyle(el).display!=='none').length,
+   .filter(el=>el.closest('g.label')?.dataset.visible==='true'&&getComputedStyle(el).display!=='none').length,
   selected:[...document.querySelectorAll('#areas path.selected')]
    .map(el=>el.getAttribute('aria-label')),
   status:document.querySelector('#status')?.textContent||'',
