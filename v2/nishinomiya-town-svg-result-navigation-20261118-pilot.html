@@ -615,8 +615,7 @@ function finishQuiz(quitEarly=false){
  KussoonTownSvgQuizUI.finish({body:document.body,panel:$('quizPanel'),results:$('quizResults'),
   result:$('quizResult'),quit:quitEarly,answered,total:quizOrder.length,score:quizScore,wrongCount:quizWrong.size});
  // Full marks: there is no missed question to retry; hide this action entirely.
- $('quizRetryWrong').hidden=quizWrong.size===0;
- $('quizRetryWrong').disabled=quizWrong.size===0;
+ KussoonTownSvgQuizUI.syncWrongRetry({retryWrong:$('quizRetryWrong'),wrongCount:quizWrong.size});
  // Labels are visible again. Flash only the interrupted question's town;
  // normal map selection can stop the flash, and restarting a quiz cleans it up.
  if(quitTown&&activeFeatures().some(f=>f.properties.S_NAME===quitTown)){
