@@ -17,6 +17,14 @@
    const k=event?.transform?.k??d3.zoomTransform(svg.node()).k;
    input.value=String(Math.max(0,Math.min(100,valueFromScale(k))));
    input.setAttribute('aria-valuetext','地図の拡大率 '+Math.round(k*100)+'％');
+   // Optional stable visual thumb for vertical Safari/WebKit. The display
+   // follows the actual native range value and does not affect zoom input.
+   const thumb=input.parentElement?.querySelector('.zoom-slider-visual-thumb');
+   if(thumb){
+    const down=100-Number(input.value);
+    const fraction=down/100;
+    thumb.style.top='calc('+down+'% - '+(fraction*27).toFixed(3)+'px)';
+   }
   }
   zoom.on('zoom.townZoomSlider',sync);
   input.addEventListener('input',()=>{
