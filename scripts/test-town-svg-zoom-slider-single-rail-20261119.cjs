@@ -12,7 +12,7 @@ async function run(driver,name,w,h){
   const geometry=()=>page.evaluate(()=>{
     const rect=id=>{const r=document.querySelector(id).getBoundingClientRect();return {x:r.x,y:r.y,top:r.top,bottom:r.bottom,left:r.left,right:r.right,width:r.width,height:r.height}};
     return {rail:rect('.map-right-rail'),full:rect('#fullscreen'),slider:rect('.map-zoom-slider'),
-     sliderInput:rect('#zoomSlider'),plus:rect('.map-zoom-slider .zoom-mark:first-child'),minus:rect('.map-zoom-slider .zoom-mark:last-child'),
+     sliderInput:rect('#zoomSlider'),sliderTrack:rect('.zoom-slider-visual-track'),sliderThumb:rect('.zoom-slider-visual-thumb'),plus:rect('.map-zoom-slider .zoom-mark:first-child'),minus:rect('.map-zoom-slider .zoom-mark:last-child'),
      textPlus:rect('#larger'),textMinus:rect('#smaller'),frame:rect('#frame'),
      k:d3.zoomTransform(document.querySelector('#map')).k,
      candidates:document.querySelectorAll('#labels g.label').length,
@@ -30,13 +30,19 @@ async function run(driver,name,w,h){
    assert(Math.abs(g.full.right-g.textPlus.right)<10,name+' all controls on the same right edge');
    assert(g.rail.top>=g.frame.top-2&&g.rail.bottom<=g.frame.bottom+2,name+' rail inside frame');
    assert(g.sliderInput.height>=32,name+' slider must preserve useful length');
+   assert(Math.abs(g.sliderTrack.width-10)<1,name+' visual rail must be 10 CSS pixels');
+   assert(Math.abs(g.sliderThumb.width-21)<1,name+' visual knob width must be 21 CSS pixels');
+   assert(Math.abs(g.sliderThumb.height-27)<1,name+' visual knob height must be 27 CSS pixels');
+   assert(g.sliderThumb.left>=g.slider.left&&g.sliderThumb.right<=g.slider.right,name+' thumb inside control frame');
   };
   let g=await geometry();verifyLayout(g);
   const lowBefore=g.k;
   await page.locator('#zoomSlider').evaluate(el=>{el.value='100';el.dispatchEvent(new Event('input',{bubbles:true}))});
   let hi=await geometry();assert(hi.k>lowBefore,name+' maximum at plus');
+  assert(Math.abs(hi.sliderThumb.top-hi.sliderTrack.top)<1.5,name+' max knob at track top');
   await page.locator('#zoomSlider').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}))});
   const lo=await geometry();assert(lo.k<hi.k,name+' minimum at minus');
+  assert(Math.abs(lo.sliderThumb.bottom-lo.sliderTrack.bottom)<1.5,name+' min knob at track bottom');
   await page.locator('#reset').click();await page.waitForTimeout(200);
   g=await geometry();verifyLayout(g);
   await page.locator('#fullscreen').click();await page.waitForTimeout(350);
