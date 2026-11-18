@@ -57,6 +57,16 @@ async function run(driver,name,width,height){
    viewport:{width,height},deviceScaleFactor:2,
    isMobile:width<600,hasTouch:width<600
   });
+  await page.route('**/v2/common/js/town-map-result-navigation-takarazuka-20261118-pilot.js*',
+   async route=>{
+    const response=await route.fetch();
+    const original=await response.text();
+    const marker='KussoonTownSvgDataContract.loadUnified({';
+    assert.equal(original.split(marker).length,2,'unexpected Takarazuka loader marker');
+    const instrumentation='window.__takarazukaQuizAudit=Object.freeze({names:()=>towns.map(t=>t.name),startQuiz,quizMapAnswer,stopQuiz});\\n';
+    await route.fulfill({response,body:original.replace(marker,instrumentation+marker),
+     headers:{...response.headers(),'content-type':'text/javascript; charset=utf-8'}});
+   });
   const errors=await open(page);
   let s=await snapshot(page);
   assert.equal(s.paths,125,name+' must render 125 town paths');
@@ -85,6 +95,54 @@ async function run(driver,name,width,height){
    assert.match(await page.locator('#communityToggle').innerText(),new RegExp(region));
   }
   await chooseWhole(page);
+
+  // Exhaustive data-driven quiz contract: every one of the 125 town names
+  // receives an independent quiz1 and quiz2 correctness/penalty check.
+  const exhaustive=await page.evaluate(()=>{
+   const api=window.__takarazukaQuizAudit;
+   if(!api)throw new Error('missing quiz audit instrumentation');
+   const names=api.names();
+   const $=id=>document.getElementById(id);
+   const report={quiz1:0,quiz2:0,failures:[]};
+   for(let i=0;i<names.length;i++){
+    const name=names[i],wrong=names[(i+1)%names.length];
+    try{
+     api.startQuiz(1,[name]);
+     const before=Number($('quizProgress').textContent.match(/得点 (\\d+)/)?.[1]);
+     if(before!==1)throw Error('quiz1 initial score');
+     api.quizMapAnswer(wrong);
+     if(Number($('quizProgress').textContent.match(/得点 (\\d+)/)?.[1])!==0)
+      throw Error('quiz1 penalty');
+     api.quizMapAnswer(wrong);
+     api.quizMapAnswer(name);
+     if(!$('quizFeedback').textContent.includes('正解です'))throw Error('quiz1 correct');
+     $('quizNext').click();
+     if(!$('quizResults').hidden||!$('quizResult').textContent.includes('1問中 0点'))
+      throw Error('quiz1 result');
+     report.quiz1++;
+     api.startQuiz(2,[name]);
+     const buttons=[...$('quizChoices').querySelectorAll('button')];
+     const labels=buttons.map(b=>b.querySelector('.choice-name')?.textContent);
+     if(buttons.length!==4||new Set(labels).size!==4||!labels.includes(name))
+      throw Error('quiz2 four choices');
+     const bad=buttons.find(b=>b.querySelector('.choice-name').textContent!==name);
+     bad.click();
+     if(!bad.disabled||!bad.classList.contains('quiz-wrong'))
+      throw Error('quiz2 penalty');
+     buttons.find(b=>b.querySelector('.choice-name').textContent===name).click();
+     if(!$('quizFeedback').textContent.includes('正解です'))throw Error('quiz2 correct');
+     $('quizNext').click();
+     if(!$('quizResults').hidden||!$('quizResult').textContent.includes('1問中 0点'))
+      throw Error('quiz2 result');
+     report.quiz2++;
+    }catch(error){report.failures.push({name,message:error.message})}
+    finally{api.stopQuiz(false)}
+   }
+   return report;
+  });
+  assert.equal(exhaustive.quiz1,125,'all 125 towns must pass quiz1');
+  assert.equal(exhaustive.quiz2,125,'all 125 towns must pass quiz2');
+  assert.deepEqual(exhaustive.failures,[],'named-town quiz failures');
 
   // Direct town navigation must focus a real town without changing the dataset.
   const direct=await page.goto(base+route+'?town=%E5%88%87%E7%95%91',
