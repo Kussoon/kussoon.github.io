@@ -26,7 +26,7 @@ async function check(browser,city,device){
   const result=await page.evaluate(async manifest=>{
    const fetchJSON=async url=>{const r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status+' '+url);return r.json()};
    const raw=await KussoonTownSvgDataContract.loadUnified(manifest,{
-    fetchJSON,topojsonClient:window.topojson,svgAdapter:KussoonTownSvgSourceAdapter
+    fetchJSON,topojsonClient:window.topojson,svgAdapter:window.KussoonTownSvgSourceAdapter
    });
    const snapshot=KussoonTownSvgSourceView.create(raw,{requireMembership:manifest.sourceFormat==='svg'});
    const mapNames=[...document.querySelectorAll('#areas path.town')].map(el=>el.getAttribute('data-name')||el.__data__?.properties?.S_NAME||el.__data__?.name);
@@ -51,7 +51,8 @@ async function check(browser,city,device){
   assert.equal(result.allShapeReferencesPreserved,true);
   assert.equal(result.allPathsPreserved,true);
   assert.equal(result.missingCandidates,city.towns,'source loading does not invent approved labels');
-  assert.equal(result.missingMembership,city.id==='takarazuka'?0:result.missingMembership,'no unverified memberships invented');
+  if(city.id==='takarazuka')assert.equal(result.missingMembership,0,'all SVG memberships supplied');
+  // TopoJSON mapping may contain grouped town names; leave unresolved IDs visible.
   assert.deepEqual(errors,[],'page errors');
   console.log('PASS TOWN_SOURCE_VIEW '+JSON.stringify({city:city.id,device:device.id,towns:result.towns,regions:result.regions,
    labelElements:result.labelNames.length,unresolvedMembership:result.missingMembership,unresolvedReading:result.missingReading,
