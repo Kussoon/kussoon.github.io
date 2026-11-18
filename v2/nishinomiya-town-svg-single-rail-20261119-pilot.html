@@ -395,6 +395,9 @@ function updateLabelSize(){
     dy=targetY-(nameRect.top+nameRect.height/2);
    }
   }
+  // Cache only the last precise C-baseline displacement. While the user
+  // drags or zooms, reuse it without measuring SVG glyph rectangles.
+  this.__townLabelScreenOffset={x:d.offset[0]+dx,y:d.offset[1]+dy};
   this.setAttribute('transform','translate('+
    (d.point[0]+(d.offset[0]+dx)/transform.k)+','+
    (d.point[1]+(d.offset[1]+dy)/transform.k)+') scale('+(1/transform.k)+')');
@@ -462,9 +465,30 @@ function draw(){
  renderLayers();
  frame.applyWorld();
 }
+// The C-baseline glyph measurement performs hundreds of DOM geometry reads.
+// Do not run it for every pointer/slider animation frame. Reflow once after
+// the current zoom/pan burst, preserving the exact original V34 algorithm.
+let zoomLabelReflowTimer=null;
+function scheduleZoomLabelReflow(){
+ if(zoomLabelReflowTimer!==null)clearTimeout(zoomLabelReflowTimer);
+ zoomLabelReflowTimer=setTimeout(()=>{
+  zoomLabelReflowTimer=null;
+  if(features.length)updateLabelSize();
+ },140);
+}
 function onZoom(event){
  if(event.sourceEvent){fittedView=false;cLabelReflow()}
- transform=event.transform;world.attr('transform',transform.toString());updateLabelSize();
+ transform=event.transform;world.attr('transform',transform.toString());
+ // Keep town label glyphs at a stable screen size during motion using
+ // already measured offsets; no getBoundingClientRect or text Range reads.
+ labels.selectAll('g.label').each(function(d){
+  const offset=this.__townLabelScreenOffset;
+  if(!offset)return;
+  this.setAttribute('transform','translate('+
+   (d.point[0]+offset.x/transform.k)+','+
+   (d.point[1]+offset.y/transform.k)+') scale('+(1/transform.k)+')');
+ });
+ scheduleZoomLabelReflow();
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
 // N-GESTURE-04/05: shared gestures preserve Leaflet C's wheel arming,
