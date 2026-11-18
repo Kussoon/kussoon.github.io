@@ -43,7 +43,20 @@
   result.textContent=quit?'途中終了：'+answered+' / '+total+'問終了（間違えた問題 '+wrongCount+'件）':
    total+'問中 '+score+'点（間違えた問題 '+wrongCount+'件）';
  }
- const api=Object.freeze({start,clearQuestion,showQuestion,correct,finish});
+ function bindResultActions({next,quit,retryWrong,retryAll,back,
+                              advanceQuestion,finishEarly,startQuiz,getLastMode,getWrongNames,returnToRegions}){
+  for(const button of [next,quit,retryWrong,retryAll,back])requireNode(button);
+  for(const fn of [advanceQuestion,finishEarly,startQuiz,getLastMode,getWrongNames,returnToRegions])
+   if(typeof fn!=='function')throw new TypeError('結果・復習操作の処理が不足しています');
+  // Only the navigation/wiring is common. Municipality data, scoring and
+  // the pre-existing full-marks retry-button visibility remain unchanged.
+  next.onclick=()=>advanceQuestion();
+  quit.onclick=()=>finishEarly();
+  retryWrong.onclick=()=>startQuiz(getLastMode(),[...getWrongNames()]);
+  retryAll.onclick=()=>startQuiz(getLastMode());
+  back.onclick=()=>returnToRegions();
+ }
+ const api=Object.freeze({start,clearQuestion,showQuestion,correct,finish,bindResultActions});
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
  root.KussoonTownSvgQuizUI=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
