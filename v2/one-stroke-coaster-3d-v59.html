@@ -466,6 +466,46 @@ function makeTrack(){
   if(j){const a=track[j-1],b=track[j];finish+=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
   track[j].s=finish;
  }
+ // Final, conservative 3D curvature cleanup AFTER both the vertical
+ // profile and horizontal route have been combined. Do not change any Y
+ // coordinate; the user's hills and backflips are kept. Keep confirmed
+ // circular loop sections fixed, including their joins.
+ function sampleCentre(points,at){
+  at=clamp(at,0,points[points.length-1].s);
+  let lo=0,hi=points.length-1;
+  while(lo+1<hi){const m=(lo+hi)>>1;if(points[m].s<at)lo=m;else hi=m;}
+  const a=points[lo],b=points[hi],t=clamp((at-a.s)/(b.s-a.s||1),0,1);
+  return V(mix(a.x,b.x,t),mix(a.y,b.y,t),mix(a.z,b.z,t));
+ }
+ const protectedFractions=used.map(zone=>({
+  a:Math.max(0,(zone.start-12)/(knots.length-1)),
+  b:Math.min(1,(zone.end+12)/(knots.length-1))
+ }));
+ for(let pass=0;pass<4;pass++){
+  const old=track;
+  track=old.map((p,i)=>{
+   if(i===0||i===old.length-1||p.s<4||p.s>old[old.length-1].s-4)
+    return p;
+   if(protectedFractions.some(z=>p.sketchFraction>=z.a&&p.sketchFraction<=z.b))
+    return p;
+   const before=sampleCentre(old,p.s-1),after=sampleCentre(old,p.s+1);
+   const u=sub(V(p.x,p.y,p.z),before),v=sub(after,V(p.x,p.y,p.z));
+   const cosine=dot(u,v)/(Math.hypot(u.x,u.y,u.z)*Math.hypot(v.x,v.y,v.z)||1);
+   const angle=Math.acos(clamp(cosine,-1,1));
+   const radius=1/Math.max(angle,.000001);
+   const strength=.28*clamp((10-radius)/10,0,1);
+   if(strength<=0)return p;
+   const low=sampleCentre(old,p.s-2),high=sampleCentre(old,p.s+2);
+   return{...p,x:mix(p.x,(low.x+high.x)*.5,strength),
+     z:mix(p.z,(low.z+high.z)*.5,strength)};
+  });
+  finish=0;
+  for(let i=0;i<track.length;i++){
+   if(i){const a=track[i-1],b=track[i];
+    finish+=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
+   track[i].s=finish;
+  }
+ }
  objects=[];const kinds=["forest","city","coast","castle","desert","tower"],section=Math.max(22,finish/6);
  for(let z=8,i=0;z<finish+18;z+=7,i++){
   const p=sample(Math.min(finish,z)),kind=kinds[Math.min(5,Math.floor(z/section))];
