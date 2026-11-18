@@ -12,6 +12,8 @@ const cases=[
 const screens=[['chromium-1280',chromium,1280,800],['webkit-390',webkit,390,844],['webkit-320',webkit,320,668]];
 async function run(browser,url,city,width,height){
  const page=await browser.newPage({viewport:{width,height},isMobile:width<600,hasTouch:width<600,deviceScaleFactor:2});
+ // Stable Fisher-Yates question order across both independent pilot pages.
+ await page.addInitScript(()=>{let seed=123456789;Math.random=()=>{seed=(Math.imul(1664525,seed)+1013904223)>>>0;return seed/4294967296}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const records=[];
  async function snap(label){
