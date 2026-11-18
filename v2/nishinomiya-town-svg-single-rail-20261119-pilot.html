@@ -462,9 +462,21 @@ function draw(){
  renderLayers();
  frame.applyWorld();
 }
+// The C-baseline glyph measurement performs hundreds of DOM geometry reads.
+// Do not run it for every pointer/slider animation frame. Reflow once after
+// the current zoom/pan burst, preserving the exact original V34 algorithm.
+let zoomLabelReflowTimer=null;
+function scheduleZoomLabelReflow(){
+ if(zoomLabelReflowTimer!==null)clearTimeout(zoomLabelReflowTimer);
+ zoomLabelReflowTimer=setTimeout(()=>{
+  zoomLabelReflowTimer=null;
+  if(features.length)updateLabelSize();
+ },140);
+}
 function onZoom(event){
  if(event.sourceEvent){fittedView=false;cLabelReflow()}
- transform=event.transform;world.attr('transform',transform.toString());updateLabelSize();
+ transform=event.transform;world.attr('transform',transform.toString());
+ scheduleZoomLabelReflow();
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
 // N-GESTURE-04/05: shared gestures preserve Leaflet C's wheel arming,
