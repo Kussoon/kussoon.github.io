@@ -18,6 +18,13 @@ assert.strictEqual(missing.records[0].geometry.data,multipolygon,'do not reproje
 assert.equal(missing.records[0].geometry.data.geometry.coordinates[0].length,2,'inner ring retained');
 assert.equal(missing.records[0].geometry.data.geometry.coordinates.length,2,'disconnected components retained');
 assert.throws(()=>create(topo,{requireMembership:true}),/未解決/);
+const splitNote={...topo,records:[{...topo.records[0],communities:['1〜3 東、4〜7 西']},topo.records[1]]};
+const noted=create(splitNote);
+assert.deepEqual(noted.validation.unresolvedMembership,['分離町']);
+assert.equal(noted.validation.ambiguousMembership[0].source[0],'1〜3 東、4〜7 西');
+assert.strictEqual(noted.records[0].geometry.data,multipolygon);
+assert.throws(()=>create(splitNote,{memberships:{'分離町':['1〜3 東、4〜7 西']}}),/不正/);
+
 const approved=[{key:'分離町:0',point:[12.1,30],provenance:'approved'},
  {key:'分離町:1',point:[19,35],provenance:'approved'}];
 const verified=create(topo,{
