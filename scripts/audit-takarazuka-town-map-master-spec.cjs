@@ -83,9 +83,13 @@ async function run(driver,name,width,height){
   assert.match((await page.locator('#size').innerText()).replace(/\s/g,''),/125％/);
   await page.locator('#size').click();
   await page.locator('#zoomIn').click();
+  // Zoom is an accepted 150ms D3 transition; await its actual result.
+  await page.waitForFunction(k=>window.d3.zoomTransform(document.querySelector('#map')).k>k+1e-6,
+    initialScale,{timeout:5000});
   const zoomed=await snapshot(page);
   assert(zoomed.scale>initialScale,name+' zoom-in must increase the view scale');
   await page.locator('#zoomOut').click();
+  await page.waitForTimeout(220);
   await chooseWhole(page);
 
   for(const region of regionNames){
