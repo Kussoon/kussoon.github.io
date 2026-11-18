@@ -1,0 +1,45 @@
+name: Nationwide town label visibility parity
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-label-visibility.js'
+      - 'v2/common/js/town-map-shared-label-visibility-takarazuka-20261118-pilot.js'
+      - 'v2/takarazuka-town-svg-shared-label-visibility-20261118-pilot.html'
+      - 'scripts/test-national-label-visibility-unit.cjs'
+      - 'scripts/test-national-label-visibility-parity.cjs'
+      - '.github/workflows/national-town-label-visibility.yml'
+  workflow_dispatch:
+jobs:
+  unit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-national-label-visibility-unit.cjs
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 27
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium webkit
+      - name: Fetch original source
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Compare all 136 labels in ten view states
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/test-national-label-visibility-parity.cjs
+      - name: Regress 125 towns and 20 regions
+        run: node scripts/audit-takarazuka-label-visibility-125-regions.cjs
+      - name: Regress interruptions and missed-question replay
+        run: node scripts/test-takarazuka-label-visibility-exceptions.cjs
