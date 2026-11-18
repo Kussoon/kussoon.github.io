@@ -63,7 +63,7 @@ async function run(driver,name,width,height){
     const original=await response.text();
     const marker='KussoonTownSvgDataContract.loadUnified({';
     assert.equal(original.split(marker).length,2,'unexpected Takarazuka loader marker');
-    const instrumentation='window.__takarazukaQuizAudit=Object.freeze({names:()=>towns.map(t=>t.name),startQuiz,quizMapAnswer,stopQuiz});\\n';
+    const instrumentation='window.__takarazukaQuizAudit=Object.freeze({names:()=>towns.map(t=>t.name),startQuiz,quizMapAnswer,stopQuiz});\n';
     await route.fulfill({response,body:original.replace(marker,instrumentation+marker),
      headers:{...response.headers(),'content-type':'text/javascript; charset=utf-8'}});
    });
@@ -109,10 +109,10 @@ async function run(driver,name,width,height){
     const name=names[i],wrong=names[(i+1)%names.length];
     try{
      api.startQuiz(1,[name]);
-     const before=Number($('quizProgress').textContent.match(/得点 (\\d+)/)?.[1]);
+     const before=Number($('quizProgress').textContent.match(/得点 (\d+)/)?.[1]);
      if(before!==1)throw Error('quiz1 initial score');
      api.quizMapAnswer(wrong);
-     if(Number($('quizProgress').textContent.match(/得点 (\\d+)/)?.[1])!==0)
+     if(Number($('quizProgress').textContent.match(/得点 (\d+)/)?.[1])!==0)
       throw Error('quiz1 penalty');
      api.quizMapAnswer(wrong);
      api.quizMapAnswer(name);
