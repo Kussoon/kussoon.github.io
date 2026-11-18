@@ -654,7 +654,23 @@ function makeTrack(){
    }
    if(tested.ok){bestCandidate=track;bestResult=tested;break;}
   }
-  if(bestCandidate){track=bestCandidate;recalcArc();}
+  if(bestCandidate){
+   track=bestCandidate;recalcArc();
+   // Parallel-transport the transverse rail axis along the rebuilt curve.
+   // This prevents yaw-based rail skew and sudden left/right swaps when
+   // the fallback route includes a vertical inversion or wide U-turn.
+   let right=V(Math.cos(track[0].heading||0),0,-Math.sin(track[0].heading||0));
+   for(let k=0;k<track.length;k++){
+    const a=track[Math.max(0,k-2)],b=track[Math.min(track.length-1,k+2)];
+    const tangent=norm(sub(b,a));
+    const projected=sub(right,scale(tangent,dot(right,tangent)));
+    if(Math.hypot(projected.x,projected.y,projected.z)<.02){
+     const ref=Math.abs(tangent.y)<.9?V(0,1,0):V(0,0,1);
+     right=norm(cross(ref,tangent));
+    }else right=norm(projected);
+    track[k].frameRight=right;
+   }
+  }
   trackQuality={...bestResult,minRequired:minRadiusWorld,
     exceptionLoops:used.length,routeRebuilt:!!bestCandidate,
     scaleFactor:bestCandidate?1:scaleNeeded};
@@ -740,12 +756,19 @@ function railHeading(distance){
  const a=track[lo],b=track[hi],t=clamp((distance-a.s)/(b.s-a.s||1),0,1);
  return mix(a.heading||0,b.heading||0,t);
 }
+function railRight(distance){
+ distance=clamp(distance,0,finish);
+ let lo=0,hi=track.length-1;
+ while(lo+1<hi){const mid=(lo+hi)>>1;if(track[mid].s<distance)lo=mid;else hi=mid;}
+ const a=track[lo],b=track[hi],t=clamp((distance-a.s)/(b.s-a.s||1),0,1);
+ return norm(add(scale(a.frameRight,1-t),scale(b.frameRight,t)));
+}
 function geometry(z){
  const p=sample(z),before=sample(Math.max(0,z-1.25)),after=sample(Math.min(finish,z+1.25));
  const dir=norm(sub(after,before));
  // Constant transverse axis: both rails are exactly symmetric in X.
  const yaw=railHeading(z);
- const right=V(Math.cos(yaw),0,-Math.sin(yaw));
+ const right=trackQuality.routeRebuilt?railRight(z):V(Math.cos(yaw),0,-Math.sin(yaw));
  const across=scale(right,.63);
  return{p,dir,right,bank:0,across,left:sub(p,across),rightRail:add(p,across)}
 }
@@ -754,7 +777,7 @@ function cam(){
  let forward=norm(sub(after,before));
  if(Math.hypot(forward.x,forward.y,forward.z)<.01)forward=V(0,0,1);
  const yaw=railHeading(ridePos);
- const right=V(Math.cos(yaw),0,-Math.sin(yaw));
+ const right=trackQuality.routeRebuilt?railRight(ridePos):V(Math.cos(yaw),0,-Math.sin(yaw));
  const up=norm(cross(forward,right));
  return{pos:add(geo.p,scale(up,1.8)),forward,right,up,roll:0};
 }
