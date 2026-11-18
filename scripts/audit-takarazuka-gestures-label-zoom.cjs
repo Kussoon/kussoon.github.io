@@ -63,31 +63,26 @@ async function test(name,engine,width,height){
    await page.mouse.wheel(0,-240);await page.waitForTimeout(200);
    const disarmed=await state(page);wheelDisarmed=Math.abs(disarmed.k-beforeDisarmed.k)<1e-5;
   }
-  let touchPan=null;
+  // Playwright's mobile WebKit supports a real touchscreen tap, but does
+  // not expose a portable cross-engine swipe/pan injector. Never claim the
+  // touch-pan gesture passed just because synthetic events were dispatched.
+  let touchPan=null,touchTap=null;
   if(width<600){
-   const before=await state(page);
-   await page.evaluate(()=>{
-    const el=document.querySelector('#map'),r=el.getBoundingClientRect();
-    const x=r.left+r.width*.5,y=r.top+r.height*.5;
-    const fire=(kind,xx,yy)=>el.dispatchEvent(new TouchEvent(kind,{
-      bubbles:true,cancelable:true,
-      touches:kind==='touchend'?[]:[new Touch({identifier:1,target:el,clientX:xx,clientY:yy})],
-      changedTouches:[new Touch({identifier:1,target:el,clientX:xx,clientY:yy})],
-      targetTouches:kind==='touchend'?[]:[new Touch({identifier:1,target:el,clientX:xx,clientY:yy})]
-    }));
-    fire('touchstart',x,y);fire('touchmove',x+40,y+22);fire('touchend',x+40,y+22);
-   });
-   await page.waitForTimeout(100);
-   const after=await state(page);touchPan=Math.hypot(after.x-before.x,after.y-before.y)>5;
+   let tapped=0;
+   await page.evaluate(()=>{window.__townAuditTaps=0;
+    document.querySelector('#map').addEventListener('touchstart',()=>window.__townAuditTaps++,{once:true});});
+   await page.touchscreen.tap(rect.x+rect.width*.5,rect.y+rect.height*.45);
+   tapped=await page.evaluate(()=>window.__townAuditTaps);
+   touchTap=tapped===1;
   }
   const record={browser:name,width,height,initial,zoomed,
-   doubleClickZoomed,dragMoved,wheelWorked,wheelDisarmed,touchPan,
+   doubleClickZoomed,dragMoved,wheelWorked,wheelDisarmed,touchPan,touchTap,
    errors,labelVisibilityAfterZoom:zoomed.uniqueNames>=initial.uniqueNames,
    moreLabelsAtZoom:zoomed.visible>=initial.visible};
   report.push(record);
   console.log('GESTURE_LABEL_REPORT '+JSON.stringify({browser:name,initial:initial.uniqueNames,
    zoomed:zoomed.uniqueNames,collisionsBefore:initial.collisions,collisionsAfter:zoomed.collisions,
-   doubleClickZoomed,dragMoved,wheelWorked,wheelDisarmed,touchPan,errors}));
+   doubleClickZoomed,dragMoved,wheelWorked,wheelDisarmed,touchPan,touchTap,errors}));
  }finally{await browser.close()}
 }
 (async()=>{for(const args of cases)await test(...args);
@@ -98,7 +93,7 @@ async function test(name,engine,width,height){
   ...(!r.dragMoved?['drag pan']:[]),
   ...(r.wheelWorked===false?['wheel B arm']:[]),
   ...(r.wheelDisarmed===false?['wheel B disarm']:[]),
-  ...(r.touchPan===false?['touch pan']:[]),
+  ...(r.touchTap===false?['touch tap']:[]),
   ...(r.errors.length?['page error']:[])
  ].map(what=>r.browser+': '+what));
  if(problems.length)throw new Error('TOWNMAP_GESTURE_FAIL '+problems.join('; '));
