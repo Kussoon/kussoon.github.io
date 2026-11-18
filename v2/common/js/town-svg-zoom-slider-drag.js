@@ -12,13 +12,14 @@
   if(!thumb||!track)throw new Error('Zoom pointer slider: visual controls missing');
   const max=zoom.scaleExtent()[1];
   let dragging=false,pointerId=null,grabOffset=0,frame=null,pendingValue=null;
+  let trackRect=null;
   const clamp=x=>Math.max(0,Math.min(100,x));
   const low=()=>Math.max(0.0001,Math.min(max*.999,getMinimumTransform().k));
   const kFor=value=>low()*Math.pow(max/low(),clamp(value)/100);
   const forK=k=>clamp(100*Math.log(Math.max(low(),Math.min(max,k))/low())/Math.log(max/low()));
   function paint(v){
    v=clamp(v);input.value=String(v);
-   const height=track.getBoundingClientRect().height;
+   const height=(dragging&&trackRect?trackRect.height:track.getBoundingClientRect().height);
    const travel=Math.max(0,height-thumb.offsetHeight);
    // top relative to the WELL: visual track is inset 7px.
    thumb.style.top=((1-v/100)*travel)+'px';
@@ -54,13 +55,14 @@
    if(frame===null)frame=requestAnimationFrame(flush);
   }
   function positionToValue(clientY){
-   const rect=track.getBoundingClientRect(),travel=Math.max(1,rect.height-thumb.offsetHeight);
+   const rect=trackRect||track.getBoundingClientRect(),travel=Math.max(1,rect.height-thumb.offsetHeight);
    const top=rect.top+Math.max(0,Math.min(travel,clientY-grabOffset-rect.top));
    return clamp(100*(1-(top-rect.top)/travel));
   }
   well.addEventListener('pointerdown',e=>{
    if(e.button!==0&&e.pointerType==='mouse')return;
    e.preventDefault();e.stopPropagation();
+   trackRect=track.getBoundingClientRect();
    dragging=true;pointerId=e.pointerId;
    const thumbRect=thumb.getBoundingClientRect();
    grabOffset=e.clientY>=thumbRect.top&&e.clientY<=thumbRect.bottom?
@@ -76,7 +78,7 @@
    if(!dragging||e.pointerId!==pointerId)return;
    e.preventDefault();e.stopPropagation();
    const v=positionToValue(e.clientY);
-   dragging=false;pointerId=null;
+   dragging=false;pointerId=null;trackRect=null;
    if(frame!==null){cancelAnimationFrame(frame);frame=null}
    pendingValue=null;apply(v);
    if(well.hasPointerCapture(e.pointerId))well.releasePointerCapture(e.pointerId);
