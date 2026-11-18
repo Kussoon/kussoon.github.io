@@ -12,6 +12,8 @@ jobs:
   browser:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
     env:
       NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
     steps:
@@ -22,7 +24,6 @@ jobs:
           cache: npm
           cache-dependency-path: v2/tests/browser/package-lock.json
       - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
-      - run: ./v2/tests/browser/node_modules/.bin/playwright install --with-deps chromium webkit
       - name: Fetch linked source data read-only
         run: |
           mkdir -p nishinomiya/data takarazuka/data
