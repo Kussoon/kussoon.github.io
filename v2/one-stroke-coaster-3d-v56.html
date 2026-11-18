@@ -318,6 +318,7 @@ function makeTrack(){
  const originalLength=finish,originalTrack=track.map(p=>({...p}));
  const verticalLoops=used.map(z=>({a:knotDistances[z.start],b:knotDistances[z.end]})).filter(z=>Number.isFinite(z.a)&&Number.isFinite(z.b)&&z.b>z.a);
  const ease=t=>{t=clamp(t,0,1);return t*t*t*(10-15*t+6*t*t);};
+ const smooth5=ease;
  // 80 screen pixels are 8.4 world units at ratio=.105.
  // Enforce a conservative >=12 world-unit horizontal radius on EVERY yaw step.
  const minUTurnRadiusPx=80,minUTurnRadiusWorld=Math.max(12,minUTurnRadiusPx*ratio);
