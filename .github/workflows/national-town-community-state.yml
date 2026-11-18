@@ -1,0 +1,49 @@
+name: National town community state parity
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-community-state.js'
+      - 'v2/nishinomiya-town-svg-community-state-20261118-pilot.html'
+      - 'v2/takarazuka-town-svg-community-state-20261118-pilot.html'
+      - 'v2/common/js/town-map-community-state-takarazuka-20261118-pilot.js'
+      - 'scripts/*community-state*.cjs'
+      - '.github/workflows/national-town-community-state.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-national-town-community-state-contract.cjs
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - run: ./v2/tests/browser/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Fetch regional input datasets without modifying them
+        run: |
+          mkdir -p nishinomiya/data takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Compare Nishinomiya whole-city, regional, labels and quiz-safe states
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-v34-community-state-parity.cjs
+      - name: Compare Takarazuka whole-city and regional display states
+        run: node scripts/test-national-town-community-state-takarazuka-parity.cjs
