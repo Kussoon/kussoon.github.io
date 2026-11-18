@@ -48,4 +48,10 @@ jobs:
           sleep 3
           node scripts/test-national-town-result-navigation-browser.cjs
       - name: Regression for 321-town V34 quiz contract
-        run: node scripts/audit-nishinomiya-v34-shared-update-321-quiz.cjs
+        run: |
+          # Actions may terminate background processes at step boundaries.
+          # Start an independent server for this step rather than relying on
+          # the previous comparison step's server (socket hang up on WebKit).
+          python3 -m http.server 8766 --bind 127.0.0.1 &
+          sleep 3
+          NISHINOMIYA_TEST_BASE=http://127.0.0.1:8766 node scripts/audit-nishinomiya-v34-shared-update-321-quiz.cjs
