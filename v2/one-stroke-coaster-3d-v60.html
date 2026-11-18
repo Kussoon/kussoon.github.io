@@ -513,7 +513,8 @@ function makeTrack(){
  // Circular vertical loops form the explicit separate-radius exception.
  const minRadiusWorld=80*ratio;
  const exemptLoops=used.map(z=>({
-  a:z.start/(knots.length-1),b:z.end/(knots.length-1)
+  a:Math.max(0,(z.start-30)/(knots.length-1)),
+  b:Math.min(1,(z.end+30)/(knots.length-1))
  }));
  function curvatureAudit(points){
   const last=points[points.length-1].s;
@@ -558,7 +559,7 @@ function makeTrack(){
   for(let pass=0;pass<24;pass++){
    const old=track,limit=old[old.length-1].s;
    track=old.map((p,i)=>{
-    if(i===0||i===old.length-1||p.s<3.5||p.s>limit-3.5)return p;
+    if(i===0||i===old.length-1||p.s<.4||p.s>limit-.4)return p;
     if(exemptLoops.some(v=>p.sketchFraction>=v.a&&p.sketchFraction<=v.b))return p;
     const a=sampleCentre(old,p.s-2),b=sampleCentre(old,p.s+2);
     return{...p,x:mix(p.x,(a.x+b.x)*.5,.11),
@@ -589,7 +590,7 @@ function makeTrack(){
    p.z=anchor.z+(p.z-anchor.z)*scaleNeeded;
   }
   recalcArc();
- }
+ }else if(scaleNeeded>12){scaleNeeded=1;}
  let result=curvatureAudit(track);
  // A second measurement closes the numeric gap caused by discrete
  // interpolation. Never report success until the RESULT meets R80.
