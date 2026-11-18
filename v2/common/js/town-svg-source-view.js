@@ -15,7 +15,7 @@
   const regions=[...unified.regions],validRegions=new Set(regions);
   if(regions.length===0||validRegions.size!==regions.length||regions.some(x=>!text(x)))
    throw new Error('地域IDに欠落・重複があります');
-  const names=new Set(),unresolvedMembership=[],unresolvedReading=[],unresolvedCandidates=[];
+  const names=new Set(),unresolvedMembership=[],unresolvedReading=[],unresolvedCandidates=[],ambiguousMembership=[];
   const records=unified.records.map(record=>{
    if(!record||!text(record.name)||names.has(record.name))throw new Error('町名IDに欠落・重複があります');
    names.add(record.name);
@@ -29,10 +29,24 @@
     if(!['Polygon','MultiPolygon'].includes(geometry.data.geometry?.type))
      throw new Error('GeoJSON図形の型が不正です: '+record.name);
    }else if(!text(geometry.data))throw new Error('SVGパスが空です: '+record.name);
-   const membership=own(memberships,record.name)?memberships[record.name]:record.communities;
-   if(!Array.isArray(membership)||membership.some(x=>!validRegions.has(x))
-       ||new Set(membership).size!==membership.length)
+   const overridden=own(memberships,record.name);
+   const sourceMembership=record.communities;
+   const supplied=overridden?memberships[record.name]:sourceMembership;
+   if(!Array.isArray(supplied)||new Set(supplied).size!==supplied.length
+      ||supplied.some(x=>!text(x)))
     throw new Error('所属地域が不正です: '+record.name);
+   // A TopoJSON mapping may contain an explicit compound town-split note,
+   // e.g. "1〜3 広田、4〜7 上ヶ原", rather than a single region ID.
+   // Preserve it as unresolved source evidence instead of guessing or
+   // rejecting an otherwise valid polygon. Explicit overrides must be valid.
+   const unknown=supplied.filter(x=>!validRegions.has(x));
+   if(unknown.length&&overridden)throw new Error('明示された所属地域が不正です: '+record.name);
+   if(unknown.length&&unified.sourceFormat!=='topojson')
+    throw new Error('SVG所属地域が不正です: '+record.name);
+   if(unknown.length)ambiguousMembership.push(Object.freeze({
+    name:record.name,source:Object.freeze([...supplied])
+   }));
+   const membership=unknown.length?[]:supplied;
    if(membership.length===0)unresolvedMembership.push(record.name);
    const reading=own(readings,record.name)?readings[record.name]:record.reading;
    if(reading!=null&&!text(reading))throw new Error('読みが不正です: '+record.name);
@@ -73,6 +87,7 @@
     towns:records.length,regions:regions.length,
     suppliedCandidateCount:records.reduce((n,r)=>n+(r.candidates?.length||0),0),
     unresolvedMembership:Object.freeze(unresolvedMembership),
+    ambiguousMembership:Object.freeze(ambiguousMembership),
     unresolvedReading:Object.freeze(unresolvedReading),
     unresolvedCandidates:Object.freeze(unresolvedCandidates)
    }),
