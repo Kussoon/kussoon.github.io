@@ -40,7 +40,11 @@ async function snapshot(page,stage,item,screen){
  });
  assert.equal(values.townPaths>0,true,item.name+' '+stage+' has map geometry');
  assert.equal(values.labelElements>0,true,item.name+' '+stage+' has label elements');
- assert.equal(values.overflow.length,0,item.name+' '+stage+' renders off-frame labels');
+ // The adopted Nishinomiya V34 keeps DOM labels while they pan out of view.
+ // Preserve the original off-frame check for all established states; an extra
+ // second zoom naturally pans some non-clipped V34 labels beyond the frame.
+ if(stage!=='zoom-in-twice')
+  assert.equal(values.overflow.length,0,item.name+' '+stage+' renders off-frame labels');
  assert.equal(values.controls.length,8,item.name+' shared controls present');
  assert.ok(values.controls.every(c=>c.inMap),item.name+' all controls inside map frame');
  if(stage==='initial') assert.equal(values.townPaths,item.towns,item.name+' full-town path count');
@@ -61,11 +65,29 @@ async function snapshot(page,stage,item,screen){
      await page.goto('http://127.0.0.1:8765'+item.path,{waitUntil:'domcontentloaded',timeout:60000});
      await page.waitForFunction(count=>(document.querySelector('#communityCount')?.textContent||'').includes(count+'町名'),item.towns,{timeout:60000});
      await snapshot(page,'initial',item,screen);
+     if(item.name==='takarazuka'){
+      // Compare the prior inlined computation and the accepted common helper
+      // on a range of zoom ratios; no style/placement tolerance is relaxed.
+      await page.evaluate(()=>{
+       const shared=window.KussoonTownSvgLabelViewport?.fontPixels;
+       if(typeof shared!=='function')throw Error('shared label font scale missing');
+       for(const ratio of [.01,.05,.1,.5,.75,1,1.15,2,4,8,16,100]){
+        for(const fontPct of [75,100,125,200]){
+         const old=8*Math.max(.75,Math.min(2,Math.pow(1.18,Math.log2(Math.max(.1,ratio)))))*fontPct/100;
+         const current=shared({zoomK:ratio,initialK:1,fontPct});
+         if(Math.abs(old-current)>1e-10)throw Error('font ratio mismatch: '+ratio+' / '+fontPct);
+        }
+       }
+      });
+     }
      await page.locator('#reading').click();await snapshot(page,'reading-on',item,screen);
      await page.locator('#reading').click();
      await page.locator('#larger').click();await snapshot(page,'text-plus',item,screen);
      await page.locator('#size').click();
      await page.locator('#zoomIn').click();await snapshot(page,'zoom-in',item,screen);
+     // R-TOWN-14: overlapping labels are allowed at full-city view; verify
+     // that magnification keeps labels available instead of dropping them.
+     await page.locator('#zoomIn').click();await snapshot(page,'zoom-in-twice',item,screen);
      await page.evaluate(region=>document.querySelector('#communityOptions button[data-community="'+region+'"]').click(),item.region);
      await snapshot(page,'selected-region',item,screen);
      assert.deepEqual(errors,[],item.name+' browser errors');

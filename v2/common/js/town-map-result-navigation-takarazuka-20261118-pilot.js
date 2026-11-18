@@ -50,8 +50,11 @@ function fit(items,padding=44){
 }
 function reset(){stopBlink();fit(active())}
 function fontPixels(){
- const ratio=Math.max(.75,Math.min(2,Math.pow(1.18,Math.log2(Math.max(.1,transform.k/baseScale)))));
- return 8*ratio*fontPct/100;
+ // R-TOWN-14/21: use the same adopted nationwide label-size calculation.
+ // baseScale is the input fit scale; no Takarazuka-only zoom policy.
+ return KussoonTownSvgLabelViewport.fontPixels({
+  zoomK:transform.k,initialK:baseScale,fontPct
+ });
 }
 // All anchors derive from source SVG geometry: no named-town coordinates.
 let candidateMode=true,sourceArea=1000*1700;
