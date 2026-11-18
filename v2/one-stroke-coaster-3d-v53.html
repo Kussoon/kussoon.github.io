@@ -608,19 +608,19 @@ function trackDraw(c){
   const g=geometry(z),p=g.p,dir=g.dir;
   if(p.y<3.5||dir.z<.35)continue; // avoid upside-down/backward loop portions
   const beamY=p.y-.52,feetY=.08;
-  const beamL=V(-.89,beamY,p.z),beamR=V(.89,beamY,p.z);
-  const baseL=V(-1.12,feetY,p.z),baseR=V(1.12,feetY,p.z);
+  const beamL=V(p.x-.89,beamY,p.z),beamR=V(p.x+.89,beamY,p.z);
+  const baseL=V(p.x-1.12,feetY,p.z),baseR=V(p.x+1.12,feetY,p.z);
   const jointY=feetY+(beamY-feetY)*.57;
-  const jointL=V(-1.02,jointY,p.z),jointR=V(1.02,jointY,p.z);
+  const jointL=V(p.x-1.02,jointY,p.z),jointR=V(p.x+1.02,jointY,p.z);
   // Two columns, connected at the top by an under-track beam.
   segment(baseL,beamL,c,"#8b9da9",3.25);
   segment(baseR,beamR,c,"#8b9da9",3.25);
   segment(beamL,beamR,c,"#aebcc5",3.0);
-  segment(V(-1.04,feetY+(beamY-feetY)*.25,p.z),
-          V(1.04,feetY+(beamY-feetY)*.25,p.z),c,"#788d9c",1.1);
+  segment(V(p.x-1.04,feetY+(beamY-feetY)*.25,p.z),
+          V(p.x+1.04,feetY+(beamY-feetY)*.25,p.z),c,"#788d9c",1.1);
   // Triangular bracing transfers track load toward each leg.
-  segment(jointL,V(0,beamY,p.z),c,"#a6b8c2",1.55);
-  segment(jointR,V(0,beamY,p.z),c,"#a6b8c2",1.55);
+  segment(jointL,V(p.x,beamY,p.z),c,"#a6b8c2",1.55);
+  segment(jointR,V(p.x,beamY,p.z),c,"#a6b8c2",1.55);
   // Small visible rail cradles directly below each rail.
   segment(beamL,g.left,c,"#657d8f",1.35);
   segment(beamR,g.rightRail,c,"#657d8f",1.35);
