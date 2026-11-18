@@ -1,0 +1,21 @@
+name: National town SVG auto-label real geometry
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-auto-labels.js'
+      - 'v2/common/js/town-svg-multipart-label-contract.js'
+      - 'scripts/test-national-town-auto-label-real-geometry.cjs'
+      - '.github/workflows/national-town-auto-label-real-geometry.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  geometry:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-national-town-auto-label-real-geometry.cjs
+      - run: node scripts/test-national-town-multipart-label-contract.cjs
