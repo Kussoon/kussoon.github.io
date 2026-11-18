@@ -21,7 +21,7 @@
    const height=track.getBoundingClientRect().height;
    const travel=Math.max(0,height-thumb.offsetHeight);
    // top relative to the WELL: visual track is inset 7px.
-   thumb.style.top=(7+(1-v/100)*travel)+'px';
+   thumb.style.top=((1-v/100)*travel)+'px';
    input.setAttribute('aria-valuetext',v===0?'市の全体':('地図の拡大率 '+Math.round(kFor(v)*100)+'％'));
   }
   function sync(event){
@@ -30,12 +30,16 @@
    paint(forK(k));
   }
   zoom.on('zoom.townPointerSlider',sync);
-  function apply(v){
+  function apply(v,commitMinimum=true){
    const val=clamp(v);
    // Keep the thumb under the user's finger, independent from map rendering.
    paint(val);
    svg.interrupt();
-   if(val===0){onMinimum();paint(0);return}
+   if(val===0){
+    if(commitMinimum)onMinimum();
+    else svg.call(zoom.scaleTo,low());
+    paint(0);return
+   }
    svg.call(zoom.scaleTo,kFor(val));
    if(!dragging)paint(val);
   }
@@ -43,7 +47,7 @@
    frame=null;
    if(pendingValue===null)return;
    const v=pendingValue;pendingValue=null;
-   apply(v);
+   apply(v,false);
   }
   function enqueue(v){
    pendingValue=clamp(v);paint(pendingValue);
