@@ -30,4 +30,19 @@ assert.match(html,/function finishQuiz\(quitEarly=false\)/);
 assert.match(html,/noindex,nofollow/);
 assert.match(html,/nishinomiya-uekoto-community\.topojson/);
 assert.match(html,/town-svg-quiz-state\.js/);
+// The new user-approved 1.3 UI is a nationwide rule. Historical V34 must
+// remain unchanged until the dedicated comparison and adoption process.
+const acceptedSlider=read('v2/takarazuka-town-svg-zoom-slider-rail-20261119-pilot.html');
+const zoomModule=read('v2/common/js/town-svg-zoom-slider.js');
+assert.match(spec,/版：\*\*1\.3\*\*/);
+assert.match(spec,/白い内側・薄いグレーの枠線/);
+assert.match(spec,/地図用の旧＋／−ボタンを再導入しない/);
+assert.match(acceptedSlider,/id="zoomSlider"/);
+assert.doesNotMatch(acceptedSlider,/id="zoomIn"/);
+assert.doesNotMatch(acceptedSlider,/id="zoomOut"/);
+assert.match(acceptedSlider,/\.zoom-slider-visual-track/);
+assert.match(acceptedSlider,/background:#ffffff;border:1px solid #b4bcc2/);
+assert.match(acceptedSlider,/\.zoom-slider-visual-thumb/);
+assert.match(acceptedSlider,/width:21px;height:27px/);
+assert.match(zoomModule,/zoom\.on\('zoom\.townZoomSlider',sync\)/);
 console.log('PASS TOWNMAP-SSOT-001: master spec, work instructions and adopted V34 control invariants');
