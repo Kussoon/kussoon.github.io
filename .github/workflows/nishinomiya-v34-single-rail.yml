@@ -38,6 +38,8 @@ jobs:
           node scripts/test-nishinomiya-single-rail-ui.cjs
       - name: Verify finger drag, framed step buttons and city-full slider minimum
         run: |
+          python3 -m http.server 8767 --bind 127.0.0.1 &
+          sleep 3
           node scripts/test-nishinomiya-pointer-slider-20261119.cjs
       - name: Verify all 321 quiz1 and quiz2 on new UI page
         run: |
