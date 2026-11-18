@@ -136,7 +136,7 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <nav class="nav"><a href="/v2/nishinomiya-town-svg-master-v20-20261117-pilot.html">第20比較版を見る</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市V2 SVG｜全国統一の右端ズームスライダー比較版</h1>
 <!-- 比較版の説明更新日は次のtime要素に記録。地図ロジックは変更しない。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-19T06:35:00+09:00">更新：2026/11/19 06:35:00（JST）</time>
+<time class="updated-at" id="updatedAt" datetime="2026-11-19T07:41:00+09:00">更新：2026/11/19 07:41:00（JST）</time>
 <p class="notice"><strong>全国町名マップ v1.3 操作UIの独立比較版です。</strong> 西宮市V34で確定した321町名・324ラベル・26地域・読み仮名・クイズ1/2のロジックと基準はそのまま使用し、宝塚市で採用した右端一列の「全画面→縦スライダー（＋最大、−最小）→文字＋／文字−→文字100％→市の全体→よみがな」だけを比較します。元の<a href="/v2/nishinomiya-town-svg-master-v34-20261117-pilot.html">西宮市V34</a>と正式入口は変更していません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
 <section class="study" aria-label="26コミュニティ学習範囲"><div class="study-row"><strong>学習範囲</strong><button type="button" id="communityToggle" aria-expanded="false" aria-controls="communityOptions" disabled>西宮市全域（321町名） ▾</button><span id="communityCount">準備中</span></div>
@@ -403,6 +403,7 @@ function updateLabelSize(){
    (d.point[1]+(d.offset[1]+dy)/transform.k)+') scale('+(1/transform.k)+')');
  });
  cRebaseline=false;
+ lastZoomLabelK=transform.k;
 }
 function refreshLabels(){
  const data=KussoonTownSvgLabels.makeData(activeFeatures(),labelPositions,'S_NAME');
@@ -469,6 +470,20 @@ function draw(){
 // Do not run it for every pointer/slider animation frame. Reflow once after
 // the current zoom/pan burst, preserving the exact original V34 algorithm.
 let zoomLabelReflowTimer=null;
+let zoomLabelFrame=null,lastZoomLabelK=NaN;
+function updateCachedZoomLabels(){
+ zoomLabelFrame=null;
+ const k=transform.k;
+ if(Math.abs(lastZoomLabelK-k)<1e-9)return;
+ labels.selectAll('g.label').each(function(d){
+  const offset=this.__townLabelScreenOffset;
+  if(!offset)return;
+  this.setAttribute('transform','translate('+
+   (d.point[0]+offset.x/k)+','+
+   (d.point[1]+offset.y/k)+') scale('+(1/k)+')');
+ });
+ lastZoomLabelK=k;
+}
 function scheduleZoomLabelReflow(){
  if(zoomLabelReflowTimer!==null)clearTimeout(zoomLabelReflowTimer);
  zoomLabelReflowTimer=setTimeout(()=>{
@@ -478,16 +493,15 @@ function scheduleZoomLabelReflow(){
 }
 function onZoom(event){
  if(event.sourceEvent){fittedView=false;cLabelReflow()}
+ const previousK=transform.k;
  transform=event.transform;world.attr('transform',transform.toString());
- // Keep town label glyphs at a stable screen size during motion using
- // already measured offsets; no getBoundingClientRect or text Range reads.
- labels.selectAll('g.label').each(function(d){
-  const offset=this.__townLabelScreenOffset;
-  if(!offset)return;
-  this.setAttribute('transform','translate('+
-   (d.point[0]+offset.x/transform.k)+','+
-   (d.point[1]+offset.y/transform.k)+') scale('+(1/transform.k)+')');
- });
+ // On pure drag/pan, SVG's single #world transform moves every label.
+ // Individual label transforms depend on k, NOT on world x/y. Avoid
+ // rewriting 324 SVG elements for each touchmove/pointermove.
+ if(Math.abs(previousK-transform.k)>1e-9&&zoomLabelFrame===null){
+  zoomLabelFrame=requestAnimationFrame(updateCachedZoomLabels);
+ }
+ // Keep the C-baseline precise glyph positioning at gesture end only.
  scheduleZoomLabelReflow();
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
