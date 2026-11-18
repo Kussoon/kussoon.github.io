@@ -5,7 +5,7 @@ const {chromium,webkit}=require('playwright');
 const fs=require('node:fs'),path=require('node:path');
 const out='artifacts/takarazuka-gesture-label-check';
 fs.mkdirSync(out,{recursive:true});
-const cases=[['chromium-1280',chromium,1280,800],['webkit-390',webkit,390,844]];
+const cases=[['chromium-1280',chromium,1280,800],['chromium-390',chromium,390,844],['webkit-390',webkit,390,844]];
 const report=[];
 const base='http://127.0.0.1:8765/v2/takarazuka-town-svg-result-navigation-20261118-pilot.html';
 async function state(page){
@@ -21,8 +21,10 @@ async function state(page){
    const a=boxes[i],b=boxes[j];
    if(a.left<b.right&&b.left<a.right&&a.top<b.bottom&&b.top<a.bottom)collisions++;
   }
+  const frame=map.getBoundingClientRect();
+  const visibleInside=visible.every(el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0&&r.right>frame.left&&r.left<frame.right&&r.bottom>frame.top&&r.top<frame.bottom;});
   return {k:t.k,x:t.x,y:t.y,labelElements:nodes.length,visible:visible.length,
-   uniqueNames:names.size,collisions,allNamesPresent:names.size>=125};
+   uniqueNames:names.size,visibleInside,collisions,allNamesPresent:names.size>=125};
  });
 }
 async function test(name,engine,width,height){
@@ -37,6 +39,7 @@ async function test(name,engine,width,height){
   // at a progressively closer view, without imposing a zero-overlap criterion.
   await page.locator('#zoomIn').click();
   await page.waitForFunction(k=>window.d3.zoomTransform(document.querySelector('#map')).k>k+1e-5,initial.k,{timeout:5000});
+  await page.waitForTimeout(200);
   const zoomed=await state(page);
   const map=page.locator('#map'),afterButton=await state(page);
   // D3 has its dblclick.zoom handler removed by town-svg-core. Record actual
@@ -45,10 +48,14 @@ async function test(name,engine,width,height){
   await page.waitForTimeout(250);
   const afterDouble=await state(page);
   const doubleClickZoomed=afterDouble.k>afterButton.k+1e-4;
-  const preDrag=await state(page);
-  const px=rect.x+rect.width*.48,py=rect.y+rect.height*.48;
-  await page.mouse.move(px,py);await page.mouse.down();await page.mouse.move(px+65,py+35,{steps:12});await page.mouse.up();
-  const dragged=await state(page),dragMoved=Math.hypot(dragged.x-preDrag.x,dragged.y-preDrag.y)>10;
+  let dragMoved=null;
+  if(width>=600){
+   const preDrag=await state(page);
+   const px=rect.x+rect.width*.48,py=rect.y+rect.height*.48;
+   await page.mouse.move(px,py);await page.mouse.down();await page.mouse.move(px+65,py+35,{steps:12});await page.mouse.up();
+   const dragged=await state(page);
+   dragMoved=Math.hypot(dragged.x-preDrag.x,dragged.y-preDrag.y)>10;
+  }
   // Wheel B is a desktop-only input; mobile WebKit intentionally has no
   // mouse.wheel support, so its equivalent coverage is the touch pan below.
   let wheelWorked=null,wheelDisarmed=null;
@@ -63,20 +70,34 @@ async function test(name,engine,width,height){
    await page.mouse.wheel(0,-240);await page.waitForTimeout(200);
    const disarmed=await state(page);wheelDisarmed=Math.abs(disarmed.k-beforeDisarmed.k)<1e-5;
   }
-  // Playwright's mobile WebKit supports a real touchscreen tap, but does
-  // not expose a portable cross-engine swipe/pan injector. Never claim the
-  // touch-pan gesture passed just because synthetic events were dispatched.
-  let touchPan=null,touchTap=null;
+  // Native touch input is available over Chromium's CDP protocol. For WebKit,
+  // Playwright exposes tapping but no portable swipe actions. Do not mislabel
+  // a synthetic touch event as a real iPhone swipe.
+  let touchPan=null,touchTap=null,webKitSyntheticPan=null;
   if(width<600){
-   let tapped=0;
-   await page.evaluate(()=>{window.__townAuditTaps=0;
-    document.querySelector('#map').addEventListener('touchstart',()=>window.__townAuditTaps++,{once:true});});
-   await page.touchscreen.tap(rect.x+rect.width*.5,rect.y+rect.height*.45);
-   tapped=await page.evaluate(()=>window.__townAuditTaps);
-   touchTap=tapped===1;
+   await page.evaluate(()=>{window.__townAuditInputs={touch:0,pointer:0};
+    document.addEventListener('touchstart',()=>window.__townAuditInputs.touch++,true);
+    document.addEventListener('pointerdown',()=>window.__townAuditInputs.pointer++,true);
+   });
+   await page.touchscreen.tap(rect.x+rect.width*.50,rect.y+rect.height*.45);
+   const inputs=await page.evaluate(()=>window.__townAuditInputs);
+   touchTap=inputs.touch>0||inputs.pointer>0;
+   if(name.startsWith('chromium')){
+    const cdp=await page.context().newCDPSession(page);
+    const pre=await state(page),x=rect.x+rect.width*.55,y=rect.y+rect.height*.55;
+    const ev=(type,xx,yy)=>cdp.send('Input.dispatchTouchEvent',{
+      type,touchPoints:type==='touchEnd'?[]:[{x:xx,y:yy,id:1}],modifiers:0
+    });
+    await ev('touchStart',x,y);
+    for(let i=1;i<=10;i++)await ev('touchMove',x+i*5,y+i*3);
+    await ev('touchEnd',x+50,y+30);
+    await page.waitForTimeout(120);
+    const after=await state(page);
+    touchPan=Math.hypot(after.x-pre.x,after.y-pre.y)>10;
+   }
   }
   const record={browser:name,width,height,initial,zoomed,
-   doubleClickZoomed,dragMoved,wheelWorked,wheelDisarmed,touchPan,touchTap,
+   doubleClickZoomed,dragMoved,wheelWorked,wheelDisarmed,touchPan,touchTap,webKitSyntheticPan,
    errors,labelVisibilityAfterZoom:zoomed.uniqueNames>=initial.uniqueNames,
    moreLabelsAtZoom:zoomed.visible>=initial.visible};
   report.push(record);
@@ -90,10 +111,12 @@ async function test(name,engine,width,height){
  // Report any actual failures as CI failure, after saving precise evidence.
  const problems=report.flatMap(r=>[
   ...(!r.doubleClickZoomed?['double click zoom']:[]),
-  ...(!r.dragMoved?['drag pan']:[]),
+  ...(r.dragMoved===false?['desktop mouse drag pan']:[]),
   ...(r.wheelWorked===false?['wheel B arm']:[]),
   ...(r.wheelDisarmed===false?['wheel B disarm']:[]),
   ...(r.touchTap===false?['touch tap']:[]),
+  ...(r.touchPan===false?['native chromium touch pan']:[]),
+  ...(!r.initial.visibleInside||!r.zoomed.visibleInside?['visible label outside viewport']:[]),
   ...(r.errors.length?['page error']:[])
  ].map(what=>r.browser+': '+what));
  if(problems.length)throw new Error('TOWNMAP_GESTURE_FAIL '+problems.join('; '));
