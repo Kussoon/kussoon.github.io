@@ -1,0 +1,45 @@
+name: Nishinomiya V34 national multipart-label parity
+on:
+  pull_request:
+    paths:
+      - 'v2/nishinomiya-town-svg-multipart-label-20261118-pilot.html'
+      - 'scripts/smoke-nishinomiya-v34-multipart-label-parity.cjs'
+      - 'scripts/audit-nishinomiya-v34-multipart-321-quiz-contract.cjs'
+      - '.github/workflows/nishinomiya-v34-multipart-label-parity.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  v34-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - run: ./v2/tests/browser/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Fetch original approved community data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare V34 label geometry on desktop and two iPhone widths
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/smoke-nishinomiya-v34-multipart-label-parity.cjs
+      - name: Confirm 321 towns in quiz 1 and 2
+        run: node scripts/audit-nishinomiya-v34-multipart-321-quiz-contract.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nishinomiya-v34-multipart-evidence
+          path: |
+            nishinomiya-v34-multipart-parity/
+            nishinomiya-v34-multipart-321-quiz-contract/
+          if-no-files-found: ignore
