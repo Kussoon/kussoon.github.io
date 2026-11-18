@@ -462,6 +462,33 @@ function makeTrack(){
   }
  }
 
+ // Remove ground-level buildings that intersect the swept horizontal path.
+ // A wide U-turn should never send the cart straight through a house.
+ // One world-space bucket lookup per nearby grid cell keeps this inexpensive.
+ const occupied=new Map();
+ for(let k=0;k<track.length;k+=6){
+  const p=track[k],cx=Math.floor(p.x/10),cz=Math.floor(p.z/10);
+  const key=cx+","+cz;
+  let cells=occupied.get(key);
+  if(!cells){cells=[];occupied.set(key,cells);}
+  cells.push({x:p.x,z:p.z});
+ }
+ for(let k=objects.length-1;k>=0;k--){
+  const o=objects[k];
+  if(o.kind!=="building"&&o.kind!=="skyline")continue;
+  const gx=Math.floor(o.x/10),gz=Math.floor(o.z/10);
+  const required=o.kind==="skyline"?10:7.5;
+  let close=false;
+  for(let dx=-2;dx<=2&&!close;dx++)for(let dz=-2;dz<=2&&!close;dz++){
+   const entries=occupied.get((gx+dx)+","+(gz+dz));
+   if(!entries)continue;
+   for(const p of entries){
+    if(Math.hypot(p.x-o.x,p.z-o.z)<required){close=true;break;}
+   }
+  }
+  if(close)objects.splice(k,1);
+ }
+
 }
 function sample(z){
  z=clamp(z,0,finish);let lo=0,hi=track.length-1;
