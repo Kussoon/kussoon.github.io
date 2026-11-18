@@ -366,7 +366,7 @@ function makeTrack(){
   }
   // Distinguishes backflips from mostly level horizontal hairpins.
   const riseAndFall=Math.max(climb,down);
-  if(maxY-minY<34||riseAndFall<Math.abs(dx)*.48)return;
+  if(maxY-minY<34||riseAndFall<Math.abs(dx)*.34)return;
   const before=Math.max(0,first-18),after=Math.min(knots.length-1,lastIndex+18);
   verticalRolls.push({a:knotDistances[before],b:knotDistances[after],
    first,last:lastIndex,height:maxY-minY});
