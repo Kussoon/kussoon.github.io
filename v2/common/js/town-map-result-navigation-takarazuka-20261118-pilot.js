@@ -325,7 +325,7 @@ function finishQuiz(quit=false){
  resetQuestion();quizMode=0;
  KussoonTownSvgQuizUI.finish({body:document.body,panel:$('quizPanel'),results:$('quizResults'),
   result:$('quizResult'),quit,answered,total:quizOrder.length,score:quizScore,wrongCount:quizWrong.size});
- $('quizRetryWrong').hidden=false;$('quizRetryWrong').disabled=quizWrong.size===0;
+ KussoonTownSvgQuizUI.syncWrongRetry({retryWrong:$('quizRetryWrong'),wrongCount:quizWrong.size});
  if(target&&byName.has(target)){
   choose(target);$('status').textContent='中断した問題：「'+townLabel(target)+'」を黄色く点滅表示しています。';
  }
