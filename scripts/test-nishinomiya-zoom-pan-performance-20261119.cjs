@@ -32,6 +32,8 @@ async function run(engine,name,width,height){
    return {durationMs:performance.now()-start,delta:(window.__labelMeasureCount||0)-before};
   });
   assert.equal(input.delta,0,name+' must not synchronously measure 324 labels for 20 inputs');
+  // Allow the coalesced zoom animation frame to apply the stable-size labels.
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   const during=await page.evaluate(()=>{
    const t=document.querySelector('#labels g.label')?.getAttribute('transform')||'';
    const m=t.match(/scale\(([^)]+)\)/);
@@ -47,10 +49,34 @@ async function run(engine,name,width,height){
   await page.waitForTimeout(270);
   const final=await page.evaluate(()=>({count:window.__labelMeasureCount,labels:document.querySelectorAll('#labels g.label').length}));
   assert.equal(final.labels,324);
+  // Pure drag changes the single #world transform, not individual labels.
+  // Track all SVG label transform attribute writes during a pointer drag.
+  let panLabelWrites=null;
+  if(width>=600){
+   await page.waitForTimeout(250);
+   await page.evaluate(()=>{
+    window.__townPanLabelWrites=0;
+    window.__townPanLabelObserver=new MutationObserver(ms=>{
+      window.__townPanLabelWrites+=ms.filter(m=>m.attributeName==='transform'&&m.target.matches('g.label')).length;
+    });
+    window.__townPanLabelObserver.observe(document.querySelector('#labels'),{
+      subtree:true,attributes:true,attributeFilter:['transform']});
+   });
+   const map=await page.locator('#map').boundingBox();
+   const x=map.x+map.width*.45,y=map.y+map.height*.4;
+   await page.mouse.move(x,y);await page.mouse.down();
+   await page.mouse.move(x+75,y+35,{steps:12});await page.mouse.up();
+   await page.waitForTimeout(60);
+   panLabelWrites=await page.evaluate(()=>{
+    window.__townPanLabelObserver.disconnect();
+    return window.__townPanLabelWrites;
+   });
+   assert.equal(panLabelWrites,0,name+' pure drag should not rewrite 324 label transforms');
+  }
   assert.deepEqual(errors,[]);
   console.log('PASS NISHINOMIYA_ZOOM_PERF '+JSON.stringify({browser:name,slider20StepsMs:Math.round(input.durationMs),
     synchronousGlyphPasses:input.delta,settledGlyphPasses:after.count-initial.count,
-    finalLabels:final.labels}));
+    finalLabels:final.labels,panLabelWrites}));
  }finally{await browser.close()}
 }
 (async()=>{await run(chromium,'chromium-1280',1280,800);await run(webkit,'webkit-390',390,844)})().catch(e=>{console.error(e);process.exitCode=1});
