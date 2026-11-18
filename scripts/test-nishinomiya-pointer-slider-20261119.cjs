@@ -32,6 +32,7 @@ async function run(engine,name,width,height){
   const mid=await read();
   await page.mouse.move(x,y2,{steps:4});
   const top=await read();
+  console.log('DEBUG_DRAG '+JSON.stringify({browser:name,start:current.value,mid:mid.value,top:top.value,thumbStart:current.thumb.top,thumbMid:mid.thumb.top,thumbTop:top.thumb.top,trackTop:current.track.top,trackHeight:current.track.height,y1,y2}));
   assert(top.value>mid.value,name+' upward drag must change value monotonically');
   assert(top.thumb.top<mid.thumb.top,name+' thumb must visually follow the finger');
   await page.mouse.up();await page.waitForTimeout(220);
