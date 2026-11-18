@@ -49,17 +49,20 @@ async function test(name,engine,width,height){
   const px=rect.x+rect.width*.48,py=rect.y+rect.height*.48;
   await page.mouse.move(px,py);await page.mouse.down();await page.mouse.move(px+65,py+35,{steps:12});await page.mouse.up();
   const dragged=await state(page),dragMoved=Math.hypot(dragged.x-preDrag.x,dragged.y-preDrag.y)>10;
-  // Wheel B policy: the first unarmed wheel should not zoom; after clicking
-  // inside, zoom should work, and outside interaction should disarm again.
-  await page.mouse.click(rect.x+rect.width*.50,rect.y+rect.height*.50);
-  const preWheel=await state(page);
-  await page.mouse.wheel(0,-240);await page.waitForTimeout(200);
-  const armedWheel=await state(page),wheelWorked=armedWheel.k>preWheel.k+1e-5;
-  await page.mouse.click(5,5);
-  const beforeDisarmed=await state(page);
-  await page.mouse.move(rect.x+rect.width*.52,rect.y+rect.height*.52);
-  await page.mouse.wheel(0,-240);await page.waitForTimeout(200);
-  const disarmed=await state(page),wheelDisarmed=Math.abs(disarmed.k-beforeDisarmed.k)<1e-5;
+  // Wheel B is a desktop-only input; mobile WebKit intentionally has no
+  // mouse.wheel support, so its equivalent coverage is the touch pan below.
+  let wheelWorked=null,wheelDisarmed=null;
+  if(width>=600){
+   await page.mouse.click(rect.x+rect.width*.50,rect.y+rect.height*.50);
+   const preWheel=await state(page);
+   await page.mouse.wheel(0,-240);await page.waitForTimeout(200);
+   const armedWheel=await state(page);wheelWorked=armedWheel.k>preWheel.k+1e-5;
+   await page.mouse.click(5,5);
+   const beforeDisarmed=await state(page);
+   await page.mouse.move(rect.x+rect.width*.52,rect.y+rect.height*.52);
+   await page.mouse.wheel(0,-240);await page.waitForTimeout(200);
+   const disarmed=await state(page);wheelDisarmed=Math.abs(disarmed.k-beforeDisarmed.k)<1e-5;
+  }
   let touchPan=null;
   if(width<600){
    const before=await state(page);
@@ -93,8 +96,8 @@ async function test(name,engine,width,height){
  const problems=report.flatMap(r=>[
   ...(!r.doubleClickZoomed?['double click zoom']:[]),
   ...(!r.dragMoved?['drag pan']:[]),
-  ...(!r.wheelWorked?['wheel B arm']:[]),
-  ...(!r.wheelDisarmed?['wheel B disarm']:[]),
+  ...(r.wheelWorked===false?['wheel B arm']:[]),
+  ...(r.wheelDisarmed===false?['wheel B disarm']:[]),
   ...(r.touchPan===false?['touch pan']:[]),
   ...(r.errors.length?['page error']:[])
  ].map(what=>r.browser+': '+what));
