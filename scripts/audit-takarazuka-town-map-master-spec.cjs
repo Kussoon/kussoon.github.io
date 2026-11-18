@@ -118,7 +118,7 @@ async function run(driver,name,width,height){
      api.quizMapAnswer(name);
      if(!$('quizFeedback').textContent.includes('正解です'))throw Error('quiz1 correct');
      $('quizNext').click();
-     if(!$('quizResults').hidden||!$('quizResult').textContent.includes('1問中 0点'))
+     if($('quizResults').hidden||!$('quizResult').textContent.includes('1問中 0点'))
       throw Error('quiz1 result');
      report.quiz1++;
      api.startQuiz(2,[name]);
@@ -133,7 +133,7 @@ async function run(driver,name,width,height){
      buttons.find(b=>b.querySelector('.choice-name').textContent===name).click();
      if(!$('quizFeedback').textContent.includes('正解です'))throw Error('quiz2 correct');
      $('quizNext').click();
-     if(!$('quizResults').hidden||!$('quizResult').textContent.includes('1問中 0点'))
+     if($('quizResults').hidden||!$('quizResult').textContent.includes('1問中 0点'))
       throw Error('quiz2 result');
      report.quiz2++;
     }catch(error){report.failures.push({name,message:error.message})}
