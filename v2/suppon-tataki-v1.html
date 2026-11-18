@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#113a38"><meta name="robots" content="noindex,nofollow">
+<title>スッポンたたき｜比較試作版 v1</title>
+<style>
+:root{color-scheme:dark;--ink:#eafaf3;--bg:#102d2d;--lane:#24554c;--rim:#a2d4a5}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overscroll-behavior:none}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer}
+.app{width:min(100%,480px);height:100dvh;min-height:480px;margin:auto;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 8px) 12px calc(env(safe-area-inset-bottom) + 8px);overflow:hidden}
+.top{flex:none;text-align:center}.top h1{margin:0 0 7px;font-size:clamp(19px,5vw,25px);letter-spacing:.05em}
+.hud{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.stat{background:#204943;border:1px solid #39776c;padding:7px 3px;border-radius:12px}.stat small{display:block;font-size:11px;opacity:.85}.stat strong{display:block;font-size:clamp(17px,5vw,24px);font-variant-numeric:tabular-nums}
+.prompt{font-size:12px;margin:7px 0 2px;opacity:.85}
+.field{flex:1;min-height:0;display:flex;flex-direction:column;gap:clamp(6px,1.2vh,12px);padding:5px 0}
+.lane{position:relative;flex:1;min-height:0;overflow:hidden;border:3px solid #447a67;border-radius:22px;background:linear-gradient(180deg,#276457,#173f39);touch-action:none;isolation:isolate}
+.lane:before{content:"";position:absolute;inset:7px 9px;border:2px dashed #63948544;border-radius:16px;pointer-events:none}
+.lane:after{content:"";position:absolute;bottom:0;left:0;width:100%;height:9px;background:#0c302c66;pointer-events:none}
+.lane .number{position:absolute;top:8px;left:10px;font-size:11px;font-weight:800;opacity:.7;pointer-events:none}
+.lane .arrow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(26px,7vw,40px);color:#d5f8de35;pointer-events:none}
+.creature{position:absolute;top:50%;height:clamp(55px,11vh,96px);width:clamp(145px,49vw,232px);border:0;background:none;padding:0;transform:translateY(-50%);touch-action:none;will-change:left;visibility:hidden}
+.creature svg{width:100%;height:100%;filter:drop-shadow(0 5px 2px #09272270)}
+.creature[data-side="right"] svg{transform:scaleX(-1)}
+.creature.live{visibility:visible}.creature.hit{filter:brightness(1.5) saturate(1.3)}
+.creature:focus-visible{outline:3px solid #fff;border-radius:40px}
+.pop{position:absolute;z-index:4;left:50%;top:45%;transform:translate(-50%,-50%);font-size:22px;font-weight:900;color:#ffdc67;text-shadow:0 2px 2px #29210c;pointer-events:none;animation:pop .45s ease-out forwards}
+@keyframes pop{from{opacity:0;scale:.7}30%{opacity:1;scale:1.15}to{opacity:0;scale:1;translate:0 -20px}}
+.bottom{flex:none;display:flex;gap:8px;padding-top:5px}.bottom button,.dialog button{border:0;border-radius:13px;padding:12px 10px;font-weight:800;min-height:43px}.start{background:#f0ca64;color:#232617;flex:2}.reset{background:#36635c;color:#fff;flex:1}
+.overlay{position:fixed;inset:0;background:#071e1ecb;display:grid;place-items:center;padding:20px;z-index:20}.overlay[hidden]{display:none}
+.dialog{background:#f5f9e9;color:#17332b;width:min(100%,350px);padding:24px 18px;border-radius:22px;text-align:center;box-shadow:0 20px 80px #0008}
+.dialog h2{margin:0 0 11px;font-size:24px}.dialog p{line-height:1.65;font-size:14px}.dialog .primary{width:100%;background:#23745e;color:white;font-size:18px;margin-top:8px}.hint{font-size:12px;opacity:.8}
+@media(max-height:640px){.app{padding-top:calc(env(safe-area-inset-top) + 3px);padding-bottom:calc(env(safe-area-inset-bottom) + 3px)}.top h1{font-size:18px;margin-bottom:4px}.stat{padding:3px}.prompt{margin:3px 0}.bottom button{padding:7px;min-height:36px}.field{gap:5px}}
+</style></head><body>
+<main class="app">
+<header class="top"><h1>🐢 スッポンたたき <small style="font-size:11px;opacity:.6">v1</small></h1><div class="hud">
+<div class="stat"><small>スコア</small><strong id="score">0</strong></div>
+<div class="stat"><small>のこり時間</small><strong id="time">30</strong></div>
+<div class="stat"><small>ベスト</small><strong id="best">0</strong></div></div>
+<p class="prompt" id="message">左右から顔を出すスッポンをタップ！</p></header>
+<section class="field" id="field" aria-label="5本のスッポンレーン"></section>
+<footer class="bottom"><button class="start" id="start">スタート</button><button class="reset" id="reset">リセット</button></footer>
+</main>
+<div class="overlay" id="overlay"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+<h2 id="dialog-title">スッポンたたき</h2><p id="dialog-message">スマホ縦画面専用の試作版。<br>5本のレーンから飛び出す顔をタップしてください。<br>30秒間、1匹10点！</p>
+<button class="primary" id="play">ゲームスタート</button><p class="hint">音なし・オフライン動作可能・記録は端末内</p>
+</section></div>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const directions=['left','right','left','left','right']; // 手描き図の矢印方向
+const field=$('field'),scoreEl=$('score'),timeEl=$('time'),bestEl=$('best'),msg=$('message'),overlay=$('overlay');
+const headSvg='<svg viewBox="0 0 240 105" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M238 30Q181 21 150 24Q103 7 62 18Q17 25 9 48Q-2 65 21 80Q55 101 125 84Q178 96 239 78Z" fill="#74ad57" stroke="#294c31" stroke-width="5"/><path d="M11 60Q43 56 65 65Q113 82 173 66" fill="none" stroke="#315d34" stroke-width="4" stroke-linecap="round"/><ellipse cx="83" cy="30" rx="12" ry="14" fill="#e8fae2" stroke="#294c31" stroke-width="3"/><circle cx="79" cy="31" r="5" fill="#142d22"/><ellipse cx="31" cy="48" rx="5" ry="4" fill="#294c31"/><path d="M16 70Q45 85 80 77" fill="none" stroke="#fff9db" stroke-width="3" stroke-linecap="round"/><circle cx="120" cy="47" r="4" fill="#b5da7b" opacity=".6"/></svg>';
+const lanes=directions.map((side,i)=>{
+ const lane=document.createElement('div');lane.className='lane';
+ lane.innerHTML='<span class="number">0'+(i+1)+'</span><span class="arrow">'+(side==='left'?'←':'→')+'</span>';
+ const head=document.createElement('button');head.type='button';head.className='creature';head.dataset.side=side;head.setAttribute('aria-label',(i+1)+'段目のスッポン');head.innerHTML=headSvg;
+ lane.append(head);field.append(lane);return {lane,head,side,phase:'idle',t0:0,duration:0,hit:false};
+});
+let score=0,left=30,best=0,running=false,epoch=0,nextSpawn=0,lastFrame=0,raf=0,lastSpawn=-1;
+try{best=Number(localStorage.getItem('kussoon-suppon-best-v1')||0)||0}catch{}
+bestEl.textContent=best;
+const rand=(a,b)=>a+Math.random()*(b-a);
+function resetHeads(){for(const l of lanes){l.phase='idle';l.hit=false;l.head.classList.remove('live','hit');l.head.style.left='';}}
+function setHud(){scoreEl.textContent=score;timeEl.textContent=Math.max(0,Math.ceil(left));bestEl.textContent=best;}
+function start(){
+ cancelAnimationFrame(raf);running=true;score=0;left=30;epoch=performance.now();nextSpawn=epoch+400;lastFrame=epoch;lastSpawn=-1;resetHeads();setHud();
+ overlay.hidden=true;$('start').textContent='プレイ中';msg.textContent='顔が見えたらタップ！';
+ raf=requestAnimationFrame(frame);
+}
+function stop(showResult){
+ running=false;cancelAnimationFrame(raf);resetHeads();
+ $('start').textContent='もう一度';setHud();
+ if(showResult){$('dialog-title').textContent='ゲーム終了！';$('dialog-message').textContent=score+'点獲得！ ベスト記録：'+best+'点';$('play').textContent='もう一度遊ぶ';overlay.hidden=false;msg.textContent='おつかれさまでした！';}
+}
+function reset(){stop(false);score=0;left=30;setHud();$('dialog-title').textContent='スッポンたたき';$('dialog-message').textContent='左右から出てくるスッポンをタップ！30秒で何点取れるかな？';$('play').textContent='ゲームスタート';overlay.hidden=false;msg.textContent='左右から顔を出すスッポンをタップ！';}
+function spawn(now){
+ let available=lanes.map((l,i)=>l.phase==='idle'&&i!==lastSpawn?i:-1).filter(i=>i>=0);
+ if(!available.length)available=lanes.map((l,i)=>l.phase==='idle'?i:-1).filter(i=>i>=0);
+ if(!available.length)return;
+ const i=available[Math.floor(Math.random()*available.length)],l=lanes[i];
+ l.phase='out';l.t0=now;l.hit=false;
+ const progress=Math.min(1,(now-epoch)/30000);
+ l.duration=rand(1250,1650)*(1-progress*.34);
+ l.head.classList.add('live');l.head.classList.remove('hit');lastSpawn=i;
+}
+function frame(now){
+ if(!running)return;
+ left=Math.max(0,30-(now-epoch)/1000);setHud();
+ if(left<=0){stop(true);return;}
+ if(now>=nextSpawn){spawn(now);const progress=(now-epoch)/30000;nextSpawn=now+rand(440,820)*(1-progress*.48);}
+ for(const l of lanes){
+  if(l.phase==='idle')continue;
+  const p=(now-l.t0)/l.duration;
+  if(p>=1){l.phase='idle';l.head.classList.remove('live','hit');continue;}
+  const w=l.lane.clientWidth,h=l.head.offsetWidth;
+  // 左向き：右から、右向き：左から。ヒット判定は出ている頭だけ
+  const extension=l.hit?0:(p<.22?p/.22:p<.68?1:Math.max(0,1-(p-.68)/.32));
+  const visible=Math.min(h*.78,w*.43)*extension;
+  const x=l.side==='left'? w-visible : visible-h;
+  l.head.style.left=x+'px';
+ }
+ raf=requestAnimationFrame(frame);
+}
+lanes.forEach((l,i)=>l.head.addEventListener('pointerdown',e=>{
+ e.preventDefault();
+ if(!running||l.phase!=='out'||l.hit)return;
+ const p=(performance.now()-l.t0)/l.duration;
+ if(p<.1||p>.92)return;
+ l.hit=true;l.head.classList.add('hit');score+=10;
+ if(score>best){best=score;try{localStorage.setItem('kussoon-suppon-best-v1',String(best))}catch{}}
+ setHud();
+ const tag=document.createElement('span');tag.className='pop';tag.textContent='+10';l.lane.append(tag);tag.addEventListener('animationend',()=>tag.remove(),{once:true});
+ // ヒットすると短時間で引っ込む。次の出現は別タイミング
+ l.duration=Math.min(l.duration,Math.max(1,performance.now()-l.t0)+155);
+ if(navigator.vibrate)navigator.vibrate(18);
+}));
+$('play').addEventListener('click',start);
+$('start').addEventListener('click',()=>{if(!running)start();});
+$('reset').addEventListener('click',reset);
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&running){const remaining=left;stop(false);left=remaining;msg.textContent='中断しました。もう一度スタートしてください。';$('start').textContent='再スタート';}});
+})();
+</script></body></html>
