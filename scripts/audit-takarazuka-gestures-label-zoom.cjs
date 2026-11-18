@@ -85,14 +85,21 @@ async function test(name,engine,width,height){
    if(name.startsWith('chromium')){
     const cdp=await page.context().newCDPSession(page);
     const pre=await state(page),x=rect.x+rect.width*.55,y=rect.y+rect.height*.55;
+    await page.evaluate(()=>{window.__townAuditTouchTrace={start:0,move:0,end:0};
+     for(const t of ['touchstart','touchmove','touchend'])document.addEventListener(t,()=>{
+       const k=t.replace('touch','');window.__townAuditTouchTrace[k]++
+     },true);
+    });
     const ev=(type,xx,yy)=>cdp.send('Input.dispatchTouchEvent',{
       type,touchPoints:type==='touchEnd'?[]:[{x:xx,y:yy,id:1}],modifiers:0
     });
     await ev('touchStart',x,y);
-    for(let i=1;i<=10;i++)await ev('touchMove',x+i*5,y+i*3);
-    await ev('touchEnd',x+50,y+30);
-    await page.waitForTimeout(120);
+    for(let i=1;i<=12;i++){await ev('touchMove',x+i*8,y+i*5);await page.waitForTimeout(16);}
+    await ev('touchEnd',x+96,y+60);
+    await page.waitForTimeout(160);
     const after=await state(page);
+    const trace=await page.evaluate(()=>window.__townAuditTouchTrace);
+    console.log('TOUCH_TRACE '+JSON.stringify({browser:name,trace,before:{x:pre.x,y:pre.y,k:pre.k},after:{x:after.x,y:after.y,k:after.k}}));
     touchPan=Math.hypot(after.x-pre.x,after.y-pre.y)>10;
    }
   }
