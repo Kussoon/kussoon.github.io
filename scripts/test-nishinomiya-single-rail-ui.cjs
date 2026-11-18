@@ -17,10 +17,13 @@ async function test(driver,name,w,h){
      slider:rect('.map-zoom-slider'),track:rect('.zoom-slider-visual-track'),thumb:rect('.zoom-slider-visual-thumb'),textPlus:rect('#larger'),
      k:d3.zoomTransform(document.querySelector('#map')).k,range:Number(document.querySelector('#zoomSlider').value),
      names:new Set(labelTexts).size,labels:labelNodes.length,oldButtons:document.querySelectorAll('#zoomIn,#zoomOut').length,
-     readingText:document.querySelector('#reading').textContent};
+     readingText:document.querySelector('#reading').textContent,
+     zoomPlus:rect('#zoomPlus'),zoomMinus:rect('#zoomMinus'),resetCount:document.querySelectorAll('#reset').length};
   });
   const check=g=>{
-   assert.equal(g.oldButtons,0,name+' map +/- removed');
+   assert.equal(g.oldButtons,0,name+' old map +/- removed');
+   assert.equal(g.resetCount,0,name+' city whole standalone button removed');
+   assert(g.zoomPlus.height>=32&&g.zoomMinus.height>=32,name+' step button hit targets');
    assert.equal(g.names,321,name+' town labels retained');
    assert.equal(g.labels,324,name+' multipart labels retained');
    assert(g.full.bottom+1<=g.plus.top,name+' full button above slider');
@@ -37,9 +40,16 @@ async function test(driver,name,w,h){
   await page.locator('#zoomSlider').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}))});
   const lo=await get();assert(lo.k<hi.k);
   assert(Math.abs(lo.thumb.bottom-lo.track.bottom)<1.5,name+' lower thumb aligns with min');
-  await page.locator('#reset').click();await page.waitForTimeout(170);
+  await page.locator('#zoomSlider').evaluate(el=>{el.value='0';el.dispatchEvent(new Event('input',{bubbles:true}))});await page.waitForTimeout(170);
   check(await get());
-  await page.locator('#reading').click();
+  // The plus/minus controls must trigger zoom independently.
+  const beforeStep=(await get()).k;
+  await page.locator('#zoomPlus').click();
+  const afterPlus=(await get()).k;
+  assert(afterPlus>beforeStep,name+' framed plus click zooms');
+  await page.locator('#zoomMinus').click();
+  assert((await get()).k<afterPlus,name+' framed minus click zooms');
+    await page.locator('#reading').click();
   assert.equal(await page.locator('#reading').getAttribute('aria-pressed'),'true');
   await page.locator('#reading').click();
   await page.locator('#larger').click();
