@@ -482,6 +482,34 @@ function makeTrack(){
    track[i].s=finish;
   }
  }
+ // Check the FINAL vertical pitch transitions against the untouched v67
+ // vertical profile. A broad filter must not create a sharper hill near
+ // endpoint or loop transition tapers. Keep the original Y if it does.
+ function verticalSharpness(points){
+  const end=points[points.length-1].s;
+  function read(d){
+   d=clamp(d,0,end);let a=0,b=points.length-1;
+   while(a+1<b){const m=(a+b)>>1;if(points[m].s<d)a=m;else b=m;}
+   const p=points[a],q=points[b],t=clamp((d-p.s)/(q.s-p.s||1),0,1);
+   return{x:mix(p.x,q.x,t),y:mix(p.y,q.y,t),z:mix(p.z,q.z,t),
+    fraction:mix(p.sketchFraction,q.sketchFraction,t)};
+  }
+  let max=0;
+  for(let d=2;d<end-2;d+=.65){
+   const a=read(d-1),b=read(d),c=read(d+1);
+   if(verticalLoopRegions.some(v=>b.fraction>=v.low&&b.fraction<=v.high))continue;
+   const slope0=Math.atan2(b.y-a.y,Math.hypot(b.x-a.x,b.z-a.z));
+   const slope1=Math.atan2(c.y-b.y,Math.hypot(c.x-b.x,c.z-b.z));
+   max=Math.max(max,Math.abs(slope1-slope0));
+  }
+  return max;
+ }
+ const previousSharpness=verticalSharpness(verticalBaseline);
+ const candidateSharpness=verticalSharpness(track);
+ if(candidateSharpness>previousSharpness+0.002){
+  track=verticalBaseline.map(p=>({...p}));
+  finish=track[track.length-1].s;
+ }
  // The old frame switched from world-X to world-Z when the tangent neared
  // world-X, producing an instant 90-degree rail flip. Instead carry
  // the rail's right vector continuously along the entire 3D centreline.
