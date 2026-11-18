@@ -8,7 +8,7 @@ main:fullscreen,main:-webkit-full-screen,main.pseudo-full{height:100dvh!importan
 main:fullscreen header,main:fullscreen nav,main:fullscreen footer,main:-webkit-full-screen header,main:-webkit-full-screen nav,main:-webkit-full-screen footer,main.pseudo-full header,main.pseudo-full nav,main.pseudo-full footer{display:none!important}
 main:fullscreen #stage,main:-webkit-full-screen #stage,main.pseudo-full #stage{flex:1;min-height:0}
 main:fullscreen #canvas,main:-webkit-full-screen #canvas,main.pseudo-full #canvas{width:100%;height:100%}#quit{background:#ffd5d5;color:#7b2525;white-space:nowrap}#loopMinus,#loopPlus{font-size:16px;padding:8px 10px;background:#d6e6ee}#loopCount{font-size:11px;white-space:nowrap;text-align:center;min-width:55px}#loopControls{display:none!important;align-items:center;gap:4px}button:disabled{opacity:.45}button[hidden]{display:none}footer{background:#102438;text-align:center;color:#b4c9dc;font-size:10px;padding-bottom:4px}
-</style></head><body><main><header><h1>🎢 一筆書きコースター <small style="font-size:11px">3D比較試作 v57</small></h1><span class="status" id="status">指で線を描いてください</span></header><section id="stage"><canvas id="canvas" aria-label="横から見たコースを一筆書きするエリア"></canvas><div id="hint" class="hint">横から見たコースを一筆書きしてください（左右カーブは自動）</div><button id="fullExit" hidden aria-label="全画面モードを終了">×</button><button id="fullReplay" hidden>▶ もう一度乗る</button></section><nav><button id="reset">新しく描く</button><div id="loopControls"><button id="loopMinus" aria-label="指定ループを1回減らす">−</button><span id="loopCount">ループ 自動</span><button id="loopPlus" aria-label="指定ループを1回増やす">＋</button></div><button id="go" disabled>▶ コースに乗る</button><button id="fullGo" disabled>⛶ 全画面でスタート</button><button id="side" hidden disabled aria-hidden="true" tabindex="-1">↔ 平面図を描く</button><button id="pause" hidden>一時停止</button><button id="fullResume" hidden>⛶ 全画面で再開</button><button id="quit" hidden>ここでやめる</button></nav><footer>広告・外部ライブラリなし｜曲率半径80px目標・左右レール各2倍・視点を高く</footer></main><script>
+</style></head><body><main><header><h1>🎢 一筆書きコースター <small style="font-size:11px">3D比較試作 v57</small></h1><span class="status" id="status">指で線を描いてください</span></header><section id="stage"><canvas id="canvas" aria-label="横から見たコースを一筆書きするエリア"></canvas><div id="hint" class="hint">横から見たコースを一筆書きしてください（左右カーブは自動）</div><button id="fullExit" hidden aria-label="全画面モードを終了">×</button><button id="fullReplay" hidden>▶ もう一度乗る</button></section><nav><button id="reset">新しく描く</button><div id="loopControls"><button id="loopMinus" aria-label="指定ループを1回減らす">−</button><span id="loopCount">ループ 自動</span><button id="loopPlus" aria-label="指定ループを1回増やす">＋</button></div><button id="go" disabled>▶ コースに乗る</button><button id="fullGo" disabled>⛶ 全画面でスタート</button><button id="side" hidden disabled aria-hidden="true" tabindex="-1">↔ 平面図を描く</button><button id="pause" hidden>一時停止</button><button id="fullResume" hidden>⛶ 全画面で再開</button><button id="quit" hidden>ここでやめる</button></nav><footer>広告・外部ライブラリなし｜版51から再設計・側面図だけ・個別Uターン・縦進捗</footer></main><script>
 (()=>{
 "use strict";
 const C=document.getElementById("canvas"),ctx=C.getContext("2d",{alpha:false}),go=document.getElementById("go"),fullGo=document.getElementById("fullGo"),fullResume=document.getElementById("fullResume"),fullExit=document.getElementById("fullExit"),fullReplay=document.getElementById("fullReplay"),main=document.querySelector("main"),side=document.getElementById("side"),pause=document.getElementById("pause"),quit=document.getElementById("quit"),reset=document.getElementById("reset"),loopControls=document.getElementById("loopControls"),loopCount=document.getElementById("loopCount"),loopMinus=document.getElementById("loopMinus"),loopPlus=document.getElementById("loopPlus"),hint=document.getElementById("hint"),status=document.getElementById("status");
@@ -345,7 +345,12 @@ function makeTrack(){
   for(const turn of turns)
    yaw+=Math.PI*turn.sign*smooth5((distance-turn.at+turn.span)/(2*turn.span));
   // On a normal sketch, still add mild and long-radius S turns.
-  const progress=clamp(distance/Math.max(1,originalLength),0,1);
+  let freePosition=distance,freeLength=originalLength;
+  for(const loop of verticalLoops){
+   freeLength-=loop.b-loop.a;
+   freePosition-=clamp(distance-loop.a,0,loop.b-loop.a);
+  }
+  const progress=clamp(freePosition/Math.max(1,freeLength),0,1);
   yaw+=.44*Math.sin(Math.PI*progress)**2*Math.sin(2*Math.PI*progress);
   return yaw;
  }
@@ -424,6 +429,30 @@ function makeTrack(){
     objects.push({kind:"skyline",x:side*([14,32,58,86][lane]+seed%7),z:z+(seed%9)-4,seed,lane});
    }
   }
+ }
+
+ // Remove only buildings overlapping the generated 3D route in the XZ plane.
+ // Hash route coordinates to avoid quadratic work on mobile browsers.
+ const routeBuckets=new Map(),cellSize=10;
+ for(let i=0;i<track.length;i+=5){
+  const p=track[i],ix=Math.floor(p.x/cellSize),iz=Math.floor(p.z/cellSize);
+  const key=ix+","+iz;
+  let cell=routeBuckets.get(key);if(!cell){cell=[];routeBuckets.set(key,cell);}
+  cell.push(p);
+ }
+ for(let i=objects.length-1;i>=0;i--){
+  const o=objects[i];
+  if(o.kind!=="building"&&o.kind!=="skyline")continue;
+  const ix=Math.floor(o.x/cellSize),iz=Math.floor(o.z/cellSize);
+  const radius=o.kind==="skyline"?10:7.5;
+  let hit=false;
+  for(let dx=-2;dx<=2&&!hit;dx++){
+   for(let dz=-2;dz<=2&&!hit;dz++){
+    const arr=routeBuckets.get((ix+dx)+","+(iz+dz));
+    if(arr)for(const p of arr){if(Math.hypot(o.x-p.x,o.z-p.z)<radius){hit=true;break;}}
+   }
+  }
+  if(hit)objects.splice(i,1);
  }
 
 }
@@ -636,38 +665,45 @@ function cockpit(){
  ctx.restore();
 }
 function courseMiniMap(){
- if(!track.length||finish<=0)return;
- // v57: entire mini-map is 70% of v44, including padding and markers.
- const mapScale=.7;
- const mw=Math.min(190,Math.max(120,W*.30))*mapScale;
+ if(raw.length<2||!track.length||finish<=0)return;
+ // This is explicitly the ORIGINAL side-view stroke, not the overhead
+ // world-X/world-Z plan. A 3D U-turn must never change the inset's shape.
+ const mapScale=.7,mw=Math.min(190,Math.max(120,W*.30))*mapScale;
  const mh=Math.min(128,Math.max(90,H*.31))*mapScale;
- const x=9,y=47,pad=8;
- let minZ=Infinity,maxZ=-Infinity,minY=Infinity,maxY=-Infinity;
- for(const p of track){minZ=Math.min(minZ,p.z);maxZ=Math.max(maxZ,p.z);
-  minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y)}
- const sx=(mw-2*pad)/Math.max(1,maxZ-minZ),sy=(mh-2*pad)/Math.max(1,maxY-minY);
- const xx=p=>x+pad+(p.z-minZ)*sx,yy=p=>y+mh-pad-(p.y-minY)*sy;
- ctx.save();
- ctx.fillStyle="rgba(16,36,56,.85)";ctx.fillRect(x,y,mw,mh);
- ctx.strokeStyle="#b4dce8";ctx.lineWidth=1;
- ctx.strokeRect(x+.5,y+.5,mw-1,mh-1);
- // No title, leaving more room for the route.
- ctx.beginPath();for(let i=0;i<track.length;i++){
-  const p=track[i];if(!i)ctx.moveTo(xx(p),yy(p));else ctx.lineTo(xx(p),yy(p))
- }
- ctx.lineWidth=1.7;ctx.strokeStyle="#70e3e4";ctx.stroke();
+ const x=9,y=47,pad=10;
+ let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+ for(const p of raw){minX=Math.min(minX,p.x);maxX=Math.max(maxX,p.x);
+  minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y);}
+ const scale=Math.min((mw-2*pad)/Math.max(1,maxX-minX),(mh-2*pad)/Math.max(1,maxY-minY));
+ const dx=x+(mw-(maxX-minX)*scale)*.5,dy=y+(mh-(maxY-minY)*scale)*.5;
+ const xx=p=>dx+(p.x-minX)*scale,yy=p=>dy+(p.y-minY)*scale;
+ ctx.save();ctx.fillStyle="rgba(16,36,56,.85)";ctx.fillRect(x,y,mw,mh);
+ ctx.strokeStyle="#b4dce8";ctx.lineWidth=1;ctx.strokeRect(x+.5,y+.5,mw-1,mh-1);
+ ctx.beginPath();
+ for(let i=0;i<raw.length;i++){const p=raw[i];i?ctx.lineTo(xx(p),yy(p)):ctx.moveTo(xx(p),yy(p));}
+ ctx.lineJoin="round";ctx.lineCap="round";ctx.lineWidth=1.7;ctx.strokeStyle="#70e3e4";ctx.stroke();
  function badge(p,color,label){
   const px=xx(p),py=yy(p);
   ctx.beginPath();ctx.arc(px,py,7,0,Math.PI*2);
   ctx.fillStyle=color;ctx.fill();ctx.lineWidth=1.2;ctx.strokeStyle="#f7fbff";ctx.stroke();
-  ctx.fillStyle="#fff";ctx.font="bold 9px sans-serif";ctx.textAlign="center";
-  ctx.textBaseline="middle";ctx.fillText(label,px,py+.5);
+  ctx.fillStyle="#fff";ctx.font="bold 9px sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+  ctx.fillText(label,px,py+.5);
  }
- badge(track[0],"#2278d6","S");
- badge(track[track.length-1],"#da4249","G");
- const p=sample(ridePos);ctx.beginPath();ctx.arc(xx(p),yy(p),4,0,Math.PI*2);
- ctx.fillStyle="#ffe36b";ctx.fill();ctx.strokeStyle="#111";ctx.lineWidth=1.2;ctx.stroke();
- ctx.restore();
+ badge(raw[0],"#2278d6","S");badge(raw[raw.length-1],"#da4249","G");
+ // Match the marker to progress along the original stroke's length.
+ let total=0;
+ const lengths=[0];
+ for(let i=1;i<raw.length;i++){
+  total+=Math.hypot(raw[i].x-raw[i-1].x,raw[i].y-raw[i-1].y);
+  lengths.push(total);
+ }
+ const target=total*clamp(ridePos/finish,0,1);
+ let lo=0,hi=lengths.length-1;
+ while(lo+1<hi){const mid=(lo+hi)>>1;if(lengths[mid]<target)lo=mid;else hi=mid;}
+ const a=raw[lo],b=raw[hi],t=clamp((target-lengths[lo])/(lengths[hi]-lengths[lo]||1),0,1);
+ const px=mix(xx(a),xx(b),t),py=mix(yy(a),yy(b),t);
+ ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);ctx.fillStyle="#ffe36b";ctx.fill();
+ ctx.strokeStyle="#111";ctx.lineWidth=1.2;ctx.stroke();ctx.restore();
 }
 function overlay(text){
  ctx.save();const fs=Math.round(clamp(Math.min(W,H)*.21,48,105));
@@ -738,6 +774,19 @@ function gGauge(){
  ctx.beginPath();ctx.moveTo(right-13,markerY);ctx.lineTo(right+1,markerY);ctx.stroke();
  ctx.restore();
 }
+function progressThermometer(){
+ if(mode!=="ride"&&mode!=="countdown")return;
+ const top=(fullMode?65:51)+Math.min(115,Math.max(78,H*.19))+36;
+ const height=Math.max(45,Math.min(165,H-top-83));
+ const x=W-22,ratio=clamp(finish?ridePos/finish:0,0,1);
+ ctx.save();ctx.font="bold 13px sans-serif";ctx.textAlign="right";ctx.fillStyle="#f7fbff";
+ ctx.fillText(Math.round(ratio*100)+"%",W-12,top-13);
+ ctx.lineCap="round";ctx.lineWidth=5;ctx.strokeStyle="rgba(232,247,255,.52)";
+ ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,top+height);ctx.stroke();
+ if(ratio>0){ctx.strokeStyle="#ffe478";ctx.lineWidth=7;ctx.beginPath();
+   ctx.moveTo(x,top);ctx.lineTo(x,top+height*ratio);ctx.stroke();}
+ ctx.restore();
+}
 function render(){
  camera=cam();landscape(camera);trackDraw(camera);cockpit();courseMiniMap();
  // Single-line HUD restores the map title area. The fullscreen exit
@@ -745,15 +794,12 @@ function render(){
  ctx.fillStyle="#102438db";ctx.fillRect(0,0,W,40);
  ctx.fillStyle="#fff";ctx.font="bold 14px sans-serif";
  if(fullMode){
-  // Reserve the extreme right for the × button; keep the HUD one row high.
-  ctx.textAlign="left";
-  ctx.fillText("走行 "+Math.round(100*ridePos/finish)+"%   "+Math.round(speed*5)+" km/h",12,25);
+  ctx.textAlign="left";ctx.fillText("ゲーム速度（目安） "+Math.round(speed*5)+" km/h",12,25);
  }else{
-  ctx.textAlign="left";ctx.fillText("走行 "+Math.round(100*ridePos/finish)+"%",12,25);
   ctx.textAlign="right";ctx.fillText("ゲーム速度（目安） "+Math.round(speed*5)+" km/h",W-12,25);
  }
  ctx.textAlign="left";
- gGauge();
+ gGauge();progressThermometer();
  if(mode==="countdown")overlay(String(Math.max(1,Math.ceil(countdown))));
  else if(startFlash>0)overlay("スタート！");
  if(ridePos>=finish&&mode!=="countdown"){paused=true;status.textContent="ゴール！";hint.hidden=true;pause.textContent="もう一度乗る";quit.hidden=true;fullResume.hidden=true;fullReplay.hidden=!fullMode;fullExit.hidden=!fullMode;overlay("ゴール！")}
