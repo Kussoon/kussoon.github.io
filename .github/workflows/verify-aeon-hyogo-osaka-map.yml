@@ -2,7 +2,11 @@ name: Aeon Hyogo Osaka 318 map verification
 on:
   pull_request:
     paths:
-      - 'v2/verification/aeon-hyogo-osaka-map/**'
+      - 'v2/verification/aeon-hyogo-osaka-map/index.html'
+      - 'v2/verification/aeon-hyogo-osaka-map/map.js'
+      - 'v2/verification/aeon-hyogo-osaka-map/map.css'
+      - 'v2/verification/aeon-hyogo-osaka-map/verify.cjs'
+      - 'v2/verification/aeon-hyogo-osaka-map/vendor/**'
       - '.github/workflows/verify-aeon-hyogo-osaka-map.yml'
 permissions:
   contents: read
