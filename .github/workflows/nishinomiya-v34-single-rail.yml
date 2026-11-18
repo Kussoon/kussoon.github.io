@@ -4,6 +4,8 @@ on:
     paths:
       - 'v2/nishinomiya-town-svg-single-rail-20261119-pilot.html'
       - 'scripts/test-nishinomiya-single-rail-ui.cjs'
+      - 'scripts/test-nishinomiya-pointer-slider-20261119.cjs'
+      - 'v2/common/js/town-svg-zoom-slider-drag.js'
       - 'scripts/audit-nishinomiya-single-rail-321-quiz.cjs'
       - '.github/workflows/nishinomiya-v34-single-rail.yml'
   workflow_dispatch:
@@ -34,6 +36,9 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 &
           sleep 3
           node scripts/test-nishinomiya-single-rail-ui.cjs
+      - name: Verify finger drag, framed step buttons and city-full slider minimum
+        run: |
+          node scripts/test-nishinomiya-pointer-slider-20261119.cjs
       - name: Verify all 321 quiz1 and quiz2 on new UI page
         run: |
           python3 -m http.server 8766 --bind 127.0.0.1 &
