@@ -32,6 +32,12 @@ async function run(engine,name,width,height){
    return {durationMs:performance.now()-start,delta:(window.__labelMeasureCount||0)-before};
   });
   assert.equal(input.delta,0,name+' must not synchronously measure 324 labels for 20 inputs');
+  const during=await page.evaluate(()=>{
+   const t=document.querySelector('#labels g.label')?.getAttribute('transform')||'';
+   const m=t.match(/scale\(([^)]+)\)/);
+   return {scale:m?Number(m[1]):NaN,k:d3.zoomTransform(document.querySelector('#map')).k};
+  });
+  assert(Math.abs(during.scale* during.k-1)<0.002,name+' labels must stay at constant pixel size during gesture');
   await page.waitForTimeout(250);
   const after=await page.evaluate(()=>({count:window.__labelMeasureCount,
     labels:document.querySelectorAll('#labels g.label').length,k:d3.zoomTransform(document.querySelector('#map')).k}));
