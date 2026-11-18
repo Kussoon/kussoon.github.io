@@ -5,7 +5,7 @@ const el=()=>({hidden:false,textContent:'',classList:{items:new Set(),add(x){thi
 const status=el(),panel=el(),results=el(),body=el();
 status.textContent='中断した問題：「前回の町」';
 ui.start({mode:2,status,panel,results,body});
-assert.equal(status.textContent,'クイズ2を実施中です.');
+assert.equal(status.textContent,'クイズ2を実施中です。');
 assert.equal(panel.hidden,false);assert.equal(results.hidden,true);assert(body.classList.items.has('town-quiz-mode'));
 const question=el(),feedback=el(),reveal=el(),next=el(),choices=el();
 const wrongPlaces=new Set(['以前の誤答']);let blinkStopped=0;
