@@ -46,7 +46,7 @@ async function snapshot(page){
   selected:[...document.querySelectorAll('#areas path.selected')]
    .map(el=>el.getAttribute('aria-label')),
   status:document.querySelector('#status')?.textContent||'',
-  menuCount:document.querySelectorAll('#communityOptions button[data-community]').length,
+  menuCount:document.querySelectorAll('#communityOptions button[data-community]:not([data-community=""])').length,
   scale:window.d3.zoomTransform(document.querySelector('#map')).k
  }));
 }
