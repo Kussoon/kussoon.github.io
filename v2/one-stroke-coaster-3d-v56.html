@@ -347,7 +347,7 @@ function makeTrack(){
   let yaw=0;
   for(const t of turns)yaw+=Math.PI*t.sign*ease((at-t.at+t.span)/(2*t.span));
   const p=clamp(at/Math.max(.001,originalLength),0,1);
-  return yaw+.26*Math.sin(Math.PI*p)**2*Math.sin(2*Math.PI*p);
+  return yaw+.72*Math.sin(Math.PI*p)**2*Math.sin(2*Math.PI*p);
  }
  let worldX=0,worldZ=originalTrack[0].z,heading=headingAt(0);
  for(let j=1;j<track.length;j++){
