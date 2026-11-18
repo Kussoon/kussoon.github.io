@@ -64,7 +64,7 @@ async function run(browser,city,url,width,height){
     // questions, the old Takarazuka pilot left a disabled button visible.
     // The new nationwide specification hides it in both cities.
     const normalized=before.map(item=>({...item,
-      retryWrongHidden:(!item.resultsHidden&&item.retryWrongDisabled)
+      retryWrongHidden:item.retryWrongDisabled
        ?true:item.retryWrongHidden
     }));
     assert.deepEqual(after,normalized,city.city+' '+screen+' result/retry navigation parity');
