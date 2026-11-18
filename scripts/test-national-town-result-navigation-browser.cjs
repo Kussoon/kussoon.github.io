@@ -60,7 +60,20 @@ async function run(browser,city,url,width,height){
    for(const city of cities){
     const before=await run(browser,city,city.pages[0],w,h);
     const after=await run(browser,city,city.pages[1],w,h);
-    assert.deepEqual(after,before,city.city+' '+screen+' result/retry navigation parity');
+    // The only approved difference is R-TOWN-33: when there are no wrong
+    // questions, the old Takarazuka pilot left a disabled button visible.
+    // The new nationwide specification hides it in both cities.
+    const normalized=before.map(item=>({...item,
+      retryWrongHidden:(!item.resultsHidden&&item.retryWrongDisabled)
+       ?true:item.retryWrongHidden
+    }));
+    assert.deepEqual(after,normalized,city.city+' '+screen+' result/retry navigation parity');
+    for(const item of after){
+      if(!item.resultsHidden&&item.retryWrongDisabled)
+       assert.equal(item.retryWrongHidden,true,city.city+' '+screen+' zero wrong retry must be hidden');
+      if(!item.resultsHidden&&!item.retryWrongDisabled)
+       assert.equal(item.retryWrongHidden,false,city.city+' '+screen+' nonzero wrong retry must remain visible');
+    }
     console.log('PASS NATIONAL_TOWN_RESULT_NAVIGATION_PARITY '+JSON.stringify({city:city.city,screen,states:before.length,retryWrong:true,retryAll:true,back:true}));
    }
   }finally{await browser.close()}
