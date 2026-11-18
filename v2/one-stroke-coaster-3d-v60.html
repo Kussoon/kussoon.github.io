@@ -620,38 +620,36 @@ function makeTrack(){
    objects.push({x:side*(6+(i%3)*2),z:p.z,kind:kind==="castle"&&i%4?"forest":kind==="tower"&&i%5?"forest":kind,seed:i+Math.max(0,side)});
   }
  }
- // v60: broad but visible low-rise neighbourhoods on a WORLD grid.
- // Prior grid had too few buildings within the camera's visible central cone.
- // Distribute several separated blocks throughout the landscape and extend
- // them past the finish, so the goal view does not turn into empty grassland.
- let minWorldZ=Infinity,maxWorldZ=-Infinity;
- for(const point of track){minWorldZ=Math.min(minWorldZ,point.z);maxWorldZ=Math.max(maxWorldZ,point.z);}
- for(let row=0,z=Math.floor((minWorldZ-350)/9)*9;z<=maxWorldZ+350;z+=9,row++){
-  const district=Math.floor(row/9)%6;
+ // v60: buildings follow the REAL swept 3D route after radius expansion.
+ // A fixed x=0 neighbourhood became invisible when a strict R80 course
+ // required a wider footprint. Keep structures on both sides of the track.
+ for(let d=12,index=0;d<finish+95;d+=12,index++){
+  const here=sample(Math.min(finish,d));
+  const yaw=railHeading(Math.min(finish,d));
+  const sideX=Math.cos(yaw),sideZ=-Math.sin(yaw);
   for(const side of [-1,1]){
    for(let lane=0;lane<4;lane++){
-    // Leave some green gaps without emptying whole sections.
-    const seed=row*31+lane*17+(side>0?11:0);
-    if((seed%11===0)||(district===3&&(row+lane)%4===0))continue;
-    const x=side*([8.5,15.5,24.5,36][lane]+((seed%5)-2)*.65);
-    const zz=z+((seed*3)%5)-2;
-    objects.push({x,z:zz,kind:"building",seed:Math.abs(seed),lane});
+    const seed=Math.abs(index*31+lane*17+(side>0?11:0));
+    if((seed%9===0)||((index+lane)%13===0))continue;
+    const across=side*([15,28,44,67][lane]+((seed%5)-2)*.7);
+    const depth=(seed%7)-3;
+    const x=here.x+sideX*across+Math.sin(yaw)*depth;
+    const z=here.z+sideZ*across+Math.cos(yaw)*depth;
+    objects.push({x,z,kind:"building",seed,lane});
    }
   }
  }
-
- // Distant skyline: widely spaced taller neighbourhoods on BOTH sides.
- // These stay anchored to the ground, including when seen upside down.
- for(let z=Math.floor((minWorldZ-400)/24)*24,j=0;z<=maxWorldZ+400;z+=24,j++){
-  for(const side of [-1,1]){
-   for(let lane=0;lane<4;lane++){
-    if((j+lane+(side>0?2:0))%5===0)continue;
-    const seed=j*23+lane*13+(side>0?5:0);
-    objects.push({kind:"skyline",x:side*([14,32,58,86][lane]+seed%7),z:z+(seed%9)-4,seed,lane});
-   }
+ // A more distant skyline extends the visible landscape on broad U-turns.
+ for(let d=18,index=0;d<finish+95;d+=29,index++){
+  const here=sample(Math.min(finish,d)),yaw=railHeading(Math.min(finish,d));
+  for(const side of [-1,1])for(let lane=0;lane<3;lane++){
+   const seed=Math.abs(index*19+lane*23+(side>0?7:0));
+   if(seed%7===0)continue;
+   const across=side*[52,84,121][lane];
+   objects.push({kind:"skyline",x:here.x+Math.cos(yaw)*across,
+     z:here.z-Math.sin(yaw)*across,seed,lane});
   }
  }
-
  // Remove only buildings overlapping the generated 3D route in the XZ plane.
  // Hash route coordinates to avoid quadratic work on mobile browsers.
  const routeBuckets=new Map(),cellSize=10;
