@@ -1,0 +1,17 @@
+name: National town multipart label contract
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-multipart-label-contract.js'
+      - 'scripts/test-national-town-multipart-label-contract.cjs'
+      - '.github/workflows/national-town-multipart-label-contract.yml'
+  workflow_dispatch:
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-national-town-multipart-label-contract.cjs
