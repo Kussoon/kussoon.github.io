@@ -1,0 +1,51 @@
+name: National town quiz presentation parity
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-quiz-ui.js'
+      - 'v2/nishinomiya-town-svg-quiz-ui-20261118-pilot.html'
+      - 'v2/takarazuka-town-svg-quiz-ui-20261118-pilot.html'
+      - 'v2/common/js/town-map-quiz-ui-takarazuka-20261118-pilot.js'
+      - 'scripts/test-national-town-quiz-ui-*.cjs'
+      - '.github/workflows/national-town-quiz-ui.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify quiz display rules, interruption cleanup, result summaries
+        run: node scripts/test-national-town-quiz-ui-contract.cjs
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - run: ./v2/tests/browser/node_modules/.bin/playwright install --with-deps chromium webkit
+      - name: Fetch approved municipality datasets
+        run: |
+          mkdir -p nishinomiya/data takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Compare both cities quiz screens with exact old/new browser state
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/test-national-town-quiz-ui-browser.cjs
+      - name: Preserve the approved full Nishinomiya 321-town quiz coverage
+        run: |
+          node scripts/audit-nishinomiya-v34-shared-update-321-quiz.cjs
