@@ -75,16 +75,22 @@ async function test(name,engine,width,height){
   // a synthetic touch event as a real iPhone swipe.
   let touchPan=null,touchTap=null,webKitSyntheticPan=null;
   if(width<600){
-   await page.evaluate(()=>{window.__townAuditInputs={touch:0,pointer:0};
-    document.addEventListener('touchstart',()=>window.__townAuditInputs.touch++,true);
+   // Buttons and locator.doubleClick may scroll a mobile page; never use
+   // coordinates saved before those actions.
+   const liveRect=await page.locator('#map').boundingBox();
+   await page.evaluate(()=>{window.__townAuditInputs={touch:0,pointer:0,inside:0,targets:[]};
+    document.addEventListener('touchstart',e=>{window.__townAuditInputs.touch++;
+      window.__townAuditInputs.inside+=Number(document.querySelector('#map').contains(e.target));
+      window.__townAuditInputs.targets.push(e.target.tagName);
+    },true);
     document.addEventListener('pointerdown',()=>window.__townAuditInputs.pointer++,true);
    });
-   await page.touchscreen.tap(rect.x+rect.width*.50,rect.y+rect.height*.45);
+   await page.touchscreen.tap(liveRect.x+liveRect.width*.50,liveRect.y+liveRect.height*.45);
    const inputs=await page.evaluate(()=>window.__townAuditInputs);
    touchTap=inputs.touch>0||inputs.pointer>0;
    if(name.startsWith('chromium')){
     const cdp=await page.context().newCDPSession(page);
-    const pre=await state(page),x=rect.x+rect.width*.55,y=rect.y+rect.height*.55;
+    const pre=await state(page),x=liveRect.x+liveRect.width*.55,y=liveRect.y+liveRect.height*.55;
     await page.evaluate(()=>{window.__townAuditTouchTrace={start:0,move:0,end:0};
      for(const t of ['touchstart','touchmove','touchend'])document.addEventListener(t,()=>{
        const k=t.replace('touch','');window.__townAuditTouchTrace[k]++
@@ -99,7 +105,7 @@ async function test(name,engine,width,height){
     await page.waitForTimeout(160);
     const after=await state(page);
     const diag=await page.evaluate(()=>({trace:window.__townAuditTouchTrace,maxTouchPoints:navigator.maxTouchPoints,ontouchstart:'ontouchstart' in document.querySelector('#map'),hasD3TouchStart:typeof window.d3.select('#map').on('touchstart.zoom')==='function',hasD3TouchMove:typeof window.d3.select('#map').on('touchmove.zoom')==='function',touchAction:getComputedStyle(document.querySelector('#map')).touchAction}));
-    console.log('TOUCH_TRACE '+JSON.stringify({browser:name,diag,before:{x:pre.x,y:pre.y,k:pre.k},after:{x:after.x,y:after.y,k:after.k}}));
+    console.log('TOUCH_TRACE '+JSON.stringify({browser:name,inputs,liveRect,diag,before:{x:pre.x,y:pre.y,k:pre.k},after:{x:after.x,y:after.y,k:after.k}}));
     touchPan=Math.hypot(after.x-pre.x,after.y-pre.y)>10;
    }
   }
