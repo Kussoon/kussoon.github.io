@@ -80,7 +80,7 @@ async function run(driver,name,width,height){
   s=await snapshot(page);
   assert.equal(s.readings,s.labels,name+' reading ON must have a reading for each visible label');
   await page.locator('#larger').click();
-  assert.match(await page.locator('#size').innerText(),/125％/);
+  assert.match((await page.locator('#size').innerText()).replace(/\s/g,''),/125％/);
   await page.locator('#size').click();
   await page.locator('#zoomIn').click();
   const zoomed=await snapshot(page);
