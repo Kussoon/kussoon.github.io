@@ -29,8 +29,9 @@ jobs:
         run: git diff --exit-code -- v2/data v2/audit/*.json
   real-browser:
     # Keep the OS aligned with the pinned Playwright browser dependencies.
+    # Ubuntu package mirrors can be slow: allow browser setup to finish before running unchanged tests.
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
