@@ -43,6 +43,15 @@
   result.textContent=quit?'途中終了：'+answered+' / '+total+'問終了（間違えた問題 '+wrongCount+'件）':
    total+'問中 '+score+'点（間違えた問題 '+wrongCount+'件）';
  }
+ // National rule: if no wrong questions remain, the retry-wrong action
+ // has no valid destination. Remove it from the visual and focus order.
+ function syncWrongRetry({retryWrong,wrongCount}){
+  requireNode(retryWrong);
+  if(!Number.isSafeInteger(wrongCount)||wrongCount<0)throw new TypeError('誤答数が不正です');
+  const available=wrongCount>0;
+  retryWrong.hidden=!available;
+  retryWrong.disabled=!available;
+ }
  function bindResultActions({next,quit,retryWrong,retryAll,back,
                               advanceQuestion,finishEarly,startQuiz,getLastMode,getWrongNames,returnToRegions}){
   for(const button of [next,quit,retryWrong,retryAll,back])requireNode(button);
@@ -56,7 +65,7 @@
   retryAll.onclick=()=>startQuiz(getLastMode());
   back.onclick=()=>returnToRegions();
  }
- const api=Object.freeze({start,clearQuestion,showQuestion,correct,finish,bindResultActions});
+ const api=Object.freeze({start,clearQuestion,showQuestion,correct,finish,bindResultActions,syncWrongRetry});
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
  root.KussoonTownSvgQuizUI=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
