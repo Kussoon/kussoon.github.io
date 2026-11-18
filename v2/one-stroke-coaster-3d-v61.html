@@ -626,7 +626,25 @@ function makeTrack(){
      scale(b,Math.sin(t*angle)/Math.sin(angle))));
   }
   const result=[{...source[0]}],pos=V(source[0].x,source[0].y,source[0].z);
+  // Identified circular vertical loops are protected rigid segments.
+  // The automatically generated surroundings may expand, but the exact
+  // point-to-point shape INSIDE the loop is copied (translation only).
+  const fixedLoops=used.map(z=>{
+   const from=z.start/(knots.length-1),to=z.end/(knots.length-1);
+   let first=source.findIndex(p=>p.sketchFraction>=from);
+   let last=source.findIndex(p=>p.sketchFraction>=to);
+   if(last<0)last=source.length-1;
+   return{first:Math.max(0,first),last,offset:null};
+  }).filter(z=>z.last>z.first);
   for(let i=0;i<source.length-1;i++){
+   const fixed=fixedLoops.find(z=>i>=z.first&&i<z.last);
+   if(fixed){
+    if(!fixed.offset)fixed.offset=sub(pos,source[i]);
+    const next=add(source[i+1],fixed.offset);
+    pos.x=next.x;pos.y=next.y;pos.z=next.z;
+    result.push({...source[i+1],x:pos.x,y:pos.y,z:pos.z,s:0});
+    continue;
+   }
    const a=source[i],b=source[i+1],u=tangent[i],v=tangent[i+1];
    const angle=Math.acos(clamp(dot(u,v),-1,1));
    const length=Math.max(Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z),radius*angle*1.30);
