@@ -1,0 +1,15 @@
+'use strict';
+const assert=require('node:assert/strict');
+const api=require('../v2/common/js/town-svg-view-actions.js');
+const records=[];
+const zoom={transform(){}};
+const svg={call(fn,value){records.push({fn,value});return this}};
+const identity={translate(x,y){return {scale(k){return {x,y,k}}}}};
+assert.strictEqual(api.apply({svg,zoom,transform:{x:1,y:2,k:3}}),svg);
+assert.deepEqual(records[0],{fn:zoom.transform,value:{x:1,y:2,k:3}});
+assert.strictEqual(api.fromFit({svg,zoom,d3:{zoomIdentity:identity},fit:{x:14,y:22,scale:1.8}}),svg);
+assert.deepEqual(records[1],{fn:zoom.transform,value:{x:14,y:22,k:1.8}});
+assert.throws(()=>api.apply({svg,zoom,transform:null}),TypeError);
+assert.throws(()=>api.fromFit({svg,zoom,d3:{zoomIdentity:identity},fit:{x:1,y:2,scale:0}}),TypeError);
+assert.equal(records.length,2);
+console.log('PASS NATIONAL_TOWN_VIEW_ACTIONS_CONTRACT');
