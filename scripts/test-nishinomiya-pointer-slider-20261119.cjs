@@ -1,7 +1,7 @@
 'use strict';
 // TOWNMAP-SSOT-001 comparison: real pointer dragging; min means whole city.
 const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict');
-const url='http://127.0.0.1:8765/v2/nishinomiya-town-svg-single-rail-20261119-pilot.html';
+const url='http://127.0.0.1:8767/v2/nishinomiya-town-svg-single-rail-20261119-pilot.html';
 async function run(engine,name,width,height){
  const browser=await engine.launch();
  try{
