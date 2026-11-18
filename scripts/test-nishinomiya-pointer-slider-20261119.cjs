@@ -21,6 +21,9 @@ async function run(engine,name,width,height){
   await page.locator('#communityToggle').click();
   await page.locator('#communityOptions button[data-community="上ヶ原"]').click();
   assert(!((await read()).city.includes('市全域')),'must select region for bottom reset test');
+  // Mobile map is below the fold. Playwright mouse does not scroll on its
+  // own; bring the rail into the viewport before sending real pointer moves.
+  await page.locator('.zoom-slider-well').scrollIntoViewIfNeeded();
   const current=await read();
   const x=current.track.left+current.track.width/2;
   // First touch the current thumb and drag toward the top in real pointer events.
@@ -45,6 +48,7 @@ async function run(engine,name,width,height){
   await page.locator('#zoomMinus').click();const decreased=(await read()).k;
   assert(decreased<increased,name+' minus must decrease zoom');
   // Drag thumb to the very bottom; it must restore 321-town whole-city view.
+  await page.locator('.zoom-slider-well').scrollIntoViewIfNeeded();
   const u=await read(),ty=u.thumb.top+u.thumb.height/2;
   await page.mouse.move(x,ty);await page.mouse.down();
   await page.mouse.move(x,u.track.bottom+10,{steps:9});await page.mouse.up();
