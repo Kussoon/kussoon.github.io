@@ -502,15 +502,19 @@ function makeTrack(){
   return t;
  }
  function appendConnector(start,end,startTangent,endTangent,span,startFraction,endFraction){
+  // Quintic Hermite connector: match position and tangent at both ends while
+  // forcing zero endpoint curvature, so the translated loop meets its lead-in
+  // and lead-out without a sharp curvature jump.
   const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
   const handle=Math.max(3,span*.44);
-  const c1=add(start,scale(startTangent,handle)),c2=sub(end,scale(endTangent,handle));
-  const steps=Math.max(12,Math.ceil((distance+2*handle)/.48));
+  const m0=scale(startTangent,handle),m1=scale(endTangent,handle),d=sub(end,start);
+  const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
+  const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
+  const c5=add(sub(scale(d,6),scale(m0,3)),scale(m1,-3));
+  const steps=Math.max(24,Math.ceil((distance+2*handle)/.24));
   for(let k=1;k<=steps;k++){
-   const t=k/steps,u=1-t;
-   const p=V(u*u*u*start.x+3*u*u*t*c1.x+3*u*t*t*c2.x+t*t*t*end.x,
-    u*u*u*start.y+3*u*u*t*c1.y+3*u*t*t*c2.y+t*t*t*end.y,
-    u*u*u*start.z+3*u*u*t*c1.z+3*u*t*t*c2.z+t*t*t*end.z);
+   const t=k/steps,t2=t*t,t3=t2*t,t4=t3*t,t5=t4*t;
+   const p=add(start,add(add(scale(m0,t),scale(c3,t3)),add(scale(c4,t4),scale(c5,t5))));
    routed.push({x:p.x,y:p.y,z:p.z,s:0,sketchFraction:mix(startFraction,endFraction,t)});
   }
  }
@@ -550,7 +554,7 @@ function makeTrack(){
     plane.lane=0;targetOffset=V();
    }
    const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
-   const ramp=Math.max(8,Math.sqrt(60*delta));
+   const ramp=Math.max(8,Math.sqrt(100*delta));
    if(previousPlane){
     transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
    }
