@@ -3,10 +3,11 @@
 (function(root){
  'use strict';
  function positions(feature,{nameProperty='S_NAME',multiLabels={},extraLabels={},labelOffsets={},projection,projectedAt}){
-  const name=feature.properties[nameProperty],multi=multiLabels[name],extra=extraLabels[name]||[];
-  if(multi)return multi.map(x=>({point:projection([x[1],x[0]]),offset:[0,0]}));
+  const name=feature.properties[nameProperty],multi=multiLabels[name];
+  // One label per named town; retain the first existing approved anchor.
+  if(multi&&multi.length)return [{point:projection([multi[0][1],multi[0][0]]),offset:[0,0]}];
   const first=projectedAt(feature);
-  return [{point:first,offset:labelOffsets[name]||[0,0]},...extra.map(x=>({point:projection([x[1],x[0]]),offset:[0,0]}))];
+  return [{point:first,offset:labelOffsets[name]||[0,0]}];
  }
  function makeData(features,locate,nameProperty='S_NAME'){
   return features.flatMap(f=>locate(f).filter(x=>x.point.every(Number.isFinite)).map((p,i)=>({...p,name:f.properties[nameProperty],id:f.properties[nameProperty]+':'+i})));
