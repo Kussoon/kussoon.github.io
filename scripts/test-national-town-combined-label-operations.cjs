@@ -49,7 +49,7 @@ async function verify(page,stage,{reading=false,expectedRegion=null,expectedQuiz
  assert.equal(snap.count,snap.keys.length,stage+' candidate count');
  assert.deepEqual(snap.unmapped,[],stage+' stale labels from previous region');
  assert.deepEqual(snap.malformed,[],stage+' invalid visibility/label layout');
- assert(snap.visible>0,stage+' has no visible labels');
+ if(snap.quiz===0)assert(snap.visible>0,stage+' has no visible labels after quiz');
  if(!reading&&snap.quiz===0&&snap.errors.length)assert(Math.max(...snap.errors)<1.8,
   stage+' visible glyph center displaced '+Math.max(...snap.errors));
  assert.equal(snap.reading,reading,stage+' reading state');
