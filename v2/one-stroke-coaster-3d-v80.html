@@ -1060,10 +1060,9 @@ quit.onclick=()=>{
 };
 reset.onclick=()=>{reset.textContent="新しく描く";raw=[];track=[];objects=[];loopZones=[];countdown=0;startFlash=0;launchElapsed=0;speed=0;length=0;drawing=false;mode="edit";go.hidden=false;go.disabled=true;fullReplay.hidden=true;fullGo.hidden=false;fullGo.disabled=true;side.hidden=false;side.disabled=true;sideRaw=[];sideDrawing=false;editPlane="height";side.textContent="↔ 平面図を描く";pause.hidden=true;fullResume.hidden=true;quit.hidden=true;loopControls.hidden=false;manualLoops=0;updateLoopControls();hint.hidden=false;hint.textContent="横から見たコースを一筆書きしてください（左右カーブは自動）";status.textContent="側面図を指で描いてください";editor()};
 // At 95%, apply the requested sharp brake and hold 15 km/h to the goal.
-// Detect a crossing within this frame so a high speed cannot skip the marker.
 function updateRideSpeed(dt){
  const brakeMark=finish*.95;
- if(ridePos>=brakeMark||ridePos+speed*dt>=brakeMark){
+ if(ridePos>=brakeMark){
   speed=3; // displayed speed: 15 km/h
   launchElapsed=3;
   return;
@@ -1091,6 +1090,17 @@ function updateRideSpeed(dt){
   }
  }
 }
+// Split a frame that crosses the marker: reach exactly 95% at the old speed,
+// then spend the rest of that frame at 15 km/h. This avoids braking early or
+// jumping past the threshold at a high speed.
+function advanceRidePosition(dt){
+ const brakeMark=finish*.95,next=ridePos+speed*dt;
+ if(ridePos<brakeMark&&speed>0&&next>=brakeMark){
+  const timeToMark=clamp((brakeMark-ridePos)/speed,0,dt);
+  ridePos=Math.min(finish,brakeMark+3*(dt-timeToMark));
+  speed=3;launchElapsed=3;
+ }else ridePos=Math.min(finish,next);
+}
 function loop(t){
  const dt=clamp((t-last)/1000||0,0,.05);last=t;
  if(mode==="countdown"){
@@ -1101,7 +1111,7 @@ function loop(t){
   if(!paused){
    if(startFlash>0)startFlash=Math.max(0,startFlash-dt);
    updateRideSpeed(dt);
-   ridePos=Math.min(finish,ridePos+speed*dt);
+   advanceRidePosition(dt);
   }
   render();
  }
