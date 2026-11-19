@@ -11,19 +11,13 @@
  function makeData(features,locate,nameProperty='S_NAME'){
   return features.flatMap(f=>locate(f).filter(x=>x.point.every(Number.isFinite)).map((p,i)=>({...p,name:f.properties[nameProperty],id:f.properties[nameProperty]+':'+i})));
  }
- // R-TOWN-00/14: one SVG label-element creation contract.
- // The data key and reading source may be supplied by any municipality
- // dataset. Defaults preserve the adopted Nishinomiya render path exactly.
- function render(labels,data,d3,readings,readingOn,options={}){
-  const key=options.key||((d)=>d.id);
-  const read=options.reading||((d)=>readings[d.name]);
-  const g=labels.selectAll('g.label').data(data,key).join('g').attr('class','label');
+ function render(labels,data,d3,readings,readingOn){
+  const g=labels.selectAll('g.label').data(data,d=>d.id).join('g').attr('class','label');
   g.each(function(d){
    const el=d3.select(this);el.selectAll('*').remove();
    const t=el.append('text').attr('class','town-label');
    t.append('tspan').attr('class','town-name').attr('x',0).text(d.name);
-   const phonetic=readingOn?read(d):'';
-   if(phonetic)t.append('tspan').attr('class','town-reading').attr('x',0).text(phonetic);
+   if(readingOn&&readings[d.name])t.append('tspan').attr('class','town-reading').attr('x',0).text(readings[d.name]);
   });
  }
  const api=Object.freeze({positions,makeData,render});

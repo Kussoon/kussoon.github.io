@@ -2,21 +2,17 @@
  * Only orders candidate town IDs: no municipality rules, geometry renderer,
  * UI markup, scoring, or random generator are embedded here.
  * Maintains Nishinomiya V9 prioritization and stable tie handling.
- * Optional sameRegion callback represents shared memberships; without it,
- * the Nishinomiya primaryRegion behavior is byte-for-byte unchanged.
  */
 (function(root){
  'use strict';
- function select(target,{townNames,scopeNames,adjacency,primaryRegion,sameRegion,distance,shuffle}){
+ function select(target,{townNames,scopeNames,adjacency,primaryRegion,distance,shuffle}){
   if(typeof target!=='string'||!target||!Array.isArray(townNames)||!townNames.includes(target))
    throw new Error('Invalid quiz target');
   if(typeof distance!=='function'||typeof shuffle!=='function')
    throw new Error('Distance and shuffle callbacks are required');
   const all=townNames.filter(name=>name!==target);
   const scope=new Set(scopeNames);
-  const group=name=>typeof sameRegion==='function'
-   ?Boolean(sameRegion(name,target))
-   :primaryRegion.get(name)===primaryRegion.get(target);
+  const group=name=>primaryRegion.get(name)===primaryRegion.get(target);
   const neighbors=all.filter(name=>adjacency.get(target)?.has(name));
   const sorted=values=>values.sort((a,b)=>distance(a)-distance(b));
   const ordered=[],used=new Set();
