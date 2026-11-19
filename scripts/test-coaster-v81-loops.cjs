@@ -101,6 +101,8 @@ async function run(browserType,label){
   await page.goto('http://127.0.0.1:8765/v2/one-stroke-coaster-3d-v82.html',{waitUntil:'domcontentloaded'});
   await page.waitForTimeout(80);
   assert.match(await page.title(),/v82/);
+  const testFunctionType=await page.evaluate(()=>typeof window.__runLoopTest);
+  assert.equal(testFunctionType,'function',`v82 test hook missing; page errors: ${errors.join(' | ')}`);
   const overlap=await page.evaluate(points=>window.__runLoopTest(points),stroke([80,80,80],0));
   assert.equal(overlap.snapshot.used.length,3,'v82 must retain three side-view loops whose paths overlap');
   const planes=await page.evaluate(()=>window.__planeSnapshot);
