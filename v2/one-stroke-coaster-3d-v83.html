@@ -433,7 +433,7 @@ function makeTrack(){
  // exit section so its tangent leaves the circle and rejoins the drawn path.
  const loopExitRanges=used.map((zone,index)=>({
   zone,high:zone.end/(knots.length-1),
-  nextLow:index+1<used.length?used[index+1].start/(knots.length-1):1
+  nextLow:index+1<used.length?used[index+1].start/(knots.length-1):null
  })).sort((a,b)=>a.high-b.high);
  for(const item of loopExitRanges){
   const endIndex=track.findIndex(p=>p.sketchFraction>=item.high-1e-9);
@@ -443,8 +443,10 @@ function makeTrack(){
   let joinIndex=endIndex+1;
   while(joinIndex<track.length&&track[joinIndex].s-p0.s<blendLength)joinIndex++;
   if(joinIndex>=track.length-1)continue;
-  const nextLoopIndex=track.findIndex(p=>p.sketchFraction>=item.nextLow-1e-9);
-  if(nextLoopIndex>0&&joinIndex>=nextLoopIndex-2)continue;
+  if(item.nextLow!==null){
+   const nextLoopIndex=track.findIndex(p=>p.sketchFraction>=item.nextLow-1e-9);
+   if(nextLoopIndex>0&&joinIndex>=nextLoopIndex-2)continue;
+  }
   const p1=track[joinIndex],length=p1.s-p0.s;
   if(length<2)continue;
   const tangentAtPoint=k=>{
