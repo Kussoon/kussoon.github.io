@@ -208,12 +208,12 @@ function makeTrack(){
   const seam=originalKnots[i],dx=seam.x-candidate.cx,dy=seam.y-candidate.cy;
   const radial=Math.hypot(dx,dy)||1;
   const cx=seam.x-dx/radial*r,cy=seam.y-dy/radial*r;
-  const arc=[0];
+  const arcProgress=[0];
   for(let k=i+1;k<=end;k++){
    const p=originalKnots[k],q=originalKnots[k-1];
-   arc.push(arc[arc.length-1]+Math.hypot(p.x-q.x,p.y-q.y));
+   arcProgress.push(arcProgress[arcProgress.length-1]+Math.hypot(p.x-q.x,p.y-q.y));
   }
-  const totalArc=arc[arc.length-1]||1;
+  const totalArc=arcProgress[arcProgress.length-1]||1;
   const startAngle=Math.atan2(seam.y-cy,seam.x-cx),direction=candidate.sign||1;
   for(let k=i+1;k<end;k++){
    const t=arc[k-i]/totalArc,theta=startAngle+direction*2*Math.PI*t;
