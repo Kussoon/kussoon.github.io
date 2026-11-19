@@ -1,0 +1,28 @@
+name: Coaster v81 small loop preservation
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/one-stroke-coaster-support-clearance.js'
+      - 'v2/one-stroke-coaster-3d-v81.html'
+      - 'v2/one-stroke-coaster-3d-v80.html'
+      - 'scripts/test-coaster-v81-loops.cjs'
+      - '.github/workflows/coaster-v81-small-loops.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  loop-stress:
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    timeout-minutes: 20
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Test isolated, small, repeated and non-loop strokes in Chromium and WebKit
+        run: node scripts/test-coaster-v81-loops.cjs
