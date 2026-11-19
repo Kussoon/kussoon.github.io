@@ -39,7 +39,23 @@ body.quiz-active #quiz .buttons{margin-top:7px;gap:5px}
 body.quiz-active #quiz .buttons button{min-height:40px;padding:5px 9px}
 }
 @media(prefers-color-scheme:dark){:root{--bg:#171b22;--surface:#252b35;--text:#f0f3f8;--muted:#bbc7d6;--border:#4b5666;--accent:#a3c9fc;--accentText:#152238;--good:#19775c;--bad:#a7414f;--soft:#343e4d;--shadow:0 12px 32px #0004}.sources-details a{color:#b9d8ff}}
-</style></head><body><main class="container"><header><div class="eyebrow">Kussoon / 検証版 v1.0 preview</div><h1>難読名前クイズ</h1><p class="intro">この名前、読めますか？ 頭の中で答えてから読み方を開き、自分で採点するクイズです。</p></header>
+.story-details{margin-top:16px;border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden}
+.story-details summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;font-weight:700}
+.story-details summary::-webkit-details-marker{display:none}
+.story-details summary::after{content:"＋";font-size:1.15rem;color:var(--muted);flex-shrink:0}
+.story-details[open] summary::after{content:"−"}
+.story-details summary:focus-visible{outline:3px solid #da9c36;outline-offset:-3px}
+.story-body{border-top:1px solid var(--border);padding:9px 17px 16px;font-size:.93rem;line-height:1.85}
+.story-body p{margin:12px 0}
+@media(max-width:500px){.story-details{margin-top:12px}.story-details summary{padding:11px 13px}.story-body{padding:8px 13px 12px;font-size:.9rem}}
+</style></head><body><main class="container"><header><div class="eyebrow">Kussoon / 検証版 v1.0 preview</div><h1>難読名前クイズ</h1><p class="intro">この名前、読めますか？ 頭の中で答えてから読み方を開き、自分で採点するクイズです。</p>
+<details class="story-details"><summary>このクイズを作った理由</summary>
+<div class="story-body">
+<p>下の名前は、親から授かる最初の大きなプレゼントとも言われます。名付けの本もたくさん出版されていますが、自分が親になって子どもの名前を考えるとき、初めて親が自分の名前に込めた思いが分かるのかもしれません。</p>
+<p>私の下の名前は、どちらかといえば一度で読むのが難しいほうだと思います。ただ、分解してみると特に当て字ではないので、いわゆる難読名とまでは言えないのでは、と勝手に思っています。</p>
+<p>さて、みなさんもテレビ番組やニュースなどで、いろいろな人の名前を目にしたり耳にしたりすることがあると思います。そんなとき浮かぶのが「これ、何と読むの？」という疑問です。こうした名前は「難読名」「難読ネーム」、ときには「キラキラネーム」とも呼ばれます。</p>
+<p>私は、そうした名前を初見で読めるようになりたいと考えていました。そこで、そのトレーニング用のページを作ることにしました。ぜひ、みなさんもチャレンジしてみてください。</p>
+</div></details></header>
 <section id="start" class="panel"><h2>クイズをはじめる</h2><p>登録された198件からランダムに20問を出題します。名前の読み方に正解は一つとは限りません。</p><div class="subhead"><b>出題範囲</b></div><div class="options"><label><input type="radio" name="pool" value="all" checked>全198件から出題</label><label><input type="radio" name="pool" value="rare">希少名42件から出題</label></div><div class="small">※「希少名」は第5次追加分を示し、難易度を保証する分類ではありません。</div><div class="buttons"><button class="primary" id="startBtn">20問に挑戦する</button><button id="resumeBtn" class="hidden">前回の続きから再開</button></div><p class="disclaimer">回答は入力せず、自己採点で記録します。途中経過はこのブラウザ内に保存されます（閲覧環境によって保存できない場合があります）。</p>
 <details class="sources-details"><summary>名前の出典・調査について</summary><div class="sources-body"><p>本クイズでは、公開された名付けランキングや名前の調査資料を参考に、実際の使用例が報告されている名前を収録しています。</p><p>主な参考資料：</p><ul><li><a href="https://baby-calendar.jp/nazuke/" target="_blank" rel="noopener noreferrer">ベビーカレンダー｜名前ランキング</a></li><li><a href="https://st.benesse.ne.jp/ninshin/name/" target="_blank" rel="noopener noreferrer">たまひよ｜赤ちゃんの名前ランキング</a></li></ul><p>表示する読み方は調査資料で確認された使用例であり、考えられるすべての読み方を示すものではありません。名前ごとの参照先URLは管理用台帳に保存しています。</p></div></details></section>
 <section id="quiz" class="panel hidden" aria-live="polite"><div class="row"><span class="label-pill" id="modeText"></span><strong class="stat" id="progressText">第1問 / 20問</strong></div><div class="progress"><div class="bar" id="progressBar"></div></div><div class="question">この名前、何と読む？</div><div class="name" id="questionName"></div><div id="before" class="pre-answer"><div class="play-stats" aria-live="off"><span>ここまでの成績</span><strong id="runningStats">正解 0問 ・ 0点</strong></div><p class="think-tip">読み方を頭の中で決めたら、答えを開いてみましょう。<br>正解・不正解は自分で判定します。</p><div class="buttons"><button class="primary" id="revealBtn">読み方を見る</button></div></div><div id="after" class="hidden"><div class="answer"><div class="small">出典で確認できた読み方</div><div class="reading" id="answerReading"></div><div class="small">※これ以外の読み方が存在する場合もあります。</div></div><p class="question">あなたの予想は合っていましたか？</p><div class="buttons"><button id="correctBtn" class="yes">✓ 正解した（5点）</button><button id="incorrectBtn" class="no">✕ 不正解だった（0点）</button></div></div><div class="buttons"><button class="ghost" id="quitBtn">中断してトップへ</button></div></section>
