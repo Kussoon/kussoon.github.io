@@ -213,7 +213,7 @@ function makeTrack(){
   // and retains its fitted orientation.
   if(i>3&&end<originalKnots.length-2){
    const exit=originalKnots[end+1],tx=exit.x-seam.x,ty=exit.y-seam.y,tl=Math.hypot(tx,ty)||1;
-   cx=seam.x+r*direction*ty/tl;cy=seam.y-r*direction*tx/tl;
+   cx=seam.x-r*direction*ty/tl;cy=seam.y+r*direction*tx/tl;
   }
   const arcProgress=[0];
   for(let k=i+1;k<=end;k++){
