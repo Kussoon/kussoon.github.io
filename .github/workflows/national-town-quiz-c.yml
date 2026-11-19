@@ -22,6 +22,10 @@ jobs:
   browser:
     runs-on: ubuntu-24.04
     timeout-minutes: 40
+    # Use Playwright's version-matched image: browser binaries and OS deps are
+    # already installed, so CI cannot stall before reaching app/browser tests.
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
     env:
       NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
     steps:
@@ -32,7 +36,6 @@ jobs:
           cache: npm
           cache-dependency-path: v2/tests/browser/package-lock.json
       - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
-      - run: ./v2/tests/browser/node_modules/.bin/playwright install --with-deps chromium webkit
       - name: Fetch source datasets
         run: |
           mkdir -p nishinomiya/data takarazuka/data
