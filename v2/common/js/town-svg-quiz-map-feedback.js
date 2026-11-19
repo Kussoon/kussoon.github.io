@@ -1,7 +1,7 @@
 /* TOWNMAP-SSOT-001 R-TOWN-15/31/32/35
- * Municipality-neutral quiz map feedback: wrong taps stay red throughout
- * the current quiz; yellow correct-answer and blinking highlight belongs
- * only to the current question. Scoring/session state is separate.
+ * Municipality-neutral quiz map feedback: wrong taps accumulate ONLY within
+ * the current question, and yellow correct-answer/blinking highlight also
+ * belongs only to that question. Do not clear the separate scoring history.
  */
 (function(root){
  'use strict';
@@ -17,7 +17,7 @@
     .classed('blink',r=>r.name===blinkName);
   }
   function startQuiz(){wrongPlaces.clear();currentCorrect='';blinkName='';paint()}
-  function nextQuestion(){currentCorrect='';blinkName='';paint()}
+  function nextQuestion(){wrongPlaces.clear();currentCorrect='';blinkName='';paint()}
   function wrong(name){
    if(typeof name!=='string'||!name)throw new TypeError('不正解の町名が必要です');
    wrongPlaces.add(name);paint();
