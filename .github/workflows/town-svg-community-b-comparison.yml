@@ -39,7 +39,6 @@ jobs:
       - name: Verify nationwide region state on Chromium and WebKit
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 &
-          python3 -m http.server 8772 --bind 127.0.0.1 &
           sleep 3
           node scripts/test-town-svg-community-b-browser-20261119.cjs
       - name: Keep existing town slider and control behavior on both cities
