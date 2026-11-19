@@ -55,7 +55,7 @@ function validateLoop(data,zone){
  }
  assert(Math.abs(winding)>3.4,'the protected loop core must preserve a full turn');
  const low=zone.start/(data.snapshot.knots.length-1),high=zone.end/(data.snapshot.knots.length-1);
- const route=data.track.filter(p=>p.sketchFraction>=low-0.002&&p.sketchFraction<=high+0.002);
+ const route=data.track.filter(p=>p.sketchFraction>=low&&p.sketchFraction<=high);
  assert(route.length>=10,'the generated 3D route must contain the loop span');
  const a=route[0],b=route.at(-1),gap=Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);
  assert(gap<.7,`the 3D loop entry and exit must join near the same point (diameter=${zone.r*2}px, gap=${gap.toFixed(3)} world units)`);
