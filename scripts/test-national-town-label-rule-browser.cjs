@@ -37,6 +37,9 @@ async function test(browserType,device,width,height){
   assert.equal(await page.locator('#body tr').count(),2);
   await page.locator('#filter').selectOption('holes');
   assert.equal(await page.locator('#body tr').count(),3);
+  await page.locator('#filter').selectOption('outside');
+  assert.equal(await page.locator('#body tr').count(),s.approvedOutsideSource,
+   'outside anchors must be shown as diagnostic, not silently repaired');
   await page.locator('#filter').selectOption('all');
   assert.equal(await page.locator('#body tr').count(),321);
   await page.locator('#query').fill('上山口');
@@ -56,7 +59,9 @@ async function test(browserType,device,width,height){
     {name:'山口町上山口',approved:2,automatic:1},
     {name:'山口町下山口',approved:2,automatic:2},
     {name:'塩瀬町名塩',approved:2,automatic:2}
-   ],maxDistance:Math.max(...actual.rows.map(r=>r.maximumAnchorDeviation)),
+   ],outsideAnchorNames:actual.rows.filter(r=>r.approvedInside!==r.acceptedCount)
+    .map(r=>({name:r.name,approved:r.acceptedCount,inside:r.approvedInside})),
+   maxDistance:Math.max(...actual.rows.map(r=>r.maximumAnchorDeviation)),
    topDistance:actual.rows.slice(0,8).map(r=>({name:r.name,d:r.maximumAnchorDeviation,
     approved:r.acceptedCount,automatic:r.automaticCount}))}));
  }finally{await browser.close()}
