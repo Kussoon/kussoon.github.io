@@ -74,7 +74,8 @@ async function run(browserType,label){
    const generated=await page.evaluate(points=>window.__runLoopTest(points),route);
    const planes=await page.evaluate(()=>window.__planeSnapshot);
    const gaps=[];for(let i=0;i<planes.length;i++)for(let j=i+1;j<planes.length;j++)gaps.push(actualLoopGap(planes[i],planes[j]));
-   const fractionBacktracks=generated.track.reduce((n,p,i,a)=>n+(i&&p.sketchFraction+1e-8<a[i-1].sketchFraction?1:0),0);\n   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length};
+   const fractionBacktracks=generated.track.reduce((n,p,i,a)=>n+(i&&p.sketchFraction+1e-8<a[i-1].sketchFraction?1:0),0);
+   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length};
   }
   await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v83.html',{waitUntil:'domcontentloaded'});
   const goal=await page.evaluate(points=>window.__runGoalTest(points),hill());
