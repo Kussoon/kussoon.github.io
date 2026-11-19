@@ -1,0 +1,194 @@
+<!doctype html><html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>西宮市｜1町名1ラベル・区域内への自動配置比較｜Kussoon</title>
+<style>
+:root{color-scheme:light;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:#19384b;background:#f5f8fa}
+*{box-sizing:border-box}body{margin:0}main{max-width:1120px;margin:auto;padding:12px}
+h1{font-size:clamp(20px,4vw,27px)}h2{font-size:18px}p{line-height:1.55}
+.note,.panel,.metric{border:1px solid #b7cdd8;background:#fff;border-radius:9px;padding:11px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px;margin:12px 0}
+.metric b{font-size:25px;display:block;font-variant-numeric:tabular-nums}.metric span{font-size:12px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:12px}
+svg{width:100%;height:auto;aspect-ratio:1000/720;display:block;border:1px solid #d3e3ec;border-radius:8px;background:#e9f4fc}
+.town{fill:#d1e5ee;stroke:#fff;stroke-width:.65;vector-effect:non-scaling-stroke}
+.town.chosen{fill:#fad586;stroke:#644c28;stroke-width:1.7}
+.town-label{font-size:8px;font-weight:800;fill:#183f59;text-anchor:middle;dominant-baseline:middle;paint-order:stroke;stroke:#fff;stroke-width:1.3px;pointer-events:none}
+.label-fallback{fill:#b33b35}
+.badge-dot{fill:#e16c2f;stroke:#fff;stroke-width:1.6;vector-effect:non-scaling-stroke}
+input,select{width:100%;font:inherit;padding:9px;border:1px solid #98b7c8;border-radius:6px;background:white;margin:4px 0 11px}
+label{font-size:14px;font-weight:600}
+.scroll{max-height:430px;overflow:auto;border:1px solid #d6e5ec;border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td,th{padding:8px 5px;border-bottom:1px solid #e1ebf0;text-align:left}
+thead{position:sticky;top:0;background:#eef5fa}button{font:inherit;background:white;border:1px solid #97b9c9;border-radius:6px;color:#1d5270;padding:5px 8px;cursor:pointer}
+button:focus-visible{outline:2px solid #176eb1}td button{border:0;text-decoration:underline;padding:3px;text-align:left}
+tr.active{background:#fff3cd}#detail{white-space:pre-wrap;line-height:1.6;font-size:13px}
+.aux{font-size:12px;color:#526978}.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;margin:8px 0}
+@media(max-width:760px){.layout{grid-template-columns:1fr}main{padding:8px}.scroll{max-height:320px}}
+</style></head><body><main>
+<h1>西宮市｜1町名1ラベル・自動配置の比較試作</h1>
+<p class="note"><strong>正式版未変更・検証専用。</strong> 役場・市街地などの位置は判断材料にせず、各町域の<strong>文字全体が収まる区域</strong>を探し、その中で最も広い区域に1個だけ置きます。全体が入らない場合は中心を区域内に置く暫定位置とします。ラベルの収まり判定は共通投影（1000×720）、文字100%相当の試験値であり、iPhone表示の厳密な画素判定ではありません。採否は未決定です。</p>
+<div class="metrics" id="metrics" role="status">321町名を測定中です…</div>
+<section class="note" aria-label="表示倍率とラベル収まり検証" style="margin-bottom:12px">
+<strong>拡大倍率を変えたときの文字の収まり（共通投影上の推定）</strong>
+<p class="aux">同じラベルを画面上で一定の大きさに保つと、地図を拡大するほど町域に対して文字が小さくなります。以下は8pxの文字矩形を×1・×2・×4の地図倍率に換算した別々の自動再配置試験です。現在の表示地図と確定版には反映していません。</p>
+<div id="scaleResults" role="status">表示倍率ごとの確認中です…</div>
+</section>
+<div class="layout">
+<section class="panel"><h2>自動配置の地図</h2>
+<svg id="map" viewBox="0 0 1000 720" aria-label="町名1個ずつの自動配置比較地図"><g id="shapes"></g><g id="names"></g><g id="approvedMarkers"></g></svg>
+<div class="legend"><span>淡青：その他の町域</span><span>黄色：選択町域</span><span>赤文字：文字全体は収まらない</span><span>橙の丸：既存V34の確定位置</span></div>
+<button type="button" id="resetView">西宮市全域</button>
+<h2 id="selected">町名を選択してください</h2><div id="detail"></div>
+<p class="aux">町域を押すか、一覧から選択してください。すべての飛び地はタップ対象に残ります。</p>
+</section>
+<section class="panel"><h2>321町名の検証一覧</h2>
+<label for="filter">抽出条件</label>
+<select id="filter">
+<option value="all">すべての町名</option>
+<option value="fallback">文字全体が収まらない町名</option>
+<option value="fits">文字全体が収まる町名</option>
+<option value="multi">離れた区域を持つ町名</option>
+<option value="approved-multi">旧版では複数ラベルの町名</option>
+</select>
+<label for="query">町名を検索</label><input id="query" type="search" placeholder="例：上山口、名塩、宝生ケ丘">
+<p id="count" class="aux"></p>
+<div class="scroll"><table><thead><tr><th>町名</th><th>区域</th><th>収まり</th></tr></thead><tbody id="rows"></tbody></table></div>
+</section>
+</div><p class="aux">全国共通ラベル候補の比較段階です。町域データ、V34の324ラベル、宝塚市、クイズのコードや確定仕様は一切変更していません。</p>
+</main>
+<script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="/v2/common/js/town-geojson-component-labels.js"></script>
+<script src="/v2/common/js/town-svg-one-label-fit.js"></script>
+<script>
+(async()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const [topology,manifest,approved]=await Promise.all([
+ fetch('/v2/data/nishinomiya-town-v2-premerged.topojson').then(r=>{if(!r.ok)throw Error('原図の取得失敗');return r.json()}),
+ fetch('/v2/data/town-maps/28204-approved-preview.json').then(r=>{if(!r.ok)throw Error('町名台帳の取得失敗');return r.json()}),
+ fetch('/v2/data/town-maps/28204-v34-labels.json').then(r=>{if(!r.ok)throw Error('確定座標の取得失敗');return r.json()})
+]);
+const features=topojson.feature(topology,topology.objects.town).features;
+if(features.length!==321)throw Error('町名件数が321ではありません');
+const projection=d3.geoMercator().fitExtent([[22,22],[978,698]],
+ {type:'FeatureCollection',features}),path=d3.geoPath(projection);
+const names=new Set(features.map(f=>f.properties.S_NAME));
+if(names.size!==321)throw Error('町名に重複があります');
+const svg=d3.select('#map');
+const fontProbe=svg.append('g').attr('opacity',0).attr('pointer-events','none');
+const probe=fontProbe.append('text').attr('class','town-label').attr('x',-9999).attr('y',-9999);
+function textDimensions(name){
+ probe.text(name);
+ const b=probe.node().getBBox();
+ if(!(b.width>0&&b.height>0))throw Error('文字寸法が取得できません：'+name);
+ return {width:b.width,height:b.height};
+}
+const layouts=[],start=performance.now();
+for(const f of features){
+ const name=f.properties.S_NAME,dimensions=textDimensions(name);
+ const placement=KussoonTownOneLabelFit.place({
+  geometry:f.geometry,projection,width:dimensions.width,height:dimensions.height,
+  padding:.65,componentEngine:KussoonTownGeojsonComponentLabels,grid:15
+ });
+ layouts.push({name,dimensions,...placement});
+}
+fontProbe.remove();
+// Compare how much more of each polygon can contain an identically sized
+// screen glyph once the *map* is zoomed 2x and 4x. This is a normalized
+// projection experiment, not a promise of iPhone screen-pixel parity.
+const zoomFits=[{zoom:1,wholeFit:layouts.filter(r=>r.wholeLabelFits).length}];
+for(const zoom of [2,4]){
+ let wholeFit=0;
+ for(const f of features){
+  const d=layouts.find(r=>r.name===f.properties.S_NAME).dimensions;
+  const test=KussoonTownOneLabelFit.place({
+   geometry:f.geometry,projection,width:d.width/zoom,height:d.height/zoom,
+   padding:.65/zoom,componentEngine:KussoonTownGeojsonComponentLabels,grid:15
+  });
+  if(test.wholeLabelFits)wholeFit++;
+ }
+ zoomFits.push({zoom,wholeFit});
+}
+$('scaleResults').textContent=zoomFits.map(x=>
+ '地図 '+x.zoom+'倍：321町名のうち '+x.wholeFit+'町名が全文字収まる').join(' ／ ');
+
+const elapsed=Math.round(performance.now()-start),byName=new Map(layouts.map(r=>[r.name,r]));
+const fitCount=layouts.filter(r=>r.wholeLabelFits).length;
+const multi=layouts.filter(r=>r.parts>1),fallback=layouts.filter(r=>!r.wholeLabelFits);
+const metricData=[['町名・ラベル',layouts.length],['文字全体が区域内',fitCount],
+ ['全体が収まらず中心のみ',fallback.length],['分離した町名',multi.length],['計算時間 (ms)',elapsed]];
+$('metrics').replaceChildren(...metricData.map(([name,value])=>{
+ const wrap=document.createElement('div');wrap.className='metric';
+ const n=document.createElement('b');n.textContent=value;
+ const t=document.createElement('span');t.textContent=name;wrap.append(n,t);return wrap;
+}));
+const layer=d3.select('#shapes').selectAll('path').data(features).join('path').attr('class','town')
+ .attr('d',path).on('click',(_,f)=>selectTown(f.properties.S_NAME));
+const texts=d3.select('#names').selectAll('text').data(layouts).join('text')
+ .attr('class',r=>'town-label'+(r.wholeLabelFits?'':' label-fallback'))
+ .attr('x',r=>r.point[0]).attr('y',r=>r.point[1]).text(r=>r.name);
+let current='';
+function accepted(name){
+ const feature=features.find(f=>f.properties.S_NAME===name);
+ const multi=approved.multiLabels[name],extra=approved.extraLabels[name]||[];
+ if(multi)return multi.map(c=>projection([c[1],c[0]]));
+ // default single position is a historical V34 center, not shown as identical
+ // to the automatically computed label; the explicit additions are accurate.
+ return extra.map(c=>projection([c[1],c[0]]));
+}
+function selectTown(name){
+ const r=byName.get(name),f=features.find(x=>x.properties.S_NAME===name);
+ if(!r||!f)return;
+ current=name;layer.classed('chosen',x=>x.properties.S_NAME===name);
+ const bounds=path.bounds(f),w=Math.max(15,bounds[1][0]-bounds[0][0]),
+  h=Math.max(15,bounds[1][1]-bounds[0][1]),pad=Math.max(w,h)*.2+15;
+ svg.attr('viewBox',[bounds[0][0]-pad,bounds[0][1]-pad,w+pad*2,h+pad*2].join(' '));
+ d3.select('#approvedMarkers').selectAll('circle').data(accepted(name)).join('circle')
+  .attr('class','badge-dot').attr('cx',p=>p[0]).attr('cy',p=>p[1]).attr('r',5);
+ $('selected').textContent=name;
+ $('detail').textContent=[
+  '共通エンジンのラベル：1個',
+  '区域数：'+r.parts+'（選んだ区域：'+(r.component+1)+'番）',
+  '文字全体：'+(r.wholeLabelFits?'区域内に収まります':'収まらないため中心位置で暫定表示'),
+  '文字の大きさ（投影座標）：'+r.dimensions.width.toFixed(1)+'×'+r.dimensions.height.toFixed(1),
+  '選択区域の面積（投影座標）：'+r.area.toFixed(1),
+  '採用理由：'+(r.wholeLabelFits?'全文字が収まる区域のうち最大面積':'全体を収められず内部サンプルの適合度を優先')
+ ].join('\n');
+ document.querySelectorAll('#rows tr').forEach(tr=>tr.classList.toggle('active',tr.dataset.name===name));
+}
+$('resetView').addEventListener('click',()=>{svg.attr('viewBox','0 0 1000 720');
+ layer.classed('chosen',false);d3.select('#approvedMarkers').selectAll('*').remove();current='';});
+function redraw(){
+ const q=$('query').value.trim(),filter=$('filter').value;
+ let rows=layouts.filter(r=>!q||r.name.includes(q));
+ if(filter==='fallback')rows=rows.filter(r=>!r.wholeLabelFits);
+ else if(filter==='fits')rows=rows.filter(r=>r.wholeLabelFits);
+ else if(filter==='multi')rows=rows.filter(r=>r.parts>1);
+ else if(filter==='approved-multi')rows=rows.filter(r=>
+  Boolean(approved.multiLabels[r.name])||Boolean(approved.extraLabels[r.name]));
+ $('count').textContent=rows.length+'町名を表示';
+ const frag=document.createDocumentFragment();
+ for(const r of rows){
+  const tr=document.createElement('tr');tr.dataset.name=r.name;
+  const name=document.createElement('td'),button=document.createElement('button');
+  button.type='button';button.textContent=r.name;button.addEventListener('click',()=>selectTown(r.name));
+  name.append(button);tr.append(name);
+  for(const value of [r.component+1+'/'+r.parts,r.wholeLabelFits?'全体OK':'中心のみ']){
+   const cell=document.createElement('td');cell.textContent=value;tr.append(cell);
+  }
+  if(r.name===current)tr.classList.add('active');frag.append(tr);
+ }
+ $('rows').replaceChildren(frag);
+}
+$('query').addEventListener('input',redraw);
+$('filter').addEventListener('change',redraw);
+redraw();
+window.__oneLabelAudit=Object.freeze({summary:{towns:layouts.length,labels:layouts.length,
+ fits:fitCount,fallback:fallback.length,multipart:multi.length,elapsedMs:elapsed},
+ zoomFits,rows:layouts.map(r=>({name:r.name,parts:r.parts,component:r.component,
+ wholeLabelFits:r.wholeLabelFits,point:r.point,area:r.area})),selectTown});
+})().catch(error=>{document.getElementById('metrics').textContent='比較版エラー：'+error.message;console.error(error)});
+</script></body></html>
