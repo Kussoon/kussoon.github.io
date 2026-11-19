@@ -1,0 +1,48 @@
+name: National town quiz cumulative red and transient yellow
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-quiz-map-feedback.js'
+      - 'v2/common/js/town-svg-dataset-browser-quiz-feedback-pilot.js'
+      - 'v2/town-map-shared-browser-quiz-feedback-20261119-pilot.html'
+      - 'v2/docs/town-map/TOWN_MAP_MASTER_SPEC.md'
+      - 'scripts/test-national-town-quiz-color-accumulation.cjs'
+      - '.github/workflows/national-town-quiz-color-accumulation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-town-map-master-spec.cjs
+      - run: node scripts/test-national-town-dataset-ready.cjs
+      - run: node scripts/test-national-town-ready-runtime.cjs
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Retrieve approved town-source registry
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Compare question transitions in Chromium and iPhone WebKit
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          sleep 3
+          node scripts/test-national-town-quiz-color-accumulation.cjs
