@@ -94,7 +94,7 @@
     const span=Math.max(1,b.width,b.height);
     const centerDistance=Math.hypot(point[0]-base.point[0],point[1]-base.point[1])/span;
     const entry={point,component:i,area,fullFit:full,coveredSamples:covered,
-     centerDistance,quality:covered-5*centerDistance};
+     centerDistance};
     if(full){
      // Prefer the largest polygon that fits the entire text rectangle;
      // within that same polygon use the deepest interior candidate.
@@ -103,10 +103,11 @@
        (Math.abs(centerDistance-bestFit.centerDistance)<=1e-9&&i<bestFit.component))))
       bestFit=entry;
     }else if(!bestFallback||
-      entry.quality>bestFallback.quality+1e-9||
-      (Math.abs(entry.quality-bestFallback.quality)<=1e-9&&
-       (area>bestFallback.area||
-        (area===bestFallback.area&&centerDistance<bestFallback.centerDistance)))){
+      area>bestFallback.area||
+      (area===bestFallback.area&&centerDistance<bestFallback.centerDistance-1e-9)){
+     // If the text cannot fit ANYWHERE, prioritize the largest interior
+     // clearance (base.point) rather than a random high-coverage grid cell.
+     // This avoids the left/top bias seen in 青葉台・清瀬台・柳本町.
      bestFallback=entry;
     }
    };
@@ -126,7 +127,7 @@
    area:chosen.area,wholeLabelFits:chosen.fullFit,
    coveredSamples:chosen.coveredSamples,parts:parts.length,
    reason:chosen.fullFit?'whole-label-inside-largest-fitting-component':
-     'center-inside-interior-biased-fallback'
+     'center-inside-largest-component-fallback'
   });
  }
  const api=Object.freeze({place,fits});
