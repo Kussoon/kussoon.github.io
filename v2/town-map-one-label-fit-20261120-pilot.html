@@ -30,6 +30,11 @@ tr.active{background:#fff3cd}#detail{white-space:pre-wrap;line-height:1.6;font-s
 <h1>西宮市｜1町名1ラベル・自動配置の比較試作</h1>
 <p class="note"><strong>正式版未変更・検証専用。</strong> 役場・市街地などの位置は判断材料にせず、各町域の<strong>文字全体が収まる区域</strong>を探し、その中で最も広い区域に1個だけ置きます。全体が入らない場合は中心を区域内に置く暫定位置とします。ラベルの収まり判定は共通投影（1000×720）、文字100%相当の試験値であり、iPhone表示の厳密な画素判定ではありません。採否は未決定です。</p>
 <div class="metrics" id="metrics" role="status">321町名を測定中です…</div>
+<section class="note" aria-label="表示倍率とラベル収まり検証" style="margin-bottom:12px">
+<strong>拡大倍率を変えたときの文字の収まり（共通投影上の推定）</strong>
+<p class="aux">同じラベルを画面上で一定の大きさに保つと、地図を拡大するほど町域に対して文字が小さくなります。以下は8pxの文字矩形を×1・×2・×4の地図倍率に換算した別々の自動再配置試験です。現在の表示地図と確定版には反映していません。</p>
+<div id="scaleResults" role="status">表示倍率ごとの確認中です…</div>
+</section>
 <div class="layout">
 <section class="panel"><h2>自動配置の地図</h2>
 <svg id="map" viewBox="0 0 1000 720" aria-label="町名1個ずつの自動配置比較地図"><g id="shapes"></g><g id="names"></g><g id="approvedMarkers"></g></svg>
@@ -91,6 +96,25 @@ for(const f of features){
  layouts.push({name,dimensions,...placement});
 }
 fontProbe.remove();
+// Compare how much more of each polygon can contain an identically sized
+// screen glyph once the *map* is zoomed 2x and 4x. This is a normalized
+// projection experiment, not a promise of iPhone screen-pixel parity.
+const zoomFits=[{zoom:1,wholeFit:layouts.filter(r=>r.wholeLabelFits).length}];
+for(const zoom of [2,4]){
+ let wholeFit=0;
+ for(const f of features){
+  const d=layouts.find(r=>r.name===f.properties.S_NAME).dimensions;
+  const test=KussoonTownOneLabelFit.place({
+   geometry:f.geometry,projection,width:d.width/zoom,height:d.height/zoom,
+   padding:.65/zoom,componentEngine:KussoonTownGeojsonComponentLabels,grid:15
+  });
+  if(test.wholeLabelFits)wholeFit++;
+ }
+ zoomFits.push({zoom,wholeFit});
+}
+$('scaleResults').textContent=zoomFits.map(x=>
+ '地図 '+x.zoom+'倍：321町名のうち '+x.wholeFit+'町名が全文字収まる').join(' ／ ');
+
 const elapsed=Math.round(performance.now()-start),byName=new Map(layouts.map(r=>[r.name,r]));
 const fitCount=layouts.filter(r=>r.wholeLabelFits).length;
 const multi=layouts.filter(r=>r.parts>1),fallback=layouts.filter(r=>!r.wholeLabelFits);
@@ -164,7 +188,7 @@ $('filter').addEventListener('change',redraw);
 redraw();
 window.__oneLabelAudit=Object.freeze({summary:{towns:layouts.length,labels:layouts.length,
  fits:fitCount,fallback:fallback.length,multipart:multi.length,elapsedMs:elapsed},
- rows:layouts.map(r=>({name:r.name,parts:r.parts,component:r.component,
+ zoomFits,rows:layouts.map(r=>({name:r.name,parts:r.parts,component:r.component,
  wholeLabelFits:r.wholeLabelFits,point:r.point,area:r.area})),selectTown});
 })().catch(error=>{document.getElementById('metrics').textContent='比較版エラー：'+error.message;console.error(error)});
 </script></body></html>
