@@ -1,0 +1,32 @@
+name: Coaster v79 browser ride smoke
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/one-stroke-coaster-support-clearance.js'
+      - 'v2/one-stroke-coaster-3d-v79.html'
+      - 'scripts/test-coaster-v79-browser.cjs'
+      - '.github/workflows/coaster-v79-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    timeout-minutes: 20
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Draw a new one-stroke course, start ride, verify runtime in both browsers
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          sleep 3
+          node scripts/test-coaster-v79-browser.cjs
