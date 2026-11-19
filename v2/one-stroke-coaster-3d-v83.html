@@ -429,6 +429,44 @@ function makeTrack(){
   if(j){const a=track[j-1],b=track[j];finish+=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
   track[j].s=finish;
  }
+ // Preserve each fitted vertical circle exactly. Shape only the short open
+ // exit section so its tangent leaves the circle and rejoins the drawn path.
+ const loopExitRanges=used.map((zone,index)=>({
+  zone,high:zone.end/(knots.length-1),
+  nextLow:index+1<used.length?used[index+1].start/(knots.length-1):1
+ })).sort((a,b)=>a.high-b.high);
+ for(const item of loopExitRanges){
+  const endIndex=track.findIndex(p=>p.sketchFraction>=item.high-1e-9);
+  if(endIndex<1)continue;
+  const p0=track[endIndex],radius=item.zone.r*ratio;
+  const blendLength=Math.max(2.5,Math.min(6,radius*.8));
+  let joinIndex=endIndex+1;
+  while(joinIndex<track.length&&track[joinIndex].s-p0.s<blendLength)joinIndex++;
+  if(joinIndex>=track.length-1)continue;
+  const nextLoopIndex=track.findIndex(p=>p.sketchFraction>=item.nextLow-1e-9);
+  if(nextLoopIndex>0&&joinIndex>=nextLoopIndex-2)continue;
+  const p1=track[joinIndex],length=p1.s-p0.s;
+  if(length<2)continue;
+  const tangentAtPoint=k=>{
+   const a=track[Math.max(0,k-1)],b=track[Math.min(track.length-1,k+1)];
+   return norm(V(b.x-a.x,b.y-a.y,b.z-a.z));
+  };
+  const t0=tangentAtPoint(endIndex),t1=tangentAtPoint(joinIndex);
+  const handle=length*.38,m0=scale(t0,handle),m1=scale(t1,handle),d=sub(V(p1.x,p1.y,p1.z),V(p0.x,p0.y,p0.z));
+  const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
+  const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
+  const c5=add(sub(scale(d,6),scale(m0,3)),scale(m1,-3));
+  for(let k=endIndex+1;k<joinIndex;k++){
+   const t=clamp((track[k].s-p0.s)/length,0,1),t2=t*t,t3=t2*t,t4=t3*t,t5=t4*t;
+   const q=add(V(p0.x,p0.y,p0.z),add(add(scale(m0,t),scale(c3,t3)),add(scale(c4,t4),scale(c5,t5))));
+   track[k].x=q.x;track[k].y=q.y;track[k].z=q.z;
+  }
+ }
+ finish=0;
+ for(let j=0;j<track.length;j++){
+  if(j){const a=track[j-1],b=track[j];finish+=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
+  track[j].s=finish;
+ }
  // v82: side-view loops that cross at the same height map to the same 3D
  // point when they share a vertical plane. Detect only those circle pairs,
  // then translate one complete loop plane sideways; smooth the offset in the
