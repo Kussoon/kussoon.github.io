@@ -8,6 +8,7 @@ on:
       - 'v2/takarazuka-town-svg-control-rail-20261119-pilot.html'
       - 'v2/common/js/town-map-result-navigation-takarazuka-control-rail-20261119-pilot.js'
       - 'scripts/test-nishinomiya-shared-controls-20261119.cjs'
+      - 'scripts/test-town-control-rail-source-parity-20261119.cjs'
       - 'scripts/test-takarazuka-shared-controls-20261119.cjs'
       - 'scripts/audit-nishinomiya-shared-controls-321-quiz.cjs'
       - '.github/workflows/town-svg-control-rail-comparison.yml'
@@ -30,6 +31,8 @@ jobs:
           cache: npm
           cache-dependency-path: v2/tests/browser/package-lock.json
       - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Verify shared UI unchanged compared to both accepted city layouts
+        run: node scripts/test-town-control-rail-source-parity-20261119.cjs
       - name: Fetch source mapping only (no changes to datasets)
         run: |
           mkdir -p nishinomiya/data takarazuka/data
