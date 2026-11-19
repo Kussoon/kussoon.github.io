@@ -202,20 +202,16 @@ function makeTrack(){
    if(!candidate||score<candidate.score)candidate={end:j,score,cx:(minX+maxX)*.5,cy:(minY+maxY)*.5,r:(w+h)*.25,sign:Math.sign(turn)};
   }
   if(!candidate)continue;
-  const end=candidate.end,{r}=candidate;
-  const seam=originalKnots[i],dx=seam.x-candidate.cx,dy=seam.y-candidate.cy;
-  const radial=Math.hypot(dx,dy)||1;
-  const cx=seam.x-dx/radial*r,cy=seam.y-dy/radial*r;
-  const loopArcProgress=[0];
-  for(let k=i+1;k<=end;k++){
-   const p=originalKnots[k],q=originalKnots[k-1];
-   loopArcProgress.push(loopArcProgress[loopArcProgress.length-1]+Math.hypot(p.x-q.x,p.y-q.y));
-  }
-  const totalLoopArc=loopArcProgress[loopArcProgress.length-1]||1;
-  const startAngle=Math.atan2(seam.y-cy,seam.x-cx),direction=candidate.sign||1;
+  const end=candidate.end,{cx,cy,r}=candidate;
+  const rx=Math.max(1,(maxX-minX)*.5),ry=Math.max(1,(maxY-minY)*.5);
   for(let k=i+1;k<end;k++){
-   const t=loopArcProgress[k-i]/totalLoopArc,theta=startAngle+direction*2*Math.PI*t;
-   corrected[k]={x:cx+r*Math.cos(theta),y:cy+r*Math.sin(theta)};
+   const t=(k-i)/(end-i),p=originalKnots[k];
+   // Keep a short C2 entry/exit feather while circularizing most of the loop.
+   const f=Math.min(1,t/.14,(1-t)/.14);
+   const weight=f*f*f*(10-15*f+6*f*f);
+   const theta=Math.atan2((p.y-cy)/ry,(p.x-cx)/rx);
+   corrected[k].x=mix(p.x,cx+r*Math.cos(theta),weight);
+   corrected[k].y=mix(p.y,cy+r*Math.sin(theta),weight);
   }
   // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
   corrected[end]={...corrected[i]};
@@ -427,46 +423,6 @@ function makeTrack(){
    worldX+=step*Math.sin(yaw);worldZ+=step*Math.cos(yaw);
   }
   track[j].x=worldX;track[j].z=worldZ;
- }
- finish=0;
- for(let j=0;j<track.length;j++){
-  if(j){const a=track[j-1],b=track[j];finish+=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
-  track[j].s=finish;
- }
- // Preserve each fitted vertical circle exactly. Shape only the short open
- // exit section so its tangent leaves the circle and rejoins the drawn path.
- const loopExitRanges=used.map((zone,index)=>({
-  zone,high:zone.end/(knots.length-1),
-  nextLow:index+1<used.length?used[index+1].start/(knots.length-1):null
- })).sort((a,b)=>a.high-b.high);
- for(const item of loopExitRanges){
-  const endIndex=track.findIndex(p=>p.sketchFraction>=item.high-1e-9);
-  if(endIndex<1)continue;
-  const p0=track[endIndex],radius=item.zone.r*ratio;
-  const blendLength=Math.max(2.5,Math.min(6,radius*.8));
-  let joinIndex=endIndex+1;
-  while(joinIndex<track.length&&track[joinIndex].s-p0.s<blendLength)joinIndex++;
-  if(joinIndex>=track.length-1)continue;
-  if(item.nextLow!==null){
-   const nextLoopIndex=track.findIndex(p=>p.sketchFraction>=item.nextLow-1e-9);
-   if(nextLoopIndex>0&&joinIndex>=nextLoopIndex-2)continue;
-  }
-  const p1=track[joinIndex],length=p1.s-p0.s;
-  if(length<2)continue;
-  const tangentAtPoint=k=>{
-   const a=track[Math.max(0,k-1)],b=track[Math.min(track.length-1,k+1)];
-   return norm(V(b.x-a.x,b.y-a.y,b.z-a.z));
-  };
-  const t0=tangentAtPoint(endIndex),t1=tangentAtPoint(joinIndex);
-  const handle=length*.38,m0=scale(t0,handle),m1=scale(t1,handle),d=sub(V(p1.x,p1.y,p1.z),V(p0.x,p0.y,p0.z));
-  const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
-  const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
-  const c5=add(sub(scale(d,6),scale(m0,3)),scale(m1,-3));
-  for(let k=endIndex+1;k<joinIndex;k++){
-   const t=clamp((track[k].s-p0.s)/length,0,1),t2=t*t,t3=t2*t,t4=t3*t,t5=t4*t;
-   const q=add(V(p0.x,p0.y,p0.z),add(add(scale(m0,t),scale(c3,t3)),add(scale(c4,t4),scale(c5,t5))));
-   track[k].x=q.x;track[k].y=q.y;track[k].z=q.z;
-  }
  }
  finish=0;
  for(let j=0;j<track.length;j++){
