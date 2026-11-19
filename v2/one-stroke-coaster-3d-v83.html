@@ -203,20 +203,13 @@ function makeTrack(){
   }
   if(!candidate)continue;
   const end=candidate.end,{r}=candidate;
-  const seam=originalKnots[i],before=originalKnots[Math.max(0,i-1)],after=originalKnots[Math.min(originalKnots.length-1,end+1)];
-  const unit2=v=>{const n=Math.hypot(v.x,v.y)||1;return{x:v.x/n,y:v.y/n};};
-  const incoming=unit2({x:seam.x-before.x,y:seam.y-before.y});
-  const outgoing=unit2({x:after.x-seam.x,y:after.y-seam.y});
-  let tangent=unit2({x:incoming.x+outgoing.x,y:incoming.y+outgoing.y});
-  if(Math.hypot(tangent.x,tangent.y)<.1)tangent=incoming;
-  // Place the circle centre on the normal implied by the stroke tangent.
-  // This keeps the loop a true circle while making its seam tangent agree
-  // with both the approach and departure whenever the drawn seam permits it.
-  const direction=candidate.sign||1;
-  const cx=seam.x+r*direction*tangent.y,cy=seam.y-r*direction*tangent.x;
-  const startAngle=Math.atan2(seam.y-cy,seam.x-cx);
+  // Keep the fitted circle's orientation, but translate its centre minimally
+  // so the seam point lies exactly on the protected circle.
+  const seam=originalKnots[i],dx=seam.x-candidate.cx,dy=seam.y-candidate.cy;
+  const radial=Math.hypot(dx,dy)||1;
+  const cx=seam.x-dx/radial*r,cy=seam.y-dy/radial*r;
   for(let k=i+1;k<end;k++){
-   const t=(k-i)/(end-i),theta=startAngle+direction*2*Math.PI*t;
+   const p=originalKnots[k],theta=Math.atan2(p.y-cy,p.x-cx);
    corrected[k]={x:cx+r*Math.cos(theta),y:cy+r*Math.sin(theta)};
   }
   // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
