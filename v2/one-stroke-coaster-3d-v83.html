@@ -631,7 +631,7 @@ function makeTrack(){
   }
   for(let n=0;n<routeBounds.length;n++){
    const bound=routeBounds[n],previousEnd=n?routeBounds[n-1].end:-1,nextStart=n+1<routeBounds.length?routeBounds[n+1].start:track.length;
-   const radius=bound.plane.radius||4,window=Math.max(3,Math.min(18,radius*4.2));
+   const radius=bound.plane.radius||4,window=Math.max(3,Math.min(13,radius*3));
    let entry=bound.start-1,entryLength=0;
    while(entry>previousEnd+1&&entry>0&&entryLength<window){entryLength+=segmentDistance(entry,entry+1);entry--;}
    if(entryLength>=2){
