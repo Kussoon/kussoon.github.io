@@ -53,7 +53,15 @@ async function test(driver,name,w,h){
   assert.equal(await page.locator('#reading').getAttribute('aria-pressed'),'true');
   await page.locator('#reading').click();
   await page.locator('#larger').click();
-  assert.match(await page.locator('#size').innerText(),/125/);
+  assert.match(await page.locator('#size').innerText(),/100/,name+' reset button caption remains 100%');
+  await page.locator('#size').click();
+  assert.equal((await page.locator('#size').innerText()).replace(/\s+/g,''),'文字100％',name+' reset caption fixed');
+  const touchProtection=await page.locator('.zoom-slider-well').evaluate(el=>{
+   const css=getComputedStyle(el);
+   return {userSelect:css.userSelect,webkitTouchCallout:css.getPropertyValue('-webkit-touch-callout')};
+  });
+  assert.equal(touchProtection.userSelect,'none',name+' prevents iOS long-press text selection');
+  assert.equal(touchProtection.webkitTouchCallout,'none',name+' prevents iOS long-press callout');
   await page.locator('#fullscreen').click();await page.waitForTimeout(380);
   check(await get());
   assert.equal(await page.locator('#fullscreen').innerText(),'戻る');
