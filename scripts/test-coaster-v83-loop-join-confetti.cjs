@@ -97,8 +97,10 @@ async function run(browserType,label){
   }
   console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,loops:v83.loops,stageCurvature:{source:maxCurvature(v83.stages.source),before:maxCurvature(v83.stages.before),after:maxCurvature(v83.stages.after)}},goal,errors}));
   assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
+  assert(v83.stages.after.every(p=>[p.x,p.y,p.z,p.s,p.sketchFraction].every(Number.isFinite)),'generated centreline must contain only finite coordinates');
+  assert(v83.planes.some(p=>p.lane!==0),'overlapping loop paths must be assigned separate lanes');
   assert.equal(v83.fractionBacktracks,0,'generated route must remain in the original stroke order');
-  assert(v83.gaps.every(gap=>gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v83.gaps)}`);
+  assert(v83.gaps.every(gap=>Number.isFinite(gap)&&gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v83.gaps)}`);
   assert(v83.maxCurvature.value<.55,`generated track has a sharp connector curvature ${v83.maxCurvature.value.toFixed(3)}/m near ${JSON.stringify(v83.maxCurvature)}`);
   assert(goal.count>=45,'goal celebration should launch a visible volley');
   assert(goal.streamers>0,'goal volley should include curved streamer ribbons');
