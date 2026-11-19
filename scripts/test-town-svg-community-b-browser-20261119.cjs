@@ -48,6 +48,9 @@ async function run(driver,browserName,width,height,model){
   await page.waitForTimeout(250);
   assert.equal((await page.locator('#communityCount').textContent()).trim(),'市全域：'+model.total+'町名');
   assert.equal(await menu.locator('button.active').getAttribute('data-community'),'');
+  assert.equal(await page.locator('#labels g.label').count(),model.total===321?324:136,'full-city labels preserved');
+  assert.equal(await page.locator('#quizOne').isEnabled(),true,'quiz1 remains available');
+  assert.equal(await page.locator('#quizTwo').isEnabled(),true,'quiz2 remains available');
   if(model.exception)assert.equal(await page.locator('#boundaryNote').isVisible(),false);
   assert.deepEqual(errors,[],browserName+'/'+model.city+' no runtime errors');
   console.log('PASS REGION_B '+JSON.stringify({city:model.city,browser:browserName,selected:model.region,escape:true,outside:true,focus:true,wholeCity:model.total}));
