@@ -28,6 +28,11 @@ async function test(engine,label,width,height){
     shapeCount:document.querySelectorAll('#shapes path').length};
   });
   assert.equal(result.summary.labels,321,'exactly one label per town');
+  const z=await page.evaluate(()=>window.__oneLabelAudit.zoomFits);
+  assert.deepEqual(z.map(x=>x.zoom),[1,2,4]);
+  assert.equal(z[0].wholeFit,result.summary.fits);
+  assert(z[1].wholeFit>=z[0].wholeFit,'2x zoom cannot reduce fit count');
+  assert(z[2].wholeFit>=z[1].wholeFit,'4x zoom cannot reduce fit count');
   assert.equal(result.textCount,321);
   assert.equal(result.shapeCount,321);
   assert.equal(result.exteriorError,0,'every label center must lie within its chosen component');
@@ -61,7 +66,7 @@ async function test(engine,label,width,height){
   await page.waitForFunction(()=>window.__townPreview?.townCount===321,null,{timeout:90000});
   assert.equal(await page.locator('#labels g.label').count(),324);
   console.log('PASS ONE_LABEL_NISHINOMIYA_321 '+JSON.stringify({
-   label,...result.summary,polygonCenterValid:true,
+   label,...result.summary,zoomFits:z,polygonCenterValid:true,
    sameTownApprovedComparisonPreserved:324,
    sample:[rows['塩瀬町名塩'],rows['山口町下山口'],rows['山口町上山口']]
   }));
