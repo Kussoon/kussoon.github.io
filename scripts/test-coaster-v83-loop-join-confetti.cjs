@@ -33,7 +33,7 @@ const server=http.createServer((req,res)=>{
 function retracedCircle(d=80,repeats=3,height=600){
  const cx=260,cy=height*.5,r=d/2,count=Math.max(24,Math.ceil(Math.PI*d/2)),points=[{x:cx,y:cy-r}];
  for(let q=0;q<repeats;q++)for(let i=1;i<=count;i++){const a=-Math.PI/2+Math.PI*2*i/count;points.push({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});}
- for(let i=1;i<=50;i++)points.push({x:cx,y:cy-r});
+ // Finish the retraced circles with one continuous straight exit; repeated identical points are not a drawable path.
  points.push({x:cx+100,y:cy-r});return points;
 }
 function hill(width=560,height=600){
