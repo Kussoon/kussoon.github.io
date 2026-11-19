@@ -1,0 +1,21 @@
+name: National town prepared dataset integration
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-ready-runtime.js'
+      - 'scripts/test-national-town-ready-runtime.cjs'
+      - '.github/workflows/national-town-ready-runtime.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-national-town-dataset-ready.cjs
+      - run: node scripts/test-national-town-ready-runtime.cjs
+      - run: node scripts/test-town-map-master-spec.cjs
