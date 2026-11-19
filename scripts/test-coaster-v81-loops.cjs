@@ -58,7 +58,7 @@ function validateLoop(data,zone){
  const route=data.track.filter(p=>p.sketchFraction>=low-0.002&&p.sketchFraction<=high+0.002);
  assert(route.length>=10,'the generated 3D route must contain the loop span');
  const a=route[0],b=route.at(-1),gap=Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);
- assert(gap<.7,'the 3D loop entry and exit must join near the same point');
+ assert(gap<.7,`the 3D loop entry and exit must join near the same point (diameter=${zone.r*2}px, gap=${gap.toFixed(3)} world units)`);
  return{radiusPx:+zone.r.toFixed(2),corePoints:pts.length,winding:+Math.abs(winding).toFixed(3),joinGap:+gap.toFixed(3)};
 }
 async function run(browserType,label){
