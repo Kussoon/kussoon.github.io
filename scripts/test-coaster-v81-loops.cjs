@@ -76,7 +76,8 @@ async function run(browserType,label){
    if(d<26)assert.equal(count,0,`v80 should reproduce its documented minimum-size rejection for ${d}px`);
    expected[d]=count;
   }
-  assert.equal(expected[30],0,'v80 smoothing should erase the 30px loop before detection');
+  assert.deepEqual([expected[16],expected[20],expected[24]],[0,0,0],
+   'v80 fixed minimum bounds should reproduce why the tiny loops were not classified');
   await page.goto('http://127.0.0.1:8765/v2/one-stroke-coaster-3d-v81.html',{waitUntil:'domcontentloaded'});
   await page.waitForTimeout(80);
   assert.match(await page.title(),/v81/);
