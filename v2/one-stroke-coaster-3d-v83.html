@@ -211,7 +211,7 @@ function makeTrack(){
   }
   // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
   corrected[end]={...corrected[i]};
-  used.push({start:i,end,coreStart:i,coreEnd:end,cx,cy,r});
+  used.push({start:i,end,coreStart:i,coreEnd:end,cx,cy,r,sign:candidate.sign||1});
   i=end;
  }
  // Smooth the remaining stroke once. The fitted loop and its exact join points are
@@ -292,6 +292,16 @@ function makeTrack(){
   const len=Math.hypot(tx,ty);
   return len<.05?{x:0,y:0}:{x:tx/len,y:ty/len};
  });
+ // Use the fitted circle's analytic tangent at both protected seam knots.
+ // Averaging these with the outside stroke directions creates an exit kink
+ // even when the loop positions are closed exactly.
+ for(const zone of used){
+  const p=knots[zone.start],rx=p.x-zone.cx,ry=p.y-zone.cy;
+  const t={x:-zone.sign*ry,y:zone.sign*rx},length=Math.hypot(t.x,t.y)||1;
+  const seamTangent={x:t.x/length,y:t.y/length};
+  tangents[zone.start]=seamTangent;
+  tangents[zone.end]={...seamTangent};
+ }
  function append(px,py,sketchFraction){
   const v={x:0,y:3+(H-py)*ratio,z:(px-W*.5)*ratio,s:finish,sketchFraction:clamp(sketchFraction,0,1)};
   if(track.length){
