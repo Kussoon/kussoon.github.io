@@ -87,16 +87,26 @@
     for(const dx of fractions)for(const dy of fractions){
      if(within([point[0]+dx*width,point[1]+dy*height],rings,inside))covered++;
     }
+    // The component engine's candidate is the point with the strongest
+    // geometric interior clearance. The former tie-break selected the first
+    // grid point, which biased text toward left/top boundaries. Prefer
+    // centers near that interior point, not the scan order.
+    const span=Math.max(1,b.width,b.height);
+    const centerDistance=Math.hypot(point[0]-base.point[0],point[1]-base.point[1])/span;
     const entry={point,component:i,area,fullFit:full,coveredSamples:covered,
-     clearance:base.clearance};
+     centerDistance,quality:covered-5*centerDistance};
     if(full){
-     // Largest admissible component wins (not the mainland or town hall).
+     // Prefer the largest polygon that fits the entire text rectangle;
+     // within that same polygon use the deepest interior candidate.
      if(!bestFit||area>bestFit.area||
-      (area===bestFit.area&&entry.component<bestFit.component))bestFit=entry;
+      (area===bestFit.area&&(centerDistance<bestFit.centerDistance-1e-9||
+       (Math.abs(centerDistance-bestFit.centerDistance)<=1e-9&&i<bestFit.component))))
+      bestFit=entry;
     }else if(!bestFallback||
-      covered>bestFallback.coveredSamples||
-      (covered===bestFallback.coveredSamples&&
-       (area>bestFallback.area||(area===bestFallback.area&&i<bestFallback.component)))){
+      entry.quality>bestFallback.quality+1e-9||
+      (Math.abs(entry.quality-bestFallback.quality)<=1e-9&&
+       (area>bestFallback.area||
+        (area===bestFallback.area&&centerDistance<bestFallback.centerDistance)))){
      bestFallback=entry;
     }
    };
@@ -116,7 +126,7 @@
    area:chosen.area,wholeLabelFits:chosen.fullFit,
    coveredSamples:chosen.coveredSamples,parts:parts.length,
    reason:chosen.fullFit?'whole-label-inside-largest-fitting-component':
-     'center-inside-best-coverage-fallback'
+     'center-inside-interior-biased-fallback'
   });
  }
  const api=Object.freeze({place,fits});
