@@ -84,7 +84,9 @@ function updateLabels(){
  });
  window.KussoonTownSvgLabelUpdate.update({
   labels,transform,fs,readingOn,anchorOf:d=>d.point,
-  candidateMode:true,frame:svg.node().getBoundingClientRect(),
+  // Accepted V34 anchors are always-on; automatic candidates retain the
+  // previously approved viewport clipping until a source opts in to anchors.
+  candidateMode:!approvedAnchors,frame:svg.node().getBoundingClientRect(),
   zoomRatio:transform.k/Math.max(.001,baseScale),selected,threshold:1.15
  });
  // V34 text-node Range correction: used only for reading-OFF candidates.
