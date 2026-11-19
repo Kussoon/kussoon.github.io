@@ -51,18 +51,22 @@
    const key=region+'\u0000'+name,items=groups.get(key)||[];
    items.push(item);groups.set(key,items);
   }
-  const regionPaths=new Map();
+  const regionPaths=new Map(),regionFeatures=new Map();
   for(const [key,items] of groups){
    const geometry=topojsonClient.merge(unified.subtopology,items);
-   const d=path({type:'Feature',properties:{},geometry});
+   const name=normalizeSubName(items[0].properties.S_NAME);
+   const feature={type:'Feature',properties:{S_NAME:name},geometry};
+   const d=path(feature);
    if(!d)throw new Error('地域別形状を投影できません: '+key);
-   regionPaths.set(key,d);
+   regionPaths.set(key,d);regionFeatures.set(key,feature);
   }
   return Object.freeze({
    records:Object.freeze(records),projection,path,viewBox:'0 0 '+width+' '+height,
    sourceFeatures:features,regionPathCount:regionPaths.size,
    sourceGeometryCount:shape.geometries.length,
    pathFor:(name,region='')=>regionPaths.get(region+'\u0000'+name)||paths.get(name),
+   featureFor:(name,region='')=>regionFeatures.get(region+'\\u0000'+name)||
+    features.find(f=>f.properties.S_NAME===name),
    hasRegionPath:(name,region)=>regionPaths.has(region+'\u0000'+name)
   });
  }
