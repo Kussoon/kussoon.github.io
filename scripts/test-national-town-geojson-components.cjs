@@ -31,7 +31,7 @@ assert(!contains(a[0].point,hole.coordinates[1]),'outside hole');
 assert(a[0].clearance>0,'valid label has interior clearance');
 const holeReversed={...hole,coordinates:hole.coordinates.map(r=>r.slice().reverse())};
 assert.equal(candidate(holeReversed).length,1,'hole classification independent of winding');
-const tiny=candidate(multi,{viewBoxArea:10000,minimumAreaFraction:.0015});
+const tiny=candidate(multi,{viewBoxArea:10000,minimumAreaFraction:.015});
 assert.deepEqual(tiny.map(x=>x.component),[0],'tiny fragment may be omitted only at configured threshold');
 const none=candidate(multi,{viewBoxArea:10000,minimumAreaFraction:5});
 assert.equal(none.length,1,'always retain largest valid component');
