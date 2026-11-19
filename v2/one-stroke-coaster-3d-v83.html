@@ -202,16 +202,12 @@ function makeTrack(){
    if(!candidate||score<candidate.score)candidate={end:j,score,cx:(minX+maxX)*.5,cy:(minY+maxY)*.5,r:(w+h)*.25,sign:Math.sign(turn)};
   }
   if(!candidate)continue;
-  const end=candidate.end,{cx,cy,r}=candidate;
-  const rx=Math.max(1,(maxX-minX)*.5),ry=Math.max(1,(maxY-minY)*.5);
+  const end=candidate.end,{r}=candidate,seam=originalKnots[i];
+  const dx=seam.x-candidate.cx,dy=seam.y-candidate.cy,radial=Math.hypot(dx,dy)||1;
+  const cx=seam.x-dx/radial*r,cy=seam.y-dy/radial*r;
   for(let k=i+1;k<end;k++){
-   const t=(k-i)/(end-i),p=originalKnots[k];
-   // Keep a short C2 entry/exit feather while circularizing most of the loop.
-   const f=Math.min(1,t/.14,(1-t)/.14);
-   const weight=f*f*f*(10-15*f+6*f*f);
-   const theta=Math.atan2((p.y-cy)/ry,(p.x-cx)/rx);
-   corrected[k].x=mix(p.x,cx+r*Math.cos(theta),weight);
-   corrected[k].y=mix(p.y,cy+r*Math.sin(theta),weight);
+   const p=originalKnots[k],theta=Math.atan2(p.y-cy,p.x-cx);
+   corrected[k]={x:cx+r*Math.cos(theta),y:cy+r*Math.sin(theta)};
   }
   // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
   corrected[end]={...corrected[i]};
