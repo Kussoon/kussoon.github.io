@@ -58,9 +58,9 @@ async function test(driver,name,w,h){
   assert.equal((await page.locator('#size').innerText()).replace(/\s+/g,''),'文字100％',name+' reset caption fixed');
   const touchProtection=await page.locator('.zoom-slider-well').evaluate(el=>{
    const css=getComputedStyle(el);
-   const ruleText=[...document.styleSheets].filter(sheet=>!sheet.href).flatMap(sheet=>{
-    try{return [...sheet.cssRules].map(rule=>rule.cssText)}catch{return []}
-   }).join(' ');
+   // CSSOM serialisation can omit unsupported prefixed properties.
+   // Inspect the actual authored CSS in addition to computed styles.
+   const ruleText=[...document.querySelectorAll('style')].map(x=>x.textContent).join(' ');
    return {
     userSelect:css.getPropertyValue('user-select')||css.getPropertyValue('-webkit-user-select')||'',
     webkitTouchCallout:css.getPropertyValue('-webkit-touch-callout')||'',
