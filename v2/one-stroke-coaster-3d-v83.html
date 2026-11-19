@@ -617,7 +617,7 @@ function makeTrack(){
    const cumulative=[0];
    for(let i=startIndex+1;i<=endIndex;i++)cumulative.push(cumulative[cumulative.length-1]+segmentDistance(i-1,i));
    const length=cumulative[cumulative.length-1];if(length<1.8)return;
-   const p0=track[startIndex],p1=track[endIndex],handle=length*.34;
+   const p0=track[startIndex],p1=track[endIndex],handle=length*.48;
    const m0=scale(norm(startT),handle),m1=scale(norm(endT),handle);
    const d=sub(V(p1.x-p0.x,p1.y-p0.y,p1.z-p0.z),V());
    const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
@@ -631,7 +631,7 @@ function makeTrack(){
   }
   for(let n=0;n<routeBounds.length;n++){
    const bound=routeBounds[n],previousEnd=n?routeBounds[n-1].end:-1,nextStart=n+1<routeBounds.length?routeBounds[n+1].start:track.length;
-   const radius=bound.plane.radius||4,window=Math.max(3,Math.min(13,radius*3));
+   const radius=bound.plane.radius||4,window=Math.max(3,Math.min(9,radius*2.1));
    let entry=bound.start-1,entryLength=0;
    while(entry>previousEnd+1&&entry>0&&entryLength<window){entryLength+=segmentDistance(entry,entry+1);entry--;}
    if(entryLength>=2){
