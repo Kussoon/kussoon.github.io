@@ -44,7 +44,9 @@ function hill(width=560,height=600){
  const points=[];for(let i=0;i<=160;i++){const t=i/160;points.push({x:24+width*t,y:height*.53-70*Math.sin(2*Math.PI*t)-20*Math.sin(4*Math.PI*t)});}return points;
 }
 function validateLoop(data,zone){
- const pts=data.snapshot.knots.slice(zone.coreStart,zone.coreEnd+1);
+ const coreStart=zone.start+Math.ceil((zone.end-zone.start)*.14);
+ const coreEnd=zone.start+Math.floor((zone.end-zone.start)*.86);
+ const pts=data.snapshot.knots.slice(coreStart,coreEnd+1);
  assert(pts.length>=8,'a detected loop must retain a substantial circular core');
  const errors=pts.map(p=>Math.abs(Math.hypot(p.x-zone.cx,p.y-zone.cy)-zone.r));
  assert(Math.max(...errors)<.02,'loop core must remain a fitted circle after smoothing');

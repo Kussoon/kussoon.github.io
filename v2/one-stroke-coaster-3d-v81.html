@@ -212,18 +212,23 @@ function makeTrack(){
    corrected[k].x=mix(p.x,cx+r*Math.cos(theta),weight);
    corrected[k].y=mix(p.y,cy+r*Math.sin(theta),weight);
   }
-  used.push({start:i,end,coreStart:i+Math.ceil((end-i)*.14),coreEnd:i+Math.floor((end-i)*.86),cx,cy,r});
+  // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
+  corrected[end]={...corrected[i]};
+  used.push({start:i,end,coreStart:i,coreEnd:end,cx,cy,r});
   i=end;
  }
- // Smooth the remaining stroke once. The fitted loop core is held fixed so
- // small circles survive both this pass and the subsequent entry/exit fairing.
- const coreByIndex=new Array(corrected.length);
- for(const zone of used)for(let k=zone.coreStart;k<=zone.coreEnd;k++)coreByIndex[k]=zone;
+ // Smooth the remaining stroke once. The fitted loop and its exact join points are
+ // held fixed so small circles survive both fairing stages without opening a seam.
+ const coreByIndex=new Array(corrected.length),loopBoundary=new Set();
+ for(const zone of used){
+  for(let k=zone.coreStart;k<=zone.coreEnd;k++)coreByIndex[k]=zone;
+  loopBoundary.add(zone.start);loopBoundary.add(zone.end);
+ }
  let faired=corrected;
  for(let pass=0;pass<58;pass++){
   const old=faired;
   faired=old.map((p,k)=>{
-   if(k===0||k===old.length-1)return p;
+   if(k===0||k===old.length-1||loopBoundary.has(k))return p;
    const a=old[k-1],b=old[k+1];
    const q={x:(a.x+2*p.x+b.x)*.25,y:(a.y+2*p.y+b.y)*.25},zone=coreByIndex[k];
    if(zone){const th=Math.atan2(q.y-zone.cy,q.x-zone.cx);
