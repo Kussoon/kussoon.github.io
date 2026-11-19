@@ -58,10 +58,19 @@ async function test(driver,name,w,h){
   assert.equal((await page.locator('#size').innerText()).replace(/\s+/g,''),'文字100％',name+' reset caption fixed');
   const touchProtection=await page.locator('.zoom-slider-well').evaluate(el=>{
    const css=getComputedStyle(el);
-   return {userSelect:css.userSelect,webkitTouchCallout:css.getPropertyValue('-webkit-touch-callout')};
+   const ruleText=[...document.styleSheets].filter(sheet=>!sheet.href).flatMap(sheet=>{
+    try{return [...sheet.cssRules].map(rule=>rule.cssText)}catch{return []}
+   }).join(' ');
+   return {
+    userSelect:css.getPropertyValue('user-select')||css.getPropertyValue('-webkit-user-select')||'',
+    webkitTouchCallout:css.getPropertyValue('-webkit-touch-callout')||'',
+    ruleText
+   };
   });
-  assert.equal(touchProtection.userSelect,'none',name+' prevents iOS long-press text selection');
-  if(name.startsWith('webkit'))assert.equal(touchProtection.webkitTouchCallout,'none',name+' prevents iOS long-press callout');
+  assert.match(touchProtection.ruleText,/-webkit-user-select:\\s*none/,name+' declares Safari long-press text selection prevention');
+  assert.match(touchProtection.ruleText,/-webkit-touch-callout:\\s*none/,name+' declares Safari long-press callout prevention');
+  if(touchProtection.userSelect)assert.equal(touchProtection.userSelect,'none',name+' computed user-select');
+  if(touchProtection.webkitTouchCallout)assert.equal(touchProtection.webkitTouchCallout,'none',name+' computed touch-callout');
   await page.locator('#fullscreen').click();await page.waitForTimeout(380);
   check(await get());
   assert.equal(await page.locator('#fullscreen').innerText(),'戻る');
