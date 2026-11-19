@@ -8,7 +8,7 @@ const versions=[
 // Wheel events exist on desktop pointers, even for narrow responsive viewports.
 const cases=[['chromium-1280',chromium,1280,800],['webkit-desktop-390',webkit,390,844],['webkit-desktop-320',webkit,320,668]];
 async function run(browser,url,width,height){
- const page=await browser.newPage({viewport:{width,height},hasTouch:width<600,isMobile:false});
+ const page=await browser.newPage({viewport:{width,height},hasTouch:false,isMobile:false});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const k=()=>page.evaluate(()=>window.d3.zoomTransform(document.querySelector('#map')).k);
  try{
