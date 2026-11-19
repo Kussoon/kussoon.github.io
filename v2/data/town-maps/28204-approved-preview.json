@@ -1,0 +1,2260 @@
+{
+  "municipalityId": "jp-hyogo-nishinomiya",
+  "name": "西宮市",
+  "sourceFormat": "topojson",
+  "topologyUrl": "/v2/data/nishinomiya-town-v2-premerged.topojson",
+  "mappingUrl": "/nishinomiya/data/community-town-map.json",
+  "exceptionUrl": "/v2/data/nishinomiya-uekoto-community.topojson",
+  "objectName": "town",
+  "townNameProperty": "S_NAME",
+  "expectedTownCount": 321,
+  "expectedRegionCount": 26,
+  "expectedLabelCount": 324,
+  "reference": "v2/nishinomiya-town-svg-master-v34-20261117-pilot.html",
+  "note": "Verified READINGS/COMMUNITY_READINGS and membership.build() primary ranking + V34 explicit additions. Geometry for 上甲東園 split and calibrated label placements must be validated separately; not ready for rendering parity.",
+  "regionReadings": {
+    "上ヶ原": "うえがはら",
+    "今津": "いまず",
+    "北口": "きたぐち",
+    "名塩": "なじお",
+    "夙川": "しゅくがわ",
+    "大社": "たいしゃ",
+    "安井": "やすい",
+    "山口": "やまぐち",
+    "平木": "ひらき",
+    "広田": "ひろた",
+    "春風": "はるかぜ",
+    "津門": "つと",
+    "浜脇": "はまわき",
+    "瓦木": "かわらぎ",
+    "生瀬": "なまぜ",
+    "用海": "ようがい",
+    "甲子園口": "こうしえんぐち",
+    "甲東": "こうとう",
+    "甲陽": "こうよう",
+    "神原": "かんばら",
+    "芦原": "あしはら",
+    "苦楽園": "くらくえん",
+    "西宮浜": "にしのみやはま",
+    "越木岩": "こしきいわ",
+    "香櫨園": "こうろえん",
+    "鳴尾": "なるお"
+  },
+  "townMetadata": {
+    "越水": {
+      "reading": "こしみず",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "湯元町": {
+      "reading": "ゆのもとちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "鷲林寺字剣谷": {
+      "reading": "じゅうりんじあざけんだに",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "鷲林寺": {
+      "reading": "じゅうりんじ",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "鷲林寺町": {
+      "reading": "じゅうりんじちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "柏堂町": {
+      "reading": "かやんどうちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "北山町": {
+      "reading": "きたやまちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "甲陽園目神山町": {
+      "reading": "こうようえんめがみやまちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "甲陽園東山町": {
+      "reading": "こうようえんひがしやまちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "甲陽園山王町": {
+      "reading": "こうようえんさんのうちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "甲陽園西山町": {
+      "reading": "こうようえんにしやまちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "甲陽園若江町": {
+      "reading": "こうようえんわかえちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "甲陽園本庄町": {
+      "reading": "こうようえんほんじょうちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "甲陽園日之出町": {
+      "reading": "こうようえんひのでちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "新甲陽町": {
+      "reading": "しんこうようちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "神園町": {
+      "reading": "かみぞのちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "獅子ケ口町": {
+      "reading": "ししがぐちちょう",
+      "communities": [
+        "神原"
+      ]
+    },
+    "甑岩町": {
+      "reading": "こしきいわちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "毘沙門町": {
+      "reading": "びしゃもんちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "角石町": {
+      "reading": "すみいしちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "西平町": {
+      "reading": "にしひらちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "美作町": {
+      "reading": "みさくちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "桜町": {
+      "reading": "さくらまち",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "豊楽町": {
+      "reading": "ほうらくちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "松風町": {
+      "reading": "まつかぜちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "石刎町": {
+      "reading": "いしばねちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "苦楽園一番町": {
+      "reading": "くらくえんいちばんちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "苦楽園二番町": {
+      "reading": "くらくえんにばんちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "苦楽園三番町": {
+      "reading": "くらくえんさんばんちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "苦楽園四番町": {
+      "reading": "くらくえんよんばんちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "苦楽園五番町": {
+      "reading": "くらくえんごばんちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "樋之池町": {
+      "reading": "ひのいけちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "老松町": {
+      "reading": "おいまつちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "深谷町": {
+      "reading": "ふかたにちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "木津山町": {
+      "reading": "きずやまちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "松ケ丘町": {
+      "reading": "まつがおかちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "菊谷町": {
+      "reading": "きくたにちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "南越木岩町": {
+      "reading": "みなみこしきいわちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "松生町": {
+      "reading": "まつおいちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "久出ケ谷町": {
+      "reading": "くでがやちょう",
+      "communities": [
+        "越木岩"
+      ]
+    },
+    "高塚町": {
+      "reading": "たかつかちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "殿山町": {
+      "reading": "とのやまちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "雲井町": {
+      "reading": "くもいちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "相生町": {
+      "reading": "あいおいちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "岡田山": {
+      "reading": "おかだやま",
+      "communities": [
+        "上ヶ原",
+        "広田"
+      ]
+    },
+    "愛宕山": {
+      "reading": "あたごやま",
+      "communities": [
+        "広田"
+      ]
+    },
+    "高座町": {
+      "reading": "たかくらちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "一ケ谷町": {
+      "reading": "いちがやちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "五月ケ丘": {
+      "reading": "さつきがおか",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "六軒町": {
+      "reading": "ろっけんちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "神原": {
+      "reading": "かんばら",
+      "communities": [
+        "神原"
+      ]
+    },
+    "奥畑": {
+      "reading": "おくはた",
+      "communities": [
+        "神原"
+      ]
+    },
+    "大社町": {
+      "reading": "たいしゃちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "能登町": {
+      "reading": "のとちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "広田町": {
+      "reading": "ひろたちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "大畑町": {
+      "reading": "おおはたちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "平木町": {
+      "reading": "ひらきちょう",
+      "communities": [
+        "平木"
+      ]
+    },
+    "中屋町": {
+      "reading": "なかやちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "河原町": {
+      "reading": "かわはらちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "青木町": {
+      "reading": "あおきちょう",
+      "communities": [
+        "平木"
+      ]
+    },
+    "柳本町": {
+      "reading": "やなぎもとちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "室川町": {
+      "reading": "むろかわちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "神垣町": {
+      "reading": "かみがきちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "越水町": {
+      "reading": "こしみずちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "城山": {
+      "reading": "しろやま",
+      "communities": [
+        "大社"
+      ]
+    },
+    "桜谷町": {
+      "reading": "さくらだにちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "西田町": {
+      "reading": "にしだちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "満池谷町": {
+      "reading": "まんちだにちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "清水町": {
+      "reading": "しみずちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "北名次町": {
+      "reading": "きたなつぎちょう",
+      "communities": [
+        "神原"
+      ]
+    },
+    "名次町": {
+      "reading": "なつぎちょう",
+      "communities": [
+        "神原"
+      ]
+    },
+    "南郷町": {
+      "reading": "なんごうちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "若松町": {
+      "reading": "わかまつちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "結善町": {
+      "reading": "けつぜんちょう",
+      "communities": [
+        "神原"
+      ]
+    },
+    "大井手町": {
+      "reading": "おおいでちょう",
+      "communities": [
+        "大社"
+      ]
+    },
+    "芦原町": {
+      "reading": "あしはらちょう",
+      "communities": [
+        "芦原"
+      ]
+    },
+    "神祇官町": {
+      "reading": "じんぎかんちょう",
+      "communities": [
+        "芦原"
+      ]
+    },
+    "森下町": {
+      "reading": "もりしたちょう",
+      "communities": [
+        "芦原"
+      ]
+    },
+    "神明町": {
+      "reading": "しんめいちょう",
+      "communities": [
+        "芦原"
+      ]
+    },
+    "西福町": {
+      "reading": "さいふくちょう",
+      "communities": [
+        "芦原"
+      ]
+    },
+    "中殿町": {
+      "reading": "なかどのちょう",
+      "communities": [
+        "芦原"
+      ]
+    },
+    "中須佐町": {
+      "reading": "なかすさちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "津田町": {
+      "reading": "つだちょう",
+      "communities": [
+        "芦原"
+      ]
+    },
+    "中前田町": {
+      "reading": "なかまえだちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "櫨塚町": {
+      "reading": "はぜつかちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "城ケ堀町": {
+      "reading": "じょうがぼりちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "江上町": {
+      "reading": "えがみちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "末広町": {
+      "reading": "すえひろちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "分銅町": {
+      "reading": "ぶんどうちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "常磐町": {
+      "reading": "ときわちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "平松町": {
+      "reading": "ひらまつちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "寿町": {
+      "reading": "ことぶきちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "千歳町": {
+      "reading": "ちとせちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "安井町": {
+      "reading": "やすいちょう",
+      "communities": [
+        "安井"
+      ]
+    },
+    "羽衣町": {
+      "reading": "はごろもちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "霞町": {
+      "reading": "かすみちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "松園町": {
+      "reading": "まつぞのちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "大谷町": {
+      "reading": "おおたにちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "郷免町": {
+      "reading": "ごうめんちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "御茶家所町": {
+      "reading": "おちゃやしょちょう",
+      "communities": [
+        "夙川"
+      ]
+    },
+    "松下町": {
+      "reading": "まつしたちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "屋敷町": {
+      "reading": "やしきちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "弓場町": {
+      "reading": "ゆばちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "川西町": {
+      "reading": "かわにしちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "中浜町": {
+      "reading": "なかはまちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "堀切町": {
+      "reading": "ほりきりちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "上葭原町": {
+      "reading": "かみよしはらちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "中葭原町": {
+      "reading": "なかよしはらちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "下葭原町": {
+      "reading": "しもよしはらちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "大浜町": {
+      "reading": "おおはまちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "神楽町": {
+      "reading": "かぐらちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "産所町": {
+      "reading": "さんしょちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "宮西町": {
+      "reading": "みやにしちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "市庭町": {
+      "reading": "いちにわちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "社家町": {
+      "reading": "しゃけちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "宮前町": {
+      "reading": "みやまえちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "荒戎町": {
+      "reading": "あらえびすちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "川東町": {
+      "reading": "かわひがしちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "川添町": {
+      "reading": "かわぞえちょう",
+      "communities": [
+        "香櫨園"
+      ]
+    },
+    "建石町": {
+      "reading": "たていしちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "前浜町": {
+      "reading": "まえはまちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "泉町": {
+      "reading": "いずみちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "西波止町": {
+      "reading": "にしはとちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "和上町": {
+      "reading": "わじょうちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "六湛寺町": {
+      "reading": "ろくたんじちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "与古道町": {
+      "reading": "よこみちちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "今在家町": {
+      "reading": "いまざいけちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "田中町": {
+      "reading": "たなかちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "馬場町": {
+      "reading": "ばばちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "戸田町": {
+      "reading": "とだちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "本町": {
+      "reading": "ほんまち",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "用海町": {
+      "reading": "ようがいちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "浜松原町": {
+      "reading": "はままつばらちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "東浜町": {
+      "reading": "ひがしはまちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "東町": {
+      "reading": "ひがしまち",
+      "communities": [
+        "用海"
+      ]
+    },
+    "石在町": {
+      "reading": "いしざいちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "久保町": {
+      "reading": "くぼちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "鞍掛町": {
+      "reading": "くらかけちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "浜脇町": {
+      "reading": "はまわきちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "浜町": {
+      "reading": "はまちょう",
+      "communities": [
+        "浜脇"
+      ]
+    },
+    "朝凪町": {
+      "reading": "あさなぎちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "池田町": {
+      "reading": "いけだちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "松原町": {
+      "reading": "まつばらちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "染殿町": {
+      "reading": "そめどのちょう",
+      "communities": [
+        "用海"
+      ]
+    },
+    "津門飯田町": {
+      "reading": "つといいでんちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門大塚町": {
+      "reading": "つとおおつかちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門大箇町": {
+      "reading": "つとおおごちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門綾羽町": {
+      "reading": "つとあやはちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門呉羽町": {
+      "reading": "つとくれはちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門稲荷町": {
+      "reading": "つといなりちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門仁辺町": {
+      "reading": "つとにべちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門西口町": {
+      "reading": "つとにしぐちちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門宝津町": {
+      "reading": "つとほうずちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "津門川町": {
+      "reading": "つとがわちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "津門住江町": {
+      "reading": "つとすみえちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "甲子園春風町": {
+      "reading": "こうしえんはるかぜちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "今津野田町": {
+      "reading": "いまずのだちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "今津山中町": {
+      "reading": "いまずやまなかちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "今津上野町": {
+      "reading": "いまずうえのちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "甲子園浜田町": {
+      "reading": "こうしえんはまだちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "甲子園砂田町": {
+      "reading": "こうしえんすなだちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "甲子園六石町": {
+      "reading": "こうしえんろっこくちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "甲子園浦風町": {
+      "reading": "こうしえんうらかぜちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "今津曙町": {
+      "reading": "いまずあけぼのちょう",
+      "communities": [
+        "津門"
+      ]
+    },
+    "今津水波町": {
+      "reading": "いまずみずなみちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "甲子園高潮町": {
+      "reading": "こうしえんたかしおちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "甲子園洲鳥町": {
+      "reading": "こうしえんすどりちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "甲子園網引町": {
+      "reading": "こうしえんあびきちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津久寿川町": {
+      "reading": "いまずくすがわちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津社前町": {
+      "reading": "いまずしゃぜんちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津大東町": {
+      "reading": "いまずおおひがしちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津二葉町": {
+      "reading": "いまずふたばちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津出在家町": {
+      "reading": "いまずでざいけちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津港町": {
+      "reading": "いまずみなとちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津巽町": {
+      "reading": "いまずたつみちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津西浜町": {
+      "reading": "いまずにしはまちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "今津真砂町": {
+      "reading": "いまずまさごちょう",
+      "communities": [
+        "今津"
+      ]
+    },
+    "甲子園三保町": {
+      "reading": "こうしえんみほちょう",
+      "communities": [
+        "春風"
+      ]
+    },
+    "苦楽園六番町": {
+      "reading": "くらくえんろくばんちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "鷲林寺南町": {
+      "reading": "じゅうりんじみなみまち",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "柏堂西町": {
+      "reading": "かやんどうにしまち",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "剣谷町": {
+      "reading": "けんだにちょう",
+      "communities": [
+        "苦楽園"
+      ]
+    },
+    "西宮浜": {
+      "reading": "にしのみやはま",
+      "communities": [
+        "西宮浜"
+      ]
+    },
+    "小曽根町": {
+      "reading": "こそねちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "小松北町": {
+      "reading": "こまつきたまち",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "小松東町": {
+      "reading": "こまつひがしまち",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "小松町": {
+      "reading": "こまつちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "小松西町": {
+      "reading": "こまつにしまち",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "小松南町": {
+      "reading": "こまつみなみまち",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "若草町": {
+      "reading": "わかくさちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "花園町": {
+      "reading": "はなぞのちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "学文殿町": {
+      "reading": "がくぶんでんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "里中町": {
+      "reading": "さとなかちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "上鳴尾町": {
+      "reading": "あげなるおちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園一番町": {
+      "reading": "こうしえんいちばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園二番町": {
+      "reading": "こうしえんにばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園三番町": {
+      "reading": "こうしえんさんばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園四番町": {
+      "reading": "こうしえんよんばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園五番町": {
+      "reading": "こうしえんごばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園六番町": {
+      "reading": "こうしえんろくばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園七番町": {
+      "reading": "こうしえんななばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園八番町": {
+      "reading": "こうしえんはちばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園九番町": {
+      "reading": "こうしえんきゅうばんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "武庫川町": {
+      "reading": "むこがわちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "池開町": {
+      "reading": "いけびらきちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "東鳴尾町": {
+      "reading": "ひがしなるおちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "笠屋町": {
+      "reading": "かさやちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "上田東町": {
+      "reading": "うえだひがしまち",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "上田中町": {
+      "reading": "うえだなかまち",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "上田西町": {
+      "reading": "うえだにしまち",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "高須町": {
+      "reading": "たかすちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "鳴尾町": {
+      "reading": "なるおちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "古川町": {
+      "reading": "ふるかわちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "枝川町": {
+      "reading": "えだがわちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園町": {
+      "reading": "こうしえんちょう",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "南甲子園": {
+      "reading": "みなみこうしえん",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "浜甲子園": {
+      "reading": "はまこうしえん",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "甲子園浜": {
+      "reading": "こうしえんはま",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "鳴尾浜": {
+      "reading": "なるおはま",
+      "communities": [
+        "鳴尾"
+      ]
+    },
+    "堤町": {
+      "reading": "つつみちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "上之町": {
+      "reading": "かみのちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "日野町": {
+      "reading": "ひのちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "荒木町": {
+      "reading": "あらきちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "大森町": {
+      "reading": "おおもりちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "薬師町": {
+      "reading": "やくしちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "伏原町": {
+      "reading": "ふしはらちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "高木東町": {
+      "reading": "たかぎひがしまち",
+      "communities": [
+        "北口"
+      ]
+    },
+    "高木西町": {
+      "reading": "たかぎにしまち",
+      "communities": [
+        "北口"
+      ]
+    },
+    "長田町": {
+      "reading": "ながたちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "北口町": {
+      "reading": "きたぐちちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "甲風園": {
+      "reading": "こうふうえん",
+      "communities": [
+        "北口"
+      ]
+    },
+    "丸橋町": {
+      "reading": "まるはしちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "北昭和町": {
+      "reading": "きたしょうわちょう",
+      "communities": [
+        "広田"
+      ]
+    },
+    "南昭和町": {
+      "reading": "みなみしょうわちょう",
+      "communities": [
+        "平木"
+      ]
+    },
+    "両度町": {
+      "reading": "りょうどちょう",
+      "communities": [
+        "平木"
+      ]
+    },
+    "高松町": {
+      "reading": "たかまつちょう",
+      "communities": [
+        "平木"
+      ]
+    },
+    "深津町": {
+      "reading": "ふかずちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "高畑町": {
+      "reading": "たかはたちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "田代町": {
+      "reading": "たしろちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "大屋町": {
+      "reading": "おおやちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "中島町": {
+      "reading": "なかじまちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "瓦林町": {
+      "reading": "かわらばやしちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "天道町": {
+      "reading": "てんどうちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "松山町": {
+      "reading": "まつやまちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "松並町": {
+      "reading": "まつなみちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "熊野町": {
+      "reading": "くまのちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "二見町": {
+      "reading": "ふたみちょう",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "甲子園口北町": {
+      "reading": "こうしえんぐちきたまち",
+      "communities": [
+        "瓦木"
+      ]
+    },
+    "甲子園口": {
+      "reading": "こうしえんぐち",
+      "communities": [
+        "甲子園口"
+      ]
+    },
+    "上甲子園": {
+      "reading": "かみこうしえん",
+      "communities": [
+        "春風"
+      ]
+    },
+    "戸崎町": {
+      "reading": "とざきちょう",
+      "communities": [
+        "甲子園口"
+      ]
+    },
+    "甲山町": {
+      "reading": "かぶとやまちょう",
+      "communities": [
+        "甲陽"
+      ]
+    },
+    "仁川町": {
+      "reading": "にがわちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "仁川百合野町": {
+      "reading": "にがわゆりのちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "仁川五ケ山町": {
+      "reading": "にがわごかやまちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原一番町": {
+      "reading": "うえがはらいちばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原二番町": {
+      "reading": "うえがはらにばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原三番町": {
+      "reading": "うえがはらさんばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原四番町": {
+      "reading": "うえがはらよんばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原五番町": {
+      "reading": "うえがはらごばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原六番町": {
+      "reading": "うえがはらろくばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原七番町": {
+      "reading": "うえがはらななばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原八番町": {
+      "reading": "うえがはらはちばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原九番町": {
+      "reading": "うえがはらきゅうばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原十番町": {
+      "reading": "うえがはらじゅうばんちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原山田町": {
+      "reading": "うえがはらやまだちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上ケ原山手町": {
+      "reading": "うえがはらやまてちょう",
+      "communities": [
+        "上ヶ原"
+      ]
+    },
+    "上甲東園": {
+      "reading": "かみこうとうえん",
+      "communities": [
+        "上ヶ原",
+        "甲東"
+      ]
+    },
+    "甲東園": {
+      "reading": "こうとうえん",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "松籟荘": {
+      "reading": "しょうらいそう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "神呪町": {
+      "reading": "かんのうちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "門戸東町": {
+      "reading": "もんどひがしまち",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "門戸西町": {
+      "reading": "もんどにしまち",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "門戸岡田町": {
+      "reading": "もんどおかだちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "門戸荘": {
+      "reading": "もんどそう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "一里山町": {
+      "reading": "いちりやまちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "段上町": {
+      "reading": "だんじょうちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "上大市": {
+      "reading": "かみおおいち",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "下大市東町": {
+      "reading": "しもおおいちひがしまち",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "下大市西町": {
+      "reading": "しもおおいちにしまち",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "樋ノ口町": {
+      "reading": "ひのくちちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "大島町": {
+      "reading": "おおしまちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "若山町": {
+      "reading": "わかやまちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "門前町": {
+      "reading": "もんぜんちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "林田町": {
+      "reading": "はやしだちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "野間町": {
+      "reading": "のまちょう",
+      "communities": [
+        "北口"
+      ]
+    },
+    "田近野町": {
+      "reading": "たじかのちょう",
+      "communities": [
+        "甲東"
+      ]
+    },
+    "塩瀬町名塩": {
+      "reading": "しおせちょうなじお",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "塩瀬町生瀬": {
+      "reading": "しおせちょうなまぜ",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "清瀬台": {
+      "reading": "きよせだい",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩木之元": {
+      "reading": "なじおこのもと",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩南台": {
+      "reading": "なじおみなみだい",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩山荘": {
+      "reading": "なじおさんそう",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩ガーデン": {
+      "reading": "なじおがーでん",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩平成台": {
+      "reading": "なじおへいせいだい",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩新町": {
+      "reading": "なじおしんまち",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "東山台": {
+      "reading": "ひがしやまだい",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "国見台": {
+      "reading": "くにみだい",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩": {
+      "reading": "なじお",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩茶園町": {
+      "reading": "なじおちゃえんちょう",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩さくら台": {
+      "reading": "なじおさくらだい",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩東久保": {
+      "reading": "なじおとうくぼ",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩赤坂": {
+      "reading": "なじおあかさか",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "名塩美山": {
+      "reading": "なじおみやま",
+      "communities": [
+        "名塩"
+      ]
+    },
+    "宝生ケ丘": {
+      "reading": "ほうしょうがおか",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "生瀬高台": {
+      "reading": "なまぜたかだい",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "花の峯": {
+      "reading": "はなのみね",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "青葉台": {
+      "reading": "あおばだい",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "生瀬東町": {
+      "reading": "なまぜひがしまち",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "生瀬武庫川町": {
+      "reading": "なまぜむこがわちょう",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "生瀬町": {
+      "reading": "なまぜちょう",
+      "communities": [
+        "生瀬"
+      ]
+    },
+    "山口町名来": {
+      "reading": "やまぐちちょうならい",
+      "communities": [
+        "山口"
+      ]
+    },
+    "山口町下山口": {
+      "reading": "やまぐちちょうしもやまぐち",
+      "communities": [
+        "山口"
+      ]
+    },
+    "山口町上山口": {
+      "reading": "やまぐちちょうかみやまぐち",
+      "communities": [
+        "山口"
+      ]
+    },
+    "山口町中野": {
+      "reading": "やまぐちちょうなかの",
+      "communities": [
+        "山口"
+      ]
+    },
+    "山口町船坂": {
+      "reading": "やまぐちちょうふなさか",
+      "communities": [
+        "山口"
+      ]
+    },
+    "山口町金仙寺": {
+      "reading": "やまぐちちょうきんせんじ",
+      "communities": [
+        "山口"
+      ]
+    },
+    "山口町阪神流通センター": {
+      "reading": "やまぐちちょうはんしんりゅうつうせんたー",
+      "communities": [
+        "山口"
+      ]
+    },
+    "山口町香花園": {
+      "reading": "やまぐちちょうこうかえん",
+      "communities": [
+        "山口"
+      ]
+    },
+    "北六甲台": {
+      "reading": "きたろっこうだい",
+      "communities": [
+        "山口"
+      ]
+    },
+    "すみれ台": {
+      "reading": "すみれだい",
+      "communities": [
+        "山口"
+      ]
+    }
+  },
+  "membershipCorrections": [
+    {
+      "name": "鷲林寺",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "苦楽園"
+      ]
+    },
+    {
+      "name": "岡田山",
+      "sourceCommunities": [
+        "1〜3 広田、4〜7 上ヶ原"
+      ],
+      "approvedCommunities": [
+        "上ヶ原",
+        "広田"
+      ]
+    },
+    {
+      "name": "東町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "用海"
+      ]
+    },
+    {
+      "name": "西宮浜",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "西宮浜"
+      ]
+    },
+    {
+      "name": "小曽根町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "小松北町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "小松東町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "小松町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "小松西町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "小松南町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "若草町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "学文殿町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "里中町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "東鳴尾町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "高須町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "鳴尾町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "南甲子園",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "浜甲子園",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "甲子園浜",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "鳴尾浜",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "鳴尾"
+      ]
+    },
+    {
+      "name": "甲風園",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "北口"
+      ]
+    },
+    {
+      "name": "甲子園口",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "甲子園口"
+      ]
+    },
+    {
+      "name": "上甲子園",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "春風"
+      ]
+    },
+    {
+      "name": "仁川町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "上ヶ原"
+      ]
+    },
+    {
+      "name": "上甲東園",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "上ヶ原",
+        "甲東"
+      ]
+    },
+    {
+      "name": "甲東園",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "甲東"
+      ]
+    },
+    {
+      "name": "段上町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "甲東"
+      ]
+    },
+    {
+      "name": "上大市",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "甲東"
+      ]
+    },
+    {
+      "name": "樋ノ口町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "甲東"
+      ]
+    },
+    {
+      "name": "名塩南台",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "名塩"
+      ]
+    },
+    {
+      "name": "東山台",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "名塩"
+      ]
+    },
+    {
+      "name": "国見台",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "名塩"
+      ]
+    },
+    {
+      "name": "名塩",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "名塩"
+      ]
+    },
+    {
+      "name": "名塩さくら台",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "名塩"
+      ]
+    },
+    {
+      "name": "宝生ケ丘",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "生瀬"
+      ]
+    },
+    {
+      "name": "青葉台",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "生瀬"
+      ]
+    },
+    {
+      "name": "生瀬町",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "生瀬"
+      ]
+    },
+    {
+      "name": "山口町阪神流通センター",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "山口"
+      ]
+    },
+    {
+      "name": "北六甲台",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "山口"
+      ]
+    },
+    {
+      "name": "すみれ台",
+      "sourceCommunities": [],
+      "approvedCommunities": [
+        "山口"
+      ]
+    }
+  ],
+  "approvedLabelsUrl": "/v2/data/town-maps/28204-v34-labels.json"
+}
