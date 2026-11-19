@@ -518,7 +518,7 @@ function makeTrack(){
   // forcing zero endpoint curvature, so the translated loop meets its lead-in
   // and lead-out without a sharp curvature jump.
   const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
-  const handle=Math.max(3,span*.75);
+  const handle=Math.max(3,span*.60);
   const m0=scale(startTangent,handle),m1=scale(endTangent,handle),d=sub(end,start);
   const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
   const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
@@ -574,7 +574,7 @@ function makeTrack(){
     plane.lane=0;targetOffset=V();
    }
    const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
-   const ramp=Math.max(8,Math.sqrt(100*delta));
+   const ramp=Math.max(8,Math.sqrt(150*delta));
    if(previousPlane){
     transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
    }
