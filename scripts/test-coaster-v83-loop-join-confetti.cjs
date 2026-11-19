@@ -75,7 +75,7 @@ async function run(browserType,label){
    const planes=await page.evaluate(()=>window.__planeSnapshot);
    const gaps=[];for(let i=0;i<planes.length;i++)for(let j=i+1;j<planes.length;j++)gaps.push(actualLoopGap(planes[i],planes[j]));
    const fractionBacktracks=generated.track.reduce((n,p,i,a)=>n+(i&&p.sketchFraction+1e-8<a[i-1].sketchFraction?1:0),0);
-   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length};
+   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint}))};
   }
   await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v83.html',{waitUntil:'domcontentloaded'});
   const goal=await page.evaluate(points=>window.__runGoalTest(points),hill());
@@ -84,7 +84,7 @@ async function run(browserType,label){
    fs.mkdirSync(path.join(root,'v2/verification/coaster-v83'),{recursive:true});
    await page.screenshot({path:path.join(root,'v2/verification/coaster-v83/goal-confetti.png')});
   }
-  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature},goal,errors}));
+  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,loops:v83.loops},goal,errors}));
   assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
   assert.equal(v83.fractionBacktracks,0,'generated route must remain in the original stroke order');
   assert(v83.gaps.every(gap=>gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v83.gaps)}`);
