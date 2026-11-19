@@ -48,16 +48,18 @@ function actualLoopGap(a,b){
  return d;
 }
 function maxCurvature(track){
- let maximum=0;
+ let maximum=0,location=-1;
  for(let i=1;i<track.length-1;i++){
   const a=track[i-1],b=track[i],c=track[i+1];
   const u={x:b.x-a.x,y:b.y-a.y,z:b.z-a.z},v={x:c.x-b.x,y:c.y-b.y,z:c.z-b.z};
   const lu=Math.hypot(u.x,u.y,u.z),lv=Math.hypot(v.x,v.y,v.z);
   if(lu<.02||lv<.02)continue;
   const cos=Math.max(-1,Math.min(1,(u.x*v.x+u.y*v.y+u.z*v.z)/(lu*lv)));
-  maximum=Math.max(maximum,Math.acos(cos)/((lu+lv)*.5));
+  const value=Math.acos(cos)/((lu+lv)*.5);
+  if(value>maximum){maximum=value;location=i;}
  }
- return maximum;
+ const p=track[location]||{};
+ return{value:maximum,index:location,s:+(p.s||0).toFixed(2),point:{x:+(p.x||0).toFixed(2),y:+(p.y||0).toFixed(2),z:+(p.z||0).toFixed(2)},sketchFraction:p.sketchFraction};
 }
 async function run(browserType,label){
  const browser=await browserType.launch({headless:true});
@@ -76,10 +78,14 @@ async function run(browserType,label){
   await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v83.html',{waitUntil:'domcontentloaded'});
   const goal=await page.evaluate(points=>window.__runGoalTest(points),hill());
   const v83=results.v83;
+  if(label==='chromium'){
+   fs.mkdirSync(path.join(root,'v2/verification/coaster-v83'),{recursive:true});
+   await page.screenshot({path:path.join(root,'v2/verification/coaster-v83/goal-confetti.png')});
+  }
   console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature},goal,errors}));
   assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
   assert(v83.gaps.every(gap=>gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v83.gaps)}`);
-  assert(v83.maxCurvature<.55,`generated track has a sharp connector curvature ${v83.maxCurvature.toFixed(3)}/m`);
+  assert(v83.maxCurvature.value<.55,`generated track has a sharp connector curvature ${v83.maxCurvature.value.toFixed(3)}/m near ${JSON.stringify(v83.maxCurvature)}`);
   assert(goal.count>=45,'goal celebration should launch a visible volley');
   assert(goal.streamers>0,'goal volley should include curved streamer ribbons');
   assert(goal.sides.includes(-1)&&goal.sides.includes(1),'both lower-side launchers must fire');
@@ -87,10 +93,6 @@ async function run(browserType,label){
   const hills=await page.evaluate(points=>window.__runLoopTest(points),hill());
   assert.equal(hills.snapshot.used.length,0,'ordinary hills must not be detected as loops');
   assert.deepEqual(errors,[],'no browser page errors');
-  if(label==='chromium'){
-   fs.mkdirSync(path.join(root,'v2/verification/coaster-v83'),{recursive:true});
-   await page.screenshot({path:path.join(root,'v2/verification/coaster-v83/goal-confetti.png')});
-  }
  }finally{await browser.close();}
 }
 (async()=>{
