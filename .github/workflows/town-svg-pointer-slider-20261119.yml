@@ -36,4 +36,4 @@ jobs:
         run: |
           python3 -m http.server 8772 --bind 127.0.0.1 &
           sleep 3
-          node scripts/test-town-svg-zoom-slider-single-rail-20261119.cjs
+          node scripts/test-takarazuka-pointer-slider-20261119.cjs
