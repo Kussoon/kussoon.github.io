@@ -112,6 +112,7 @@ async function run(browserType,label){
   }
   console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,maxSegment:v83.maxSegment,loops:v83.loops,loopRanges:v83.planes.map(p=>({first:p.first,last:p.last,low:p.low,high:p.high,firstPoint:p.points[0],lastPoint:p.points[p.points.length-1]})),stageCurvature:{source:maxCurvature(v83.stages.source),before:maxCurvature(v83.stages.before),after:maxCurvature(v83.stages.after)},boundaryAngles:boundaryAngles(v83.stages.source,v83.loops,v83.knotCount)},goal,errors}));
   assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
+  assert(v83.loops.every(z=>Math.hypot(z.startPoint.x-z.endPoint.x,z.startPoint.y-z.endPoint.y)<.01),'every fitted loop must close at its selected start seam');
   assert(v83.stages.after.every(p=>[p.x,p.y,p.z,p.s,p.sketchFraction].every(Number.isFinite)),'generated centreline must contain only finite coordinates');
   assert(v83.maxSegment<2,'generated centreline must not contain a large point-to-point jump');
   assert(v83.planes.some(p=>p.lane!==0),'overlapping loop paths must be assigned separate lanes');
