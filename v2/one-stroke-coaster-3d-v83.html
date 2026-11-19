@@ -202,16 +202,22 @@ function makeTrack(){
    if(!candidate||score<candidate.score)candidate={end:j,score,cx:(minX+maxX)*.5,cy:(minY+maxY)*.5,r:(w+h)*.25,sign:Math.sign(turn)};
   }
   if(!candidate)continue;
-  const end=candidate.end,{r}=candidate,seam=originalKnots[i];
-  const dx=seam.x-candidate.cx,dy=seam.y-candidate.cy,radial=Math.hypot(dx,dy)||1;
+  const end=candidate.end,{r}=candidate;
+  let start=i;
+  if(i<=6){
+   const prefix=originalKnots.slice(0,i+1);
+   const tolerance=Math.max(5,r*.15);
+   if(prefix.every(p=>Math.abs(Math.hypot(p.x-candidate.cx,p.y-candidate.cy)-r)<=tolerance))start=0;
+  }
+  const seam=originalKnots[start],dx=seam.x-candidate.cx,dy=seam.y-candidate.cy,radial=Math.hypot(dx,dy)||1;
   const cx=seam.x-dx/radial*r,cy=seam.y-dy/radial*r;
-  for(let k=i+1;k<end;k++){
+  for(let k=start+1;k<end;k++){
    const p=originalKnots[k],theta=Math.atan2(p.y-cy,p.x-cx);
    corrected[k]={x:cx+r*Math.cos(theta),y:cy+r*Math.sin(theta)};
   }
   // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
   corrected[end]={...corrected[i]};
-  used.push({start:i,end,coreStart:i,coreEnd:end,cx,cy,r,sign:candidate.sign||1});
+  used.push({start,end,coreStart:start,coreEnd:end,cx,cy,r,sign:candidate.sign||1});
   i=end;
  }
  // Smooth the remaining stroke once. The fitted loop and its exact join points are
