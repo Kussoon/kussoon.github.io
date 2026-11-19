@@ -518,6 +518,10 @@ function makeTrack(){
    routed.push({x:p.x,y:p.y,z:p.z,s:0,sketchFraction:mix(startFraction,endFraction,t)});
   }
  }
+ function routedTailTangent(fallbackIndex){
+  if(routed.length>1){const p=routed[routed.length-1],q=routed[routed.length-2],t=norm(sub(p,q));if(Math.hypot(t.x,t.y,t.z)>.01)return t;}
+  return tangentAtIndex(fallbackIndex,false);
+ }
  function interpolateOffset(a,b,t){return add(scale(a,1-t),scale(b,t));}
  function transitionGap(fromIndex,toIndex,fromOffset,toOffset,requiredRamp){
   const a=sourceTrack[Math.max(0,fromIndex)],b=sourceTrack[Math.min(sourceTrack.length-1,toIndex)];
@@ -537,7 +541,7 @@ function makeTrack(){
   const last=routed[routed.length-1]||shiftedPoint(a,fromOffset);
   const baseEnd=shiftedPoint(b,toOffset);
   const end=add(baseEnd,advance);
-  appendConnector(last,end,tangentAtIndex(fromIndex,false),tangent,requiredRamp,
+  appendConnector(last,end,routedTailTangent(fromIndex),tangent,requiredRamp,
    last.sketchFraction,b.sketchFraction);
   routeShift=add(routeShift,advance);
  }
@@ -582,12 +586,12 @@ function makeTrack(){
    }else{
     const tangent=tangentAtIndex(lastIndex,true),extra=Math.max(0,ramp-gap);
     const advance=scale(tangent,extra),from=routed[routed.length-1],to=add(shiftedPoint(end,endOffset),advance);
-    appendConnector(from,to,tangentAtIndex(cursor,false),tangent,ramp,from.sketchFraction,end.sketchFraction);
+    appendConnector(from,to,routedTailTangent(cursor),tangent,ramp,from.sketchFraction,end.sketchFraction);
    }
   }else if(cursor===lastIndex&&Math.hypot(previousOffset.x,previousOffset.z)>.01){
    const tangent=tangentAtIndex(lastIndex,true),ramp=Math.max(8,Math.sqrt(60*Math.hypot(previousOffset.x,previousOffset.z)));
    const from=routed[routed.length-1],to=add(shiftedPoint(sourceTrack[lastIndex],V()),scale(tangent,ramp));
-   appendConnector(from,to,tangentAtIndex(lastIndex,false),tangent,ramp,from.sketchFraction,sourceTrack[lastIndex].sketchFraction);
+   appendConnector(from,to,routedTailTangent(lastIndex),tangent,ramp,from.sketchFraction,sourceTrack[lastIndex].sketchFraction);
   }
   track=routed;
  }
