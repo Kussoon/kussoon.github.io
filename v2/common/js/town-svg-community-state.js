@@ -20,12 +20,14 @@
     ||typeof cityLabel!=='string'||!cityLabel
     ||!Number.isSafeInteger(wholeCityCount)||wholeCityCount<1
     ||!Number.isSafeInteger(activeTownCount)||activeTownCount<0
-    ||!toggle||!count||!reset||!buttons||typeof buttons[Symbol.iterator]!=='function')
+    ||!toggle||!count||!buttons||typeof buttons[Symbol.iterator]!=='function')
    throw new TypeError('地域選択UIの入力が不正です');
   const active=Boolean(selectedRegion);
   const title=active?regionLabel(selectedRegion):cityLabel;
   if(typeof title!=='string'||!title.trim())throw new Error('地域名がありません');
-  reset.textContent=active?'区域\n全体':'市の\n全体';
+  // Legacy pages may still provide a standalone reset button. Nationwide
+  // v1.4 slider layouts omit it and restore the entire city at slider min.
+  if(reset)reset.textContent=active?'区域\n全体':'市の\n全体';
   toggle.textContent=(active?title:cityLabel+'全域（'+wholeCityCount+'町名）')+' ▾';
   count.textContent=active?title+'：'+activeTownCount+'町名':'市全域：'+activeTownCount+'町名';
   for(const button of buttons){
