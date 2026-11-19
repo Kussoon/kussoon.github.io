@@ -1,0 +1,48 @@
+name: National town fullscreen state invariant
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-fullscreen-viewport.js'
+      - 'v2/common/js/town-svg-dataset-browser-fullscreen-pilot.js'
+      - 'v2/town-map-shared-browser-fullscreen-20261119-pilot.html'
+      - 'scripts/test-national-town-fullscreen-state.cjs'
+      - '.github/workflows/national-town-fullscreen-state.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-town-map-master-spec.cjs
+      - run: node scripts/test-national-town-dataset-ready.cjs
+      - run: node scripts/test-national-town-ready-runtime.cjs
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Fetch trusted town source
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Check region, glyphs, fonts, quiz and map zoom across fullscreen
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          sleep 3
+          node scripts/test-national-town-fullscreen-state.cjs
