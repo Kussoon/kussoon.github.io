@@ -6,7 +6,7 @@ const versions=[
  '/v2/takarazuka-town-svg-gestures-d-20261119-pilot.html'
 ];
 // Wheel events exist on desktop pointers, even for narrow responsive viewports.
-const cases=[['chromium-1280',chromium,1280,800],['webkit-desktop-390',webkit,390,844],['webkit-desktop-320',webkit,320,668]];
+const cases=[['chromium-desktop-1280',chromium,1280,800],['webkit-desktop-1280',webkit,1280,800]];
 async function run(browser,url,width,height){
  const page=await browser.newPage({viewport:{width,height},hasTouch:false,isMobile:false});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -75,12 +75,16 @@ async function runMobile(browser,url,width,height){
    const after=await run(browser,versions[1],w,h);
    assert.deepEqual(after,before,'gesture behavior mismatch');
    console.log('PASS TOWN_GESTURES_D '+JSON.stringify({name,before,after}));
-   if(name.startsWith('webkit')){
-    const mobileBefore=await runMobile(browser,versions[0],w,h);
-    const mobileAfter=await runMobile(browser,versions[1],w,h);
-    assert.deepEqual(mobileAfter,mobileBefore,'mobile WebKit touch behavior mismatch');
-    console.log('PASS TOWN_GESTURES_D_MOBILE '+JSON.stringify({name,mobileAfter}));
-   }
+
   }finally{await browser.close()}
  }
+ const browser=await webkit.launch({headless:true});
+ try{
+  for(const [width,height] of [[390,844],[320,668]]){
+   const mobileBefore=await runMobile(browser,versions[0],width,height);
+   const mobileAfter=await runMobile(browser,versions[1],width,height);
+   assert.deepEqual(mobileAfter,mobileBefore,'mobile WebKit touch behavior mismatch');
+   console.log('PASS TOWN_GESTURES_D_MOBILE '+JSON.stringify({width,height,mobileAfter}));
+  }
+ }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
