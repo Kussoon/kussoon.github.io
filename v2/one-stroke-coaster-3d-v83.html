@@ -635,7 +635,7 @@ function makeTrack(){
    }
    let exit=bound.end+1,exitLength=0;
    while(exit<nextStart-1&&exit<track.length&&exitLength<window){exitLength+=segmentDistance(exit-1,exit);exit++;}
-   if(exitLength>=2&&exit<track.length){
+   if(exitLength>=2&&exit<track.length-1){
     const startT=V(track[bound.end].x-track[bound.end-1].x,track[bound.end].y-track[bound.end-1].y,track[bound.end].z-track[bound.end-1].z);
     const endT=V(track[exit+1].x-track[exit].x,track[exit+1].y-track[exit].y,track[exit+1].z-track[exit].z);
     fitJoin(bound.end,exit,startT,endT);
