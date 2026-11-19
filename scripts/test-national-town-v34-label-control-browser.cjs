@@ -34,7 +34,7 @@ async function run(engine,name,width,height){
   assert.equal(current.labels,324,'accepted V34 324 labels, not auto-generated 323');
   assert.equal(current.names,321);assert.equal(current.nonFinite,0);
   assert.equal(new Set(current.keys).size,324);
-  assert.deepEqual(current.duplicated.map(x=>x.n),[2,2,2-1],'V34 extra label allocation');
+  assert.deepEqual(current.duplicated.map(x=>x.n),[2,2,2],'V34 extra label allocation');
   for(const b of current.buttons){
    assert(b.w<=64&&b.w>=32,name+' compact width '+b.id+': '+b.w);
    assert(b.h<=54&&b.h>=25,name+' compact height '+b.id+': '+b.h);
