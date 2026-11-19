@@ -12,7 +12,7 @@ function instrument(html){
  html=html.replace(planeMarker,'window.__planeSnapshot=loopPlanes.map(p=>({index:p.index,lane:p.lane,low:p.low,high:p.high,first:p.first,last:p.last,axis:{...p.axis},points:p.points.map(q=>({...q})),conflicts:[...loopConflicts[p.index]]}));\n '+planeMarker);
  const source='const sourceTrack=track.map(p=>({...p}));';
  assert(html.includes(source),'source-track marker must exist');
- html=html.replace(source,'window.__sourceTrack=track.map(p=>({...p}));\\n '+source);
+ html=html.replace(source,'window.__sourceTrack=track.map(p=>({...p}));\n '+source);
  const before='const beforeFairing=track.map(p=>({...p}));';
  assert(html.includes(before),'pre-fairing marker must exist');
  html=html.replace(before,'window.__beforeFairing=track.map(p=>({...p}));\n '+before);
