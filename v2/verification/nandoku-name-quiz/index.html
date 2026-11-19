@@ -55,7 +55,10 @@ body.quiz-active #quiz .buttons button{min-height:40px;padding:5px 9px}
 .story-close{min-height:38px;padding:6px 16px;border-radius:10px;background:var(--soft);color:var(--text);border:1px solid var(--border);font-size:.86rem}
 .story-close:hover{border-color:var(--accent)}
 @media(max-width:500px){.story-details{margin-top:12px}.story-details summary{padding:11px 13px}.story-body{padding:8px 13px 12px;font-size:.9rem}}
-.song-recommend{margin:18px 0 2px;padding:13px 15px;border:1px solid var(--border);border-radius:12px;background:var(--soft);color:var(--text);font-size:.9rem;line-height:1.65}.song-recommend a{color:var(--accent);text-underline-offset:3px}@media(prefers-color-scheme:dark){.song-recommend a{color:#b9d8ff}}
+.story-link-box{margin:14px 0 2px;padding:13px 15px;border:1px solid var(--border);border-radius:12px;background:var(--soft);color:var(--text);font-size:.9rem;line-height:1.65}
+.story-box-label{display:block;font-size:.82rem;margin-bottom:5px;color:var(--muted);font-weight:800}
+.story-link-box a{color:var(--accent);text-underline-offset:3px}
+@media(prefers-color-scheme:dark){.story-link-box a{color:#b9d8ff}}
 </style></head><body><main class="container"><header><div class="eyebrow">Kussoon / 検証版 v1.1.0</div><h1>このお名前、読めますか？</h1><p class="intro">この名前、読めますか？ 頭の中で答えてから読み方を開き、自分で採点するクイズです。</p>
 <details class="story-details" id="storyDetails"><summary>このクイズを作った理由</summary>
 <div class="story-body">
@@ -64,7 +67,8 @@ body.quiz-active #quiz .buttons button{min-height:40px;padding:5px 9px}
 <p>私の下の名前は、どちらかといえば一度で読むのが難しいほうだと思います。ただ、分解してみると特に当て字ではないので、いわゆる難読名とまでは言えないのでは、と勝手に思っています。</p>
 <p>さて、みなさんもテレビ番組やニュースなどで、いろいろな人の名前を目にしたり耳にしたりすることがあると思います。そんなとき浮かぶのが「これ、何と読むの？」という疑問です。こうした名前は「難読名」「難読ネーム」、ときには「キラキラネーム」とも呼ばれます。</p>
 <p>私は、そうした名前を初見で読めるようになりたいと考えていました。そこで、そのトレーニング用のページを作ることにしました。ぜひ、みなさんもチャレンジしてみてください。</p>
-<div class="song-recommend">ゴダイゴ『<a href="https://youtu.be/rg5KoT-SkWg?si=VVmPFxb4sIhwb-ft" target="_blank" rel="noopener noreferrer">ビューティフル・ネーム</a>』〜素敵な歌詞です。ぜひ一度お聞きください。</div>
+<div class="story-reference story-link-box"><strong class="story-box-label">参考</strong><div><a href="https://ja.wikipedia.org/wiki/%E6%82%AA%E9%AD%94%E3%81%A1%E3%82%83%E3%82%93%E5%91%BD%E5%90%8D%E9%A8%92%E5%8B%95" target="_blank" rel="noopener noreferrer">悪魔ちゃん命名騒動（Wikipedia）</a></div></div>
+<div class="song-recommend story-link-box"><strong class="story-box-label">おすすめ</strong><div>ゴダイゴ『<a href="https://youtu.be/rg5KoT-SkWg?si=VVmPFxb4sIhwb-ft" target="_blank" rel="noopener noreferrer">ビューティフル・ネーム</a>』〜素敵な歌詞です。ぜひ一度お聞きください。</div></div>
 <div class="story-close-row story-close-bottom"><button type="button" class="story-close" aria-label="このクイズを作った理由を閉じる">閉じる ↑</button></div>
 </div></details></header>
 <section id="start" class="panel"><h2>クイズをはじめる</h2><p>登録された198件からランダムに20問を出題します。名前の読み方に正解は一つとは限りません。</p><div class="subhead"><b>出題範囲</b></div><div class="options"><label><input type="radio" name="pool" value="all" checked>全198件から出題</label><label><input type="radio" name="pool" value="rare">希少名42件から出題</label></div><div class="small">※「希少名」は第5次追加分を示し、難易度を保証する分類ではありません。</div><div class="buttons"><button class="primary" id="startBtn">20問に挑戦する</button><button id="resumeBtn" class="hidden">前回の続きから再開</button></div><p class="disclaimer">回答は入力せず、自己採点で記録します。途中経過はこのブラウザ内に保存されます（閲覧環境によって保存できない場合があります）。</p>
