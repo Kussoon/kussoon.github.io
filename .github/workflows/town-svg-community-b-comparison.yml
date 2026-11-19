@@ -36,17 +36,12 @@ jobs:
           curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
           curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
           curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
-      - name: Verify nationwide region state on Chromium and WebKit
+      - name: Verify both cities and all 321 Nishinomiya quiz answers
         run: |
+          # Keep server and browser checks in ONE Actions step: runners may
+          # stop background processes when each separate step terminates.
           python3 -m http.server 8765 --bind 127.0.0.1 &
           sleep 3
           node scripts/test-town-svg-community-b-browser-20261119.cjs
-      - name: Preserve Nishinomiya 321-label control behavior
-        run: |
           node scripts/test-nishinomiya-community-b-20261119.cjs
-      # The Takarazuka full control suite is unchanged from passing stage A.
-      # Stage B specifically checks Takarazuka controls, labels and region changes
-      # in the cross-city test above, avoiding duplicate WebKit browser launches.
-      - name: Exhaustively verify 321-town quiz 1 and 2 in new Nishinomiya page
-        run: |
           NISHINOMIYA_TEST_BASE=http://127.0.0.1:8765 node scripts/audit-nishinomiya-community-b-321-quiz.cjs
