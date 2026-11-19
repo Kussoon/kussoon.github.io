@@ -80,7 +80,8 @@ async function run(browserType,label){
    await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-'+version+'.html',{waitUntil:'domcontentloaded'});
    await page.waitForTimeout(60);
    const generated=await page.evaluate(points=>window.__runLoopTest(points),route);
-   const planes=await page.evaluate(()=>window.__planeSnapshot);\n   const stages=version==='v83'?await page.evaluate(()=>({before:window.__beforeFairing,after:window.__afterFairing})):null;
+   const planes=await page.evaluate(()=>window.__planeSnapshot);
+   const stages=version==='v83'?await page.evaluate(()=>({before:window.__beforeFairing,after:window.__afterFairing})):null;
    const gaps=[];for(let i=0;i<planes.length;i++)for(let j=i+1;j<planes.length;j++)gaps.push(actualLoopGap(planes[i],planes[j]));
    const fractionBacktracks=generated.track.reduce((n,p,i,a)=>n+(i&&p.sketchFraction+1e-8<a[i-1].sketchFraction?1:0),0);
    results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint})),stages};
