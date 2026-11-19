@@ -595,7 +595,7 @@ function makeTrack(){
   const lastIndex=sourceTrack.length-1;
   if(cursor<lastIndex){
    const delta=Math.hypot(previousOffset.x,previousOffset.z);
-   const ramp=Math.max(8,Math.sqrt(120*delta));
+   const ramp=Math.max(8,Math.sqrt(130*delta));
    const endOffset=V();
    const start=sourceTrack[cursor],end=sourceTrack[lastIndex];
    const gap=end.s-start.s;
