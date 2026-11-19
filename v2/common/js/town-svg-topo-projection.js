@@ -65,7 +65,7 @@
    sourceFeatures:features,regionPathCount:regionPaths.size,
    sourceGeometryCount:shape.geometries.length,
    pathFor:(name,region='')=>regionPaths.get(region+'\u0000'+name)||paths.get(name),
-   featureFor:(name,region='')=>regionFeatures.get(region+'\\u0000'+name)||
+   featureFor:(name,region='')=>regionFeatures.get(region+'\u0000'+name)||
     features.find(f=>f.properties.S_NAME===name),
    hasRegionPath:(name,region)=>regionPaths.has(region+'\u0000'+name)
   });
