@@ -518,7 +518,6 @@ function makeTrack(){
   // forcing zero endpoint curvature, so the translated loop meets its lead-in
   // and lead-out without a sharp curvature jump.
   const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
-  const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
   const handle=Math.max(3,span*.60),d=sub(end,start);
   const m0=scale(startTangent,handle),m1=scale(endTangent,handle);
   const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
