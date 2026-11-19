@@ -10,7 +10,7 @@ const d3=window.d3;
 const api=window.KussoonTownSvgReadyRuntime;
 const state=window.KussoonTownSvgQuizState;
 const ui=window.KussoonTownSvgQuizUI;
-const configPath=new URLSearchParams(location.search).get('manifest')||'/v2/data/town-maps/28214-preview.json';
+const configPath=new URLSearchParams(location.search).get('manifest')||'/v2/data/town-maps/28204-preview.json';
 const allowed=/^\/v2\/data\/town-maps\/[0-9]{5}-preview\.json$/;
 if(!allowed.test(configPath))throw Error('自治体台帳は登録済みのサイト内ファイルを指定してください');
 const configResponse=await fetch(configPath,{credentials:'same-origin'});
