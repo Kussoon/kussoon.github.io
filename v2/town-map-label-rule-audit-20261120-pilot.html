@@ -50,6 +50,7 @@ footer{padding:20px 0;font-size:13px}
  <option value="multipart">飛び地・分離した町域</option>
  <option value="holes">穴を持つ町域</option>
  <option value="approved-multi">確定ラベル2か所以上</option>
+ <option value="outside">確定基準点が町域外（要検証）</option>
  <option value="outliers">候補位置の差が大きい順</option>
  <option value="all">全321町名</option></select>
  <label for="query">町名検索</label><input id="query" type="search" placeholder="例：山口、名塩">
@@ -85,7 +86,8 @@ if(audit.summary.towns!==approved.expectedTownCount ||
 const summ=audit.summary;
 const metrics=[['町名',summ.towns],['確定ラベル',summ.approvedLabels],
  ['自動候補',summ.automaticLabels],['個数に差がある町名',summ.mismatchTowns],
- ['飛び地・分離した町名',summ.disjoint],['穴のある町名',summ.withHoles]];
+ ['飛び地・分離した町名',summ.disjoint],['穴のある町名',summ.withHoles],
+ ['確定基準点の町域外判定',summ.approvedOutsideSource]];
 $('metrics').replaceChildren(...metrics.map(([label,num])=>{
  const x=document.createElement('div');x.className='metric';
  const b=document.createElement('b');b.textContent=String(num);
@@ -133,6 +135,7 @@ function drawTable(){
  if(choice==='multipart')rows=rows.filter(r=>r.parts>1);
  if(choice==='holes')rows=rows.filter(r=>r.holes>0);
  if(choice==='approved-multi')rows=rows.filter(r=>r.acceptedCount>1);
+ if(choice==='outside')rows=rows.filter(r=>r.acceptedPoints.some(p=>!p.inside));
  if(choice==='outliers')rows.sort((a,b)=>b.maximumAnchorDeviation-a.maximumAnchorDeviation);
  $('tableStatus').textContent=rows.length+'町名を表示';
  const frag=document.createDocumentFragment();
