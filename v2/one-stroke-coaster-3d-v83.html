@@ -543,16 +543,19 @@ function makeTrack(){
   for(let i=0;i<first.first;i++)appendPoint(sourceTrack[i],V());
   for(const plane of orderedPlanes){
    const firstIndex=Math.max(cursor,plane.first),lastIndex=Math.max(firstIndex,plane.last);
-   const targetOffset=scale(plane.axis,plane.lane*laneStep);
+   let targetOffset=scale(plane.axis,plane.lane*laneStep);
+   if(!previousPlane&&Math.hypot(targetOffset.x,targetOffset.z)>.01){
+    // Anchor the first loop at the course start; it has no approach section
+    // before it on which to build a smooth lane-change connector.
+    plane.lane=0;targetOffset=V();
+   }
    const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
    const ramp=Math.max(8,Math.sqrt(60*delta));
    if(previousPlane){
     transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
-   }else if(firstIndex>cursor){
-    transitionGap(cursor-1,firstIndex,previousOffset,targetOffset,ramp);
-   }else if(Math.hypot(firstOffset.x,firstOffset.z)>.01){
-    plane.lane=0;
    }
+   // The unshifted approach to the first loop was already appended above.
+   // Do not append it a second time, which would jump back to sketch fraction 0.
    const actualPoints=[];
    for(let i=firstIndex;i<=lastIndex&&i<sourceTrack.length;i++){
     const p=appendPoint(sourceTrack[i],targetOffset);actualPoints.push(p);
