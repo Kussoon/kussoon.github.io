@@ -100,7 +100,7 @@ function updateLabels(){
   candidateMode:!approvedAnchors&&!oneLabelMode,frame:svg.node().getBoundingClientRect(),
   zoomRatio:transform.k/Math.max(.001,baseScale),selected,threshold:1.15
  });
-
+}
 function alignGlyphCenters(){
  // Range/getBoundingClientRect correction is layout-expensive. Apply it
  // after label creation or a reading-mode change, not on every zoom frame.
