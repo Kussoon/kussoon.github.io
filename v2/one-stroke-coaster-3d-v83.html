@@ -8,7 +8,7 @@ main:fullscreen,main:-webkit-full-screen,main.pseudo-full{height:100dvh!importan
 main:fullscreen header,main:fullscreen nav,main:fullscreen footer,main:-webkit-full-screen header,main:-webkit-full-screen nav,main:-webkit-full-screen footer,main.pseudo-full header,main.pseudo-full nav,main.pseudo-full footer{display:none!important}
 main:fullscreen #stage,main:-webkit-full-screen #stage,main.pseudo-full #stage{flex:1;min-height:0}
 main:fullscreen #canvas,main:-webkit-full-screen #canvas,main.pseudo-full #canvas{width:100%;height:100%}#quit{background:#ffd5d5;color:#7b2525;white-space:nowrap}#loopMinus,#loopPlus{font-size:16px;padding:8px 10px;background:#d6e6ee}#loopCount{font-size:11px;white-space:nowrap;text-align:center;min-width:55px}#loopControls{display:none!important;align-items:center;gap:4px}button:disabled{opacity:.45}button[hidden]{display:none}footer{background:#102438;text-align:center;color:#b4c9dc;font-size:10px;padding-bottom:4px}
-</style></head><body><main><header><h1>🎢 一筆書きコースター <small style="font-size:11px">3D比較試作 v82</small></h1><span class="status" id="status">指で線を描いてください</span></header><section id="stage"><canvas id="canvas" aria-label="横から見たコースを一筆書きするエリア"></canvas><div id="hint" class="hint">横から見たコースを一筆書きしてください（左右カーブは自動）</div><button id="fullExit" hidden aria-label="全画面モードを終了">×</button><button id="fullReplay" hidden>▶ もう一度乗る</button></section><nav><button id="reset">新しく描く</button><div id="loopControls"><button id="loopMinus" aria-label="指定ループを1回減らす">−</button><span id="loopCount">ループ 自動</span><button id="loopPlus" aria-label="指定ループを1回増やす">＋</button></div><button id="go" disabled>▶ コースに乗る</button><button id="fullGo" disabled>⛶ 全画面でスタート</button><button id="side" hidden disabled aria-hidden="true" tabindex="-1">↔ 平面図を描く</button><button id="pause" hidden>一時停止</button><button id="fullResume" hidden>⛶ 全画面で再開</button><button id="quit" hidden>ここでやめる</button></nav><footer>広告・外部ライブラリなし｜ゆったりした左右カーブ・元の側面図を保持・進捗バー</footer></main><script src="/v2/common/js/one-stroke-coaster-support-clearance.js"></script>
+</style></head><body><main><header><h1>🎢 一筆書きコースター <small style="font-size:11px">3D比較試作 v83</small></h1><span class="status" id="status">指で線を描いてください</span></header><section id="stage"><canvas id="canvas" aria-label="横から見たコースを一筆書きするエリア"></canvas><div id="hint" class="hint">横から見たコースを一筆書きしてください（左右カーブは自動）</div><button id="fullExit" hidden aria-label="全画面モードを終了">×</button><button id="fullReplay" hidden>▶ もう一度乗る</button></section><nav><button id="reset">新しく描く</button><div id="loopControls"><button id="loopMinus" aria-label="指定ループを1回減らす">−</button><span id="loopCount">ループ 自動</span><button id="loopPlus" aria-label="指定ループを1回増やす">＋</button></div><button id="go" disabled>▶ コースに乗る</button><button id="fullGo" disabled>⛶ 全画面でスタート</button><button id="side" hidden disabled aria-hidden="true" tabindex="-1">↔ 平面図を描く</button><button id="pause" hidden>一時停止</button><button id="fullResume" hidden>⛶ 全画面で再開</button><button id="quit" hidden>ここでやめる</button></nav><footer>広告・外部ライブラリなし｜ゆったりした左右カーブ・元の側面図を保持・進捗バー</footer></main><script src="/v2/common/js/one-stroke-coaster-support-clearance.js"></script>
 <script>
 (()=>{
 "use strict";
@@ -479,28 +479,110 @@ function makeTrack(){
   }
  }
  const smoother=t=>{t=clamp(t,0,1);return t*t*t*(t*(t*6-15)+10);};
- // Build one composed lateral-offset field. Independent per-loop offsets
- // were added together; neighboring loops could cancel or double lane shifts
- // even though the collision detector had assigned safe lanes.
- const shiftedPlanes=loopPlanes.filter(plane=>plane.lane&&plane.first>=0&&plane.last>plane.first)
-  .map(plane=>{
-   const startS=track[plane.first].s,endS=track[plane.last].s;
-   const displacement=Math.abs(plane.lane*laneStep);
-   // Scale each transition to its displacement; the old fixed 8m ramp
-   // forced large lane changes through a short, sharp S-bend.
-   const ramp=Math.max(8,Math.sqrt(60*displacement));
-   return{...plane,startS,endS,ramp,offset:scale(plane.axis,plane.lane*laneStep)};
-  });
- for(const p of track){
-  let total=0,offset=V();
-  for(const plane of shiftedPlanes){
-   let weight=1;
-   if(p.s<plane.startS)weight=1-smoother((plane.startS-p.s)/plane.ramp);
-   else if(p.s>plane.endS)weight=1-smoother((p.s-plane.endS)/plane.ramp);
-   if(weight<=0)continue;
-   offset=add(offset,scale(plane.offset,weight));total+=weight;
+ // Keep each protected loop in a constant lateral lane. When adjacent loop
+ // planes need different lanes, insert a forward-advancing cubic connector
+ // rather than superimposing offsets inside neighboring circles.
+ const sourceTrack=track.map(p=>({...p}));
+ const orderedPlanes=loopPlanes.filter(p=>p.first>=0&&p.last>=p.first)
+  .sort((a,b)=>a.first-b.first);
+ let routed=[],routeShift=V(),cursor=0,previousOffset=V(),previousPlane=null;
+ function shiftedPoint(p,offset){
+  return{...p,x:p.x+offset.x+routeShift.x,z:p.z+offset.z+routeShift.z};
+ }
+ function appendPoint(p,offset){
+  const q=shiftedPoint(p,offset),last=routed[routed.length-1];
+  if(last&&Math.hypot(q.x-last.x,q.y-last.y,q.z-last.z)<.0001)return last;
+  routed.push(q);return q;
+ }
+ function tangentAtIndex(index,forward){
+  const i=clamp(index,0,sourceTrack.length-1);
+  const a=sourceTrack[Math.max(0,i-(forward?0:1))],b=sourceTrack[Math.min(sourceTrack.length-1,i+(forward?1:0))];
+  let t=norm(sub(b,a));
+  if(Math.hypot(t.x,t.y,t.z)<.01)t=V(0,0,1);
+  return t;
+ }
+ function appendConnector(start,end,startTangent,endTangent,span,startFraction,endFraction){
+  const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
+  const handle=Math.max(3,span*.44);
+  const c1=add(start,scale(startTangent,handle)),c2=sub(end,scale(endTangent,handle));
+  const steps=Math.max(12,Math.ceil((distance+2*handle)/.48));
+  for(let k=1;k<=steps;k++){
+   const t=k/steps,u=1-t;
+   const p=V(u*u*u*start.x+3*u*u*t*c1.x+3*u*t*t*c2.x+t*t*t*end.x,
+    u*u*u*start.y+3*u*u*t*c1.y+3*u*t*t*c2.y+t*t*t*end.y,
+    u*u*u*start.z+3*u*u*t*c1.z+3*u*t*t*c2.z+t*t*t*end.z);
+   routed.push({x:p.x,y:p.y,z:p.z,s:0,sketchFraction:mix(startFraction,endFraction,t)});
   }
-  if(total>0){p.x+=offset.x/total;p.z+=offset.z/total;}
+ }
+ function interpolateOffset(a,b,t){return add(scale(a,1-t),scale(b,t));}
+ function transitionGap(fromIndex,toIndex,fromOffset,toOffset,requiredRamp){
+  const a=sourceTrack[Math.max(0,fromIndex)],b=sourceTrack[Math.min(sourceTrack.length-1,toIndex)];
+  const gap=Math.max(0,b.s-a.s),delta=Math.hypot(toOffset.x-fromOffset.x,toOffset.y-fromOffset.y,toOffset.z-fromOffset.z);
+  if(delta<.01||gap>=requiredRamp){
+   for(let i=fromIndex+1;i<toIndex;i++){
+    const p=sourceTrack[i],t=gap>0?clamp((p.s-a.s)/gap,0,1):1;
+    appendPoint(p,interpolateOffset(fromOffset,toOffset,smoother(t)));
+   }
+   return;
+  }
+  // A short sketch gap cannot carry a safe lane change. Add just enough
+  // forward distance for a broad, tangent-matched connector; the loop itself
+  // remains a rigid translated circle.
+  const tangent=tangentAtIndex(toIndex,true),extra=Math.max(0,requiredRamp-gap);
+  const advance=scale(tangent,extra);
+  const last=routed[routed.length-1]||shiftedPoint(a,fromOffset);
+  const baseEnd=shiftedPoint(b,toOffset);
+  const end=add(baseEnd,advance);
+  appendConnector(last,end,tangentAtIndex(fromIndex,false),tangent,requiredRamp,
+   last.sketchFraction,b.sketchFraction);
+  routeShift=add(routeShift,advance);
+ }
+ if(orderedPlanes.length){
+  const first=orderedPlanes[0],firstOffset=scale(first.axis,first.lane*laneStep);
+  // First detected loop currently stays in lane zero; preserve any approach.
+  for(let i=0;i<first.first;i++)appendPoint(sourceTrack[i],V());
+  for(const plane of orderedPlanes){
+   const firstIndex=Math.max(cursor,plane.first),lastIndex=Math.max(firstIndex,plane.last);
+   const targetOffset=scale(plane.axis,plane.lane*laneStep);
+   const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
+   const ramp=Math.max(8,Math.sqrt(60*delta));
+   if(previousPlane){
+    transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
+   }else if(firstIndex>cursor){
+    transitionGap(cursor-1,firstIndex,previousOffset,targetOffset,ramp);
+   }else if(Math.hypot(firstOffset.x,firstOffset.z)>.01){
+    plane.lane=0;
+   }
+   const actualPoints=[];
+   for(let i=firstIndex;i<=lastIndex&&i<sourceTrack.length;i++){
+    const p=appendPoint(sourceTrack[i],targetOffset);actualPoints.push({...p});
+   }
+   plane.points=actualPoints;
+   previousPlane=plane;previousOffset=targetOffset;cursor=lastIndex;
+  }
+  const lastIndex=sourceTrack.length-1;
+  if(cursor<lastIndex){
+   const delta=Math.hypot(previousOffset.x,previousOffset.z);
+   const ramp=Math.max(8,Math.sqrt(60*delta));
+   const endOffset=V();
+   const start=sourceTrack[cursor],end=sourceTrack[lastIndex];
+   const gap=end.s-start.s;
+   if(delta<.01||gap>=ramp){
+    for(let i=cursor+1;i<=lastIndex;i++){
+     const p=sourceTrack[i],t=gap>0?clamp((p.s-start.s)/gap,0,1):1;
+     appendPoint(p,interpolateOffset(previousOffset,endOffset,smoother(t)));
+    }
+   }else{
+    const tangent=tangentAtIndex(lastIndex,true),extra=Math.max(0,ramp-gap);
+    const advance=scale(tangent,extra),from=routed[routed.length-1],to=add(shiftedPoint(end,endOffset),advance);
+    appendConnector(from,to,tangentAtIndex(cursor,false),tangent,ramp,from.sketchFraction,end.sketchFraction);
+   }
+  }else if(cursor===lastIndex&&Math.hypot(previousOffset.x,previousOffset.z)>.01){
+   const tangent=tangentAtIndex(lastIndex,true),ramp=Math.max(8,Math.sqrt(60*Math.hypot(previousOffset.x,previousOffset.z)));
+   const from=routed[routed.length-1],to=add(shiftedPoint(sourceTrack[lastIndex],V()),scale(tangent,ramp));
+   appendConnector(from,to,tangentAtIndex(lastIndex,false),tangent,ramp,from.sketchFraction,sourceTrack[lastIndex].sketchFraction);
+  }
+  track=routed;
  }
  finish=0;
  for(let j=0;j<track.length;j++){
