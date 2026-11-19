@@ -36,7 +36,13 @@ const acceptedSlider=read('v2/nishinomiya-town-svg-single-rail-20261119-pilot.ht
 const takarazukaPointer=read('v2/takarazuka-town-svg-pointer-slider-20261119-pilot.html');
 const communityState=read('v2/common/js/town-svg-community-state.js');
 const zoomModule=read('v2/common/js/town-svg-zoom-slider-drag.js');
-assert.match(spec,/版：\*\*1\.4\*\*/);
+assert.match(spec,/版：\*\*1\.5\*\*/);
+// v1.5 changes new shared label cardinality, NOT the historical V34 gate.
+assert.match(spec,/1町名1ラベル/);
+assert.match(spec,/321町名・321ラベル/);
+assert.match(spec,/旧V34の不変回帰ゲート/);
+assert.match(spec,/旧V34の324件/);
+assert.match(spec,/同一問題の回答中に限り/);
 assert.match(spec,/白い内側・薄いグレーの枠線/);
 assert.match(spec,/独立した＋ボタン/);
 assert.match(spec,/学習地域の選択も解除した自治体全体表示/);
