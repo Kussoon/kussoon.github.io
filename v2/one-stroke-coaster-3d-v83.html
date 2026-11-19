@@ -536,6 +536,10 @@ function makeTrack(){
   return tangentAtIndex(fallbackIndex,false);
  }
  function interpolateOffset(a,b,t){return add(scale(a,1-t),scale(b,t));}
+ function horizontalAdvance(tangent,distance){
+  const direction=norm(V(tangent.x,0,tangent.z));
+  return Math.hypot(direction.x,direction.z)>.01?scale(direction,distance):V(0,0,distance);
+ }
  function transitionGap(fromIndex,toIndex,fromOffset,toOffset,requiredRamp){
   const a=sourceTrack[Math.max(0,fromIndex)],b=sourceTrack[Math.min(sourceTrack.length-1,toIndex)];
   const gap=Math.max(0,b.s-a.s),delta=Math.hypot(toOffset.x-fromOffset.x,toOffset.y-fromOffset.y,toOffset.z-fromOffset.z);
@@ -550,7 +554,7 @@ function makeTrack(){
   // forward distance for a broad, tangent-matched connector; the loop itself
   // remains a rigid translated circle.
   const tangent=tangentAtIndex(toIndex,true),extra=Math.max(0,requiredRamp-gap);
-  const advance=scale(tangent,extra);
+  const advance=horizontalAdvance(tangent,extra);
   const last=routed[routed.length-1]||shiftedPoint(a,fromOffset);
   const baseEnd=shiftedPoint(b,toOffset);
   const end=add(baseEnd,advance);
