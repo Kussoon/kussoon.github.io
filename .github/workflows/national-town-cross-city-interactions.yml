@@ -13,7 +13,9 @@ permissions:
 jobs:
   cross-city:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 30
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
     env:
       NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
     steps:
@@ -25,8 +27,6 @@ jobs:
           cache-dependency-path: v2/tests/browser/package-lock.json
       - name: Install pinned Playwright
         run: npm ci --prefix v2/tests/browser --no-audit --no-fund
-      - name: Install two browser engines
-        run: ./v2/tests/browser/node_modules/.bin/playwright install --with-deps chromium webkit
       - name: Fetch approved town source datasets
         run: |
           mkdir -p nishinomiya/data takarazuka/data
@@ -36,6 +36,8 @@ jobs:
       - name: Cross-city label, zoom, region and fullscreen matrix
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
           sleep 3
           node scripts/audit-national-town-cross-city-interactions.cjs
       - uses: actions/upload-artifact@v4
