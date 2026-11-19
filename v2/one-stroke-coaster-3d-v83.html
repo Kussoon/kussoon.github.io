@@ -236,7 +236,7 @@ function makeTrack(){
  knots=faired;
  // v78: curvature-aware fillets on OPEN parts of the side-view stroke.
  // The desired radius is 80 DRAWING PIXELS (not 50 game-world units).
- // Keep the circular loop core untouched; allow open approaches to be rounded.
+ // Never modify the validated circular loop or its adjacent join.
  const minTurnRadiusPx=80;
  const cornerCandidates=[],curvatureProbe=6;
  function localTurnRadius(points,k,probe){
@@ -246,13 +246,13 @@ function makeTrack(){
   return (Math.hypot(ux,uy)+Math.hypot(vx,vy))*.5/Math.max(.000001,angle);
  }
  for(let k=curvatureProbe;k<knots.length-curvatureProbe;k++){
-  if(used.some(zone=>k>=zone.start-12&&k<=zone.end+12))continue;
+  if(used.some(zone=>k>=zone.start-50&&k<=zone.end+50))continue;
   const radius=localTurnRadius(knots,k,curvatureProbe);
   if(radius<minTurnRadiusPx)cornerCandidates.push({k,radius});
  }
  cornerCandidates.sort((a,b)=>a.radius-b.radius);
  const roundedCorners=[];
- const cornerSpan=24;
+ const cornerSpan=50;
  for(const candidate of cornerCandidates){
   const k=candidate.k,lo=k-cornerSpan,hi=k+cornerSpan;
   if(lo<4||hi>=knots.length-4)continue;
@@ -512,7 +512,7 @@ function makeTrack(){
   // forcing zero endpoint curvature, so the translated loop meets its lead-in
   // and lead-out without a sharp curvature jump.
   const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
-  const handle=Math.max(3,span*.44);
+  const handle=Math.max(3,span*.60);
   const m0=scale(startTangent,handle),m1=scale(endTangent,handle),d=sub(end,start);
   const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
   const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
