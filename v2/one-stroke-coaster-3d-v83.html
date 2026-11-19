@@ -598,6 +598,49 @@ function makeTrack(){
    appendConnector(from,to,routedTailTangent(lastIndex),tangent,ramp,from.sketchFraction,sourceTrack[lastIndex].sketchFraction);
   }
   track=routed;
+  // Retain each circular loop core and fit the open lane-change connectors
+  // to its actual 3D entry/exit tangent.
+  const routeBounds=orderedPlanes.map((plane,index)=>({
+   plane,index,
+   start:plane.points.length?track.indexOf(plane.points[0]):-1,
+   end:plane.points.length?track.indexOf(plane.points[plane.points.length-1]):-1
+  })).filter(item=>item.start>=0&&item.end>=item.start);
+  function segmentDistance(i,j){const a=track[i],b=track[j];return Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
+  function fitJoin(startIndex,endIndex,startT,endT){
+   if(endIndex-startIndex<3)return;
+   const cumulative=[0];
+   for(let i=startIndex+1;i<=endIndex;i++)cumulative.push(cumulative[cumulative.length-1]+segmentDistance(i-1,i));
+   const length=cumulative[cumulative.length-1];if(length<1.8)return;
+   const p0=track[startIndex],p1=track[endIndex],handle=length*.34;
+   const m0=scale(norm(startT),handle),m1=scale(norm(endT),handle);
+   const d=sub(V(p1.x-p0.x,p1.y-p0.y,p1.z-p0.z),V());
+   const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
+   const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
+   const c5=add(sub(scale(d,6),scale(m0,3)),scale(m1,-3));
+   for(let i=startIndex+1;i<endIndex;i++){
+    const t=clamp(cumulative[i-startIndex]/length,0,1),t2=t*t,t3=t2*t,t4=t3*t,t5=t4*t;
+    const q=add(V(p0.x,p0.y,p0.z),add(add(scale(m0,t),scale(c3,t3)),add(scale(c4,t4),scale(c5,t5))));
+    track[i].x=q.x;track[i].y=q.y;track[i].z=q.z;
+   }
+  }
+  for(let n=0;n<routeBounds.length;n++){
+   const bound=routeBounds[n],previousEnd=n?routeBounds[n-1].end:-1,nextStart=n+1<routeBounds.length?routeBounds[n+1].start:track.length;
+   const radius=bound.plane.radius||4,window=Math.max(2.5,Math.min(5,radius*.75));
+   let entry=bound.start-1,entryLength=0;
+   while(entry>previousEnd+1&&entry>0&&entryLength<window){entryLength+=segmentDistance(entry,entry+1);entry--;}
+   if(entryLength>=2){
+    const startT=V(track[entry].x-track[entry-1].x,track[entry].y-track[entry-1].y,track[entry].z-track[entry-1].z);
+    const endT=V(track[bound.start+1].x-track[bound.start].x,track[bound.start+1].y-track[bound.start].y,track[bound.start+1].z-track[bound.start].z);
+    fitJoin(entry,bound.start,startT,endT);
+   }
+   let exit=bound.end+1,exitLength=0;
+   while(exit<nextStart-1&&exit<track.length&&exitLength<window){exitLength+=segmentDistance(exit-1,exit);exit++;}
+   if(exitLength>=2&&exit<track.length){
+    const startT=V(track[bound.end].x-track[bound.end-1].x,track[bound.end].y-track[bound.end-1].y,track[bound.end].z-track[bound.end-1].z);
+    const endT=V(track[exit+1].x-track[exit].x,track[exit+1].y-track[exit].y,track[exit+1].z-track[exit].z);
+    fitJoin(bound.end,exit,startT,endT);
+   }
+  }
  }
  finish=0;
  for(let j=0;j<track.length;j++){
