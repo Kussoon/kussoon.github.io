@@ -481,12 +481,11 @@ function makeTrack(){
  for(let i=0;i<loopPlanes.length;i++){
   if(!loopConflicts[i].size)continue;
   const candidates=[0];for(let n=1;n<=8;n++)candidates.push(n,-n);
-  const previous=i?loopPlanes[i-1]:null;
-  const shiftCost=lane=>previous?Math.hypot(
-   loopPlanes[i].axis.x*lane-previous.axis.x*previous.lane,
-   loopPlanes[i].axis.z*lane-previous.axis.z*previous.lane
-  )*laneStep:Math.abs(lane);
-  candidates.sort((a,b)=>shiftCost(a)-shiftCost(b)||Math.abs(a)-Math.abs(b)||a-b);
+  const previousLane=i?loopPlanes[i-1].lane:0;
+  candidates.sort((a,b)=>{
+   const score=lane=>Math.abs(lane-previousLane)*2+Math.abs(lane);
+   return score(a)-score(b)||Math.abs(a)-Math.abs(b)||a-b;
+  });
   const conflicts=[...loopConflicts[i]].filter(j=>j<i);
   for(const lane of candidates){
    const clear=conflicts.every(j=>{
@@ -629,7 +628,7 @@ function makeTrack(){
    const cumulative=[0];
    for(let i=startIndex+1;i<=endIndex;i++)cumulative.push(cumulative[cumulative.length-1]+segmentDistance(i-1,i));
    const length=cumulative[cumulative.length-1];if(length<1.8)return;
-   const p0=track[startIndex],p1=track[endIndex],handle=length*.34;
+   const p0=track[startIndex],p1=track[endIndex],handle=length*.36;
    const m0=scale(norm(startT),handle),m1=scale(norm(endT),handle);
    const d=sub(V(p1.x-p0.x,p1.y-p0.y,p1.z-p0.z),V());
    const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
