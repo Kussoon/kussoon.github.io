@@ -628,7 +628,7 @@ function makeTrack(){
    const cumulative=[0];
    for(let i=startIndex+1;i<=endIndex;i++)cumulative.push(cumulative[cumulative.length-1]+segmentDistance(i-1,i));
    const length=cumulative[cumulative.length-1];if(length<1.8)return;
-   const p0=track[startIndex],p1=track[endIndex],handle=length*.32;
+   const p0=track[startIndex],p1=track[endIndex],handle=length*.34;
    const m0=scale(norm(startT),handle),m1=scale(norm(endT),handle);
    const d=sub(V(p1.x-p0.x,p1.y-p0.y,p1.z-p0.z),V());
    const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
@@ -695,7 +695,7 @@ function makeTrack(){
   for(const zone of lockedLoops){
    if(p.sketchFraction>=zone.low&&p.sketchFraction<=zone.high){blend=0;break;}
    const gap=p.s<zone.a?zone.a-p.s:p.s-zone.b;
-   blend=Math.min(blend,clamp((gap-1.5)/3,0,1));
+   blend=Math.min(blend,clamp((gap-2.5)/4,0,1));
   }
   blend*=clamp(Math.min(p.s,beforeFairing[beforeFairing.length-1].s-p.s)/3,0,1);
   if(blend<=0)return p;
