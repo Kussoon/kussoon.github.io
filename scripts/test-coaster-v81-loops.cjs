@@ -117,7 +117,7 @@ async function run(browserType,label){
    assert(sideGap>=2.7,`overlapping loop planes need >=2.7m lateral separation, got ${sideGap.toFixed(2)}m`);
    resolved++;
   }
-  assert(resolved>=2,'the repeated-loop stress drawing must exercise at least two loop-plane conflicts');
+  assert(resolved>=2,`the repeated-loop stress drawing must exercise at least two loop-plane conflicts: ${JSON.stringify(planes)}`);
   for(const plane of planes)if(plane.conflicts.length===0)assert.equal(plane.lane,0,`isolated loop ${plane.index} must not be moved`);
   const noLoopV82=await page.evaluate(points=>window.__runLoopTest(points),hill());
   assert.equal(noLoopV82.snapshot.used.length,0,'v82 must preserve ordinary hills without loop-plane changes');
