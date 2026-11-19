@@ -9,6 +9,7 @@ function instrument(html){
  const marker='// Unit-tangent vectors derived';
  assert(html.includes(marker),'track generator marker must exist');
  html=html.replace(marker,'window.__loopSnapshot={used:used.map(z=>({...z,startPoint:{...knots[z.start]},endPoint:{...knots[z.end]}})),knots:knots.map(p=>({...p}))};\n '+marker);
+ if(html.includes('v82')){const marker='const smoother=t=>';assert(html.includes(marker),'v82 loop-plane marker must exist');html=html.replace(marker,'window.__planeSnapshot=loopPlanes.map(p=>({index:p.index,lane:p.lane,center:{...p.center},axis:{...p.axis},conflicts:[...loopConflicts[p.index]} }));\n '+marker);}
  const end='})();\n</script>';
  assert(html.includes(end),'inline game script must be instrumentable');
  return html.replace(end,'window.__runLoopTest=points=>{raw=points;makeTrack();return{warning:loopWarning,finish,track:track.map(p=>({...p})),snapshot:window.__loopSnapshot}};\n'+end);
@@ -16,6 +17,7 @@ function instrument(html){
 const files={
  '/v2/one-stroke-coaster-3d-v80.html':instrument(fs.readFileSync(path.join(root,'v2/one-stroke-coaster-3d-v80.html'),'utf8')),
  '/v2/one-stroke-coaster-3d-v81.html':instrument(fs.readFileSync(path.join(root,'v2/one-stroke-coaster-3d-v81.html'),'utf8')),
+ '/v2/one-stroke-coaster-3d-v82.html':instrument(fs.readFileSync(path.join(root,'v2/one-stroke-coaster-3d-v82.html'),'utf8')),
 };
 const server=http.createServer((req,res)=>{
  const pathname=new URL(req.url,'http://127.0.0.1').pathname;
@@ -96,8 +98,29 @@ async function run(browserType,label){
   }
   const noLoop=await page.evaluate(points=>window.__runLoopTest(points),hill());
   assert.equal(noLoop.snapshot.used.length,0,'ordinary hills and S-shaped profiles must not be classified as loops');
+  await page.goto('http://127.0.0.1:8765/v2/one-stroke-coaster-3d-v82.html',{waitUntil:'domcontentloaded'});
+  await page.waitForTimeout(80);
+  assert.match(await page.title(),/v82/);
+  const overlap=await page.evaluate(points=>window.__runLoopTest(points),stroke([80,80,80],0));
+  assert.equal(overlap.snapshot.used.length,3,'v82 must retain three side-view loops whose paths overlap');
+  const planes=await page.evaluate(()=>window.__planeSnapshot);
+  assert.equal(planes.length,3,'every detected loop needs a plane record');
+  let resolved=0;
+  for(const plane of planes)for(const otherIndex of plane.conflicts){
+   if(otherIndex<=plane.index)continue;
+   const other=planes[otherIndex];
+   const delta={x:plane.center.x-other.center.x+plane.axis.x*plane.lane*3.4-other.axis.x*other.lane*3.4,
+    z:plane.center.z-other.center.z+plane.axis.z*plane.lane*3.4-other.axis.z*other.lane*3.4};
+   const sideGap=Math.abs(delta.x*plane.axis.x+delta.z*plane.axis.z);
+   assert(sideGap>=2.7,`overlapping loop planes need >=2.7m lateral separation, got ${sideGap.toFixed(2)}m`);
+   resolved++;
+  }
+  assert(resolved>=2,'the repeated-loop stress drawing must exercise at least two loop-plane conflicts');
+  for(const plane of planes)if(plane.conflicts.length===0)assert.equal(plane.lane,0,`isolated loop ${plane.index} must not be moved`);
+  const noLoopV82=await page.evaluate(points=>window.__runLoopTest(points),hill());
+  assert.equal(noLoopV82.snapshot.used.length,0,'v82 must preserve ordinary hills without loop-plane changes');
   assert.deepEqual(errors,[],'no browser errors while generating the stress patterns');
-  console.log('PASS COASTER_V81_LOOPS '+JSON.stringify({browser:label,v80Detected:expected,v81Detected:Object.fromEntries(Object.keys(corrected).map(x=>[x,1])),v81Core:corrected,densePatterns:4,nonLoopGuard:true}));
+  console.log('PASS COASTER_V82_LOOP_PLANES '+JSON.stringify({browser:label,v80Detected:expected,v81DensePatterns:4,v82LoopCount:planes.length,v82ConflictsResolved:resolved,v82Lanes:planes.map(p=>p.lane),nonLoopGuard:true}));
   await page.close();
  }finally{await browser.close()}
 }
