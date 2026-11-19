@@ -172,7 +172,8 @@ function ask(){
  quiz.locked=false;
  ui.clearQuestion({stopBlink,wrongPlaces:quiz.wrongPlaces,choices:$('quizChoices'),
   next:$('quizNext'),reveal:$('quizReveal'),feedback:$('quizFeedback')});
- // Red errors survive question changes; yellow belongs to only this question.
+ // Reset both visible red mistakes and yellow answer at each question boundary.
+ // Scoring/retry records are held independently by KussoonTownSvgQuizState.
  quizMapFeedback.nextQuestion();
  const target=state.question(quiz);
  $('quizProgress').textContent=(quiz.index+1)+' / '+quiz.order.length+'問　得点 '+quiz.score;
