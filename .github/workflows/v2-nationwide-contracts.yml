@@ -28,9 +28,11 @@ jobs:
       - name: Confirm tests did not rewrite data or URL audit
         run: git diff --exit-code -- v2/data v2/audit/*.json
   real-browser:
-    # Keep the OS aligned with the pinned Playwright browser dependencies.
-    # Ubuntu package mirrors can be slow: allow browser setup to finish before running unchanged tests.
+    # Playwright 1.56.1 preinstalled: avoid repeated apt/browser downloads.
+    # This changes CI provisioning only; all regression scripts are preserved.
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
@@ -40,8 +42,6 @@ jobs:
           cache: npm
           cache-dependency-path: v2/tests/browser/package-lock.json
       - run: npm ci --no-audit --no-fund
-        working-directory: v2/tests/browser
-      - run: npx playwright install --with-deps chromium webkit
         working-directory: v2/tests/browser
       - run: |
           node v2/tests/nationwide-2026.browser.cjs
