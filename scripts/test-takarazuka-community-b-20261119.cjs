@@ -1,7 +1,7 @@
 'use strict';
 // TOWNMAP-SSOT-001 R-TOWN-20/21/22: compare a single right-side vertical rail.
 const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict');
-const url='http://127.0.0.1:8772/v2/takarazuka-town-svg-community-b-20261119-pilot.html';
+const url='http://127.0.0.1:8765/v2/takarazuka-town-svg-community-b-20261119-pilot.html';
 async function run(driver,name,w,h){
  const browser=await driver.launch();
  try{
