@@ -90,6 +90,11 @@ async function run(browserType,label,width,height){
   s=await verify(page,'fullscreen',{reading:true,expectedRegion:'仁川',expectedQuiz:2});
   assert.equal(s.fullscreen,true);
   assert(Math.abs(s.zoom-zoomBefore)<1e-5,'fullscreen changed map zoom');
+  // Quiz controls intentionally live outside the fullscreen map (R-TOWN-20).
+  // Leave fullscreen before using the external quiz controls.
+  await page.locator('#fullscreen').click();
+  s=await verify(page,'exit-during-quiz',{reading:true,expectedRegion:'仁川',expectedQuiz:2});
+  assert.equal(s.fullscreen,false);
   await page.locator('#quizQuit').click();
   await page.locator('#quizBack').click();
   s=await verify(page,'quiz-end',{reading:true,expectedRegion:'仁川',expectedQuiz:0});
@@ -98,6 +103,9 @@ async function run(browserType,label,width,height){
   await page.locator('#size').click();
   s=await verify(page,'font-100',{reading:false,expectedRegion:'仁川'});
   assert(s.font<bigger,'100% must be smaller than 125% at unchanged zoom');
+  await page.locator('#fullscreen').click();
+  s=await verify(page,'fullscreen-after-quiz',{reading:false,expectedRegion:'仁川'});
+  assert.equal(s.fullscreen,true);
   await page.locator('#fullscreen').click();
   s=await verify(page,'fullscreen-exit',{reading:false,expectedRegion:'仁川'});
   assert.equal(s.fullscreen,false);
