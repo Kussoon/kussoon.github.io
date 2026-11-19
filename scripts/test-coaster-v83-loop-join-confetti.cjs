@@ -59,7 +59,8 @@ function maxCurvature(track){
   if(value>maximum){maximum=value;location=i;}
  }
  const p=track[location]||{};
- return{value:maximum,index:location,s:+(p.s||0).toFixed(2),point:{x:+(p.x||0).toFixed(2),y:+(p.y||0).toFixed(2),z:+(p.z||0).toFixed(2)},sketchFraction:p.sketchFraction};
+ const neighbors=track.slice(Math.max(0,location-3),location+4).map(q=>({x:+q.x.toFixed(2),y:+q.y.toFixed(2),z:+q.z.toFixed(2),s:+q.s.toFixed(2),f:+q.sketchFraction.toFixed(4)}));
+ return{value:maximum,index:location,s:+(p.s||0).toFixed(2),point:{x:+(p.x||0).toFixed(2),y:+(p.y||0).toFixed(2),z:+(p.z||0).toFixed(2)},sketchFraction:p.sketchFraction,neighbors};
 }
 async function run(browserType,label){
  const browser=await browserType.launch({headless:true});
