@@ -89,7 +89,9 @@ function fit(){
  const scale=window.KussoonTownSvgViewport.fitBounds(bounds,rect.width,rect.height,40,.15,50);
  if(scale){baseScale=scale.scale;svg.call(zoom.transform,d3.zoomIdentity.translate(scale.x,scale.y).scale(scale.scale));}
 }
-function updateLabels(){
+let labelUpdates=0,preciseReflows=0;
+function updateLabels({precise=false}={}){
+ labelUpdates++;
  const fs=window.KussoonTownSvgLabelViewport.fontPixels({
   zoomK:transform.k,initialK:Math.max(.001,baseScale),fontPct
  });
@@ -100,17 +102,21 @@ function updateLabels(){
   candidateMode:!approvedAnchors&&!oneLabelMode,frame:svg.node().getBoundingClientRect(),
   zoomRatio:transform.k/Math.max(.001,baseScale),selected,threshold:1.15
  });
- // V34 text-node Range correction: used only for reading-OFF candidates.
- window.KussoonTownSvgGlyphCenter.align({
-  labels,world,transform,document,readingOn
- });
+ // Range measurement forces layout for each label. Run only on map
+ // redraw or font changes, NOT on each pinch / wheel / slider frame.
+ if(precise){
+  preciseReflows++;
+  window.KussoonTownSvgGlyphCenter.align({
+   labels,world,transform,document,readingOn
+  });
+ }
 }
 function redrawLabels(){
  const entries=app.active().flatMap(t=>labelCandidates.get(t.name)||[]);
  window.KussoonTownSvgLabels.render(labels,entries,d3,{},readingOn,{
   key:d=>d.key,reading:d=>d.reading
  });
- updateLabels();
+ updateLabels({precise:true});
 }
 function draw(){
  regionGeometry.clear();
@@ -279,7 +285,7 @@ const fullscreenViewport=window.KussoonTownSvgFullscreenViewport.create({
 });
 window.KussoonTownSvgControlRail.bind({
  root:controlRail,document,body:document.body,
- getFontPct:()=>fontPct,setFontPct:value=>{fontPct=value},onFontChange:updateLabels,
+ getFontPct:()=>fontPct,setFontPct:value=>{fontPct=value},onFontChange:()=>updateLabels({precise:true}),
  getReadingOn:()=>readingOn,setReadingOn:value=>{readingOn=value},onReadingChange:redrawLabels,
  onFullscreenChange:()=>{
  window.KussoonTownSvgResponsiveViewBox.sync(svg.node());
@@ -307,6 +313,7 @@ window.__townPreview=Object.freeze({
  townCount:prepared.records.length,regionCount:prepared.regions.length,
  labelCandidateCount:()=>[...labelCandidates.values()].reduce((n,a)=>n+a.length,0),
  oneLabelMode,
+ labelUpdateDiagnostics:()=>({labelUpdates,preciseReflows}),
  regionPathCount:projected?.regionPathCount||0,
  sourceGeometryCount:projected?.sourceGeometryCount||0,
  hasRegionPath:(name,region)=>Boolean(projected?.hasRegionPath(name,region)),

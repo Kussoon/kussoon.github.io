@@ -1,0 +1,48 @@
+name: Town one-label interior centering and zoom performance regression
+on:
+  pull_request:
+    paths:
+      - 'v2/common/js/town-svg-one-label-fit.js'
+      - 'v2/common/js/town-svg-dataset-browser-one-label-pilot.js'
+      - 'scripts/test-town-one-label-center-priority.cjs'
+      - 'scripts/test-town-one-label-zoom-fast-browser.cjs'
+      - '.github/workflows/town-one-label-center-and-zoom.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-town-one-label-center-priority.cjs
+      - run: node scripts/test-town-one-label-fit.cjs
+      - run: node scripts/test-town-map-master-spec.cjs
+      - run: node scripts/test-national-town-question-scoped-colors.cjs
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Retrieve certified town data
+        run: |
+          mkdir -p nishinomiya/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+      - name: Verify zoom skips 321 individual Range reads and centering remains valid
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true' EXIT
+          sleep 3
+          node scripts/test-town-one-label-zoom-fast-browser.cjs
