@@ -57,6 +57,21 @@ function actualLoopGap(a,b){
  }
  return d;
 }
+function boundaryAngles(track,loops,knotCount){
+ const angle=(a,b,c)=>{const u={x:b.x-a.x,y:b.y-a.y,z:b.z-a.z},v={x:c.x-b.x,y:c.y-b.y,z:c.z-b.z};
+  const lu=Math.hypot(u.x,u.y,u.z),lv=Math.hypot(v.x,v.y,v.z);
+  if(!lu||!lv)return null;
+  return +(Math.acos(Math.max(-1,Math.min(1,(u.x*v.x+u.y*v.y+u.z*v.z)/(lu*lv))))*180/Math.PI).toFixed(2);
+ };
+ return loops.map(z=>{
+  const low=z.start/(knotCount-1),high=z.end/(knotCount-1);
+  const first=track.findIndex(p=>p.sketchFraction>=low);
+  let last=track.findIndex(p=>p.sketchFraction>=high);if(last<0)last=track.length-1;
+  return{startAngle:first>0?angle(track[first-1],track[first],track[first+1]):null,
+   endAngle:last<track.length-1?angle(track[last-1],track[last],track[last+1]):null,
+   low:+low.toFixed(4),high:+high.toFixed(4)};
+ });
+}
 function maxCurvature(track){
  let maximum=0,location=-1;
  for(let i=1;i<track.length-1;i++){
@@ -86,7 +101,7 @@ async function run(browserType,label){
    const stages=version==='v83'?await page.evaluate(()=>({source:window.__sourceTrack,before:window.__beforeFairing,after:window.__afterFairing})):null;
    const gaps=[];for(let i=0;i<planes.length;i++)for(let j=i+1;j<planes.length;j++)gaps.push(actualLoopGap(planes[i],planes[j]));
    const fractionBacktracks=generated.track.reduce((n,p,i,a)=>n+(i&&p.sketchFraction+1e-8<a[i-1].sketchFraction?1:0),0);
-   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint})),stages};
+   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint})),knotCount:generated.snapshot.knots.length,stages};
   }
   await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v83.html',{waitUntil:'domcontentloaded'});
   const goal=await page.evaluate(points=>window.__runGoalTest(points),hill());
@@ -95,7 +110,7 @@ async function run(browserType,label){
    fs.mkdirSync(path.join(root,'v2/verification/coaster-v83'),{recursive:true});
    await page.screenshot({path:path.join(root,'v2/verification/coaster-v83/goal-confetti.png')});
   }
-  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,loops:v83.loops,stageCurvature:{source:maxCurvature(v83.stages.source),before:maxCurvature(v83.stages.before),after:maxCurvature(v83.stages.after)}},goal,errors}));
+  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,loops:v83.loops,stageCurvature:{source:maxCurvature(v83.stages.source),before:maxCurvature(v83.stages.before),after:maxCurvature(v83.stages.after)},boundaryAngles:boundaryAngles(v83.stages.source,v83.loops,v83.knotCount)},goal,errors}));
   assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
   assert(v83.stages.after.every(p=>[p.x,p.y,p.z,p.s,p.sketchFraction].every(Number.isFinite)),'generated centreline must contain only finite coordinates');
   assert(v83.planes.some(p=>p.lane!==0),'overlapping loop paths must be assigned separate lanes');
