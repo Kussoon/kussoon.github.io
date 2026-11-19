@@ -1,0 +1,48 @@
+name: National town shared page real-data browser pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/data/town-maps/28214-preview.json'
+      - 'v2/common/js/town-svg-dataset-browser-pilot.js'
+      - 'v2/town-map-shared-browser-20261119-pilot.html'
+      - 'scripts/test-national-town-shared-browser-pilot.cjs'
+      - '.github/workflows/national-town-shared-browser-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/test-national-town-dataset-ready.cjs
+      - run: node scripts/test-national-town-ready-runtime.cjs
+      - run: node scripts/test-town-map-master-spec.cjs
+  browser:
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    timeout-minutes: 30
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Fetch original verified Takarazuka town source
+        run: |
+          mkdir -p takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Real browser map, region, quiz1, quiz2 and readings
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          sleep 3
+          node scripts/test-national-town-shared-browser-pilot.cjs
