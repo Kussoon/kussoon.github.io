@@ -5,9 +5,10 @@ const versions=[
  '/v2/takarazuka-town-svg-community-b-20261119-pilot.html',
  '/v2/takarazuka-town-svg-gestures-d-20261119-pilot.html'
 ];
-const cases=[['chromium-1280',chromium,1280,800],['webkit-390',webkit,390,844],['webkit-320',webkit,320,668]];
+// Wheel events exist on desktop pointers, even for narrow responsive viewports.
+const cases=[['chromium-1280',chromium,1280,800],['webkit-desktop-390',webkit,390,844],['webkit-desktop-320',webkit,320,668]];
 async function run(browser,url,width,height){
- const page=await browser.newPage({viewport:{width,height},hasTouch:width<600,isMobile:width<600});
+ const page=await browser.newPage({viewport:{width,height},hasTouch:width<600,isMobile:false});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const k=()=>page.evaluate(()=>window.d3.zoomTransform(document.querySelector('#map')).k);
  try{
@@ -44,6 +45,27 @@ async function run(browser,url,width,height){
   return {loaded:true,unarmed:true,armed:true,disarmed:true,doubleClick:true,quizQuit:true};
  }finally{await page.close()}
 }
+
+// Real mobile WebKit contexts do not support mouse.wheel; check touch/tap
+// and quiz state there, instead of pretending a mouse wheel is an iPhone input.
+async function runMobile(browser,url,width,height){
+ const page=await browser.newPage({viewport:{width,height},hasTouch:true,isMobile:true,deviceScaleFactor:2});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ try{
+  await page.goto('http://127.0.0.1:8765'+url,{waitUntil:'domcontentloaded',timeout:60000});
+  await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('125町名'),null,{timeout:60000});
+  const map=page.locator('#map'),box=await map.boundingBox();
+  assert(box&&box.width>100&&box.height>100);
+  await page.touchscreen.tap(box.x+box.width*.45,box.y+box.height*.48);
+  await page.evaluate(()=>document.querySelector('#communityOptions button[data-community="仁川"]').click());
+  await page.locator('#quizTwo').click();
+  assert.equal(await page.locator('#quizChoices button').count(),4);
+  await page.locator('#quizQuit').click();
+  assert.equal(await page.locator('#quizResults').isVisible(),true);
+  assert.deepEqual(errors,[],'mobile WebKit page errors');
+  return {loaded:true,touchTap:true,quizChoices:4,quizQuit:true};
+ }finally{await page.close()}
+}
 (async()=>{
  for(const [name,driver,w,h] of cases){
   const browser=await driver.launch({headless:true});
@@ -52,6 +74,12 @@ async function run(browser,url,width,height){
    const after=await run(browser,versions[1],w,h);
    assert.deepEqual(after,before,'gesture behavior mismatch');
    console.log('PASS TOWN_GESTURES_D '+JSON.stringify({name,before,after}));
+   if(name.startsWith('webkit')){
+    const mobileBefore=await runMobile(browser,versions[0],w,h);
+    const mobileAfter=await runMobile(browser,versions[1],w,h);
+    assert.deepEqual(mobileAfter,mobileBefore,'mobile WebKit touch behavior mismatch');
+    console.log('PASS TOWN_GESTURES_D_MOBILE '+JSON.stringify({name,mobileAfter}));
+   }
   }finally{await browser.close()}
  }
 })().catch(e=>{console.error(e);process.exitCode=1});
