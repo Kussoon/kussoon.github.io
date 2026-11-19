@@ -10,6 +10,14 @@ function instrument(html){
  const planeMarker='const separatedLoopCount=loopPlanes.filter';
  assert(html.includes(planeMarker),'post-offset loop snapshot marker must exist');
  html=html.replace(planeMarker,'window.__planeSnapshot=loopPlanes.map(p=>({index:p.index,lane:p.lane,low:p.low,high:p.high,first:p.first,last:p.last,axis:{...p.axis},points:p.points.map(q=>({...q})),conflicts:[...loopConflicts[p.index]]}));\n '+planeMarker);
+ const before='const beforeFairing=track.map(p=>({...p}));';
+ assert(html.includes(before),'pre-fairing marker must exist');
+ html=html.replace(before,'window.__beforeFairing=track.map(p=>({...p}));\\n '+before);
+ const after='track=beforeFairing.map((p,i)=>{';
+ assert(html.includes(after),'fairing marker must exist');
+ const close='return{...p,x:mix(p.x,average.x/weight,blend),\\n   y:mix(p.y,average.y/weight,blend),z:mix(p.z,average.z/weight,blend)};\\n });';
+ assert(html.includes(close),'post-fairing marker must exist');
+ html=html.replace(close,close+'\\n window.__afterFairing=track.map(p=>({...p}));');
  const end='})();\n</script>';
  assert(html.includes(end),'inline game script must be instrumentable');
  const hooks=`window.__runLoopTest=points=>{raw=points;makeTrack();return{warning:loopWarning,finish,track:track.map(p=>({...p})),snapshot:window.__loopSnapshot}};
@@ -72,10 +80,10 @@ async function run(browserType,label){
    await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-'+version+'.html',{waitUntil:'domcontentloaded'});
    await page.waitForTimeout(60);
    const generated=await page.evaluate(points=>window.__runLoopTest(points),route);
-   const planes=await page.evaluate(()=>window.__planeSnapshot);
+   const planes=await page.evaluate(()=>window.__planeSnapshot);\n   const stages=version==='v83'?await page.evaluate(()=>({before:window.__beforeFairing,after:window.__afterFairing})):null;
    const gaps=[];for(let i=0;i<planes.length;i++)for(let j=i+1;j<planes.length;j++)gaps.push(actualLoopGap(planes[i],planes[j]));
    const fractionBacktracks=generated.track.reduce((n,p,i,a)=>n+(i&&p.sketchFraction+1e-8<a[i-1].sketchFraction?1:0),0);
-   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint}))};
+   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint})),stages};
   }
   await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v83.html',{waitUntil:'domcontentloaded'});
   const goal=await page.evaluate(points=>window.__runGoalTest(points),hill());
@@ -84,7 +92,7 @@ async function run(browserType,label){
    fs.mkdirSync(path.join(root,'v2/verification/coaster-v83'),{recursive:true});
    await page.screenshot({path:path.join(root,'v2/verification/coaster-v83/goal-confetti.png')});
   }
-  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,loops:v83.loops},goal,errors}));
+  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,loops:v83.loops,stageCurvature:{before:maxCurvature(v83.stages.before),after:maxCurvature(v83.stages.after)}},goal,errors}));
   assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
   assert.equal(v83.fractionBacktracks,0,'generated route must remain in the original stroke order');
   assert(v83.gaps.every(gap=>gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v83.gaps)}`);
