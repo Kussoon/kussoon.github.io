@@ -442,21 +442,29 @@ function makeTrack(){
   if(points.length){center.x/=points.length;center.y/=points.length;center.z/=points.length;}
   const yaw=yawAt(knotDistances[zone.start]||0);
   return{index,zone,low,high,first,last,center,radius:zone.r*ratio,
-   axis:V(Math.cos(yaw),0,-Math.sin(yaw)),lane:0};
+   points,lane:0,axis:V(Math.cos(yaw),0,-Math.sin(yaw))};
  });
+ // Compare the generated 3D centreline points themselves. Two loops that
+ // overlap in the side drawing may already be safely separated by the plan
+ // mapping, so screen-space circles alone must never trigger a detour.
+ const laneStep=3.4,clearance=2.7;
+ function loopGap(a,laneA,b,laneB){
+  const offA=scale(a.axis,laneA*laneStep),offB=scale(b.axis,laneB*laneStep);
+  let minimum=Infinity;
+  for(let i=2;i<a.points.length-2;i+=2)for(let j=2;j<b.points.length-2;j+=2){
+   const p=a.points[i],q=b.points[j];
+   if(Math.abs(p.s-q.s)<8)continue;
+   minimum=Math.min(minimum,Math.hypot(p.x+offA.x-q.x-offB.x,p.y-q.y,p.z+offA.z-q.z-offB.z));
+  }
+  return minimum;
+ }
  const loopConflicts=loopPlanes.map(()=>new Set());
  for(let i=0;i<loopPlanes.length;i++)for(let j=i+1;j<loopPlanes.length;j++){
-  const a=loopPlanes[i],b=loopPlanes[j];
-  if(Math.abs(dot(a.axis,b.axis))<.96)continue;
-  const dx=b.center.x-a.center.x,dy=b.center.y-a.center.y,dz=b.center.z-a.center.z;
-  const vertical=dy,forward=dx*Math.sin(yawAt(knotDistances[a.zone.start]||0))+dz*Math.cos(yawAt(knotDistances[a.zone.start]||0));
-  const separation=Math.hypot(vertical,forward),r1=a.radius,r2=b.radius;
-  // Circle paths cross (or pass within one rail spacing) in their shared plane.
-  if(separation<r1+r2+1.35&&separation+Math.min(r1,r2)>Math.max(r1,r2)-1.35){
+  if(loopGap(loopPlanes[i],0,loopPlanes[j],0)<clearance){
    loopConflicts[i].add(j);loopConflicts[j].add(i);
   }
  }
- const laneStep=3.4;
+
  for(let i=0;i<loopPlanes.length;i++){
   if(!loopConflicts[i].size)continue;
   const candidates=[0];for(let n=1;n<=8;n++)candidates.push(n,-n);
@@ -464,8 +472,7 @@ function makeTrack(){
   for(const lane of candidates){
    const clear=conflicts.every(j=>{
     const prior=loopPlanes[j];
-    const delta=add(sub(loopPlanes[i].center,prior.center),sub(scale(loopPlanes[i].axis,lane*laneStep),scale(prior.axis,prior.lane*laneStep)));
-    return Math.abs(dot(delta,loopPlanes[i].axis))>=2.7;
+    return loopGap(loopPlanes[i],lane,prior,prior.lane)>=clearance;
    });
    if(clear){loopPlanes[i].lane=lane;break;}
   }
@@ -489,7 +496,7 @@ function makeTrack(){
   track[j].s=finish;
  }
  const separatedLoopCount=loopPlanes.filter(p=>p.lane!==0).length;
- if(separatedLoopCount)loopWarning+="・交差する縦ループ面を"+separatedLoopCount+"か所分離";
+ if(separatedLoopCount)loopWarning+="・接近する縦ループ面を"+separatedLoopCount+"か所分離";
  // v78: single-pass, distance-based 3D fairing, tested against v62.
  // No R80 certification, no expansion and no forced redraw. Avoid repeated
  // curvature repairs, which can create fresh kinks at adjacent segments.
