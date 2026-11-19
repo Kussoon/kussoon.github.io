@@ -513,26 +513,13 @@ function makeTrack(){
   if(Math.hypot(t.x,t.y,t.z)<.01)t=V(0,0,1);
   return t;
  }
- function appendConnector(start,end,startTangent,endTangent,span,startFraction,endFraction,laneChange=false){
+ function appendConnector(start,end,startTangent,endTangent,span,startFraction,endFraction){
   // Quintic Hermite connector: match position and tangent at both ends while
   // forcing zero endpoint curvature, so the translated loop meets its lead-in
   // and lead-out without a sharp curvature jump.
   const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
-  const startDir=norm(startTangent),endDir=norm(endTangent),alignment=startDir.x*endDir.x+startDir.y*endDir.y+startDir.z*endDir.z;
-  const d=sub(end,start);
-  if(laneChange&&alignment>.85){
-   const forward=norm(add(startDir,endDir)),longitudinal=d.x*forward.x+d.y*forward.y+d.z*forward.z;
-   const lateral=sub(d,scale(forward,longitudinal)),lateralLength=Math.hypot(lateral.x,lateral.y,lateral.z);
-   if(longitudinal>2&&lateralLength>1){
-    const steps=Math.max(24,Math.ceil((longitudinal+2*lateralLength)/.24));
-    for(let k=1;k<=steps;k++){
-     const t=k/steps,offset=smoother(t),p=add(start,add(scale(forward,longitudinal*t),scale(lateral,offset)));
-     routed.push({x:p.x,y:p.y,z:p.z,s:0,sketchFraction:mix(startFraction,endFraction,t)});
-    }
-    return true;
-   }
-  }
-  const handle=Math.max(3,span*.60);
+  const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
+  const handle=Math.max(3,span*.60),d=sub(end,start);
   const m0=scale(startTangent,handle),m1=scale(endTangent,handle);
   const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
   const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
@@ -543,7 +530,6 @@ function makeTrack(){
    const p=add(start,add(add(scale(m0,t),scale(c3,t3)),add(scale(c4,t4),scale(c5,t5))));
    routed.push({x:p.x,y:p.y,z:p.z,s:0,sketchFraction:mix(startFraction,endFraction,t)});
   }
-  return false;
  }
  function routedTailTangent(fallbackIndex){
   if(routed.length>1){const p=routed[routed.length-1],q=routed[routed.length-2],t=norm(sub(p,q));if(Math.hypot(t.x,t.y,t.z)>.01)return t;}
@@ -572,10 +558,9 @@ function makeTrack(){
   const last=routed[routed.length-1]||shiftedPoint(a,fromOffset);
   const baseEnd=shiftedPoint(b,toOffset);
   const end=add(baseEnd,advance);
-  const laneChange=appendConnector(last,end,routedTailTangent(fromIndex),tangent,requiredRamp,
-   last.sketchFraction,b.sketchFraction,true);
+  appendConnector(last,end,routedTailTangent(fromIndex),tangent,requiredRamp,
+   last.sketchFraction,b.sketchFraction);
   routeShift=add(routeShift,advance);
-  return laneChange;
  }
  if(orderedPlanes.length){
   const first=orderedPlanes[0],firstOffset=scale(first.axis,first.lane*laneStep);
@@ -592,8 +577,7 @@ function makeTrack(){
    const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
    const ramp=Math.max(8,Math.sqrt(100*delta));
    if(previousPlane){
-    const laneChange=transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
-    if(laneChange){previousPlane.laneExitSmooth=true;plane.laneEntrySmooth=true;}
+    transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
    }
    // The unshifted approach to the first loop was already appended above.
    // Do not append it a second time, which would jump back to sketch fraction 0.
@@ -657,14 +641,14 @@ function makeTrack(){
    const radius=bound.plane.radius||4,window=Math.max(3,Math.min(9,radius*2.1));
    let entry=bound.start-1,entryLength=0;
    while(entry>previousEnd+1&&entry>0&&entryLength<window){entryLength+=segmentDistance(entry,entry+1);entry--;}
-   if(entryLength>=2&&!bound.plane.laneEntrySmooth){
+   if(entryLength>=2){
     const startT=V(track[entry].x-track[entry-1].x,track[entry].y-track[entry-1].y,track[entry].z-track[entry-1].z);
     const endT=V(track[bound.start+1].x-track[bound.start].x,track[bound.start+1].y-track[bound.start].y,track[bound.start+1].z-track[bound.start].z);
     fitJoin(entry,bound.start,startT,endT);
    }
    let exit=bound.end+1,exitLength=0;
    while(exit<nextStart-1&&exit<track.length&&exitLength<window){exitLength+=segmentDistance(exit-1,exit);exit++;}
-   if(exitLength>=2&&exit<track.length-1&&!bound.plane.laneExitSmooth){
+   if(exitLength>=2&&exit<track.length-1){
     const startT=V(track[bound.end].x-track[bound.end-1].x,track[bound.end].y-track[bound.end-1].y,track[bound.end].z-track[bound.end-1].z);
     const endT=V(track[exit+1].x-track[exit].x,track[exit+1].y-track[exit].y,track[exit+1].z-track[exit].z);
     fitJoin(bound.end,exit,startT,endT);
