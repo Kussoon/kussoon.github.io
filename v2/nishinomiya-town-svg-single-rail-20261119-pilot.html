@@ -144,12 +144,21 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
  pointer-events:none;touch-action:none;
 }
 .map-right-rail .zoom-slider-visual-thumb{will-change:top;}
+/* iOS Safari: no text selection loupe / callout on the slider's touch area. */
+.map-right-rail .map-zoom-slider,
+.map-right-rail .map-zoom-slider *,
+.map-right-rail .zoom-slider-well,
+.map-right-rail .zoom-slider-well *{
+ -webkit-user-select:none;user-select:none;
+ -webkit-touch-callout:none;
+}
+.map-right-rail .zoom-slider-well{-webkit-tap-highlight-color:transparent}
 </style></head>
 <body><main>
 <nav class="nav"><a href="/v2/nishinomiya-town-svg-master-v20-20261117-pilot.html">第20比較版を見る</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
 <h1>西宮市V2 SVG｜全国統一の右端ズームスライダー比較版</h1>
 <!-- 比較版の説明更新日は次のtime要素に記録。地図ロジックは変更しない。 -->
-<time class="updated-at" id="updatedAt" datetime="2026-11-19T08:38:31+09:00">更新：2026/11/19 08:38:31（JST）</time>
+<time class="updated-at" id="updatedAt" datetime="2026-11-19T09:04:00+09:00">更新：2026/11/19 09:04:00（JST）</time>
 <p class="notice"><strong>全国町名マップ v1.3 操作UIの独立比較版です。</strong> 西宮市V34で確定した321町名・324ラベル・26地域・読み仮名・クイズ1/2のロジックと基準はそのまま使用し、右端一列の「全画面→＋ボタン→縦スライダー→−ボタン→文字＋／文字−→文字100％→よみがな」を比較します。スライダー最下端では西宮市全体へ戻ります。元の<a href="/v2/nishinomiya-town-svg-master-v34-20261117-pilot.html">西宮市V34</a>と正式入口は変更していません。</p>
 <p class="small">ラベル文字・読み・手動オフセット・複数地点の設定はPR #470時点のC版から取得しています。TopoJSONの出典：CODH/e-Stat 2020年国勢調査（CC BY 4.0）。</p>
 <section class="study" aria-label="26コミュニティ学習範囲"><div class="study-row"><strong>学習範囲</strong><button type="button" id="communityToggle" aria-expanded="false" aria-controls="communityOptions" disabled>西宮市全域（321町名） ▾</button><span id="communityCount">準備中</span></div>
@@ -587,8 +596,8 @@ function focusTown(name){
  return true;
 }
 // Map zoom uses the approved shared slider, pinch, wheel and double-click.
-$('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);$('size').textContent='文字\n'+fontPct+'\n％';updateLabelSize()};
-$('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);$('size').textContent='文字\n'+fontPct+'\n％';updateLabelSize()};
+$('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);updateLabelSize()};
+$('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);updateLabelSize()};
 $('size').onclick=()=>{fontPct=100;$('size').textContent='文字\n100\n％';updateLabelSize()};
 $('reading').onclick=()=>{cLabelReflow();readingOn=!readingOn;$('reading').textContent='よみ\nがな\n'+(readingOn?'ON':'OFF');$('reading').setAttribute('aria-pressed',String(readingOn));refreshLabels()};
 $('fullscreen').onclick=()=>{cLabelReflow();document.body.classList.toggle('fullscreen');$('fullscreen').textContent=document.body.classList.contains('fullscreen')?'戻る':'全画面';setTimeout(()=>{draw();reset()},60)};

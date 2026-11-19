@@ -53,7 +53,24 @@ async function test(driver,name,w,h){
   assert.equal(await page.locator('#reading').getAttribute('aria-pressed'),'true');
   await page.locator('#reading').click();
   await page.locator('#larger').click();
-  assert.match(await page.locator('#size').innerText(),/125/);
+  assert.match(await page.locator('#size').innerText(),/100/,name+' reset button caption remains 100%');
+  await page.locator('#size').click();
+  assert.equal((await page.locator('#size').innerText()).replace(/\s+/g,''),'文字100％',name+' reset caption fixed');
+  const touchProtection=await page.locator('.zoom-slider-well').evaluate(el=>{
+   const css=getComputedStyle(el);
+   // CSSOM serialisation can omit unsupported prefixed properties.
+   // Inspect the actual authored CSS in addition to computed styles.
+   const ruleText=[...document.querySelectorAll('style')].map(x=>x.textContent).join(' ');
+   return {
+    userSelect:css.getPropertyValue('user-select')||css.getPropertyValue('-webkit-user-select')||'',
+    webkitTouchCallout:css.getPropertyValue('-webkit-touch-callout')||'',
+    ruleText
+   };
+  });
+  assert.match(touchProtection.ruleText,/-webkit-user-select:\s*none/,name+' declares Safari long-press text selection prevention');
+  assert.match(touchProtection.ruleText,/-webkit-touch-callout:\s*none/,name+' declares Safari long-press callout prevention');
+  if(touchProtection.userSelect)assert.equal(touchProtection.userSelect,'none',name+' computed user-select');
+  if(touchProtection.webkitTouchCallout)assert.equal(touchProtection.webkitTouchCallout,'none',name+' computed touch-callout');
   await page.locator('#fullscreen').click();await page.waitForTimeout(380);
   check(await get());
   assert.equal(await page.locator('#fullscreen').innerText(),'戻る');
