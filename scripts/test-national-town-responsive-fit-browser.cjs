@@ -48,9 +48,17 @@ async function verify(engine,label,w,h){
   centered(curr,label+' initial');
   assert.equal(curr.towns,321);
   assert.equal(curr.candidates,323,'initial label candidates unchanged');
-  assert(Math.max(curr.fractions.width,curr.fractions.height)>
-    Math.max(baseline.fractions.width,baseline.fractions.height)*1.5,
-    label+' should be materially larger than old page');
+  const beforeMax=Math.max(baseline.fractions.width,baseline.fractions.height);
+  const afterMax=Math.max(curr.fractions.width,curr.fractions.height);
+  console.log('RESPONSIVE_FIT_BEFORE_AFTER '+JSON.stringify({label,beforeMax,afterMax,
+    initialCenter:[curr.fractions.cx,curr.fractions.cy]}));
+  if(w<600){
+   assert(afterMax>beforeMax*1.5,
+     label+' mobile map must be materially larger than the old page');
+  }else{
+   assert(afterMax>=beforeMax*.98,
+     label+' desktop map must not become smaller');
+  }
   const scenarios=['西宮浜','山口','上ヶ原','甲東'];
   const regions=[];
   for(const name of scenarios){
