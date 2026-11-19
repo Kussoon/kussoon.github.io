@@ -579,7 +579,7 @@ function makeTrack(){
     plane.lane=0;targetOffset=V();
    }
    const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
-   const ramp=Math.max(8,Math.sqrt(100*delta));
+   const ramp=Math.max(8,Math.sqrt(110*delta));
    if(previousPlane){
     transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
    }
