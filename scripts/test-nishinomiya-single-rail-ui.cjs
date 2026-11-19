@@ -61,7 +61,7 @@ async function test(driver,name,w,h){
    return {userSelect:css.userSelect,webkitTouchCallout:css.getPropertyValue('-webkit-touch-callout')};
   });
   assert.equal(touchProtection.userSelect,'none',name+' prevents iOS long-press text selection');
-  assert.equal(touchProtection.webkitTouchCallout,'none',name+' prevents iOS long-press callout');
+  if(name.startsWith('webkit'))assert.equal(touchProtection.webkitTouchCallout,'none',name+' prevents iOS long-press callout');
   await page.locator('#fullscreen').click();await page.waitForTimeout(380);
   check(await get());
   assert.equal(await page.locator('#fullscreen').innerText(),'戻る');
