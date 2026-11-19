@@ -51,8 +51,8 @@ jobs:
         # A server started in a previous Actions step is not guaranteed to
         # survive its process cleanup. Own the server for this entire audit.
         run: |
-          python3 -m http.server 8765 --bind 127.0.0.1 &
+          python3 -m http.server 8877 --bind 127.0.0.1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
           sleep 3
-          node scripts/audit-nishinomiya-v34-shared-update-321-quiz.cjs
+          NISHINOMIYA_TEST_BASE=http://127.0.0.1:8877 node scripts/audit-nishinomiya-v34-shared-update-321-quiz.cjs
