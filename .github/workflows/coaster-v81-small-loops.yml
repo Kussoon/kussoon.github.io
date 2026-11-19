@@ -1,9 +1,10 @@
-name: Coaster v81 small loop preservation
+name: Coaster v81-v82 loop preservation
 on:
   pull_request:
     paths:
       - 'v2/common/js/one-stroke-coaster-support-clearance.js'
       - 'v2/one-stroke-coaster-3d-v81.html'
+      - 'v2/one-stroke-coaster-3d-v82.html'
       - 'v2/one-stroke-coaster-3d-v80.html'
       - 'scripts/test-coaster-v81-loops.cjs'
       - '.github/workflows/coaster-v81-small-loops.yml'
@@ -24,5 +25,5 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
-      - name: Test isolated, small, repeated and non-loop strokes in Chromium and WebKit
+      - name: Test small, repeated, overlapping and non-loop strokes in Chromium and WebKit
         run: node scripts/test-coaster-v81-loops.cjs
