@@ -35,7 +35,7 @@ async function verify(page,stage,{reading=false,expectedRegion=null,expectedQuiz
    region:window.__townPreview.currentRegion(),allCandidateCount:window.__townPreview.labelCandidateCount(),
    quiz:mode,reading,zoom:t.k,fullscreen:document.body.classList.contains('fullscreen'),
    keys:candidates.map(d=>d.key),unmapped:candidates.filter(d=>!names.has(d.name)).map(d=>d.name),
-   malformed:candidates.filter(d=>!d.key||!d.name||!d.hasName||!d.hasReading||
+   malformed:candidates.filter(d=>!d.key||!d.name||!d.hasName||(reading&&!d.hasReading)||
      !Number.isFinite(d.font)||d.font<=0||d.display===''&& !d.visible ||
      d.display==='none'&&d.visible),
    errors:candidates.map(d=>d.error).filter(x=>x!==null),font:candidates[0]?.font,
