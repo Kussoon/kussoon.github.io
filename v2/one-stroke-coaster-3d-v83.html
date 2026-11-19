@@ -481,6 +481,11 @@ function makeTrack(){
  for(let i=0;i<loopPlanes.length;i++){
   if(!loopConflicts[i].size)continue;
   const candidates=[0];for(let n=1;n<=8;n++)candidates.push(n,-n);
+  const previousLane=i?loopPlanes[i-1].lane:0;
+  candidates.sort((a,b)=>{
+   const score=lane=>Math.abs(lane-previousLane)*2+Math.abs(lane);
+   return score(a)-score(b)||Math.abs(a)-Math.abs(b)||a-b;
+  });
   const conflicts=[...loopConflicts[i]].filter(j=>j<i);
   for(const lane of candidates){
    const clear=conflicts.every(j=>{
