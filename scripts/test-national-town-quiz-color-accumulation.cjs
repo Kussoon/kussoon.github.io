@@ -51,13 +51,13 @@ async function run(engine,label,width,height){
   await page.locator('#quizNext').click();
   state=await appearance();
   assert.equal(state.yellow.length,0,'old yellow correct highlight must not accumulate');
-  assert.deepEqual(state.red,[wrong1],'red error must survive next question');
+  assert.deepEqual(state.red,[],'red error must clear upon entering the next question');
   assert.equal(state.blink.length,0);
   const wrong2=state.names.find(n=>n!==state.target&&n!==wrong1);
   assert(wrong2,'the second wrong tap must be a different region');
   await clickTown(wrong2);
   state=await appearance();
-  assert.deepEqual(new Set(state.red),new Set([wrong1,wrong2]),'red must accumulate across questions');
+  assert.deepEqual(state.red,[wrong2],'only current-question wrong taps may be red');
   assert.match(state.score,/得点 5/);
   await clickTown(state.target);
   state=await appearance();
@@ -66,11 +66,29 @@ async function run(engine,label,width,height){
   await page.locator('#quizNext').click();
   state=await appearance();
   assert.equal(state.yellow.length,0,'second yellow must disappear');
-  assert.deepEqual(new Set(state.red),new Set([wrong1,wrong2]));
-  // Quiz1 -> quiz2 must reset both red/yellow state and abandoned status.
+  assert.deepEqual(state.red,[],'all previous-question red must clear on next question');
+  // A fresh question can mark multiple different wrong towns simultaneously.
+  // The already-used wrongs from earlier questions have no display persistence.
+  const wrong3a=state.names.find(n=>n!==state.target);
+  const wrong3b=state.names.find(n=>n!==state.target&&n!==wrong3a);
+  await clickTown(wrong3a);
+  await clickTown(wrong3b);
+  state=await appearance();
+  assert.deepEqual(new Set(state.red),new Set([wrong3a,wrong3b]),
+   'two red towns must accumulate while the SAME question remains active');
+  assert.match(state.score,/得点 3/);
+  await clickTown(state.target);
+  state=await appearance();
+  assert.equal(state.yellow.length,1);
+  assert.equal(state.red.length,2,'red stays through correct answer until next question');
+  await page.locator('#quizNext').click();
+  state=await appearance();
+  assert.deepEqual(state.red,[],'next question clears all reds after correct answer');
+  assert.deepEqual(state.yellow,[],'next question also clears yellow');
+  // Quiz1 -> quiz2 must reset all color state, while retry history stays available.
   await page.locator('#quizTwo').click();
   state=await appearance();
-  assert.equal(state.red.length,0,'a new quiz clears previous accumulated reds');
+  assert.equal(state.red.length,0,'new quiz starts with no previous red');
   assert.equal(state.yellow.length,0,'a new quiz clears prior quiz yellow');
   assert(state.blink.length<=1,'one target may blink, never multiple');
   let q2target=state.target;
@@ -103,7 +121,7 @@ async function run(engine,label,width,height){
   assert.deepEqual(errors,[],label+' runtime errors');
   console.log('PASS NATIONAL_QUIZ_COLOR_ACCUMULATION '+JSON.stringify({
    label,wrong1,wrong2,correct:firstCorrect,quiz2Target:q2target,
-   redCumulative:true,yellowCurrentOnly:true,quizReset:true,scorePreserved:true
+   redWithinQuestionOnly:true,yellowCurrentOnly:true,quizReset:true,scorePreserved:true
   }));
  }finally{await browser.close()}
 }
