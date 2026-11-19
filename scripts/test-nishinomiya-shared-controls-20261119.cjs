@@ -56,11 +56,11 @@ async function test(driver,name,w,h){
   assert.match(await page.locator('#size').innerText(),/100/,name+' reset button caption remains 100%');
   await page.locator('#size').click();
   assert.equal((await page.locator('#size').innerText()).replace(/\s+/g,''),'文字100％',name+' reset caption fixed');
-  const touchProtection=await page.locator('.zoom-slider-well').evaluate(el=>{
+  const touchProtection=await page.locator('.zoom-slider-well').evaluate(async el=>{
    const css=getComputedStyle(el);
    // CSSOM serialisation can omit unsupported prefixed properties.
    // Inspect the actual authored CSS in addition to computed styles.
-   const ruleText=[...document.querySelectorAll('style')].map(x=>x.textContent).join(' ');
+   const ruleText=[...document.querySelectorAll('style')].map(x=>x.textContent).join(' ')+await fetch('/v2/common/css/town-svg-control-rail.css').then(r=>r.text());
    return {
     userSelect:css.getPropertyValue('user-select')||css.getPropertyValue('-webkit-user-select')||'',
     webkitTouchCallout:css.getPropertyValue('-webkit-touch-callout')||'',
