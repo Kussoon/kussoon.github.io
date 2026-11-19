@@ -9,7 +9,7 @@ function instrument(html){
  const marker='// Unit-tangent vectors derived';
  assert(html.includes(marker),'track generator marker must exist');
  html=html.replace(marker,'window.__loopSnapshot={used:used.map(z=>({...z,startPoint:{...knots[z.start]},endPoint:{...knots[z.end]}})),knots:knots.map(p=>({...p}))};\n '+marker);
- if(html.includes('v82')){const marker='const smoother=t=>';assert(html.includes(marker),'v82 loop-plane marker must exist');html=html.replace(marker,'window.__planeSnapshot=loopPlanes.map(p=>({index:p.index,lane:p.lane,center:{...p.center},axis:{...p.axis},conflicts:[...loopConflicts[p.index]} }));\n '+marker);}
+ if(html.includes('v82')){const marker='const smoother=t=>';assert(html.includes(marker),'v82 loop-plane marker must exist');html=html.replace(marker,'window.__planeSnapshot=loopPlanes.map(p=>({index:p.index,lane:p.lane,center:{...p.center},axis:{...p.axis},conflicts:[...loopConflicts[p.index]] }));\n '+marker);}
  const end='})();\n</script>';
  assert(html.includes(end),'inline game script must be instrumentable');
  return html.replace(end,'window.__runLoopTest=points=>{raw=points;makeTrack();return{warning:loopWarning,finish,track:track.map(p=>({...p})),snapshot:window.__loopSnapshot}};\n'+end);
