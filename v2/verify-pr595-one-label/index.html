@@ -67,6 +67,13 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 .controls #anchorMode{display:none!important}
 .full{position:absolute;top:6px;right:6px;z-index:4;box-sizing:border-box;width:49px;
  min-height:27px;padding:1px;white-space:normal;font-size:13px;line-height:1.05;text-align:center}
+.zoom-slider-slot{position:absolute;right:7px;top:56px;bottom:calc(var(--control-height,220px) + 16px);width:34px;z-index:3;display:flex;justify-content:center}
+#zoomSlider{writing-mode:vertical-lr;direction:rtl;width:34px;height:100%;min-height:40px;margin:0;background:transparent;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;appearance:none;-webkit-appearance:none;cursor:pointer}
+#zoomSlider::-webkit-slider-runnable-track{width:6px;height:100%;background:#888;border-radius:3px}
+#zoomSlider::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:30px;height:16px;background:#888;border:3px solid white;border-radius:2px;box-shadow:0 1px 5px #0005;margin-left:-12px}
+#zoomSlider::-moz-range-track{width:6px;background:#888;border-radius:3px}
+#zoomSlider::-moz-range-thumb{width:26px;height:12px;background:#888;border:3px solid white;border-radius:2px}
+#zoomSlider:focus-visible{outline:2px solid #dd9a31;outline-offset:2px}
 </style></head>
 <body><main>
 <nav class="nav"><a href="/v2/nishinomiya-town-svg-master-v20-20261117-pilot.html">第20比較版を見る</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
@@ -97,14 +104,13 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <svg id="map" role="img" aria-label="西宮市の町域SVG比較試作"><g id="world"><g id="areas"></g><g id="labels" class="labels"></g></g></svg>
 <div id="quizFeedback" class="map-quiz-feedback" role="status"></div>
 <button class="full" id="fullscreen" type="button">全画面</button>
+<div class="zoom-slider-slot"><input id="zoomSlider" type="range" min="0" max="100" step="0.1" value="0" aria-label="地図の拡大縮小" aria-orientation="vertical"></div>
 <div class="controls" aria-label="地図操作">
 <div class="pair"><button id="zoomIn" type="button">＋</button><button id="zoomOut" type="button">−</button></div>
 <div class="pair"><button id="larger" type="button"><span>文字</span><span>＋</span></button><button id="smaller" type="button"><span>文字</span><span>−</span></button></div>
 <button id="size" type="button">文字
 100
 ％</button>
-<button id="reset" type="button">市の
-全体</button>
 <button id="reading" type="button" aria-pressed="false">よみ
 がな
 OFF</button>
@@ -236,7 +242,6 @@ function showCommunity(){
  stopQuiz(false);
  stopBlink();
  renderLayers();
- $('reset').textContent=communityChoice?'区域\n全体':'市の\n全体';
  $('communityToggle').textContent=(communityChoice?regionLabel(communityChoice):'西宮市全域（321町名）')+' ▾';
  const count=activeFeatures().length;
  $('communityCount').textContent=communityChoice?regionLabel(communityChoice)+'：'+count+'町名':'市全域：'+count+'町名';
@@ -389,6 +394,7 @@ function draw(){
 function onZoom(event){
  if(event.sourceEvent){fittedView=false;cLabelReflow()}
  transform=event.transform;world.attr('transform',transform.toString());updateLabelSize();
+ $('zoomSlider').value=String(Math.log(transform.k/.6)/Math.log(40/.6)*100);
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
 // N-GESTURE-04/05: shared gestures preserve Leaflet C's wheel arming,
@@ -457,8 +463,23 @@ function focusTown(name){
  return true;
 }
 function changeZoom(factor){fittedView=false;KussoonTownSvgCore.zoomBy(svg,zoom,factor,150)}
+let sliderFrame=0,sliderValue=0;
+$('zoomSlider').addEventListener('pointerdown',()=>{cLabelReflow();fittedView=false});
+$('zoomSlider').addEventListener('input',()=>{
+ sliderValue=Number($('zoomSlider').value);
+ if(sliderFrame)return;
+ sliderFrame=requestAnimationFrame(()=>{
+  sliderFrame=0;fittedView=false;
+  const k=.6*Math.pow(40/.6,sliderValue/100);
+  const cx=baseWidth/2,cy=baseHeight/2;
+  svg.interrupt().call(zoom.transform,d3.zoomIdentity
+   .translate(cx-(cx-transform.x)*k/transform.k,cy-(cy-transform.y)*k/transform.k).scale(k));
+ });
+});
+new ResizeObserver(entries=>{
+ $('frame').style.setProperty('--control-height',entries[0].target.getBoundingClientRect().height+'px');
+}).observe(document.querySelector('.controls'));
 $('zoomIn').onclick=()=>changeZoom(2);$('zoomOut').onclick=()=>changeZoom(.5);
-$('reset').onclick=()=>{cLabelReflow();reset()};
 $('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);$('size').textContent='文字\n'+fontPct+'\n％';updateLabelSize()};
 $('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);$('size').textContent='文字\n'+fontPct+'\n％';updateLabelSize()};
 $('size').onclick=()=>{fontPct=100;$('size').textContent='文字\n100\n％';updateLabelSize()};
