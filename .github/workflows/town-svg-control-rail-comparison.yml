@@ -1,0 +1,49 @@
+name: National town v1.4 shared right rail A comparison
+on:
+  pull_request:
+    paths:
+      - 'v2/common/css/town-svg-control-rail.css'
+      - 'v2/common/js/town-svg-control-rail.js'
+      - 'v2/nishinomiya-town-svg-control-rail-20261119-pilot.html'
+      - 'v2/takarazuka-town-svg-control-rail-20261119-pilot.html'
+      - 'v2/common/js/town-map-result-navigation-takarazuka-control-rail-20261119-pilot.js'
+      - 'scripts/test-nishinomiya-shared-controls-20261119.cjs'
+      - 'scripts/test-town-control-rail-source-parity-20261119.cjs'
+      - 'scripts/test-takarazuka-shared-controls-20261119.cjs'
+      - 'scripts/audit-nishinomiya-shared-controls-321-quiz.cjs'
+      - '.github/workflows/town-svg-control-rail-comparison.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: v2/tests/browser/package-lock.json
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Verify shared UI unchanged compared to both accepted city layouts
+        run: node scripts/test-town-control-rail-source-parity-20261119.cjs
+      - name: Fetch source mapping only (no changes to datasets)
+        run: |
+          mkdir -p nishinomiya/data takarazuka/data
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/nishinomiya/main/data/community-town-map.json -o nishinomiya/data/community-town-map.json
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/town-search.html -o takarazuka/town-search.html
+          curl --fail --location --retry 3 --silent --show-error https://raw.githubusercontent.com/Kussoon/takarazuka/main/data/takarazuka-town-info.json -o takarazuka/data/takarazuka-town-info.json
+      - name: Test control rail on both municipalities and complete Nishinomiya quiz parity
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 &
+          python3 -m http.server 8772 --bind 127.0.0.1 &
+          sleep 3
+          node scripts/test-nishinomiya-shared-controls-20261119.cjs
+          node scripts/test-takarazuka-shared-controls-20261119.cjs
+          NISHINOMIYA_TEST_BASE=http://127.0.0.1:8765 node scripts/audit-nishinomiya-shared-controls-321-quiz.cjs
