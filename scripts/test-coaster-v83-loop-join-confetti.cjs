@@ -12,12 +12,12 @@ function instrument(html){
  html=html.replace(planeMarker,'window.__planeSnapshot=loopPlanes.map(p=>({index:p.index,lane:p.lane,low:p.low,high:p.high,first:p.first,last:p.last,axis:{...p.axis},points:p.points.map(q=>({...q})),conflicts:[...loopConflicts[p.index]]}));\n '+planeMarker);
  const before='const beforeFairing=track.map(p=>({...p}));';
  assert(html.includes(before),'pre-fairing marker must exist');
- html=html.replace(before,'window.__beforeFairing=track.map(p=>({...p}));\\n '+before);
+ html=html.replace(before,'window.__beforeFairing=track.map(p=>({...p}));\n '+before);
  const after='track=beforeFairing.map((p,i)=>{';
  assert(html.includes(after),'fairing marker must exist');
- const close='return{...p,x:mix(p.x,average.x/weight,blend),\\n   y:mix(p.y,average.y/weight,blend),z:mix(p.z,average.z/weight,blend)};\\n });';
+ const close='return{...p,x:mix(p.x,average.x/weight,blend),\n   y:mix(p.y,average.y/weight,blend),z:mix(p.z,average.z/weight,blend)};\n });';
  assert(html.includes(close),'post-fairing marker must exist');
- html=html.replace(close,close+'\\n window.__afterFairing=track.map(p=>({...p}));');
+ html=html.replace(close,close+'\n window.__afterFairing=track.map(p=>({...p}));');
  const end='})();\n</script>';
  assert(html.includes(end),'inline game script must be instrumentable');
  const hooks=`window.__runLoopTest=points=>{raw=points;makeTrack();return{warning:loopWarning,finish,track:track.map(p=>({...p})),snapshot:window.__loopSnapshot}};
