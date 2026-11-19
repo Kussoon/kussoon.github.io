@@ -481,11 +481,12 @@ function makeTrack(){
  for(let i=0;i<loopPlanes.length;i++){
   if(!loopConflicts[i].size)continue;
   const candidates=[0];for(let n=1;n<=8;n++)candidates.push(n,-n);
-  const previousLane=i?loopPlanes[i-1].lane:0;
-  candidates.sort((a,b)=>{
-   const score=lane=>Math.abs(lane-previousLane)*2+Math.abs(lane);
-   return score(a)-score(b)||Math.abs(a)-Math.abs(b)||a-b;
-  });
+  const previous=i?loopPlanes[i-1]:null;
+  const shiftCost=lane=>previous?Math.hypot(
+   loopPlanes[i].axis.x*lane-previous.axis.x*previous.lane,
+   loopPlanes[i].axis.z*lane-previous.axis.z*previous.lane
+  )*laneStep:Math.abs(lane);
+  candidates.sort((a,b)=>shiftCost(a)-shiftCost(b)||Math.abs(a)-Math.abs(b)||a-b);
   const conflicts=[...loopConflicts[i]].filter(j=>j<i);
   for(const lane of candidates){
    const clear=conflicts.every(j=>{
@@ -579,8 +580,7 @@ function makeTrack(){
     plane.lane=0;targetOffset=V();
    }
    const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
-   const laneDelta=previousPlane?Math.abs(plane.lane-previousPlane.lane):0;
-   const ramp=Math.max(8,Math.sqrt((laneDelta>2?80:100)*delta));
+   const ramp=Math.max(8,Math.sqrt(100*delta));
    if(previousPlane){
     transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
    }
