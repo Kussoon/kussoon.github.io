@@ -100,7 +100,10 @@ function updateLabels(){
   candidateMode:!approvedAnchors&&!oneLabelMode,frame:svg.node().getBoundingClientRect(),
   zoomRatio:transform.k/Math.max(.001,baseScale),selected,threshold:1.15
  });
- // V34 text-node Range correction: used only for reading-OFF candidates.
+
+function alignGlyphCenters(){
+ // Range/getBoundingClientRect correction is layout-expensive. Apply it
+ // after label creation or a reading-mode change, not on every zoom frame.
  window.KussoonTownSvgGlyphCenter.align({
   labels,world,transform,document,readingOn
  });
@@ -150,6 +153,7 @@ function draw(){
   labelCandidates.set(t.name,entries);
  });
  redrawLabels();
+ alignGlyphCenters();
 }
 function updateRegion(){
  const n=app.active().length;
@@ -280,7 +284,7 @@ const fullscreenViewport=window.KussoonTownSvgFullscreenViewport.create({
 window.KussoonTownSvgControlRail.bind({
  root:controlRail,document,body:document.body,
  getFontPct:()=>fontPct,setFontPct:value=>{fontPct=value},onFontChange:updateLabels,
- getReadingOn:()=>readingOn,setReadingOn:value=>{readingOn=value},onReadingChange:redrawLabels,
+ getReadingOn:()=>readingOn,setReadingOn:value=>{readingOn=value},onReadingChange:()=>{redrawLabels();alignGlyphCenters()},
  onFullscreenChange:()=>{
  window.KussoonTownSvgResponsiveViewBox.sync(svg.node());
  fullscreenViewport.onFullscreenChange();
