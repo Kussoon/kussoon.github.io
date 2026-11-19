@@ -21,7 +21,7 @@ async function run(engine,name,width,height){
     const el=document.getElementById(id),r=el.getBoundingClientRect();
     return {id,w:r.width,h:r.height,left:r.left,right:r.right,top:r.top,bottom:r.bottom};
    });
-   return {labels:labels.length,names:new Set(labels.map(x=>x.__data__.name)).size,
+   return {labels:labels.length,visibleLabels:labels.filter(x=>getComputedStyle(x).display!=='none').length,names:new Set(labels.map(x=>x.__data__.name)).size,
     keys:labels.map(x=>x.__data__.key),nonFinite:labels.filter(x=>!x.__data__.point.every(Number.isFinite)).length,
     duplicated:['塩瀬町名塩','山口町上山口','山口町下山口'].map(name=>({name,n:labels.filter(x=>x.__data__.name===name).length})),
     areas:document.querySelectorAll('#areas path.town').length,
@@ -32,6 +32,7 @@ async function run(engine,name,width,height){
   let current=await snapshot();
   assert.equal(current.areas,321);
   assert.equal(current.labels,324,'accepted V34 324 labels, not auto-generated 323');
+  assert.equal(current.visibleLabels,324,'V34 approved labels must be visible even at whole-city zoom');
   assert.equal(current.names,321);assert.equal(current.nonFinite,0);
   assert.equal(new Set(current.keys).size,324);
   assert.deepEqual(current.duplicated.map(x=>x.n),[2,2,2],'V34 extra label allocation');
