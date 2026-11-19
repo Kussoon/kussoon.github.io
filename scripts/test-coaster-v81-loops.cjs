@@ -8,7 +8,7 @@ const root=process.cwd();
 function instrument(html){
  const marker='// Unit-tangent vectors derived';
  assert(html.includes(marker),'track generator marker must exist');
- html=html.replace(marker,'window.__loopSnapshot={used:used.map(z=>({...z})),knots:knots.map(p=>({...p}))};\n '+marker);
+ html=html.replace(marker,'window.__loopSnapshot={used:used.map(z=>({...z,startPoint:{...knots[z.start]},endPoint:{...knots[z.end]}})),knots:knots.map(p=>({...p}))};\n '+marker);
  const end='})();\n</script>';
  assert(html.includes(end),'inline game script must be instrumentable');
  return html.replace(end,'window.__runLoopTest=points=>{raw=points;makeTrack();return{warning:loopWarning,finish,track:track.map(p=>({...p})),snapshot:window.__loopSnapshot}};\n'+end);
@@ -58,7 +58,7 @@ function validateLoop(data,zone){
  const route=data.track.filter(p=>p.sketchFraction>=low&&p.sketchFraction<=high);
  assert(route.length>=10,'the generated 3D route must contain the loop span');
  const a=route[0],b=route.at(-1),gap=Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);
- assert(gap<.7,`the 3D loop entry and exit must join near the same point (diameter=${zone.r*2}px, gap=${gap.toFixed(3)} world units)`);
+ assert(gap<.7,`3D loop join gap=${gap.toFixed(3)} at diameter=${zone.r*2}px; bounds=${JSON.stringify({low,high,start:zone.start,end:zone.end,startPoint:zone.startPoint,endPoint:zone.endPoint,a,b})}`);
  return{radiusPx:+zone.r.toFixed(2),corePoints:pts.length,winding:+Math.abs(winding).toFixed(3),joinGap:+gap.toFixed(3)};
 }
 async function run(browserType,label){
