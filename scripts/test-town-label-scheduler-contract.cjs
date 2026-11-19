@@ -20,4 +20,5 @@ assert.equal(pending.size,0);
 scheduler.request();scheduler.cancel();
 assert.equal(scheduler.stats().pending,false);
 assert.equal(events.length,2);
+assert.deepEqual(scheduler.stats(),{requests:53,updates:2,pending:false});
 console.log('PASS TOWN_LABEL_SCHEDULER_CONTRACT',scheduler.stats());
