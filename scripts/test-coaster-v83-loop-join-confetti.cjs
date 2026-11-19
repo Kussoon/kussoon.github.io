@@ -85,7 +85,8 @@ async function run(browserType,label){
    await page.screenshot({path:path.join(root,'v2/verification/coaster-v83/goal-confetti.png')});
   }
   console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature},goal,errors}));
-  assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');\n  assert.equal(v83.fractionBacktracks,0,'generated route must remain in the original stroke order');
+  assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
+  assert.equal(v83.fractionBacktracks,0,'generated route must remain in the original stroke order');
   assert(v83.gaps.every(gap=>gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v83.gaps)}`);
   assert(v83.maxCurvature.value<.55,`generated track has a sharp connector curvature ${v83.maxCurvature.value.toFixed(3)}/m near ${JSON.stringify(v83.maxCurvature)}`);
   assert(goal.count>=45,'goal celebration should launch a visible volley');
