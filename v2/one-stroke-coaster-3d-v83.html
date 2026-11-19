@@ -216,7 +216,7 @@ function makeTrack(){
    corrected[k]={x:cx+r*Math.cos(theta),y:cy+r*Math.sin(theta)};
   }
   // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
-  corrected[end]={...corrected[i]};
+  corrected[end]={...corrected[start]};
   used.push({start,end,coreStart:start,coreEnd:end,cx,cy,r,sign:candidate.sign||1});
   i=end;
  }
