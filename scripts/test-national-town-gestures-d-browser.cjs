@@ -21,7 +21,10 @@ async function run(browser,url,width,height){
   await page.waitForTimeout(150);
   const unarmed=await k();
   assert(Math.abs(unarmed-before)<1e-8,'wheel acted before map arming');
-  await page.mouse.click(x,y);await page.mouse.wheel(0,-300);
+  // Arm on a blank SVG background, not a town path with its own click handler.
+  await page.mouse.click(box.x+12,box.y+12);
+  await page.mouse.move(x,y);
+  await page.mouse.wheel(0,-300);
   await page.waitForTimeout(200);
   const armed=await k();
   assert(armed>unarmed,'wheel did not zoom after map click');
