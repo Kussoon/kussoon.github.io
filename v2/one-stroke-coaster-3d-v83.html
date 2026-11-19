@@ -555,7 +555,7 @@ function makeTrack(){
    }
    const actualPoints=[];
    for(let i=firstIndex;i<=lastIndex&&i<sourceTrack.length;i++){
-    const p=appendPoint(sourceTrack[i],targetOffset);actualPoints.push({...p});
+    const p=appendPoint(sourceTrack[i],targetOffset);actualPoints.push(p);
    }
    plane.points=actualPoints;
    previousPlane=plane;previousOffset=targetOffset;cursor=lastIndex;
