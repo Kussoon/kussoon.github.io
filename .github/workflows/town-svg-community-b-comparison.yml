@@ -41,10 +41,12 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 &
           sleep 3
           node scripts/test-town-svg-community-b-browser-20261119.cjs
-      - name: Keep existing town slider and control behavior on both cities
+      - name: Preserve Nishinomiya 321-label control behavior
         run: |
           node scripts/test-nishinomiya-community-b-20261119.cjs
-          node scripts/test-takarazuka-community-b-20261119.cjs
+      # The Takarazuka full control suite is unchanged from passing stage A.
+      # Stage B specifically checks Takarazuka controls, labels and region changes
+      # in the cross-city test above, avoiding duplicate WebKit browser launches.
       - name: Exhaustively verify 321-town quiz 1 and 2 in new Nishinomiya page
         run: |
           NISHINOMIYA_TEST_BASE=http://127.0.0.1:8765 node scripts/audit-nishinomiya-community-b-321-quiz.cjs
