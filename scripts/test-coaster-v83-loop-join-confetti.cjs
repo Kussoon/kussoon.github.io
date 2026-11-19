@@ -101,7 +101,7 @@ async function run(browserType,label){
    const stages=version==='v83'?await page.evaluate(()=>({source:window.__sourceTrack,before:window.__beforeFairing,after:window.__afterFairing})):null;
    const gaps=[];for(let i=0;i<planes.length;i++)for(let j=i+1;j<planes.length;j++)gaps.push(actualLoopGap(planes[i],planes[j]));
    const fractionBacktracks=generated.track.reduce((n,p,i,a)=>n+(i&&p.sketchFraction+1e-8<a[i-1].sketchFraction?1:0),0);
-   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint})),knotCount:generated.snapshot.knots.length,stages};
+   results[version]={planes,gaps,maxCurvature:maxCurvature(generated.track),maxSegment:generated.track.reduce((m,p,i,a)=>i?Math.max(m,Math.hypot(p.x-a[i-1].x,p.y-a[i-1].y,p.z-a[i-1].z)):m,0),fractionBacktracks,trackPoints:generated.track.length,loops:generated.snapshot.used.map(z=>({start:z.start,end:z.end,startPoint:z.startPoint,endPoint:z.endPoint})),knotCount:generated.snapshot.knots.length,stages};
   }
   await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v83.html',{waitUntil:'domcontentloaded'});
   const goal=await page.evaluate(points=>window.__runGoalTest(points),hill());
@@ -110,9 +110,10 @@ async function run(browserType,label){
    fs.mkdirSync(path.join(root,'v2/verification/coaster-v83'),{recursive:true});
    await page.screenshot({path:path.join(root,'v2/verification/coaster-v83/goal-confetti.png')});
   }
-  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,loops:v83.loops,loopRanges:v83.planes.map(p=>({first:p.first,last:p.last,low:p.low,high:p.high,firstPoint:p.points[0],lastPoint:p.points[p.points.length-1]})),stageCurvature:{source:maxCurvature(v83.stages.source),before:maxCurvature(v83.stages.before),after:maxCurvature(v83.stages.after)},boundaryAngles:boundaryAngles(v83.stages.source,v83.loops,v83.knotCount)},goal,errors}));
+  console.log('METRICS '+JSON.stringify({browser:label,v82:{lanes:results.v82.planes.map(p=>p.lane),gaps:results.v82.gaps,maxCurvature:results.v82.maxCurvature},v83:{lanes:v83.planes.map(p=>p.lane),gaps:v83.gaps,maxCurvature:v83.maxCurvature,maxSegment:v83.maxSegment,loops:v83.loops,loopRanges:v83.planes.map(p=>({first:p.first,last:p.last,low:p.low,high:p.high,firstPoint:p.points[0],lastPoint:p.points[p.points.length-1]})),stageCurvature:{source:maxCurvature(v83.stages.source),before:maxCurvature(v83.stages.before),after:maxCurvature(v83.stages.after)},boundaryAngles:boundaryAngles(v83.stages.source,v83.loops,v83.knotCount)},goal,errors}));
   assert.equal(v83.planes.length,3,'dense repeated-loop pattern should retain all detected loops');
   assert(v83.stages.after.every(p=>[p.x,p.y,p.z,p.s,p.sketchFraction].every(Number.isFinite)),'generated centreline must contain only finite coordinates');
+  assert(v83.maxSegment<2,'generated centreline must not contain a large point-to-point jump');
   assert(v83.planes.some(p=>p.lane!==0),'overlapping loop paths must be assigned separate lanes');
   assert.equal(v83.fractionBacktracks,0,'generated route must remain in the original stroke order');
   assert(v83.gaps.every(gap=>Number.isFinite(gap)&&gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v83.gaps)}`);
