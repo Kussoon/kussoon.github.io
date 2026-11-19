@@ -67,8 +67,8 @@ async function test(driver,name,w,h){
     ruleText
    };
   });
-  assert.match(touchProtection.ruleText,/-webkit-user-select:\\s*none/,name+' declares Safari long-press text selection prevention');
-  assert.match(touchProtection.ruleText,/-webkit-touch-callout:\\s*none/,name+' declares Safari long-press callout prevention');
+  assert.match(touchProtection.ruleText,/-webkit-user-select:\s*none/,name+' declares Safari long-press text selection prevention');
+  assert.match(touchProtection.ruleText,/-webkit-touch-callout:\s*none/,name+' declares Safari long-press callout prevention');
   if(touchProtection.userSelect)assert.equal(touchProtection.userSelect,'none',name+' computed user-select');
   if(touchProtection.webkitTouchCallout)assert.equal(touchProtection.webkitTouchCallout,'none',name+' computed touch-callout');
   await page.locator('#fullscreen').click();await page.waitForTimeout(380);
