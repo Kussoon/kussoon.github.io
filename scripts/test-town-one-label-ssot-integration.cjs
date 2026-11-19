@@ -17,6 +17,17 @@ async function run(browserType,label,width,height){
   assert.equal(await n(),321,'321 names have 321 labels in city-wide view');
   assert.equal(await page.evaluate(()=>window.__townPreview.labelCandidateCount()),321);
   assert.equal(await page.locator('#areas path.town').count(),321);
+  // Zoom frames must not invoke layout-heavy glyph-centering correction.
+  await page.evaluate(()=>{
+   const api=window.KussoonTownSvgGlyphCenter;
+   let calls=0; const align=api.align;
+   window.__glyphAlignCalls=()=>calls;
+   api.align=(...args)=>{calls++;return align(...args)};
+  });
+  for(let i=0;i<3;i++)await page.locator('#zoomPlus').click();
+  await page.waitForTimeout(250);
+  assert.equal(await page.evaluate(()=>window.__glyphAlignCalls()),0,
+   'zoom does not force glyph layout correction');
   assert.equal(await page.locator('#quizOne').isEnabled(),true);
   assert.equal(await page.locator('#quizTwo').isEnabled(),true);
   const regions=await page.locator('#region option').count();
