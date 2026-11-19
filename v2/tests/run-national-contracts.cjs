@@ -43,10 +43,8 @@ const files=[
  'v2/tests/prefecture-colors.test.cjs',
  'v2/tests/national-density-overlap.test.cjs',
  'v2/tests/national-study-label-layout.test.cjs',
- // The rejected Kawanishi common prototype and its v2/town-map adapter
- // were intentionally removed. Their test targets/dependencies no longer
- // exist on main. Do not restore the rejected prototype just for CI.
- // A future adopted town-map adapter must add a new test and register it here.
+ 'v2/tests/kawanishi-town-map-contract.test.cjs',
+ 'v2/tests/town-map-adapter-regression.test.cjs',
 ];
 for(const file of files){
  const result=spawnSync(process.execPath,[file],{cwd:path.resolve(__dirname,'../..'),stdio:'inherit'});
