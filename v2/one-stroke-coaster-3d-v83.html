@@ -208,8 +208,15 @@ function makeTrack(){
   const seam=originalKnots[i],dx=seam.x-candidate.cx,dy=seam.y-candidate.cy;
   const radial=Math.hypot(dx,dy)||1;
   const cx=seam.x-dx/radial*r,cy=seam.y-dy/radial*r;
+  const arc=[0];
+  for(let k=i+1;k<=end;k++){
+   const p=originalKnots[k],q=originalKnots[k-1];
+   arc.push(arc[arc.length-1]+Math.hypot(p.x-q.x,p.y-q.y));
+  }
+  const totalArc=arc[arc.length-1]||1;
+  const startAngle=Math.atan2(seam.y-cy,seam.x-cx),direction=candidate.sign||1;
   for(let k=i+1;k<end;k++){
-   const p=originalKnots[k],theta=Math.atan2(p.y-cy,p.x-cx);
+   const t=arc[k-i]/totalArc,theta=startAngle+direction*2*Math.PI*t;
    corrected[k]={x:cx+r*Math.cos(theta),y:cy+r*Math.sin(theta)};
   }
   // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
