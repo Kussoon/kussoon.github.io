@@ -120,7 +120,9 @@ async function run(browserType,label){
   assert(v84.gaps.every(gap=>Number.isFinite(gap)&&gap>=2.7),`actual generated loop-route clearance must be at least 2.7m: ${JSON.stringify(v84.gaps)}`);
   assert(v84.maxCurvature.value<.55,`generated track has a sharp connector curvature ${v84.maxCurvature.value.toFixed(3)}/m near ${JSON.stringify(v84.maxCurvature)}`);
   assert(goal.count>=90,'goal celebration should launch a visible volley');
-  assert.equal(goal.streamers,0,'goal celebration must not contain tape streamers');\n  assert.equal(goal.squares,goal.count,'every paper piece must be square');\n  assert(goal.colors.length>=5,'paper colors should use a varied palette');
+  assert.equal(goal.streamers,0,'goal celebration must not contain tape streamers');
+  assert.equal(goal.squares,goal.count,'every paper piece must be square');
+  assert(goal.colors.length>=5,'paper colors should use a varied palette');
   assert(goal.sides.includes(-1)&&goal.sides.includes(1),'both lower-side launchers must fire');
   assert(goal.labels.includes('ゴール')&&!goal.labels.includes('ゴール！'),'goal overlay should say only ゴール');
   const hills=await page.evaluate(points=>window.__runLoopTest(points),hill());
