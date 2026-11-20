@@ -15,6 +15,9 @@ async function main(){
  const originalKeys=originalTopology.objects.town.geometries.map(g=>g.properties.KEY_CODE).sort();
  const mergedKeys=mergedTopology.objects.town.geometries.flatMap(g=>g.properties.sourceKeys).sort();
  assert.deepEqual(mergedKeys,originalKeys,'One or more statistical geometries lost/duplicated');
+ assert.equal(new Set(originalKeys).size,337,'Statistical KEY_CODE count changed');
+ const sourceRecords=mergedTopology.objects.town.geometries.flatMap(g=>g.properties.sourceRecords).sort((a,b)=>a-b);
+ assert.deepEqual(sourceRecords,Array.from({length:398},(_,i)=>i),'Source record coverage changed');
  if(!process.env.TOWN_TEST_BASE){
   const mapping=await fetch('https://kussoon.com/nishinomiya/data/community-town-map.json').then(r=>{assert(r.ok);return r.text()});
   server=http.createServer((req,res)=>{
