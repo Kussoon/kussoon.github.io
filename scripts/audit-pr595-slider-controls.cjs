@@ -3,13 +3,15 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 async function run(page,cfg,out){
  const results=[];
  await page.evaluate(()=>window.__audit.showRegion(''));
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
  const slider=page.locator('#zoomSlider');
  const rect=await slider.boundingBox(),x=rect.x+rect.width/2;
  const yAt=f=>rect.y+9+(rect.height-18)*f;
  const snap=()=>page.evaluate(()=>{const e=document.querySelector('#zoomSlider'),r=e.getBoundingClientRect(),t=document.querySelector('.zoom-slider-thumb').getBoundingClientRect();return {value:Number(e.getAttribute('aria-valuenow')),scale:window.__audit.transform().k,thumb:t.y+t.height/2,expected:r.bottom-9-(r.height-18)*Number(e.getAttribute('aria-valuenow'))/100,measures:document.querySelector('#map').getAttribute('data-label-measurements')}});
+ await slider.evaluate(e=>{for(const type of ['pointerdown','pointermove','pointerup'])e.addEventListener(type,event=>{window.__sliderInput={type,y:event.clientY,id:event.pointerId,primary:event.isPrimary,pointerType:event.pointerType}})});
  async function verify(f,label){
   const target=Math.max(0,Math.min(100,(1-f)*100));
-  await page.waitForFunction(target=>Math.abs(Number(document.querySelector('#zoomSlider').getAttribute('aria-valuenow'))-target)<.12&&Math.abs(window.__audit.transform().k-(.6*Math.pow(40/.6,target/100)))<.03,target);
+  try{await page.waitForFunction(target=>Math.abs(Number(document.querySelector('#zoomSlider').getAttribute('aria-valuenow'))-target)<.12&&Math.abs(window.__audit.transform().k-(.6*Math.pow(40/.6,target/100)))<.03,target)}catch(error){console.error('SLIDER_DIAGNOSTIC '+JSON.stringify({browser:cfg.name,label,target,state:await snap(),rect,input:await page.evaluate(()=>window.__sliderInput)}));throw error}
   const s=await snap();assert(Math.abs(s.scale-(.6*Math.pow(40/.6,target/100)))<.03,label+' map/slider mismatch');
   assert(Math.abs(s.thumb-s.expected)<.75,label+' painted thumb drift');results.push({label,value:s.value,scale:s.scale});return s;
  }
@@ -56,6 +58,7 @@ async function run(page,cfg,out){
  assert.equal(colors.action,'rgb(230, 241, 250)');assert(colors.choices.every(c=>c==='rgb(255, 255, 255)'));
  await page.locator('#quizPanel').screenshot({path:path.join(out,cfg.name+'-action-colors.png')});
  await page.evaluate(()=>window.__audit.stopQuiz(false));
+ await page.locator('#fullscreen').click();await page.waitForTimeout(100);
  fs.writeFileSync(path.join(out,cfg.name+'-slider.json'),JSON.stringify({results,meta,colors},null,2));
  console.log('PASS SLIDER_CONTROLS '+JSON.stringify({browser:cfg.name,cases:results.length,nativeTouchDrag:cfg.name.startsWith('chromium'),nativeTouchTaps:cfg.width<600}));
 }

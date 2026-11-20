@@ -68,6 +68,7 @@ async function main(){
    assert.deepEqual(report.quizzes,{quiz1:125,quiz2:125,failures:[]});
    await page.evaluate(()=>window.__audit.showRegion(''));
    await page.locator('#fullscreen').click();await page.waitForTimeout(150);
+   await require('./audit-pr595-slider-controls.cjs').run(page,cfg,out);
    const measurements=()=>page.locator('#map').getAttribute('data-label-measurements');
    const oldCount=await measurements();
    await page.locator('#zoomSlider').press('End');await page.waitForTimeout(150);assert.equal(await measurements(),oldCount,'zoom remeasures glyphs');
@@ -90,7 +91,6 @@ async function main(){
    assert.equal(report.taps.length,136);await page.evaluate(()=>window.__audit.stopQuiz(false));
    // Actual selected-town second input cancels the flash.
    await page.evaluate(()=>{window.__audit.showRegion('');window.__audit.choose('鹿塩');});assert.equal(await page.evaluate(()=>window.__audit.getSelected()),'鹿塩');await page.evaluate(()=>window.__audit.choose('鹿塩'));assert.equal(await page.evaluate(()=>window.__audit.getSelected()),'');
-   await require('./audit-pr595-slider-controls.cjs').run(page,cfg,out);
    assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,cfg.name+'.json'),JSON.stringify(report,null,2));
    console.log('PASS COMMON_TOWN '+JSON.stringify({browser:cfg.name,delta:report.nishinomiyaMaxDelta,names:125,regions:20,quiz1:125,quiz2:125,taps:136}));
   }finally{await browser.close()}
