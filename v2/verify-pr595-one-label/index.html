@@ -74,6 +74,13 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 #zoomSlider::-moz-range-track{width:6px;background:#888;border-radius:3px}
 #zoomSlider::-moz-range-thumb{width:26px;height:12px;background:#888;border:3px solid white;border-radius:2px}
 #zoomSlider:focus-visible{outline:2px solid #dd9a31;outline-offset:2px}
+.zoom-slider-slot{flex-direction:column;align-items:center;gap:6px}
+.zoom-slider-slot button{flex:none;width:34px;min-height:30px;padding:0;font-size:23px;line-height:28px;background:#fff;border:1px solid #92b6cc;color:#16384e}
+.zoom-slider-track{position:relative;flex:1;width:34px;min-height:40px;--zoom-percent:0}
+.zoom-slider-track:before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:6px;background:#888;border-radius:3px;pointer-events:none}
+.zoom-slider-thumb{position:absolute;left:2px;top:calc(8px + (100% - 16px) * (1 - var(--zoom-percent) / 100));transform:translateY(-50%);width:30px;height:18px;background:#777;border:3px solid #fff;border-radius:2px;box-shadow:0 1px 6px #0006;pointer-events:none}
+#zoomSlider{position:absolute;inset:0;opacity:0;width:34px;height:100%;z-index:1}
+.zoom-slider-track:focus-within{outline:2px solid #dd9a31;outline-offset:2px}
 </style></head>
 <body><main>
 <nav class="nav"><a href="/v2/nishinomiya-town-svg-master-v20-20261117-pilot.html">第20比較版を見る</a><a id="hierarchyReturn" href="/v2/geography/#jp-hyogo-nishinomiya">世界から町へ</a><a href="/v2/nishinomiya-town-study-c.html">正式C版（Leaflet）へ戻る</a><a href="/v2/nishinomiya-town-comparison-b.html">B版</a><a href="/maps/national-municipalities.html">全国V2</a></nav>
@@ -104,9 +111,8 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 <svg id="map" role="img" aria-label="西宮市の町域SVG比較試作"><g id="world"><g id="areas"></g><g id="labels" class="labels"></g></g></svg>
 <div id="quizFeedback" class="map-quiz-feedback" role="status"></div>
 <button class="full" id="fullscreen" type="button">全画面</button>
-<div class="zoom-slider-slot"><input id="zoomSlider" type="range" min="0" max="100" step="0.1" value="0" aria-label="地図の拡大縮小" aria-orientation="vertical"></div>
+<div class="zoom-slider-slot"><button id="zoomIn" type="button" aria-label="地図を拡大">＋</button><div class="zoom-slider-track"><span class="zoom-slider-thumb" aria-hidden="true"></span><input id="zoomSlider" type="range" min="0" max="100" step="0.1" value="0" aria-label="地図の拡大縮小" aria-orientation="vertical"></div><button id="zoomOut" type="button" aria-label="地図を縮小">−</button></div>
 <div class="controls" aria-label="地図操作">
-<div class="pair"><button id="zoomIn" type="button">＋</button><button id="zoomOut" type="button">−</button></div>
 <div class="pair"><button id="larger" type="button"><span>文字</span><span>＋</span></button><button id="smaller" type="button"><span>文字</span><span>−</span></button></div>
 <button id="size" type="button">文字
 100
@@ -395,6 +401,7 @@ function onZoom(event){
  if(event.sourceEvent){fittedView=false;cLabelReflow()}
  transform=event.transform;world.attr('transform',transform.toString());updateLabelSize();
  $('zoomSlider').value=String(Math.log(transform.k/.6)/Math.log(40/.6)*100);
+ document.querySelector('.zoom-slider-track').style.setProperty('--zoom-percent',$('zoomSlider').value);
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
 // N-GESTURE-04/05: shared gestures preserve Leaflet C's wheel arming,
@@ -467,6 +474,7 @@ let sliderFrame=0,sliderValue=0;
 $('zoomSlider').addEventListener('pointerdown',()=>{cLabelReflow();fittedView=false});
 $('zoomSlider').addEventListener('input',()=>{
  sliderValue=Number($('zoomSlider').value);
+ document.querySelector('.zoom-slider-track').style.setProperty('--zoom-percent',String(sliderValue));
  if(sliderFrame)return;
  sliderFrame=requestAnimationFrame(()=>{
   sliderFrame=0;fittedView=false;
@@ -701,3 +709,4 @@ KussoonTownSvgDataContract.load({
 })();
 </script>
 </body></html>
+
