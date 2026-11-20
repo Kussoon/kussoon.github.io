@@ -1,0 +1,32 @@
+name: PR595 verification exhaustive quizzes
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit-nishinomiya-v34-321-quiz-contract.cjs'
+      - 'v2/verify-pr595-one-label/**'
+      - '.github/workflows/pr595-verification-quizzes.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quizzes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+      NISHINOMIYA_TEST_BASE: https://kussoon.com
+      NISHINOMIYA_TEST_PATH: /v2/verify-pr595-one-label/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - run: node scripts/audit-nishinomiya-v34-321-quiz-contract.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr595-exhaustive-quiz-results
+          path: nishinomiya-v34-321-quiz-contract/
