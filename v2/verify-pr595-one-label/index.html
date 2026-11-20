@@ -74,10 +74,10 @@ body:not(.town-quiz-mode) .map-quiz-feedback{display:none}
 #zoomSlider::-moz-range-track{width:6px;background:#888;border-radius:3px}
 #zoomSlider::-moz-range-thumb{width:26px;height:12px;background:#888;border:3px solid white;border-radius:2px}
 #zoomSlider:focus-visible{outline:2px solid #dd9a31;outline-offset:2px}
-.zoom-slider-slot{flex-direction:column;align-items:center;gap:6px}
+.zoom-slider-slot{flex-direction:column;align-items:center;gap:0}
 .zoom-slider-slot button{flex:none;width:34px;min-height:30px;padding:0;font-size:23px;line-height:28px;background:#fff;border:1px solid #92b6cc;color:#16384e}
 .zoom-slider-track{position:relative;flex:1;width:34px;min-height:40px;--zoom-percent:0}
-.zoom-slider-track:before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:6px;background:#888;border-radius:3px;pointer-events:none}
+.zoom-slider-track:before{content:'';position:absolute;left:14px;top:0;bottom:0;width:6px;background:#888;pointer-events:none}
 .zoom-slider-thumb{position:absolute;left:2px;top:calc(8px + (100% - 16px) * (1 - var(--zoom-percent) / 100));transform:translateY(-50%);width:30px;height:18px;background:#777;border:3px solid #fff;border-radius:2px;box-shadow:0 1px 6px #0006;pointer-events:none}
 #zoomSlider{position:absolute;inset:0;opacity:0;width:34px;height:100%;z-index:1}
 .zoom-slider-track:focus-within{outline:2px solid #dd9a31;outline-offset:2px}
@@ -286,6 +286,10 @@ function townTspanScreenRect(el){
  return {left,right,top,bottom,width:right-left,height:bottom-top};
 }
 function cLabelReflow(){cLabelMode='centered';cRebaseline=true}
+// Cache glyph geometry relative to its anchor at a known font size.
+// Translation and uniform font scaling do not require new DOM measurements.
+const labelGlyphMetrics=new Map();
+let labelMeasureCount=0;
 function updateLabelSize(){
  // V16 comparison: retain shared font/reading layout, but put the rendered
  // label's bottom-right at the same polygon anchor as Leaflet C tooltip.
@@ -293,11 +297,23 @@ function updateLabelSize(){
  const mapBounds=svg.node().getBoundingClientRect();
  labels.selectAll('g.label').each(function(d){
   const text=this.querySelector('text.town-label');if(!text)return;
-  const box=text.getBoundingClientRect();
-  const nameTspan=text.querySelector('tspan.town-name');
-  const nameRect=nameTspan?townTspanScreenRect(nameTspan):null;
   const targetX=mapBounds.left+d.point[0]*transform.k+transform.x+d.offset[0];
   const targetY=mapBounds.top+d.point[1]*transform.k+transform.y+d.offset[1];
+  const fs=fontPixels();
+  let metrics=labelGlyphMetrics.get(d.id);
+  if(!metrics){
+   const b=text.getBoundingClientRect();
+   const nameTspan=text.querySelector('tspan.town-name');
+   const n=nameTspan?townTspanScreenRect(nameTspan):null;
+   metrics={fs,box:{left:b.left-targetX,top:b.top-targetY,width:b.width,height:b.height},
+    name:n?{left:n.left-targetX,top:n.top-targetY,width:n.width,height:n.height}:null};
+   labelGlyphMetrics.set(d.id,metrics);labelMeasureCount++;
+  }
+  const ratio=fs/metrics.fs;
+  const rect=m=>m?{left:targetX+m.left*ratio,top:targetY+m.top*ratio,
+   right:targetX+(m.left+m.width)*ratio,bottom:targetY+(m.top+m.height)*ratio,
+   width:m.width*ratio,height:m.height*ratio}:null;
+  const box=rect(metrics.box),nameRect=rect(metrics.name);
   // Retain the original 8px label's placement correction. C tooltip
   // content/size changes do not necessarily recenter its anchor each time.
   let baseline=cBaselineLabelShifts.get(d.id);
@@ -335,8 +351,10 @@ function updateLabelSize(){
    (d.point[1]+(d.offset[1]+dy)/transform.k)+') scale('+(1/transform.k)+')');
  });
  cRebaseline=false;
+ svg.attr('data-label-measurements',labelMeasureCount);
 }
 function refreshLabels(){
+ labelGlyphMetrics.clear();
  const data=KussoonTownSvgLabels.makeData(activeFeatures(),labelPositions,'S_NAME');
  KussoonTownSvgLabels.render(labels,data,d3,READINGS,readingOn);
  updateLabelSize();
@@ -398,8 +416,10 @@ function draw(){
  frame.applyWorld();
 }
 function onZoom(event){
- if(event.sourceEvent){fittedView=false;cLabelReflow()}
- transform=event.transform;world.attr('transform',transform.toString());updateLabelSize();
+ const previousK=transform.k;
+ if(event.sourceEvent){fittedView=false;if(cLabelMode!=='centered')cLabelReflow()}
+ transform=event.transform;world.attr('transform',transform.toString());
+ if(transform.k!==previousK||cRebaseline)updateLabelSize();
  $('zoomSlider').value=String(Math.log(transform.k/.6)/Math.log(40/.6)*100);
  document.querySelector('.zoom-slider-track').style.setProperty('--zoom-percent',$('zoomSlider').value);
 }
@@ -709,4 +729,5 @@ KussoonTownSvgDataContract.load({
 })();
 </script>
 </body></html>
+
 
