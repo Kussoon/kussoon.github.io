@@ -281,8 +281,7 @@ function onZoom(event){
  if(event.sourceEvent){fittedView=false;if(cLabelMode!=='centered')cLabelReflow()}
  transform=event.transform;world.attr('transform',transform.toString());
  if(transform.k!==previousK||cRebaseline)updateLabelSize();
- $('zoomSlider').value=String(Math.log(transform.k/.6)/Math.log(40/.6)*100);
- document.querySelector('.zoom-slider-track').style.setProperty('--zoom-percent',$('zoomSlider').value);
+ sliderController.setValue(Math.log(transform.k/.6)/Math.log(40/.6)*100);
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
 // N-GESTURE-04/05: shared gestures preserve Leaflet C's wheel arming,
@@ -351,19 +350,15 @@ function focusTown(name){
  return true;
 }
 function changeZoom(factor){fittedView=false;KussoonTownSvgCore.zoomBy(svg,zoom,factor,150)}
-let sliderFrame=0,sliderValue=0;
-$('zoomSlider').addEventListener('pointerdown',()=>{cLabelReflow();fittedView=false});
-$('zoomSlider').addEventListener('input',()=>{
- sliderValue=Number($('zoomSlider').value);
- document.querySelector('.zoom-slider-track').style.setProperty('--zoom-percent',String(sliderValue));
- if(sliderFrame)return;
- sliderFrame=requestAnimationFrame(()=>{
-  sliderFrame=0;fittedView=false;
-  const k=.6*Math.pow(40/.6,sliderValue/100);
-  const cx=baseWidth/2,cy=baseHeight/2;
+const sliderController=KussoonTownMapZoomSlider.install({
+ element:$('zoomSlider'),
+ onStart:()=>{cLabelReflow();fittedView=false;svg.interrupt()},
+ onChange:value=>{
+  fittedView=false;
+  const k=.6*Math.pow(40/.6,value/100),cx=baseWidth/2,cy=baseHeight/2;
   svg.interrupt().call(zoom.transform,d3.zoomIdentity
    .translate(cx-(cx-transform.x)*k/transform.k,cy-(cy-transform.y)*k/transform.k).scale(k));
- });
+ }
 });
 new ResizeObserver(entries=>{
  $('frame').style.setProperty('--control-height',entries[0].target.getBoundingClientRect().height+'px');
@@ -551,7 +546,7 @@ KussoonTownSvgDataContract.load(config,{
  topojsonClient:topojson
 }).then(({topology,mapping,subtopology,features:loadedFeatures})=>{
  features=loadedFeatures;
- document.title=config.name+'｜PR595基準・共通町名マップ比較試作';
+ document.title=config.name+'｜共通町名マップ比較試作';
  $('pageTitle').textContent=document.title;
  $('hierarchyReturn').href='/v2/geography/#'+config.municipalityId;
  $('map').setAttribute('aria-label',config.name+'の町名マップ');

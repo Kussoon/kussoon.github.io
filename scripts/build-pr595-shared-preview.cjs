@@ -41,23 +41,46 @@ replace("'SVG描画：321町名・26コミュニティ読み込み完了（比�
 replace("'/v2/geography/#town:jp-hyogo-nishinomiya:'","'/v2/geography/#town:'+config.municipalityId+':'");
 replace("'指定された町名は見つかりません。西宮市全域を表示しています。'","'指定された町名は見つかりません。'+config.name+'全域を表示しています。'");
 replace(" features=loadedFeatures;",` features=loadedFeatures;
- document.title=config.name+'｜PR595基準・共通町名マップ比較試作';
+ document.title=config.name+'｜共通町名マップ比較試作';
  $('pageTitle').textContent=document.title;
  $('hierarchyReturn').href='/v2/geography/#'+config.municipalityId;
  $('map').setAttribute('aria-label',config.name+'の町名マップ');
  $('frame').setAttribute('aria-label',config.name+'町名マップ');`);
 code=code.replace(/\}\)\(\);\s*$/,"})().catch(e=>{document.getElementById('status').textContent='読み込み失敗：'+e.message;console.error(e)});\n");
+replace(" $('zoomSlider').value=String(Math.log(transform.k/.6)/Math.log(40/.6)*100);\n document.querySelector('.zoom-slider-track').style.setProperty('--zoom-percent',$('zoomSlider').value);",
+ " sliderController.setValue(Math.log(transform.k/.6)/Math.log(40/.6)*100);");
+const sliderStart=code.indexOf('let sliderFrame=0,sliderValue=0;'),sliderEnd=code.indexOf('new ResizeObserver(entries=>{',sliderStart);
+replace(code.slice(sliderStart,sliderEnd),`const sliderController=KussoonTownMapZoomSlider.install({
+ element:$('zoomSlider'),
+ onStart:()=>{cLabelReflow();fittedView=false;svg.interrupt()},
+ onChange:value=>{
+  fittedView=false;
+  const k=.6*Math.pow(40/.6,value/100),cx=baseWidth/2,cy=baseHeight/2;
+  svg.interrupt().call(zoom.transform,d3.zoomIdentity
+   .translate(cx-(cx-transform.x)*k/transform.k,cy-(cy-transform.y)*k/transform.k).scale(k));
+ }
+});
+`);
 if(/西宮|宝塚|岡田山|上甲東園/.test(code))throw Error('City-specific runtime remains');
 fs.writeFileSync(path.join(out,'town-map.js'),code);
 let html=original.slice(0,original.indexOf('<script>\n(()=>'));
-html=html.replace(/<title>.*?<\/title>/,'<title>全国共通町名マップ｜PR595基準比較試作</title>');
+html=html.replace(/<title>.*?<\/title>/,'<title>全国共通町名マップ｜共通化実装PR681</title>');
 html=html.replace(/<nav class="nav">.*?<\/nav>/s,'<nav class="nav"><a href="?code=28214">宝塚市</a><a href="?code=28204">西宮市・共通化比較</a><a href="/v2/verify-pr595-one-label/">承認済み西宮市基準版</a><a id="hierarchyReturn" href="/v2/geography/">世界から町へ</a></nav>');
-html=html.replace(/<h1>.*?<\/h1>/,'<h1 id="pageTitle">全国共通町名マップ｜PR595基準比較試作</h1>');
-html=html.replace(/<time.*?<\/time>/s,'<time class="updated-at" id="updatedAt" datetime="2026-11-20">更新：2026/11/20（JST）</time>');
-html=html.replace(/<p class="notice">.*?<\/p>/s,'<p class="notice"><strong>PR595復元版＋承認済み操作改善の共通化比較試作です。</strong>同じ描画・ラベル・操作・採点コードへ自治体別データを接続しています。正式ページは変更していません。</p>');
+html=html.replace(/<h1>.*?<\/h1>/,'<h1 id="pageTitle">全国共通町名マップ｜比較試作</h1>');
+const updated=new Date(process.env.TOWN_MAP_UPDATED_AT||Date.now());
+if(!Number.isFinite(updated.getTime()))throw Error('Invalid update timestamp');
+const display=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(updated).replace(/-/g,'/');
+const release=updated.toISOString().replace(/[^0-9]/g,'');
+html=html.replace(/<time.*?<\/time>/s,'<time class="updated-at" id="updatedAt" datetime="'+updated.toISOString()+'">更新：'+display+'（JST）</time>');
+html=html.replace(/<p class="notice">.*?<\/p>/s,'<p class="notice"><strong>共通化の実装元は<a href="https://github.com/Kussoon/kussoon.github.io/pull/681">PR #681</a>です。</strong>仕様の起点はPR #595で、承認済みの1ラベル化・操作・性能改善を引き継いでいます。同じ描画・ラベル・操作・採点コードへ自治体別データを接続しています。正式ページは変更していません。</p>');
 html=html.replace(/<p class="small">ラベル文字.*?<\/p>/s,'<p class="small">境界：CODH「国勢調査町丁・字等別境界データセット」（e-Stat 2020年国勢調査を加工）、CC BY 4.0、<a href="https://doi.org/10.20676/00000450">DOI:10.20676/00000450</a>。2020年統計境界と現行住所境界は異なります。町名・読み・地域所属は既存の各市台帳を継承しています。</p>');
 html=html.replace(/26コミュニティ学習範囲/g,'地域学習範囲').replace(/西宮市全域（321町名）/g,'自治体データ準備中').replace(/SVG版 西宮市町名マップ|西宮市の町域SVG比較試作/g,'町名マップ比較試作');
 html=html.replace(/<p class="small">検証ポイント：.*?<\/p>/s,'<p class="small">比較試作：1町名1ラベル。初期の重なりは許容します。拡大・読み仮名・地域切替・クイズ1/2・再タップ解除を確認できます。</p>');
-html+='\n<script src="./town-map.js"></script><script defer src="/common/site-footer.js"></script>\n</body></html>\n';
+const oldStyles=html.indexOf('.zoom-slider-slot{position:absolute;right:7px;');
+if(oldStyles<0)throw Error('Missing native slider styles');
+html=html.slice(0,oldStyles)+html.slice(html.indexOf('</style>',oldStyles));
+html=html.replace('</style>','</style><link rel="stylesheet" href="./controls.css?rev='+release+'">');
+html=html.replace(/<input id="zoomSlider"[^>]+>/,'<div id="zoomSlider" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="地図の拡大縮小" aria-orientation="vertical"></div>');
+html+='\n<script src="./zoom-slider.js?rev='+release+'"></script><script src="./town-map.js?rev='+release+'"></script><script defer src="/common/site-footer.js"></script>\n</body></html>\n';
 fs.writeFileSync(path.join(out,'index.html'),html);
 console.log('Extracted same shared runtime and Nishinomiya configuration');

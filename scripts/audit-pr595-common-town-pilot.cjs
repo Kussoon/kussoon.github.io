@@ -25,7 +25,7 @@ async function main(){
    if(p==='/nishinomiya/data/community-town-map.json'){res.setHeader('Content-Type','application/json');res.end(mapping);return}
    const file=path.resolve(root,'.'+decodeURIComponent(p)+(p.endsWith('/')?'index.html':''));
    if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.statusCode=404;res.end('missing');return}
-   res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.html')?'text/html; charset=utf-8':'application/json');res.end(fs.readFileSync(file));
+   res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.html')?'text/html; charset=utf-8':file.endsWith('.css')?'text/css':'application/json');res.end(fs.readFileSync(file));
   });await new Promise(r=>server.listen(8765,'127.0.0.1',r));
  }
  for(const cfg of [{name:'chromium1280',engine:chromium,width:1280,height:800},{name:'webkit390',engine:webkit,width:390,height:844},{name:'webkit320',engine:webkit,width:320,height:668}]){
@@ -33,7 +33,7 @@ async function main(){
   try{
    const page=await browser.newPage({viewport:{width:cfg.width,height:cfg.height},isMobile:cfg.width<600,hasTouch:cfg.width<600});
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
-   await page.route('**/town-map.js',async route=>{const response=await route.fetch();const text=await response.text();assert.equal(text.split('KussoonTownSvgDataContract.load(config,{').length,2);await route.fulfill({response,body:text.replace('KussoonTownSvgDataContract.load(config,{',expose+'KussoonTownSvgDataContract.load(config,{')});});
+   await page.route('**/town-map.js*',async route=>{const response=await route.fetch();const text=await response.text();assert.equal(text.split('KussoonTownSvgDataContract.load(config,{').length,2);await route.fulfill({response,body:text.replace('KussoonTownSvgDataContract.load(config,{',expose+'KussoonTownSvgDataContract.load(config,{')});});
    const report={browser:cfg.name};
    // Shared extraction must preserve every retained Nishinomiya label, not only count.
    const snapshot=()=>page.evaluate(()=>{const b=document.querySelector('#map').getBoundingClientRect();return [...document.querySelectorAll('#labels g.label')].map(g=>{const r=g.querySelector('.town-name').getBoundingClientRect();return {name:g.__data__.name,x:r.x-b.x,y:r.y-b.y,w:r.width,h:r.height}})});
@@ -70,7 +70,7 @@ async function main(){
    await page.locator('#fullscreen').click();await page.waitForTimeout(150);
    const measurements=()=>page.locator('#map').getAttribute('data-label-measurements');
    const oldCount=await measurements();
-   await page.locator('#zoomSlider').evaluate(e=>{e.value=65;e.dispatchEvent(new Event('input',{bubbles:true}))});await page.waitForTimeout(150);assert.equal(await measurements(),oldCount,'zoom remeasures glyphs');
+   await page.locator('#zoomSlider').press('End');await page.waitForTimeout(150);assert.equal(await measurements(),oldCount,'zoom remeasures glyphs');
    await page.locator('#larger').click();assert.equal((await page.locator('#size').innerText()).replace(/\s/g,''),'文字100％');await page.locator('#size').click();await page.locator('#reading').click();assert.equal(await page.locator('.town-reading').count(),125);await page.locator('#reading').click();
    await page.evaluate(()=>window.__audit.focusTown('鹿塩'));await page.waitForTimeout(150);await page.locator('#frame').screenshot({path:path.join(out,cfg.name+'-zoom.png')});
    report.taps=[];
@@ -90,6 +90,7 @@ async function main(){
    assert.equal(report.taps.length,136);await page.evaluate(()=>window.__audit.stopQuiz(false));
    // Actual selected-town second input cancels the flash.
    await page.evaluate(()=>{window.__audit.showRegion('');window.__audit.choose('鹿塩');});assert.equal(await page.evaluate(()=>window.__audit.getSelected()),'鹿塩');await page.evaluate(()=>window.__audit.choose('鹿塩'));assert.equal(await page.evaluate(()=>window.__audit.getSelected()),'');
+   await require('./audit-pr595-slider-controls.cjs').run(page,cfg,out);
    assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,cfg.name+'.json'),JSON.stringify(report,null,2));
    console.log('PASS COMMON_TOWN '+JSON.stringify({browser:cfg.name,delta:report.nishinomiyaMaxDelta,names:125,regions:20,quiz1:125,quiz2:125,taps:136}));
   }finally{await browser.close()}
