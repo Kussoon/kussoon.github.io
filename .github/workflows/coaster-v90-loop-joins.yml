@@ -1,0 +1,33 @@
+name: Coaster v90 loop join regression
+on:
+  pull_request:
+    paths:
+      - 'v2/one-stroke-coaster-3d-v90.html'
+      - 'v2/tests/coaster-geometry-regression-v90.html'
+      - 'scripts/test-coaster-v90-loop-joins.cjs'
+      - '.github/workflows/coaster-v90-loop-joins.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  geometry-regression:
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    timeout-minutes: 20
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Check geometry in Chromium and WebKit
+        run: node scripts/test-coaster-v90-loop-joins.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coaster-v90-geometry-projections
+          path: v2/verification/coaster-v90/geometry-regression.png
+          if-no-files-found: ignore
