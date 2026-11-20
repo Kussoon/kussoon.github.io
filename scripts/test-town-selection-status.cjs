@@ -2,13 +2,16 @@
 const {chromium,webkit}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const root=path.resolve(__dirname,'..');
+let communityMapping;
 const server=http.createServer((req,res)=>{
  const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
+ if(pathname==='/nishinomiya/data/community-town-map.json'){res.setHeader('Content-Type','application/json');res.end(communityMapping);return}
  let file=path.join(root,pathname);if(pathname.endsWith('/'))file=path.join(file,'index.html');
  if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);res.end();return}
  res.setHeader('Content-Type',file.endsWith('.html')?'text/html':file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'application/json');res.end(fs.readFileSync(file));
 });
 async function main(){
+ const mappingResponse=await fetch('https://kussoon.com/nishinomiya/data/community-town-map.json');assert(mappingResponse.ok);communityMapping=await mappingResponse.text();
  await new Promise(r=>server.listen(8766,'127.0.0.1',r));
  for(const cfg of [{name:'chromium1280',engine:chromium,width:1280,height:800},{name:'webkit390',engine:webkit,width:390,height:844},{name:'webkit320',engine:webkit,width:320,height:668}]){
  const browser=await cfg.engine.launch({headless:true});
@@ -40,7 +43,7 @@ async function main(){
    await page.locator('#quizQuit').click();s=await sample();assert(s.active&&s.text.includes('中断した問題'));
    await page.locator('#quizBack').click();s=await sample();assert(!s.active&&!s.off);
    // Pointer focus must not paint the track; keyboard focus and keys remain usable.
-   const slider=page.locator('#zoomSlider');
+   const slider=page.locator('#zoomSlider');await slider.scrollIntoViewIfNeeded();
    if(cfg.width<600){const b=await slider.boundingBox();await page.touchscreen.tap(b.x+b.width/2,b.y+b.height/2)}else await slider.click();
    const outlines=()=>page.evaluate(()=>['#zoomSlider','.zoom-slider-track'].map(sel=>getComputedStyle(document.querySelector(sel)).outlineStyle));
    assert((await outlines()).every(x=>x==='none'),'pointer focus outline');
