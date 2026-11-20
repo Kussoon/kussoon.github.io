@@ -226,6 +226,12 @@ function clearTownStyles(){
 function stopBlink(){
  if(blinkTimer!==null)clearInterval(blinkTimer);
  blinkTimer=null;selected='';blinkOn=false;clearTownStyles();
+ $('status').classList.remove('selection-status','selection-off');
+}
+function displaySelectionBlink(){
+ areas.selectAll('path.town').classed('selected',d=>d.properties.S_NAME===selected).classed('dim',d=>d.properties.S_NAME===selected&&!blinkOn);
+ $('status').classList.add('selection-status');
+ $('status').classList.toggle('selection-off',!blinkOn);
 }
 function renderLayers(){
  KussoonTownSvgRender.render({
@@ -243,12 +249,13 @@ function renderLayers(){
   for(const name of quizWrongPlaces)highlightQuizTown(name,false,true);
   if(quizTarget)highlightQuizTown(quizTarget,quizBlinkOn);
  }
+ else if(selected)displaySelectionBlink();
 }
 function choose(name){
  if(quizMode)return;
  if(selected===name){stopBlink();$('status').textContent=name+' の点滅を停止しました。';return}
- stopBlink();selected=name;blinkOn=true;const display=()=>areas.selectAll('path.town').classed('selected',d=>d.properties.S_NAME===name).classed('dim',d=>d.properties.S_NAME===name&&!blinkOn);
- display();blinkTimer=setInterval(()=>{blinkOn=!blinkOn;display()},500);
+ stopBlink();selected=name;blinkOn=true;
+ displaySelectionBlink();blinkTimer=setInterval(()=>{blinkOn=!blinkOn;displaySelectionBlink()},500);
  $('status').textContent=name+(READINGS[name]?'（'+READINGS[name]+'）':'')+' を選択中です。';
 }
 function draw(){

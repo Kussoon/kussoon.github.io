@@ -8,4 +8,7 @@
 .zoom-slider-track:before{content:'';position:absolute;left:14px;top:0;bottom:0;width:6px;background:#888;pointer-events:none}
 .zoom-slider-thumb{position:absolute;left:2px;top:calc(9px + (100% - 18px) * var(--zoom-position));transform:translateY(-50%);width:30px;height:18px;background:#777;border:3px solid #fff;border-radius:2px;box-shadow:0 1px 6px #0006;pointer-events:none}
 #zoomSlider{position:absolute;inset:0;width:34px;height:100%;z-index:1;cursor:ns-resize;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.zoom-slider-track:focus-within{outline:2px solid #dd9a31;outline-offset:2px}
+#zoomSlider:focus{outline:none}
+#zoomSlider:focus-visible:not([data-focus-input="pointer"]){outline:2px solid #719bb4;outline-offset:2px}
+#status.selection-status{font-size:16px}
+#status.selection-off{color:transparent}

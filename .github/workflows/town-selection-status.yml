@@ -1,0 +1,22 @@
+name: Town selection status and slider focus
+on:
+  pull_request:
+    paths:
+      - 'v2/verify-town-map-pr595/**'
+      - 'scripts/test-town-selection-status.cjs'
+      - '.github/workflows/town-selection-status.yml'
+  workflow_dispatch:
+jobs:
+  selection-status:
+    runs-on: ubuntu-24.04
+    container: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - run: node scripts/test-town-map-master-spec.cjs
+      - run: node scripts/test-town-selection-status.cjs
