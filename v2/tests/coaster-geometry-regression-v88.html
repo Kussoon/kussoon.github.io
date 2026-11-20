@@ -1,0 +1,710 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>コースター形状回帰テスト v88</title><style>body{font:16px sans-serif;max-width:900px;margin:30px auto;padding:12px}pre{white-space:pre-wrap;background:#eef4f7;padding:20px;border-radius:8px}</style><h1>コースター形状回帰テスト v88</h1><p>5種類の固定入力で、元の側面図と最終3D線路の高度差、勾配の逆転、検出されたループ数を確認します。これは診断専用でゲーム本体は変更しません。</p><pre id="results">実行中...</pre><script src="/v2/common/js/one-stroke-coaster-support-clearance.js"></script><script>(()=>{"use strict";const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),mix=(a,b,t)=>a+(b-a)*t,V=(x=0,y=0,z=0)=>({x,y,z}),add=(a,b)=>V(a.x+b.x,a.y+b.y,a.z+b.z),sub=(a,b)=>V(a.x-b.x,a.y-b.y,a.z-b.z),scale=(a,k)=>V(a.x*k,a.y*k,a.z*k),dot=(a,b)=>a.x*b.x+a.y*b.y+a.z*b.z,cross=(a,b)=>V(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x),norm=a=>scale(a,1/(Math.hypot(a.x,a.y,a.z)||1));let W=900,H=450,raw=[],track=[],finish=0,loopZones=[],loopWarning="",supportClearance=null,objects=[],heightDiagnosis=null;const diagnoseHeight=()=>null;
+function sample(z){
+ z=clamp(z,0,finish);let lo=0,hi=track.length-1;
+ while(lo+1<hi){const m=(lo+hi)>>1;if(track[m].s<z)lo=m;else hi=m}
+ const a=track[lo],b=track[hi],t=clamp((z-a.s)/(b.s-a.s||1),0,1);
+ // No spline overshoot: interpolated points stay ON the user's stroke.
+ return V(mix(a.x,b.x,t),mix(a.y,b.y,t),mix(a.z,b.z,t));
+}
+function makeTrack(){
+ // v78: shape-preserving smooth centreline. No circle detection or substitution.
+ // Strong smoothing followed by targeted small-loop circularization.
+ // Only an observed closed revolution may be rounded; open hills remain.
+ supportClearance=null;track=[];finish=0;loopZones=[];loopWarning="手描きの形を保って滑らかなレールを生成";
+ const ratio=.105;
+ if(raw.length<2)return;
+ // Regularize sample spacing before smoothing: the result must not depend
+ // on how frequently the browser emits touch/pointer events.
+ const uniform=[{x:raw[0].x,y:raw[0].y}];
+ let carry=0;
+ for(let i=1;i<raw.length;i++){
+  const a=raw[i-1],b=raw[i],len=Math.hypot(b.x-a.x,b.y-a.y);
+  if(len<1e-5)continue;
+  let d=2-carry;
+  while(d<=len+1e-8){
+   const t=d/len;uniform.push({x:mix(a.x,b.x,t),y:mix(a.y,b.y,t)});
+   d+=2;
+  }
+  carry=len-(d-2);
+  if(carry<1e-8||carry>=2)carry=0;
+ }
+ const last=raw[raw.length-1];
+ if(Math.hypot(uniform[uniform.length-1].x-last.x,uniform[uniform.length-1].y-last.y)>.01)
+  uniform.push({x:last.x,y:last.y});
+ // Detect closed revolutions BEFORE the high-pass-count fairing. At v80 the
+ // 58-pass smoothing ran first, erasing the small circles this detector needed.
+ let knots=uniform;
+ const originalKnots=knots;
+ const corrected=knots.map(p=>({x:p.x,y:p.y}));
+ const used=[];
+ for(let i=3;i<knots.length-24;i++){
+  if(used.some(z=>i<z.end+3))continue;
+  const lim=Math.min(knots.length-5,i+280);
+  let arc=0,turn=0,minX=knots[i].x,maxX=minX,minY=knots[i].y,maxY=minY;
+  let candidate=null;
+  for(let j=i+1;j<=lim;j++){
+   const a=knots[j-1],b=knots[j];
+   arc+=Math.hypot(b.x-a.x,b.y-a.y);
+   minX=Math.min(minX,b.x);maxX=Math.max(maxX,b.x);
+   minY=Math.min(minY,b.y);maxY=Math.max(maxY,b.y);
+   if(j>i+1){
+    const p=knots[j-2],v1={x:a.x-p.x,y:a.y-p.y},v2={x:b.x-a.x,y:b.y-a.y};
+    turn+=Math.atan2(v1.x*v2.y-v1.y*v2.x,v1.x*v2.x+v1.y*v2.y);
+   }
+   if(Math.abs(turn)>7.3)break;
+   if(Math.abs(turn)<5.35||j-i<16)continue;
+   const w=maxX-minX,h=maxY-minY,d=Math.max(w,h);
+   // Lower bounds are tied to the actual stroke size and sample spacing;
+   // 26px/26 samples incorrectly excluded the small loops in the stress test.
+   if(d<12||d>190||Math.min(w,h)<10)continue;
+   const close=Math.hypot(b.x-knots[i].x,b.y-knots[i].y);
+   if(close>Math.max(4,d*.14)||arc/d<2.4||arc/d>4.2)continue;
+   const score=Math.abs(Math.abs(turn)-2*Math.PI)+close/d;
+   if(!candidate||score<candidate.score)candidate={end:j,score,cx:(minX+maxX)*.5,cy:(minY+maxY)*.5,r:(w+h)*.25,sign:Math.sign(turn)};
+  }
+  if(!candidate)continue;
+  const end=candidate.end,{r}=candidate;
+  let start=i;
+  if(i<=6){
+   const prefix=originalKnots.slice(0,i+1);
+   const tolerance=Math.max(5,r*.15);
+   if(prefix.every(p=>Math.abs(Math.hypot(p.x-candidate.cx,p.y-candidate.cy)-r)<=tolerance))start=0;
+  }
+  const seam=originalKnots[start],dx=seam.x-candidate.cx,dy=seam.y-candidate.cy,radial=Math.hypot(dx,dy)||1;
+  const cx=seam.x-dx/radial*r,cy=seam.y-dy/radial*r;
+  for(let k=start+1;k<end;k++){
+   const p=originalKnots[k],theta=Math.atan2(p.y-cy,p.x-cx);
+   corrected[k]={x:cx+r*Math.cos(theta),y:cy+r*Math.sin(theta)};
+  }
+  // Close the one-stroke join exactly; otherwise a few remaining pixels of hand-drawn gap become a visible 3D kink.
+  corrected[end]={...corrected[start]};
+  used.push({start,end,coreStart:start,coreEnd:end,cx,cy,r,sign:candidate.sign||1});
+  i=end;
+ }
+ // Smooth the remaining stroke once. The fitted loop and its exact join points are
+ // held fixed so small circles survive both fairing stages without opening a seam.
+ const coreByIndex=new Array(corrected.length),loopBoundary=new Set();
+ for(const zone of used){
+  for(let k=zone.coreStart;k<=zone.coreEnd;k++)coreByIndex[k]=zone;
+  loopBoundary.add(zone.start);loopBoundary.add(zone.end);
+ }
+ let faired=corrected;
+ for(let pass=0;pass<58;pass++){
+  const old=faired;
+  faired=old.map((p,k)=>{
+   if(k===0||k===old.length-1||loopBoundary.has(k))return p;
+   const a=old[k-1],b=old[k+1];
+   const q={x:(a.x+2*p.x+b.x)*.25,y:(a.y+2*p.y+b.y)*.25},zone=coreByIndex[k];
+   if(zone){const th=Math.atan2(q.y-zone.cy,q.x-zone.cx);
+    return{x:zone.cx+zone.r*Math.cos(th),y:zone.cy+zone.r*Math.sin(th)};}
+   return q;
+  });
+ }
+ knots=faired;
+ // v78: curvature-aware fillets on OPEN parts of the side-view stroke.
+ // The desired radius is 80 DRAWING PIXELS (not 50 game-world units).
+ // Never modify the validated circular loop or its adjacent join.
+ const minTurnRadiusPx=80;
+ const cornerCandidates=[],curvatureProbe=6;
+ function localTurnRadius(points,k,probe){
+  const a=points[k-probe],b=points[k],c=points[k+probe];
+  const ux=b.x-a.x,uy=b.y-a.y,vx=c.x-b.x,vy=c.y-b.y;
+  const angle=Math.abs(Math.atan2(ux*vy-uy*vx,ux*vx+uy*vy));
+  return (Math.hypot(ux,uy)+Math.hypot(vx,vy))*.5/Math.max(.000001,angle);
+ }
+ for(let k=curvatureProbe;k<knots.length-curvatureProbe;k++){
+  if(used.some(zone=>k>=zone.start-50&&k<=zone.end+50))continue;
+  const radius=localTurnRadius(knots,k,curvatureProbe);
+  if(radius<minTurnRadiusPx)cornerCandidates.push({k,radius});
+ }
+ cornerCandidates.sort((a,b)=>a.radius-b.radius);
+ const roundedCorners=[];
+ const cornerSpan=50;
+ for(const candidate of cornerCandidates){
+  const k=candidate.k,lo=k-cornerSpan,hi=k+cornerSpan;
+  if(lo<4||hi>=knots.length-4)continue;
+  if(roundedCorners.some(other=>Math.abs(other-k)<cornerSpan*2))continue;
+  if(used.some(zone=>lo<zone.end+12&&hi>zone.start-12))continue;
+  const P=knots[lo],Q=knots[hi],before=knots[lo-3],after=knots[hi+3];
+  const ux=P.x-before.x,uy=P.y-before.y;
+  const vx=after.x-Q.x,vy=after.y-Q.y;
+  const ulen=Math.hypot(ux,uy),vlen=Math.hypot(vx,vy);
+  if(ulen<.001||vlen<.001)continue;
+  const handle=40;
+  const A={x:P.x+handle*ux/ulen,y:P.y+handle*uy/ulen};
+  const B={x:Q.x-handle*vx/vlen,y:Q.y-handle*vy/vlen};
+  const candidateCurve=[];
+  for(let i=lo;i<=hi;i++){
+   const t=(i-lo)/(hi-lo),u=1-t;
+   candidateCurve.push({x:u*u*u*P.x+3*u*u*t*A.x+3*u*t*t*B.x+t*t*t*Q.x,
+    y:u*u*u*P.y+3*u*u*t*A.y+3*u*t*t*B.y+t*t*t*Q.y});
+  }
+  // Accept an adjustment only when it really reduces measured sharpness.
+  const minBefore=localTurnRadius(knots,k,curvatureProbe);
+  const temp=knots.slice();for(let j=0;j<candidateCurve.length;j++)temp[lo+j]=candidateCurve[j];
+  const minAfter=localTurnRadius(temp,k,curvatureProbe);
+  if(minAfter<minBefore*1.35)continue;
+  knots=temp;roundedCorners.push(k);
+ }
+ loopWarning=used.length?"閉じた小ループ "+used.length+"か所を正円に補正":"手描きコースを滑らかに生成";
+ // Unit-tangent vectors derived from adjacent chord directions. Near reversal
+ // points the average approaches zero, so a hand-drawn loop remains intact.
+ const tangents=knots.map((p,i)=>{
+  const a=knots[Math.max(0,i-1)],b=knots[Math.min(knots.length-1,i+1)];
+  const prev={x:p.x-a.x,y:p.y-a.y},next={x:b.x-p.x,y:b.y-p.y};
+  const pn=Math.hypot(prev.x,prev.y),nn=Math.hypot(next.x,next.y);
+  if(i===0)return{x:next.x/(nn||1),y:next.y/(nn||1)};
+  if(i===knots.length-1)return{x:prev.x/(pn||1),y:prev.y/(pn||1)};
+  const tx=prev.x/(pn||1)+next.x/(nn||1),ty=prev.y/(pn||1)+next.y/(nn||1);
+  const len=Math.hypot(tx,ty);
+  return len<.05?{x:0,y:0}:{x:tx/len,y:ty/len};
+ });
+ // Use the fitted circle's analytic tangent at both protected seam knots.
+ // Averaging these with the outside stroke directions creates an exit kink
+ // even when the loop positions are closed exactly.
+ for(const zone of used){
+  const p=knots[zone.start],rx=p.x-zone.cx,ry=p.y-zone.cy;
+  const t={x:-zone.sign*ry,y:zone.sign*rx},length=Math.hypot(t.x,t.y)||1;
+  const seamTangent={x:t.x/length,y:t.y/length};
+  tangents[zone.start]=seamTangent;
+  tangents[zone.end]={...seamTangent};
+ }
+ function append(px,py,sketchFraction){
+  const v={x:0,y:3+(H-py)*ratio,z:(px-W*.5)*ratio,s:finish,sketchFraction:clamp(sketchFraction,0,1)};
+  if(track.length){
+   const q=track[track.length-1],ds=Math.hypot(v.y-q.y,v.z-q.z);
+   if(ds<.00001)return;
+   finish+=ds;v.s=finish;
+  }
+  track.push(v);
+ }
+ append(knots[0].x,knots[0].y,0);
+ const knotDistances=[0];
+ for(let i=0;i<knots.length-1;i++){
+  const a=knots[i],b=knots[i+1],chord=Math.hypot(b.x-a.x,b.y-a.y);
+  if(chord<.001){knotDistances.push(finish);continue;}
+  const prev=Math.hypot(a.x-knots[Math.max(0,i-1)].x,a.y-knots[Math.max(0,i-1)].y);
+  const next=Math.hypot(knots[Math.min(knots.length-1,i+2)].x-b.x,knots[Math.min(knots.length-1,i+2)].y-b.y);
+  // Control lengths are capped to prevent loops, artificial humps and bends
+  // appearing as an interpolation artifact.
+  const h0=Math.min(chord*.34,Math.sqrt(chord*Math.max(.001,prev))*.36);
+  const h1=Math.min(chord*.34,Math.sqrt(chord*Math.max(.001,next))*.36);
+  const c0={x:a.x+tangents[i].x*h0,y:a.y+tangents[i].y*h0};
+  const c1={x:b.x-tangents[i+1].x*h1,y:b.y-tangents[i+1].y*h1};
+  const steps=Math.max(2,Math.ceil(chord/.65));
+  for(let j=1;j<=steps;j++){
+   const t=j/steps,u=1-t;
+   const x=u*u*u*a.x+3*u*u*t*c0.x+3*u*t*t*c1.x+t*t*t*b.x;
+   const y=u*u*u*a.y+3*u*u*t*c0.y+3*u*t*t*c1.y+t*t*t*b.y;
+   append(x,y,(i+t)/(knots.length-1));
+  }
+  knotDistances.push(finish);
+ }
+ // v78: Convert genuine backwards strokes into broad horizontal
+ // U-turns, instead of adding a lateral offset to signed backward Z.
+ const originalLength=finish;
+ const originalTrack=track.map(p=>({...p}));
+ const loopSections=used.map(z=>({a:knotDistances[z.start],b:knotDistances[z.end]}))
+  .filter(z=>Number.isFinite(z.a)&&Number.isFinite(z.b)&&z.b>z.a);
+ const smoothTurn=t=>{t=clamp(t,0,1);return t*t*t*(10-15*t+6*t*t);};
+ const candidates=[];
+ // Detect left/right handwriting in the UNSMOOTHED, evenly resampled stroke.
+ // The 58-pass vertical fairing can legitimately soften a short zigzag; it
+ // must not erase the independent plan-view instruction. Map each event back
+ // to the generated centreline by the original sketch progression fraction.
+ function stationAtSketchFraction(fraction){
+  let lo=0,hi=originalTrack.length-1;
+  while(lo+1<hi){const mid=(lo+hi)>>1;if(originalTrack[mid].sketchFraction<fraction)lo=mid;else hi=mid;}
+  const a=originalTrack[lo],b=originalTrack[hi];
+  const t=clamp((fraction-a.sketchFraction)/(b.sketchFraction-a.sketchFraction||1),0,1);
+  return mix(a.s,b.s,t);
+ }
+ for(let k=10;k<uniform.length-10;k++){
+  const fraction=k/(uniform.length-1);
+  if(used.some(z=>fraction>=z.start/(knots.length-1)-.025&&fraction<=z.end/(knots.length-1)+.025))continue;
+  let best=null;
+  for(const probe of [10,18,28,36]){
+   if(k<probe||k+probe>=uniform.length)continue;
+   const incoming=uniform[k].x-uniform[k-probe].x;
+   const outgoing=uniform[k+probe].x-uniform[k].x;
+   if(incoming*outgoing>=0)continue;
+   const score=Math.min(Math.abs(incoming),Math.abs(outgoing));
+   if(score<7)continue;
+   if(!best||score>best.score)best={k,fraction,at:stationAtSketchFraction(fraction),score,sign:incoming>0?1:-1};
+  }
+  if(best)candidates.push(best);
+ }
+ // Candidates from different probe widths around one crest belong to one event.
+ // Collapse same-direction detections in screen-station space before shaping yaw.
+ candidates.sort((a,b)=>a.k-b.k);
+ const grouped=[];
+ for(const candidate of candidates){
+  const prior=grouped[grouped.length-1];
+  if(prior&&prior.sign===candidate.sign&&candidate.k-prior.lastK<=24){
+   prior.lastK=candidate.k;
+   if(candidate.score>prior.score){prior.k=candidate.k;prior.at=candidate.at;prior.score=candidate.score;}
+  }else grouped.push({...candidate,lastK:candidate.k});
+ }
+ const reversals=[];
+ for(const c of grouped){
+  // A 10-world-unit dead zone and a strongest-12 cap discarded dense
+  // handwritten switchbacks. Grouping already merges duplicate probes;
+  // preserve the remaining events chronologically, including close ones.
+  if(reversals.some(t=>Math.abs(t.at-c.at)<1.5))continue;
+  if(loopSections.some(z=>c.at>=z.a-6&&c.at<=z.b+6))continue;
+  reversals.push(c);
+ }
+ reversals.sort((a,b)=>a.at-b.at);
+ const turns=reversals.map((r,i)=>{
+  const prev=i?reversals[i-1].at:0,next=i+1<reversals.length?reversals[i+1].at:originalLength;
+  const spacing=Math.min(r.at-prev,next-r.at);
+  return{at:r.at,half:Math.min(24,Math.max(.05,spacing*.40)),radius:clamp(spacing*.45,3,13),sign:r.sign};
+ }).filter(t=>!loopSections.some(z=>t.at-t.half<z.b+3&&t.at+t.half>z.a-3));
+ function yawAt(distance){
+  let yaw=0;
+  for(const turn of turns)yaw+=turn.sign*Math.PI*smoothTurn((distance-turn.at+turn.half)/(2*turn.half));
+  const t=clamp(distance/Math.max(1,originalLength),0,1);
+  return yaw+.52*Math.sin(Math.PI*t)**2*Math.sin(2*Math.PI*t);
+ }
+ let worldX=0,worldZ=originalTrack[0].z;
+ for(let j=1;j<track.length;j++){
+  const a=originalTrack[j-1],b=originalTrack[j],mid=(a.s+b.s)*.5;
+  const loop=loopSections.find(z=>mid>=z.a&&mid<=z.b);
+  // Fade the extra forward run to zero at each loop join. A hard switch
+  // between signed loop travel and normal forward travel creates a pitch
+  // kink when the hand-drawn loop closes imperfectly.
+  let runBlend=1;
+  for(const z of loopSections){
+   const gap=mid<z.a?z.a-mid:mid>z.b?mid-z.b:0;
+   const t=clamp(gap/14,0,1),eased=t*t*(3-2*t);
+   runBlend=Math.min(runBlend,eased);
+  }
+  if(loop){
+   const yaw=yawAt(loop.a),dz=b.z-a.z;
+   worldX+=dz*Math.sin(yaw);worldZ+=dz*Math.cos(yaw);
+  }else{
+   const dYaw=Math.abs(yawAt(b.s)-yawAt(a.s));
+   // Increase forward travel only while yaw is changing. The turn radius
+   // follows the spacing between neighboring reversals: wide when the
+   // sketch leaves room, compact for dense zigzags, avoiding fixed-radius
+   // course growth. Vertical displacement remains a separate lower bound.
+    const rise=Math.abs(b.y-a.y);
+    const activeTurns=turns.filter(turn=>b.s>=turn.at-turn.half&&a.s<=turn.at+turn.half);
+   const turnRadius=activeTurns.length?Math.min(...activeTurns.map(turn=>turn.radius)):13;
+   const step=Math.max(.04,Math.abs(b.z-a.z),turnRadius*dYaw,rise*.72*runBlend);
+   const yaw=yawAt(mid);
+   worldX+=step*Math.sin(yaw);worldZ+=step*Math.cos(yaw);
+  }
+  track[j].x=worldX;track[j].z=worldZ;
+ }
+ finish=0;
+ for(let j=0;j<track.length;j++){
+  if(j){const a=track[j-1],b=track[j];finish+=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
+  track[j].s=finish;
+ }
+ // v82: side-view loops that cross at the same height map to the same 3D
+ // point when they share a vertical plane. Detect only those circle pairs,
+ // then translate one complete loop plane sideways; smooth the offset in the
+ // approach/exit so the protected circular core itself remains unchanged.
+ const loopPlanes=used.map((zone,index)=>{
+  const low=zone.start/(knots.length-1),high=zone.end/(knots.length-1);
+  const first=track.findIndex(p=>p.sketchFraction>=low);
+  let last=track.length-1;
+  for(let k=first;k<track.length;k++){if(track[k].sketchFraction>=high){last=k;break;}}
+  const points=track.slice(Math.max(0,first),Math.min(track.length,last+1));
+  const center=points.reduce((sum,p)=>add(sum,V(p.x,p.y,p.z)),V());
+  if(points.length){center.x/=points.length;center.y/=points.length;center.z/=points.length;}
+  const yaw=yawAt(knotDistances[zone.start]||0);
+  return{index,zone,low,high,first,last,center,radius:zone.r*ratio,
+   points,lane:0,axis:V(Math.cos(yaw),0,-Math.sin(yaw))};
+ });
+ // Compare the generated 3D centreline points themselves. Two loops that
+ // overlap in the side drawing may already be safely separated by the plan
+ // mapping, so screen-space circles alone must never trigger a detour.
+ const laneStep=3.4,clearance=2.7;
+ function loopGap(a,laneA,b,laneB){
+  const offA=scale(a.axis,laneA*laneStep),offB=scale(b.axis,laneB*laneStep);
+  let minimum=Infinity;
+  for(let i=2;i<a.points.length-2;i+=2)for(let j=2;j<b.points.length-2;j+=2){
+   const p=a.points[i],q=b.points[j];
+   if(Math.abs(p.s-q.s)<8)continue;
+   minimum=Math.min(minimum,Math.hypot(p.x+offA.x-q.x-offB.x,p.y-q.y,p.z+offA.z-q.z-offB.z));
+  }
+  return minimum;
+ }
+ const loopConflicts=loopPlanes.map(()=>new Set());
+ for(let i=0;i<loopPlanes.length;i++)for(let j=i+1;j<loopPlanes.length;j++){
+  if(loopGap(loopPlanes[i],0,loopPlanes[j],0)<clearance){
+   loopConflicts[i].add(j);loopConflicts[j].add(i);
+  }
+ }
+
+ for(let i=0;i<loopPlanes.length;i++){
+  if(!loopConflicts[i].size)continue;
+  const candidates=[0];for(let n=1;n<=8;n++)candidates.push(n,-n);
+  const previousLane=i?loopPlanes[i-1].lane:0;
+  candidates.sort((a,b)=>{
+   const score=lane=>Math.abs(lane-previousLane)*2+Math.abs(lane);
+   return score(a)-score(b)||Math.abs(a)-Math.abs(b)||a-b;
+  });
+  const conflicts=[...loopConflicts[i]].filter(j=>j<i);
+  for(const lane of candidates){
+   const clear=conflicts.every(j=>{
+    const prior=loopPlanes[j];
+    return loopGap(loopPlanes[i],lane,prior,prior.lane)>=clearance;
+   });
+   if(clear){loopPlanes[i].lane=lane;break;}
+  }
+ }
+ const smoother=t=>{t=clamp(t,0,1);return t*t*t*(t*(t*6-15)+10);};
+ // Keep each protected loop in a constant lateral lane. When adjacent loop
+ // planes need different lanes, insert a forward-advancing cubic connector
+ // rather than superimposing offsets inside neighboring circles.
+ const sourceTrack=track.map(p=>({...p}));
+ const orderedPlanes=loopPlanes.filter(p=>p.first>=0&&p.last>=p.first)
+  .sort((a,b)=>a.first-b.first);
+ let routed=[],routeShift=V(),cursor=0,previousOffset=V(),previousPlane=null;
+ function shiftedPoint(p,offset){
+  return{...p,x:p.x+offset.x+routeShift.x,z:p.z+offset.z+routeShift.z};
+ }
+ function appendPoint(p,offset){
+  const q=shiftedPoint(p,offset),last=routed[routed.length-1];
+  if(last&&Math.hypot(q.x-last.x,q.y-last.y,q.z-last.z)<.0001)return last;
+  routed.push(q);return q;
+ }
+ function tangentAtIndex(index,forward){
+  const i=clamp(index,0,sourceTrack.length-1);
+  const a=sourceTrack[Math.max(0,i-(forward?0:1))],b=sourceTrack[Math.min(sourceTrack.length-1,i+(forward?1:0))];
+  let t=norm(sub(b,a));
+  if(Math.hypot(t.x,t.y,t.z)<.01)t=V(0,0,1);
+  return t;
+ }
+ function appendConnector(start,end,startTangent,endTangent,span,startFraction,endFraction){
+  // Quintic Hermite connector: match position and tangent at both ends while
+  // forcing zero endpoint curvature, so the translated loop meets its lead-in
+  // and lead-out without a sharp curvature jump.
+  const distance=Math.hypot(end.x-start.x,end.y-start.y,end.z-start.z);
+  const handle=Math.max(3,span*.60),d=sub(end,start);
+  const m0=scale(startTangent,handle),m1=scale(endTangent,handle);
+  const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
+  const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
+  const c5=add(sub(scale(d,6),scale(m0,3)),scale(m1,-3));
+  const steps=Math.max(24,Math.ceil((distance+2*handle)/.24));
+  for(let k=1;k<=steps;k++){
+   const t=k/steps,t2=t*t,t3=t2*t,t4=t3*t,t5=t4*t;
+   const p=add(start,add(add(scale(m0,t),scale(c3,t3)),add(scale(c4,t4),scale(c5,t5))));
+   routed.push({x:p.x,y:p.y,z:p.z,s:0,sketchFraction:mix(startFraction,endFraction,t)});
+  }
+ }
+ function routedTailTangent(fallbackIndex){
+  if(routed.length>1){const p=routed[routed.length-1],q=routed[routed.length-2],t=norm(sub(p,q));if(Math.hypot(t.x,t.y,t.z)>.01)return t;}
+  return tangentAtIndex(fallbackIndex,false);
+ }
+ function interpolateOffset(a,b,t){return add(scale(a,1-t),scale(b,t));}
+ function horizontalAdvance(tangent,distance){
+  const direction=norm(V(tangent.x,0,tangent.z));
+  return Math.hypot(direction.x,direction.z)>.01?scale(direction,distance):V(0,0,distance);
+ }
+ function transitionGap(fromIndex,toIndex,fromOffset,toOffset,requiredRamp){
+  const a=sourceTrack[Math.max(0,fromIndex)],b=sourceTrack[Math.min(sourceTrack.length-1,toIndex)];
+  const gap=Math.max(0,b.s-a.s),delta=Math.hypot(toOffset.x-fromOffset.x,toOffset.y-fromOffset.y,toOffset.z-fromOffset.z);
+  if(delta<.01||gap>=requiredRamp){
+   for(let i=fromIndex+1;i<toIndex;i++){
+    const p=sourceTrack[i],t=gap>0?clamp((p.s-a.s)/gap,0,1):1;
+    appendPoint(p,interpolateOffset(fromOffset,toOffset,smoother(t)));
+   }
+   return;
+  }
+  // A short sketch gap cannot carry a safe lane change. Add just enough
+  // forward distance for a broad, tangent-matched connector; the loop itself
+  // remains a rigid translated circle.
+  const tangent=tangentAtIndex(toIndex,true),extra=Math.max(0,requiredRamp-gap);
+  const advance=horizontalAdvance(tangent,extra);
+  const last=routed[routed.length-1]||shiftedPoint(a,fromOffset);
+  const baseEnd=shiftedPoint(b,toOffset);
+  const end=add(baseEnd,advance);
+  appendConnector(last,end,routedTailTangent(fromIndex),tangent,requiredRamp,
+   last.sketchFraction,b.sketchFraction);
+  routeShift=add(routeShift,advance);
+ }
+ if(orderedPlanes.length){
+  const first=orderedPlanes[0],firstOffset=scale(first.axis,first.lane*laneStep);
+  // First detected loop currently stays in lane zero; preserve any approach.
+  for(let i=0;i<first.first;i++)appendPoint(sourceTrack[i],V());
+  for(const plane of orderedPlanes){
+   const firstIndex=Math.max(cursor,plane.first),lastIndex=Math.max(firstIndex,plane.last);
+   let targetOffset=scale(plane.axis,plane.lane*laneStep);
+   if(!previousPlane&&Math.hypot(targetOffset.x,targetOffset.z)>.01){
+    // Anchor the first loop at the course start; it has no approach section
+    // before it on which to build a smooth lane-change connector.
+    plane.lane=0;targetOffset=V();
+   }
+   const delta=Math.hypot(targetOffset.x-previousOffset.x,targetOffset.z-previousOffset.z);
+   const ramp=Math.max(8,Math.sqrt(100*delta));
+   if(previousPlane){
+    transitionGap(previousPlane.last,firstIndex,previousOffset,targetOffset,ramp);
+   }
+   // The unshifted approach to the first loop was already appended above.
+   // Do not append it a second time, which would jump back to sketch fraction 0.
+   const actualPoints=[];
+   for(let i=firstIndex;i<=lastIndex&&i<sourceTrack.length;i++){
+    const p=appendPoint(sourceTrack[i],targetOffset);actualPoints.push(p);
+   }
+   plane.points=actualPoints;
+   previousPlane=plane;previousOffset=targetOffset;cursor=lastIndex;
+  }
+  const lastIndex=sourceTrack.length-1;
+  if(cursor<lastIndex){
+   const delta=Math.hypot(previousOffset.x,previousOffset.z);
+   const ramp=Math.max(8,Math.sqrt(130*delta));
+   const endOffset=V();
+   const start=sourceTrack[cursor],end=sourceTrack[lastIndex];
+   const gap=end.s-start.s;
+   if(delta<.01||gap>=ramp){
+    for(let i=cursor+1;i<=lastIndex;i++){
+     const p=sourceTrack[i],t=gap>0?clamp((p.s-start.s)/gap,0,1):1;
+     appendPoint(p,interpolateOffset(previousOffset,endOffset,smoother(t)));
+    }
+   }else{
+    const tangent=tangentAtIndex(lastIndex,true),extra=Math.max(0,ramp-gap);
+    const advance=scale(tangent,extra),from=routed[routed.length-1],to=add(shiftedPoint(end,endOffset),advance);
+    appendConnector(from,to,routedTailTangent(cursor),tangent,ramp,from.sketchFraction,end.sketchFraction);
+   }
+  }else if(cursor===lastIndex&&Math.hypot(previousOffset.x,previousOffset.z)>.01){
+   const tangent=tangentAtIndex(lastIndex,true),ramp=Math.max(8,Math.sqrt(60*Math.hypot(previousOffset.x,previousOffset.z)));
+   const from=routed[routed.length-1],to=add(shiftedPoint(sourceTrack[lastIndex],V()),scale(tangent,ramp));
+   appendConnector(from,to,routedTailTangent(lastIndex),tangent,ramp,from.sketchFraction,sourceTrack[lastIndex].sketchFraction);
+  }
+  track=routed;
+  // Retain each circular loop core and fit the open lane-change connectors
+  // to its actual 3D entry/exit tangent.
+  const routeBounds=orderedPlanes.map((plane,index)=>({
+   plane,index,
+   start:plane.points.length?track.indexOf(plane.points[0]):-1,
+   end:plane.points.length?track.indexOf(plane.points[plane.points.length-1]):-1
+  })).filter(item=>item.start>=0&&item.end>=item.start);
+  function segmentDistance(i,j){const a=track[i],b=track[j];return Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
+  function fitJoin(startIndex,endIndex,startT,endT){
+   if(endIndex-startIndex<3)return;
+   const cumulative=[0];
+   for(let i=startIndex+1;i<=endIndex;i++)cumulative.push(cumulative[cumulative.length-1]+segmentDistance(i-1,i));
+   const length=cumulative[cumulative.length-1];if(length<1.8)return;
+   const p0=track[startIndex],p1=track[endIndex],handle=length*.34;
+   const m0=scale(norm(startT),handle),m1=scale(norm(endT),handle);
+   const d=sub(V(p1.x-p0.x,p1.y-p0.y,p1.z-p0.z),V());
+   const c3=add(sub(scale(d,10),scale(m0,6)),scale(m1,-4));
+   const c4=add(sub(scale(d,-15),scale(m0,-8)),scale(m1,7));
+   const c5=add(sub(scale(d,6),scale(m0,3)),scale(m1,-3));
+   for(let i=startIndex+1;i<endIndex;i++){
+    const t=clamp(cumulative[i-startIndex]/length,0,1),t2=t*t,t3=t2*t,t4=t3*t,t5=t4*t;
+    const q=add(V(p0.x,p0.y,p0.z),add(add(scale(m0,t),scale(c3,t3)),add(scale(c4,t4),scale(c5,t5))));
+    track[i].x=q.x;track[i].y=q.y;track[i].z=q.z;
+   }
+  }
+  for(let n=0;n<routeBounds.length;n++){
+   const bound=routeBounds[n],previousEnd=n?routeBounds[n-1].end:-1,nextStart=n+1<routeBounds.length?routeBounds[n+1].start:track.length;
+   const radius=bound.plane.radius||4,window=Math.max(3,Math.min(9,radius*2.1));
+   let entry=bound.start-1,entryLength=0;
+   while(entry>previousEnd+1&&entry>0&&entryLength<window){entryLength+=segmentDistance(entry,entry+1);entry--;}
+   if(entryLength>=2){
+    const startT=V(track[entry].x-track[entry-1].x,track[entry].y-track[entry-1].y,track[entry].z-track[entry-1].z);
+    const endT=V(track[bound.start+1].x-track[bound.start].x,track[bound.start+1].y-track[bound.start].y,track[bound.start+1].z-track[bound.start].z);
+    fitJoin(entry,bound.start,startT,endT);
+   }
+   let exit=bound.end+1,exitLength=0;
+   while(exit<nextStart-1&&exit<track.length&&exitLength<window){exitLength+=segmentDistance(exit-1,exit);exit++;}
+   if(exitLength>=2&&exit<track.length-1){
+    const startT=V(track[bound.end].x-track[bound.end-1].x,track[bound.end].y-track[bound.end-1].y,track[bound.end].z-track[bound.end-1].z);
+    const endT=V(track[exit+1].x-track[exit].x,track[exit+1].y-track[exit].y,track[exit+1].z-track[exit].z);
+    fitJoin(bound.end,exit,startT,endT);
+   }
+  }
+ }
+ finish=0;
+ for(let j=0;j<track.length;j++){
+  if(j){const a=track[j-1],b=track[j];finish+=Math.hypot(b.x-a.x,b.y-a.y,b.z-a.z);}
+  track[j].s=finish;
+ }
+ const separatedLoopCount=loopPlanes.filter(p=>p.lane!==0).length;
+ if(separatedLoopCount)loopWarning+="・接近する縦ループ面を"+separatedLoopCount+"か所分離";
+ // v78: single-pass, distance-based 3D fairing, tested against v62.
+ // No R80 certification, no expansion and no forced redraw. Avoid repeated
+ // curvature repairs, which can create fresh kinks at adjacent segments.
+ const beforeFairing=track.map(p=>({...p}));
+ // v78: the U-turn remaps arc length. The former loopSections distances
+  // belonged to the PRE-turn track, so protecting those s values could
+  // inadvertently smooth the actual loop and leave nearby joins untouched.
+  // sketchFraction is unchanged by the horizontal reconstruction.
+  const lockedLoops=used.map(zone=>{
+    const low=zone.start/(knots.length-1),high=zone.end/(knots.length-1);
+    const first=beforeFairing.find(p=>p.sketchFraction>=low);
+    const last=beforeFairing.find(p=>p.sketchFraction>=high);
+    return{low,high,a:first?first.s:0,b:last?last.s:beforeFairing[beforeFairing.length-1].s};
+  });
+ const kernel=[.024,.076,.166,.234,.166,.076,.024];
+ function oldCentre(distance){
+  distance=clamp(distance,0,beforeFairing[beforeFairing.length-1].s);
+  let a=0,b=beforeFairing.length-1;
+  while(a+1<b){const k=(a+b)>>1;if(beforeFairing[k].s<distance)a=k;else b=k;}
+  const p=beforeFairing[a],q=beforeFairing[b],f=clamp((distance-p.s)/(q.s-p.s||1),0,1);
+  return V(mix(p.x,q.x,f),mix(p.y,q.y,f),mix(p.z,q.z,f));
+ }
+ const smoothingStep=1.7;
+ track=beforeFairing.map((p,i)=>{
+  if(i===0||i===beforeFairing.length-1)return p;
+  let blend=1;
+  for(const zone of lockedLoops){
+   if(p.sketchFraction>=zone.low&&p.sketchFraction<=zone.high){blend=0;break;}
+   const gap=p.s<zone.a?zone.a-p.s:p.s-zone.b;
+   blend=Math.min(blend,clamp((gap-2.5)/4,0,1));
+  }
+  blend*=clamp(Math.min(p.s,beforeFairing[beforeFairing.length-1].s-p.s)/3,0,1);
+  if(blend<=0)return p;
+  const average=V();let weight=0;
+  for(let k=-3;k<=3;k++){
+   const v=oldCentre(p.s+k*smoothingStep),w=kernel[k+3];
+   average.x+=v.x*w;average.y+=v.y*w;average.z+=v.z*w;weight+=w;
+  }
+  return{...p,x:mix(p.x,average.x/weight,blend),
+   y:mix(p.y,average.y/weight,blend),z:mix(p.z,average.z/weight,blend)};
+ });
+ finish=0;
+ for(let j=0;j<track.length;j++){
+  if(j){const p=track[j],q=track[j-1];finish+=Math.hypot(p.x-q.x,p.y-q.y,p.z-q.z);}
+  track[j].s=finish;
+ }
+ // v88: Restore the original side-view elevation on OPEN sections.
+ // The 3D lateral routing is unchanged; protect the recognized circular loop cores.
+ const rawCum=[0];
+ for(let i=1;i<raw.length;i++)rawCum.push(rawCum[i-1]+Math.hypot(raw[i].x-raw[i-1].x,raw[i].y-raw[i-1].y));
+ const rawTotal=rawCum[rawCum.length-1];
+ function sourceElevation(f){
+  const target=clamp(f,0,1)*rawTotal;
+  let lo=0,hi=rawCum.length-1;
+  while(lo+1<hi){const m=(lo+hi)>>1;if(rawCum[m]<target)lo=m;else hi=m;}
+  const t=clamp((target-rawCum[lo])/(rawCum[hi]-rawCum[lo]||1),0,1);
+  return 3+(H-mix(raw[lo].y,raw[hi].y,t))*.105;
+ }
+ const protectedFractions=used.map(zone=>({low:zone.start/(knots.length-1),high:zone.end/(knots.length-1)}));
+ // Smoothly blend over a 3% sketch-distance collar to avoid a hard seam.
+ function elevationBlend(f){
+  let weight=1;
+  for(const zone of protectedFractions){
+   if(f>=zone.low&&f<=zone.high)return 0;
+   const gap=f<zone.low?zone.low-f:f-zone.high;
+   const t=clamp(gap/.03,0,1);
+   weight=Math.min(weight,t*t*(3-2*t));
+  }
+  return weight;
+ }
+ for(const p of track){
+  const weight=elevationBlend(p.sketchFraction);
+  if(weight>0)p.y=mix(p.y,sourceElevation(p.sketchFraction),weight);
+ }
+ finish=0;
+ for(let j=0;j<track.length;j++){
+  if(j){const p=track[j],q=track[j-1];finish+=Math.hypot(p.x-q.x,p.y-q.y,p.z-q.z);}
+  track[j].s=finish;
+ }
+ // Keep the 3D fairing as the sole centerline fairing stage. The later
+ // pointwise vertical accept/reject pass (introduced in v69) produced
+ // isolated slope changes around rejected stations in regression cases.
+ // The side-view interpolation and 3D fairing already provide the required
+ // continuity; no second, axis-specific correction is applied.
+ // The old frame switched from world-X to world-Z when the tangent neared
+ // world-X, producing an instant 90-degree rail flip. Instead carry
+ // the rail's right vector continuously along the entire 3D centreline.
+ function tangentAt(distance){
+  const p=sample(clamp(distance-.8,0,finish));
+  const q=sample(clamp(distance+.8,0,finish));
+  return norm(sub(q,p));
+ }
+ let priorTangent=tangentAt(0);
+ let frameRight=sub(V(1,0,0),scale(priorTangent,priorTangent.x));
+ if(Math.hypot(frameRight.x,frameRight.y,frameRight.z)<.08)
+  frameRight=sub(V(0,0,1),scale(priorTangent,priorTangent.z));
+ frameRight=norm(frameRight);
+ for(let j=0;j<track.length;j++){
+  const tangent=tangentAt(track[j].s);
+  if(j){
+   const axis=cross(priorTangent,tangent);
+   const sn=Math.hypot(axis.x,axis.y,axis.z);
+   const cs=clamp(dot(priorTangent,tangent),-1,1);
+   if(cs<-.9999){
+     frameRight=norm(sub(frameRight,scale(priorTangent,dot(frameRight,priorTangent))));
+    }else if(sn>1e-7){
+    const unitAxis=scale(axis,1/sn);
+    frameRight=add(
+      add(scale(frameRight,cs),scale(cross(unitAxis,frameRight),sn)),
+      scale(unitAxis,dot(unitAxis,frameRight)*(1-cs))
+    );
+   }
+   frameRight=sub(frameRight,scale(tangent,dot(frameRight,tangent)));
+   if(Math.hypot(frameRight.x,frameRight.y,frameRight.z)<.05){
+    const verticalRef=Math.abs(tangent.y)<.9?V(0,1,0):V(0,0,1);
+    frameRight=cross(verticalRef,tangent);
+   }
+   frameRight=norm(frameRight);
+  }
+  track[j].frameRight=frameRight;
+  priorTangent=tangent;
+ }
+ objects=[];const kinds=["forest","city","coast","castle","desert","tower"],section=Math.max(22,finish/6);
+ for(let z=8,i=0;z<finish+18;z+=7,i++){
+  const p=sample(Math.min(finish,z)),kind=kinds[Math.min(5,Math.floor(z/section))];
+  for(const side of [-1,1]){
+   if(kind==="coast"&&side<0)continue;
+   if(kind==="desert"&&i%2)continue;
+   // Keep landmarks and trees along the ride, but avoid old
+   // three-at-once city blocks directly beside the rail.
+   if(kind==="city")continue;
+   objects.push({x:side*(6+(i%3)*2),z:p.z,kind:kind==="castle"&&i%4?"forest":kind==="tower"&&i%5?"forest":kind,seed:i+Math.max(0,side)});
+  }
+ }
+ // v78: broad but visible low-rise neighbourhoods on a WORLD grid.
+ // Prior grid had too few buildings within the camera's visible central cone.
+ // Distribute several separated blocks throughout the landscape and extend
+ // them past the finish, so the goal view does not turn into empty grassland.
+ let minWorldZ=Infinity,maxWorldZ=-Infinity;
+ for(const point of track){minWorldZ=Math.min(minWorldZ,point.z);maxWorldZ=Math.max(maxWorldZ,point.z);}
+ for(let row=0,z=Math.floor((minWorldZ-350)/9)*9;z<=maxWorldZ+350;z+=9,row++){
+  const district=Math.floor(row/9)%6;
+  for(const side of [-1,1]){
+   for(let lane=0;lane<4;lane++){
+    // Leave some green gaps without emptying whole sections.
+    const seed=row*31+lane*17+(side>0?11:0);
+    if((seed%11===0)||(district===3&&(row+lane)%4===0))continue;
+    const x=side*([8.5,15.5,24.5,36][lane]+((seed%5)-2)*.65);
+    const zz=z+((seed*3)%5)-2;
+    objects.push({x,z:zz,kind:"building",seed:Math.abs(seed),lane});
+   }
+  }
+ }
+
+ // Distant skyline: widely spaced taller neighbourhoods on BOTH sides.
+ // These stay anchored to the ground, including when seen upside down.
+ for(let z=Math.floor((minWorldZ-400)/24)*24,j=0;z<=maxWorldZ+400;z+=24,j++){
+  for(const side of [-1,1]){
+   for(let lane=0;lane<4;lane++){
+    if((j+lane+(side>0?2:0))%5===0)continue;
+    const seed=j*23+lane*13+(side>0?5:0);
+    objects.push({kind:"skyline",x:side*([14,32,58,86][lane]+seed%7),z:z+(seed%9)-4,seed,lane});
+   }
+  }
+ }
+
+ heightDiagnosis=diagnoseHeight();
+}
+
+
+const line=(pts,step=4)=>{let out=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],n=Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)/step);for(let j=0;j<n;j++)out.push({x:mix(a.x,b.x,j/n),y:mix(a.y,b.y,j/n)})}out.push(pts.at(-1));return out};
+const circle=(cx,cy,rad,n=110)=>Array.from({length:n+1},(_,i)=>({x:cx+rad*Math.cos(-Math.PI/2+2*Math.PI*i/n),y:cy+rad*Math.sin(-Math.PI/2+2*Math.PI*i/n)}));
+const cases={hills:line([{x:30,y:300},{x:190,y:120},{x:390,y:320},{x:610,y:100},{x:850,y:280}]),zigzag:line([{x:30,y:280},{x:280,y:110},{x:80,y:180},{x:440,y:330},{x:210,y:250},{x:810,y:180}]),loop:line([{x:30,y:350},{x:300,y:300}]).concat(circle(300,260,40),line([{x:300,y:220},{x:520,y:260},{x:820,y:310}])),doubleLoop:line([{x:30,y:350},{x:220,y:300}]).concat(circle(220,260,40),line([{x:220,y:220},{x:420,y:300}]),circle(420,260,40),line([{x:420,y:220},{x:800,y:320}])),steep:line([{x:30,y:340},{x:240,y:70},{x:250,y:65},{x:265,y:345},{x:550,y:150},{x:850,y:290}])};
+function test(points){raw=points;makeTrack();const cum=[0];for(let i=1;i<raw.length;i++)cum.push(cum.at(-1)+Math.hypot(raw[i].x-raw[i-1].x,raw[i].y-raw[i-1].y));const total=cum.at(-1);
+function source(f){let target=f*total,i=1;while(i<cum.length-1&&cum[i]<target)i++;let t=(target-cum[i-1])/(cum[i]-cum[i-1]||1);return 3+(H-mix(raw[i-1].y,raw[i].y,t))*.105}
+function output(f){let i=1;while(i<track.length-1&&track[i].sketchFraction<f)i++;const a=track[i-1],b=track[i],t=clamp((f-a.sketchFraction)/(b.sketchFraction-a.sketchFraction||1),0,1);return mix(a.y,b.y,t)}
+let maxError=0,reversals=0;for(let i=1;i<100;i++){const f=i/100,e=output(f)-source(f);maxError=Math.max(maxError,Math.abs(e));const d=source(f+.01)-source(f-.01),v=output(f+.01)-output(f-.01);if(Math.abs(d)>.25&&d*v<0)reversals++}
+return{points:track.length,loops:loopWarning,maxError:+maxError.toFixed(2),reversals,finish:+finish.toFixed(1)}}
+const results=Object.entries(cases).map(([name,points])=>({name,...test(points)}));
+document.querySelector("#results").textContent=JSON.stringify(results,null,2);
+})();</script></html>
