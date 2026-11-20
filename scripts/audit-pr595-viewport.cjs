@@ -3,7 +3,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 async function run(page,cfg,out,city){
  const report={city,browser:cfg.name};
  const snapshot=()=>page.evaluate(()=>{const a=window.__audit,t=a.transform(),b=a.path().bounds({type:'FeatureCollection',features:a.features()}),svg=document.querySelector('#map').getBoundingClientRect();return {k:t.k,x:t.x,y:t.y,fit:a.cityFit(),min:a.minScale(),range:a.zoomRange(),width:svg.width,height:svg.height,bounds:b.map(p=>[p[0]*t.k+t.x,p[1]*t.k+t.y])}});
- const checkFit=async()=>{const s=await snapshot();assert(Math.abs(s.k-s.min)<1e-8);assert(Math.abs(s.x-s.fit.x)<1e-6);assert(Math.abs(s.y-s.fit.y)<1e-6);assert.equal(s.range[0],s.min);assert(s.bounds[0][0]>=-1&&s.bounds[0][1]>=-1&&s.bounds[1][0]<=s.width+1&&s.bounds[1][1]<=s.height+1,'city clipped at min');return s};
+ const checkFit=async()=>{await page.waitForFunction(()=>Math.abs(window.__audit.transform().k-window.__audit.minScale())<1e-8);const s=await snapshot();assert(Math.abs(s.k-s.min)<1e-8);assert(Math.abs(s.x-s.fit.x)<1e-6);assert(Math.abs(s.y-s.fit.y)<1e-6);assert.equal(s.range[0],s.min);assert(s.bounds[0][0]>=-1&&s.bounds[0][1]>=-1&&s.bounds[1][0]<=s.width+1&&s.bounds[1][1]<=s.height+1,'city clipped at min');return s};
  await page.evaluate(()=>window.__audit.showRegion(''));
  await page.locator('#zoomSlider').press('Home');report.minimum=await checkFit();
  await page.locator('#zoomOut').click();await page.waitForTimeout(180);await checkFit();
