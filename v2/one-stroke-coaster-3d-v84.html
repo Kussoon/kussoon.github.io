@@ -1185,8 +1185,8 @@ function updateGoalConfetti(dt){
  if(!goalCelebrationStarted)return;
  goalCelebrationTime+=dt;
  if(goalCelebrationTime<.62){
-  // Twice as many square paper pieces as the v84 volley.
-  confettiEmitterAccumulator+=dt*264;
+  // Triple the existing square-paper confetti emission rate at the goal.
+  confettiEmitterAccumulator+=dt*792;
   while(confettiEmitterAccumulator>=1){
    confettiEmitterAccumulator-=1;
    const side=confettiEmitterIndex++%2===0?-1:1,rand=Math.random();
