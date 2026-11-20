@@ -6,7 +6,7 @@ if(!response.ok)throw Error('自治体設定の読み込みに失敗しました
 const config=await response.json();
 const READINGS=config.readings,LABEL_OFFSETS=config.labelOffsets||{},MULTI_LABELS=config.multiLabels||{},EXTRA_LABELS=config.extraLabels||{};
 const $=id=>document.getElementById(id), svg=d3.select('#map'), world=d3.select('#world'), areas=d3.select('#areas'), labels=d3.select('#labels');
-let features=[], projection,path,transform=d3.zoomIdentity,baseWidth=0,baseHeight=0,initialK=1,cityFitTransform=d3.zoomIdentity,cBaselineLabelShifts=new Map(),cLabelReflowMetrics=new Map(),cLabelMode='initial',cRebaseline=false,directLinkFontOffset=0,fittedView=true,selected='',blinkTimer=null,blinkOn=false,fontPct=100,readingOn=false,anchorMode='leaflet',zoom,communityChoice='',communityNames=[],communityByTown=new Map(),membership=null,regionalShapes=new Map(),adjacency=new Map(),quizGeography=null,quizSession=null,quizMode=0,quizLastMode=0,quizOrder=[],quizIndex=0,quizScore=0,quizWrong=new Set(),quizLocked=false,quizWrongPlaces=new Set(),quizTimer=null,quizBlinkOn=false,quizTarget='',quizWrongTownNames=new Set();
+let features=[], projection,path,transform=d3.zoomIdentity,baseWidth=0,baseHeight=0,initialK=1,cityFitTransform=d3.zoomIdentity,cBaselineLabelShifts=new Map(),cLabelReflowMetrics=new Map(),cLabelMode='initial',cRebaseline=false,directLinkFontOffset=0,fittedView=true,selected='',blinkTimer=null,blinkOn=false,fontPct=100,readingOn=false,anchorMode='leaflet',zoom,communityChoice='',communityNames=[],communityByTown=new Map(),membership=null,regionalShapes=new Map(),adjacency=new Map(),quizGeography=null,quizSession=null,quizMode=0,quizLastMode=0,quizOrder=[],quizIndex=0,quizScore=0,quizWrong=new Set(),quizLocked=false,quizWrongPlaces=new Set(),quizAllWrongPlaces=new Set(),quizAnsweredPlaces=new Set(),quizTimer=null,quizBlinkOn=false,quizTarget='',quizInterruptionTimer=null,quizInterruptionOn=false;
 function size(){const r=$('map').getBoundingClientRect();return [Math.max(1,r.width),Math.max(1,r.height)]}
 // Leaflet 1.9.x Polygon.getCenter uses the first exterior ring of a polygon
 // and a projected shoelace centroid, rather than d3.geoPath's weighted
@@ -233,6 +233,33 @@ function displaySelectionBlink(){
  $('status').classList.add('selection-status');
  $('status').classList.toggle('selection-off',!blinkOn);
 }
+function displayQuizInterruption(){
+ const wrong=quizAllWrongPlaces,correct=quizAnsweredPlaces;
+ areas.selectAll('path.town')
+  .classed('selected',d=>quizInterruptionOn&&correct.has(d.properties.S_NAME))
+  .classed('wrong',d=>quizInterruptionOn&&wrong.has(d.properties.S_NAME)&&!correct.has(d.properties.S_NAME))
+  .classed('dim',false);
+}
+function stopQuizInterruption(){
+ if(quizInterruptionTimer!==null)clearInterval(quizInterruptionTimer);
+ quizInterruptionTimer=null;quizInterruptionOn=false;
+ areas.selectAll('path.town').classed('selected',false).classed('wrong',false);
+}
+function fitTownSet(names){
+ const wanted=new Set(names),active=activeFeatures().filter(f=>wanted.has(f.properties.S_NAME));
+ if(!active.length)return false;
+ let bounds=null;
+ for(const feature of active){
+  const b=path.bounds(feature);if(!b?.[0]||!b?.[1])continue;
+  bounds=bounds?[[Math.min(bounds[0][0],b[0][0]),Math.min(bounds[0][1],b[0][1])],[Math.max(bounds[1][0],b[1][0]),Math.max(bounds[1][1],b[1][1])]]:b;
+ }
+ if(!bounds)return false;
+ cLabelReflow();fittedView=false;
+ const fit=KussoonTownSvgViewport.fitBounds(bounds,baseWidth,baseHeight,44,initialK,40);
+ if(!fit)return false;
+ svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));
+ return true;
+}
 function renderLayers(){
  KussoonTownSvgRender.render({
   areas,features:activeFeatures(),path,nameProperty:'S_NAME',
@@ -249,6 +276,7 @@ function renderLayers(){
   for(const name of quizWrongPlaces)highlightQuizTown(name,false,true);
   if(quizTarget)highlightQuizTown(quizTarget,quizBlinkOn);
  }
+ else if(quizInterruptionTimer!==null)displayQuizInterruption();
  else if(selected)displaySelectionBlink();
 }
 function choose(name){
@@ -413,7 +441,8 @@ function stopQuizBlink(){
  areas.selectAll('path.town').classed('selected',false).classed('dim',false);
 }
 function stopQuiz(returnToMap){
- stopQuizBlink();clearTownStyles();quizMode=0;quizLocked=false;quizSession=null;
+ stopQuizBlink();stopQuizInterruption();clearTownStyles();quizMode=0;quizLocked=false;quizSession=null;
+ quizAllWrongPlaces.clear();quizAnsweredPlaces.clear();
  document.body.classList.remove('town-quiz-mode');
  $('quizPanel').hidden=true;$('quizResults').hidden=true;
  $('quizFeedback').textContent='';
@@ -434,6 +463,7 @@ function syncQuizFromSession(){
 }
 function startQuiz(mode,forcedNames){
  stopQuiz(false);stopBlink();
+ quizAllWrongPlaces.clear();quizAnsweredPlaces.clear();
  // Status belongs to map navigation, not a new quiz session.
  // In particular clear the interrupted-town message left by finishQuiz(true).
  $('status').textContent='クイズ'+mode+'を実施中です。';
@@ -488,6 +518,7 @@ function quizMapAnswer(name){
  syncQuizFromSession();
  if(grade.kind==='ignored')return;
  if(grade.kind==='wrong'){
+  quizAllWrongPlaces.add(name);
   highlightQuizTown(name,false,true);
   $('quizFeedback').textContent='違います。そこは「'+townLabel(name)+'」です。';
   scoreLabel();return;
@@ -510,6 +541,7 @@ function quizChoiceAnswer(name,button){
 }
 function quizCorrect(name){
  KussoonTownSvgQuizState.markCorrect(quizSession);syncQuizFromSession();
+ if(quizMode===1)quizAnsweredPlaces.add(name);
  startQuizBlink(name);
  $('quizFeedback').textContent='正解です！ '+townLabel(name)+(communityChoice&&townExplanation(name)?' '+townExplanation(name):'');
  $('quizReveal').hidden=true;$('quizNext').hidden=false;
@@ -529,8 +561,9 @@ function quizReveal(){
 function finishQuiz(quitEarly=false){
  const summary=KussoonTownSvgQuizState.result(quizSession,quitEarly);
  const answered=summary.answered;
- // Preserve the question active at the moment "ここでやめる" is pressed.
- const quitTown=summary.interruptedTown;
+ const interruptedMode=quizMode;
+ const interruptedColors=quitEarly&&interruptedMode===1
+  ?{wrong:new Set(quizAllWrongPlaces),correct:new Set(quizAnsweredPlaces)}:null;
  resetQuestion();quizMode=0;document.body.classList.remove('town-quiz-mode');
  $('quizPanel').hidden=true;$('quizResults').hidden=false;
  $('quizResult').textContent=quitEarly
@@ -539,11 +572,17 @@ function finishQuiz(quitEarly=false){
  // Full marks: there is no missed question to retry; hide this action entirely.
  $('quizRetryWrong').hidden=quizWrong.size===0;
  $('quizRetryWrong').disabled=quizWrong.size===0;
- // Labels are visible again. Flash only the interrupted question's town;
- // normal map selection can stop the flash, and restarting a quiz cleans it up.
- if(quitTown&&activeFeatures().some(f=>f.properties.S_NAME===quitTown)){
-  focusTown(quitTown);
-  $('status').textContent='中断した問題：「'+townLabel(quitTown)+'」を黄色く点滅表示しています。';
+ // Quiz 1 interruption: show all answered feedback together, then fit the
+ // union of the red/yellow areas so the result is the largest useful view.
+ stopQuizInterruption();
+ if(interruptedColors){
+  quizAllWrongPlaces=interruptedColors.wrong;quizAnsweredPlaces=interruptedColors.correct;
+  const names=[...new Set([...quizAllWrongPlaces,...quizAnsweredPlaces])];
+  if(names.length){
+   fitTownSet(names);quizInterruptionOn=true;displayQuizInterruption();
+   quizInterruptionTimer=setInterval(()=>{quizInterruptionOn=!quizInterruptionOn;displayQuizInterruption()},500);
+   $('status').textContent='クイズ1を中断しました。赤＝間違えた場所、黄色＝正解した場所を点滅表示しています。';
+  }else $('status').textContent='クイズ1を中断しました。まだ解答した場所はありません。';
  }
 }
 $('quizOne').onclick=()=>startQuiz(1);
