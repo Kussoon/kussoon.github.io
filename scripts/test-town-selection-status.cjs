@@ -23,7 +23,7 @@ async function main(){
    await page.waitForFunction(()=>document.querySelectorAll('path.town').length>0);
    const names=await page.locator('path.town').evaluateAll(es=>es.slice(0,2).map(e=>e.__data__.properties.S_NAME));
    const select=name=>page.locator('path.town').evaluateAll((es,name)=>es.find(e=>e.__data__.properties.S_NAME===name).dispatchEvent(new MouseEvent('click',{bubbles:true})),name);
-   const sample=()=>page.evaluate(()=>{const s=document.querySelector('#status'),paths=[...document.querySelectorAll('path.town.selected')],r=s.getBoundingClientRect();return {text:s.textContent,font:getComputedStyle(s).fontSize,off:getComputedStyle(s).color==='rgba(0, 0, 0, 0)',active:s.classList.contains('selection-status'),dims:paths.map(p=>p.classList.contains('dim')),height:r.height}});
+   const sample=()=>page.evaluate(()=>{const s=document.querySelector('#status'),paths=[...document.querySelectorAll('path.town.selected')],r=s.getBoundingClientRect();return {text:s.textContent,font:getComputedStyle(s).fontSize,off:getComputedStyle(s).color==='rgba(0, 0, 0, 0)',active:s.classList.contains('selection-status'),dims:paths.map(p=>p.classList.contains('dim')),height:r.height,red:document.querySelectorAll('path.town.wrong').length,yellow:document.querySelectorAll('path.town.selected').length}});
    await select(names[0]);
    let s=await sample();assert.equal(s.font,'16px');assert.equal(s.off,false);assert(s.text.includes(names[0]));
    const height=s.height;
@@ -37,10 +37,15 @@ async function main(){
    await select(names[0]);s=await sample();assert(!s.active&&!s.off);assert.equal(s.font,'14px');assert(s.text.includes('停止'));
    await select(names[1]);s=await sample();assert(s.active&&!s.off&&s.text.includes(names[1]));
    await page.locator('#quizOne').click();s=await sample();assert(!s.active&&!s.off&&s.text.includes('クイズ1'));assert.equal(s.font,'14px');
-   await page.waitForTimeout(600);assert(!(await sample()).active);
-   await page.locator('#quizReveal').click();assert((await page.locator('#quizFeedback').textContent()).includes('点滅している場所'));
+   const target=await page.locator('#quizQuestion').innerText().then(t=>t.slice(1,t.indexOf('（')));
+   const wrongName=await page.locator('path.town').evaluateAll((es,target)=>es.map(e=>e.__data__.properties.S_NAME).find(n=>n!==target),target);
+   await select(wrongName);await select(target);await page.locator('#quizNext').click();
+   await page.locator('#quizQuit').click();s=await sample();assert(!s.active&&s.text.includes('赤＝間違えた場所'));assert.equal(s.red,1);assert.equal(s.yellow,1);
+   await page.waitForTimeout(600);s=await sample();assert.equal(s.red,0);assert.equal(s.yellow,0);
+   await page.locator('#quizBack').click();
+   await page.locator('#quizOne').click();await page.locator('#quizReveal').click();assert((await page.locator('#quizFeedback').textContent()).includes('点滅している場所'));
    assert((await page.locator('path.town.selected').count())>0);
-   await page.locator('#quizQuit').click();s=await sample();assert(s.active&&s.text.includes('中断した問題'));
+   await page.locator('#quizQuit').click();s=await sample();assert(!s.active&&!s.text.includes('中断した問題'));
    await page.locator('#quizBack').click();s=await sample();assert(!s.active&&!s.off);
    // Pointer focus must not paint the track; keyboard focus and keys remain usable.
    const slider=page.locator('#zoomSlider');await slider.scrollIntoViewIfNeeded();
