@@ -24,6 +24,7 @@
   element.addEventListener('pointerdown',event=>{
    if(active!==null||event.isPrimary===false||(event.pointerType==='mouse'&&event.button!==0))return;
    event.preventDefault();event.stopPropagation();onStart();
+   element.dataset.focusInput='pointer';
    element.focus({preventScroll:true});active=event.pointerId;
    const rect=element.getBoundingClientRect(),center=rect.bottom-9-(rect.height-18)*value/100;
    grabOffset=Math.abs(event.clientY-center)<=12?event.clientY-center:0;
@@ -46,7 +47,9 @@
   element.addEventListener('pointercancel',cancel);
   element.addEventListener('lostpointercapture',cancel);
   element.addEventListener('click',event=>{event.preventDefault();event.stopPropagation()});
+  element.addEventListener('blur',()=>{delete element.dataset.focusInput});
   element.addEventListener('keydown',event=>{
+   element.dataset.focusInput='keyboard';
    const deltas={ArrowUp:1,ArrowRight:1,ArrowDown:-1,ArrowLeft:-1,PageUp:10,PageDown:-10};
    if(!(event.key in deltas)&&!['Home','End'].includes(event.key))return;
    event.preventDefault();event.stopPropagation();onStart();
