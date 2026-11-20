@@ -7,6 +7,14 @@ const prefix='/v2/verify-town-map-pr595/';
 const expose=`window.__audit={features:()=>features,regions:()=>communityNames,membership:()=>membership,projection:()=>projection,path:()=>path,transform:()=>transform,startQuiz,quizMapAnswer,stopQuiz,quizReveal,choose,focusTown,reset,showRegion:co=>{cLabelReflow();communityChoice=co;showCommunity()},getSelected:()=>selected,fitPart:(name,index)=>{const f=features.find(f=>f.properties.S_NAME===name),g=f.geometry;const part={type:'Feature',properties:f.properties,geometry:{type:'Polygon',coordinates:g.type==='Polygon'?g.coordinates:g.coordinates[index]}};const b=path.bounds(part),fit=KussoonTownSvgViewport.fitBounds(b,baseWidth,baseHeight,100,.6,40);svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));return part;}};\n`;
 let server;
 async function main(){
+ const sourceCommit='fe3c5692ab0547348b67a47874a1c43f2c382c5a';
+ const originalTopology=await fetch('https://raw.githubusercontent.com/Kussoon/takarazuka/'+sourceCommit+'/data/takarazuka-towns.topojson').then(r=>{assert(r.ok);return r.json()});
+ const mergedTopology=JSON.parse(fs.readFileSync(path.join(root,prefix,'data/28214.topojson')));
+ assert.deepEqual(mergedTopology.arcs,originalTopology.arcs,'Source coordinate arcs changed');
+ assert.equal(originalTopology.objects.town.geometries.length,398);
+ const originalKeys=originalTopology.objects.town.geometries.map(g=>g.properties.KEY_CODE).sort();
+ const mergedKeys=mergedTopology.objects.town.geometries.flatMap(g=>g.properties.sourceKeys).sort();
+ assert.deepEqual(mergedKeys,originalKeys,'One or more statistical geometries lost/duplicated');
  if(!process.env.TOWN_TEST_BASE){
   const mapping=await fetch('https://kussoon.com/nishinomiya/data/community-town-map.json').then(r=>{assert(r.ok);return r.text()});
   server=http.createServer((req,res)=>{
@@ -37,6 +45,8 @@ async function main(){
    await page.goto(base+prefix+'?code=28214',{waitUntil:'domcontentloaded'});
    await page.waitForFunction(()=>document.querySelectorAll('g.label').length===125);
    await page.waitForTimeout(400);
+   report.geometryArea=await page.evaluate(({originalTopology,mergedTopology})=>{const area=t=>d3.sum(topojson.feature(t,t.objects.town).features,d3.geoArea);return {source:area(originalTopology),merged:area(mergedTopology)}},{originalTopology,mergedTopology});
+   assert(Math.abs(report.geometryArea.source-report.geometryArea.merged)<1e-9,'Union changed geographic area');
    report.data=await page.evaluate(()=>{const a=window.__audit,fs=a.features(),m=a.membership();return {names:fs.map(f=>f.properties.S_NAME),regions:a.regions(),parts:fs.reduce((n,f)=>n+(f.geometry.type==='Polygon'?1:f.geometry.coordinates.length),0),labels:document.querySelectorAll('g.label').length,readings:document.querySelectorAll('.town-reading').length,memberships:Object.fromEntries(fs.map(f=>[f.properties.S_NAME,a.regions().filter(c=>m.belongs(f.properties.S_NAME,c))]))}});
    assert.equal(new Set(report.data.names).size,125);assert.equal(report.data.regions.length,20);assert.equal(report.data.parts,136);assert.equal(report.data.readings,0);
    report.anchors=await page.evaluate(()=>{const a=window.__audit;return [...document.querySelectorAll('g.label')].map(g=>{const f=a.features().find(f=>f.properties.S_NAME===g.__data__.name),p=g.__data__.point,polys=f.geometry.type==='Polygon'?[f.geometry.coordinates]:f.geometry.coordinates;return {name:g.__data__.name,inside:polys.some(poly=>{const rings=poly.map(r=>r.map(a.projection()));return d3.polygonContains(rings[0],p)&&!rings.slice(1).some(h=>d3.polygonContains(h,p))})}})});
