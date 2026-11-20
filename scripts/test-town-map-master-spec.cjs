@@ -30,37 +30,17 @@ assert.match(html,/function finishQuiz\(quitEarly=false\)/);
 assert.match(html,/noindex,nofollow/);
 assert.match(html,/nishinomiya-uekoto-community\.topojson/);
 assert.match(html,/town-svg-quiz-state\.js/);
-// The user-approved v1.4 slider UI is the single nationwide rule. Historical V34 must
-// remain unchanged until the dedicated comparison and adoption process.
-const acceptedSlider=read('v2/nishinomiya-town-svg-single-rail-20261119-pilot.html');
-const takarazukaPointer=read('v2/takarazuka-town-svg-pointer-slider-20261119-pilot.html');
-const communityState=read('v2/common/js/town-svg-community-state.js');
-const zoomModule=read('v2/common/js/town-svg-zoom-slider-drag.js');
-assert.match(spec,/版：\*\*1\.5\*\*/);
-// v1.5 changes new shared label cardinality, NOT the historical V34 gate.
+// Current accepted PR595-derived baseline; the historical V34 checks above remain.
+const current=read('v2/verify-pr595-one-label/index.html');
+assert.match(spec,/版：\*\*1\.3\*\*/);
 assert.match(spec,/1町名1ラベル/);
-assert.match(spec,/321町名・321ラベル/);
-assert.match(spec,/旧V34の不変回帰ゲート/);
-assert.match(spec,/旧V34の324件/);
-assert.match(spec,/同一問題の回答中に限り/);
-assert.match(spec,/白い内側・薄いグレーの枠線/);
-assert.match(spec,/独立した＋ボタン/);
-assert.match(spec,/学習地域の選択も解除した自治体全体表示/);
 assert.match(spec,/文字倍率変更後も表示を変えず/);
-assert.match(acceptedSlider,/id="zoomSlider"/);
-assert.doesNotMatch(acceptedSlider,/id="zoomIn"/);
-assert.doesNotMatch(acceptedSlider,/id="zoomOut"/);
-assert.match(acceptedSlider,/\.zoom-slider-visual-track/);
-assert.match(acceptedSlider,/background:#ffffff;border:1px solid #b4bcc2/);
-assert.match(acceptedSlider,/\.zoom-slider-visual-thumb/);
-assert.match(acceptedSlider,/width:21px;height:27px/);
-assert.match(zoomModule,/zoom\.on\('zoom\.townPointerSlider',sync\)/);
-assert.match(zoomModule,/setPointerCapture/);
-assert.match(acceptedSlider,/id="zoomPlus"/);
-assert.match(acceptedSlider,/id="zoomMinus"/);
-assert.doesNotMatch(acceptedSlider,/id="reset"/);
-assert.match(takarazukaPointer,/id="zoomPlus"/);
-assert.match(takarazukaPointer,/id="zoomMinus"/);
-assert.doesNotMatch(takarazukaPointer,/id="reset"/);
-assert.match(communityState,/if\(reset\)reset\.textContent/);
-console.log('PASS TOWNMAP-SSOT-001: master spec, work instructions and adopted V34 control invariants');
+assert.match(spec,/44669089746/);
+assert.match(spec,/最大内部余白を優先する後続の自動配置処理は採用しない/);
+for(const id of ['zoomSlider','zoomIn','zoomOut','larger','smaller','size','reading','fullscreen'])
+ assert.match(current,new RegExp('id="'+id+'"'));
+assert.doesNotMatch(current,/id="reset"/);
+assert.match(current,/zoom-slider-thumb/);
+assert.match(current,/labelGlyphMetrics/);
+assert.doesNotMatch(current,/textContent='文字\\n'\+fontPct/);
+console.log('PASS TOWNMAP-SSOT-001 v1.3: accepted baseline and historical V34 preserved');
