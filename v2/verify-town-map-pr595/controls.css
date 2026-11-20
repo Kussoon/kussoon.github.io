@@ -1,0 +1,11 @@
+/* Shared comparison controls: no municipality-specific presentation. */
+.quiz-actions button{background:#e6f1fa;border-color:#719bb4;color:#16384e}
+.quiz-actions button:hover{background:#d5e8f6}
+.quiz-actions button:disabled{opacity:.6}
+.zoom-slider-slot{position:absolute;right:7px;top:56px;bottom:calc(var(--control-height,220px) + 16px);width:34px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:0;touch-action:none}
+.zoom-slider-slot button{flex:none;width:34px;min-height:30px;padding:0;font-size:23px;line-height:28px;background:#fff;border:1px solid #92b6cc;color:#16384e}
+.zoom-slider-track{position:relative;flex:1;width:34px;min-height:40px;--zoom-position:1;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.zoom-slider-track:before{content:'';position:absolute;left:14px;top:0;bottom:0;width:6px;background:#888;pointer-events:none}
+.zoom-slider-thumb{position:absolute;left:2px;top:calc(9px + (100% - 18px) * var(--zoom-position));transform:translateY(-50%);width:30px;height:18px;background:#777;border:3px solid #fff;border-radius:2px;box-shadow:0 1px 6px #0006;pointer-events:none}
+#zoomSlider{position:absolute;inset:0;width:34px;height:100%;z-index:1;cursor:ns-resize;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.zoom-slider-track:focus-within{outline:2px solid #dd9a31;outline-offset:2px}
