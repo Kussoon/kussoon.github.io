@@ -562,7 +562,7 @@ function finishQuiz(quitEarly=false){
  const summary=KussoonTownSvgQuizState.result(quizSession,quitEarly);
  const answered=summary.answered;
  const interruptedMode=quizMode;
- const interruptedColors=quitEarly&&interruptedMode===1
+ const quizOneResultColors=interruptedMode===1
   ?{wrong:new Set(quizAllWrongPlaces),correct:new Set(quizAnsweredPlaces)}:null;
  resetQuestion();quizMode=0;document.body.classList.remove('town-quiz-mode');
  $('quizPanel').hidden=true;$('quizResults').hidden=false;
@@ -572,17 +572,21 @@ function finishQuiz(quitEarly=false){
  // Full marks: there is no missed question to retry; hide this action entirely.
  $('quizRetryWrong').hidden=quizWrong.size===0;
  $('quizRetryWrong').disabled=quizWrong.size===0;
- // Quiz 1 interruption: show all answered feedback together, then fit the
+ // Quiz 1 results: show all accumulated feedback together, then fit the
  // union of the red/yellow areas so the result is the largest useful view.
  stopQuizInterruption();
- if(interruptedColors){
-  quizAllWrongPlaces=interruptedColors.wrong;quizAnsweredPlaces=interruptedColors.correct;
+ if(quizOneResultColors){
+  quizAllWrongPlaces=quizOneResultColors.wrong;quizAnsweredPlaces=quizOneResultColors.correct;
   const names=[...new Set([...quizAllWrongPlaces,...quizAnsweredPlaces])];
   if(names.length){
    fitTownSet(names);quizInterruptionOn=true;displayQuizInterruption();
    quizInterruptionTimer=setInterval(()=>{quizInterruptionOn=!quizInterruptionOn;displayQuizInterruption()},500);
-   $('status').textContent='クイズ1を中断しました。赤＝間違えた場所、黄色＝正解した場所を点滅表示しています。';
-  }else $('status').textContent='クイズ1を中断しました。まだ解答した場所はありません。';
+   $('status').textContent=quitEarly
+    ?'クイズ1を中断しました。赤＝間違えた場所、黄色＝正解した場所を点滅表示しています。'
+    :'クイズ1の結果です。赤＝間違えた場所、黄色＝正解した場所を点滅表示しています。';
+  }else $('status').textContent=quitEarly
+   ?'クイズ1を中断しました。まだ解答した場所はありません。'
+   :'クイズ1の結果です。解答した場所はありません。';
  }
 }
 $('quizOne').onclick=()=>startQuiz(1);

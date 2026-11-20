@@ -47,6 +47,19 @@ async function main(){
    assert((await page.locator('path.town.selected').count())>0);
    await page.locator('#quizQuit').click();s=await sample();assert(!s.active&&!s.text.includes('中断した問題'));
    await page.locator('#quizBack').click();s=await sample();assert(!s.active&&!s.off);
+   // A completed Quiz 1 result uses the same cumulative red/yellow view as early quit.
+   if(cfg.name==='chromium1280'&&code==='28214'){
+    await page.locator('#quizOne').click();
+    let completed=0;
+    while(!(await page.locator('#quizResults').isVisible())){
+     await page.locator('#quizReveal').click();
+     if(await page.locator('#quizNext').isVisible())await page.locator('#quizNext').click();
+     assert(++completed<=200,'quiz completion did not finish');
+    }
+    s=await sample();assert(s.text.includes('クイズ1の結果です'));assert(s.yellow>0);assert(s.red===0);
+    await page.waitForTimeout(600);s=await sample();assert.equal(s.red,0);assert.equal(s.yellow,0);
+    await page.locator('#quizBack').click();s=await sample();assert(!s.active&&!s.off);
+   }
    // Pointer focus must not paint the track; keyboard focus and keys remain usable.
    const slider=page.locator('#zoomSlider');await slider.scrollIntoViewIfNeeded();
    if(cfg.width<600){const b=await slider.boundingBox();await page.touchscreen.tap(b.x+b.width/2,b.y+b.height/2)}else await slider.click();
