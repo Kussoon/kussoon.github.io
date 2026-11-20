@@ -488,8 +488,8 @@ new ResizeObserver(entries=>{
  $('frame').style.setProperty('--control-height',entries[0].target.getBoundingClientRect().height+'px');
 }).observe(document.querySelector('.controls'));
 $('zoomIn').onclick=()=>changeZoom(2);$('zoomOut').onclick=()=>changeZoom(.5);
-$('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);$('size').textContent='文字\n'+fontPct+'\n％';updateLabelSize()};
-$('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);$('size').textContent='文字\n'+fontPct+'\n％';updateLabelSize()};
+$('smaller').onclick=()=>{fontPct=Math.max(75,fontPct-25);updateLabelSize()};
+$('larger').onclick=()=>{fontPct=Math.min(200,fontPct+25);updateLabelSize()};
 $('size').onclick=()=>{fontPct=100;$('size').textContent='文字\n100\n％';updateLabelSize()};
 $('reading').onclick=()=>{cLabelReflow();readingOn=!readingOn;$('reading').textContent='よみ\nがな\n'+(readingOn?'ON':'OFF');$('reading').setAttribute('aria-pressed',String(readingOn));refreshLabels()};
 $('fullscreen').onclick=()=>{cLabelReflow();document.body.classList.toggle('fullscreen');$('fullscreen').textContent=document.body.classList.contains('fullscreen')?'戻る':'全画面';setTimeout(()=>{draw();reset()},60)};
