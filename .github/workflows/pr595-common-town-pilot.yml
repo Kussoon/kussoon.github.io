@@ -1,0 +1,31 @@
+name: PR595 shared town pilot
+on:
+  pull_request:
+    paths:
+      - 'v2/verify-town-map-pr595/**'
+      - 'scripts/*pr595*'
+      - '.github/workflows/pr595-common-town-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  shared-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - run: node scripts/test-town-map-master-spec.cjs
+      - run: node scripts/audit-pr595-common-town-pilot.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr595-common-town-audit
+          path: pr595-common-town-audit/
