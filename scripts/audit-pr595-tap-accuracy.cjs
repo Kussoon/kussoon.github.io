@@ -4,6 +4,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
 const base=process.env.NISHINOMIYA_TEST_BASE||'https://kussoon.com';
 const target=process.env.NISHINOMIYA_TEST_PATH||'/v2/verify-pr595-one-label/';
 const out='pr595-tap-accuracy';fs.mkdirSync(out,{recursive:true});
+const allFailures=[];
 (async()=>{for(const [driver,name,width,height] of [[chromium,'chromium-1280',1280,800],[webkit,'webkit-390',390,844],[webkit,'webkit-320',320,668]]){
  const browser=await driver.launch({headless:true});
  try{
@@ -53,17 +54,21 @@ const out='pr595-tap-accuracy';fs.mkdirSync(out,{recursive:true});
      throw Error('No visible interior sample at supported zoom');
     },{rings,name:item.name});
     assert.equal(hit.hitName,item.name,'DOM hit target differs from source geometry');
+    // Independent questions must not form a rapid double-tap gesture.
+    if(width<600)await page.waitForTimeout(550);
     if(width>=600)await page.mouse.click(hit.x,hit.y);else await page.touchscreen.tap(hit.x,hit.y);
+    // WebKit may deliver the compatibility click after touchend returns.
+    await page.waitForFunction(name=>document.getElementById('quizFeedback').textContent.includes('正解です')&&document.getElementById('quizFeedback').textContent.includes(name),item.name,{timeout:2000});
     const state=await page.evaluate(()=>({feedback:document.getElementById('quizFeedback').textContent,progress:document.getElementById('quizProgress').textContent,next:!document.getElementById('quizNext').hidden}));
     assert(state.feedback.includes('正解です')&&state.feedback.includes(item.name),'coordinate input was not graded as intended town');
     assert(state.progress.includes('得点 1')&&state.next,'wrong score/next state');
     report.cases.push({...item,...hit});report.passed++;
-   }catch(e){report.failures.push({...item,error:e.message})}
+   }catch(e){report.failures.push({...item,error:e.message,state:await page.evaluate(()=>({feedback:document.getElementById('quizFeedback').textContent,progress:document.getElementById('quizProgress').textContent}))})}
    finally{await page.evaluate(()=>window.__tapAudit.stop())}
   }
   report.pageErrors=errors;fs.writeFileSync(`${out}/${name}.json`,JSON.stringify(report,null,2));
   await page.screenshot({path:`${out}/${name}.png`});
   console.log('TAP_ACCURACY '+JSON.stringify({browser:name,towns:321,components:cases.length,passed:report.passed,failures:report.failures}));
-  assert.deepEqual(report.failures,[]);assert.deepEqual(errors,[]);
+  allFailures.push(...report.failures.map(f=>({browser:name,...f})));assert.deepEqual(errors,[]);
  }finally{await browser.close()}
-}})().catch(e=>{console.error(e);process.exitCode=1});
+}assert.deepEqual(allFailures,[]);})().catch(e=>{console.error(e);process.exitCode=1});
