@@ -61,6 +61,24 @@ replace(code.slice(sliderStart,sliderEnd),`const sliderController=KussoonTownMap
  }
 });
 `);
+// Preserve per-question mistake colors when stopping/restarting the answer timer.
+// Keep scoring in the existing shared quiz-state module; no city-specific grading.
+replace(" quizTimer=null;quizTarget='';quizBlinkOn=false;\n clearTownStyles();",
+ " quizTimer=null;quizTarget='';quizBlinkOn=false;\n areas.selectAll('path.town').classed('selected',false).classed('dim',false);");
+replace(" stopQuizBlink();quizMode=0;quizLocked=false;quizSession=null;",
+ " stopQuizBlink();clearTownStyles();quizMode=0;quizLocked=false;quizSession=null;");
+replace(" stopQuizBlink();quizWrongPlaces.clear();",
+ " stopQuizBlink();clearTownStyles();quizWrongPlaces.clear();");
+replace(" stopQuizBlink();highlightQuizTown(name,true);"," startQuizBlink(name);");
+replace("'答えは「'+townLabel(target)+'」です。'","'点滅している場所が「'+townLabel(target)+'」です。'");
+replace(" refreshLabels();\n}\nfunction choose(name){",` refreshLabels();
+ // SVG redraw/fullscreen must restore current-question feedback from shared state.
+ if(quizMode){
+  for(const name of quizWrongPlaces)highlightQuizTown(name,false,true);
+  if(quizTarget)highlightQuizTown(quizTarget,quizBlinkOn);
+ }
+}
+function choose(name){`);
 if(/西宮|宝塚|岡田山|上甲東園/.test(code))throw Error('City-specific runtime remains');
 fs.writeFileSync(path.join(out,'town-map.js'),code);
 let html=original.slice(0,original.indexOf('<script>\n(()=>'));

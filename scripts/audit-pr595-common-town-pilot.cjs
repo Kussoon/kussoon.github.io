@@ -4,7 +4,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const root=path.resolve(__dirname,'..'),out=path.join(root,'pr595-common-town-audit');fs.mkdirSync(out,{recursive:true});
 const base=process.env.TOWN_TEST_BASE||'http://127.0.0.1:8765';
 const prefix='/v2/verify-town-map-pr595/';
-const expose=`window.__audit={features:()=>features,regions:()=>communityNames,membership:()=>membership,projection:()=>projection,path:()=>path,transform:()=>transform,startQuiz,quizMapAnswer,stopQuiz,quizReveal,choose,focusTown,reset,showRegion:co=>{cLabelReflow();communityChoice=co;showCommunity()},getSelected:()=>selected,fitPart:(name,index)=>{const f=features.find(f=>f.properties.S_NAME===name),g=f.geometry;const part={type:'Feature',properties:f.properties,geometry:{type:'Polygon',coordinates:g.type==='Polygon'?g.coordinates:g.coordinates[index]}};const b=path.bounds(part),fit=KussoonTownSvgViewport.fitBounds(b,baseWidth,baseHeight,100,.6,40);svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));return part;}};\n`;
+const expose=`window.__audit={features:()=>features,regions:()=>communityNames,membership:()=>membership,projection:()=>projection,path:()=>path,transform:()=>transform,startQuiz,quizMapAnswer,stopQuiz,quizReveal,choose,focusTown,reset,showRegion:co=>{cLabelReflow();communityChoice=co;showCommunity()},getSelected:()=>selected,target:()=>quizOrder[quizIndex],fitPart:(name,index)=>{const f=features.find(f=>f.properties.S_NAME===name),g=f.geometry;const part={type:'Feature',properties:f.properties,geometry:{type:'Polygon',coordinates:g.type==='Polygon'?g.coordinates:g.coordinates[index]}};const b=path.bounds(part),fit=KussoonTownSvgViewport.fitBounds(b,baseWidth,baseHeight,100,.6,40);svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));return part;}};\n`;
 let server;
 async function main(){
  const sourceCommit='fe3c5692ab0547348b67a47874a1c43f2c382c5a';
@@ -45,6 +45,7 @@ async function main(){
    await page.waitForTimeout(400);const after=await snapshot();assert.equal(before.length,after.length);
    report.nishinomiyaMaxDelta=Math.max(...before.flatMap((v,i)=>{assert.equal(v.name,after[i].name);return ['x','y','w','h'].map(k=>Math.abs(v[k]-after[i][k]))}));
    assert(report.nishinomiyaMaxDelta<=.1,'Shared extraction changes accepted baseline');
+   await require('./audit-pr595-quiz-feedback.cjs').run(page,cfg,out,{city:'nishinomiya',samples:['西宮浜','岡田山','塩瀬町名塩']});
    await page.goto(base+prefix+'?code=28214',{waitUntil:'domcontentloaded'});
    await page.waitForFunction(()=>document.querySelectorAll('g.label').length===125);
    await page.waitForTimeout(400);
@@ -57,12 +58,13 @@ async function main(){
    const config=JSON.parse(fs.readFileSync(path.join(root,prefix,'data/28214.json')));
    for(const [name,extra]of Object.entries(config.membership.additionalRegions))for(const region of extra)assert(report.data.memberships[name].includes(region));
    await page.locator('#frame').screenshot({path:path.join(out,cfg.name+'-whole.png')});
+   await require('./audit-pr595-quiz-feedback.cjs').run(page,cfg,out,{city:'takarazuka',samples:['梅野町','小浜','清荒神']});
    report.regionCounts={};
    for(const region of report.data.regions){await page.evaluate(c=>window.__audit.showRegion(c),region);await page.waitForTimeout(370);report.regionCounts[region]=await page.locator('path.town').count();assert(report.regionCounts[region]>0);assert.equal(await page.locator('g.label').count(),report.regionCounts[region]);}
    await page.evaluate(()=>window.__audit.showRegion(''));
    report.quizzes=await page.evaluate(()=>{const a=window.__audit,names=a.features().map(f=>f.properties.S_NAME),$=id=>document.getElementById(id),score=()=>Number($('quizProgress').textContent.match(/得点 (\d+)/)?.[1]),r={quiz1:0,quiz2:0,failures:[]};
     for(let i=0;i<names.length;i++){const name=names[i],wrong=names[(i+1)%names.length];try{
-     a.startQuiz(1,[name]);if(score()!==1)throw Error('initial');a.quizMapAnswer(wrong);if(score()!==0)throw Error('penalty');a.quizMapAnswer(wrong);if(score()!==0)throw Error('double penalty');a.quizMapAnswer(name);if(!$('quizFeedback').textContent.includes('正解です'))throw Error('correct');$('quizNext').click();if(!$('quizResult').textContent.includes('1問中 0点')||$('quizRetryWrong').hidden)throw Error('result');r.quiz1++;
+     a.startQuiz(1,[name]);if(score()!==1)throw Error('initial');a.quizMapAnswer(wrong);if(score()!==0)throw Error('penalty');a.quizMapAnswer(wrong);if(score()!==0)throw Error('double penalty');a.quizMapAnswer(name);if(!$('quizFeedback').textContent.includes('正解です'))throw Error('correct');if(![...document.querySelectorAll('path.town.wrong')].some(e=>e.__data__.properties.S_NAME===wrong))throw Error('correct erased red');$('quizNext').click();if(!$('quizResult').textContent.includes('1問中 0点')||$('quizRetryWrong').hidden)throw Error('result');r.quiz1++;
      a.startQuiz(2,[name]);const bs=[...$('quizChoices').children],ns=bs.map(b=>b.querySelector('.choice-name').textContent);if(bs.length!==4||new Set(ns).size!==4||!ns.includes(name)||bs.some(b=>!b.querySelector('.choice-reading')?.textContent))throw Error('choices');const w=bs.find(b=>b.querySelector('.choice-name').textContent!==name);w.click();if(score()!==0||!w.disabled||!w.classList.contains('quiz-wrong'))throw Error('choice penalty');w.click();if(score()!==0)throw Error('choice double penalty');bs.find(b=>b.querySelector('.choice-name').textContent===name).click();$('quizNext').click();if(!$('quizResult').textContent.includes('1問中 0点'))throw Error('choice result');r.quiz2++;
     }catch(e){r.failures.push({name,message:e.message})}finally{a.stopQuiz(false)}}return r;});
    assert.deepEqual(report.quizzes,{quiz1:125,quiz2:125,failures:[]});

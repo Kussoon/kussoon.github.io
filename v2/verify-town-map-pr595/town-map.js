@@ -238,6 +238,11 @@ function renderLayers(){
   }
  });
  refreshLabels();
+ // SVG redraw/fullscreen must restore current-question feedback from shared state.
+ if(quizMode){
+  for(const name of quizWrongPlaces)highlightQuizTown(name,false,true);
+  if(quizTarget)highlightQuizTown(quizTarget,quizBlinkOn);
+ }
 }
 function choose(name){
  if(quizMode)return;
@@ -393,17 +398,17 @@ function highlightQuizTown(name,on,wrong=false){
 function stopQuizBlink(){
  if(quizTimer!==null)clearInterval(quizTimer);
  quizTimer=null;quizTarget='';quizBlinkOn=false;
- clearTownStyles();
+ areas.selectAll('path.town').classed('selected',false).classed('dim',false);
 }
 function stopQuiz(returnToMap){
- stopQuizBlink();quizMode=0;quizLocked=false;quizSession=null;
+ stopQuizBlink();clearTownStyles();quizMode=0;quizLocked=false;quizSession=null;
  document.body.classList.remove('town-quiz-mode');
  $('quizPanel').hidden=true;$('quizResults').hidden=true;
  $('quizFeedback').textContent='';
  if(returnToMap){showCommunity();}
 }
 function resetQuestion(){
- stopQuizBlink();quizWrongPlaces.clear();
+ stopQuizBlink();clearTownStyles();quizWrongPlaces.clear();
  $('quizChoices').replaceChildren();$('quizNext').hidden=true;
  $('quizNext').textContent='次の問題へ';
  $('quizReveal').hidden=true;$('quizFeedback').textContent='';
@@ -493,7 +498,7 @@ function quizChoiceAnswer(name,button){
 }
 function quizCorrect(name){
  KussoonTownSvgQuizState.markCorrect(quizSession);syncQuizFromSession();
- stopQuizBlink();highlightQuizTown(name,true);
+ startQuizBlink(name);
  $('quizFeedback').textContent='正解です！ '+townLabel(name)+(communityChoice&&townExplanation(name)?' '+townExplanation(name):'');
  $('quizReveal').hidden=true;$('quizNext').hidden=false;
  $('quizNext').textContent=quizIndex===quizOrder.length-1?'結果発表':'次の問題へ';
@@ -506,7 +511,7 @@ function quizReveal(){
  if(grade.kind==='ignored')return;
  const target=quizOrder[quizIndex];
  quizCorrect(target);
- $('quizFeedback').textContent='答えは「'+townLabel(target)+'」です。'+(communityChoice&&townExplanation(target)?' '+townExplanation(target):'');
+ $('quizFeedback').textContent='点滅している場所が「'+townLabel(target)+'」です。'+(communityChoice&&townExplanation(target)?' '+townExplanation(target):'');
 }
 function finishQuiz(quitEarly=false){
  const summary=KussoonTownSvgQuizState.result(quizSession,quitEarly);
