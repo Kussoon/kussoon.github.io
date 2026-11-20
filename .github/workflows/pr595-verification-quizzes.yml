@@ -25,8 +25,11 @@ jobs:
           node-version: '22'
       - run: npm ci --prefix v2/tests/browser --no-audit --no-fund
       - run: node scripts/audit-nishinomiya-v34-321-quiz-contract.cjs
+      - run: node scripts/audit-pr595-tap-accuracy.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: pr595-exhaustive-quiz-results
-          path: nishinomiya-v34-321-quiz-contract/
+          path: |
+            nishinomiya-v34-321-quiz-contract/
+            pr595-tap-accuracy/
