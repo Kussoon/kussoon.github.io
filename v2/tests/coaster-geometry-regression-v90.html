@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>コースター形状回帰テスト v90</title><style>body{font:16px sans-serif;max-width:900px;margin:30px auto;padding:12px}pre{white-space:pre-wrap;background:#eef4f7;padding:20px;border-radius:8px}</style><h1>コースター形状回帰テスト v90</h1><p>5種類の固定入力で、元の側面図と最終3D線路の高度差、勾配の逆転、検出されたループ数を確認します。これは診断専用でゲーム本体は変更しません。</p><pre id="results">実行中...</pre><script src="/v2/common/js/one-stroke-coaster-support-clearance.js"></script><script>(()=>{"use strict";const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),mix=(a,b,t)=>a+(b-a)*t,V=(x=0,y=0,z=0)=>({x,y,z}),add=(a,b)=>V(a.x+b.x,a.y+b.y,a.z+b.z),sub=(a,b)=>V(a.x-b.x,a.y-b.y,a.z-b.z),scale=(a,k)=>V(a.x*k,a.y*k,a.z*k),dot=(a,b)=>a.x*b.x+a.y*b.y+a.z*b.z,cross=(a,b)=>V(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x),norm=a=>scale(a,1/(Math.hypot(a.x,a.y,a.z)||1));let W=900,H=450,raw=[],track=[],finish=0,loopZones=[],loopWarning="",supportClearance=null,objects=[],heightDiagnosis=null;const diagnoseHeight=()=>null;
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>コースター形状回帰テスト v90</title><style>body{font:16px sans-serif;max-width:1100px;margin:30px auto;padding:12px;color:#17324a}pre{white-space:pre-wrap;background:#eef4f7;padding:20px;border-radius:8px}.case{border:1px solid #cbdce5;border-radius:10px;padding:12px;margin:12px 0;background:#fff}.views{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}.views svg{display:block;width:100%;height:auto;background:#f4f8fa;border:1px solid #dce7ed;border-radius:6px}.view-title{font:12px sans-serif;fill:#38566b}</style><h1>コースター形状回帰テスト v90</h1><p>5種類の固定入力で、元の側面図と最終3D線路の高度差、勾配の逆転、検出されたループ数を確認します。診断ページ内ではv90候補の線路生成処理を使い、ゲーム画面とは別に中心線を投影表示します。</p><h2>数値検査</h2><pre id="results">実行中...</pre><h2>3D中心線の投影図（上面・側面・斜視）</h2><div id="plots">生成中...</div><script src="/v2/common/js/one-stroke-coaster-support-clearance.js"></script><script>(()=>{"use strict";const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),mix=(a,b,t)=>a+(b-a)*t,V=(x=0,y=0,z=0)=>({x,y,z}),add=(a,b)=>V(a.x+b.x,a.y+b.y,a.z+b.z),sub=(a,b)=>V(a.x-b.x,a.y-b.y,a.z-b.z),scale=(a,k)=>V(a.x*k,a.y*k,a.z*k),dot=(a,b)=>a.x*b.x+a.y*b.y+a.z*b.z,cross=(a,b)=>V(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x),norm=a=>scale(a,1/(Math.hypot(a.x,a.y,a.z)||1));let W=900,H=450,raw=[],track=[],finish=0,loopZones=[],loopJoinFractions=[],loopWarning="",supportClearance=null,objects=[],heightDiagnosis=null;const diagnoseHeight=()=>null;
 function sample(z){
  z=clamp(z,0,finish);let lo=0,hi=track.length-1;
  while(lo+1<hi){const m=(lo+hi)>>1;if(track[m].s<z)lo=m;else hi=m}
@@ -10,7 +10,7 @@ function makeTrack(){
  // v78: shape-preserving smooth centreline. No circle detection or substitution.
  // Strong smoothing followed by targeted small-loop circularization.
  // Only an observed closed revolution may be rounded; open hills remain.
- supportClearance=null;track=[];finish=0;loopZones=[];loopWarning="手描きの形を保って滑らかなレールを生成";
+ supportClearance=null;track=[];finish=0;loopZones=[];loopJoinFractions=[];loopWarning="手描きの形を保って滑らかなレールを生成";
  const ratio=.105;
  if(raw.length<2)return;
  // Regularize sample spacing before smoothing: the result must not depend
@@ -270,15 +270,9 @@ function makeTrack(){
  for(let j=1;j<track.length;j++){
   const a=originalTrack[j-1],b=originalTrack[j],mid=(a.s+b.s)*.5;
   const loop=loopSections.find(z=>mid>=z.a&&mid<=z.b);
-  // Fade the extra forward run to zero at each loop join. A hard switch
-  // between signed loop travel and normal forward travel creates a pitch
-  // kink when the hand-drawn loop closes imperfectly.
-  let runBlend=1;
-  for(const z of loopSections){
-   const gap=mid<z.a?z.a-mid:mid>z.b?mid-z.b:0;
-   const t=clamp(gap/14,0,1),eased=t*t*(3-2*t);
-   runBlend=Math.min(runBlend,eased);
-  }
+  // Keep the forward component required by vertical movement all the way
+  // through loop approaches. Fading it near a loop collapses a steep climb
+  // into a nearly vertical run before the tangent-matched join can take over.
   if(loop){
    const yaw=yawAt(loop.a),dz=b.z-a.z;
    worldX+=dz*Math.sin(yaw);worldZ+=dz*Math.cos(yaw);
@@ -291,7 +285,7 @@ function makeTrack(){
     const rise=Math.abs(b.y-a.y);
     const activeTurns=turns.filter(turn=>b.s>=turn.at-turn.half&&a.s<=turn.at+turn.half);
    const turnRadius=activeTurns.length?Math.min(...activeTurns.map(turn=>turn.radius)):13;
-   const step=Math.max(.04,Math.abs(b.z-a.z),turnRadius*dYaw,rise*.72*runBlend);
+   const step=Math.max(.04,Math.abs(b.z-a.z),turnRadius*dYaw,rise*.72);
    const yaw=yawAt(mid);
    worldX+=step*Math.sin(yaw);worldZ+=step*Math.cos(yaw);
   }
@@ -513,6 +507,9 @@ function makeTrack(){
    }
    let exit=bound.end+1,exitLength=0;
    while(exit<nextStart-1&&exit<track.length&&exitLength<window){exitLength+=segmentDistance(exit-1,exit);exit++;}
+   const joinStart=track[Math.max(0,entry)].sketchFraction;
+   const joinEnd=track[Math.min(exit,track.length-1)].sketchFraction;
+   loopJoinFractions.push({low:Math.min(joinStart,bound.plane.low),high:Math.max(joinEnd,bound.plane.high)});
    if(exitLength>=2&&exit<track.length-1){
     const startT=V(track[bound.end].x-track[bound.end-1].x,track[bound.end].y-track[bound.end-1].y,track[bound.end].z-track[bound.end-1].z);
     const endT=V(track[exit+1].x-track[exit].x,track[exit+1].y-track[exit].y,track[exit+1].z-track[exit].z);
@@ -535,11 +532,11 @@ function makeTrack(){
   // belonged to the PRE-turn track, so protecting those s values could
   // inadvertently smooth the actual loop and leave nearby joins untouched.
   // sketchFraction is unchanged by the horizontal reconstruction.
-  const lockedLoops=used.map(zone=>{
-    const low=zone.start/(knots.length-1),high=zone.end/(knots.length-1);
-    const first=beforeFairing.find(p=>p.sketchFraction>=low);
-    const last=beforeFairing.find(p=>p.sketchFraction>=high);
-    return{low,high,a:first?first.s:0,b:last?last.s:beforeFairing[beforeFairing.length-1].s};
+  const lockedFractions=[...used.map(zone=>({low:zone.start/(knots.length-1),high:zone.end/(knots.length-1)})),...loopJoinFractions];
+  const lockedLoops=lockedFractions.map(zone=>{
+    const first=beforeFairing.find(p=>p.sketchFraction>=zone.low);
+    const last=beforeFairing.find(p=>p.sketchFraction>=zone.high);
+    return{low:zone.low,high:zone.high,a:first?first.s:0,b:last?last.s:beforeFairing[beforeFairing.length-1].s};
   });
  const kernel=[.024,.076,.166,.234,.166,.076,.024];
  function oldCentre(distance){
@@ -585,7 +582,7 @@ function makeTrack(){
   const t=clamp((target-rawCum[lo])/(rawCum[hi]-rawCum[lo]||1),0,1);
   return 3+(H-mix(raw[lo].y,raw[hi].y,t))*.105;
  }
- const protectedFractions=used.map(zone=>({low:zone.start/(knots.length-1),high:zone.end/(knots.length-1)}));
+ const protectedFractions=[...used.map(zone=>({low:zone.start/(knots.length-1),high:zone.end/(knots.length-1)})),...loopJoinFractions];
  // Smoothly blend over a 3% sketch-distance collar to avoid a hard seam.
  function elevationBlend(f){
   let weight=1;
@@ -751,9 +748,19 @@ function geometryAudit(track,raw){
 function test(points){raw=points;makeTrack();const cum=[0];for(let i=1;i<raw.length;i++)cum.push(cum.at(-1)+Math.hypot(raw[i].x-raw[i-1].x,raw[i].y-raw[i-1].y));const total=cum.at(-1);
 function source(f){let target=f*total,i=1;while(i<cum.length-1&&cum[i]<target)i++;let t=(target-cum[i-1])/(cum[i]-cum[i-1]||1);return 3+(H-mix(raw[i-1].y,raw[i].y,t))*.105}
 function output(f){let i=1;while(i<track.length-1&&track[i].sketchFraction<f)i++;const a=track[i-1],b=track[i],t=clamp((f-a.sketchFraction)/(b.sketchFraction-a.sketchFraction||1),0,1);return mix(a.y,b.y,t)}
-let maxError=0,reversals=0;for(let i=1;i<100;i++){const f=i/100,e=output(f)-source(f);maxError=Math.max(maxError,Math.abs(e));const d=source(f+.01)-source(f-.01),v=output(f+.01)-output(f-.01);if(Math.abs(d)>.25&&d*v<0)reversals++}
+let maxError=0,reversals=0;for(let i=1;i<100;i++){const f=i/100,e=output(f)-source(f);maxError=Math.max(maxError,Math.abs(e));const d=source(f+.01)-source(f-.01),v=output(f+.01)-output(f-.01),before=source(f)-source(f-.01),after=source(f+.01)-source(f);if(Math.abs(d)>.25&&d*v<0&&before*after>0)reversals++}
 const geom=geometryAudit(track,raw);
 return{points:track.length,loops:loopWarning,maxError:+maxError.toFixed(2),reversals,finish:+finish.toFixed(1),...geom}}
-const results=Object.entries(cases).map(([name,points])=>({name,...test(points)}));
+const detailed=Object.entries(cases).map(([name,points])=>{const metrics=test(points);return{name,metrics,track:track.map(p=>({x:p.x,y:p.y,z:p.z,s:p.s}))};});
+const results=detailed.map(({name,metrics})=>({name,...metrics}));
 document.querySelector("#results").textContent=JSON.stringify(results,null,2);
+function projectionSvg(points,label,project){
+ const values=points.map(project),xs=values.map(p=>p[0]),ys=values.map(p=>p[1]);
+ const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys),pad=14,w=320,h=132;
+ const scale=Math.min((w-2*pad)/Math.max(1e-6,maxX-minX),(h-2*pad)/Math.max(1e-6,maxY-minY));
+ const ox=(w-(maxX-minX)*scale)/2,oy=(h-(maxY-minY)*scale)/2;
+ const d=values.map((p,i)=>`${i?'L':'M'}${(ox+(p[0]-minX)*scale).toFixed(2)},${(h-oy-(p[1]-minY)*scale).toFixed(2)}`).join(' ');
+ return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${label}"><text class="view-title" x="10" y="16">${label}</text><path d="${d}" fill="none" stroke="#173d59" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+document.querySelector("#plots").innerHTML=detailed.map(item=>`<section class="case"><strong>${item.name}</strong><div class="views">${projectionSvg(item.track,"上面図（X–Z）",p=>[p.x,p.z])}${projectionSvg(item.track,"側面図（距離–高さ）",p=>[p.s,p.y])}${projectionSvg(item.track,"斜視図（X–Z–高さ）",p=>[p.x-p.z*.45,p.y+p.z*.25])}</div></section>`).join('');
 })();</script></html>
