@@ -278,15 +278,20 @@ function draw(){
  const cCenter=projection([(env[0]+env[2])/2,(env[1]+env[3])/2]);
  cityFitTransform=d3.zoomIdentity.translate(baseWidth/2-cScale*cCenter[0],baseHeight/2-cScale*cCenter[1]).scale(cScale);
  initialK=cScale;
+ zoom.scaleExtent([initialK,40]);
  renderLayers();
  frame.applyWorld();
 }
 function onZoom(event){
+ // At the lower bound show the complete municipality, even after a pan/focus.
+ if(event.transform.k<=initialK+1e-9&&(Math.abs(event.transform.k-initialK)>1e-9||Math.abs(event.transform.x-cityFitTransform.x)>1e-6||Math.abs(event.transform.y-cityFitTransform.y)>1e-6)){
+  svg.call(zoom.transform,cityFitTransform);return;
+ }
  const previousK=transform.k;
  if(event.sourceEvent){fittedView=false;if(cLabelMode!=='centered')cLabelReflow()}
  transform=event.transform;world.attr('transform',transform.toString());
  if(transform.k!==previousK||cRebaseline)updateLabelSize();
- sliderController.setValue(Math.log(transform.k/.6)/Math.log(40/.6)*100);
+ sliderController.setValue(Math.log(transform.k/initialK)/Math.max(1e-9,Math.log(40/initialK))*100);
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
 // N-GESTURE-04/05: shared gestures preserve Leaflet C's wheel arming,
@@ -344,7 +349,7 @@ function focusTown(name){
  };
  const cInitialZoom=leafletFitZoom(getEnvelope(features),44,19);
  const cTargetZoom=leafletFitZoom(getEnvelope([town]),100,15);
- const targetScale=Math.min(40,(256/(2*Math.PI))*Math.pow(2,cTargetZoom)/projection.scale());
+ const targetScale=Math.max(initialK,Math.min(40,(256/(2*Math.PI))*Math.pow(2,cTargetZoom)/projection.scale()));
  // At a direct link, align the text size with C's zoom delta while keeping
  // the SVG's initial 8px label size unchanged in ordinary map mode.
  directLinkFontOffset=cTargetZoom-cInitialZoom-Math.log2(targetScale/initialK);
@@ -360,7 +365,7 @@ const sliderController=KussoonTownMapZoomSlider.install({
  onStart:()=>{cLabelReflow();fittedView=false;svg.interrupt()},
  onChange:value=>{
   fittedView=false;
-  const k=.6*Math.pow(40/.6,value/100),cx=baseWidth/2,cy=baseHeight/2;
+  const k=initialK*Math.pow(40/initialK,value/100),cx=baseWidth/2,cy=baseHeight/2;
   svg.interrupt().call(zoom.transform,d3.zoomIdentity
    .translate(cx-(cx-transform.x)*k/transform.k,cy-(cy-transform.y)*k/transform.k).scale(k));
  }
@@ -511,6 +516,7 @@ function quizReveal(){
  if(grade.kind==='ignored')return;
  const target=quizOrder[quizIndex];
  quizCorrect(target);
+ focusTown(target);
  $('quizFeedback').textContent='点滅している場所が「'+townLabel(target)+'」です。'+(communityChoice&&townExplanation(target)?' '+townExplanation(target):'');
 }
 function finishQuiz(quitEarly=false){
@@ -529,7 +535,7 @@ function finishQuiz(quitEarly=false){
  // Labels are visible again. Flash only the interrupted question's town;
  // normal map selection can stop the flash, and restarting a quiz cleans it up.
  if(quitTown&&activeFeatures().some(f=>f.properties.S_NAME===quitTown)){
-  choose(quitTown);
+  focusTown(quitTown);
   $('status').textContent='中断した問題：「'+townLabel(quitTown)+'」を黄色く点滅表示しています。';
  }
 }
