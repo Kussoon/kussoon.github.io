@@ -4,6 +4,7 @@ async function run(page,cfg,out){
  const results=[];
  await page.evaluate(()=>window.__audit.showRegion(''));
  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+ const minScale=await page.evaluate(()=>window.__audit.minScale());
  const slider=page.locator('#zoomSlider');
  const rect=await slider.boundingBox(),x=rect.x+rect.width/2;
  const yAt=f=>rect.y+9+(rect.height-18)*f;
@@ -18,8 +19,8 @@ async function run(page,cfg,out){
   const input=physical?await page.evaluate(()=>window.__sliderInput):null;
   if(physical)assert(Math.abs(input.y-yAt(f))<=1.01,label+' unexpected native coordinate rounding');
   const target=physical?Math.max(0,Math.min(100,(rect.y+rect.height-9-input.y)/(rect.height-18)*100)):requestedTarget;
-  try{await page.waitForFunction(target=>Math.abs(Number(document.querySelector('#zoomSlider').getAttribute('aria-valuenow'))-target)<.12&&Math.abs(window.__audit.transform().k-(.6*Math.pow(40/.6,target/100)))<.03,target)}catch(error){console.error('SLIDER_DIAGNOSTIC '+JSON.stringify({browser:cfg.name,label,target,state:await snap(),rect,input:await page.evaluate(()=>window.__sliderInput)}));throw error}
-  const s=await snap();assert(Math.abs(s.scale-(.6*Math.pow(40/.6,target/100)))<.03,label+' map/slider mismatch');
+  try{await page.waitForFunction(({target,minScale})=>Math.abs(Number(document.querySelector('#zoomSlider').getAttribute('aria-valuenow'))-target)<.12&&Math.abs(window.__audit.transform().k-(minScale*Math.pow(40/minScale,target/100)))<.03,{target,minScale})}catch(error){console.error('SLIDER_DIAGNOSTIC '+JSON.stringify({browser:cfg.name,label,target,state:await snap(),rect,input:await page.evaluate(()=>window.__sliderInput)}));throw error}
+  const s=await snap();assert(Math.abs(s.scale-(minScale*Math.pow(40/minScale,target/100)))<.03,label+' map/slider mismatch');
   assert(Math.abs(s.thumb-s.expected)<.75,label+' painted thumb drift');
   if(physical&&f>=0&&f<=1)assert(Math.abs(s.thumb-input.y)<.75,label+' thumb does not track actual native input');
   results.push({label,value:s.value,scale:s.scale,requestedTarget,actualInputY:input?.y});return s;
@@ -57,7 +58,7 @@ async function run(page,cfg,out){
  // Existing plus/minus continue using the same D3 zoom and update the slider.
  await slider.press('Home');await verify(1,'before buttons');
  await page.locator('#zoomIn').click();await page.waitForTimeout(200);
- assert(Math.abs((await snap()).scale-1.2)<.01);
+ assert(Math.abs((await snap()).scale-2*minScale)<.01);
  await page.locator('#zoomOut').click();await page.waitForTimeout(200);await verify(1,'minus sync');
  const meta=await page.evaluate(()=>({time:document.querySelector('#updatedAt').textContent,iso:document.querySelector('#updatedAt').dateTime,notice:document.querySelector('.notice').textContent}));
  assert.match(meta.time,/\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}/);assert(Number.isFinite(Date.parse(meta.iso)));assert.match(meta.notice,/PR #681/);assert.match(meta.notice,/PR #595/);

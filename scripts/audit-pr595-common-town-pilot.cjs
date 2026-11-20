@@ -4,7 +4,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const root=path.resolve(__dirname,'..'),out=path.join(root,'pr595-common-town-audit');fs.mkdirSync(out,{recursive:true});
 const base=process.env.TOWN_TEST_BASE||'http://127.0.0.1:8765';
 const prefix='/v2/verify-town-map-pr595/';
-const expose=`window.__audit={features:()=>features,regions:()=>communityNames,membership:()=>membership,projection:()=>projection,path:()=>path,transform:()=>transform,startQuiz,quizMapAnswer,stopQuiz,quizReveal,choose,focusTown,reset,showRegion:co=>{cLabelReflow();communityChoice=co;showCommunity()},getSelected:()=>selected,target:()=>quizOrder[quizIndex],fitPart:(name,index)=>{const f=features.find(f=>f.properties.S_NAME===name),g=f.geometry;const part={type:'Feature',properties:f.properties,geometry:{type:'Polygon',coordinates:g.type==='Polygon'?g.coordinates:g.coordinates[index]}};const b=path.bounds(part),fit=KussoonTownSvgViewport.fitBounds(b,baseWidth,baseHeight,100,.6,40);svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));return part;}};\n`;
+const expose=`window.__audit={features:()=>features,regions:()=>communityNames,membership:()=>membership,projection:()=>projection,path:()=>path,transform:()=>transform,cityFit:()=>cityFitTransform,minScale:()=>initialK,zoomRange:()=>zoom.scaleExtent(),underzoom:()=>svg.call(zoom.scaleTo,.01),startQuiz,quizMapAnswer,stopQuiz,quizReveal,choose,focusTown,reset,showRegion:co=>{cLabelReflow();communityChoice=co;showCommunity()},getSelected:()=>selected,target:()=>quizOrder[quizIndex],fitPart:(name,index)=>{const f=features.find(f=>f.properties.S_NAME===name),g=f.geometry;const part={type:'Feature',properties:f.properties,geometry:{type:'Polygon',coordinates:g.type==='Polygon'?g.coordinates:g.coordinates[index]}};const b=path.bounds(part),fit=KussoonTownSvgViewport.fitBounds(b,baseWidth,baseHeight,100,.6,40);svg.call(zoom.transform,d3.zoomIdentity.translate(fit.x,fit.y).scale(fit.scale));return part;}};\n`;
 let server;
 async function main(){
  const sourceCommit='fe3c5692ab0547348b67a47874a1c43f2c382c5a';
@@ -45,6 +45,7 @@ async function main(){
    await page.waitForTimeout(400);const after=await snapshot();assert.equal(before.length,after.length);
    report.nishinomiyaMaxDelta=Math.max(...before.flatMap((v,i)=>{assert.equal(v.name,after[i].name);return ['x','y','w','h'].map(k=>Math.abs(v[k]-after[i][k]))}));
    assert(report.nishinomiyaMaxDelta<=.1,'Shared extraction changes accepted baseline');
+   await require('./audit-pr595-viewport.cjs').run(page,cfg,out,'nishinomiya');
    await require('./audit-pr595-quiz-feedback.cjs').run(page,cfg,out,{city:'nishinomiya',samples:['西宮浜','岡田山','塩瀬町名塩']});
    await page.goto(base+prefix+'?code=28214',{waitUntil:'domcontentloaded'});
    await page.waitForFunction(()=>document.querySelectorAll('g.label').length===125);
@@ -58,6 +59,7 @@ async function main(){
    const config=JSON.parse(fs.readFileSync(path.join(root,prefix,'data/28214.json')));
    for(const [name,extra]of Object.entries(config.membership.additionalRegions))for(const region of extra)assert(report.data.memberships[name].includes(region));
    await page.locator('#frame').screenshot({path:path.join(out,cfg.name+'-whole.png')});
+   await require('./audit-pr595-viewport.cjs').run(page,cfg,out,'takarazuka');
    await require('./audit-pr595-quiz-feedback.cjs').run(page,cfg,out,{city:'takarazuka',samples:['梅野町','小浜','清荒神']});
    report.regionCounts={};
    for(const region of report.data.regions){await page.evaluate(c=>window.__audit.showRegion(c),region);await page.waitForTimeout(370);report.regionCounts[region]=await page.locator('path.town').count();assert(report.regionCounts[region]>0);assert.equal(await page.locator('g.label').count(),report.regionCounts[region]);}

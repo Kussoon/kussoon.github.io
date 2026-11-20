@@ -79,6 +79,18 @@ replace(" refreshLabels();\n}\nfunction choose(name){",` refreshLabels();
  }
 }
 function choose(name){`);
+// Reuse the established city fit and direct-link town focus; only their callers change.
+replace(" initialK=cScale;", " initialK=cScale;\n zoom.scaleExtent([initialK,40]);");
+replace("function onZoom(event){", `function onZoom(event){
+ // At the lower bound show the complete municipality, even after a pan/focus.
+ if(event.transform.k<=initialK+1e-9&&(Math.abs(event.transform.k-initialK)>1e-9||Math.abs(event.transform.x-cityFitTransform.x)>1e-6||Math.abs(event.transform.y-cityFitTransform.y)>1e-6)){
+  svg.call(zoom.transform,cityFitTransform);return;
+ }`);
+replace("Math.log(transform.k/.6)/Math.log(40/.6)*100", "Math.log(transform.k/initialK)/Math.max(1e-9,Math.log(40/initialK))*100");
+replace("const k=.6*Math.pow(40/.6,value/100)", "const k=initialK*Math.pow(40/initialK,value/100)");
+replace("const targetScale=Math.min(40,(256/(2*Math.PI))*Math.pow(2,cTargetZoom)/projection.scale());", "const targetScale=Math.max(initialK,Math.min(40,(256/(2*Math.PI))*Math.pow(2,cTargetZoom)/projection.scale()));");
+replace(" quizCorrect(target);", " quizCorrect(target);\n focusTown(target);");
+replace("  choose(quitTown);", "  focusTown(quitTown);");
 if(/西宮|宝塚|岡田山|上甲東園/.test(code))throw Error('City-specific runtime remains');
 fs.writeFileSync(path.join(out,'town-map.js'),code);
 let html=original.slice(0,original.indexOf('<script>\n(()=>'));

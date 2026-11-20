@@ -32,7 +32,7 @@ assert.match(html,/nishinomiya-uekoto-community\.topojson/);
 assert.match(html,/town-svg-quiz-state\.js/);
 // Current accepted PR595-derived baseline; the historical V34 checks above remain.
 const current=read('v2/verify-pr595-one-label/index.html');
-assert.match(spec,/版：\*\*1\.5\*\*/);
+assert.match(spec,/版：\*\*1\.6\*\*/);
 assert.match(spec,/1町名1ラベル/);
 assert.match(spec,/文字倍率変更後も表示を変えず/);
 assert.match(spec,/44669089746/);
@@ -43,4 +43,4 @@ assert.doesNotMatch(current,/id="reset"/);
 assert.match(current,/zoom-slider-thumb/);
 assert.match(current,/labelGlyphMetrics/);
 assert.doesNotMatch(current,/textContent='文字\\n'\+fontPct/);
-console.log('PASS TOWNMAP-SSOT-001 v1.5: accepted baseline and historical V34 preserved');
+console.log('PASS TOWNMAP-SSOT-001 v1.6: accepted baseline and historical V34 preserved');
