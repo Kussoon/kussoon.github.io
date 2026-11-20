@@ -9,7 +9,7 @@ async function run(page,cfg,out){
  const snap=()=>page.evaluate(()=>{const e=document.querySelector('#zoomSlider'),r=e.getBoundingClientRect(),t=document.querySelector('.zoom-slider-thumb').getBoundingClientRect();return {value:Number(e.getAttribute('aria-valuenow')),scale:window.__audit.transform().k,thumb:t.y+t.height/2,expected:r.bottom-9-(r.height-18)*Number(e.getAttribute('aria-valuenow'))/100,measures:document.querySelector('#map').getAttribute('data-label-measurements')}});
  async function verify(f,label){
   const target=Math.max(0,Math.min(100,(1-f)*100));
-  await page.waitForFunction(target=>Math.abs(Number(document.querySelector('#zoomSlider').getAttribute('aria-valuenow'))-target)<.12,target);
+  await page.waitForFunction(target=>Math.abs(Number(document.querySelector('#zoomSlider').getAttribute('aria-valuenow'))-target)<.12&&Math.abs(window.__audit.transform().k-(.6*Math.pow(40/.6,target/100)))<.03,target);
   const s=await snap();assert(Math.abs(s.scale-(.6*Math.pow(40/.6,target/100)))<.03,label+' map/slider mismatch');
   assert(Math.abs(s.thumb-s.expected)<.75,label+' painted thumb drift');results.push({label,value:s.value,scale:s.scale});return s;
  }
@@ -50,6 +50,7 @@ async function run(page,cfg,out){
  await page.locator('#zoomOut').click();await page.waitForTimeout(200);await verify(1,'minus sync');
  const meta=await page.evaluate(()=>({time:document.querySelector('#updatedAt').textContent,iso:document.querySelector('#updatedAt').dateTime,notice:document.querySelector('.notice').textContent}));
  assert.match(meta.time,/\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}/);assert(Number.isFinite(Date.parse(meta.iso)));assert.match(meta.notice,/PR #681/);assert.match(meta.notice,/PR #595/);
+ if(await page.locator('body').evaluate(e=>e.classList.contains('fullscreen'))){await page.locator('#fullscreen').click();await page.waitForTimeout(100)}
  await page.evaluate(()=>window.__audit.startQuiz(2,[window.__audit.features()[0].properties.S_NAME]));
  const colors=await page.evaluate(()=>({action:getComputedStyle(document.querySelector('#quizQuit')).backgroundColor,choices:[...document.querySelectorAll('#quizChoices button')].map(e=>getComputedStyle(e).backgroundColor)}));
  assert.equal(colors.action,'rgb(230, 241, 250)');assert(colors.choices.every(c=>c==='rgb(255, 255, 255)'));
