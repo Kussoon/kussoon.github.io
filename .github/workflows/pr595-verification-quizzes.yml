@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'scripts/audit-nishinomiya-v34-321-quiz-contract.cjs'
+      - 'scripts/audit-pr595-tap-accuracy.cjs'
       - 'v2/verify-pr595-one-label/**'
       - '.github/workflows/pr595-verification-quizzes.yml'
   workflow_dispatch:
