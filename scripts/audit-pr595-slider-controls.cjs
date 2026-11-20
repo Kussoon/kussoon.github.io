@@ -10,10 +10,19 @@ async function run(page,cfg,out){
  const snap=()=>page.evaluate(()=>{const e=document.querySelector('#zoomSlider'),r=e.getBoundingClientRect(),t=document.querySelector('.zoom-slider-thumb').getBoundingClientRect();return {value:Number(e.getAttribute('aria-valuenow')),scale:window.__audit.transform().k,thumb:t.y+t.height/2,expected:r.bottom-9-(r.height-18)*Number(e.getAttribute('aria-valuenow'))/100,measures:document.querySelector('#map').getAttribute('data-label-measurements')}});
  await slider.evaluate(e=>{for(const type of ['pointerdown','pointermove','pointerup'])e.addEventListener(type,event=>{window.__sliderInput={type,y:event.clientY,id:event.pointerId,primary:event.isPrimary,pointerType:event.pointerType}})});
  async function verify(f,label){
-  const target=Math.max(0,Math.min(100,(1-f)*100));
+  const requestedTarget=Math.max(0,Math.min(100,(1-f)*100));
+  // WebKit rounds native input coordinates (e.g. requested199.4 -> clientY199).
+  // Judge tracking against the actual delivered finger/mouse position, with the
+  // same strict thumb and map agreement; never assume fractional OS coordinates.
+  const physical=/^(mouse |native touch tap |native continuous touch )/.test(label);
+  const input=physical?await page.evaluate(()=>window.__sliderInput):null;
+  if(physical)assert(Math.abs(input.y-yAt(f))<=1.01,label+' unexpected native coordinate rounding');
+  const target=physical?Math.max(0,Math.min(100,(rect.y+rect.height-9-input.y)/(rect.height-18)*100)):requestedTarget;
   try{await page.waitForFunction(target=>Math.abs(Number(document.querySelector('#zoomSlider').getAttribute('aria-valuenow'))-target)<.12&&Math.abs(window.__audit.transform().k-(.6*Math.pow(40/.6,target/100)))<.03,target)}catch(error){console.error('SLIDER_DIAGNOSTIC '+JSON.stringify({browser:cfg.name,label,target,state:await snap(),rect,input:await page.evaluate(()=>window.__sliderInput)}));throw error}
   const s=await snap();assert(Math.abs(s.scale-(.6*Math.pow(40/.6,target/100)))<.03,label+' map/slider mismatch');
-  assert(Math.abs(s.thumb-s.expected)<.75,label+' painted thumb drift');results.push({label,value:s.value,scale:s.scale});return s;
+  assert(Math.abs(s.thumb-s.expected)<.75,label+' painted thumb drift');
+  if(physical&&f>=0&&f<=1)assert(Math.abs(s.thumb-input.y)<.75,label+' thumb does not track actual native input');
+  results.push({label,value:s.value,scale:s.scale,requestedTarget,actualInputY:input?.y});return s;
  }
  await slider.press('Home');await verify(1,'keyboard min');
  // Continuous real mouse drag, reversing several times and leaving the track.
