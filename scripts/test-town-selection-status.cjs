@@ -107,6 +107,8 @@ async function main(){
    assert.notEqual((await outlines())[0],'none','keyboard focus missing');
    await slider.press('ArrowUp');await page.waitForTimeout(100);assert(Number(await slider.getAttribute('aria-valuenow'))>0);
    await slider.press('Tab');assert((await outlines()).every(x=>x==='none'));
+   const normalSlider=await page.evaluate(()=>{const frame=document.querySelector('#frame').getBoundingClientRect(),slot=document.querySelector('.zoom-slider-slot').getBoundingClientRect();return {frameHeight:frame.height,slotHeight:slot.height}});
+   assert(normalSlider.slotHeight>normalSlider.frameHeight*.55,'normal slider was shortened');
    await page.locator('#communityToggle').click();
    await page.locator('#communityOptions button[data-community]:not([data-community=""])').first().click();
    await page.locator('#fullscreen').click();await page.waitForTimeout(250);
