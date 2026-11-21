@@ -1,0 +1,44 @@
+name: Coaster v93 loop detection
+on:
+  push:
+    paths:
+      - 'v2/one-stroke-coaster-3d-v93.html'
+      - 'v2/common/js/coaster-loop-detector.js'
+      - 'scripts/test-coaster-v93-loop-detection.cjs'
+      - 'scripts/test-coaster-v93-browser.cjs'
+      - '.github/workflows/coaster-v93-loop-detection.yml'
+  pull_request:
+    paths:
+      - 'v2/one-stroke-coaster-3d-v93.html'
+      - 'v2/common/js/coaster-loop-detector.js'
+      - 'scripts/test-coaster-v93-loop-detection.cjs'
+      - 'scripts/test-coaster-v93-browser.cjs'
+      - '.github/workflows/coaster-v93-loop-detection.yml'
+jobs:
+  loop-detection:
+    runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    env:
+      NODE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --check v2/common/js/coaster-loop-detector.js
+      - run: node scripts/test-coaster-v93-loop-detection.cjs
+      - name: Install browser test dependencies
+        run: npm ci --prefix v2/tests/browser --no-audit --no-fund
+      - name: Exercise the game with hand-drawn paths
+        run: node scripts/test-coaster-v93-browser.cjs
+      - name: Check inline game script syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('v2/one-stroke-coaster-3d-v93.html').read_text()
+          scripts = re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>', html)
+          Path('/tmp/coaster-v93-inline.js').write_text('\n'.join(scripts))
+          PY
+          node --check /tmp/coaster-v93-inline.js
