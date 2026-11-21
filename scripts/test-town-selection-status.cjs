@@ -69,6 +69,20 @@ async function main(){
    assert.notEqual((await outlines())[0],'none','keyboard focus missing');
    await slider.press('ArrowUp');await page.waitForTimeout(100);assert(Number(await slider.getAttribute('aria-valuenow'))>0);
    await slider.press('Tab');assert((await outlines()).every(x=>x==='none'));
+   await page.locator('#communityToggle').click();
+   await page.locator('#communityOptions button[data-community]:not([data-community=""])').first().click();
+   await page.locator('#fullscreen').click();await page.waitForTimeout(250);
+   const regionBox=()=>page.evaluate(()=>{const a=document.querySelector('#areas').getBoundingClientRect(),m=document.querySelector('#map').getBoundingClientRect();return {cx:(a.left+a.right)/2-m.left,cy:(a.top+a.bottom)/2-m.top,w:a.width,h:a.height,mw:m.width,mh:m.height}});
+   const fitted=await regionBox();
+   await slider.press('End');await page.waitForTimeout(100);
+   await slider.press('Home');await page.waitForTimeout(100);
+   const low=await regionBox();
+   assert(Math.abs(low.cx-fitted.cx)<1&&Math.abs(low.cy-fitted.cy)<1,'region jumps at minimum zoom');
+   assert(Math.abs(low.w-fitted.w)<1&&Math.abs(low.h-fitted.h)<1,'minimum does not fit selected region');
+   await slider.press('End');await page.waitForTimeout(100);
+   const high=await regionBox();assert(high.cx+high.w/2>0&&high.cx-high.w/2<high.mw&&high.cy+high.h/2>0&&high.cy-high.h/2<high.mh,'region outside maximum zoom');
+   await page.locator('#reading').click();
+   await page.locator('#fullscreen').click();await page.waitForTimeout(250);
    console.log('PASS SELECTION_STATUS '+JSON.stringify({browser:cfg.name,code,phases:6,redraw:true,cleanup:true,pointerOutline:false,keyboardOutline:true}));
   }
   assert.deepEqual(errors,[]);
