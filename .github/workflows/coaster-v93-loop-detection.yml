@@ -5,12 +5,14 @@ on:
       - 'v2/one-stroke-coaster-3d-v93.html'
       - 'v2/common/js/coaster-loop-detector.js'
       - 'scripts/test-coaster-v93-loop-detection.cjs'
+      - 'scripts/test-coaster-v93-browser.cjs'
       - '.github/workflows/coaster-v93-loop-detection.yml'
   pull_request:
     paths:
       - 'v2/one-stroke-coaster-3d-v93.html'
       - 'v2/common/js/coaster-loop-detector.js'
       - 'scripts/test-coaster-v93-loop-detection.cjs'
+      - 'scripts/test-coaster-v93-browser.cjs'
       - '.github/workflows/coaster-v93-loop-detection.yml'
 jobs:
   loop-detection:
@@ -22,6 +24,16 @@ jobs:
           node-version: 22
       - run: node --check v2/common/js/coaster-loop-detector.js
       - run: node scripts/test-coaster-v93-loop-detection.cjs
+      - name: Install browser test dependencies
+        run: npm ci
+        working-directory: v2/tests/browser
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: v2/tests/browser
+      - name: Exercise the game with hand-drawn paths
+        run: node scripts/test-coaster-v93-browser.cjs
+        env:
+          PLAYWRIGHT_MODULE_PATH: ${{ github.workspace }}/v2/tests/browser/node_modules/playwright
       - name: Check inline game script syntax
         run: |
           python3 - <<'PY'
