@@ -44,7 +44,17 @@
     // Spring-like seams may be apart, but not so far that the loop ceases to read as a circle.
     if(gap>roughR*.65){rejections.openOrIncomplete++;continue;}
     const fit=fitCircle(points,i,j);
-    if(!fit||fit.r<minRadius||fit.rms>fit.r*.30){rejections.nonCircular++;continue;}
+    // A swept-back U can accumulate a full turn after its entry and return
+    // tangents are folded together. Reject those D-shaped paths by requiring
+    // both a tight radial fit and no sharp tangent discontinuity in the arc.
+    if(!fit||fit.r<minRadius||fit.rms>fit.r*.15){rejections.nonCircular++;continue;}
+    let sharpJoin=false;
+    for(let k=i+2;k<=j;k++){
+     const p=points[k-2],a=points[k-1],b=points[k];
+     const ux=a.x-p.x,uy=a.y-p.y,vx=b.x-a.x,vy=b.y-a.y;
+     if(Math.abs(Math.atan2(ux*vy-uy*vx,ux*vx+uy*vy))>1.05){sharpJoin=true;break;}
+    }
+    if(sharpJoin){rejections.nonCircular++;continue;}
     if(gap>fit.r*.55){rejections.openOrIncomplete++;continue;}
     const score=Math.abs(sweep-2*Math.PI)+fit.rms/fit.r+gap/fit.r*.25;
     if(!best||score<best.score)best={start:i,end:j,score,cx:fit.cx,cy:fit.cy,r:fit.r,sign:Math.sign(turn)||1,gap,rms:fit.rms,sweep};
