@@ -32,7 +32,7 @@ jobs:
           from pathlib import Path
           import re
           html = Path('v2/one-stroke-coaster-3d-v94.html').read_text()
-          scripts = re.findall(r'<script[^>]*>([\\s\\S]*?)</script>', html)
-          Path('/tmp/coaster-v94-inline.js').write_text('\\n'.join(scripts))
+          scripts = re.findall(r'<script[^>]*>([\s\S]*?)</script>', html)
+          Path('/tmp/coaster-v94-inline.js').write_text('\n'.join(scripts))
           PY
           node --check /tmp/coaster-v94-inline.js
