@@ -1,12 +1,18 @@
-# お菓子マップ 管理用Excel候補
+# 阪神間お菓子マップ 管理用正本
 
-[10シートを保持したv0.4.2 S2検証候補](masters/kussoon-sweets-common-master-v0.4.2-s2-candidate-20261112.xlsx)
+次回の店舗調査・地図更新には [管理用Excel v0.4.3](masters/kussoon-sweets-common-master-v0.4.3-20261121.xlsx) を使用します。5市510店舗・10シートを収録しています。
 
-元のv0.4.1候補を基準に、S2採用確認済み24店舗だけの座標・位置精度を更新しました。510店舗・10シートを保持しています。4シートの同期検証用Excelを正本へ置き換えたものではありません。
+2026年11月21日、[PR #426](https://github.com/Kussoon/kussoon.github.io/pull/426) で公開済みの住所3件を同期し、店舗IDで公開429店舗の住所がすべて一致することを確認しました。変更前後の住所はExcelの「変更履歴」で確認できます。
 
-- [元のv0.4.1候補](masters/kussoon-sweets-common-master-v0.4.1-candidate-20261102.xlsx)は無変更で保管。
-- [manifest.json](manifest.json)に候補とハッシュを記載。正式採用済みマスターは未承認のためnull。
-- [店舗マスター比較CSV](views/kussoon-sweets-master-v0.4.2-s2-510stores-20261112.csv)は閲覧用で、10シート正本の代わりではありません。
-- [統合・検証資料](../../v2/verification/sweets-s2-coordinate-audit/20261112-final/)に24件差分・106件採否・検証結果・チェックリストを保存。
+- [店舗マスター比較CSV（510店舗）](views/kussoon-sweets-master-v0.4.3-510stores-20261121.csv)
+- [正本の版・保存先・SHA-256](manifest.json)
 
-公式案内地点は入口や売場のGPS実測ではありません。中満本店と未採用81件の座標を保持しています。正式公開・mainへの反映・PRのマージはユーザーの別途承認後に判断します。
+## 更新方法
+
+住所や座標を変更するときは、この正本から次版を作り、店舗IDで公開HTMLの該当項目と照合します。更新したExcel、変更履歴、比較用CSV、正本へのリンクを同じPRで管理します。
+
+## 過去の版と監査記録
+
+- [v0.4.2 S2検証候補](masters/kussoon-sweets-common-master-v0.4.2-s2-candidate-20261112.xlsx)
+- [v0.4.1検証候補](masters/kussoon-sweets-common-master-v0.4.1-candidate-20261102.xlsx)
+- [S2座標監査の採否と検証結果](../../v2/verification/sweets-s2-coordinate-audit/20261112-final/)（採用24店舗、保留82店舗）
