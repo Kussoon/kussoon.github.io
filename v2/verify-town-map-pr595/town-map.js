@@ -74,6 +74,7 @@ function initCommunityData(mapping,subtopology){
  $('quizTwo').disabled=false;
  showCommunity();
 }
+let minimumK=1,minimumTransform=d3.zoomIdentity;
 function regionFit(){
  if(cLabelMode==='centered')cRebaseline=true;
  fittedView=true;directLinkFontOffset=0;
@@ -104,7 +105,10 @@ function regionFit(){
  const centerMercatorY=(y(env[1])+y(env[3]))/2;
  const centerLat=(2*Math.atan(Math.exp(centerMercatorY))-Math.PI/2)*180/Math.PI;
  const center=projection([(env[0]+env[2])/2,centerLat]);
- svg.call(zoom.transform,d3.zoomIdentity.translate(baseWidth/2-factor*center[0],baseHeight/2-factor*center[1]).scale(factor));
+ minimumK=factor;
+ minimumTransform=d3.zoomIdentity.translate(baseWidth/2-factor*center[0],baseHeight/2-factor*center[1]).scale(factor);
+ zoom.scaleExtent([minimumK,40]);
+ svg.call(zoom.transform,minimumTransform);
 }
 function showCommunity(){
  stopQuiz(false);
@@ -313,20 +317,21 @@ function draw(){
  const cCenter=projection([(env[0]+env[2])/2,(env[1]+env[3])/2]);
  cityFitTransform=d3.zoomIdentity.translate(baseWidth/2-cScale*cCenter[0],baseHeight/2-cScale*cCenter[1]).scale(cScale);
  initialK=cScale;
- zoom.scaleExtent([initialK,40]);
+ minimumK=initialK;minimumTransform=cityFitTransform;
+ zoom.scaleExtent([minimumK,40]);
  renderLayers();
  frame.applyWorld();
 }
 function onZoom(event){
- // At the lower bound show the complete municipality, even after a pan/focus.
- if(event.transform.k<=initialK+1e-9&&(Math.abs(event.transform.k-initialK)>1e-9||Math.abs(event.transform.x-cityFitTransform.x)>1e-6||Math.abs(event.transform.y-cityFitTransform.y)>1e-6)){
-  svg.call(zoom.transform,cityFitTransform);return;
+ // At the lower bound center the current learning scope, even after a pan/focus.
+ if(event.transform.k<=minimumK+1e-9&&(Math.abs(event.transform.k-minimumK)>1e-9||Math.abs(event.transform.x-minimumTransform.x)>1e-6||Math.abs(event.transform.y-minimumTransform.y)>1e-6)){
+  svg.call(zoom.transform,minimumTransform);return;
  }
  const previousK=transform.k;
  if(event.sourceEvent){fittedView=false;if(cLabelMode!=='centered')cLabelReflow()}
  transform=event.transform;world.attr('transform',transform.toString());
  if(transform.k!==previousK||cRebaseline)updateLabelSize();
- sliderController.setValue(Math.log(transform.k/initialK)/Math.max(1e-9,Math.log(40/initialK))*100);
+ sliderController.setValue(Math.log(transform.k/minimumK)/Math.max(1e-9,Math.log(40/minimumK))*100);
 }
 zoom=KussoonTownSvgCore.attachZoom(svg,d3,onZoom,.6,40);
 // N-GESTURE-04/05: shared gestures preserve Leaflet C's wheel arming,
@@ -335,7 +340,7 @@ KussoonTownSvgGestures.install({
  svg,zoom,document,
  getQuizMode:()=>quizMode,getSelected:()=>selected,stopBlink
 });
-function reset(){fittedView=true;directLinkFontOffset=0;if(communityChoice)regionFit();else svg.call(zoom.transform,cityFitTransform)}
+function reset(){fittedView=true;directLinkFontOffset=0;if(communityChoice)regionFit();else {minimumK=initialK;minimumTransform=cityFitTransform;zoom.scaleExtent([minimumK,40]);svg.call(zoom.transform,minimumTransform)}}
 $('anchorMode').onclick=()=>{
  anchorMode=anchorMode==='svg'?'leaflet':'svg';
  $('anchorMode').textContent=anchorMode==='leaflet'?'配置：C方式':'配置：現行SVG';
@@ -400,7 +405,7 @@ const sliderController=KussoonTownMapZoomSlider.install({
  onStart:()=>{cLabelReflow();fittedView=false;svg.interrupt()},
  onChange:value=>{
   fittedView=false;
-  const k=initialK*Math.pow(40/initialK,value/100),cx=baseWidth/2,cy=baseHeight/2;
+  const k=minimumK*Math.pow(40/minimumK,value/100),cx=baseWidth/2,cy=baseHeight/2;
   svg.interrupt().call(zoom.transform,d3.zoomIdentity
    .translate(cx-(cx-transform.x)*k/transform.k,cy-(cy-transform.y)*k/transform.k).scale(k));
  }
