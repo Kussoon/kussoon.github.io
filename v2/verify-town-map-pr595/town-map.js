@@ -288,7 +288,7 @@ function choose(name){
  if(selected===name){stopBlink();$('status').textContent=name+' の点滅を停止しました。';return}
  stopBlink();selected=name;blinkOn=true;
  displaySelectionBlink();blinkTimer=setInterval(()=>{blinkOn=!blinkOn;displaySelectionBlink()},500);
- $('status').textContent=name+(READINGS[name]?'（'+READINGS[name]+'）':'')+' を選択中です。';
+ $('status').textContent=selectionStatusText(name);
 }
 function draw(){
  [baseWidth,baseHeight]=size();
@@ -431,6 +431,13 @@ function shuffleQuiz(values){
 }
 function townLabel(name){return name+'（'+(READINGS[name]||'読み未登録')+'）'}
 function townExplanation(name){return config.annotations?.[name]?.quiz||''}
+function townHasSeparatedParts(name){
+ const feature=features.find(f=>f.properties.S_NAME===name),geometry=feature?.geometry;
+ return geometry?.type==='MultiPolygon'&&Array.isArray(geometry.coordinates)&&geometry.coordinates.length>1;
+}
+function selectionStatusText(name){
+ return townLabel(name)+' を選択中です。'+(townHasSeparatedParts(name)?' 飛び地が存在します。':'');
+}
 function scoreLabel(){
  $('quizProgress').textContent=(quizIndex+1)+' / '+quizOrder.length+'問　得点 '+quizScore;
 }
@@ -626,7 +633,7 @@ KussoonTownSvgDataContract.load(config,{
  if(linkedTown){
   if(features.some(f=>f.properties.S_NAME===linkedTown)){
    $('hierarchyReturn').href='/v2/geography/#town:'+config.municipalityId+':'+encodeURIComponent(linkedTown);
-   if(focusTown(linkedTown))$('status').textContent='階層ナビゲーションから「'+townLabel(linkedTown)+'」を表示しています。地図を押すと点滅を操作できます。';
+   if(focusTown(linkedTown))$('status').textContent='階層ナビゲーションから「'+townLabel(linkedTown)+'」を表示しています。'+(townHasSeparatedParts(linkedTown)?'飛び地が存在します。':'')+'地図を押すと点滅を操作できます。';
   }else $('status').textContent='指定された町名は見つかりません。'+config.name+'全域を表示しています。';
  }
  new ResizeObserver(()=>{const [w,h]=size();if(w!==baseWidth||h!==baseHeight){draw();reset()}}).observe($('map'));

@@ -37,6 +37,8 @@ async function main(){
    await page.locator('#fullscreen').click();
    await select(names[0]);s=await sample();assert(!s.active&&!s.off);assert.equal(s.font,'14px');assert(s.text.includes('停止'));
    await select(names[1]);s=await sample();assert(s.active&&!s.off&&s.text.includes(names[1]));
+   const islandName=await page.locator('path.town').evaluateAll(es=>es.map(e=>e.__data__).find(d=>d.geometry?.type==='MultiPolygon'&&d.geometry.coordinates.length>1)?.properties.S_NAME||null);
+   if(islandName){await select(islandName);s=await sample();assert(s.text.includes(islandName)&&s.text.includes('飛び地が存在します'));}
    await page.locator('#quizOne').click();s=await sample();assert(!s.active&&!s.off&&s.text.includes('クイズ1'));assert.equal(s.font,'14px');
    const target=await page.locator('#quizQuestion').innerText().then(t=>t.slice(1,t.indexOf('（')));
    const wrongName=await page.locator('path.town').evaluateAll((es,target)=>es.map(e=>e.__data__.properties.S_NAME).find(n=>n!==target),target);
@@ -108,6 +110,9 @@ async function main(){
    await page.locator('#communityToggle').click();
    await page.locator('#communityOptions button[data-community]:not([data-community=""])').first().click();
    await page.locator('#fullscreen').click();await page.waitForTimeout(250);
+   const sliderLayout=await page.evaluate(()=>{const frame=document.querySelector('#frame').getBoundingClientRect(),slot=document.querySelector('.zoom-slider-slot').getBoundingClientRect(),controls=document.querySelector('.controls').getBoundingClientRect();return {frameHeight:frame.height,slotHeight:slot.height,slotBottom:slot.bottom,controlsTop:controls.top}});
+   assert(sliderLayout.slotHeight<sliderLayout.frameHeight*.55,'slider was not shortened');
+   assert(sliderLayout.slotBottom<=sliderLayout.controlsTop+8,'slider is not above the lower controls');
    const regionBox=()=>page.evaluate(()=>{const a=document.querySelector('#areas').getBoundingClientRect(),m=document.querySelector('#map').getBoundingClientRect();return {cx:(a.left+a.right)/2-m.left,cy:(a.top+a.bottom)/2-m.top,w:a.width,h:a.height,mw:m.width,mh:m.height}});
    const fitted=await regionBox();
    await slider.press('End');await page.waitForTimeout(100);
