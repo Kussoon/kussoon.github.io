@@ -61,7 +61,7 @@ async function main(){
     await page.waitForTimeout(600);s=await sample();assert.equal(s.red,0);assert.equal(s.yellow,0);
     await page.locator('#quizBack').click();s=await sample();assert(!s.active&&!s.off);
    }
-   const quizTwoTarget=()=>page.evaluate(()=>quizOrder[quizIndex]);
+   const quizTwoTarget=()=>page.locator('path.town.selected').first().evaluate(e=>e.__data__.properties.S_NAME);
    const quizTwoChoice=async(name,wrong=false)=>page.locator('#quizChoices button').evaluateAll((buttons,{name,wrong})=>{
     const button=buttons.find(b=>(b.querySelector('.choice-name').textContent===name)!==wrong);
     if(!button)throw new Error('Quiz 2 choice missing: '+name);
