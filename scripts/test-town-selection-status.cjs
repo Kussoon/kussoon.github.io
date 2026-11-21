@@ -14,7 +14,8 @@ async function main(){
  const mappingResponse=await fetch('https://kussoon.com/nishinomiya/data/community-town-map.json');assert(mappingResponse.ok);communityMapping=await mappingResponse.text();
  await new Promise(r=>server.listen(8766,'127.0.0.1',r));
  for(const cfg of [{name:'chromium1280',engine:chromium,width:1280,height:800},{name:'webkit390',engine:webkit,width:390,height:844},{name:'webkit320',engine:webkit,width:320,height:668}]){
- const browser=await cfg.engine.launch({headless:true});
+ if(process.env.TOWNMAP_BROWSER&&cfg.name!==process.env.TOWNMAP_BROWSER)continue;
+ const browser=await cfg.engine.launch({headless:true,...(cfg.name.startsWith('chromium')&&process.env.TOWNMAP_CHROMIUM_PATH?{executablePath:process.env.TOWNMAP_CHROMIUM_PATH}:{} )});
  try{
   const page=await browser.newPage({viewport:{width:cfg.width,height:cfg.height},hasTouch:cfg.width<600,isMobile:cfg.width<600});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -59,6 +60,41 @@ async function main(){
     s=await sample();assert(s.text.includes('クイズ1の結果です'));assert(s.yellow>0);assert(s.red===0);
     await page.waitForTimeout(600);s=await sample();assert.equal(s.red,0);assert.equal(s.yellow,0);
     await page.locator('#quizBack').click();s=await sample();assert(!s.active&&!s.off);
+   }
+   const quizTwoTarget=()=>page.locator('path.town.selected').first().evaluate(e=>e.__data__.properties.S_NAME);
+   const quizTwoChoice=async(name,wrong=false)=>page.locator('#quizChoices button').evaluateAll((buttons,{name,wrong})=>{
+    const button=buttons.find(b=>(b.querySelector('.choice-name').textContent===name)!==wrong);
+    if(!button)throw new Error('Quiz 2 choice missing: '+name);
+    button.click();
+   },{name,wrong});
+   await page.locator('#quizTwo').click();
+   const missed=await quizTwoTarget();
+   await quizTwoChoice(missed,true);await quizTwoChoice(missed);
+   await page.locator('#quizNext').click();
+   const firstTry=await quizTwoTarget();assert.notEqual(missed,firstTry);
+   await quizTwoChoice(firstTry);
+   await page.locator('#quizQuit').click();
+   s=await sample();assert(s.text.includes('クイズ2を中断')&&s.text.includes('赤＝一度でも間違えた'));assert.equal(s.red,1);assert.equal(s.yellow,1);
+   const resultNames=await page.locator('path.town.wrong, path.town.selected').evaluateAll(es=>[...new Set(es.map(e=>e.__data__.properties.S_NAME))]);
+   assert.equal(resultNames.length,2);
+   await page.waitForTimeout(600);s=await sample();assert.equal(s.red,0);assert.equal(s.yellow,0);
+   await page.locator('#quizBack').click();
+   if(cfg.name==='chromium1280'&&code==='28214'){
+    await page.locator('#communityToggle').click();
+    await page.locator('#communityOptions button[data-community]:not([data-community=""])').first().click();
+    await page.locator('#quizTwo').click();
+    let completed=0;
+    while(!(await page.locator('#quizResults').isVisible())){
+     const target=await quizTwoTarget();
+     if(completed===0)await quizTwoChoice(target,true);
+     await quizTwoChoice(target);
+     await page.locator('#quizNext').click();
+     assert(++completed<=200,'Quiz 2 completion did not finish');
+    }
+    s=await sample();assert(s.text.includes('クイズ2の結果です'));assert.equal(s.red,1);assert.equal(s.yellow,completed-1);
+    await page.locator('#quizBack').click();
+    await page.locator('#communityToggle').click();
+    await page.locator('#communityOptions button[data-community=""]').first().click();
    }
    // Pointer focus must not paint the track; keyboard focus and keys remain usable.
    const slider=page.locator('#zoomSlider');await slider.scrollIntoViewIfNeeded();
