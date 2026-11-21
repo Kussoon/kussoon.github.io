@@ -38,14 +38,17 @@ function join(...paths) { return paths.flatMap((path, i) => i ? path.slice(1) : 
     for (const test of cases) {
       const page = await browser.newPage({ viewport: { width: 800, height: 900 } });
       const errors = []; page.on('pageerror', e => errors.push(e.message));
-      await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v93.html');
+      await page.goto('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v93.html?debugLoops=1');
       const box = await page.locator('#canvas').boundingBox(), points = test.draw(box);
       await page.mouse.move(points[0][0], points[0][1]); await page.mouse.down();
       for (let i = 1; i < points.length; i++) await page.mouse.move(points[i][0], points[i][1]);
       await page.mouse.up();
       await page.locator('#go').click(); await wait(100);
       const status = await page.locator('#status').innerText();
-      if (test.loops !== status.includes('縦ループ')) throw new Error(`${test.name}: unexpected loop result: ${status}`);
+      if (test.loops !== status.includes('縦ループ')) {
+        const diagnostic = await page.evaluate(() => window.__coasterLoopDetectionDebug);
+        throw new Error(`${test.name}: unexpected loop result: ${status}; detection=${JSON.stringify(diagnostic)}`);
+      }
       if (errors.length) throw new Error(`${test.name}: page errors: ${errors.join('; ')}`);
       console.log(`PASS browser ${test.name}: ${status}`);
       await page.close();
