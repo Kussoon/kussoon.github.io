@@ -27,8 +27,6 @@ async function main(){
    const sample=()=>page.evaluate(()=>{const s=document.querySelector('#status'),paths=[...document.querySelectorAll('path.town.selected')],r=s.getBoundingClientRect();return {text:s.textContent,font:getComputedStyle(s).fontSize,off:getComputedStyle(s).color==='rgba(0, 0, 0, 0)',active:s.classList.contains('selection-status'),dims:paths.map(p=>p.classList.contains('dim')),height:r.height,red:document.querySelectorAll('path.town.wrong').length,yellow:document.querySelectorAll('path.town.selected').length}});
    await select(names[0]);
    let s=await sample();assert.equal(s.font,'16px');assert.equal(s.off,false);assert(s.text.includes(names[0]));
-   const islandName=await page.locator('path.town').evaluateAll(es=>es.map(e=>e.__data__).find(d=>d.geometry?.type==='MultiPolygon'&&d.geometry.coordinates.length>1)?.properties.S_NAME||null);
-   if(islandName){await select(islandName);s=await sample();assert(s.text.includes(islandName)&&s.text.includes('飛び地が存在します'));await select(names[0]);}
    const height=s.height;
    for(let i=0;i<6;i++){
     const off=!!(i%2===0);
@@ -39,6 +37,8 @@ async function main(){
    await page.locator('#fullscreen').click();
    await select(names[0]);s=await sample();assert(!s.active&&!s.off);assert.equal(s.font,'14px');assert(s.text.includes('停止'));
    await select(names[1]);s=await sample();assert(s.active&&!s.off&&s.text.includes(names[1]));
+   const islandName=await page.locator('path.town').evaluateAll(es=>es.map(e=>e.__data__).find(d=>d.geometry?.type==='MultiPolygon'&&d.geometry.coordinates.length>1)?.properties.S_NAME||null);
+   if(islandName){await select(islandName);s=await sample();assert(s.text.includes(islandName)&&s.text.includes('飛び地が存在します'));}
    await page.locator('#quizOne').click();s=await sample();assert(!s.active&&!s.off&&s.text.includes('クイズ1'));assert.equal(s.font,'14px');
    const target=await page.locator('#quizQuestion').innerText().then(t=>t.slice(1,t.indexOf('（')));
    const wrongName=await page.locator('path.town').evaluateAll((es,target)=>es.map(e=>e.__data__.properties.S_NAME).find(n=>n!==target),target);
