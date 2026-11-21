@@ -26,10 +26,14 @@ check('楕円寄りの丸もループ候補として扱う', () => {
   const oval = Array.from({ length: 181 }, (_, i) => { const a = -Math.PI / 2 + i / 180 * Math.PI * 2; return { x: 150 + 42 * Math.cos(a), y: 150 + 34 * Math.sin(a) }; });
   assert.equal(detected(oval).length, 1);
 });
+check('手描きの軽いゆらぎを含む円を認識する', () => {
+  const jitter = Array.from({ length: 241 }, (_, i) => { const a = -Math.PI / 2 + i / 240 * Math.PI * 2, r = 42 + 1.2 * Math.sin(i * .71); return { x: 150 + r * Math.cos(a), y: 150 + r * Math.sin(a) }; });
+  assert.equal(detected(jitter).length, 1);
+});
 check('山形はループに誤認しない', () => assert.equal(detected(join(line({ x: 10, y: 240 }, { x: 150, y: 80 }), line({ x: 150, y: 80 }, { x: 290, y: 240 }))).length, 0));
 check('水平Uターンは縦ループに誤認しない', () => {
-  const turn = Array.from({ length: 101 }, (_, i) => { const a = Math.PI * i / 100; return { x: 150 + 55 * Math.cos(a), y: 130 + 55 * Math.sin(a) }; });
-  assert.equal(detected(join(line({ x: 10, y: 130 }, { x: 95, y: 130 }), turn, line({ x: 205, y: 130 }, { x: 290, y: 130 }))).length, 0);
+  const turn = Array.from({ length: 101 }, (_, i) => { const a = Math.PI * i / 100; return { x: 280 + 55 * Math.cos(a), y: 400 + 55 * Math.sin(a) }; });
+  assert.equal(detected(join(line({ x: 20, y: 400 }, { x: 280, y: 400 }), turn, line({ x: 225, y: 400 }, { x: 780, y: 400 }))).length, 0);
 });
 check('連続した2ループを別々に認識する', () => {
   const a = circle(100, 120, 40), b = circle(300, 160, 40);
