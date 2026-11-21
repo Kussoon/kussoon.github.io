@@ -926,6 +926,15 @@ function geometry(z){
  const across=scale(right,.63);
  return{p,dir,right,bank:0,across,left:sub(p,across),rightRail:add(p,across)}
 }
+if(new URLSearchParams(location.search).has("debugRailFrame")){
+ window.__coasterRailFrameAt=distance=>{
+  const g=geometry(clamp(distance,0,finish));
+  return{distance:g.p,dir:g.dir,right:g.right,left:g.left,rightRail:g.rightRail,
+   gauge:Math.hypot(g.rightRail.x-g.left.x,g.rightRail.y-g.left.y,g.rightRail.z-g.left.z),
+   orthogonality:dot(g.dir,g.right)};
+ };
+ window.__coasterRailFinish=()=>finish;
+}
 function cam(){
  const geo=geometry(ridePos);
  // v78: aim slightly ahead along the *actual* track rather than only at
