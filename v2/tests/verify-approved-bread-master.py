@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Verify staged official bread master and coordinated production HTML release."""
-import collections, csv, hashlib, json, pathlib, re, subprocess, sys, zipfile, xml.etree.ElementTree as ET
+import collections, csv, hashlib, json, pathlib, re, zipfile, xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 DATA = ROOT / "data/bread"
@@ -32,9 +32,9 @@ def main():
     book=DATA/a["path"]
     view=DATA/m["review_csv"]["path"]
     assert book.is_file() and view.is_file()
-    assert sha(book)=="8c9d737c68490daf9535df4464877e83d5823dba9ce3e55c4609bb151cb3f2f4"==a["sha256"]
+    assert sha(book)=="2014e2238565bdb9d3b0666bad168c2a31552200feceb5c025bcaab2bd237521"==a["sha256"]
     assert sha(view)=="2bb6dc73fd7eac2af71b80ff4823182b9a12134aed67d9534a8883a51ed63af7"==m["review_csv"]["sha256"]
-    assert a["version"]=="1.4.4" and a["record_count"]==263 and a["public_count"]==262
+    assert a["version"]=="1.4.5" and a["record_count"]==263 and a["public_count"]==262
     assert a["adopted_coordinate_changes"]==EXPECTED_NINE
     assert a["adoption_status"]=="approved_on_release_merge"
     assert m["html_release"]["version"]=="1.3.13"
@@ -79,23 +79,30 @@ def main():
         assert row["status"]==rec["status"]
         assert [float(row["緯度"]),float(row["経度"])]==[rec["緯度"],rec["経度"]]
 
-    # On a PR checkout, HEAD^1 is the current main before the proposed release.
-    try:
-        old=subprocess.check_output(["git","show","HEAD^1:maps/unified-bread-map.html"],cwd=ROOT,stderr=subprocess.DEVNULL).decode()
-    except (subprocess.CalledProcessError,UnicodeDecodeError):
-        old=None
-    if old:
-        prior=read(old)
-        assert len(prior)==263
-        changed=[]
-        for p,q in zip(prior,stores):
-            assert p["No."]==q["No."]
-            diff={k for k in p if p[k]!=q[k]}
-            if diff:
-                assert diff=={"緯度","経度"},(p["No."],diff)
-                changed.append(p["No."])
-        assert changed==EXPECTED_NINE,changed
-    print("PASS: official Excel v1.4.4 and bread HTML v1.3.13; 11 sheets; 263 records; 245/17/1; nine coordinates only; other 254 preserved; preview/HTML exact; SHA256 verified")
+    previous = DATA / a["previous_master"]
+    assert sha(previous) == "8c9d737c68490daf9535df4464877e83d5823dba9ce3e55c4609bb151cb3f2f4"
+    sheet = "xl/worksheets/sheet2.xml"
+    with zipfile.ZipFile(previous) as before, zipfile.ZipFile(book) as after:
+        assert before.namelist() == after.namelist()
+        for name in before.namelist():
+            if name != sheet:
+                assert before.read(name) == after.read(name), name
+
+        # Reordering cells must preserve every cell's contents and attributes.
+        previous_sheet = ET.fromstring(before.read(sheet))
+        current_sheet = ET.fromstring(after.read(sheet))
+
+        def column_index(cell):
+            letters = re.fullmatch(r"([A-Z]+)[0-9]+", cell.attrib["r"])[1]
+            result = 0
+            for letter in letters:
+                result = result * 26 + ord(letter) - ord("A") + 1
+            return result
+
+        for row in previous_sheet.iter(N + "row"):
+            row[:] = sorted(row, key=column_index)
+        assert ET.tostring(previous_sheet) == ET.tostring(current_sheet)
+    print("PASS: workbook cell order, historical package contents, 263 keys and coordinates, release HTML and CSV")
 
 if __name__=="__main__":
     main()
