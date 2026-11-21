@@ -69,7 +69,7 @@ function join(...paths) { return paths.flatMap((path, i) => i ? path.slice(1) : 
       const hud=await page.evaluate(()=>window.__hudText);
       if(hud.some(x=>/mph/.test(x.text))) throw new Error('mph remains');
       if(!hud.some(x=>/km\/h/.test(x.text))) throw new Error('missing km/h');
-      if(!hud.some(x=>/^\\d+%$/.test(x.text)&&x.x>200&&x.x<600&&x.y<65)) throw new Error('missing centered progress');
+      if(!hud.some(x=>/^\d+%$/.test(x.text)&&x.x>200&&x.x<600&&x.y<65)) throw new Error('missing centered progress');
       const status = await page.locator('#status').innerText();
       if (test.loops !== generationStatus.includes('縦ループ')) {
         const diagnostic = await page.evaluate(() => window.__coasterLoopDetectionDebug);
