@@ -17,10 +17,17 @@ function join(...paths) { return paths.flatMap((path, i) => i ? path.slice(1) : 
 (async () => {
   let browser;
   try {
+    let ready = false;
     for (let i = 0; i < 30; i++) {
-      try { if ((await fetch('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v93.html')).ok) break; } catch {}
+      try {
+        const response = await fetch('http://127.0.0.1:8767/v2/one-stroke-coaster-3d-v93.html');
+        const ok = response.ok;
+        await response.arrayBuffer();
+        if (ok) { ready = true; break; }
+      } catch {}
       await wait(200);
     }
+    if (!ready) throw new Error('Local HTTP server did not start');
     browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
     const cases = [
       { name: 'spring loop', draw: box => pathCircle(box.x + box.width * .45, box.y + box.height * .5, 42, { offsetX: 15 }), loops: true },
