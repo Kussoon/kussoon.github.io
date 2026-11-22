@@ -53,9 +53,9 @@ onAuthStateChanged(auth,async user=>{
  const generation=++authGeneration;
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
- approvedUid=null;
+ approvedUid=null;bankQuestions=[];
  $("approvedPanel").hidden=true;
- $("quiz").hidden=true;$("bank").hidden=true;
+ $("quiz").hidden=true;$("bank").hidden=true;$("importText").value="";$("importStatus").textContent="";
  $("questionArea").hidden=true;
  $("resultArea").hidden=true;
  $("start").hidden=false;
@@ -137,7 +137,7 @@ $("importButton").addEventListener("click",async()=>{
 function beginQuiz(){
  const pool=Array.from(new Map([...quizPool,...bankQuestions].map(q=>[key(q),q])).values());
  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
- questions=pool.slice(0,5);beginQuiz();
+ questions=pool.slice(0,5);currentIndex=0;correctCount=0;showQuestion();
 }
 quizPool=questions.slice();
 function showQuestion(){
@@ -166,7 +166,7 @@ function selfGrade(isCorrect){
 $("markCorrect").addEventListener("click",()=>selfGrade(true));
 $("markWrong").addEventListener("click",()=>selfGrade(false));
 $("start").addEventListener("click",()=>{if(!approvedUid)return;beginQuiz();});
-$("retry").addEventListener("click",()=>{if(!approvedUid)return;currentIndex=0;correctCount=0;showQuestion();});
+$("retry").addEventListener("click",()=>{if(!approvedUid)return;beginQuiz();});
 async function finishQuiz(){
  if(!approvedUid)return;
  const uid=approvedUid,generation=authGeneration;
