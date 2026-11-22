@@ -7,7 +7,7 @@
 <title>英語復習アプリ（試作） | Kussoon</title>
 <style>
 :root{color-scheme:light dark;font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
-body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:40px auto;padding:24px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#logout{background:#4b5563}#userPanel{display:none}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}a{color:#1769aa}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}}
+body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:40px auto;padding:24px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#userPanel[hidden],#loginPanel[hidden],#pendingPanel[hidden],#approvedPanel[hidden]{display:none!important}code{overflow-wrap:anywhere}#copyUid{background:#526172}#logout{background:#4b5563}#userPanel{display:none}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}a{color:#1769aa}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}}
 </style>
 </head>
 <body>
@@ -17,12 +17,13 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:40px 
 <p>まずはGoogleログインとログアウトの動作を確認するためのページです。復習問題と学習履歴は今後追加します。</p>
 <p id="status" role="status" aria-live="polite">認証状態を確認しています…</p>
 <section id="loginPanel" hidden><button id="login" type="button">Googleでログイン</button></section>
-<section id="userPanel" hidden><p>ログイン中：<strong id="userName"></strong></p><p class="muted" id="userEmail"></p><button id="logout" type="button">ログアウト</button></section>
+<section id="userPanel" hidden><p>ログイン中：<strong id="userName"></strong></p><p class="muted" id="userEmail"></p><section id="approvedPanel" hidden><p>利用が許可されています。復習機能は今後追加します。</p></section><section id="pendingPanel" hidden><p>このアカウントはまだ利用許可されていません。管理者にユーザーID（UID）を登録してもらってください。</p><p>UID：<code id="uid"></code></p><button id="copyUid" type="button">UIDをコピー</button><p class="muted">登録後にこのページを再読み込みしてください。</p></section><p><button id="logout" type="button">ログアウト</button></p></section>
 <p class="muted">ログインするとGoogleアカウントの基本プロフィール情報を認証に使用します。現在の試作版ではFirestoreへの読み書きは行いません。</p>
 </main>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -34,18 +35,41 @@ const firebaseConfig={
 };
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
+const db=getFirestore(app);
+let authGeneration=0;
 const provider=new GoogleAuthProvider();
 const $=id=>document.getElementById(id);
 const status=$("status"),login=$("login"),logout=$("logout");
-onAuthStateChanged(auth,user=>{
+onAuthStateChanged(auth,async user=>{
+ const generation=++authGeneration;
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
- $("userPanel").style.display=user?"block":"none";
- status.textContent=user?"ログインできました。":"ログインしていません。";
+ $("approvedPanel").hidden=true;
+ $("pendingPanel").hidden=true;
  $("userName").textContent=user?.displayName||"Googleユーザー";
  $("userEmail").textContent=user?.email||"";
  login.disabled=false;logout.disabled=false;
+ if(!user){status.textContent="ログインしていません。";return;}
+ status.textContent="利用許可を確認しています…";
+ $("uid").textContent=user.uid;
+ try{
+  const snap=await getDoc(doc(db,"access",user.uid));
+  if(generation!==authGeneration)return;
+  const approved=snap.exists() && snap.data().enabled===true;
+  $("approvedPanel").hidden=!approved;
+  $("pendingPanel").hidden=approved;
+  status.textContent=approved?"利用が許可されています。":"このアカウントは未許可です。";
+ }catch(e){
+  if(generation!==authGeneration)return;
+  $("approvedPanel").hidden=true;
+  $("pendingPanel").hidden=false;
+  status.textContent="利用許可を確認できませんでした。管理者にお問い合わせください。";
+ }
 },error=>{status.textContent="認証状態を確認できませんでした："+error.code;login.disabled=false;});
+$("copyUid").addEventListener("click",async()=>{
+ try{await navigator.clipboard.writeText($("uid").textContent);status.textContent="UIDをコピーしました。";}
+ catch(e){status.textContent="コピーできませんでした。UIDを長押ししてコピーしてください。";}
+});
 login.addEventListener("click",async()=>{
  login.disabled=true;status.textContent="Googleログイン画面を開いています…";
  try{await signInWithPopup(auth,provider);}
