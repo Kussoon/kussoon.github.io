@@ -7,23 +7,23 @@
 <title>英語復習アプリ（試作） | Kussoon</title>
 <style>
 :root{color-scheme:light dark;font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
-body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:40px auto;padding:24px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#userPanel[hidden],#loginPanel[hidden],#pendingPanel[hidden],#approvedPanel[hidden]{display:none!important}code{overflow-wrap:anywhere}#copyUid{background:#526172}#logout{background:#4b5563}#userPanel{display:none}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}a{color:#1769aa}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}}
+body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:40px auto;padding:24px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#userPanel[hidden],#loginPanel[hidden],#pendingPanel[hidden],#approvedPanel[hidden]{display:none!important}code{overflow-wrap:anywhere}#copyUid{background:#526172}#logout{background:#4b5563}#userPanel{display:block}#quiz[hidden],#questionArea[hidden],#resultArea[hidden]{display:none!important}.answers{display:grid;gap:10px}.answers button{text-align:left;background:#344e6b}.answers button:disabled{opacity:.8;cursor:default}.answers button.correct{background:#216e4e}.answers button.wrong{background:#a43d3d}.panel{border:1px solid #8794a455;border-radius:12px;padding:16px;margin-top:16px}.feedback{min-height:2em}.quiz-actions{display:flex;gap:10px;flex-wrap:wrap}.quiz-actions button{background:#1769aa}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}a{color:#1769aa}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}}
 </style>
 </head>
 <body>
 <main>
 <p><a href="/">Kussoon トップへ</a></p>
 <h1>英語復習アプリ <small>試作版</small></h1>
-<p>まずはGoogleログインとログアウトの動作を確認するためのページです。復習問題と学習履歴は今後追加します。</p>
+<p>Googleログインで利用許可を確認してから、英語の復習問題に挑戦できます。</p>
 <p id="status" role="status" aria-live="polite">認証状態を確認しています…</p>
 <section id="loginPanel" hidden><button id="login" type="button">Googleでログイン</button></section>
-<section id="userPanel" hidden><p>ログイン中：<strong id="userName"></strong></p><p class="muted" id="userEmail"></p><section id="approvedPanel" hidden><p>利用が許可されています。復習機能は今後追加します。</p></section><section id="pendingPanel" hidden><p>このアカウントはまだ利用許可されていません。管理者にユーザーID（UID）を登録してもらってください。</p><p>UID：<code id="uid"></code></p><button id="copyUid" type="button">UIDをコピー</button><p class="muted">登録後にこのページを再読み込みしてください。</p></section><p><button id="logout" type="button">ログアウト</button></p></section>
-<p class="muted">ログインするとGoogleアカウントの基本プロフィール情報を認証に使用します。現在の試作版ではFirestoreへの読み書きは行いません。</p>
+<section id="userPanel" hidden><p>ログイン中：<strong id="userName"></strong></p><p class="muted" id="userEmail"></p><section id="approvedPanel" hidden><p>利用が許可されています。</p><section id="quiz" class="panel" hidden><h2>英語の復習・5問</h2><p class="muted">日常会話・運転・交通の表現を練習します。回答後に正解と解説が表示されます。</p><p id="history" class="muted">学習履歴を読み込んでいます…</p><section id="questionArea" hidden><p id="progress"></p><h3 id="question"></h3><div id="answers" class="answers"></div><p id="feedback" class="feedback" role="status" aria-live="polite"></p><button id="next" type="button" hidden>次の問題へ</button></section><section id="resultArea" hidden><h3>結果発表</h3><p id="score"></p><p id="saveStatus" role="status"></p><button id="retry" type="button">もう一度挑戦する</button></section><button id="start" type="button">5問に挑戦する</button></section></section><section id="pendingPanel" hidden><p>このアカウントはまだ利用許可されていません。管理者にユーザーID（UID）を登録してもらってください。</p><p>UID：<code id="uid"></code></p><button id="copyUid" type="button">UIDをコピー</button><p class="muted">登録後にこのページを再読み込みしてください。</p></section><p><button id="logout" type="button">ログアウト</button></p></section>
+<p class="muted">ログインするとGoogleアカウントの基本プロフィール情報を認証に使用します。許可済みの利用者については、学習結果（得点・実施日時）をFirestoreに保存します。</p>
 </main>
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import {getFirestore,doc,getDoc} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {getFirestore,doc,getDoc,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -37,6 +37,15 @@ const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 let authGeneration=0;
+let approvedUid=null;
+let currentIndex=0,correctCount=0,answered=false;
+const questions=[
+ {q:"「歩行者に道を譲る」は英語で？",a:["yield to pedestrians","ride pedestrians","follow pedestrians","cross pedestrians"],correct:0,why:"yield to pedestrians は「歩行者に道を譲る」という意味です。"},
+ {q:"「バスの運賃」に最も自然な英語は？",a:["bus salary","bus fare","bus price tag","bus fee card"],correct:1,why:"公共交通機関の運賃には fare を使います。"},
+ {q:"「私は毎朝徒歩で通勤します」に近い英文は？",a:["I walk to work every morning.","I go walking my job every morning.","I work to walk every morning.","I walk my office every morning."],correct:0,why:"walk to work は「歩いて職場へ行く」という自然な表現です。"},
+ {q:"「後ろの車がクラクションを鳴らした」は？",a:["The car behind me honked.","The car behind me blinked.","The car behind me yielded.","The car behind me parked."],correct:0,why:"honk は車のクラクションを鳴らすことです。"},
+ {q:"「私はイヤホンでポッドキャストを聴きます」は？",a:["I listen to podcasts by my earphones.","I listen to podcasts on my earphones.","I listen podcasts with my earphones.","I hear to podcasts in my earphones."],correct:1,why:"listen to podcasts on my earphones と言えます。through my earphones も自然です。"}
+];
 const provider=new GoogleAuthProvider();
 const $=id=>document.getElementById(id);
 const status=$("status"),login=$("login"),logout=$("logout");
@@ -44,7 +53,9 @@ onAuthStateChanged(auth,async user=>{
  const generation=++authGeneration;
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
+ approvedUid=null;
  $("approvedPanel").hidden=true;
+ $("quiz").hidden=true;
  $("pendingPanel").hidden=true;
  $("userName").textContent=user?.displayName||"Googleユーザー";
  $("userEmail").textContent=user?.email||"";
@@ -59,6 +70,7 @@ onAuthStateChanged(auth,async user=>{
   $("approvedPanel").hidden=!approved;
   $("pendingPanel").hidden=approved;
   status.textContent=approved?"利用が許可されています。":"このアカウントは未許可です。";
+  if(approved){approvedUid=user.uid;$("quiz").hidden=false;await loadHistory(user.uid,generation);}
  }catch(e){
   if(generation!==authGeneration)return;
   $("approvedPanel").hidden=true;
@@ -66,6 +78,59 @@ onAuthStateChanged(auth,async user=>{
   status.textContent="利用許可を確認できませんでした。管理者にお問い合わせください。";
  }
 },error=>{status.textContent="認証状態を確認できませんでした："+error.code;login.disabled=false;});
+async function loadHistory(uid,generation){
+ $("history").textContent="学習履歴を読み込んでいます…";
+ try{
+  const snap=await getDoc(doc(db,"users",uid,"review","progress"));
+  if(generation!==authGeneration||approvedUid!==uid)return;
+  if(!snap.exists()){$("history").textContent="まだ学習履歴はありません。";return;}
+  const data=snap.data();
+  const date=data.lastAt?.toDate?.()?.toLocaleString("ja-JP")||"日時未取得";
+  $("history").textContent="前回の結果："+(Number(data.lastScore)||0)+"/5問 正解（"+date+"）／挑戦回数："+(Number(data.attempts)||0);
+ }catch(e){if(generation===authGeneration)$("history").textContent="学習履歴を読み込めませんでした："+(e.code||"エラー");}
+}
+function showQuestion(){
+ answered=false;
+ $("questionArea").hidden=false;$("resultArea").hidden=true;$("start").hidden=true;$("next").hidden=true;
+ $("progress").textContent=(currentIndex+1)+" / "+questions.length+" 問";
+ const q=questions[currentIndex];
+ $("question").textContent=q.q;
+ $("feedback").textContent="";
+ $("answers").replaceChildren();
+ q.a.forEach((answer,index)=>{
+  const btn=document.createElement("button");btn.type="button";btn.textContent=(index+1)+". "+answer;
+  btn.addEventListener("click",()=>chooseAnswer(index));$("answers").append(btn);
+ });
+}
+function chooseAnswer(index){
+ if(answered||!approvedUid)return;
+ answered=true;const q=questions[currentIndex];if(index===q.correct)correctCount++;
+ [...$("answers").children].forEach((btn,i)=>{btn.disabled=true;if(i===q.correct)btn.classList.add("correct");else if(i===index)btn.classList.add("wrong");});
+ $("feedback").textContent=(index===q.correct?"正解です！ ":"残念、不正解です。 ")+q.why;
+ $("next").hidden=false;$("next").textContent=currentIndex===questions.length-1?"結果を見る":"次の問題へ";
+}
+$("start").addEventListener("click",()=>{if(!approvedUid)return;currentIndex=0;correctCount=0;showQuestion();});
+$("retry").addEventListener("click",()=>{if(!approvedUid)return;currentIndex=0;correctCount=0;showQuestion();});
+$("next").addEventListener("click",async()=>{
+ if(!answered||!approvedUid)return;
+ if(currentIndex<questions.length-1){currentIndex++;showQuestion();return;}
+ const uid=approvedUid,generation=authGeneration;
+ $("questionArea").hidden=true;$("resultArea").hidden=false;
+ $("score").textContent=questions.length+"問中 "+correctCount+"問正解";
+ $("saveStatus").textContent="学習結果を保存しています…";
+ $("retry").disabled=true;
+ try{
+  const ref=doc(db,"users",uid,"review","progress");
+  const snap=await getDoc(ref);
+  if(generation!==authGeneration||approvedUid!==uid)return;
+  const attempts=(snap.exists()?Number(snap.data().attempts)||0:0)+1;
+  await setDoc(ref,{attempts,lastScore:correctCount,lastAt:serverTimestamp()});
+  if(generation!==authGeneration||approvedUid!==uid)return;
+  $("saveStatus").textContent="学習結果を保存しました。";
+  await loadHistory(uid,generation);
+ }catch(e){if(generation===authGeneration)$("saveStatus").textContent="保存できませんでした："+(e.code||"エラー")+"。再挑戦できます。";}
+ finally{if(generation===authGeneration)$("retry").disabled=false;}
+});
 $("copyUid").addEventListener("click",async()=>{
  try{await navigator.clipboard.writeText($("uid").textContent);status.textContent="UIDをコピーしました。";}
  catch(e){status.textContent="コピーできませんでした。UIDを長押ししてコピーしてください。";}
