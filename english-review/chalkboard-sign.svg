@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 178" role="img" aria-label="スピード・回転数重視！">
+<defs><linearGradient id="wood" x2="0" y2="1"><stop stop-color="#c78a48"/><stop offset=".4" stop-color="#8c4f25"/><stop offset=".8" stop-color="#c58a49"/><stop offset="1" stop-color="#75411e"/></linearGradient><radialGradient id="board"><stop stop-color="#24543d"/><stop offset="1" stop-color="#103425"/></radialGradient></defs>
+<rect x="3" y="3" width="794" height="172" rx="22" fill="url(#wood)" stroke="#663a1d" stroke-width="5"/>
+<rect x="20" y="20" width="760" height="138" rx="13" fill="url(#board)" stroke="#714621" stroke-width="7"/>
+<path d="M36 28H763 M36 151H763" stroke="#e3aa6b" stroke-opacity=".32" stroke-width="2"/>
+<g fill="#d9af60" stroke="#694a2a" stroke-width="2"><circle cx="17" cy="17" r="7"/><circle cx="783" cy="17" r="7"/><circle cx="17" cy="161" r="7"/><circle cx="783" cy="161" r="7"/></g>
+<text x="400" y="110" text-anchor="middle" fill="#f8f7ed" stroke="#f8f7ed" stroke-width=".65" paint-order="stroke" font-size="55" font-weight="800" letter-spacing="-1" font-family="Hiragino Maru Gothic ProN,Yu Gothic,Meiryo,sans-serif" transform="rotate(-.4 400 90)">スピード・回転数重視！</text>
+<path d="M100 133 Q265 129 425 135 T700 133" fill="none" stroke="#e6d533" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 3"/>
+</svg>
