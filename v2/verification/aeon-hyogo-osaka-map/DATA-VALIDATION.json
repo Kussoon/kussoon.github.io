@@ -6,18 +6,18 @@
   "masterHeadersChanged": false,
   "duplicateIDs": 0,
   "osakaPrecision": {
-    "P4": 43,
-    "P3": 99,
+    "P4": 45,
+    "P3": 97,
     "P2": 0,
     "P1": 0,
     "未確認": 0
   },
   "combinedPrecision": {
-    "P4": 152,
-    "P3": 166
+    "P4": 154,
+    "P3": 164
   },
   "policyResolved": 4,
-  "continuingIssues": 3,
+  "continuingIssues": 1,
   "formulaErrors": 0,
   "reconciliationDifferences": [
     0,
@@ -44,5 +44,9 @@
     "調査出典一覧",
     "兵庫県修正候補",
     "運用・設計メモ"
-  ]
+  ],
+  "changedLocations": 3,
+  "upgradedPrecision": 2,
+  "osakaP3Reviewed": 99,
+  "followupDate": "2026-11-22"
 }
