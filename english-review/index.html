@@ -46,6 +46,7 @@ let questions=[
  {q:"後ろの車がクラクションを鳴らしました。",answer:"The car behind me honked.",why:"honk は車のクラクションを鳴らすことです。"},
  {q:"私はイヤホンでポッドキャストを聴きます。",answer:"I listen to podcasts on my earphones.",why:"through my earphones や with my earphones も自然な言い方です。"}
 ];
+const $=id=>document.getElementById(id);
 const builtins=questions.map((q,i)=>({...q,id:"builtin-"+i,language:"en"}));
 const provider=new GoogleAuthProvider();
 const qid=q=>q.id||key(q);
@@ -80,7 +81,7 @@ document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if
 $("mode").addEventListener("change",refresh);$("batchSelect").addEventListener("change",refresh);
 async function loadSessions(uid,generation){try{const snap=await getDocs(collection(db,"users",uid,"sessions"));if(generation!==authGeneration||approvedUid!==uid)return;sessions=snap.docs.map(d=>d.data());refresh();}catch(e){$("poolCount").textContent="詳細履歴の取得に失敗："+(e.code||"エラー");}}
 
-const $=id=>document.getElementById(id);
+
 const status=$("status"),login=$("login"),logout=$("logout");
 onAuthStateChanged(auth,async user=>{
  const generation=++authGeneration;
