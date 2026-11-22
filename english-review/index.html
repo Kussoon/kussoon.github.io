@@ -7,7 +7,7 @@
 <title>英語復習アプリ（試作） | Kussoon</title>
 <style>
 :root{color-scheme:light dark;font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
-body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:40px auto;padding:24px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem} [hidden]{display:none!important}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#userPanel[hidden],#loginPanel[hidden],#pendingPanel[hidden],#approvedPanel[hidden]{display:none!important}code{overflow-wrap:anywhere}#copyUid{background:#526172}#logout{background:#4b5563}#userPanel{display:block}#quiz[hidden],#questionArea[hidden],#resultArea[hidden]{display:none!important}.answers{display:grid;gap:10px}.answers button{text-align:left;background:#344e6b}.answers button:disabled{opacity:.8;cursor:default}.answers button.correct{background:#216e4e}.answers button.wrong{background:#a43d3d}.panel{border:1px solid #8794a455;border-radius:12px;padding:16px;margin-top:16px}.feedback{min-height:2em}.quiz-actions{display:flex;gap:10px;flex-wrap:wrap}.quiz-actions button{background:#1769aa}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}a{color:#1769aa}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}}
+body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 auto;padding:16px 20px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem;margin:12px 0 10px} [hidden]{display:none!important}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#userPanel[hidden],#loginPanel[hidden],#pendingPanel[hidden],#approvedPanel[hidden]{display:none!important}code{overflow-wrap:anywhere}#copyUid{background:#526172}#logout{background:#4b5563}#userPanel{display:block}#quiz[hidden],#questionArea[hidden],#resultArea[hidden]{display:none!important}.answers{display:grid;gap:10px}.answers button{text-align:left;background:#344e6b}.answers button:disabled{opacity:.8;cursor:default}.answers button.correct{background:#216e4e}.answers button.wrong{background:#a43d3d}.panel{border:1px solid #8794a455;border-radius:12px;padding:16px;margin-top:12px}.feedback{min-height:2em}.quiz-actions{display:flex;gap:10px;flex-wrap:wrap}.quiz-actions button{background:#1769aa}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}#status[hidden]{display:none!important}#userPanel>p:first-child{margin:8px 0 12px}#userPanel>p:last-child{margin-bottom:0}a{color:#1769aa}@media(max-width:680px){main{border-radius:0;min-height:100dvh;box-sizing:border-box;padding:12px 16px}main>p:first-child{margin:4px 0 12px}#quiz{margin-top:8px}}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}}
 </style>
 </head>
 <body>
@@ -17,7 +17,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:40px 
 
 <p id="status" role="status" aria-live="polite">認証状態を確認しています…</p>
 <section id="loginPanel" hidden><button id="login" type="button">Googleでログイン</button></section>
-<section id="userPanel" hidden><p>ログイン中：<strong id="userName"></strong></p><p class="muted" id="userEmail"></p><section id="approvedPanel" hidden><section id="quiz" class="panel" hidden><h2>英語の復習・5問</h2><p class="muted">日本語を英語にしてみましょう。声に出して答えても構いません。模範解答を見て、ご自身で採点してください。</p><p id="history" class="muted">学習履歴を読み込んでいます…</p><section id="questionArea" hidden><p id="progress"></p><h3 id="question"></h3><button id="reveal" type="button">解答を見る</button><div id="answerPanel" class="panel" hidden><p><strong>模範解答</strong></p><p id="modelAnswer" lang="en"></p><p id="feedback" class="muted"></p><p>ご自身の答えを採点してください。</p><div class="quiz-actions"><button id="markCorrect" type="button">正解</button><button id="markWrong" type="button">不正解</button></div></div></section><section id="resultArea" hidden><h3>結果発表</h3><p id="score"></p><p id="saveStatus" role="status"></p><button id="retry" type="button">もう一度挑戦する</button></section><button id="start" type="button">5問に挑戦する</button></section></section><section id="pendingPanel" hidden><p>このアカウントはまだ利用許可されていません。管理者にユーザーID（UID）を登録してもらってください。</p><p>UID：<code id="uid"></code></p><button id="copyUid" type="button">UIDをコピー</button><p class="muted">登録後にこのページを再読み込みしてください。</p></section><p><button id="logout" type="button">ログアウト</button></p></section>
+<section id="userPanel" hidden><p><strong id="userName"></strong> でログイン中</p><section id="approvedPanel" hidden><section id="quiz" class="panel" hidden><h2>英語の復習・5問</h2><p class="muted">日本語を英語にしてみましょう。声に出して答えても構いません。模範解答を見て、ご自身で採点してください。</p><p id="history" class="muted">学習履歴を読み込んでいます…</p><section id="questionArea" hidden><p id="progress"></p><h3 id="question"></h3><button id="reveal" type="button">解答を見る</button><div id="answerPanel" class="panel" hidden><p><strong>模範解答</strong></p><p id="modelAnswer" lang="en"></p><p id="feedback" class="muted"></p><p>ご自身の答えを採点してください。</p><div class="quiz-actions"><button id="markCorrect" type="button">正解</button><button id="markWrong" type="button">不正解</button></div></div></section><section id="resultArea" hidden><h3>結果発表</h3><p id="score"></p><p id="saveStatus" role="status"></p><button id="retry" type="button">もう一度挑戦する</button></section><button id="start" type="button">5問に挑戦する</button></section></section><section id="pendingPanel" hidden><p>このアカウントはまだ利用許可されていません。管理者にユーザーID（UID）を登録してもらってください。</p><p>UID：<code id="uid"></code></p><button id="copyUid" type="button">UIDをコピー</button><p class="muted">登録後にこのページを再読み込みしてください。</p></section><p><button id="logout" type="button">ログアウト</button></p></section>
 <p class="muted">ログインするとGoogleアカウントの基本プロフィール情報を認証に使用します。許可済みの利用者については、自己採点した学習結果（得点・実施日時）をFirestoreに保存します。</p>
 </main>
 <script type="module">
@@ -61,10 +61,10 @@ onAuthStateChanged(auth,async user=>{
  $("start").hidden=false;
  $("pendingPanel").hidden=true;
  $("userName").textContent=user?.displayName||"Googleユーザー";
- $("userEmail").textContent=user?.email||"";
+
  login.disabled=false;logout.disabled=false;
- if(!user){status.textContent="ログインしていません。";return;}
- status.textContent="利用許可を確認しています…";
+ if(!user){status.hidden=false;status.textContent="ログインしていません。";return;}
+ status.hidden=false;status.textContent="利用許可を確認しています…";
  $("uid").textContent=user.uid;
  try{
   const snap=await getDoc(doc(db,"access",user.uid));
@@ -72,15 +72,15 @@ onAuthStateChanged(auth,async user=>{
   const approved=snap.exists() && snap.data().enabled===true;
   $("approvedPanel").hidden=!approved;
   $("pendingPanel").hidden=approved;
-  status.textContent=approved?"利用が許可されています。":"このアカウントは未許可です。";
+  status.hidden=approved;status.textContent=approved?"":"このアカウントは未許可です。";
   if(approved){approvedUid=user.uid;$("quiz").hidden=false;await loadHistory(user.uid,generation);}
  }catch(e){
   if(generation!==authGeneration)return;
   $("approvedPanel").hidden=true;
   $("pendingPanel").hidden=false;
-  status.textContent="利用許可を確認できませんでした。管理者にお問い合わせください。";
+  status.hidden=false;status.textContent="利用許可を確認できませんでした。管理者にお問い合わせください。";
  }
-},error=>{status.textContent="認証状態を確認できませんでした："+error.code;login.disabled=false;});
+},error=>{status.hidden=false;status.textContent="認証状態を確認できませんでした："+error.code;login.disabled=false;});
 async function loadHistory(uid,generation){
  $("history").textContent="学習履歴を読み込んでいます…";
  try{
@@ -143,13 +143,13 @@ $("copyUid").addEventListener("click",async()=>{
  catch(e){status.textContent="コピーできませんでした。UIDを長押ししてコピーしてください。";}
 });
 login.addEventListener("click",async()=>{
- login.disabled=true;status.textContent="Googleログイン画面を開いています…";
+ status.hidden=false;login.disabled=true;status.textContent="Googleログイン画面を開いています…";
  try{await signInWithPopup(auth,provider);}
  catch(e){status.textContent=e.code==="auth/popup-blocked"?"ポップアップがブロックされました。Safariの設定をご確認ください。":e.code==="auth/popup-closed-by-user"?"ログイン画面が閉じられました。":"ログインできませんでした："+(e.code||"不明なエラー");}
  finally{login.disabled=false;}
 });
 logout.addEventListener("click",async()=>{
- logout.disabled=true;
+ status.hidden=false;logout.disabled=true;
  try{await signOut(auth);}catch(e){status.textContent="ログアウトできませんでした："+(e.code||"不明なエラー");}
  finally{logout.disabled=false;}
 });
