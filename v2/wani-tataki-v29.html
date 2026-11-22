@@ -294,7 +294,6 @@ const EMPTY_FIELD_MS = 450;
 const FRENZY_COUNT = 33;
 const CROC_SPEED = 500;
 const FRENZY_SPEED = 700;
-const FRENZY_LAUNCH_GAP_MS = Math.ceil(MAX_CROC_WIDTH * .5 * 1000 / FRENZY_SPEED + 40);
 const SHORE_REVEAL_PX = 32;
 const SHORE_HANDOFF_PX = 18;
 const PLAY_MESSAGE = 'ワニをたたけ！';
@@ -384,58 +383,30 @@ function shuffledLanes(){
  return indices;
 }
 function makeFrenzySchedule(holdRange){
- const minimumGap=FRENZY_LAUNCH_GAP_MS;
+ const order=shuffledLanes();
  const fullTripsMs=MAX_CROC_WIDTH/FRENZY_SPEED*1000;
- function randomLaneOrder(){
-  const remaining=lanes.map((_,index)=>Math.floor(FRENZY_COUNT/lanes.length)+(index<FRENZY_COUNT%lanes.length?1:0));
-  const order=[];
-  function fill(){
-   if(order.length===FRENZY_COUNT)return true;
-   let candidates=remaining.map((count,index)=>count>0&&!order.slice(-4).includes(index)?index:-1).filter(index=>index>=0);
-   for(let i=candidates.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[candidates[i],candidates[j]]=[candidates[j],candidates[i]]}
-   for(const index of candidates){
-    remaining[index]--;order.push(index);
-    if(fill())return true;
-    order.pop();remaining[index]++;
-   }
-   return false;
-  }
-  return fill()?order:null;
- }
- for(let attempt=0;attempt<500;attempt++){
-  const order=randomLaneOrder();
-  if(!order)continue;
-  const holds=order.map(()=>rnd(...holdRange));
-  const latestFinalStart=FRENZY_MS-holds[FRENZY_COUNT-1]-fullTripsMs;
-  const slack=latestFinalStart-minimumGap*(FRENZY_COUNT-1);
-  if(slack<0)continue;
-  const weights=Array.from({length:FRENZY_COUNT-1},()=>rnd(.8,1.2));
+ const schedule=[];
+ for(const [position,index] of order.entries()){
+  const count=Math.floor(FRENZY_COUNT/order.length)+(position<FRENZY_COUNT%order.length?1:0);
+  const holds=Array.from({length:count},()=>rnd(...holdRange));
+  const occupied=holds.slice(0,-1).map(hold=>hold+fullTripsMs+5);
+  const finaleLane=position===order.length-1;
+  const openingLane=position===0;
+  const latest=FRENZY_MS-holds[count-1]-fullTripsMs-(finaleLane?0:20);
+  const slack=latest-occupied.reduce((sum,ms)=>sum+ms,0);
+  // Pick the gaps independently for each lane while leaving room for all 33 turns.
+  const weights=Array.from({length:count+1},()=>rnd(.1,1)**2);
+  if(openingLane)weights[0]=0;
+  if(finaleLane)weights[count]=0;
   const weightTotal=weights.reduce((sum,weight)=>sum+weight,0);
-  const laneReady=Array(lanes.length).fill(0);
-  const schedule=[];
-  let at=0,valid=true;
-  for(let i=0;i<FRENZY_COUNT;i++){
-   if(i)at+=minimumGap+slack*weights[i-1]/weightTotal;
-   at=Math.max(at,laneReady[order[i]]);
-   if(i===FRENZY_COUNT-1&&at>latestFinalStart){valid=false;break}
-   schedule.push({at,index:order[i],holdMs:holds[i],finale:i===FRENZY_COUNT-1});
-   laneReady[order[i]]=at+holds[i]+fullTripsMs;
+  const gaps=weights.map(weight=>slack*weight/weightTotal);
+  let at=gaps[0];
+  for(let i=0;i<count;i++){
+   schedule.push({at,index,holdMs:holds[i],finale:finaleLane&&i===count-1});
+   if(i<count-1)at+=occupied[i]+gaps[i+1];
   }
-  if(valid)return schedule;
  }
- // Keep a safe, staggered fallback if random holds and lane cooldowns are unusually tight.
- const order=randomLaneOrder()||shuffledLanes();
- const holds=order.map(()=>rnd(...holdRange));
- const latestFinalStart=FRENZY_MS-holds[FRENZY_COUNT-1]-fullTripsMs;
- const slack=Math.max(0,latestFinalStart-minimumGap*(FRENZY_COUNT-1));
- const weights=Array.from({length:FRENZY_COUNT-1},()=>rnd(.8,1.2));
- const weightTotal=weights.reduce((sum,weight)=>sum+weight,0);
- const schedule=[];let at=0;
- for(let i=0;i<FRENZY_COUNT;i++){
-  schedule.push({at,index:order[i],holdMs:holds[i],finale:i===FRENZY_COUNT-1});
-  if(i<FRENZY_COUNT-1)at+=minimumGap+slack*weights[i]/weightTotal;
- }
- return schedule;
+ return schedule.sort((a,b)=>a.at-b.at);
 }
 function openNormalLane(){
  const index=shuffledLanes().find(i=>!lanes[i].active);
@@ -546,7 +517,7 @@ function frame(now){
    appear(events.shift());
   }
  }
- if(t<limit&&!isFrenzy)keepLaneVisible(false);
+ if(t<limit)keepLaneVisible(isFrenzy);
  if(t>=limit){
   // Let visible crocodiles retreat normally, then leave a clear beat before the card.
   events.length=0;
