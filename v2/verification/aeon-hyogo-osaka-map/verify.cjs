@@ -23,7 +23,7 @@ await page.click('#reset');
 for(const name of ['KOHYO淀川三国店','KOHYO肥後橋店']){
  await page.fill('#query',name); assert.equal(await page.locator('#store-rows tr').count(),1);
  assert.equal(await page.evaluate(()=>clusters.getLayers().length),1);
- await page.locator('#store-cards button').click(); assert(await page.locator('#detail').isVisible());
+ await page.getByRole('button',{name:'地図・詳細を見る',exact:true}).click(); assert(await page.locator('#detail').isVisible());
  assert.equal(await page.locator('#detail .detail-actions a').count(),3);
 }
 await page.click('#reset');await page.fill('#query','CoDeli天神橋筋六丁目駅前店');assert.equal(await page.locator('#store-rows tr').count(),1);await page.click('#fit-results');await page.locator('.leaflet-marker-icon[title^="CoDeli天神橋筋六丁目駅前店"]').click();assert(await page.locator('#detail').isVisible());assert.equal(await page.locator('#detail h3').textContent(),'CoDeli天神橋筋六丁目駅前店');const links=await page.locator('#detail .detail-actions a').evaluateAll(a=>a.map(x=>({href:x.href,rel:x.rel})));assert.equal(links.length,3);assert.equal(links[0].href,await page.evaluate(()=>STORES.find(s=>s.id==='JP-27-000013').url));assert(links[1].href.includes('maps/search/'));assert(links[2].href.includes('maps/dir/'));assert(links.every(x=>x.rel.includes('noopener')));await page.locator('#detail .detail-actions a').last().scrollIntoViewIfNeeded();assert.equal(await page.evaluate(()=>{const r=document.querySelector('#detail .detail-actions a:last-child').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.bottom<=innerHeight}),true,'detail last action visible');await page.click('.detail-close');assert(!(await page.locator('#detail').isVisible()));
