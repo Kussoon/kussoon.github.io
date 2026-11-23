@@ -126,7 +126,7 @@ async function loadHistory(uid,generation){
   $("history").textContent="前回の結果："+(Number(data.lastScore)||0)+"/5問 正解（"+date+"）／挑戦回数："+(Number(data.attempts)||0);
  }catch(e){if(generation===authGeneration)$("history").textContent="学習履歴を読み込めませんでした："+(e.code||"エラー");}
 }
-const norm=s=>s.normalize("NFKC").trim().replace(/\\s+/g," ").toLowerCase();
+const norm=s=>s.normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase();
 const key=q=>norm(q.q)+"|"+norm(q.answer);
 async function loadBank(uid,generation){
  $("bankCount").textContent="登録済み表現を読み込み中…";
@@ -143,9 +143,9 @@ async function expressionId(q){
 }
 $("importButton").addEventListener("click",async()=>{
  const uid=approvedUid,generation=authGeneration;if(!uid)return;
- const lines=$("importText").value.split(/\\r?\\n/).map(x=>x.trim()).filter(Boolean);
+ const lines=$("importText").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
  if(!lines.length||lines.length>100){$("importStatus").textContent="1〜100行を入力してください。";return;}
- const rows=lines.map(line=>line.split("\\t").map(x=>x.trim()));
+ const rows=lines.map(line=>line.split(line.includes("\t")?/\t/:/ {2,}|\u3000+/).map(x=>x.trim()));
  if(rows.some(a=>a.length<2||a.length>3||!a[0]||!a[1]||a[0].length>300||a[1].length>500||(a[2]||"").length>1000)){
   $("importStatus").textContent="形式が不正な行があります。タブ区切りで入力してください。";return;
  }
