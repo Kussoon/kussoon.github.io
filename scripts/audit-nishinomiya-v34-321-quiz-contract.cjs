@@ -4,9 +4,11 @@
 const {chromium,webkit}=require('playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const base=process.env.NISHINOMIYA_TEST_BASE||'http://127.0.0.1:8765';
+const targetPath=process.env.NISHINOMIYA_TEST_PATH||'/v2/nishinomiya-town-svg-master-v34-20261117-pilot.html';
 const out=path.resolve('nishinomiya-v34-321-quiz-contract');fs.mkdirSync(out,{recursive:true});
 const engines=[{name:'chromium-1280',driver:chromium,width:1280,height:800},
- {name:'webkit-390',driver:webkit,width:390,height:844}];
+ {name:'webkit-390',driver:webkit,width:390,height:844},
+ {name:'webkit-320',driver:webkit,width:320,height:668}];
 (async()=>{
  for(const cfg of engines){
   const browser=await cfg.driver.launch({headless:true});
@@ -16,7 +18,7 @@ const engines=[{name:'chromium-1280',driver:chromium,width:1280,height:800},
    const errors=[];page.on('pageerror',e=>errors.push(e.message));
    // Test-only exposure of functions already scoped inside the production
    // IIFE. Do not alter the shipped HTML file or the quiz implementation.
-   await page.route('**/v2/nishinomiya-town-svg-master-v34-20261117-pilot.html',async route=>{
+   await page.route('**'+targetPath,async route=>{
     const response=await route.fetch();
     const original=await response.text();
     const marker='KussoonTownSvgDataContract.load({';
@@ -25,7 +27,7 @@ const engines=[{name:'chromium-1280',driver:chromium,width:1280,height:800},
     const body=original.replace(marker,instrumentation+marker);
     await route.fulfill({response,body,headers:{...response.headers(),'content-type':'text/html; charset=utf-8'}});
    });
-   await page.goto(base+'/v2/nishinomiya-town-svg-master-v34-20261117-pilot.html',
+   await page.goto(base+targetPath,
     {waitUntil:'domcontentloaded',timeout:60000});
    await page.waitForFunction(()=>document.querySelector('#communityCount')?.textContent.includes('321町名'),
     null,{timeout:60000});
