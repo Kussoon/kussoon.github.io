@@ -6,15 +6,15 @@
   "masterHeadersChanged": false,
   "duplicateIDs": 0,
   "osakaPrecision": {
-    "P4": 45,
-    "P3": 97,
+    "P4": 43,
+    "P3": 99,
     "P2": 0,
     "P1": 0,
     "未確認": 0
   },
   "combinedPrecision": {
-    "P4": 154,
-    "P3": 164
+    "P4": 152,
+    "P3": 166
   },
   "policyResolved": 4,
   "continuingIssues": 1,
@@ -83,14 +83,16 @@
   "officialPositionReview": {
     "date": "2026-11-23",
     "confirmed": 140,
-    "coordinateChanges": 13,
-    "pending": 2,
+    "coordinateChanges": 15,
+    "pending": 0,
     "excelHtmlMatches": 318,
     "osakaExcelHtmlMatches": 142,
     "hyogoUnchangedRows": 176,
     "workbookSheets": 9,
     "masterColumns": 35,
     "workbookValidationDifferences": 0,
-    "cachedFormulaErrors": 0
+    "cachedFormulaErrors": 0,
+    "userSelected": 2,
+    "browserVerification": "変更後は未実施"
   }
 }
