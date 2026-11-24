@@ -41,3 +41,8 @@
 
 ## 新しいチャットへの依頼例
 この語学復習アプリの開発を引き継いでください。https://kussoon.com/english-review/ と GitHub Kussoon/kussoon.github.io の english-review/HANDOVER.md、index.html を確認し、既存データを維持して作業してください。
+
+## 未分類の追加整理
+- 復習範囲に未分類の表現を追加。管理メニューに現在の言語の未分類件数と未分類のみのJSON出力を追加。
+- scope: unclassified の整理用JSONは部分反映可能。対象は現在も未分類の既存IDのみ。本文・初回番号・学習履歴は変更せず、situation と sortOrder のみ更新。反映前バックアップを維持。
+- 部分整理時は scope を保持し、既存分類済み表現と順序が衝突しないよう元の sortOrder を維持することを推奨。
