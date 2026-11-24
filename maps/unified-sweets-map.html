@@ -499,7 +499,7 @@ new SweetsSizeControl().addTo(map);
  // Use passive:false; do not attach to the popup list or the document.
  $('map').addEventListener('touchmove',function(e){if(e.cancelable)e.preventDefault()},{passive:false});
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
-clusters=L.markerClusterGroup({maxClusterRadius:36,showCoverageOnHover:false,spiderfyOnMaxZoom:false,disableClusteringAtZoom:15}).addTo(map);
+clusters=L.markerClusterGroup({maxClusterRadius:36,showCoverageOnHover:false,spiderfyOnMaxZoom:false,disableClusteringAtZoom:14}).addTo(map);
 map.on('movestart zoomstart',closeSweetPreview);
 map.on('click',closeSweetPreview);
 // Both controls live at upper right. 「全体」 fits the currently visible pins.
