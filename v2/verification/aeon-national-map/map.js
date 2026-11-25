@@ -112,7 +112,16 @@ async function start() {
     for (const row of sortedRows) {
       const item = node('li');
       item.dataset.storeId = row.id;
-      item.append(node('strong',row.name),node('p',`${row.brand} ／ ${row.operator}`),node('p',row.address || '住所未確認'));
+      const fields = node('dl',null,'popup-fields');
+      for (const [label,value] of [
+        ['店舗名',row.name],
+        ['屋号',row.brand || '未確認'],
+        ['運営会社',row.operator || '未確認'],
+        ['住所',row.address || '住所未確認']
+      ]) {
+        fields.append(node('dt',label),node('dd',value));
+      }
+      item.append(fields);
       if (!matchedIds.has(row.id)) item.append(node('p','絞り込み条件外の同一地点店舗','outside-filter'));
       if (row.url) {
         const link = node('a','公式店舗情報');
@@ -136,7 +145,7 @@ async function start() {
     const title = rows.length > 1 ? `同じ座標の店舗 ${format(rows.length)}件` : row.name;
     const dot = node('span',rows.length > 1 ? String(rows.length) : '',`store-dot${rows.length > 1 ? ' shared' : ''}`);
     if (brand) dot.style.setProperty('--brand',palette.get(brand));
-    const size = 29;
+    const size = 24;
     const icon = L.divIcon({className:'map-pin',html:dot,iconSize:[size,size],iconAnchor:[size/2,size/2]});
     return L.marker([row.lat,row.lng],{icon,title,alt:title,brand,storeCount:rows.length}).on('click',() => openPoint(rows));
   }
