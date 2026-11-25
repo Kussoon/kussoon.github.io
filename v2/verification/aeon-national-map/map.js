@@ -21,7 +21,7 @@ function totals(rows, key) {
 }
 
 async function start() {
-  const response = await fetch('stores.json?v=20261125-8');
+  const response = await fetch('stores.json?v=20261125-9');
   if (!response.ok) throw new Error('店舗データを取得できませんでした');
   const stores = await response.json();
   const ids = new Set(stores.map(row => row.id));
