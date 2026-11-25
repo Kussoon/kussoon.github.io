@@ -235,7 +235,7 @@ $("resetHistory").addEventListener("click",async()=>{
  if(!keep.length){plan.delete(a.ref);for(const d of a.parts||[])plan.delete(d.ref);}
  else{plan.update(a.ref,{count:keep.length,score:keep.filter(x=>x.correct).length,...(a.chunked?{}:{answers:keep})});for(const d of a.parts||[])plan.update(d.ref,{answers:d.data().answers.filter(x=>!drop(x))});}}
  const counts=xs=>({correctCount:xs.filter(x=>x.state!=="excluded"&&x.correct).length,wrongCount:xs.filter(x=>x.state!=="excluded"&&!x.correct).length});
- for(const q of bank.filter(q=>affected.has(q.id))){const old=counts(before.get(q.id)||[]);if(mode!=="all"&&mode!=="question"&&(old.correctCount!==(q.correctCount||0)||old.wrongCount!==(q.wrongCount||0)))throw Error("過去の詳細履歴が不足しています。部分取消は安全のため中止します。");const xs=after.get(q.id)||[],last=xs.at(-1),graded=xs.filter(x=>x.state!=="excluded").at(-1),correct=xs.filter(x=>x.correct).at(-1);plan.update(doc(db,"users",uid,"expressions",q.id),{...counts(xs),learningState:last?(last.state||(last.correct?"learned":"learning")):null,lastReviewedAt:last?.at||null,lastCorrect:graded?graded.correct:null,lastCorrectAt:correct?.at||null});}
+ for(const q of bank.filter(q=>affected.has(q.id))){const old=counts(before.get(q.id)||[]);if(mode!=="all"&&mode!=="question"&&(old.correctCount!==(q.correctCount||0)||old.wrongCount!==(q.wrongCount||0)))throw Error("過去の詳細履歴が不足しています。部分取消は安全のため中止します。");plan.update(doc(db,"users",uid,"expressions",q.id),resetStats(after.get(q.id)||[]));}
  if(mode==="all"){for(const d of chunks)if(!records.some(a=>a.parts?.some(x=>x.id===d.id)))plan.delete(d.ref);plan.delete(activeRef(uid,l));if(l==="en")plan.delete(doc(db,"users",uid,"review","progress"));}
  if(!ops.length){status.textContent="対象の履歴はありません。";return;}
  if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");
@@ -247,6 +247,10 @@ $("resetHistory").addEventListener("click",async()=>{
 });
 
 // Durable reset journal.
+function resetStats(xs){
+ const last=xs.at(-1),graded=xs.filter(x=>x.state!=="excluded").at(-1),correct=xs.filter(x=>x.state!=="excluded"&&x.correct).at(-1);
+ return {correctCount:xs.filter(x=>x.state!=="excluded"&&x.correct).length,wrongCount:xs.filter(x=>x.state!=="excluded"&&!x.correct).length,learningState:last?(last.state||(last.correct?"learned":"learning")):null,lastReviewedAt:last?.at||null,lastCorrect:graded?graded.correct:null,lastCorrectAt:correct?.at||null};
+}
 const resetJournalRef=(uid,l)=>doc(db,"users",uid,"review","reset-"+l);
 const resetJournalPart=(uid,l,id,n)=>doc(db,"users",uid,"resetPlans",l+"-"+id+"-"+n);
 // Stage a complete immutable plan before enabling execution.
