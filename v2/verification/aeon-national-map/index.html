@@ -4,27 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="全国4,613店舗のイオン系列スーパーの地理的分布を確認できるKussoonの第2検証版。">
+<meta name="description" content="全国4,613店舗のイオン系列スーパーの地理的分布を確認できるKussoonの第3検証版。">
 <title>全国イオン系列スーパーマップ｜Kussoon</title>
 <link rel="stylesheet" href="vendor/leaflet.css">
 <link rel="stylesheet" href="vendor/MarkerCluster.css">
-<link rel="stylesheet" href="map.css?v=20261125-2">
+<link rel="stylesheet" href="map.css?v=20261125-3">
 <script defer src="vendor/leaflet.js"></script>
 <script defer src="vendor/leaflet.markercluster.js"></script>
-<script defer src="map.js?v=20261125-2"></script>
+<script defer src="map.js?v=20261125-3"></script>
 </head>
 <body>
 <main class="frame">
   <section class="intro">
-    <div class="edition">第2検証版</div>
+    <div class="edition">第3検証版</div>
     <h1>全国イオン系列<span>スーパーマップ</span></h1>
     <p>全国のイオン系列スーパーを、地域と屋号から見る。</p>
     <div class="metadata"><span><strong>4,613</strong> 店舗</span><span><strong>47</strong> 都道府県</span><span><strong>16</strong> 系列</span><span class="date">台帳基準日 2026年11月23日</span></div>
   </section>
-  <div class="pin-legends">
-    <details class="legend card"><summary>屋号の凡例</summary><ul id="brands"></ul></details>
-    <div class="map-legend"><span><i class="legend-cluster" aria-hidden="true">42</i> 近接する店舗</span><span><i class="legend-shared" aria-hidden="true">2</i> 同じ座標の店舗</span></div>
-  </div>
   <div class="workspace">
     <section class="filters card" aria-labelledby="filters-title">
       <div class="panel-head"><h2 id="filters-title">店舗を絞り込む</h2><button id="reset" type="button" disabled>リセット</button></div>
@@ -37,6 +33,11 @@
     </section>
     <section class="map-card card" aria-labelledby="map-title">
       <div class="map-head"><h2 id="map-title">全国の店舗分布</h2><output id="count" aria-live="polite">読み込み中</output></div>
+      <div class="pin-legends">
+        <details class="legend card"><summary>屋号の凡例</summary><ul id="brands"></ul></details>
+        <div class="map-legend"><span><i class="legend-cluster" aria-hidden="true">42</i> 近接する店舗</span><span><i class="legend-shared" aria-hidden="true">2</i> 同じ座標の店舗</span></div>
+        <p class="pin-hint">ピンを押すと店舗情報が出ます</p>
+      </div>
       <div id="map" aria-label="全国イオン系列スーパーの分布地図"></div>
     </section>
     <section class="results card" aria-labelledby="results-title">
