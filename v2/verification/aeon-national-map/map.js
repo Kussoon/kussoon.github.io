@@ -135,7 +135,8 @@ async function start() {
     const content = node('div');
     if (rows.length > 1) content.append(node('div',`同じ座標の店舗（${format(rows.length)}件）`,'popup-title'));
     content.append(list);
-    L.popup({maxWidth: Math.min(290,el('map').clientWidth-65), maxHeight: Math.min(280,el('map').clientHeight-110)})
+    const popupWidth = Math.min(290, Math.max(120, el('map').clientWidth-65));
+    L.popup({minWidth: popupWidth, maxWidth: popupWidth, maxHeight: Math.min(280,el('map').clientHeight-110)})
       .setLatLng([rows[0].lat,rows[0].lng]).setContent(content).openOn(map);
   }
 
