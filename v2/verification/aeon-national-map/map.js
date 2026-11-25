@@ -202,7 +202,6 @@ async function start() {
     if (refit) fitResults();
     clusterLayer.addLayers([...pointGroups.values()].map(marker));
     el('count').textContent = `${format(shown.length)} / ${format(stores.length)} 店舗`;
-    el('fit').disabled = !shown.length;
     page = 0;
     showPage();
   }
@@ -221,7 +220,6 @@ async function start() {
     for (const id of ['query','prefecture','brand']) el(id).value = '';
     filter(true);
   });
-  el('fit').addEventListener('click', fitResults);
   el('previous').addEventListener('click',() => {page -= 1;showPage();});
   el('next').addEventListener('click',() => {page += 1;showPage();});
   if ('ResizeObserver' in window) new ResizeObserver(() => {
