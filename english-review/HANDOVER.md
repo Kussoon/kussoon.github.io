@@ -54,3 +54,7 @@
 
 ## 途中再開
 review/active-en, active-fr に出題ID順、回答、進捗を保存。採点はFirestore transactionで問題別履歴と同時更新、最終問は同一transactionでsessionsにも保存。別端末の進行を検知したら再読み込み。旧progress集計は新規更新しない。実機未検証。途中終了・教材削除との整合は次工程。
+
+
+## 三段階判定
+learningState: excluded / learned / learning。通常範囲はexcludedを除外、全件・除外のみ範囲で再判定して復帰可能。三ボタンは均等横一列。除外は正誤回数を増やさない。旧lastCorrectは状態未設定時の互換用。実機検証とバックアップ・リセット対応は残工程。
