@@ -115,7 +115,7 @@ async function start() {
       item.append(node('strong',row.name),node('p',`${row.brand} ／ ${row.operator}`),node('p',row.address || '住所未確認'));
       if (!matchedIds.has(row.id)) item.append(node('p','絞り込み条件外の同一地点店舗','outside-filter'));
       if (row.url) {
-        const link = node('a','公式店舗情報 ↗');
+        const link = node('a','公式店舗情報');
         link.href = row.url;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
@@ -136,7 +136,7 @@ async function start() {
     const title = rows.length > 1 ? `同じ座標の店舗 ${format(rows.length)}件` : row.name;
     const dot = node('span',rows.length > 1 ? String(rows.length) : '',`store-dot${rows.length > 1 ? ' shared' : ''}`);
     if (brand) dot.style.setProperty('--brand',palette.get(brand));
-    const size = rows.length > 1 ? 24 : 15;
+    const size = 29;
     const icon = L.divIcon({className:'map-pin',html:dot,iconSize:[size,size],iconAnchor:[size/2,size/2]});
     return L.marker([row.lat,row.lng],{icon,title,alt:title,brand,storeCount:rows.length}).on('click',() => openPoint(rows));
   }
