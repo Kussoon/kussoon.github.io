@@ -228,25 +228,25 @@ $("resetHistory").addEventListener("click",async()=>{
  const date=$("resetDate").value;if(mode==="date"&&!date)throw Error("日付を指定してください。");
  const localDate=t=>{const d=t?.toDate?.();return d?[d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-"):"";};
  const selected=a=>mode==="all"||mode==="latest"&&a===records.at(-1)||mode==="date"&&localDate(a.finishedAt)===date;
- const affected=new Set(mode==="all"?bank.map(q=>q.id):mode==="question"?qidSet:[]),ops=[];let removed=0;const before=new Map(),after=new Map();
+ const affected=new Set(mode==="all"?bank.map(q=>q.id):mode==="question"?qidSet:[]),ops=[];const plan={delete:ref=>ops.push({type:"delete",collection:ref.parent.id,id:ref.id}),update:(ref,data)=>ops.push({type:"update",collection:ref.parent.id,id:ref.id,data})};let removed=0;const before=new Map(),after=new Map();
  const add=(map,x,a)=>{if(!map.has(x.id))map.set(x.id,[]);map.get(x.id).push({...x,at:x.at||a.finishedAt});};
  for(const a of records){const drop=x=>selected(a)||mode==="question"&&qidSet.has(x.id);const keep=a.answers.filter(x=>!drop(x));for(const x of a.answers){add(before,x,a);if(drop(x)){affected.add(x.id);removed++;}else add(after,x,a);}
  if(keep.length===a.answers.length&&!selected(a))continue;
- if(!keep.length){ops.push(b=>b.delete(a.ref));for(const d of a.parts||[])ops.push(b=>b.delete(d.ref));}
- else{ops.push(b=>b.update(a.ref,{count:keep.length,score:keep.filter(x=>x.correct).length,...(a.chunked?{}:{answers:keep})}));for(const d of a.parts||[])ops.push(b=>b.update(d.ref,{answers:d.data().answers.filter(x=>!drop(x))}));}}
+ if(!keep.length){plan.delete(a.ref);for(const d of a.parts||[])plan.delete(d.ref);}
+ else{plan.update(a.ref,{count:keep.length,score:keep.filter(x=>x.correct).length,...(a.chunked?{}:{answers:keep})});for(const d of a.parts||[])plan.update(d.ref,{answers:d.data().answers.filter(x=>!drop(x))});}}
  const counts=xs=>({correctCount:xs.filter(x=>x.state!=="excluded"&&x.correct).length,wrongCount:xs.filter(x=>x.state!=="excluded"&&!x.correct).length});
- for(const q of bank.filter(q=>affected.has(q.id))){const old=counts(before.get(q.id)||[]);if(mode!=="all"&&mode!=="question"&&(old.correctCount!==(q.correctCount||0)||old.wrongCount!==(q.wrongCount||0)))throw Error("過去の詳細履歴が不足しています。部分取消は安全のため中止します。");const xs=after.get(q.id)||[],last=xs.at(-1),graded=xs.filter(x=>x.state!=="excluded").at(-1),correct=xs.filter(x=>x.correct).at(-1);ops.push(b=>b.update(doc(db,"users",uid,"expressions",q.id),{...counts(xs),learningState:last?(last.state||(last.correct?"learned":"learning")):null,lastReviewedAt:last?.at||null,lastCorrect:graded?graded.correct:null,lastCorrectAt:correct?.at||null}));}
- if(mode==="all"){for(const d of chunks)if(!records.some(a=>a.parts?.some(x=>x.id===d.id)))ops.push(b=>b.delete(d.ref));ops.push(b=>b.delete(activeRef(uid,l)));if(l==="en")ops.push(b=>b.delete(doc(db,"users",uid,"review","progress")));}
+ for(const q of bank.filter(q=>affected.has(q.id))){const old=counts(before.get(q.id)||[]);if(mode!=="all"&&mode!=="question"&&(old.correctCount!==(q.correctCount||0)||old.wrongCount!==(q.wrongCount||0)))throw Error("過去の詳細履歴が不足しています。部分取消は安全のため中止します。");const xs=after.get(q.id)||[],last=xs.at(-1),graded=xs.filter(x=>x.state!=="excluded").at(-1),correct=xs.filter(x=>x.correct).at(-1);plan.update(doc(db,"users",uid,"expressions",q.id),{...counts(xs),learningState:last?(last.state||(last.correct?"learned":"learning")):null,lastReviewedAt:last?.at||null,lastCorrect:graded?graded.correct:null,lastCorrectAt:correct?.at||null});}
+ if(mode==="all"){for(const d of chunks)if(!records.some(a=>a.parts?.some(x=>x.id===d.id)))plan.delete(d.ref);plan.delete(activeRef(uid,l));if(l==="en")plan.delete(doc(db,"users",uid,"review","progress"));}
  if(!ops.length){status.textContent="対象の履歴はありません。";return;}
  if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");
  downloadFile("history-before-reset-"+l+"-"+Date.now()+".json",JSON.stringify({language:l,expressions:bank,sessions:records.map(({ref,parts,...a})=>a),chunks:chunks.map(d=>({id:d.id,data:d.data()})),active:active.exists()?active.data():null},null,2),"application/json");
  if(!confirm("対象 "+affected.size+"問、回答履歴 "+removed+"件。バックアップを保存しましたか？ 取り消しを実行しますか？"))return;
- if(ops.length>450)throw Error("部分取消の安全上限（450書込）を超えています。範囲を絞ってください。");
- if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");const b=writeBatch(db);for(const op of ops)op(b);await b.commit();committed=ops.length;await Promise.all([loadBank(uid,generation),loadSessions(uid,generation)]);status.textContent="初期化完了："+affected.size+"問、回答履歴 "+removed+"件。";
+ 
+ if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");await stageResetPlan(uid,l,ops);await resumeResetPlan(uid,l,(n,total)=>{status.textContent="初期化中 "+n+"/"+total;});committed=ops.length;await Promise.all([loadBank(uid,generation),loadSessions(uid,generation)]);status.textContent="初期化完了："+affected.size+"問、回答履歴 "+removed+"件。";
  }catch(e){status.textContent=(committed?"更新済み・再読込確認が必要：":"中止：")+e.message;}finally{$("resetHistory").disabled=false;}
 });
 
-// Staged reset journal primitives. Not connected to live reset until all mutation guards are implemented.
+// Durable reset journal.
 const resetJournalRef=(uid,l)=>doc(db,"users",uid,"review","reset-"+l);
 const resetJournalPart=(uid,l,id,n)=>doc(db,"users",uid,"resetPlans",l+"-"+id+"-"+n);
 // Stage a complete immutable plan before enabling execution.
@@ -256,7 +256,7 @@ async function stageResetPlan(uid,l,ops){
  let part=[],bytes=0;
  for(const op of ops){const size=new TextEncoder().encode(JSON.stringify(op)).length;if(size>200000)throw Error("初期化操作が大きすぎます");if(part.length>=300||bytes+size>200000){parts.push(part);part=[];bytes=0;}part.push(op);bytes+=size;}
  if(part.length)parts.push(part);
- await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(snap.exists()&&!["completed","discarded"].includes(snap.data().status))throw Error("未完了の初期化があります");tx.set(ref,{id,language:l,status:"staging",next:0,parts:parts.length});});
+ await runTransaction(db,async tx=>{const snap=await tx.get(ref);const active=await tx.get(activeRef(uid,l));if(active.exists()&&active.data().index<sessionCount(active.data()))throw Error("途中の復習があります");if(snap.exists()&&!["completed","discarded"].includes(snap.data().status))throw Error("未完了の初期化があります");tx.set(ref,{id,language:l,status:"staging",next:0,parts:parts.length});});
  for(let n=0;n<parts.length;n++){await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging")throw Error("初期化計画が変更されました");tx.set(resetJournalPart(uid,l,id,n),{ops:parts[n]});});}
  await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging")throw Error("初期化計画が変更されました");tx.update(ref,{status:"running"});});
  return id;
