@@ -256,13 +256,24 @@ async function stageResetPlan(uid,l,ops){
  let part=[],bytes=0;
  for(const op of ops){const size=new TextEncoder().encode(JSON.stringify(op)).length;if(size>200000)throw Error("初期化操作が大きすぎます");if(part.length>=300||bytes+size>200000){parts.push(part);part=[];bytes=0;}part.push(op);bytes+=size;}
  if(part.length)parts.push(part);
- await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(snap.exists()&&snap.data().status!=="completed")throw Error("未完了の初期化があります");tx.set(ref,{id,language:l,status:"staging",next:0,parts:parts.length});});
+ await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(snap.exists()&&!["completed","discarded"].includes(snap.data().status))throw Error("未完了の初期化があります");tx.set(ref,{id,language:l,status:"staging",next:0,parts:parts.length});});
  for(let n=0;n<parts.length;n++){await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging")throw Error("初期化計画が変更されました");tx.set(resetJournalPart(uid,l,id,n),{ops:parts[n]});});}
  await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging")throw Error("初期化計画が変更されました");tx.update(ref,{status:"running"});});
  return id;
 }
+async function discardStagedReset(uid,l,id){
+ await runTransaction(db,async tx=>{
+  const ref=resetJournalRef(uid,l),snap=await tx.get(ref);
+  if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging"||snap.data().next!==0)throw Error("実行済みの計画は破棄できません");
+  tx.update(ref,{status:"discarded"});
+ });
+}
+async function assertNoReset(uid,l,tx){
+ const ref=resetJournalRef(uid,l),snap=await (tx?tx.get(ref):getDoc(ref));
+ if(snap.exists()&&["staging","running"].includes(snap.data().status))throw Error("履歴初期化が未完了です。先に復旧してください。");
+}
 async function resumeResetPlan(uid,l,onProgress){
- for(;;){const snap=await getDoc(resetJournalRef(uid,l));if(!snap.exists())return;const j=snap.data();if(j.status==="completed")return;if(j.status!=="running")throw Error("初期化計画の保存が完了していません");await commitResetPart(uid,l,j.id,j.next);onProgress?.(j.next+1,j.parts);}
+ for(;;){const snap=await getDoc(resetJournalRef(uid,l));if(!snap.exists())return;const j=snap.data();if(["completed","discarded"].includes(j.status))return;if(j.status!=="running")throw Error("初期化計画の保存が完了していません");await commitResetPart(uid,l,j.id,j.next);onProgress?.(j.next+1,j.parts);}
 }
 async function commitResetPart(uid,l,id,n){
  return runTransaction(db,async tx=>{
