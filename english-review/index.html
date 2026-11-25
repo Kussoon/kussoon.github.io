@@ -23,7 +23,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 aut
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {getFirestore,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -40,7 +40,8 @@ let authGeneration=0;
 let approvedUid=null;
 let currentIndex=0,correctCount=0,answered=false;
 let bankQuestions=[],quizPool=[],sessions=[],lang="en",answers=[],modeAtStart="all",managerRows=null;
-let questions=[];
+let questions=[],activeSession=null;
+const activeRef=(uid,l)=>doc(db,'users',uid,'review','active-'+l);
 const $=id=>document.getElementById(id);
 const provider=new GoogleAuthProvider();
 const qid=q=>q.id||key(q);
@@ -79,7 +80,7 @@ function refresh(){
  $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件";
  const ss=recentSessions();$("history").textContent=ss.length?"前回："+ss[0].score+"/"+ss[0].count+"問正解／記録済み："+ss.length+"回":"まだ学習履歴はありません。";
 }
-document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if(!$("questionArea").hidden)return;lang=b.dataset.lang;document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));$("quizTitle").textContent=(lang==="en"?"英語":"フランス語")+"の復習";$("modelAnswer").lang=lang;$("resultArea").hidden=true;$("start").hidden=false;refresh();}));
+document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if(!$("questionArea").hidden)return;lang=b.dataset.lang;document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));$("quizTitle").textContent=(lang==="en"?"英語":"フランス語")+"の復習";$("modelAnswer").lang=lang;$("resultArea").hidden=true;$("start").hidden=false;refresh();resumeQuiz();}));
 $("mode").addEventListener("change",refresh);$("batchSelect").addEventListener("change",refresh);$("situationSelect").addEventListener("change",refresh);$("rangeStart").addEventListener("input",refresh);$("rangeEnd").addEventListener("input",refresh);
 async function loadSessions(uid,generation){try{const snap=await getDocs(collection(db,"users",uid,"sessions"));if(generation!==authGeneration||approvedUid!==uid)return;sessions=snap.docs.map(d=>d.data()).filter(s=>Array.isArray(s.answers)&&s.answers.some(a=>!String(a.id).startsWith("builtin-")));refresh();}catch(e){$("poolCount").textContent="詳細履歴の取得に失敗："+(e.code||"エラー");}}
 
@@ -89,7 +90,7 @@ onAuthStateChanged(auth,async user=>{
  const generation=++authGeneration;
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
- approvedUid=null;bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
+ approvedUid=null;activeSession=null;bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
  $("approvedPanel").hidden=true;
  $("quiz").hidden=true;$("bank").hidden=true;$("importText").value="";$("importStatus").textContent="";
  $("questionArea").hidden=true;
@@ -109,7 +110,7 @@ onAuthStateChanged(auth,async user=>{
   $("approvedPanel").hidden=!approved;
   $("pendingPanel").hidden=approved;
   status.hidden=approved;status.textContent=approved?"":"このアカウントは未許可です。";
-  if(approved){approvedUid=user.uid;$("managePanel").hidden=false;$("quiz").hidden=false;$("bank").hidden=false;await Promise.all([loadHistory(user.uid,generation),loadBank(user.uid,generation),loadSessions(user.uid,generation)]);refresh();}
+  if(approved){approvedUid=user.uid;$("managePanel").hidden=false;$("quiz").hidden=false;$("bank").hidden=false;await Promise.all([loadHistory(user.uid,generation),loadBank(user.uid,generation),loadSessions(user.uid,generation)]);refresh();await resumeQuiz();}
  }catch(e){
   if(generation!==authGeneration)return;
   $("approvedPanel").hidden=true;
@@ -190,11 +191,22 @@ $("importButton").addEventListener("click",async()=>{
  }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。再実行しても重複しません。";}
  finally{clearInterval(dotTimer);importButton.textContent="表現を登録する";importButton.removeAttribute("aria-busy");importButton.disabled=false;}
 });
-function beginQuiz(){
+async function beginQuiz(){
+ if(!approvedUid)return;const uid=approvedUid,l=lang; $("start").disabled=true;$("retry").disabled=true;
+ try{
  const list=[...new Map(pool().map(q=>[qid(q),q])).values()];
  if($("shuffle").checked)for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
  questions=list.sort((a,b)=>$("shuffle").checked?0:a.number-b.number);if(!questions.length)return;
- modeAtStart=$("mode").value;answers=[];currentIndex=0;correctCount=0;showQuestion();
+ modeAtStart=$("mode").value;answers=[];currentIndex=0;correctCount=0;const session={id:crypto.randomUUID(),language:l,mode:modeAtStart,ids:questions.map(q=>q.id),answers:[],index:0,score:0};await runTransaction(db,async tx=>{const ref=activeRef(uid,l),snap=await tx.get(ref);if(snap.exists()&&snap.data().index<snap.data().ids.length)throw Error("途中の復習があります。再読み込みしてください。");tx.set(ref,session);});if(uid!==approvedUid||l!==lang)return;activeSession=session;showQuestion();
+ }catch(e){$("history").textContent="開始できません："+(e.message||e.code);}finally{$("start").disabled=false;$("retry").disabled=false;}
+}
+async function resumeQuiz(){
+ const uid=approvedUid,l=lang;if(!uid)return;
+ try{const snap=await getDoc(activeRef(uid,l));if(uid!==approvedUid||l!==lang||!snap.exists())return;
+ const a=snap.data();if(a.index>=a.ids.length)return;
+ const lookup=new Map(allQuestions().map(q=>[q.id,q]));const list=a.ids.map(id=>lookup.get(id));if(list.some(q=>!q))throw Error("教材が変更されています。");
+ activeSession=a;questions=list;answers=a.answers;currentIndex=a.index;correctCount=a.score;modeAtStart=a.mode;showQuestion();
+ }catch(e){$("history").textContent="途中の復習を取得できません："+(e.message||e.code);}
 }
 quizPool=questions.slice();
 function showQuestion(){
@@ -245,7 +257,13 @@ async function selfGrade(isCorrect){
  if(answered||!approvedUid||$("answerPanel").hidden||!$("editPanel").hidden)return;
  answered=true;
  const graded=questions[currentIndex],gradedAt=new Date();$("markCorrect").disabled=true;$("markWrong").disabled=true;
- try{await updateDoc(doc(db,"users",approvedUid,"expressions",graded.id),{[isCorrect?"correctCount":"wrongCount"]:increment(1),lastReviewedAt:serverTimestamp(),lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:serverTimestamp()}:{})});graded[isCorrect?"correctCount":"wrongCount"]=(graded[isCorrect?"correctCount":"wrongCount"]||0)+1;graded.lastReviewedAt={toDate:()=>gradedAt};graded.lastCorrect=isCorrect;if(isCorrect)graded.lastCorrectAt={toDate:()=>gradedAt};bankQuestions=bankQuestions.map(q=>q.id===graded.id?{...q,correctCount:graded.correctCount,wrongCount:graded.wrongCount,lastReviewedAt:graded.lastReviewedAt,lastCorrect:graded.lastCorrect,lastCorrectAt:graded.lastCorrectAt}:q);}catch(e){$("editStatus").textContent="保存できませんでした。もう一度採点してください："+(e.code||"エラー");answered=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
+ const uid=approvedUid,l=lang,session=activeSession,index=currentIndex;
+ try{if(!session)throw Error("復習を再読み込みしてください");
+ const next={...session,index:index+1,answers:[...answers,{id:graded.id,correct:isCorrect}],score:correctCount+(isCorrect?1:0)};
+ await runTransaction(db,async tx=>{const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==session.id||snap.data().index!==index)throw Error("別の端末で進行しています。再読み込みしてください。");
+ tx.update(doc(db,"users",uid,"expressions",graded.id),{[isCorrect?"correctCount":"wrongCount"]:increment(1),lastReviewedAt:serverTimestamp(),lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:serverTimestamp()}:{})});
+ tx.set(ref,next);if(next.index===next.ids.length)tx.set(doc(db,"users",uid,"sessions",session.id),{language:l,mode:session.mode,answers:next.answers,score:next.score,count:next.ids.length,finishedAt:serverTimestamp()});
+ });if(uid!==approvedUid||l!==lang)return;activeSession=next;graded[isCorrect?"correctCount":"wrongCount"]=(graded[isCorrect?"correctCount":"wrongCount"]||0)+1;graded.lastReviewedAt={toDate:()=>gradedAt};graded.lastCorrect=isCorrect;if(isCorrect)graded.lastCorrectAt={toDate:()=>gradedAt};bankQuestions=bankQuestions.map(q=>q.id===graded.id?{...q,correctCount:graded.correctCount,wrongCount:graded.wrongCount,lastReviewedAt:graded.lastReviewedAt,lastCorrect:graded.lastCorrect,lastCorrectAt:graded.lastCorrectAt}:q);}catch(e){$("editStatus").textContent="保存できませんでした。もう一度採点してください："+(e.code||"エラー");answered=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
  if(isCorrect)correctCount++;answers.push({id:qid(graded),correct:isCorrect});
  if(currentIndex<questions.length-1){currentIndex++;showQuestion();$("progress").scrollIntoView({block:"start",behavior:"instant"});return;}
  finishQuiz();
@@ -255,24 +273,11 @@ $("markWrong").addEventListener("click",()=>selfGrade(false));
 $("start").addEventListener("click",()=>{if(!approvedUid)return;beginQuiz();});
 $("retry").addEventListener("click",()=>{if(!approvedUid)return;beginQuiz();});
 async function finishQuiz(){
- if(!approvedUid)return;
- const uid=approvedUid,generation=authGeneration;
+ const uid=approvedUid,generation=authGeneration;if(!uid)return;
  $("questionArea").hidden=true;$("resultArea").hidden=false;
  $("score").textContent="自己採点："+questions.length+"問中 "+correctCount+"問正解";
- $("saveStatus").textContent="学習結果を保存しています…";
- $("retry").disabled=true;
- try{
-  const ref=doc(db,"users",uid,"review","progress");
-  const snap=await getDoc(ref);
-  if(generation!==authGeneration||approvedUid!==uid)return;
-  const attempts=(snap.exists()&&snap.data().lastCount?Number(snap.data().attempts)||0:0)+1;
-  if(lang==="en")await setDoc(ref,{attempts,lastScore:correctCount,lastCount:questions.length,lastAt:serverTimestamp()});
-  await setDoc(doc(collection(db,"users",uid,"sessions")),{language:lang,mode:modeAtStart,answers,score:correctCount,count:questions.length,finishedAt:serverTimestamp()});
-  if(generation!==authGeneration||approvedUid!==uid)return;
-  $("saveStatus").textContent="学習結果を保存しました。";
-  await Promise.all([loadHistory(uid,generation),loadSessions(uid,generation)]);$("resultArea").hidden=false;$("start").hidden=true;
- }catch(e){if(generation===authGeneration)$("saveStatus").textContent="保存できませんでした："+(e.code||"エラー")+"。再挑戦できます。";}
- finally{if(generation===authGeneration)$("retry").disabled=false;}
+ $("saveStatus").textContent="学習結果を保存しました。";
+ await loadSessions(uid,generation);if(uid===approvedUid&&generation===authGeneration){$("resultArea").hidden=false;$("start").hidden=true;}
 }
 $("copyUid").addEventListener("click",async()=>{
  try{await navigator.clipboard.writeText($("uid").textContent);status.textContent="UIDをコピーしました。";}
