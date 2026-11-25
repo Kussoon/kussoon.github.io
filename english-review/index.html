@@ -246,6 +246,28 @@ $("resetHistory").addEventListener("click",async()=>{
  }catch(e){status.textContent=(committed?"更新済み・再読込確認が必要：":"中止：")+e.message;}finally{$("resetHistory").disabled=false;}
 });
 
+// Staged reset journal primitives. Not connected to live reset until all mutation guards are implemented.
+const resetJournalRef=(uid,l)=>doc(db,"users",uid,"review","reset-"+l);
+const resetJournalPart=(uid,l,id,n)=>doc(db,"users",uid,"resetPlans",l+"-"+id+"-"+n);
+async function commitResetPart(uid,l,id,n){
+ return runTransaction(db,async tx=>{
+  const ref=resetJournalRef(uid,l),snap=await tx.get(ref),j=snap.data();
+  if(!snap.exists()||j.id!==id||j.status!=="running")throw Error("初期化計画が一致しません");
+  if(j.next>n)return;
+  if(j.next!==n||n>=j.parts)throw Error("初期化の進捗が一致しません");
+  const p=await tx.get(resetJournalPart(uid,l,id,n));
+  if(!p.exists()||!Array.isArray(p.data().ops)||p.data().ops.length>300)throw Error("初期化計画が不正です");
+  for(const op of p.data().ops){
+   if(!["expressions","sessions","reviewChunks","review"].includes(op.collection)||typeof op.id!=="string"||!op.id||op.id.includes("/"))throw Error("初期化対象が不正です");
+   const target=doc(db,"users",uid,op.collection,op.id);
+   if(op.collection==="review"&&op.id!=="active-"+l&&!(l==="en"&&op.id==="progress"))throw Error("初期化対象が不正です");
+   if(op.type==="delete"&&op.collection!=="expressions")tx.delete(target);
+   else if(op.type==="update"&&op.collection!=="review")tx.update(target,op.data);
+   else throw Error("初期化操作が不正です");
+  }
+  tx.update(ref,{next:n+1,status:n+1===j.parts?"completed":"running"});
+ });
+}
 const chunkSize=200;
 const chunkRef=(uid,id,n)=>doc(db,"users",uid,"reviewChunks",id+"-"+n);
 const sessionCount=a=>a.total??a.ids.length;
