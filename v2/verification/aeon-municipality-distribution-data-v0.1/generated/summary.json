@@ -20,17 +20,16 @@
   "brand_count_excluding_pending": 42,
   "brand_group_count_excluding_pending": 21,
   "brand_status_counts": {
-    "candidate": 498,
-    "pending": 6,
+    "candidate": 504,
     "retained": 4109
   },
-  "brand_labels_changed_from_legacy": 497,
+  "brand_labels_changed_from_legacy": 496,
   "existing_map_field_differences": {
     "brand": 7,
     "operator": 3
   },
   "operator_count_excluding_pending": 17,
-  "operator_pending": 3,
+  "operator_pending": 0,
   "area_sources": {
     "n03_as_of": "2026-01-01",
     "active_map_codes": 1905,
@@ -119,10 +118,9 @@
   },
   "followup_counts": {
     "brand": 7,
-    "inherited_address": 8,
-    "operator": 3
+    "inherited_address": 8
   },
-  "followup_unique_stores": 17,
+  "followup_unique_stores": 14,
   "preliminary_comparison": {
     "assigned_wards": {
       "preliminary": 4613,
@@ -138,7 +136,7 @@
     },
     "brand_candidates": {
       "preliminary": 473,
-      "actual": 498
+      "actual": 504
     },
     "brand_count_excluding_pending": {
       "preliminary": 42,
@@ -189,6 +187,10 @@
       "status": "pass",
       "value": []
     },
+    "unused_operator_overrides": {
+      "status": "pass",
+      "value": []
+    },
     "workbook_normal_fields": {
       "status": "pass",
       "value": 0
@@ -222,12 +224,12 @@
       "value": 0
     },
     "brand_pending": {
-      "status": "pending",
-      "value": 6
+      "status": "pass",
+      "value": 0
     },
     "operator_pending": {
-      "status": "pending",
-      "value": 3
+      "status": "pass",
+      "value": 0
     },
     "inherited_address_details_pending": {
       "status": "pending",
@@ -239,7 +241,7 @@
     },
     "brand_change_candidates": {
       "status": "pending",
-      "value": 498
+      "value": 504
     },
     "city_municipality_id_partition_no_double_count": {
       "status": "pass",
@@ -292,7 +294,7 @@
       "status": "pass",
       "value": {
         "denominator": 1741,
-        "categories": 66
+        "categories": 64
       }
     },
     "ward_municipality_id_partition_no_double_count": {
@@ -346,7 +348,7 @@
       "status": "pass",
       "value": {
         "denominator": 1892,
-        "categories": 66
+        "categories": 64
       }
     },
     "all_store_total_city_vs_ward": {

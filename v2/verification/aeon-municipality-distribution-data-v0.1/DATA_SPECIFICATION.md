@@ -22,7 +22,7 @@
 
 ID別根拠と採否は `brand-overrides.csv` に記録します。全店について現行公式名・公式店舗名・表示用店舗名を正規化し、長い屋号から照合します。照合で得た屋号と元分類を規則に照らし、会社名・施設名・複合分類だけで個別屋号を確定しません。名称の違いは `brand-verification.csv` の各名称欄と判定欄で追跡できます。
 
-`brand_status` の `retained` はExcel分類の採用、`candidate` は表示分類の採用案、`pending` は個別屋号の判断保留です。`brand_rule_id` と `brand_basis` が派生分類の根拠、`master_brand_basis` が台帳の根拠欄、`brand_evidence_url` が既存根拠への参照です。実運営法人はExcelの `実運営法人` を引き継ぎ、空欄は `運営会社未確認` に集計します。屋号保留・法人未確認も全4,613店舗に含みます。
+`brand_status` の `retained` はExcel分類の採用、`candidate` は表示分類の採用案、`pending` は個別屋号の判断保留です。`brand_rule_id` と `brand_basis` が派生分類の根拠、`master_brand_basis` が台帳の根拠欄、`brand_evidence_url` が既存根拠への参照です。実運営法人はExcelの `実運営法人` を引き継ぎ、根拠を確認した例外は `operator-overrides.csv` にID・元値・根拠を記録します。それ以外の空欄は `運営会社未確認` に集計します。屋号保留・法人未確認も全4,613店舗に含みます。
 
 ## 出力
 

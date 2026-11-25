@@ -269,6 +269,7 @@ def build(args):
     n03 = load_n03_audit(args.audit)
     overrides = unique_index(csv_rows(HERE / "brand-overrides.csv"), "store_id")
     brands = Brands(read_json(HERE / "brand-rules.json"), overrides)
+    operator_overrides = unique_index(csv_rows(HERE / "operator-overrides.csv"), "store_id")
     diff_rows = legacy_differences(normal, legacy)
     checks = {}
 
@@ -299,6 +300,7 @@ def build(args):
     check("normal_and_map_id_set", normal.keys() == legacy.keys(), len(normal.keys() ^ legacy.keys()))
     check("normal_and_pr761_id_set", normal.keys() == n03.keys(), len(normal.keys() ^ n03.keys()))
     check("unused_brand_overrides", overrides.keys() <= normal.keys(), sorted(overrides.keys() - normal.keys()))
+    check("unused_operator_overrides", operator_overrides.keys() <= normal.keys(), sorted(operator_overrides.keys() - normal.keys()))
     workbook_diff = [{"store_id": sid, "field": field, "master_value": master[sid][field],
                       "normal_value": value}
                      for sid, row in sorted(normal.items()) if sid in master
@@ -346,7 +348,13 @@ def build(args):
         old_map_brand = legacy.get(sid, {}).get("brand")
         classification = brands.classify(row, record, old_map_brand)
         name = row["表示用店舗名"]
-        operator = row["実運営法人"]
+        original_operator = row["実運営法人"]
+        operator = original_operator
+        operator_override = operator_overrides.get(sid)
+        if operator_override:
+            if (original_operator or "") != operator_override["expected_original_operator"] or name != operator_override["expected_name"]:
+                raise ValueError(f"Stale operator override: {sid}")
+            operator = operator_override["operator"]
         if classification["brand_status"] == "pending" or name in TARGET_NAMES or sid in overrides:
             followup.append({
                 "store_id": sid, "name": name, "axis": "brand", "status": classification["brand_status"],
@@ -369,7 +377,7 @@ def build(args):
             "municipality_status": "verified" if assigned else "pending",
             "original_brand": row["有効屋号"], "original_raw_brand": record.get("屋号"),
             "legacy_map_brand": old_map_brand, "operator": operator or UNKNOWN_OPERATOR,
-            "operator_status": "ledger" if operator else "pending",
+            "operator_status": "official_override" if operator_override else ("ledger" if operator else "pending"),
             **{k: v for k, v in classification.items() if k != "name_brand_signals"},
         })
         brand_audit.append({
