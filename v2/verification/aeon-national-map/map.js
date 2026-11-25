@@ -63,6 +63,9 @@ async function start() {
     return wrapper;
   };
   resetControl.addTo(map);
+  const legendControl = L.control({position:'topleft'});
+  legendControl.onAdd = () => el('map-legend-template').content.firstElementChild.cloneNode(true);
+  legendControl.addTo(map);
   L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',{
     maxNativeZoom:18,maxZoom:18,keepBuffer:2,noWrap:true,
     attribution:'<a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル</a>'
