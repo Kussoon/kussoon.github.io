@@ -1,0 +1,367 @@
+{
+  "schema_version": "0.1",
+  "inputs_sha256": {
+    "workbook": "6a3f69c0ae247fe7bc870e29b8b60f019aee10316c5ca81974c6831ae0d75ad2",
+    "legacy_json": "f2f3a9daa37948ec731a1bbd8409455259018052a2c118ad8a959de6498684a6",
+    "address_audit": "3f4139826558a026a843e0441c943db1bc3238dbfa255b443500ac99bdd1cdaf"
+  },
+  "store_baseline_dates": [
+    "2026-11-23"
+  ],
+  "master_total": 4728,
+  "master_listing_counts": {
+    "参考・保留": 75,
+    "対象外": 26,
+    "履歴・休業・予定": 14,
+    "通常掲載": 4613
+  },
+  "normal_stores": 4613,
+  "existing_map_brand_count": 56,
+  "brand_count_excluding_pending": 42,
+  "brand_group_count_excluding_pending": 21,
+  "brand_status_counts": {
+    "candidate": 504,
+    "retained": 4109
+  },
+  "brand_labels_changed_from_legacy": 496,
+  "existing_map_field_differences": {
+    "brand": 7,
+    "operator": 3
+  },
+  "operator_count_excluding_pending": 17,
+  "operator_pending": 0,
+  "area_sources": {
+    "n03_as_of": "2026-01-01",
+    "active_map_codes": 1905,
+    "national_index_codes": 1905,
+    "office_codes": 1912,
+    "map_only_codes": [
+      "01695",
+      "01696",
+      "01697",
+      "01698",
+      "01699",
+      "01700",
+      "12000",
+      "13000",
+      "23000",
+      "30000",
+      "40000",
+      "46000",
+      "47000"
+    ],
+    "office_only_codes": [
+      "01100",
+      "04100",
+      "11100",
+      "12100",
+      "14100",
+      "14130",
+      "14150",
+      "15100",
+      "22100",
+      "22130",
+      "23100",
+      "26100",
+      "27100",
+      "27140",
+      "28100",
+      "33100",
+      "34100",
+      "40100",
+      "40130",
+      "43100"
+    ],
+    "active_vs_manifest_code_name_or_part_count_differences": [],
+    "shared_topology_prefectures": [
+      "04",
+      "07",
+      "27",
+      "28",
+      "29",
+      "43",
+      "44"
+    ],
+    "multi_part_areas": 693,
+    "polygon_parts": 125131,
+    "plate_geometry_codes": 1905,
+    "plate_metadata_dates": [
+      [
+        "2026-01-01",
+        "2026-10-15"
+      ]
+    ],
+    "plate_region_status_counts": {
+      "地域名確認済": 1892,
+      "地域名未確認": 6,
+      "市区町村未所属": 7
+    },
+    "plate_vs_map_only_plate_codes": [],
+    "plate_vs_map_only_map_codes": [],
+    "office_name_unconfirmed_codes": []
+  },
+  "levels": {
+    "city": {
+      "has_stores": 776,
+      "other_level": 171,
+      "zero": 965,
+      "out_of_scope": 6,
+      "unconfirmed": 7
+    },
+    "ward": {
+      "other_level": 20,
+      "has_stores": 916,
+      "zero": 976,
+      "out_of_scope": 6,
+      "unconfirmed": 7
+    }
+  },
+  "followup_counts": {
+    "brand": 7,
+    "inherited_address": 8
+  },
+  "followup_unique_stores": 14,
+  "preliminary_comparison": {
+    "assigned_wards": {
+      "preliminary": 4613,
+      "actual": 4613
+    },
+    "cities_with_stores": {
+      "preliminary": 776,
+      "actual": 776
+    },
+    "wards_with_stores": {
+      "preliminary": 916,
+      "actual": 916
+    },
+    "brand_candidates": {
+      "preliminary": 473,
+      "actual": 504
+    },
+    "brand_count_excluding_pending": {
+      "preliminary": 42,
+      "actual": 42
+    }
+  },
+  "quality_status": "pending",
+  "quality_checks": {
+    "master_listing_counts": {
+      "status": "pass",
+      "value": {
+        "通常掲載": 4613,
+        "参考・保留": 75,
+        "対象外": 26,
+        "履歴・休業・予定": 14
+      }
+    },
+    "workbook_partitions": {
+      "status": "pass",
+      "value": {
+        "count": 4728,
+        "id_differences": [],
+        "wrong_status": [],
+        "duplicates": 0
+      }
+    },
+    "normal_count": {
+      "status": "pass",
+      "value": 4613
+    },
+    "workbook_missing_ids": {
+      "status": "pass",
+      "value": 0
+    },
+    "workbook_duplicate_ids": {
+      "status": "pass",
+      "value": 0
+    },
+    "normal_and_map_id_set": {
+      "status": "pass",
+      "value": 0
+    },
+    "normal_and_pr761_id_set": {
+      "status": "pass",
+      "value": 0
+    },
+    "unused_brand_overrides": {
+      "status": "pass",
+      "value": []
+    },
+    "unused_operator_overrides": {
+      "status": "pass",
+      "value": []
+    },
+    "workbook_normal_fields": {
+      "status": "pass",
+      "value": 0
+    },
+    "unexplained_legacy_field_differences": {
+      "status": "pass",
+      "value": 0
+    },
+    "unconfirmed_office_names": {
+      "status": "pass",
+      "value": 0
+    },
+    "unassigned_municipality_codes": {
+      "status": "pass",
+      "value": 0
+    },
+    "pr761_address_code_differences": {
+      "status": "pass",
+      "value": 0
+    },
+    "active_map_code_differences": {
+      "status": "pass",
+      "value": 0
+    },
+    "unassigned_brand_labels": {
+      "status": "pass",
+      "value": 0
+    },
+    "unassigned_brand_group_labels": {
+      "status": "pass",
+      "value": 0
+    },
+    "brand_pending": {
+      "status": "pass",
+      "value": 0
+    },
+    "operator_pending": {
+      "status": "pass",
+      "value": 0
+    },
+    "inherited_address_details_pending": {
+      "status": "pending",
+      "value": 8
+    },
+    "boundary_assignment_unconfirmed": {
+      "status": "pending",
+      "value": 7
+    },
+    "brand_change_candidates": {
+      "status": "pending",
+      "value": 504
+    },
+    "city_municipality_id_partition_no_double_count": {
+      "status": "pass",
+      "value": {
+        "listed": 4613,
+        "duplicate_assignments": 0,
+        "missing_ids": []
+      }
+    },
+    "city_all_dimension_id_totals": {
+      "status": "pass",
+      "value": {
+        "prefectures": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "brands": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "brand-groups": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "operators": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "area-brands": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "area-operators": {
+          "count": 4613,
+          "exact_ids": true
+        }
+      }
+    },
+    "city_zero_and_unknown_separated": {
+      "status": "pass",
+      "value": {
+        "has_stores": 776,
+        "other_level": 171,
+        "zero": 965,
+        "out_of_scope": 6,
+        "unconfirmed": 7
+      }
+    },
+    "city_color_band_denominators": {
+      "status": "pass",
+      "value": {
+        "denominator": 1741,
+        "categories": 64
+      }
+    },
+    "ward_municipality_id_partition_no_double_count": {
+      "status": "pass",
+      "value": {
+        "listed": 4613,
+        "duplicate_assignments": 0,
+        "missing_ids": []
+      }
+    },
+    "ward_all_dimension_id_totals": {
+      "status": "pass",
+      "value": {
+        "prefectures": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "brands": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "brand-groups": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "operators": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "area-brands": {
+          "count": 4613,
+          "exact_ids": true
+        },
+        "area-operators": {
+          "count": 4613,
+          "exact_ids": true
+        }
+      }
+    },
+    "ward_zero_and_unknown_separated": {
+      "status": "pass",
+      "value": {
+        "other_level": 20,
+        "has_stores": 916,
+        "zero": 976,
+        "out_of_scope": 6,
+        "unconfirmed": 7
+      }
+    },
+    "ward_color_band_denominators": {
+      "status": "pass",
+      "value": {
+        "denominator": 1892,
+        "categories": 64
+      }
+    },
+    "all_store_total_city_vs_ward": {
+      "status": "pass",
+      "value": 4613
+    },
+    "original_inputs_unchanged": {
+      "status": "pass",
+      "value": {
+        "workbook": "6a3f69c0ae247fe7bc870e29b8b60f019aee10316c5ca81974c6831ae0d75ad2",
+        "legacy_json": "f2f3a9daa37948ec731a1bbd8409455259018052a2c118ad8a959de6498684a6",
+        "address_audit": "3f4139826558a026a843e0441c943db1bc3238dbfa255b443500ac99bdd1cdaf"
+      }
+    }
+  }
+}
