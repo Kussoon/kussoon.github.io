@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="全国4,613店舗のイオン系列スーパーの地理的分布を確認できるKussoonの第1検証版。">
+<title>全国イオン系列スーパーマップ｜Kussoon</title>
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="vendor/MarkerCluster.css">
+<link rel="stylesheet" href="map.css">
+<script defer src="vendor/leaflet.js"></script>
+<script defer src="vendor/leaflet.markercluster.js"></script>
+<script defer src="map.js"></script>
+</head>
+<body>
+<header class="masthead"><div class="frame mast-inner">
+  <a class="wordmark" href="/">Kussoon<span>.</span></a>
+  <a class="regional-link" href="/reading/aeon-supermarkets/">兵庫県版を見る <span aria-hidden="true">↗</span></a>
+</div></header>
+<main class="frame">
+  <section class="intro">
+    <div class="edition">第1検証版</div>
+    <h1>全国イオン系列<span>スーパーマップ</span></h1>
+    <p>全国のイオン系列スーパーを、地域と屋号から見る。</p>
+    <div class="metadata"><span><strong>4,613</strong> 店舗</span><span><strong>47</strong> 都道府県</span><span><strong>16</strong> 系列</span><span class="date">台帳基準日 2026年11月23日</span></div>
+  </section>
+  <div class="workspace">
+    <section class="filters card" aria-labelledby="filters-title">
+      <div class="panel-head"><h2 id="filters-title">店舗を絞り込む</h2><button id="reset" type="button" disabled>リセット</button></div>
+      <label for="query">店名・住所</label>
+      <input id="query" type="search" placeholder="例：まいばすけっと、横浜市" autocomplete="off" disabled>
+      <div class="selects">
+        <div><label for="prefecture">都道府県</label><select id="prefecture" disabled><option value="">すべて</option></select></div>
+        <div><label for="brand">屋号</label><select id="brand" disabled><option value="">すべて</option></select></div>
+      </div>
+    </section>
+    <section class="map-card card" aria-labelledby="map-title">
+      <div class="map-head"><h2 id="map-title">全国の店舗分布</h2><output id="count" aria-live="polite">読み込み中</output></div>
+      <div id="map" aria-label="全国イオン系列スーパーの分布地図"></div>
+      <div class="map-legend"><span><i class="legend-cluster" aria-hidden="true">42</i> 近接する店舗</span><span><i class="legend-shared" aria-hidden="true">2</i> 同じ座標の店舗</span></div>
+    </section>
+    <section class="results card" aria-labelledby="results-title">
+      <div class="panel-head"><h2 id="results-title">店舗一覧</h2><button id="fit" type="button" disabled>表示範囲に合わせる</button></div>
+      <p id="range"></p>
+      <ul id="stores" class="stores"></ul>
+      <div class="pagination"><button id="previous" disabled>前へ</button><span id="page-number"></span><button id="next" disabled>次へ</button></div>
+    </section>
+  </div>
+  <details class="legend card"><summary>屋号の凡例</summary><ul id="brands"></ul></details>
+  <section class="sources card" aria-labelledby="sources-title">
+    <h2 id="sources-title">データと地図について</h2>
+    <p>この地図は店舗の地理的な分布を把握するためのものです。訪問案内には使用できません。一部の座標は町字・町丁目などの住所代表点です。</p>
+    <p>店舗データは全国統合マスターVer.1.3（2026年11月23日基準）。背景地図は <a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル（淡色地図）</a>。</p>
+    <p>デジタル庁「<a href="https://www.digital.go.jp/policies/base_registry_address_tos">アドレス・ベース・レジストリ</a>」、法務省「<a href="https://www.geospatial.jp/ckan/dataset/houmusyouchizu-riyoukiyaku">登記所備付地図データ</a>」、国土交通省「<a href="https://nlftp.mlit.go.jp/isj/agreement.html">位置参照情報</a>」（令和7年度）、Geolonia「<a href="https://github.com/geolonia/japanese-addresses">日本全国の住所データ</a>」（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a>）、厚生労働省「<a href="https://i2fas.mhlw.go.jp/faspub/IO_S010303.do">食品衛生申請等システム</a>」（<a href="https://www.digital.go.jp/resources/open_data/public_data_license_v1.0">PDL1.0</a>）を使用し、Kussoonが住所照合・座標変換を行いました。坂田店の位置はユーザー提供・地図確認。</p>
+    <p><a href="data-sources.md">出典と利用条件の詳細</a> · <a href="THIRD-PARTY-NOTICES.md">地図ライブラリのライセンス</a></p>
+  </section>
+</main>
+<footer class="site-footer"><nav aria-label="Kussoon共通フッター"><a href="/">Kussoonトップ</a><a href="/reading/">読み物・雑学</a><a href="/sitemap/">サイトマップ</a><a href="/about/">このサイトについて</a><a href="/contact/">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p></footer>
+</body>
+</html>
