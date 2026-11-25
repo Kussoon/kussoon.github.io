@@ -4,7 +4,7 @@ const el = id => document.getElementById(id);
 const format = n => n.toLocaleString('ja-JP');
 const pageSize = 14;
 const pinZoom = 14;
-const normalize = text => (text || '').normalize('NFKC').toLowerCase().replace(/[‐‑‒–—―−]/g, '-');
+const normalize = text => (text || '').normalize('NFKC').toLowerCase().replace(/[‐‑‒–—―−]/g, '-').replace(/(\d)ー(?=\d)/g, '$1-');
 const colors = ['#8e376f','#087a73','#a64c13','#3754aa','#a52438','#3f7549','#6242a0','#376584','#716020','#963f83','#365930','#a74660','#6d5680','#aa5137','#28739d','#795122'];
 
 function node(tag, content, className) {
@@ -21,7 +21,7 @@ function totals(rows, key) {
 }
 
 async function start() {
-  const response = await fetch('stores.json?v=20261125-1');
+  const response = await fetch('stores.json?v=20261125-8');
   if (!response.ok) throw new Error('店舗データを取得できませんでした');
   const stores = await response.json();
   const ids = new Set(stores.map(row => row.id));
