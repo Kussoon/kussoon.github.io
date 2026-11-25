@@ -97,14 +97,23 @@ async function start() {
   let pointGroups = new Map();
   let searchTimer;
   const whichPoint = row => `${row.lat},${row.lng}`;
+  const allPointGroups = new Map();
+  for (const row of sorted) {
+    const key = whichPoint(row);
+    if (!allPointGroups.has(key)) allPointGroups.set(key,[]);
+    allPointGroups.get(key).push(row);
+  }
 
-  function openPoint(rows, lead) {
+  function openPoint(matches, lead) {
+    const rows = allPointGroups.get(whichPoint(matches[0]));
+    const matchedIds = new Set(matches.map(row => row.id));
     const sortedRows = lead ? [lead,...rows.filter(row => row.id !== lead.id)] : rows;
     const list = node('ul',null,'popup-list');
     for (const row of sortedRows) {
       const item = node('li');
       item.dataset.storeId = row.id;
       item.append(node('strong',row.name),node('p',`${row.brand} ／ ${row.operator}`),node('p',row.address || '住所未確認'));
+      if (!matchedIds.has(row.id)) item.append(node('p','絞り込み条件外の同一地点店舗','outside-filter'));
       if (row.url) {
         const link = node('a','公式店舗情報 ↗');
         link.href = row.url;
