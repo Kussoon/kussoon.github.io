@@ -241,7 +241,7 @@ $("resetHistory").addEventListener("click",async()=>{
  if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");
  downloadFile("history-before-reset-"+l+"-"+Date.now()+".json",JSON.stringify({language:l,expressions:bank,sessions:records.map(({ref,parts,...a})=>a),chunks:chunks.map(d=>({id:d.id,data:d.data()})),active:active.exists()?active.data():null},null,2),"application/json");
  if(!confirm("対象 "+affected.size+"問、回答履歴 "+removed+"件。バックアップを保存しましたか？ 取り消しを実行しますか？"))return;
- if(ops.length>450)throw Error("一度に安全に更新できる件数を超えています。範囲を絞ってください。全英語初期化は教材一括更新機能を利用してください。");
+ if(ops.length>450)throw Error("部分取消の安全上限（450書込）を超えています。範囲を絞ってください。");
  if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");const b=writeBatch(db);for(const op of ops)op(b);await b.commit();committed=ops.length;await Promise.all([loadBank(uid,generation),loadSessions(uid,generation)]);status.textContent="初期化完了："+affected.size+"問、回答履歴 "+removed+"件。";
  }catch(e){status.textContent=(committed?"更新済み・再読込確認が必要：":"中止：")+e.message;}finally{$("resetHistory").disabled=false;}
 });
