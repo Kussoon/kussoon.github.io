@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="全国4,613店舗のイオン系列スーパーの地理的分布を確認できるKussoonの第11検証版。">
+<title>全国イオン系列スーパー分布図｜Kussoon</title>
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="vendor/MarkerCluster.css">
+<link rel="stylesheet" href="map.css?v=20261125-11">
+<script defer src="vendor/leaflet.js"></script>
+<script defer src="vendor/leaflet.markercluster.js"></script>
+<script defer src="map.js?v=20261125-11"></script>
+</head>
+<body>
+<main class="frame">
+  <section class="intro">
+    <div class="title-row"><h1>全国<span>イオン系列スーパー</span>分布図</h1><span class="edition" aria-label="第11検証版">Ver. 0.11（検証版）</span></div>
+    <p>全国のイオン系列スーパーを、地域と屋号から見る。</p>
+    <div class="metadata"><span><strong>4,613</strong> 店舗</span><span><strong>47</strong> 都道府県</span><span><strong>16</strong> 系列</span><span class="date">台帳基準日 2026年11月23日</span></div>
+  </section>
+  <div class="workspace">
+    <section class="filters card" aria-labelledby="filters-title">
+      <div class="panel-head"><h2 id="filters-title">店舗を絞り込む</h2><button id="reset" type="button" disabled>リセット</button></div>
+      <label for="query">店名・住所</label>
+      <input id="query" type="search" placeholder="例：まいばすけっと、横浜市" autocomplete="off" disabled>
+      <div class="selects">
+        <div><label for="prefecture">都道府県</label><select id="prefecture" disabled><option value="">すべて</option></select></div>
+        <div><label for="brand">屋号</label><select id="brand" disabled><option value="">すべて</option></select></div>
+      </div>
+      <div class="precision-filter"><label for="precision">座標の対応範囲</label><select id="precision" disabled><option value="">すべて</option></select></div>
+    </section>
+    <section class="map-card card" aria-labelledby="map-title">
+      <div class="map-head"><h2 id="map-title">全国の店舗分布</h2><output id="count" aria-live="polite">読み込み中</output></div>
+      <div class="pin-legends">
+        <p class="pin-hint">ピンを押すと店舗情報が出ます</p>
+        <details class="legend card"><summary>屋号の凡例</summary><ul id="brands"></ul></details>
+      </div>
+      <div id="map" aria-label="全国イオン系列スーパーの分布地図"></div>
+      <template id="map-legend-template"><div class="map-legend map-legend-control" aria-label="丸数字の凡例"><span><i class="legend-cluster" aria-hidden="true">42</i> 近接する店舗</span><span><i class="legend-shared" aria-hidden="true">2</i> 同じ座標の店舗</span></div></template>
+    </section>
+    <section class="results card" aria-labelledby="results-title">
+      <div class="panel-head"><h2 id="results-title">店舗一覧</h2></div>
+      <p id="range"></p>
+      <ul id="stores" class="stores"></ul>
+      <div class="pagination"><button id="previous" disabled>前へ</button><span id="page-number"></span><button id="next" disabled>次へ</button></div>
+    </section>
+  </div>
+  <section class="sources card" aria-labelledby="sources-title">
+    <h2 id="sources-title">データと地図について</h2>
+    <p>この地図は店舗の地理的な分布を把握するためのものです。訪問案内には使用できません。一部の座標は町字・町丁目などの住所代表点です。</p>
+    <p>店舗データは全国統合マスターVer.1.3.3（店舗基準日 2026年11月23日・座標調査基準日 2026年11月25日）。背景地図は <a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル（淡色地図）</a>。</p>
+    <p>デジタル庁「<a href="https://www.digital.go.jp/policies/base_registry_address_tos">アドレス・ベース・レジストリ</a>」、法務省「<a href="https://www.geospatial.jp/ckan/dataset/houmusyouchizu-riyoukiyaku">登記所備付地図データ</a>」、国土交通省「<a href="https://nlftp.mlit.go.jp/isj/agreement.html">位置参照情報</a>」（令和7年度）、Geolonia「<a href="https://github.com/geolonia/japanese-addresses">日本全国の住所データ</a>」（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja">CC BY 4.0</a>）、厚生労働省「<a href="https://i2fas.mhlw.go.jp/faspub/IO_S010303.do">食品衛生申請等システム</a>」（<a href="https://www.digital.go.jp/resources/open_data/public_data_license_v1.0">PDL1.0</a>）を使用し、Kussoonが住所照合・座標変換を行いました。坂田店の位置はユーザー提供・地図確認。</p>
+    <p>東京大学空間情報科学研究センター「<a href="https://geocode.csis.u-tokyo.ac.jp/home/csv-admatch/">CSVアドレスマッチングサービス</a>」の結果を加工。国土交通省「<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html">国土数値情報（行政区域データ、2026年1月1日時点）</a>」を加工し行政区域を確認しました。</p>
+    <p><a href="https://jageocoder.info-proto.com/license">Jageocoder用住所データベース（住居表示レベル）</a>を利用。国土交通省「<a href="https://nlftp.mlit.go.jp/cgi-bin/isj/dls/_choose_method.cgi">位置参照情報</a>」、国土地理院「<a href="https://www.gsi.go.jp/kihonjohochousa/jukyo_jusho.html">電子国土基本図住居表示住所</a>」、Geolonia Inc.「<a href="https://geolonia.github.io/japanese-addresses/">Geolonia 住所データ</a>」、デジタル庁「<a href="https://www.digital.go.jp/policies/base_registry_address">アドレス・ベース・レジストリ</a>」を加工。法務省「<a href="https://front.geospatial.jp/moj-chizu-xml-readme/">登記所備付地図データ</a>」をデジタル庁が加工したデータを再加工。</p>
+    <p><a href="data-sources.md">出典と利用条件の詳細</a> · <a href="THIRD-PARTY-NOTICES.md">地図ライブラリのライセンス</a></p>
+  </section>
+</main>
+<footer class="site-footer"><nav aria-label="Kussoon共通フッター"><a href="https://kussoon.com/">Kussoonトップ</a><a href="https://kussoon.com/reading/">読み物・雑学</a><a href="https://kussoon.com/sitemap/">サイトマップ</a><a href="https://kussoon.com/about/">このサイトについて</a><a href="https://kussoon.com/contact/">お問い合わせ</a><a href="https://kussoon.com/privacy/">プライバシーポリシー</a><a href="https://kussoon.com/sources/">データ出典</a><a href="https://kussoon.com/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p></footer>
+</body>
+</html>
