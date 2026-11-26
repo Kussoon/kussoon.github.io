@@ -40,7 +40,7 @@ async function syncApi(request,env,user){
  return {status:404,body:{error:"not_found"}};
  }
  const migration=await db.prepare("SELECT completed FROM migration_state WHERE account_id=?").bind(user.id).first();
- if(migration&&!migration.completed)return {status:409,body:{error:"migration_in_progress"}};
+ if(!migration||!migration.completed)return {status:409,body:{error:"migration_in_progress"}};
  if(request.method==="GET"&&url.pathname==="/api/changes"){
  const raw=url.searchParams.get("after")??"0";
  if(!/^\d+$/.test(raw)||!Number.isSafeInteger(Number(raw)))return {status:400,body:{error:"invalid_cursor"}};
@@ -56,7 +56,7 @@ async function syncApi(request,env,user){
  while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>65536){await reader.cancel();return {status:413,body:{error:"too_large"}};}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
  let data;try{data=JSON.parse(raw);}catch{return {status:400,body:{error:"invalid_json"}};}
  const events=data?.events,validId=x=>typeof x==="string"&&/^[A-Za-z0-9_-]{1,128}$/.test(x);
- if(!Array.isArray(events)||events.length<1||events.length>50||events.some(e=>!e||!validId(e.eventId)||!validId(e.expressionId)||!validId(e.sessionId)||!["correct","wrong","excluded","skipped"].includes(e.rating)||typeof e.reviewedAt!=="string"||!Number.isFinite(Date.parse(e.reviewedAt))))return {status:400,body:{error:"invalid_events"}};
+ if(!Array.isArray(events)||events.length<1||events.length>50||events.some(e=>!e||!validId(e.eventId)||!(typeof e.expressionId==="string"&&e.expressionId.length>0&&e.expressionId.length<=512)||!validId(e.sessionId)||!["correct","wrong","excluded","skipped"].includes(e.rating)||typeof e.reviewedAt!=="string"||!Number.isFinite(Date.parse(e.reviewedAt))))return {status:400,body:{error:"invalid_events"}};
  if(new Set(events.map(e=>e.eventId)).size!==events.length)return {status:400,body:{error:"duplicate_batch_ids"}};
  const statements=[db.prepare("INSERT INTO accounts(id) VALUES(?) ON CONFLICT(id) DO NOTHING").bind(user.id)];
  for(const e of events)statements.push(db.prepare("INSERT INTO review_events(account_id,event_id,expression_id,rating,reviewed_at,session_id) VALUES(?,?,?,?,?,?) ON CONFLICT(account_id,event_id) DO NOTHING").bind(user.id,e.eventId,e.expressionId,e.rating,new Date(e.reviewedAt).toISOString(),e.sessionId));
@@ -70,6 +70,7 @@ export default {async fetch(request,env){
  const user=await authorize(request,env);
  const headers={"Content-Type":"application/json","Cache-Control":"no-store","X-Content-Type-Options":"nosniff","X-Robots-Tag":"noindex, nofollow"};
  if(!user)return new Response(JSON.stringify({error:"forbidden"}),{status:403,headers});
+ if(!new URL(request.url).pathname.startsWith("/api/")&&env.ASSETS)return env.ASSETS.fetch(request);
  if(request.method==="GET"&&new URL(request.url).pathname==="/api/me")return new Response(JSON.stringify({id:user.id,email:user.email}),{headers});
  try{const result=await syncApi(request,env,user);return new Response(JSON.stringify(result.body),{status:result.status,headers});}catch{return new Response(JSON.stringify({error:"sync_failed"}),{status:503,headers});}
 }};
