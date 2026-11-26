@@ -1,3 +1,4 @@
+import {importBatch} from "./import-api.mjs";
 import {createRemoteJWKSet,jwtVerify} from "jose";
 const keys=new Map();
 export async function authorize(request,env,verify=jwtVerify){
@@ -17,6 +18,29 @@ export async function authorize(request,env,verify=jwtVerify){
 async function syncApi(request,env,user){
  const url=new URL(request.url),db=env.DB;
  if(!db)return {status:503,body:{error:"database_unconfigured"}};
+ if(url.pathname.startsWith("/api/import/")){
+ if(request.method==="GET"&&url.pathname==="/api/import/status"){
+ const state=await db.prepare("SELECT archive_id,next_batch,completed FROM migration_state WHERE account_id=?").bind(user.id).first();
+ return {status:200,body:{state}};
+ }
+ if(request.method!=="POST"||request.headers.get("Origin")!==url.origin||!request.headers.get("Content-Type")?.startsWith("application/json"))return {status:403,body:{error:"origin_or_method"}};
+ const reader=request.body?.getReader();if(!reader)return {status:400,body:{error:"body"}};
+ let raw="",size=0;const decoder=new TextDecoder();
+ while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>1100000){await reader.cancel();return {status:413,body:{error:"too_large"}};}raw+=decoder.decode(value,{stream:true});}raw+=decoder.decode();
+ let body;try{body=JSON.parse(raw);}catch{return {status:400,body:{error:"invalid_json"}};}
+ try{
+ if(url.pathname==="/api/import/batch")return {status:200,body:await importBatch(db,user.id,body)};
+ if(url.pathname==="/api/import/finish"){
+ const {archiveId,batchCount,counts}=body??{};
+ if(typeof archiveId!=="string"||!/^[a-f0-9]{64}$/.test(archiveId)||!Number.isSafeInteger(batchCount)||batchCount<1||!counts||!["expressions","sessions","chunks","review"].every(k=>Number.isSafeInteger(counts[k])&&counts[k]>=0))return {status:400,body:{error:"invalid_manifest"}};
+ const result=await db.prepare("UPDATE migration_state SET completed=1 WHERE account_id=? AND archive_id=? AND next_batch=? AND (SELECT COUNT(*) FROM expressions WHERE account_id=?)=? AND (SELECT COUNT(*) FROM legacy_documents WHERE account_id=? AND collection_name='sessions')=? AND (SELECT COUNT(*) FROM legacy_documents WHERE account_id=? AND collection_name='chunks')=? AND (SELECT COUNT(*) FROM legacy_documents WHERE account_id=? AND collection_name='review')=?").bind(user.id,archiveId,batchCount,user.id,counts.expressions,user.id,counts.sessions,user.id,counts.chunks,user.id,counts.review).run();
+ return result.meta.changes===1?{status:200,body:{completed:true}}:{status:409,body:{error:"manifest_mismatch"}};
+ }
+ }catch{return {status:409,body:{error:"import_rejected"}};}
+ return {status:404,body:{error:"not_found"}};
+ }
+ const migration=await db.prepare("SELECT completed FROM migration_state WHERE account_id=?").bind(user.id).first();
+ if(migration&&!migration.completed)return {status:409,body:{error:"migration_in_progress"}};
  if(request.method==="GET"&&url.pathname==="/api/changes"){
  const raw=url.searchParams.get("after")??"0";
  if(!/^\d+$/.test(raw)||!Number.isSafeInteger(Number(raw)))return {status:400,body:{error:"invalid_cursor"}};
