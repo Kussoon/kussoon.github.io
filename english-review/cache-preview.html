@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>語学復習アプリ 検証版 | Kussoon</title>
+<style>
+:root{color-scheme:light dark;font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
+body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 auto;padding:16px 20px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem;margin:12px 0 10px} [hidden]{display:none!important}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#userPanel[hidden],#loginPanel[hidden],#pendingPanel[hidden],#approvedPanel[hidden]{display:none!important}code{overflow-wrap:anywhere}#copyUid{background:#526172}#logout{background:#4b5563}#userPanel{display:block}#quiz[hidden],#questionArea[hidden],#resultArea[hidden]{display:none!important}.answers{display:grid;gap:10px}.answers button{text-align:left;background:#344e6b}.answers button:disabled{opacity:.8;cursor:default}.answers button.correct{background:#216e4e}.answers button.wrong{background:#a43d3d}.panel{border:1px solid #8794a455;border-radius:12px;padding:16px;margin-top:12px}.bank-summary{font-size:1.35rem;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px}.bank-summary::-webkit-details-marker{display:none}.bank-summary::after{content:"▼";font-size:.85rem;opacity:.8;transition:transform .15s}.bank-summary[aria-expanded="true"]::after,details[open]>.bank-summary::after{transform:rotate(180deg)}.bank-summary:focus-visible{outline:2px solid #78aaf6;outline-offset:5px}.bank-content{padding-top:8px}.feedback{min-height:2em}.quiz-actions{display:flex;gap:10px;flex-wrap:wrap}.quiz-actions button{background:#1769aa}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}#status[hidden]{display:none!important}.login-summary{margin:16px 0 8px}#userPanel>p:last-child{margin-bottom:0}.slogan{display:block;width:100%;height:auto;margin:12px 0 16px;animation:slogan-blink 2s steps(1,end) infinite;filter:drop-shadow(0 2px 4px #0003)}@keyframes slogan-blink{0%,74.999%{opacity:1}75%,99.999%{opacity:0}}.lang-tabs{display:flex;gap:8px}.lang{flex:1;background:#dce5f1;color:#1b2737}.lang.active{background:#1769aa;color:white}.modes{display:grid;gap:10px}.modes select{display:block;width:100%;padding:10px;border-radius:8px;font:inherit}.modes label{display:block}#rangeFields{display:flex;gap:12px;flex-wrap:wrap}#rangeFields input{width:90px;padding:8px;font:inherit;border-radius:6px;border:1px solid #8794a4}textarea{box-sizing:border-box;width:100%;min-height:135px;padding:10px;border:1px solid #8794a488;border-radius:8px;font:inherit;background:transparent;color:inherit}a{color:#1769aa}.stats{background:#f3f6fa;border-radius:8px;padding:10px}.manage-summary{font-size:1rem;font-weight:700;cursor:pointer;list-style:none;padding:10px 0}.manage-summary{display:flex;align-items:center;justify-content:space-between;gap:12px}.manage-summary::-webkit-details-marker{display:none}.manage-summary::after{content:"▼";font-size:.85rem;opacity:.8;flex-shrink:0;transition:transform .15s}details[open]>.manage-summary::after{transform:rotate(180deg)}.manage-content{border-top:1px solid #8794a455;padding-top:8px}#exportTable th,#exportTable td{padding:7px;border-bottom:1px solid #8794a455;text-align:left;vertical-align:top}input[type=file]{display:block;margin:10px 0}@media(max-width:680px){main{border-radius:0;min-height:100dvh;box-sizing:border-box;padding:12px 16px}#quiz{margin-top:8px}}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}.stats{background:#16202c}}
+#answerPanel{padding:10px;margin-top:6px}#answerPanel p{margin:6px 0}#progress{scroll-margin-top:24px}#questionArea{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}#editStatus:empty{display:none}
+#gradeActions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}#gradeActions button{padding:10px 2px;font-size:.9rem;line-height:1.3;min-width:0}#markExclude{background:#64748b}#markCorrect{background:#21804e}#markWrong{background:#b54040}
+#question,#modelAnswer{font-size:1.2rem;font-weight:600;line-height:1.5}#preActions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}#preActions button{padding:8px 10px;font-size:.85rem}body.reviewing .slogan{position:sticky;top:0;z-index:5;max-height:76px;object-fit:contain;background:inherit;margin:0 0 8px}#progress{scroll-margin-top:85px}</style>
+</head>
+<body>
+<main>
+<h1>語学復習アプリ <small style="font-size:.65em">v1.3 検証版</small></h1><p style="color:#a34b00;font-weight:bold">検証版：正式版と同じ学習データを使用します。試用モード以外の操作は実際に保存されます。</p>
+
+<p id="status" role="status" aria-live="polite">認証状態を確認しています…</p>
+<section id="loginPanel" hidden><button id="login" type="button">Googleでログイン</button></section>
+<section id="userPanel" hidden><section id="approvedPanel" hidden><img class="slogan" src="./chalkboard-sign.svg" alt="スピード・回転数重視！" width="800" height="178"><p id="trialBanner" hidden style="background:#fff0c2;color:#713f12;padding:8px;font-weight:bold">試用モード中：学習記録は保存されません</p><div class="lang-tabs"><button class="lang active" data-lang="en">英語</button><button class="lang" data-lang="fr">フランス語</button></div><section id="quiz" class="panel" hidden><h2 id="quizTitle">英語の復習</h2><div class="modes"><label>復習範囲<select id="mode"><option value="all">すべての問題（通常）</option><option value="allIncluded">出題から外した問題も含めたすべて</option><option value="excluded">出題から外した問題のみ</option><option value="learned">ひとまず覚えた問題</option><option value="unseen">まだやっていない問題</option><option value="unclassified">未分類の表現</option><option value="range">番号で指定</option><option value="batch">指定したかたまり</option><option value="batches3">直近3回の登録分</option><option value="sessions3">直近3回の学習分</option><option value="month">先月登録した問題</option><option value="wrong">前回間違えた問題</option><option value="situation">シチュエーションで指定</option><option value="unmastered">まだ覚えていない問題</option></select></label><select id="batchSelect" hidden></select><select id="situationSelect" hidden aria-label="シチュエーション"></select><div id="rangeFields" hidden><label>開始番号 <input id="rangeStart" type="number" min="1" value="1" inputmode="numeric"></label><label>終了番号 <input id="rangeEnd" type="number" min="1" value="100" inputmode="numeric"></label></div><label><input type="checkbox" id="shuffle"> シャッフルする</label><p id="poolCount" class="muted"></p></div><p id="history" class="muted">学習履歴を読み込んでいます…</p><details class="panel"><summary class="manage-summary">学習履歴を見る</summary><div id="sessionList"></div></details><section id="questionArea" hidden><div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><p id="progress"></p><button id="stopQuiz" type="button" style="padding:6px 10px;font-size:.85rem">ここで終了</button></div><h3 id="question"></h3><p id="questionMeta" class="muted"></p><div id="preActions"><button id="preExclude" type="button">出題から外す</button><button id="skipQuestion" type="button">この問題は飛ばす</button><button id="reveal" type="button">解答を見る</button></div><div id="answerPanel" class="panel" hidden><p><strong>模範解答</strong></p><p id="modelAnswer" lang="en"></p><p id="feedback" class="muted"></p><p id="questionStats" class="stats muted"></p><p><button id="editQuestion" type="button">問題を編集</button></p><div id="editPanel" hidden><label for="editJapanese">日本語</label><textarea id="editJapanese" maxlength="300"></textarea><label for="editForeign">外国語</label><textarea id="editForeign" maxlength="500"></textarea><label for="editExplanation">解説（任意）</label><textarea id="editExplanation" maxlength="1000"></textarea><div class="quiz-actions"><button id="saveEdit" type="button">保存する</button><button id="cancelEdit" type="button">キャンセル</button></div></div><p id="editStatus" role="status"></p><p>覚え具合を選んでください。</p><div id="gradeActions"><button id="markExclude" type="button">出題から<br>外す</button><button id="markCorrect" type="button">ひとまず<br>覚えた</button><button id="markWrong" type="button">まだ覚えて<br>いない</button></div></div></section><section id="resultArea" hidden><h3>結果発表</h3><p id="score"></p><p id="saveStatus" role="status"></p><button id="retry" type="button">もう一度挑戦する</button></section><button id="start" type="button">復習を始める</button></section><details id="bank" class="panel" hidden><summary class="bank-summary">復習表現を登録</summary><div class="bank-content"><p class="muted">日本語・外国語・解説・シチュエーション（任意）をタブで区切り、1行に1表現ずつ貼り付けてください。登録内容はこのアカウント専用です。</p><p id="bankCount" class="muted"></p><textarea id="importText" placeholder="日本語&#9;外国語&#9;解説（任意）&#9;シチュエーション（任意）"></textarea><p><button id="importButton" type="button">表現を登録する</button></p><p id="importStatus" class="muted" role="status"></p></div></details></section><section id="pendingPanel" hidden><p>このアカウントはまだ利用許可されていません。管理者にユーザーID（UID）を登録してもらってください。</p><p>UID：<code id="uid"></code></p><button id="copyUid" type="button">UIDをコピー</button><p class="muted">登録後にこのページを再読み込みしてください。</p></section><p class="login-summary"><strong id="userName"></strong> でログイン中</p><p><button id="logout" type="button">ログアウト</button></p></section>
+<p class="muted">ログインするとGoogleアカウントの基本プロフィール情報を認証に使用します。許可済みの利用者については、自己採点した学習結果（得点・実施日時）をFirestoreに保存します。</p>
+<details id="managePanel" class="panel" hidden><summary class="manage-summary">データ整理・バックアップ（管理機能）</summary><div class="manage-content"><p class="muted">許可済みアカウントのデータだけをFirebaseから取得します。固有IDと学習履歴を保ったまま分類・並べ替えできます。</p><label>言語 <select id="exportLanguage"><option value="en">英語</option><option value="fr">フランス語</option><option value="all">両方</option></select></label><p id="unclassifiedCount" class="muted"></p><p><button id="exportUnclassified" type="button">未分類だけをJSONでダウンロード</button></p><p><button id="exportJson" type="button">整理用JSONをダウンロード</button></p><p><button id="exportRefresh" type="button">最新の一覧を表示</button></p><p id="exportStatus" role="status"></p><div style="overflow:auto;max-height:65vh"><table id="exportTable" style="border-collapse:collapse;width:100%;font-size:.9em" hidden><thead><tr><th>言語</th><th>No.</th><th>シチュエーション</th><th>日本語</th><th>外国語</th><th>正/誤</th><th>最終学習</th></tr></thead><tbody id="exportRows"></tbody></table></div><hr><h3>英語教材の一括置換・学習履歴初期化</h3><p class="muted">専用の置換計画JSONのみ対応。ほかの端末の復習を終了してから実行してください。英語のみ対象です。</p><input id="replacementFile" type="file" accept=".json,application/json"><p id="replacementStatus" role="status"></p><button id="replacementBackup" disabled>更新前バックアップを保存</button><p><button id="replacementApply" disabled>英語教材を置換して履歴を初期化</button></p><hr><h3>分類・並べ替え結果を反映</h3><p class="muted">ダウンロードしたJSONの situation と sortOrder を編集してください。IDを維持している行だけを更新します。行の追加・削除は行いません。</p><label for="manageFile">編集したJSONファイル</label><input id="manageFile" type="file" accept="application/json,.json"><p id="changePreview" class="muted" role="status">ファイルを選択すると変更件数を確認できます。</p><button id="applyChanges" type="button" disabled>バックアップして変更を反映</button><p id="manageStatus" class="muted" role="status"></p></div></details><details id="handoverPanel" class="panel"><summary class="manage-summary">システム構成・開発引き継ぎ情報</summary><p class="muted">新しいチャットやWorkへの引き継ぎに使用できます。個人の学習データや秘密情報は含みません。</p><p><label><input type="checkbox" id="trialMode"> 試用モード（学習履歴を保存しない）</label></p><p id="trialStatus" role="status"></p><hr><h3>学習履歴の初期化</h3><p class="muted">選択中の言語のみ。教材は削除しません。途中の復習を終了してから操作してください。</p><select id="resetScope"><option value="latest">直前の復習を取り消す</option><option value="date">指定日の復習を取り消す</option><option value="question">指定した登録番号の履歴を初期化</option><option value="all">全学習履歴を初期化</option></select><input id="resetDate" type="date" hidden><input id="resetNumber" type="number" min="1" placeholder="初回登録番号" hidden><p><button id="resetHistory">対象を確認・バックアップ</button></p><p id="resetStatus" role="status"></p><p><button id="resetRecovery" type="button">未完了の初期化を確認・復旧</button></p><p><a href="./HANDOVER.md" target="_blank" rel="noopener">引き継ぎ仕様書を開く</a></p><p><button type="button" id="handoverCopy">引き継ぎ情報をコピー</button></p><p><a href="./HANDOVER.md" download="HANDOVER.md">引き継ぎ情報を保存（Markdown）</a></p><p id="handoverStatus" role="status"></p><pre id="handoverText" hidden style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:50vh;overflow:auto"></pre></details></main>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,onSnapshot,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,arrayUnion,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+const firebaseConfig={
+ apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
+ authDomain:"english-review-6ffa5.firebaseapp.com",
+ projectId:"english-review-6ffa5",
+ storageBucket:"english-review-6ffa5.firebasestorage.app",
+ messagingSenderId:"331251616985",
+ appId:"1:331251616985:web:0a07f66d15d0259b25c2c8",
+ measurementId:"G-NG14SKMLJ8"
+};
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+// Firestore-managed IndexedDB cache; server remains authoritative.
+const db=initializeFirestore(app,{localCache:typeof indexedDB!=="undefined"?persistentLocalCache({tabManager:persistentMultipleTabManager()}):memoryLocalCache()});
+let authGeneration=0;
+let approvedUid=null;
+let bankUnsubscribe=null,bankSubscriptionUid=null,bankReady=null,bankResolve=null;
+let currentIndex=0,correctCount=0,answered=false;
+let bankQuestions=[],quizPool=[],sessions=[],lang="en",answers=[],modeAtStart="all",managerRows=null;
+let questions=[],activeSession=null;
+const activeRef=(uid,l)=>doc(db,'users',uid,'review','active-'+l);
+const $=id=>document.getElementById(id);
+const provider=new GoogleAuthProvider();
+const qid=q=>q.id||key(q);
+const getLang=q=>q.language||"en";
+const stamp=q=>q.createdAt?.seconds||0;
+const order=(a,b)=>(Number.isFinite(Number(a.sortOrder))?Number(a.sortOrder):Infinity)-(Number.isFinite(Number(b.sortOrder))?Number(b.sortOrder):Infinity)||stamp(a)-stamp(b)||(a.createdAt?.nanoseconds||0)-(b.createdAt?.nanoseconds||0)||(a.batchIndex??0)-(b.batchIndex??0)||a.id.localeCompare(b.id);
+const allQuestions=()=>bankQuestions.filter(q=>getLang(q)===lang).sort(order).map((q,i)=>({...q,number:i+1}));
+const recentSessions=()=>sessions.filter(s=>(s.language||"en")===lang).sort((a,b)=>(b.finishedAt?.seconds||0)-(a.finishedAt?.seconds||0));
+function groups(){
+ const m=new Map();for(const q of allQuestions()){const id=q.batchId||"old-"+stamp(q);if(!m.has(id))m.set(id,[]);m.get(id).push(q);}
+ return [...m].sort((a,b)=>Math.max(...b[1].map(stamp))-Math.max(...a[1].map(stamp)));
+}
+const isUnclassified=q=>!String(q.situation||"").trim()||String(q.situation).trim()==="未分類";
+function pool(){
+ const full=allQuestions(),all=["allIncluded","excluded"].includes($("mode").value)?full:full.filter(q=>q.learningState!=="excluded"),lookup=new Map(all.map(q=>[qid(q),q])),g=groups(),ss=recentSessions();
+ switch($("mode").value){
+ case "range":return all.filter(q=>q.number>=Number($("rangeStart").value)&&q.number<=Number($("rangeEnd").value));
+ case "batch":return (g.find(x=>x[0]===$("batchSelect").value)?.[1]||[]).filter(q=>lookup.has(q.id));
+ case "excluded":return full.filter(q=>q.learningState==="excluded");
+ case "allIncluded":return full;
+ case "learned":return all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true));
+ case "unseen":return all.filter(q=>!q.learningState&&!q.lastReviewedAt&&!q.correctCount&&!q.wrongCount);
+ case "unclassified":return all.filter(isUnclassified);
+ case "situation":return all.filter(q=>(q.situation||"未分類")===$("situationSelect").value);
+ case "batches3":return g.slice(0,3).flatMap(x=>x[1]).filter(q=>lookup.has(q.id));
+ case "sessions3":return [...new Set(ss.slice(0,3).flatMap(s=>(s.answers||[]).map(a=>a.id)))].map(id=>lookup.get(id)).filter(Boolean);
+ case "month":{const now=new Date(),start=new Date(now.getFullYear(),now.getMonth()-1,1).getTime()/1000,end=new Date(now.getFullYear(),now.getMonth(),1).getTime()/1000;return all.filter(q=>stamp(q)>=start&&stamp(q)<end);}
+ case "wrong":return (ss[0]?.answers||[]).filter(a=>a.state!=="excluded"&&!a.correct).map(a=>lookup.get(a.id)).filter(Boolean);
+ case "unmastered":return all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false));
+ default:return all;
+ }
+}
+function refresh(){
+ $("unclassifiedCount").textContent="未分類："+allQuestions().filter(isUnclassified).length+"件";
+ const g=groups(),old=$("batchSelect").value,select=$("batchSelect"),months=new Map();select.replaceChildren();for(const [id,items] of g){const seconds=items.map(stamp).filter(n=>n>0),d=seconds.length?new Date(Math.min(...seconds)*1000):null;const parts=d?Object.fromEntries(new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"2-digit",hourCycle:"h23"}).formatToParts(d).map(p=>[p.type,p.value])):null;const month=parts?parts.year+"年"+parts.month+"月":"以前の登録";const o=document.createElement("option");o.value=id;o.textContent=(parts?parts.month+"/"+parts.day+" "+Number(parts.hour)+":"+parts.minute:"日時不明")+"・"+items.length+"問";if(!months.has(month)){const group=document.createElement("optgroup");group.label=month;months.set(month,group);select.append(group);}months.get(month).append(o);}if(g.some(x=>x[0]===old))select.value=old;
+ $("batchSelect").hidden=$("mode").value!=="batch";
+ const situations=[...new Set(allQuestions().map(q=>q.situation||"未分類"))].sort((a,b)=>a.localeCompare(b,"ja")),situationSelect=$("situationSelect"),oldSituation=situationSelect.value;situationSelect.replaceChildren();for(const name of situations){const o=document.createElement("option");o.value=name;o.textContent=name;situationSelect.append(o);}if(situations.includes(oldSituation))situationSelect.value=oldSituation;situationSelect.hidden=$("mode").value!=="situation";
+ $("rangeFields").hidden=$("mode").value!=="range";const unavailable=["sessions3","wrong"].includes($("mode").value)&&recentSessions().slice(0,$("mode").value==="wrong"?1:3).some(a=>a.chunked&&!Array.isArray(a.answers));const n=unavailable?0:pool().length;$("poolCount").textContent=unavailable?"詳細履歴を取得できません。再読み込みしてください。":"対象："+n+"問";$("start").disabled=n===0;$("start").textContent=n+"問に挑戦する";
+ $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件";
+ const ss=recentSessions();$("sessionList").replaceChildren();for(const a of ss){const p=document.createElement("p");p.className="muted";p.textContent="開始："+(a.startedAt?dateFrom(a.startedAt):"記録なし")+" ｜ 終了："+dateFrom(a.finishedAt)+" ｜ "+(Array.isArray(a.answers)?a.answers.length:(a.count??0))+"問";$("sessionList").append(p);}if(!ss.length)$("sessionList").textContent="学習履歴はありません。";const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問｜除外 "+excluded+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
+}
+document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if(!$("questionArea").hidden)return;lang=b.dataset.lang;document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));$("quizTitle").textContent=(lang==="en"?"英語":"フランス語")+"の復習";$("modelAnswer").lang=lang;$("resultArea").hidden=true;$("start").hidden=false;refresh();resumeQuiz();}));
+$("mode").addEventListener("change",refresh);$("batchSelect").addEventListener("change",refresh);$("situationSelect").addEventListener("change",refresh);$("rangeStart").addEventListener("input",refresh);$("rangeEnd").addEventListener("input",refresh);
+async function loadSessions(uid,generation){
+ try{
+ const snap=await getDocs(collection(db,"users",uid,"sessions"));
+ if(generation!==authGeneration||approvedUid!==uid)return;
+ const summaries=snap.docs.map(d=>({...d.data(),id:d.data().id||d.id})).filter(a=>a.chunked?(a.count??a.total)>0:Array.isArray(a.answers)&&a.answers.some(x=>!String(x.id).startsWith("builtin-")));
+ const recent=["en","fr"].flatMap(l=>summaries.filter(a=>(a.language||"en")===l).sort((a,b)=>(b.finishedAt?.seconds||0)-(a.finishedAt?.seconds||0)).slice(0,3));
+ const detailed=await Promise.all(recent.filter(a=>a.chunked).map(async a=>{try{return [a.id,(await readChunks(uid,a,true)).answers];}catch(e){return [a.id,null];}}));
+ if(generation!==authGeneration||approvedUid!==uid)return;
+ const byId=new Map(detailed);sessions=summaries.map(a=>byId.has(a.id)?{...a,answers:byId.get(a.id)}:a);
+ refresh();
+ if(detailed.some(x=>x[1]===null))$("history").textContent+="｜一部の詳細履歴を取得できません";
+ }catch(e){$("poolCount").textContent="学習履歴の取得に失敗："+(e.code||"エラー");}
+}
+
+const status=$("status"),login=$("login"),logout=$("logout");
+onAuthStateChanged(auth,async user=>{
+ const generation=++authGeneration;
+ if(bankUnsubscribe)bankUnsubscribe();bankUnsubscribe=null;bankSubscriptionUid=null;if(bankResolve)bankResolve();bankResolve=null;bankReady=null;
+ $("loginPanel").hidden=!!user;
+ $("userPanel").hidden=!user;
+ approvedUid=null;activeSession=null;bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
+ $("approvedPanel").hidden=true;
+ $("quiz").hidden=true;$("bank").hidden=true;$("importText").value="";$("importStatus").textContent="";
+ document.body.classList.remove("reviewing");$("questionArea").hidden=true;
+ $("resultArea").hidden=true;
+ $("start").hidden=false;
+ $("pendingPanel").hidden=true;
+ $("userName").textContent=user?.displayName||"Googleユーザー";
+
+ login.disabled=false;logout.disabled=false;
+ if(!user){status.hidden=false;status.textContent="ログインしていません。";return;}
+ status.hidden=false;status.textContent="利用許可を確認しています…";
+ $("uid").textContent=user.uid;
+ try{
+  const snap=await getDoc(doc(db,"access",user.uid));
+  if(generation!==authGeneration)return;
+  const approved=snap.exists() && snap.data().enabled===true;
+  $("approvedPanel").hidden=!approved;
+  $("pendingPanel").hidden=approved;
+  status.hidden=approved;status.textContent=approved?"":"このアカウントは未許可です。";
+  if(approved){approvedUid=user.uid;$("managePanel").hidden=false;$("quiz").hidden=false;$("bank").hidden=false;await Promise.all([loadHistory(user.uid,generation),loadBank(user.uid,generation),loadSessions(user.uid,generation)]);refresh();await resumeQuiz();}
+ }catch(e){
+  if(generation!==authGeneration)return;
+  $("approvedPanel").hidden=true;
+  $("pendingPanel").hidden=false;
+  status.hidden=false;status.textContent="利用許可を確認できませんでした。管理者にお問い合わせください。";
+ }
+},error=>{status.hidden=false;status.textContent="認証状態を確認できませんでした："+error.code;login.disabled=false;});
+async function loadHistory(uid,generation){
+ $("history").textContent="学習履歴を読み込んでいます…";
+ try{
+  const snap=await getDoc(doc(db,"users",uid,"review","progress"));
+  if(generation!==authGeneration||approvedUid!==uid)return;
+  if(!snap.exists()){$("history").textContent="まだ学習履歴はありません。";return;}
+  const data=snap.data();
+  if(!data.lastCount){$("history").textContent="まだ学習履歴はありません。";return;}
+  const date=data.lastAt?.toDate?.()?.toLocaleString("ja-JP")||"日時未取得";
+  $("history").textContent="前回の結果："+(Number(data.lastScore)||0)+"/"+(data.lastCount||5)+"問 正解（"+date+"）／挑戦回数："+(Number(data.attempts)||0);
+ }catch(e){if(generation===authGeneration)$("history").textContent="学習履歴を読み込めませんでした："+(e.code||"エラー");}
+}
+const norm=s=>s.normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase();
+const key=q=>norm(q.q)+"|"+norm(q.answer);
+async function loadBank(uid,generation,force=false){
+ if(uid!==approvedUid||generation!==authGeneration)return;
+ if(bankSubscriptionUid===uid&&bankReady){if(force){const snap=await getDocsFromServer(collection(db,"users",uid,"expressions"));if(uid!==approvedUid||generation!==authGeneration)return;bankQuestions=snap.docs.map(d=>({...d.data(),id:d.id})).filter(q=>typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim());refresh();}return bankReady;}
+ if(bankUnsubscribe)bankUnsubscribe();
+ bankSubscriptionUid=uid;
+ $("bankCount").textContent="登録済み表現を同期中…";
+ bankReady=new Promise(resolve=>{bankResolve=resolve;});
+ const ready=bankReady;
+ bankUnsubscribe=onSnapshot(collection(db,"users",uid,"expressions"),{includeMetadataChanges:true},snap=>{
+  if(generation!==authGeneration||approvedUid!==uid)return;
+  bankQuestions=snap.docs.map(d=>({...d.data(),id:d.id})).filter(q=>typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim());
+  refresh();
+  if(snap.metadata.fromCache)$("bankCount").textContent+="（端末内データ・同期確認中）";
+  if(!snap.metadata.fromCache||bankQuestions.length){if(bankResolve)bankResolve();bankResolve=null;}
+ },e=>{
+  if(generation!==authGeneration||approvedUid!==uid)return;
+  $("bankCount").textContent="同期失敗："+(e.code||e.message||"エラー");
+  if(bankResolve)bankResolve();bankResolve=null;bankSubscriptionUid=null;bankReady=null;
+ });
+ return ready;
+}
+function tsDate(v){return v?.toDate?.()?.toISOString?.()||v||null;}
+function dateFrom(v){return v?.toDate?.()?.toLocaleString("ja-JP")|| (typeof v==="string"?new Date(v).toLocaleString("ja-JP"):"—");}
+function toPortable(q,index){return {id:q.id,language:getLang(q),initialNumber:Number(q.initialNumber)||index+1,createdAt:tsDate(q.createdAt),situation:q.situation||"",sortOrder:Number.isFinite(Number(q.sortOrder))?Number(q.sortOrder):index+1,q:q.q,answer:q.answer,why:q.why||"",correctCount:Number(q.correctCount)||0,wrongCount:Number(q.wrongCount)||0,lastReviewedAt:tsDate(q.lastReviewedAt),lastCorrectAt:tsDate(q.lastCorrectAt),learningState:q.learningState||null,lastCorrect:q.lastCorrect===true?true:q.lastCorrect===false?false:null};}
+function downloadFile(name,content,type){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement("a");a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
+async function fetchManaged(){const uid=approvedUid,generation=authGeneration;if(!uid)throw Error("ログインしてください");const snap=await getDocsFromServer(collection(db,"users",uid,"expressions"));if(generation!==authGeneration||uid!==approvedUid)throw Error("ログイン状態が変わりました");return snap.docs.map(d=>({...d.data(),id:d.id})).filter(q=>typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim());}
+async function exportLatest(kind){const selection=$("exportLanguage").value;$("exportStatus").textContent="最新データを取得中…";$("exportRows").replaceChildren();$("exportTable").hidden=true;try{const all=await fetchManaged(),langs=selection==="all"?["en","fr"]:[selection],portable=[];for(const l of langs){const rows=all.filter(q=>getLang(q)===l).sort(order);rows.forEach((q,i)=>portable.push(toPortable(q,i)));}if(kind==="unclassified"){const subset=portable.filter(isUnclassified);downloadFile("language-review-unclassified-"+selection+"-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify({format:"kussoon-language-review-v1",scope:"unclassified",exportedAt:new Date().toISOString(),language:selection,expressions:subset},null,2),"application/json;charset=utf-8");$("exportStatus").textContent="未分類 "+subset.length+"件";return;}managerRows=portable;$("exportStatus").textContent=portable.length+"件（サーバーから最新取得）";if(kind==="json"){downloadFile("language-review-"+selection+"-"+new Date().toISOString().slice(0,10)+".json",JSON.stringify({format:"kussoon-language-review-v1",exportedAt:new Date().toISOString(),language:selection,expressions:portable},null,2),"application/json;charset=utf-8");return;}const allData=all.filter(q=>langs.includes(getLang(q))).sort(order),frag=document.createDocumentFragment(),counts=new Map();for(const q of allData){const index=counts.get(getLang(q))||0;counts.set(getLang(q),index+1);const tr=document.createElement("tr"),values=[getLang(q)==="en"?"英語":"フランス語",q.initialNumber||index+1,q.situation||"未分類",q.q,q.answer,(q.correctCount||0)+" / "+(q.wrongCount||0),dateFrom(q.lastReviewedAt)];for(const v of values){const td=document.createElement("td");td.textContent=String(v);tr.append(td);}frag.append(tr);}$("exportRows").append(frag);$("exportTable").hidden=false;}catch(e){$("exportStatus").textContent="取得できませんでした："+(e.code||e.message||"エラー");}}
+$("exportJson").addEventListener("click",()=>exportLatest("json"));$("exportRefresh").addEventListener("click",()=>exportLatest("view"));
+$("exportLanguage").addEventListener("change",()=>{$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";});
+let stagedFile=null,stagedChanges=[];
+$("exportUnclassified").addEventListener("click",()=>exportLatest("unclassified"));
+$("manageFile").addEventListener("change",async e=>{stagedFile=null;stagedChanges=[];$("applyChanges").disabled=true;try{const file=e.target.files?.[0];if(!file)return;const data=JSON.parse(await file.text());if(data?.format!=="kussoon-language-review-v1"||!Array.isArray(data.expressions))throw Error("このアプリの整理用JSONではありません。");const current=await fetchManaged(),byId=new Map(current.map(q=>[q.id,q]));if(data.expressions.length>5000)throw Error("一度に処理できる上限（5,000件）を超えています。");const seen=new Set();for(const row of data.expressions){if(!row||typeof row.id!=="string"||seen.has(row.id)||!byId.has(row.id))throw Error("固有IDが重複または未登録の行があります。追加・削除せず、元のIDを維持してください。");seen.add(row.id);if(!["en","fr"].includes(row.language)||row.language!==getLang(byId.get(row.id))||(data.language!=="all"&&row.language!==data.language))throw Error("言語と固有IDが一致しません。");if(typeof row.situation!=="string"||row.situation.length>120||typeof row.q!=="string"||row.q.length>300||typeof row.answer!=="string"||row.answer.length>500||typeof (row.why||"")!=="string"||(row.why||"").length>1000||!Number.isFinite(Number(row.sortOrder)))throw Error("入力項目の形式または文字数が正しくありません。");const old=byId.get(row.id);if(data.scope==="unclassified"&&(!isUnclassified(old)||isUnclassified(row)||row.q!==old.q||row.answer!==old.answer||(row.why||"")!==(old.why||"")))throw Error("未分類の既存表現に分類を設定してください。本文変更はできません。");const fallbackNumber=current.filter(q=>getLang(q)===row.language).sort(order).findIndex(q=>q.id===row.id)+1;if(!Number.isFinite(Number(row.initialNumber)))throw Error("初回登録番号がありません。");if(Number(row.initialNumber)!==(Number(old.initialNumber)||fallbackNumber))throw Error("初回登録番号は変更できません。ダウンロードした番号に戻してください。");if((row.situation||"")!==(old.situation||"")||Number(row.sortOrder)!==(Number.isFinite(Number(old.sortOrder))?Number(old.sortOrder):fallbackNumber)||(row.q!==old.q)||(row.answer!==old.answer)||(row.why||"")!==(old.why||"")||Number(row.initialNumber)!==(Number(old.initialNumber)||fallbackNumber)||!Number.isFinite(Number(old.initialNumber))||Number(old.initialNumber)<=0)stagedChanges.push(row);}if(data.scope!=="unclassified"&&data.expressions.length!==current.filter(q=>data.language==="all"||getLang(q)===data.language).length)throw Error("対象行の不足があります。最新データをダウンロードしてから編集してください。");stagedFile={data,current};$("changePreview").textContent="対象 "+data.expressions.length+"件、変更 "+stagedChanges.length+"件です。登録内容・学習記録を含むバックアップを先にダウンロードしてから反映します。";$("applyChanges").disabled=stagedChanges.length===0;}catch(e){$("changePreview").textContent="反映できません："+(e.message||"ファイルを確認してください");}}
+);
+$("applyChanges").addEventListener("click",async()=>{if(!stagedFile||!stagedChanges.length||!approvedUid)return;const btn=$("applyChanges");btn.disabled=true;try{const fresh=await fetchManaged(),byId=new Map(fresh.map(q=>[q.id,q]));if(stagedChanges.some(r=>!byId.has(r.id)))throw Error("サーバーの登録件数が変わりました。最新ファイルを再取得してください。");if(stagedFile.data.scope==="unclassified"&&stagedChanges.some(r=>{const q=byId.get(r.id);return !isUnclassified(q)||r.q!==q.q||r.answer!==q.answer||(r.why||"")!==(q.why||"");}))throw Error("対象が変更されています。最新ファイルを取得してください。");const sessionsSnap=await getDocsFromServer(collection(db,"users",approvedUid,"sessions")),progressSnap=await getDoc(doc(db,"users",approvedUid,"review","progress"));const progress=progressSnap.exists()?progressSnap.data():null;const backup={format:"kussoon-language-review-backup-v1",createdAt:new Date().toISOString(),expressions:fresh.map((q,i)=>toPortable(q,i)),sessions:sessionsSnap.docs.map(d=>({id:d.id,...d.data(),finishedAt:tsDate(d.data().finishedAt)})),progress:progress?{...progress,lastAt:tsDate(progress.lastAt)}:null};downloadFile("language-review-backup-"+new Date().toISOString().replace(/[:.]/g,"-")+".json",JSON.stringify(backup,null,2),"application/json;charset=utf-8");const uid=approvedUid,generation=authGeneration;for(let i=0;i<stagedChanges.length;i+=400){await assertNoReset(uid,"en");await assertNoReset(uid,"fr");const batch=writeBatch(db);for(const row of stagedChanges.slice(i,i+400)){const ref=doc(db,"users",uid,"expressions",row.id);batch.update(ref,stagedFile.data.scope==="unclassified"?{situation:row.situation.trim(),sortOrder:Number(row.sortOrder)}:{initialNumber:Number(row.initialNumber),situation:row.situation.trim(),sortOrder:Number(row.sortOrder),q:row.q,answer:row.answer,why:row.why||""});}await batch.commit();if(uid!==approvedUid||generation!==authGeneration)throw Error("ログイン状態が変わりました。");}await loadBank(uid,generation,true);$("manageStatus").textContent=stagedChanges.length+"件を反映しました。固有ID・登録日時・学習記録は維持されています。";$("changePreview").textContent="反映済み："+stagedChanges.length+"件";stagedChanges=[];stagedFile=null;$("manageFile").value="";refresh();}catch(e){$("manageStatus").textContent="反映できませんでした："+(e.code||e.message||"エラー");}finally{btn.disabled=!stagedChanges.length;}});
+ 
+let replacementPlan=null,replacementSnapshot=null,replacementBusy=false;
+const replacementMessage=t=>$("replacementStatus").textContent=t;
+async function replacementCheck(p){
+ if(p?.format!=="kussoon-language-review-replacement-plan-v1"||p.language!=="en"||p.resetLearningHistory!==true||!Array.isArray(p.expectedSourceIds)||!Array.isArray(p.removeIds)||!Array.isArray(p.expressions))throw Error("専用の英語置換計画ではありません");
+ const ids=new Set(p.expectedSourceIds),target=new Set(p.expressions.map(r=>r.id)),removed=new Set(p.removeIds);
+ if(ids.size!==p.expectedSourceCount||ids.size!==p.expectedSourceIds.length||target.size!==p.targetCount||target.size!==p.expressions.length||removed.size!==p.removeIds.length||target.size+removed.size!==ids.size||[...target].some(id=>!ids.has(id)||removed.has(id))||[...removed].some(id=>!ids.has(id)))throw Error("ID構成が不正です");
+ const all=await fetchManaged(),en=all.filter(q=>getLang(q)==="en"),byId=new Map(en.map(q=>[q.id,q]));
+ if(en.some(q=>!ids.has(q.id))||[...target].some(id=>!byId.has(id)))throw Error("英語教材のIDが一致しません。別の教材や追加登録が存在します");
+ for(const r of p.expressions){const q=byId.get(r.id);if(r.language!=="en"||!Number.isInteger(r.initialNumber)||r.initialNumber<1||(q.initialNumber&&Number(q.initialNumber)!==r.initialNumber)||!Number.isFinite(r.sortOrder)||typeof r.q!=="string"||!r.q.trim()||typeof r.answer!=="string"||!r.answer.trim()||typeof r.why!=="string"||typeof r.situation!=="string")throw Error("教材の形式または登録番号が不正です");}
+ return en;
+}
+$("replacementFile").addEventListener("change",async e=>{replacementPlan=null;replacementSnapshot=null;$("replacementBackup").disabled=true;$("replacementApply").disabled=true;try{const f=e.target.files[0];if(!f)return;const p=JSON.parse(await f.text()),en=await replacementCheck(p);replacementPlan=p;replacementMessage("英語 "+en.length+"件 → "+p.targetCount+"件。統合対象 "+p.removeIds.filter(id=>en.some(q=>q.id===id)).length+"件。英語学習履歴を初期化します。");$("replacementBackup").disabled=false;}catch(e){replacementMessage(e.message);}});
+$("replacementBackup").addEventListener("click",async()=>{try{const uid=approvedUid,p=replacementPlan;if(!uid||!p||replacementBusy)return;const en=await replacementCheck(p),ss=await getDocsFromServer(collection(db,"users",uid,"sessions")),pr=await getDoc(doc(db,"users",uid,"review","progress")),ac=await getDoc(activeRef(uid,"en"));if(uid!==approvedUid||p!==replacementPlan)throw Error("対象が変わりました");const backup={format:"kussoon-language-review-replacement-backup-v1",language:"en",expressions:en,sessions:ss.docs.filter(d=>(d.data().language||"en")==="en").map(d=>({id:d.id,data:d.data()})),progress:pr.exists()?pr.data():null,active:ac.exists()?ac.data():null,chunks:(await getDocsFromServer(collection(db,"users",uid,"reviewChunks"))).docs.filter(d=>d.data().language==="en").map(d=>({id:d.id,data:d.data()}))};downloadFile("english-before-replacement-"+Date.now()+".json",JSON.stringify(backup,null,2),"application/json");replacementSnapshot={uid,p,signature:JSON.stringify(en.slice().sort((a,b)=>a.id.localeCompare(b.id)))};$("replacementApply").disabled=false;replacementMessage("バックアップの保存を確認してから更新してください。");}catch(e){replacementMessage(e.message);}});
+$("replacementApply").addEventListener("click",async()=>{const p=replacementPlan,uid=approvedUid,generation=authGeneration;if(!$("questionArea").hidden){replacementMessage("復習を終了してから更新してください。");return;}if(replacementBusy||!p||replacementSnapshot?.uid!==uid||replacementSnapshot?.p!==p)return;if(!confirm("英語教材を置換し、英語の学習履歴をすべて初期化します。バックアップは保存しましたか？"))return;replacementBusy=true;$("replacementApply").disabled=true;$("replacementFile").disabled=true;$("replacementBackup").disabled=true;let done=0;try{const en=await replacementCheck(p);if(replacementSnapshot.signature!==JSON.stringify(en.slice().sort((a,b)=>a.id.localeCompare(b.id)))&&!replacementSnapshot.started)throw Error("バックアップ後に教材が変化しました。バックアップを取り直してください。");const active=await getDoc(activeRef(uid,"en"));if(active.exists()&&active.data().index<sessionCount(active.data()))throw Error("英語の途中セッションを終了してください。");const ss=await getDocsFromServer(collection(db,"users",uid,"sessions")),existing=new Set(en.map(q=>q.id)),ops=[];for(const r of p.expressions)ops.push(b=>b.update(doc(db,"users",uid,"expressions",r.id),{q:r.q,answer:r.answer,why:r.why,situation:r.situation,sortOrder:r.sortOrder,initialNumber:r.initialNumber,correctCount:0,wrongCount:0,lastReviewedAt:null,lastCorrectAt:null,lastCorrect:null,learningState:null}));for(const id of p.removeIds)if(existing.has(id))ops.push(b=>b.delete(doc(db,"users",uid,"expressions",id)));for(const d of ss.docs)if((d.data().language||"en")==="en")ops.push(b=>b.delete(d.ref));const chunks=await getDocsFromServer(collection(db,"users",uid,"reviewChunks"));for(const d of chunks.docs)if(d.data().language==="en")ops.push(b=>b.delete(d.ref));ops.push(b=>b.delete(doc(db,"users",uid,"review","progress")),b=>b.delete(activeRef(uid,"en")));replacementSnapshot.started=true;for(let i=0;i<ops.length;i+=300){if(uid!==approvedUid||generation!==authGeneration)throw Error("ログイン状態が変わりました");await assertNoReset(uid,"en");const b=writeBatch(db);for(const op of ops.slice(i,i+300))op(b);await b.commit();done+=Math.min(300,ops.length-i);replacementMessage("更新中 "+done+"/"+ops.length);}await Promise.all([loadBank(uid,generation,true),loadSessions(uid,generation)]);if(lang==="en"){document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;activeSession=null;}refresh();replacementMessage("英語教材 "+p.targetCount+"件への更新と履歴初期化が完了しました。");replacementPlan=null;replacementSnapshot=null;$("replacementFile").value="";}catch(e){replacementMessage("更新中断（確定済み操作 "+done+"件）："+e.message+"。同じ計画で再試行できます。");$("replacementApply").disabled=false;}finally{replacementBusy=false;$("replacementFile").disabled=false;$("replacementBackup").disabled=!replacementPlan;}});
+
+async function expressionId(q){
+ const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(key(q)));
+ return Array.from(new Uint8Array(hash),v=>v.toString(16).padStart(2,"0")).join("");
+}
+$("importButton").addEventListener("click",async()=>{
+ const uid=approvedUid,generation=authGeneration;if(!uid)return;
+ const lines=$("importText").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ if(!lines.length||lines.length>100){$("importStatus").textContent="1〜100行を入力してください。";return;}
+ const rows=lines.map(line=>line.split(line.includes("\t")?/\t/:/ {2,}|\u3000+/).map(x=>x.trim()));
+ if(rows.some(a=>a.length<2||a.length>4||!a[0]||!a[1]||a[0].length>300||a[1].length>500||(a[2]||"").length>1000)){
+  $("importStatus").textContent="形式が不正な行があります。タブ区切りで入力してください。";return;
+ }
+ const importButton=$("importButton");
+ importButton.disabled=true;
+ importButton.setAttribute("aria-busy","true");
+ importButton.innerHTML='登録中<span id="importDots" aria-hidden="true" style="display:inline-block;width:1.5em;text-align:left">.</span>';
+ const dots=$("importDots");let dotCount=1;
+ const dotTimer=setInterval(()=>{dotCount=(dotCount+1)%4;dots.textContent=".".repeat(dotCount);},400);
+ let added=0,duplicates=0;
+ try{
+  const known=new Set(bankQuestions.filter(q=>getLang(q)===lang).map(key));const batchId="batch-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+  for(const [batchIndex,[q,answer,why="",situation=""]] of rows.entries()){
+   if(generation!==authGeneration||approvedUid!==uid)break;
+   const item={q,answer,why,language:lang},k=key(item);
+   let ref=doc(db,"users",uid,"expressions",lang+"-"+await expressionId(item));
+   if(known.has(k)||(await getDoc(ref)).exists()){if(!confirm("重複した表現です。\n"+q+"\n"+answer+"\nOK：別の問題として残す／キャンセル：今回の登録を省略")){duplicates++;continue;}ref=doc(db,"users",uid,"expressions",lang+"-"+crypto.randomUUID());}
+   await assertNoReset(approvedUid,lang);await setDoc(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.initialNumber)||0))+added+1,sortOrder:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.sortOrder)||0))+added+1});added++;known.add(k);
+  }
+  if(generation===authGeneration&&approvedUid===uid){
+   $("importStatus").textContent=added+"件登録、"+duplicates+"件重複を省略しました。";
+   if(added)$("importText").value="";
+   await loadBank(uid,generation,true);
+  }
+ }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。再実行時は重複確認が表示されます。";}
+ finally{clearInterval(dotTimer);importButton.textContent="表現を登録する";importButton.removeAttribute("aria-busy");importButton.disabled=false;}
+});
+let trialMode=sessionStorage.getItem("languageReviewTrial")==="1";
+function syncTrial(){ $("trialMode").checked=trialMode;$("trialBanner").hidden=!trialMode;$("bank").hidden=trialMode||!approvedUid;$("managePanel").hidden=trialMode||!approvedUid; }
+$("trialMode").addEventListener("change",async()=>{if(!approvedUid||!$("questionArea").hidden){$("trialMode").checked=trialMode;$("trialStatus").textContent="復習を終了してから切り替えてください。";return;}trialMode=$("trialMode").checked;sessionStorage.setItem("languageReviewTrial",trialMode?"1":"0");activeSession=null;$("resultArea").hidden=true;$("start").hidden=false;syncTrial();if(!trialMode)await resumeQuiz();});
+
+$("resetScope").addEventListener("change",()=>{$("resetDate").hidden=$("resetScope").value!=="date";$("resetNumber").hidden=$("resetScope").value!=="question";});
+$("resetHistory").addEventListener("click",async()=>{
+ const uid=approvedUid,l=lang,generation=authGeneration,mode=$("resetScope").value,status=$("resetStatus");if(!uid||trialMode||!$("questionArea").hidden){status.textContent="通常モードで復習を終了してから操作してください。";return;}
+ $("resetHistory").disabled=true;let committed=0;
+ try{
+ await assertNoReset(uid,l);const active=await getDoc(activeRef(uid,l));if(active.exists()&&active.data().index<sessionCount(active.data()))throw Error("途中の復習を終了してください。");
+ const bank=(await fetchManaged()).filter(q=>getLang(q)===l),ss=await getDocsFromServer(collection(db,"users",uid,"sessions")),cs=await getDocsFromServer(collection(db,"users",uid,"reviewChunks"));
+ const chunks=cs.docs.filter(d=>d.data().language===l),cm=new Map(chunks.map(d=>[d.id,d])),records=ss.docs.filter(d=>(d.data().language||"en")===l).map(d=>({ref:d.ref,id:d.id,...d.data()})).sort((a,b)=>(a.finishedAt?.seconds||0)-(b.finishedAt?.seconds||0));
+ for(const a of records){if(a.chunked){a.parts=Array.from({length:Math.ceil(a.total/chunkSize)},(_,n)=>cm.get(a.id+"-"+n));if(a.parts.some(x=>!x))throw Error("履歴の一部が欠けています");a.answers=a.parts.flatMap(x=>x.data().answers);}if(!Array.isArray(a.answers))throw Error("未対応の履歴形式です");}
+ const qidSet=new Set(bank.filter(q=>Number(q.initialNumber)===Number($("resetNumber").value)).map(q=>q.id));if(mode==="question"&&qidSet.size!==1)throw Error("登録番号を一つ指定してください。");
+ const date=$("resetDate").value;if(mode==="date"&&!date)throw Error("日付を指定してください。");
+ const localDate=t=>{const d=t?.toDate?.();return d?[d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-"):"";};
+ const selected=a=>mode==="all"||mode==="latest"&&a===records.at(-1)||mode==="date"&&localDate(a.finishedAt)===date;
+ const affected=new Set(mode==="all"?bank.map(q=>q.id):mode==="question"?qidSet:[]),ops=[];const plan={delete:ref=>ops.push({type:"delete",collection:ref.parent.id,id:ref.id}),update:(ref,data)=>ops.push({type:"update",collection:ref.parent.id,id:ref.id,data})};let removed=0;const before=new Map(),after=new Map();
+ const add=(map,x,a)=>{if(!map.has(x.id))map.set(x.id,[]);map.get(x.id).push({...x,at:x.at||a.finishedAt});};
+ for(const a of records){const drop=x=>selected(a)||mode==="question"&&qidSet.has(x.id);const keep=a.answers.filter(x=>!drop(x));for(const x of a.answers){add(before,x,a);if(drop(x)){affected.add(x.id);removed++;}else add(after,x,a);}
+ if(keep.length===a.answers.length&&!selected(a))continue;
+ if(!keep.length){plan.delete(a.ref);for(const d of a.parts||[])plan.delete(d.ref);}
+ else{plan.update(a.ref,{count:keep.length,score:keep.filter(x=>x.correct).length,...(a.chunked?{}:{answers:keep})});for(const d of a.parts||[])plan.update(d.ref,{answers:d.data().answers.filter(x=>!drop(x))});}}
+ const counts=xs=>({correctCount:xs.filter(x=>x.state!=="excluded"&&x.correct).length,wrongCount:xs.filter(x=>x.state!=="excluded"&&!x.correct).length});
+ for(const q of bank.filter(q=>affected.has(q.id))){const old=counts(before.get(q.id)||[]);if(mode!=="all"&&mode!=="question"&&(old.correctCount!==(q.correctCount||0)||old.wrongCount!==(q.wrongCount||0)))throw Error("過去の詳細履歴が不足しています。部分取消は安全のため中止します。");plan.update(doc(db,"users",uid,"expressions",q.id),resetStats(after.get(q.id)||[]));}
+ if(mode==="all"){for(const d of chunks)if(!records.some(a=>a.parts?.some(x=>x.id===d.id)))plan.delete(d.ref);plan.delete(activeRef(uid,l));if(l==="en")plan.delete(doc(db,"users",uid,"review","progress"));}
+ if(!ops.length){status.textContent="対象の履歴はありません。";return;}
+ if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");
+ downloadFile("history-before-reset-"+l+"-"+Date.now()+".json",JSON.stringify({language:l,expressions:bank,sessions:records.map(({ref,parts,...a})=>a),chunks:chunks.map(d=>({id:d.id,data:d.data()})),active:active.exists()?active.data():null},null,2),"application/json");
+ if(!confirm("対象 "+affected.size+"問、回答履歴 "+removed+"件。バックアップを保存しましたか？ 取り消しを実行しますか？"))return;
+ 
+ if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");await stageResetPlan(uid,l,ops);await resumeResetPlan(uid,l,(n,total)=>{status.textContent="初期化中 "+n+"/"+total;});committed=ops.length;await Promise.all([loadBank(uid,generation,true),loadSessions(uid,generation)]);status.textContent="初期化完了："+affected.size+"問、回答履歴 "+removed+"件。";
+ }catch(e){status.textContent=(committed?"更新済み・再読込確認が必要：":"中止：")+e.message;}finally{$("resetHistory").disabled=false;}
+});
+
+// Durable reset journal.
+function resetStats(xs){
+ const last=xs.at(-1),graded=xs.filter(x=>x.state!=="excluded").at(-1),correct=xs.filter(x=>x.state!=="excluded"&&x.correct).at(-1);
+ return {correctCount:xs.filter(x=>x.state!=="excluded"&&x.correct).length,wrongCount:xs.filter(x=>x.state!=="excluded"&&!x.correct).length,learningState:last?(last.state||(last.correct?"learned":"learning")):null,lastReviewedAt:last?.at||null,lastCorrect:graded?graded.correct:null,lastCorrectAt:correct?.at||null};
+}
+const resetJournalRef=(uid,l)=>doc(db,"users",uid,"review","reset-"+l);
+const resetJournalPart=(uid,l,id,n)=>doc(db,"users",uid,"resetPlans",l+"-"+id+"-"+n);
+// Stage a complete immutable plan before enabling execution.
+async function stageResetPlan(uid,l,ops){
+ if(!["en","fr"].includes(l)||!ops.length)throw Error("初期化計画が不正です");
+ const id=crypto.randomUUID(),ref=resetJournalRef(uid,l),parts=[];
+ let part=[],bytes=0;
+ for(const op of ops){const size=new TextEncoder().encode(JSON.stringify(op)).length;if(size>200000)throw Error("初期化操作が大きすぎます");if(part.length>=300||bytes+size>200000){parts.push(part);part=[];bytes=0;}part.push(op);bytes+=size;}
+ if(part.length)parts.push(part);
+ await runTransaction(db,async tx=>{const snap=await tx.get(ref);const active=await tx.get(activeRef(uid,l));if(active.exists()&&active.data().index<sessionCount(active.data()))throw Error("途中の復習があります");if(snap.exists()&&!["completed","discarded"].includes(snap.data().status))throw Error("未完了の初期化があります");tx.set(ref,{id,language:l,status:"staging",next:0,parts:parts.length});});
+ for(let n=0;n<parts.length;n++){await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging")throw Error("初期化計画が変更されました");tx.set(resetJournalPart(uid,l,id,n),{ops:parts[n]});});}
+ await runTransaction(db,async tx=>{const snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging")throw Error("初期化計画が変更されました");tx.update(ref,{status:"running"});});
+ return id;
+}
+$("resetRecovery").addEventListener("click",async()=>{
+ const uid=approvedUid,l=lang,g=authGeneration,status=$("resetStatus");
+ if(!uid||trialMode||!$("questionArea").hidden){status.textContent="通常モードで復習を終了してください。";return;}
+ $("resetRecovery").disabled=true;
+ try{
+ const snap=await getDoc(resetJournalRef(uid,l));const j=snap.data();
+ if(!snap.exists()||["completed","discarded"].includes(j.status)){status.textContent="未完了の初期化はありません。";return;}
+ if(uid!==approvedUid||l!==lang||g!==authGeneration)throw Error("対象が変わりました");
+ if(j.status==="staging"){if(confirm("未実行の初期化計画を破棄しますか？")){await discardStagedReset(uid,l,j.id);status.textContent="計画を破棄しました。";}return;}
+ if(j.status==="running"&&confirm("中断した初期化を再開しますか？")){await resumeResetPlan(uid,l,(n,total)=>{status.textContent="初期化中 "+n+"/"+total;});if(uid===approvedUid&&g===authGeneration){await Promise.all([loadBank(uid,g,true),loadSessions(uid,g)]);status.textContent="初期化を完了しました。";}}
+ }catch(e){status.textContent="復旧できません："+e.message;}finally{$("resetRecovery").disabled=false;}
+});
+async function discardStagedReset(uid,l,id){
+ await runTransaction(db,async tx=>{
+  const ref=resetJournalRef(uid,l),snap=await tx.get(ref);
+  if(!snap.exists()||snap.data().id!==id||snap.data().status!=="staging"||snap.data().next!==0)throw Error("実行済みの計画は破棄できません");
+  tx.update(ref,{status:"discarded"});
+ });
+}
+async function assertNoReset(uid,l,tx){
+ const ref=resetJournalRef(uid,l),snap=await (tx?tx.get(ref):getDoc(ref));
+ if(snap.exists()&&["staging","running"].includes(snap.data().status))throw Error("履歴初期化が未完了です。先に復旧してください。");
+}
+async function resumeResetPlan(uid,l,onProgress){
+ for(;;){const snap=await getDoc(resetJournalRef(uid,l));if(!snap.exists())return;const j=snap.data();if(["completed","discarded"].includes(j.status))return;if(j.status!=="running")throw Error("初期化計画の保存が完了していません");await commitResetPart(uid,l,j.id,j.next);onProgress?.(j.next+1,j.parts);}
+}
+async function commitResetPart(uid,l,id,n){
+ return runTransaction(db,async tx=>{
+  const ref=resetJournalRef(uid,l),snap=await tx.get(ref),j=snap.data();
+  if(!snap.exists()||j.id!==id||j.status!=="running")throw Error("初期化計画が一致しません");
+  if(j.next>n)return;
+  if(j.next!==n||n>=j.parts)throw Error("初期化の進捗が一致しません");
+  const p=await tx.get(resetJournalPart(uid,l,id,n));
+  if(!p.exists()||!Array.isArray(p.data().ops)||p.data().ops.length>300)throw Error("初期化計画が不正です");
+  for(const op of p.data().ops){
+   if(!["expressions","sessions","reviewChunks","review"].includes(op.collection)||typeof op.id!=="string"||!op.id||op.id.includes("/"))throw Error("初期化対象が不正です");
+   const target=doc(db,"users",uid,op.collection,op.id);
+   if(op.collection==="review"&&op.id!=="active-"+l&&!(l==="en"&&op.id==="progress"))throw Error("初期化対象が不正です");
+   if(op.type==="delete"&&op.collection!=="expressions")tx.delete(target);
+   else if(op.type==="update"&&op.collection!=="review")tx.update(target,op.data);
+   else throw Error("初期化操作が不正です");
+  }
+  tx.update(ref,{next:n+1,status:n+1===j.parts?"completed":"running"});
+ });
+}
+const chunkSize=200;
+const chunkRef=(uid,id,n)=>doc(db,"users",uid,"reviewChunks",id+"-"+n);
+const sessionCount=a=>a.total??a.ids.length;
+async function readChunks(uid,a,historyOnly=false){
+ if(!a.chunked)return {ids:a.ids,answers:a.answers};
+ const ids=[],answers=[];
+ for(let n=0;n<Math.ceil((historyOnly&&Number.isInteger(a.processedCount)?Math.min(a.total,a.processedCount):a.total)/chunkSize);n++){
+ const snap=await getDoc(chunkRef(uid,a.id,n));if(!snap.exists())throw Error("復習データの一部がありません");
+ ids.push(...snap.data().ids);answers.push(...snap.data().answers);
+ }
+ return {ids,answers};
+}
+async function beginQuiz(){
+ if(!approvedUid)return;const uid=approvedUid,l=lang; $("start").disabled=true;$("retry").disabled=true;
+ try{
+ const list=[...new Map(pool().map(q=>[qid(q),q])).values()];
+ if($("shuffle").checked)for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
+ questions=list.sort((a,b)=>$("shuffle").checked?0:a.number-b.number);if(!questions.length)return;
+ modeAtStart=$("mode").value;answers=[];currentIndex=0;correctCount=0;if(trialMode){activeSession={trial:true};showQuestion();return;}const session={id:crypto.randomUUID(),language:l,mode:modeAtStart,chunked:true,total:questions.length,index:0,answeredCount:0,startedAt:new Date(),score:0};await assertNoReset(uid,l);for(let n=0;n<Math.ceil(questions.length/chunkSize);n++){await setDoc(chunkRef(uid,session.id,n),{language:l,ids:questions.slice(n*chunkSize,(n+1)*chunkSize).map(q=>q.id),answers:[]});}await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(snap.exists()&&snap.data().index<sessionCount(snap.data()))throw Error("途中の復習があります。再読み込みしてください。");tx.set(ref,session);});if(uid!==approvedUid||l!==lang)return;activeSession=session;showQuestion();
+ }catch(e){$("history").textContent="開始できません："+(e.message||e.code);}finally{$("start").disabled=false;$("retry").disabled=false;}
+}
+async function resumeQuiz(){
+ const uid=approvedUid,l=lang;syncTrial();if(!uid||trialMode)return;
+ try{const snap=await getDoc(activeRef(uid,l));if(uid!==approvedUid||l!==lang||!snap.exists())return;
+ const a=snap.data();if(a.index>=sessionCount(a))return;const data=await readChunks(uid,a);if(uid!==approvedUid||l!==lang)return;
+ const lookup=new Map(allQuestions().map(q=>[q.id,q]));const list=data.ids.map(id=>lookup.get(id));if(list.some(q=>!q))throw Error("教材が変更されています。");
+ activeSession=a;questions=list;answers=data.answers;currentIndex=a.index;correctCount=a.score;modeAtStart=a.mode;showQuestion();
+ }catch(e){$("history").textContent="途中の復習を取得できません："+(e.message||e.code);}
+}
+quizPool=questions.slice();
+function showQuestion(){
+ $("editPanel").hidden=true;$("editQuestion").hidden=trialMode;$("editStatus").textContent="";$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;
+ answered=false;
+ $("questionArea").hidden=false;$("resultArea").hidden=true;$("start").hidden=true;
+ $("progress").textContent=(currentIndex+1)+" / "+questions.length+" 問";
+ const q=questions[currentIndex];
+ $("question").textContent=q.q;$("questionMeta").textContent="No. "+(q.initialNumber||q.number)+" ｜ "+(q.situation||"未分類");$("preActions").hidden=false;$("preExclude").hidden=false;$("preExclude").disabled=false;$("skipQuestion").disabled=false;document.body.classList.add("reviewing");
+ $("questionStats").textContent="正解 "+(q.correctCount||0)+"回／不正解 "+(q.wrongCount||0)+"回｜最終学習："+dateFrom(q.lastReviewedAt)+"｜最終正解："+dateFrom(q.lastCorrectAt)+"｜前回："+({excluded:"出題から外した",learned:"ひとまず覚えた",learning:"まだ覚えていない"}[q.learningState]||(q.lastCorrect==null?"未記録":q.lastCorrect?"ひとまず覚えた":"まだ覚えていない"));
+ $("answerPanel").hidden=true;$("reveal").hidden=false;
+ $("modelAnswer").textContent="";$("feedback").textContent="";
+}
+$("reveal").addEventListener("click",()=>{
+ if(answered||!approvedUid)return;
+ const q=questions[currentIndex];
+ $("modelAnswer").textContent=q.answer;
+ $("feedback").textContent=q.why||"";
+ $("answerPanel").hidden=false;$("reveal").hidden=true;$("preExclude").hidden=true;
+});
+function closeEdit(){
+ $("editPanel").hidden=true;$("editQuestion").hidden=false;$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;
+}
+$("editQuestion").addEventListener("click",()=>{
+ const q=questions[currentIndex];if(trialMode||!approvedUid||!q?.id||answered)return;
+ $("editJapanese").value=q.q;$("editForeign").value=q.answer;$("editExplanation").value=q.why||"";
+ $("editStatus").textContent="";$("editPanel").hidden=false;$("editQuestion").hidden=true;
+ $("markExclude").disabled=true;$("markCorrect").disabled=true;$("markWrong").disabled=true;
+});
+$("cancelEdit").addEventListener("click",()=>{closeEdit();$("editStatus").textContent="";});
+$("saveEdit").addEventListener("click",async()=>{
+ const uid=approvedUid,generation=authGeneration,q=questions[currentIndex];if(!uid||!q?.id||$("editPanel").hidden)return;
+ const patch={q:$("editJapanese").value.trim(),answer:$("editForeign").value.trim(),why:$("editExplanation").value.trim()};
+ if(!patch.q||!patch.answer){$("editStatus").textContent="日本語と外国語を入力してください。";return;}
+ if(bankQuestions.some(x=>x.id!==q.id&&getLang(x)===getLang(q)&&key(x)===key(patch))){$("editStatus").textContent="同じ表現がすでに登録されています。";return;}
+ $("saveEdit").disabled=true;$("cancelEdit").disabled=true;$("editStatus").textContent="保存中…";
+ try{
+ await runTransaction(db,async tx=>{await assertNoReset(uid,getLang(q),tx);tx.update(doc(db,"users",uid,"expressions",q.id),patch);});
+ if(generation!==authGeneration||uid!==approvedUid)return;
+ Object.assign(q,patch);bankQuestions=bankQuestions.map(x=>x.id===q.id?{...x,...patch}:x);
+ $("question").textContent="No. "+(q.initialNumber||q.number)+"　"+q.q;$("modelAnswer").textContent=q.answer;
+ $("feedback").textContent=q.why+" 模範解答以外でも自然で意味が通じる外国語なら、正解として構いません。";
+ closeEdit();$("editStatus").textContent="修正を保存しました。";
+ }catch(e){if(generation===authGeneration)$("editStatus").textContent="保存できませんでした："+(e.code||"エラー");}
+ finally{$("saveEdit").disabled=false;$("cancelEdit").disabled=false;}
+});
+async function selfGrade(state){
+ const isCorrect=state==="learned",excluded=state==="excluded",skipped=state==="skipped";
+ if(answered||!approvedUid||(!excluded&&!skipped&&$("answerPanel").hidden)||!$("editPanel").hidden)return;
+ answered=true;
+ const graded=questions[currentIndex],gradedAt=new Date();$("markExclude").disabled=true;$("markCorrect").disabled=true;$("markWrong").disabled=true;
+ if(trialMode){if(isCorrect)correctCount++;if(!skipped)answers.push({id:graded.id,correct:isCorrect,state});if(currentIndex<questions.length-1){currentIndex++;showQuestion();$("progress").scrollIntoView({block:"start",behavior:"instant"});}else finishQuiz();return;}
+ const uid=approvedUid,l=lang,session=activeSession,index=currentIndex;
+ try{if(!session)throw Error("復習を再読み込みしてください");
+ const entry={id:graded.id,correct:isCorrect,state,at:gradedAt};const next={...session,index:index+1,answeredCount:(session.answeredCount??session.index)+(skipped?0:1),...(session.chunked?{}:{answers:skipped?answers:[...answers,entry]}),score:correctCount+(isCorrect?1:0)};
+ await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==session.id||snap.data().index!==index)throw Error("別の端末で進行しています。再読み込みしてください。");
+ if(session.chunked&&!skipped){const cr=chunkRef(uid,session.id,Math.floor(index/chunkSize));tx.update(cr,{answers:arrayUnion(entry)});}
+ if(!skipped)tx.update(doc(db,"users",uid,"expressions",graded.id),excluded?{learningState:state,lastReviewedAt:serverTimestamp()}:{learningState:state,[isCorrect?"correctCount":"wrongCount"]:increment(1),lastReviewedAt:serverTimestamp(),lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:serverTimestamp()}:{})});
+ tx.set(ref,next);if(next.index===sessionCount(next))tx.set(doc(db,"users",uid,"sessions",session.id),{language:l,mode:session.mode,...(session.chunked?{chunked:true,id:session.id,total:session.total}:{answers:next.answers}),score:next.score,count:next.answeredCount,processedCount:next.index,startedAt:session.startedAt||null,finishedAt:serverTimestamp()});
+ });if(uid!==approvedUid||l!==lang)return;activeSession=next;}catch(e){$("editStatus").textContent="保存できませんでした："+(e.message||e.code||"エラー");answered=false;$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
+ if(isCorrect)correctCount++;if(!skipped)answers.push({id:qid(graded),correct:isCorrect,state});
+ if(currentIndex<questions.length-1){currentIndex++;showQuestion();$("progress").scrollIntoView({block:"start",behavior:"instant"});return;}
+ finishQuiz();
+}
+$("markCorrect").addEventListener("click",()=>selfGrade("learned"));
+$("markWrong").addEventListener("click",()=>selfGrade("learning"));
+$("markExclude").addEventListener("click",()=>selfGrade("excluded"));$("preExclude").addEventListener("click",()=>selfGrade("excluded"));$("skipQuestion").addEventListener("click",()=>selfGrade("skipped"));
+$("start").addEventListener("click",()=>{if(!approvedUid)return;beginQuiz();});
+$("retry").addEventListener("click",()=>{if(!approvedUid)return;beginQuiz();});
+$("stopQuiz").addEventListener("click",async()=>{
+ if(answered||!approvedUid||!activeSession||!$("editPanel").hidden)return;
+ if(!confirm("ここで復習を終了しますか？ 判定済みの記録は残ります。"))return;
+ if(trialMode){activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;answered=false;return;}
+ const uid=approvedUid,l=lang,a=activeSession;answered=true;$("stopQuiz").disabled=true;
+ try{await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==a.id||snap.data().index!==a.index)throw Error("別端末で進行しています。再読み込みしてください。");if(a.index)tx.set(doc(db,"users",uid,"sessions",a.id),{language:l,mode:a.mode,...(a.chunked?{chunked:true,id:a.id,total:a.total}:{answers:a.answers}),score:a.score,count:a.answeredCount??a.index,processedCount:a.index,startedAt:a.startedAt||null,finishedAt:serverTimestamp(),partial:true});tx.delete(ref);});if(uid!==approvedUid)return;activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;await loadSessions(uid,authGeneration);refresh();}catch(e){$("editStatus").textContent=e.message;alert(e.message);}finally{answered=false;$("stopQuiz").disabled=false;}
+});
+async function finishQuiz(){
+ const uid=approvedUid,generation=authGeneration;if(!uid)return;
+ document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=false;
+ $("score").textContent="学習："+answers.length+"問／飛ばした "+(questions.length-answers.length)+"問／ひとまず覚えた "+correctCount+"問／出題から外した "+answers.filter(a=>a.state==="excluded").length+"問";
+ $("saveStatus").textContent=trialMode?"試用モード：学習結果は保存していません。":"学習結果を保存しました。";if(trialMode)return;
+ await loadSessions(uid,generation);if(uid===approvedUid&&generation===authGeneration){$("resultArea").hidden=false;$("start").hidden=true;}
+}
+$("copyUid").addEventListener("click",async()=>{
+ try{await navigator.clipboard.writeText($("uid").textContent);status.textContent="UIDをコピーしました。";}
+ catch(e){status.textContent="コピーできませんでした。UIDを長押ししてコピーしてください。";}
+});
+login.addEventListener("click",async()=>{
+ status.hidden=false;login.disabled=true;status.textContent="Googleログイン画面を開いています…";
+ try{await signInWithPopup(auth,provider);}
+ catch(e){status.textContent=e.code==="auth/popup-blocked"?"ポップアップがブロックされました。Safariの設定をご確認ください。":e.code==="auth/popup-closed-by-user"?"ログイン画面が閉じられました。":"ログインできませんでした："+(e.code||"不明なエラー");}
+ finally{login.disabled=false;}
+});
+logout.addEventListener("click",async()=>{
+ status.hidden=false;logout.disabled=true;
+ try{await signOut(auth);}catch(e){status.textContent="ログアウトできませんでした："+(e.code||"不明なエラー");}
+ finally{logout.disabled=false;}
+});
+</script>
+<script>
+(function(){
+ const panel=document.getElementById("handoverPanel"),out=document.getElementById("handoverText"),status=document.getElementById("handoverStatus");
+ async function load(){const response=await fetch("./HANDOVER.md",{cache:"no-cache"});if(!response.ok)throw Error("HTTP "+response.status);const value=await response.text();out.textContent=value;out.hidden=false;return value;}
+ panel.addEventListener("toggle",()=>{if(panel.open)load().catch(()=>{status.textContent="仕様書を取得できませんでした。リンクから確認してください。";});});
+ document.getElementById("handoverCopy").addEventListener("click",async()=>{try{const value=out.textContent||await load();await navigator.clipboard.writeText(value);status.textContent="コピーしました。";}catch(e){status.textContent="コピーできませんでした。仕様書を開くか、表示された本文を選択してコピーしてください。";}});
+})();
+</script>
+</body>
+</html>
