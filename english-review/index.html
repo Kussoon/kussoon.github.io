@@ -24,7 +24,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 aut
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,onSnapshot,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,onSnapshot,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,arrayUnion,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -94,7 +94,7 @@ async function loadSessions(uid,generation){
  if(generation!==authGeneration||approvedUid!==uid)return;
  const summaries=snap.docs.map(d=>({...d.data(),id:d.data().id||d.id})).filter(a=>a.chunked?(a.count??a.total)>0:Array.isArray(a.answers)&&a.answers.some(x=>!String(x.id).startsWith("builtin-")));
  const recent=["en","fr"].flatMap(l=>summaries.filter(a=>(a.language||"en")===l).sort((a,b)=>(b.finishedAt?.seconds||0)-(a.finishedAt?.seconds||0)).slice(0,3));
- const detailed=await Promise.all(recent.filter(a=>a.chunked).map(async a=>{try{return [a.id,(await readChunks(uid,a)).answers];}catch(e){return [a.id,null];}}));
+ const detailed=await Promise.all(recent.filter(a=>a.chunked).map(async a=>{try{return [a.id,(await readChunks(uid,a,true)).answers];}catch(e){return [a.id,null];}}));
  if(generation!==authGeneration||approvedUid!==uid)return;
  const byId=new Map(detailed);sessions=summaries.map(a=>byId.has(a.id)?{...a,answers:byId.get(a.id)}:a);
  refresh();
@@ -338,10 +338,10 @@ async function commitResetPart(uid,l,id,n){
 const chunkSize=200;
 const chunkRef=(uid,id,n)=>doc(db,"users",uid,"reviewChunks",id+"-"+n);
 const sessionCount=a=>a.total??a.ids.length;
-async function readChunks(uid,a){
+async function readChunks(uid,a,historyOnly=false){
  if(!a.chunked)return {ids:a.ids,answers:a.answers};
  const ids=[],answers=[];
- for(let n=0;n<Math.ceil(a.total/chunkSize);n++){
+ for(let n=0;n<Math.ceil((historyOnly&&Number.isInteger(a.processedCount)?Math.min(a.total,a.processedCount):a.total)/chunkSize);n++){
  const snap=await getDoc(chunkRef(uid,a.id,n));if(!snap.exists())throw Error("復習データの一部がありません");
  ids.push(...snap.data().ids);answers.push(...snap.data().answers);
  }
@@ -419,9 +419,9 @@ async function selfGrade(state){
  try{if(!session)throw Error("復習を再読み込みしてください");
  const entry={id:graded.id,correct:isCorrect,state,at:gradedAt};const next={...session,index:index+1,answeredCount:(session.answeredCount??session.index)+(skipped?0:1),...(session.chunked?{}:{answers:skipped?answers:[...answers,entry]}),score:correctCount+(isCorrect?1:0)};
  await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==session.id||snap.data().index!==index)throw Error("別の端末で進行しています。再読み込みしてください。");
- if(session.chunked&&!skipped){const cr=chunkRef(uid,session.id,Math.floor(index/chunkSize)),cs=await tx.get(cr);if(!cs.exists())throw Error("復習データがありません");tx.update(cr,{answers:[...cs.data().answers,entry]});}
+ if(session.chunked&&!skipped){const cr=chunkRef(uid,session.id,Math.floor(index/chunkSize));tx.update(cr,{answers:arrayUnion(entry)});}
  if(!skipped)tx.update(doc(db,"users",uid,"expressions",graded.id),excluded?{learningState:state,lastReviewedAt:serverTimestamp()}:{learningState:state,[isCorrect?"correctCount":"wrongCount"]:increment(1),lastReviewedAt:serverTimestamp(),lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:serverTimestamp()}:{})});
- tx.set(ref,next);if(next.index===sessionCount(next))tx.set(doc(db,"users",uid,"sessions",session.id),{language:l,mode:session.mode,...(session.chunked?{chunked:true,id:session.id,total:session.total}:{answers:next.answers}),score:next.score,count:next.answeredCount,startedAt:session.startedAt||null,finishedAt:serverTimestamp()});
+ tx.set(ref,next);if(next.index===sessionCount(next))tx.set(doc(db,"users",uid,"sessions",session.id),{language:l,mode:session.mode,...(session.chunked?{chunked:true,id:session.id,total:session.total}:{answers:next.answers}),score:next.score,count:next.answeredCount,processedCount:next.index,startedAt:session.startedAt||null,finishedAt:serverTimestamp()});
  });if(uid!==approvedUid||l!==lang)return;activeSession=next;if(!skipped){graded.learningState=state;if(!excluded)graded[isCorrect?"correctCount":"wrongCount"]=(graded[isCorrect?"correctCount":"wrongCount"]||0)+1;graded.lastReviewedAt={toDate:()=>gradedAt};if(!excluded)graded.lastCorrect=isCorrect;if(isCorrect)graded.lastCorrectAt={toDate:()=>gradedAt};bankQuestions=bankQuestions.map(q=>q.id===graded.id?{...q,learningState:state,correctCount:graded.correctCount||0,wrongCount:graded.wrongCount||0,lastReviewedAt:graded.lastReviewedAt,lastCorrect:graded.lastCorrect??null,lastCorrectAt:graded.lastCorrectAt??null}:q);}}catch(e){$("editStatus").textContent="保存できませんでした："+(e.message||e.code||"エラー");answered=false;$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
  if(isCorrect)correctCount++;if(!skipped)answers.push({id:qid(graded),correct:isCorrect,state});
  if(currentIndex<questions.length-1){currentIndex++;showQuestion();$("progress").scrollIntoView({block:"start",behavior:"instant"});return;}
@@ -437,7 +437,7 @@ $("stopQuiz").addEventListener("click",async()=>{
  if(!confirm("ここで復習を終了しますか？ 判定済みの記録は残ります。"))return;
  if(trialMode){activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;answered=false;return;}
  const uid=approvedUid,l=lang,a=activeSession;answered=true;$("stopQuiz").disabled=true;
- try{await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==a.id||snap.data().index!==a.index)throw Error("別端末で進行しています。再読み込みしてください。");if(a.index)tx.set(doc(db,"users",uid,"sessions",a.id),{language:l,mode:a.mode,...(a.chunked?{chunked:true,id:a.id,total:a.total}:{answers:a.answers}),score:a.score,count:a.answeredCount??a.index,startedAt:a.startedAt||null,finishedAt:serverTimestamp(),partial:true});tx.delete(ref);});if(uid!==approvedUid)return;activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;await loadSessions(uid,authGeneration);refresh();}catch(e){$("editStatus").textContent=e.message;alert(e.message);}finally{answered=false;$("stopQuiz").disabled=false;}
+ try{await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==a.id||snap.data().index!==a.index)throw Error("別端末で進行しています。再読み込みしてください。");if(a.index)tx.set(doc(db,"users",uid,"sessions",a.id),{language:l,mode:a.mode,...(a.chunked?{chunked:true,id:a.id,total:a.total}:{answers:a.answers}),score:a.score,count:a.answeredCount??a.index,processedCount:a.index,startedAt:a.startedAt||null,finishedAt:serverTimestamp(),partial:true});tx.delete(ref);});if(uid!==approvedUid)return;activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;await loadSessions(uid,authGeneration);refresh();}catch(e){$("editStatus").textContent=e.message;alert(e.message);}finally{answered=false;$("stopQuiz").disabled=false;}
 });
 async function finishQuiz(){
  const uid=approvedUid,generation=authGeneration;if(!uid)return;
