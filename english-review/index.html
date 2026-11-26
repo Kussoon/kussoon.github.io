@@ -24,7 +24,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 aut
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,query,where,Timestamp,getDocFromServer,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,arrayUnion,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -36,9 +36,11 @@ const firebaseConfig={
 };
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
-const db=getFirestore(app);
+// Firestore-managed IndexedDB cache; server remains authoritative.
+const db=initializeFirestore(app,{localCache:typeof indexedDB!=="undefined"?persistentLocalCache({tabManager:persistentMultipleTabManager()}):memoryLocalCache()});
 let authGeneration=0;
 let approvedUid=null;
+let bankSyncTask=null,bankSyncTimer=null,bankSyncOK=false,bankSyncLabel="";
 let currentIndex=0,correctCount=0,answered=false;
 let bankQuestions=[],quizPool=[],sessions=[],lang="en",answers=[],modeAtStart="all",managerRows=null;
 let questions=[],activeSession=null;
@@ -80,18 +82,30 @@ function refresh(){
  const g=groups(),old=$("batchSelect").value,select=$("batchSelect"),months=new Map();select.replaceChildren();for(const [id,items] of g){const seconds=items.map(stamp).filter(n=>n>0),d=seconds.length?new Date(Math.min(...seconds)*1000):null;const parts=d?Object.fromEntries(new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"2-digit",hourCycle:"h23"}).formatToParts(d).map(p=>[p.type,p.value])):null;const month=parts?parts.year+"年"+parts.month+"月":"以前の登録";const o=document.createElement("option");o.value=id;o.textContent=(parts?parts.month+"/"+parts.day+" "+Number(parts.hour)+":"+parts.minute:"日時不明")+"・"+items.length+"問";if(!months.has(month)){const group=document.createElement("optgroup");group.label=month;months.set(month,group);select.append(group);}months.get(month).append(o);}if(g.some(x=>x[0]===old))select.value=old;
  $("batchSelect").hidden=$("mode").value!=="batch";
  const situations=[...new Set(allQuestions().map(q=>q.situation||"未分類"))].sort((a,b)=>a.localeCompare(b,"ja")),situationSelect=$("situationSelect"),oldSituation=situationSelect.value;situationSelect.replaceChildren();for(const name of situations){const o=document.createElement("option");o.value=name;o.textContent=name;situationSelect.append(o);}if(situations.includes(oldSituation))situationSelect.value=oldSituation;situationSelect.hidden=$("mode").value!=="situation";
- $("rangeFields").hidden=$("mode").value!=="range";const n=pool().length;$("poolCount").textContent="対象："+n+"問";$("start").disabled=n===0;$("start").textContent=n+"問に挑戦する";
- $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件";
- const ss=recentSessions();$("sessionList").replaceChildren();for(const a of ss){const p=document.createElement("p");p.className="muted";p.textContent="開始："+(a.startedAt?dateFrom(a.startedAt):"記録なし")+" ｜ 終了："+dateFrom(a.finishedAt)+" ｜ "+(a.answers||[]).length+"問";$("sessionList").append(p);}if(!ss.length)$("sessionList").textContent="学習履歴はありません。";const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問｜除外 "+excluded+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
+ $("rangeFields").hidden=$("mode").value!=="range";const unavailable=["sessions3","wrong"].includes($("mode").value)&&recentSessions().slice(0,$("mode").value==="wrong"?1:3).some(a=>a.chunked&&!Array.isArray(a.answers));const n=unavailable||(!bankSyncOK&&!trialMode)?0:pool().length;$("poolCount").textContent=unavailable?"詳細履歴を取得できません。再読み込みしてください。":"対象："+n+"問";$("start").disabled=n===0;$("start").textContent=n+"問に挑戦する";
+ $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件"+(bankSyncLabel?"｜"+bankSyncLabel:"");
+ const ss=recentSessions();$("sessionList").replaceChildren();for(const a of ss){const p=document.createElement("p");p.className="muted";p.textContent="開始："+(a.startedAt?dateFrom(a.startedAt):"記録なし")+" ｜ 終了："+dateFrom(a.finishedAt)+" ｜ "+(Array.isArray(a.answers)?a.answers.length:(a.count??0))+"問";$("sessionList").append(p);}if(!ss.length)$("sessionList").textContent="学習履歴はありません。";const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問｜除外 "+excluded+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
 }
 document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if(!$("questionArea").hidden)return;lang=b.dataset.lang;document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));$("quizTitle").textContent=(lang==="en"?"英語":"フランス語")+"の復習";$("modelAnswer").lang=lang;$("resultArea").hidden=true;$("start").hidden=false;refresh();resumeQuiz();}));
 $("mode").addEventListener("change",refresh);$("batchSelect").addEventListener("change",refresh);$("situationSelect").addEventListener("change",refresh);$("rangeStart").addEventListener("input",refresh);$("rangeEnd").addEventListener("input",refresh);
-async function loadSessions(uid,generation){try{const snap=await getDocs(collection(db,"users",uid,"sessions"));if(generation!==authGeneration||approvedUid!==uid)return;const loaded=await Promise.all(snap.docs.map(async d=>{const a=d.data();return a.chunked?{...a,answers:(await readChunks(uid,a)).answers}:a;}));if(generation!==authGeneration||approvedUid!==uid)return;sessions=loaded.filter(s=>Array.isArray(s.answers)&&s.answers.some(a=>!String(a.id).startsWith("builtin-")));refresh();}catch(e){$("poolCount").textContent="詳細履歴の取得に失敗："+(e.code||"エラー");}}
-
+async function loadSessions(uid,generation){
+ try{
+ const snap=await getDocs(collection(db,"users",uid,"sessions"));
+ if(generation!==authGeneration||approvedUid!==uid)return;
+ const summaries=snap.docs.map(d=>({...d.data(),id:d.data().id||d.id})).filter(a=>a.chunked?(a.count??a.total)>0:Array.isArray(a.answers)&&a.answers.some(x=>!String(x.id).startsWith("builtin-")));
+ const recent=["en","fr"].flatMap(l=>summaries.filter(a=>(a.language||"en")===l).sort((a,b)=>(b.finishedAt?.seconds||0)-(a.finishedAt?.seconds||0)).slice(0,3));
+ const detailed=await Promise.all(recent.filter(a=>a.chunked).map(async a=>{try{return [a.id,(await readChunks(uid,a,true)).answers];}catch(e){return [a.id,null];}}));
+ if(generation!==authGeneration||approvedUid!==uid)return;
+ const byId=new Map(detailed);sessions=summaries.map(a=>byId.has(a.id)?{...a,answers:byId.get(a.id)}:a);
+ refresh();
+ if(detailed.some(x=>x[1]===null))$("history").textContent+="｜一部の詳細履歴を取得できません";
+ }catch(e){$("poolCount").textContent="学習履歴の取得に失敗："+(e.code||"エラー");}
+}
 
 const status=$("status"),login=$("login"),logout=$("logout");
 onAuthStateChanged(auth,async user=>{
  const generation=++authGeneration;
+ clearInterval(bankSyncTimer);bankSyncTimer=null;bankSyncTask=null;bankSyncOK=false;bankSyncLabel="";
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
  approvedUid=null;activeSession=null;bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
@@ -136,15 +150,40 @@ async function loadHistory(uid,generation){
 }
 const norm=s=>s.normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase();
 const key=q=>norm(q.q)+"|"+norm(q.answer);
-async function loadBank(uid,generation){
- $("bankCount").textContent="登録済み表現を読み込み中…";
+const bankStore=()=>new Promise((resolve,reject)=>{const req=indexedDB.open("kussoon-review-bank-v1",1);req.onupgradeneeded=()=>req.result.createObjectStore("banks");req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+async function bankDisk(uid,value){const db=await bankStore();try{return await new Promise((resolve,reject)=>{const tx=db.transaction("banks",value===undefined?"readonly":"readwrite"),store=tx.objectStore("banks"),req=value===undefined?store.get(uid):store.put(value,uid);tx.oncomplete=()=>resolve(req.result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);});}finally{db.close();}}
+const packBank=v=>JSON.stringify(v,(k,x)=>x&&typeof x.seconds==="number"&&typeof x.nanoseconds==="number"?{__bankTimestamp:[x.seconds,x.nanoseconds]}:x);
+const unpackBank=v=>JSON.parse(v,(k,x)=>x&&Array.isArray(x.__bankTimestamp)?new Timestamp(...x.__bankTimestamp):x);
+const cmpStamp=(a,b)=>a.seconds-b.seconds||a.nanoseconds-b.nanoseconds;
+async function loadBank(uid,generation,force=false){
+ if(uid!==approvedUid||generation!==authGeneration)return;
+ if(bankSyncTask){await bankSyncTask;if(!force)return;if(uid!==approvedUid||generation!==authGeneration)return;}
+ const current=()=>uid===approvedUid&&generation===authGeneration;
+ const task=(async()=>{
+ let saved=null;try{const raw=await bankDisk(uid);if(raw)saved=unpackBank(raw);}catch(e){}
+ if(!current())return;
+ if(saved&&Array.isArray(saved.rows)&&!bankQuestions.length){bankQuestions=saved.rows;refresh();}
  try{
-  const snap=await getDocs(collection(db,"users",uid,"expressions"));
-  if(generation!==authGeneration||approvedUid!==uid)return;
-  bankQuestions=snap.docs.map(d=>({...d.data(),id:d.id})).filter(q=>typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim());
-  refresh();
- }catch(e){if(generation===authGeneration)$("bankCount").textContent="読み込み失敗："+(e.code||"エラー");}
+ const epochSnap=await getDocFromServer(doc(db,"users",uid,"review","bankEpoch"));
+ const epoch=epochSnap.exists()?epochSnap.data().changedAt:null;
+ const sameEpoch=JSON.stringify(epoch)===JSON.stringify(saved?.epoch??null);
+ const full=force||!saved||!Array.isArray(saved.rows)||!(saved.cursor instanceof Timestamp)||!Number.isFinite(saved.fullAt)||!sameEpoch||Date.now()-saved.fullAt>86400000;
+ const ref=collection(db,"users",uid,"expressions");
+ const snap=await getDocsFromServer(full?ref:query(ref,where("syncUpdatedAt",">=",saved.cursor)));
+ if(!current())return;
+ const rows=new Map(full?[]:saved.rows.map(q=>[q.id,q]));
+ let cursor=full?new Timestamp(0,0):saved.cursor;
+ for(const d of snap.docs){const q={...d.data(),id:d.id};if(q.syncUpdatedAt&&cmpStamp(q.syncUpdatedAt,cursor)>0)cursor=q.syncUpdatedAt;if(typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim())rows.set(q.id,q);else rows.delete(q.id);}
+ const next={rows:[...rows.values()],cursor,epoch,fullAt:full?Date.now():saved.fullAt};
+ const verify=await getDocFromServer(doc(db,"users",uid,"review","bankEpoch"));if(JSON.stringify(verify.exists()?verify.data().changedAt:null)!==JSON.stringify(epoch))throw Error("教材置換中です。再同期してください。");if(!current())return;
+ bankQuestions=next.rows;bankSyncOK=true;bankSyncLabel=(full?"全件":"差分")+"取得 "+snap.size+"件・"+new Date().toLocaleTimeString("ja-JP");
+ try{await bankDisk(uid,packBank(next));}catch(e){bankSyncLabel+="（端末保存不可）";}
+ if(current())refresh();
+ }catch(e){if(!current())return;bankSyncOK=false;bankSyncLabel="同期失敗："+(e.code||e.message);refresh();if(force)throw e;}
+ })();bankSyncTask=task;try{await task;}finally{if(bankSyncTask===task)bankSyncTask=null;}
+ if(current()&&!bankSyncTimer)bankSyncTimer=setInterval(()=>{if(document.visibilityState==="visible"&&$("questionArea").hidden)loadBank(uid,generation);},60000);
 }
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&approvedUid&&$("questionArea").hidden)loadBank(approvedUid,authGeneration);});
 function tsDate(v){return v?.toDate?.()?.toISOString?.()||v||null;}
 function dateFrom(v){return v?.toDate?.()?.toLocaleString("ja-JP")|| (typeof v==="string"?new Date(v).toLocaleString("ja-JP"):"—");}
 function toPortable(q,index){return {id:q.id,language:getLang(q),initialNumber:Number(q.initialNumber)||index+1,createdAt:tsDate(q.createdAt),situation:q.situation||"",sortOrder:Number.isFinite(Number(q.sortOrder))?Number(q.sortOrder):index+1,q:q.q,answer:q.answer,why:q.why||"",correctCount:Number(q.correctCount)||0,wrongCount:Number(q.wrongCount)||0,lastReviewedAt:tsDate(q.lastReviewedAt),lastCorrectAt:tsDate(q.lastCorrectAt),learningState:q.learningState||null,lastCorrect:q.lastCorrect===true?true:q.lastCorrect===false?false:null};}
@@ -157,7 +196,7 @@ let stagedFile=null,stagedChanges=[];
 $("exportUnclassified").addEventListener("click",()=>exportLatest("unclassified"));
 $("manageFile").addEventListener("change",async e=>{stagedFile=null;stagedChanges=[];$("applyChanges").disabled=true;try{const file=e.target.files?.[0];if(!file)return;const data=JSON.parse(await file.text());if(data?.format!=="kussoon-language-review-v1"||!Array.isArray(data.expressions))throw Error("このアプリの整理用JSONではありません。");const current=await fetchManaged(),byId=new Map(current.map(q=>[q.id,q]));if(data.expressions.length>5000)throw Error("一度に処理できる上限（5,000件）を超えています。");const seen=new Set();for(const row of data.expressions){if(!row||typeof row.id!=="string"||seen.has(row.id)||!byId.has(row.id))throw Error("固有IDが重複または未登録の行があります。追加・削除せず、元のIDを維持してください。");seen.add(row.id);if(!["en","fr"].includes(row.language)||row.language!==getLang(byId.get(row.id))||(data.language!=="all"&&row.language!==data.language))throw Error("言語と固有IDが一致しません。");if(typeof row.situation!=="string"||row.situation.length>120||typeof row.q!=="string"||row.q.length>300||typeof row.answer!=="string"||row.answer.length>500||typeof (row.why||"")!=="string"||(row.why||"").length>1000||!Number.isFinite(Number(row.sortOrder)))throw Error("入力項目の形式または文字数が正しくありません。");const old=byId.get(row.id);if(data.scope==="unclassified"&&(!isUnclassified(old)||isUnclassified(row)||row.q!==old.q||row.answer!==old.answer||(row.why||"")!==(old.why||"")))throw Error("未分類の既存表現に分類を設定してください。本文変更はできません。");const fallbackNumber=current.filter(q=>getLang(q)===row.language).sort(order).findIndex(q=>q.id===row.id)+1;if(!Number.isFinite(Number(row.initialNumber)))throw Error("初回登録番号がありません。");if(Number(row.initialNumber)!==(Number(old.initialNumber)||fallbackNumber))throw Error("初回登録番号は変更できません。ダウンロードした番号に戻してください。");if((row.situation||"")!==(old.situation||"")||Number(row.sortOrder)!==(Number.isFinite(Number(old.sortOrder))?Number(old.sortOrder):fallbackNumber)||(row.q!==old.q)||(row.answer!==old.answer)||(row.why||"")!==(old.why||"")||Number(row.initialNumber)!==(Number(old.initialNumber)||fallbackNumber)||!Number.isFinite(Number(old.initialNumber))||Number(old.initialNumber)<=0)stagedChanges.push(row);}if(data.scope!=="unclassified"&&data.expressions.length!==current.filter(q=>data.language==="all"||getLang(q)===data.language).length)throw Error("対象行の不足があります。最新データをダウンロードしてから編集してください。");stagedFile={data,current};$("changePreview").textContent="対象 "+data.expressions.length+"件、変更 "+stagedChanges.length+"件です。登録内容・学習記録を含むバックアップを先にダウンロードしてから反映します。";$("applyChanges").disabled=stagedChanges.length===0;}catch(e){$("changePreview").textContent="反映できません："+(e.message||"ファイルを確認してください");}}
 );
-$("applyChanges").addEventListener("click",async()=>{if(!stagedFile||!stagedChanges.length||!approvedUid)return;const btn=$("applyChanges");btn.disabled=true;try{const fresh=await fetchManaged(),byId=new Map(fresh.map(q=>[q.id,q]));if(stagedChanges.some(r=>!byId.has(r.id)))throw Error("サーバーの登録件数が変わりました。最新ファイルを再取得してください。");if(stagedFile.data.scope==="unclassified"&&stagedChanges.some(r=>{const q=byId.get(r.id);return !isUnclassified(q)||r.q!==q.q||r.answer!==q.answer||(r.why||"")!==(q.why||"");}))throw Error("対象が変更されています。最新ファイルを取得してください。");const sessionsSnap=await getDocsFromServer(collection(db,"users",approvedUid,"sessions")),progressSnap=await getDoc(doc(db,"users",approvedUid,"review","progress"));const progress=progressSnap.exists()?progressSnap.data():null;const backup={format:"kussoon-language-review-backup-v1",createdAt:new Date().toISOString(),expressions:fresh.map((q,i)=>toPortable(q,i)),sessions:sessionsSnap.docs.map(d=>({id:d.id,...d.data(),finishedAt:tsDate(d.data().finishedAt)})),progress:progress?{...progress,lastAt:tsDate(progress.lastAt)}:null};downloadFile("language-review-backup-"+new Date().toISOString().replace(/[:.]/g,"-")+".json",JSON.stringify(backup,null,2),"application/json;charset=utf-8");const uid=approvedUid,generation=authGeneration;for(let i=0;i<stagedChanges.length;i+=400){await assertNoReset(uid,"en");await assertNoReset(uid,"fr");const batch=writeBatch(db);for(const row of stagedChanges.slice(i,i+400)){const ref=doc(db,"users",uid,"expressions",row.id);batch.update(ref,stagedFile.data.scope==="unclassified"?{situation:row.situation.trim(),sortOrder:Number(row.sortOrder)}:{initialNumber:Number(row.initialNumber),situation:row.situation.trim(),sortOrder:Number(row.sortOrder),q:row.q,answer:row.answer,why:row.why||""});}await batch.commit();if(uid!==approvedUid||generation!==authGeneration)throw Error("ログイン状態が変わりました。");}await loadBank(uid,generation);$("manageStatus").textContent=stagedChanges.length+"件を反映しました。固有ID・登録日時・学習記録は維持されています。";$("changePreview").textContent="反映済み："+stagedChanges.length+"件";stagedChanges=[];stagedFile=null;$("manageFile").value="";refresh();}catch(e){$("manageStatus").textContent="反映できませんでした："+(e.code||e.message||"エラー");}finally{btn.disabled=!stagedChanges.length;}});
+$("applyChanges").addEventListener("click",async()=>{if(!stagedFile||!stagedChanges.length||!approvedUid)return;const btn=$("applyChanges");btn.disabled=true;try{const fresh=await fetchManaged(),byId=new Map(fresh.map(q=>[q.id,q]));if(stagedChanges.some(r=>!byId.has(r.id)))throw Error("サーバーの登録件数が変わりました。最新ファイルを再取得してください。");if(stagedFile.data.scope==="unclassified"&&stagedChanges.some(r=>{const q=byId.get(r.id);return !isUnclassified(q)||r.q!==q.q||r.answer!==q.answer||(r.why||"")!==(q.why||"");}))throw Error("対象が変更されています。最新ファイルを取得してください。");const sessionsSnap=await getDocsFromServer(collection(db,"users",approvedUid,"sessions")),progressSnap=await getDoc(doc(db,"users",approvedUid,"review","progress"));const progress=progressSnap.exists()?progressSnap.data():null;const backup={format:"kussoon-language-review-backup-v1",createdAt:new Date().toISOString(),expressions:fresh.map((q,i)=>toPortable(q,i)),sessions:sessionsSnap.docs.map(d=>({id:d.id,...d.data(),finishedAt:tsDate(d.data().finishedAt)})),progress:progress?{...progress,lastAt:tsDate(progress.lastAt)}:null};downloadFile("language-review-backup-"+new Date().toISOString().replace(/[:.]/g,"-")+".json",JSON.stringify(backup,null,2),"application/json;charset=utf-8");const uid=approvedUid,generation=authGeneration;for(let i=0;i<stagedChanges.length;i+=400){await assertNoReset(uid,"en");await assertNoReset(uid,"fr");const batch=writeBatch(db);for(const row of stagedChanges.slice(i,i+400)){const ref=doc(db,"users",uid,"expressions",row.id);batch.update(ref,stagedFile.data.scope==="unclassified"?{syncUpdatedAt:serverTimestamp(),situation:row.situation.trim(),sortOrder:Number(row.sortOrder)}:{syncUpdatedAt:serverTimestamp(),initialNumber:Number(row.initialNumber),situation:row.situation.trim(),sortOrder:Number(row.sortOrder),q:row.q,answer:row.answer,why:row.why||""});}await batch.commit();if(uid!==approvedUid||generation!==authGeneration)throw Error("ログイン状態が変わりました。");}await loadBank(uid,generation,true);$("manageStatus").textContent=stagedChanges.length+"件を反映しました。固有ID・登録日時・学習記録は維持されています。";$("changePreview").textContent="反映済み："+stagedChanges.length+"件";stagedChanges=[];stagedFile=null;$("manageFile").value="";refresh();}catch(e){$("manageStatus").textContent="反映できませんでした："+(e.code||e.message||"エラー");}finally{btn.disabled=!stagedChanges.length;}});
  
 let replacementPlan=null,replacementSnapshot=null,replacementBusy=false;
 const replacementMessage=t=>$("replacementStatus").textContent=t;
@@ -172,7 +211,7 @@ async function replacementCheck(p){
 }
 $("replacementFile").addEventListener("change",async e=>{replacementPlan=null;replacementSnapshot=null;$("replacementBackup").disabled=true;$("replacementApply").disabled=true;try{const f=e.target.files[0];if(!f)return;const p=JSON.parse(await f.text()),en=await replacementCheck(p);replacementPlan=p;replacementMessage("英語 "+en.length+"件 → "+p.targetCount+"件。統合対象 "+p.removeIds.filter(id=>en.some(q=>q.id===id)).length+"件。英語学習履歴を初期化します。");$("replacementBackup").disabled=false;}catch(e){replacementMessage(e.message);}});
 $("replacementBackup").addEventListener("click",async()=>{try{const uid=approvedUid,p=replacementPlan;if(!uid||!p||replacementBusy)return;const en=await replacementCheck(p),ss=await getDocsFromServer(collection(db,"users",uid,"sessions")),pr=await getDoc(doc(db,"users",uid,"review","progress")),ac=await getDoc(activeRef(uid,"en"));if(uid!==approvedUid||p!==replacementPlan)throw Error("対象が変わりました");const backup={format:"kussoon-language-review-replacement-backup-v1",language:"en",expressions:en,sessions:ss.docs.filter(d=>(d.data().language||"en")==="en").map(d=>({id:d.id,data:d.data()})),progress:pr.exists()?pr.data():null,active:ac.exists()?ac.data():null,chunks:(await getDocsFromServer(collection(db,"users",uid,"reviewChunks"))).docs.filter(d=>d.data().language==="en").map(d=>({id:d.id,data:d.data()}))};downloadFile("english-before-replacement-"+Date.now()+".json",JSON.stringify(backup,null,2),"application/json");replacementSnapshot={uid,p,signature:JSON.stringify(en.slice().sort((a,b)=>a.id.localeCompare(b.id)))};$("replacementApply").disabled=false;replacementMessage("バックアップの保存を確認してから更新してください。");}catch(e){replacementMessage(e.message);}});
-$("replacementApply").addEventListener("click",async()=>{const p=replacementPlan,uid=approvedUid,generation=authGeneration;if(!$("questionArea").hidden){replacementMessage("復習を終了してから更新してください。");return;}if(replacementBusy||!p||replacementSnapshot?.uid!==uid||replacementSnapshot?.p!==p)return;if(!confirm("英語教材を置換し、英語の学習履歴をすべて初期化します。バックアップは保存しましたか？"))return;replacementBusy=true;$("replacementApply").disabled=true;$("replacementFile").disabled=true;$("replacementBackup").disabled=true;let done=0;try{const en=await replacementCheck(p);if(replacementSnapshot.signature!==JSON.stringify(en.slice().sort((a,b)=>a.id.localeCompare(b.id)))&&!replacementSnapshot.started)throw Error("バックアップ後に教材が変化しました。バックアップを取り直してください。");const active=await getDoc(activeRef(uid,"en"));if(active.exists()&&active.data().index<sessionCount(active.data()))throw Error("英語の途中セッションを終了してください。");const ss=await getDocsFromServer(collection(db,"users",uid,"sessions")),existing=new Set(en.map(q=>q.id)),ops=[];for(const r of p.expressions)ops.push(b=>b.update(doc(db,"users",uid,"expressions",r.id),{q:r.q,answer:r.answer,why:r.why,situation:r.situation,sortOrder:r.sortOrder,initialNumber:r.initialNumber,correctCount:0,wrongCount:0,lastReviewedAt:null,lastCorrectAt:null,lastCorrect:null,learningState:null}));for(const id of p.removeIds)if(existing.has(id))ops.push(b=>b.delete(doc(db,"users",uid,"expressions",id)));for(const d of ss.docs)if((d.data().language||"en")==="en")ops.push(b=>b.delete(d.ref));const chunks=await getDocsFromServer(collection(db,"users",uid,"reviewChunks"));for(const d of chunks.docs)if(d.data().language==="en")ops.push(b=>b.delete(d.ref));ops.push(b=>b.delete(doc(db,"users",uid,"review","progress")),b=>b.delete(activeRef(uid,"en")));replacementSnapshot.started=true;for(let i=0;i<ops.length;i+=300){if(uid!==approvedUid||generation!==authGeneration)throw Error("ログイン状態が変わりました");await assertNoReset(uid,"en");const b=writeBatch(db);for(const op of ops.slice(i,i+300))op(b);await b.commit();done+=Math.min(300,ops.length-i);replacementMessage("更新中 "+done+"/"+ops.length);}await Promise.all([loadBank(uid,generation),loadSessions(uid,generation)]);if(lang==="en"){document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;activeSession=null;}refresh();replacementMessage("英語教材 "+p.targetCount+"件への更新と履歴初期化が完了しました。");replacementPlan=null;replacementSnapshot=null;$("replacementFile").value="";}catch(e){replacementMessage("更新中断（確定済み操作 "+done+"件）："+e.message+"。同じ計画で再試行できます。");$("replacementApply").disabled=false;}finally{replacementBusy=false;$("replacementFile").disabled=false;$("replacementBackup").disabled=!replacementPlan;}});
+$("replacementApply").addEventListener("click",async()=>{const p=replacementPlan,uid=approvedUid,generation=authGeneration;if(!$("questionArea").hidden){replacementMessage("復習を終了してから更新してください。");return;}if(replacementBusy||!p||replacementSnapshot?.uid!==uid||replacementSnapshot?.p!==p)return;if(!confirm("英語教材を置換し、英語の学習履歴をすべて初期化します。バックアップは保存しましたか？"))return;replacementBusy=true;$("replacementApply").disabled=true;$("replacementFile").disabled=true;$("replacementBackup").disabled=true;let done=0;try{const en=await replacementCheck(p);if(replacementSnapshot.signature!==JSON.stringify(en.slice().sort((a,b)=>a.id.localeCompare(b.id)))&&!replacementSnapshot.started)throw Error("バックアップ後に教材が変化しました。バックアップを取り直してください。");const active=await getDoc(activeRef(uid,"en"));if(active.exists()&&active.data().index<sessionCount(active.data()))throw Error("英語の途中セッションを終了してください。");const ss=await getDocsFromServer(collection(db,"users",uid,"sessions")),existing=new Set(en.map(q=>q.id)),ops=[];for(const r of p.expressions)ops.push(b=>b.update(doc(db,"users",uid,"expressions",r.id),{syncUpdatedAt:serverTimestamp(),q:r.q,answer:r.answer,why:r.why,situation:r.situation,sortOrder:r.sortOrder,initialNumber:r.initialNumber,correctCount:0,wrongCount:0,lastReviewedAt:null,lastCorrectAt:null,lastCorrect:null,learningState:null}));for(const id of p.removeIds)if(existing.has(id))ops.push(b=>b.delete(doc(db,"users",uid,"expressions",id)));for(const d of ss.docs)if((d.data().language||"en")==="en")ops.push(b=>b.delete(d.ref));const chunks=await getDocsFromServer(collection(db,"users",uid,"reviewChunks"));for(const d of chunks.docs)if(d.data().language==="en")ops.push(b=>b.delete(d.ref));ops.push(b=>b.delete(doc(db,"users",uid,"review","progress")),b=>b.delete(activeRef(uid,"en")));replacementSnapshot.started=true;for(let i=0;i<ops.length;i+=300){if(uid!==approvedUid||generation!==authGeneration)throw Error("ログイン状態が変わりました");await assertNoReset(uid,"en");const b=writeBatch(db);for(const op of ops.slice(i,i+300))op(b);b.set(doc(db,"users",uid,"review","bankEpoch"),{changedAt:serverTimestamp()});await b.commit();done+=Math.min(300,ops.length-i);replacementMessage("更新中 "+done+"/"+ops.length);}await Promise.all([loadBank(uid,generation,true),loadSessions(uid,generation)]);if(lang==="en"){document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;activeSession=null;}refresh();replacementMessage("英語教材 "+p.targetCount+"件への更新と履歴初期化が完了しました。");replacementPlan=null;replacementSnapshot=null;$("replacementFile").value="";}catch(e){replacementMessage("更新中断（確定済み操作 "+done+"件）："+e.message+"。同じ計画で再試行できます。");$("replacementApply").disabled=false;}finally{replacementBusy=false;$("replacementFile").disabled=false;$("replacementBackup").disabled=!replacementPlan;}});
 
 async function expressionId(q){
  const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(key(q)));
@@ -200,19 +239,19 @@ $("importButton").addEventListener("click",async()=>{
    const item={q,answer,why,language:lang},k=key(item);
    let ref=doc(db,"users",uid,"expressions",lang+"-"+await expressionId(item));
    if(known.has(k)||(await getDoc(ref)).exists()){if(!confirm("重複した表現です。\n"+q+"\n"+answer+"\nOK：別の問題として残す／キャンセル：今回の登録を省略")){duplicates++;continue;}ref=doc(db,"users",uid,"expressions",lang+"-"+crypto.randomUUID());}
-   await assertNoReset(approvedUid,lang);await setDoc(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.initialNumber)||0))+added+1,sortOrder:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.sortOrder)||0))+added+1});added++;known.add(k);
+   await assertNoReset(approvedUid,lang);await setDoc(ref,{...item,situation:situation.trim(),batchId,batchIndex,syncUpdatedAt:serverTimestamp(),createdAt:serverTimestamp(),initialNumber:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.initialNumber)||0))+added+1,sortOrder:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.sortOrder)||0))+added+1});added++;known.add(k);
   }
   if(generation===authGeneration&&approvedUid===uid){
    $("importStatus").textContent=added+"件登録、"+duplicates+"件重複を省略しました。";
    if(added)$("importText").value="";
-   await loadBank(uid,generation);
+   await loadBank(uid,generation,true);
   }
  }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。再実行時は重複確認が表示されます。";}
  finally{clearInterval(dotTimer);importButton.textContent="表現を登録する";importButton.removeAttribute("aria-busy");importButton.disabled=false;}
 });
 let trialMode=sessionStorage.getItem("languageReviewTrial")==="1";
 function syncTrial(){ $("trialMode").checked=trialMode;$("trialBanner").hidden=!trialMode;$("bank").hidden=trialMode||!approvedUid;$("managePanel").hidden=trialMode||!approvedUid; }
-$("trialMode").addEventListener("change",async()=>{if(!approvedUid||!$("questionArea").hidden){$("trialMode").checked=trialMode;$("trialStatus").textContent="復習を終了してから切り替えてください。";return;}trialMode=$("trialMode").checked;sessionStorage.setItem("languageReviewTrial",trialMode?"1":"0");activeSession=null;$("resultArea").hidden=true;$("start").hidden=false;syncTrial();if(!trialMode)await resumeQuiz();});
+$("trialMode").addEventListener("change",async()=>{if(!approvedUid||!$("questionArea").hidden){$("trialMode").checked=trialMode;$("trialStatus").textContent="復習を終了してから切り替えてください。";return;}trialMode=$("trialMode").checked;sessionStorage.setItem("languageReviewTrial",trialMode?"1":"0");activeSession=null;$("resultArea").hidden=true;$("start").hidden=false;syncTrial();refresh();if(!trialMode)await resumeQuiz();});
 
 $("resetScope").addEventListener("change",()=>{$("resetDate").hidden=$("resetScope").value!=="date";$("resetNumber").hidden=$("resetScope").value!=="question";});
 $("resetHistory").addEventListener("click",async()=>{
@@ -241,7 +280,7 @@ $("resetHistory").addEventListener("click",async()=>{
  downloadFile("history-before-reset-"+l+"-"+Date.now()+".json",JSON.stringify({language:l,expressions:bank,sessions:records.map(({ref,parts,...a})=>a),chunks:chunks.map(d=>({id:d.id,data:d.data()})),active:active.exists()?active.data():null},null,2),"application/json");
  if(!confirm("対象 "+affected.size+"問、回答履歴 "+removed+"件。バックアップを保存しましたか？ 取り消しを実行しますか？"))return;
  
- if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");await stageResetPlan(uid,l,ops);await resumeResetPlan(uid,l,(n,total)=>{status.textContent="初期化中 "+n+"/"+total;});committed=ops.length;await Promise.all([loadBank(uid,generation),loadSessions(uid,generation)]);status.textContent="初期化完了："+affected.size+"問、回答履歴 "+removed+"件。";
+ if(uid!==approvedUid||l!==lang||generation!==authGeneration)throw Error("対象が変わりました");await stageResetPlan(uid,l,ops);await resumeResetPlan(uid,l,(n,total)=>{status.textContent="初期化中 "+n+"/"+total;});committed=ops.length;await Promise.all([loadBank(uid,generation,true),loadSessions(uid,generation)]);status.textContent="初期化完了："+affected.size+"問、回答履歴 "+removed+"件。";
  }catch(e){status.textContent=(committed?"更新済み・再読込確認が必要：":"中止：")+e.message;}finally{$("resetHistory").disabled=false;}
 });
 
@@ -273,7 +312,7 @@ $("resetRecovery").addEventListener("click",async()=>{
  if(!snap.exists()||["completed","discarded"].includes(j.status)){status.textContent="未完了の初期化はありません。";return;}
  if(uid!==approvedUid||l!==lang||g!==authGeneration)throw Error("対象が変わりました");
  if(j.status==="staging"){if(confirm("未実行の初期化計画を破棄しますか？")){await discardStagedReset(uid,l,j.id);status.textContent="計画を破棄しました。";}return;}
- if(j.status==="running"&&confirm("中断した初期化を再開しますか？")){await resumeResetPlan(uid,l,(n,total)=>{status.textContent="初期化中 "+n+"/"+total;});if(uid===approvedUid&&g===authGeneration){await Promise.all([loadBank(uid,g),loadSessions(uid,g)]);status.textContent="初期化を完了しました。";}}
+ if(j.status==="running"&&confirm("中断した初期化を再開しますか？")){await resumeResetPlan(uid,l,(n,total)=>{status.textContent="初期化中 "+n+"/"+total;});if(uid===approvedUid&&g===authGeneration){await Promise.all([loadBank(uid,g,true),loadSessions(uid,g)]);status.textContent="初期化を完了しました。";}}
  }catch(e){status.textContent="復旧できません："+e.message;}finally{$("resetRecovery").disabled=false;}
 });
 async function discardStagedReset(uid,l,id){
@@ -303,7 +342,7 @@ async function commitResetPart(uid,l,id,n){
    const target=doc(db,"users",uid,op.collection,op.id);
    if(op.collection==="review"&&op.id!=="active-"+l&&!(l==="en"&&op.id==="progress"))throw Error("初期化対象が不正です");
    if(op.type==="delete"&&op.collection!=="expressions")tx.delete(target);
-   else if(op.type==="update"&&op.collection!=="review")tx.update(target,op.data);
+   else if(op.type==="update"&&op.collection!=="review")tx.update(target,op.collection==="expressions"?{...op.data,syncUpdatedAt:serverTimestamp()}:op.data);
    else throw Error("初期化操作が不正です");
   }
   tx.update(ref,{next:n+1,status:n+1===j.parts?"completed":"running"});
@@ -312,18 +351,19 @@ async function commitResetPart(uid,l,id,n){
 const chunkSize=200;
 const chunkRef=(uid,id,n)=>doc(db,"users",uid,"reviewChunks",id+"-"+n);
 const sessionCount=a=>a.total??a.ids.length;
-async function readChunks(uid,a){
+async function readChunks(uid,a,historyOnly=false){
  if(!a.chunked)return {ids:a.ids,answers:a.answers};
  const ids=[],answers=[];
- for(let n=0;n<Math.ceil(a.total/chunkSize);n++){
+ for(let n=0;n<Math.ceil((historyOnly&&Number.isInteger(a.processedCount)?Math.min(a.total,a.processedCount):a.total)/chunkSize);n++){
  const snap=await getDoc(chunkRef(uid,a.id,n));if(!snap.exists())throw Error("復習データの一部がありません");
  ids.push(...snap.data().ids);answers.push(...snap.data().answers);
  }
  return {ids,answers};
 }
 async function beginQuiz(){
- if(!approvedUid)return;const uid=approvedUid,l=lang; $("start").disabled=true;$("retry").disabled=true;
+ if(!approvedUid||(!trialMode&&!bankSyncOK))return;const uid=approvedUid,l=lang; $("start").disabled=true;$("retry").disabled=true;
  try{
+ if(!trialMode){await loadBank(uid,authGeneration);if(!bankSyncOK||uid!==approvedUid||l!==lang)throw Error("教材を同期できません。");}
  const list=[...new Map(pool().map(q=>[qid(q),q])).values()];
  if($("shuffle").checked)for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
  questions=list.sort((a,b)=>$("shuffle").checked?0:a.number-b.number);if(!questions.length)return;
@@ -331,7 +371,7 @@ async function beginQuiz(){
  }catch(e){$("history").textContent="開始できません："+(e.message||e.code);}finally{$("start").disabled=false;$("retry").disabled=false;}
 }
 async function resumeQuiz(){
- const uid=approvedUid,l=lang;syncTrial();if(!uid||trialMode)return;
+ const uid=approvedUid,l=lang;syncTrial();if(!uid||trialMode||!bankSyncOK)return;
  try{const snap=await getDoc(activeRef(uid,l));if(uid!==approvedUid||l!==lang||!snap.exists())return;
  const a=snap.data();if(a.index>=sessionCount(a))return;const data=await readChunks(uid,a);if(uid!==approvedUid||l!==lang)return;
  const lookup=new Map(allQuestions().map(q=>[q.id,q]));const list=data.ids.map(id=>lookup.get(id));if(list.some(q=>!q))throw Error("教材が変更されています。");
@@ -374,7 +414,7 @@ $("saveEdit").addEventListener("click",async()=>{
  if(bankQuestions.some(x=>x.id!==q.id&&getLang(x)===getLang(q)&&key(x)===key(patch))){$("editStatus").textContent="同じ表現がすでに登録されています。";return;}
  $("saveEdit").disabled=true;$("cancelEdit").disabled=true;$("editStatus").textContent="保存中…";
  try{
- await runTransaction(db,async tx=>{await assertNoReset(uid,getLang(q),tx);tx.update(doc(db,"users",uid,"expressions",q.id),patch);});
+ await runTransaction(db,async tx=>{await assertNoReset(uid,getLang(q),tx);tx.update(doc(db,"users",uid,"expressions",q.id),{...patch,syncUpdatedAt:serverTimestamp()});});
  if(generation!==authGeneration||uid!==approvedUid)return;
  Object.assign(q,patch);bankQuestions=bankQuestions.map(x=>x.id===q.id?{...x,...patch}:x);
  $("question").textContent="No. "+(q.initialNumber||q.number)+"　"+q.q;$("modelAnswer").textContent=q.answer;
@@ -393,10 +433,10 @@ async function selfGrade(state){
  try{if(!session)throw Error("復習を再読み込みしてください");
  const entry={id:graded.id,correct:isCorrect,state,at:gradedAt};const next={...session,index:index+1,answeredCount:(session.answeredCount??session.index)+(skipped?0:1),...(session.chunked?{}:{answers:skipped?answers:[...answers,entry]}),score:correctCount+(isCorrect?1:0)};
  await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==session.id||snap.data().index!==index)throw Error("別の端末で進行しています。再読み込みしてください。");
- if(session.chunked&&!skipped){const cr=chunkRef(uid,session.id,Math.floor(index/chunkSize)),cs=await tx.get(cr);if(!cs.exists())throw Error("復習データがありません");tx.update(cr,{answers:[...cs.data().answers,entry]});}
- if(!skipped)tx.update(doc(db,"users",uid,"expressions",graded.id),excluded?{learningState:state,lastReviewedAt:serverTimestamp()}:{learningState:state,[isCorrect?"correctCount":"wrongCount"]:increment(1),lastReviewedAt:serverTimestamp(),lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:serverTimestamp()}:{})});
- tx.set(ref,next);if(next.index===sessionCount(next))tx.set(doc(db,"users",uid,"sessions",session.id),{language:l,mode:session.mode,...(session.chunked?{chunked:true,id:session.id,total:session.total}:{answers:next.answers}),score:next.score,count:next.answeredCount,startedAt:session.startedAt||null,finishedAt:serverTimestamp()});
- });if(uid!==approvedUid||l!==lang)return;activeSession=next;if(!skipped){graded.learningState=state;if(!excluded)graded[isCorrect?"correctCount":"wrongCount"]=(graded[isCorrect?"correctCount":"wrongCount"]||0)+1;graded.lastReviewedAt={toDate:()=>gradedAt};if(!excluded)graded.lastCorrect=isCorrect;if(isCorrect)graded.lastCorrectAt={toDate:()=>gradedAt};bankQuestions=bankQuestions.map(q=>q.id===graded.id?{...q,learningState:state,correctCount:graded.correctCount||0,wrongCount:graded.wrongCount||0,lastReviewedAt:graded.lastReviewedAt,lastCorrect:graded.lastCorrect??null,lastCorrectAt:graded.lastCorrectAt??null}:q);}}catch(e){$("editStatus").textContent="保存できませんでした："+(e.message||e.code||"エラー");answered=false;$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
+ if(session.chunked&&!skipped){const cr=chunkRef(uid,session.id,Math.floor(index/chunkSize));tx.update(cr,{answers:arrayUnion(entry)});}
+ if(!skipped)tx.update(doc(db,"users",uid,"expressions",graded.id),excluded?{syncUpdatedAt:serverTimestamp(),learningState:state,lastReviewedAt:serverTimestamp()}:{syncUpdatedAt:serverTimestamp(),learningState:state,[isCorrect?"correctCount":"wrongCount"]:increment(1),lastReviewedAt:serverTimestamp(),lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:serverTimestamp()}:{})});
+ tx.set(ref,next);if(next.index===sessionCount(next))tx.set(doc(db,"users",uid,"sessions",session.id),{language:l,mode:session.mode,...(session.chunked?{chunked:true,id:session.id,total:session.total}:{answers:next.answers}),score:next.score,count:next.answeredCount,processedCount:next.index,startedAt:session.startedAt||null,finishedAt:serverTimestamp()});
+ });if(uid!==approvedUid||l!==lang)return;activeSession=next;if(!skipped){const patch={learningState:state,lastReviewedAt:Timestamp.fromDate(gradedAt),...(!excluded?{[isCorrect?"correctCount":"wrongCount"]:(graded[isCorrect?"correctCount":"wrongCount"]||0)+1,lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:Timestamp.fromDate(gradedAt)}:{})}:{})};bankQuestions=bankQuestions.map(q=>q.id===graded.id?{...q,...patch}:q);}}catch(e){$("editStatus").textContent="保存できませんでした："+(e.message||e.code||"エラー");answered=false;$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
  if(isCorrect)correctCount++;if(!skipped)answers.push({id:qid(graded),correct:isCorrect,state});
  if(currentIndex<questions.length-1){currentIndex++;showQuestion();$("progress").scrollIntoView({block:"start",behavior:"instant"});return;}
  finishQuiz();
@@ -411,7 +451,7 @@ $("stopQuiz").addEventListener("click",async()=>{
  if(!confirm("ここで復習を終了しますか？ 判定済みの記録は残ります。"))return;
  if(trialMode){activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;answered=false;return;}
  const uid=approvedUid,l=lang,a=activeSession;answered=true;$("stopQuiz").disabled=true;
- try{await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==a.id||snap.data().index!==a.index)throw Error("別端末で進行しています。再読み込みしてください。");if(a.index)tx.set(doc(db,"users",uid,"sessions",a.id),{language:l,mode:a.mode,...(a.chunked?{chunked:true,id:a.id,total:a.total}:{answers:a.answers}),score:a.score,count:a.answeredCount??a.index,startedAt:a.startedAt||null,finishedAt:serverTimestamp(),partial:true});tx.delete(ref);});if(uid!==approvedUid)return;activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;await loadSessions(uid,authGeneration);refresh();}catch(e){$("editStatus").textContent=e.message;alert(e.message);}finally{answered=false;$("stopQuiz").disabled=false;}
+ try{await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==a.id||snap.data().index!==a.index)throw Error("別端末で進行しています。再読み込みしてください。");if(a.index)tx.set(doc(db,"users",uid,"sessions",a.id),{language:l,mode:a.mode,...(a.chunked?{chunked:true,id:a.id,total:a.total}:{answers:a.answers}),score:a.score,count:a.answeredCount??a.index,processedCount:a.index,startedAt:a.startedAt||null,finishedAt:serverTimestamp(),partial:true});tx.delete(ref);});if(uid!==approvedUid)return;activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;await loadSessions(uid,authGeneration);refresh();}catch(e){$("editStatus").textContent=e.message;alert(e.message);}finally{answered=false;$("stopQuiz").disabled=false;}
 });
 async function finishQuiz(){
  const uid=approvedUid,generation=authGeneration;if(!uid)return;
