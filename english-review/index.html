@@ -24,7 +24,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 aut
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,onSnapshot,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -40,6 +40,7 @@ const auth=getAuth(app);
 const db=initializeFirestore(app,{localCache:typeof indexedDB!=="undefined"?persistentLocalCache({tabManager:persistentMultipleTabManager()}):memoryLocalCache()});
 let authGeneration=0;
 let approvedUid=null;
+let bankUnsubscribe=null,bankSubscriptionUid=null,bankReady=null,bankResolve=null;
 let currentIndex=0,correctCount=0,answered=false;
 let bankQuestions=[],quizPool=[],sessions=[],lang="en",answers=[],modeAtStart="all",managerRows=null;
 let questions=[],activeSession=null;
@@ -93,6 +94,7 @@ async function loadSessions(uid,generation){try{const snap=await getDocs(collect
 const status=$("status"),login=$("login"),logout=$("logout");
 onAuthStateChanged(auth,async user=>{
  const generation=++authGeneration;
+ if(bankUnsubscribe)bankUnsubscribe();bankUnsubscribe=null;bankSubscriptionUid=null;if(bankResolve)bankResolve();bankResolve=null;bankReady=null;
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
  approvedUid=null;activeSession=null;bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
@@ -138,13 +140,25 @@ async function loadHistory(uid,generation){
 const norm=s=>s.normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase();
 const key=q=>norm(q.q)+"|"+norm(q.answer);
 async function loadBank(uid,generation){
- $("bankCount").textContent="登録済み表現を読み込み中…";
- try{
-  const snap=await getDocs(collection(db,"users",uid,"expressions"));
+ if(uid!==approvedUid||generation!==authGeneration)return;
+ if(bankSubscriptionUid===uid&&bankReady)return bankReady;
+ if(bankUnsubscribe)bankUnsubscribe();
+ bankSubscriptionUid=uid;
+ $("bankCount").textContent="登録済み表現を同期中…";
+ bankReady=new Promise(resolve=>{bankResolve=resolve;});
+ const ready=bankReady;
+ bankUnsubscribe=onSnapshot(collection(db,"users",uid,"expressions"),{includeMetadataChanges:true},snap=>{
   if(generation!==authGeneration||approvedUid!==uid)return;
   bankQuestions=snap.docs.map(d=>({...d.data(),id:d.id})).filter(q=>typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim());
   refresh();
- }catch(e){if(generation===authGeneration)$("bankCount").textContent="読み込み失敗："+(e.code||"エラー");}
+  if(snap.metadata.fromCache)$("bankCount").textContent+="（端末内データ・同期確認中）";
+  if(!snap.metadata.fromCache||bankQuestions.length){if(bankResolve)bankResolve();bankResolve=null;}
+ },e=>{
+  if(generation!==authGeneration||approvedUid!==uid)return;
+  $("bankCount").textContent="同期失敗："+(e.code||e.message||"エラー");
+  if(bankResolve)bankResolve();bankResolve=null;bankSubscriptionUid=null;bankReady=null;
+ });
+ return ready;
 }
 function tsDate(v){return v?.toDate?.()?.toISOString?.()||v||null;}
 function dateFrom(v){return v?.toDate?.()?.toLocaleString("ja-JP")|| (typeof v==="string"?new Date(v).toLocaleString("ja-JP"):"—");}
