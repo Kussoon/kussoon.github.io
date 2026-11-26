@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS migration_state (account_id TEXT PRIMARY KEY REFERENCES accounts(id), archive_id TEXT NOT NULL, next_batch INTEGER NOT NULL DEFAULT 0, completed INTEGER NOT NULL DEFAULT 0 CHECK(completed IN (0,1)));
+CREATE TABLE IF NOT EXISTS migration_receipts (account_id TEXT NOT NULL REFERENCES accounts(id), batch_no INTEGER NOT NULL, digest TEXT NOT NULL, PRIMARY KEY(account_id,batch_no));

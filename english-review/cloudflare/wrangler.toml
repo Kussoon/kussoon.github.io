@@ -1,0 +1,18 @@
+# Isolated preview; authentication fails closed until runtime secrets are configured.
+name = "kussoon-review-preview"
+main = "worker.mjs"
+compatibility_date = "2026-11-01"
+workers_dev = true
+preview_urls = false
+keep_vars = true
+
+[build]
+command = "node build-assets.mjs"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+
+# D1 is intentionally not declared until the actual database ID is known.
+# Set TEAM_DOMAIN, POLICY_AUD and ALLOWED_EMAILS in Worker runtime settings.

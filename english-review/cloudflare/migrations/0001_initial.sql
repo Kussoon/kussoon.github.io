@@ -1,0 +1,11 @@
+PRAGMA foreign_keys=ON;
+CREATE TABLE IF NOT EXISTS accounts (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE IF NOT EXISTS expressions (account_id TEXT NOT NULL REFERENCES accounts(id), id TEXT NOT NULL, language TEXT NOT NULL CHECK(language IN ('en','fr')), payload TEXT NOT NULL CHECK(json_valid(payload)), PRIMARY KEY(account_id,id));
+CREATE TABLE IF NOT EXISTS review_events (account_id TEXT NOT NULL REFERENCES accounts(id), event_id TEXT NOT NULL, expression_id TEXT NOT NULL, rating TEXT NOT NULL CHECK(rating IN ('correct','wrong','excluded','skipped')), reviewed_at TEXT NOT NULL, session_id TEXT NOT NULL, PRIMARY KEY(account_id,event_id), FOREIGN KEY(account_id,expression_id) REFERENCES expressions(account_id,id));
+CREATE TABLE IF NOT EXISTS changes (seq INTEGER PRIMARY KEY AUTOINCREMENT, account_id TEXT NOT NULL REFERENCES accounts(id), entity TEXT NOT NULL, entity_id TEXT NOT NULL, operation TEXT NOT NULL CHECK(operation IN ('upsert','delete')), payload TEXT);
+CREATE INDEX IF NOT EXISTS changes_account_seq ON changes(account_id,seq);
+CREATE INDEX IF NOT EXISTS events_account_expression ON review_events(account_id,expression_id);
+CREATE TRIGGER IF NOT EXISTS expression_insert AFTER INSERT ON expressions BEGIN INSERT INTO changes(account_id,entity,entity_id,operation,payload) VALUES(new.account_id,'expression',new.id,'upsert',new.payload); END;
+CREATE TRIGGER IF NOT EXISTS expression_update AFTER UPDATE ON expressions BEGIN INSERT INTO changes(account_id,entity,entity_id,operation,payload) VALUES(new.account_id,'expression',new.id,'upsert',new.payload); END;
+CREATE TRIGGER IF NOT EXISTS expression_delete AFTER DELETE ON expressions BEGIN INSERT INTO changes(account_id,entity,entity_id,operation) VALUES(old.account_id,'expression',old.id,'delete'); END;
+CREATE TRIGGER IF NOT EXISTS event_insert AFTER INSERT ON review_events BEGIN INSERT INTO changes(account_id,entity,entity_id,operation,payload) VALUES(new.account_id,'event',new.event_id,'upsert',json_object('expressionId',new.expression_id,'rating',new.rating,'reviewedAt',new.reviewed_at,'sessionId',new.session_id)); END;

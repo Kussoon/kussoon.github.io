@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS legacy_documents (account_id TEXT NOT NULL REFERENCES accounts(id), collection_name TEXT NOT NULL CHECK(collection_name IN ('sessions','chunks','review')), document_id TEXT NOT NULL, payload TEXT NOT NULL CHECK(json_valid(payload)), PRIMARY KEY(account_id,collection_name,document_id));
