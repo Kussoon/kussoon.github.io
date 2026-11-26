@@ -29,8 +29,8 @@ export function createSync(local,account,fetcher=fetch){
  async function run(){
  const me=await request("/api/me");if(me.id!==account)throw Error("account changed");
  for(let i=0;i<20;i++){const pending=(await local.pending()).slice(0,50);if(!pending.length)break;const response=await request("/api/events",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({events:pending})});const expected=new Set(pending.map(e=>e.eventId));if(!Array.isArray(response.acknowledged)||response.acknowledged.length!==expected.size||new Set(response.acknowledged).size!==expected.size||response.acknowledged.some(id=>!expected.has(id)))throw Error("invalid acknowledgement");await local.acknowledge(response.acknowledged);}
- for(let i=0;i<100;i++){const after=await local.cursor(),page=await request("/api/changes?after="+after);await local.applyPage(after,page);if(!page.more)break;if(page.cursor<=after)throw Error("cursor stalled");}
- return {pending:(await local.pending()).length};
+ let more=true;for(let i=0;i<100;i++){const after=await local.cursor(),page=await request("/api/changes?after="+after);await local.applyPage(after,page);more=page.more;if(!more)break;if(page.cursor<=after)throw Error("cursor stalled");}
+ return {pending:(await local.pending()).length,more};
  }
  return ()=>{if(!running)running=run().finally(()=>{running=null;});return running;};
 }
