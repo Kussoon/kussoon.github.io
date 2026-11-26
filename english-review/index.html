@@ -167,7 +167,7 @@ async function loadBank(uid,generation,force=false){
  const epochSnap=await getDocFromServer(doc(db,"users",uid,"review","bankEpoch"));
  const epoch=epochSnap.exists()?epochSnap.data().changedAt:null;
  const sameEpoch=JSON.stringify(epoch)===JSON.stringify(saved?.epoch??null);
- const full=force||!saved||!sameEpoch||Date.now()-saved.fullAt>86400000;
+ const full=force||!saved||!Array.isArray(saved.rows)||!(saved.cursor instanceof Timestamp)||!Number.isFinite(saved.fullAt)||!sameEpoch||Date.now()-saved.fullAt>86400000;
  const ref=collection(db,"users",uid,"expressions");
  const snap=await getDocsFromServer(full?ref:query(ref,where("syncUpdatedAt",">=",saved.cursor)));
  if(!current())return;
@@ -175,6 +175,7 @@ async function loadBank(uid,generation,force=false){
  let cursor=full?new Timestamp(0,0):saved.cursor;
  for(const d of snap.docs){const q={...d.data(),id:d.id};if(q.syncUpdatedAt&&cmpStamp(q.syncUpdatedAt,cursor)>0)cursor=q.syncUpdatedAt;if(typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim())rows.set(q.id,q);else rows.delete(q.id);}
  const next={rows:[...rows.values()],cursor,epoch,fullAt:full?Date.now():saved.fullAt};
+ const verify=await getDocFromServer(doc(db,"users",uid,"review","bankEpoch"));if(JSON.stringify(verify.exists()?verify.data().changedAt:null)!==JSON.stringify(epoch))throw Error("教材置換中です。再同期してください。");if(!current())return;
  bankQuestions=next.rows;bankSyncOK=true;bankSyncLabel=(full?"全件":"差分")+"取得 "+snap.size+"件・"+new Date().toLocaleTimeString("ja-JP");
  try{await bankDisk(uid,packBank(next));}catch(e){bankSyncLabel+="（端末保存不可）";}
  if(current())refresh();
@@ -250,7 +251,7 @@ $("importButton").addEventListener("click",async()=>{
 });
 let trialMode=sessionStorage.getItem("languageReviewTrial")==="1";
 function syncTrial(){ $("trialMode").checked=trialMode;$("trialBanner").hidden=!trialMode;$("bank").hidden=trialMode||!approvedUid;$("managePanel").hidden=trialMode||!approvedUid; }
-$("trialMode").addEventListener("change",async()=>{if(!approvedUid||!$("questionArea").hidden){$("trialMode").checked=trialMode;$("trialStatus").textContent="復習を終了してから切り替えてください。";return;}trialMode=$("trialMode").checked;sessionStorage.setItem("languageReviewTrial",trialMode?"1":"0");activeSession=null;$("resultArea").hidden=true;$("start").hidden=false;syncTrial();if(!trialMode)await resumeQuiz();});
+$("trialMode").addEventListener("change",async()=>{if(!approvedUid||!$("questionArea").hidden){$("trialMode").checked=trialMode;$("trialStatus").textContent="復習を終了してから切り替えてください。";return;}trialMode=$("trialMode").checked;sessionStorage.setItem("languageReviewTrial",trialMode?"1":"0");activeSession=null;$("resultArea").hidden=true;$("start").hidden=false;syncTrial();refresh();if(!trialMode)await resumeQuiz();});
 
 $("resetScope").addEventListener("change",()=>{$("resetDate").hidden=$("resetScope").value!=="date";$("resetNumber").hidden=$("resetScope").value!=="question";});
 $("resetHistory").addEventListener("click",async()=>{
@@ -362,6 +363,7 @@ async function readChunks(uid,a,historyOnly=false){
 async function beginQuiz(){
  if(!approvedUid||(!trialMode&&!bankSyncOK))return;const uid=approvedUid,l=lang; $("start").disabled=true;$("retry").disabled=true;
  try{
+ if(!trialMode){await loadBank(uid,authGeneration);if(!bankSyncOK||uid!==approvedUid||l!==lang)throw Error("教材を同期できません。");}
  const list=[...new Map(pool().map(q=>[qid(q),q])).values()];
  if($("shuffle").checked)for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
  questions=list.sort((a,b)=>$("shuffle").checked?0:a.number-b.number);if(!questions.length)return;
@@ -369,7 +371,7 @@ async function beginQuiz(){
  }catch(e){$("history").textContent="開始できません："+(e.message||e.code);}finally{$("start").disabled=false;$("retry").disabled=false;}
 }
 async function resumeQuiz(){
- const uid=approvedUid,l=lang;syncTrial();if(!uid||trialMode)return;
+ const uid=approvedUid,l=lang;syncTrial();if(!uid||trialMode||!bankSyncOK)return;
  try{const snap=await getDoc(activeRef(uid,l));if(uid!==approvedUid||l!==lang||!snap.exists())return;
  const a=snap.data();if(a.index>=sessionCount(a))return;const data=await readChunks(uid,a);if(uid!==approvedUid||l!==lang)return;
  const lookup=new Map(allQuestions().map(q=>[q.id,q]));const list=data.ids.map(id=>lookup.get(id));if(list.some(q=>!q))throw Error("教材が変更されています。");
