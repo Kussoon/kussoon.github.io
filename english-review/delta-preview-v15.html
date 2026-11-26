@@ -57,6 +57,7 @@ function groups(){
  const m=new Map();for(const q of allQuestions()){const id=q.batchId||"old-"+stamp(q);if(!m.has(id))m.set(id,[]);m.get(id).push(q);}
  return [...m].sort((a,b)=>Math.max(...b[1].map(stamp))-Math.max(...a[1].map(stamp)));
 }
+const isUnseen=q=>!!q&&!q.learningState&&!q.lastReviewedAt&&!q.lastCorrectAt&&!Number(q.correctCount||0)&&!Number(q.wrongCount||0)&&q.lastCorrect==null;
 const isUnclassified=q=>!String(q.situation||"").trim()||String(q.situation).trim()==="未分類";
 function pool(){
  const full=allQuestions(),all=["allIncluded","excluded"].includes($("mode").value)?full:full.filter(q=>q.learningState!=="excluded"),lookup=new Map(all.map(q=>[qid(q),q])),g=groups(),ss=recentSessions();
@@ -66,7 +67,7 @@ function pool(){
  case "excluded":return full.filter(q=>q.learningState==="excluded");
  case "allIncluded":return full;
  case "learned":return all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true));
- case "unseen":return all.filter(q=>!q.learningState&&!q.lastReviewedAt&&!q.correctCount&&!q.wrongCount);
+ case "unseen":return all.filter(isUnseen);
  case "unclassified":return all.filter(isUnclassified);
  case "situation":return all.filter(q=>(q.situation||"未分類")===$("situationSelect").value);
  case "batches3":return g.slice(0,3).flatMap(x=>x[1]).filter(q=>lookup.has(q.id));
@@ -109,7 +110,7 @@ onAuthStateChanged(auth,async user=>{
  clearInterval(bankSyncTimer);bankSyncTimer=null;bankSyncTask=null;bankSyncOK=false;bankSyncLabel="";
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
- approvedUid=null;activeSession=null;batchLabels={en:{},fr:{}};bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
+ approvedUid=null;$("mode").disabled=false;activeSession=null;batchLabels={en:{},fr:{}};bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
  $("approvedPanel").hidden=true;
  $("quiz").hidden=true;$("bank").hidden=true;$("importText").value="";$("importStatus").textContent="";
  document.body.classList.remove("reviewing");$("questionArea").hidden=true;
@@ -169,14 +170,14 @@ async function loadBank(uid,generation,force=false){
   const epochSnap=await getDocFromServer(doc(db,"users",uid,"review","bankEpoch"));
  const epoch=epochSnap.exists()?epochSnap.data().changedAt:null;
  const sameEpoch=JSON.stringify(epoch)===JSON.stringify(saved?.epoch??null);
- const full=force||!saved||!Array.isArray(saved.rows)||!(saved.cursor instanceof Timestamp)||!Number.isFinite(saved.fullAt)||!sameEpoch||Date.now()-saved.fullAt>86400000;
+ const full=force||saved?.unseenFix!==1||!saved||!Array.isArray(saved.rows)||!(saved.cursor instanceof Timestamp)||!Number.isFinite(saved.fullAt)||!sameEpoch||Date.now()-saved.fullAt>86400000;
  const ref=collection(db,"users",uid,"expressions");
  const snap=await getDocsFromServer(full?ref:query(ref,where("syncUpdatedAt",">=",saved.cursor)));
  if(!current())return;
  const rows=new Map(full?[]:saved.rows.map(q=>[q.id,q]));
  let cursor=full?new Timestamp(0,0):saved.cursor;
  for(const d of snap.docs){const q={...d.data(),id:d.id};if(q.syncUpdatedAt&&cmpStamp(q.syncUpdatedAt,cursor)>0)cursor=q.syncUpdatedAt;if(typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim())rows.set(q.id,q);else rows.delete(q.id);}
- const next={rows:[...rows.values()],cursor,epoch,fullAt:full?Date.now():saved.fullAt};
+ const next={unseenFix:1,rows:[...rows.values()],cursor,epoch,fullAt:full?Date.now():saved.fullAt};
  const verify=await getDocFromServer(doc(db,"users",uid,"review","bankEpoch"));if(JSON.stringify(verify.exists()?verify.data().changedAt:null)!==JSON.stringify(epoch))throw Error("教材置換中です。再同期してください。");if(!current())return;
  bankQuestions=next.rows;bankSyncOK=true;bankSyncLabel=(full?"全件":"差分")+"取得 "+snap.size+"件・"+new Date().toLocaleTimeString("ja-JP");
  try{await bankDisk(uid,packBank(next));}catch(e){bankSyncLabel+="（端末保存不可）";}
@@ -376,17 +377,19 @@ async function resumeQuiz(){
  const uid=approvedUid,l=lang;syncTrial();if(!uid||trialMode||!bankSyncOK)return;
  try{const snap=await getDoc(activeRef(uid,l));if(uid!==approvedUid||l!==lang||!snap.exists())return;
  const a=snap.data();if(a.index>=sessionCount(a))return;const data=await readChunks(uid,a);if(uid!==approvedUid||l!==lang)return;
- const lookup=new Map(allQuestions().map(q=>[q.id,q]));const list=data.ids.map((id,i)=>lookup.get(id)||(i<a.index?{id,number:i+1}:null));if(list.some(q=>!q))throw Error("教材が変更されています。");
- activeSession=a;questions=list;answers=data.answers;currentIndex=a.index;correctCount=a.score;modeAtStart=a.mode;showQuestion();
+ const lookup=new Map(allQuestions().map(q=>[q.id,q]));const list=data.ids.map((id,i)=>lookup.get(id)||(i<a.index||a.mode==="unseen"?{id,number:i+1}:null));if(list.some(q=>!q))throw Error("教材が変更されています。");
+ activeSession=a;questions=list;answers=data.answers;currentIndex=a.index;correctCount=a.score;modeAtStart=a.mode;if([...$("mode").options].some(o=>o.value===a.mode))$("mode").value=a.mode;refresh();showQuestion();
  }catch(e){$("history").textContent="途中の復習を取得できません："+(e.message||e.code);}
 }
 quizPool=questions.slice();
 function showQuestion(){
+ $("mode").disabled=true;
  $("editPanel").hidden=true;$("editQuestion").hidden=trialMode;$("editStatus").textContent="";$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;
  answered=false;
  $("questionArea").hidden=false;$("resultArea").hidden=true;$("start").hidden=true;
  $("progress").textContent=(currentIndex+1)+" / "+questions.length+" 問";
  const q=questions[currentIndex];
+ if(modeAtStart==="unseen"&&!trialMode&&!isUnseen(bankQuestions.find(x=>x.id===q.id))){$("question").textContent="学習済みの問題をスキップしています…";$("questionArea").hidden=false;$("answerPanel").hidden=true;$("preActions").hidden=true;$("editPanel").hidden=true;void selfGrade("skipped");return;}
  $("question").textContent=q.q;$("questionMeta").textContent="No. "+(q.initialNumber||q.number)+" ｜ "+(q.situation||"未分類");$("preActions").hidden=false;$("preExclude").hidden=false;$("preExclude").disabled=false;$("skipQuestion").disabled=false;document.body.classList.add("reviewing");
  $("questionStats").textContent="正解 "+(q.correctCount||0)+"回／不正解 "+(q.wrongCount||0)+"回｜最終学習："+dateFrom(q.lastReviewedAt)+"｜最終正解："+dateFrom(q.lastCorrectAt)+"｜前回："+({excluded:"出題から外した",learned:"ひとまず覚えた",learning:"まだ覚えていない"}[q.learningState]||(q.lastCorrect==null?"未記録":q.lastCorrect?"ひとまず覚えた":"まだ覚えていない"));
  $("answerPanel").hidden=true;$("reveal").hidden=false;
@@ -452,11 +455,12 @@ $("retry").addEventListener("click",()=>{if(!approvedUid)return;beginQuiz();});
 $("stopQuiz").addEventListener("click",async()=>{
  if(answered||!approvedUid||!activeSession||!$("editPanel").hidden)return;
  if(!confirm("ここで復習を終了しますか？ 判定済みの記録は残ります。"))return;
- if(trialMode){activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;answered=false;return;}
+ if(trialMode){activeSession=null;$("mode").disabled=false;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;answered=false;return;}
  const uid=approvedUid,l=lang,a=activeSession;answered=true;$("stopQuiz").disabled=true;
- try{await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==a.id||snap.data().index!==a.index)throw Error("別端末で進行しています。再読み込みしてください。");if(a.index)tx.set(doc(db,"users",uid,"sessions",a.id),{language:l,mode:a.mode,...(a.chunked?{chunked:true,id:a.id,total:a.total}:{answers:a.answers}),score:a.score,count:a.answeredCount??a.index,processedCount:a.index,startedAt:a.startedAt||null,finishedAt:serverTimestamp(),partial:true});tx.delete(ref);});if(uid!==approvedUid)return;activeSession=null;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;await loadSessions(uid,authGeneration);refresh();}catch(e){$("editStatus").textContent=e.message;alert(e.message);}finally{answered=false;$("stopQuiz").disabled=false;}
+ try{await runTransaction(db,async tx=>{await assertNoReset(uid,l,tx);const ref=activeRef(uid,l),snap=await tx.get(ref);if(!snap.exists()||snap.data().id!==a.id||snap.data().index!==a.index)throw Error("別端末で進行しています。再読み込みしてください。");if(a.index)tx.set(doc(db,"users",uid,"sessions",a.id),{language:l,mode:a.mode,...(a.chunked?{chunked:true,id:a.id,total:a.total}:{answers:a.answers}),score:a.score,count:a.answeredCount??a.index,processedCount:a.index,startedAt:a.startedAt||null,finishedAt:serverTimestamp(),partial:true});tx.delete(ref);});if(uid!==approvedUid)return;activeSession=null;$("mode").disabled=false;document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=true;$("start").hidden=false;await loadSessions(uid,authGeneration);refresh();}catch(e){$("editStatus").textContent=e.message;alert(e.message);}finally{answered=false;$("stopQuiz").disabled=false;}
 });
 async function finishQuiz(){
+ $("mode").disabled=false;
  const uid=approvedUid,generation=authGeneration;if(!uid)return;
  document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=false;
  $("score").textContent="学習："+answers.length+"問／飛ばした "+(questions.length-answers.length)+"問／ひとまず覚えた "+correctCount+"問／出題から外した "+answers.filter(a=>a.state==="excluded").length+"問";
