@@ -24,7 +24,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 aut
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,onSnapshot,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,arrayUnion,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,query,where,Timestamp,getDocFromServer,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,arrayUnion,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -40,7 +40,7 @@ const auth=getAuth(app);
 const db=initializeFirestore(app,{localCache:typeof indexedDB!=="undefined"?persistentLocalCache({tabManager:persistentMultipleTabManager()}):memoryLocalCache()});
 let authGeneration=0;
 let approvedUid=null;
-let bankUnsubscribe=null,bankSubscriptionUid=null,bankReady=null,bankResolve=null;
+let bankSyncTask=null,bankSyncTimer=null,bankSyncOK=false,bankSyncLabel="";
 let currentIndex=0,correctCount=0,answered=false;
 let bankQuestions=[],quizPool=[],sessions=[],lang="en",answers=[],modeAtStart="all",managerRows=null;
 let questions=[],activeSession=null;
@@ -82,8 +82,8 @@ function refresh(){
  const g=groups(),old=$("batchSelect").value,select=$("batchSelect"),months=new Map();select.replaceChildren();for(const [id,items] of g){const seconds=items.map(stamp).filter(n=>n>0),d=seconds.length?new Date(Math.min(...seconds)*1000):null;const parts=d?Object.fromEntries(new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"2-digit",hourCycle:"h23"}).formatToParts(d).map(p=>[p.type,p.value])):null;const month=parts?parts.year+"年"+parts.month+"月":"以前の登録";const o=document.createElement("option");o.value=id;o.textContent=(parts?parts.month+"/"+parts.day+" "+Number(parts.hour)+":"+parts.minute:"日時不明")+"・"+items.length+"問";if(!months.has(month)){const group=document.createElement("optgroup");group.label=month;months.set(month,group);select.append(group);}months.get(month).append(o);}if(g.some(x=>x[0]===old))select.value=old;
  $("batchSelect").hidden=$("mode").value!=="batch";
  const situations=[...new Set(allQuestions().map(q=>q.situation||"未分類"))].sort((a,b)=>a.localeCompare(b,"ja")),situationSelect=$("situationSelect"),oldSituation=situationSelect.value;situationSelect.replaceChildren();for(const name of situations){const o=document.createElement("option");o.value=name;o.textContent=name;situationSelect.append(o);}if(situations.includes(oldSituation))situationSelect.value=oldSituation;situationSelect.hidden=$("mode").value!=="situation";
- $("rangeFields").hidden=$("mode").value!=="range";const unavailable=["sessions3","wrong"].includes($("mode").value)&&recentSessions().slice(0,$("mode").value==="wrong"?1:3).some(a=>a.chunked&&!Array.isArray(a.answers));const n=unavailable?0:pool().length;$("poolCount").textContent=unavailable?"詳細履歴を取得できません。再読み込みしてください。":"対象："+n+"問";$("start").disabled=n===0;$("start").textContent=n+"問に挑戦する";
- $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件";
+ $("rangeFields").hidden=$("mode").value!=="range";const unavailable=["sessions3","wrong"].includes($("mode").value)&&recentSessions().slice(0,$("mode").value==="wrong"?1:3).some(a=>a.chunked&&!Array.isArray(a.answers));const n=unavailable||(!bankSyncOK&&!trialMode)?0:pool().length;$("poolCount").textContent=unavailable?"詳細履歴を取得できません。再読み込みしてください。":"対象："+n+"問";$("start").disabled=n===0;$("start").textContent=n+"問に挑戦する";
+ $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件"+(bankSyncLabel?"｜"+bankSyncLabel:"");
  const ss=recentSessions();$("sessionList").replaceChildren();for(const a of ss){const p=document.createElement("p");p.className="muted";p.textContent="開始："+(a.startedAt?dateFrom(a.startedAt):"記録なし")+" ｜ 終了："+dateFrom(a.finishedAt)+" ｜ "+(Array.isArray(a.answers)?a.answers.length:(a.count??0))+"問";$("sessionList").append(p);}if(!ss.length)$("sessionList").textContent="学習履歴はありません。";const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問｜除外 "+excluded+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
 }
 document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if(!$("questionArea").hidden)return;lang=b.dataset.lang;document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));$("quizTitle").textContent=(lang==="en"?"英語":"フランス語")+"の復習";$("modelAnswer").lang=lang;$("resultArea").hidden=true;$("start").hidden=false;refresh();resumeQuiz();}));
@@ -105,7 +105,7 @@ async function loadSessions(uid,generation){
 const status=$("status"),login=$("login"),logout=$("logout");
 onAuthStateChanged(auth,async user=>{
  const generation=++authGeneration;
- if(bankUnsubscribe)bankUnsubscribe();bankUnsubscribe=null;bankSubscriptionUid=null;if(bankResolve)bankResolve();bankResolve=null;bankReady=null;
+ clearInterval(bankSyncTimer);bankSyncTimer=null;bankSyncTask=null;bankSyncOK=false;bankSyncLabel="";
  $("loginPanel").hidden=!!user;
  $("userPanel").hidden=!user;
  approvedUid=null;activeSession=null;bankQuestions=[];sessions=[]; $("managePanel").hidden=true;$("managePanel").open=false;$("exportRows").replaceChildren();$("exportTable").hidden=true;$("exportStatus").textContent="";
@@ -150,27 +150,39 @@ async function loadHistory(uid,generation){
 }
 const norm=s=>s.normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase();
 const key=q=>norm(q.q)+"|"+norm(q.answer);
+const bankStore=()=>new Promise((resolve,reject)=>{const req=indexedDB.open("kussoon-review-bank-v1",1);req.onupgradeneeded=()=>req.result.createObjectStore("banks");req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+async function bankDisk(uid,value){const db=await bankStore();try{return await new Promise((resolve,reject)=>{const tx=db.transaction("banks",value===undefined?"readonly":"readwrite"),store=tx.objectStore("banks"),req=value===undefined?store.get(uid):store.put(value,uid);tx.oncomplete=()=>resolve(req.result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);});}finally{db.close();}}
+const packBank=v=>JSON.stringify(v,(k,x)=>x&&typeof x.seconds==="number"&&typeof x.nanoseconds==="number"?{__bankTimestamp:[x.seconds,x.nanoseconds]}:x);
+const unpackBank=v=>JSON.parse(v,(k,x)=>x&&Array.isArray(x.__bankTimestamp)?new Timestamp(...x.__bankTimestamp):x);
+const cmpStamp=(a,b)=>a.seconds-b.seconds||a.nanoseconds-b.nanoseconds;
 async function loadBank(uid,generation,force=false){
  if(uid!==approvedUid||generation!==authGeneration)return;
- if(bankSubscriptionUid===uid&&bankReady){if(force){const snap=await getDocsFromServer(collection(db,"users",uid,"expressions"));if(uid!==approvedUid||generation!==authGeneration)return;bankQuestions=snap.docs.map(d=>({...d.data(),id:d.id})).filter(q=>typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim());refresh();}return bankReady;}
- if(bankUnsubscribe)bankUnsubscribe();
- bankSubscriptionUid=uid;
- $("bankCount").textContent="登録済み表現を同期中…";
- bankReady=new Promise(resolve=>{bankResolve=resolve;});
- const ready=bankReady;
- bankUnsubscribe=onSnapshot(collection(db,"users",uid,"expressions"),{includeMetadataChanges:true},snap=>{
-  if(generation!==authGeneration||approvedUid!==uid)return;
-  bankQuestions=snap.docs.map(d=>({...d.data(),id:d.id})).filter(q=>typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim());
-  refresh();
-  if(snap.metadata.fromCache)$("bankCount").textContent+="（端末内データ・同期確認中）";
-  if(!snap.metadata.fromCache||bankQuestions.length){if(bankResolve)bankResolve();bankResolve=null;}
- },e=>{
-  if(generation!==authGeneration||approvedUid!==uid)return;
-  $("bankCount").textContent="同期失敗："+(e.code||e.message||"エラー");
-  if(bankResolve)bankResolve();bankResolve=null;bankSubscriptionUid=null;bankReady=null;
- });
- return ready;
+ if(bankSyncTask){await bankSyncTask;if(!force)return;if(uid!==approvedUid||generation!==authGeneration)return;}
+ const current=()=>uid===approvedUid&&generation===authGeneration;
+ const task=(async()=>{
+ let saved=null;try{const raw=await bankDisk(uid);if(raw)saved=unpackBank(raw);}catch(e){}
+ if(!current())return;
+ if(saved&&Array.isArray(saved.rows)&&!bankQuestions.length){bankQuestions=saved.rows;refresh();}
+ try{
+ const epochSnap=await getDocFromServer(doc(db,"users",uid,"review","bankEpoch"));
+ const epoch=epochSnap.exists()?epochSnap.data().changedAt:null;
+ const sameEpoch=JSON.stringify(epoch)===JSON.stringify(saved?.epoch??null);
+ const full=force||!saved||!sameEpoch||Date.now()-saved.fullAt>86400000;
+ const ref=collection(db,"users",uid,"expressions");
+ const snap=await getDocsFromServer(full?ref:query(ref,where("syncUpdatedAt",">=",saved.cursor)));
+ if(!current())return;
+ const rows=new Map(full?[]:saved.rows.map(q=>[q.id,q]));
+ let cursor=full?new Timestamp(0,0):saved.cursor;
+ for(const d of snap.docs){const q={...d.data(),id:d.id};if(q.syncUpdatedAt&&cmpStamp(q.syncUpdatedAt,cursor)>0)cursor=q.syncUpdatedAt;if(typeof q.q==="string"&&typeof q.answer==="string"&&q.q.trim()&&q.answer.trim())rows.set(q.id,q);else rows.delete(q.id);}
+ const next={rows:[...rows.values()],cursor,epoch,fullAt:full?Date.now():saved.fullAt};
+ bankQuestions=next.rows;bankSyncOK=true;bankSyncLabel=(full?"全件":"差分")+"取得 "+snap.size+"件・"+new Date().toLocaleTimeString("ja-JP");
+ try{await bankDisk(uid,packBank(next));}catch(e){bankSyncLabel+="（端末保存不可）";}
+ if(current())refresh();
+ }catch(e){if(!current())return;bankSyncOK=false;bankSyncLabel="同期失敗："+(e.code||e.message);refresh();if(force)throw e;}
+ })();bankSyncTask=task;try{await task;}finally{if(bankSyncTask===task)bankSyncTask=null;}
+ if(current()&&!bankSyncTimer)bankSyncTimer=setInterval(()=>{if(document.visibilityState==="visible"&&$("questionArea").hidden)loadBank(uid,generation);},60000);
 }
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&approvedUid&&$("questionArea").hidden)loadBank(approvedUid,authGeneration);});
 function tsDate(v){return v?.toDate?.()?.toISOString?.()||v||null;}
 function dateFrom(v){return v?.toDate?.()?.toLocaleString("ja-JP")|| (typeof v==="string"?new Date(v).toLocaleString("ja-JP"):"—");}
 function toPortable(q,index){return {id:q.id,language:getLang(q),initialNumber:Number(q.initialNumber)||index+1,createdAt:tsDate(q.createdAt),situation:q.situation||"",sortOrder:Number.isFinite(Number(q.sortOrder))?Number(q.sortOrder):index+1,q:q.q,answer:q.answer,why:q.why||"",correctCount:Number(q.correctCount)||0,wrongCount:Number(q.wrongCount)||0,lastReviewedAt:tsDate(q.lastReviewedAt),lastCorrectAt:tsDate(q.lastCorrectAt),learningState:q.learningState||null,lastCorrect:q.lastCorrect===true?true:q.lastCorrect===false?false:null};}
@@ -348,7 +360,7 @@ async function readChunks(uid,a,historyOnly=false){
  return {ids,answers};
 }
 async function beginQuiz(){
- if(!approvedUid)return;const uid=approvedUid,l=lang; $("start").disabled=true;$("retry").disabled=true;
+ if(!approvedUid||(!trialMode&&!bankSyncOK))return;const uid=approvedUid,l=lang; $("start").disabled=true;$("retry").disabled=true;
  try{
  const list=[...new Map(pool().map(q=>[qid(q),q])).values()];
  if($("shuffle").checked)for(let i=list.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[list[i],list[j]]=[list[j],list[i]];}
@@ -422,7 +434,7 @@ async function selfGrade(state){
  if(session.chunked&&!skipped){const cr=chunkRef(uid,session.id,Math.floor(index/chunkSize));tx.update(cr,{answers:arrayUnion(entry)});}
  if(!skipped)tx.update(doc(db,"users",uid,"expressions",graded.id),excluded?{syncUpdatedAt:serverTimestamp(),learningState:state,lastReviewedAt:serverTimestamp()}:{syncUpdatedAt:serverTimestamp(),learningState:state,[isCorrect?"correctCount":"wrongCount"]:increment(1),lastReviewedAt:serverTimestamp(),lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:serverTimestamp()}:{})});
  tx.set(ref,next);if(next.index===sessionCount(next))tx.set(doc(db,"users",uid,"sessions",session.id),{language:l,mode:session.mode,...(session.chunked?{chunked:true,id:session.id,total:session.total}:{answers:next.answers}),score:next.score,count:next.answeredCount,processedCount:next.index,startedAt:session.startedAt||null,finishedAt:serverTimestamp()});
- });if(uid!==approvedUid||l!==lang)return;activeSession=next;}catch(e){$("editStatus").textContent="保存できませんでした："+(e.message||e.code||"エラー");answered=false;$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
+ });if(uid!==approvedUid||l!==lang)return;activeSession=next;if(!skipped){const patch={learningState:state,lastReviewedAt:Timestamp.fromDate(gradedAt),...(!excluded?{[isCorrect?"correctCount":"wrongCount"]:(graded[isCorrect?"correctCount":"wrongCount"]||0)+1,lastCorrect:isCorrect,...(isCorrect?{lastCorrectAt:Timestamp.fromDate(gradedAt)}:{})}:{})};bankQuestions=bankQuestions.map(q=>q.id===graded.id?{...q,...patch}:q);}}catch(e){$("editStatus").textContent="保存できませんでした："+(e.message||e.code||"エラー");answered=false;$("markExclude").disabled=false;$("markCorrect").disabled=false;$("markWrong").disabled=false;return;}
  if(isCorrect)correctCount++;if(!skipped)answers.push({id:qid(graded),correct:isCorrect,state});
  if(currentIndex<questions.length-1){currentIndex++;showQuestion();$("progress").scrollIntoView({block:"start",behavior:"instant"});return;}
  finishQuiz();
