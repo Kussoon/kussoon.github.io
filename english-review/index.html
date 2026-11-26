@@ -24,7 +24,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 aut
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import {getAuth,GoogleAuthProvider,onAuthStateChanged,signInWithPopup,signOut} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,memoryLocalCache,doc,getDoc,setDoc,getDocs,collection,serverTimestamp,updateDoc,getDocsFromServer,writeBatch,increment,runTransaction} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 const firebaseConfig={
  apiKey:"AIzaSyC7t5z_jjHfLJljQqlD_naf5Rmfq1J12Gw",
  authDomain:"english-review-6ffa5.firebaseapp.com",
@@ -36,7 +36,8 @@ const firebaseConfig={
 };
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
-const db=getFirestore(app);
+// Firestore-managed IndexedDB cache; server remains authoritative.
+const db=initializeFirestore(app,{localCache:typeof indexedDB!=="undefined"?persistentLocalCache({tabManager:persistentMultipleTabManager()}):memoryLocalCache()});
 let authGeneration=0;
 let approvedUid=null;
 let currentIndex=0,correctCount=0,answered=false;
