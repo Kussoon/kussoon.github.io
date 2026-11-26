@@ -84,12 +84,23 @@ function refresh(){
  const situations=[...new Set(allQuestions().map(q=>q.situation||"未分類"))].sort((a,b)=>a.localeCompare(b,"ja")),situationSelect=$("situationSelect"),oldSituation=situationSelect.value;situationSelect.replaceChildren();for(const name of situations){const o=document.createElement("option");o.value=name;o.textContent=name;situationSelect.append(o);}if(situations.includes(oldSituation))situationSelect.value=oldSituation;situationSelect.hidden=$("mode").value!=="situation";
  $("rangeFields").hidden=$("mode").value!=="range";const n=pool().length;$("poolCount").textContent="対象："+n+"問";$("start").disabled=n===0;$("start").textContent=n+"問に挑戦する";
  $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件";
- const ss=recentSessions();$("sessionList").replaceChildren();for(const a of ss){const p=document.createElement("p");p.className="muted";p.textContent="開始："+(a.startedAt?dateFrom(a.startedAt):"記録なし")+" ｜ 終了："+dateFrom(a.finishedAt)+" ｜ "+(a.answers||[]).length+"問";$("sessionList").append(p);}if(!ss.length)$("sessionList").textContent="学習履歴はありません。";const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問｜除外 "+excluded+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
+ const ss=recentSessions();$("sessionList").replaceChildren();for(const a of ss){const p=document.createElement("p");p.className="muted";p.textContent="開始："+(a.startedAt?dateFrom(a.startedAt):"記録なし")+" ｜ 終了："+dateFrom(a.finishedAt)+" ｜ "+(Array.isArray(a.answers)?a.answers.length:(a.count??0))+"問";$("sessionList").append(p);}if(!ss.length)$("sessionList").textContent="学習履歴はありません。";const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問｜除外 "+excluded+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
 }
 document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if(!$("questionArea").hidden)return;lang=b.dataset.lang;document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));$("quizTitle").textContent=(lang==="en"?"英語":"フランス語")+"の復習";$("modelAnswer").lang=lang;$("resultArea").hidden=true;$("start").hidden=false;refresh();resumeQuiz();}));
 $("mode").addEventListener("change",refresh);$("batchSelect").addEventListener("change",refresh);$("situationSelect").addEventListener("change",refresh);$("rangeStart").addEventListener("input",refresh);$("rangeEnd").addEventListener("input",refresh);
-async function loadSessions(uid,generation){try{const snap=await getDocs(collection(db,"users",uid,"sessions"));if(generation!==authGeneration||approvedUid!==uid)return;const loaded=await Promise.all(snap.docs.map(async d=>{const a=d.data();return a.chunked?{...a,answers:(await readChunks(uid,a)).answers}:a;}));if(generation!==authGeneration||approvedUid!==uid)return;sessions=loaded.filter(s=>Array.isArray(s.answers)&&s.answers.some(a=>!String(a.id).startsWith("builtin-")));refresh();}catch(e){$("poolCount").textContent="詳細履歴の取得に失敗："+(e.code||"エラー");}}
-
+async function loadSessions(uid,generation){
+ try{
+ const snap=await getDocs(collection(db,"users",uid,"sessions"));
+ if(generation!==authGeneration||approvedUid!==uid)return;
+ const summaries=snap.docs.map(d=>({...d.data(),id:d.data().id||d.id})).filter(a=>a.chunked?(a.count??a.total)>0:Array.isArray(a.answers)&&a.answers.some(x=>!String(x.id).startsWith("builtin-")));
+ const recent=["en","fr"].flatMap(l=>summaries.filter(a=>(a.language||"en")===l).sort((a,b)=>(b.finishedAt?.seconds||0)-(a.finishedAt?.seconds||0)).slice(0,3));
+ const detailed=await Promise.all(recent.filter(a=>a.chunked).map(async a=>{try{return [a.id,(await readChunks(uid,a)).answers];}catch(e){return [a.id,null];}}));
+ if(generation!==authGeneration||approvedUid!==uid)return;
+ const byId=new Map(detailed);sessions=summaries.map(a=>byId.has(a.id)?{...a,answers:byId.get(a.id)}:a);
+ refresh();
+ if(detailed.some(x=>x[1]===null))$("history").textContent+="｜一部の詳細履歴を取得できません";
+ }catch(e){$("poolCount").textContent="学習履歴の取得に失敗："+(e.code||"エラー");}
+}
 
 const status=$("status"),login=$("login"),logout=$("logout");
 onAuthStateChanged(auth,async user=>{
