@@ -243,6 +243,7 @@ $("importButton").addEventListener("click",async()=>{
  let added=0,duplicates=0;
  try{
   const l=lang,batchId=draftBatch,ids=draftRows.map(r=>r[4]);
+  const counterRef=doc(db,"users",uid,"review","import-counter-"+l);
   const fresh=await fetchManaged(),existing=fresh.filter(q=>getLang(q)===l),known=new Set(existing.map(key));
   let nextNumber=Math.max(0,...existing.map(x=>Number(x.initialNumber)||0)),nextOrder=Math.max(0,...existing.map(x=>Number(x.sortOrder)||0));
   for(const [batchIndex,[q,answer,why="",situation=""]] of rows.entries()){
@@ -255,9 +256,13 @@ $("importButton").addEventListener("click",async()=>{
    const created=await runTransaction(db,async tx=>{
     await assertNoReset(uid,l,tx);const prior=await tx.get(ref);if(prior.exists())return false;
     if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
-    tx.set(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:nextNumber+1,sortOrder:nextOrder+1});return true;
+    const counter=await tx.get(counterRef),data=counter.data()||{};
+    const number=Math.max(nextNumber,Number(data.initialNumber)||0)+1,sort=Math.max(nextOrder,Number(data.sortOrder)||0)+1;
+    tx.set(counterRef,{initialNumber:number,sortOrder:sort},{merge:true});
+    tx.set(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:number,sortOrder:sort});return {number,sort};
    });
-   if(created){added++;nextNumber++;nextOrder++;known.add(k);}else duplicates++;
+   if(created){added++;nextNumber=created.number;nextOrder=created.sort;known.add(k);}else duplicates++;
+   if(generation===authGeneration)$("importStatus").textContent=(batchIndex+1)+"/"+rows.length+"件処理済み";
   }
   if(generation===authGeneration&&approvedUid===uid){
    $("importStatus").textContent=added+"件登録、"+duplicates+"件重複を省略しました。";
@@ -265,7 +270,7 @@ $("importButton").addEventListener("click",async()=>{
    await loadBank(uid,generation);
   }
  }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。下書きを保持しました。同じ下書きで再実行すると登録済みの行は省略されます。";}
- finally{clearInterval(dotTimer);importButton.textContent="編集済みの表現を登録する";importButton.removeAttribute("aria-busy");importButton.disabled=false;draftBusy=false;$("draftRows").querySelectorAll("input,textarea,select,button").forEach(e=>e.disabled=false);}
+ finally{clearInterval(dotTimer);importButton.textContent="編集済みの表現を登録する";importButton.removeAttribute("aria-busy");draftBusy=false;importButton.disabled=!draftRows.length;$("draftRows").querySelectorAll("input,textarea,select,button").forEach(e=>e.disabled=false);}
 });
 let trialMode=sessionStorage.getItem("languageReviewTrial")==="1";
 function syncTrial(){ $("trialMode").checked=trialMode;$("trialBanner").hidden=!trialMode;$("bank").hidden=trialMode||!approvedUid;$("managePanel").hidden=trialMode||!approvedUid; }
