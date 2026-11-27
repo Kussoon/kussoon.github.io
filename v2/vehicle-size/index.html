@@ -55,6 +55,7 @@
     #vehicle-overlay-v3 .vehicle-source { flex-basis:100%; color:var(--muted-foreground); font-size:.76rem; overflow-wrap:anywhere }
     #vehicle-overlay-v3 .comparison { margin:8px 0; display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; justify-content:center }
     #vehicle-overlay-v3 .comparison span { white-space:nowrap }
+    #vehicle-overlay-v3 .display-row { justify-content:center; gap:6px; margin:6px 0 0 }
     #vehicle-overlay-v3 .viewport { display:flex; align-items:stretch; min-width:0; gap:4px; margin-top:8px }
     #vehicle-overlay-v3 .stage { flex:1 1 0; min-width:0; height:clamp(270px,49vw,390px); display:block; overflow:hidden; touch-action:none; user-select:none; cursor:grab; border-radius:6px; background:color-mix(in srgb,var(--muted) 45%,transparent) }
     #vehicle-overlay-v3 .stage:active { cursor:grabbing }
@@ -79,7 +80,7 @@
       #vehicle-overlay-v3 .zoom-range {writing-mode:horizontal-tb;direction:ltr;transform:rotate(-90deg);width:188px;height:44px;margin:72px -72px}
     }
   </style>
-  <h2 class="title-row"><span>車両サイズ 3D比較</span><small class="version">v4</small></h2>
+  <h2 class="title-row"><span>車両サイズ 3D比較</span><small class="version">v5</small></h2>
   <p class="intro">乗用車やバス、トラック、電車から戦車まで、いろいろな乗り物の大きさを比べてみましょう！</p>
   <div class="vehicle-pickers">
     <div class="vehicle-picker">
@@ -94,6 +95,11 @@
     </div>
   </div>
   <div class="comparison tabular-nums" id="vehicle-difference-v3" aria-live="polite"></div>
+  <div class="viz-row display-row" aria-label="表示形式">
+    <span class="text-muted text-small">表示形式</span>
+    <button type="button" class="btn" data-display="box" aria-pressed="false">箱型</button>
+    <button type="button" class="btn" data-display="illustration" aria-pressed="true">イラスト型</button>
+  </div>
   <div class="viewport">
     <svg class="stage" role="img" aria-label="選択された2台の寸法を重ねた回転可能な3Dモデル"></svg>
     <div class="zoom-rail">
@@ -113,9 +119,9 @@
   <div class="viz-row mode-row" aria-label="ドラッグの操作">
     <button type="button" class="btn" data-mode="rotate" aria-pressed="true">回転</button>
     <button type="button" class="btn" data-mode="pan" aria-pressed="false">移動</button>
-    <span class="text-muted text-small">箱をドラッグ</span>
+    <span class="text-muted text-small">車両をドラッグ</span>
   </div>
-  <p class="caption text-small text-muted">箱の前端・右側面・底面揃え。寸法はmm。前側の斜面は方向を示す目印です。戦車の線は砲身の前方への突出を示します。</p>
+  <p class="caption text-small text-muted">前端・右側面・底面揃え。寸法はmm。イラスト型は車種の特徴を表した模式図です。正確な外形寸法は箱型で確認できます。戦車の線は砲身の前方への突出を示します。</p>
   <script>
     (() => {
       const root=document.getElementById('vehicle-overlay-v3');
@@ -125,6 +131,8 @@
       const specA=root.querySelector('#vehicle-spec-a-v3'), specB=root.querySelector('#vehicle-spec-b-v3');
       const diff=root.querySelector('#vehicle-difference-v3');
       const viewButtons=[...root.querySelectorAll('[data-view]')];
+      const displayButtons=[...root.querySelectorAll('[data-display]')];
+      let display='illustration';
       const modeButtons=[...root.querySelectorAll('[data-mode]')];
       const zoomButtons=[...root.querySelectorAll('[data-zoom]')];
       // Dimensions in millimetres; each item is a specific published configuration.
@@ -257,8 +265,222 @@
         }
         const signed=n=>n>0?'+'+fmt(n):n<0?'−'+fmt(-n):'0';
         diff.innerHTML='<span class="text-muted text-small">B − A（mm）</span><span>全長 '+signed(b.l-a.l)+'</span><span>全幅 '+signed(b.w-a.w)+'</span><span>全高 '+signed(b.h-a.h)+'</span>';
-        svg.setAttribute('aria-label',a.name+' と '+b.name+' の外接寸法の重ね合わせ、前端の上角をカット'+(a.bodyL||b.bodyL?'。戦車の突出部を線で表示':''));
+        svg.setAttribute('aria-label',a.name+' と '+b.name+' の外接寸法の重ね合わせ（箱型・模式イラスト切替）'+(a.bodyL||b.bodyL?'。戦車の突出部を線で表示':''));
       }
+
+      // Procedural, deliberately schematic shapes. x=front to rear, y=ground to roof,
+      // z=right to left. Fractions are visual guides, not measured component dimensions.
+      const illustrationCache=new Map();
+      function illustrationMesh(v){
+        if(illustrationCache.has(v.id))return illustrationCache.get(v.id);
+        const L=(v.bodyL??v.l)/1000,H=v.h/1000,W=v.w/1000,mesh=[];
+        const worldPoint=p=>[p[0]*L,p[1]*H,p[2]*W];
+        function face(points,kind='body',hint){
+          const p=points.map(worldPoint);
+          let n=[0,0,0];
+          for(let i=1;i<p.length-1&&Math.hypot(...n)<1e-8;i++){
+            const a=p[i].map((x,j)=>x-p[0][j]),b=p[i+1].map((x,j)=>x-p[0][j]);
+            n=cross(a,b);
+          }
+          if(Math.hypot(...n)<1e-8)return;
+          n=unit(n);
+          if(hint&&dot(n,hint)<0)n=n.map(x=>-x);
+          mesh.push({p,n,kind});
+        }
+        function prism(profile,z0,z1,kind='body'){
+          face(profile.map(([x,y])=>[x,y,z0]),kind,[0,0,-1]);
+          face(profile.map(([x,y])=>[x,y,z1]),kind,[0,0,1]);
+          // Each XY profile is counter-clockwise, giving outward edge normals.
+          for(let i=0;i<profile.length;i++){
+            const [x,y]=profile[i],[a,b]=profile[(i+1)%profile.length];
+            face([[x,y,z0],[a,b,z0],[a,b,z1],[x,y,z1]],kind,[b-y,x-a,0]);
+          }
+        }
+        const block=(x0,x1,y0,y1,z0=0,z1=1,kind='body')=>prism([[x0,y0],[x1,y0],[x1,y1],[x0,y1]],z0,z1,kind);
+        function sidePanel(profile,z0,z1,kind='window'){
+          face(profile.map(([x,y])=>[x,y,z0]),kind,[0,0,-1]);
+          face(profile.map(([x,y])=>[x,y,z1]),kind,[0,0,1]);
+        }
+        function windows(x0,x1,y0,y1,n,z0,z1){
+          if(x1<=x0)return;
+          const step=(x1-x0)/n,gap=Math.min(step*.18,.011);
+          for(let i=0;i<n;i++){
+            const a=x0+i*step+gap/2,b=x0+(i+1)*step-gap/2;
+            sidePanel([[a,y0],[b,y0],[b,y1],[a,y1]],z0,z1);
+          }
+        }
+        function glass(a,b,z0,z1,hint=[-1,0,0]){
+          face([[a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1]],'window',hint);
+        }
+        function wheel(cx,r,z0,z1,hub=true){
+          // The decorative tires/drums meet the ground; width and height remain within the envelope.
+          const rx=Math.min(r*H/L,.20);
+          cx=Math.max(rx,Math.min(1-rx,cx));
+          const circle=(f=1)=>Array.from({length:12},(_,i)=>{
+            const a=2*Math.PI*i/12;return [cx+rx*f*Math.cos(a),r+r*f*Math.sin(a)];
+          });
+          prism(circle(),z0,z1,'wheel');
+          if(hub){
+            const z=z0+z1<1?z0:z1;
+            face(circle(.50).map(([x,y])=>[x,y,z]),'hub',[0,0,z0+z1<1?-1:1]);
+          }
+        }
+        const roadWheels=(xs,r=.19,th=.14)=>xs.forEach(x=>{wheel(x,r,0,th);wheel(x,r,1-th,1)});
+        const railWheels=(xs,r=.13)=>xs.forEach(x=>{wheel(x,r,.08,.24);wheel(x,r,.76,.92)});
+        function seams(xs,y0,y1,z0,z1){
+          const d=.002;
+          xs.forEach(x=>sidePanel([[x-d,y0],[x+d,y0],[x+d,y1],[x-d,y1]],z0,z1,'detail'));
+        }
+        const id=v.id,g=v.group;
+        const isBus=g.includes('バス')||id==='erga-duo';
+        const isTruck=g.includes('トラック');
+        const isRail=g==='JR・国鉄在来線'||g==='私鉄・地下鉄'||g==='路面電車'||g==='新幹線'||g==='リニア'||g==='貨物・機関車';
+        const isBullet=g==='新幹線'||g==='リニア';
+        if(g==='戦車'){
+          // A general crawler silhouette, no mechanical/weapon detail.
+          block(0,1,.20,.53,.06,.94);
+          block(.04,.96,0,.35,0,.19,'wheel');
+          block(.04,.96,0,.35,.81,1,'wheel');
+          prism([[.27,.51],[.71,.51],[.69,.91],[.60,1],[.38,1],[.29,.88]],.23,.77);
+          [.15,.29,.43,.57,.71,.85].forEach(x=>{wheel(x,.135,0,.18);wheel(x,.135,.82,1)});
+        }else if(id==='komatsu-980e-5'){
+          block(0,1,.20,.47,.15,.85);
+          prism([[.23,.48],[.95,.48],[1,.85],[1,.92],[.31,.92],[.23,1],[.12,1],[.12,.83]],0,1);
+          block(0,.28,.48,.88,.07,.42);
+          sidePanel([[.045,.69],[.24,.69],[.24,.85],[.045,.85]],.07,.42);
+          glass([0,.65],[0,.85],.10,.39);
+          roadWheels([.20,.76],.255,.22);
+        }else if(g==='建設・鉱山機械'){
+          const r=id==='sakai-r2-4'?.27:.23,rx=Math.min(r*H/L,.20);
+          block(.05,.95,.28,.51,.10,.90);
+          block(.29,.74,.48,1,.22,.78);
+          windows(.32,.70,.60,.91,2,.22,.78);
+          glass([.29,.58],[.29,.91],.26,.74);
+          wheel(rx,r,0,1,false);wheel(1-rx,r,0,1,false);
+        }else if(g==='蒸気機関車'){
+          const tender=id!=='c11',end=tender?.69:1,boilerEnd=tender?.48:.68;
+          block(0,end,.19,.40,.10,.90);
+          // Broad, faceted boiler along the length, retaining a simple cartoon outline.
+          const ring=(x)=>Array.from({length:12},(_,i)=>{const a=i*2*Math.PI/12;return [x,.59+.22*Math.cos(a),.50+.36*Math.sin(a)]});
+          const p=ring(.055),q=ring(boilerEnd);
+          face(p,'body',[-1,0,0]);face(q,'body',[1,0,0]);
+          for(let i=0;i<12;i++){
+            const j=(i+1)%12,a=(i+.5)*2*Math.PI/12;
+            face([p[i],q[i],q[j],p[j]],'body',[0,Math.cos(a),Math.sin(a)]);
+          }
+          block(.09,.15,.76,1,.36,.64,'detail');
+          block(boilerEnd-.015,end-.035,.36,.97,.06,.94);
+          windows(boilerEnd+.015,end-.065,.65,.87,1,.06,.94);
+          block(0,.07,.23,.44,0,1);
+          if(tender){
+            block(end+.025,1,.21,.34,.05,.95);
+            block(end+.04,1,.34,.76,0,1);
+            block(end+.075,.98,.76,.81,.12,.88,'detail');
+          }else{block(.30,.68,.35,.59,0,1)}
+          const n=id==='d51'?4:3;
+          railWheels([.065]);
+          for(let i=0;i<n;i++){const x=.16+(boilerEnd-.18)*(i+.5)/n;wheel(x,.19,0,.17);wheel(x,.19,.83,1);}
+          railWheels(tender?[.60,.76,.93]:[.88]);
+        }else if(isBus){
+          const z0=.01,z1=.99,coach=g==='大型観光バス'||id==='galamio'||id==='melpha';
+          prism([[0,.15],[1,.15],[1,.88],[.98,1],[.035,1],[0,.88]],z0,z1);
+          glass([0,.46],[0,.88],.06,.94);
+          windows(.10,.96,coach?.57:.49,.87,id==='erga-duo'?12:g==='小型バス'?5:8,z0,z1);
+          seams(id==='erga-duo'?[.54,.56,.58]:coach?[.09,.84]:[.10,.52],.20,.90,z0,z1);
+          roadWheels(id==='erga-duo'?[.12,.43,.83]:[.17,.78],.16,.12);
+        }else if(isTruck){
+          const flat=['canter','dutro','fighter'].includes(id),cab=L<6?.37:L<8?.29:.23;
+          const cabH=flat?1:.86,z0=.025,z1=.975;
+          block(0,1,.15,.33,.12,.88,'detail');
+          prism([[0,.25],[cab,.25],[cab,cabH*.91],[cab*.88,cabH],[cab*.30,cabH],[0,cabH*.86]],z0,z1);
+          sidePanel([[cab*.09,cabH*.54],[cab*.79,cabH*.54],[cab*.79,cabH*.88],[cab*.27,cabH*.88]],z0,z1);
+          glass([0,cabH*.48],[0,cabH*.85],.07,.93);
+          if(flat){
+            block(cab+.015,1,.30,.40,0,1);
+            block(cab+.015,1,.40,.48,0,.08);
+            block(cab+.015,1,.40,.48,.92,1);
+            block(.97,1,.40,.48,0,1);
+          }else{
+            block(cab+.015,1,.30,1,0,1);
+            seams([cab+.055,.97],.32,.97,0,1);
+          }
+          roadWheels(L>10?[.14,.70,.85]:[.18,.77],.17,.13);
+        }else if(isBullet){
+          const n=id==='linear-l0'?.49:id==='shinkansen-500'?.36:id==='shinkansen-n700s'?.30:id==='shinkansen-0'?.15:.20;
+          prism([[0,.25],[1,.25],[1,.95],[.985,1],[n,1],[n*.67,.88],[n*.22,.63],[0,.46]],0,1);
+          glass([n*.22,.63],[n*.67,.88],.20,.80,[-1,1,0]);
+          windows(n+.025,.96,.66,.84,Math.max(4,Math.round((1-n)*13)),0,1);
+          railWheels([.23,.30,.75,.82],.12);
+        }else if(isRail){
+          if(id==='wamu3500'){
+            block(0,1,.19,.83,0,1);
+            prism([[.01,.83],[.99,.83],[.96,1],[.04,1]],.04,.96);
+            seams([.31,.69],.23,.82,0,1);
+            railWheels([.19,.81]);
+          }else if(id==='dd51'){
+            block(0,1,.22,.43,0,1);
+            block(.025,.42,.43,.75,.10,.90);
+            block(.58,.975,.43,.75,.10,.90);
+            block(.41,.59,.43,1,.025,.975);
+            windows(.43,.57,.65,.90,1,.025,.975);
+            railWheels([.13,.21,.45,.55,.79,.87]);
+          }else{
+            const nose=id==='jr-489'?.13:.035;
+            prism([[0,.21],[1,.21],[1,.93],[.985,1],[nose,1],[0,.88]],0,1);
+            glass([0,.52],[0,.86],.08,.92);
+            const n=id==='hiroden-5000'?5:id==='hiroden-1000'?3:1;
+            windows(Math.max(.09,nose+.015),.96,.54,.85,n===1?9:n*3,0,1);
+            seams(Array.from({length:n-1},(_,i)=>(i+1)/n),.22,.98,0,1);
+            railWheels(n===1?[.17,.24,.76,.83]:Array.from({length:n},(_,i)=>(i+.5)/n));
+          }
+        }else{
+          const sporty=g==='スポーツカー',van=['alphard-z','hiace-wagon-gl','nbox-ff'].includes(id),
+            suv=['landcruiser300-zx','century-suv','hummer-limo'].includes(id),hatch=['yaris-z','prius-z'].includes(id),
+            z0=.025,z1=.975;
+          if(van||suv){
+            const f=id==='hiace-wagon-gl'?.08:id==='nbox-ff'?.13:van?.19:.28;
+            const back=van?.96:.90;
+            prism([[0,.21],[1,.21],[1,.79],[back,.97],[back-.05,1],[f+.09,1],[f,.94],[f*.57,.62],[0,.53]],z0,z1);
+            glass([f*.57,.62],[f,.94],.11,.89,[-1,1,0]);
+            sidePanel([[f*.64,.63],[f+.20,.63],[f+.20,.90],[f+.025,.90]],z0,z1);
+            windows(f+.23,back-.025,.63,.90,id==='hummer-limo'?5:2,z0,z1);
+            seams([f+.21,back-.17],.27,.62,z0,z1);
+          }else if(sporty){
+            prism([[0,.17],[1,.17],[1,.40],[.95,.51],[.75,.59],[.65,.94],[.56,1],[.43,.96],[.24,.53],[0,.37]],z0,z1);
+            glass([.24,.53],[.43,.96],.13,.87,[-1,1,0]);
+            sidePanel([[.32,.58],[.72,.58],[.63,.88],[.56,.93],[.45,.91]],z0,z1);
+            seams([.59],.23,.55,z0,z1);
+          }else{
+            const back=hatch?.90:.76;
+            prism([[0,.19],[1,.19],[1,.49],[.97,.58],[back,.64],[back-.075,.95],[.64,1],[.43,1],[.34,.93],[.23,.65],[.035,.56],[0,.43]],z0,z1);
+            glass([.23,.65],[.34,.93],.12,.88,[-1,1,0]);
+            sidePanel([[.27,.66],[.51,.66],[.51,.93],[.39,.93],[.34,.88]],z0,z1);
+            sidePanel([[.53,.66],[back-.02,.66],[back-.08,.91],[.53,.93]],z0,z1);
+            seams([.52,back-.01],.26,.64,z0,z1);
+          }
+          roadWheels([.20,.80],sporty?.24:van?.18:.205,.15);
+        }
+        illustrationCache.set(v.id,mesh);
+        return mesh;
+      }
+      function illustrationLayers(cars,world,xy){
+        const rendered=[];
+        for(const [k,v] of cars.entries()){
+          for(const f of illustrationMesh(v)){
+            const normal=rotate(f.n);
+            if(normal[2]<=1e-7)continue;
+            const points=f.p.map(world),depth=points.reduce((s,p)=>s+p[2],0)/points.length;
+            rendered.push({k,kind:f.kind,points,depth,shade:normal[1]});
+          }
+        }
+        return rendered.sort((a,b)=>a.depth-b.depth).map(f=>{
+          const color=f.k===0?'var(--a)':'var(--b)';
+          const body=f.kind==='body',window=f.kind==='window',wheel=f.kind==='wheel',hub=f.kind==='hub';
+          const fill=wheel?'var(--foreground)':color, op=body?(.14+Math.max(0,f.shade)*.06):window?.34:wheel?.19:hub?.25:.23;
+          return '<polygon data-model-part="'+f.kind+'" data-model-car="'+f.k+'" points="'+f.points.map(xy).join(' ')+'" fill="'+fill+'" fill-opacity="'+op.toFixed(2)+'" stroke="'+color+'" stroke-opacity="'+(body?.88:.80)+'" stroke-width="'+(body?1.35:window?1.05:.85)+'" stroke-linejoin="round" stroke-dasharray="'+(f.k===1?'5 3':'none')+'"/>';
+        }).join('');
+      }
+
       function paint(){
         const w=svg.clientWidth,h=svg.clientHeight;
         if(w<1||h<1)return;
@@ -284,9 +506,9 @@
         const normals=faces.map(f=>rotate(f.n)[2]);
         const visible=f=>normals[f]>1e-7;
         const fills=all.flatMap(v=>faces.map((f,i)=>({v,f,i,depth:f.i.reduce((s,j)=>s+v.points[j][2],0)/f.i.length})).filter(item=>visible(item.i))).sort((a,b)=>a.depth-b.depth);
-        const layers=fills.map(({v,f})=>'<polygon points="'+f.i.map(i=>xy(v.points[i])).join(' ')+'" fill="'+v.color+'" fill-opacity="'+(f.bevel?'.20':'.12')+'" stroke="none"/>').join('');
+        const layers=display==='illustration'?illustrationLayers(cars,world,xy):fills.map(({v,f})=>'<polygon points="'+f.i.map(i=>xy(v.points[i])).join(' ')+'" fill="'+v.color+'" fill-opacity="'+(f.bevel?'.20':'.12')+'" stroke="none"/>').join('');
         const strokes=[];
-        for(const isFront of [false,true]){
+        if(display==='box')for(const isFront of [false,true]){
           for(const v of all){
             for(let i=0;i<edges.length;i++){
               const front=faceAdj[i].some(visible);
@@ -301,7 +523,7 @@
         // The protrusion is a schematic line in the same coordinate system as the boxes.
         for(const [k,v] of cars.entries()){
           if(!v.bodyL)continue;
-          const start=[0,v.h/1000*.74,v.w/2000],tip=[(v.bodyL-v.l)/1000,start[1],start[2]];
+          const start=[display==='illustration'?v.bodyL/1000*.29:0,v.h/1000*.74,v.w/2000],tip=[(v.bodyL-v.l)/1000,start[1],start[2]];
           const a=projected(world(start)),b=projected(world(tip));
           const color=k===0?'var(--a)':'var(--b)';
           if(Math.hypot(a[0]-b[0],a[1]-b[1])>=.2){
@@ -361,6 +583,11 @@
         viewButtons.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
         paint();
       }));
+      displayButtons.forEach(b=>b.addEventListener('click',()=>{
+        display=b.dataset.display;
+        displayButtons.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+        paint();
+      }));
       modeButtons.forEach(b=>b.addEventListener('click',()=>{
         mode=b.dataset.mode;
         modeButtons.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
@@ -399,7 +626,7 @@
   <p>メーカー・正規販売店・販売事業者・運行事業者・自治体・博物館が公表した代表車型の全長・全幅・全高、または車体寸法を基本としています（全72車種、2026年11月確認）。各車両の寸法下にある仕様・出典リンクから確認できます。</p>
   <p>同じ車名でも年式、グレード、ホイールベース、架装、装備などで寸法は異なります。現行型だけでなく、過去の市販車や実車の公表寸法も含みます。比較は表示した仕様に限ります。</p>
   <p>鉄道は原則として1両単位（連接車は連接車全体、テンダー式蒸気機関車は炭水車込み）です。出典が車体寸法の場合は連結器・パンタグラフなどを含む最大寸法とは異なることがあります。建設・鉱山機械は記載した仕様・状態での寸法です。</p>
-  <p>戦車は砲身込み全長と車体長を区別し、車体と砲塔を含む外形を半透明の箱、砲身の前方への突出を線で示します。線の高さは模式的です。10式戦車の車体長は公的資料に記載がないため比較用の概算（約7.3m）であり、正確な実測値ではありません。</p>
-  <p>車体の形状・斜面は実車を再現したものではありません。外形寸法を比較する検証用ページです。</p>
+  <p>戦車は砲身込み全長と車体長を区別し、車体と砲塔を含む外形は半透明の箱または模式イラスト、砲身の前方への突出は線で示します。線の高さは模式的です。10式戦車の車体長は公的資料に記載がないため比較用の概算（約7.3m）であり、正確な実測値ではありません。</p>
+  <p>箱型は公表寸法に基づく外形の比較用です（前側の斜面は方向を示す目印）。イラスト型は全長・全幅・全高の比率を保ちながら、屋根・窓・タイヤなどを車種の特徴に合わせて模式化したものです。実車の正確な形状や部位ごとの寸法を再現したものではありません。</p>
 </details>
 </main></body></html>
