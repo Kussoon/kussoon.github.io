@@ -206,8 +206,8 @@
           {key:'side-right',face:1,text:'側面',car:largest(v=>v.w),u:[1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,c.w/1000]},
           {key:'front',face:2,text:'前',car:largest(v=>v.w*v.h),u:[0,0,1],v:[0,-1,0],point:c=>[0,(c.h/1000-bevelH)/2,c.w/2000]},
           {key:'rear',face:3,text:'後',car:largest(v=>v.l),u:[0,0,-1],v:[0,-1,0],point:c=>[c.l/1000,c.h/2000,c.w/2000]},
-          {key:'bottom',face:4,text:'底面',car:largest(v=>v.l*v.w),u:[1,0,0],v:[0,0,-1],point:c=>[c.l/2000,0,c.w/2000]},
-          {key:'top',face:5,text:'上面',car:largest(v=>v.h),u:[1,0,0],v:[0,0,1],point:c=>[(c.l/1000+bevelL)/2,c.h/1000,c.w/2000]}
+          {key:'bottom',face:4,text:'底面',vertical:true,car:largest(v=>v.l*v.w),u:[0,0,1],v:[1,0,0],point:c=>[c.l/2000,0,c.w/2000]},
+          {key:'top',face:5,text:'上面',vertical:true,car:largest(v=>v.h),u:[0,0,-1],v:[1,0,0],point:c=>[(c.l/1000+bevelL)/2,c.h/1000,c.w/2000]}
         ];
         const faceLabels=[];
         const glyph=Math.max(12,Math.min(22,base*.28*Math.sqrt(zoom)));
@@ -216,12 +216,13 @@
           if(normals[side.face]<.12)continue;
           const [cx,cy]=projected(world(side.point(side.car)));
           const u=rotate(side.u),v=rotate(side.v);
-          let a=u[0],b=-u[1],c=v[0],d=-v[1];
-          // Preserve proper reading direction without mirroring the characters.
-          if(a<-.001||(Math.abs(a)<.001&&d<0)){a=-a;b=-b;c=-c;d=-d;}
+          // The local face axes rotate with the body; never turn labels upright on screen.
+          const a=u[0],b=-u[1],c=v[0],d=-v[1];
           if(cx<0||cx>w||cy<0||cy>h)continue;
           const transform=[a,b,c,d,cx,cy].map(n=>n.toFixed(4)).join(' ');
-          faceLabels.push('<text data-face-label="'+side.key+'" transform="matrix('+transform+')" text-anchor="middle" dominant-baseline="central" fill="var(--foreground)" opacity=".88" stroke="var(--background)" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round" font-size="'+glyph.toFixed(1)+'" font-weight="500" pointer-events="none">'+side.text+'</text>');
+          // Roof and floor are written vertically, beginning toward the front (x=0).
+          const lettering=side.vertical?[...side.text].map((ch,i,list)=>'<tspan x="0" y="'+((i-(list.length-1)/2)*glyph*1.1).toFixed(1)+'">'+ch+'</tspan>').join(''):side.text;
+          faceLabels.push('<text data-face-label="'+side.key+'" transform="matrix('+transform+')" text-anchor="middle" dominant-baseline="central" fill="var(--foreground)" opacity=".88" stroke="var(--background)" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round" font-size="'+glyph.toFixed(1)+'" font-weight="500" pointer-events="none">'+lettering+'</text>');
         }
         const scaleM=[5,2,1,.5,.2,.1,.05,.02,.01].find(m=>scale*m<=Math.min(100,w*.35))||.01;
         const line=scaleM*scale,sx=14,sy=h-17;
