@@ -55,7 +55,12 @@
     #vehicle-overlay-v3 .stage { flex:1 1 0; min-width:0; height:clamp(270px,49vw,390px); display:block; overflow:hidden; touch-action:none; user-select:none; cursor:grab; border-radius:6px; background:color-mix(in srgb,var(--muted) 45%,transparent) }
     #vehicle-overlay-v3 .stage:active { cursor:grabbing }
     #vehicle-overlay-v3 .zoom-rail { flex:0 0 54px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:5px }
-    #vehicle-overlay-v3 .zoom-range { writing-mode:vertical-lr; direction:rtl; width:36px; height:188px; margin:0; touch-action:none }
+    #vehicle-overlay-v3 .zoom-range { writing-mode:vertical-lr; direction:rtl; width:44px; height:188px; margin:0; padding:0; touch-action:none; cursor:ns-resize; -webkit-appearance:none; appearance:none; background:transparent }
+    #vehicle-overlay-v3 .zoom-range::-webkit-slider-runnable-track {inline-size:100%;block-size:14px;background:var(--border);border:1px solid var(--muted-foreground);border-radius:999px;box-sizing:border-box}
+    #vehicle-overlay-v3 .zoom-range::-webkit-slider-thumb {-webkit-appearance:none;appearance:none;inline-size:30px;block-size:30px;box-sizing:border-box;background:var(--foreground);border:2px solid var(--background);border-radius:50%;margin-block-start:-9px}
+    #vehicle-overlay-v3 .zoom-range::-moz-range-track {inline-size:100%;block-size:14px;background:var(--border);border:1px solid var(--muted-foreground);border-radius:999px;box-sizing:border-box}
+    #vehicle-overlay-v3 .zoom-range::-moz-range-thumb {inline-size:30px;block-size:30px;box-sizing:border-box;background:var(--foreground);border:2px solid var(--background);border-radius:50%}
+    #vehicle-overlay-v3 .zoom-range:focus-visible {outline:2px solid var(--primary);outline-offset:2px;border-radius:8px}
     #vehicle-overlay-v3 .zoom-current { margin:0; white-space:nowrap }
     #vehicle-overlay-v3 .control-row { justify-content:center; margin-top:10px; gap:6px }
     #vehicle-overlay-v3 .caption { margin:8px 0 0; text-align:center }
@@ -67,7 +72,7 @@
       #vehicle-overlay-v3 .zoom-rail {flex-basis:48px}
     }
     @supports not (writing-mode:vertical-lr) {
-      #vehicle-overlay-v3 .zoom-range {writing-mode:horizontal-tb;direction:ltr;transform:rotate(-90deg);width:188px;height:36px;margin:76px -70px}
+      #vehicle-overlay-v3 .zoom-range {writing-mode:horizontal-tb;direction:ltr;transform:rotate(-90deg);width:188px;height:44px;margin:72px -72px}
     }
   </style>
   <h2>車両サイズ 3D比較</h2>
@@ -105,7 +110,7 @@
     <button type="button" class="btn" data-mode="pan" aria-pressed="false">移動</button>
     <span class="text-muted text-small">箱をドラッグ</span>
   </div>
-  <p class="caption text-small text-muted">前端・左側面・底面揃え。寸法はmm。前側の斜面は方向を示す目印です。</p>
+  <p class="caption text-small text-muted">前端・右側面・底面揃え。寸法はmm。前側の斜面は方向を示す目印です。</p>
   <script>
     (() => {
       const root=document.getElementById('vehicle-overlay-v3');
@@ -202,15 +207,15 @@
         // share the same axes, so duplicate lettering would obscure their overlap.
         const largest=score=>cars.reduce((a,b)=>score(a)>=score(b)?a:b);
         const sides=[
-          {key:'side-left',face:0,text:'側面',car:largest(v=>v.l*v.h),u:[-1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,0]},
-          {key:'side-right',face:1,text:'側面',car:largest(v=>v.w),u:[1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,c.w/1000]},
+          {key:'side-right',face:0,text:'右側面',car:largest(v=>v.l*v.h),u:[-1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,0]},
+          {key:'side-left',face:1,text:'左側面',car:largest(v=>v.w),u:[1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,c.w/1000]},
           {key:'front',face:2,text:'前',car:largest(v=>v.w*v.h),u:[0,0,1],v:[0,-1,0],point:c=>[0,(c.h/1000-bevelH)/2,c.w/2000]},
           {key:'rear',face:3,text:'後',car:largest(v=>v.l),u:[0,0,-1],v:[0,-1,0],point:c=>[c.l/1000,c.h/2000,c.w/2000]},
           {key:'bottom',face:4,text:'底面',vertical:true,car:largest(v=>v.l*v.w),u:[0,0,1],v:[1,0,0],point:c=>[c.l/2000,0,c.w/2000]},
           {key:'top',face:5,text:'上面',vertical:true,car:largest(v=>v.h),u:[0,0,-1],v:[1,0,0],point:c=>[(c.l/1000+bevelL)/2,c.h/1000,c.w/2000]}
         ];
         const faceLabels=[];
-        const glyph=Math.max(12,Math.min(22,base*.28*Math.sqrt(zoom)));
+        const glyph=Math.max(18,Math.min(33,base*.42*Math.sqrt(zoom)));
         for(const side of sides){
           // Hide far/edge-on lettering, avoiding overlap through translucent faces.
           if(normals[side.face]<.12)continue;
