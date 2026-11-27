@@ -111,7 +111,7 @@
     <button type="button" class="btn" data-mode="pan" aria-pressed="false">移動</button>
     <span class="text-muted text-small">箱をドラッグ</span>
   </div>
-  <p class="caption text-small text-muted">前端・右側面・底面揃え。寸法はmm。前側の斜面は方向を示す目印です。</p>
+  <p class="caption text-small text-muted">箱の前端・右側面・底面揃え。寸法はmm。前側の斜面は方向を示す目印です。戦車の線は砲身の前方への突出を示します。</p>
   <script>
     (() => {
       const root=document.getElementById('vehicle-overlay-v3');
@@ -193,9 +193,12 @@
         {"id":"hiroden-5000","name":"広島電鉄 5000形 グリーンムーバー","group":"路面電車","l":30520,"w":2450,"h":3645,"variant":"連接車全体・最大寸法","source":"https://www.hiroden.co.jp/train/train-list/gm5000.html"},
         {"id":"sakai-r2-4","name":"酒井重工 R2-4 ロードローラー","group":"建設・鉱山機械","l":5020,"w":2100,"h":3060,"variant":"マカダムローラ・メーカー仕様","source":"https://www.sakainet.co.jp/products/roller-road/r2-4.html"},
         {"id":"sakai-sw654","name":"酒井重工 SW654 振動ローラー","group":"建設・鉱山機械","l":4300,"w":1615,"h":2795,"variant":"振動タンデムローラ・メーカー仕様","source":"https://www.sakainet.co.jp/products/roller-pavement/sw654_series.html"},
-        {"id":"komatsu-980e-5","name":"コマツ 980E-5（超大型鉱山用ダンプ）","group":"建設・鉱山機械","l":15110,"w":10010,"h":8000,"variant":"標準荷台・空車・荷台を下げた状態・メーカー寸法図","source":"https://www.komatsu.com/content/dam/komatsu/sales-and-marketing-documents/brochures/trucks/980e/980e-5-aess932-01.pdf"}
+        {"id":"komatsu-980e-5","name":"コマツ 980E-5（超大型鉱山用ダンプ）","group":"建設・鉱山機械","l":15110,"w":10010,"h":8000,"variant":"標準荷台・空車・荷台を下げた状態・メーカー寸法図","source":"https://www.komatsu.com/content/dam/komatsu/sales-and-marketing-documents/brochures/trucks/980e/980e-5-aess932-01.pdf"},
+        {"id":"tank-type10","name":"10式戦車（陸上自衛隊）","group":"戦車","l":9420,"bodyL":7300,"bodyApprox":true,"w":3240,"h":2300,"variant":"陸上自衛隊第7師団公表・車体長のみ比較用概算","source":"https://www.mod.go.jp/gsdf/nae/7d/tk_history.html"},
+        {"id":"tank-abrams-m1","name":"M1 エイブラムス（初期型）","group":"戦車","l":9770,"bodyL":7920,"w":3650,"h":2890,"variant":"米陸軍TM 55-2350-255-14（1984年・m公表値）","source":"https://www.military-references.com/wp-content/uploads/books/tanks/usa/m1_abrams/M1_Abrams_Transportability_Guidance_1984.pdf"},
+        {"id":"tank-tiger-i","name":"ティーガーI（タイガー戦車）","group":"戦車","l":8450,"bodyL":6290,"w":3550,"h":3000,"variant":"英国Airborne Assault Museum資料","source":"https://paradata.org.uk/content/4663685-german-tiger-tank"}
       ];
-      const groups=["身近な乗用車","大型乗用車","高級車","スポーツカー","大型観光バス","大型路線バス","中型バス","小型バス","小型トラック","中型トラック","大型トラック","特殊車両","JR・国鉄在来線","私鉄・地下鉄","新幹線","貨物・機関車","蒸気機関車","リニア","路面電車","建設・鉱山機械"];
+      const groups=["身近な乗用車","大型乗用車","高級車","スポーツカー","大型観光バス","大型路線バス","中型バス","小型バス","小型トラック","中型トラック","大型トラック","特殊車両","JR・国鉄在来線","私鉄・地下鉄","新幹線","貨物・機関車","蒸気機関車","リニア","路面電車","建設・鉱山機械","戦車"];
       const fmt=n=>n.toLocaleString('ja-JP');
       const get=id=>vehicles.find(v=>v.id===id)||vehicles[0];
       for(const select of [selectA,selectB]){
@@ -239,7 +242,7 @@
       function pair(){return [get(selectA.value),get(selectB.value)]}
       function updateDetails(){
         const [a,b]=pair();
-        const vals=v=>'<span>長 '+fmt(v.l)+'</span><span>幅 '+fmt(v.w)+'</span><span>高 '+fmt(v.h)+'</span>';
+        const vals=v=>'<span>'+(v.bodyL?'砲身込み長 ':'長 ')+fmt(v.l)+'</span><span>幅 '+fmt(v.w)+'</span><span>高 '+fmt(v.h)+'</span>'+(v.bodyL?'<span>車体長 '+(v.bodyApprox?'約':'')+fmt(v.bodyL)+(v.bodyApprox?'（概算）':'')+'</span>':'');
         for(const [spec,v] of [[specA,a],[specB,b]]){
           spec.innerHTML=vals(v);
           const link=document.createElement('a');
@@ -250,19 +253,23 @@
         }
         const signed=n=>n>0?'+'+fmt(n):n<0?'−'+fmt(-n):'0';
         diff.innerHTML='<span class="text-muted text-small">B − A（mm）</span><span>全長 '+signed(b.l-a.l)+'</span><span>全幅 '+signed(b.w-a.w)+'</span><span>全高 '+signed(b.h-a.h)+'</span>';
-        svg.setAttribute('aria-label',a.name+' と '+b.name+' の外接寸法の重ね合わせ、前端の上角をカット');
+        svg.setAttribute('aria-label',a.name+' と '+b.name+' の外接寸法の重ね合わせ、前端の上角をカット'+(a.bodyL||b.bodyL?'。戦車の突出部を線で表示':''));
       }
       function paint(){
         const w=svg.clientWidth,h=svg.clientHeight;
         if(w<1||h<1)return;
         svg.setAttribute('viewBox','0 0 '+w+' '+h);
         const cars=pair();
-        const maxL=Math.max(...cars.map(v=>v.l))/1000,maxH=Math.max(...cars.map(v=>v.h))/1000,maxW=Math.max(...cars.map(v=>v.w))/1000;
+        // Align box fronts at x=0; include tank overhang when fitting the entire scene.
+        const bodies=cars.map(v=>({...v,l:v.bodyL??v.l}));
+        const minX=Math.min(0,...cars.map(v=>v.bodyL?(v.bodyL-v.l)/1000:0));
+        const maxX=Math.max(...bodies.map(v=>v.l))/1000;
+        const maxL=maxX-minX,maxH=Math.max(...cars.map(v=>v.h))/1000,maxW=Math.max(...cars.map(v=>v.w))/1000;
         const size=Math.hypot(maxL,maxH,maxW);
         const base=Math.min((w-32)/size,(h-52)/size),scale=base*zoom;
-        const center=[maxL/2,maxH/2,maxW/2];
+        const center=[(minX+maxX)/2,maxH/2,maxW/2];
         const world=p=>rotate(p.map((n,i)=>n-center[i]));
-        const all=cars.map((v,k)=>{
+        const all=bodies.map((v,k)=>{
           const l=v.l/1000,y=v.h/1000,z=v.w/1000;
           const side=[[0,0,0],[l,0,0],[l,y,0],[bevelL,y,0],[0,y-bevelH,0]];
           const vertices=[...side,...side.map(([x,y])=>[x,y,z])];
@@ -287,9 +294,19 @@
             }
           }
         }
+        // The protrusion is a schematic line in the same coordinate system as the boxes.
+        for(const [k,v] of cars.entries()){
+          if(!v.bodyL)continue;
+          const start=[0,v.h/1000*.74,v.w/2000],tip=[(v.bodyL-v.l)/1000,start[1],start[2]];
+          const a=projected(world(start)),b=projected(world(tip));
+          const color=k===0?'var(--a)':'var(--b)';
+          if(Math.hypot(a[0]-b[0],a[1]-b[1])>=.2){
+            strokes.push('<line data-tank-overhang="'+k+'" x1="'+a[0].toFixed(2)+'" y1="'+a[1].toFixed(2)+'" x2="'+b[0].toFixed(2)+'" y2="'+b[1].toFixed(2)+'" stroke="'+color+'" stroke-width="3" stroke-linecap="round" stroke-dasharray="'+(k===1?'7 4':'none')+'"/>');
+          }
+        }
         // One orientation label per outward-facing main surface. Both vehicles
         // share the same axes, so duplicate lettering would obscure their overlap.
-        const largest=score=>cars.reduce((a,b)=>score(a)>=score(b)?a:b);
+        const largest=score=>bodies.reduce((a,b)=>score(a)>=score(b)?a:b);
         const sides=[
           {key:'side-right',face:0,text:'右側面',car:largest(v=>v.l*v.h),u:[-1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,0]},
           {key:'side-left',face:1,text:'左側面',car:largest(v=>v.w),u:[1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,c.w/1000]},
@@ -375,9 +392,10 @@
 
 <details class="text-small text-muted" style="margin-top:20px;line-height:1.7">
   <summary>車両寸法の出典・試作版について</summary>
-  <p>メーカー・正規販売店・販売事業者・運行事業者・自治体・博物館が公表した代表車型の全長・全幅・全高、または車体寸法を使用しています（全69車種、2026年11月確認）。各車両の寸法下にある仕様・出典リンクから確認できます。</p>
+  <p>メーカー・正規販売店・販売事業者・運行事業者・自治体・博物館が公表した代表車型の全長・全幅・全高、または車体寸法を基本としています（全72車種、2026年11月確認）。各車両の寸法下にある仕様・出典リンクから確認できます。</p>
   <p>同じ車名でも年式、グレード、ホイールベース、架装、装備などで寸法は異なります。現行型だけでなく、過去の市販車や実車の公表寸法も含みます。比較は表示した仕様に限ります。</p>
   <p>鉄道は原則として1両単位（連接車は連接車全体、テンダー式蒸気機関車は炭水車込み）です。出典が車体寸法の場合は連結器・パンタグラフなどを含む最大寸法とは異なることがあります。建設・鉱山機械は記載した仕様・状態での寸法です。</p>
+  <p>戦車は砲身込み全長と車体長を区別し、車体と砲塔を含む外形を半透明の箱、砲身の前方への突出を線で示します。線の高さは模式的です。10式戦車の車体長は公的資料に記載がないため比較用の概算（約7.3m）であり、正確な実測値ではありません。</p>
   <p>車体の形状・斜面は実車を再現したものではありません。外形寸法を比較する検証用ページです。</p>
 </details>
 </main></body></html>
