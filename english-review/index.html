@@ -189,14 +189,17 @@ function draftDuplicates(){
 }
 function saveDraft(){
  if(!approvedUid)return;
- try{if($("importEditor").hidden)localStorage.removeItem(draftStorageKey());else localStorage.setItem(draftStorageKey(),JSON.stringify({rows:draftRows,original:draftOriginal,batch:draftBatch}));$("draftSaveStatus").textContent="編集中の内容はこの端末に保存されます。";}catch(e){$("draftSaveStatus").textContent="下書きを端末に保存できませんでした。";}
+ try{if($("importEditor").hidden)localStorage.removeItem(draftStorageKey());else localStorage.setItem(draftStorageKey(),JSON.stringify({rows:draftRows,original:draftOriginal,batch:draftBatch,duplicatePolicy:$("duplicatePolicy").value}));$("draftSaveStatus").textContent="編集中の内容はこの端末に保存されます。";}catch(e){$("draftSaveStatus").textContent="下書きを端末に保存できませんでした。";}
 }
 function draftSummary(){
  const flags=draftDuplicates();$("importButton").disabled=draftBusy||!draftRows.length;$("draftCount").textContent="取込 "+draftOriginal+"件 ／ 残り "+draftRows.length+"件 ／ 重複候補 "+flags.filter(Boolean).length+"件";
  $("draftRows").querySelectorAll("[data-duplicate]").forEach((el,i)=>el.textContent=flags[i]?"重複候補":"");
 }
 function renderDraft(){
- $("importPastePanel").hidden=true;
+ const editing=draftRows.length>0;
+ $("importPastePanel").hidden=editing;
+ $("importEditor").hidden=!editing;
+ if(!editing)$("importText").value="";
  const host=$("draftRows");host.replaceChildren();
  draftRows.forEach((r,i)=>{
  const card=document.createElement("div");card.style.cssText="border:1px solid #8794a488;border-radius:8px;padding:8px;margin:8px 0";
@@ -213,16 +216,18 @@ function renderDraft(){
 }
 function restoreDraft(){
  draftRows=[];draftOriginal=0;draftBatch="";$("importPastePanel").hidden=false;$("importEditor").hidden=true;$("importText").value="";$("draftRows").replaceChildren();
+ $("duplicatePolicy").value="skip";
  if(!approvedUid)return;
- try{const d=JSON.parse(localStorage.getItem(draftStorageKey())||"null");if(d&&Array.isArray(d.rows)&&d.rows.length<=1000){draftRows=d.rows.filter(r=>Array.isArray(r)&&r.length>=4&&r.slice(0,4).every(v=>typeof v==="string")&&typeof r[4]==="string"&&/^[a-zA-Z0-9-]{1,80}$/.test(r[4])).map(r=>r.slice(0,5));draftOriginal=d.original;draftBatch=d.batch||"batch-"+crypto.randomUUID();$("importEditor").hidden=false;renderDraft();saveDraft();}}catch(e){}
+ try{const d=JSON.parse(localStorage.getItem(draftStorageKey())||"null");if(d&&Array.isArray(d.rows)&&d.rows.length<=1000){draftRows=d.rows.filter(r=>Array.isArray(r)&&r.length>=4&&r.slice(0,4).every(v=>typeof v==="string")&&typeof r[4]==="string"&&/^[a-zA-Z0-9-]{1,80}$/.test(r[4])).map(r=>r.slice(0,5));draftOriginal=d.original;draftBatch=d.batch||"batch-"+crypto.randomUUID();$("duplicatePolicy").value=d.duplicatePolicy==="keep"?"keep":"skip";renderDraft();saveDraft();}}catch(e){}
 }
+$("duplicatePolicy").addEventListener("change",saveDraft);
 $("reopenPaste").addEventListener("click",()=>{if(draftBusy)return;$("importPastePanel").hidden=false;$("importPastePanel").scrollIntoView({block:"start"});});
 $("previewImport").addEventListener("click",()=>{
  if(!approvedUid||draftBusy)return;
  const rows=$("importText").value.split(/\r?\n/).filter(x=>x.trim()).map(x=>x.split(x.includes("\t")?/\t/:/ {2,}|\u3000+/).map(v=>v.trim()));
  if(!rows.length||rows.length>1000||rows.some(r=>r.length<2||r.length>4||!r[0]||!r[1])){$("importStatus").textContent="1〜1000行のタブ区切りデータを確認してください。";return;}
  if(!$("importEditor").hidden&&!confirm("編集中の下書きを置き換えますか？"))return;
- draftBatch="batch-"+crypto.randomUUID();draftRows=rows.map(r=>[r[0],r[1],r[2]||"",r[3]||"",crypto.randomUUID()]);draftOriginal=rows.length;$("importEditor").hidden=false;$("importStatus").textContent="";renderDraft();saveDraft();
+ draftBatch="batch-"+crypto.randomUUID();draftRows=rows.map(r=>[r[0],r[1],r[2]||"",r[3]||"",crypto.randomUUID()]);draftOriginal=rows.length;$("duplicatePolicy").value="skip";$("importStatus").textContent="";renderDraft();saveDraft();
 });
 $("deleteSelected").addEventListener("click",()=>{if(draftBusy)return;const ids=new Set([...$("draftRows").querySelectorAll("[data-select]:checked")].map(e=>Number(e.dataset.select)));draftRows=draftRows.filter((_,i)=>!ids.has(i));renderDraft();saveDraft();});
 $("deleteDuplicates").addEventListener("click",()=>{if(draftBusy)return;const flags=draftDuplicates();if(!confirm("重複候補 "+flags.filter(Boolean).length+"件を削除しますか？"))return;draftRows=draftRows.filter((_,i)=>!flags[i]);renderDraft();saveDraft();});
@@ -254,14 +259,19 @@ $("importButton").addEventListener("click",async()=>{
   for(const [batchIndex,[q,answer,why="",situation=""]] of rows.entries()){
    if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
    const item={q,answer,why,language:l},k=key(item),ref=doc(db,"users",uid,"expressions",l+"-draft-"+ids[batchIndex]);
-   if((await getDoc(ref)).exists()){duplicates++;continue;}
-   const hash=await expressionId(item),canonical=doc(db,"users",uid,"expressions",l+"-"+hash),keyRef=doc(db,"users",uid,"review","import-key-"+l+"-"+hash);
-   if(!keepDuplicates&&(known.has(k)||(await getDoc(canonical)).exists())){duplicates++;continue;}
+   if(!keepDuplicates&&known.has(k)){duplicates++;continue;}
+   const hash=await expressionId(item),keyRef=doc(db,"users",uid,"review","import-key-"+l+"-"+hash);
    if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
    const created=await runTransaction(db,async tx=>{
     await assertNoReset(uid,l,tx);const prior=await tx.get(ref);if(prior.exists())return false;
     if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
-    const marker=await tx.get(keyRef);if(marker.exists()&&!keepDuplicates)return false;
+    if(!keepDuplicates){
+     // 登録後に本文を編集・削除している場合もあるため、参照先の現在の内容を照合する。
+     const marker=(await tx.get(keyRef)).data();
+     const candidateId=marker?.expressionId||l+"-"+hash;
+     const saved=(await tx.get(doc(db,"users",uid,"expressions",candidateId))).data();
+     if(saved&&getLang(saved)===l&&typeof saved.q==="string"&&typeof saved.answer==="string"&&key(saved)===k)return false;
+    }
     const counter=await tx.get(counterRef),data=counter.data()||{};
     const number=Math.max(nextNumber,Number(data.initialNumber)||0)+1,sort=Math.max(nextOrder,Number(data.sortOrder)||0)+1;
     tx.set(keyRef,{expressionId:l+"-draft-"+ids[batchIndex]});
@@ -276,7 +286,7 @@ $("importButton").addEventListener("click",async()=>{
    draftRows=[];$("importPastePanel").hidden=false;$("importEditor").hidden=true;$("importText").value="";saveDraft();
    await loadBank(uid,generation);
   }
- }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。下書きを保持しました。登録済みの行を編集しても再実行では更新されません。そのまま再実行すると登録済みの行は省略されます。";}
+ }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||e.message||"エラー")+"。下書きを保持しました。登録済みの行を編集しても再実行では更新されません。そのまま再実行すると登録済みの行は省略されます。";}
  finally{$("duplicatePolicy").disabled=false;clearInterval(dotTimer);importButton.textContent="編集済みの表現を登録する";importButton.removeAttribute("aria-busy");draftBusy=false;importButton.disabled=!draftRows.length;$("draftRows").querySelectorAll("input,textarea,select,button").forEach(e=>e.disabled=false);}
 });
 let trialMode=sessionStorage.getItem("languageReviewTrial")==="1";
