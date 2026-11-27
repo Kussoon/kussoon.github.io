@@ -49,6 +49,7 @@
     #vehicle-overlay-v3 .marker.b { border-top:3px dashed var(--b) }
     #vehicle-overlay-v3 .spec { margin:6px 0 0; display:flex; flex-wrap:wrap; gap:4px 9px }
     #vehicle-overlay-v3 .spec span { white-space:nowrap }
+    #vehicle-overlay-v3 .vehicle-source { flex-basis:100%; color:var(--muted-foreground); font-size:.76rem; overflow-wrap:anywhere }
     #vehicle-overlay-v3 .comparison { margin:8px 0; display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; justify-content:center }
     #vehicle-overlay-v3 .comparison span { white-space:nowrap }
     #vehicle-overlay-v3 .viewport { display:flex; align-items:stretch; min-width:0; gap:4px; margin-top:8px }
@@ -122,17 +123,64 @@
       const viewButtons=[...root.querySelectorAll('[data-view]')];
       const modeButtons=[...root.querySelectorAll('[data-mode]')];
       const zoomButtons=[...root.querySelectorAll('[data-zoom]')];
+      // Dimensions in millimetres; each item is a specific published configuration.
       const vehicles=[
-        {id:'alphard-z',name:'アルファード Z',l:4995,w:1850,h:1935},
-        {id:'hiace-wagon-gl',name:'ハイエース ワゴンGL',l:4840,w:1880,h:2105},
-        {id:'crown-sedan-z',name:'クラウン セダン Z',l:5030,w:1890,h:1475}
+        {"id":"alphard-z","name":"アルファード Z","group":"大型乗用車","l":4995,"w":1850,"h":1935,"variant":"2026年6月","source":"https://toyota.jp/ucar/catalog/brand-TOYOTA/car-ALPHARD/202606/10163594/"},
+        {"id":"hiace-wagon-gl","name":"ハイエース ワゴンGL","group":"大型乗用車","l":4840,"w":1880,"h":2105,"variant":"2026年7月","source":"https://toyota.jp/ucar/catalog/brand-TOYOTA/car-HIACE_WAGON/202607/10164950/"},
+        {"id":"crown-sedan-z","name":"クラウン セダン Z","group":"大型乗用車","l":5030,"w":1890,"h":1475,"variant":"2026年9月","source":"https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CROWN/202609/10164956/"},
+        {"id":"yaris-z","name":"ヤリス Z","group":"身近な乗用車","l":3950,"w":1695,"h":1510,"variant":"2026年3月","source":"https://toyota.jp/ucar/catalog/brand-TOYOTA/car-YARIS/202603/10162199/"},
+        {"id":"prius-z","name":"プリウス Z","group":"身近な乗用車","l":4600,"w":1780,"h":1430,"variant":"2026年7月","source":"https://toyota.jp/ucar/catalog/brand-TOYOTA/car-PRIUS/202607/10163992/"},
+        {"id":"corolla-g","name":"カローラ セダン ハイブリッドG","group":"身近な乗用車","l":4495,"w":1745,"h":1435,"variant":"2026年5月","source":"https://toyota.jp/ucar/catalog/brand-TOYOTA/car-COROLLA/202605/10163216/"},
+        {"id":"landcruiser300-zx","name":"ランドクルーザー300 ZX","group":"大型乗用車","l":4985,"w":1980,"h":1925,"variant":"2025年3月仕様","source":"https://toyota.jp/pages/contents/request/webcatalog/landcruiser300/landcruiser300_main_202505.pdf"},
+        {"id":"century-sedan","name":"センチュリー（セダン）","group":"高級車","l":5335,"w":1930,"h":1505,"variant":"2025年12月","source":"https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CENTURY/202512/10161185/"},
+        {"id":"century-suv","name":"センチュリー（SUVタイプ）","group":"高級車","l":5205,"w":1990,"h":1805,"variant":"メーカー公表寸法","source":"https://toyota.jp/faq/show/10268.html"},
+        {"id":"nsx-type-s","name":"NSX Type S（2代目）","group":"スポーツカー","l":4535,"w":1940,"h":1215,"variant":"2021年発表モデル","source":"https://www.honda.co.jp/sportscar/NSX_35th/"},
+        {"id":"nbox-ff","name":"N-BOX（FF）","group":"身近な乗用車","l":3395,"w":1475,"h":1790,"variant":"FF・メーカー主要諸元","source":"https://www.honda.co.jp/Nbox/webcatalog/type/compare/"},
+        {"id":"revuelto","name":"ランボルギーニ レヴエルト","group":"スポーツカー","l":4947,"w":2033,"h":1160,"variant":"日本語カタログ（ミラー除外）","source":"https://www.lamborghini.com/original/DAM/lamborghini/facelift_2019/model_detail/revuelto/brochure/LB744_REVUELTO_DIGITAL_BROCHURE_JAP.pdf"},
+        {"id":"selega-hd","name":"セレガ HD","group":"大型観光バス","l":11990,"w":2490,"h":3500,"variant":"RU1ASDY・2025年発表参考諸元","source":"https://www.hino.co.jp/corp/news/assets/20250918JP.pdf"},
+        {"id":"gala-hd","name":"ガーラ HD","group":"大型観光バス","l":11990,"w":2490,"h":3500,"variant":"ハイデッカー・12m車","source":"https://www.isuzu.co.jp/support/data/pdf/bus/11shogen.pdf"},
+        {"id":"aeroqueen","name":"エアロクィーン","group":"大型観光バス","l":11990,"w":2490,"h":3535,"variant":"2021年・観光貸切（床下直冷）","source":"https://assets.mitsubishi-fuso.com/fusoassets/2021/06/MY21_AeroQueen_0621.pdf"},
+        {"id":"aeroace","name":"エアロエース","group":"大型観光バス","l":11990,"w":2490,"h":3460,"variant":"2021年・観光貸切（天井直冷）","source":"https://assets.mitsubishi-fuso.com/fusoassets/2021/06/MY21_AeroQueen_0621.pdf"},
+        {"id":"erga-n","name":"エルガ N尺","group":"大型路線バス","l":10430,"w":2485,"h":3105,"variant":"ディーゼル・N尺","source":"https://www.isuzu.co.jp/product/bus/erga_rt/common/pdf/diesel/sunpou_diesel.pdf"},
+        {"id":"ergamio","name":"エルガミオ","group":"中型バス","l":8990,"w":2300,"h":3105,"variant":"2026年・路線ノンステップ","source":"https://www.isuzu.co.jp/product/bus/ergamio_rt/common/pdf/ergamio_rt_sunpou.pdf"},
+        {"id":"galamio","name":"ガーラミオ","group":"中型バス","l":8990,"w":2340,"h":3035,"variant":"2026年・リアスポイラーなし","source":"https://www.isuzu.co.jp/product/bus/galamio/common/pdf/galamio_syogen.pdf"},
+        {"id":"coaster-gx","name":"コースター GX ロング","group":"小型バス","l":6990,"w":2080,"h":2635,"variant":"2026年6月・29人乗り","source":"https://toyota.jp/pages/contents/request/webcatalog/coaster/coaster_main_202606.pdf"},
+        {"id":"phantom-ewb","name":"ロールス・ロイス ファントム EWB","group":"高級車","l":5990,"w":2020,"h":1645,"variant":"第8世代・正規販売店CORNES公式レビュー","source":"https://www.youtube.com/watch?v=9iVY6OVAMD8"},
+        {"id":"universe","name":"ヒョンデ ユニバース","group":"大型観光バス","l":12000,"w":2500,"h":3490,"variant":"群馬中央バスの車両公表値（m換算）","source":"https://gunmachuobus.co.jp/pages/21/"},
+        {"id":"aerostar","name":"エアロスター","group":"大型路線バス","l":10705,"w":2490,"h":3070,"variant":"2016年カタログ・全長10,705mm車","source":"https://www.mitsubishi-fuso.com/core/pdf/jp/lineup/buses/aero_star/AERO_STAR_spec.pdf"},
+        {"id":"blueribbon-zev","name":"ブルーリボン Z EV","group":"大型路線バス","l":10545,"w":2485,"h":3330,"variant":"2026年10月・都市型","source":"https://www.hino.co.jp/corp/news/2026/20261027-004758.shtml"},
+        {"id":"melpha","name":"メルファ","group":"中型バス","l":8990,"w":2340,"h":3130,"variant":"2023年式・スサノオ観光の44人乗り車","source":"https://www.susanoo.co.jp/syaryou_i211ku.html"},
+        {"id":"rainbow","name":"レインボー","group":"中型バス","l":8990,"w":2300,"h":3040,"variant":"東浦町コミュニティバスの公表車両寸法","source":"https://www.town.aichi-higashiura.lg.jp/material/files/group/19/shiryou1-2.pdf"},
+        {"id":"rosa","name":"ローザ スーパーロング","group":"小型バス","l":7730,"w":2010,"h":2645,"variant":"2015年カタログ・33人乗り","source":"https://www.mitsubishi-fuso.com/core/pdf/jp/lineup/ROSA.pdf"},
+        {"id":"liesse2","name":"リエッセⅡ ロング","group":"小型バス","l":6990,"w":2035,"h":2750,"variant":"2012年式・スサノオ観光の28人乗り車","source":"https://www.susanoo.co.jp/syaryou_204i.html"},
+        {"id":"poncho-ev","name":"ポンチョ EV ロング","group":"小型バス","l":6990,"w":2080,"h":3100,"variant":"2017年・限定販売車 SKG-HX9JLBE改","source":"https://www.hino.co.jp/corp/news/2017/20171010_03.html"},
+        {"id":"canter","name":"キャンター","group":"小型トラック","l":4690,"w":1695,"h":1990,"variant":"8代目・2013年メーカー発表寸法","source":"https://www.mitsubishi-fuso.com/ja/news-main/press-release/2013/03/19/%E5%B0%8F%E5%9E%8B%E3%83%88%E3%83%A9%E3%83%83%E3%82%AF%E3%80%8C%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BF%E3%83%BC%E3%80%8D50%E5%91%A8%E5%B9%B4/"},
+        {"id":"elf-wing","name":"エルフ ウイング","group":"小型トラック","l":7120,"w":2185,"h":3310,"variant":"超ロングワイド BDG-NPR85AN-KL5A","source":"https://www.isuzu.co.jp/faq/car/pdf/acar_syo_elf02.pdf"},
+        {"id":"dutro","name":"デュトロ ハイブリッド","group":"小型トラック","l":6180,"w":2180,"h":2270,"variant":"2017年・ワイドキャブ TSG-XKU712M","source":"https://www.hino.co.jp/corp/news/2017/20171010_03.html"},
+        {"id":"fighter","name":"ファイター 平ボデー","group":"中型トラック","l":7540,"w":2240,"h":2450,"variant":"2019年・FK62NH","source":"https://assets.mitsubishi-fuso.com/fusoassets/2019/07/19FIGHTER_CARGO_BR_5SF3A2A195.pdf"},
+        {"id":"ranger","name":"レンジャー","group":"中型トラック","l":9680,"w":2490,"h":3570,"variant":"2017年展示市販車 2PG-FE2APBG","source":"https://www.hino.co.jp/corp/news/2017/20171010_03.html"},
+        {"id":"forward","name":"フォワード Fカーゴ","group":"中型トラック","l":8670,"w":2310,"h":3335,"variant":"2011年・展示車","source":"https://www.isuzu.co.jp/museum/tms/2011/pdf/tms2011.pdf"},
+        {"id":"supergreat","name":"スーパーグレート V","group":"大型トラック","l":11990,"w":2495,"h":3790,"variant":"2016年市販車 FU64VUZ","source":"https://www.mitsubishi-fuso.com/ja/news-main/press-release/2015/10/28/%E7%AC%AC44%E5%9B%9E%E6%9D%B1%E4%BA%AC%E3%83%A2%E3%83%BC%E3%82%BF%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%BC2015%E3%81%AB%E5%87%BA%E5%B1%95/"},
+        {"id":"giga","name":"ギガ カーゴ 6×2","group":"大型トラック","l":11810,"w":2490,"h":3730,"variant":"2WG-CYL77D-VX-D","source":"https://www.isuzu.co.jp/support/data/pdf/giga/01shogen.pdf"},
+        {"id":"profia","name":"プロフィア","group":"大型トラック","l":11970,"w":2490,"h":3780,"variant":"2017年展示市販車 2RG-FW1AXHG","source":"https://www.hino.co.jp/corp/news/2017/20171010_03.html"},
+        {"id":"hummer-limo","name":"ハマー H2 ストレッチリムジン","group":"特殊車両","l":7900,"w":2100,"h":1900,"variant":"2003年式・キャルウイング販売実車（cm換算）","source":"https://www.calwing.com/sales/inventory/78/"},
+        {"id":"erga-duo","name":"エルガ デュオ（連節バス）","group":"特殊車両","l":17990,"w":2495,"h":3260,"variant":"メーカー主要諸元・連節バス","source":"https://www.isuzu.co.jp/product/bus/ergaduo/common/pdf/ERGADUO_equipment.pdf"}
       ];
+      const groups=["身近な乗用車","大型乗用車","高級車","スポーツカー","大型観光バス","大型路線バス","中型バス","小型バス","小型トラック","中型トラック","大型トラック","特殊車両"];
       const fmt=n=>n.toLocaleString('ja-JP');
       const get=id=>vehicles.find(v=>v.id===id)||vehicles[0];
       for(const select of [selectA,selectB]){
-        for(const v of vehicles){const option=document.createElement('option');option.value=v.id;option.textContent=v.name;select.appendChild(option);}
+        for(const groupName of groups){
+          const group=document.createElement('optgroup');
+          group.label=groupName;
+          for(const v of vehicles.filter(v=>v.group===groupName)){
+            const option=document.createElement('option');
+            option.value=v.id;option.textContent=v.name;group.appendChild(option);
+          }
+          select.appendChild(group);
+        }
       }
-      selectA.value=vehicles[0].id;selectB.value=vehicles[1].id;
+      selectA.value='alphard-z';selectB.value='hiace-wagon-gl';
       const mul=(a,b)=>[a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3],a[0]*b[1]+a[1]*b[0]+a[2]*b[3]-a[3]*b[2],a[0]*b[2]-a[1]*b[3]+a[2]*b[0]+a[3]*b[1],a[0]*b[3]+a[1]*b[2]-a[2]*b[1]+a[3]*b[0]];
       const unit=v=>{const l=Math.hypot(...v)||1;return v.map(n=>n/l)};
       const axis=(x,y,z,a)=>[Math.cos(a/2),x*Math.sin(a/2),y*Math.sin(a/2),z*Math.sin(a/2)];
@@ -163,7 +211,14 @@
       function updateDetails(){
         const [a,b]=pair();
         const vals=v=>'<span>長 '+fmt(v.l)+'</span><span>幅 '+fmt(v.w)+'</span><span>高 '+fmt(v.h)+'</span>';
-        specA.innerHTML=vals(a);specB.innerHTML=vals(b);
+        for(const [spec,v] of [[specA,a],[specB,b]]){
+          spec.innerHTML=vals(v);
+          const link=document.createElement('a');
+          link.className='vehicle-source';link.href=v.source;link.target='_blank';link.rel='noopener noreferrer';
+          link.textContent=v.variant+'（出典）';
+          link.setAttribute('aria-label',v.name+' '+v.variant+' の寸法出典（新しいタブ）');
+          spec.appendChild(link);
+        }
         const signed=n=>n>0?'+'+fmt(n):n<0?'−'+fmt(-n):'0';
         diff.innerHTML='<span class="text-muted text-small">B − A（mm）</span><span>全長 '+signed(b.l-a.l)+'</span><span>全幅 '+signed(b.w-a.w)+'</span><span>全高 '+signed(b.h-a.h)+'</span>';
         svg.setAttribute('aria-label',a.name+' と '+b.name+' の外接寸法の重ね合わせ、前端の上角をカット');
@@ -291,7 +346,8 @@
 
 <details class="text-small text-muted" style="margin-top:20px;line-height:1.7">
   <summary>車両寸法の出典・試作版について</summary>
-  <p>トヨタ自動車の車両カタログの全長・全幅・全高を使用しています。<a style="color:inherit" href="https://toyota.jp/ucar/catalog/brand-TOYOTA/car-ALPHARD/202606/10163594/" target="_blank" rel="noopener">アルファード Z</a> ／ <a style="color:inherit" href="https://toyota.jp/ucar/catalog/brand-TOYOTA/car-HIACE_WAGON/202607/10164950/" target="_blank" rel="noopener">ハイエース ワゴンGL</a> ／ <a style="color:inherit" href="https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CROWN/202609/10164956/" target="_blank" rel="noopener">クラウン セダン Z</a>（2026年11月確認）。</p>
+  <p>メーカー・正規販売店・販売事業者・運行事業者・自治体が公表した代表車型の全長・全幅・全高を使用しています（全40車種、2026年11月確認）。各車両の寸法下にある仕様・出典リンクから確認できます。</p>
+  <p>同じ車名でも年式、グレード、ホイールベース、架装、装備などで寸法は異なります。現行型だけでなく、過去の市販車や実車の公表寸法も含みます。比較は表示した仕様に限ります。</p>
   <p>車体の形状・斜面は実車を再現したものではありません。外形寸法を比較する検証用ページです。</p>
 </details>
 </main></body></html>
