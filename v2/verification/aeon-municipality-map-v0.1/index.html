@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="イオン系列スーパーの市区町村別分布を確認するKussoonの検証版。">
+  <title>全国イオン系列スーパー分布図｜Kussoon 検証版 Ver.0.1</title>
+  <link rel="stylesheet" href="./map.css?v=0.1">
+  <script defer src="/v2/progressive-preview/map-viewport.js"></script>
+  <script type="module" src="./map.js?v=0.1"></script>
+</head>
+<body id="page-top">
+  <header class="site-header">
+    <div class="shell masthead">
+      <a class="wordmark" href="/" rel="nofollow" aria-label="Kussoonトップ">Kussoon<span>.</span></a>
+      <span class="version">検証版 <strong>Ver.0.1</strong></span>
+    </div>
+  </header>
+  <main class="shell">
+    <header class="intro">
+      <h1>全国<span>イオン系列スーパー</span>分布図</h1>
+      <p>全国のイオン系列スーパーを市区町村ごとに集計し、店舗数や屋号、運営会社の地域的な分布を地図で確認できます。<br class="desktop-break">個々の店舗の位置を示す地図ではありません。</p>
+      <div class="dates"><span>店舗 <time datetime="2026-11-23">2026年11月23日</time>時点</span><span>行政区域 <time datetime="2026-01-01">2026年1月1日</time>時点</span></div>
+    </header>
+
+    <section class="workbench" aria-label="地図と絞り込み">
+      <div class="controls" id="map-tools">
+        <fieldset class="level-control">
+          <legend>集計単位</legend>
+          <div class="segments">
+            <label><input type="radio" name="level" value="city" checked><span>市町村単位</span></label>
+            <label><input type="radio" name="level" value="ward"><span>行政区単位</span></label>
+          </div>
+        </fieldset>
+        <label class="field" for="dimension">表示対象
+          <select id="dimension">
+            <option value="all">全屋号</option><option value="group">屋号グループ別</option>
+            <option value="brand">個別屋号別</option><option value="operator">運営会社別</option>
+          </select>
+        </label>
+        <label class="field category-field" for="category" hidden><span id="category-label">分類</span><select id="category"></select></label>
+      </div>
+      <div class="controls geography-controls">
+        <label class="field" for="prefecture">都道府県<select id="prefecture"><option value="">全国47都道府県</option></select></label>
+        <div class="field search-field">
+          <label for="search">市区町村名で検索</label>
+          <form id="search-form" role="search">
+            <div class="search-box">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4.5 4.5"/></svg>
+              <input id="search" type="search" placeholder="例：横浜市、中央区、はままつ" autocomplete="off" aria-controls="search-results">
+            </div>
+            <button type="submit" class="button search-go">検索</button>
+          </form>
+          <div id="search-results" class="search-results" hidden></div>
+        </div>
+        <div class="region-actions">
+          <button type="button" class="button" id="nation">日本全国へ</button>
+          <button type="button" class="button subtle" id="clear">条件を解除</button>
+        </div>
+      </div>
+
+      <div class="map-heading" id="map-heading">
+        <div><span id="map-scope">日本全国</span><span class="scope-divider" aria-hidden="true"></span><span id="map-filter">全屋号</span></div>
+        <div id="map-total" class="map-total" aria-live="polite">読み込み中</div>
+      </div>
+
+      <div class="map-layout">
+        <div class="map-frame" id="map-frame">
+          <svg id="map" viewBox="0 0 980 660" tabindex="0" role="group" aria-label="店舗数で色分けした日本の行政区域地図">
+            <defs>
+              <pattern id="unconfirmed-fill" patternUnits="userSpaceOnUse" width="3.4" height="3.4" patternTransform="rotate(40)">
+                <rect width="3.4" height="3.4" class="unconfirmed-base"/><path d="M0 0V3.4" class="unconfirmed-stripe"/>
+              </pattern>
+              <pattern id="out-of-scope-fill" patternUnits="userSpaceOnUse" width="4.1" height="4.1">
+                <rect width="4.1" height="4.1" class="excluded-base"/><circle cx="2.05" cy="2.05" r=".85" class="excluded-dot"/>
+              </pattern>
+            </defs>
+            <g id="land-layer"></g>
+          </svg>
+          <div class="map-buttons" aria-label="地図の操作">
+            <button type="button" id="zoom-in" aria-label="拡大">＋</button>
+            <button type="button" id="zoom-out" aria-label="縮小">−</button>
+            <button type="button" id="fit">全体</button>
+          </div>
+          <p id="map-status" class="map-status" role="status">全国地図を読み込み中</p>
+          <div id="map-popup" class="map-popup" hidden></div>
+          <a class="map-credit" href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html" rel="nofollow">国土数値情報 N03 © 国土交通省・Kussoon加工</a>
+        </div>
+        <aside class="map-side" aria-label="凡例と区域数">
+          <section class="legend">
+            <h2>店舗数の凡例</h2>
+            <ol id="legend" aria-label="店舗数の階級"></ol>
+            <div class="exception-legend">
+              <div><i class="swatch unconfirmed"></i> 未確認 <strong id="unconfirmed-count">7</strong></div>
+              <div><i class="swatch out-of-scope"></i> 対象外 <strong id="excluded-count">6</strong></div>
+            </div>
+          </section>
+          <section class="coverage">
+            <h2>店舗がある区域</h2>
+            <div class="coverage-value"><strong id="coverage-num">—</strong><span id="coverage-denom"></span></div>
+            <div class="coverage-track" aria-hidden="true"><div id="coverage-bar"></div></div>
+            <div class="coverage-stats"><span id="coverage-positive"></span><span id="coverage-zero"></span></div>
+          </section>
+        </aside>
+      </div>
+      <p class="map-note">屋号グループはKussoon独自の閲覧用分類です。企業の公式分類や法人区分とは独立しています。</p>
+    </section>
+
+    <section id="detail" class="section-panel detail-panel" aria-labelledby="detail-title" hidden>
+      <div class="detail-heading">
+        <div><p class="detail-pref" id="detail-pref"></p><h2 id="detail-title" tabindex="-1"></h2></div>
+        <button type="button" class="button" id="detail-close">選択を解除</button>
+      </div>
+      <p id="detail-status" class="detail-status" hidden></p>
+      <div class="detail-eligible">
+        <div class="detail-stats" id="detail-stats"></div>
+        <div class="detail-breakdowns">
+          <section><h3>屋号別店舗数</h3><div id="detail-brands"></div></section>
+          <section><h3>運営会社別店舗数</h3><div id="detail-operators"></div></section>
+        </div>
+        <details class="store-disclosure">
+          <summary id="store-summary">店舗一覧</summary>
+          <div id="store-list"></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section-panel rankings" aria-labelledby="rank-title">
+      <div class="section-title"><h2 id="rank-title">集計・ランキング</h2><span id="rank-scope"></span></div>
+      <div id="rankings"></div>
+    </section>
+    <footer class="sources">
+      <p>行政区域は国土交通省「国土数値情報 行政区域データ（N03、2026年1月1日時点）」をもとにKussoonが加工しました。表示用に簡略化した境界です。</p>
+      <p><a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2026.html" rel="nofollow">行政区域データ</a> <a href="https://creativecommons.org/licenses/by/4.0/deed.ja" rel="nofollow">CC BY 4.0</a> <a href="./data-sources.md" rel="nofollow">出典と利用条件</a> <a href="https://github.com/Kussoon/kussoon.github.io/pull/769" rel="nofollow">店舗データの確認報告</a></p>
+    </footer>
+  </main>
+  <a class="back-top" id="back-top" href="#page-top" hidden>↑ <span>一番上へ</span></a>
+  <noscript><p class="shell">地図の表示にはJavaScriptが必要です。</p></noscript>
+</body>
+</html>
