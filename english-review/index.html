@@ -180,7 +180,7 @@ async function expressionId(q){
 }
 
 const draftCategories=["01 挨拶・お礼・別れ","02 会話の進行・質問・聞き返し","03 基本表現・比較・数量","04 日常生活・朝の支度","05 健康・身体・服薬","06 通勤・徒歩・運動","07 家族・友人・思い出","08 学校・習い事・教育","09 音楽・ピアノ・趣味","10 語学学習・音声機器","11 仕事・役員車・駐車設備","12 仕事・舞台・コンサート","13 自動車・車種・車のある生活","14 道路・交通ルール・安全運転","15 自転車・バイク・免許","16 公共交通・運賃・決済","17 公共交通・経営・運転士不足","18 社会・文化・マナー・価値観","19 ごみ・環境・生活制度"];
-let draftRows=[],draftOriginal=0,draftBusy=false;
+let draftRows=[],draftOriginal=0,draftBusy=false,draftBatch="";
 const draftStorageKey=()=> "review-import-draft-v1:"+approvedUid+":"+lang;
 const draftNorm=s=>norm(String(s||""));
 function draftDuplicates(){
@@ -189,10 +189,10 @@ function draftDuplicates(){
 }
 function saveDraft(){
  if(!approvedUid)return;
- try{if($("importEditor").hidden)localStorage.removeItem(draftStorageKey());else localStorage.setItem(draftStorageKey(),JSON.stringify({rows:draftRows,original:draftOriginal}));$("draftSaveStatus").textContent="編集中の内容はこの端末に保存されます。";}catch(e){$("draftSaveStatus").textContent="下書きを端末に保存できませんでした。";}
+ try{if($("importEditor").hidden)localStorage.removeItem(draftStorageKey());else localStorage.setItem(draftStorageKey(),JSON.stringify({rows:draftRows,original:draftOriginal,batch:draftBatch}));$("draftSaveStatus").textContent="編集中の内容はこの端末に保存されます。";}catch(e){$("draftSaveStatus").textContent="下書きを端末に保存できませんでした。";}
 }
 function draftSummary(){
- const flags=draftDuplicates();$("draftCount").textContent="取込 "+draftOriginal+"件 ／ 残り "+draftRows.length+"件 ／ 重複候補 "+flags.filter(Boolean).length+"件";
+ const flags=draftDuplicates();$("importButton").disabled=draftBusy||!draftRows.length;$("draftCount").textContent="取込 "+draftOriginal+"件 ／ 残り "+draftRows.length+"件 ／ 重複候補 "+flags.filter(Boolean).length+"件";
  $("draftRows").querySelectorAll("[data-duplicate]").forEach((el,i)=>el.textContent=flags[i]?"重複候補":"");
 }
 function renderDraft(){
@@ -204,7 +204,7 @@ function renderDraft(){
  ["日本語","外国語","解説","分類"].forEach((name,j)=>{
  const label=document.createElement("label");label.style.display="block";label.textContent=name;
  const field=document.createElement(j===3?"select":"textarea");field.style.cssText="display:block;width:100%;box-sizing:border-box;margin:3px 0 8px;font-size:16px";
- if(j===3){for(const c of [...new Set(["",...draftCategories,...bankQuestions.filter(q=>getLang(q)===lang).map(q=>q.situation||""),r[j]||""])]){const o=document.createElement("option");o.value=c;o.textContent=c||"未分類";field.append(o);}}else field.rows=j===2?2:1;
+ if(j===3){for(const c of [...new Set(["",...draftCategories,...bankQuestions.filter(q=>getLang(q)===lang).map(q=>q.situation||""),r[j]||""])]){const o=document.createElement("option");o.value=c;o.textContent=c||"未分類";field.append(o);}}else field.rows=j===2?2:1;field.style.minHeight=j===3?"44px":"0";
  field.value=r[j]||"";field.addEventListener("input",()=>{r[j]=field.value;draftSummary();saveDraft();});label.append(field);card.append(label);
  });
  const del=document.createElement("button");del.type="button";del.textContent="削除";del.addEventListener("click",()=>{if(draftBusy)return;draftRows.splice(i,1);renderDraft();saveDraft();});card.append(del);host.append(card);
@@ -213,21 +213,21 @@ function renderDraft(){
 function restoreDraft(){
  draftRows=[];draftOriginal=0;$("importEditor").hidden=true;$("importText").value="";$("draftRows").replaceChildren();
  if(!approvedUid)return;
- try{const d=JSON.parse(localStorage.getItem(draftStorageKey())||"null");if(d&&Array.isArray(d.rows)){draftRows=d.rows;draftOriginal=d.original;$("importEditor").hidden=false;renderDraft();}}catch(e){}
+ try{const d=JSON.parse(localStorage.getItem(draftStorageKey())||"null");if(d&&Array.isArray(d.rows)){draftRows=d.rows.filter(r=>Array.isArray(r)&&r.slice(0,4).every(v=>typeof v==="string")).map(r=>[...r.slice(0,4),r[4]||crypto.randomUUID()]);draftOriginal=d.original;draftBatch=d.batch||"batch-"+crypto.randomUUID();$("importEditor").hidden=false;renderDraft();saveDraft();}}catch(e){}
 }
 $("previewImport").addEventListener("click",()=>{
  if(!approvedUid||draftBusy)return;
  const rows=$("importText").value.split(/\r?\n/).filter(x=>x.trim()).map(x=>x.split(x.includes("\t")?/\t/:/ {2,}|\u3000+/).map(v=>v.trim()));
  if(!rows.length||rows.length>1000||rows.some(r=>r.length<2||r.length>4||!r[0]||!r[1])){$("importStatus").textContent="1〜1000行のタブ区切りデータを確認してください。";return;}
  if(!$("importEditor").hidden&&!confirm("編集中の下書きを置き換えますか？"))return;
- draftRows=rows.map(r=>[r[0],r[1],r[2]||"",r[3]||""]);draftOriginal=rows.length;$("importEditor").hidden=false;$("importStatus").textContent="";renderDraft();saveDraft();
+ draftBatch="batch-"+crypto.randomUUID();draftRows=rows.map(r=>[r[0],r[1],r[2]||"",r[3]||"",crypto.randomUUID()]);draftOriginal=rows.length;$("importEditor").hidden=false;$("importStatus").textContent="";renderDraft();saveDraft();
 });
 $("deleteSelected").addEventListener("click",()=>{if(draftBusy)return;const ids=new Set([...$("draftRows").querySelectorAll("[data-select]:checked")].map(e=>Number(e.dataset.select)));draftRows=draftRows.filter((_,i)=>!ids.has(i));renderDraft();saveDraft();});
 $("deleteDuplicates").addEventListener("click",()=>{if(draftBusy)return;const flags=draftDuplicates();if(!confirm("重複候補 "+flags.filter(Boolean).length+"件を削除しますか？"))return;draftRows=draftRows.filter((_,i)=>!flags[i]);renderDraft();saveDraft();});
 $("discardDraft").addEventListener("click",()=>{if(draftBusy||!confirm("編集中の下書きを破棄しますか？"))return;draftRows=[];$("importEditor").hidden=true;$("importText").value="";saveDraft();});
 $("importButton").addEventListener("click",async()=>{
  const uid=approvedUid,generation=authGeneration;if(!uid)return;
- const rows=draftRows.map(r=>r.map(x=>x.trim()));
+ const rows=draftRows.map(r=>r.slice(0,4).map(x=>x.trim()));
  if(draftBusy||$("importEditor").hidden||!rows.length||rows.length>1000){$("importStatus").textContent="1〜1000件の編集済み表現を用意してください。";return;}
  if(rows.some(a=>a.length<2||a.length>4||!a[0]||!a[1]||a[0].length>300||a[1].length>500||(a[2]||"").length>1000)){
   $("importStatus").textContent="形式が不正な行があります。タブ区切りで入力してください。";return;
@@ -242,20 +242,29 @@ $("importButton").addEventListener("click",async()=>{
  const dotTimer=setInterval(()=>{dotCount=(dotCount+1)%4;dots.textContent=".".repeat(dotCount);},400);
  let added=0,duplicates=0;
  try{
-  const known=new Set(bankQuestions.filter(q=>getLang(q)===lang).map(key));const batchId="batch-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+  const l=lang,batchId=draftBatch,ids=draftRows.map(r=>r[4]);
+  const fresh=await fetchManaged(),existing=fresh.filter(q=>getLang(q)===l),known=new Set(existing.map(key));
+  let nextNumber=Math.max(0,...existing.map(x=>Number(x.initialNumber)||0)),nextOrder=Math.max(0,...existing.map(x=>Number(x.sortOrder)||0));
   for(const [batchIndex,[q,answer,why="",situation=""]] of rows.entries()){
-   if(generation!==authGeneration||approvedUid!==uid)break;
-   const item={q,answer,why,language:lang},k=key(item);
-   let ref=doc(db,"users",uid,"expressions",lang+"-"+await expressionId(item));
-   if(known.has(k)||(await getDoc(ref)).exists()){if(!confirm("重複した表現です。\n"+q+"\n"+answer+"\nOK：別の問題として残す／キャンセル：今回の登録を省略")){duplicates++;continue;}ref=doc(db,"users",uid,"expressions",lang+"-"+crypto.randomUUID());}
-   await assertNoReset(approvedUid,lang);await setDoc(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.initialNumber)||0))+added+1,sortOrder:Math.max(0,...bankQuestions.filter(x=>getLang(x)===lang).map(x=>Number(x.sortOrder)||0))+added+1});added++;known.add(k);
+   if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
+   const item={q,answer,why,language:l},k=key(item),ref=doc(db,"users",uid,"expressions",l+"-draft-"+ids[batchIndex]);
+   if((await getDoc(ref)).exists()){duplicates++;continue;}
+   const canonical=doc(db,"users",uid,"expressions",l+"-"+await expressionId(item));
+   if(known.has(k)||(await getDoc(canonical)).exists()){if(!confirm("重複した表現です。\n"+q+"\n"+answer+"\nOK：別の問題として残す／キャンセル：今回の登録を省略")){duplicates++;continue;}}
+   if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
+   const created=await runTransaction(db,async tx=>{
+    await assertNoReset(uid,l,tx);const prior=await tx.get(ref);if(prior.exists())return false;
+    if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
+    tx.set(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:nextNumber+1,sortOrder:nextOrder+1});return true;
+   });
+   if(created){added++;nextNumber++;nextOrder++;known.add(k);}else duplicates++;
   }
   if(generation===authGeneration&&approvedUid===uid){
    $("importStatus").textContent=added+"件登録、"+duplicates+"件重複を省略しました。";
    draftRows=[];$("importEditor").hidden=true;$("importText").value="";saveDraft();
    await loadBank(uid,generation);
   }
- }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。再実行時は重複確認が表示されます。";}
+ }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。下書きを保持しました。同じ下書きで再実行すると登録済みの行は省略されます。";}
  finally{clearInterval(dotTimer);importButton.textContent="編集済みの表現を登録する";importButton.removeAttribute("aria-busy");importButton.disabled=false;draftBusy=false;$("draftRows").querySelectorAll("input,textarea,select,button").forEach(e=>e.disabled=false);}
 });
 let trialMode=sessionStorage.getItem("languageReviewTrial")==="1";
@@ -478,7 +487,7 @@ login.addEventListener("click",async()=>{
  catch(e){status.textContent=e.code==="auth/popup-blocked"?"ポップアップがブロックされました。Safariの設定をご確認ください。":e.code==="auth/popup-closed-by-user"?"ログイン画面が閉じられました。":"ログインできませんでした："+(e.code||"不明なエラー");}
  finally{login.disabled=false;}
 });
-logout.addEventListener("click",async()=>{
+logout.addEventListener("click",async()=>{if(draftBusy)return;
  status.hidden=false;logout.disabled=true;
  try{await signOut(auth);}catch(e){status.textContent="ログアウトできませんでした："+(e.code||"不明なエラー");}
  finally{logout.disabled=false;}
