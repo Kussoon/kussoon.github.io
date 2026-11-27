@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>車両サイズ3D比較・試作版</title>
+<style>
+  :root {
+    color-scheme:light dark;
+    --background:#fff;--foreground:#1a2433;--muted:#eef2f5;--muted-foreground:#546375;
+    --primary:#26364c;--primary-foreground:#fff;--border:#d3dce5;
+    --viz-series-1:#1269ab;--viz-series-2:#d06620;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  }
+  @media(prefers-color-scheme:dark) { :root {
+    --background:#111827;--foreground:#f2f5f8;--muted:#283447;--muted-foreground:#b3c0d1;
+    --primary:#cae1fa;--primary-foreground:#172235;--border:#536276;
+    --viz-series-1:#59b3ff;--viz-series-2:#ff9e58;
+  } }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--background);color:var(--foreground)}
+  main{max-width:850px;margin-inline:auto;padding:16px 14px max(16px,env(safe-area-inset-bottom))}
+  h2{font-size:1.32rem;margin:0 0 12px;font-weight:600}
+  .form-label{display:block;font-size:.88rem;margin-bottom:4px;font-weight:500}
+  .form-select{display:block;appearance:auto;background:var(--background);color:var(--foreground);border:1px solid var(--border);border-radius:7px;padding:8px;min-height:42px;font:inherit}
+  .btn{color:var(--foreground);background:var(--background);border:1px solid var(--border);border-radius:7px;padding:8px 12px;min-height:42px;min-width:44px;font:inherit;white-space:nowrap;touch-action:manipulation}
+  .btn[aria-pressed="true"]{color:var(--primary-foreground);background:var(--primary);border-color:var(--primary)}
+  .btn:disabled{opacity:.4}
+  .btn-ghost{border-color:transparent;background:transparent;padding-inline:4px}
+  .viz-row{display:flex;flex-wrap:wrap;align-items:center}
+  .text-small{font-size:.84rem}
+  .text-muted{color:var(--muted-foreground)}
+  .tabular-nums{font-variant-numeric:tabular-nums}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .zoom-range{accent-color:var(--foreground)}
+  .stage{flex:1 1 auto}
+</style>
+<script>window.kussoonUmamiBeforeSend=function(type,payload){if(payload&&typeof payload==='object'){for(const key of ['url','referrer']){if(typeof payload[key]==='string')payload[key]=payload[key].split(/[?#]/)[0];}}return payload;};</script><script data-before-send="kussoonUmamiBeforeSend" data-domains="kussoon.com,www.kussoon.com" data-exclude-hash="true" data-exclude-search="true" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" defer src="https://cloud.umami.is/script.js"></script>
+<script defer src="/common/site-footer.js"></script>
+</head>
+<body><main>
+<div id="vehicle-overlay-v3">
+  <style>
+    #vehicle-overlay-v3 { --a:var(--viz-series-1); --b:var(--viz-series-2) }
+    #vehicle-overlay-v3 .vehicle-pickers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:10px 0 }
+    #vehicle-overlay-v3 .vehicle-picker { min-width:0 }
+    #vehicle-overlay-v3 .marker { display:inline-block; width:19px; margin-right:6px; vertical-align:middle; border-top:3px solid var(--a) }
+    #vehicle-overlay-v3 .marker.b { border-top:3px dashed var(--b) }
+    #vehicle-overlay-v3 .spec { margin:6px 0 0; display:flex; flex-wrap:wrap; gap:4px 9px }
+    #vehicle-overlay-v3 .spec span { white-space:nowrap }
+    #vehicle-overlay-v3 .comparison { margin:8px 0; display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 12px; justify-content:center }
+    #vehicle-overlay-v3 .comparison span { white-space:nowrap }
+    #vehicle-overlay-v3 .viewport { display:flex; align-items:stretch; min-width:0; gap:4px; margin-top:8px }
+    #vehicle-overlay-v3 .stage { flex:1 1 0; min-width:0; height:clamp(270px,49vw,390px); display:block; overflow:hidden; touch-action:none; user-select:none; cursor:grab; border-radius:6px; background:color-mix(in srgb,var(--muted) 45%,transparent) }
+    #vehicle-overlay-v3 .stage:active { cursor:grabbing }
+    #vehicle-overlay-v3 .zoom-rail { flex:0 0 54px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:5px }
+    #vehicle-overlay-v3 .zoom-range { writing-mode:vertical-lr; direction:rtl; width:36px; height:188px; margin:0; touch-action:none }
+    #vehicle-overlay-v3 .zoom-current { margin:0; white-space:nowrap }
+    #vehicle-overlay-v3 .control-row { justify-content:center; margin-top:10px; gap:6px }
+    #vehicle-overlay-v3 .caption { margin:8px 0 0; text-align:center }
+    #vehicle-overlay-v3 .vehicle-select { width:100% }
+    #vehicle-overlay-v3 .mode-row { justify-content:center; margin:8px 0 0; gap:6px }
+    @media(max-width:410px) {
+      #vehicle-overlay-v3 .vehicle-pickers {grid-template-columns:1fr;gap:8px}
+      #vehicle-overlay-v3 .spec {margin-top:4px}
+      #vehicle-overlay-v3 .zoom-rail {flex-basis:48px}
+    }
+    @supports not (writing-mode:vertical-lr) {
+      #vehicle-overlay-v3 .zoom-range {writing-mode:horizontal-tb;direction:ltr;transform:rotate(-90deg);width:188px;height:36px;margin:76px -70px}
+    }
+  </style>
+  <h2>車両サイズ 3D比較</h2>
+  <div class="vehicle-pickers">
+    <div class="vehicle-picker">
+      <label class="form-label" for="vehicle-a-v3"><span class="marker"></span>車両 A</label>
+      <select class="form-select vehicle-select" id="vehicle-a-v3"></select>
+      <p id="vehicle-spec-a-v3" class="spec text-small tabular-nums" aria-live="polite"></p>
+    </div>
+    <div class="vehicle-picker">
+      <label class="form-label" for="vehicle-b-v3"><span class="marker b"></span>車両 B</label>
+      <select class="form-select vehicle-select" id="vehicle-b-v3"></select>
+      <p id="vehicle-spec-b-v3" class="spec text-small tabular-nums" aria-live="polite"></p>
+    </div>
+  </div>
+  <div class="comparison tabular-nums" id="vehicle-difference-v3" aria-live="polite"></div>
+  <div class="viewport">
+    <svg class="stage" role="img" aria-label="選択された2台の寸法を重ねた回転可能な3Dモデル"></svg>
+    <div class="zoom-rail">
+      <button type="button" class="btn" data-zoom="plus" aria-label="拡大">＋</button>
+      <label class="sr-only" for="zoom-slider-v3">拡大縮小</label>
+      <input id="zoom-slider-v3" class="form-range zoom-range" type="range" min="100" max="1000" value="100" step="10" aria-valuetext="100%">
+      <button type="button" class="btn" data-zoom="minus" aria-label="縮小">−</button>
+      <button type="button" class="btn btn-ghost zoom-current tabular-nums" id="zoom-current-v3" aria-label="拡大率を100%に戻す">100%</button>
+    </div>
+  </div>
+  <div class="viz-row control-row" aria-label="見る方向">
+    <button type="button" class="btn" data-view="iso" aria-pressed="true">斜め</button>
+    <button type="button" class="btn" data-view="side" aria-pressed="false">真横</button>
+    <button type="button" class="btn" data-view="front" aria-pressed="false">正面</button>
+    <button type="button" class="btn" data-view="top" aria-pressed="false">真上</button>
+  </div>
+  <div class="viz-row mode-row" aria-label="ドラッグの操作">
+    <button type="button" class="btn" data-mode="rotate" aria-pressed="true">回転</button>
+    <button type="button" class="btn" data-mode="pan" aria-pressed="false">移動</button>
+    <span class="text-muted text-small">箱をドラッグ</span>
+  </div>
+  <p class="caption text-small text-muted">前端・左側面・底面揃え。寸法はmm。前側の斜面は方向を示す目印です。</p>
+  <script>
+    (() => {
+      const root=document.getElementById('vehicle-overlay-v3');
+      const svg=root.querySelector('.stage'), slider=root.querySelector('#zoom-slider-v3');
+      const current=root.querySelector('#zoom-current-v3');
+      const selectA=root.querySelector('#vehicle-a-v3'), selectB=root.querySelector('#vehicle-b-v3');
+      const specA=root.querySelector('#vehicle-spec-a-v3'), specB=root.querySelector('#vehicle-spec-b-v3');
+      const diff=root.querySelector('#vehicle-difference-v3');
+      const viewButtons=[...root.querySelectorAll('[data-view]')];
+      const modeButtons=[...root.querySelectorAll('[data-mode]')];
+      const zoomButtons=[...root.querySelectorAll('[data-zoom]')];
+      const vehicles=[
+        {id:'alphard-z',name:'アルファード Z',l:4995,w:1850,h:1935},
+        {id:'hiace-wagon-gl',name:'ハイエース ワゴンGL',l:4840,w:1880,h:2105},
+        {id:'crown-sedan-z',name:'クラウン セダン Z',l:5030,w:1890,h:1475}
+      ];
+      const fmt=n=>n.toLocaleString('ja-JP');
+      const get=id=>vehicles.find(v=>v.id===id)||vehicles[0];
+      for(const select of [selectA,selectB]){
+        for(const v of vehicles){const option=document.createElement('option');option.value=v.id;option.textContent=v.name;select.appendChild(option);}
+      }
+      selectA.value=vehicles[0].id;selectB.value=vehicles[1].id;
+      const mul=(a,b)=>[a[0]*b[0]-a[1]*b[1]-a[2]*b[2]-a[3]*b[3],a[0]*b[1]+a[1]*b[0]+a[2]*b[3]-a[3]*b[2],a[0]*b[2]-a[1]*b[3]+a[2]*b[0]+a[3]*b[1],a[0]*b[3]+a[1]*b[2]-a[2]*b[1]+a[3]*b[0]];
+      const unit=v=>{const l=Math.hypot(...v)||1;return v.map(n=>n/l)};
+      const axis=(x,y,z,a)=>[Math.cos(a/2),x*Math.sin(a/2),y*Math.sin(a/2),z*Math.sin(a/2)];
+      const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+      const dot=(a,b)=>a.reduce((sum,v,i)=>sum+v*b[i],0);
+      const presets={
+        iso:mul(axis(1,0,0,Math.PI/7),axis(0,1,0,Math.PI/6)),
+        side:[1,0,0,0],
+        front:axis(0,1,0,Math.PI/2),
+        top:axis(1,0,0,Math.PI/2)
+      };
+      let q=presets.iso.slice(), zoom=1, pan=[0,0], mode='rotate';
+      const rotate=v=>mul(mul(q,[0,...v]),[q[0],-q[1],-q[2],-q[3]]).slice(1);
+      // Chamfer only the front/top corner; retain identical bounding dimensions.
+      const bevelL=.40,bevelH=.24;
+      const faces=[
+        {i:[0,4,3,2,1],n:[0,0,-1]},
+        {i:[5,6,7,8,9],n:[0,0,1]},
+        {i:[0,5,9,4],n:[-1,0,0]},
+        {i:[1,2,7,6],n:[1,0,0]},
+        {i:[0,1,6,5],n:[0,-1,0]},
+        {i:[3,8,7,2],n:[0,1,0]},
+        {i:[4,9,8,3],n:unit([-bevelH,bevelL,0]),bevel:true}
+      ];
+      const edges=[[0,1],[1,2],[2,3],[3,4],[4,0],[5,6],[6,7],[7,8],[8,9],[9,5],[0,5],[1,6],[2,7],[3,8],[4,9]];
+      const faceAdj=edges.map(([a,b])=>faces.map((f,i)=>f.i.includes(a)&&f.i.includes(b)?i:-1).filter(i=>i!==-1));
+      function pair(){return [get(selectA.value),get(selectB.value)]}
+      function updateDetails(){
+        const [a,b]=pair();
+        const vals=v=>'<span>長 '+fmt(v.l)+'</span><span>幅 '+fmt(v.w)+'</span><span>高 '+fmt(v.h)+'</span>';
+        specA.innerHTML=vals(a);specB.innerHTML=vals(b);
+        const signed=n=>n>0?'+'+fmt(n):n<0?'−'+fmt(-n):'0';
+        diff.innerHTML='<span class="text-muted text-small">B − A（mm）</span><span>全長 '+signed(b.l-a.l)+'</span><span>全幅 '+signed(b.w-a.w)+'</span><span>全高 '+signed(b.h-a.h)+'</span>';
+        svg.setAttribute('aria-label',a.name+' と '+b.name+' の外接寸法の重ね合わせ、前端の上角をカット');
+      }
+      function paint(){
+        const w=svg.clientWidth,h=svg.clientHeight;
+        if(w<1||h<1)return;
+        svg.setAttribute('viewBox','0 0 '+w+' '+h);
+        const cars=pair();
+        const maxL=Math.max(...cars.map(v=>v.l))/1000,maxH=Math.max(...cars.map(v=>v.h))/1000,maxW=Math.max(...cars.map(v=>v.w))/1000;
+        const size=Math.hypot(maxL,maxH,maxW);
+        const base=Math.min((w-32)/size,(h-52)/size),scale=base*zoom;
+        const center=[maxL/2,maxH/2,maxW/2];
+        const world=p=>rotate(p.map((n,i)=>n-center[i]));
+        const all=cars.map((v,k)=>{
+          const l=v.l/1000,y=v.h/1000,z=v.w/1000;
+          const side=[[0,0,0],[l,0,0],[l,y,0],[bevelL,y,0],[0,y-bevelH,0]];
+          const vertices=[...side,...side.map(([x,y])=>[x,y,z])];
+          return {points:vertices.map(world),k,color:k===0?'var(--a)':'var(--b)'};
+        });
+        const projected=p=>[w/2+pan[0]+p[0]*scale,h/2+pan[1]-p[1]*scale];
+        const xy=p=>projected(p).map(n=>n.toFixed(2)).join(',');
+        const normals=faces.map(f=>rotate(f.n)[2]);
+        const visible=f=>normals[f]>1e-7;
+        const fills=all.flatMap(v=>faces.map((f,i)=>({v,f,i,depth:f.i.reduce((s,j)=>s+v.points[j][2],0)/f.i.length})).filter(item=>visible(item.i))).sort((a,b)=>a.depth-b.depth);
+        const layers=fills.map(({v,f})=>'<polygon points="'+f.i.map(i=>xy(v.points[i])).join(' ')+'" fill="'+v.color+'" fill-opacity="'+(f.bevel?'.20':'.12')+'" stroke="none"/>').join('');
+        const strokes=[];
+        for(const isFront of [false,true]){
+          for(const v of all){
+            for(let i=0;i<edges.length;i++){
+              const front=faceAdj[i].some(visible);
+              if(front!==isFront)continue;
+              const [a,b]=edges[i], pa=projected(v.points[a]), pb=projected(v.points[b]);
+              if(Math.hypot(pa[0]-pb[0],pa[1]-pb[1])<.2)continue;
+              const dash=!isFront?(v.k===0?'3 4':'2 5'):(v.k===1?'7 4':'none');
+              strokes.push('<line x1="'+pa[0].toFixed(2)+'" y1="'+pa[1].toFixed(2)+'" x2="'+pb[0].toFixed(2)+'" y2="'+pb[1].toFixed(2)+'" stroke="'+v.color+'" stroke-width="'+(isFront?(v.k===0?2.2:2.5):1.1)+'" stroke-opacity="'+(isFront?1:.36)+'" stroke-linecap="round" stroke-dasharray="'+dash+'"/>');
+            }
+          }
+        }
+        // One orientation label per outward-facing main surface. Both vehicles
+        // share the same axes, so duplicate lettering would obscure their overlap.
+        const largest=score=>cars.reduce((a,b)=>score(a)>=score(b)?a:b);
+        const sides=[
+          {key:'side-left',face:0,text:'側面',car:largest(v=>v.l*v.h),u:[-1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,0]},
+          {key:'side-right',face:1,text:'側面',car:largest(v=>v.w),u:[1,0,0],v:[0,-1,0],point:c=>[c.l/2000,c.h/2000,c.w/1000]},
+          {key:'front',face:2,text:'前',car:largest(v=>v.w*v.h),u:[0,0,1],v:[0,-1,0],point:c=>[0,(c.h/1000-bevelH)/2,c.w/2000]},
+          {key:'rear',face:3,text:'後',car:largest(v=>v.l),u:[0,0,-1],v:[0,-1,0],point:c=>[c.l/1000,c.h/2000,c.w/2000]},
+          {key:'bottom',face:4,text:'底面',car:largest(v=>v.l*v.w),u:[1,0,0],v:[0,0,-1],point:c=>[c.l/2000,0,c.w/2000]},
+          {key:'top',face:5,text:'上面',car:largest(v=>v.h),u:[1,0,0],v:[0,0,1],point:c=>[(c.l/1000+bevelL)/2,c.h/1000,c.w/2000]}
+        ];
+        const faceLabels=[];
+        const glyph=Math.max(12,Math.min(22,base*.28*Math.sqrt(zoom)));
+        for(const side of sides){
+          // Hide far/edge-on lettering, avoiding overlap through translucent faces.
+          if(normals[side.face]<.12)continue;
+          const [cx,cy]=projected(world(side.point(side.car)));
+          const u=rotate(side.u),v=rotate(side.v);
+          let a=u[0],b=-u[1],c=v[0],d=-v[1];
+          // Preserve proper reading direction without mirroring the characters.
+          if(a<-.001||(Math.abs(a)<.001&&d<0)){a=-a;b=-b;c=-c;d=-d;}
+          if(cx<0||cx>w||cy<0||cy>h)continue;
+          const transform=[a,b,c,d,cx,cy].map(n=>n.toFixed(4)).join(' ');
+          faceLabels.push('<text data-face-label="'+side.key+'" transform="matrix('+transform+')" text-anchor="middle" dominant-baseline="central" fill="var(--foreground)" opacity=".88" stroke="var(--background)" stroke-width="2.6" paint-order="stroke" stroke-linejoin="round" font-size="'+glyph.toFixed(1)+'" font-weight="500" pointer-events="none">'+side.text+'</text>');
+        }
+        const scaleM=[5,2,1,.5,.2,.1,.05,.02,.01].find(m=>scale*m<=Math.min(100,w*.35))||.01;
+        const line=scaleM*scale,sx=14,sy=h-17;
+        const marker='<g aria-hidden="true" stroke="var(--foreground)" stroke-width="1.15" fill="none"><path d="M'+sx+','+(sy-5)+' V'+sy+' H'+(sx+line)+' v-5"/></g><text x="'+(sx+line/2)+'" y="'+(sy-8)+'" text-anchor="middle" fill="var(--foreground)" font-size="12">'+(scaleM>=1?scaleM+' m':Math.round(scaleM*1000)+' mm')+'</text>';
+        svg.innerHTML=layers+strokes.join('')+faceLabels.join('')+marker;
+      }
+      function setZoom(value,resetPan=false){
+        const old=zoom;
+        const newValue=Math.max(100,Math.min(1000,Math.round(value/10)*10));
+        zoom=newValue/100;
+        if(resetPan||zoom===1)pan=[0,0];else pan=pan.map(n=>n*zoom/old);
+        slider.value=String(newValue);
+        slider.setAttribute('aria-valuetext',newValue+'%');
+        current.textContent=newValue+'%';
+        zoomButtons.forEach(b=>b.disabled=(b.dataset.zoom==='minus'?newValue===100:newValue===1000));
+        paint();
+      }
+      slider.addEventListener('input',()=>setZoom(Number(slider.value)));
+      zoomButtons.forEach(b=>b.addEventListener('click',()=>setZoom(Number(slider.value)+(b.dataset.zoom==='plus'?50:-50))));
+      current.addEventListener('click',()=>setZoom(100,true));
+      for(const select of [selectA,selectB]){
+        select.addEventListener('change',()=>{updateDetails();setZoom(100,true);});
+      }
+      viewButtons.forEach(b=>b.addEventListener('click',()=>{
+        q=presets[b.dataset.view].slice();pan=[0,0];
+        viewButtons.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+        paint();
+      }));
+      modeButtons.forEach(b=>b.addEventListener('click',()=>{
+        mode=b.dataset.mode;
+        modeButtons.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+      }));
+      function ball(e){
+        const r=svg.getBoundingClientRect(),radius=Math.min(r.width,r.height)*.46;
+        const x=(e.clientX-r.left-r.width/2)/radius,y=-(e.clientY-r.top-r.height/2)/radius;
+        const d=x*x+y*y;return d<=1?[x,y,Math.sqrt(1-d)]:unit([x,y,0]);
+      }
+      let pointer=null,lastPoint=null,lastBall=null;
+      svg.addEventListener('pointerdown',e=>{
+        if(pointer!==null)return;
+        pointer=e.pointerId;lastPoint=[e.clientX,e.clientY];lastBall=ball(e);
+        svg.setPointerCapture(pointer);
+      });
+      svg.addEventListener('pointermove',e=>{
+        if(pointer!==e.pointerId||!lastPoint)return;
+        if(mode==='pan'||e.shiftKey){
+          pan=[pan[0]+e.clientX-lastPoint[0],pan[1]+e.clientY-lastPoint[1]];
+        }else{
+          const next=ball(e), c=cross(lastBall,next),d=Math.max(-1,Math.min(1,dot(lastBall,next)));
+          if(d>-.99999){q=unit(mul(unit([1+d,...c]),q));viewButtons.forEach(b=>b.setAttribute('aria-pressed','false'));}
+        }
+        lastPoint=[e.clientX,e.clientY];lastBall=ball(e);paint();
+      });
+      const end=e=>{if(pointer===e.pointerId){pointer=null;lastPoint=null;lastBall=null}};
+      svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);svg.addEventListener('lostpointercapture',end);
+      new ResizeObserver(paint).observe(svg);
+      updateDetails();setZoom(100,true);
+    })();
+  </script>
+</div>
+
+<details class="text-small text-muted" style="margin-top:20px;line-height:1.7">
+  <summary>車両寸法の出典・試作版について</summary>
+  <p>トヨタ自動車の車両カタログの全長・全幅・全高を使用しています。<a style="color:inherit" href="https://toyota.jp/ucar/catalog/brand-TOYOTA/car-ALPHARD/202606/10163594/" target="_blank" rel="noopener">アルファード Z</a> ／ <a style="color:inherit" href="https://toyota.jp/ucar/catalog/brand-TOYOTA/car-HIACE_WAGON/202607/10164950/" target="_blank" rel="noopener">ハイエース ワゴンGL</a> ／ <a style="color:inherit" href="https://toyota.jp/ucar/catalog/brand-TOYOTA/car-CROWN/202609/10164956/" target="_blank" rel="noopener">クラウン セダン Z</a>（2026年11月確認）。</p>
+  <p>車体の形状・斜面は実車を再現したものではありません。外形寸法を比較する検証用ページです。</p>
+</details>
+</main></body></html>
