@@ -43,6 +43,9 @@
 <div id="vehicle-overlay-v3">
   <style>
     #vehicle-overlay-v3 { --a:var(--viz-series-1); --b:var(--viz-series-2) }
+    #vehicle-overlay-v3 .title-row { display:flex; align-items:baseline; gap:10px; margin-bottom:6px }
+    #vehicle-overlay-v3 .version { font-size:.74rem; font-weight:500; color:var(--muted-foreground); white-space:nowrap }
+    #vehicle-overlay-v3 .intro { margin:0 0 12px; font-size:.92rem; line-height:1.6 }
     #vehicle-overlay-v3 .vehicle-pickers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:10px 0 }
     #vehicle-overlay-v3 .vehicle-picker { min-width:0 }
     #vehicle-overlay-v3 .marker { display:inline-block; width:19px; margin-right:6px; vertical-align:middle; border-top:3px solid var(--a) }
@@ -76,7 +79,8 @@
       #vehicle-overlay-v3 .zoom-range {writing-mode:horizontal-tb;direction:ltr;transform:rotate(-90deg);width:188px;height:44px;margin:72px -72px}
     }
   </style>
-  <h2>車両サイズ 3D比較</h2>
+  <h2 class="title-row"><span>車両サイズ 3D比較</span><small class="version">v4</small></h2>
+  <p class="intro">乗用車やバス、トラック、電車から戦車まで、いろいろな乗り物の大きさを比べてみましょう！</p>
   <div class="vehicle-pickers">
     <div class="vehicle-picker">
       <label class="form-label" for="vehicle-a-v3"><span class="marker"></span>車両 A</label>
