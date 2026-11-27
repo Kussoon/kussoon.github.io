@@ -203,7 +203,7 @@ function renderDraft(){
  const mark=document.createElement("strong");mark.dataset.duplicate="";card.append(mark);
  ["日本語","外国語","解説","分類"].forEach((name,j)=>{
  const label=document.createElement("label");label.style.display="block";label.textContent=name;
- const field=document.createElement(j===3?"select":"textarea");field.style.cssText="display:block;width:100%;box-sizing:border-box;margin:3px 0 8px;font-size:16px";
+ const field=document.createElement(j===3?"select":"textarea");if(j<3)field.maxLength=[300,500,1000][j];field.style.cssText="display:block;width:100%;box-sizing:border-box;margin:3px 0 8px;font-size:16px";
  if(j===3){for(const c of [...new Set(["",...draftCategories,...bankQuestions.filter(q=>getLang(q)===lang).map(q=>q.situation||""),r[j]||""])]){const o=document.createElement("option");o.value=c;o.textContent=c||"未分類";field.append(o);}}else field.rows=j===2?2:1;field.style.minHeight=j===3?"44px":"0";
  field.value=r[j]||"";field.addEventListener("input",()=>{r[j]=field.value;draftSummary();saveDraft();});label.append(field);card.append(label);
  });
@@ -211,9 +211,9 @@ function renderDraft(){
  });draftSummary();
 }
 function restoreDraft(){
- draftRows=[];draftOriginal=0;$("importEditor").hidden=true;$("importText").value="";$("draftRows").replaceChildren();
+ draftRows=[];draftOriginal=0;draftBatch="";$("importEditor").hidden=true;$("importText").value="";$("draftRows").replaceChildren();
  if(!approvedUid)return;
- try{const d=JSON.parse(localStorage.getItem(draftStorageKey())||"null");if(d&&Array.isArray(d.rows)){draftRows=d.rows.filter(r=>Array.isArray(r)&&r.slice(0,4).every(v=>typeof v==="string")).map(r=>[...r.slice(0,4),r[4]||crypto.randomUUID()]);draftOriginal=d.original;draftBatch=d.batch||"batch-"+crypto.randomUUID();$("importEditor").hidden=false;renderDraft();saveDraft();}}catch(e){}
+ try{const d=JSON.parse(localStorage.getItem(draftStorageKey())||"null");if(d&&Array.isArray(d.rows)&&d.rows.length<=1000){draftRows=d.rows.filter(r=>Array.isArray(r)&&r.length>=4&&r.slice(0,4).every(v=>typeof v==="string")&&typeof r[4]==="string"&&/^[a-zA-Z0-9-]{1,80}$/.test(r[4])).map(r=>r.slice(0,5));draftOriginal=d.original;draftBatch=d.batch||"batch-"+crypto.randomUUID();$("importEditor").hidden=false;renderDraft();saveDraft();}}catch(e){}
 }
 $("previewImport").addEventListener("click",()=>{
  if(!approvedUid||draftBusy)return;
@@ -229,7 +229,7 @@ $("importButton").addEventListener("click",async()=>{
  const uid=approvedUid,generation=authGeneration;if(!uid)return;
  const rows=draftRows.map(r=>r.slice(0,4).map(x=>x.trim()));
  if(draftBusy||$("importEditor").hidden||!rows.length||rows.length>1000){$("importStatus").textContent="1〜1000件の編集済み表現を用意してください。";return;}
- if(rows.some(a=>a.length<2||a.length>4||!a[0]||!a[1]||a[0].length>300||a[1].length>500||(a[2]||"").length>1000)){
+ if(rows.some(a=>a.length<2||a.length>4||!a[0]||!a[1]||a[0].length>300||a[1].length>500||(a[2]||"").length>1000||(a[3]||"").length>120)){
   $("importStatus").textContent="形式が不正な行があります。タブ区切りで入力してください。";return;
  }
  if(!confirm(rows.length+"件を"+(lang==="en"?"英語":"フランス語")+"に登録しますか？"))return;
@@ -245,6 +245,7 @@ $("importButton").addEventListener("click",async()=>{
   const l=lang,batchId=draftBatch,ids=draftRows.map(r=>r[4]);
   const counterRef=doc(db,"users",uid,"review","import-counter-"+l);
   const fresh=await fetchManaged(),existing=fresh.filter(q=>getLang(q)===l),known=new Set(existing.map(key));
+  if(existing.some(q=>!Number.isSafeInteger(Number(q.initialNumber))||Number(q.initialNumber)<1))throw Error("初回登録番号が未確定の教材があります。番号を確定してから登録してください。");
   let nextNumber=Math.max(0,...existing.map(x=>Number(x.initialNumber)||0)),nextOrder=Math.max(0,...existing.map(x=>Number(x.sortOrder)||0));
   for(const [batchIndex,[q,answer,why="",situation=""]] of rows.entries()){
    if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
@@ -269,7 +270,7 @@ $("importButton").addEventListener("click",async()=>{
    draftRows=[];$("importEditor").hidden=true;$("importText").value="";saveDraft();
    await loadBank(uid,generation);
   }
- }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。下書きを保持しました。同じ下書きで再実行すると登録済みの行は省略されます。";}
+ }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。下書きを保持しました。登録済みの行を編集しても再実行では更新されません。そのまま再実行すると登録済みの行は省略されます。";}
  finally{clearInterval(dotTimer);importButton.textContent="編集済みの表現を登録する";importButton.removeAttribute("aria-busy");draftBusy=false;importButton.disabled=!draftRows.length;$("draftRows").querySelectorAll("input,textarea,select,button").forEach(e=>e.disabled=false);}
 });
 let trialMode=sessionStorage.getItem("languageReviewTrial")==="1";
