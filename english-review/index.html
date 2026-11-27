@@ -251,17 +251,24 @@ $("importButton").addEventListener("click",async()=>{
    if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
    const item={q,answer,why,language:l},k=key(item),ref=doc(db,"users",uid,"expressions",l+"-draft-"+ids[batchIndex]);
    if((await getDoc(ref)).exists()){duplicates++;continue;}
-   const canonical=doc(db,"users",uid,"expressions",l+"-"+await expressionId(item));
-   if(known.has(k)||(await getDoc(canonical)).exists()){if(!confirm("重複した表現です。\n"+q+"\n"+answer+"\nOK：別の問題として残す／キャンセル：今回の登録を省略")){duplicates++;continue;}}
+   const hash=await expressionId(item),canonical=doc(db,"users",uid,"expressions",l+"-"+hash),keyRef=doc(db,"users",uid,"review","import-key-"+l+"-"+hash);
+   let allowDuplicate=false;
+   if(known.has(k)||(await getDoc(canonical)).exists()){if(!confirm("重複した表現です。\n"+q+"\n"+answer+"\nOK：別の問題として残す／キャンセル：今回の登録を省略")){duplicates++;continue;}allowDuplicate=true;}
    if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
-   const created=await runTransaction(db,async tx=>{
+   let created;
+   for(;;){created=await runTransaction(db,async tx=>{
     await assertNoReset(uid,l,tx);const prior=await tx.get(ref);if(prior.exists())return false;
     if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
+    const marker=await tx.get(keyRef);if(marker.exists()&&!allowDuplicate)return {needsConfirmation:true};
     const counter=await tx.get(counterRef),data=counter.data()||{};
     const number=Math.max(nextNumber,Number(data.initialNumber)||0)+1,sort=Math.max(nextOrder,Number(data.sortOrder)||0)+1;
+    tx.set(keyRef,{expressionId:l+"-draft-"+ids[batchIndex]});
     tx.set(counterRef,{initialNumber:number,sortOrder:sort},{merge:true});
     tx.set(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:number,sortOrder:sort});return {number,sort};
    });
+   if(!created?.needsConfirmation)break;
+   if(!confirm("別の端末等から同じ表現が登録されました。別の問題として残しますか？\n"+q+"\n"+answer)){created=false;break;}allowDuplicate=true;
+   }
    if(created){added++;nextNumber=created.number;nextOrder=created.sort;known.add(k);}else duplicates++;
    if(generation===authGeneration)$("importStatus").textContent=(batchIndex+1)+"/"+rows.length+"件処理済み";
   }

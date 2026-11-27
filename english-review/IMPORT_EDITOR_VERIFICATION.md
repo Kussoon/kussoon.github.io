@@ -8,20 +8,23 @@
 - Chromium 375×900、430×900、1280×900：個別編集、再読込による下書き復元、英仏切替、重複候補削除、個別削除、125件のカード表示。横はみ出しとJavaScript例外なし。
 - jsdom合成データ：選択削除、1000件編集・破棄、125件登録。
 - トランザクション模擬モデル：保存成功後の応答消失→同じ下書きで再実行して件数不変、2クライアント同時登録で番号重複なし。
-- 仮の認証・保存実装へ置き換えたテストのため、Firebase SDK・Security Rules・実ネットワーク上の競合まで検証した結果ではありません。
+- Firestoreエミュレーター（demo-review774、Firestore SDK 13.4.0）：125件登録、独立した2クライアントの同文同時登録で確認・省略、番号重複なし、コミット後の応答消失→再試行で1件のみ、SDK disableNetwork/enableNetworkによる切断復帰、既存教材とセッションの不変を確認。
+- 同エミュレーターで、未認証・未許可ユーザー・他人UIDの拒否、access書込み拒否、許可済み本人のカウンター読書き許可を確認。
+- ブラウザー・モデル試験では仮の認証・保存実装を使用。Firestore試験では実SDKとエミュレーター、記載のSecurity Rulesを使用。本番サービスの設定値そのものは未取得です。
 
 ## 修正
 
 - 編集欄に文字数上限、分類120文字の登録前検証。
 - 復元下書きの件数・行形状・IDを検証。言語切替時にバッチ状態を初期化。
 - 登録途中のエラー後、登録済み行の編集は再実行で更新されないことを明記。
+- 同文の同時登録を検出するimport-keyドキュメントを同じトランザクションで確認・保存。確認ダイアログはトランザクション外で表示。
 - 初回番号未確定の既存教材がある場合は登録を停止。既存番号を推測して衝突することを防止。
 
 ## 権限・番号管理の照合
 
-新規パスは users/{uid}/expressions/{language}-draft-{rowId} と users/{uid}/review/import-counter-{language}。FAMILY_ACCESS_SETUP.mdの本人・許可済みユーザー限定ルールでは両方が対象です。カウンターと表現を同一トランザクションで作成、同一行IDの再実行は書き込まず省略。既存の表現ドキュメント・学習履歴は更新しません。
+新規パスは users/{uid}/expressions/{language}-draft-{rowId} と users/{uid}/review/import-counter-{language}、users/{uid}/review/import-key-{language}-{hash}。FAMILY_ACCESS_SETUP.mdの本人・許可済みユーザー限定ルールでは両方が対象です。カウンターと表現を同一トランザクションで作成、同一行IDの再実行は書き込まず省略。既存の表現ドキュメント・学習履歴は更新しません。
 
-**公開済みRulesの実物は取得できていません。** 対象プロジェクトのエミュレーターまたは検証専用プロジェクトで、未認証・未許可・他人UIDの拒否、および許可済み本人のカウンター読書きを確認する必要があります。異なる下書きとして同じ表現を投入した場合は別行IDになります。同時に投入した同文が常に重複候補として警告される保証はありません。採番の競合保護とは別の制限です。
+**公開済みRulesの実物は取得できていません。** リポジトリのFAMILY_ACCESS_SETUP.mdに記載されたルールとの適合性はエミュレーターで検証済みです。Firebase Consoleで現在公開中のルールがこの内容と一致することの確認が公開前に必要です。同文の同時登録はこのPRの新しい登録処理間で保護します。旧版の登録処理など、import-keyを書かない処理との同時操作は対象外です。
 
 ## 実機確認手順（統合前）
 
@@ -36,4 +39,14 @@
 
 tests/import-editor-model.cjs は jsdom、tests/import-editor-browser.cjs は playwright と @sparticuz/chromium を使います。テストは合成データのみ、外部リクエストを遮断します。REVIEW_JSDOM、REVIEW_CHROMIUMで導入済みモジュールのパスを指定できます。
 
-実ブラウザーと模擬保存の検査は完了しましたが、Firebase実環境・Rulesの実行検証が残るため、全検証完了・公開可能とは判定していません。
+自動検証は実ブラウザー・実SDK・エミュレーターで完了しました。iPhone実機と公開済みRulesの一致確認は残っています。本番への統合・公開はユーザー確認後です。
+
+### エミュレーター試験の再実行
+
+Java 21とfirebase-tools、firebase 13.4.0、@firebase/rules-unit-testing、jsdomを使用。FAMILY_ACCESS_SETUP.mdのルールをテスト用firestore.rulesへ抽出し、Firestoreポート8087・UI無効のfirebase.jsonを指定します。
+
+```sh
+firebase emulators:exec --only firestore --project demo-review774 --config /path/to/test/firebase.json 'node english-review/tests/import-editor-firestore.cjs'
+```
+
+REVIEW_RULES_TESTING、REVIEW_FIRESTORE、REVIEW_JSDOMでモジュールの絶対パスを指定できます。Nodeとjsdom間のオブジェクトはテスト境界でホスト側のplain objectへ変換し、実トランザクションへ渡しています。
