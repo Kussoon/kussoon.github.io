@@ -50,3 +50,7 @@ firebase emulators:exec --only firestore --project demo-review774 --config /path
 ```
 
 REVIEW_RULES_TESTING、REVIEW_FIRESTORE、REVIEW_JSDOMでモジュールの絶対パスを指定できます。Nodeとjsdom間のオブジェクトはテスト境界でホスト側のplain objectへ変換し、実トランザクションへ渡しています。
+
+## 重複確認の一括化
+
+登録前に重複を「まとめて省略／別問題としてすべて残す」から選択します。通常は省略です。登録開始時の確認は1回のみで、行ごとの確認ダイアログは表示しません。同時登録で検出した重複にも同じ方針を適用します。125件すべてが既存重複の場合の省略・保持、およびトランザクション内の重複検出による省略を実行ハーネスで検証し、追加の確認なしを確認しました。
