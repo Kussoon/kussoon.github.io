@@ -1,0 +1,125 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'"><title>登録前編集・実機確認用 | Kussoon</title><style>
+:root{color-scheme:light dark;font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
+body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 auto;padding:16px 20px;background:white;border-radius:16px;box-shadow:0 4px 24px #0001}h1{font-size:1.55rem;margin:12px 0 10px} [hidden]{display:none!important}p{line-height:1.7}button{font:inherit;padding:12px 20px;border:0;border-radius:9px;background:#1769aa;color:white;cursor:pointer}button:disabled{opacity:.55;cursor:wait}#userPanel[hidden],#loginPanel[hidden],#pendingPanel[hidden],#approvedPanel[hidden]{display:none!important}code{overflow-wrap:anywhere}#copyUid{background:#526172}#logout{background:#4b5563}#userPanel{display:block}#quiz[hidden],#questionArea[hidden],#resultArea[hidden]{display:none!important}.answers{display:grid;gap:10px}.answers button{text-align:left;background:#344e6b}.answers button:disabled{opacity:.8;cursor:default}.answers button.correct{background:#216e4e}.answers button.wrong{background:#a43d3d}.panel{border:1px solid #8794a455;border-radius:12px;padding:16px;margin-top:12px}.bank-summary{font-size:1.35rem;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px}.bank-summary::-webkit-details-marker{display:none}.bank-summary::after{content:"▼";font-size:.85rem;opacity:.8;transition:transform .15s}.bank-summary[aria-expanded="true"]::after,details[open]>.bank-summary::after{transform:rotate(180deg)}.bank-summary:focus-visible{outline:2px solid #78aaf6;outline-offset:5px}.bank-content{padding-top:8px}.feedback{min-height:2em}.quiz-actions{display:flex;gap:10px;flex-wrap:wrap}.quiz-actions button{background:#1769aa}.muted{color:#526172;font-size:.9rem}#status{min-height:1.5em}#status[hidden]{display:none!important}.login-summary{margin:16px 0 8px}#userPanel>p:last-child{margin-bottom:0}.slogan{display:block;width:100%;height:auto;margin:12px 0 16px;animation:slogan-blink 2s steps(1,end) infinite;filter:drop-shadow(0 2px 4px #0003)}@keyframes slogan-blink{0%,74.999%{opacity:1}75%,99.999%{opacity:0}}.lang-tabs{display:flex;gap:8px}.lang{flex:1;background:#dce5f1;color:#1b2737}.lang.active{background:#1769aa;color:white}.modes{display:grid;gap:10px}.modes select{display:block;width:100%;padding:10px;border-radius:8px;font:inherit}.modes label{display:block}#rangeFields{display:flex;gap:12px;flex-wrap:wrap}#rangeFields input{width:90px;padding:8px;font:inherit;border-radius:6px;border:1px solid #8794a4}textarea{box-sizing:border-box;width:100%;min-height:135px;padding:10px;border:1px solid #8794a488;border-radius:8px;font:inherit;background:transparent;color:inherit}a{color:#1769aa}.stats{background:#f3f6fa;border-radius:8px;padding:10px}.manage-summary{font-size:1rem;font-weight:700;cursor:pointer;list-style:none;padding:10px 0}.manage-summary{display:flex;align-items:center;justify-content:space-between;gap:12px}.manage-summary::-webkit-details-marker{display:none}.manage-summary::after{content:"▼";font-size:.85rem;opacity:.8;flex-shrink:0;transition:transform .15s}details[open]>.manage-summary::after{transform:rotate(180deg)}.manage-content{border-top:1px solid #8794a455;padding-top:8px}#exportTable th,#exportTable td{padding:7px;border-bottom:1px solid #8794a455;text-align:left;vertical-align:top}input[type=file]{display:block;margin:10px 0}@media(max-width:680px){main{border-radius:0;min-height:100dvh;box-sizing:border-box;padding:12px 16px}#quiz{margin-top:8px}}@media(prefers-color-scheme:dark){body{background:#10151d;color:#e7edf6}main{background:#202a37;box-shadow:none}.muted{color:#bdc8d8}a{color:#9bceff}.stats{background:#16202c}}
+#answerPanel{padding:10px;margin-top:6px}#answerPanel p{margin:6px 0}#progress{scroll-margin-top:24px}#questionArea{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}#editStatus:empty{display:none}
+#gradeActions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}#gradeActions button{padding:10px 2px;font-size:.9rem;line-height:1.3;min-width:0}#markExclude{background:#64748b}#markCorrect{background:#21804e}#markWrong{background:#b54040}
+#question,#modelAnswer{font-size:1.2rem;font-weight:600;line-height:1.5}#preActions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}#preActions button{padding:8px 10px;font-size:.85rem}body.reviewing .slogan{position:sticky;top:0;z-index:5;max-height:76px;object-fit:contain;background:inherit;margin:0 0 8px}#progress{scroll-margin-top:85px}
+button{max-width:100%;margin-bottom:8px}.preview-note{padding:12px;border:2px solid #d99120;border-radius:10px}summary{cursor:pointer}main{overflow-wrap:anywhere}</style></head><body><main><h1>登録前編集・実機確認用</h1><p class="preview-note">PR #774の編集部分を確認する専用ページです。Firebase接続なし。「登録する」を押しても、このブラウザー内のテスト保存だけです。個人の教材は貼り付けず、サンプルをご利用ください。</p><p>① サンプルを入れる → ② 登録前に編集する → ③ 編集・削除を試す → ④ 再読み込みして復元を確認してください。</p><div class="lang-tabs"><button data-lang="en" class="lang active">英語</button><button data-lang="fr" class="lang">フランス語</button></div><p><button id="sample">サンプルを入れる</button> <button id="sample125">125件を入れる</button></p><details open id="bank" class="panel"><summary class="bank-summary">復習表現を登録</summary><div class="bank-content"><p class="muted">日本語・外国語・解説・シチュエーション（任意）をタブで区切り、1行に1表現ずつ貼り付けてください。登録内容はこのアカウント専用です。</p><p id="bankCount" class="muted"></p><textarea id="importText" placeholder="日本語&#9;外国語&#9;解説（任意）&#9;シチュエーション（任意）"></textarea><p><button id="previewImport" type="button">登録前に編集する</button></p><section id="importEditor" hidden><p id="draftCount" role="status"></p><p><button id="deleteSelected" type="button">選択項目を削除</button> <button id="deleteDuplicates" type="button">重複候補を削除</button></p><div id="draftRows" style="max-height:65vh;overflow:auto"></div><p><button id="importButton" type="button">編集済みの表現を登録する</button> <button id="discardDraft" type="button">編集を破棄</button></p><p id="draftSaveStatus" class="muted"></p></section><p id="importStatus" class="muted" role="status"></p></div></details><details class="panel"><summary>確認していただきたいこと</summary><ol><li>日本語・外国語・解説・分類を編集できる</li><li>「削除」と選択項目の削除が使える</li><li>重複候補が表示され、削除できる</li><li>ページ再読み込みで編集した下書きが復元される</li><li>英語・フランス語の下書きが別々に残る</li><li>125件でも操作でき、横にはみ出さない</li><li>テスト登録後に件数が増える</li></ol><p>実際の通信切断・同時登録・アクセス権限は別途エミュレーターで検証済みです。このページは画面操作の確認用です。</p></details><p><button id="clearTest">確認ページのテストデータを消去</button></p></main><script>const $=id=>document.getElementById(id);let approvedUid="preview-only",authGeneration=1,lang="en",bankQuestions=[];const db={};
+const norm=s=>s.normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase(),key=q=>norm(q.q)+"|"+norm(q.answer),getLang=q=>q.language||"en";
+const storeKey="review774-preview-documents-v1";let documents=new Map();try{documents=new Map(JSON.parse(localStorage.getItem(storeKey)||"[]"));}catch{}
+const doc=(db,...parts)=>parts.join("/"),serverTimestamp=()=>({seconds:Math.floor(Date.now()/1000)}),getDoc=async ref=>({exists:()=>documents.has(ref),data:()=>documents.get(ref)});
+const fetchManaged=async()=>[...documents].filter(([p])=>p.includes("/expressions/")).map(([p,q])=>({...q,id:p.split("/").pop()}));
+async function loadBank(){bankQuestions=await fetchManaged();$("bankCount").textContent="この確認ページ内のテスト登録："+bankQuestions.filter(q=>getLang(q)===lang).length+"件";}
+const assertNoReset=async()=>{};let txQueue=Promise.resolve();
+async function runTransaction(db,callback){const task=txQueue.then(async()=>{const writes=[];const result=await callback({get:getDoc,set:(r,v)=>writes.push([r,v])});const updated=new Map(documents);for(const [r,v]of writes)updated.set(r,v);localStorage.setItem(storeKey,JSON.stringify([...updated]));documents=updated;return result});txQueue=task.catch(()=>{});return task;}
+async function expressionId(q){
+ const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(key(q)));
+ return Array.from(new Uint8Array(hash),v=>v.toString(16).padStart(2,"0")).join("");
+}
+
+const draftCategories=["01 挨拶・お礼・別れ","02 会話の進行・質問・聞き返し","03 基本表現・比較・数量","04 日常生活・朝の支度","05 健康・身体・服薬","06 通勤・徒歩・運動","07 家族・友人・思い出","08 学校・習い事・教育","09 音楽・ピアノ・趣味","10 語学学習・音声機器","11 仕事・役員車・駐車設備","12 仕事・舞台・コンサート","13 自動車・車種・車のある生活","14 道路・交通ルール・安全運転","15 自転車・バイク・免許","16 公共交通・運賃・決済","17 公共交通・経営・運転士不足","18 社会・文化・マナー・価値観","19 ごみ・環境・生活制度"];
+let draftRows=[],draftOriginal=0,draftBusy=false,draftBatch="";
+const draftStorageKey=()=> "review-import-draft-v1:"+approvedUid+":"+lang;
+const draftNorm=s=>norm(String(s||""));
+function draftDuplicates(){
+ const known=new Set(bankQuestions.filter(q=>getLang(q)===lang).map(q=>draftNorm(q.answer)));
+ return draftRows.map(r=>{const k=draftNorm(r[1]),duplicate=!!k&&known.has(k);if(k)known.add(k);return duplicate;});
+}
+function saveDraft(){
+ if(!approvedUid)return;
+ try{if($("importEditor").hidden)localStorage.removeItem(draftStorageKey());else localStorage.setItem(draftStorageKey(),JSON.stringify({rows:draftRows,original:draftOriginal,batch:draftBatch}));$("draftSaveStatus").textContent="編集中の内容はこの端末に保存されます。";}catch(e){$("draftSaveStatus").textContent="下書きを端末に保存できませんでした。";}
+}
+function draftSummary(){
+ const flags=draftDuplicates();$("importButton").disabled=draftBusy||!draftRows.length;$("draftCount").textContent="取込 "+draftOriginal+"件 ／ 残り "+draftRows.length+"件 ／ 重複候補 "+flags.filter(Boolean).length+"件";
+ $("draftRows").querySelectorAll("[data-duplicate]").forEach((el,i)=>el.textContent=flags[i]?"重複候補":"");
+}
+function renderDraft(){
+ const host=$("draftRows");host.replaceChildren();
+ draftRows.forEach((r,i)=>{
+ const card=document.createElement("div");card.style.cssText="border:1px solid #8794a488;border-radius:8px;padding:8px;margin:8px 0";
+ const check=document.createElement("input");check.type="checkbox";check.dataset.select=String(i);check.setAttribute("aria-label","項目 "+(i+1)+" を選択");card.append(check,document.createTextNode(" "+(i+1)+"件目 "));
+ const mark=document.createElement("strong");mark.dataset.duplicate="";card.append(mark);
+ ["日本語","外国語","解説","分類"].forEach((name,j)=>{
+ const label=document.createElement("label");label.style.display="block";label.textContent=name;
+ const field=document.createElement(j===3?"select":"textarea");if(j<3)field.maxLength=[300,500,1000][j];field.style.cssText="display:block;width:100%;box-sizing:border-box;margin:3px 0 8px;font-size:16px";
+ if(j===3){for(const c of [...new Set(["",...draftCategories,...bankQuestions.filter(q=>getLang(q)===lang).map(q=>q.situation||""),r[j]||""])]){const o=document.createElement("option");o.value=c;o.textContent=c||"未分類";field.append(o);}}else field.rows=j===2?2:1;field.style.minHeight=j===3?"44px":"0";
+ field.value=r[j]||"";field.addEventListener("input",()=>{r[j]=field.value;draftSummary();saveDraft();});label.append(field);card.append(label);
+ });
+ const del=document.createElement("button");del.type="button";del.textContent="削除";del.addEventListener("click",()=>{if(draftBusy)return;draftRows.splice(i,1);renderDraft();saveDraft();});card.append(del);host.append(card);
+ });draftSummary();
+}
+function restoreDraft(){
+ draftRows=[];draftOriginal=0;draftBatch="";$("importEditor").hidden=true;$("importText").value="";$("draftRows").replaceChildren();
+ if(!approvedUid)return;
+ try{const d=JSON.parse(localStorage.getItem(draftStorageKey())||"null");if(d&&Array.isArray(d.rows)&&d.rows.length<=1000){draftRows=d.rows.filter(r=>Array.isArray(r)&&r.length>=4&&r.slice(0,4).every(v=>typeof v==="string")&&typeof r[4]==="string"&&/^[a-zA-Z0-9-]{1,80}$/.test(r[4])).map(r=>r.slice(0,5));draftOriginal=d.original;draftBatch=d.batch||"batch-"+crypto.randomUUID();$("importEditor").hidden=false;renderDraft();saveDraft();}}catch(e){}
+}
+$("previewImport").addEventListener("click",()=>{
+ if(!approvedUid||draftBusy)return;
+ const rows=$("importText").value.split(/\r?\n/).filter(x=>x.trim()).map(x=>x.split(x.includes("\t")?/\t/:/ {2,}|\u3000+/).map(v=>v.trim()));
+ if(!rows.length||rows.length>1000||rows.some(r=>r.length<2||r.length>4||!r[0]||!r[1])){$("importStatus").textContent="1〜1000行のタブ区切りデータを確認してください。";return;}
+ if(!$("importEditor").hidden&&!confirm("編集中の下書きを置き換えますか？"))return;
+ draftBatch="batch-"+crypto.randomUUID();draftRows=rows.map(r=>[r[0],r[1],r[2]||"",r[3]||"",crypto.randomUUID()]);draftOriginal=rows.length;$("importEditor").hidden=false;$("importStatus").textContent="";renderDraft();saveDraft();
+});
+$("deleteSelected").addEventListener("click",()=>{if(draftBusy)return;const ids=new Set([...$("draftRows").querySelectorAll("[data-select]:checked")].map(e=>Number(e.dataset.select)));draftRows=draftRows.filter((_,i)=>!ids.has(i));renderDraft();saveDraft();});
+$("deleteDuplicates").addEventListener("click",()=>{if(draftBusy)return;const flags=draftDuplicates();if(!confirm("重複候補 "+flags.filter(Boolean).length+"件を削除しますか？"))return;draftRows=draftRows.filter((_,i)=>!flags[i]);renderDraft();saveDraft();});
+$("discardDraft").addEventListener("click",()=>{if(draftBusy||!confirm("編集中の下書きを破棄しますか？"))return;draftRows=[];$("importEditor").hidden=true;$("importText").value="";saveDraft();});
+$("importButton").addEventListener("click",async()=>{
+ const uid=approvedUid,generation=authGeneration;if(!uid)return;
+ const rows=draftRows.map(r=>r.slice(0,4).map(x=>x.trim()));
+ if(draftBusy||$("importEditor").hidden||!rows.length||rows.length>1000){$("importStatus").textContent="1〜1000件の編集済み表現を用意してください。";return;}
+ if(rows.some(a=>a.length<2||a.length>4||!a[0]||!a[1]||a[0].length>300||a[1].length>500||(a[2]||"").length>1000||(a[3]||"").length>120)){
+  $("importStatus").textContent="形式が不正な行があります。タブ区切りで入力してください。";return;
+ }
+ if(!confirm(rows.length+"件を"+(lang==="en"?"英語":"フランス語")+"に登録しますか？"))return;
+ draftBusy=true;const importButton=$("importButton");
+ $("draftRows").querySelectorAll("input,textarea,select,button").forEach(e=>e.disabled=true);
+ importButton.disabled=true;
+ importButton.setAttribute("aria-busy","true");
+ importButton.innerHTML='登録中<span id="importDots" aria-hidden="true" style="display:inline-block;width:1.5em;text-align:left">.</span>';
+ const dots=$("importDots");let dotCount=1;
+ const dotTimer=setInterval(()=>{dotCount=(dotCount+1)%4;dots.textContent=".".repeat(dotCount);},400);
+ let added=0,duplicates=0;
+ try{
+  const l=lang,batchId=draftBatch,ids=draftRows.map(r=>r[4]);
+  const counterRef=doc(db,"users",uid,"review","import-counter-"+l);
+  const fresh=await fetchManaged(),existing=fresh.filter(q=>getLang(q)===l),known=new Set(existing.map(key));
+  if(existing.some(q=>!Number.isSafeInteger(Number(q.initialNumber))||Number(q.initialNumber)<1))throw Error("初回登録番号が未確定の教材があります。番号を確定してから登録してください。");
+  let nextNumber=Math.max(0,...existing.map(x=>Number(x.initialNumber)||0)),nextOrder=Math.max(0,...existing.map(x=>Number(x.sortOrder)||0));
+  for(const [batchIndex,[q,answer,why="",situation=""]] of rows.entries()){
+   if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
+   const item={q,answer,why,language:l},k=key(item),ref=doc(db,"users",uid,"expressions",l+"-draft-"+ids[batchIndex]);
+   if((await getDoc(ref)).exists()){duplicates++;continue;}
+   const hash=await expressionId(item),canonical=doc(db,"users",uid,"expressions",l+"-"+hash),keyRef=doc(db,"users",uid,"review","import-key-"+l+"-"+hash);
+   let allowDuplicate=false;
+   if(known.has(k)||(await getDoc(canonical)).exists()){if(!confirm("重複した表現です。\n"+q+"\n"+answer+"\nOK：別の問題として残す／キャンセル：今回の登録を省略")){duplicates++;continue;}allowDuplicate=true;}
+   if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
+   let created;
+   for(;;){created=await runTransaction(db,async tx=>{
+    await assertNoReset(uid,l,tx);const prior=await tx.get(ref);if(prior.exists())return false;
+    if(generation!==authGeneration||approvedUid!==uid||lang!==l)throw Error("ログイン状態が変わりました");
+    const marker=await tx.get(keyRef);if(marker.exists()&&!allowDuplicate)return {needsConfirmation:true};
+    const counter=await tx.get(counterRef),data=counter.data()||{};
+    const number=Math.max(nextNumber,Number(data.initialNumber)||0)+1,sort=Math.max(nextOrder,Number(data.sortOrder)||0)+1;
+    tx.set(keyRef,{expressionId:l+"-draft-"+ids[batchIndex]});
+    tx.set(counterRef,{initialNumber:number,sortOrder:sort},{merge:true});
+    tx.set(ref,{...item,situation:situation.trim(),batchId,batchIndex,createdAt:serverTimestamp(),initialNumber:number,sortOrder:sort});return {number,sort};
+   });
+   if(!created?.needsConfirmation)break;
+   if(!confirm("別の端末等から同じ表現が登録されました。別の問題として残しますか？\n"+q+"\n"+answer)){created=false;break;}allowDuplicate=true;
+   }
+   if(created){added++;nextNumber=created.number;nextOrder=created.sort;known.add(k);}else duplicates++;
+   if(generation===authGeneration)$("importStatus").textContent=(batchIndex+1)+"/"+rows.length+"件処理済み";
+  }
+  if(generation===authGeneration&&approvedUid===uid){
+   $("importStatus").textContent=added+"件登録、"+duplicates+"件重複を省略しました。";
+   draftRows=[];$("importEditor").hidden=true;$("importText").value="";saveDraft();
+   await loadBank(uid,generation);
+  }
+ }catch(e){if(generation===authGeneration)$("importStatus").textContent=added+"件登録後に失敗："+(e.code||"エラー")+"。下書きを保持しました。登録済みの行を編集しても再実行では更新されません。そのまま再実行すると登録済みの行は省略されます。";}
+ finally{clearInterval(dotTimer);importButton.textContent="編集済みの表現を登録する";importButton.removeAttribute("aria-busy");draftBusy=false;importButton.disabled=!draftRows.length;$("draftRows").querySelectorAll("input,textarea,select,button").forEach(e=>e.disabled=false);}
+});
+document.querySelectorAll("[data-lang]").forEach(b=>b.addEventListener("click",async()=>{if(draftBusy)return;lang=b.dataset.lang;document.querySelectorAll("[data-lang]").forEach(x=>x.classList.toggle("active",x===b));restoreDraft();await loadBank();}));
+$("sample").addEventListener("click",()=>{$("importText").value=lang==="en"?"おはようございます。\tGood morning.\t朝の挨拶です。\t01 挨拶・お礼・別れ\nありがとうございます。\tThank you.\tお礼です。\t01 挨拶・お礼・別れ\nありがとう。\tThank you.\t重複候補の確認用です。\t01 挨拶・お礼・別れ":"こんにちは。\tBonjour.\t挨拶です。\t01 挨拶・お礼・別れ\nありがとう。\tMerci.\tお礼です。\t01 挨拶・お礼・別れ";});
+$("sample125").addEventListener("click",()=>{$("importText").value=Array.from({length:125},(_,i)=>"確認用 "+(i+1)+"\t"+(lang==="en"?"Test expression ":"Expression de test ")+(i+1)+"\t大量表示の確認用です。\t03 基本表現・比較・数量").join("\n");});
+$("clearTest").addEventListener("click",async()=>{if(draftBusy||!confirm("この確認ページのテスト登録と英仏の下書きを消去しますか？"))return;localStorage.removeItem(storeKey);for(const l of ["en","fr"])localStorage.removeItem("review-import-draft-v1:preview-only:"+l);documents.clear();restoreDraft();await loadBank();});restoreDraft();loadBank();
+</script></body></html>
