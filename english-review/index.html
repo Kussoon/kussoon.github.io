@@ -458,7 +458,7 @@ $("saveEdit").addEventListener("click",async()=>{
  if(generation!==authGeneration||uid!==approvedUid)return;
  Object.assign(q,patch);bankQuestions=bankQuestions.map(x=>x.id===q.id?{...x,...patch}:x);
  $("question").textContent="No. "+(q.initialNumber||q.number)+"　"+q.q;$("modelAnswer").textContent=q.answer;
- $("feedback").textContent=q.why+" 模範解答以外でも自然で意味が通じる外国語なら、正解として構いません。";
+ $("feedback").textContent=q.why||"";
  closeEdit();$("editStatus").textContent="修正を保存しました。";
  }catch(e){if(generation===authGeneration)$("editStatus").textContent="保存できませんでした："+(e.code||"エラー");}
  finally{$("saveEdit").disabled=false;$("cancelEdit").disabled=false;}
