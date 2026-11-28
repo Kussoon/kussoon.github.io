@@ -51,9 +51,26 @@
     #kussoon-region-size-v2{width:100%;color:var(--foreground)}
     #kussoon-region-size-v2 .title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
     #kussoon-region-size-v2 .title h2{margin:0}
-    #kussoon-region-size-v2 .pickers{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin:10px 0}
-    #kussoon-region-size-v2 .picker{min-width:0}
-    #kussoon-region-size-v2 select{display:block;width:100%;max-width:100%;box-sizing:border-box}
+    #kussoon-region-size-v2 .pickers{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:auto auto auto;gap:3px 8px;margin:10px 0;position:relative}
+    #kussoon-region-size-v2 .picker{display:contents}
+    #kussoon-region-size-v2 .picker-a>*{grid-column:1}
+    #kussoon-region-size-v2 .picker-b>*{grid-column:3}
+    #kussoon-region-size-v2 .picker .form-label{grid-row:1;margin-bottom:0}
+    #kussoon-region-size-v2 .picker .country-trigger{grid-row:2}
+    #kussoon-region-size-v2 .picker .values{grid-row:3;min-width:0;overflow-wrap:anywhere}
+    #kussoon-region-size-v2 [hidden]{display:none!important}
+    #kussoon-region-size-v2 #rg-swap{grid-column:2;grid-row:2;align-self:stretch;padding:6px 7px;font-size:.86rem}
+    #kussoon-region-size-v2 .country-trigger{display:flex;align-items:center;justify-content:space-between;gap:5px;min-width:0;width:100%;padding:7px 9px;text-align:left;white-space:normal}
+    #kussoon-region-size-v2 .country-trigger span{min-width:0;overflow-wrap:anywhere}
+    #kussoon-region-size-v2 .country-trigger::after{content:"";width:7px;height:7px;flex:none;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);margin:0 2px 4px}
+    #kussoon-region-size-v2 .country-trigger[aria-expanded="true"]{border-color:var(--viz-series-1);outline:1px solid var(--viz-series-1)}
+    #kussoon-region-size-v2 .country-panel{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:20;max-height:60vh;max-height:min(60dvh,500px);overflow:auto;overscroll-behavior:contain;background:var(--background);border:1px solid var(--border);border-radius:10px;padding:0 8px 8px;box-shadow:0 8px 28px #0005}
+    #kussoon-region-size-v2 .country-panel-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 0;background:var(--background);border-bottom:1px solid var(--border);font-size:.9rem;font-weight:600}
+    #kussoon-region-size-v2 .country-panel-head .btn{padding:5px 9px;min-height:36px;font-size:.86rem}
+    #kussoon-region-size-v2 .country-group h3{font-size:.82rem;color:var(--muted-foreground);margin:12px 0 6px;font-weight:600}
+    #kussoon-region-size-v2 .country-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+    #kussoon-region-size-v2 .country-option{min-width:0;min-height:44px;padding:6px 4px;font-size:.86rem;line-height:1.35;white-space:normal;overflow-wrap:anywhere}
+    #kussoon-region-size-v2 .country-option:focus-visible,#kussoon-region-size-v2 .country-trigger:focus-visible{outline:2px solid var(--viz-series-1);outline-offset:-3px}
     #kussoon-region-size-v2 .swatch{display:inline-block;width:13px;height:10px;border:2px solid var(--viz-series-1);margin-right:5px;vertical-align:baseline}
     #kussoon-region-size-v2 .swatch.b{border-color:var(--viz-series-2);border-style:dashed}
     #kussoon-region-size-v2 .values{display:block;margin-top:3px}
@@ -73,16 +90,21 @@
     #kussoon-region-size-v2 .map-label{fill:var(--foreground);font-size:12px;pointer-events:none}
     #kussoon-region-size-v2 .scale-line{stroke:var(--muted-foreground);stroke-width:1.5}
     #kussoon-region-size-v2 .small-note{margin:8px 0 0}
-    @media(max-width:370px){#kussoon-region-size-v2 .pickers{gap:6px}#kussoon-region-size-v2 .toolbar{gap:4px}}
+    @media(max-width:370px){#kussoon-region-size-v2 .pickers{column-gap:5px}#kussoon-region-size-v2 #rg-swap{padding-inline:4px;font-size:.8rem}#kussoon-region-size-v2 .country-option{font-size:.8rem}#kussoon-region-size-v2 .toolbar{gap:4px}}
   </style>
-  <div class="title"><h2>世界の国・地域の大きさ比較</h2><span class="text-small text-muted">v5（試作版）</span></div>
+  <div class="title"><h2>世界の国・地域の大きさ比較</h2><span class="text-small text-muted">v6（試作版）</span></div>
   <p style="margin:0 0 8px;font-size:.92rem;line-height:1.6">世界の国々やアメリカの州の面積を、地図の輪郭を重ねたり並べたりして比べてみましょう！</p>
-  <div class="pickers">
-    <div class="picker"><label class="form-label" for="rg-a"><span class="swatch"></span>比較対象 A</label><select id="rg-a" class="form-select"></select><span class="values tabular-nums" id="rg-area-a"></span></div>
-    <div class="picker"><label class="form-label" for="rg-b"><span class="swatch b"></span>比較対象 B</label><select id="rg-b" class="form-select"></select><span class="values tabular-nums" id="rg-area-b"></span></div>
+  <div class="pickers" id="rg-pickers">
+    <div class="picker picker-a"><label class="form-label" id="rg-label-a" for="rg-trigger-a"><span class="swatch"></span>比較対象 A</label><button class="btn country-trigger" type="button" id="rg-trigger-a" aria-labelledby="rg-label-a rg-choice-a" aria-expanded="false" aria-controls="rg-picker-panel"><span id="rg-choice-a"></span></button><select id="rg-a" hidden></select><span class="values tabular-nums" id="rg-area-a"></span></div>
+    <button class="btn" type="button" id="rg-swap" aria-label="比較対象を入れ替え">A ⇄ B</button>
+    <div class="picker picker-b"><label class="form-label" id="rg-label-b" for="rg-trigger-b"><span class="swatch b"></span>比較対象 B</label><button class="btn country-trigger" type="button" id="rg-trigger-b" aria-labelledby="rg-label-b rg-choice-b" aria-expanded="false" aria-controls="rg-picker-panel"><span id="rg-choice-b"></span></button><select id="rg-b" hidden></select><span class="values tabular-nums" id="rg-area-b"></span></div>
+    <div class="country-panel" id="rg-picker-panel" role="region" aria-labelledby="rg-picker-heading" hidden>
+      <div class="country-panel-head"><span id="rg-picker-heading">比較対象を選択</span><button class="btn" type="button" id="rg-picker-close">閉じる</button></div>
+      <div id="rg-picker-groups"></div>
+    </div>
   </div>
   <div class="result tabular-nums" id="rg-result" aria-live="polite"></div>
-  <div class="toolbar"><button class="btn" type="button" id="rg-overlay" aria-pressed="true">重ね合わせ</button><button class="btn" type="button" id="rg-side" aria-pressed="false">並べて比較</button><button class="btn" type="button" id="rg-swap" aria-label="比較対象を入れ替え">A ⇄ B</button><button class="btn" type="button" id="rg-reset">全体表示</button></div>
+  <div class="toolbar"><button class="btn" type="button" id="rg-overlay" aria-pressed="true">重ね合わせ</button><button class="btn" type="button" id="rg-side" aria-pressed="false">並べて比較</button><button class="btn" type="button" id="rg-reset">全体表示</button></div>
   <div class="toolbar" role="group" aria-label="ドラッグで移動する地図"><span class="text-small">移動対象</span><button class="btn" type="button" id="rg-move-a" aria-pressed="false"><span class="swatch" aria-hidden="true"></span>Aのみ</button><button class="btn" type="button" id="rg-move-b" aria-pressed="true"><span class="swatch b" aria-hidden="true"></span>Bのみ</button><button class="btn" type="button" id="rg-move-both" aria-pressed="false">両方</button></div>
   <div class="canvas" id="rg-canvas">
     <svg id="rg-svg" role="img" aria-label="同じ面積縮尺で地域の輪郭を比較する地図" xmlns="http://www.w3.org/2000/svg">
@@ -106,13 +128,52 @@
     const a=$('a'),b=$('b'),svg=$('svg'),canvas=$('canvas');
     const shapes={a:root.querySelector('[data-region="a"]'),b:root.querySelector('[data-region="b"]')};
     const gs={a:$('ga'),b:$('gb')};
-    for(const sel of [a,b]){
-      for(const group of ['アジアの国・地域','その他の国・地域','米国の州']){
+    const panel=$('picker-panel'),optionButtons=new Map();
+    let pickerTarget=null;
+    for(const group of ['アジアの国・地域','その他の国・地域','米国の州']){
+      const items=data.filter(x=>x.group===group).sort((x,y)=>x.name.localeCompare(y.name,'ja'));
+      for(const sel of [a,b]){
         const optgroup=document.createElement('optgroup');optgroup.label=group;
-        for(const item of data.filter(x=>x.group===group).sort((x,y)=>x.name.localeCompare(y.name,'ja'))){const opt=document.createElement('option');opt.value=item.id;opt.textContent=item.name;optgroup.append(opt);}
+        for(const item of items){const opt=document.createElement('option');opt.value=item.id;opt.textContent=item.name;optgroup.append(opt);}
         sel.append(optgroup);
       }
+      const section=document.createElement('section');section.className='country-group';
+      const title=document.createElement('h3');title.textContent=group;section.append(title);
+      const grid=document.createElement('div');grid.className='country-grid';
+      for(const item of items){
+        const button=document.createElement('button');button.type='button';button.className='btn country-option';button.textContent=item.name;button.setAttribute('aria-pressed','false');
+        button.addEventListener('click',()=>{
+          if(!pickerTarget)return;
+          const sel=pickerTarget==='a'?a:b;
+          if(sel.value!==item.id){sel.value=item.id;changed();}
+          closePicker(true);
+        });
+        grid.append(button);optionButtons.set(item.id,button);
+      }
+      section.append(grid);$('picker-groups').append(section);
     }
+    function closePicker(restoreFocus=false){
+      if(!pickerTarget)return;
+      const trigger=$('trigger-'+pickerTarget);pickerTarget=null;panel.hidden=true;
+      trigger.setAttribute('aria-expanded','false');
+      if(restoreFocus)trigger.focus({preventScroll:true});
+    }
+    function openPicker(key){
+      if(pickerTarget===key){closePicker(true);return;}
+      closePicker();
+      pickerTarget=key;
+      const sel=key==='a'?a:b;
+      $('picker-heading').textContent='比較対象 '+key.toUpperCase()+' を選択';
+      for(const [id,button] of optionButtons)button.setAttribute('aria-pressed',String(id===sel.value));
+      $('trigger-'+key).setAttribute('aria-expanded','true');
+      panel.hidden=false;panel.scrollTop=0;
+      $('picker-close').focus({preventScroll:true});
+    }
+    for(const key of ['a','b'])$('trigger-'+key).addEventListener('click',()=>openPicker(key));
+    $('picker-close').addEventListener('click',()=>closePicker(true));
+    document.addEventListener('pointerdown',e=>{if(pickerTarget&&!$('pickers').contains(e.target))closePicker();});
+    document.addEventListener('focusin',e=>{if(pickerTarget&&!$('pickers').contains(e.target))closePicker();});
+    document.addEventListener('keydown',e=>{if(pickerTarget&&e.key==='Escape'){e.preventDefault();closePicker(true);}});
     a.value='JPN';b.value='US-California';
     let mode='overlay',moveTarget='b',angle=0,zoom=1,scale=1,W=0,H=0,drag=null;
     const offset={a:{x:0,y:0},b:{x:0,y:0}};
@@ -158,16 +219,18 @@
     }
     function update(){
       const A=lookup.get(a.value),B=lookup.get(b.value);
+      $('choice-a').textContent=A.name;$('choice-b').textContent=B.name;
       $('area-a').textContent=fmt(A.area)+' km²';$('area-b').textContent=fmt(B.area)+' km²';
       const ratio=B.area/A.area;
       $('result').textContent=B.name+'は'+A.name+'の'+(ratio>=.1?ratio.toFixed(2):ratio>=.01?ratio.toFixed(3):ratio.toPrecision(3))+'倍';
       svg.setAttribute('aria-label',A.name+'と'+B.name+'の地図による面積比較');
       draw();
     }
-    for(const sel of [a,b])sel.addEventListener('change',()=>{angle=0;resetPositions();update();});
+    function changed(){angle=0;resetPositions();update();}
+    for(const sel of [a,b])sel.addEventListener('change',changed);
     function setMode(m){mode=m;resetPositions();$('overlay').setAttribute('aria-pressed',m==='overlay');$('side').setAttribute('aria-pressed',m==='side');draw();}
     $('overlay').addEventListener('click',()=>setMode('overlay'));$('side').addEventListener('click',()=>setMode('side'));
-    $('swap').addEventListener('click',()=>{const v=a.value;a.value=b.value;b.value=v;angle=0;resetPositions();update();});
+    $('swap').addEventListener('click',()=>{closePicker();const v=a.value;a.value=b.value;b.value=v;changed();});
     $('reset').addEventListener('click',()=>{angle=0;resetPositions();draw();});
     $('zoom').addEventListener('input',()=>{zoom=Number($('zoom').value)/100;draw();});
     $('ccw').addEventListener('click',()=>{angle-=15;draw();});$('cw').addEventListener('click',()=>{angle+=15;draw();});
