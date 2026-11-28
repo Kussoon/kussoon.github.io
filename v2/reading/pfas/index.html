@@ -11,13 +11,14 @@
 <style>
 :root{color-scheme:light dark;--bg:#f2f7f5;--paper:#fff;--ink:#15352f;--sub:#4e6864;--line:#c7dcd5;--accent:#17695a;--soft:#e5f1ed;--warn:#fff2df;--warn-ink:#795023;--link:#17695a}
 @media(prefers-color-scheme:dark){:root{--bg:#101f20;--paper:#1a2c2b;--ink:#e9f5f2;--sub:#b7cec8;--line:#49645e;--accent:#8cd7c2;--soft:#203f39;--warn:#443422;--warn-ink:#ffcf91;--link:#9cdeca}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',Meiryo,sans-serif;line-height:1.85}main{width:min(800px,calc(100% - 28px));margin:0 auto;padding:20px 0 42px}a{color:var(--link);text-underline-offset:3px;overflow-wrap:anywhere}a:focus-visible{outline:3px solid #ed9e3c;outline-offset:3px}.top{display:flex;flex-wrap:wrap;gap:8px;font-size:.85rem;color:var(--sub);margin-bottom:16px}.hero{background:var(--paper);border:1px solid var(--line);padding:clamp(20px,5vw,38px);border-radius:20px;box-shadow:0 6px 18px #0000000a}.eyebrow{font-weight:900;color:var(--accent);letter-spacing:.1em;font-size:.74rem}.hero h1{font-size:clamp(2rem,7vw,3.5rem);line-height:1.25;margin:8px 0 12px;letter-spacing:.03em}.hero .subtitle{font-size:clamp(1.05rem,3.4vw,1.35rem);font-weight:750;color:var(--accent);margin:0 0 12px}.hero p{margin:12px 0;color:var(--sub)}.hero time,.meta,.small{font-size:.83rem;color:var(--sub)}.hero-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(145px,190px);gap:20px;align-items:center}.hero-art{background:var(--soft);border-radius:18px;padding:14px;display:grid;place-items:center}.hero-art svg{width:100%;height:auto;max-width:180px}.chapterlist,.article{margin-top:20px;border:1px solid var(--line);background:var(--paper);border-radius:18px;padding:clamp(17px,4vw,32px)}.chapterlist h2{font-size:1.25rem;margin:0 0 10px}.lineup{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0}.lineup li{border:1px solid var(--line);border-radius:9px;padding:10px 12px;line-height:1.6;font-size:.89rem}.lineup li:nth-child(-n+5){background:var(--soft);border-color:var(--accent)}.lineup a{display:block;font-weight:800}.status{display:block;font-size:.75rem;color:var(--sub)}.article h2{font-size:clamp(1.5rem,4.5vw,2rem);line-height:1.4;margin:8px 0 0}.article h3{font-size:clamp(1.18rem,3.5vw,1.4rem);line-height:1.55;border-bottom:2px solid var(--line);padding-bottom:8px;margin:34px 0 12px}.article p{margin:0 0 16px}.article ul{padding-left:1.4em}.article li{margin-bottom:5px}.summary,.note,.caution{padding:17px 18px;border-radius:10px;background:var(--soft);border-left:4px solid var(--accent);margin:18px 0}.summary p:last-child,.note p:last-child,.caution p:last-child{margin-bottom:0}.caution{background:var(--warn);color:var(--warn-ink);border-left-color:#bc8135}.toc{font-size:.91rem;margin:20px 0;padding:14px 16px;background:var(--soft);border-radius:10px}.toc a{margin-right:10px;display:inline-block}.table-wrap{overflow-x:auto;margin:15px 0 20px;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:.88rem;text-align:left}th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}thead th{background:var(--soft);font-weight:800}tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}tbody th{font-weight:700}.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.source-ref{font-size:.78em;white-space:nowrap;text-decoration:none;color:var(--link)}.sources{font-size:.85rem;overflow-wrap:anywhere}.sources li{padding:5px 0}.sources h3{margin-top:24px}.backlinks{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0 0}.foot{border-top:1px solid var(--line);margin-top:38px;padding:25px 0;color:var(--sub);font-size:12px}.links{display:flex;flex-wrap:wrap;gap:8px 17px;margin-bottom:10px}.links a{text-underline-offset:3px}.version{text-align:right;font-size:11px;margin-top:10px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',Meiryo,sans-serif;line-height:1.85}main{width:min(800px,calc(100% - 28px));margin:0 auto;padding:20px 0 86px}a{color:var(--link);text-underline-offset:3px;overflow-wrap:anywhere}a:focus-visible{outline:3px solid #ed9e3c;outline-offset:3px}.top{display:flex;flex-wrap:wrap;gap:8px;font-size:.85rem;color:var(--sub);margin-bottom:16px}.hero{background:var(--paper);border:1px solid var(--line);padding:clamp(20px,5vw,38px);border-radius:20px;box-shadow:0 6px 18px #0000000a}.eyebrow{font-weight:900;color:var(--accent);letter-spacing:.1em;font-size:.74rem}.hero h1{font-size:clamp(2rem,7vw,3.5rem);line-height:1.25;margin:8px 0 12px;letter-spacing:.03em}.hero .subtitle{font-size:clamp(1.05rem,3.4vw,1.35rem);font-weight:750;color:var(--accent);margin:0 0 12px}.hero p{margin:12px 0;color:var(--sub)}.hero time,.meta,.small{font-size:.83rem;color:var(--sub)}.hero-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(145px,190px);gap:20px;align-items:center}.hero-art{background:var(--soft);border-radius:18px;padding:14px;display:grid;place-items:center}.hero-art svg{width:100%;height:auto;max-width:180px}.chapterlist,.article{margin-top:20px;border:1px solid var(--line);background:var(--paper);border-radius:18px;padding:clamp(17px,4vw,32px)}.chapterlist h2{font-size:1.25rem;margin:0 0 10px}.lineup{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0}.lineup li{border:1px solid var(--line);border-radius:9px;padding:10px 12px;line-height:1.6;font-size:.89rem}.lineup li:nth-child(-n+6){background:var(--soft);border-color:var(--accent)}.lineup a{display:block;font-weight:800}.status{display:block;font-size:.75rem;color:var(--sub)}.article h2{font-size:clamp(1.5rem,4.5vw,2rem);line-height:1.4;margin:8px 0 0}.article h3{font-size:clamp(1.18rem,3.5vw,1.4rem);line-height:1.55;border-bottom:2px solid var(--line);padding-bottom:8px;margin:34px 0 12px}.article p{margin:0 0 16px}.article ul{padding-left:1.4em}.article li{margin-bottom:5px}.summary,.note,.caution{padding:17px 18px;border-radius:10px;background:var(--soft);border-left:4px solid var(--accent);margin:18px 0}.summary p:last-child,.note p:last-child,.caution p:last-child{margin-bottom:0}.caution{background:var(--warn);color:var(--warn-ink);border-left-color:#bc8135}.toc{font-size:.91rem;margin:20px 0;padding:14px 16px;background:var(--soft);border-radius:10px}.toc a{margin-right:10px;display:inline-block}.table-wrap{overflow-x:auto;margin:15px 0 20px;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:.88rem;text-align:left}th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}thead th{background:var(--soft);font-weight:800}tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}tbody th{font-weight:700}.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.source-ref{font-size:.78em;white-space:nowrap;text-decoration:none;color:var(--link)}.sources{font-size:.85rem;overflow-wrap:anywhere}.sources li{padding:5px 0}.sources h3{margin-top:24px}.backlinks{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0 0}.foot{border-top:1px solid var(--line);margin-top:38px;padding:25px 0;color:var(--sub);font-size:12px}.links{display:flex;flex-wrap:wrap;gap:8px 17px;margin-bottom:10px}.links a{text-underline-offset:3px}.version{text-align:right;font-size:11px;margin-top:10px}
 @media(max-width:530px){.hero-layout{grid-template-columns:1fr}.hero-art{display:none}.lineup{grid-template-columns:1fr}th,td{padding:8px 10px}.article{padding:17px 14px}.article .table-wrap{margin-left:0;margin-right:0}}
+.page-top-button{position:fixed;right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:1000;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 13px;border:1px solid var(--accent);border-radius:999px;background:var(--paper);color:var(--ink);font-weight:800;font-size:.88rem;line-height:1.3;text-decoration:none;box-shadow:0 3px 12px #00000026;white-space:nowrap}.page-top-button:hover{background:var(--soft)}
 </style>
 <script>window.kussoonUmamiBeforeSend=function(type,payload){if(payload&&typeof payload==='object'){if(typeof payload.url==='string'){try{payload.url=new URL(payload.url,location.origin).pathname}catch(e){payload.url=location.pathname}}if(typeof payload.referrer==='string'){try{const r=new URL(payload.referrer,location.href);payload.referrer=r.origin+r.pathname}catch(e){payload.referrer=''}}}return payload;};</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="8beb23a4-a36f-4aff-b082-bec86e01a2f7" data-domains="kussoon.com,www.kussoon.com" data-exclude-search="true" data-exclude-hash="true" data-before-send="kussoonUmamiBeforeSend"></script>
 </head>
-<body>
+<body id="page-top">
 <main>
 <nav class="top" aria-label="パンくずリスト"><a href="/">Kussoonトップ</a><span>›</span><a href="/v2/">V2検証エリア</a><span>›</span><b>PFASを知る（検証版）</b></nav>
 <div class="caution" role="note"><strong>検証版・正式未掲載</strong><p>公開前の確認用ページです。記事内容と表示を確認するためのもので、正式掲載は承認後に行います。</p></div>
@@ -36,7 +37,7 @@
 <li><a href="#chapter3" data-umami-event="pfas-read-chapter3">第3回　身の回りのPFAS ↓</a><span class="status">検証中</span></li>
 <li><a href="#chapter4" data-umami-event="pfas-read-chapter4">第4回　人体への影響と科学的根拠 ↓</a><span class="status">検証中</span></li>
 <li><a href="#chapter5" data-umami-event="pfas-read-chapter5">第5回　世界と日本の汚染状況 ↓</a><span class="status">検証中</span></li>
-<li>第6回　日本・米国・欧州の規制<span class="status">掲載予定</span></li>
+<li><a href="#chapter6" data-umami-event="pfas-read-chapter6">第6回　日本・米国・欧州の規制 ↓</a><span class="status">検証中</span></li>
 <li>第7回　除去方法とその限界<span class="status">掲載予定</span></li>
 <li>第8回　代替物質と今後の課題<span class="status">掲載予定</span></li>
 </ol></section>
@@ -444,10 +445,110 @@
 <li id="p16"><a href="https://www.env.go.jp/water/pfas/faq004.html">環境省：PFASに関するよくある質問（水道水・飲用水）</a></li>
 <li id="p17"><a href="https://www.env.go.jp/water/pfas.html">環境省：有機フッ素化合物（PFAS）について（各種調査結果・対策の総合案内）</a></li>
 </ol></section>
-<nav class="backlinks" aria-label="連載ナビゲーション"><a href="#chapter4">← 第4回へ</a><a href="#series-title">↑ 連載一覧へ</a><span class="small">次回：日本・米国・欧州の規制（掲載予定）</span></nav>
+<nav class="backlinks" aria-label="連載ナビゲーション"><a href="#chapter4">← 第4回へ</a><a href="#series-title">↑ 連載一覧へ</a><a href="#chapter6">第6回へ →</a></nav>
 </article>
-<footer class="foot"><nav class="links" aria-label="Kussoon共通案内"><a href="/">Kussoonトップ</a><a href="/reading/">読み物・雑学</a><a href="/ideas/">工夫・アイデア</a><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/about/">このサイトについて</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p><div class="version">PFASを知る 検証版 v1.4</div></footer>
+<article class="article" id="chapter6">
+<div class="eyebrow">第6回</div>
+<h2>日本・米国・欧州の規制</h2>
+<p class="meta">国際条約・水道水の基準・製造や使用の規制（2026年11月28日時点）</p>
+<div class="summary"><strong>この記事のポイント</strong><ul><li>PFAS全体が世界で一律に禁止されているわけではなく、物質や用途ごとに規制が進んでいる。</li><li>日本、米国、欧州では飲料水の基準値だけでなく、対象物質や評価方法も異なる。</li><li>2026年には既に施行された制度と、今後の方針をめぐる提案の両方がある。両者を区別することが大切。</li></ul></div>
+<nav class="toc" aria-label="第6回の目次"><strong>目次：</strong> <a href="#regulation-purpose">規制の目的</a><a href="#regulation-world">国際条約</a><a href="#regulation-japan">日本</a><a href="#regulation-us">米国</a><a href="#regulation-eu">欧州</a><a href="#regulation-comparison">基準の比較</a><a href="#regulation-foam">泡消火剤</a><a href="#regulation-future">今後の課題</a><a href="#regulation-sources">出典</a></nav>
+<h3 id="regulation-purpose">1．何を規制するのか</h3>
+<p>第5回では、世界や日本の河川・地下水・水道水の汚染について見てきました。では、これ以上汚染を広げないために、各国は何をしているのでしょうか。</p>
+<p>一口にPFASの規制といっても、いくつかの異なる役割があります。</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">規制・対策の種類</th><th scope="col">目的</th></tr></thead><tbody>
+<tr><th scope="row">製造・輸入・使用の制限</th><td>新たな排出や汚染を減らす。</td></tr>
+<tr><th scope="row">飲料水の水質基準</th><td>飲み水を通じた長期的な摂取を管理する。</td></tr>
+<tr><th scope="row">河川・地下水の指針や環境規制</th><td>汚染を監視し、対策の必要性を判断する。</td></tr>
+<tr><th scope="row">廃棄・浄化対策</th><td>過去から残る汚染や、使用済みの製品を管理する。</td></tr>
+</tbody></table></div>
+<p>製造を禁止しても、既に環境中へ流出した物質が消えるわけではありません。水質基準に適合していても、新しい汚染源への対策が不要になるわけではありません。これらは互いに補い合う制度です。</p>
+<h3 id="regulation-world">2．国際的な枠組み ─ ストックホルム条約</h3>
+<p>残留性有機汚染物質（POPs）に関するストックホルム条約は、環境中で分解されにくく、長距離を移動し、人体や生態系に影響を及ぼす物質を国際的に管理する枠組みです。PFASの一部も対象になっています。<sup><a class="source-ref" href="#r1">[1]</a></sup><sup><a class="source-ref" href="#r2">[2]</a></sup></p>
+<div class="table-wrap"><table><thead><tr><th scope="col">条約への追加年</th><th scope="col">対象</th><th scope="col">区分</th></tr></thead><tbody>
+<tr><td>2009年</td><td>PFOS、その塩、PFOSF</td><td>附属書B（制限）</td></tr>
+<tr><td>2019年</td><td>PFOA、その塩、関連物質</td><td>附属書A（廃絶）</td></tr>
+<tr><td>2022年</td><td>PFHxS、その塩、関連物質</td><td>附属書A（廃絶）</td></tr>
+<tr><td>2025年</td><td>長鎖PFCA（炭素数9〜21）、その塩、関連物質</td><td>附属書A（廃絶）</td></tr>
+</tbody></table></div>
+<p class="small">条約への追加を決めた年を示しています。附属書には物質によって適用除外などがあり、各国での国内法の施行時期とは異なります。</p>
+<p>当初は特に問題となった物質を一つずつ管理していましたが、その後、関連物質や長鎖PFCAも対象になりました。代替物質に切り替えるだけでは汚染を防げない場合があるためです。ただし、条約でPFAS全体が禁止されたわけではありません。</p>
+<h3 id="regulation-japan">3．日本 ─ 化学物質と水道水の規制</h3>
+<p><strong>製造・輸入など：</strong>日本では化学物質審査規制法（化審法）により、PFOSは2010年、PFOAは2021年、PFHxSは2024年に第一種特定化学物質として規制され、製造・輸入などが原則禁止されました。2026年6月17日にはPFHxSの関連物質、同年11月22日には長鎖PFCA（炭素数9〜21の13種類の酸）、その塩及び関連物質に関する改正政令が施行され、対象が拡大しました。<sup><a class="source-ref" href="#r3">[3]</a></sup><sup><a class="source-ref" href="#r4">[4]</a></sup><sup><a class="source-ref" href="#r5">[5]</a></sup></p>
+<p>これは一部のPFASや対象製品に関する制度であり、あらゆるフッ素樹脂製品の所持や使用が一律に違法になったという意味ではありません。</p>
+<p><strong>水道水：</strong>2020年にPFOSとPFOAの合計50ng/Lが暫定目標値として設定されました。2025年6月30日に水質基準の改正が公布され、2026年4月1日から<strong>PFOS＋PFOAの合計50ng/L以下</strong>が水道法上の水質基準となりました。水道事業者などには基準の遵守と水質検査が求められます。<sup><a class="source-ref" href="#r6">[6]</a></sup><sup><a class="source-ref" href="#r7">[7]</a></sup></p>
+<div class="note"><strong>50ng/Lの考え方</strong><p>食品安全委員会がPFOSとPFOAそれぞれについて設定した耐容一日摂取量（20ng/kg体重/日）を基に、体重50kg、飲料水からの摂取への配分10％、飲水量1日2Lという条件では、各物質について50ng/Lが計算されます。日本の水質基準は従来の目標値を踏まえ、両物質を合わせて50ng/L以下としています。これは長期間飲み続けることを想定した管理のための数値です。<sup><a class="source-ref" href="#r8">[8]</a></sup></p></div>
+<p>一方、公共用水域・地下水についても2025年6月30日からPFOSとPFOAの合計50ng/Lが指針値とされました。数値は同じでも水道水の法的な水質基準とは制度上の位置づけが異なります。その他のPFASについても知見の収集が続いています。<sup><a class="source-ref" href="#r9">[9]</a></sup></p>
+<h3 id="regulation-us">4．米国 ─ 低い濃度で個別の物質を管理</h3>
+<p>米国環境保護庁（EPA）は2024年4月、PFASに関する全国飲料水規制を定めました。2024年の規則で定められた最大汚染物質濃度（MCL）は、次のとおりです。<sup><a class="source-ref" href="#r10">[10]</a></sup></p>
+<div class="table-wrap"><table><thead><tr><th scope="col">物質・混合物</th><th scope="col">MCL</th></tr></thead><tbody>
+<tr><th scope="row">PFOA</th><td class="num">4ng/L</td></tr>
+<tr><th scope="row">PFOS</th><td class="num">4ng/L</td></tr>
+<tr><th scope="row">PFHxS、PFNA、HFPO-DA（GenX関連化合物）</th><td class="num">それぞれ10ng/L</td></tr>
+<tr><th scope="row">PFHxS、PFNA、HFPO-DA、PFBSのうち2種類以上の混合物</th><td class="num">ハザード指数1</td></tr>
+</tbody></table></div>
+<p>ハザード指数は、対象物質の濃度をそれぞれの健康に基づく参照濃度で割り、その値を足し合わせる考え方です。単位はなく、1が規則で定められた上限です。PFOAとPFOSについては健康保護上の目標値（MCLG）がゼロとされ、測定や処理の実現可能性を考慮した法的基準が4ng/Lとなっています。<sup><a class="source-ref" href="#r10">[10]</a></sup><sup><a class="source-ref" href="#r11">[11]</a></sup></p>
+<p>2024年の規則では、2027年までに初期のモニタリングを完了し、2029年までに基準へ適合することが求められています。</p>
+<div class="caution"><strong>2026年の動き：変更案はまだ確定した規則ではない</strong><p>EPAは2026年5月18日、PFOA・PFOSについて4ng/Lの基準は維持しつつ、条件を満たす水道システムに最長2031年までの適合期限の延長を認める案を公表しました。同時に、その他の4種に関連する個別基準・混合物のハザード指数について、手続き上の理由から撤回する案を示しました。これはそれらの物質について安全が新たに確認されたという意味ではありません。2026年11月28日時点で、EPAが公表しているのはこれらの変更の提案であり、2024年に定められた規則と区別する必要があります。<sup><a class="source-ref" href="#r12">[12]</a></sup><sup><a class="source-ref" href="#r13">[13]</a></sup></p></div>
+<h3 id="regulation-eu">5．欧州 ─ 物質群としての規制へ</h3>
+<p>EUの飲料水指令（2020/2184）は、PFASについて二つの指標を定めています。2026年1月12日から関連する飲料水の監視・基準への適合が求められており、加盟国は一方または両方を用いることができます。<sup><a class="source-ref" href="#r14">[14]</a></sup><sup><a class="source-ref" href="#r15">[15]</a></sup></p>
+<div class="table-wrap"><table><thead><tr><th scope="col">指標</th><th scope="col">対象</th><th scope="col">基準値</th></tr></thead><tbody>
+<tr><th scope="row">Sum of PFAS</th><td>指定された20種類のPFASの合計</td><td class="num">100ng/L</td></tr>
+<tr><th scope="row">PFAS Total</th><td>より広範なPFASの総量を対象とする指標</td><td class="num">500ng/L</td></tr>
+</tbody></table></div>
+<p class="small">原文の単位はそれぞれ0.10µg/Lと0.50µg/L。PFAS TotalはすべてのPFASを個別かつ完全に測定できるという意味ではなく、分析方法についても技術ガイドラインがあります。<sup><a class="source-ref" href="#r16">[16]</a></sup></p>
+<p>製造・使用に関しては、デンマーク、ドイツ、オランダ、ノルウェー、スウェーデンの5か国が2023年1月に、REACH規則の下で広範なPFASを制限する提案を提出しました。物質を一つずつ規制するだけでは、別のPFASへの置き換えが繰り返されるおそれがあるためです。</p>
+<p>欧州化学品庁（ECHA）のリスク評価委員会（RAC）は2026年3月、社会経済分析委員会（SEAC）は同年11月19日に意見を採択しました。科学的・社会経済的評価が進んだ段階であり、今後は欧州委員会による規制案の策定と加盟国による手続きへ進みます。代替が難しい用途への除外なども検討されており、<strong>包括的なPFAS制限が既に一律に施行されたわけではありません。</strong><sup><a class="source-ref" href="#r17">[17]</a></sup><sup><a class="source-ref" href="#r18">[18]</a></sup><sup><a class="source-ref" href="#r19">[19]</a></sup></p>
+<h3 id="regulation-comparison">6．飲料水の基準を比較する</h3>
+<p>日本・米国・EUの代表的な水質基準を、すべてng/L（1リットルあたり10億分の1グラム）にそろえると次のようになります。</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">地域</th><th scope="col">対象・評価方法</th><th scope="col">基準値</th></tr></thead><tbody>
+<tr><th scope="row">日本</th><td>PFOS＋PFOAの合計</td><td class="num">50ng/L</td></tr>
+<tr><th scope="row">米国</th><td>PFOA、PFOSを個別に評価</td><td class="num">各4ng/L</td></tr>
+<tr><th scope="row">米国</th><td>その他の対象物質と混合物</td><td>10ng/Lまたはハザード指数1（前表参照）</td></tr>
+<tr><th scope="row">EU</th><td>指定20種類の合計</td><td class="num">100ng/L</td></tr>
+<tr><th scope="row">EU</th><td>PFAS Total指標</td><td class="num">500ng/L</td></tr>
+</tbody></table></div>
+<div class="note"><strong>仮に、PFOAが30ng/L、PFOSが10ng/Lだったら？</strong><ul><li>日本：合計40ng/Lとなり、50ng/L以下です。</li><li>米国：それぞれ4ng/Lを超えています。</li><li>EU：指定20種類のうち他の18種がゼロという仮定では、合計40ng/LでSum of PFASの基準値以下です。</li></ul><p class="small">これは基準の仕組みを理解するための架空の例です。実際の適合判定には、それぞれの制度に定められた採水・測定・平均化などの方法を用います。米国のMCLには年間移動平均による判定が用いられます。個人の健康リスクを判定するものではありません。</p></div>
+<p>このように、数字の大小だけで規制全体の厳しさは比較できません。対象となる物質、健康影響の評価、水からの摂取に割り当てる割合、測定・浄水技術の実現可能性などが異なるためです。</p>
+<p>例えば欧州食品安全機関（EFSA）は2020年、PFOS、PFOA、PFHxS、PFNAの合計について耐容週間摂取量を4.4ng/kg体重/週と評価しました。ワクチンへの免疫反応への影響を重要な指標とした評価です。これは食品を含めた摂取に関する科学的な指標であり、飲料水の濃度基準そのものではありません。<sup><a class="source-ref" href="#r20">[20]</a></sup></p>
+<h3 id="regulation-foam">7．泡消火剤はどうなるのか ─ 日本と欧州</h3>
+<p>第1回では西宮市の夙川で発生した泡消火剤の流出について紹介しました。泡消火剤は、駐車場や危険物施設などで火災から人命や施設を守る重要な設備にも使われてきました。そのため、環境汚染を防ぎながら消火性能を維持する対策が必要です。</p>
+<p>日本では、過去に設置されたPFOSなどを含む泡消火剤が直ちにすべて使用禁止になるわけではありません。化審法に基づく適切な取扱い、漏出防止や関係機関への連絡などが重要です。また2026年には駐車場などの泡消火設備に関する技術基準が見直され、所定の性能を満たすフッ素を含まない泡消火薬剤を、既存設備で使用しやすくする取り組みが進められています。<sup><a class="source-ref" href="#r21">[21]</a></sup></p>
+<p>EUでは、包括的なPFAS制限の提案とは別に、2025年に泡消火剤に含まれるPFASを制限する規則（EU 2025/1988）が既に採択されています。原則として2030年10月23日以降、PFASの合計が1mg/L以上の泡消火剤の上市・使用が制限されます。ただし、製品や施設の種類によって異なる移行期限や条件があります。2026年10月23日からは対象となる泡消火剤の管理などに関する規定も段階的に適用されています。<sup><a class="source-ref" href="#r22">[22]</a></sup></p>
+<p>すなわち、禁止するだけではなく、火災への備えと安全な切り替え、それまでの汚染防止・回収をどう両立させるかが実務上の課題となっています。</p>
+<h3 id="regulation-future">8．規制の先にある課題</h3>
+<p>規制によって新たなPFASの使用や排出を減らしても、既に汚染された地下水や土壌、古い設備に残る物質は長く問題となります。さらに、有用な性能を必要とする用途では、代替物質についても環境への影響や安全性を評価しなければなりません。</p>
+<div class="summary"><strong>第6回のまとめ</strong><ul><li>国際条約はPFOS、PFOA、PFHxSなどから順次対象を広げている。</li><li>日本では2026年4月からPFOS・PFOAの合計50ng/Lが法的な水道水質基準となった。</li><li>米国の2026年の変更案、欧州の包括的な制限案は、既に決まった制度と分けて理解する。</li><li>規制値の比較だけでなく、汚染を増やさないことと、既に存在するPFASへの対策が重要。</li></ul></div>
+<p>次回は、既に水や環境中に存在しているPFASをどのように取り除くことができるのか、活性炭や膜処理などの技術と、その限界について見ていきます。</p>
+<section class="sources" aria-labelledby="regulation-sources"><h3 id="regulation-sources">出典・参考資料</h3><p>2026年11月28日確認。条約・政府機関・欧州機関の公表資料を中心に整理しています。規制の適用時期や詳細な例外は最新の法令・公的資料をご確認ください。</p><ol>
+<li id="r1"><a href="https://chm.pops.int/Implementation/IndustrialPOPs/PFAS/Overview/tabid/5221/Default.aspx">ストックホルム条約事務局：PFAS Overview</a></li>
+<li id="r2"><a href="https://chm.pops.int/Portals/0/download.aspx?e=UNEP-POPS-COP.12-SC-12-12.English.pdf">ストックホルム条約第12回締約国会議：長鎖PFCA、その塩及び関連物質の附属書Aへの追加（2025年、PDF）</a></li>
+<li id="r3"><a href="https://www.env.go.jp/water/pfas/faq001.html">環境省：PFASに関するよくある質問（基本情報）</a></li>
+<li id="r4"><a href="https://www.env.go.jp/press/press_01937.html">環境省：PFHxS関連物質に関する化審法施行令の改正</a></li>
+<li id="r5"><a href="https://www.env.go.jp/press/press_04704.html">環境省：長鎖PFCA、その塩及び関連物質に関する化審法施行令の改正（2026年）</a></li>
+<li id="r6"><a href="https://www.env.go.jp/press/press_00075.html">環境省：水質基準に関する省令等の一部改正（2025年6月30日）</a></li>
+<li id="r7"><a href="https://www.env.go.jp/water/water_supply/kijun/kijunchi.html">環境省：水質基準項目と基準値</a></li>
+<li id="r8"><a href="https://www.env.go.jp/water/pfas/faq004.html">環境省：PFASに関するよくある質問（水道水・飲用水）</a></li>
+<li id="r9"><a href="https://www.env.go.jp/policy/hakusyo/r08/html/hj26020402.html">環境省：令和8年版環境白書（水環境の保全対策）</a></li>
+<li id="r10"><a href="https://www.epa.gov/sdwa/and-polyfluoroalkyl-substances-pfas">米国EPA：PFAS National Primary Drinking Water Regulation</a></li>
+<li id="r11"><a href="https://www.epa.gov/system/files/documents/2024-04/pfas_npwdr_faqsstates_4.8.24.pdf">米国EPA：PFAS飲料水規則に関する州・水道システム向けFAQ（2024年、PDF）</a></li>
+<li id="r12"><a href="https://www.epa.gov/sdwa/proposed-pfoa-and-pfos-compliance-extension-rule">米国EPA：PFOA・PFOSの基準適合期限延長案（2026年）</a></li>
+<li id="r13"><a href="https://www.epa.gov/sdwa/proposed-pfas-rescission-rule">米国EPA：その他のPFASに関する規則の撤回案（2026年）</a></li>
+<li id="r14"><a href="https://eur-lex.europa.eu/eli/dir/2020/2184/oj">EU：飲料水指令（EU 2020/2184）</a></li>
+<li id="r15"><a href="https://environment.ec.europa.eu/news/new-eu-rules-limit-pfas-drinking-water-2026-01-12_en">欧州委員会：飲料水のPFASに関する新たなEU規則（2026年1月12日）</a></li>
+<li id="r16"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A52024XC04910">欧州委員会：飲料水中のPFAS分析のための技術ガイドライン（2024年）</a></li>
+<li id="r17"><a href="https://echa.europa.eu/de/-/echa-s-risk-assessment-committee-adopts-its-opinion-on-pfas-restriction-proposal">欧州化学品庁（ECHA）：リスク評価委員会によるPFAS制限案の意見採択（2026年3月）</a></li>
+<li id="r18"><a href="https://audiovisual.ec.europa.eu/en/media/video/I-297456">欧州委員会：PFAS制限提案に関する記者説明（2026年11月19日）</a></li>
+<li id="r19"><a href="https://echa.europa.eu/documents/d/guest/echa_qa_pfas_opinions_final_en">欧州化学品庁：PFAS制限案に関する科学委員会の意見についてのQ&amp;A</a></li>
+<li id="r20"><a href="https://www.efsa.europa.eu/en/news/pfas-food-efsa-assesses-risks-and-sets-tolerable-intake">欧州食品安全機関（EFSA）：食品に含まれるPFASのリスク評価と耐容摂取量（2020年）</a></li>
+<li id="r21"><a href="https://www.fdma.go.jp/mission/prevention/item/prevention001_41_panf1.pdf">総務省消防庁：PFOS等を含有する泡消火薬剤に関する案内（2026年5月、PDF）</a></li>
+<li id="r22"><a href="https://eur-lex.europa.eu/eli/reg/2025/1988/oj">EU：泡消火剤に含まれるPFASの制限に関する改正規則（EU 2025/1988）</a></li>
+</ol></section>
+<nav class="backlinks" aria-label="連載ナビゲーション"><a href="#chapter5">← 第5回へ</a><a href="#series-title">↑ 連載一覧へ</a><span class="small">次回：除去方法とその限界（掲載予定）</span></nav>
+</article>
+<footer class="foot"><nav class="links" aria-label="Kussoon共通案内"><a href="/">Kussoonトップ</a><a href="/reading/">読み物・雑学</a><a href="/ideas/">工夫・アイデア</a><a href="/games/">学ぶ・遊ぶ</a><a href="/local/">地域を調べる</a><a href="/about/">このサイトについて</a><a href="/privacy/">プライバシーポリシー</a><a href="/sources/">データ出典</a><a href="/terms/">利用上の注意</a></nav><p>© 2026 Kussoon. All rights reserved.</p><div class="version">PFASを知る 検証版 v1.5</div></footer>
 </main>
+<a class="page-top-button" href="#page-top" aria-label="↑いちばん上へ">↑いちばん上へ</a>
 <script defer src="/common/footer-links.js"></script>
 </body>
 </html>
