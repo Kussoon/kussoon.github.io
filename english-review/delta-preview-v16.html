@@ -17,6 +17,7 @@ body{margin:0;background:#f5f7fb;color:#1b2737}main{max-width:640px;margin:0 aut
 body{font-size:16px}h1{font-size:1.55rem}h2{font-size:1.35rem}h3{font-size:1.15rem}.bank-summary,.manage-summary{font-size:1.15rem;font-weight:700}button,select,input,textarea{font-size:1rem}label{font-size:1rem}#question,#modelAnswer,#previousJapanese,#previousForeign{font-size:1.25rem;line-height:1.5;font-weight:600}#feedback,#previousWhy{font-size:1rem;line-height:1.65}.muted,#questionStats,#questionMeta,#sessionList p{font-size:.875rem;line-height:1.6}#progress{font-size:.95rem;white-space:nowrap}#skipQuestion,#stopQuiz,#preActions button,#previousQuestion,#previousClose{font-size:.875rem!important}#gradeActions button{font-size:.95rem}#calGrid button{font-size:.875rem}#calGrid small{font-size:.7rem}.previous-nav{display:flex;justify-content:flex-start;margin:4px 0}#previousQuestion{padding:6px 10px}#previousView{margin:6px 0 12px}#previousView p,#previousView h3{margin:8px 0}
 #editQuestion{display:block;margin:6px 0 6px auto;padding:6px 10px;font-size:.875rem;line-height:1.3;min-height:0}#editQuestion[hidden]{display:none!important}#gradeActions button{padding:6px 2px;min-height:0}
 @keyframes import-label-blink{0%,49.999%{visibility:visible}50%,100%{visibility:hidden}}#importButton[aria-busy="true"]{opacity:1}#importButton .import-blink{animation:import-label-blink 1s steps(1,end) infinite}
+#questionArea #preActions button,#skipQuestion,#stopQuiz,#previousQuestion,#editQuestion{padding:6px 10px;line-height:1.3;font-size:.875rem!important}#questionArea>div:first-child{flex-wrap:wrap}#questionArea #questionMeta{margin:6px 0 8px}#questionArea #question{margin:10px 0 6px}#gradeActions button{padding:6px 2px}#sessionList{max-height:300px;max-height:min(300px,45dvh)}
 </style>
 </head>
 <body>
@@ -110,7 +111,7 @@ function refresh(){
  const situations=[...new Set(allQuestions().map(q=>q.situation||"未分類"))].sort((a,b)=>a.localeCompare(b,"ja")),situationSelect=$("situationSelect"),oldSituation=situationSelect.value;situationSelect.replaceChildren();for(const name of situations){const o=document.createElement("option");o.value=name;o.textContent=name;situationSelect.append(o);}if(situations.includes(oldSituation))situationSelect.value=oldSituation;situationSelect.hidden=$("mode").value!=="situation";
  $("rangeFields").hidden=$("mode").value!=="range";const unavailable=["sessions3","wrong"].includes($("mode").value)&&recentSessions().slice(0,$("mode").value==="wrong"?1:3).some(a=>a.chunked&&!Array.isArray(a.answers));const n=unavailable||(!bankSyncOK&&!trialMode)?0:pool().length;$("poolCount").textContent=unavailable?"詳細履歴を取得できません。再読み込みしてください。":"対象："+n+"問";$("start").disabled=n===0;$("start").textContent=n+"問に挑戦する";
  $("bankCount").textContent="登録済み："+bankQuestions.filter(q=>getLang(q)===lang).length+"件"+(bankSyncLabel?"｜"+bankSyncLabel:"");
- const ss=recentSessions();renderHistoryCalendar(ss);const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問｜除外 "+excluded+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
+ const ss=recentSessions();renderHistoryCalendar(ss);const all=allQuestions(),excluded=all.filter(q=>q.learningState==="excluded").length,learned=all.filter(q=>q.learningState==="learned"||(!q.learningState&&q.lastCorrect===true)).length,learning=all.filter(q=>q.learningState==="learning"||(!q.learningState&&q.lastCorrect===false)).length;$("history").textContent="全 "+all.length+"問"+(excluded?"｜旧除外 "+excluded:"")+"｜ひとまず覚えた "+learned+"｜まだ覚えていない "+learning+"｜未学習 "+(all.length-excluded-learned-learning)+"｜学習回数 "+ss.length;
 }
 document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>{if(!$("questionArea").hidden)return;lang=b.dataset.lang;restoreDraft();document.querySelectorAll(".lang").forEach(x=>x.classList.toggle("active",x===b));$("quizTitle").textContent=(lang==="en"?"英語":"フランス語")+"の復習";$("modelAnswer").lang=lang;$("resultArea").hidden=true;$("start").hidden=false;refresh();resumeQuiz();}));
 $("batchEdit").addEventListener("click",async()=>{const uid=approvedUid,l=lang,id=$("batchSelect").value;if(!uid||trialMode||!id)return;const name=prompt("かたまりの名称（空欄で元の表示に戻す）",batchLabels[l]?.[id]||"");if(name===null)return;if(name.trim().length>100){alert("100文字以内で入力してください。");return;}const btn=$("batchEdit");btn.disabled=true;try{const ref=doc(db,"users",uid,"review","batchLabels-"+l);const labels=await runTransaction(db,async tx=>{const snap=await tx.get(ref),next={...(snap.data()?.labels||{})};if(name.trim())next[id]=name.trim();else delete next[id];tx.set(ref,{labels:next});return next;});if(uid===approvedUid){batchLabels[l]=labels;refresh();}}catch(e){alert("名称を保存できません："+(e.code||e.message));}finally{btn.disabled=false;}});
@@ -581,7 +582,7 @@ $("saveEdit").addEventListener("click",async()=>{
  await runTransaction(db,async tx=>{await assertNoReset(uid,getLang(q),tx);tx.update(doc(db,"users",uid,"expressions",q.id),{...patch,syncUpdatedAt:serverTimestamp()});});
  if(generation!==authGeneration||uid!==approvedUid)return;
  Object.assign(q,patch);bankQuestions=bankQuestions.map(x=>x.id===q.id?{...x,...patch}:x);
- $("question").textContent="No. "+(q.initialNumber||q.number)+"　"+q.q;$("modelAnswer").textContent=q.answer;
+ $("question").textContent=q.q;$("modelAnswer").textContent=q.answer;
  $("feedback").textContent=q.why||"";
  closeEdit();$("editStatus").textContent="修正を保存しました。";
  }catch(e){if(generation===authGeneration)$("editStatus").textContent="保存できませんでした："+(e.code||"エラー");}
@@ -622,7 +623,7 @@ async function finishQuiz(){
  $("mode").disabled=false;
  const uid=approvedUid,generation=authGeneration;if(!uid)return;
  document.body.classList.remove("reviewing");$("questionArea").hidden=true;$("resultArea").hidden=false;
- $("score").textContent="学習："+answers.length+"問／飛ばした "+(questions.length-answers.length)+"問／ひとまず覚えた "+correctCount+"問／出題から外した "+answers.filter(a=>a.state==="excluded").length+"問";
+ $("score").textContent="学習："+answers.length+"問／飛ばした "+(questions.length-answers.length)+"問／ひとまず覚えた "+correctCount+"問／永久削除 "+answers.filter(a=>a.state==="excluded").length+"問";
  $("saveStatus").textContent=trialMode?"試用モード：学習結果は保存していません。":"学習結果を保存しました。";if(trialMode)return;
  await loadSessions(uid,generation);if(uid===approvedUid&&generation===authGeneration){$("resultArea").hidden=false;$("start").hidden=true;}
 }
