@@ -59,7 +59,8 @@
     #kussoon-region-size-v2 .picker .country-trigger{grid-row:2}
     #kussoon-region-size-v2 .picker .values{grid-row:3;min-width:0;overflow-wrap:anywhere}
     #kussoon-region-size-v2 [hidden]{display:none!important}
-    #kussoon-region-size-v2 #rg-swap{grid-column:2;grid-row:2;align-self:stretch;padding:6px 7px;font-size:.86rem}
+    #kussoon-region-size-v2 #rg-swap{grid-column:2;grid-row:2;align-self:stretch;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:5px 6px;font-size:.74rem;line-height:1.2;white-space:nowrap}
+    #kussoon-region-size-v2 #rg-swap .swap-arrow{display:block;width:72px;max-width:100%;height:16px;flex:none;pointer-events:none}
     #kussoon-region-size-v2 .country-trigger{display:flex;align-items:center;justify-content:space-between;gap:5px;min-width:0;width:100%;padding:7px 9px;text-align:left;white-space:normal}
     #kussoon-region-size-v2 .country-trigger span{min-width:0;overflow-wrap:anywhere}
     #kussoon-region-size-v2 .country-trigger::after{content:"";width:7px;height:7px;flex:none;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);margin:0 2px 4px}
@@ -91,13 +92,13 @@
     #kussoon-region-size-v2 .map-label{fill:var(--foreground);font-size:12px;pointer-events:none}
     #kussoon-region-size-v2 .scale-line{stroke:var(--muted-foreground);stroke-width:1.5}
     #kussoon-region-size-v2 .small-note{margin:8px 0 0}
-    @media(max-width:370px){#kussoon-region-size-v2 .pickers{column-gap:5px}#kussoon-region-size-v2 #rg-swap{padding-inline:4px;font-size:.8rem}#kussoon-region-size-v2 .country-option{font-size:.8rem}#kussoon-region-size-v2 .toolbar{gap:4px}}
+    @media(max-width:370px){#kussoon-region-size-v2 .pickers{column-gap:5px}#kussoon-region-size-v2 #rg-swap{padding-inline:4px;font-size:.68rem}#kussoon-region-size-v2 .country-option{font-size:.8rem}#kussoon-region-size-v2 .toolbar{gap:4px}}
   </style>
-  <div class="title"><h2>世界の国・地域の大きさ比較</h2><span class="text-small text-muted">v8（試作版）</span></div>
+  <div class="title"><h2>世界の国・地域の大きさ比較</h2><span class="text-small text-muted">v9（試作版）</span></div>
   <p style="margin:0 0 8px;font-size:.92rem;line-height:1.6">世界の国々やアメリカの州の面積を、地図の輪郭を重ねたり並べたりして比べてみましょう！</p>
   <div class="pickers" id="rg-pickers">
     <div class="picker picker-a"><label class="form-label" id="rg-label-a" for="rg-trigger-a"><span class="swatch"></span>比較対象 A</label><button class="btn country-trigger" type="button" id="rg-trigger-a" aria-labelledby="rg-label-a rg-choice-a" aria-expanded="false" aria-controls="rg-picker-panel"><span id="rg-choice-a"></span></button><select id="rg-a" hidden></select><span class="values tabular-nums" id="rg-area-a"></span></div>
-    <button class="btn" type="button" id="rg-swap" aria-label="比較対象を入れ替え">A ↔︎ B</button>
+    <button class="btn" type="button" id="rg-swap" aria-label="AとBの入れ替え"><span>AとBの入れ替え</span><svg class="swap-arrow" viewBox="0 0 80 16" aria-hidden="true" focusable="false"><path d="M4 8H76M12 2L4 8l8 6M68 2l8 6-8 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <div class="picker picker-b"><label class="form-label" id="rg-label-b" for="rg-trigger-b"><span class="swatch b"></span>比較対象 B</label><button class="btn country-trigger" type="button" id="rg-trigger-b" aria-labelledby="rg-label-b rg-choice-b" aria-expanded="false" aria-controls="rg-picker-panel"><span id="rg-choice-b"></span></button><select id="rg-b" hidden></select><span class="values tabular-nums" id="rg-area-b"></span></div>
     <div class="country-panel" id="rg-picker-panel" role="region" aria-labelledby="rg-picker-heading" hidden>
       <div class="country-panel-head" id="rg-picker-head"><span id="rg-picker-heading">比較対象を選択</span><button class="btn" type="button" id="rg-picker-close">閉じる</button></div>
