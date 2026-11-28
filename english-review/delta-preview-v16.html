@@ -237,7 +237,7 @@ async function loadBank(uid,generation,force=false){
  if(current()){refresh();if(!$("importEditor").hidden)draftSummary();}
  }catch(e){if(!current())return;bankSyncOK=false;bankSyncLabel="同期失敗："+(e.code||e.message);refresh();if(force)throw e;}
  })();bankSyncTask=task;try{await task;}finally{if(bankSyncTask===task)bankSyncTask=null;}
- if(current()&&!bankSyncTimer)bankSyncTimer=setInterval(()=>{if(document.visibilityState==="visible"&&$("questionArea").hidden)loadBank(uid,generation);},60000);
+ if(current()&&!bankSyncTimer)bankSyncTimer=setInterval(()=>{if(document.visibilityState==="visible"&&$("questionArea").hidden)loadBank(uid,generation);},300000);
 }
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&approvedUid&&$("questionArea").hidden)loadBank(approvedUid,authGeneration);});
 function tsDate(v){return v?.toDate?.()?.toISOString?.()||v||null;}
