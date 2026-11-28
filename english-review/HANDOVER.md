@@ -78,7 +78,7 @@ learningState: excluded / learned / learning。通常範囲はexcludedを除外�
 - 検証版：`english-review/delta-preview-v16.html`。正式版 `english-review/index.html` は利用者の実機確認・承認前に差し替えない。
 - v1.6はv1.5の教材IndexedDBキャッシュ、Firestore差分同期、24時間ごとの全件再同期、万年カレンダー、教材永久削除、教材名同期、途中再開等を維持し、PR #774の登録前編集機能を統合する。
 - 登録前の下書きはブラウザーのlocalStorageに利用者・言語ごとに保存する。登録は差分同期後のキャッシュを基に既存重複を確認し、同じ下書き行IDとトランザクションを再利用する。登録文書には syncUpdatedAt を設定して、他端末の差分同期で取り込む。
-- 教材キャッシュはIndexedDBに保存。差分同期カーソルは syncUpdatedAt、教材置換・物理削除時は review/bankEpoch により他端末へ全件同期を要求する。24時間経過時も全件再同期する。
+- 教材キャッシュはIndexedDBに保存。差分同期カーソルは syncUpdatedAt。学習中でない表示タブの定期確認は5分ごとで、タブ再表示時と学習・登録前にも同期する。教材置換・物理削除時は review/bankEpoch により他端末へ全件同期を要求する。24時間経過時も全件再同期する。
 - 学習履歴のsessions一覧はIndexedDBにキャッシュし、syncUpdatedAt の差分を取得する。review/historyEpoch の変更（履歴の初期化・教材置換）時と24時間経過時は全件再同期する。履歴詳細のチャンクは直近3件ずつのみ取得し、同じ端末では直近履歴の回答をキャッシュする。
 - 既存のsessions文書にsyncUpdatedAtがない場合は初回全件同期で取得し、キャッシュに保持する。新規完了分からsyncUpdatedAtで差分取得する。初回同期と24時間ごとの全件同期は履歴件数に応じた読み取りになる。
 - v1.6検証ページも既存Firebaseプロジェクトを参照する。ログイン後の読取は実データが対象。試用モードの採点は保存しないが、登録・編集・削除・通常学習は本番Firebaseへ保存する。合成データ以外で書き込み検証をしない。
